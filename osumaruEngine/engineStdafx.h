@@ -1,6 +1,20 @@
 #pragma once
 
+
+
+//#include "Timer\GameTime.h"
+//#include "Random\Random.h"
+//#include "Graphics/Texture.h"
+//#include "Graphics/Primitive.h"
+//#include "Graphics/RenderTarget.h"
+//#include "GameObject/GameObject.h"
+//#include "GameObject/GameObjectManager.h"
+//#include "BulletCollision/CollisionDispatch/btGhostObject.h"
+
+#include <d3d11.h>
+#include <d3d11shader.h>
 #include <windows.h>
+#include <D3DCompiler.h>
 #include <x3daudio.h>
 #include <XAudio2.h>
 #include <XAudio2fx.h>
@@ -11,22 +25,28 @@
 #include <vector>
 #include <map>
 #include <list>
-
+#include <wincodec.h>
+#include <wincodecsdk.h>
 #include <string>
 #include <typeinfo>
-
-#pragma comment ( lib, "winmm.lib" )
-
 #include <stdio.h>
 #include <string.h>
 
-//#include "Timer\GameTime.h"
-//#include "Random\Random.h"
+#pragma comment ( lib, "winmm.lib" )
+#include "DirectXTK/Inc/CommonStates.h"
+#include "DirectXTK\Inc\Effects.h"
+#include "DirectXTK/Inc/Model.h"
+#include "DirectXTK/Inc/Effects.h"
+#include "DirectXTK/Inc/WICTextureLoader.h"
+#include "DirectXTK/Inc/DDSTextureLoader.h"
+
+#include "../osumaruEngine/bulletPhysics/src/btBulletDynamicsCommon.h"
+
 #include "Uncopyable.h"
-//#include "Graphics/Texture.h"
-//#include "Graphics/Primitive.h"
-//#include "Graphics/RenderTarget.h"
-//#include "GameObject/GameObject.h"
-//#include "GameObject/GameObjectManager.h"
-//#include "btBulletDynamicsCommon.h"
-//#include "BulletCollision/CollisionDispatch/btGhostObject.h"
+#include "Engine.h"
+#include "Math\Math.h"
+#include "Math/Matrix.h"
+#include "Math\Vector.h"
+#include "Graphics/ConstantBuffer.h"
+#include "Graphics/Shader.h"
+using namespace DirectX;

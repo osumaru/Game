@@ -1,6 +1,5 @@
 #pragma once
 class GameObject;
-#include "../Graphics/PostEffect/PostEffect.h"
 //オブジェクトマネージャー
 
 struct GameObjectData
@@ -18,7 +17,7 @@ public:
 	void Init();
 
 	//ゲームの1ループを実行する関数
-	void Execute(PostEffect& postEffect);
+	void Execute();
 
 	//ゲームのオブジェクトを消去する関数
 	void Delete(GameObject* deleteObject);
@@ -28,14 +27,14 @@ public:
 	オブジェクトを生成する。
 	priority	オブジェクトの優先度
 	*/
-	template<class T>
-	T* New(int priority)
+	template<class T, class... TArgs>
+	T* New(int priority, TArgs... args)
 	{
 		if (priority < 0 || PRIORITY_MAX <= priority)
 		{
 			return nullptr;
 		}
-		T* newObject = new T;
+		T* newObject = new T(args...);
 		m_objectVector[priority].push_back({ newObject, true });
 		return newObject;
 	}

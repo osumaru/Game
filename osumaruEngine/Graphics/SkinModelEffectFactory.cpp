@@ -1,0 +1,30 @@
+#include "engineStdafx.h"
+#include "SkinModelEffectFactory.h"
+#include "SkinModelEffect.h"
+
+std::shared_ptr<DirectX::IEffect> __cdecl SkinModelEffectFactory::CreateEffect(_In_ const IEffectFactory::EffectInfo& info, _In_opt_ ID3D11DeviceContext* deviceContext)
+{
+	std::shared_ptr<ISkinModelEffect> effect;
+	ID3D11ShaderResourceView* view;
+	if (info.enableSkinning)
+	{
+		effect = std::make_shared<SkinModelEffect>();
+	}
+	else
+	{
+		effect = std::make_shared<NoSkinModelEffect>();
+	}
+	if (info.diffuseTexture != nullptr)
+	{
+		wchar_t filePath[256];
+		swprintf(filePath, L"Assets/modelData/%s", info.diffuseTexture);
+		EffectFactory::CreateTexture(filePath, GetDeviceContext(), &view);
+		effect->SetTexture(view);
+	}
+	return effect;
+}
+
+void __cdecl SkinModelEffectFactory::CreateTexture(_In_z_ const wchar_t* name, _In_opt_ ID3D11DeviceContext* deviceContext, _Outptr_ ID3D11ShaderResourceView** textureView)
+{
+	EffectFactory::CreateTexture(name, deviceContext, textureView);
+}
