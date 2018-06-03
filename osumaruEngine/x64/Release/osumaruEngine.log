@@ -1,4 +1,0 @@
-﻿d3dx9.lib(d3dx9_43.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR は d3d9.lib(d3d9.dll) で定義されています。2 つ目以降の定義は無視されます。
-XInput.lib(XINPUT1_3.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR は d3d9.lib(d3d9.dll) で定義されています。2 つ目以降の定義は無視されます。
-x3daudio.lib(X3DAudio1_7.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR は d3d9.lib(d3d9.dll) で定義されています。2 つ目以降の定義は無視されます。
-  osumaruEngine.vcxproj -> C:\Users\kbc16\Documents\Game\Game\x64\Release\osumaruEngine.lib

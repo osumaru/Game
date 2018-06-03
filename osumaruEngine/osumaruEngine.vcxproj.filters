@@ -25,6 +25,27 @@
     <Filter Include="ソース ファイル\Math">
       <UniqueIdentifier>{d636a4d5-1835-4ed3-9a77-3767de162654}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Physics">
+      <UniqueIdentifier>{b0d991b2-5f81-4cb2-821c-46f81b871fcf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Physics\Collider">
+      <UniqueIdentifier>{4d4909e5-88c0-4d74-b95c-002c5d223881}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Camera">
+      <UniqueIdentifier>{1a14df84-c7e0-48fd-a324-0d1eb14a4994}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Time">
+      <UniqueIdentifier>{02c08749-0d0f-4c32-aba4-a6b3a0472a6b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Random">
+      <UniqueIdentifier>{6baa6860-2c88-4675-b7f0-5ff0a20bf333}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Sound">
+      <UniqueIdentifier>{bbc2202a-b2bf-4ae4-8505-d0bdc67b57a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Input">
+      <UniqueIdentifier>{7012f079-d1f9-4016-9db6-b908046e581a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="engineStdafx.cpp">
@@ -78,14 +99,59 @@
     <ClCompile Include="Graphics\SkinModelEffectFactory.cpp">
       <Filter>ソース ファイル\Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="Camera.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="Graphics\Skelton.cpp">
       <Filter>ソース ファイル\Graphics</Filter>
     </ClCompile>
     <ClCompile Include="Graphics\Animation.cpp">
       <Filter>ソース ファイル\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Physics\Physics.cpp">
+      <Filter>ソース ファイル\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="Physics\RigidBody.cpp">
+      <Filter>ソース ファイル\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="Physics\Collider\ICollider.cpp">
+      <Filter>ソース ファイル\Physics\Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="Physics\Collider\BoxCollider.cpp">
+      <Filter>ソース ファイル\Physics\Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="Physics\Collider\CapsuleCollider.cpp">
+      <Filter>ソース ファイル\Physics\Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="Physics\Collider\SphereCollider.cpp">
+      <Filter>ソース ファイル\Physics\Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="Physics\CharacterController.cpp">
+      <Filter>ソース ファイル\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera\Camera.cpp">
+      <Filter>ソース ファイル\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Timer\GameTime.cpp">
+      <Filter>ソース ファイル\Time</Filter>
+    </ClCompile>
+    <ClCompile Include="Timer\StopWatch.cpp">
+      <Filter>ソース ファイル\Time</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera\SpringCamera.cpp">
+      <Filter>ソース ファイル\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Random\Random.cpp">
+      <Filter>ソース ファイル\Random</Filter>
+    </ClCompile>
+    <ClCompile Include="Sound\SoundEngine.cpp">
+      <Filter>ソース ファイル\Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="Sound\SoundSource.cpp">
+      <Filter>ソース ファイル\Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="Sound\WaveFileOpen.cpp">
+      <Filter>ソース ファイル\Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="Input\Pad.cpp">
+      <Filter>ソース ファイル\Input</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -143,14 +209,62 @@
     <ClInclude Include="Graphics\SkinModelEffect.h">
       <Filter>ソース ファイル\Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="Camera.h">
-      <Filter>ソース ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="Graphics\Skelton.h">
       <Filter>ソース ファイル\Graphics</Filter>
     </ClInclude>
     <ClInclude Include="Graphics\Animation.h">
       <Filter>ソース ファイル\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Physics\Physics.h">
+      <Filter>ソース ファイル\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Physics\RigidBody.h">
+      <Filter>ソース ファイル\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Physics\CollisionAttr.h">
+      <Filter>ソース ファイル\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Physics\Collider\ICollider.h">
+      <Filter>ソース ファイル\Physics\Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="Physics\Collider\BoxCollider.h">
+      <Filter>ソース ファイル\Physics\Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="Physics\Collider\CapsuleCollider.h">
+      <Filter>ソース ファイル\Physics\Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="Physics\Collider\SphereCollider.h">
+      <Filter>ソース ファイル\Physics\Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="Physics\CharacterController.h">
+      <Filter>ソース ファイル\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera\Camera.h">
+      <Filter>ソース ファイル\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Timer\GameTime.h">
+      <Filter>ソース ファイル\Time</Filter>
+    </ClInclude>
+    <ClInclude Include="Timer\StopWatch.h">
+      <Filter>ソース ファイル\Time</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera\SpringCamera.h">
+      <Filter>ソース ファイル\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Random\Random.h">
+      <Filter>ソース ファイル\Random</Filter>
+    </ClInclude>
+    <ClInclude Include="Sound\SoundEngine.h">
+      <Filter>ソース ファイル\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="Sound\SoundSource.h">
+      <Filter>ソース ファイル\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="Sound\WaveFileOpen.h">
+      <Filter>ソース ファイル\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="Input\Pad.h">
+      <Filter>ソース ファイル\Input</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
