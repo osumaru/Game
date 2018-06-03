@@ -7,8 +7,7 @@
 //#include "Graphics/Texture.h"
 //#include "Graphics/Primitive.h"
 //#include "Graphics/RenderTarget.h"
-//#include "GameObject/GameObject.h"
-//#include "GameObject/GameObjectManager.h"
+
 //#include "BulletCollision/CollisionDispatch/btGhostObject.h"
 
 #include <d3d11.h>
@@ -44,9 +43,12 @@
 
 #include "Uncopyable.h"
 #include "Engine.h"
+#include "GameObject/GameObject.h"
+#include "GameObject/GameObjectManager.h"
 #include "Math\Math.h"
 #include "Math/Matrix.h"
 #include "Math\Vector.h"
+#include "Sound/SoundEngine.h"
 #include "Graphics/ConstantBuffer.h"
 #include "Graphics/Shader.h"
 using namespace DirectX;

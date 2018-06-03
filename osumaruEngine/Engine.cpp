@@ -1,5 +1,10 @@
 #include "engineStdafx.h"
 #include "Engine.h"
+#include "Physics\Physics.h"
+#include "Timer\GameTime.h"
+#include "Timer/StopWatch.h"
+#include "Sound\SoundEngine.h"
+#include "Input\Pad.h"
 
 LRESULT WINAPI MsgProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
@@ -122,6 +127,11 @@ void Engine::InitD3D(HINSTANCE& hInst)
 	vp.MinDepth = 0.0f;
 	vp.MaxDepth = 1.0f;
 	m_pDeviceContext->RSSetViewports(1, &vp);
+	m_physicsWorld = std::make_unique<PhysicsWorld>();
+	m_physicsWorld->Init();
+	m_soundEngine = std::make_unique<SoundEngine>();
+	m_soundEngine->Init();
+	m_pad = std::make_unique<Pad>();
 }
 
 void Engine::GameLoop()
@@ -140,11 +150,27 @@ void Engine::GameLoop()
 		}
 		else
 		{
+			StopWatch sw;
+			sw.Start();
 			float color[4] = { 0.0f, 0.0f, 1.0f, 0.0f };
 			m_pDeviceContext->ClearRenderTargetView(m_pBackBuffer, color);
 			m_pDeviceContext->ClearDepthStencilView(m_backBuffer.GetDepthStencil(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
 			m_objectManager.Execute();
+			m_physicsWorld->Update();
+			m_soundEngine->Update();
+			m_pad->Update();
 			m_pSwapChain->Present(0, 0);
+			sw.Stop();
+			if (sw.GetElapsedTime() < 1.0f / 30.0f)
+			{
+				DWORD sleepTime = max(0.0, (1.0 - 30.0) * 1000.0 - (DWORD)sw.GetElapsedTimeMill());
+				Sleep(sleepTime);
+				GetGameTime().SetFrameDeltaTime(1.0f / 30.0f);
+			}
+			else
+			{
+				GetGameTime().SetFrameDeltaTime((float)sw.GetElapsedTime());
+			}
 		}
 	}
 

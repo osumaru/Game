@@ -3,7 +3,6 @@
 #include "GameObject/GameObjectManager.h"
 #include "Graphics/Texture.h"
 #include "Graphics\RenderTarget.h"
-
 //エンジンクラス
 
 const int FRAME_BUFFER_WIDTH = 1280;
@@ -11,7 +10,9 @@ const int FRAME_BUFFER_HEIGHT = 720;
 
 class EffectManager;
 class GameObject;
-
+class PhysicsWorld;
+class SoundEngine;
+class Pad;
 
 class Engine
 {
@@ -38,6 +39,24 @@ public:
 	void Release()
 	{
 
+	}
+
+	//物理ワールドを取得。
+	PhysicsWorld& GetPhysicsWorld()
+	{
+		return *m_physicsWorld;
+	}
+
+	//サウンドエンジンを取得
+	SoundEngine& GetSoundEngine()
+	{
+		return *m_soundEngine;
+	}
+
+	//パッドの取得
+	Pad& GetPad()
+	{
+		return *m_pad;
 	}
 
 	ID3D11Device* GetDevice()
@@ -85,6 +104,9 @@ private:
 	D3D_DRIVER_TYPE							m_driverType;
 	ID3D11RenderTargetView*					m_pBackBuffer;
 	HWND									m_hwnd;
+	std::unique_ptr<PhysicsWorld>			m_physicsWorld;				//物理ワールド
+	std::unique_ptr<SoundEngine>			m_soundEngine;				//サウンドエンジン]
+	std::unique_ptr<Pad>					m_pad;
 };
 
 //エンジンクラスのインスタンスを取得。
@@ -120,4 +142,19 @@ static ID3D11DeviceContext* GetDeviceContext()
 	return GetEngine().GetDeviceContext();
 }
 
+//パッドの取得
+static Pad& GetPad()
+{
+	return GetEngine().GetPad();
+}
+
+static PhysicsWorld& GetPhysicsWorld()
+{
+	return GetEngine().GetPhysicsWorld();
+}
+
+static SoundEngine& GetSoundEngine()
+{
+	return GetEngine().GetSoundEngine();
+}
 
