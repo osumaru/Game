@@ -1,5 +1,12 @@
-﻿  コード生成しています。
-  All 1 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+﻿  Assets\modelData\GroundBrock.FBX
+  Assets\modelData\Unitychan.FBX
+  stdafx.cpp
+  Test.cpp
+  main.cpp
+  コード生成しています。
+  167 of 1118 functions (14.9%) were compiled, the rest were copied from previous compilation.
+    39 functions were new in current compilation
+    7 functions had inline decision re-evaluated but remain unchanged
   コード生成が終了しました。
-  Game.vcxproj -> C:\Users\kbc16\Documents\Game\Game\x64\Release\Game.exe
-  Game.vcxproj -> C:\Users\kbc16\Documents\Game\Game\x64\Release\Game.pdb (Full PDB)
+  Game.vcxproj -> C:\Users\kbc16\Documents\github\Game\Game\x64\Release\Game.exe
+  Game.vcxproj -> C:\Users\kbc16\Documents\github\Game\Game\x64\Release\Game.pdb (Full PDB)

@@ -1,2 +1,4 @@
-﻿  Game.vcxproj -> C:\Users\kbc16\Documents\Game\Game\x64\Debug\Game.exe
-  Game.vcxproj -> C:\Users\kbc16\Documents\Game\Game\x64\Debug\Game.pdb (Full PDB)
+﻿  Assets\modelData\GroundBrock.FBX
+  Assets\modelData\Unitychan.FBX
+  Game.vcxproj -> C:\Users\kbc16\Documents\github\Game\Game\x64\Debug\Game.exe
+  Game.vcxproj -> C:\Users\kbc16\Documents\github\Game\Game\x64\Debug\Game.pdb (Full PDB)
