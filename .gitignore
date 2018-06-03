@@ -18,13 +18,19 @@
 *.log
 *.vspscc
 *.vssscc
-.builds
+*.builds
 *.pidb
 *.svclog
 *.scc
 *.tlog
+*.lib
+*.idb
+*.db
+*.suo
 
 /Game/x64
+/Game/x64/Release
+/Game/x64/Debug
 /Game/ipch
 /osumaruEngine/bulletPhysics/src/BulletCollision/x64
 /osumaruEngine/bulletPhysics/src/BulletDynamics/x64
