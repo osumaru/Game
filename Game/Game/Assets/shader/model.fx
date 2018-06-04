@@ -50,7 +50,7 @@ VS_OUTPUT VSSkinMain(VS_SKIN_INPUT In)
 		pos += mul(boneMatrix[In.boneIndex[i]], In.pos) * In.blendWeight[i];
 	}
 	Out.pos = pos;
-	//Out.pos = mul(mvp, Out.pos);
+	Out.pos = mul(mvp, Out.pos);
 	Out.pos = mul(view, Out.pos);
 	Out.pos = mul(proj, Out.pos);
 	Out.uv = In.uv;

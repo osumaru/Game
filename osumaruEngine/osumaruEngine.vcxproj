@@ -22,7 +22,7 @@
     <ProjectGuid>{9E0FC05E-69E9-4E14-B784-233842771258}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>osumaruEngine</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.10240.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.10586.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
