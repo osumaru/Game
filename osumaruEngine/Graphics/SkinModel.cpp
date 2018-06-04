@@ -4,56 +4,84 @@
 
 SkinModel::SkinModel()
 {
+	isSkelton = false;
+	worldMatrix = Matrix::Identity;
 }
 
-void SkinModel::Create()
+void SkinModel::Load(wchar_t* filePath)
 {
 	m_skelton = new Skelton;
-	m_skelton->Init();
 	SkinModelCB cb;
 	cb.worldMat = Matrix::Identity;
 	cb.viewMat.MakeLookAt({ 0.0f, 0.0f, -100.0f }, { 0.0f, 0.0f, 0.0f }, { 0.0f, 1.0f, 0.0f });
 	cb.projMat.MakeProjectionMatrix(Math::DegToRad(60.0f), 1.0f, 1.0f, 500.0f);
 	constantBuffer.Create(sizeof(SkinModelCB), &cb);
-	std::vector<std::unique_ptr<Bone>>& bones = m_skelton->GetBones();
-	Matrix* boneMatrix = new Matrix[bones.size()];
-	for (int i = 0;i < bones.size();i++)
+	size_t pos = wcslen(filePath);
+	
+	wchar_t skeltonName[256] = {0};
+	wcsncpy(skeltonName, filePath, pos - 4);
+	wcscat(skeltonName, L".tks");
+	if (m_skelton->Load(skeltonName))
 	{
-		boneMatrix[i] = bones[i]->GetWorldMatrix();
-	}
-	D3D11_BUFFER_DESC desc;
-	desc.ByteWidth = bones.size() * sizeof(Matrix);
-	desc.StructureByteStride = sizeof(Matrix);
-	desc.BindFlags = D3D11_BIND_SHADER_RESOURCE;
-	desc.Usage = D3D11_USAGE_DEFAULT;
-	desc.CPUAccessFlags = 0;
-	desc.MiscFlags = D3D11_RESOURCE_MISC_BUFFER_STRUCTURED;
-	D3D11_SUBRESOURCE_DATA resource;
-	resource.pSysMem = boneMatrix;
 
-	GetDevice()->CreateBuffer(&desc, &resource, &m_structuredBuffer);
-	D3D11_SHADER_RESOURCE_VIEW_DESC viewDesc;
-	ZeroMemory(&viewDesc, sizeof(viewDesc));
-	viewDesc.ViewDimension = D3D11_SRV_DIMENSION_BUFFEREX;
-	viewDesc.Format = DXGI_FORMAT_UNKNOWN;
-	viewDesc.BufferEx.FirstElement = 0;
-	viewDesc.BufferEx.NumElements = bones.size();
-	GetDevice()->CreateShaderResourceView(m_structuredBuffer, &viewDesc, &m_shaderResourceView);
-
-	SkinModelEffectFactory effectFactory(GetDevice());
-	auto onFindBone = [&](
-		const wchar_t* boneName,
-		const VSD3DStarter::Bone* bone,
-		std::vector<int>& localBoneIDtoGlobalBoneIDTbl
-		) {
-		int globalBoneID = m_skelton->FindBoneID(boneName);
-		if (globalBoneID == -1) {
-			return;
+		std::vector<std::unique_ptr<Bone>>& bones = m_skelton->GetBones();
+		Matrix* boneMatrix = new Matrix[bones.size()];
+		for (int i = 0;i < bones.size();i++)
+		{
+			boneMatrix[i] = bones[i]->GetWorldMatrix();
 		}
-		localBoneIDtoGlobalBoneIDTbl.push_back(globalBoneID);
-	};
-	m_skinModel = Model::CreateFromCMO(GetDevice(), L"Assets/modelData/Unitychan.cmo", effectFactory, false, false, onFindBone);
+		D3D11_BUFFER_DESC desc;
+		desc.ByteWidth = bones.size() * sizeof(Matrix);
+		desc.StructureByteStride = sizeof(Matrix);
+		desc.BindFlags = D3D11_BIND_SHADER_RESOURCE;
+		desc.Usage = D3D11_USAGE_DEFAULT;
+		desc.CPUAccessFlags = 0;
+		desc.MiscFlags = D3D11_RESOURCE_MISC_BUFFER_STRUCTURED;
+		D3D11_SUBRESOURCE_DATA resource;
+		resource.pSysMem = boneMatrix;
 
+		GetDevice()->CreateBuffer(&desc, &resource, &m_structuredBuffer);
+		D3D11_SHADER_RESOURCE_VIEW_DESC viewDesc;
+		ZeroMemory(&viewDesc, sizeof(viewDesc));
+		viewDesc.ViewDimension = D3D11_SRV_DIMENSION_BUFFEREX;
+		viewDesc.Format = DXGI_FORMAT_UNKNOWN;
+		viewDesc.BufferEx.FirstElement = 0;
+		viewDesc.BufferEx.NumElements = bones.size();
+		GetDevice()->CreateShaderResourceView(m_structuredBuffer, &viewDesc, &m_shaderResourceView);
+
+		SkinModelEffectFactory effectFactory(GetDevice());
+		auto onFindBone = [&](
+			const wchar_t* boneName,
+			const VSD3DStarter::Bone* bone,
+			std::vector<int>& localBoneIDtoGlobalBoneIDTbl
+			) {
+			int globalBoneID = m_skelton->FindBoneID(boneName);
+			if (globalBoneID == -1) {
+				return;
+			}
+			localBoneIDtoGlobalBoneIDTbl.push_back(globalBoneID);
+		};
+		m_skinModel = Model::CreateFromCMO(GetDevice(), filePath, effectFactory, false, false, onFindBone);
+		isSkelton = true;
+	}
+	else
+	{
+		SkinModelEffectFactory effectFactory(GetDevice());
+		m_skinModel = Model::CreateFromCMO(GetDevice(), filePath, effectFactory);
+	}
+
+}
+
+void SkinModel::Update(Vector3 position, Quaternion rotation, Vector3 scale)
+{
+	Matrix posMat;
+	posMat.MakeTranslation(position);
+	Matrix rotMat;
+	rotMat.MakeRotationFromQuaternion(rotation);
+	Matrix scaleMat;
+	scaleMat.MakeScaling(scale);
+	worldMatrix.Mul(posMat, rotMat);
+	worldMatrix.Mul(worldMatrix, scaleMat);
 }
 
 void SkinModel::Draw(Matrix view, Matrix projection)
@@ -63,10 +91,13 @@ void SkinModel::Draw(Matrix view, Matrix projection)
 	SkinModelCB cb;
 	cb.viewMat = view;
 	cb.projMat = projection;
-	cb.worldMat = world;
+	cb.worldMat = worldMatrix;
 	constantBuffer.Update(&cb);
 	ID3D11Buffer* cbBuffer = constantBuffer.GetBody();
 	GetDeviceContext()->VSSetConstantBuffers(0, 1, &cbBuffer);
-	GetDeviceContext()->VSSetShaderResources(0, 1, &m_shaderResourceView);
+	if (isSkelton)
+	{
+		GetDeviceContext()->VSSetShaderResources(0, 1, &m_shaderResourceView);
+	}
 	m_skinModel->Draw(GetDeviceContext(), common, world, view, projection);
 }

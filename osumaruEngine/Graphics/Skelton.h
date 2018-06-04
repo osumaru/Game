@@ -87,7 +87,7 @@ class Skelton
 {
 public:
 
-	void Init();
+	bool Load(wchar_t* filePath);
 
 	int FindBoneID(const wchar_t* boneName)
 	{

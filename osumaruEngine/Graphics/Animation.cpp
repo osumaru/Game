@@ -6,7 +6,7 @@
 void Animation::Init()
 {
 	m_skelton = new Skelton;
-	m_skelton->Init();
+	//m_skelton->Init();
 }
 
 void Animation::Update()

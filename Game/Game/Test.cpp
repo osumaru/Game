@@ -10,7 +10,7 @@ void Test::Init()
 	sprite.Init(&texture);
 	view.MakeLookAt({ 0.0f, 0.0f, -10.0f }, { 0.0f, 0.0f, 0.0f }, {0.0f, 1.0f, 0.0f});
 	proj.MakeProjectionMatrix(Math::DegToRad(60.0f), (float)FRAME_BUFFER_WIDTH / (float)FRAME_BUFFER_HEIGHT, 1.0f, 500.0f);
-	model.Create();
+	model.Load(L"Assets/modelData/Unitychan.cmo");
 }
 
 void Test::Update()

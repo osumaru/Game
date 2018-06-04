@@ -2,10 +2,14 @@
 #include "Skelton.h"
 
 
-void Skelton::Init()
+bool Skelton::Load(wchar_t* filePath)
 {
-	FILE* fp;
-	fp = fopen("Assets/modelData/unity.tks", "rb");
+	FILE* fp = NULL;;
+	fp = _wfopen(filePath, L"rb");
+	if (fp == NULL)
+	{
+		return false;
+	}
 	//œ‚Ì”‚ğæ“¾B
 	int numBone = 0;
 	fread(&numBone, sizeof(numBone), 1, fp);
@@ -72,6 +76,7 @@ void Skelton::Init()
 	}
 
 	Update(Matrix::Identity);
+	return true;
 }
 
 void Skelton::Update(Matrix mat)
