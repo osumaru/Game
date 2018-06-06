@@ -209,9 +209,6 @@
     <ClInclude Include="Graphics\SkinModelEffect.h">
       <Filter>ソース ファイル\Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics\Skelton.h">
-      <Filter>ソース ファイル\Graphics</Filter>
-    </ClInclude>
     <ClInclude Include="Graphics\Animation.h">
       <Filter>ソース ファイル\Graphics</Filter>
     </ClInclude>
@@ -265,6 +262,9 @@
     </ClInclude>
     <ClInclude Include="Input\Pad.h">
       <Filter>ソース ファイル\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Skelton.h">
+      <Filter>ソース ファイル\Graphics</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

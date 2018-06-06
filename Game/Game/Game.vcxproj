@@ -185,10 +185,7 @@
     </MeshContentTask>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="Assets\modelData\unity.tks">
-      <FileType>Document</FileType>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(SolutionDir)Game\Assets\modelData\%Unitychan.tks</Outputs>
-    </CustomBuild>
+    <None Include="Assets\modelData\unitychan.tks" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

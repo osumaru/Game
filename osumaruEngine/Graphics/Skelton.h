@@ -16,6 +16,7 @@ public:
 		m_worldMatrix = worldMat;
 		m_invMatrix = invWorldMat;
 		m_localMatrix = worldMat;
+		m_animMatrix = Matrix::Identity;
 	}
 	void AddChildren(Bone* children)
 	{
@@ -52,6 +53,16 @@ public:
 		m_worldMatrix = worldMatrix;
 	}
 
+	void SetAnimationMatrix(Matrix mat)
+	{
+		m_animMatrix = mat;
+	}
+
+	Matrix GetAnimationMatrix()
+	{
+		return m_animMatrix;
+	}
+
 	void SetInvMatrix(Matrix invMatrix)
 	{
 		m_invMatrix = invMatrix;
@@ -81,6 +92,7 @@ private:
 	Matrix m_worldMatrix;
 	Matrix m_invMatrix;
 	std::vector<Bone*> m_boneChilds;
+	Matrix m_animMatrix;
 };
 
 class Skelton
@@ -100,14 +112,23 @@ public:
 		}
 		return -1;
 	}
-	std::vector<std::unique_ptr<Bone>>& GetBones()
+
+	void SetBoneMatrix(int boneIndex, Matrix mat)
 	{
-		return m_bones;
+		Matrix multi;
+		multi.Mul(mat, m_bones[boneIndex]->GetInvMatrix());
+		m_bones[boneIndex]->SetAnimationMatrix(multi);
 	}
+
 
 	void Update(Matrix mat);
 
 	void UpdateWorldMatrix(Bone* bone, Matrix mat);
+
+	void Render();
 private:
 	std::vector<std::unique_ptr<Bone>> m_bones;
+	ID3D11Buffer*					m_structuredBuffer;
+	ID3D11ShaderResourceView*		m_shaderResourceView;
+	std::unique_ptr<Matrix[]> m_boneMat;
 };

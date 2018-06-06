@@ -118,6 +118,14 @@ void Engine::InitD3D(HINSTANCE& hInst)
 	m_pBackBuffer = m_backBuffer.GetRenderTarget();
 	ID3D11DepthStencilView* depthStencil = m_backBuffer.GetDepthStencil();
 	m_pDeviceContext->OMSetRenderTargets(1, &m_pBackBuffer, depthStencil);
+	D3D11_RASTERIZER_DESC rasterizerDesc;
+	ID3D11RasterizerState* rasterizerState;
+	ZeroMemory(&rasterizerDesc, sizeof(D3D11_RASTERIZER_DESC));
+	rasterizerDesc.FillMode = D3D11_FILL_SOLID;
+	rasterizerDesc.CullMode = D3D11_CULL_FRONT;
+	m_pD3DDevice->CreateRasterizerState(&rasterizerDesc, &rasterizerState);
+	m_pDeviceContext->RSSetState(rasterizerState);
+
 	// ビューポート設定
 	D3D11_VIEWPORT vp;
 	vp.TopLeftX = 0;
@@ -146,7 +154,6 @@ void Engine::GameLoop()
 		{
 			TranslateMessage(&msg);
 			DispatchMessage(&msg);
-
 		}
 		else
 		{

@@ -44,13 +44,12 @@ VS_OUTPUT VSMain(VS_INPUT In)
 VS_OUTPUT VSSkinMain(VS_SKIN_INPUT In)
 {
 	VS_OUTPUT Out;
-	float4 pos = 0;
+	float4x4 pos = 0;
 	for (int i = 0;i < 4;i++)
 	{
-		pos += mul(boneMatrix[In.boneIndex[i]], In.pos) * In.blendWeight[i];
+		pos += boneMatrix[In.boneIndex[i]] * In.blendWeight[i];
 	}
-	Out.pos = pos;
-	Out.pos = mul(mvp, Out.pos);
+	Out.pos = mul(pos, In.pos);
 	Out.pos = mul(view, Out.pos);
 	Out.pos = mul(proj, Out.pos);
 	Out.uv = In.uv;

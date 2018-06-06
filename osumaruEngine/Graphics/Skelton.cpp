@@ -66,8 +66,9 @@ bool Skelton::Load(wchar_t* filePath)
 		{
 			m_bones[bone->GetParentID()]->AddChildren(bone.get());
 			Matrix localMat;
-			localMat.Mul(m_bones[bone->GetParentID()]->GetInvMatrix(), bone->GetWorldMatrix());
+			localMat.Mul(bone->GetWorldMatrix(), m_bones[bone->GetParentID()]->GetInvMatrix());
 			bone->SetLocalMatrix(localMat);
+			bone->SetAnimationMatrix(localMat);
 		}
 		else
 		{
@@ -75,6 +76,30 @@ bool Skelton::Load(wchar_t* filePath)
 		}
 	}
 
+
+	m_boneMat = std::make_unique<Matrix[]>(m_bones.size());
+	for (int i = 0;i < m_bones.size();i++)
+	{
+		m_boneMat[i] = m_bones[i]->GetLocalMatrix();
+	}
+	D3D11_BUFFER_DESC desc;
+	desc.ByteWidth = m_bones.size() * sizeof(Matrix);
+	desc.StructureByteStride = sizeof(Matrix);
+	desc.BindFlags = D3D11_BIND_SHADER_RESOURCE;
+	desc.Usage = D3D11_USAGE_DEFAULT;
+	desc.CPUAccessFlags = 0;
+	desc.MiscFlags = D3D11_RESOURCE_MISC_BUFFER_STRUCTURED;
+	D3D11_SUBRESOURCE_DATA resource;
+	resource.pSysMem = m_boneMat.get();
+
+	GetDevice()->CreateBuffer(&desc, &resource, &m_structuredBuffer);
+	D3D11_SHADER_RESOURCE_VIEW_DESC viewDesc;
+	ZeroMemory(&viewDesc, sizeof(viewDesc));
+	viewDesc.ViewDimension = D3D11_SRV_DIMENSION_BUFFEREX;
+	viewDesc.Format = DXGI_FORMAT_UNKNOWN;
+	viewDesc.BufferEx.FirstElement = 0;
+	viewDesc.BufferEx.NumElements = m_bones.size();
+	GetDevice()->CreateShaderResourceView(m_structuredBuffer, &viewDesc, &m_shaderResourceView);
 	Update(Matrix::Identity);
 	return true;
 }
@@ -94,11 +119,23 @@ void Skelton::Update(Matrix mat)
 void Skelton::UpdateWorldMatrix(Bone* bone, Matrix mat)
 {
 	Matrix mBoneWorld;
-	Matrix localMatrix = bone->GetLocalMatrix();
+	Matrix localMatrix = bone->GetAnimationMatrix();
 	mBoneWorld.Mul(localMatrix, mat);
 
 	bone->SetWorldMatrix(mBoneWorld);
 	for (auto childBone : bone->GetChildren()) {
 		UpdateWorldMatrix(childBone, mBoneWorld);
 	}
+
+}
+
+
+void Skelton::Render()
+{
+	for (int i = 0;i < m_bones.size();i++)
+	{
+		m_boneMat[i] = m_bones[i]->GetAnimationMatrix();
+	}
+	GetDeviceContext()->UpdateSubresource(m_structuredBuffer, 0, NULL, m_boneMat.get(), 0, 0);
+	GetDeviceContext()->VSSetShaderResources(0, 1, &m_shaderResourceView);
 }

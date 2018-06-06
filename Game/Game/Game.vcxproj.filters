@@ -37,10 +37,12 @@
     <CustomBuild Include="Assets\shader\sprite.fx">
       <Filter>ソース ファイル</Filter>
     </CustomBuild>
-    <CustomBuild Include="Assets\modelData\unity.tks" />
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\GroundBrock.FBX" />
     <MeshContentTask Include="Assets\modelData\Unitychan.FBX" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\modelData\unitychan.tks" />
   </ItemGroup>
 </Project>

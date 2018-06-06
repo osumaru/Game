@@ -1,6 +1,7 @@
 #include "engineStdafx.h"
 #include "SkinModel.h"
 #include "Skelton.h"
+#include "Animation.h"
 
 SkinModel::SkinModel()
 {
@@ -10,6 +11,7 @@ SkinModel::SkinModel()
 
 void SkinModel::Load(wchar_t* filePath)
 {
+	m_anim = nullptr;
 	m_skelton = new Skelton;
 	SkinModelCB cb;
 	cb.worldMat = Matrix::Identity;
@@ -24,30 +26,7 @@ void SkinModel::Load(wchar_t* filePath)
 	if (m_skelton->Load(skeltonName))
 	{
 
-		std::vector<std::unique_ptr<Bone>>& bones = m_skelton->GetBones();
-		Matrix* boneMatrix = new Matrix[bones.size()];
-		for (int i = 0;i < bones.size();i++)
-		{
-			boneMatrix[i] = bones[i]->GetWorldMatrix();
-		}
-		D3D11_BUFFER_DESC desc;
-		desc.ByteWidth = bones.size() * sizeof(Matrix);
-		desc.StructureByteStride = sizeof(Matrix);
-		desc.BindFlags = D3D11_BIND_SHADER_RESOURCE;
-		desc.Usage = D3D11_USAGE_DEFAULT;
-		desc.CPUAccessFlags = 0;
-		desc.MiscFlags = D3D11_RESOURCE_MISC_BUFFER_STRUCTURED;
-		D3D11_SUBRESOURCE_DATA resource;
-		resource.pSysMem = boneMatrix;
 
-		GetDevice()->CreateBuffer(&desc, &resource, &m_structuredBuffer);
-		D3D11_SHADER_RESOURCE_VIEW_DESC viewDesc;
-		ZeroMemory(&viewDesc, sizeof(viewDesc));
-		viewDesc.ViewDimension = D3D11_SRV_DIMENSION_BUFFEREX;
-		viewDesc.Format = DXGI_FORMAT_UNKNOWN;
-		viewDesc.BufferEx.FirstElement = 0;
-		viewDesc.BufferEx.NumElements = bones.size();
-		GetDevice()->CreateShaderResourceView(m_structuredBuffer, &viewDesc, &m_shaderResourceView);
 
 		SkinModelEffectFactory effectFactory(GetDevice());
 		auto onFindBone = [&](
@@ -63,6 +42,8 @@ void SkinModel::Load(wchar_t* filePath)
 		};
 		m_skinModel = Model::CreateFromCMO(GetDevice(), filePath, effectFactory, false, false, onFindBone);
 		isSkelton = true;
+		m_anim = new Animation;
+		m_anim->Init(m_skelton, L"Assets/modelData/unity.tka");
 	}
 	else
 	{
@@ -82,6 +63,11 @@ void SkinModel::Update(Vector3 position, Quaternion rotation, Vector3 scale)
 	scaleMat.MakeScaling(scale);
 	worldMatrix.Mul(posMat, rotMat);
 	worldMatrix.Mul(worldMatrix, scaleMat);
+	if (m_anim != nullptr)
+	{
+		m_anim->Update();
+	}
+	m_skelton->Update(worldMatrix);
 }
 
 void SkinModel::Draw(Matrix view, Matrix projection)
@@ -97,7 +83,7 @@ void SkinModel::Draw(Matrix view, Matrix projection)
 	GetDeviceContext()->VSSetConstantBuffers(0, 1, &cbBuffer);
 	if (isSkelton)
 	{
-		GetDeviceContext()->VSSetShaderResources(0, 1, &m_shaderResourceView);
+		m_skelton->Render();
 	}
 	m_skinModel->Draw(GetDeviceContext(), common, world, view, projection);
 }
