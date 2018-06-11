@@ -45,6 +45,7 @@ VS_OUTPUT VSSkinMain(VS_SKIN_INPUT In)
 {
 	VS_OUTPUT Out;
 	float4x4 pos = 0;
+	float4 blendWeight;
 	for (int i = 0;i < 4;i++)
 	{
 		pos += boneMatrix[In.boneIndex[i]] * In.blendWeight[i];

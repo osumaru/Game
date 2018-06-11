@@ -42,8 +42,8 @@ void SkinModel::Load(wchar_t* filePath)
 		};
 		m_skinModel = Model::CreateFromCMO(GetDevice(), filePath, effectFactory, false, false, onFindBone);
 		isSkelton = true;
-		m_anim = new Animation;
-		m_anim->Init(m_skelton, L"Assets/modelData/unity.tka");
+		//m_anim = new Animation;
+		//m_anim->Init(m_skelton, L"Assets/modelData/unity.tka");
 	}
 	else
 	{
@@ -67,7 +67,10 @@ void SkinModel::Update(Vector3 position, Quaternion rotation, Vector3 scale)
 	{
 		m_anim->Update();
 	}
-	m_skelton->Update(worldMatrix);
+	if (isSkelton)
+	{
+		m_skelton->Update(worldMatrix);
+	}
 }
 
 void SkinModel::Draw(Matrix view, Matrix projection)

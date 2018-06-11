@@ -40,6 +40,10 @@ bool Skelton::Load(wchar_t* filePath)
 		bindPoseMatrix.m[2][3] = 0.0f;
 		bindPoseMatrix.m[3][3] = 1.0f;
 
+		//float swap = bindPoseMatrix.m[3][2];
+		//bindPoseMatrix.m[3][2] = bindPoseMatrix.m[3][1];
+		//bindPoseMatrix.m[3][1] = swap;
+
 		//バインドポーズの逆行列。
 		Matrix invBindPoseMatrix;
 		memcpy(invBindPoseMatrix.m[0], &invBindPose[0], sizeof(invBindPose[0]));
@@ -50,6 +54,10 @@ bool Skelton::Load(wchar_t* filePath)
 		invBindPoseMatrix.m[1][3] = 0.0f;
 		invBindPoseMatrix.m[2][3] = 0.0f;
 		invBindPoseMatrix.m[3][3] = 1.0f;
+
+		//swap = invBindPoseMatrix.m[3][2];
+		//invBindPoseMatrix.m[3][2] = invBindPoseMatrix.m[3][1];
+		//invBindPoseMatrix.m[3][1] = swap;
 
 		std::unique_ptr<wchar_t[]> boneName;
 		boneName = std::make_unique<wchar_t[]>(256);
@@ -68,7 +76,6 @@ bool Skelton::Load(wchar_t* filePath)
 			Matrix localMat;
 			localMat.Mul(bone->GetWorldMatrix(), m_bones[bone->GetParentID()]->GetInvMatrix());
 			bone->SetLocalMatrix(localMat);
-			bone->SetAnimationMatrix(localMat);
 		}
 		else
 		{
@@ -119,11 +126,11 @@ void Skelton::Update(Matrix mat)
 void Skelton::UpdateWorldMatrix(Bone* bone, Matrix mat)
 {
 	Matrix mBoneWorld;
-	Matrix localMatrix = bone->GetAnimationMatrix();
+	Matrix localMatrix = bone->GetLocalMatrix();
 	mBoneWorld.Mul(localMatrix, mat);
 
 	bone->SetWorldMatrix(mBoneWorld);
-	for (auto childBone : bone->GetChildren()) {
+	for (auto& childBone : bone->GetChildren()) {
 		UpdateWorldMatrix(childBone, mBoneWorld);
 	}
 
@@ -134,7 +141,7 @@ void Skelton::Render()
 {
 	for (int i = 0;i < m_bones.size();i++)
 	{
-		m_boneMat[i] = m_bones[i]->GetAnimationMatrix();
+		m_boneMat[i].Mul(m_bones[i]->GetInvMatrix(), m_bones[i]->GetWorldMatrix());
 	}
 	GetDeviceContext()->UpdateSubresource(m_structuredBuffer, 0, NULL, m_boneMat.get(), 0, 0);
 	GetDeviceContext()->VSSetShaderResources(0, 1, &m_shaderResourceView);

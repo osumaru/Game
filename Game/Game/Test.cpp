@@ -18,8 +18,12 @@ void Test::Update()
 	static float angle = 0.0f;
 	angle += 0.2f;
 	Quaternion rot;
+	rot.SetRotationDeg(Vector3::AxisZ, angle);
+	Quaternion def;
+	def.SetRotationDeg(Vector3::AxisX, -90.0f);
+	def.Multiply(rot);
 	rot.SetRotationDeg(Vector3::AxisY, angle);
-	model.Update({ 0.0f, 0.0f, 0.0f }, rot, { 1.0f, 1.0f, 1.0f });
+	model.Update({ 0.0f, 0.0f, 0.0f }, def, { 1.0f, 1.0f, 1.0f });
 }
 
 void Test::Draw()

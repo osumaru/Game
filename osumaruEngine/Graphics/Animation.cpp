@@ -8,6 +8,7 @@ void Animation::Init(Skelton* skelton, wchar_t* filePath)
 	m_count = 0;
 	m_currentFrameNo = 0;
 	m_skelton = skelton;
+	m_topBoneKeyFramList = nullptr;
 	auto fp = _wfopen(filePath, L"rb");
 
 	//アニメーションクリップのヘッダーをロード。
@@ -63,7 +64,7 @@ void Animation::Init(Skelton* skelton, wchar_t* filePath)
 void Animation::Update()
 {
 	m_count++;
-	if (m_count >= 20)
+	if (m_count >= 10)
 	{
 		int i = 0;
 		for (auto& keyframe : m_keyFramePtrListArray)
@@ -72,10 +73,10 @@ void Animation::Update()
 			{
 				m_skelton->SetBoneMatrix(keyframe[m_currentFrameNo]->boneIndex, keyframe[m_currentFrameNo]->transform);
 			}
+			i++;
 		}
-
 		m_currentFrameNo++;
-		if (m_keyFramePtrListArray[0].size() <= m_currentFrameNo)
+		if (m_topBoneKeyFramList->size() <= m_currentFrameNo)
 		{
 			m_currentFrameNo = 0;
 		}
