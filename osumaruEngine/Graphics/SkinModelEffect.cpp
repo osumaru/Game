@@ -5,7 +5,7 @@ SkinModelEffect::SkinModelEffect()
 {
 	textureResource = nullptr;
 	vsShader.Load("Assets/shader/model.fx", "VSSkinMain", Shader::enVS);
-	psShader.Load("Assets/shader/model.fx", "PSMain", Shader::enPS);
+	psShader.Load("Assets/shader/model.fx", "PSSkinMain", Shader::enPS);
 }
 
 void __cdecl ISkinModelEffect::Apply(_In_ ID3D11DeviceContext* deviceContext)

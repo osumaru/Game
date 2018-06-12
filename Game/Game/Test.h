@@ -18,4 +18,5 @@ private:
 	Texture texture;
 	Matrix	view;
 	Matrix	proj;
+	Animation animation;
 };

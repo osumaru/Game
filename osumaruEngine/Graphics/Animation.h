@@ -37,7 +37,9 @@ class Animation
 {
 public:
 
-	void Init(Skelton* skelton, wchar_t* filePath);
+	void Load(wchar_t* filePath);
+
+	void SetSkelton(Skelton* skelton);
 
 	void Update();
 

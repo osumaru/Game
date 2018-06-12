@@ -14,21 +14,24 @@ public:
 
 	SkinModel();
 
+	~SkinModel();
+
 
 	void Update(Vector3 position, Quaternion rotation, Vector3 scale);
 
-	void Load(wchar_t* filePath);
+	void Load(wchar_t* filePath, Animation* animation = nullptr);
 
 	void Draw(Matrix view, Matrix proj);
 
 
+	void SetAnimation(Animation* animation);
 
 private:
 
-	Skelton*						m_skelton;
+	std::unique_ptr<Skelton>		m_skelton;
 	ConstantBuffer					constantBuffer;
 	std::unique_ptr<DirectX::Model> m_skinModel;
-	bool isSkelton;
+	bool							isSkelton;
 	Matrix							worldMatrix;
 	Animation*						m_anim;
 };

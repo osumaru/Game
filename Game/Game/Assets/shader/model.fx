@@ -62,3 +62,9 @@ float4 PSMain(VS_OUTPUT In) : SV_TARGET
 	float4 color = colorTexture.Sample(Sampler, In.uv);
 	return color;
 }
+
+float4 PSSkinMain(VS_OUTPUT In) : SV_TARGET
+{
+	float4 color = colorTexture.Sample(Sampler, In.uv);
+	return color;
+}

@@ -3,11 +3,10 @@
 #include "Skelton.h"
 
 
-void Animation::Init(Skelton* skelton, wchar_t* filePath)
+void Animation::Load(wchar_t* filePath)
 {
 	m_count = 0;
 	m_currentFrameNo = 0;
-	m_skelton = skelton;
 	m_topBoneKeyFramList = nullptr;
 	auto fp = _wfopen(filePath, L"rb");
 
@@ -57,6 +56,11 @@ void Animation::Init(Skelton* skelton, wchar_t* filePath)
 			m_topBoneKeyFramList = &m_keyFramePtrListArray[keyframe->boneIndex];
 		}
 	}
+}
+
+void Animation::SetSkelton(Skelton* skelton)
+{
+	m_skelton = skelton;
 }
 
 

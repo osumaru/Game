@@ -3,10 +3,7 @@
 class Bone
 {
 public:
-	Bone()
-	{
-		
-	}
+	Bone();
 
 	void Init(std::unique_ptr<wchar_t[]> boneName, int boneID, int parentID, const Matrix& worldMat, const Matrix& invWorldMat)
 	{
@@ -81,6 +78,10 @@ private:
 class Skelton
 {
 public:
+
+	Skelton();
+
+	~Skelton();
 
 	bool Load(wchar_t* filePath);
 

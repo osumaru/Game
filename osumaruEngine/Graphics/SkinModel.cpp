@@ -3,16 +3,25 @@
 #include "Skelton.h"
 #include "Animation.h"
 
-SkinModel::SkinModel()
+SkinModel::SkinModel() :
+	m_skelton(nullptr),
+	constantBuffer(),
+	m_skinModel(nullptr),
+	isSkelton(false),
+	worldMatrix(Matrix::Identity),
+	m_anim(nullptr)
 {
-	isSkelton = false;
-	worldMatrix = Matrix::Identity;
 }
 
-void SkinModel::Load(wchar_t* filePath)
+SkinModel::~SkinModel()
+{
+}
+
+void SkinModel::Load(wchar_t* filePath, Animation* animation)
 {
 	m_anim = nullptr;
-	m_skelton = new Skelton;
+	std::unique_ptr<Skelton> skelton;
+	skelton = std::make_unique<Skelton>();
 	SkinModelCB cb;
 	cb.worldMat = Matrix::Identity;
 	cb.viewMat.MakeLookAt({ 0.0f, 0.0f, -100.0f }, { 0.0f, 0.0f, 0.0f }, { 0.0f, 1.0f, 0.0f });
@@ -23,11 +32,9 @@ void SkinModel::Load(wchar_t* filePath)
 	wchar_t skeltonName[256] = {0};
 	wcsncpy(skeltonName, filePath, pos - 4);
 	wcscat(skeltonName, L".tks");
-	if (m_skelton->Load(skeltonName))
+	if (skelton->Load(skeltonName))
 	{
-
-
-
+		m_skelton = std::move(skelton);
 		SkinModelEffectFactory effectFactory(GetDevice());
 		auto onFindBone = [&](
 			const wchar_t* boneName,
@@ -42,8 +49,8 @@ void SkinModel::Load(wchar_t* filePath)
 		};
 		m_skinModel = Model::CreateFromCMO(GetDevice(), filePath, effectFactory, false, false, onFindBone);
 		isSkelton = true;
-		//m_anim = new Animation;
-		//m_anim->Init(m_skelton, L"Assets/modelData/unity.tka");
+		m_anim = animation;
+		m_anim->SetSkelton(m_skelton.get());
 	}
 	else
 	{
@@ -71,6 +78,12 @@ void SkinModel::Update(Vector3 position, Quaternion rotation, Vector3 scale)
 	{
 		m_skelton->Update(worldMatrix);
 	}
+}
+
+void SkinModel::SetAnimation(Animation* animation)
+{
+	m_anim = animation;
+	m_anim->SetSkelton(m_skelton.get());
 }
 
 void SkinModel::Draw(Matrix view, Matrix projection)

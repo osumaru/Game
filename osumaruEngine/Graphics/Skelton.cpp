@@ -2,9 +2,45 @@
 #include "Skelton.h"
 
 
+Bone::Bone() :
+	m_boneName(),
+	m_boneID(-1),
+	m_parentID(-1),
+	m_localMatrix(Matrix::Identity),
+	m_worldMatrix(Matrix::Identity),
+	m_invMatrix(Matrix::Identity),
+	m_boneChilds()
+{
+
+}
+
+Skelton::Skelton() :
+	m_bones(),
+	m_structuredBuffer(nullptr),
+	m_shaderResourceView(nullptr),
+	m_boneMat(nullptr)
+{
+
+}
+
+Skelton::~Skelton()
+{
+	if (m_structuredBuffer != nullptr)
+	{
+		m_structuredBuffer->Release();
+		m_structuredBuffer = nullptr;
+	}
+
+	if (m_shaderResourceView != nullptr)
+	{
+		m_shaderResourceView->Release();
+		m_shaderResourceView = nullptr;
+	}
+}
+
 bool Skelton::Load(wchar_t* filePath)
 {
-	FILE* fp = NULL;;
+	FILE* fp = NULL;
 	fp = _wfopen(filePath, L"rb");
 	if (fp == NULL)
 	{
