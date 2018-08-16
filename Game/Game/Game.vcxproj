@@ -113,6 +113,9 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>osumaruEngine.lib;d3d9.lib;d3dx9.lib;XInput.lib;x3daudio.lib;DirectXTK.lib;%(AdditionalDependencies);LinearMath_Debug.lib;BulletSoftBody_Debug.lib;BulletDynamics_Debug.lib;BulletCollision_Debug.lib</AdditionalDependencies>
     </Link>
+    <MeshContentTask>
+      <ContentOutput>$(SolutionDir)Game\Assets\modelData\%(Filename).cmo</ContentOutput>
+    </MeshContentTask>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -148,6 +151,9 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>osumaruEngine.lib;d3d9.lib;d3dx9.lib;d3dcompiler.lib;XInput.lib;x3daudio.lib;DirectXTK.lib;%(AdditionalDependencies);LinearMath.lib;BulletSoftBody.lib;BulletDynamics.lib;BulletCollision.lib</AdditionalDependencies>
     </Link>
+    <MeshContentTask>
+      <ContentOutput>$(SolutionDir)Game\Assets\modelData\%(Filename).cmo</ContentOutput>
+    </MeshContentTask>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />

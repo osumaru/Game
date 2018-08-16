@@ -67,6 +67,8 @@ public:
 		m_rigidBody->getWorldTransform().setRotation(btQuaternion(rotation.x, rotation.y, rotation.z, rotation.w));
 	}
 
+	void Draw();
+
 	void PhysicsWorldAddRigidBody();
 
 	void PhysicsWorldRemoveRigidBody();
@@ -96,6 +98,8 @@ public:
 	{
 		m_rigidBody->setPlayerCollisionGroundFlg(flg);
 	}
+
+
 private:
 	std::unique_ptr<btDefaultMotionState>	m_myMotionState;		//モーションステイト
 	std::unique_ptr<btRigidBody>			m_rigidBody;			//剛体

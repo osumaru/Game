@@ -172,6 +172,7 @@
     <ClCompile Include="GameObject\GameObject.cpp" />
     <ClCompile Include="GameObject\GameObjectManager.cpp" />
     <ClCompile Include="Graphics\Animation.cpp" />
+    <ClCompile Include="Graphics\AnimationClip.cpp" />
     <ClCompile Include="Graphics\ConstantBuffer.cpp" />
     <ClCompile Include="Graphics\PostEffect\PostEffect.cpp" />
     <ClCompile Include="Graphics\Primitive.cpp" />
@@ -191,9 +192,11 @@
     <ClCompile Include="Physics\Collider\BoxCollider.cpp" />
     <ClCompile Include="Physics\Collider\CapsuleCollider.cpp" />
     <ClCompile Include="Physics\Collider\ICollider.cpp" />
+    <ClCompile Include="Physics\Collider\MeshCollider.cpp" />
     <ClCompile Include="Physics\Collider\SphereCollider.cpp" />
     <ClCompile Include="Physics\Physics.cpp" />
     <ClCompile Include="Physics\RigidBody.cpp" />
+    <ClCompile Include="Physics\RigidBodyDraw.cpp" />
     <ClCompile Include="Random\Random.cpp" />
     <ClCompile Include="Sound\SoundEngine.cpp" />
     <ClCompile Include="Sound\SoundSource.cpp" />
@@ -209,6 +212,7 @@
     <ClInclude Include="GameObject\GameObject.h" />
     <ClInclude Include="GameObject\GameObjectManager.h" />
     <ClInclude Include="Graphics\Animation.h" />
+    <ClInclude Include="Graphics\AnimationClip.h" />
     <ClInclude Include="Graphics\ConstantBuffer.h" />
     <ClInclude Include="Graphics\PostEffect\PostEffect.h" />
     <ClInclude Include="Graphics\Primitive.h" />
@@ -228,10 +232,12 @@
     <ClInclude Include="Physics\Collider\BoxCollider.h" />
     <ClInclude Include="Physics\Collider\CapsuleCollider.h" />
     <ClInclude Include="Physics\Collider\ICollider.h" />
+    <ClInclude Include="Physics\Collider\MeshCollider.h" />
     <ClInclude Include="Physics\Collider\SphereCollider.h" />
     <ClInclude Include="Physics\CollisionAttr.h" />
     <ClInclude Include="Physics\Physics.h" />
     <ClInclude Include="Physics\RigidBody.h" />
+    <ClInclude Include="Physics\RigidBodyDraw.h" />
     <ClInclude Include="Random\Random.h" />
     <ClInclude Include="Sound\SoundEngine.h" />
     <ClInclude Include="Sound\SoundSource.h" />

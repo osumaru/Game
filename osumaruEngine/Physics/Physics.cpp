@@ -1,7 +1,7 @@
 #include "engineStdafx.h"
 #include "Physics.h"
 #include "RigidBody.h"
-//#include "RigidBodyDraw.h"
+#include "RigidBodyDraw.h"
 #include "../Camera/Camera.h"
 #include "../Timer/GameTime.h"
 
@@ -11,7 +11,7 @@ PhysicsWorld::PhysicsWorld() :
 	m_pOverlappingPairCache(nullptr),
 	m_pConstraintSolver(nullptr),
 	m_pDynamicWorld(nullptr),
-//	m_pRigidBodyDraw(nullptr),
+	m_pRigidBodyDraw(nullptr),
 	m_pCamera(nullptr)
 {
 }
@@ -36,9 +36,9 @@ void PhysicsWorld::Init()
 		m_pCollisionConfig.get()
 	));
 	m_pDynamicWorld->setGravity(btVector3(0, -10, 0));
-	//m_pRigidBodyDraw.reset(new RigidBodyDraw);
-	//m_pRigidBodyDraw->Init();
-	//m_pDynamicWorld->setDebugDrawer(m_pRigidBodyDraw.get());
+	m_pRigidBodyDraw.reset(new RigidBodyDraw);
+	m_pRigidBodyDraw->Init();
+	m_pDynamicWorld->setDebugDrawer(m_pRigidBodyDraw.get());
 }
 
 void PhysicsWorld::Update()
@@ -50,8 +50,8 @@ void PhysicsWorld::Draw()
 {
 	if (m_pCamera != nullptr)
 	{
-		//m_pRigidBodyDraw->Draw(m_pCamera->GetViewMatrix(), m_pCamera->GetProjectionMatrix());
-		//m_pRigidBodyDraw->Reset();
+		m_pRigidBodyDraw->Draw(m_pCamera->GetViewMatrix(), m_pCamera->GetProjectionMatrix());
+		m_pRigidBodyDraw->Reset();
 	}
 }
 

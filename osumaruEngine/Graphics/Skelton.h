@@ -75,7 +75,7 @@ private:
 	std::vector<Bone*> m_boneChilds;
 };
 
-class Skelton
+class Skelton : Uncopyable
 {
 public:
 
@@ -102,12 +102,22 @@ public:
 		m_bones[boneIndex]->SetLocalMatrix(mat);
 	}
 
+	Matrix GetBoneMatrix(int boneIndex)
+	{
+		return m_bones[boneIndex]->GetLocalMatrix();
+	}
+
 
 	void Update(Matrix mat);
 
 	void UpdateWorldMatrix(Bone* bone, Matrix mat);
 
 	void Render();
+
+	int GetBoneNum()
+	{
+		return m_bones.size();
+	}
 private:
 	std::vector<std::unique_ptr<Bone>> m_bones;
 	ID3D11Buffer*					m_structuredBuffer;

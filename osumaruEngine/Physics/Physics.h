@@ -3,6 +3,7 @@
 class RigidBody;
 class RigidBodyDraw;
 class Camera;
+
 /*
 物理ワールド
 */
@@ -13,7 +14,7 @@ class PhysicsWorld : Uncopyable
 	std::unique_ptr<btBroadphaseInterface>					m_pOverlappingPairCache;		//ブロードフェーズ。
 	std::unique_ptr<btSequentialImpulseConstraintSolver>	m_pConstraintSolver;			//コンストレイントソルバー。拘束条件の解決処理
 	std::unique_ptr<btDiscreteDynamicsWorld>				m_pDynamicWorld;				//ワールド
-	//std::unique_ptr<RigidBodyDraw>							m_pRigidBodyDraw;
+	std::unique_ptr<RigidBodyDraw>							m_pRigidBodyDraw;
 	Camera*													m_pCamera;
 public:
 	//コンストラクタ
@@ -84,6 +85,7 @@ public:
 		const btTransform& worldTrans,
 		const btCollisionShape* colShape)
 	{
-		m_pDynamicWorld->debugDrawObject(worldTrans, colShape, { 1.0f, 0.0f, 0.0f });
+		m_pDynamicWorld->debugDrawObject(worldTrans, colShape, { 0.0f, 0.0f, 0.0f });
+		
 	}
 };

@@ -7,9 +7,7 @@ SkinModel::SkinModel() :
 	m_skelton(nullptr),
 	constantBuffer(),
 	m_skinModel(nullptr),
-	isSkelton(false),
-	worldMatrix(Matrix::Identity),
-	m_anim(nullptr)
+	worldMatrix(Matrix::Identity)
 {
 }
 
@@ -17,9 +15,8 @@ SkinModel::~SkinModel()
 {
 }
 
-void SkinModel::Load(wchar_t* filePath, Animation* animation)
+void SkinModel::Load(wchar_t* filePath)
 {
-	m_anim = nullptr;
 	std::unique_ptr<Skelton> skelton;
 	skelton = std::make_unique<Skelton>();
 	SkinModelCB cb;
@@ -48,16 +45,13 @@ void SkinModel::Load(wchar_t* filePath, Animation* animation)
 			localBoneIDtoGlobalBoneIDTbl.push_back(globalBoneID);
 		};
 		m_skinModel = Model::CreateFromCMO(GetDevice(), filePath, effectFactory, false, false, onFindBone);
-		isSkelton = true;
-		m_anim = animation;
-		m_anim->SetSkelton(m_skelton.get());
 	}
 	else
 	{
 		SkinModelEffectFactory effectFactory(GetDevice());
 		m_skinModel = Model::CreateFromCMO(GetDevice(), filePath, effectFactory);
-	}
 
+	}
 }
 
 void SkinModel::Update(Vector3 position, Quaternion rotation, Vector3 scale)
@@ -70,21 +64,12 @@ void SkinModel::Update(Vector3 position, Quaternion rotation, Vector3 scale)
 	scaleMat.MakeScaling(scale);
 	worldMatrix.Mul(posMat, rotMat);
 	worldMatrix.Mul(worldMatrix, scaleMat);
-	if (m_anim != nullptr)
-	{
-		m_anim->Update();
-	}
-	if (isSkelton)
+	if (m_skelton != nullptr)
 	{
 		m_skelton->Update(worldMatrix);
 	}
 }
 
-void SkinModel::SetAnimation(Animation* animation)
-{
-	m_anim = animation;
-	m_anim->SetSkelton(m_skelton.get());
-}
 
 void SkinModel::Draw(Matrix view, Matrix projection)
 {
@@ -97,7 +82,7 @@ void SkinModel::Draw(Matrix view, Matrix projection)
 	constantBuffer.Update(&cb);
 	ID3D11Buffer* cbBuffer = constantBuffer.GetBody();
 	GetDeviceContext()->VSSetConstantBuffers(0, 1, &cbBuffer);
-	if (isSkelton)
+	if (m_skelton != nullptr)
 	{
 		m_skelton->Render();
 	}

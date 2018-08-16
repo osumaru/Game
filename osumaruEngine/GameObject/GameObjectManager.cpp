@@ -2,6 +2,7 @@
 #include "GameObject.h"
 #include "GameObjectManager.h"
 #include "../Engine.h"
+#include "../Physics/Physics.h"
 
 void GameObjectManager::Init()
 {
@@ -33,6 +34,8 @@ void GameObjectManager::Execute()
 			object.gameObject->Drawer();
 		}
 	}
+	
+	GetPhysicsWorld().Draw();
 	for (GameObjectList& objList : m_objectVector)
 	{
 		for (GameObjectData& object : objList)

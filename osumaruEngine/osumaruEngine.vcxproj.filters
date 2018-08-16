@@ -153,6 +153,15 @@
     <ClCompile Include="Input\Pad.cpp">
       <Filter>ソース ファイル\Input</Filter>
     </ClCompile>
+    <ClCompile Include="Graphics\AnimationClip.cpp">
+      <Filter>ソース ファイル\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Physics\Collider\MeshCollider.cpp">
+      <Filter>ソース ファイル\Physics\Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="Physics\RigidBodyDraw.cpp">
+      <Filter>ソース ファイル\Physics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject\GameObjectManager.h">
@@ -265,6 +274,15 @@
     </ClInclude>
     <ClInclude Include="Graphics\Skelton.h">
       <Filter>ソース ファイル\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\AnimationClip.h">
+      <Filter>ソース ファイル\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Physics\Collider\MeshCollider.h">
+      <Filter>ソース ファイル\Physics\Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="Physics\RigidBodyDraw.h">
+      <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

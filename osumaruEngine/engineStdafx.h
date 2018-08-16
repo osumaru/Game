@@ -2,7 +2,6 @@
 
 
 
-//#include "Timer\GameTime.h"
 //#include "Random\Random.h"
 //#include "Graphics/Texture.h"
 //#include "Graphics/Primitive.h"
@@ -40,6 +39,8 @@
 #include "DirectXTK/Inc/DDSTextureLoader.h"
 
 #include "../osumaruEngine/bulletPhysics/src/btBulletDynamicsCommon.h"
+
+#include "Timer\GameTime.h"
 
 #include "Uncopyable.h"
 #include "Engine.h"

@@ -16,12 +16,12 @@ Primitive::~Primitive()
 {
 	if (m_vertexBuffer != nullptr)
 	{
-		//m_vertexBuffer->Release();
+		m_vertexBuffer->Release();
 		m_vertexBuffer = nullptr;
 	}
 	if (m_indexBuffer != nullptr)
 	{
-		//m_indexBuffer->Release();
+		m_indexBuffer->Release();
 		m_indexBuffer != nullptr;
 	}
 }
@@ -63,7 +63,7 @@ void Primitive::Create(void* vertexBuffer, int vertexStride, int vertexNum, void
 	bufferDesc.CPUAccessFlags = 0;
 	bufferDesc.StructureByteStride = vertexStride;
 	subresourceData.pSysMem = vertexBuffer;
-	GetDevice()->CreateBuffer(&bufferDesc, &subresourceData, &m_vertexBuffer);
+	HRESULT hr = GetDevice()->CreateBuffer(&bufferDesc, &subresourceData, &m_vertexBuffer);
 	D3D11_BUFFER_DESC bufferIndexDesc;
 	D3D11_SUBRESOURCE_DATA subresourceIndexData;
 	bufferIndexDesc.ByteWidth = m_indexNum * size;
@@ -73,6 +73,6 @@ void Primitive::Create(void* vertexBuffer, int vertexStride, int vertexNum, void
 	bufferIndexDesc.CPUAccessFlags = 0;
 	bufferIndexDesc.StructureByteStride = size;
 	subresourceIndexData.pSysMem = indexBuffer;
-	GetDevice()->CreateBuffer(&bufferIndexDesc, &subresourceIndexData, &m_indexBuffer);
+	hr = GetDevice()->CreateBuffer(&bufferIndexDesc, &subresourceIndexData, &m_indexBuffer);
 	m_stride = vertexStride;
 }
