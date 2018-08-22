@@ -11,6 +11,8 @@
 *.rsp
 *.sbr
 *.tlb
+*.dds
+*.cmo
 *.tli
 *.tlh
 *.tmp
