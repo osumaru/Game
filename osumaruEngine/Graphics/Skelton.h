@@ -1,18 +1,20 @@
 #pragma once
+//骨クラス
 
 class Bone
 {
 public:
-	Bone();
+	//コンストラクタ
+	Bone(std::unique_ptr<wchar_t[]> boneName, int boneID, int parentID, const Matrix& worldMat, const Matrix& invWorldMat);
 
-	void Init(std::unique_ptr<wchar_t[]> boneName, int boneID, int parentID, const Matrix& worldMat, const Matrix& invWorldMat)
+	void Init()
 	{
-		m_boneName = std::move(boneName);
-		m_boneID = boneID;
-		m_parentID = parentID;
-		m_worldMatrix = worldMat;
-		m_invMatrix = invWorldMat;
-		m_localMatrix = worldMat;
+		//m_boneName = std::move(boneName);
+		//m_boneID = boneID;
+		//m_parentID = parentID;
+		//m_worldMatrix = worldMat;
+		//m_invMatrix = invWorldMat;
+		//m_localMatrix = worldMat;
 	}
 	void AddChildren(Bone* children)
 	{

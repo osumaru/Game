@@ -1,30 +1,43 @@
 #pragma once
 #include "Texture.h"
+//レンダリングターゲットクラス
 
 class RenderTarget : Uncopyable
 {
 public:
+	//コンストラクタ
 	RenderTarget();
 
+	//デストラクタ
 	~RenderTarget();
 
-	void Create(ID3D11Texture2D* m_pRenderTarget, ID3D11Texture2D* m_pDepthStencil, int width, int height, bool isBackBuffer);
+	/*
+	レンダリングターゲットの作成
+	pRenderTarget	レンダリングターゲットに使うテクスチャ
+	pDepthStencil	デプスステンシルバッファに使うテクスチャ
+	width			レンダリングターゲットの幅
+	height			レンダリングターゲットの高さ
+	isBackBuffer	バックバッファかどうか
+	*/
+	void Create(ID3D11Texture2D* pRenderTarget, ID3D11Texture2D* pDepthStencil, int width, int height, bool isBackBuffer);
 
-	ID3D11RenderTargetView* GetRenderTarget()
+	//レンダリングターゲットの取得
+	ID3D11RenderTargetView* GetRenderTarget() const
 	{
 		return m_pRenderTarget;
 	}
 
-	ID3D11DepthStencilView* GetDepthStencil()
+	//デプスステンシルバッファの取得
+	ID3D11DepthStencilView* GetDepthStencil() const
 	{
 		return m_pDepthStencil;
 	}
 
 private:
-	ID3D11DepthStencilView*					m_pDepthStencil;
-	ID3D11RenderTargetView*					m_pRenderTarget;
-	ID3D11Texture2D*						m_pRenderTargetTexture;
-	ID3D11Texture2D*						m_pDepthStencilTexture;
-	int										m_width;
-	int										m_height;
+	ID3D11DepthStencilView*					m_pDepthStencil;		//デプスステンシルビュー
+	ID3D11RenderTargetView*					m_pRenderTarget;		//レンダリングターゲット
+	ID3D11Texture2D*						m_pRenderTargetTexture;	//レンダリングターゲット用のテクスチャ	
+	ID3D11Texture2D*						m_pDepthStencilTexture;	//デプスステンシル用のテクスチャ
+	int										m_width;				//レンダリングターゲットの幅
+	int										m_height;				//レンダリングターゲットの高さ
 };

@@ -34,28 +34,56 @@ struct KeyframeRow {
 	Vector3 transform[4];		//!<トランスフォーム。
 };
 
-class AnimationClip
+//アニメーションクリップ(一つのアニメーションを管理するクラス)
+
+class AnimationClip : Uncopyable
 {
 public:
+	/*
+	アニメーションを読み込む関数。
+	filePath	アニメーションファイルのパス
+	*/
 	void Load(wchar_t* filePath);
 
 
-	bool Update();
+	//更新関数。
+	void Update(float deltaTime);
 
-	std::vector<Matrix> GetLocalMatrix()
+	//ボーンの行列を取得。
+	const std::vector<Matrix>& GetLocalMatrix() const
 	{
 		return m_localMatrix;
 	}
 
+	//アニメーションを再生。
 	void Play();
+	
+	//ループフラグを設定。
+	void SetIsLoop(bool isLoop)
+	{
+		m_isLoop = isLoop;
+	}
+
+	//ループフラグを取得。
+	bool IsLoop() const
+	{
+		return m_isLoop;
+	}
+
+	//再生中かのフラグを取得。
+	bool IsPlay() const
+	{
+		return m_isPlay;
+	}
 
 private:
-	bool m_isPlaying;
-	std::wstring m_clipName;	//!<アニメーションクリップの名前。
-	std::vector<std::unique_ptr<Keyframe>>			m_keyframes;				//キーフレーム。
-	std::vector<std::vector<Keyframe*>> m_keyFramePtrListArray;
-	std::vector<Keyframe*>* m_topBoneKeyFrameList;
-	std::vector<Matrix> m_localMatrix;
-	float m_frameTime;
-	int	m_currentFrameNo;
+	bool									m_isPlay;					//再生中か？
+	bool									m_isLoop;					//ループしてるか？
+	std::wstring							m_clipName;					//アニメーションクリップの名前。
+	std::vector<std::unique_ptr<Keyframe>>	m_keyframes;				//キーフレーム。
+	std::vector<std::vector<Keyframe*>>		m_keyFramePtrListArray;		//ボーン毎のキーフレームのリスト
+	std::vector<Keyframe*>*					m_topBoneKeyFrameList;		//一番最初のキーフレーム
+	std::vector<Matrix>						m_localMatrix;				//ボーンの行列を保存するためのもの
+	float									m_frameTime;				//フレームを進めるためのタイマー
+	int										m_currentFrameNo;			//現在のフレームナンバー
 };

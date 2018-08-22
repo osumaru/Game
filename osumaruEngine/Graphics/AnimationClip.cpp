@@ -3,6 +3,7 @@
 #include "Skelton.h"
 void AnimationClip::Load(wchar_t * filePath)
 {
+	m_isLoop = false;
 	m_currentFrameNo = 0;
 	m_frameTime = 0.0f;
 	m_topBoneKeyFrameList = nullptr;
@@ -72,12 +73,12 @@ void AnimationClip::Load(wchar_t * filePath)
 }
 
 
-bool AnimationClip::Update()
+void AnimationClip::Update(float deltaTime)
 {
 	
-	if (m_isPlaying)
+	if (m_isPlay)
 	{
-		m_frameTime += GetGameTime().GetDeltaFrameTime();
+		m_frameTime += deltaTime;
 		if ((*m_topBoneKeyFrameList)[m_currentFrameNo]->time < m_frameTime)
 		{
 			int i = 0;
@@ -92,16 +93,15 @@ bool AnimationClip::Update()
 			m_currentFrameNo++;
 			if (m_topBoneKeyFrameList->size() <= m_currentFrameNo)
 			{
-				m_isPlaying = false;
+				m_isPlay = false;
 			}
 			m_frameTime = 0.0f;
 		}
 	}
-	return m_isPlaying;
 }
 
 void AnimationClip::Play()
 {
-	m_isPlaying = true;
+	m_isPlay = true;
 	m_currentFrameNo = 0;
 }

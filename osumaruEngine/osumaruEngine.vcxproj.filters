@@ -282,7 +282,7 @@
       <Filter>ソース ファイル\Physics\Collider</Filter>
     </ClInclude>
     <ClInclude Include="Physics\RigidBodyDraw.h">
-      <Filter>ヘッダー ファイル</Filter>
+      <Filter>ソース ファイル\Physics</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -2,13 +2,13 @@
 #include "Skelton.h"
 
 
-Bone::Bone() :
-	m_boneName(),
-	m_boneID(-1),
-	m_parentID(-1),
-	m_localMatrix(Matrix::Identity),
-	m_worldMatrix(Matrix::Identity),
-	m_invMatrix(Matrix::Identity),
+Bone::Bone(std::unique_ptr<wchar_t[]> boneName, int boneID, int parentID, const Matrix& worldMat, const Matrix& invWorldMat) :
+	m_boneName(std::move(boneName)),
+	m_boneID(boneID),
+	m_parentID(parentID),
+	m_localMatrix(worldMat),
+	m_worldMatrix(worldMat),
+	m_invMatrix(invWorldMat),
 	m_boneChilds()
 {
 
@@ -98,8 +98,7 @@ bool Skelton::Load(wchar_t* filePath)
 		std::unique_ptr<wchar_t[]> boneName;
 		boneName = std::make_unique<wchar_t[]>(256);
 		mbstowcs(boneName.get(), name.get(), 256);
-		std::unique_ptr<Bone> bone = std::make_unique<Bone>();
-		bone->Init(std::move(boneName), i, parentId, bindPoseMatrix, invBindPoseMatrix); 
+		std::unique_ptr<Bone> bone = std::make_unique<Bone>(std::move(boneName), i, parentId, bindPoseMatrix, invBindPoseMatrix);
 		m_bones.push_back(std::move(bone));
 	}
 	fclose(fp);

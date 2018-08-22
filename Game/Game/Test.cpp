@@ -21,11 +21,10 @@ void Test::Init()
 	camera.SetTarget({ 0.0f, 0.0f, 0.0f });
 	camera.SetUp({ 0.0f, 1.0f, 0.0f });
 	
-	std::unique_ptr<AnimationClip[]> animClip;
-	animClip.reset(new AnimationClip[2]);
-	animClip[0].Load(L"Assets/modelData/unity3.tka");
-	animClip[1].Load(L"Assets/modelData/unity2.tka");
-	model.Load(L"Assets/modelData/Unitychan.cmo");
+	wchar_t* animClip[2];
+	animClip[0] = L"Assets/modelData/unity3.tka";
+	animClip[1] = L"Assets/modelData/unity2.tka";
+	model.Load(L"Assets/modelData/Unitychan.cmo", &animation);
 	//capsule.Create(100.0f, 1.0f);
 	capsule.CreateCollider(&model);
 	RigidBodyInfo info;
@@ -34,7 +33,7 @@ void Test::Init()
 	info.collider = &capsule;
 	rigidbody.Create(info);
 	GetPhysicsWorld().SetCamera(&camera);
-	animation.Init(std::move(animClip), model.GetSkelton());
+	animation.Init(animClip, 2);
 }
 
 void Test::Update()
@@ -48,7 +47,7 @@ void Test::Update()
 	def.Multiply(rot);
 	rot.SetRotationDeg(Vector3::AxisY, angle);
 	model.Update({ 0.0f, 0.0f, 0.0f }, def, { 1.0f, 1.0f, 1.0f });
-	animation.Update();
+	animation.Update(GetGameTime().GetDeltaFrameTime());
 	rigidbody.SetRotation(def);
 	if (GetPad().IsTriggerButton(enButtonA))
 	{
@@ -56,7 +55,7 @@ void Test::Update()
 	}
 	if (GetPad().IsTriggerButton(enButtonB))
 	{
-		animation.Play(1);
+		animation.Play(1, 10.0f);
 	}
 }
 

@@ -34,7 +34,8 @@ void ConstantBuffer::Create(int bufferSize, void* initData)
 	else
 	{
 		GetDevice()->CreateBuffer(&desc, nullptr, &m_buffer);
-	}}
+	}
+}
 
 void ConstantBuffer::Update(void* updateData)
 {

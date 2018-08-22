@@ -49,9 +49,18 @@ void Shader::Load(const char* filepath, const char* entryFuncName, EnShaderType 
 		"ps_5_0",
 		"cs_5_0"
 	};
-	D3DCompile(m_pShaderData.get(), (int)filepos, nullptr,
+	HRESULT hr = D3DCompile(m_pShaderData.get(), (int)filepos, nullptr,
 		nullptr, nullptr, entryFuncName, shaderTypeName[shaderType], shaderCompilerOption, 0, &m_blob, &errorBlob);
-
+	if (FAILED(hr))
+	{
+		if (errorBlob != nullptr)
+		{
+			static char errorMessage[10240];
+			sprintf(errorMessage, "filePath : %s, %s", filepath, (char*)errorBlob->GetBufferPointer());
+			MessageBox(NULL, errorMessage, "シェーダーコンパイルエラー", MB_OK);
+			return;
+		}
+	}
 	switch (shaderType)
 	{
 	case enVS:

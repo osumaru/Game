@@ -3,11 +3,7 @@
 #include "Skelton.h"
 #include "Animation.h"
 
-SkinModel::SkinModel() :
-	m_skelton(nullptr),
-	constantBuffer(),
-	m_skinModel(nullptr),
-	worldMatrix(Matrix::Identity)
+SkinModel::SkinModel()
 {
 }
 
@@ -15,7 +11,7 @@ SkinModel::~SkinModel()
 {
 }
 
-void SkinModel::Load(wchar_t* filePath)
+void SkinModel::Load(wchar_t* filePath, Animation* animation)
 {
 	std::unique_ptr<Skelton> skelton;
 	skelton = std::make_unique<Skelton>();
@@ -31,6 +27,10 @@ void SkinModel::Load(wchar_t* filePath)
 	wcscat(skeltonName, L".tks");
 	if (skelton->Load(skeltonName))
 	{
+		if (animation != nullptr)
+		{
+			animation->SetSkelton(skelton.get());
+		}
 		m_skelton = std::move(skelton);
 		SkinModelEffectFactory effectFactory(GetDevice());
 		auto onFindBone = [&](
@@ -50,7 +50,6 @@ void SkinModel::Load(wchar_t* filePath)
 	{
 		SkinModelEffectFactory effectFactory(GetDevice());
 		m_skinModel = Model::CreateFromCMO(GetDevice(), filePath, effectFactory);
-
 	}
 }
 
