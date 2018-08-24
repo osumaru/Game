@@ -26,6 +26,7 @@ public:
 
 private:
 	Camera camera;
+	Vector3 m_cameraVec;
 };
 
 static GameCamera& GetGameCamera()
