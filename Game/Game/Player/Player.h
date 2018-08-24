@@ -22,11 +22,14 @@ public:
 		return m_position;
 	}
 
+	void Move();
 
 
 private:
 	Vector3 m_position;
+	Vector3 m_moveSpeed = Vector3::Zero;
 	SkinModel m_skinmodel;
+	CharacterController m_characterController;
 };
 
 static Player& GetPlayer()

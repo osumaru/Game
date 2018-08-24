@@ -9,7 +9,7 @@ void GameCamera::Init()
 	camera.SetNear(1.0f);
 	camera.SetAspect((float)FRAME_BUFFER_WIDTH / (float)FRAME_BUFFER_HEIGHT);
 	camera.SetAngle(Math::DegToRad(60.0f));
-	camera.SetPosition({ 0.0f, 0.0f, -200.0f });
+	camera.SetPosition({ 0.0f, 5.0f, 10.0f });
 	camera.SetTarget({ 0.0f, 0.0f, 0.0f });
 	camera.SetUp({ 0.0f, 1.0f, 0.0f });
 	camera.Update();
@@ -19,8 +19,8 @@ void GameCamera::Init()
 
 void GameCamera::Update()
 {
-	float rStick_x = GetPad().GetRightStickX();
-	float rStick_y = GetPad().GetRightStickY();
+	float rStick_x = GetPad().GetRightStickX() * 5 * GetGameTime().GetDeltaFrameTime();
+	float rStick_y = GetPad().GetRightStickY() * 5 * GetGameTime().GetDeltaFrameTime();
 
 	if (fabsf(rStick_x) > 0.0f) {
 		//YŽ²Žü‚è‚Ì‰ñ“]
