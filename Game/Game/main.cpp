@@ -1,5 +1,8 @@
 #include "stdafx.h"
 #include "Test.h"
+#include "GameCamera.h"
+#include "Player\Player.h"
+#include "Map\Map.h"
 
 using namespace std;
 int WINAPI wWinMain(
@@ -11,7 +14,9 @@ int WINAPI wWinMain(
 {
 	//Direct3D‚ğ‰Šú‰»
 	GetEngine().InitD3D(hInst);
-	New<Test>(0)->Init();
+	GetGameCamera().Init();
+	New<Map>(0)->Init(0);
+
 	GetEngine().GameLoop();
 	return 0;
 }

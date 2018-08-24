@@ -8,18 +8,7 @@ void Test::Init()
 	texture.Load(L"Assets/sprite/CLEAR.png");
 
 	sprite.Init(&texture);
-	view.MakeLookAt({ 0.0f, 0.0f, -200.0f }, { 0.0f, 0.0f, 0.0f }, {0.0f, 1.0f, 0.0f});
-	proj.MakeProjectionMatrix(Math::DegToRad(60.0f), (float)FRAME_BUFFER_WIDTH / (float)FRAME_BUFFER_HEIGHT, 1.0f, 500.0f);
-	camera.Init();
-	camera.SetViewMatrix(view);
-	camera.SetProjectionMatrix(proj);
-	camera.SetFar(500.0f);
-	camera.SetNear(1.0f);
-	camera.SetAspect((float)FRAME_BUFFER_WIDTH / (float)FRAME_BUFFER_HEIGHT);
-	camera.SetAngle(Math::DegToRad(60.0f));
-	camera.SetPosition({ 0.0f, 0.0f, -200.0f });
-	camera.SetTarget({ 0.0f, 0.0f, 0.0f });
-	camera.SetUp({ 0.0f, 1.0f, 0.0f });
+
 	
 	wchar_t* animClip[2];
 	animClip[0] = L"Assets/modelData/unity3.tka";
@@ -47,21 +36,13 @@ void Test::Update()
 	def.Multiply(rot);
 	rot.SetRotationDeg(Vector3::AxisY, angle);
 	model.Update({ 0.0f, 0.0f, 0.0f }, def, { 1.0f, 1.0f, 1.0f });
-	animation.Update(GetGameTime().GetDeltaFrameTime());
 	rigidbody.SetRotation(def);
-	if (GetPad().IsTriggerButton(enButtonA))
-	{
-		animation.Play(0);
-	}
-	if (GetPad().IsTriggerButton(enButtonB))
-	{
-		animation.Play(1, 10.0f);
-	}
+
 }
 
 void Test::Draw()
 {
 	//GetPhysicsWorld().DebugDraw(rigidbody.GetBody()->getWorldTransform(), rigidbody.GetBody()->getCollisionShape());
-	model.Draw(view, proj);
+	//model.Draw(view, proj);
 	//sprite.Draw();
 }

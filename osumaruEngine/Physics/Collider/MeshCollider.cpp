@@ -6,6 +6,8 @@ void MeshCollider::CreateCollider(SkinModel* skinModel)
 {
 	DirectX::Model* model = skinModel->GetBody();
 	m_stridingMeshInterface.reset(new btTriangleIndexVertexArray);
+	m_aabbMax = { FLT_MIN, FLT_MIN, FLT_MIN };
+	m_aabbMin = { FLT_MAX, FLT_MAX, FLT_MAX };
 	for (auto& mesh : model->meshes)
 	{
 		for (auto& meshPart : mesh->meshParts)
@@ -24,6 +26,8 @@ void MeshCollider::CreateCollider(SkinModel* skinModel)
 			for (int i = 0;i < vertexCount;i++)
 			{
 				Vector3 vertexPos = *((Vector3*)pData);
+				m_aabbMax.Max(vertexPos);
+				m_aabbMin.Min(vertexPos);
 				m_vertexBuffer.push_back(vertexPos);
 				pData += meshPart->vertexStride;
 			}

@@ -69,6 +69,7 @@ void Animation::Update(float deltaTime)
 					mat.m[0][j] += mat2.m[0][j];
 				}
 				boneMat = mat;
+
 			}
 			else
 			{

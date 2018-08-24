@@ -16,8 +16,6 @@ private:
 	SkinModel model;
 	Sprite sprite;
 	Texture texture;
-	Matrix	view;
-	Matrix	proj;
 	Animation animation;
 	RigidBody rigidbody;
 	MeshCollider capsule;

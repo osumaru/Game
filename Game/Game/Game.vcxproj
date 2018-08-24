@@ -78,6 +78,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
     <LibraryPath>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Lib\$(Platform);$(SolutionDir)$(Platform)\$(Configuration);$(SolutionDir)../osumaruEngine\DirectXTK\Bin\Desktop_2015_Win10\$(Platform)\$(Configuration)\;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)Game;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -85,6 +86,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <LibraryPath>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Lib\$(Platform);$(SolutionDir)../osumaruEngine\DirectXTK\Bin\Desktop_2015_Win10\$(Platform)\$(Configuration)\;$(SolutionDir)$(Platform)\$(Configuration);$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)Game;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -156,7 +158,12 @@
     </MeshContentTask>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="GameCamera.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Map\Map.cpp" />
+    <ClCompile Include="Map\MapChip\MapChip.cpp" />
+    <ClCompile Include="Map\MapChip\StaticMapObject.cpp" />
+    <ClCompile Include="Player\Player.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -165,6 +172,11 @@
     <ClCompile Include="Test.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="GameCamera.h" />
+    <ClInclude Include="Map\Map.h" />
+    <ClInclude Include="Map\MapChip\MapChip.h" />
+    <ClInclude Include="Map\MapChip\StaticMapObject.h" />
+    <ClInclude Include="Player\Player.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="Test.h" />
   </ItemGroup>
@@ -178,17 +190,35 @@
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
+    <MeshContentTask Include="Assets\modelData\clock.FBX" />
+    <MeshContentTask Include="Assets\modelData\coin.FBX" />
     <MeshContentTask Include="Assets\modelData\GroundBrock.FBX">
       <FileType>Document</FileType>
       <ContentOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(SolutionDir)Game\Assets\modelData\%(Filename).cmo</ContentOutput>
       <ContentOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(SolutionDir)Game\Assets\modelData\%(Filename).cmo</ContentOutput>
       <ContentOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)Game/Assets/modelData/%(Filename).cmo</ContentOutput>
     </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\GroundBrock2.FBX" />
+    <MeshContentTask Include="Assets\modelData\GroundIsland.FBX" />
+    <MeshContentTask Include="Assets\modelData\Ground_2.FBX" />
+    <MeshContentTask Include="Assets\modelData\Ground_4.FBX" />
+    <MeshContentTask Include="Assets\modelData\log.FBX" />
+    <MeshContentTask Include="Assets\modelData\skyBox.FBX" />
+    <MeshContentTask Include="Assets\modelData\Spring.FBX" />
+    <MeshContentTask Include="Assets\modelData\star.FBX" />
+    <MeshContentTask Include="Assets\modelData\test.FBX" />
+    <MeshContentTask Include="Assets\modelData\testBox.FBX" />
+    <MeshContentTask Include="Assets\modelData\testChamferBox.FBX" />
+    <MeshContentTask Include="Assets\modelData\testGoal.FBX" />
+    <MeshContentTask Include="Assets\modelData\testGround.FBX" />
+    <MeshContentTask Include="Assets\modelData\testRectangle.FBX" />
+    <MeshContentTask Include="Assets\modelData\U2.FBX" />
     <MeshContentTask Include="Assets\modelData\Unitychan.FBX">
       <ContentOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)Game/Assets/modelData/%(Filename).cmo</ContentOutput>
       <ContentOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(SolutionDir)Game\Assets\modelData\%(Filename).cmo</ContentOutput>
       <ContentOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(SolutionDir)Game/Assets/modelData/%(Filename).cmo</ContentOutput>
     </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\Wave.FBX" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\modelData\unitychan.tks" />
