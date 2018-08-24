@@ -1,0 +1,36 @@
+﻿//test
+{
+	"test",
+	D3DXVECTOR3(0.70f, 0.00f, 30.90f),             //平行移動
+	D3DXQUATERNION(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
+},
+//Unitychan
+{
+	"Unitychan",
+	D3DXVECTOR3(0.00f, 1.54f, 0.00f),             //平行移動
+	D3DXQUATERNION(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
+},
+//test
+{
+	"test",
+	D3DXVECTOR3(-0.31f, 0.00f, 1.05f),             //平行移動
+	D3DXQUATERNION(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
+},
+//test
+{
+	"test",
+	D3DXVECTOR3(2.50f, 0.00f, 64.40f),             //平行移動
+	D3DXQUATERNION(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
+},
+//test
+{
+	"test",
+	D3DXVECTOR3(3.90f, -2.80f, 96.10f),             //平行移動
+	D3DXQUATERNION(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
+},
+//testGround
+{
+	"testGround",
+	D3DXVECTOR3(-0.31f, -33.00f, 46.50f),             //平行移動
+	D3DXQUATERNION(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
+},
