@@ -17,8 +17,7 @@ void SkinModel::Load(wchar_t* filePath, Animation* animation)
 	skelton = std::make_unique<Skelton>();
 	SkinModelCB cb;
 	cb.worldMat = Matrix::Identity;
-	cb.viewMat.MakeLookAt({ 0.0f, 0.0f, -100.0f }, { 0.0f, 0.0f, 0.0f }, { 0.0f, 1.0f, 0.0f });
-	cb.projMat.MakeProjectionMatrix(Math::DegToRad(60.0f), 1.0f, 1.0f, 500.0f);
+	cb.viewProjMat = Matrix::Identity;
 	constantBuffer.Create(sizeof(SkinModelCB), &cb);
 	size_t pos = wcslen(filePath);
 	
@@ -75,8 +74,9 @@ void SkinModel::Draw(Matrix view, Matrix projection)
 	DirectX::CommonStates common(GetDevice());
 	Matrix world = Matrix::Identity;
 	SkinModelCB cb;
-	cb.viewMat = view;
-	cb.projMat = projection;
+	Matrix viewProjMat;
+	viewProjMat.Mul(view, projection);
+	cb.viewProjMat = viewProjMat;
 	cb.worldMat = worldMatrix;
 	constantBuffer.Update(&cb);
 	ID3D11Buffer* cbBuffer = constantBuffer.GetBody();
