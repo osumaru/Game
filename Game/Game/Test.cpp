@@ -13,7 +13,8 @@ void Test::Init()
 	wchar_t* animClip[2];
 	animClip[0] = L"Assets/modelData/unity3.tka";
 	animClip[1] = L"Assets/modelData/unity2.tka";
-	model.Load(L"Assets/modelData/Unitychan.cmo", &animation);
+	model.Load(L"Assets/modelData/Unitychan2.cmo", &animation);
+	///animation.Init(animClip);
 	//capsule.Create(100.0f, 1.0f);
 	capsule.CreateCollider(&model);
 	RigidBodyInfo info;
@@ -37,7 +38,7 @@ void Test::Update()
 	rot.SetRotationDeg(Vector3::AxisY, angle);
 	model.Update({ 0.0f, 0.0f, 0.0f }, def, { 1.0f, 1.0f, 1.0f });
 	rigidbody.SetRotation(def);
-
+	//animation.Update();
 }
 
 void Test::Draw()

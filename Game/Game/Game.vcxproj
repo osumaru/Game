@@ -220,6 +220,7 @@
       <ContentOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(SolutionDir)Game\Assets\modelData\%(Filename).cmo</ContentOutput>
       <ContentOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(SolutionDir)Game/Assets/modelData/%(Filename).cmo</ContentOutput>
     </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\Unitychan2.fbx" />
     <MeshContentTask Include="Assets\modelData\Wave.FBX" />
   </ItemGroup>
   <ItemGroup>

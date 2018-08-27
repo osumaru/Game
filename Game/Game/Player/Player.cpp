@@ -4,10 +4,13 @@
 
 void Player::Init(Vector3 position)
 {
-	m_skinmodel.Load(L"Assets/modelData/UnityChan.cmo");
+	m_skinmodel.Load(L"Assets/modelData/UnityChan2.cmo", &animation);
 	m_position = position;
 	m_characterController.Init(2.0f, 2.0f, m_position);
 	m_characterController.SetGravity(0.0f);
+	wchar_t* animClip[2] = { L"Assets/modelData/unity2.tka", L"Assets/modelData/unity3.tka" };
+	animation.Init(animClip, 2);
+	m_rotation.SetRotationDeg(Vector3::AxisX, -90.0f);
 	Add(this, 0);
 }
 
@@ -21,15 +24,21 @@ void Player::Update()
 	
 	if (playerVec.LengthSq() > 0.001f)
 	{
+
 		Quaternion rot = Quaternion::Identity;
 		rot.SetRotation(Vector3::AxisY, atan2f(playerVec.x, playerVec.z));
 		m_rotation.Slerp(0.02f, m_rotation, rot);
 		//m_rotation .SetRotation(Vector3::AxisY, atan2f(playerVec.x, playerVec.z));
-		
-
+		Quaternion rot;
+		rot.SetRotationDeg(Vector3::AxisX, -90.0f);
+		m_rotation.Multiply(rot);
 	}
-
-	m_skinmodel.Update(m_position, m_rotation, { 1.0f, 1.0f, 1.0f });
+	if (GetPad().IsTriggerButton(enButtonA))
+	{
+		animation.Play(0);
+	}
+	animation.Update(GetGameTime().GetDeltaFrameTime());
+	m_skinmodel.Update(m_position, m_rotation, { 0.05f, 0.05f, 0.05f });
 }
 
 void Player::Draw()
