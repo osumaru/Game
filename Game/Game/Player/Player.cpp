@@ -7,7 +7,7 @@ void Player::Init(Vector3 position)
 	m_skinmodel.Load(L"Assets/modelData/U2.cmo");
 	m_position = position;
 	m_characterController.Init(2.0f, 2.0f, m_position);
-	m_characterController.SetGravity(-9.0f);
+	m_characterController.SetGravity(-0.0f);
 	Add(this, 0);
 }
 
