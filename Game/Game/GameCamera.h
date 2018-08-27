@@ -24,6 +24,8 @@ public:
 		return camera.GetProjectionMatrix();
 	}
 
+
+
 private:
 	Camera camera;
 	Vector3 m_cameraVec;
