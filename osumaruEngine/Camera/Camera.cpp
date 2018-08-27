@@ -113,6 +113,7 @@ void Camera::Update()
 {
 	m_viewMatrix.MakeLookAt(m_position, m_target, m_up);
 	m_projectionMatrix.MakeProjectionMatrix(m_angle, m_Aspect, m_Near, m_Far);
+
 }
 
 void Camera::Init()

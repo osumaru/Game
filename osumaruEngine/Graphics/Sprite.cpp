@@ -31,7 +31,7 @@ void Sprite::Init(Texture* texture)
 		{ { -1.0f, -1.0f, 0.0f, 1.0f } , { 0.0f, 1.0f } },
 		{ {  1.0f, -1.0f, 0.0f, 1.0f } , { 1.0f, 1.0f } },
 	};
-	DWORD indexBufferLayout[4] = {0, 1, 2, 3};
+	DWORD indexBufferLayout[4] = {0, 2, 1, 3};
 	SpriteCB cb;
 	cb.worldMat = Matrix::Identity;
 	cb.alpha = 1.0f;
@@ -42,7 +42,6 @@ void Sprite::Init(Texture* texture)
 
 void Sprite::Draw()
 {
-	m_position.x += 1.0f;
 	//座標のスケールを変換
 	Vector3 position;
 	position.x = m_position.x / (FRAME_BUFFER_WIDTH / 2.0f);

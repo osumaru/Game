@@ -61,8 +61,8 @@ void SkinModel::Update(Vector3 position, Quaternion rotation, Vector3 scale)
 	rotMat.MakeRotationFromQuaternion(rotation);
 	Matrix scaleMat;
 	scaleMat.MakeScaling(scale);
-	worldMatrix.Mul(posMat, rotMat);
-	worldMatrix.Mul(worldMatrix, scaleMat);
+	worldMatrix.Mul(scaleMat, rotMat);
+	worldMatrix.Mul(worldMatrix, posMat);
 	if (m_skelton != nullptr)
 	{
 		m_skelton->Update(worldMatrix);
