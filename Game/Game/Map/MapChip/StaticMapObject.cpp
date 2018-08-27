@@ -22,7 +22,7 @@ void StaticMapObject::Init(const Vector3& position, const Quaternion& rotation, 
 	meshCollider.CreateCollider(&m_skinModel);
 	Vector3 size = (meshCollider.GetAabbMax() - meshCollider.GetAabbMin()) / 2.0f;
 	m_boxCollider.reset(new BoxCollider);
-
+	m_boxCollider->Create(btVector3(size.x, size.y, size.z));
 	RigidBodyInfo rInfo;
 	rInfo.collider = m_boxCollider.get();
 	rInfo.mass = 0.0f;
@@ -46,5 +46,5 @@ void StaticMapObject::Update()
 void StaticMapObject::Draw()
 {
 	MapChip::Draw();
-	//GetPhysicsWorld().DebugDraw(m_rigidBody.GetBody()->getWorldTransform(), m_rigidBody.GetBody()->getCollisionShape());
+	//GetPhysicsWorld().DebugDraw(m_rigidBody->GetBody()->getWorldTransform(), m_rigidBody->GetBody()->getCollisionShape());
 }

@@ -1,8 +1,7 @@
 cbuffer cb : register(b0)
 {
 	float4x4 mvp;	//ワールドビュープロジェクション行列
-	float4x4 view;
-	float4x4 proj;
+	float4x4 viewProj;
 };
 
 StructuredBuffer<float4x4> boneMatrix : register(t0);
@@ -35,8 +34,7 @@ VS_OUTPUT VSMain(VS_INPUT In)
 {
 	VS_OUTPUT Out;
 	Out.pos = mul(mvp, In.pos);
-	Out.pos = mul(view, Out.pos);
-	Out.pos = mul(proj, Out.pos);
+	Out.pos = mul(viewProj, Out.pos);
 	Out.uv = In.uv;
 	return Out;
 }
@@ -51,8 +49,7 @@ VS_OUTPUT VSSkinMain(VS_SKIN_INPUT In)
 		pos += boneMatrix[In.boneIndex[i]] * In.blendWeight[i];
 	}
 	Out.pos = mul(pos, In.pos);
-	Out.pos = mul(view, Out.pos);
-	Out.pos = mul(proj, Out.pos);
+	Out.pos = mul(viewProj, Out.pos);
 	Out.uv = In.uv;
 	return Out;
 }

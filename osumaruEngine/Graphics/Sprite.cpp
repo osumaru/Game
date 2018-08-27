@@ -42,7 +42,6 @@ void Sprite::Init(Texture* texture)
 
 void Sprite::Draw()
 {
-	m_position.x += 1.0f;
 	//座標のスケールを変換
 	Vector3 position;
 	position.x = m_position.x / (FRAME_BUFFER_WIDTH / 2.0f);

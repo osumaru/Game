@@ -3,6 +3,7 @@
 #include "MapChip/MapChip.h"
 #include "MapChip\StaticMapObject.h"
 #include "../Player/Player.h"
+#include "../Enemy/Enemy.h"
 
 
 std::vector<std::vector<MapChipInfo>> mapChipInfo = 
@@ -39,6 +40,7 @@ Map::~Map()
 void Map::Init(int stageNum)
 {
 	std::map<int, std::vector<MapChipInfo>> instancingData;
+	Enemy* enemy = nullptr;
 	for (MapChipInfo& mInfo : mapChipInfo[stageNum])
 	{
 		MapChip* mapChip = nullptr;
@@ -51,6 +53,11 @@ void Map::Init(int stageNum)
 		case enMapTagPlayer:
 			GetPlayer().Init(mInfo.m_position);
 			break;
+		case enMapTagEnemy:
+			enemy = New<Enemy>(0);
+			enemy->Init(mInfo.m_position);
+			break;
+
 		default:
 			mapChip = New<StaticMapObject>(0);
 			break;
