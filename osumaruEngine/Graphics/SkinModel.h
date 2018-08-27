@@ -10,8 +10,7 @@ public:
 	struct SkinModelCB
 	{
 		Matrix worldMat;		//ワールド行列
-		Matrix viewMat;			//ビュー行列
-		Matrix projMat;			//プロジェクション行列
+		Matrix viewProjMat;			//ビュープロジェクション行列
 	};
 
 	//コンストラクタ
