@@ -158,6 +158,7 @@
     </MeshContentTask>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Enemy\Enemy.cpp" />
     <ClCompile Include="GameCamera.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Map\Map.cpp" />
@@ -172,6 +173,7 @@
     <ClCompile Include="Test.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Enemy\Enemy.h" />
     <ClInclude Include="GameCamera.h" />
     <ClInclude Include="Map\Map.h" />
     <ClInclude Include="Map\MapChip\MapChip.h" />

@@ -6,6 +6,7 @@ enum EnMapChipTag
 {
 	enMapTagUntagged,
 	enMapTagPlayer,
+	enMapTagEnemy,
 	enMapTagMapChip,
 	enMapTagNum,
 };
