@@ -54,6 +54,12 @@ public:
 		return m_skelton.get();
 	}
 
+	//ワールド行列の取得
+	Matrix GetWorldMatrix()
+	{
+		return worldMatrix;
+	}
+
 private:
 	std::unique_ptr<Skelton>		m_skelton = nullptr;			//スケルトン
 	ConstantBuffer					constantBuffer;					//定数バッファ
