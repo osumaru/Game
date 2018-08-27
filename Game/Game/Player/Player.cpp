@@ -21,13 +21,15 @@ void Player::Update()
 
 	Vector3 playerVec = m_moveSpeed;
 
-
+	
 	if (playerVec.LengthSq() > 0.001f)
 	{
 
+		Quaternion rot = Quaternion::Identity;
+		rot.SetRotation(Vector3::AxisY, atan2f(playerVec.x, playerVec.z));
+		m_rotation.Slerp(0.02f, m_rotation, rot);
+		//m_rotation .SetRotation(Vector3::AxisY, atan2f(playerVec.x, playerVec.z));
 		Quaternion rot;
-		m_rotation.SetRotation(Vector3::AxisY, atan2f(playerVec.x, playerVec.z));
-
 		rot.SetRotationDeg(Vector3::AxisX, -90.0f);
 		m_rotation.Multiply(rot);
 	}
