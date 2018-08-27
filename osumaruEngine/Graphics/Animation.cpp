@@ -62,12 +62,12 @@ void Animation::Update(float deltaTime)
 			{
 				Matrix mat = localMatrix[i];
 				Matrix mat2 = localMatrix2[i];
-				for (int j = 0;j < 16;j++)
-				{
-					mat.m[0][j] *= 1.0f - m_blendRate;
-					mat2.m[0][j] *= m_blendRate;
-					mat.m[0][j] += mat2.m[0][j];
-				}
+				//for (int j = 0;j < 16;j++)
+				//{
+				//	mat.m[0][j] *= 1.0f - m_blendRate;
+				//	mat2.m[0][j] *= m_blendRate;
+				//	mat.m[0][j] += mat2.m[0][j];
+				//}
 				boneMat = mat;
 
 			}

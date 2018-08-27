@@ -38,7 +38,8 @@ private:
 	Quaternion			m_rotation = Quaternion::Identity;	//回転
 	SkinModel			m_skinmodel;						//スキンモデル
 	CharacterController m_characterController;				//キャラクターコントローラー
-	Pad					m_pad;								//パッド
+	Pad					m_pad;			//パッド
+	Animation			animation;
 };
 
 static Player& GetPlayer()

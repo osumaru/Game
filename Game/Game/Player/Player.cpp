@@ -4,7 +4,12 @@
 
 void Player::Init(Vector3 position)
 {
-	m_skinmodel.Load(L"Assets/modelData/U2.cmo");
+	//m_skinmodel.Load(L"Assets/modelData/U2.cmo");
+	wchar_t* animClip[2];
+	animClip[0] = L"Assets/modelData/unity3.tka";
+	animClip[1] = L"Assets/modelData/unity2.tka";
+	m_skinmodel.Load(L"Assets/modelData/Unitychan2.cmo", &animation);
+	animation.Init(animClip, 2);
 	m_position = position;
 	m_characterController.Init(2.0f, 2.0f, m_position);
 	m_characterController.SetGravity(-0.0f);
@@ -16,8 +21,17 @@ void Player::Update()
 	Quaternion rot;
 	Move();
 
-	//rot.SetRotationDeg(Vector3::AxisX, -90.0f);
-	m_skinmodel.Update(m_position, rot, { 1.0f, 1.0f, 1.0f });
+	rot.SetRotationDeg(Vector3::AxisX, -90.0f);
+	if (GetPad().IsTriggerButton(enButtonA))
+	{
+		animation.Play(0);
+	}
+	if (GetPad().IsTriggerButton(enButtonB))
+	{
+		animation.Play(1);
+	}
+	m_skinmodel.Update(m_position, rot, { 0.05f, 0.05f, 0.05f });
+	animation.Update(GetGameTime().GetDeltaFrameTime());
 }
 
 void Player::Draw()
