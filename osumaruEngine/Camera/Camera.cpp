@@ -89,6 +89,16 @@ const Vector3& Camera::GetUp() const
 	return m_up;
 }
 
+const Vector3& Camera::GetFlont() const
+{
+	return m_flont;
+}
+
+const Vector3& Camera::GetRight() const
+{
+	return m_right;
+}
+
 void Camera::SetViewMatrix(const Matrix& view)
 {
 	m_viewMatrix = view;
@@ -113,6 +123,11 @@ void Camera::Update()
 {
 	m_viewMatrix.MakeLookAt(m_position, m_target, m_up);
 	m_projectionMatrix.MakeProjectionMatrix(m_angle, m_Aspect, m_Near, m_Far);
+
+	//ƒJƒƒ‰‚Ì‘O•ûŒü
+	m_flont = { m_viewMatrix.m[2][0],m_viewMatrix.m[2][1], m_viewMatrix.m[2][2] };
+	//ƒJƒƒ‰‚Ì‰¡•ûŒü
+	m_right = { m_viewMatrix.m[0][0],m_viewMatrix.m[0][1], m_viewMatrix.m[0][2] };
 
 }
 

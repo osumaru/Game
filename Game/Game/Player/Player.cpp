@@ -4,39 +4,51 @@
 
 void Player::Init(Vector3 position)
 {
-	m_skinmodel.Load(L"Assets/modelData/UnityChan2.cmo", &animation);
+	m_skinmodel.Load(L"Assets/modelData/UnityChan2.cmo", &m_animation);
 	m_position = position;
 	m_characterController.Init(2.0f, 2.0f, m_position);
 	m_characterController.SetGravity(0.0f);
 	wchar_t* animClip[2] = { L"Assets/modelData/unity2.tka", L"Assets/modelData/unity3.tka" };
-	animation.Init(animClip, 2);
+	m_animation.Init(animClip, 2);
 	m_rotation.SetRotationDeg(Vector3::AxisX, -90.0f);
+
+	//プレイヤーのステータスの初期化
+	{
+
+		m_status.Strength	= 10;				//攻撃力
+		m_status.Defense	= 3;				//防御力
+		m_status.Health		= 100;				//体力
+		m_status.Level		= 1;				//レベル
+		m_status.OldExp		= 15;				//ひとつ前のレベルに必要な経験値
+		m_status.NextExp	= ((m_status.OldExp * 1.1f + 0.5) + (m_status.Level * 12 )) / 2 + 0.5;		//次のレベルアップに必要な経験値
+		m_status.ExperiencePoint = 0;				//経験値
+		m_status.AccumulationExp += m_status.OldExp;	//累積経験値
+
+
+	}
+
 	Add(this, 0);
 }
 
 void Player::Update()
 {
 
-	Move();
+	Move();					//移動処理
+	Rotation();				//回転処理
+	AnimationMove();		//アニメーションの処理
+	StatusCalculation();	//ステータスの処理
 
-	Vector3 playerVec = m_moveSpeed;
-
-
-	if (playerVec.LengthSq() > 0.001f)
+	if (GetPad().IsTriggerButton(enButtonB))
 	{
+		m_status.ExperiencePoint += 43;
+		m_status.AccumulationExp += 43;
 
-		Quaternion rot;
-		m_rotation.SetRotation(Vector3::AxisY, atan2f(playerVec.x, playerVec.z));
+	}
 
-		rot.SetRotationDeg(Vector3::AxisX, -90.0f);
-		m_rotation.Multiply(rot);
-	}
-	if (GetPad().IsTriggerButton(enButtonA))
-	{
-		animation.Play(0);
-	}
-	animation.Update(GetGameTime().GetDeltaFrameTime());
+	//スキンモデルの更新
 	m_skinmodel.Update(m_position, m_rotation, { 0.05f, 0.05f, 0.05f });
+
+
 }
 
 void Player::Draw()
@@ -69,7 +81,7 @@ void Player::Move()
 		cameraX.z = cameraVm.m[0][2];
 		cameraX.Normalize();
 
-
+		//キャラクターを移動させる処理
 		m_moveSpeed.x = cameraX.x * moveSpeed.x + cameraZ.x * moveSpeed.z;
 		m_moveSpeed.z = cameraX.z * moveSpeed.x + cameraZ.z * moveSpeed.z;
 
@@ -81,13 +93,84 @@ void Player::Move()
 
 		m_position = m_characterController.GetPosition();
 
-
-	
 }
 
 void Player::Rotation()
 {
 
+	Vector3 playerVec = m_moveSpeed;
+
+
+	if (playerVec.LengthSq() > 0.001f)
+	{
+
+
+		Quaternion rot = Quaternion::Identity;
+		m_rotation.SetRotation(Vector3::AxisY, atan2f(playerVec.x, playerVec.z));		//Y軸周りの回転
+
+		rot.SetRotationDeg(Vector3::AxisX, -90.0f);
+		m_rotation.Multiply(rot);
+
+
+		//m_rotation.Slerp(0.02f, m_rotation, rot);
+
+
+	}
+
+}
+
+void Player::AnimationMove()
+{
+
+	if (GetPad().IsTriggerButton(enButtonA))
+	{
+		m_animation.Play(0);
+	}
+
+	m_animation.Update(GetGameTime().GetDeltaFrameTime());
+
+}
+
+void Player::StatusCalculation()
+{
+	//レベルアップの処理
+	if (m_status.NextExp <= m_status.ExperiencePoint)
+	{
+		m_status.ExperiencePoint -= m_status.NextExp;
+
+		m_status.Level += 1;
+
+		m_status.OldExp = m_status.NextExp;
+
+		m_status.NextExp = ((m_status.OldExp * 1.1f + 0.5) + (m_status.Level * 12)) / 2 + 0.5;		//次のレベルアップに必要な経験値
+
+		if (m_status.Level % 10 == 0)
+		{
+
+			m_status.Strength	+= 9;
+			m_status.Defense	+= 6;
+			m_status.Health		+= 25;
+
+
+		}
+
+		else if (m_status.Level % 2 == 0)
+		{
+
+			m_status.Strength += 5;
+			m_status.Defense += 3;
+			m_status.Health += 14;
+
+		}
+
+		else
+		{
+			m_status.Strength += 2;
+			m_status.Defense += 2;
+			m_status.Health += 11;
+		}
+
+	}
 
 
 }

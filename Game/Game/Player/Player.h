@@ -1,7 +1,21 @@
 #pragma once
 
+struct playerStatus
+{
+	int Strength;			//攻撃力
+	int Defense;			//防御力
+	int	Health;				//体力
+	int Level;				//レベル
+	int ExperiencePoint	;	//現在の経験値
+	int NextExp;			//レベルアップまでに必要な経験値
+	int OldExp;				//現在のレベルアップに必要だった経験値
+	int AccumulationExp;	//累積経験値
+
+};
+
 class Player : public GameObject
 {
+
 public:
 
 	//プレイヤーの初期化
@@ -21,7 +35,7 @@ public:
 	void Draw()override;
 
 	//プレイヤーの座標を取得する関数
-	Vector3 GetPosition()
+	const Vector3 GetPosition()
 	{
 		return m_position;
 	}
@@ -32,14 +46,29 @@ public:
 	//プレイヤーの回転を行う関数
 	void Rotation();
 
+	//プレイヤーのアニメーションの処理を行う関数
+	void AnimationMove();
+
+	//ステータスの計算処理を行う関数
+	void StatusCalculation();
+
+	//プレイヤーの経験値量を上げる関数（セットする関数ではないです）
+	//引数で倒した敵の経験値量を入れる
+	void ExpUP(const int expup)
+	{
+		m_status.ExperiencePoint += expup;
+		m_status.AccumulationExp += expup;
+	}
+
 private:
 	Vector3				m_position;							//座標
 	Vector3				m_moveSpeed = Vector3::Zero;		//移動速度
 	Quaternion			m_rotation = Quaternion::Identity;	//回転
 	SkinModel			m_skinmodel;						//スキンモデル
 	CharacterController m_characterController;				//キャラクターコントローラー
-	Pad					m_pad;			//パッド
-	Animation			animation;
+	Pad					m_pad;								//パッド
+	Animation			m_animation;						//アニメーション
+	playerStatus		m_status;							//プレイヤーのステータス
 };
 
 static Player& GetPlayer()

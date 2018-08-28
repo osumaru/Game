@@ -50,6 +50,12 @@ public:
 	//カメラの上方向を取得
 	const Vector3& GetUp() const;
 
+	//カメラの前方向を取得
+	const Vector3& GetFlont() const;
+
+	//カメラの横方向を取得
+	const Vector3& GetRight() const;
+
 	//ビュー行列の設定。
 	void SetViewMatrix(const Matrix& view);
 
@@ -74,6 +80,9 @@ private:
 	Vector3			m_position;				//カメラの視点。
 	Vector3			m_target;				//カメラの注視点
 	Vector3			m_up;					//カメラの上方向
+	Vector3			m_flont;				//カメラの前方向
+	Vector3			m_right;				//カメラの横方向
+
 	float				m_Far;					//遠平面
 	float				m_Near;					//近平面
 	float				m_Aspect;				//アスペクト比
