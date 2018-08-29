@@ -213,6 +213,7 @@
     <MeshContentTask Include="Assets\modelData\Ground_2.FBX" />
     <MeshContentTask Include="Assets\modelData\Ground_4.FBX" />
     <MeshContentTask Include="Assets\modelData\log.FBX" />
+    <MeshContentTask Include="Assets\modelData\Player.FBX" />
     <MeshContentTask Include="Assets\modelData\skyBox.FBX" />
     <MeshContentTask Include="Assets\modelData\Spring.FBX" />
     <MeshContentTask Include="Assets\modelData\star.FBX" />
@@ -232,6 +233,7 @@
     <MeshContentTask Include="Assets\modelData\Wave.FBX" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\modelData\Player.tks" />
     <None Include="Assets\modelData\unitychan.tks" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
