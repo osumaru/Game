@@ -4,7 +4,7 @@
 
 void Player::Init(Vector3 position)
 {
-	m_skinmodel.Load(L"Assets/modelData/UnityChan2.cmo", &m_animation);
+	m_skinmodel.Load(L"Assets/modelData/Player.cmo", &m_animation);
 	m_position = position;
 	m_characterController.Init(2.0f, 2.0f, m_position);
 	m_characterController.SetGravity(-9.0f);
@@ -34,7 +34,7 @@ void Player::Update()
 
 	Move();					//移動処理
 	Rotation();				//回転処理
-	AnimationMove();		//アニメーションの処理
+	//AnimationMove();		//アニメーションの処理
 	StatusCalculation();	//ステータスの処理
 
 	if (GetPad().IsTriggerButton(enButtonB))
@@ -45,7 +45,7 @@ void Player::Update()
 	}
 
 	//スキンモデルの更新
-	m_skinmodel.Update(m_position, m_rotation, { 0.05f, 0.05f, 0.05f }, true);
+	m_skinmodel.Update(m_position, m_rotation, { 1.0f, 1.0f, 1.0f }, true);
 
 
 }
@@ -60,8 +60,8 @@ void Player::Move()
 	
 
 		Vector3 moveSpeed;
-		moveSpeed.z = GetPad().GetLeftStickY();
-		moveSpeed.x = GetPad().GetLeftStickX();
+		moveSpeed.z = GetPad().GetLeftStickY() * GetGameTime().GetDeltaFrameTime() * 5;
+		moveSpeed.x = GetPad().GetLeftStickX() * GetGameTime().GetDeltaFrameTime() * 5;
 
 		Matrix cameraVm = GetGameCamera().GetViewMatrix();
 		cameraVm.Inverse();	//カメラのビュー行列の逆行列
@@ -84,7 +84,11 @@ void Player::Move()
 		m_moveSpeed.x = cameraX.x * moveSpeed.x + cameraZ.x * moveSpeed.z;
 		m_moveSpeed.z = cameraX.z * moveSpeed.x + cameraZ.z * moveSpeed.z;
 
+		if (GetPad().IsPressButton(enButtonRB))
+		{
+			m_moveSpeed *= 5;
 
+		}
 
 		m_characterController.SetMoveSpeed(m_moveSpeed);
 		m_characterController.SetPosition(m_position);
@@ -105,10 +109,7 @@ void Player::Rotation()
 
 
 		Quaternion rot = Quaternion::Identity;
-		m_rotation.SetRotation(Vector3::AxisY, atan2f(playerVec.x, playerVec.z));		//Y軸周りの回転
-		m_rotation.Multiply(rot);
-
-
+		rot.SetRotation(Vector3::AxisY, atan2f(playerVec.x, playerVec.z));		//Y軸周りの回転
 		m_rotation.Slerp(0.02f, m_rotation, rot);
 
 
