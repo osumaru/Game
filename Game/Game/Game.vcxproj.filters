@@ -135,52 +135,10 @@
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <MeshContentTask Include="Assets\modelData\GroundBrock.FBX">
-      <Filter>ソース ファイル\Assets</Filter>
-    </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\Unitychan.FBX">
       <Filter>ソース ファイル\Assets</Filter>
     </MeshContentTask>
-    <MeshContentTask Include="Assets\modelData\clock.FBX">
-      <Filter>ソース ファイル\Assets</Filter>
-    </MeshContentTask>
-    <MeshContentTask Include="Assets\modelData\coin.FBX">
-      <Filter>ソース ファイル\Assets</Filter>
-    </MeshContentTask>
-    <MeshContentTask Include="Assets\modelData\Ground_2.FBX">
-      <Filter>ソース ファイル\Assets</Filter>
-    </MeshContentTask>
-    <MeshContentTask Include="Assets\modelData\Ground_4.FBX">
-      <Filter>ソース ファイル\Assets</Filter>
-    </MeshContentTask>
-    <MeshContentTask Include="Assets\modelData\GroundBrock2.FBX">
-      <Filter>ソース ファイル\Assets</Filter>
-    </MeshContentTask>
-    <MeshContentTask Include="Assets\modelData\GroundIsland.FBX">
-      <Filter>ソース ファイル\Assets</Filter>
-    </MeshContentTask>
-    <MeshContentTask Include="Assets\modelData\log.FBX">
-      <Filter>ソース ファイル\Assets</Filter>
-    </MeshContentTask>
-    <MeshContentTask Include="Assets\modelData\skyBox.FBX">
-      <Filter>ソース ファイル\Assets</Filter>
-    </MeshContentTask>
-    <MeshContentTask Include="Assets\modelData\Spring.FBX">
-      <Filter>ソース ファイル\Assets</Filter>
-    </MeshContentTask>
-    <MeshContentTask Include="Assets\modelData\star.FBX">
-      <Filter>ソース ファイル\Assets</Filter>
-    </MeshContentTask>
-    <MeshContentTask Include="Assets\modelData\test.FBX">
-      <Filter>ソース ファイル\Assets</Filter>
-    </MeshContentTask>
-    <MeshContentTask Include="Assets\modelData\testBox.FBX">
-      <Filter>ソース ファイル\Assets</Filter>
-    </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\testChamferBox.FBX">
-      <Filter>ソース ファイル\Assets</Filter>
-    </MeshContentTask>
-    <MeshContentTask Include="Assets\modelData\testGoal.FBX">
       <Filter>ソース ファイル\Assets</Filter>
     </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\testGround.FBX">
@@ -196,9 +154,15 @@
       <Filter>ソース ファイル\Assets</Filter>
     </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\Unitychan2.fbx" />
+    <MeshContentTask Include="Assets\modelData\Player.FBX">
+      <Filter>ソース ファイル\Assets</Filter>
+    </MeshContentTask>
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\modelData\unitychan.tks">
+      <Filter>ソース ファイル\Assets</Filter>
+    </None>
+    <None Include="Assets\modelData\Player.tks">
       <Filter>ソース ファイル\Assets</Filter>
     </None>
   </ItemGroup>

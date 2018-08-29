@@ -61,7 +61,7 @@ void Engine::InitD3D(HINSTANCE& hInst)
 
 	//ウィンドウを作成
 	m_hwnd = CreateWindow("Game", "Game",
-		WS_OVERLAPPEDWINDOW, 0, 0, FRAME_BUFFER_WIDTH, FRAME_BUFFER_HEIGHT,
+		WS_OVERLAPPEDWINDOW, 0, 0, m_frameBufferWidth, m_frameBufferHeight,
 		NULL, NULL, m_wc.hInstance, NULL);
 
 
@@ -112,7 +112,7 @@ void Engine::InitD3D(HINSTANCE& hInst)
 	}
 	ID3D11Texture2D * p_RT;
 	hr = m_pSwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (LPVOID*)(&p_RT));
-	m_depthStencilTexture.Create(FRAME_BUFFER_WIDTH, FRAME_BUFFER_HEIGHT, Texture::enDepthStencil, DXGI_FORMAT_D24_UNORM_S8_UINT);
+	m_depthStencilTexture.Create(m_frameBufferWidth, m_frameBufferHeight, Texture::enDepthStencil, DXGI_FORMAT_D24_UNORM_S8_UINT);
 
 	m_backBuffer.Create(p_RT, (ID3D11Texture2D*)m_depthStencilTexture.GetTexture(), m_frameBufferWidth, m_frameBufferHeight, true);
 	m_pBackBuffer = m_backBuffer.GetRenderTarget();

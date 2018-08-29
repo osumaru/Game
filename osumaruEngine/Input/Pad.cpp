@@ -37,8 +37,8 @@ Pad::Pad() :
 	m_leftStickY(0.0f),
 	m_rightTrigger(0.0f),
 	m_leftTrigger(0.0f),
-	m_isPadPress{},
-	m_isPadTrigger{},
+	m_isPadPress{0},
+	m_isPadTrigger{0},
 	m_state{}
 {
 }
@@ -58,20 +58,13 @@ void Pad::Update()
 		{
 			if (m_state.Gamepad.wButtons & pad.padCode)
 			{
-				if (!m_isPadPress[pad.padButton])
-				{
-					m_isPadTrigger[pad.padButton] = true;
-				}
-				else
-				{
-					m_isPadTrigger[pad.padButton] = false;
-				}
-				m_isPadPress[pad.padButton] = true;
+				m_isPadTrigger[pad.padButton] = 1 ^ m_isPadPress[pad.padButton];
+				m_isPadPress[pad.padButton] = 1;
 			}
 			else
 			{
-				m_isPadTrigger[pad.padButton] = false;
-				m_isPadPress[pad.padButton] = false;
+				m_isPadTrigger[pad.padButton] = 0;
+				m_isPadPress[pad.padButton] = 0;
 			}
 		}
 		float inputNormalize;
@@ -79,6 +72,29 @@ void Pad::Update()
 		//ÉgÉäÉKÅ[ÇÃâüÇµçûÇ›ó Ç0.0Å`1.0Ç…ê≥ãKâª
 		m_leftTrigger = (float)m_state.Gamepad.bLeftTrigger / inputNormalize;
 		m_rightTrigger = (float)m_state.Gamepad.bRightTrigger / inputNormalize;
+
+		if (m_state.Gamepad.bLeftTrigger != 0)
+		{
+			m_isPadTrigger[enButtonLeftTrigger] =1 ^ m_isPadPress[enButtonLeftTrigger];
+			m_isPadPress[enButtonLeftTrigger] = 1;
+		}
+		else
+		{
+			m_isPadTrigger[enButtonLeftTrigger] = 0;
+			m_isPadPress[enButtonLeftTrigger] = 0;
+		}
+
+		if (m_state.Gamepad.bRightTrigger != 0)
+		{
+			m_isPadTrigger[enButtonRightTrigger] = 1 ^ m_isPadPress[enButtonRightTrigger];
+			m_isPadPress[enButtonRightTrigger] = 1;
+		}
+		else
+		{
+			m_isPadTrigger[enButtonRightTrigger] = 0;
+			m_isPadPress[enButtonRightTrigger] = 0;
+		}
+
 
 		const int stickNum = 4;
 		float padInput[stickNum] = 
@@ -122,20 +138,13 @@ void Pad::Update()
 		{
 			if (GetAsyncKeyState(pad.keyCode))
 			{
-				if (!m_isPadPress[pad.padButton])
-				{
-					m_isPadTrigger[pad.padButton] = true;
-				}
-				else
-				{
-					m_isPadTrigger[pad.padButton] = false;
-				}
-				m_isPadPress[pad.padButton] = true;
+				m_isPadTrigger[pad.padButton] = 1 ^ m_isPadPress[pad.padButton];
+				m_isPadPress[pad.padButton] = 1;
 			}
 			else
 			{
-				m_isPadTrigger[pad.padButton] = false;
-				m_isPadPress[pad.padButton] = false;
+				m_isPadTrigger[pad.padButton] = 0;
+				m_isPadPress[pad.padButton] = 0;
 			}
 		}
 		m_leftStickX = 0.0f;

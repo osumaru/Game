@@ -8,7 +8,7 @@
 //Unitychan
 {
 	L"Unitychan",
-	Vector3(16.80f, 0.86f, -62.60f),             //平行移動
+	Vector3(0.00f, 20.86f, 0.0f),             //平行移動
 	Quaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagPlayer, //タグ
 },

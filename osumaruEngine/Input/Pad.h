@@ -14,8 +14,10 @@ enum EnPadButton
 	enButtonSelect,
 	enButtonStart,
 	enButtonRB,
+	enButtonRightTrigger,
 	enButtonRStickPush,
 	enButtonLB,
+	enButtonLeftTrigger,
 	enButtonLStickPush,
 	enButtonNum,
 

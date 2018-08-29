@@ -52,15 +52,24 @@ void SkinModel::Load(wchar_t* filePath, Animation* animation)
 	}
 }
 
-void SkinModel::Update(Vector3 position, Quaternion rotation, Vector3 scale)
+void SkinModel::Update(Vector3 position, Quaternion rotation, Vector3 scale, bool isZup)
 {
+
+	Matrix biMat = Matrix::Identity;
+	if (isZup)
+	{
+		Quaternion rot;
+		rot.SetRotationDeg(Vector3::AxisX, -90.0f);
+		biMat.MakeRotationFromQuaternion(rot);
+	}
 	Matrix posMat;
 	posMat.MakeTranslation(position);
 	Matrix rotMat;
 	rotMat.MakeRotationFromQuaternion(rotation);
 	Matrix scaleMat;
 	scaleMat.MakeScaling(scale);
-	worldMatrix.Mul(scaleMat, rotMat);
+	worldMatrix.Mul(scaleMat, biMat);
+	worldMatrix.Mul(worldMatrix, rotMat);
 	worldMatrix.Mul(worldMatrix, posMat);
 	if (m_skelton != nullptr)
 	{

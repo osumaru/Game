@@ -4,11 +4,19 @@ class Matrix;
 
 class Vector2 {
 public:
+
+	union {
+		DirectX::XMFLOAT2 vec;
+		struct { float x, y; };
+		float v[2];
+	};
+
 	static const Vector2 Zero;
 	Vector2()
 	{
 
 	}
+
 	Vector2(float x, float y)
 	{
 		this->x = x;
@@ -22,11 +30,94 @@ public:
 		vec = _v.vec;
 		return *this;
 	}
-	union {
-		DirectX::XMFLOAT2 vec;
-		struct { float x, y; };
-		float v[2];
-	};
+
+	/*!
+	* @brief	ベクトルを加算。
+	*/
+	void Add(const Vector2& _v)
+	{
+		DirectX::XMVECTOR xmv0 = DirectX::XMLoadFloat2(&vec);
+		DirectX::XMVECTOR xmv1 = DirectX::XMLoadFloat2(&_v.vec);
+		DirectX::XMVECTOR xmvr = DirectX::XMVectorAdd(xmv0, xmv1);
+		DirectX::XMStoreFloat2(&vec, xmvr);
+	}
+
+	void Add(const Vector2& v0, const Vector2& v1)
+	{
+		DirectX::XMVECTOR xmv0 = DirectX::XMLoadFloat2(&v0.vec);
+		DirectX::XMVECTOR xmv1 = DirectX::XMLoadFloat2(&v1.vec);
+		DirectX::XMVECTOR xmvr = DirectX::XMVectorAdd(xmv0, xmv1);
+		DirectX::XMStoreFloat2(&vec, xmvr);
+	}
+
+	/*!
+	* @brief	ベクトルを減算。
+	*/
+	void Subtract(const Vector2& _v)
+	{
+		DirectX::XMVECTOR xmv0 = DirectX::XMLoadFloat2(&vec);
+		DirectX::XMVECTOR xmv1 = DirectX::XMLoadFloat2(&_v.vec);
+		DirectX::XMVECTOR xmvr = DirectX::XMVectorSubtract(xmv0, xmv1);
+		DirectX::XMStoreFloat2(&vec, xmvr);
+	}
+	void Subtract(const Vector2& v0, const Vector2& v1)
+	{
+		DirectX::XMVECTOR xmv0 = DirectX::XMLoadFloat2(&v0.vec);
+		DirectX::XMVECTOR xmv1 = DirectX::XMLoadFloat2(&v1.vec);
+		DirectX::XMVECTOR xmvr = DirectX::XMVectorSubtract(xmv0, xmv1);
+		DirectX::XMStoreFloat2(&vec, xmvr);
+	}
+
+	/*!
+	* @brief	拡大。
+	*/
+	void Scale(float s)
+	{
+		DirectX::XMVECTOR xmv = DirectX::XMLoadFloat2(&vec);
+		xmv = DirectX::XMVectorScale(xmv, s);
+		DirectX::XMStoreFloat2(&vec, xmv);
+	}
+	/*!
+	* @brief	除算。
+	*/
+	void Div(float d)
+	{
+		float scale = 1.0f / d;
+		Scale(scale);
+	}
+
+	/*!
+	*@brief	加算代入演算子。
+	*/
+	const Vector2& operator+=(const Vector2& _v)
+	{
+		Add(_v);
+		return *this;
+	}
+	/*!
+	*@brief　乗算代入演算子。
+	*/
+	const Vector2& operator*=(float s)
+	{
+		Scale(s);
+		return *this;
+	}
+	/*!
+	*@brief	減算代入演算子。
+	*/
+	const Vector2& operator-=(const Vector2& _v)
+	{
+		Subtract(_v);
+		return *this;
+	}
+	/*!
+	*@brief	除算代入演算子。
+	*/
+	const Vector2& operator/=(const float s)
+	{
+		Div(s);
+		return *this;
+	}
 	/*!
 	* @brief	線形補間。
 	*@details

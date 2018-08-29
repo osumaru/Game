@@ -10,7 +10,7 @@ Sprite::Sprite() :
 	m_primitive(),
 	m_alpha(1.0f),
 	m_position(0.0f, 0.0f),
-	m_size(FRAME_BUFFER_WIDTH, FRAME_BUFFER_HEIGHT)
+	m_size(FrameBufferWidth(), FrameBufferHeight())
 {
 
 }
@@ -44,13 +44,13 @@ void Sprite::Draw()
 {
 	//座標のスケールを変換
 	Vector3 position;
-	position.x = m_position.x / (FRAME_BUFFER_WIDTH / 2.0f);
-	position.y = m_position.y / (FRAME_BUFFER_HEIGHT / 2.0f);
+	position.x = m_position.x / (FrameBufferWidth() / 2.0f);
+	position.y = m_position.y / (FrameBufferHeight() / 2.0f);
 	position.z = 0.0f;
 	//拡大のスケールを変換
 	Vector3 size;
-	size.x = m_size.x / FRAME_BUFFER_WIDTH;
-	size.y = m_size.y / FRAME_BUFFER_HEIGHT;
+	size.x = m_size.x / FrameBufferWidth();
+	size.y = m_size.y / FrameBufferHeight();
 	size.z = 1.0f;
 
 	//移動行列を作成

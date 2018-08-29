@@ -13,6 +13,7 @@ public:
 		Matrix viewProjMat;			//ビュープロジェクション行列
 	};
 
+
 	//コンストラクタ
 	SkinModel();
 
@@ -24,8 +25,9 @@ public:
 	position	座標
 	rotation	回転
 	scale		拡大
+	isZup		Zアップで吐き出したモデルはtrue,Yアップで吐き出した場合はfalse
 	*/
-	void Update(Vector3 position, Quaternion rotation, Vector3 scale);
+	void Update(Vector3 position, Quaternion rotation, Vector3 scale, bool isZup = false);
 
 	/*
 	モデルの読み込み

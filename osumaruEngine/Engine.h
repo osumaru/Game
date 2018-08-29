@@ -5,8 +5,6 @@
 #include "Graphics\RenderTarget.h"
 //エンジンクラス
 
-const int FRAME_BUFFER_WIDTH = 1280;
-const int FRAME_BUFFER_HEIGHT = 720;
 
 class EffectManager;
 class GameObject;
@@ -39,6 +37,16 @@ public:
 	void Release()
 	{
 
+	}
+
+	int GetFrameBufferWidth()
+	{
+		return m_frameBufferWidth;
+	}
+
+	int GetFrameBufferHeight()
+	{
+		return m_frameBufferHeight;
 	}
 
 	//物理ワールドを取得。
@@ -156,5 +164,15 @@ static PhysicsWorld& GetPhysicsWorld()
 static SoundEngine& GetSoundEngine()
 {
 	return GetEngine().GetSoundEngine();
+}
+
+static int FrameBufferWidth()
+{
+	return GetEngine().GetFrameBufferWidth();
+}
+
+static int FrameBufferHeight()
+{
+	return GetEngine().GetFrameBufferHeight();
 }
 
