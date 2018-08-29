@@ -2,6 +2,7 @@
 #include "../Scene/GameScene.h"
 #include "../UI/MiniMap/MiniMap.h"
 #include "../UI/DamageNumber/DamageNumber.h"
+#include "../UI/WeaponSelect/WeaponSelect.h"
 
 void GameScene::Init()
 {
@@ -10,6 +11,9 @@ void GameScene::Init()
 
 	DamegeNumber* damageNumber = New<DamegeNumber>(0);
 	damageNumber->Init();
+
+	WeaponSelect* weaponSelect = New<WeaponSelect>(0);
+	weaponSelect->Init();
 }
 
 void GameScene::Update()

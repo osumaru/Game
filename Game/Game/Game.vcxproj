@@ -175,6 +175,7 @@
     <ClCompile Include="UI\DamageNumber\DamageNumber.cpp" />
     <ClCompile Include="UI\DamageNumber\Number.cpp" />
     <ClCompile Include="UI\MiniMap\MiniMap.cpp" />
+    <ClCompile Include="UI\WeaponSelect\WeaponSelect.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Enemy\Enemy.h" />
@@ -189,6 +190,7 @@
     <ClInclude Include="UI\DamageNumber\DamageNumber.h" />
     <ClInclude Include="UI\DamageNumber\Number.h" />
     <ClInclude Include="UI\MiniMap\MiniMap.h" />
+    <ClInclude Include="UI\WeaponSelect\WeaponSelect.h" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="Assets\shader\sprite.fx">

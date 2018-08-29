@@ -40,6 +40,9 @@
     <Filter Include="ソース ファイル\Scene">
       <UniqueIdentifier>{e0ede6b2-fd4f-4bf6-b96e-acf0b148326f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\UI\WeaponSelect">
+      <UniqueIdentifier>{d189a704-f5f2-4120-ad87-99c01945ad9c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -81,6 +84,9 @@
     <ClCompile Include="UI\DamageNumber\Number.cpp">
       <Filter>ソース ファイル\UI\DamageNumber</Filter>
     </ClCompile>
+    <ClCompile Include="UI\WeaponSelect\WeaponSelect.cpp">
+      <Filter>ソース ファイル\UI\WeaponSelect</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -118,6 +124,9 @@
     </ClInclude>
     <ClInclude Include="UI\DamageNumber\Number.h">
       <Filter>ソース ファイル\UI\DamageNumber</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\WeaponSelect\WeaponSelect.h">
+      <Filter>ソース ファイル\UI\WeaponSelect</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
