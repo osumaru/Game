@@ -59,7 +59,7 @@ public:
 
 	void Updater()
 	{
-		if (m_isStart && !m_isDelete)
+		if (m_isStart && m_isActive && !m_isDelete)
 		{
 			Update();
 		}
@@ -67,7 +67,7 @@ public:
 
 	void Drawer()
 	{
-		if (m_isStart && !m_isDelete)
+		if (m_isStart && m_isActive && !m_isDelete)
 		{
 			Draw();
 		}
@@ -75,12 +75,23 @@ public:
 
 	void AfterDrawer()
 	{
-		if (m_isStart && !m_isDelete)
+		if (m_isStart && m_isActive && !m_isDelete)
 		{
 			AfterDraw();
 		}
 	}
+
+	void SetIsActive(bool isActive)
+	{
+		m_isActive = isActive;
+	}
+
+	bool IsActive()
+	{
+		return m_isActive;
+	}
 private:
 	bool m_isDelete;			//インスタンスを消す時に建てるフラグ
 	bool m_isStart;				//初期化してるかのフラグ
+	bool m_isActive;			//アクティブかどうかのフラグ
 };

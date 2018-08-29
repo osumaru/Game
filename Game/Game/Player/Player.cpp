@@ -10,7 +10,6 @@ void Player::Init(Vector3 position)
 	m_characterController.SetGravity(-9.0f);
 	wchar_t* animClip[2] = { L"Assets/modelData/unity2.tka", L"Assets/modelData/unity3.tka" };
 	m_animation.Init(animClip, 2);
-	m_rotation.SetRotationDeg(Vector3::AxisX, -90.0f);
 
 	//プレイヤーのステータスの初期化
 	{
@@ -46,7 +45,7 @@ void Player::Update()
 	}
 
 	//スキンモデルの更新
-	m_skinmodel.Update(m_position, m_rotation, { 0.05f, 0.05f, 0.05f });
+	m_skinmodel.Update(m_position, m_rotation, { 0.05f, 0.05f, 0.05f }, true);
 
 
 }
@@ -107,12 +106,10 @@ void Player::Rotation()
 
 		Quaternion rot = Quaternion::Identity;
 		m_rotation.SetRotation(Vector3::AxisY, atan2f(playerVec.x, playerVec.z));		//Y軸周りの回転
-
-		rot.SetRotationDeg(Vector3::AxisX, -90.0f);
 		m_rotation.Multiply(rot);
 
 
-		//m_rotation.Slerp(0.02f, m_rotation, rot);
+		m_rotation.Slerp(0.02f, m_rotation, rot);
 
 
 	}
