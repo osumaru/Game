@@ -28,6 +28,18 @@
     <Filter Include="ソース ファイル\Enemy">
       <UniqueIdentifier>{0eaf0a26-752e-41b7-bc44-3a456ae73350}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\UI">
+      <UniqueIdentifier>{660794ff-c4a4-4d7b-8f0b-9724e227c179}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\UI\MiniMap">
+      <UniqueIdentifier>{f283ccba-aef8-4f5f-a5d2-15019b3b3c02}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\UI\DamageNumber">
+      <UniqueIdentifier>{32f2ec74-b50e-4788-b125-04ae971952fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Scene">
+      <UniqueIdentifier>{e0ede6b2-fd4f-4bf6-b96e-acf0b148326f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -57,6 +69,18 @@
     <ClCompile Include="Enemy\Enemy.cpp">
       <Filter>ソース ファイル\Enemy</Filter>
     </ClCompile>
+    <ClCompile Include="UI\MiniMap\MiniMap.cpp">
+      <Filter>ソース ファイル\UI\MiniMap</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\DamageNumber\DamageNumber.cpp">
+      <Filter>ソース ファイル\UI\DamageNumber</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\GameScene.cpp">
+      <Filter>ソース ファイル\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\DamageNumber\Number.cpp">
+      <Filter>ソース ファイル\UI\DamageNumber</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -82,6 +106,18 @@
     </ClInclude>
     <ClInclude Include="Enemy\Enemy.h">
       <Filter>ソース ファイル\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\MiniMap\MiniMap.h">
+      <Filter>ソース ファイル\UI\MiniMap</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\DamageNumber\DamageNumber.h">
+      <Filter>ソース ファイル\UI\DamageNumber</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\GameScene.h">
+      <Filter>ソース ファイル\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\DamageNumber\Number.h">
+      <Filter>ソース ファイル\UI\DamageNumber</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -150,6 +186,7 @@
     <MeshContentTask Include="Assets\modelData\U2.FBX">
       <Filter>ソース ファイル\Assets</Filter>
     </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\Unitychan2.fbx" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\modelData\unitychan.tks">

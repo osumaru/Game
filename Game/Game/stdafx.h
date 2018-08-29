@@ -31,6 +31,7 @@
 //#include "../osumaruEngine/Particle/Particle.h"
 //#include "../osumaruEngine/Particle/ParticleEmitter.h"
 //#include "../osumaruEngine/Font/Font.h"
+#include "../../osumaruEngine/Random/Random.h"
 #include <fstream>
 #include <iostream>
 #include <stdio.h>

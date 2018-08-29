@@ -41,6 +41,7 @@ void Map::Init(int stageNum)
 {
 	std::map<int, std::vector<MapChipInfo>> instancingData;
 	Enemy* enemy = nullptr;
+
 	for (MapChipInfo& mInfo : mapChipInfo[stageNum])
 	{
 		MapChip* mapChip = nullptr;
