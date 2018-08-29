@@ -19,9 +19,23 @@ void DamegeNumber::Update()
 	if (GetPad().IsTriggerButton(EnPadButton::enButtonA)) {
 		int randomNumber = GetRandom().GetRandSInt();
 		randomNumber %= 1000;
-		m_number[0]->SetNumber(randomNumber / 100);
+		if (randomNumber / 100 > 0) {
+			m_number[0]->SetIsActive(true);
+			m_number[0]->SetNumber(randomNumber / 100);
+		}
+		else {
+			m_number[0]->SetIsActive(false);
+		}
 		randomNumber %= 100;
-		m_number[1]->SetNumber(randomNumber / 10);
+		if (randomNumber / 10 > 0) {
+			m_number[1]->SetIsActive(true);
+			m_number[1]->SetNumber(randomNumber / 10);
+		}
+		else {
+			if (m_number[0]->IsActive() == false) {
+				m_number[1]->SetIsActive(false);
+			}
+		}
 		randomNumber %= 10;
 		m_number[2]->SetNumber(randomNumber);
 	}
