@@ -7,7 +7,7 @@ void Player::Init(Vector3 position)
 	m_skinmodel.Load(L"Assets/modelData/UnityChan2.cmo", &m_animation);
 	m_position = position;
 	m_characterController.Init(2.0f, 2.0f, m_position);
-	m_characterController.SetGravity(0.0f);
+	m_characterController.SetGravity(-9.0f);
 	wchar_t* animClip[2] = { L"Assets/modelData/unity2.tka", L"Assets/modelData/unity3.tka" };
 	m_animation.Init(animClip, 2);
 	m_rotation.SetRotationDeg(Vector3::AxisX, -90.0f);
@@ -144,6 +144,7 @@ void Player::StatusCalculation()
 
 		m_status.NextExp = ((m_status.OldExp * 1.1f + 0.5) + (m_status.Level * 12)) / 2 + 0.5;		//次のレベルアップに必要な経験値
 
+		//10レベルごとのステータスの上昇量
 		if (m_status.Level % 10 == 0)
 		{
 
@@ -153,7 +154,7 @@ void Player::StatusCalculation()
 
 
 		}
-
+		//偶数レベルごとのステータスの上昇量
 		else if (m_status.Level % 2 == 0)
 		{
 
