@@ -10,7 +10,7 @@ Camera::Camera() :
 	m_up(0.0f, 1.0f, 0.0f),
 	m_Far(1000.0),
 	m_Near(0.1f),
-	m_Aspect((float)FRAME_BUFFER_WIDTH / (float)FRAME_BUFFER_HEIGHT),
+	m_Aspect((float)FrameBufferWidth() / (float)FrameBufferHeight()),
 	m_angle(Math::PI / 4)
 {
 }
