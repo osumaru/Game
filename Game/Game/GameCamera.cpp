@@ -9,8 +9,8 @@ void GameCamera::Init()
 	camera.SetNear(1.0f);
 	camera.SetAspect((float)FrameBufferWidth() / (float)FrameBufferHeight());
 	camera.SetAngle(Math::DegToRad(60.0f));
-	camera.SetPosition({ 0.0f, 5.0f, 10.0f });
-	camera.SetTarget({ 0.0f, 0.0f, 0.0f });
+	camera.SetPosition({ 0.0f, 5.0f, 5.0f });
+	camera.SetTarget({ 0.0f, 7.0f, 0.0f });
 	camera.SetUp({ 0.0f, 1.0f, 0.0f });
 	camera.Update();
 	Add(this, 0);
