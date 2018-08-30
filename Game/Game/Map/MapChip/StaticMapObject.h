@@ -29,5 +29,5 @@ public:
 
 private:
 	std::unique_ptr<RigidBody>		m_rigidBody;		//剛体
-	std::unique_ptr<BoxCollider>		m_boxCollider;		//コライダー
+	std::unique_ptr<MeshCollider>		m_boxCollider;		//コライダー
 };

@@ -60,10 +60,21 @@ public:
 		m_status.AccumulationExp += expup;
 	}
 
+
 	playerStatus GetStatus()
 	{
 		return m_status;
 	}
+
+
+	const int GetStrength()
+	{
+		return m_status.Strength;
+	}
+
+	//プレイヤーの装備の変更を行う処理
+	void WeaponChange();
+
 
 private:
 	Vector3				m_position;							//座標

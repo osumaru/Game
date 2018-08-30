@@ -92,6 +92,7 @@ void Player::Move()
 		m_characterController.SetPosition(m_position);
 		m_characterController.Execute(GetGameTime().GetDeltaFrameTime());
 
+
 		m_position = m_characterController.GetPosition();
 
 }
@@ -168,6 +169,13 @@ void Player::StatusCalculation()
 		}
 
 	}
+
+
+}
+
+void  Player::WeaponChange()
+{
+
 
 
 }
