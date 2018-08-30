@@ -1,5 +1,7 @@
 #include "stdafx.h"
 #include "DamageNumber.h"
+#include "../../Player/Player.h"
+#include "../../Enemy/Enemy.h"
 
 void DamegeNumber::Init()
 {
@@ -7,40 +9,50 @@ void DamegeNumber::Init()
 	m_numSize = { 100.0f,150.0f };
 
 	for (int i = 0; i < 3; i++) {
-		m_number[i] = New<Number>(0);		
+		m_number[i] = New<Number>(0);
+		m_numPos.x = m_numSize.x * i;
+		m_number[i]->Init(m_numPos, m_numSize);
+		m_number[i]->SetIsActive(false);
 	}
-	m_number[0]->Init(m_numPos, m_numSize);
-	m_number[1]->Init({ 100.0f, 0.0f }, m_numSize);
-	m_number[2]->Init({ 200.0f, 0.0f }, m_numSize);
 }
 
-void DamegeNumber::Update()
+void DamegeNumber::DamageCalculation(Player* player, Enemy* enemy)
 {
-	if (GetPad().IsTriggerButton(EnPadButton::enButtonA)) {
-		int randomNumber = GetRandom().GetRandSInt();
-		randomNumber %= 1000;
-		if (randomNumber / 100 > 0) {
-			m_number[0]->SetIsActive(true);
-			m_number[0]->SetNumber(randomNumber / 100);
-		}
-		else {
-			m_number[0]->SetIsActive(false);
-		}
-		randomNumber %= 100;
-		if (randomNumber / 10 > 0) {
-			m_number[1]->SetIsActive(true);
-			m_number[1]->SetNumber(randomNumber / 10);
-		}
-		else {
-			if (m_number[0]->IsActive() == false) {
-				m_number[1]->SetIsActive(false);
+	Vector3 toEnemy = enemy->GetPosition() - player->GetPosition();
+	float length = toEnemy.Length();
+	if (length < 30.0f) {
+		if (GetPad().IsTriggerButton(EnPadButton::enButtonA)){			
+			int playerStrength = player->GetStatus().Strength;
+			playerStrength %= 1000;
+			if (playerStrength / 100 > 0) {
+				m_number[0]->SetIsActive(true);
+				m_number[0]->SetNumber(playerStrength / 100);
 			}
+			else {
+				m_number[0]->SetIsActive(false);
+			}
+			playerStrength %= 100;
+			if (playerStrength / 10 > 0) {
+				m_number[1]->SetIsActive(true);
+				m_number[1]->SetNumber(playerStrength / 10);
+			}
+			else {
+				if (m_number[0]->IsActive() == true) {
+					m_number[1]->SetNumber(0);
+					m_number[1]->SetIsActive(true);
+				}
+				else {
+					m_number[1]->SetIsActive(false);
+				}
+			}
+			playerStrength %= 10;
+			m_number[2]->SetIsActive(true);
+			m_number[2]->SetNumber(playerStrength);
 		}
-		randomNumber %= 10;
-		m_number[2]->SetNumber(randomNumber);
 	}
-}
-
-void DamegeNumber::Draw()
-{
+	else {
+		m_number[0]->SetIsActive(false);
+		m_number[1]->SetIsActive(false);
+		m_number[2]->SetIsActive(false);
+	}
 }

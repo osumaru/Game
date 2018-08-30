@@ -386,9 +386,9 @@ MonoBehaviour:
   m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 462b0000
-    m_LastClickedID: 11078
-    m_ExpandedIDs: 000000003a270000462b000000ca9a3bffffff7f
+    m_SelectedIDs: 3e2b0000
+    m_LastClickedID: 11070
+    m_ExpandedIDs: 000000002e2700003e2b000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -416,7 +416,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000003a270000462b0000
+    m_ExpandedIDs: 000000002e2700003e2b0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -443,7 +443,7 @@ MonoBehaviour:
   m_ListAreaState:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 1
+    m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: c6230000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -534,7 +534,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 30fbffff00000000782d0000
+    m_ExpandedIDs: 9cfbffff00000000322d0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -589,9 +589,9 @@ MonoBehaviour:
   m_isRotationLocked: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 407.45016, y: -267.3736, z: -313.71274}
+    m_Target: {x: 565.8671, y: -48.531277, z: -103.643776}
     speed: 2
-    m_Value: {x: 407.45016, y: -267.3736, z: -313.71274}
+    m_Value: {x: 565.8671, y: -48.531277, z: -103.643776}
   m_RenderMode: 0
   m_ValidateTrueMetals: 0
   m_SceneViewState:
@@ -614,13 +614,13 @@ MonoBehaviour:
       speed: 2
       m_Value: 0
   m_Rotation:
-    m_Target: {x: 0.13561498, y: 0.83182174, z: -0.23236442, w: 0.4854771}
+    m_Target: {x: 0.027007423, y: 0.71018094, z: -0.027284604, w: 0.7029717}
     speed: 2
-    m_Value: {x: 0.13561498, y: 0.83182174, z: -0.23236442, w: 0.4854771}
+    m_Value: {x: 0.027007421, y: 0.7101809, z: -0.027284602, w: 0.70297164}
   m_Size:
-    m_Target: 654.08105
+    m_Target: 632.8414
     speed: 2
-    m_Value: 654.08105
+    m_Value: 632.8414
   m_Ortho:
     m_Target: 0
     speed: 2

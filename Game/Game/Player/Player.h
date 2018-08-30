@@ -60,6 +60,11 @@ public:
 		m_status.AccumulationExp += expup;
 	}
 
+	playerStatus GetStatus()
+	{
+		return m_status;
+	}
+
 private:
 	Vector3				m_position;							//À•W
 	Vector3				m_moveSpeed = Vector3::Zero;		//ˆÚ“®‘¬“x

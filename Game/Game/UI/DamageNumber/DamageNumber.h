@@ -1,15 +1,15 @@
 #pragma once
 
+class Player;
+class Enemy;
 #include "Number.h"
 
-class DamegeNumber : public GameObject
+class DamegeNumber
 {
 public:
 	void Init();
 
-	void Update();
-
-	void Draw();
+	void DamageCalculation(Player* player, Enemy* enemy);
 
 private:
 	Number* m_number[3];
