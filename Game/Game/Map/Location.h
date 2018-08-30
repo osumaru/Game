@@ -19,3 +19,4 @@
 	Quaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagUntagged, //タグ
 },
+

@@ -60,6 +60,14 @@ public:
 		m_status.AccumulationExp += expup;
 	}
 
+	const int GetStrength()
+	{
+		return m_status.Strength;
+	}
+
+	//プレイヤーの装備の変更を行う処理
+	void WeaponChange();
+
 private:
 	Vector3				m_position;							//座標
 	Vector3				m_moveSpeed = Vector3::Zero;		//移動速度
