@@ -65,6 +65,7 @@ public:
 		return m_status.Strength;
 	}
 
+
 	//プレイヤーの装備の変更を行う処理
 	void WeaponChange();
 
@@ -77,6 +78,8 @@ private:
 	Pad					m_pad;								//パッド
 	Animation			m_animation;						//アニメーション
 	playerStatus		m_status;							//プレイヤーのステータス
+	bool				m_isSlip = false;					//スリップ判定
+	float				m_slipSpeed = 2.0f;
 };
 
 static Player& GetPlayer()
