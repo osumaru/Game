@@ -14,12 +14,12 @@ void Player::Init(Vector3 position)
 	//プレイヤーのステータスの初期化
 	{
 
-		m_status.Strength = 10;				//攻撃力
-		m_status.Defense = 3;				//防御力
-		m_status.Health = 100;				//体力
-		m_status.Level = 1;				//レベル
-		m_status.OldExp = 15;				//ひとつ前のレベルに必要な経験値
-		m_status.NextExp = ((m_status.OldExp * 1.1f + 0.5) + (m_status.Level * 12)) / 2 + 0.5;		//次のレベルアップに必要な経験値
+		m_status.Strength	= 10;				//攻撃力
+		m_status.Defense	= 3;				//防御力
+		m_status.Health		= 100;				//体力
+		m_status.Level		= 1;				//レベル
+		m_status.OldExp		= 15;				//ひとつ前のレベルに必要な経験値
+		m_status.NextExp	= ((m_status.OldExp * 1.1f + 0.5) + (m_status.Level * 12 )) / 2 + 0.5;		//次のレベルアップに必要な経験値
 		m_status.ExperiencePoint = 0;				//経験値
 		m_status.AccumulationExp += m_status.OldExp;	//累積経験値
 	}
@@ -55,6 +55,7 @@ void Player::Draw()
 
 void Player::Move()
 {
+
 	//m_moveSpeed = m_characterController.GetMoveSpeed();
 
 	Vector3 moveSpeed;
@@ -96,10 +97,8 @@ void Player::Move()
 	{
 		m_isSlip = true;
 	}
-
-	if (m_isSlip)
+	if(m_isSlip)
 	{
-
 		m_slipSpeed = m_slipSpeed - (0.8f * GetGameTime().GetDeltaFrameTime());
 		if (m_slipSpeed <= 0)
 		{
@@ -112,12 +111,9 @@ void Player::Move()
 		m_moveSpeed = playerFlontVec * m_slipSpeed;
 	}
 
-		m_characterController.SetMoveSpeed(m_moveSpeed);	
+		m_characterController.SetMoveSpeed(m_moveSpeed);
 		m_characterController.SetPosition(m_position);
 		m_characterController.Execute(GetGameTime().GetDeltaFrameTime());
-	
-
-
 		m_position = m_characterController.GetPosition();
 
 }

@@ -1,5 +1,8 @@
 #pragma once
 
+class Map;
+#include "../UI/DamageNumber/DamageNumber.h"
+
 class GameScene : public GameObject
 {
 public:
@@ -8,5 +11,6 @@ public:
 	void Update();
 
 private:
-
+	Map* map = nullptr;
+	DamegeNumber damageNumber;
 };

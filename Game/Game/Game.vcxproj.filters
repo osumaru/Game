@@ -135,7 +135,8 @@
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <MeshContentTask Include="Assets\modelData\Unitychan.FBX">
+    <MeshContentTask Include="Assets\modelData\Unitychan2.fbx" />
+    <MeshContentTask Include="Assets\modelData\Player.fbx">
       <Filter>ソース ファイル\Assets</Filter>
     </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\testChamferBox.FBX">
@@ -147,29 +148,17 @@
     <MeshContentTask Include="Assets\modelData\testRectangle.FBX">
       <Filter>ソース ファイル\Assets</Filter>
     </MeshContentTask>
-    <MeshContentTask Include="Assets\modelData\Wave.FBX">
-      <Filter>ソース ファイル\Assets</Filter>
-    </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\U2.FBX">
       <Filter>ソース ファイル\Assets</Filter>
     </MeshContentTask>
-    <MeshContentTask Include="Assets\modelData\Unitychan2.fbx" />
-    <MeshContentTask Include="Assets\modelData\Player.FBX">
+    <MeshContentTask Include="Assets\modelData\Unitychan.FBX">
+      <Filter>ソース ファイル\Assets</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\Wave.FBX">
       <Filter>ソース ファイル\Assets</Filter>
     </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\map2.FBX">
       <Filter>ソース ファイル\Assets</Filter>
     </MeshContentTask>
-    <MeshContentTask Include="Assets\modelData\Barrel.FBX">
-      <Filter>ソース ファイル\Assets</Filter>
-    </MeshContentTask>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Assets\modelData\unitychan.tks">
-      <Filter>ソース ファイル\Assets</Filter>
-    </None>
-    <None Include="Assets\modelData\Player.tks">
-      <Filter>ソース ファイル\Assets</Filter>
-    </None>
   </ItemGroup>
 </Project>

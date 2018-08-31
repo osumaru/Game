@@ -60,14 +60,21 @@ public:
 		m_status.AccumulationExp += expup;
 	}
 
+	//プレイヤーのステータスを取得
+	const playerStatus& GetStatus()
+	{
+		return m_status;
+	}
+
+
 	const int GetStrength()
 	{
 		return m_status.Strength;
 	}
 
-
 	//プレイヤーの装備の変更を行う処理
 	void WeaponChange();
+
 
 private:
 	Vector3				m_position;							//座標
@@ -80,6 +87,7 @@ private:
 	playerStatus		m_status;							//プレイヤーのステータス
 	bool				m_isSlip = false;					//スリップ判定
 	float				m_slipSpeed = 8.0f;
+
 };
 
 static Player& GetPlayer()

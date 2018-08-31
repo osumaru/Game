@@ -9,6 +9,10 @@ public:
 
 	void Draw();
 
+	Vector3 GetPosition()
+	{
+		return m_position;
+	}
 private:
 	Vector3 m_position;
 	SkinModel m_skinmodel;
