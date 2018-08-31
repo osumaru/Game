@@ -79,7 +79,7 @@ private:
 	Animation			m_animation;						//アニメーション
 	playerStatus		m_status;							//プレイヤーのステータス
 	bool				m_isSlip = false;					//スリップ判定
-	float				m_slipSpeed = 2.0f;
+	float				m_slipSpeed = 8.0f;
 };
 
 static Player& GetPlayer()

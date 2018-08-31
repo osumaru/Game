@@ -55,7 +55,7 @@ void Player::Draw()
 
 void Player::Move()
 {
-	m_moveSpeed = m_characterController.GetMoveSpeed();
+	//m_moveSpeed = m_characterController.GetMoveSpeed();
 
 	Vector3 moveSpeed;
 	moveSpeed.z = GetPad().GetLeftStickY() * GetGameTime().GetDeltaFrameTime() * 5;
@@ -80,30 +80,40 @@ void Player::Move()
 
 	//キャラクターを移動させる処理
 	m_moveSpeed.x = cameraX.x * moveSpeed.x + cameraZ.x * moveSpeed.z;
-	m_moveSpeed.y = 0;
+	//m_moveSpeed.y = 0;
 	m_moveSpeed.z = cameraX.z * moveSpeed.x + cameraZ.z * moveSpeed.z;
 
 	//ダッシュの処理
-	if (GetPad().IsTriggerButton(enButtonRB))
+	if (GetPad().IsPressButton(enButtonRB))
+	{
+		
+		m_moveSpeed *= 5.0f;
+	}
+
+
+	//回避の処理
+	if (GetPad().IsTriggerButton(enButtonRightTrigger))
 	{
 		m_isSlip = true;
-
 	}
 
 	if (m_isSlip)
 	{
 
-		m_slipSpeed = m_slipSpeed - (0.01f * GetGameTime().GetDeltaFrameTime());
+		m_slipSpeed = m_slipSpeed - (0.8f * GetGameTime().GetDeltaFrameTime());
 		if (m_slipSpeed <= 0)
 		{
 			m_isSlip = false;
-			m_slipSpeed = 2.0f;
+			m_slipSpeed = 8.0f;
 			return;
 		}
-		m_moveSpeed = cameraZ * m_slipSpeed;
+		Vector3 playerFlontVec = { m_skinmodel.GetWorldMatrix().m[2][0],0.0f,m_skinmodel.GetWorldMatrix().m[2][2] };
+		playerFlontVec.Normalize();
+		m_moveSpeed = playerFlontVec * m_slipSpeed;
 	}
 
-		m_characterController.SetMoveSpeed(m_moveSpeed);	m_characterController.SetPosition(m_position);
+		m_characterController.SetMoveSpeed(m_moveSpeed);	
+		m_characterController.SetPosition(m_position);
 		m_characterController.Execute(GetGameTime().GetDeltaFrameTime());
 	
 
