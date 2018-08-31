@@ -21,7 +21,7 @@ void DamegeNumber::DamageCalculation(Player* player, Enemy* enemy)
 	Vector3 toEnemy = enemy->GetPosition() - player->GetPosition();
 	float length = toEnemy.Length();
 	if (length < 30.0f) {
-		if (GetPad().IsTriggerButton(EnPadButton::enButtonA)){			
+		if (GetPad().IsTriggerButton(enButtonA)){			
 			int playerStrength = player->GetStatus().Strength;
 			playerStrength %= 1000;
 			if (playerStrength / 100 > 0) {

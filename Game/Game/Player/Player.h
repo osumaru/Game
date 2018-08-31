@@ -60,8 +60,8 @@ public:
 		m_status.AccumulationExp += expup;
 	}
 
-
-	playerStatus GetStatus()
+	//プレイヤーのステータスを取得
+	const playerStatus& GetStatus()
 	{
 		return m_status;
 	}

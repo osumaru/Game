@@ -1,3 +1,7 @@
+/*
+*	ダメージ数値表示クラス
+*/
+
 #pragma once
 
 class Player;
@@ -7,12 +11,16 @@ class Enemy;
 class DamegeNumber
 {
 public:
+	//初期化
 	void Init();
 
+	//ダメージ計算
+	//player	プレイヤークラスのポインタ
+	//enemy		エネミークラスのポインタ
 	void DamageCalculation(Player* player, Enemy* enemy);
 
 private:
-	Number* m_number[3];
-	Vector2 m_numPos;
-	Vector2 m_numSize;
+	Number* m_number[3];	//数字のスプライト
+	Vector2 m_numPos;		//座標
+	Vector2 m_numSize;		//サイズ
 };
