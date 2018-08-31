@@ -175,6 +175,7 @@
     <ClCompile Include="UI\DamageNumber\DamageNumber.cpp" />
     <ClCompile Include="UI\DamageNumber\Number.cpp" />
     <ClCompile Include="UI\MiniMap\MiniMap.cpp" />
+    <ClCompile Include="UI\PlayerHp\PlayerHp.cpp" />
     <ClCompile Include="UI\WeaponSelect\WeaponSelect.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -190,6 +191,7 @@
     <ClInclude Include="UI\DamageNumber\DamageNumber.h" />
     <ClInclude Include="UI\DamageNumber\Number.h" />
     <ClInclude Include="UI\MiniMap\MiniMap.h" />
+    <ClInclude Include="UI\PlayerHp\PlayerHp.h" />
     <ClInclude Include="UI\WeaponSelect\WeaponSelect.h" />
   </ItemGroup>
   <ItemGroup>
@@ -203,7 +205,9 @@
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\map2.FBX" />
+    <MeshContentTask Include="Assets\modelData\ninja.FBX" />
     <MeshContentTask Include="Assets\modelData\Player.fbx" />
+    <MeshContentTask Include="Assets\modelData\samurai.FBX" />
     <MeshContentTask Include="Assets\modelData\testChamferBox.FBX" />
     <MeshContentTask Include="Assets\modelData\testGround.FBX" />
     <MeshContentTask Include="Assets\modelData\testRectangle.FBX" />
@@ -211,6 +215,7 @@
     <MeshContentTask Include="Assets\modelData\Unitychan.FBX" />
     <MeshContentTask Include="Assets\modelData\Unitychan2.fbx" />
     <MeshContentTask Include="Assets\modelData\Wave.FBX" />
+    <MeshContentTask Include="Assets\modelData\zombi.FBX" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

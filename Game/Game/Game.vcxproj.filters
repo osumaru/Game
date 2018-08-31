@@ -43,6 +43,9 @@
     <Filter Include="ソース ファイル\UI\WeaponSelect">
       <UniqueIdentifier>{d189a704-f5f2-4120-ad87-99c01945ad9c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\UI\PlayerHp">
+      <UniqueIdentifier>{248a276b-0149-4fbe-afb3-ee335170e663}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -87,6 +90,9 @@
     <ClCompile Include="UI\WeaponSelect\WeaponSelect.cpp">
       <Filter>ソース ファイル\UI\WeaponSelect</Filter>
     </ClCompile>
+    <ClCompile Include="UI\PlayerHp\PlayerHp.cpp">
+      <Filter>ソース ファイル\UI\PlayerHp</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -128,6 +134,9 @@
     <ClInclude Include="UI\WeaponSelect\WeaponSelect.h">
       <Filter>ソース ファイル\UI\WeaponSelect</Filter>
     </ClInclude>
+    <ClInclude Include="UI\PlayerHp\PlayerHp.h">
+      <Filter>ソース ファイル\UI\PlayerHp</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="Assets\shader\sprite.fx">
@@ -158,6 +167,15 @@
       <Filter>ソース ファイル\Assets</Filter>
     </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\map2.FBX">
+      <Filter>ソース ファイル\Assets</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\ninja.FBX">
+      <Filter>ソース ファイル\Assets</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\samurai.FBX">
+      <Filter>ソース ファイル\Assets</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\zombi.FBX">
       <Filter>ソース ファイル\Assets</Filter>
     </MeshContentTask>
   </ItemGroup>

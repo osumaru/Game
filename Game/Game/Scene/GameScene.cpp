@@ -4,6 +4,7 @@
 #include "../Player/Player.h"
 #include "../UI/MiniMap/MiniMap.h"
 #include "../UI/WeaponSelect/WeaponSelect.h"
+#include "../UI/PlayerHp/PlayerHp.h"
 
 void GameScene::Init()
 {
@@ -17,6 +18,9 @@ void GameScene::Init()
 
 	WeaponSelect* weaponSelect = New<WeaponSelect>(0);
 	weaponSelect->Init();
+
+	PlayerHp* playerHp = New<PlayerHp>(0);
+	playerHp->Init();
 }
 
 void GameScene::Update()
