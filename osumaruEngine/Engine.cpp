@@ -11,7 +11,7 @@ LRESULT WINAPI MsgProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 	switch (msg)
 	{
 	case WM_DESTROY:
-		GetEngine().Release();
+		Engine().Release();
 		PostQuitMessage(0);
 		return 0;
 	}
@@ -29,7 +29,7 @@ int MakeHash(const char* string)
 	return hash;
 }
 
-Engine::Engine() :
+CEngine::CEngine() :
 	m_objectManager(),
 	m_wc(),
 	m_pD3DDevice(nullptr),
@@ -39,13 +39,13 @@ Engine::Engine() :
 	
 }
 
-Engine::~Engine()
+CEngine::~CEngine()
 {
 	Release();
 }
 
 
-void Engine::InitD3D(HINSTANCE& hInst)
+void CEngine::InitD3D(HINSTANCE& hInst)
 {
 
 	UNREFERENCED_PARAMETER(hInst);
@@ -146,14 +146,14 @@ void Engine::InitD3D(HINSTANCE& hInst)
 	vp.MinDepth = 0.0f;
 	vp.MaxDepth = 1.0f;
 	m_pDeviceContext->RSSetViewports(1, &vp);
-	m_physicsWorld = std::make_unique<PhysicsWorld>();
+	m_physicsWorld = std::make_unique<CPhysicsWorld>();
 	m_physicsWorld->Init();
-	m_soundEngine = std::make_unique<SoundEngine>();
+	m_soundEngine = std::make_unique<CSoundEngine>();
 	m_soundEngine->Init();
-	m_pad = std::make_unique<Pad>();
+	m_pad = std::make_unique<CPad>();
 }
 
-void Engine::GameLoop()
+void CEngine::GameLoop()
 {
 	//ƒQ[ƒ€ƒ‹[ƒv
 	MSG msg;
@@ -168,7 +168,7 @@ void Engine::GameLoop()
 		}
 		else
 		{
-			StopWatch sw;
+			CStopWatch sw;
 			sw.Start();
 			float color[4] = { 0.0f, 0.0f, 1.0f, 0.0f };
 			m_pDeviceContext->ClearRenderTargetView(m_pBackBuffer, color);
@@ -185,11 +185,11 @@ void Engine::GameLoop()
 			{
 				DWORD sleepTime = max(0.0, limitTime * 1000.0 - (DWORD)sw.GetElapsedTimeMill());
 				Sleep(sleepTime);
-				GetGameTime().SetFrameDeltaTime(limitTime);
+				GameTime().SetFrameDeltaTime(limitTime);
 			}
 			else
 			{
-				GetGameTime().SetFrameDeltaTime((float)sw.GetElapsedTime());
+				GameTime().SetFrameDeltaTime((float)sw.GetElapsedTime());
 			}
 		}
 	}

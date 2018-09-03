@@ -1,15 +1,15 @@
 #pragma once
 //時間を計測するクラス
 
-class StopWatch
+class CStopWatch
 {
 public:
 
 	//コンストラクタ
-	StopWatch();
+	CStopWatch();
 
 	//デストラクタ
-	~StopWatch();
+	~CStopWatch();
 
 	//計測開始
 	void Start();

@@ -1,7 +1,7 @@
 #include "engineStdafx.h"
 #include "AnimationClip.h"
 #include "Skelton.h"
-void AnimationClip::Load(wchar_t * filePath)
+void CAnimationClip::Load(wchar_t * filePath)
 {
 	m_isLoop = false;
 	m_currentFrameNo = 0;
@@ -10,14 +10,14 @@ void AnimationClip::Load(wchar_t * filePath)
 	auto fp = _wfopen(filePath, L"rb");
 
 	//アニメーションクリップのヘッダーをロード。
-	AnimClipHeader header;
+	SAnimClipHeader header;
 	fread(&header, sizeof(header), 1, fp);
 
 	if (header.numAnimationEvent > 0) {
 		//m_animationEvent = std::make_unique<CAnimationEvent[]>(header.numAnimationEvent);
 		//アニメーションイベントがあるなら、イベント情報をロードする。
 		for (auto i = 0; i < header.numAnimationEvent; i++) {
-			AnimationEvent animEvent;
+			SAnimationEvent animEvent;
 			fread(&animEvent, sizeof(animEvent), 1, fp);
 			//イベント名をロードする。
 			static char eventName[256];
@@ -31,8 +31,8 @@ void AnimationClip::Load(wchar_t * filePath)
 	//m_numAnimationEvent = header.numAnimationEvent;
 
 	//中身をごそっとロード。
-	auto keyframes = std::make_unique<KeyframeRow[]>(header.numKey);
-	fread(keyframes.get(), sizeof(KeyframeRow), header.numKey, fp);
+	auto keyframes = std::make_unique<SKeyframeRow[]>(header.numKey);
+	fread(keyframes.get(), sizeof(SKeyframeRow), header.numKey, fp);
 	fclose(fp);
 	for (auto i = 0; i < header.numKey; i++) {
 		auto keyframe = std::make_unique<Keyframe>();
@@ -73,7 +73,7 @@ void AnimationClip::Load(wchar_t * filePath)
 }
 
 
-void AnimationClip::Update(float deltaTime)
+void CAnimationClip::Update(float deltaTime)
 {
 	
 	if (m_isPlay)
@@ -99,7 +99,7 @@ void AnimationClip::Update(float deltaTime)
 	}
 }
 
-void AnimationClip::Play()
+void CAnimationClip::Play()
 {
 	m_isPlay = true;
 	m_currentFrameNo = 0;

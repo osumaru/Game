@@ -5,14 +5,14 @@ const int triggerMax = 255;			//トリガーの入力値が0～255なので正規化するときに使
 
 const float inputDeadZone = 0.2f;	//入力量の誤差の範囲
 
-struct CorrespondencePad
+struct SCorrespondencePad
 {
 	EnPadButton	padButton;
 	DWORD		padCode;
 	DWORD		keyCode;
 };
 
-const CorrespondencePad correspondencePad[enButtonNum] =
+const SCorrespondencePad correspondencePad[enButtonNum] =
 {
 	{ enButtonUp,			XINPUT_GAMEPAD_DPAD_UP,			'W' },
 	{ enButtonDown,			XINPUT_GAMEPAD_DPAD_DOWN,		'S' },
@@ -30,7 +30,7 @@ const CorrespondencePad correspondencePad[enButtonNum] =
 	{ enButtonLStickPush,	XINPUT_GAMEPAD_LEFT_THUMB,		'9' }
 	
 };
-Pad::Pad() :
+CPad::CPad() :
 	m_padNum(0),
 	m_rightStickX(0.0f),
 	m_rightStickY(0.0f),
@@ -44,12 +44,12 @@ Pad::Pad() :
 {
 }
 
-Pad::~Pad()
+CPad::~CPad()
 {
 
 }
 
-void Pad::Update()
+void CPad::Update()
 {
 	DWORD result = XInputGetState(m_padNum, &m_state);
 	

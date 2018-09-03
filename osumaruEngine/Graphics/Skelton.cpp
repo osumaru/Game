@@ -62,7 +62,7 @@ bool Skelton::Load(wchar_t* filePath)
 		Vector3 bindPose[4];
 		fread(&bindPose, sizeof(bindPose), 1, fp);
 		//バインドポーズの逆数を取得。
-		Vector3 invBindPose[4];
+		CVector3 invBindPose[4];
 		fread(&invBindPose, sizeof(invBindPose), 1, fp);
 
 		//バインドポーズ。
@@ -75,7 +75,7 @@ bool Skelton::Load(wchar_t* filePath)
 		bindPoseMatrix.m[1][3] = 0.0f;
 		bindPoseMatrix.m[2][3] = 0.0f;
 		bindPoseMatrix.m[3][3] = 1.0f;
-		Vector3 scaleVec;
+		CVector3 scaleVec;
 		//scaleVec.x = ((Vector3*)bindPoseMatrix.m[0])->Length();
 		//scaleVec.y = ((Vector3*)bindPoseMatrix.m[1])->Length();
 		//scaleVec.z = ((Vector3*)bindPoseMatrix.m[2])->Length();

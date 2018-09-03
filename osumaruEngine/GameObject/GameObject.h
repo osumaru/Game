@@ -2,14 +2,14 @@
 #pragma once
 //オブジェクトのインターフェース
 
-class GameObject : Uncopyable
+class IGameObject : Uncopyable
 {
 public:
 	//コンストラクタ
-	GameObject();
+	IGameObject();
 
 	//仮想デストラクタ(基底クラスのデストラクタは仮想関数でなくてはならない。)
-	virtual ~GameObject();
+	virtual ~IGameObject();
 
 	//初期化関数
 	virtual bool Start() { return true; }

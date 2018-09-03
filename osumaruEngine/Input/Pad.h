@@ -23,15 +23,15 @@ enum EnPadButton
 
 };
 
-class Pad
+class CPad
 {
 public:
 
 	//コンストラクタ
-	Pad();
+	CPad();
 
 	//デストラクタ
-	~Pad();
+	~CPad();
 
 	//更新
 	void Update();

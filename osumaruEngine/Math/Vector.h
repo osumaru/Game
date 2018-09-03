@@ -1,8 +1,8 @@
 #pragma once
 #include "Math.h"
-class Matrix;
+class CMatrix;
 
-class Vector2 {
+class CVector2 {
 public:
 
 	union {
@@ -11,13 +11,13 @@ public:
 		float v[2];
 	};
 
-	static const Vector2 Zero;
-	Vector2()
+	static const CVector2 Zero;
+	CVector2()
 	{
 
 	}
 
-	Vector2(float x, float y)
+	CVector2(float x, float y)
 	{
 		this->x = x;
 		this->y = y;
@@ -25,7 +25,7 @@ public:
 	/*!
 	*@brief	代入演算子。
 	*/
-	Vector2& operator=(const Vector2& _v)
+	CVector2& operator=(const CVector2& _v)
 	{
 		vec = _v.vec;
 		return *this;
@@ -34,7 +34,7 @@ public:
 	/*!
 	* @brief	ベクトルを加算。
 	*/
-	void Add(const Vector2& _v)
+	void Add(const CVector2& _v)
 	{
 		DirectX::XMVECTOR xmv0 = DirectX::XMLoadFloat2(&vec);
 		DirectX::XMVECTOR xmv1 = DirectX::XMLoadFloat2(&_v.vec);
@@ -42,7 +42,7 @@ public:
 		DirectX::XMStoreFloat2(&vec, xmvr);
 	}
 
-	void Add(const Vector2& v0, const Vector2& v1)
+	void Add(const CVector2& v0, const CVector2& v1)
 	{
 		DirectX::XMVECTOR xmv0 = DirectX::XMLoadFloat2(&v0.vec);
 		DirectX::XMVECTOR xmv1 = DirectX::XMLoadFloat2(&v1.vec);
@@ -53,14 +53,14 @@ public:
 	/*!
 	* @brief	ベクトルを減算。
 	*/
-	void Subtract(const Vector2& _v)
+	void Subtract(const CVector2& _v)
 	{
 		DirectX::XMVECTOR xmv0 = DirectX::XMLoadFloat2(&vec);
 		DirectX::XMVECTOR xmv1 = DirectX::XMLoadFloat2(&_v.vec);
 		DirectX::XMVECTOR xmvr = DirectX::XMVectorSubtract(xmv0, xmv1);
 		DirectX::XMStoreFloat2(&vec, xmvr);
 	}
-	void Subtract(const Vector2& v0, const Vector2& v1)
+	void Subtract(const CVector2& v0, const CVector2& v1)
 	{
 		DirectX::XMVECTOR xmv0 = DirectX::XMLoadFloat2(&v0.vec);
 		DirectX::XMVECTOR xmv1 = DirectX::XMLoadFloat2(&v1.vec);
@@ -89,7 +89,7 @@ public:
 	/*!
 	*@brief	加算代入演算子。
 	*/
-	const Vector2& operator+=(const Vector2& _v)
+	const CVector2& operator+=(const CVector2& _v)
 	{
 		Add(_v);
 		return *this;
@@ -97,7 +97,7 @@ public:
 	/*!
 	*@brief　乗算代入演算子。
 	*/
-	const Vector2& operator*=(float s)
+	const CVector2& operator*=(float s)
 	{
 		Scale(s);
 		return *this;
@@ -105,7 +105,7 @@ public:
 	/*!
 	*@brief	減算代入演算子。
 	*/
-	const Vector2& operator-=(const Vector2& _v)
+	const CVector2& operator-=(const CVector2& _v)
 	{
 		Subtract(_v);
 		return *this;
@@ -113,7 +113,7 @@ public:
 	/*!
 	*@brief	除算代入演算子。
 	*/
-	const Vector2& operator/=(const float s)
+	const CVector2& operator/=(const float s)
 	{
 		Div(s);
 		return *this;
@@ -123,7 +123,7 @@ public:
 	*@details
 	* this = v0 + (v1-v0) * t;
 	*/
-	void Lerp(float t, const Vector2& v0, const Vector2& v1)
+	void Lerp(float t, const CVector2& v0, const CVector2& v1)
 	{
 		x = v0.x + (v1.x - v0.x) * t;
 		y = v0.y + (v1.y - v0.y) * t;
@@ -132,24 +132,24 @@ public:
 /*!
 * @brief	ベクトル。
 */
-class Vector3 {
+class CVector3 {
 public:
 	union {
 		DirectX::XMFLOAT3 vec;
 		float v[3];
 		struct { float x, y, z; };
 	};
-	static const Vector3 Zero;
-	static const Vector3 Right;
-	static const Vector3 Left;
-	static const Vector3 Up;
-	static const Vector3 Down;
-	static const Vector3 Front;
-	static const Vector3 Back;
-	static const Vector3 AxisX;
-	static const Vector3 AxisY;
-	static const Vector3 AxisZ;
-	static const Vector3 One;
+	static const CVector3 Zero;
+	static const CVector3 Right;
+	static const CVector3 Left;
+	static const CVector3 Up;
+	static const CVector3 Down;
+	static const CVector3 Front;
+	static const CVector3 Back;
+	static const CVector3 AxisX;
+	static const CVector3 AxisY;
+	static const CVector3 AxisZ;
+	static const CVector3 One;
 public:
 	//XMVECTORへの暗黙の変換。
 	operator DirectX::XMVECTOR() const
@@ -160,19 +160,19 @@ public:
 	/*!
 	*@brief	代入演算子。
 	*/
-	Vector3& operator=(const Vector3& _v)
+	CVector3& operator=(const CVector3& _v)
 	{
 		vec = _v.vec;
 		return *this;
 	}
-	Vector3()
+	CVector3()
 	{
 		x = y = z = 0.0f;
 	}
 	/*!
 	* @brief	コンストラクタ。
 	*/
-	Vector3(float x, float y, float z)
+	CVector3(float x, float y, float z)
 	{
 		Set(x, y, z);
 	}
@@ -181,7 +181,7 @@ public:
 	*@details
 	* this = v0 + (v1-v0) * t;
 	*/
-	void Lerp(float t, const Vector3& v0, const Vector3& v1)
+	void Lerp(float t, const CVector3& v0, const CVector3& v1)
 	{
 		DirectX::XMVECTOR _v = DirectX::XMVectorLerp(
 			DirectX::XMLoadFloat3(&v0.vec),
@@ -189,8 +189,8 @@ public:
 			t);
 		DirectX::XMStoreFloat3(&vec, _v);
 	}
-	template<class TVector>
-	void CopyTo(TVector& dst) const
+	template<class TCVector>
+	void CopyTo(TCVector& dst) const
 	{
 		dst.x = x;
 		dst.y = y;
@@ -205,8 +205,8 @@ public:
 		vec.y = _y;
 		vec.z = _z;
 	}
-	template<class TVector>
-	void Set(TVector& _v)
+	template<class TCVector>
+	void Set(TCVector& _v)
 	{
 		Set(_v.x, _v.y, _v.z);
 	}
@@ -220,14 +220,14 @@ public:
 	/*!
 	* @brief	ベクトルを加算。
 	*/
-	void Add(const Vector3& _v)
+	void Add(const CVector3& _v)
 	{
 		DirectX::XMVECTOR xmv0 = DirectX::XMLoadFloat3(&vec);
 		DirectX::XMVECTOR xmv1 = DirectX::XMLoadFloat3(&_v.vec);
 		DirectX::XMVECTOR xmvr = DirectX::XMVectorAdd(xmv0, xmv1);
 		DirectX::XMStoreFloat3(&vec, xmvr);
 	}
-	void Add(const Vector3& v0, const Vector3& v1)
+	void Add(const CVector3& v0, const CVector3& v1)
 	{
 		DirectX::XMVECTOR xmv0 = DirectX::XMLoadFloat3(&v0.vec);
 		DirectX::XMVECTOR xmv1 = DirectX::XMLoadFloat3(&v1.vec);
@@ -237,14 +237,14 @@ public:
 	/*!
 	* @brief	ベクトルを減算。
 	*/
-	void Subtract(const Vector3& _v)
+	void Subtract(const CVector3& _v)
 	{
 		DirectX::XMVECTOR xmv0 = DirectX::XMLoadFloat3(&vec);
 		DirectX::XMVECTOR xmv1 = DirectX::XMLoadFloat3(&_v.vec);
 		DirectX::XMVECTOR xmvr = DirectX::XMVectorSubtract(xmv0, xmv1);
 		DirectX::XMStoreFloat3(&vec, xmvr);
 	}
-	void Subtract(const Vector3& v0, const Vector3& v1)
+	void Subtract(const CVector3& v0, const CVector3& v1)
 	{
 		DirectX::XMVECTOR xmv0 = DirectX::XMLoadFloat3(&v0.vec);
 		DirectX::XMVECTOR xmv1 = DirectX::XMLoadFloat3(&v1.vec);
@@ -254,7 +254,7 @@ public:
 	/*!
 	* @brief	内積。
 	*/
-	float Dot(const Vector3& _v) const
+	float Dot(const CVector3& _v) const
 	{
 		DirectX::XMVECTOR xmv0 = DirectX::XMLoadFloat3(&vec);
 		DirectX::XMVECTOR xmv1 = DirectX::XMLoadFloat3(&_v.vec);
@@ -263,14 +263,14 @@ public:
 	/*!
 	* @brief	外積。
 	*/
-	void Cross(const Vector3& _v)
+	void Cross(const CVector3& _v)
 	{
 		DirectX::XMVECTOR xmv0 = DirectX::XMLoadFloat3(&vec);
 		DirectX::XMVECTOR xmv1 = DirectX::XMLoadFloat3(&_v.vec);
 		DirectX::XMVECTOR xmvr = DirectX::XMVector3Cross(xmv0, xmv1);
 		DirectX::XMStoreFloat3(&vec, xmvr);
 	}
-	void Cross(const Vector3& v0, const Vector3& v1)
+	void Cross(const CVector3& v0, const CVector3& v1)
 	{
 		DirectX::XMVECTOR xmv0 = DirectX::XMLoadFloat3(&v0.vec);
 		DirectX::XMVECTOR xmv1 = DirectX::XMLoadFloat3(&v1.vec);
@@ -322,7 +322,7 @@ public:
 	/*!
 	* @brief	最大値を設定。
 	*/
-	void Max(const Vector3& vMax)
+	void Max(const CVector3& vMax)
 	{
 		DirectX::XMVECTOR xmv0 = DirectX::XMLoadFloat3(&vec);
 		DirectX::XMVECTOR xmv1 = DirectX::XMLoadFloat3(&vMax.vec);
@@ -331,7 +331,7 @@ public:
 	/*!
 	* @brief	最小値を設定。
 	*/
-	void Min(const Vector3& vMin)
+	void Min(const CVector3& vMin)
 	{
 		DirectX::XMVECTOR xmv0 = DirectX::XMLoadFloat3(&vec);
 		DirectX::XMVECTOR xmv1 = DirectX::XMLoadFloat3(&vMin.vec);
@@ -340,7 +340,7 @@ public:
 	/*!
 	*@brief	加算代入演算子。
 	*/
-	const Vector3& operator+=(const Vector3& _v)
+	const CVector3& operator+=(const CVector3& _v)
 	{
 		Add(_v);
 		return *this;
@@ -348,7 +348,7 @@ public:
 	/*!
 	*@brief　乗算代入演算子。
 	*/
-	const Vector3& operator*=(float s)
+	const CVector3& operator*=(float s)
 	{
 		Scale(s);
 		return *this;
@@ -356,7 +356,7 @@ public:
 	/*!
 	*@brief	減算代入演算子。
 	*/
-	const Vector3& operator-=(const Vector3& _v)
+	const CVector3& operator-=(const CVector3& _v)
 	{
 		Subtract(_v);
 		return *this;
@@ -364,7 +364,7 @@ public:
 	/*!
 	*@brief	除算代入演算子。
 	*/
-	const Vector3& operator/=(const float s)
+	const CVector3& operator/=(const float s)
 	{
 		Div(s);
 		return *this;
@@ -373,29 +373,29 @@ public:
 /*!
 *@brief	4要素のベクトルクラス。
 */
-class Vector4 {
+class CVector4 {
 public:
 	union {
 		DirectX::XMFLOAT4 vec;
 		struct { float x, y, z, w; };
 		float v[4];
 	};
-	static const Vector4 White;
-	static const Vector4 Black;
-	static const Vector4 Yellow;
+	static const CVector4 White;
+	static const CVector4 Black;
+	static const CVector4 Yellow;
 public:
 	operator DirectX::XMVECTOR() const
 	{
 		return DirectX::XMLoadFloat4(&vec);
 	}
-	Vector4()
+	CVector4()
 	{
 		x = y = z = w = 0.0f;
 	}
 	/*!
 	*@brief	代入演算子。
 	*/
-	Vector4& operator=(const Vector4& _v)
+	CVector4& operator=(const CVector4& _v)
 	{
 		vec = _v.vec;
 		return *this;
@@ -403,7 +403,7 @@ public:
 	/*!
 	*@brief	コンストラクタ
 	*/
-	Vector4(float x, float y, float z, float w)
+	CVector4(float x, float y, float z, float w)
 	{
 		Set(x, y, z, w);
 	}
@@ -412,7 +412,7 @@ public:
 	*@details
 	* wには1.0が格納されます。
 	*/
-	Vector4(const Vector3& v)
+	CVector4(const CVector3& v)
 	{
 		Set(v);
 	}
@@ -438,7 +438,7 @@ public:
 	/*!
 	*@brief	ベクトルを設定。
 	*/
-	void Set(const Vector4& _v)
+	void Set(const CVector4& _v)
 	{
 		*this = _v;
 	}
@@ -448,7 +448,7 @@ public:
 	* wには1.0が格納されます。
 	*/
 
-	void Set(const Vector3& _v)
+	void Set(const CVector3& _v)
 	{
 		this->x = _v.x;
 		this->y = _v.y;
@@ -458,14 +458,14 @@ public:
 	/*!
 	*@brief	ベクトルを加算。
 	*/
-	void Add(const Vector4& _v)
+	void Add(const CVector4& _v)
 	{
 		DirectX::XMVECTOR xmv0 = DirectX::XMLoadFloat4(&vec);
 		DirectX::XMVECTOR xmv1 = DirectX::XMLoadFloat4(&_v.vec);
 		DirectX::XMVECTOR xmvr = DirectX::XMVectorAdd(xmv0, xmv1);
 		DirectX::XMStoreFloat4(&vec, xmvr);
 	}
-	void Add(const Vector4& v0, const Vector4& v1)
+	void Add(const CVector4& v0, const CVector4& v1)
 	{
 		DirectX::XMVECTOR xmv0 = DirectX::XMLoadFloat4(&v0.vec);
 		DirectX::XMVECTOR xmv1 = DirectX::XMLoadFloat4(&v1.vec);
@@ -475,14 +475,14 @@ public:
 	/*!
 	*@brief	ベクトルを減算。
 	*/
-	void Subtract(const Vector4& _v)
+	void Subtract(const CVector4& _v)
 	{
 		DirectX::XMVECTOR xmv0 = DirectX::XMLoadFloat4(&vec);
 		DirectX::XMVECTOR xmv1 = DirectX::XMLoadFloat4(&_v.vec);
 		DirectX::XMVECTOR xmvr = DirectX::XMVectorSubtract(xmv0, xmv1);
 		DirectX::XMStoreFloat4(&vec, xmvr);
 	}
-	void Subtract(const Vector4& v0, const Vector4& v1)
+	void Subtract(const CVector4& v0, const CVector4& v1)
 	{
 		DirectX::XMVECTOR xmv0 = DirectX::XMLoadFloat4(&v0.vec);
 		DirectX::XMVECTOR xmv1 = DirectX::XMLoadFloat4(&v1.vec);
@@ -492,7 +492,7 @@ public:
 	/*!
 	*@brief	内積
 	*/
-	float Dot(const Vector4& _v)
+	float Dot(const CVector4& _v)
 	{
 		DirectX::XMVECTOR xmv0 = DirectX::XMLoadFloat4(&vec);
 		DirectX::XMVECTOR xmv1 = DirectX::XMLoadFloat4(&_v.vec);
@@ -525,23 +525,23 @@ public:
 	}
 };
 
-class Quaternion : public Vector4 {
+class CQuaternion : public CVector4 {
 public:
-	static const Quaternion Identity;		//!<単位クォータニオン。
-	Quaternion()
+	static const CQuaternion Identity;		//!<単位クォータニオン。
+	CQuaternion()
 	{
 		x = y = z = 0.0f;
 		w = 1.0f;
 	}
-	Quaternion(float x, float y, float z, float w) :
-		Vector4(x, y, z, w)
+	CQuaternion(float x, float y, float z, float w) :
+		CVector4(x, y, z, w)
 	{
 	}
 
 	/*!
 	*@brief	任意の軸周りの回転クォータニオンを作成。
 	*/
-	void SetRotation(const Vector3& axis, float angle)
+	void SetRotation(const CVector3& axis, float angle)
 	{
 		float s;
 		float halfAngle = angle * 0.5f;
@@ -551,7 +551,7 @@ public:
 		y = axis.y * s;
 		z = axis.z * s;
 	}
-	void SetRotationDeg(const Vector3& axis, float angle)
+	void SetRotationDeg(const CVector3& axis, float angle)
 	{
 		float s;
 		float halfAngle = Math::DegToRad(angle) * 0.5f;
@@ -564,11 +564,11 @@ public:
 	/*!
 	*@brief	行列からクォータニオンを作成。
 	*/
-	void SetRotation(const Matrix& m);
+	void SetRotation(const CMatrix& m);
 	/*!
 	*@brief	球面線形補完。
 	*/
-	void Slerp(float t, Quaternion q1, Quaternion q2)
+	void Slerp(float t, CQuaternion q1, CQuaternion q2)
 	{
 		DirectX::XMVECTOR xmv = DirectX::XMQuaternionSlerp(
 			DirectX::XMLoadFloat4(&q1.vec),
@@ -580,7 +580,7 @@ public:
 	/*!
 	*@brief	クォータニオン同士の積。
 	*/
-	void Multiply(const Quaternion& rot)
+	void Multiply(const CQuaternion& rot)
 	{
 		float pw, px, py, pz;
 		float qw, qx, qy, qz;
@@ -599,7 +599,7 @@ public:
 	*@details
 	* this = rot0 * rot1;
 	*/
-	void Multiply(const Quaternion& rot0, const Quaternion& rot1)
+	void Multiply(const CQuaternion& rot0, const CQuaternion& rot1)
 	{
 		float pw, px, py, pz;
 		float qw, qx, qy, qz;
@@ -616,19 +616,19 @@ public:
 	*@brief	ベクトルにクォータニオンを適用する。
 	*@param[in,out] v	ベクトル。
 	*/
-	void Multiply(Vector4& _v)
+	void Multiply(CVector4& _v)
 	{
 		DirectX::XMVECTOR xmv = DirectX::XMVector3Rotate(_v, *this);
 		DirectX::XMStoreFloat4(&_v.vec, xmv);
 	}
-	void Multiply(Vector3& _v)
+	void Multiply(CVector3& _v)
 	{
 		DirectX::XMVECTOR xmv = DirectX::XMVector3Rotate(_v, *this);
 		DirectX::XMStoreFloat3(&_v.vec, xmv);
 	}
 };
 //整数型のベクトルクラス。
-__declspec(align(16)) class CVector4i {
+__declspec(align(16)) class CCVector4i {
 public:
 	union {
 		struct { int x, y, z, w; };
@@ -638,20 +638,20 @@ public:
 /*!
 *@brief	ベクトル同士の加算。
 */
-template<class TVector>
-static inline TVector operator+(const TVector& v0, const TVector& v1)
+template<class TCVector>
+static inline TCVector operator+(const TCVector& v0, const TCVector& v1)
 {
-	TVector result;
+	TCVector result;
 	result.Add(v0, v1);
 	return result;
 }
 /*!
 *@brief	ベクトルのスケール倍。
 */
-template<class TVector>
-static inline TVector operator*(const TVector& v, float s)
+template<class TCVector>
+static inline TCVector operator*(const TCVector& v, float s)
 {
-	TVector result;
+	TCVector result;
 	result = v;
 	result.Scale(s);
 	return result;
@@ -659,10 +659,10 @@ static inline TVector operator*(const TVector& v, float s)
 /*!
 *@brief	ベクトルの除算。
 */
-template<class TVector>
-static inline TVector operator/(const TVector& v, float s)
+template<class TCVector>
+static inline TCVector operator/(const TCVector& v, float s)
 {
-	TVector result;
+	TCVector result;
 	result = v;
 	result.Div(s);
 	return result;
@@ -670,10 +670,10 @@ static inline TVector operator/(const TVector& v, float s)
 /*!
 *@brief	ベクトル同士の減算。
 */
-template<class TVector>
-static inline TVector operator-(const TVector& v0, const TVector& v1)
+template<class TCVector>
+static inline TCVector operator-(const TCVector& v0, const TCVector& v1)
 {
-	TVector result;
+	TCVector result;
 	result.Subtract(v0, v1);
 	return result;
 }

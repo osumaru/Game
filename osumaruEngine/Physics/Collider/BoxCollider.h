@@ -2,14 +2,14 @@
 #include "ICollider.h"
 //箱のコライダー
 
-class BoxCollider : public ICollider
+class CBoxCollider : public ICollider
 {
 public:
 	//コンストラクタ
-	BoxCollider();
+	CBoxCollider();
 
 	//デストラクタ
-	~BoxCollider();
+	~CBoxCollider();
 	
 	/*
 	コライダーの初期化

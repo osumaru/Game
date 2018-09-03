@@ -2,14 +2,14 @@
 #include "Texture.h"
 //レンダリングターゲットクラス
 
-class RenderTarget : Uncopyable
+class CRenderTarget : Uncopyable
 {
 public:
 	//コンストラクタ
-	RenderTarget();
+	CRenderTarget();
 
 	//デストラクタ
-	~RenderTarget();
+	~CRenderTarget();
 
 	/*
 	レンダリングターゲットの作成

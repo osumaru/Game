@@ -6,7 +6,7 @@
 #include "Physics.h"
 
 
-void RigidBody::Create(const RigidBodyInfo& rbInfo)
+void CRigidBody::Create(const SRigidBodyInfo& rbInfo)
 {
 	Release();
 
@@ -21,18 +21,18 @@ void RigidBody::Create(const RigidBodyInfo& rbInfo)
 	m_rigidBody->setUserIndex(enCollisionAttr_MapChip);
 }
 
-void RigidBody::PhysicsWorldAddRigidBody()
+void CRigidBody::PhysicsWorldAddRigidBody()
 {
 	GetPhysicsWorld().AddRigidBody(m_rigidBody.get());
 }
 
 
-void RigidBody::PhysicsWorldRemoveRigidBody()
+void CRigidBody::PhysicsWorldRemoveRigidBody()
 {
 	GetPhysicsWorld().RemoveRigidBody(m_rigidBody.get());
 }
 
-void RigidBody::Release()
+void CRigidBody::Release()
 {
 	if (m_rigidBody)
 	{
@@ -41,7 +41,7 @@ void RigidBody::Release()
 	}
 }
 
-void RigidBody::Draw()
+void CRigidBody::Draw()
 {
 	GetPhysicsWorld().DebugDraw(m_rigidBody->getWorldTransform(), m_rigidBody->getCollisionShape());
 }

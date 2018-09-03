@@ -2,16 +2,16 @@
 #include "SphereCollider.h"
 
 
-SphereCollider::SphereCollider() :
+CSphereCollider::CSphereCollider() :
 	m_sphereShape(nullptr)
 {
 }
 
-SphereCollider::~SphereCollider()
+CSphereCollider::~CSphereCollider()
 {
 }
 
-void SphereCollider::Create(float radius)
+void CSphereCollider::Create(float radius)
 {
 	m_sphereShape.reset(new btSphereShape(radius));
 }

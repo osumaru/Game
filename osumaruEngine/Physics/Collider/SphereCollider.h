@@ -2,15 +2,15 @@
 #include "ICollider.h"
 //球形状のコライダークラス
 
-class SphereCollider : public ICollider
+class CSphereCollider : public ICollider
 {
 public:
 
 	//コンストラクタ
-	SphereCollider();
+	CSphereCollider();
 	
 	//デストラクタ
-	~SphereCollider();
+	~CSphereCollider();
 
 	/*
 	コライダーを作成

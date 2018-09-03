@@ -5,7 +5,7 @@
 #include "../Camera/Camera.h"
 #include "../Timer/GameTime.h"
 
-PhysicsWorld::PhysicsWorld() :
+CPhysicsWorld::CPhysicsWorld() :
 	m_pCollisionConfig(nullptr),
 	m_pCollisionDispatcher(nullptr),
 	m_pOverlappingPairCache(nullptr),
@@ -16,12 +16,12 @@ PhysicsWorld::PhysicsWorld() :
 {
 }
 
-PhysicsWorld::~PhysicsWorld()
+CPhysicsWorld::~CPhysicsWorld()
 {
 }
 
 
-void PhysicsWorld::Init()
+void CPhysicsWorld::Init()
 {
 	//•¨—ƒGƒ“ƒWƒ“‚ð‰Šú‰»
 	m_pCollisionConfig.reset(new btDefaultCollisionConfiguration);
@@ -41,12 +41,12 @@ void PhysicsWorld::Init()
 	m_pDynamicWorld->setDebugDrawer(m_pRigidBodyDraw.get());
 }
 
-void PhysicsWorld::Update()
+void CPhysicsWorld::Update()
 {
 	m_pDynamicWorld->stepSimulation(GetGameTime().GetDeltaFrameTime());
 }
 
-void PhysicsWorld::Draw()
+void CPhysicsWorld::Draw()
 {
 	if (m_pCamera != nullptr)
 	{
@@ -55,12 +55,12 @@ void PhysicsWorld::Draw()
 	}
 }
 
-void PhysicsWorld::AddRigidBody(btRigidBody* rb)
+void CPhysicsWorld::AddRigidBody(btRigidBody* rb)
 {
 	m_pDynamicWorld->addRigidBody(rb);
 }
 
-void PhysicsWorld::RemoveRigidBody(btRigidBody* rb)
+void CPhysicsWorld::RemoveRigidBody(btRigidBody* rb)
 {
 	m_pDynamicWorld->removeRigidBody(rb);
 }

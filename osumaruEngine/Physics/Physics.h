@@ -1,27 +1,27 @@
 #pragma once
 #pragma once
-class RigidBody;
-class RigidBodyDraw;
-class Camera;
+class CRigidBody;
+class CRigidBodyDraw;
+class CCamera;
 
 /*
 物理ワールド
 */
-class PhysicsWorld : Uncopyable
+class CPhysicsWorld : Uncopyable
 {
 	std::unique_ptr<btDefaultCollisionConfiguration>		m_pCollisionConfig;
 	std::unique_ptr<btCollisionDispatcher>					m_pCollisionDispatcher;		//衝突解決処理
 	std::unique_ptr<btBroadphaseInterface>					m_pOverlappingPairCache;		//ブロードフェーズ。
 	std::unique_ptr<btSequentialImpulseConstraintSolver>	m_pConstraintSolver;			//コンストレイントソルバー。拘束条件の解決処理
 	std::unique_ptr<btDiscreteDynamicsWorld>				m_pDynamicWorld;				//ワールド
-	std::unique_ptr<RigidBodyDraw>							m_pRigidBodyDraw;
-	Camera*													m_pCamera;
+	std::unique_ptr<CRigidBodyDraw>							m_pRigidBodyDraw;
+	CCamera*													m_pCamera;
 public:
 	//コンストラクタ
-	PhysicsWorld();
+	CPhysicsWorld();
 
 	//デストラクタ
-	~PhysicsWorld();
+	~CPhysicsWorld();
 
 	//初期化関数
 	void Init();
@@ -42,7 +42,7 @@ public:
 	//剛体を物理ワールドから削除
 	void RemoveRigidBody(btRigidBody* rb);
 
-	void SetCamera(Camera* camera)
+	void SetCamera(CCamera* camera)
 	{
 		m_pCamera = camera;
 	}

@@ -1,9 +1,9 @@
 #pragma once
 #include "AnimationClip.h"
-class Skelton;
+class CSkelton;
 //アニメーションを管理するクラス
 
-class Animation : Uncopyable
+class CAnimation : Uncopyable
 {
 public:
 
@@ -15,7 +15,7 @@ public:
 	void Init(wchar_t* animFilePath[], int animNum);
 
 	//スケルトンを設定
-	void SetSkelton(Skelton* skelton);
+	void SetSkelton(CSkelton* skelton);
 
 	/*
 	更新関数
@@ -47,7 +47,7 @@ public:
 	}
 
 private:
-	std::unique_ptr<AnimationClip[]>	m_animationClips = nullptr;		//アニメーションクリップの配列
+	std::unique_ptr<CAnimationClip[]>	m_animationClips = nullptr;		//アニメーションクリップの配列
 	int									m_currentAnimationNum = 0;		//今再生しているアニメーションの番号
 	int									m_curCurrentAnimationNum = 0;	//ひとつ前に再生していたアニメーションの番号
 	Skelton*							m_skelton = nullptr;			//スケルトンの番号

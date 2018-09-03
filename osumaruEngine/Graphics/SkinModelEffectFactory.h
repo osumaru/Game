@@ -1,8 +1,8 @@
 #pragma once
-class SkinModelEffectFactory : public EffectFactory
+class CSkinModelEffectFactory : public EffectFactory
 {
 public:
-	SkinModelEffectFactory(_In_ ID3D11Device* device) :
+	CSkinModelEffectFactory(_In_ ID3D11Device* device) :
 		EffectFactory(device)
 	{
 	}

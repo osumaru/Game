@@ -2,12 +2,12 @@
 #include "ConstantBuffer.h"
 
 
-ConstantBuffer::ConstantBuffer() :
+CConstantBuffer::CConstantBuffer() :
 	m_buffer(nullptr)
 {
 }
 
-ConstantBuffer::~ConstantBuffer()
+CConstantBuffer::~CConstantBuffer()
 {
 	if (m_buffer != nullptr)
 	{
@@ -17,7 +17,7 @@ ConstantBuffer::~ConstantBuffer()
 
 }
 
-void ConstantBuffer::Create(int bufferSize, void* initData)
+void CConstantBuffer::Create(int bufferSize, void* initData)
 {
 	D3D11_BUFFER_DESC desc;
 	desc.ByteWidth = (((bufferSize - 1) / 16) + 1) * 16;
@@ -37,7 +37,7 @@ void ConstantBuffer::Create(int bufferSize, void* initData)
 	}
 }
 
-void ConstantBuffer::Update(void* updateData)
+void CConstantBuffer::Update(void* updateData)
 {
 
 	GetDeviceContext()->UpdateSubresource(m_buffer, 0, NULL, updateData, 0, 0);

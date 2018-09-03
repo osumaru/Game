@@ -6,15 +6,15 @@ class SoundSource;
 #include "../Math\Math.h"
 #include "../Math/Matrix.h"
 #include "../Math\Vector.h"
-class SoundEngine : Uncopyable
+class CSoundEngine : Uncopyable
 {
 public:
 
 	//コンストラクタ
-	SoundEngine();
+	CSoundEngine();
 
 	//デストラクタ
-	~SoundEngine();
+	~CSoundEngine();
 
 	//初期化
 	void Init();
@@ -39,7 +39,7 @@ public:
 	}
 
 	//リスナーの座標を設定
-	void SetListenerPosition(const Vector3& position)
+	void SetListenerPosition(const CVector3& position)
 	{
 		m_3dListener.Position.x = position.x;
 		m_3dListener.Position.y = position.y;
@@ -47,7 +47,7 @@ public:
 	}
 
 	//リスナーの前方向を設定
-	void SetListenerFront(const Vector3& front)
+	void SetListenerFront(const CVector3& front)
 	{
 		m_3dListener.OrientFront.x = front.x;
 		m_3dListener.OrientFront.y = front.y;
@@ -55,7 +55,7 @@ public:
 	}
 
 	//リスナーの上方向を設定
-	void SetListenerUp(const Vector3& up)
+	void SetListenerUp(const CVector3& up)
 	{
 		m_3dListener.OrientTop.x = up.x;
 		m_3dListener.OrientTop.y = up.y;

@@ -1,7 +1,7 @@
 #pragma once
 //テクスチャクラス
 
-class Texture : Uncopyable
+class CTexture : Uncopyable
 {
 public:
 	enum EnTextureType
@@ -10,10 +10,10 @@ public:
 		enDepthStencil,
 	};
 	//コンストラクタ
-	Texture();
+	CTexture();
 
 	//デストラクタ
-	~Texture();
+	~CTexture();
 
 	/*
 	テクスチャの読み込み関数
