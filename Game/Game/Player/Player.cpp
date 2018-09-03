@@ -7,9 +7,9 @@ void Player::Init(Vector3 position)
 	m_skinmodel.Load(L"Assets/modelData/Player.cmo", &m_animation);
 	m_position = position;
 	m_characterController.Init(2.0f, 2.0f, m_position);
-	m_characterController.SetGravity(-9.0f);
-	wchar_t* animClip[2] = { L"Assets/modelData/unity2.tka", L"Assets/modelData/unity3.tka" };
-	m_animation.Init(animClip, 2);
+	m_characterController.SetGravity(-90.0f);
+	wchar_t* animClip[1] = { L"Assets/modelData/PlayerWalk.tka"};
+	m_animation.Init(animClip, 1);
 
 	//プレイヤーのステータスの初期化
 	{
@@ -37,11 +37,11 @@ void Player::Update()
 
 	if (GetPad().IsTriggerButton(enButtonB))
 	{
-		m_status.ExperiencePoint += 43;
-		m_status.AccumulationExp += 43;
-
+		//m_status.ExperiencePoint += 43;
+		//m_status.AccumulationExp += 43;
+		m_animation.Play(0, 0.8f);
 	}
-
+	m_animation.Update(GetGameTime().GetDeltaFrameTime());
 	//スキンモデルの更新
 	m_skinmodel.Update(m_position, m_rotation, { 1.0f, 1.0f, 1.0f }, true);
 

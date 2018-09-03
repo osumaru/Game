@@ -19,7 +19,7 @@ void Number::Update()
 
 void Number::Draw()
 {
-	m_number[m_num].Draw();
+	//m_number[m_num].Draw();
 }
 
 void Number::SetNumber(int num)

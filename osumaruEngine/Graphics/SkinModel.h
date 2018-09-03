@@ -13,7 +13,6 @@ public:
 		Matrix viewProjMat;			//ビュープロジェクション行列
 	};
 
-
 	//コンストラクタ
 	SkinModel();
 

@@ -135,9 +135,6 @@
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <MeshContentTask Include="Assets\modelData\Unitychan.FBX">
-      <Filter>ソース ファイル\Assets</Filter>
-    </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\testChamferBox.FBX">
       <Filter>ソース ファイル\Assets</Filter>
     </MeshContentTask>
@@ -153,7 +150,6 @@
     <MeshContentTask Include="Assets\modelData\U2.FBX">
       <Filter>ソース ファイル\Assets</Filter>
     </MeshContentTask>
-    <MeshContentTask Include="Assets\modelData\Unitychan2.fbx" />
     <MeshContentTask Include="Assets\modelData\Player.FBX">
       <Filter>ソース ファイル\Assets</Filter>
     </MeshContentTask>
@@ -165,9 +161,6 @@
     </MeshContentTask>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\modelData\unitychan.tks">
-      <Filter>ソース ファイル\Assets</Filter>
-    </None>
     <None Include="Assets\modelData\Player.tks">
       <Filter>ソース ファイル\Assets</Filter>
     </None>

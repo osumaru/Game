@@ -118,6 +118,15 @@ void Engine::InitD3D(HINSTANCE& hInst)
 	m_pBackBuffer = m_backBuffer.GetRenderTarget();
 	ID3D11DepthStencilView* depthStencil = m_backBuffer.GetDepthStencil();
 	m_pDeviceContext->OMSetRenderTargets(1, &m_pBackBuffer, depthStencil);
+
+	ID3D11DepthStencilState* depthStencilState;
+	D3D11_DEPTH_STENCIL_DESC depthDesc;
+	ZeroMemory(&depthDesc, sizeof(D3D11_DEPTH_STENCIL_DESC));
+
+	depthDesc.DepthFunc = D3D11_COMPARISON_LESS;
+	depthDesc.DepthEnable = true;
+	m_pD3DDevice->CreateDepthStencilState(&depthDesc, &depthStencilState);
+	m_pDeviceContext->OMSetDepthStencilState(depthStencilState, 0);
 	D3D11_RASTERIZER_DESC rasterizerDesc;
 	ID3D11RasterizerState* rasterizerState;
 	ZeroMemory(&rasterizerDesc, sizeof(D3D11_RASTERIZER_DESC));
@@ -125,7 +134,7 @@ void Engine::InitD3D(HINSTANCE& hInst)
 	rasterizerDesc.CullMode = D3D11_CULL_FRONT;
 	m_pD3DDevice->CreateRasterizerState(&rasterizerDesc, &rasterizerState);
 	m_pDeviceContext->RSSetState(rasterizerState);
-
+	
 	// ビューポート設定
 	D3D11_VIEWPORT vp;
 	vp.TopLeftX = 0;
