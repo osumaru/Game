@@ -19,8 +19,8 @@ void GameCamera::Init()
 
 void GameCamera::Update()
 {
-	float rStick_x = GetPad().GetRightStickX() * 10 * GetGameTime().GetDeltaFrameTime();
-	float rStick_y = GetPad().GetRightStickY() * 10 * GetGameTime().GetDeltaFrameTime();
+	float rStick_x = GetPad().GetRightStickX() * 180 * GetGameTime().GetDeltaFrameTime();
+	float rStick_y = GetPad().GetRightStickY() * 180 * GetGameTime().GetDeltaFrameTime();
 
 	if (fabsf(rStick_x) > 0.0f) {
 		//YŽ²Žü‚è‚Ì‰ñ“]

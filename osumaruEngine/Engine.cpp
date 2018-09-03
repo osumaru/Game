@@ -179,11 +179,11 @@ void Engine::GameLoop()
 			m_pad->Update();
 			m_pSwapChain->Present(0, 0);
 			sw.Stop();
-			if (sw.GetElapsedTime() < 1.0f / 30.0f)
+			if (sw.GetElapsedTime() < 1.0f / 60.0f)
 			{
-				DWORD sleepTime = max(0.0, (1.0 - 30.0) * 1000.0 - (DWORD)sw.GetElapsedTimeMill());
+				DWORD sleepTime = max(0.0, (1.0 / 60.0) * 1000.0 - (DWORD)sw.GetElapsedTimeMill());
 				Sleep(sleepTime);
-				GetGameTime().SetFrameDeltaTime(1.0f / 30.0f);
+				GetGameTime().SetFrameDeltaTime(1.0f / 60.0f);
 			}
 			else
 			{
