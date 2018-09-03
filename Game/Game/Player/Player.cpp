@@ -39,7 +39,7 @@ void Player::Update()
 	{
 		m_status.ExperiencePoint += 43;
 		m_status.AccumulationExp += 43;
-		//m_animation.Play(0, 0.8f);
+		
 	}
 	m_animation.Update(GetGameTime().GetDeltaFrameTime());
 	//スキンモデルの更新
@@ -84,11 +84,19 @@ void Player::Move()
 	//m_moveSpeed.y = 0;
 	m_moveSpeed.z = cameraX.z * moveSpeed.x + cameraZ.z * moveSpeed.z;
 
+
 	//ダッシュの処理
 	if (GetPad().IsPressButton(enButtonRB))
 	{
 		
-		m_moveSpeed *= 5.0f;
+		m_moveSpeed.x *= 5.0f;
+		m_moveSpeed.z *= 5.0f;
+	}
+
+	else if (GetPad().IsTriggerButton(enButtonY))
+	{
+
+		m_moveSpeed.y += 50.0f;
 	}
 
 
@@ -97,13 +105,14 @@ void Player::Move()
 	{
 		m_isSlip = true;
 	}
+
 	if(m_isSlip)
 	{
-		m_slipSpeed = m_slipSpeed - (1.0f * GetGameTime().GetDeltaFrameTime());
+		m_slipSpeed = m_slipSpeed - (3.0f * GetGameTime().GetDeltaFrameTime());
 		if (m_slipSpeed <= 0)
 		{
 			m_isSlip = false;
-			m_slipSpeed = 7.0f;
+			m_slipSpeed = 6.5f;
 			return;
 		}
 		Vector3 playerFlontVec = { m_skinmodel.GetWorldMatrix().m[2][0],0.0f,m_skinmodel.GetWorldMatrix().m[2][2] };
