@@ -14,6 +14,7 @@ public:
 		return m_position;
 	}
 private:
-	Vector3 m_position;
-	SkinModel m_skinmodel;
+	Vector3				m_position;
+	SkinModel			m_skinmodel;
+	CharacterController m_characterController;
 };
