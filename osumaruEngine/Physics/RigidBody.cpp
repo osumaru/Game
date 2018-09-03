@@ -6,14 +6,14 @@
 #include "Physics.h"
 
 
-void RigidBody::Create(const RigidBodyInfo& rbInfo)
+void CRigidBody::Create(const SRigidBodyInfo& rbInfo)
 {
 	Release();
 
 	m_myMotionState.reset(new btDefaultMotionState());
 	btRigidBody::btRigidBodyConstructionInfo btRBInfo(rbInfo.mass, m_myMotionState.get(), const_cast<btCollisionShape*>(rbInfo.collider->GetBody()), btVector3(0, 0, 0));
 	m_rigidBody.reset(new btRigidBody(btRBInfo));
-	GetPhysicsWorld().AddRigidBody(m_rigidBody.get());
+	PhysicsWorld().AddRigidBody(m_rigidBody.get());
 	SetPosition(rbInfo.pos);
 	SetRotation(rbInfo.rot);
 	m_rigidBody->getOneBeforeWorldTransform().setOrigin({ rbInfo.pos.x, rbInfo.pos.y, rbInfo.pos.z });
@@ -21,27 +21,27 @@ void RigidBody::Create(const RigidBodyInfo& rbInfo)
 	m_rigidBody->setUserIndex(enCollisionAttr_MapChip);
 }
 
-void RigidBody::PhysicsWorldAddRigidBody()
+void CRigidBody::PhysicsWorldAddRigidBody()
 {
-	GetPhysicsWorld().AddRigidBody(m_rigidBody.get());
+	PhysicsWorld().AddRigidBody(m_rigidBody.get());
 }
 
 
-void RigidBody::PhysicsWorldRemoveRigidBody()
+void CRigidBody::PhysicsWorldRemoveRigidBody()
 {
-	GetPhysicsWorld().RemoveRigidBody(m_rigidBody.get());
+	PhysicsWorld().RemoveRigidBody(m_rigidBody.get());
 }
 
-void RigidBody::Release()
+void CRigidBody::Release()
 {
 	if (m_rigidBody)
 	{
-		GetPhysicsWorld().RemoveRigidBody(m_rigidBody.get());
+		PhysicsWorld().RemoveRigidBody(m_rigidBody.get());
 		m_rigidBody.reset();
 	}
 }
 
-void RigidBody::Draw()
+void CRigidBody::Draw()
 {
-	GetPhysicsWorld().DebugDraw(m_rigidBody->getWorldTransform(), m_rigidBody->getCollisionShape());
+	PhysicsWorld().DebugDraw(m_rigidBody->getWorldTransform(), m_rigidBody->getCollisionShape());
 }

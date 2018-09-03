@@ -1,11 +1,11 @@
 #include "engineStdafx.h"
 #include "CapsuleCollider.h"
 
-CapsuleCollider::CapsuleCollider() :
+CCapsuleCollider::CCapsuleCollider() :
 	m_shape(nullptr)
 {
 }
 
-CapsuleCollider::~CapsuleCollider()
+CCapsuleCollider::~CCapsuleCollider()
 {
 }

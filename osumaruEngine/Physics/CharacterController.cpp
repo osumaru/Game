@@ -6,12 +6,12 @@
 
 
 //衝突したときに呼ばれる関数オブジェクト(地面用)
-struct SweepResultGround : public btCollisionWorld::ConvexResultCallback
+struct SSweepResultGround : public btCollisionWorld::ConvexResultCallback
 {
 	bool isHit = false;								//衝突フラグ。
-	Vector3 hitPos = { 0.0f, 0.0f, 0.0f };		//衝突点。
-	Vector3 startPos = { 0.0f, 0.0f, 0.0f };	//レイの始点。
-	Vector3 hitNormal = { 0.0f, 0.0f, 0.0f };	//衝突点の法線
+	CVector3 hitPos = { 0.0f, 0.0f, 0.0f };		//衝突点。
+	CVector3 startPos = { 0.0f, 0.0f, 0.0f };	//レイの始点。
+	CVector3 hitNormal = { 0.0f, 0.0f, 0.0f };	//衝突点の法線
 	const btCollisionObject* hitObject = nullptr;
 	const btCollisionObject* me = nullptr;				//自分自身。自分自身との衝突を除外するためのメンバ。
 	float dist = FLT_MAX;							//衝突点までの距離。一番近い衝突点を求めるため。FLT_MAXは単精度の浮動小数点が取りうる最大の値。
@@ -27,10 +27,10 @@ struct SweepResultGround : public btCollisionWorld::ConvexResultCallback
 		}
 		hitObject = convexResult.m_hitCollisionObject;
 		//衝突点の法線を引っ張ってくる
-		Vector3	hitNormalTmp;
+		CVector3	hitNormalTmp;
 		hitNormalTmp.Set(convexResult.m_hitNormalLocal);
 		//上方向と法線のなす角度を求める。
-		Vector3 up = { 0.0f, 1.0f, 0.0f };
+		CVector3 up = { 0.0f, 1.0f, 0.0f };
 		float angle = hitNormalTmp.Dot(up);
 		
 		angle = fabsf(acosf(angle));
@@ -40,10 +40,10 @@ struct SweepResultGround : public btCollisionWorld::ConvexResultCallback
 
 			//衝突している。
 			isHit = true;
-			Vector3 hitPosTmp;
+			CVector3 hitPosTmp;
 			hitPosTmp.Set(convexResult.m_hitPointLocal);
 			//衝突点の距離を求める。
-			Vector3 vDist;
+			CVector3 vDist;
 			vDist = hitPosTmp - startPos;
 			float distTmp = vDist.Length();
 			if (dist > distTmp)
@@ -59,12 +59,12 @@ struct SweepResultGround : public btCollisionWorld::ConvexResultCallback
 };
 
 //衝突したときに呼ばれる関数オブジェクト(天井用)
-struct SweepResultCeiling : public btCollisionWorld::ConvexResultCallback
+struct SSweepResultCeiling : public btCollisionWorld::ConvexResultCallback
 {
 	bool isHit = false;								//衝突フラグ。
-	Vector3 hitPos = { 0.0f, 0.0f, 0.0f };		//衝突点。
-	Vector3 startPos = { 0.0f, 0.0f, 0.0f };	//レイの始点。
-	Vector3 hitNormal = { 0.0f, 0.0f, 0.0f };	//衝突点の法線
+	CVector3 hitPos = { 0.0f, 0.0f, 0.0f };		//衝突点。
+	CVector3 startPos = { 0.0f, 0.0f, 0.0f };	//レイの始点。
+	CVector3 hitNormal = { 0.0f, 0.0f, 0.0f };	//衝突点の法線
 	const btCollisionObject* hitObject = nullptr;
 	const btCollisionObject* me = nullptr;				//自分自身。自分自身との衝突を除外するためのメンバ。
 	float dist = FLT_MAX;							//衝突点までの距離。一番近い衝突点を求めるため。FLT_MAXは単精度の浮動小数点が取りうる最大の値。
@@ -80,10 +80,10 @@ struct SweepResultCeiling : public btCollisionWorld::ConvexResultCallback
 		}
 		hitObject = convexResult.m_hitCollisionObject;
 		//衝突点の法線を引っ張ってくる
-		Vector3	hitNormalTmp;
+		CVector3	hitNormalTmp;
 		hitNormalTmp.Set(convexResult.m_hitNormalLocal);
 		//下方向と法線のなす角度を求める。
-		Vector3 up = { 0.0f, -1.0f, 0.0f };
+		CVector3 up = { 0.0f, -1.0f, 0.0f };
 		float angle = hitNormalTmp.Dot(up);
 		angle = fabsf(acosf(angle));
 		if (angle < cPI * 0.3f ||		//地面の傾斜が54度より小さいので地面とみなす。角度がラジアン単位なので180度がcPI
@@ -91,10 +91,10 @@ struct SweepResultCeiling : public btCollisionWorld::ConvexResultCallback
 		{
 			//衝突している。
 			isHit = true;
-			Vector3 hitPosTmp;
+			CVector3 hitPosTmp;
 			hitPosTmp.Set(convexResult.m_hitPointLocal);
 			//衝突点の距離を求める。
-			Vector3 vDist;
+			CVector3 vDist;
 			vDist = hitPosTmp - startPos;
 			float distTmp = vDist.Length();
 			if (dist > distTmp)
@@ -110,16 +110,16 @@ struct SweepResultCeiling : public btCollisionWorld::ConvexResultCallback
 };
 
 //衝突したときに呼ばれる関数オブジェクト(壁用)
-struct SweepResultWall : public btCollisionWorld::ConvexResultCallback
+struct SSweepResultWall : public btCollisionWorld::ConvexResultCallback
 {
 	bool isHit = false;								//衝突フラグ。
-	Vector3 hitPos = { 0.0f, 0.0f, 0.0f };		//衝突点。
-	Vector3 startPos = { 0.0f, 0.0f, 0.0f };	//レイの始点。
-	Vector3 ray = { 0.0f, 0.0f, 0.0f };
+	CVector3 hitPos = { 0.0f, 0.0f, 0.0f };		//衝突点。
+	CVector3 startPos = { 0.0f, 0.0f, 0.0f };	//レイの始点。
+	CVector3 ray = { 0.0f, 0.0f, 0.0f };
 	bool		isRay = false;
 	float		distance = 0.0f;
 	float dist = FLT_MAX;							//衝突点までの距離。一番近い衝突点を求めるため。FLT_MAXは単精度の浮動小数点が取りうる最大の値。
-	Vector3	hitNormal = { 0.0f, 0.0f, 0.0f };	//衝突点の法線
+	CVector3	hitNormal = { 0.0f, 0.0f, 0.0f };	//衝突点の法線
 	const btCollisionObject* me = NULL;					//自分自身。自分自身との衝突を除外するためのメンバ。
 	const btCollisionObject* hitObject = NULL;
 													//衝突したときに呼ばれるコールバック関数
@@ -133,10 +133,10 @@ struct SweepResultWall : public btCollisionWorld::ConvexResultCallback
 		}
 		hitObject = convexResult.m_hitCollisionObject;
 		//衝突点の法線を引っ張ってくる。
-		Vector3 hitNormalTmp;
+		CVector3 hitNormalTmp;
 		hitNormalTmp.Set(convexResult.m_hitNormalLocal);
 		//上方向と衝突点の法線のなす角度を求める
-		Vector3 up = { 0.0f, 1.0f, 0.0f };
+		CVector3 up = { 0.0f, 1.0f, 0.0f };
 		float angle = hitNormalTmp.Dot(up);
 		angle = fabsf(acosf(angle));
 		if (angle >= cPI * 0.3f ||		//地面の傾斜が54度以上なので壁とみなす。
@@ -144,7 +144,7 @@ struct SweepResultWall : public btCollisionWorld::ConvexResultCallback
 		{
 			ray.Normalize();
 			btVector3 btMoveSpeed = hitObject->getWorldTransform().getOrigin() - hitObject->getOneBeforeWorldTransform().getOrigin();
-			Vector3 moveSpeed = { btMoveSpeed.x(), btMoveSpeed.y(), btMoveSpeed.z() };
+			CVector3 moveSpeed = { btMoveSpeed.x(), btMoveSpeed.y(), btMoveSpeed.z() };
 			distance = moveSpeed.Length();
 			if (FLT_EPSILON <= distance)
 			{
@@ -155,10 +155,10 @@ struct SweepResultWall : public btCollisionWorld::ConvexResultCallback
 				}
 			}
 			isHit = true;
-			Vector3 hitPosTmp;
+			CVector3 hitPosTmp;
 			hitPosTmp.Set(convexResult.m_hitPointLocal);
 			//交点との距離を調べる。
-			Vector3 vDist;
+			CVector3 vDist;
 			vDist = hitPosTmp - startPos;
 			vDist.y = 0.0f;
 			float distTmp = vDist.Length();
@@ -174,7 +174,7 @@ struct SweepResultWall : public btCollisionWorld::ConvexResultCallback
 	}
 };
 
-CharacterController::CharacterController() :
+CCharacterController::CCharacterController() :
 	m_position(0.0f, 0.0f, 0.0f),
 	m_moveSpeed(0.0f, 0.0f, 0.0f),
 	m_isJump(false),
@@ -191,12 +191,12 @@ CharacterController::CharacterController() :
 {
 }
 
-CharacterController::~CharacterController()
+CCharacterController::~CCharacterController()
 {
 	RemovedRigidBody();
 }
 
-void CharacterController::Init(float radius, float height, const Vector3& position)
+void CCharacterController::Init(float radius, float height, const CVector3& position)
 {
 	m_position = position;
 	m_moveSpeed = {0.0f, 0.0f, 0.0f};
@@ -206,7 +206,7 @@ void CharacterController::Init(float radius, float height, const Vector3& positi
 	m_collider.Create(m_radius, m_height);
 
 	//剛体を初期化。
-	RigidBodyInfo rbInfo;
+	SRigidBodyInfo rbInfo;
 	rbInfo.collider = &m_collider;
 	rbInfo.mass = 0.0f;
 	m_rigidBody.Create(rbInfo);
@@ -217,19 +217,19 @@ void CharacterController::Init(float radius, float height, const Vector3& positi
 	m_rigidBody.SetCollisionFlags(btCollisionObject::CF_CHARACTER_OBJECT);
 }
 
-void CharacterController::Execute(float deltaTime)
+void CCharacterController::Execute(float deltaTime)
 {
 	StaticExecute();
-	PhysicsWorld& physicsWorld = GetPhysicsWorld();
+	CPhysicsWorld& physicsWorld = PhysicsWorld();
 	//速度に重力加速度を加える。
 	m_moveSpeed.y += m_gravity * deltaTime;
 	//次の移動先となる座標を計算する。
-	Vector3 nextPosition = m_position;
+	CVector3 nextPosition = m_position;
 	//速度からこのフレームでの移動量を求める。オイラー積分。
-	Vector3 addPos = m_moveSpeed;
+	CVector3 addPos = m_moveSpeed;
 	addPos *= deltaTime;
 	nextPosition += addPos;
-	Vector3 originalXZDir = addPos;
+	CVector3 originalXZDir = addPos;
 	originalXZDir.y = 0.0f;
 	originalXZDir.Normalize();
 
@@ -237,11 +237,11 @@ void CharacterController::Execute(float deltaTime)
 	{
 		int loopCount = 0;
 		const btCollisionObject* wallCollisionObject = nullptr;
-		Vector3 hitNormal = { 0.0f, 0.0f, 0.0f };
+		CVector3 hitNormal = { 0.0f, 0.0f, 0.0f };
 		while (true)
 		{
 			//現在の座標から次の移動先へ向かうベクトルを求める。
-			Vector3  addPosXZ;
+			CVector3  addPosXZ;
 			addPosXZ = nextPosition - m_position;
 			addPosXZ.y = 0.0f;
 			if (addPosXZ.Length() < FLT_EPSILON)
@@ -252,7 +252,7 @@ void CharacterController::Execute(float deltaTime)
 				break;
 			}
 			//カプセルコライダーの中心座標　+ 0.2の座標をposTmpに求める。
-			Vector3 posTmp = m_position;
+			CVector3 posTmp = m_position;
 			posTmp.y += m_height * 0.5f + m_radius + 0.2f;
 			//レイを作成。
 			btTransform start, end;
@@ -263,7 +263,7 @@ void CharacterController::Execute(float deltaTime)
 			//終点は次の移動先。XZ平面での衝突を調べるので、yはposTmp.yを設定する。
 			end.setOrigin(btVector3(nextPosition.x, posTmp.y, nextPosition.z));
 
-			SweepResultWall callback;
+			SSweepResultWall callback;
 			callback.me = m_rigidBody.GetBody();
 			callback.startPos = posTmp;
 			//衝突検出。
@@ -273,16 +273,16 @@ void CharacterController::Execute(float deltaTime)
 				wallCollisionObject = callback.hitObject;
 				//当たった。
 				//壁。
-				Vector3 vT0, vT1;
+				CVector3 vT0, vT1;
 				//XZ平面での移動後の座標をvT0に、交点(衝突点)をvT1に設定する。
 				vT0 = { nextPosition.x, 0.0f, nextPosition.z };
 				vT1 = { callback.hitPos.x, 0.0f, callback.hitPos.z };
 				//めり込みが発生している移動ベクトルを求める。
-				Vector3 vMerikomi;
+				CVector3 vMerikomi;
 				vMerikomi = vT1 - vT0;
 
 				//XZ平面での衝突した壁の法線を求める。
-				Vector3 hitNormalXZ = callback.hitNormal;
+				CVector3 hitNormalXZ = callback.hitNormal;
 				hitNormalXZ.y = 0.0f;
 				hitNormalXZ.Normalize();
 				hitNormal = hitNormalXZ;
@@ -290,11 +290,11 @@ void CharacterController::Execute(float deltaTime)
 				float fT0 = hitNormalXZ.Dot(vMerikomi);
 				//押し戻し返すベクトルを求める。
 				//押し返すベクトルは壁の法線に射影されためり込みベクトル。
-				Vector3 vOffset;
+				CVector3 vOffset;
 				vOffset = hitNormalXZ;
 				vOffset *= (fT0 + m_radius);//コライダーの半径分手動で戻している
 				nextPosition += vOffset;
-				Vector3 currentDir;
+				CVector3 currentDir;
 				currentDir = nextPosition - m_position;
 				currentDir.y = 0.0f;
 				currentDir.Normalize();
@@ -330,7 +330,7 @@ void CharacterController::Execute(float deltaTime)
 	m_position.x = nextPosition.x;
 	m_position.z = nextPosition.z;
 
-	Vector3 addPosY;
+	CVector3 addPosY;
 	addPosY = nextPosition - m_position;
 	//下方向を調べる。
 	{
@@ -344,7 +344,7 @@ void CharacterController::Execute(float deltaTime)
 		//終点は地面上にいない場合は1m下を見る。
 		//地面上にいなくてジャンプで上昇中の場合は上昇量の0.01倍下を見る。
 		//地面上にいなくて降下中の場合はそのまま落下先を調べる。
-		Vector3 endPos;
+		CVector3 endPos;
 		endPos.Set(start.getOrigin());
 		if (!m_isOnGround)
 		{
@@ -365,7 +365,7 @@ void CharacterController::Execute(float deltaTime)
 			endPos.y -= 1.0f;
 		}
 		end.setOrigin(btVector3(endPos.x, endPos.y, endPos.z));
-		SweepResultGround callback;
+		SSweepResultGround callback;
 		callback.me = m_rigidBody.GetBody();
 		callback.startPos.Set(start.getOrigin());
 		//衝突検出。
@@ -404,7 +404,7 @@ void CharacterController::Execute(float deltaTime)
 		//終点は地面上にいない場合は1m下を見る。
 		//地面上にいなくてジャンプで上昇中の場合は上昇量の0.01倍下を見る。
 		//地面上にいなくて降下中の場合はそのまま落下先を調べる。
-		Vector3 endPos;
+		CVector3 endPos;
 		endPos.Set(start.getOrigin());
 		if (!m_isOnGround)
 		{
@@ -420,7 +420,7 @@ void CharacterController::Execute(float deltaTime)
 			}
 		}
 		end.setOrigin(btVector3(endPos.x, endPos.y, endPos.z));
-		SweepResultCeiling callback;
+		SSweepResultCeiling callback;
 		callback.me = m_rigidBody.GetBody();
 		callback.startPos.Set(start.getOrigin());
 		//衝突検出。
@@ -447,12 +447,12 @@ void CharacterController::Execute(float deltaTime)
 	//@todo 未対応。 trans.setRotation(btQuaternion(rotation.x, rotation.y, rotation.z));
 }
 
-void CharacterController::StaticExecute()
+void CCharacterController::StaticExecute()
 {
 	const int rayNum = 4;
 	const float rayLength = 1.0f;
 	//4方向のXZ平面にレイを飛ばす
-	Vector3 ray[rayNum] =
+	CVector3 ray[rayNum] =
 	{
 		{ rayLength,	0.0f, 0.0f},
 		{ -rayLength,	0.0f, 0.0f },
@@ -466,26 +466,26 @@ void CharacterController::StaticExecute()
 		start.setIdentity();
 		end.setIdentity();
 		//レイの終点を現在を座標とし外側から現在の座標に向かってレイを飛ばす
-		Vector3 endPos = m_position;
+		CVector3 endPos = m_position;
 		end.setOrigin(btVector3(endPos.x, endPos.y + m_height * 0.5f + m_radius , endPos.z));
-		Vector3 startPos = m_position;
+		CVector3 startPos = m_position;
 		startPos += ray[i];
 		//高さが違うのでyの値だけ終点と同じものを使う
 		start.setOrigin(btVector3(startPos.x, end.getOrigin().y(), startPos.z));
-		SweepResultWall callback;
+		SSweepResultWall callback;
 		callback.me = m_rigidBody.GetBody();
 		callback.startPos = startPos;
 		callback.ray.Set(end.getOrigin() - start.getOrigin());
-		GetPhysicsWorld().ConvexSweepTest((const btConvexShape*)m_collider.GetBody(), start, end, callback);
+		PhysicsWorld().ConvexSweepTest((const btConvexShape*)m_collider.GetBody(), start, end, callback);
 		//もしレイが当たっていて、さらに押し戻す方向とオブジェクトの移動方向が一致している場合(引っ付き防止)
 		if(callback.isHit && callback.isRay /*&& fabs(rayLength - callback.dist) < m_radius + 0.1f*/)
 		{
-			Vector3 hitNormal = callback.hitNormal;
+			CVector3 hitNormal = callback.hitNormal;
 			hitNormal.y = 0.0f;
 			hitNormal.Normalize();
 			m_wallNormal = hitNormal;
-			Vector3 sinking;
-			Vector3 endVector;
+			CVector3 sinking;
+			CVector3 endVector;
 			endVector.Set(end.getOrigin());
 			sinking = callback.hitPos - endVector;
 			sinking.y = 0.0f;
@@ -496,16 +496,16 @@ void CharacterController::StaticExecute()
 	}
 }
 
-void CharacterController::RemovedRigidBody()
+void CCharacterController::RemovedRigidBody()
 {
 	m_rigidBody.Release();
 }
 
-void CharacterController::Draw()
+void CCharacterController::Draw()
 {
 	btTransform transform = m_rigidBody.GetBody()->getWorldTransform();
 
 	btVector3& position = transform.getOrigin();
 	position.setY(position.y() + m_radius + m_height * 0.5f - m_rigidBodyManip);
-	GetPhysicsWorld().DebugDraw(transform, const_cast<btCollisionShape*>(m_collider.GetBody()));
+	PhysicsWorld().DebugDraw(transform, const_cast<btCollisionShape*>(m_collider.GetBody()));
 }

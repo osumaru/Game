@@ -1,14 +1,14 @@
 #include "engineStdafx.h"
 #include "GameObject.h"
 
-GameObject::GameObject() :
+IGameObject::IGameObject() :
 	m_isDelete(false),
 	m_isStart(false),
 	m_isActive(true)
 {
 }
 
-GameObject::~GameObject()
+IGameObject::~IGameObject()
 {
 
 }

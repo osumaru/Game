@@ -2,14 +2,14 @@
 #include "WaveFileOpen.h"
 #include "SoundEngine.h"
 
-class SoundSource : public GameObject
+class CSoundSource : public IGameObject
 {
 public:
 	//コンストラクタ
-	SoundSource();
+	CSoundSource();
 
 	//デストラクタ
-	~SoundSource();
+	~CSoundSource();
 
 	/*
 	初期化
@@ -21,7 +21,7 @@ public:
 	void Update()override;
 
 	//座標を設定(3Dサウンドの時に使う
-	void SetPosition(Vector3 position)
+	void SetPosition(CVector3 position)
 	{
 		m_position = position;
 	}
@@ -42,7 +42,7 @@ public:
 	}
 
 	//座標を取得
-	Vector3& GetPosition()
+	CVector3& GetPosition()
 	{
 		return m_position;
 	}
@@ -74,7 +74,7 @@ public:
 	}
 
 private:
-	Vector3				m_position;			//座標
+	CVector3				m_position;			//座標
 	FLOAT32					m_coefficients[INPUTCHANNELS * OUTPUTCHANNELS];
 	FLOAT32					m_emitterAzimuths[INPUTCHANNELS];
 	X3DAUDIO_DSP_SETTINGS	m_dspSettings;

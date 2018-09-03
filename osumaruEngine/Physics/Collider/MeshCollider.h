@@ -1,34 +1,34 @@
 #pragma once
 #include "ICollider.h"
-class SkinModel;
+class CSkinModel;
 
-class MeshCollider : public ICollider
+class CMeshCollider : public ICollider
 {
 public:
 
-	void CreateCollider(SkinModel* skinModel);
+	void CreateCollider(CSkinModel* skinModel);
 
 	const btCollisionShape* GetBody()const override
 	{
 		return m_meshShape.get();
 	}
 
-	Vector3 GetAabbMax()
+	CVector3 GetAabbMax()
 	{
 		return m_aabbMax;
 	}
 
-	Vector3 GetAabbMin()
+	CVector3 GetAabbMin()
 	{
 		return m_aabbMin;
 	}
 
 private:
-	Vector3												m_aabbMax;
-	Vector3												m_aabbMin;
+	CVector3												m_aabbMax;
+	CVector3												m_aabbMin;
 
 	std::vector<DWORD>									m_indexBuffer;
-	std::vector<Vector3>								m_vertexBuffer;
+	std::vector<CVector3>								m_vertexBuffer;
 	std::unique_ptr<btBvhTriangleMeshShape>				m_meshShape;				//メッシュコライダー
 	std::unique_ptr<btTriangleIndexVertexArray>			m_stridingMeshInterface;
 };

@@ -1,23 +1,23 @@
 #pragma once
 
-class GameTime
+class CGameTime
 {
 	//コンストラクタ
-	GameTime() :
+	CGameTime() :
 		m_frameDeltaTime(1.0f / 60.0f)
 	{
 	}
 
 	//デストラクタ
-	~GameTime()
+	~CGameTime()
 	{
 
 	}
 public:
 	//インスタンスを取得
-	static GameTime& GetInstance()
+	static CGameTime& GetInstance()
 	{
-		static GameTime gametime;
+		static CGameTime gametime;
 		return gametime;
 	}
 
@@ -39,7 +39,7 @@ private:
 };
 
 //ゲームタイマーを取得
-static GameTime& GetGameTime()
+static CGameTime& GameTime()
 {
-	return GameTime::GetInstance();
+	return CGameTime::GetInstance();
 }

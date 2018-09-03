@@ -1,15 +1,15 @@
 #pragma once
-class GameObject;
+class IGameObject;
 //オブジェクトマネージャー
 
-struct GameObjectData
+struct SGameObjectData
 {
-	GameObject* gameObject;		//オブジェクト
+	IGameObject* gameObject;		//オブジェクト
 	bool isNew;					//このオブジェクトがnewされて作ったか否か
 };
 const int PRIORITY_MAX = 16;
 
-class GameObjectManager : Uncopyable
+class CGameObjectManager : Uncopyable
 {
 public:
 
@@ -20,7 +20,7 @@ public:
 	void Execute();
 
 	//ゲームのオブジェクトを消去する関数
-	void Delete(GameObject* deleteObject);
+	void Delete(IGameObject* deleteObject);
 
 
 	/*
@@ -44,7 +44,7 @@ public:
 	object		登録するオブジェクト
 	priority	オブジェクトの優先度
 	*/
-	void Add(GameObject* object, int priority)
+	void Add(IGameObject* object, int priority)
 	{
 		m_objectVector[priority].push_back({ object, false });
 	}
@@ -56,6 +56,6 @@ private:
 	void DeleteExecute();
 
 private:
-	typedef std::list<GameObjectData> GameObjectList;	//オブジェクトのリスト
+	typedef std::list<SGameObjectData> GameObjectList;	//オブジェクトのリスト
 	std::vector<GameObjectList> m_objectVector;		//オブジェクト
 };

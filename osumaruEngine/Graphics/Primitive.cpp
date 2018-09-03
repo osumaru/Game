@@ -2,7 +2,7 @@
 #include "Primitive.h"
 
 
-Primitive::Primitive() :
+CPrimitive::CPrimitive() :
 	m_vertexBuffer(nullptr),
 	m_indexBuffer(nullptr),
 	m_indexFormat(DXGI_FORMAT_R16_UINT),
@@ -12,7 +12,7 @@ Primitive::Primitive() :
 	
 }
 
-Primitive::~Primitive()
+CPrimitive::~CPrimitive()
 {
 	if (m_vertexBuffer != nullptr)
 	{
@@ -26,7 +26,7 @@ Primitive::~Primitive()
 	}
 }
 
-void Primitive::Create(void* vertexBuffer, int vertexStride, int vertexNum, void* indexBuffer, int indexNum, EnFormatIndex formatIndex, EnPrimitiveType primitiveType)
+void CPrimitive::Create(void* vertexBuffer, int vertexStride, int vertexNum, void* indexBuffer, int indexNum, EnFormatIndex formatIndex, EnPrimitiveType primitiveType)
 {
 	int size;
 	switch (formatIndex)

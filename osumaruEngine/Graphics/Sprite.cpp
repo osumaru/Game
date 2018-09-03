@@ -3,7 +3,7 @@
 #include "../Engine.h"
 #include "Texture.h"
 
-Sprite::Sprite() :
+CSprite::CSprite() :
 	m_pTexture(nullptr),
 	m_vertexShader(),
 	m_pixelShader(),
@@ -14,17 +14,17 @@ Sprite::Sprite() :
 {
 
 }
-Sprite::~Sprite()
+CSprite::~CSprite()
 {
 }
 
 
-void Sprite::Init(Texture* texture)
+void CSprite::Init(CTexture* texture)
 {
 	m_pTexture = texture;
-	m_vertexShader.Load("Assets/shader/sprite.fx", "VSMain", Shader::enVS);
-	m_pixelShader.Load("Assets/shader/sprite.fx", "PSMain", Shader::enPS);
-	VSLayout vertexBufferLayout[4] = 
+	m_vertexShader.Load("Assets/shader/sprite.fx", "VSMain", CShader::enVS);
+	m_pixelShader.Load("Assets/shader/sprite.fx", "PSMain", CShader::enPS);
+	SVSLayout vertexBufferLayout[4] = 
 	{
 		{ { -1.0f,  1.0f, 0.0f, 1.0f } , { 0.0f, 0.0f } },
 		{ {  1.0f,  1.0f, 0.0f, 1.0f } , { 1.0f, 0.0f } },
@@ -32,38 +32,38 @@ void Sprite::Init(Texture* texture)
 		{ {  1.0f, -1.0f, 0.0f, 1.0f } , { 1.0f, 1.0f } },
 	};
 	DWORD indexBufferLayout[4] = {0, 2, 1, 3};
-	SpriteCB cb;
-	cb.worldMat = Matrix::Identity;
+	SSpriteCB cb;
+	cb.worldMat = CMatrix::Identity;
 	cb.alpha = 1.0f;
-	m_cb.Create(sizeof(SpriteCB), &cb);
-	m_primitive.Create(vertexBufferLayout, sizeof(VSLayout), 4, indexBufferLayout, 4, Primitive::enIndex32, Primitive::enTypeTriangleStrip);
+	m_cb.Create(sizeof(SSpriteCB), &cb);
+	m_primitive.Create(vertexBufferLayout, sizeof(SVSLayout), 4, indexBufferLayout, 4, CPrimitive::enIndex32, CPrimitive::enTypeTriangleStrip);
 
 }
 
-void Sprite::Draw()
+void CSprite::Draw()
 {
 	//座標のスケールを変換
-	Vector3 position;
+	CVector3 position;
 	position.x = m_position.x / (FrameBufferWidth() / 2.0f);
 	position.y = m_position.y / (FrameBufferHeight() / 2.0f);
 	position.z = 0.0f;
 	//拡大のスケールを変換
-	Vector3 size;
+	CVector3 size;
 	size.x = m_size.x / FrameBufferWidth();
 	size.y = m_size.y / FrameBufferHeight();
 	size.z = 1.0f;
 
 	//移動行列を作成
-	Matrix transform;
+	CMatrix transform;
 	transform.MakeTranslation(position);
 	//拡大行列を作成
-	Matrix scale;
+	CMatrix scale;
 	scale.MakeScaling(size);
 	//ワールド行列を作成
-	SpriteCB cb;
-	Matrix worldMatrix = Matrix::Identity;
-	Quaternion quat = Quaternion::Identity;
-	Matrix rot;
+	SSpriteCB cb;
+	CMatrix worldMatrix = CMatrix::Identity;
+	CQuaternion quat = CQuaternion::Identity;
+	CMatrix rot;
 	rot.MakeRotationFromQuaternion(quat);
 	worldMatrix.Mul(worldMatrix, scale);
 	worldMatrix.Mul(worldMatrix, rot);

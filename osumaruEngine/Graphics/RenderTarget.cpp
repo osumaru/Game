@@ -1,13 +1,13 @@
 #include "engineStdafx.h"
 #include "RenderTarget.h"
 
-RenderTarget::RenderTarget()
+CRenderTarget::CRenderTarget()
 {
 	m_pRenderTarget = nullptr;
 	m_pDepthStencil = nullptr;
 }
 
-RenderTarget::~RenderTarget()
+CRenderTarget::~CRenderTarget()
 {
 	if (m_pRenderTarget != nullptr)
 	{
@@ -21,9 +21,10 @@ RenderTarget::~RenderTarget()
 	}
 	m_pRenderTargetTexture->Release();
 	m_pDepthStencilTexture->Release();
+
 }
 
-void RenderTarget::Create(ID3D11Texture2D* pRenderTarget, ID3D11Texture2D* pDepthStencil, int width, int height, bool isBackBuffer)
+void CRenderTarget::Create(ID3D11Texture2D* pRenderTarget, ID3D11Texture2D* pDepthStencil, int width, int height, bool isBackBuffer)
 {
 	m_pRenderTargetTexture = pRenderTarget;
 	m_pDepthStencilTexture = pDepthStencil;

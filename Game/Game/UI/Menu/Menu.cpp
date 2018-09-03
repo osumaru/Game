@@ -30,7 +30,7 @@ void CMenu::Init()
 
 void CMenu::Update()
 {
-	if (GetPad().IsTriggerButton(enButtonSelect))
+	if (Pad().IsTriggerButton(enButtonSelect))
 	{
 		if (m_Draw)
 		{

@@ -3,14 +3,14 @@
 #include "SoundSource.h"
 #include "../Engine.h"
 
-SoundEngine::SoundEngine()
+CSoundEngine::CSoundEngine()
 {
 	m_xAudio = nullptr;
 	m_masteringVoice = nullptr;
 	m_channelNum = 0;
 }
 
-SoundEngine::~SoundEngine()
+CSoundEngine::~CSoundEngine()
 {
 	if (m_masteringVoice != nullptr)
 	{
@@ -22,7 +22,7 @@ SoundEngine::~SoundEngine()
 	}
 }
 
-void SoundEngine::Init()
+void CSoundEngine::Init()
 {
 	CoInitializeEx(NULL, COINIT_MULTITHREADED);
 	HRESULT hr;
@@ -46,9 +46,9 @@ void SoundEngine::Init()
 	m_3dListener.pCone = NULL;
 }
 
-void SoundEngine::Update()
+void CSoundEngine::Update()
 {
-	for (SoundSource* sound : m_3dSound)
+	for (CSoundSource* sound : m_3dSound)
 	{
 		X3DAUDIO_EMITTER emitter;
 		emitter.pCone = NULL;
@@ -90,7 +90,7 @@ void SoundEngine::Update()
 	}
 }
 
-IXAudio2SourceVoice* SoundEngine::CreateSouceVoice(WAVEFORMATEX* format, bool is3DSound)
+IXAudio2SourceVoice* CSoundEngine::CreateSouceVoice(WAVEFORMATEX* format, bool is3DSound)
 {
 	if (!is3DSound)
 	{

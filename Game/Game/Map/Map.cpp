@@ -5,7 +5,7 @@
 #include "../Player/Player.h"
 #include "../Enemy/Enemy.h"
 
-std::vector<std::vector<MapChipInfo>> mapChipInfo = 
+std::vector<std::vector<SMapChipInfo>> mapChipInfo = 
 {
 	{
 #include "Location.h"
@@ -38,10 +38,10 @@ Map::~Map()
 
 void Map::Init(int stageNum)
 {
-	std::map<int, std::vector<MapChipInfo>> instancingData;
+	std::map<int, std::vector<SMapChipInfo>> instancingData;
 	
 
-	for (MapChipInfo& mInfo : mapChipInfo[stageNum])
+	for (SMapChipInfo& mInfo : mapChipInfo[stageNum])
 	{
 		MapChip* mapChip = nullptr;
 		CEnemy* enemy = nullptr;

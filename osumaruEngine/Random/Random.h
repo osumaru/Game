@@ -1,19 +1,19 @@
 #pragma once
-class Random {
+class CRandom {
 private:
 	/*!
 	* @brief	コンストラクタ。
 	*/
-	Random();
+	CRandom();
 	/*!
 	* @brief	デストラクタ。
 	*/
-	~Random();
+	~CRandom();
 public:
 
-	static Random& GetInstance()
+	static CRandom& GetInstance()
 	{
-		static Random instance;
+		static CRandom instance;
 		return instance;
 	}
 	/*!
@@ -89,7 +89,7 @@ private:
 };
 
 
-static Random& GetRandom()
+static CRandom& Random()
 {
-	return Random::GetInstance();
+	return CRandom::GetInstance();
 }

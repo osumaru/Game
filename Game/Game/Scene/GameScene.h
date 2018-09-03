@@ -3,7 +3,7 @@
 class Map;
 #include "../UI/DamageNumber/DamageNumber.h"
 
-class CGameScene : public GameObject
+class CGameScene : public IGameObject
 {
 public:
 	void Init();

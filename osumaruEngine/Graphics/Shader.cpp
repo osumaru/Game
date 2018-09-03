@@ -1,7 +1,7 @@
 #include "engineStdafx.h"
 #include "Shader.h"
 
-Shader::Shader() :
+CShader::CShader() :
 	m_pShaderData(nullptr),
 	m_pShader(nullptr),
 	m_pInputLayout(nullptr),
@@ -10,7 +10,7 @@ Shader::Shader() :
 	
 }
 
-Shader::~Shader()
+CShader::~CShader()
 {
 	if (m_pShader != nullptr)
 	{
@@ -29,7 +29,7 @@ Shader::~Shader()
 	}
 }
 
-void Shader::Load(const char* filepath, const char* entryFuncName, EnShaderType shaderType)
+void CShader::Load(const char* filepath, const char* entryFuncName, EnShaderType shaderType)
 {
 	FILE* file;
 	file = fopen(filepath, "rb");
@@ -76,7 +76,7 @@ void Shader::Load(const char* filepath, const char* entryFuncName, EnShaderType 
 
 }
 
-void Shader::CreateInputLayout(ID3DBlob* blob)
+void CShader::CreateInputLayout(ID3DBlob* blob)
 {
 	ID3D11ShaderReflection* shaderReflection;
 	D3DReflect(blob->GetBufferPointer(), blob->GetBufferSize(), IID_ID3D11ShaderReflection, (void**)&shaderReflection);

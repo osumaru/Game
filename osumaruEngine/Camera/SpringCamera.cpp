@@ -1,7 +1,7 @@
 #include "engineStdafx.h"
 #include "SpringCamera.h"
 #include "../Timer/GameTime.h"
-SpringCamera::SpringCamera() :
+CSpringCamera::CSpringCamera() :
 	m_camera(),
 	m_target(0.0f, 0.0f, 0.0f),
 	m_position(0.0f, 0.0f, 0.0f),
@@ -16,12 +16,12 @@ SpringCamera::SpringCamera() :
 
 }
 
-SpringCamera::~SpringCamera()
+CSpringCamera::~CSpringCamera()
 {
 
 }
 
-void SpringCamera::Init(const Vector3& target, const Vector3& position, float maxMoveSpeed)
+void CSpringCamera::Init(const CVector3& target, const CVector3& position, float maxMoveSpeed)
 {
 	m_camera.SetTarget(target);
 
@@ -33,9 +33,9 @@ void SpringCamera::Init(const Vector3& target, const Vector3& position, float ma
 	m_maxMoveSpeed = maxMoveSpeed;
 }
 
-float SpringCamera::CalcSpringScalar(float positionNow, float positionTarget, float& moveSpeed)
+float CSpringCamera::CalcSpringScalar(float positionNow, float positionTarget, float& moveSpeed)
 {
-	float deltaTime = GetGameTime().GetDeltaFrameTime();
+	float deltaTime = GameTime().GetDeltaFrameTime();
 	float dampingRate = 0.2f;
 	float distance = positionTarget - positionNow;
 	if (fabsf(distance) < FLT_EPSILON)
@@ -80,22 +80,22 @@ float SpringCamera::CalcSpringScalar(float positionNow, float positionTarget, fl
 	return newPos;
 }
 
-Vector3 SpringCamera::CalcSpringVector(const Vector3& positionNow, const Vector3& positionTarget, Vector3& moveSpeed, float maxMoveSpeed, float dampingRate)
+CVector3 CSpringCamera::CalcSpringVector(const CVector3& positionNow, const CVector3& positionTarget, CVector3& moveSpeed, float maxMoveSpeed, float dampingRate)
 {
-	float deltaTime = GetGameTime().GetDeltaFrameTime();
+	float deltaTime = GameTime().GetDeltaFrameTime();
 	//現在の位置と目標の位置との差分を求める。
-	Vector3 distance;
+	CVector3 distance;
 	distance = positionTarget - positionNow;
-	Vector3 originalDir = distance;
+	CVector3 originalDir = distance;
 	originalDir.Normalize();
-	Vector3 springAccel;
+	CVector3 springAccel;
 	springAccel = distance;
 	
 	float t = m_dampingK / (2.0f * dampingRate);
 	float springK = t * t;
 	springAccel *= springK;
 	//加速度を決定。
-	Vector3 vt = moveSpeed;
+	CVector3 vt = moveSpeed;
 	vt *= m_dampingK;
 	springAccel -= vt;
 
@@ -107,8 +107,8 @@ Vector3 SpringCamera::CalcSpringVector(const Vector3& positionNow, const Vector3
 		moveSpeed.Normalize();
 		moveSpeed *= maxMoveSpeed;
 	}
-	Vector3 newPos = positionNow;
-	Vector3 addPos = moveSpeed;
+	CVector3 newPos = positionNow;
+	CVector3 addPos = moveSpeed;
 	addPos *= deltaTime;
 	newPos += addPos;
 	vt = positionTarget - newPos;
@@ -123,16 +123,16 @@ Vector3 SpringCamera::CalcSpringVector(const Vector3& positionNow, const Vector3
 
 }
 
-void SpringCamera::UpdateSpringCamera()
+void CSpringCamera::UpdateSpringCamera()
 {
 	m_dampingRate = CalcSpringScalar(m_dampingRate, m_targetDampingRate, m_dampingRateVel);
-	Vector3 target = CalcSpringVector(m_camera.GetTarget(), m_target, m_targetMoveSpeed, m_maxMoveSpeed, m_dampingRate);
-	Vector3 position = CalcSpringVector(m_camera.GetPosition(), m_position, m_positionMoveSpeed, m_maxMoveSpeed, m_dampingRate);
+	CVector3 target = CalcSpringVector(m_camera.GetTarget(), m_target, m_targetMoveSpeed, m_maxMoveSpeed, m_dampingRate);
+	CVector3 position = CalcSpringVector(m_camera.GetPosition(), m_position, m_positionMoveSpeed, m_maxMoveSpeed, m_dampingRate);
 	m_camera.SetTarget(target);
 	m_camera.SetPosition(position);
 }
 
-void SpringCamera::Update()
+void CSpringCamera::Update()
 {
 	UpdateSpringCamera();
 	UpdateCamera();

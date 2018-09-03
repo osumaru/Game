@@ -4,7 +4,7 @@
 
 #pragma once
 
-class CWeaponSelect : public GameObject
+class CWeaponSelect : public IGameObject
 {
 public:
 	//初期化
@@ -29,20 +29,20 @@ public:
 	};
 
 private:
-	Sprite m_weapon[enWeaponNum];			//武器
-	Texture m_weaponTexture[enWeaponNum];
+	CSprite m_weapon[enWeaponNum];			//武器
+	CTexture m_weaponTexture[enWeaponNum];
 
-	Sprite m_crossKey;					//十字キー
-	Texture m_crossKeyTexture;
+	CSprite m_crossKey;					//十字キー
+	CTexture m_crossKeyTexture;
 
-	Sprite m_LBButton;					//LBボタン
-	Texture m_LBButtonTexture;
+	CSprite m_LBButton;					//LBボタン
+	CTexture m_LBButtonTexture;
 
-	Sprite m_RBButton;					//RBボタン
-	Texture m_RBButtonTexture;
+	CSprite m_RBButton;					//RBボタン
+	CTexture m_RBButtonTexture;
 
-	Vector2 crossKeyPos;				//十字キーの座標
-	Vector2 size;						//サイズ
+	CVector2 crossKeyPos;				//十字キーの座標
+	CVector2 size;						//サイズ
 
 	int weaponNumber = enSword;			//変更する武器の番号
 	int weaponNumberOld = enSword;		//現在選択している武器の番号

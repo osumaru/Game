@@ -6,37 +6,37 @@ class Keyframe;
 /*!
 *@brief	アニメーションクリップのヘッダー。
 */
-struct AnimClipHeader {
+struct SAnimClipHeader {
 	std::uint32_t numKey;				//!<キーフレームの数。
 	std::uint32_t numAnimationEvent;	//!<アニメーションイベントの数。
 };
 /*!
 *@brief	アニメーションイベント
 */
-struct AnimationEvent {
+struct SAnimationEvent {
 	float	invokeTime;					//!<アニメーションイベントが発生する時間(単位:秒)
 	std::uint32_t eventNameLength;		//!<イベント名の長さ。
 };
 /*!
 *@brief	キーフレーム。
 */
-struct Keyframe {
+struct SKeyframe {
 	std::uint32_t boneIndex;	//!<ボーンインデックス。
 	float time;					//!<時間。
-	Matrix transform;			//!<トランスフォーム。
+	CMatrix transform;			//!<トランスフォーム。
 };
 /*!
 *@brief	キーフレーム。
 */
-struct KeyframeRow {
+struct SKeyframeRow {
 	std::uint32_t boneIndex;	//!<ボーンインデックス。
 	float time;					//!<時間。
-	Vector3 transform[4];		//!<トランスフォーム。
+	CVector3 transform[4];		//!<トランスフォーム。
 };
 
 //アニメーションクリップ(一つのアニメーションを管理するクラス)
 
-class AnimationClip : Uncopyable
+class CAnimationClip : Uncopyable
 {
 public:
 	/*
@@ -50,7 +50,7 @@ public:
 	void Update(float deltaTime);
 
 	//ボーンの行列を取得。
-	const std::vector<Matrix>& GetLocalMatrix() const
+	const std::vector<CMatrix>& GetLocalMatrix() const
 	{
 		return m_localMatrix;
 	}
@@ -80,10 +80,10 @@ private:
 	bool									m_isPlay;					//再生中か？
 	bool									m_isLoop;					//ループしてるか？
 	std::wstring							m_clipName;					//アニメーションクリップの名前。
-	std::vector<std::unique_ptr<Keyframe>>	m_keyframes;				//キーフレーム。
-	std::vector<std::vector<Keyframe*>>		m_keyFramePtrListArray;		//ボーン毎のキーフレームのリスト
-	std::vector<Keyframe*>*					m_topBoneKeyFrameList;		//一番最初のキーフレーム
-	std::vector<Matrix>						m_localMatrix;				//ボーンの行列を保存するためのもの
+	std::vector<std::unique_ptr<SKeyframe>>	m_keyframes;				//キーフレーム。
+	std::vector<std::vector<SKeyframe*>>	m_keyFramePtrListArray;		//ボーン毎のキーフレームのリスト
+	std::vector<SKeyframe*>*				m_topBoneKeyFrameList;		//一番最初のキーフレーム
+	std::vector<CMatrix>					m_localMatrix;				//ボーンの行列を保存するためのもの
 	float									m_frameTime;				//フレームを進めるためのタイマー
 	int										m_currentFrameNo;			//現在のフレームナンバー
 };

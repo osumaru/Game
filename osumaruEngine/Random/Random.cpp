@@ -4,20 +4,20 @@
 /*!
 * @brief	コンストラクタ。
 */
-Random::Random()
+CRandom::CRandom()
 {
 }
 /*!
 * @brief	デストラクタ。
 */
-Random::~Random()
+CRandom::~CRandom()
 {
 }
 /*!
 * @brief	乱数を初期化。
 *@param[in]	seed		ランダムシード。
 */
-void Random::Init(unsigned long seed)
+void CRandom::Init(unsigned long seed)
 {
 	mt[0] = seed & 0xffffffffUL;
 	for (mti = 1; mti<N; mti++) {

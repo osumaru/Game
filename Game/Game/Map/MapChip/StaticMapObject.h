@@ -19,7 +19,7 @@ public:
 	modelName	読み込むモデルの名前
 	anim		アニメーション付きのモデルの場合アニメーションを入れる入れ物
 	*/
-	void Init(const Vector3& position, const Quaternion& rotation, const wchar_t* modelName, Animation* anim = nullptr)override;
+	void Init(const CVector3& position, const CQuaternion& rotation, const wchar_t* modelName, CAnimation* anim = nullptr)override;
 
 	//更新関数
 	void Update()override;
@@ -28,6 +28,6 @@ public:
 	void Draw()override;
 
 private:
-	std::unique_ptr<RigidBody>		m_rigidBody;		//剛体
-	std::unique_ptr<MeshCollider>		m_boxCollider;		//コライダー
+	std::unique_ptr<CRigidBody>		m_rigidBody;		//剛体
+	std::unique_ptr<CMeshCollider>		m_boxCollider;		//コライダー
 };

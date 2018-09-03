@@ -1,14 +1,14 @@
 #pragma once
 //シェーダー(エフェクトファイル)を読み込むクラス
 
-class Shader : Uncopyable
+class CShader : Uncopyable
 {
 public:
 	//コンストラクタ
-	Shader();
+	CShader();
 
 	//デストラクタ
-	~Shader();
+	~CShader();
 
 	enum EnShaderType
 	{

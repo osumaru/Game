@@ -1,14 +1,14 @@
 #pragma once
 //定数バッファクラス
 
-class ConstantBuffer
+class CConstantBuffer
 {
 public:
 	//コンストラクタ
-	ConstantBuffer();
+	CConstantBuffer();
 
 	//デストラクタ
-	~ConstantBuffer();
+	~CConstantBuffer();
 
 	/*
 	定数バッファを作成

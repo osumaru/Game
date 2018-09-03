@@ -2,7 +2,7 @@
 #include "StopWatch.h"
 
 
-StopWatch::StopWatch() :
+CStopWatch::CStopWatch() :
 	m_start(0),
 	m_end(0),
 	m_frequency(1),
@@ -11,17 +11,17 @@ StopWatch::StopWatch() :
 {
 }
 
-StopWatch::~StopWatch()
+CStopWatch::~CStopWatch()
 {
 
 }
 
-void StopWatch::Start()
+void CStopWatch::Start()
 {
 	QueryPerformanceCounter((LARGE_INTEGER*)&m_start);
 }
 
-void StopWatch::Stop()
+void CStopWatch::Stop()
 {
 	QueryPerformanceFrequency((LARGE_INTEGER*)&m_frequency);
 	QueryPerformanceCounter((LARGE_INTEGER*)&m_end);

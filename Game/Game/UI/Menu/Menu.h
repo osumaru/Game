@@ -1,5 +1,5 @@
 #pragma once
-class CMenu : public GameObject
+class CMenu : public IGameObject
 {
 public:
 	CMenu();
@@ -10,11 +10,10 @@ public:
 	void Draw();
 
 private:
-	Sprite		m_menu;
-	Texture		m_Texture;
-	Sprite		m_number;
-	Texture		m_numberTexture;
-
+	CSprite		m_menu;
+	CTexture		m_Texture;
+	CSprite		m_number;
+	CTexture		m_numberTexture;
 	bool		m_Draw = false;
 
 };

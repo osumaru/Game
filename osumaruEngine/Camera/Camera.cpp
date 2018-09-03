@@ -2,9 +2,9 @@
 #include "Camera.h"
 #include "Engine.h"
 
-Camera::Camera() :
-	m_viewMatrix(Matrix::Identity),
-	m_projectionMatrix(Matrix::Identity),
+CCamera::CCamera() :
+	m_viewMatrix(CMatrix::Identity),
+	m_projectionMatrix(CMatrix::Identity),
 	m_position(0.0f, 0.0f, 0.0f),
 	m_target(0.0f, 0.0f, 0.0f),
 	m_up(0.0f, 1.0f, 0.0f),
@@ -15,111 +15,111 @@ Camera::Camera() :
 {
 }
 
-Camera::~Camera()
+CCamera::~CCamera()
 {
 }
 
-void Camera::SetAspect(float _aspect)
+void CCamera::SetAspect(float _aspect)
 {
 	m_Aspect = _aspect;
 }
 
-float Camera::GetAspect() const
+float CCamera::GetAspect() const
 {
 	return m_Aspect;
 }
 
-void  Camera::SetFar(float _far)
+void  CCamera::SetFar(float _far)
 {
 	m_Far = _far;
 }
 
-float Camera::GetFar() const
+float CCamera::GetFar() const
 {
 	return m_Far;
 }
 
-void Camera::SetNear(float _near)
+void CCamera::SetNear(float _near)
 {
 	m_Near = _near;
 }
 
-float Camera::GetNear() const
+float CCamera::GetNear() const
 {
 	return m_Near;
 }
 
-void Camera::SetAngle(float angle)
+void CCamera::SetAngle(float angle)
 {
 	m_angle = angle;
 }
 
-float Camera::GetAngle() const
+float CCamera::GetAngle() const
 {
 	return m_angle;
 }
 
-void Camera::SetTarget(const Vector3& target)
+void CCamera::SetTarget(const CVector3& target)
 {
 	m_target = target;
 }
 
-const Vector3& Camera::GetTarget() const
+const CVector3& CCamera::GetTarget() const
 {
 	return m_target;
 }
 
-void Camera::SetPosition(const Vector3& position)
+void CCamera::SetPosition(const CVector3& position)
 {
 	m_position = position;
 }
 
-const Vector3& Camera::GetPosition() const
+const CVector3& CCamera::GetPosition() const
 {
 	return m_position;
 }
 
-void Camera::SetUp(const Vector3& up)
+void CCamera::SetUp(const CVector3& up)
 {
 	m_up = up;
 }
 
-const Vector3& Camera::GetUp() const
+const CVector3& CCamera::GetUp() const
 {
 	return m_up;
 }
 
-const Vector3& Camera::GetFlont() const
+const CVector3& CCamera::GetFlont() const
 {
 	return m_flont;
 }
 
-const Vector3& Camera::GetRight() const
+const CVector3& CCamera::GetRight() const
 {
 	return m_right;
 }
 
-void Camera::SetViewMatrix(const Matrix& view)
+void CCamera::SetViewMatrix(const CMatrix& view)
 {
 	m_viewMatrix = view;
 }
 
-const Matrix& Camera::GetViewMatrix() const
+const CMatrix& CCamera::GetViewMatrix() const
 {
 	return m_viewMatrix;
 }
 
-void Camera::SetProjectionMatrix(const Matrix& projection)
+void CCamera::SetProjectionMatrix(const CMatrix& projection)
 {
 	m_projectionMatrix = projection;
 }
 
-const Matrix& Camera::GetProjectionMatrix() const
+const CMatrix& CCamera::GetProjectionMatrix() const
 {
 	return m_projectionMatrix;
 }
 
-void Camera::Update()
+void CCamera::Update()
 {
 	m_viewMatrix.MakeLookAt(m_position, m_target, m_up);
 	m_projectionMatrix.MakeProjectionMatrix(m_angle, m_Aspect, m_Near, m_Far);
@@ -131,10 +131,10 @@ void Camera::Update()
 
 }
 
-void Camera::Init()
+void CCamera::Init()
 {
-	m_position = Vector3(0.0f, 0.5f, 2.0f);
-	m_target = Vector3(0.0f, 0.5f, 0.0f);
-	m_up = Vector3(0.0f, 1.0f, 0.0f);
+	m_position = CVector3(0.0f, 0.5f, 2.0f);
+	m_target = CVector3(0.0f, 0.5f, 0.0f);
+	m_up = CVector3(0.0f, 1.0f, 0.0f);
 	Update();
 }

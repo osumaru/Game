@@ -1,14 +1,14 @@
 #pragma once
 #include "ICollider.h"
 
-class CapsuleCollider : public ICollider
+class CCapsuleCollider : public ICollider
 {
 public:
 	//コンストラクタ
-	CapsuleCollider();
+	CCapsuleCollider();
 
 	//デストラクタ
-	~CapsuleCollider();
+	~CCapsuleCollider();
 
 	/*
 	コライダーを作る初期化関数

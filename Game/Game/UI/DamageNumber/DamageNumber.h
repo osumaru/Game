@@ -25,6 +25,6 @@ public:
 
 private:
 	CNumber* m_number[3];	//数字のスプライト
-	Vector2 m_numPos;		//座標
-	Vector2 m_numSize;		//サイズ
+	CVector2 m_numPos;		//座標
+	CVector2 m_numSize;		//サイズ
 };

@@ -1,6 +1,6 @@
 #pragma once
 
-class CGameCamera : GameObject
+class CGameCamera : IGameObject
 {
 public:
 
@@ -14,12 +14,12 @@ public:
 		return gamecamera;
 	}
 
-	Matrix GetViewMatrix()
+	CMatrix GetViewMatrix()
 	{
 		return camera.GetViewMatrix();
 	}
 
-	Matrix GetProjectionMatrix()
+	CMatrix GetProjectionMatrix()
 	{
 		return camera.GetProjectionMatrix();
 	}
@@ -27,8 +27,8 @@ public:
 
 
 private:
-	Camera camera;
-	Vector3 m_cameraVec;
+	CCamera camera;
+	CVector3 m_cameraVec;
 };
 
 static CGameCamera& GetGameCamera()

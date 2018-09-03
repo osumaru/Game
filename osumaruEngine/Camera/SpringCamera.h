@@ -2,42 +2,42 @@
 #include "Camera.h"
 //バネカメラ
 
-class SpringCamera
+class CSpringCamera
 {
 public:
 	//コンストラクタ
-	SpringCamera();
+	CSpringCamera();
 
 	//デストラクタ
-	~SpringCamera();
+	~CSpringCamera();
 
 	/*
 	初期化
 	*/
-	void Init(const Vector3& target, const Vector3& position, float maxMoveSpeed);
+	void Init(const CVector3& target, const CVector3& position, float maxMoveSpeed);
 
 	
 	//目標となる注視点を設定。
-	void SetTarTarget(const Vector3& target)
+	void SetTarTarget(const CVector3& target)
 	{
 		m_target = target;
 	}
 
 	//注視点を設定
-	void SetTarget(const Vector3& target)
+	void SetTarget(const CVector3& target)
 	{
 		m_camera.SetTarget(target);
 	}
 
 	
 	//目標となる視点を設定
-	void SetTarPosition(const Vector3& position)
+	void SetTarPosition(const CVector3& position)
 	{
 		m_position = position;
 	}
 
 	//視点を設定
-	void SetPosition(const Vector3& position)
+	void SetPosition(const CVector3& position)
 	{
 		m_camera.SetPosition(position);
 	}
@@ -49,13 +49,13 @@ public:
 	}
 
 	//注視点を取得
-	const Vector3& GetTarget() const
+	const CVector3& GetTarget() const
 	{
 		return m_camera.GetTarget();
 	}
 
 	//視点を取得
-	const Vector3& GetPosition() const
+	const CVector3& GetPosition() const
 	{
 		return m_camera.GetPosition();
 	}
@@ -64,7 +64,7 @@ public:
 	void Update();
 
 	//カメラを取得
-	const Camera* GetCamera() const
+	const CCamera* GetCamera() const
 	{
 		return &m_camera;
 	}
@@ -79,13 +79,13 @@ public:
 	}
 
 	//目標となる注視点を取得
-	const Vector3& GetTarTarget() const
+	const CVector3& GetTarTarget() const
 	{
 		return m_target;
 	}
 
 	//目標となる視点を取得
-	const Vector3& GetTarPosition() const
+	const CVector3& GetTarPosition() const
 	{
 		return m_position;
 	}
@@ -113,15 +113,15 @@ public:
 	}
 private:
 
-	Vector3 CalcSpringVector(const Vector3& positionNow, const Vector3& positionTarget, Vector3& moveSpeed, float maxMoveSpeed, float dampingRate);
+	CVector3 CalcSpringVector(const CVector3& positionNow, const CVector3& positionTarget, CVector3& moveSpeed, float maxMoveSpeed, float dampingRate);
 
 	float CalcSpringScalar(float positionNow, float positionTarget, float& moveSpeed);
 private:
-	Camera		m_camera;
-	Vector3 m_target;
-	Vector3 m_position;
-	Vector3 m_targetMoveSpeed;
-	Vector3 m_positionMoveSpeed;
+	CCamera		m_camera;
+	CVector3 m_target;
+	CVector3 m_position;
+	CVector3 m_targetMoveSpeed;
+	CVector3 m_positionMoveSpeed;
 	float		m_maxMoveSpeed;
 	float		m_targetDampingRate;
 	float		m_dampingRate;

@@ -1,7 +1,7 @@
 #pragma once
 //プリミチィブクラス
 
-class Primitive
+class CPrimitive
 {
 public:
 	enum EnFormatIndex
@@ -18,10 +18,10 @@ public:
 	};
 
 	//コンストラクタ
-	Primitive();
+	CPrimitive();
 
 	//デストラクタ
-	~Primitive();
+	~CPrimitive();
 
 	/*
 	プリミティブを作成

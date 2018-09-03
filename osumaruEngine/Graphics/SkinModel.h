@@ -1,23 +1,23 @@
 #pragma once
 #include "SkinModelEffectFactory.h"
-class Skelton;
-class Animation;
+class CSkelton;
+class CAnimation;
 //スキンモデルクラス
 
-class SkinModel : Uncopyable
+class CSkinModel : Uncopyable
 {
 public:
-	struct SkinModelCB
+	struct SSkinModelCB
 	{
-		Matrix worldMat;		//ワールド行列
-		Matrix viewProjMat;			//ビュープロジェクション行列
+		CMatrix worldMat;		//ワールド行列
+		CMatrix viewProjMat;			//ビュープロジェクション行列
 	};
 
 	//コンストラクタ
-	SkinModel();
+	CSkinModel();
 
 	//デストラクタ
-	~SkinModel();
+	~CSkinModel();
 
 	/*
 	ワールド行列を更新
@@ -26,21 +26,21 @@ public:
 	scale		拡大
 	isZup		Zアップで吐き出したモデルはtrue,Yアップで吐き出した場合はfalse
 	*/
-	void Update(Vector3 position, Quaternion rotation, Vector3 scale, bool isZup = false);
+	void Update(const CVector3& position, const CQuaternion& rotation, const CVector3& scale, bool isZup = false);
 
 	/*
 	モデルの読み込み
 	filePath	モデルのファイルパス
 	animation	アニメーションが有るモデルならアニメーションのインスタンス
 	*/
-	void Load(wchar_t* filePath, Animation* animation = nullptr);
+	void Load(wchar_t* filePath, CAnimation* animation = nullptr);
 
 	/*
 	描画関数
 	view	ビュー行列
 	proj	プロジェクション行列
 	*/
-	void Draw(Matrix view, Matrix proj);
+	void Draw(const CMatrix& view, const CMatrix& proj);
 
 	//モデルを取得
 	DirectX::Model* GetBody()
@@ -49,21 +49,21 @@ public:
 	}
 
 	//スケルトンを取得
-	Skelton* GetSkelton()
+	CSkelton* GetSkelton()
 	{
 		return m_skelton.get();
 	}
 
 	//ワールド行列の取得
-	Matrix GetWorldMatrix()
+	const CMatrix& GetWorldMatrix()
 	{
 		return worldMatrix;
 	}
 
 private:
-	std::unique_ptr<Skelton>		m_skelton = nullptr;			//スケルトン
-	ConstantBuffer					constantBuffer;					//定数バッファ
+	std::unique_ptr<CSkelton>		m_skelton = nullptr;			//スケルトン
+	CConstantBuffer					constantBuffer;					//定数バッファ
 	std::unique_ptr<DirectX::Model> m_skinModel = nullptr;			//スキンモデル
-	Matrix							worldMatrix = Matrix::Identity;	//ワールド行列
+	CMatrix							worldMatrix = CMatrix::Identity;	//ワールド行列
 	
 };

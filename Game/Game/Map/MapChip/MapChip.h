@@ -3,7 +3,7 @@
 class Player;
 #include "../Map.h"
 
-class MapChip : public GameObject
+class MapChip : public IGameObject
 {
 public:
 
@@ -20,7 +20,7 @@ public:
 	modelName	読み込むモデルの名前
 	anim		アニメーション付きのモデルの場合アニメーションを入れる入れ物
 	*/
-	virtual void Init(const Vector3& position, const Quaternion& rotation, const wchar_t* modelName, Animation* anim = nullptr);
+	virtual void Init(const CVector3& position, const CQuaternion& rotation, const wchar_t* modelName, CAnimation* anim = nullptr);
 
 	//初期化関数
 	virtual bool Start()override;
@@ -49,12 +49,12 @@ protected:
 	void MapChipDelete();
 
 protected:
-	SkinModel		m_skinModel;				//スキンモデル
-	Vector3			m_position;					//座標
-	Quaternion		m_rotation;					//回転
-	Vector3			m_scale;					//拡大
+	CSkinModel		m_skinModel;				//スキンモデル
+	CVector3			m_position;					//座標
+	CQuaternion		m_rotation;					//回転
+	CVector3			m_scale;					//拡大
 	Map*			m_pMap;						//デリートする時のためのポインタ
 	std::list<MapChip*>::iterator m_iterator;	//自身のイテレーター
 	bool			m_isActive;					//アクティブか？
-	Matrix			m_worldMatrix;
+	CMatrix			m_worldMatrix;
 };

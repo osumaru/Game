@@ -21,10 +21,10 @@ void CDamegeNumber::DamageCalculation(CPlayer* player, CEnemy* enemy)
 
 
 {
-	Vector3 toEnemy = enemy->GetPosition() - player->GetPosition();
+	CVector3 toEnemy = enemy->GetPosition() - player->GetPosition();
 	float length = toEnemy.Length();
 	if (length < 30.0f) {
-		if (GetPad().IsTriggerButton(enButtonA)){			
+		if (Pad().IsTriggerButton(enButtonA)){			
 			int playerStrength = player->GetStatus().Strength;
 			playerStrength %= 1000;
 			if (playerStrength / 100 > 0) {
