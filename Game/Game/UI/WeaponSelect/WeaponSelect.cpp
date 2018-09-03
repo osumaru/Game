@@ -1,33 +1,33 @@
 #include "stdafx.h"
 #include "WeaponSelect.h"
 
-void WeaponSelect::Init()
+void CWeaponSelect::Init()
 {
 	crossKeyPos = { -520.0f, -240.0f };
 	size = { 50.0f,50.0f };
 
-	m_weaponTexture[Sword].Load(L"Assets/sprite/sword.png");
-	m_weapon[Sword].Init(&m_weaponTexture[Sword]);
-	m_weapon[Sword].SetPosition({ crossKeyPos.x , crossKeyPos.y + size.y });
-	m_weapon[Sword].SetSize(size);
+	m_weaponTexture[enSword].Load(L"Assets/sprite/sword.png");
+	m_weapon[enSword].Init(&m_weaponTexture[enSword]);
+	m_weapon[enSword].SetPosition({ crossKeyPos.x , crossKeyPos.y + size.y });
+	m_weapon[enSword].SetSize(size);
 
-	m_weaponTexture[LargeSword].Load(L"Assets/sprite/largeSword.png");
-	m_weapon[LargeSword].Init(&m_weaponTexture[LargeSword]);
-	m_weapon[LargeSword].SetPosition({ crossKeyPos.x + size.x, crossKeyPos.y });
-	m_weapon[LargeSword].SetSize(size);
+	m_weaponTexture[enLargeSword].Load(L"Assets/sprite/largeSword.png");
+	m_weapon[enLargeSword].Init(&m_weaponTexture[enLargeSword]);
+	m_weapon[enLargeSword].SetPosition({ crossKeyPos.x + size.x, crossKeyPos.y });
+	m_weapon[enLargeSword].SetSize(size);
 
-	m_weaponTexture[TwinSword].Load(L"Assets/sprite/twinSword.png");
-	m_weapon[TwinSword].Init(&m_weaponTexture[TwinSword]);
-	m_weapon[TwinSword].SetPosition({ crossKeyPos.x - size.x, crossKeyPos.y });
-	m_weapon[TwinSword].SetSize(size);
+	m_weaponTexture[enTwinSword].Load(L"Assets/sprite/twinSword.png");
+	m_weapon[enTwinSword].Init(&m_weaponTexture[enTwinSword]);
+	m_weapon[enTwinSword].SetPosition({ crossKeyPos.x - size.x, crossKeyPos.y });
+	m_weapon[enTwinSword].SetSize(size);
 
-	m_weaponTexture[Bow].Load(L"Assets/sprite/bow.png");
-	m_weapon[Bow].Init(&m_weaponTexture[Bow]);
-	m_weapon[Bow].SetPosition({ crossKeyPos.x, crossKeyPos.y - size.y });
-	m_weapon[Bow].SetSize(size);
+	m_weaponTexture[enBow].Load(L"Assets/sprite/bow.png");
+	m_weapon[enBow].Init(&m_weaponTexture[enBow]);
+	m_weapon[enBow].SetPosition({ crossKeyPos.x, crossKeyPos.y - size.y });
+	m_weapon[enBow].SetSize(size);
 
-	for (int i = 0; i < WeaponNum; i++) {
-		if (i == Sword) {
+	for (int i = 0; i < enWeaponNum; i++) {
+		if (i == enSword) {
 			m_selectFlag[i] = true;
 		}
 		else {
@@ -53,7 +53,7 @@ void WeaponSelect::Init()
 	
 }
 
-void WeaponSelect::Update()
+void CWeaponSelect::Update()
 {
 	//武器変更
 	ChangeWeapon();
@@ -65,7 +65,7 @@ void WeaponSelect::Update()
 	}
 
 	//選択した武器のUIの大きさを変える
-	for (int i = 0; i < WeaponNum; i++) {
+	for (int i = 0; i < enWeaponNum; i++) {
 		if (m_selectFlag[i] == true){
 			m_weapon[i].SetSize(size * 1.2f);
 		}
@@ -75,44 +75,44 @@ void WeaponSelect::Update()
 	}
 }
 
-void WeaponSelect::Draw()
+void CWeaponSelect::Draw()
 {
-	m_weapon[Sword].Draw();
-	m_weapon[LargeSword].Draw();
-	m_weapon[TwinSword].Draw();
-	m_weapon[Bow].Draw();
+	m_weapon[enSword].Draw();
+	m_weapon[enLargeSword].Draw();
+	m_weapon[enTwinSword].Draw();
+	m_weapon[enBow].Draw();
 	m_crossKey.Draw();
 	m_LBButton.Draw();
 	m_RBButton.Draw();
 }
 
-void WeaponSelect::ChangeWeapon()
+void CWeaponSelect::ChangeWeapon()
 {
 	//十字キーで武器を変更する
 	if (GetPad().IsTriggerButton(enButtonUp)) {
-		weaponNumber = Sword;
+		weaponNumber = enSword;
 	}
 	else if (GetPad().IsTriggerButton(enButtonRight)) {
-		weaponNumber = LargeSword;
+		weaponNumber = enLargeSword;
 	}
 	else if (GetPad().IsTriggerButton(enButtonDown)) {
-		weaponNumber = Bow;		
+		weaponNumber = enBow;		
 	}
 	else if (GetPad().IsTriggerButton(enButtonLeft)) {
-		weaponNumber = TwinSword;		
+		weaponNumber = enTwinSword;		
 	}
 
 	//RBボタンかLBボタンで武器を変更する
 	if (GetPad().IsTriggerButton(enButtonRB)) {
 		weaponNumber++;
-		if (weaponNumber > TwinSword) {
-			weaponNumber = Sword;
+		if (weaponNumber > enTwinSword) {
+			weaponNumber = enSword;
 		}
 	}
 	else if (GetPad().IsTriggerButton(enButtonLB)) {
 		weaponNumber--;
-		if (weaponNumber < Sword){
-			weaponNumber = TwinSword;
+		if (weaponNumber < enSword){
+			weaponNumber = enTwinSword;
 		}
 	}
 

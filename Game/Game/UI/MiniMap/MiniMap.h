@@ -1,6 +1,6 @@
 #pragma once
 
-class MiniMap : public GameObject
+class CMiniMap : public GameObject
 {
 public:
 	void Init();

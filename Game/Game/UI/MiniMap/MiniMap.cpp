@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "MiniMap.h"
 
-void MiniMap::Init()
+void CMiniMap::Init()
 {
 	m_miniMapTexture.Load(L"Assets/sprite/miniMap.png");
 	m_miniMap.Init(&m_miniMapTexture);
@@ -14,11 +14,11 @@ void MiniMap::Init()
 	m_playerIcon.SetSize({ 50.0f,50.0f });
 }
 
-void MiniMap::Update()
+void CMiniMap::Update()
 {
 }
 
-void MiniMap::Draw()
+void CMiniMap::Draw()
 {
 	m_miniMap.Draw();
 	m_playerIcon.Draw();

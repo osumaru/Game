@@ -1,6 +1,6 @@
 #pragma once
 
-class Enemy : public GameObject
+class CEnemy : public GameObject
 {
 public:
 	void Init(Vector3 position);

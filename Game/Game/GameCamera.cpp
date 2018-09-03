@@ -2,7 +2,7 @@
 #include "GameCamera.h"
 #include "Player\Player.h"
 
-void GameCamera::Init()
+void CGameCamera::Init()
 {
 	camera.Init();
 	camera.SetFar(10000.0f);
@@ -17,7 +17,7 @@ void GameCamera::Init()
 	m_cameraVec = camera.GetPosition();
 }
 
-void GameCamera::Update()
+void CGameCamera::Update()
 {
 	float rStick_x = GetPad().GetRightStickX() * 180 * GetGameTime().GetDeltaFrameTime();
 	float rStick_y = GetPad().GetRightStickY() * 180 * GetGameTime().GetDeltaFrameTime();
