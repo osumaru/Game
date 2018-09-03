@@ -5,8 +5,8 @@
 #include "../UI/MiniMap/MiniMap.h"
 #include "../UI/WeaponSelect/WeaponSelect.h"
 #include "../UI/PlayerHp/PlayerHp.h"
-
 void GameScene::Init()
+
 {
 	map = New<Map>(0);
 	map->Init(0);
