@@ -5,25 +5,37 @@
 #include "../UI/MiniMap/MiniMap.h"
 #include "../UI/WeaponSelect/WeaponSelect.h"
 #include "../UI/PlayerHp/PlayerHp.h"
-void GameScene::Init()
+#include "../UI/Menu/Menu.h"
+void CGameScene::Init()
+
 
 {
 	map = New<Map>(0);
 	map->Init(0);
 
-	MiniMap* miniMap = New<MiniMap>(0);
+
+	CMenu* menu = New<CMenu>(0);
+	menu->Init();
+
+	CMiniMap* miniMap = New<CMiniMap>(0);
 	miniMap->Init();
+
+
 
 	damageNumber.Init();
 
-	WeaponSelect* weaponSelect = New<WeaponSelect>(0);
+	CWeaponSelect* weaponSelect = New<CWeaponSelect>(0);
 	weaponSelect->Init();
 
 	PlayerHp* playerHp = New<PlayerHp>(0);
 	playerHp->Init();
+
+	
 }
 
-void GameScene::Update()
+void CGameScene::Update()
 {
-	damageNumber.DamageCalculation(&GetPlayer().GetInstance(), map->GetEnemy());
+
+	//damageNumber.DamageCalculation(&GetPlayer().GetInstance(), map->GetEnemy());
+
 }

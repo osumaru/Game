@@ -4,11 +4,13 @@
 
 #pragma once
 
-class Player;
-class Enemy;
+
+class CPlayer;
+class CEnemy;
+
 #include "Number.h"
 
-class DamegeNumber
+class CDamegeNumber
 {
 public:
 	//初期化
@@ -17,10 +19,12 @@ public:
 	//ダメージ計算
 	//player	プレイヤークラスのポインタ
 	//enemy		エネミークラスのポインタ
-	void DamageCalculation(Player* player, Enemy* enemy);
+
+	void DamageCalculation(CPlayer* player, CEnemy* enemy);
+
 
 private:
-	Number* m_number[3];	//数字のスプライト
+	CNumber* m_number[3];	//数字のスプライト
 	Vector2 m_numPos;		//座標
 	Vector2 m_numSize;		//サイズ
 };

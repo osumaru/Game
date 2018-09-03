@@ -4,7 +4,7 @@
 
 #pragma once
 
-class Number : public GameObject
+class CNumber : public GameObject
 {
 public:
 	//‰Šú‰»

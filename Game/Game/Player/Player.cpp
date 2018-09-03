@@ -2,7 +2,7 @@
 #include "Player.h"
 #include "../GameCamera.h"
 
-void Player::Init(Vector3 position)
+void CPlayer::Init(Vector3 position)
 {
 	m_skinmodel.Load(L"Assets/modelData/Player.cmo", &m_animation);
 	m_position = position;
@@ -27,7 +27,7 @@ void Player::Init(Vector3 position)
 	Add(this, 0);
 }
 
-void Player::Update()
+void CPlayer::Update()
 {
 
 	Move();					//移動処理
@@ -48,12 +48,12 @@ void Player::Update()
 
 }
 
-void Player::Draw()
+void CPlayer::Draw()
 {
 	m_skinmodel.Draw(GetGameCamera().GetViewMatrix(), GetGameCamera().GetProjectionMatrix());
 }
 
-void Player::Move()
+void CPlayer::Move()
 {
 
 	m_moveSpeed = m_characterController.GetMoveSpeed();
@@ -108,11 +108,11 @@ void Player::Move()
 
 	if(m_isSlip)
 	{
-		m_slipSpeed = m_slipSpeed - (3.0f * GetGameTime().GetDeltaFrameTime());
+		m_slipSpeed = m_slipSpeed - (60.0f * GetGameTime().GetDeltaFrameTime());
 		if (m_slipSpeed <= 0)
 		{
 			m_isSlip = false;
-			m_slipSpeed = 6.5f;
+			m_slipSpeed = 50.0f;
 			return;
 		}
 		Vector3 playerFlontVec = { m_skinmodel.GetWorldMatrix().m[2][0],0.0f,m_skinmodel.GetWorldMatrix().m[2][2] };
@@ -127,10 +127,11 @@ void Player::Move()
 
 }
 
-void Player::Rotation()
+void CPlayer::Rotation()
 {
 
 	Vector3 playerVec = m_moveSpeed;
+	playerVec.y = 0.0f;
 
 
 	if (playerVec.LengthSq() > 0.001f)
@@ -146,7 +147,7 @@ void Player::Rotation()
 
 }
 
-void Player::AnimationMove()
+void CPlayer::AnimationMove()
 {
 
 	if (GetPad().IsTriggerButton(enButtonA))
@@ -158,7 +159,7 @@ void Player::AnimationMove()
 
 }
 
-void Player::StatusCalculation()
+void CPlayer::StatusCalculation()
 {
 	//レベルアップの処理
 	if (m_status.NextExp <= m_status.ExperiencePoint)
@@ -203,7 +204,7 @@ void Player::StatusCalculation()
 
 }
 
-void  Player::WeaponChange()
+void  CPlayer::WeaponChange()
 {
 
 
