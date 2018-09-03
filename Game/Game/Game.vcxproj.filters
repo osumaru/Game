@@ -49,6 +49,9 @@
     <Filter Include="ソース ファイル\UI\MiniMap">
       <UniqueIdentifier>{a154942c-4880-4acf-8542-357018c797c9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Item">
+      <UniqueIdentifier>{fe491995-d611-4183-8285-c214638a84fe}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -93,14 +96,14 @@
     <ClCompile Include="UI\PlayerHp\PlayerHp.cpp">
       <Filter>ソース ファイル\UI\PlayerHp</Filter>
     </ClCompile>
-    <ClCompile Include="Enemy\EnemyManager.cpp">
-      <Filter>ソース ファイル\Enemy</Filter>
-    </ClCompile>
     <ClCompile Include="UI\MiniMap\MiniMap.cpp">
       <Filter>ソース ファイル\UI\MiniMap</Filter>
     </ClCompile>
     <ClCompile Include="UI\Menu\Menu.cpp">
       <Filter>ソース ファイル\UI\Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="Itam\RecoveryItem.cpp">
+      <Filter>ソース ファイル\Item</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -143,14 +146,14 @@
     <ClInclude Include="UI\PlayerHp\PlayerHp.h">
       <Filter>ソース ファイル\UI\PlayerHp</Filter>
     </ClInclude>
-    <ClInclude Include="Enemy\EnemyManager.h">
-      <Filter>ソース ファイル\Enemy</Filter>
-    </ClInclude>
     <ClInclude Include="UI\MiniMap\MiniMap.h">
       <Filter>ソース ファイル\UI\MiniMap</Filter>
     </ClInclude>
     <ClInclude Include="UI\Menu\Menu.h">
       <Filter>ソース ファイル\UI\Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="Itam\RecoveryItem.h">
+      <Filter>ソース ファイル\Item</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -12,7 +12,9 @@ void CEnemy::Init(Vector3 position)
 
 void CEnemy::Update()
 {
+	//死亡時に回復アイテムとお金を出す
 	if (GetPad().IsTriggerButton(enButtonA)) {
+
 		Dead();
 	}
 
