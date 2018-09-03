@@ -1,6 +1,6 @@
 #pragma once
 //サウンドエンジン
-class SoundSource;
+class CSoundSource;
 #define INPUTCHANNELS 2  // number of source channels
 #define OUTPUTCHANNELS 8	//最大出力チャンネル数。
 #include "../Math\Math.h"
@@ -23,13 +23,13 @@ public:
 	void Update();
 	
 	//3Dサウンドリストに追加
-	void Add3dSound(SoundSource* sound)
+	void Add3dSound(CSoundSource* sound)
 	{
 		m_3dSound.push_back(sound);
 	}
 
 	//3Dサウンドリストから削除
-	void Delete3dSound(SoundSource* sound)
+	void Delete3dSound(CSoundSource* sound)
 	{
 		auto& it = std::find(m_3dSound.begin(), m_3dSound.end(), sound);
 		if (it != m_3dSound.end())
@@ -78,7 +78,7 @@ private:
 	DWORD					m_channelNum;
 	X3DAUDIO_LISTENER		m_3dListener;		//リスナー
 	X3DAUDIO_HANDLE			m_3dAudioHandle;	//３Dサウンドのハンドル
-	std::list<SoundSource*> m_3dSound;			//3Dサウンドのリスト
+	std::list<CSoundSource*> m_3dSound;			//3Dサウンドのリスト
 	IXAudio2*				m_xAudio;			//オーディオ
 	IXAudio2MasteringVoice* m_masteringVoice;	//マスターボイス
 };

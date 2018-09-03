@@ -35,7 +35,7 @@ void CSoundSource::Init(char* filePath, bool is3DSound)
 	m_dspSettings.pMatrixCoefficients = m_coefficients;
 	m_dspSettings.pDelayTimes = nullptr;
 	m_dspSettings.SrcChannelCount = INPUTCHANNELS;
-	m_dspSettings.DstChannelCount = GetSoundEngine().GetChannelNum();
+	m_dspSettings.DstChannelCount = SoundEngine().GetChannelNum();
 	m_dspSettings.DopplerFactor = 1.0f;
 	m_dspSettings.LPFDirectCoefficient = 0.82142854f;
 	m_dspSettings.LPFReverbCoefficient = 0.75f;
@@ -47,7 +47,7 @@ void CSoundSource::Init(char* filePath, bool is3DSound)
 	m_is3DSound = is3DSound;
 	if (m_is3DSound)
 	{
-		GetSoundEngine().Add3dSound(this);
+		SoundEngine().Add3dSound(this);
 	}
 }
 

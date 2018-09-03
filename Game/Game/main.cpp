@@ -1,5 +1,4 @@
 #include "stdafx.h"
-#include "Test.h"
 #include "GameCamera.h"
 #include "Player\Player.h"
 #include "Scene\GameScene.h"
@@ -13,9 +12,9 @@ int WINAPI wWinMain(
 )
 {
 	//Direct3D‚ğ‰Šú‰»
-	GetEngine().InitD3D(hInst);
+	Engine().InitD3D(hInst);
 	GetGameCamera().Init();
 	New<CGameScene>(0)->Init();
-	GetEngine().GameLoop();
+	Engine().GameLoop();
 	return 0;
 }

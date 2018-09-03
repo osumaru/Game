@@ -1,6 +1,6 @@
 #pragma once
 
-class CMiniMap : public GameObject
+class CMiniMap : public IGameObject
 {
 public:
 	void Init();
@@ -10,9 +10,9 @@ public:
 	void Draw();
 
 private:
-	Sprite m_miniMap;
-	Texture m_miniMapTexture;
+	CSprite m_miniMap;
+	CTexture m_miniMapTexture;
 
-	Sprite m_playerIcon;
-	Texture m_playerIconTexture;
+	CSprite m_playerIcon;
+	CTexture m_playerIconTexture;
 };

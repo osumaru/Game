@@ -2,7 +2,7 @@
 #include "Skelton.h"
 
 
-Bone::Bone(std::unique_ptr<wchar_t[]> boneName, int boneID, int parentID, const Matrix& worldMat, const Matrix& invWorldMat) :
+CBone::CBone(std::unique_ptr<wchar_t[]> boneName, int boneID, int parentID, const CMatrix& worldMat, const CMatrix& invWorldMat) :
 	m_boneName(std::move(boneName)),
 	m_boneID(boneID),
 	m_parentID(parentID),
@@ -14,7 +14,7 @@ Bone::Bone(std::unique_ptr<wchar_t[]> boneName, int boneID, int parentID, const 
 
 }
 
-Skelton::Skelton() :
+CSkelton::CSkelton() :
 	m_bones(),
 	m_structuredBuffer(nullptr),
 	m_shaderResourceView(nullptr),
@@ -23,7 +23,7 @@ Skelton::Skelton() :
 
 }
 
-Skelton::~Skelton()
+CSkelton::~CSkelton()
 {
 	if (m_structuredBuffer != nullptr)
 	{
@@ -38,7 +38,7 @@ Skelton::~Skelton()
 	}
 }
 
-bool Skelton::Load(wchar_t* filePath)
+bool CSkelton::Load(wchar_t* filePath)
 {
 	FILE* fp = NULL;
 	fp = _wfopen(filePath, L"rb");
@@ -59,14 +59,14 @@ bool Skelton::Load(wchar_t* filePath)
 		int parentId;
 		fread(&parentId, sizeof(parentId), 1, fp);
 		//バインドポーズを取得。
-		Vector3 bindPose[4];
+		CVector3 bindPose[4];
 		fread(&bindPose, sizeof(bindPose), 1, fp);
 		//バインドポーズの逆数を取得。
 		CVector3 invBindPose[4];
 		fread(&invBindPose, sizeof(invBindPose), 1, fp);
 
 		//バインドポーズ。
-		Matrix bindPoseMatrix;
+		CMatrix bindPoseMatrix;
 		memcpy(bindPoseMatrix.m[0], &bindPose[0], sizeof(bindPose[0]));
 		memcpy(bindPoseMatrix.m[1], &bindPose[1], sizeof(bindPose[1]));
 		memcpy(bindPoseMatrix.m[2], &bindPose[2], sizeof(bindPose[2]));
@@ -94,7 +94,7 @@ bool Skelton::Load(wchar_t* filePath)
 		//bindPoseMatrix.m[3][1] = swap;
 
 		//バインドポーズの逆行列。
-		Matrix invBindPoseMatrix;
+		CMatrix invBindPoseMatrix;
 		memcpy(invBindPoseMatrix.m[0], &invBindPose[0], sizeof(invBindPose[0]));
 		memcpy(invBindPoseMatrix.m[1], &invBindPose[1], sizeof(invBindPose[1]));
 		memcpy(invBindPoseMatrix.m[2], &invBindPose[2], sizeof(invBindPose[2]));
@@ -124,7 +124,7 @@ bool Skelton::Load(wchar_t* filePath)
 		std::unique_ptr<wchar_t[]> boneName;
 		boneName = std::make_unique<wchar_t[]>(256);
 		mbstowcs(boneName.get(), name.get(), 256);
-		std::unique_ptr<Bone> bone = std::make_unique<Bone>(std::move(boneName), i, parentId, bindPoseMatrix, invBindPoseMatrix);
+		std::unique_ptr<CBone> bone = std::make_unique<CBone>(std::move(boneName), i, parentId, bindPoseMatrix, invBindPoseMatrix);
 		m_bones.push_back(std::move(bone));
 	}
 	fclose(fp);
@@ -134,7 +134,7 @@ bool Skelton::Load(wchar_t* filePath)
 		if (bone->GetParentID() != -1)
 		{
 			m_bones[bone->GetParentID()]->AddChildren(bone.get());
-			Matrix localMat;
+			CMatrix localMat;
 			localMat.Mul(bone->GetWorldMatrix(), m_bones[bone->GetParentID()]->GetInvMatrix());
 			bone->SetLocalMatrix(localMat);
 		}
@@ -145,14 +145,14 @@ bool Skelton::Load(wchar_t* filePath)
 	}
 
 
-	m_boneMat = std::make_unique<Matrix[]>(m_bones.size());
+	m_boneMat = std::make_unique<CMatrix[]>(m_bones.size());
 	for (int i = 0;i < m_bones.size();i++)
 	{
 		m_boneMat[i] = m_bones[i]->GetLocalMatrix();
 	}
 	D3D11_BUFFER_DESC desc;
-	desc.ByteWidth = m_bones.size() * sizeof(Matrix);
-	desc.StructureByteStride = sizeof(Matrix);
+	desc.ByteWidth = m_bones.size() * sizeof(CMatrix);
+	desc.StructureByteStride = sizeof(CMatrix);
 	desc.BindFlags = D3D11_BIND_SHADER_RESOURCE;
 	desc.Usage = D3D11_USAGE_DEFAULT;
 	desc.CPUAccessFlags = 0;
@@ -168,11 +168,11 @@ bool Skelton::Load(wchar_t* filePath)
 	viewDesc.BufferEx.FirstElement = 0;
 	viewDesc.BufferEx.NumElements = m_bones.size();
 	GetDevice()->CreateShaderResourceView(m_structuredBuffer, &viewDesc, &m_shaderResourceView);
-	Update(Matrix::Identity);
+	Update(CMatrix::Identity);
 	return true;
 }
 
-void Skelton::Update(Matrix mat)
+void CSkelton::Update(CMatrix mat)
 {
 	for (auto& bone : m_bones)
 	{
@@ -184,10 +184,10 @@ void Skelton::Update(Matrix mat)
 	}
 }
 
-void Skelton::UpdateWorldMatrix(Bone* bone, Matrix mat)
+void CSkelton::UpdateWorldMatrix(CBone* bone, CMatrix mat)
 {
-	Matrix mBoneWorld;
-	Matrix localMatrix = bone->GetLocalMatrix();
+	CMatrix mBoneWorld;
+	CMatrix localMatrix = bone->GetLocalMatrix();
 	mBoneWorld.Mul(localMatrix, mat);
 
 	bone->SetWorldMatrix(mBoneWorld);
@@ -198,7 +198,7 @@ void Skelton::UpdateWorldMatrix(Bone* bone, Matrix mat)
 }
 
 
-void Skelton::Render()
+void CSkelton::Render()
 {
 	for (int i = 0;i < m_bones.size();i++)
 	{

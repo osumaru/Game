@@ -22,7 +22,7 @@
     <ProjectGuid>{860D6064-5724-42AC-B22A-4617041DBAE0}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>Game</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.10586.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -171,7 +171,6 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="Test.cpp" />
     <ClCompile Include="UI\DamageNumber\DamageNumber.cpp" />
     <ClCompile Include="UI\DamageNumber\Number.cpp" />
     <ClCompile Include="UI\Menu\Menu.cpp" />
@@ -188,7 +187,6 @@
     <ClInclude Include="Player\Player.h" />
     <ClInclude Include="Scene\GameScene.h" />
     <ClInclude Include="stdafx.h" />
-    <ClInclude Include="Test.h" />
     <ClInclude Include="UI\DamageNumber\DamageNumber.h" />
     <ClInclude Include="UI\DamageNumber\Number.h" />
     <ClInclude Include="UI\Menu\Menu.h" />

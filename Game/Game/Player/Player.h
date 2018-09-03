@@ -13,13 +13,13 @@ struct SplayerStatus
 
 };
 
-class CPlayer : public GameObject
+class CPlayer : public IGameObject
 {
 
 public:
 
 	//プレイヤーの初期化
-	void Init(Vector3 position);
+	void Init(CVector3 position);
 
 	//プレイヤーのインスタンスの取得
 	static CPlayer& GetInstance()
@@ -35,7 +35,7 @@ public:
 	void Draw()override;
 
 	//プレイヤーの座標を取得する関数
-	const Vector3 GetPosition()
+	const CVector3 GetPosition()
 	{
 		return m_position;
 	}
@@ -77,13 +77,13 @@ public:
 
 
 private:
-	Vector3				m_position;							//座標
-	Vector3				m_moveSpeed = Vector3::Zero;		//移動速度
-	Quaternion			m_rotation = Quaternion::Identity;	//回転
-	SkinModel			m_skinmodel;						//スキンモデル
-	CharacterController m_characterController;				//キャラクターコントローラー
-	Pad					m_pad;								//パッド
-	Animation			m_animation;						//アニメーション
+	CVector3				m_position;							//座標
+	CVector3				m_moveSpeed = CVector3::Zero;		//移動速度
+	CQuaternion			m_rotation = CQuaternion::Identity;	//回転
+	CSkinModel			m_skinmodel;						//スキンモデル
+	CCharacterController m_characterController;				//キャラクターコントローラー
+	CPad					m_pad;								//パッド
+	CAnimation			m_animation;						//アニメーション
 	SplayerStatus		m_status;							//プレイヤーのステータス
 	bool				m_isSlip = false;					//スリップ判定
 	float				m_slipSpeed = 50.0f;

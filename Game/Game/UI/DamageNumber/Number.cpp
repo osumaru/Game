@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "../DamageNumber/Number.h"
 
-void CNumber::Init(Vector2 numPos, Vector2 numSize)
+void CNumber::Init(CVector2 numPos, CVector2 numSize)
 {
 	for (int i = 0; i < 10; i++) {
 		wchar_t filePath[256];

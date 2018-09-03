@@ -8,7 +8,7 @@ void CAnimation::Init(wchar_t* animFilePath[], int animNum)
 	m_blendRate = 0.0f;
 	m_currentAnimationNum = 0;
 	m_curCurrentAnimationNum = 0;
-	m_animationClips.reset(new AnimationClip[animNum]);
+	m_animationClips.reset(new CAnimationClip[animNum]);
 	for (int i = 0;i < animNum;i++)
 	{
 		m_animationClips[i].Load(animFilePath[i]);

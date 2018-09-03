@@ -35,7 +35,7 @@ void CGameObjectManager::Execute()
 		}
 	}
 	
-	GetPhysicsWorld().Draw();
+	PhysicsWorld().Draw();
 	for (GameObjectList& objList : m_objectVector)
 	{
 		for (SGameObjectData& object : objList)

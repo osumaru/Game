@@ -2,7 +2,7 @@
 #include "Player.h"
 #include "../GameCamera.h"
 
-void CPlayer::Init(Vector3 position)
+void CPlayer::Init(CVector3 position)
 {
 	m_skinmodel.Load(L"Assets/modelData/Player.cmo", &m_animation);
 	m_position = position;
@@ -35,13 +35,13 @@ void CPlayer::Update()
 	AnimationMove();		//アニメーションの処理
 	StatusCalculation();	//ステータスの処理
 
-	if (GetPad().IsTriggerButton(enButtonB))
+	if (Pad().IsTriggerButton(enButtonB))
 	{
 		m_status.ExperiencePoint += 43;
 		m_status.AccumulationExp += 43;
 		
 	}
-	m_animation.Update(GetGameTime().GetDeltaFrameTime());
+	m_animation.Update(GameTime().GetDeltaFrameTime());
 	//スキンモデルの更新
 	m_skinmodel.Update(m_position, m_rotation, { 1.0f, 1.0f, 1.0f }, true);
 
@@ -58,22 +58,22 @@ void CPlayer::Move()
 
 	m_moveSpeed = m_characterController.GetMoveSpeed();
 
-	Vector3 moveSpeed;
-	moveSpeed.z = GetPad().GetLeftStickY() * GetGameTime().GetDeltaFrameTime() * 100;
-	moveSpeed.x = GetPad().GetLeftStickX() * GetGameTime().GetDeltaFrameTime() * 100;
+	CVector3 moveSpeed;
+	moveSpeed.z = Pad().GetLeftStickY() * GameTime().GetDeltaFrameTime() * 100;
+	moveSpeed.x = Pad().GetLeftStickX() * GameTime().GetDeltaFrameTime() * 100;
 
-	Matrix cameraVm = GetGameCamera().GetViewMatrix();
+	CMatrix cameraVm = GetGameCamera().GetViewMatrix();
 	cameraVm.Inverse();	//カメラのビュー行列の逆行列
 
 	//カメラの前方向
-	Vector3 cameraZ;
+	CVector3 cameraZ;
 	cameraZ.x = cameraVm.m[2][0];
 	cameraZ.y = 0.0f;
 	cameraZ.z = cameraVm.m[2][2];
 	cameraZ.Normalize();
 
 	//カメラの横方向
-	Vector3 cameraX;
+	CVector3 cameraX;
 	cameraX.x = cameraVm.m[0][0];
 	cameraX.y = 0.0f;
 	cameraX.z = cameraVm.m[0][2];
@@ -86,14 +86,14 @@ void CPlayer::Move()
 
 
 	//ダッシュの処理
-	if (GetPad().IsPressButton(enButtonRB))
+	if (Pad().IsPressButton(enButtonRB))
 	{
 		
 		m_moveSpeed.x *= 5.0f;
 		m_moveSpeed.z *= 5.0f;
 	}
 
-	else if (GetPad().IsTriggerButton(enButtonY))
+	else if (Pad().IsTriggerButton(enButtonY))
 	{
 
 		m_moveSpeed.y += 50.0f;
@@ -101,28 +101,28 @@ void CPlayer::Move()
 
 
 	//回避の処理
-	if (GetPad().IsTriggerButton(enButtonRightTrigger))
+	if (Pad().IsTriggerButton(enButtonRightTrigger))
 	{
 		m_isSlip = true;
 	}
 
 	if(m_isSlip)
 	{
-		m_slipSpeed = m_slipSpeed - (60.0f * GetGameTime().GetDeltaFrameTime());
+		m_slipSpeed = m_slipSpeed - (60.0f * GameTime().GetDeltaFrameTime());
 		if (m_slipSpeed <= 0)
 		{
 			m_isSlip = false;
 			m_slipSpeed = 50.0f;
 			return;
 		}
-		Vector3 playerFlontVec = { m_skinmodel.GetWorldMatrix().m[2][0],0.0f,m_skinmodel.GetWorldMatrix().m[2][2] };
+		CVector3 playerFlontVec = { m_skinmodel.GetWorldMatrix().m[2][0],0.0f,m_skinmodel.GetWorldMatrix().m[2][2] };
 		playerFlontVec.Normalize();
 		m_moveSpeed = playerFlontVec * m_slipSpeed;
 	}
 
 		m_characterController.SetMoveSpeed(m_moveSpeed);
 		m_characterController.SetPosition(m_position);
-		m_characterController.Execute(GetGameTime().GetDeltaFrameTime());
+		m_characterController.Execute(GameTime().GetDeltaFrameTime());
 		m_position = m_characterController.GetPosition();
 
 }
@@ -130,7 +130,7 @@ void CPlayer::Move()
 void CPlayer::Rotation()
 {
 
-	Vector3 playerVec = m_moveSpeed;
+	CVector3 playerVec = m_moveSpeed;
 	playerVec.y = 0.0f;
 
 
@@ -138,8 +138,8 @@ void CPlayer::Rotation()
 	{
 
 
-		Quaternion rot = Quaternion::Identity;
-		rot.SetRotation(Vector3::AxisY, atan2f(playerVec.x, playerVec.z));		//Y軸周りの回転
+		CQuaternion rot = CQuaternion::Identity;
+		rot.SetRotation(CVector3::AxisY, atan2f(playerVec.x, playerVec.z));		//Y軸周りの回転
 		m_rotation.Slerp(0.02f, m_rotation, rot);
 
 
@@ -150,12 +150,12 @@ void CPlayer::Rotation()
 void CPlayer::AnimationMove()
 {
 
-	if (GetPad().IsTriggerButton(enButtonA))
+	if (Pad().IsTriggerButton(enButtonA))
 	{
 		m_animation.Play(0);
 	}
 
-	m_animation.Update(GetGameTime().GetDeltaFrameTime());
+	m_animation.Update(GameTime().GetDeltaFrameTime());
 
 }
 

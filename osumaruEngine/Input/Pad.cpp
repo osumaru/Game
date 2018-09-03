@@ -55,7 +55,7 @@ void CPad::Update()
 	
 	if (result == ERROR_SUCCESS)
 	{
-		for (const CorrespondencePad& pad : correspondencePad)
+		for (const SCorrespondencePad& pad : correspondencePad)
 		{
 			if (m_state.Gamepad.wButtons & pad.padCode)
 			{
@@ -138,7 +138,7 @@ void CPad::Update()
 	else
 	{
 		//接続されてない場合キーボードで入力。
-		for (const CorrespondencePad& pad : correspondencePad)
+		for (const SCorrespondencePad& pad : correspondencePad)
 		{
 			if (GetAsyncKeyState(pad.keyCode))
 			{

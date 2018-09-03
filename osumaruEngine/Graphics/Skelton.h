@@ -5,7 +5,7 @@ class CBone
 {
 public:
 	//コンストラクタ
-	CBone(std::unique_ptr<wchar_t[]> boneName, int boneID, int parentID, const Matrix& worldMat, const Matrix& invWorldMat);
+	CBone(std::unique_ptr<wchar_t[]> boneName, int boneID, int parentID, const CMatrix& worldMat, const CMatrix& invWorldMat);
 
 	void AddChildren(CBone* children)
 	{

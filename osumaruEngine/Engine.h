@@ -127,7 +127,7 @@ static CEngine& Engine()
 template <class T, class... TArgs>
 static T* New(int priority, TArgs... args)
 {
-	return GetEngine().New<T, TArgs...>(priority, args...);
+	return Engine().New<T, TArgs...>(priority, args...);
 }
 //インスタンスの削除
 static void Delete(IGameObject* deleteObject)
@@ -161,7 +161,7 @@ static CPhysicsWorld& PhysicsWorld()
 	return Engine().PhysicsWorld();
 }
 
-static CSoundEngine& GetSoundEngine()
+static CSoundEngine& SoundEngine()
 {
 	return Engine().SoundEngine();
 }

@@ -31,7 +31,7 @@ void CSkinModel::Load(wchar_t* filePath, CAnimation* animation)
 			animation->SetSkelton(skelton.get());
 		}
 		m_skelton = std::move(skelton);
-		SkinModelEffectFactory effectFactory(GetDevice());
+		CSkinModelEffectFactory effectFactory(GetDevice());
 		auto onFindBone = [&](
 			const wchar_t* boneName,
 			const VSD3DStarter::Bone* bone,
@@ -47,12 +47,12 @@ void CSkinModel::Load(wchar_t* filePath, CAnimation* animation)
 	}
 	else
 	{
-		SkinModelEffectFactory effectFactory(GetDevice());
+		CSkinModelEffectFactory effectFactory(GetDevice());
 		m_skinModel = Model::CreateFromCMO(GetDevice(), filePath, effectFactory);
 	}
 }
 
-void CSkinModel::Update(CVector3 position, CQuaternion rotation, CVector3 scale, bool isZup)
+void CSkinModel::Update(const CVector3& position, const CQuaternion& rotation, const CVector3& scale, bool isZup)
 {
 
 	CMatrix biMat = CMatrix::Identity;
@@ -78,12 +78,12 @@ void CSkinModel::Update(CVector3 position, CQuaternion rotation, CVector3 scale,
 }
 
 
-void SkinModel::Draw(Matrix view, Matrix projection)
+void CSkinModel::Draw(const CMatrix& view, const CMatrix& projection)
 {
 	DirectX::CommonStates common(GetDevice());
-	Matrix world = Matrix::Identity;
-	SkinModelCB cb;
-	Matrix viewProjMat;
+	CMatrix world = CMatrix::Identity;
+	SSkinModelCB cb;
+	CMatrix viewProjMat;
 	viewProjMat.Mul(view, projection);
 	cb.viewProjMat = viewProjMat;
 	cb.worldMat = worldMatrix;

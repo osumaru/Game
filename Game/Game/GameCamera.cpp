@@ -19,27 +19,27 @@ void CGameCamera::Init()
 
 void CGameCamera::Update()
 {
-	float rStick_x = GetPad().GetRightStickX() * 180 * GetGameTime().GetDeltaFrameTime();
-	float rStick_y = GetPad().GetRightStickY() * 180 * GetGameTime().GetDeltaFrameTime();
+	float rStick_x = Pad().GetRightStickX() * 180 * GameTime().GetDeltaFrameTime();
+	float rStick_y = Pad().GetRightStickY() * 180 * GameTime().GetDeltaFrameTime();
 
 	if (fabsf(rStick_x) > 0.0f) {
 		//Y軸周りの回転
-		Matrix matrix;
+		CMatrix matrix;
 		matrix.MakeRotationY(0.01f * rStick_x);
 		matrix.Mul(m_cameraVec);
 	}
 	if (fabsf(rStick_y) > 0.0f) {
 		//X軸周りの回転
-		Vector3 rotAxis;
-		rotAxis.Cross(Vector3::Up, m_cameraVec);
+		CVector3 rotAxis;
+		rotAxis.Cross(CVector3::Up, m_cameraVec);
 		rotAxis.Normalize();
-		Matrix matrix;
+		CMatrix matrix;
 		matrix.MakeRotationAxis(rotAxis, 0.01f * rStick_y);
 		//1フレーム前のカメラベクトル
-		Vector3 cameraVecOld = m_cameraVec;
+		CVector3 cameraVecOld = m_cameraVec;
 
 		matrix.Mul(m_cameraVec);
-		Vector3 cameraDir = m_cameraVec;
+		CVector3 cameraDir = m_cameraVec;
 		cameraDir.Normalize();
 
 		if (cameraDir.y < -0.9f) {
@@ -50,7 +50,7 @@ void CGameCamera::Update()
 		}
 	}
 
-	Vector3 position = GetPlayer().GetPosition();
+	CVector3 position = GetPlayer().GetPosition();
 	float interporation = 1.0f;
 	//position.y += interporation;
 	camera.SetTarget(position);

@@ -9,7 +9,7 @@ MapChip::MapChip():
 	m_pMap(nullptr),
 	m_iterator(),
 	m_isActive(true),
-	m_worldMatrix(Matrix::Identity)
+	m_worldMatrix(CMatrix::Identity)
 {
 }
 
@@ -17,7 +17,7 @@ MapChip::~MapChip()
 {
 }
 
-void MapChip::Init(const Vector3& position, const Quaternion& rotation, const wchar_t* modelName, Animation* anim)
+void MapChip::Init(const CVector3& position, const CQuaternion& rotation, const wchar_t* modelName, CAnimation* anim)
 {
 	//ÉâÉCÉgÇÃê›íË
 	//float ambientLightColor = 0.4f;

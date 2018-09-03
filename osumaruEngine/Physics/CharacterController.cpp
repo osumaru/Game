@@ -220,7 +220,7 @@ void CCharacterController::Init(float radius, float height, const CVector3& posi
 void CCharacterController::Execute(float deltaTime)
 {
 	StaticExecute();
-	PhysicsWorld& physicsWorld = GetPhysicsWorld();
+	CPhysicsWorld& physicsWorld = PhysicsWorld();
 	//速度に重力加速度を加える。
 	m_moveSpeed.y += m_gravity * deltaTime;
 	//次の移動先となる座標を計算する。
@@ -476,7 +476,7 @@ void CCharacterController::StaticExecute()
 		callback.me = m_rigidBody.GetBody();
 		callback.startPos = startPos;
 		callback.ray.Set(end.getOrigin() - start.getOrigin());
-		GetPhysicsWorld().ConvexSweepTest((const btConvexShape*)m_collider.GetBody(), start, end, callback);
+		PhysicsWorld().ConvexSweepTest((const btConvexShape*)m_collider.GetBody(), start, end, callback);
 		//もしレイが当たっていて、さらに押し戻す方向とオブジェクトの移動方向が一致している場合(引っ付き防止)
 		if(callback.isHit && callback.isRay /*&& fabs(rayLength - callback.dist) < m_radius + 0.1f*/)
 		{

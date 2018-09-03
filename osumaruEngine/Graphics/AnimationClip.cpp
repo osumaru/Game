@@ -35,9 +35,9 @@ void CAnimationClip::Load(wchar_t * filePath)
 	fread(keyframes.get(), sizeof(SKeyframeRow), header.numKey, fp);
 	fclose(fp);
 	for (auto i = 0; i < header.numKey; i++) {
-		auto keyframe = std::make_unique<Keyframe>();
+		auto keyframe = std::make_unique<SKeyframe>();
 		keyframe->boneIndex = keyframes[i].boneIndex;
-		keyframe->transform = Matrix::Identity;
+		keyframe->transform = CMatrix::Identity;
 		keyframe->time = keyframes[i].time;
 		for (auto j = 0; j < 4; j++) {
 			keyframe->transform.m[j][0] = keyframes[i].transform[j].x;
@@ -66,9 +66,8 @@ void CAnimationClip::Load(wchar_t * filePath)
 		}
 		else
 		{
-			m_localMatrix[i] = Matrix::Identity;
+			m_localMatrix[i] = CMatrix::Identity;
 		}
-
 	}
 }
 

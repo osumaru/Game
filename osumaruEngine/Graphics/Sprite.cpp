@@ -19,11 +19,11 @@ CSprite::~CSprite()
 }
 
 
-void CSprite::Init(Texture* texture)
+void CSprite::Init(CTexture* texture)
 {
 	m_pTexture = texture;
-	m_vertexShader.Load("Assets/shader/sprite.fx", "VSMain", Shader::enVS);
-	m_pixelShader.Load("Assets/shader/sprite.fx", "PSMain", Shader::enPS);
+	m_vertexShader.Load("Assets/shader/sprite.fx", "VSMain", CShader::enVS);
+	m_pixelShader.Load("Assets/shader/sprite.fx", "PSMain", CShader::enPS);
 	SVSLayout vertexBufferLayout[4] = 
 	{
 		{ { -1.0f,  1.0f, 0.0f, 1.0f } , { 0.0f, 0.0f } },

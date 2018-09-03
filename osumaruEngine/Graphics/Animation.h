@@ -50,7 +50,7 @@ private:
 	std::unique_ptr<CAnimationClip[]>	m_animationClips = nullptr;		//アニメーションクリップの配列
 	int									m_currentAnimationNum = 0;		//今再生しているアニメーションの番号
 	int									m_curCurrentAnimationNum = 0;	//ひとつ前に再生していたアニメーションの番号
-	Skelton*							m_skelton = nullptr;			//スケルトンの番号
+	CSkelton*							m_skelton = nullptr;			//スケルトンの番号
 	float								m_blendRate = 0.0f;				//アニメーション補間時のレート
 	bool								m_isInterpolation = false;		//補間しているか？
 	float								m_interpolationTime = 1.0f;		//アニメーション補間時の経過させる時間

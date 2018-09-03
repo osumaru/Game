@@ -36,14 +36,14 @@ void CPhysicsWorld::Init()
 		m_pCollisionConfig.get()
 	));
 	m_pDynamicWorld->setGravity(btVector3(0, -10, 0));
-	m_pRigidBodyDraw.reset(new RigidBodyDraw);
+	m_pRigidBodyDraw.reset(new CRigidBodyDraw);
 	m_pRigidBodyDraw->Init();
 	m_pDynamicWorld->setDebugDrawer(m_pRigidBodyDraw.get());
 }
 
 void CPhysicsWorld::Update()
 {
-	m_pDynamicWorld->stepSimulation(GetGameTime().GetDeltaFrameTime());
+	m_pDynamicWorld->stepSimulation(GameTime().GetDeltaFrameTime());
 }
 
 void CPhysicsWorld::Draw()

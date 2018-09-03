@@ -123,7 +123,7 @@ CVector3 CSpringCamera::CalcSpringVector(const CVector3& positionNow, const CVec
 
 }
 
-void CSpringCamera::UpdateCSpringCamera()
+void CSpringCamera::UpdateSpringCamera()
 {
 	m_dampingRate = CalcSpringScalar(m_dampingRate, m_targetDampingRate, m_dampingRateVel);
 	CVector3 target = CalcSpringVector(m_camera.GetTarget(), m_target, m_targetMoveSpeed, m_maxMoveSpeed, m_dampingRate);
@@ -134,6 +134,6 @@ void CSpringCamera::UpdateCSpringCamera()
 
 void CSpringCamera::Update()
 {
-	UpdateCSpringCamera();
+	UpdateSpringCamera();
 	UpdateCamera();
 }
