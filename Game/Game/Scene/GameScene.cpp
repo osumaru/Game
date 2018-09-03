@@ -1,22 +1,29 @@
 #include "stdafx.h"
 #include "../Scene/GameScene.h"
+#include "Map/Map.h"
+#include "../Player/Player.h"
 #include "../UI/MiniMap/MiniMap.h"
-#include "../UI/DamageNumber/DamageNumber.h"
 #include "../UI/WeaponSelect/WeaponSelect.h"
+#include "../UI/PlayerHp/PlayerHp.h"
 
 void GameScene::Init()
 {
+	map = New<Map>(0);
+	map->Init(0);
+
 	MiniMap* miniMap = New<MiniMap>(0);
 	miniMap->Init();
 
-	DamegeNumber* damageNumber = New<DamegeNumber>(0);
-	damageNumber->Init();
+	damageNumber.Init();
 
 	WeaponSelect* weaponSelect = New<WeaponSelect>(0);
 	weaponSelect->Init();
+
+	PlayerHp* playerHp = New<PlayerHp>(0);
+	playerHp->Init();
 }
 
 void GameScene::Update()
 {
-
+	damageNumber.DamageCalculation(&GetPlayer().GetInstance(), map->GetEnemy());
 }

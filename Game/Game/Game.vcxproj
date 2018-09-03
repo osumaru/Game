@@ -22,7 +22,7 @@
     <ProjectGuid>{860D6064-5724-42AC-B22A-4617041DBAE0}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>Game</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.10586.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -175,6 +175,7 @@
     <ClCompile Include="UI\DamageNumber\DamageNumber.cpp" />
     <ClCompile Include="UI\DamageNumber\Number.cpp" />
     <ClCompile Include="UI\MiniMap\MiniMap.cpp" />
+    <ClCompile Include="UI\PlayerHp\PlayerHp.cpp" />
     <ClCompile Include="UI\WeaponSelect\WeaponSelect.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -190,6 +191,7 @@
     <ClInclude Include="UI\DamageNumber\DamageNumber.h" />
     <ClInclude Include="UI\DamageNumber\Number.h" />
     <ClInclude Include="UI\MiniMap\MiniMap.h" />
+    <ClInclude Include="UI\PlayerHp\PlayerHp.h" />
     <ClInclude Include="UI\WeaponSelect\WeaponSelect.h" />
   </ItemGroup>
   <ItemGroup>
@@ -202,17 +204,18 @@
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <MeshContentTask Include="Assets\modelData\Barrel.FBX" />
     <MeshContentTask Include="Assets\modelData\map2.FBX" />
-    <MeshContentTask Include="Assets\modelData\Player.FBX" />
+    <MeshContentTask Include="Assets\modelData\ninja.FBX" />
+    <MeshContentTask Include="Assets\modelData\Player.fbx" />
+    <MeshContentTask Include="Assets\modelData\samurai.FBX" />
     <MeshContentTask Include="Assets\modelData\testChamferBox.FBX" />
     <MeshContentTask Include="Assets\modelData\testGround.FBX" />
     <MeshContentTask Include="Assets\modelData\testRectangle.FBX" />
     <MeshContentTask Include="Assets\modelData\U2.FBX" />
+    <MeshContentTask Include="Assets\modelData\Unitychan.FBX" />
+    <MeshContentTask Include="Assets\modelData\Unitychan2.fbx" />
     <MeshContentTask Include="Assets\modelData\Wave.FBX" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Assets\modelData\Player.tks" />
+    <MeshContentTask Include="Assets\modelData\zombi.FBX" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

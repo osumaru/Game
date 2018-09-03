@@ -55,44 +55,65 @@ void Player::Draw()
 
 void Player::Move()
 {
-	
 
-		Vector3 moveSpeed;
-		moveSpeed.z = GetPad().GetLeftStickY() * GetGameTime().GetDeltaFrameTime() * 5;
-		moveSpeed.x = GetPad().GetLeftStickX() * GetGameTime().GetDeltaFrameTime() * 5;
+	//m_moveSpeed = m_characterController.GetMoveSpeed();
 
-		Matrix cameraVm = GetGameCamera().GetViewMatrix();
-		cameraVm.Inverse();	//カメラのビュー行列の逆行列
+	Vector3 moveSpeed;
+	moveSpeed.z = GetPad().GetLeftStickY() * GetGameTime().GetDeltaFrameTime() * 5;
+	moveSpeed.x = GetPad().GetLeftStickX() * GetGameTime().GetDeltaFrameTime() * 5;
 
-		//カメラの前方向
-		Vector3 cameraZ;
-		cameraZ.x = cameraVm.m[2][0];
-		cameraZ.y = 0.0f;
-		cameraZ.z = cameraVm.m[2][2];
-		cameraZ.Normalize();
+	Matrix cameraVm = GetGameCamera().GetViewMatrix();
+	cameraVm.Inverse();	//カメラのビュー行列の逆行列
 
-		//カメラの横方向
-		Vector3 cameraX;
-		cameraX.x = cameraVm.m[0][0];
-		cameraX.y = 0.0f;
-		cameraX.z = cameraVm.m[0][2];
-		cameraX.Normalize();
+	//カメラの前方向
+	Vector3 cameraZ;
+	cameraZ.x = cameraVm.m[2][0];
+	cameraZ.y = 0.0f;
+	cameraZ.z = cameraVm.m[2][2];
+	cameraZ.Normalize();
 
-		//キャラクターを移動させる処理
-		m_moveSpeed.x = cameraX.x * moveSpeed.x + cameraZ.x * moveSpeed.z;
-		m_moveSpeed.z = cameraX.z * moveSpeed.x + cameraZ.z * moveSpeed.z;
+	//カメラの横方向
+	Vector3 cameraX;
+	cameraX.x = cameraVm.m[0][0];
+	cameraX.y = 0.0f;
+	cameraX.z = cameraVm.m[0][2];
+	cameraX.Normalize();
 
-		if (GetPad().IsPressButton(enButtonRB))
+	//キャラクターを移動させる処理
+	m_moveSpeed.x = cameraX.x * moveSpeed.x + cameraZ.x * moveSpeed.z;
+	//m_moveSpeed.y = 0;
+	m_moveSpeed.z = cameraX.z * moveSpeed.x + cameraZ.z * moveSpeed.z;
+
+	//ダッシュの処理
+	if (GetPad().IsPressButton(enButtonRB))
+	{
+		
+		m_moveSpeed *= 5.0f;
+	}
+
+
+	//回避の処理
+	if (GetPad().IsTriggerButton(enButtonRightTrigger))
+	{
+		m_isSlip = true;
+	}
+	if(m_isSlip)
+	{
+		m_slipSpeed = m_slipSpeed - (0.8f * GetGameTime().GetDeltaFrameTime());
+		if (m_slipSpeed <= 0)
 		{
-			m_moveSpeed *= 5;
-
+			m_isSlip = false;
+			m_slipSpeed = 8.0f;
+			return;
 		}
+		Vector3 playerFlontVec = { m_skinmodel.GetWorldMatrix().m[2][0],0.0f,m_skinmodel.GetWorldMatrix().m[2][2] };
+		playerFlontVec.Normalize();
+		m_moveSpeed = playerFlontVec * m_slipSpeed;
+	}
 
 		m_characterController.SetMoveSpeed(m_moveSpeed);
 		m_characterController.SetPosition(m_position);
 		m_characterController.Execute(GetGameTime().GetDeltaFrameTime());
-
-
 		m_position = m_characterController.GetPosition();
 
 }

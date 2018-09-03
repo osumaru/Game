@@ -1,6 +1,7 @@
 #pragma once
 class MapChip;
-class Player;
+class Enemy;
+
 //マップチップのタグ
 enum EnMapChipTag
 {
@@ -47,6 +48,12 @@ public:
 	*/
 	void MapChipErase(std::list<MapChip*>::iterator iterator);
 
+	Enemy* GetEnemy()
+	{
+		return enemy;
+	}
+
 private:
 	std::list<MapChip*> m_mapChip;					//マップチップ
+	Enemy* enemy = nullptr;
 };
