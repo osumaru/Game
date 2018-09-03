@@ -12,17 +12,17 @@ enum EnMapChipTag
 	enMapTagNum,
 };
 
-struct MapChipInfo
+struct SMapChipInfo
 {
 	wchar_t*			m_modelName;
-	Vector3		m_position;
-	Quaternion	m_rotation;
+	CVector3		m_position;
+	CQuaternion	m_rotation;
 	EnMapChipTag	m_tag;
 };
 
 //マップのオブジェクトを配置するクラス
 
-class Map : public GameObject
+class Map : public IGameObject
 {
 public:
 	//コンストラクタ

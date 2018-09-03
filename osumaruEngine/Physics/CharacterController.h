@@ -9,14 +9,14 @@ const float cPI = 3.14159265358979323846f;
 //キャラクターコントローラー
 //衝突解決と衝突判定をしてくれるクラス。
 
-class CharacterController
+class CCharacterController
 {
 public:
 	//コンストラクタ
-	CharacterController();
+	CCharacterController();
 
 	//デストラクタ
-	~CharacterController();
+	~CCharacterController();
 
 	/*
 	初期化関数
@@ -26,7 +26,7 @@ public:
 
 	コライダーはカプセルコライダーでキャラクターの原点が足元にあることを前提としている。
 	*/
-	void Init(float radius, float height, const Vector3& position);
+	void Init(float radius, float height, const CVector3& position);
 
 	//実行関数
 	void Execute(float deltaTime);
@@ -35,19 +35,19 @@ public:
 	void StaticExecute();
 
 	//座標を取得。
-	const Vector3& GetPosition() const
+	const CVector3& GetPosition() const
 	{
 		return m_position;
 	}
 
 	//座標を設定。
-	void SetPosition(const Vector3& pos)
+	void SetPosition(const CVector3& pos)
 	{
 		m_position = pos;
 	}
 
 	//移動速度を設定。
-	void SetMoveSpeed(const Vector3& moveSpeed)
+	void SetMoveSpeed(const CVector3& moveSpeed)
 	{
 		m_moveSpeed = moveSpeed;
 		//上向きに移動速度が与えられていた場合ジャンプするとみなす
@@ -58,7 +58,7 @@ public:
 	}
 	
 	//移動速度を取得。
-	const Vector3& GetMoveSpeed() const
+	const CVector3& GetMoveSpeed() const
 	{
 		return m_moveSpeed;
 	}
@@ -83,7 +83,7 @@ public:
 	}
 
 	//コライダーを取得。
-	const CapsuleCollider* GetCollider() const
+	const CCapsuleCollider* GetCollider() const
 	{
 		return &m_collider;
 	}
@@ -112,7 +112,7 @@ public:
 		return m_wallHitObject;
 	}
 
-	const Vector3& GetWallNormal() const
+	const CVector3& GetWallNormal() const
 	{
 		return m_wallNormal;
 	}
@@ -129,17 +129,17 @@ public:
 		return m_rigidBody;
 	}
 private:
-	Vector3		m_position;					//座標
-	Vector3		m_moveSpeed;				//移動速度
+	CVector3		m_position;					//座標
+	CVector3		m_moveSpeed;				//移動速度
 	bool			m_isJump;					//ジャンプしているか？
 	bool			m_isOnGround;				//地面に設置しているか？
-	CapsuleCollider	m_collider;					//コライダー
+	CCapsuleCollider	m_collider;					//コライダー
 	float			m_radius;					//半径
 	float			m_height;					//高さ
-	RigidBody		m_rigidBody;				//剛体
+	CRigidBody		m_rigidBody;				//剛体
 	float			m_gravity;					//重力
 	const btCollisionObject* m_groundHitObject;
 	const btCollisionObject* m_wallHitObject;
-	Vector3		m_wallNormal;
+	CVector3		m_wallNormal;
 	const float		m_rigidBodyManip;
 };

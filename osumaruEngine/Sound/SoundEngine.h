@@ -1,20 +1,20 @@
 #pragma once
 //サウンドエンジン
-class SoundSource;
+class CSoundSource;
 #define INPUTCHANNELS 2  // number of source channels
 #define OUTPUTCHANNELS 8	//最大出力チャンネル数。
 #include "../Math\Math.h"
 #include "../Math/Matrix.h"
 #include "../Math\Vector.h"
-class SoundEngine : Uncopyable
+class CSoundEngine : Uncopyable
 {
 public:
 
 	//コンストラクタ
-	SoundEngine();
+	CSoundEngine();
 
 	//デストラクタ
-	~SoundEngine();
+	~CSoundEngine();
 
 	//初期化
 	void Init();
@@ -23,13 +23,13 @@ public:
 	void Update();
 	
 	//3Dサウンドリストに追加
-	void Add3dSound(SoundSource* sound)
+	void Add3dSound(CSoundSource* sound)
 	{
 		m_3dSound.push_back(sound);
 	}
 
 	//3Dサウンドリストから削除
-	void Delete3dSound(SoundSource* sound)
+	void Delete3dSound(CSoundSource* sound)
 	{
 		auto& it = std::find(m_3dSound.begin(), m_3dSound.end(), sound);
 		if (it != m_3dSound.end())
@@ -39,7 +39,7 @@ public:
 	}
 
 	//リスナーの座標を設定
-	void SetListenerPosition(const Vector3& position)
+	void SetListenerPosition(const CVector3& position)
 	{
 		m_3dListener.Position.x = position.x;
 		m_3dListener.Position.y = position.y;
@@ -47,7 +47,7 @@ public:
 	}
 
 	//リスナーの前方向を設定
-	void SetListenerFront(const Vector3& front)
+	void SetListenerFront(const CVector3& front)
 	{
 		m_3dListener.OrientFront.x = front.x;
 		m_3dListener.OrientFront.y = front.y;
@@ -55,7 +55,7 @@ public:
 	}
 
 	//リスナーの上方向を設定
-	void SetListenerUp(const Vector3& up)
+	void SetListenerUp(const CVector3& up)
 	{
 		m_3dListener.OrientTop.x = up.x;
 		m_3dListener.OrientTop.y = up.y;
@@ -78,7 +78,7 @@ private:
 	DWORD					m_channelNum;
 	X3DAUDIO_LISTENER		m_3dListener;		//リスナー
 	X3DAUDIO_HANDLE			m_3dAudioHandle;	//３Dサウンドのハンドル
-	std::list<SoundSource*> m_3dSound;			//3Dサウンドのリスト
+	std::list<CSoundSource*> m_3dSound;			//3Dサウンドのリスト
 	IXAudio2*				m_xAudio;			//オーディオ
 	IXAudio2MasteringVoice* m_masteringVoice;	//マスターボイス
 };

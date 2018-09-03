@@ -1,11 +1,11 @@
 #include "engineStdafx.h"
 #include "SkinModelEffect.h"
 
-SkinModelEffect::SkinModelEffect()
+CSkinModelEffect::CSkinModelEffect()
 {
 	textureResource = nullptr;
-	vsShader.Load("Assets/shader/model.fx", "VSSkinMain", Shader::enVS);
-	psShader.Load("Assets/shader/model.fx", "PSSkinMain", Shader::enPS);
+	vsShader.Load("Assets/shader/model.fx", "VSSkinMain", CShader::enVS);
+	psShader.Load("Assets/shader/model.fx", "PSSkinMain", CShader::enPS);
 }
 
 void __cdecl ISkinModelEffect::Apply(_In_ ID3D11DeviceContext* deviceContext)
@@ -26,9 +26,9 @@ void __cdecl ISkinModelEffect::GetVertexShaderBytecode(_Out_ void const** pShade
 }
 
 
-NoSkinModelEffect::NoSkinModelEffect()
+CNoSkinModelEffect::CNoSkinModelEffect()
 {
 	textureResource = nullptr;
-	vsShader.Load("Assets/shader/model.fx", "VSMain", Shader::enVS);
-	psShader.Load("Assets/shader/model.fx", "PSMain", Shader::enPS);
+	vsShader.Load("Assets/shader/model.fx", "VSMain", CShader::enVS);
+	psShader.Load("Assets/shader/model.fx", "PSMain", CShader::enPS);
 }

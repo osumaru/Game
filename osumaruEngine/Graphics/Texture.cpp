@@ -3,13 +3,13 @@
 
 
 
-Texture::Texture() :
+CTexture::CTexture() :
 	m_pTexture(nullptr),
 	m_pShaderResource(nullptr)
 {
 }
 
-Texture::~Texture()
+CTexture::~CTexture()
 {
 	if (m_pTexture != nullptr)
 	{
@@ -24,12 +24,12 @@ Texture::~Texture()
 	}
 }
 
-void Texture::Load(const wchar_t* filepath)
+void CTexture::Load(const wchar_t* filepath)
 {
 	CreateWICTextureFromFile(GetDevice(), filepath, &m_pTexture, &m_pShaderResource);
 }
 
-void Texture::Create(int width, int height, EnTextureType textureType, DXGI_FORMAT format)
+void CTexture::Create(int width, int height, EnTextureType textureType, DXGI_FORMAT format)
 {
 	UINT bindFlags = 0;
 	switch (textureType)

@@ -3,22 +3,22 @@
 #include "Skelton.h"
 #include "Animation.h"
 
-SkinModel::SkinModel()
+CSkinModel::CSkinModel()
 {
 }
 
-SkinModel::~SkinModel()
+CSkinModel::~CSkinModel()
 {
 }
 
-void SkinModel::Load(wchar_t* filePath, Animation* animation)
+void CSkinModel::Load(wchar_t* filePath, CAnimation* animation)
 {
-	std::unique_ptr<Skelton> skelton;
-	skelton = std::make_unique<Skelton>();
-	SkinModelCB cb;
-	cb.worldMat = Matrix::Identity;
-	cb.viewProjMat = Matrix::Identity;
-	constantBuffer.Create(sizeof(SkinModelCB), &cb);
+	std::unique_ptr<CSkelton> skelton;
+	skelton = std::make_unique<CSkelton>();
+	SSkinModelCB cb;
+	cb.worldMat = CMatrix::Identity;
+	cb.viewProjMat = CMatrix::Identity;
+	constantBuffer.Create(sizeof(SSkinModelCB), &cb);
 	size_t pos = wcslen(filePath);
 	
 	wchar_t skeltonName[256] = {0};
@@ -31,7 +31,7 @@ void SkinModel::Load(wchar_t* filePath, Animation* animation)
 			animation->SetSkelton(skelton.get());
 		}
 		m_skelton = std::move(skelton);
-		SkinModelEffectFactory effectFactory(GetDevice());
+		CSkinModelEffectFactory effectFactory(GetDevice());
 		auto onFindBone = [&](
 			const wchar_t* boneName,
 			const VSD3DStarter::Bone* bone,
@@ -47,26 +47,26 @@ void SkinModel::Load(wchar_t* filePath, Animation* animation)
 	}
 	else
 	{
-		SkinModelEffectFactory effectFactory(GetDevice());
+		CSkinModelEffectFactory effectFactory(GetDevice());
 		m_skinModel = Model::CreateFromCMO(GetDevice(), filePath, effectFactory);
 	}
 }
 
-void SkinModel::Update(Vector3 position, Quaternion rotation, Vector3 scale, bool isZup)
+void CSkinModel::Update(const CVector3& position, const CQuaternion& rotation, const CVector3& scale, bool isZup)
 {
 
-	Matrix biMat = Matrix::Identity;
+	CMatrix biMat = CMatrix::Identity;
 	if (isZup)
 	{
-		Quaternion rot;
-		rot.SetRotationDeg(Vector3::AxisX, -90.0f);
+		CQuaternion rot;
+		rot.SetRotationDeg(CVector3::AxisX, -90.0f);
 		biMat.MakeRotationFromQuaternion(rot);
 	}
-	Matrix posMat;
+	CMatrix posMat;
 	posMat.MakeTranslation(position);
-	Matrix rotMat;
+	CMatrix rotMat;
 	rotMat.MakeRotationFromQuaternion(rotation);
-	Matrix scaleMat;
+	CMatrix scaleMat;
 	scaleMat.MakeScaling(scale);
 	worldMatrix.Mul(scaleMat, biMat);
 	worldMatrix.Mul(worldMatrix, rotMat);
@@ -78,12 +78,12 @@ void SkinModel::Update(Vector3 position, Quaternion rotation, Vector3 scale, boo
 }
 
 
-void SkinModel::Draw(Matrix view, Matrix projection)
+void CSkinModel::Draw(const CMatrix& view, const CMatrix& projection)
 {
 	DirectX::CommonStates common(GetDevice());
-	Matrix world = Matrix::Identity;
-	SkinModelCB cb;
-	Matrix viewProjMat;
+	CMatrix world = CMatrix::Identity;
+	SSkinModelCB cb;
+	CMatrix viewProjMat;
 	viewProjMat.Mul(view, projection);
 	cb.viewProjMat = viewProjMat;
 	cb.worldMat = worldMatrix;

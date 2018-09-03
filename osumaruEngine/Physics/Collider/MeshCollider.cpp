@@ -2,7 +2,7 @@
 #include "MeshCollider.h"
 #include "../../Graphics/SkinModel.h"
 
-void MeshCollider::CreateCollider(SkinModel* skinModel)
+void CMeshCollider::CreateCollider(CSkinModel* skinModel)
 {
 	DirectX::Model* model = skinModel->GetBody();
 	m_stridingMeshInterface.reset(new btTriangleIndexVertexArray);
@@ -21,23 +21,23 @@ void MeshCollider::CreateCollider(SkinModel* skinModel)
 
 
 			D3D11_MAPPED_SUBRESOURCE subresource;
-			GetEngine().GetDeviceContext()->Map(vertexBuffer, 0, D3D11_MAP_WRITE_NO_OVERWRITE, 0, &subresource);
+			Engine().GetDeviceContext()->Map(vertexBuffer, 0, D3D11_MAP_WRITE_NO_OVERWRITE, 0, &subresource);
 			char* pData = (char*)subresource.pData;
 			for (int i = 0;i < vertexCount;i++)
 			{
-				Vector3 vertexPos = *((Vector3*)pData);
+				CVector3 vertexPos = *((CVector3*)pData);
 				m_aabbMax.Max(vertexPos);
 				m_aabbMin.Min(vertexPos);
 				m_vertexBuffer.push_back(vertexPos);
 				pData += meshPart->vertexStride;
 			}
-			GetEngine().GetDeviceContext()->Unmap(vertexBuffer, 0);
+			Engine().GetDeviceContext()->Unmap(vertexBuffer, 0);
 
 
 			ID3D11Buffer* indexBuffer = meshPart->indexBuffer.Get();
 			D3D11_BUFFER_DESC indexDesc;
 			indexBuffer->GetDesc(&indexDesc);
-			HRESULT hr = GetEngine().GetDeviceContext()->Map(indexBuffer, 0, D3D11_MAP_WRITE_NO_OVERWRITE, 0, &subresource);
+			HRESULT hr = Engine().GetDeviceContext()->Map(indexBuffer, 0, D3D11_MAP_WRITE_NO_OVERWRITE, 0, &subresource);
 			pData = (char*)subresource.pData;
 			int indexStride = 0;
 			switch (meshPart->indexFormat)
@@ -74,7 +74,7 @@ void MeshCollider::CreateCollider(SkinModel* skinModel)
 	indexedMesh.m_triangleIndexStride = 12;
 	indexedMesh.m_numVertices = (unsigned int)m_vertexBuffer.size();
 	indexedMesh.m_vertexBase = (unsigned char*)&m_vertexBuffer[0];
-	indexedMesh.m_vertexStride = sizeof(Vector3);
+	indexedMesh.m_vertexStride = sizeof(CVector3);
 	m_stridingMeshInterface->addIndexedMesh(indexedMesh);
 	m_meshShape.reset(new btBvhTriangleMeshShape(m_stridingMeshInterface.get(), true));
 	

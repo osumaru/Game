@@ -20,27 +20,27 @@ public:
 
 protected:
 	ID3D11ShaderResourceView* textureResource;
-	ConstantBuffer constantBuffer;
-	Shader vsShader;
-	Shader psShader;
+	CConstantBuffer constantBuffer;
+	CShader vsShader;
+	CShader psShader;
 };
 
-class SkinModelEffect : public ISkinModelEffect
+class CSkinModelEffect : public ISkinModelEffect
 {
 public:
 
-	SkinModelEffect();
+	CSkinModelEffect();
 
 
 private:
 };
 
 
-class NoSkinModelEffect : public ISkinModelEffect
+class CNoSkinModelEffect : public ISkinModelEffect
 {
 public:
 
-	NoSkinModelEffect();
+	CNoSkinModelEffect();
 
 private:
 };

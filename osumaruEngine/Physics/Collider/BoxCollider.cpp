@@ -1,12 +1,12 @@
 #include "engineStdafx.h"
 #include "BoxCollider.h"
 
-BoxCollider::BoxCollider() :
+CBoxCollider::CBoxCollider() :
 	m_boxShape(nullptr)
 {
 }
 
-BoxCollider::~BoxCollider()
+CBoxCollider::~CBoxCollider()
 {
 }
 

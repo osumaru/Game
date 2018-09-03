@@ -1,20 +1,20 @@
 #pragma once
 
-class CEnemy : public GameObject
+class CEnemy : public IGameObject
 {
 public:
-	void Init(Vector3 position);
+	void Init(CVector3 position);
 
 	void Update();
 
 	void Draw();
 
-	Vector3 GetPosition()
+	CVector3 GetPosition()
 	{
 		return m_position;
 	}
 private:
-	Vector3				m_position;
-	SkinModel			m_skinmodel;
-	CharacterController m_characterController;
+	CVector3				m_position;
+	CSkinModel			m_skinmodel;
+	CCharacterController m_characterController;
 };

@@ -1,18 +1,18 @@
 #pragma once
 //骨クラス
 
-class Bone
+class CBone
 {
 public:
 	//コンストラクタ
-	Bone(std::unique_ptr<wchar_t[]> boneName, int boneID, int parentID, const Matrix& worldMat, const Matrix& invWorldMat);
+	CBone(std::unique_ptr<wchar_t[]> boneName, int boneID, int parentID, const CMatrix& worldMat, const CMatrix& invWorldMat);
 
-	void AddChildren(Bone* children)
+	void AddChildren(CBone* children)
 	{
 		m_boneChilds.push_back(children);
 	}
 
-	std::vector<Bone*>& GetChildren()
+	std::vector<CBone*>& GetChildren()
 	{
 		return m_boneChilds;
 	}
@@ -22,27 +22,27 @@ public:
 		return m_parentID;
 	}
 
-	Matrix GetLocalMatrix()
+	CMatrix GetLocalMatrix()
 	{
 		return m_localMatrix;
 	}
 
-	void SetLocalMatrix(Matrix localMatrix)
+	void SetLocalMatrix(CMatrix localMatrix)
 	{
 		m_localMatrix = localMatrix;
 	}
 
-	Matrix GetWorldMatrix()
+	CMatrix GetWorldMatrix()
 	{
 		return m_worldMatrix;
 	}
 
-	void SetWorldMatrix(Matrix worldMatrix)
+	void SetWorldMatrix(CMatrix worldMatrix)
 	{
 		m_worldMatrix = worldMatrix;
 	}
 
-	Matrix GetInvMatrix()
+	CMatrix GetInvMatrix()
 	{
 		return m_invMatrix;
 	}
@@ -62,19 +62,19 @@ private:
 	std::unique_ptr<wchar_t[]> m_boneName;
 	int m_boneID;
 	int m_parentID;
-	Matrix m_localMatrix;
-	Matrix m_worldMatrix;
-	Matrix m_invMatrix;
-	std::vector<Bone*> m_boneChilds;
+	CMatrix m_localMatrix;
+	CMatrix m_worldMatrix;
+	CMatrix m_invMatrix;
+	std::vector<CBone*> m_boneChilds;
 };
 
-class Skelton : Uncopyable
+class CSkelton : Uncopyable
 {
 public:
 
-	Skelton();
+	CSkelton();
 
-	~Skelton();
+	~CSkelton();
 
 	bool Load(wchar_t* filePath);
 
@@ -90,20 +90,20 @@ public:
 		return -1;
 	}
 
-	void SetBoneMatrix(int boneIndex, Matrix mat)
+	void SetBoneMatrix(int boneIndex, CMatrix mat)
 	{
 		m_bones[boneIndex]->SetLocalMatrix(mat);
 	}
 
-	Matrix GetBoneMatrix(int boneIndex)
+	CMatrix GetBoneMatrix(int boneIndex)
 	{
 		return m_bones[boneIndex]->GetLocalMatrix();
 	}
 
 
-	void Update(Matrix mat);
+	void Update(CMatrix mat);
 
-	void UpdateWorldMatrix(Bone* bone, Matrix mat);
+	void UpdateWorldMatrix(CBone* bone, CMatrix mat);
 
 	void Render();
 
@@ -112,8 +112,8 @@ public:
 		return m_bones.size();
 	}
 private:
-	std::vector<std::unique_ptr<Bone>> m_bones;
+	std::vector<std::unique_ptr<CBone>> m_bones;
 	ID3D11Buffer*					m_structuredBuffer;
 	ID3D11ShaderResourceView*		m_shaderResourceView;
-	std::unique_ptr<Matrix[]> m_boneMat;
+	std::unique_ptr<CMatrix[]> m_boneMat;
 };

@@ -4,13 +4,13 @@
 
 #pragma once
 
-class CNumber : public GameObject
+class CNumber : public IGameObject
 {
 public:
 	//初期化
 	//Vector2  numPos  座標
 	//Vector2  numSize サイズ
-	void Init(Vector2 numPos, Vector2 numSize);
+	void Init(CVector2 numPos, CVector2 numSize);
 
 	//更新
 	void Update();
@@ -22,7 +22,7 @@ public:
 	//int  num  数値
 	void SetNumber(int num);
 private:
-	Sprite	m_number[10];			//スプライト
-	Texture m_numberTexture[10];	//テクスチャ
+	CSprite	m_number[10];			//スプライト
+	CTexture m_numberTexture[10];	//テクスチャ
 	int		m_num = 0;				//数値を保存する変数
 };

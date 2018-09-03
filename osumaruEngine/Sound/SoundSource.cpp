@@ -2,7 +2,7 @@
 #include "SoundSource.h"
 #include "../Engine.h"
 
-SoundSource::SoundSource()
+CSoundSource::CSoundSource()
 {
 	m_sourceVoice = nullptr;
 	m_isLoop = false;
@@ -13,7 +13,7 @@ SoundSource::SoundSource()
 	m_is3DSound = false;
 }
 
-SoundSource::~SoundSource()
+CSoundSource::~CSoundSource()
 {
 	if (m_sourceVoice != nullptr)
 	{
@@ -21,21 +21,21 @@ SoundSource::~SoundSource()
 	}
 	if (m_is3DSound)
 	{
-		GetSoundEngine().Delete3dSound(this);
+		SoundEngine().Delete3dSound(this);
 	}
 }
 
-void SoundSource::Init(char* filePath, bool is3DSound)
+void CSoundSource::Init(char* filePath, bool is3DSound)
 {
 	//WAVEファイルを読み込み
 	m_waveFile.Open(filePath);
 	//ソースボイスを作成
-	m_sourceVoice = GetSoundEngine().CreateSouceVoice(m_waveFile.GetFormat(), is3DSound);
+	m_sourceVoice = SoundEngine().CreateSouceVoice(m_waveFile.GetFormat(), is3DSound);
 
 	m_dspSettings.pMatrixCoefficients = m_coefficients;
 	m_dspSettings.pDelayTimes = nullptr;
 	m_dspSettings.SrcChannelCount = INPUTCHANNELS;
-	m_dspSettings.DstChannelCount = GetSoundEngine().GetChannelNum();
+	m_dspSettings.DstChannelCount = SoundEngine().GetChannelNum();
 	m_dspSettings.DopplerFactor = 1.0f;
 	m_dspSettings.LPFDirectCoefficient = 0.82142854f;
 	m_dspSettings.LPFReverbCoefficient = 0.75f;
@@ -47,16 +47,16 @@ void SoundSource::Init(char* filePath, bool is3DSound)
 	m_is3DSound = is3DSound;
 	if (m_is3DSound)
 	{
-		GetSoundEngine().Add3dSound(this);
+		SoundEngine().Add3dSound(this);
 	}
 }
 
-void SoundSource::Stop()
+void CSoundSource::Stop()
 {
 	m_sourceVoice->Stop();
 }
 
-void SoundSource::Update()
+void CSoundSource::Update()
 {
 	//再生してなければ更新不要
 	if (!m_isPlaying)
@@ -79,7 +79,7 @@ void SoundSource::Update()
 	}
 }
 
-void SoundSource::Play(bool isLoop)
+void CSoundSource::Play(bool isLoop)
 {
 	m_isLoop = isLoop;
 	if (m_isPlaying)

@@ -1,41 +1,41 @@
 #pragma once
-class Texture;
+class CTexture;
 #include "Shader.h"
 #include "Primitive.h"
 //スプライトクラス
 
-class Sprite
+class CSprite
 {
 public:
 	//コンストラクタ
-	Sprite();
+	CSprite();
 
 	//デストラクタ
-	~Sprite();
+	~CSprite();
 
 	/*
 	初期化関数
 	texture	スプライトに張り付けるテクスチャ
 	*/
-	void Init(Texture* texture);
+	void Init(CTexture* texture);
 
 	//描画関数
 	void Draw();
 
 	//座標を設定
-	void SetPosition(const Vector2& position)
+	void SetPosition(const CVector2& position)
 	{
 		m_position = position;
 	}
 
 	//座標を取得
-	const Vector2& GetPosition() const
+	const CVector2& GetPosition() const
 	{
 		return m_position;
 	}
 
 	//サイズを設定
-	void SetSize(const Vector2& size)
+	void SetSize(const CVector2& size)
 	{
 		m_size = size;
 	}
@@ -47,13 +47,13 @@ public:
 	}
 
 	//サイズを取得
-	const Vector2& GetSize() const
+	const CVector2& GetSize() const
 	{
 		return m_size;
 	}
 
 	//テクスチャを設定
-	void SetTexture(Texture* pTexture)
+	void SetTexture(CTexture* pTexture)
 	{
 		if(pTexture != nullptr)
 		{
@@ -63,25 +63,25 @@ public:
 	}
 
 private:
-	struct VSLayout
+	struct SVSLayout
 	{
-		Vector4 position;
-		Vector2	uv;
+		CVector4 position;
+		CVector2	uv;
 	};
 
-	struct SpriteCB
+	struct SSpriteCB
 	{
-		Matrix worldMat;
+		CMatrix worldMat;
 		float alpha;
 	};
 
-	Texture*						m_pTexture;
-	Shader							m_vertexShader;
-	Shader							m_pixelShader;
-	Primitive						m_primitive;
+	CTexture*						m_pTexture;
+	CShader							m_vertexShader;
+	CShader							m_pixelShader;
+	CPrimitive						m_primitive;
 	float							m_alpha;
-	Vector2							m_position;			//スプライトのウィンドウ上での座標
-	Vector2							m_centerPosition;	//スプライトの基点を表す座標
-	Vector2							m_size;				//スプライトのサイズ
-	ConstantBuffer					m_cb;
+	CVector2						m_position;			//スプライトのウィンドウ上での座標
+	CVector2						m_centerPosition;	//スプライトの基点を表す座標
+	CVector2						m_size;				//スプライトのサイズ
+	CConstantBuffer					m_cb;
 };

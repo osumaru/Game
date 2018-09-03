@@ -3,21 +3,21 @@
 #include "../Graphics/Primitive.h"
 #include "../Graphics/Shader.h"
 
-struct RigidBodyVSLayout
+struct SRigidBodyVSLayout
 {
-	Vector4 pos;
-	Vector3 color;
+	CVector4 pos;
+	CVector3 color;
 };
 //剛体を表示するクラス
 
-class RigidBodyDraw : public btIDebugDraw
+class CRigidBodyDraw : public btIDebugDraw
 {
 public:
 	//コンストラクタ
-	RigidBodyDraw();
+	CRigidBodyDraw();
 
 	//デストラクタ
-	~RigidBodyDraw();
+	~CRigidBodyDraw();
 
 	//初期化関数
 	void Init();
@@ -35,7 +35,7 @@ public:
 	viewMatrix			カメラのビュー行列
 	projectionMatrix	カメラの射影行列
 	*/
-	void Draw(Matrix viewMatrix, Matrix projectionMatrix);
+	void Draw(CMatrix viewMatrix, CMatrix projectionMatrix);
 
 	//よくわかってない
 	void drawContactPoint(const btVector3& PointOnB, const btVector3& normalOnB, btScalar distance, int lifeTime, const btVector3& color) {}
@@ -65,10 +65,10 @@ public:
 
 private:
 	std::vector<DWORD> m_indexBuffer;			//インデックスバッファ
-	std::vector<RigidBodyVSLayout> m_vertexBuffer;	//頂点バッファ
-	Primitive		m_primitive;			//プリミティブ
+	std::vector<SRigidBodyVSLayout> m_vertexBuffer;	//頂点バッファ
+	CPrimitive		m_primitive;			//プリミティブ
 	int				m_count;				//プリミティブの数
-	Shader			m_vs;				//エフェクト
-	Shader			m_ps;
-	ConstantBuffer	m_cb;
+	CShader			m_vs;				//エフェクト
+	CShader			m_ps;
+	CConstantBuffer	m_cb;
 };

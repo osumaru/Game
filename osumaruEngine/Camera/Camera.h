@@ -1,12 +1,12 @@
 #pragma once
-class Camera
+class CCamera
 {
 public:
 	//コンストラクタ
-	Camera();
+	CCamera();
 
 	//デストラクタ
-	~Camera();
+	~CCamera();
 
 	//アスペクト比を設定
 	void SetAspect(float _aspect);
@@ -33,40 +33,40 @@ public:
 	float GetAngle() const;
 
 	//視点を設定
-	void SetTarget(const Vector3& target);
+	void SetTarget(const CVector3& target);
 
 	//視点を取得
-	const Vector3& GetTarget() const;
+	const CVector3& GetTarget() const;
 
 	//座標を設定
-	void SetPosition(const Vector3& position);
+	void SetPosition(const CVector3& position);
 
 	//座標を取得
-	const Vector3& GetPosition() const;
+	const CVector3& GetPosition() const;
 
 	//カメラの上方向を設定
-	void SetUp(const Vector3& up);
+	void SetUp(const CVector3& up);
 
 	//カメラの上方向を取得
-	const Vector3& GetUp() const;
+	const CVector3& GetUp() const;
 
 	//カメラの前方向を取得
-	const Vector3& GetFlont() const;
+	const CVector3& GetFlont() const;
 
 	//カメラの横方向を取得
-	const Vector3& GetRight() const;
+	const CVector3& GetRight() const;
 
 	//ビュー行列の設定。
-	void SetViewMatrix(const Matrix& view);
+	void SetViewMatrix(const CMatrix& view);
 
 	//ビュー行列の取得
-	const Matrix& GetViewMatrix() const;
+	const CMatrix& GetViewMatrix() const;
 
 	//プロジェクション行列の設定。
-	void SetProjectionMatrix(const Matrix& projection);
+	void SetProjectionMatrix(const CMatrix& projection);
 
 	//プロジェクション行列の取得。
-	const Matrix& GetProjectionMatrix() const;
+	const CMatrix& GetProjectionMatrix() const;
 
 	//初期化
 	void Init();
@@ -75,13 +75,13 @@ public:
 	void Update();
 
 private:
-	Matrix			m_viewMatrix;			//ビュー行列。カメラ行列とも言う。
-	Matrix			m_projectionMatrix;		//プロジェクション行列。ビュー空間から射影空間に変換する。
-	Vector3			m_position;				//カメラの視点。
-	Vector3			m_target;				//カメラの注視点
-	Vector3			m_up;					//カメラの上方向
-	Vector3			m_flont;				//カメラの前方向
-	Vector3			m_right;				//カメラの横方向
+	CMatrix			m_viewMatrix;			//ビュー行列。カメラ行列とも言う。
+	CMatrix			m_projectionMatrix;		//プロジェクション行列。ビュー空間から射影空間に変換する。
+	CVector3			m_position;				//カメラの視点。
+	CVector3			m_target;				//カメラの注視点
+	CVector3			m_up;					//カメラの上方向
+	CVector3			m_flont;				//カメラの前方向
+	CVector3			m_right;				//カメラの横方向
 
 	float				m_Far;					//遠平面
 	float				m_Near;					//近平面
