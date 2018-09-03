@@ -123,6 +123,11 @@ public:
 	}
 
 	void Draw();
+
+	CRigidBody& GetRigidBody()
+	{
+		return m_rigidBody;
+	}
 private:
 	CVector3		m_position;					//À•W
 	CVector3		m_moveSpeed;				//ˆÚ“®‘¬“x

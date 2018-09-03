@@ -22,7 +22,7 @@
     <ProjectGuid>{860D6064-5724-42AC-B22A-4617041DBAE0}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>Game</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.10586.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -160,6 +160,7 @@
   <ItemGroup>
     <ClCompile Include="Enemy\Enemy.cpp" />
     <ClCompile Include="GameCamera.cpp" />
+    <ClCompile Include="Itam\RecoveryItem.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Map\Map.cpp" />
     <ClCompile Include="Map\MapChip\MapChip.cpp" />
@@ -181,6 +182,7 @@
   <ItemGroup>
     <ClInclude Include="Enemy\Enemy.h" />
     <ClInclude Include="GameCamera.h" />
+    <ClInclude Include="Itam\RecoveryItem.h" />
     <ClInclude Include="Map\Map.h" />
     <ClInclude Include="Map\MapChip\MapChip.h" />
     <ClInclude Include="Map\MapChip\StaticMapObject.h" />

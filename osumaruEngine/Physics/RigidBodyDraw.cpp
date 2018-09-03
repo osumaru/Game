@@ -60,28 +60,28 @@ void CRigidBodyDraw::Draw(CMatrix viewMatrix, CMatrix projectionMatrix)
 	ID3D11Buffer* vertexBuffer = m_primitive.GetVertexBuffer();
 	D3D11_MAPPED_SUBRESOURCE subresource;
 	Engine().GetDeviceContext()->UpdateSubresource(vertexBuffer, 0, NULL, &m_vertexBuffer[0], 0, 0);
-	Engine().GetDeviceContext()->Map(vertexBuffer, 0, D3D11_MAP_WRITE, 0, &subresource);
-	void* pData = subresource.pData;
-	int count = 0;
-	for (auto& list : m_vertexBuffer)
-	{
-		*((SRigidBodyVSLayout*)pData + count) = list;
-		count++;
-	}
-	Engine().GetDeviceContext()->Unmap(vertexBuffer, 0);
+	//GetEngine().GetDeviceContext()->Map(vertexBuffer, 0, D3D11_MAP_WRITE, 0, &subresource);
+	//void* pData = subresource.pData;
+	//int count = 0;
+	//for (auto& list : m_vertexBuffer)
+	//{
+	//	*((RigidBodyVSLayout*)pData + count) = list;
+	//	count++;
+	//}
+	//GetEngine().GetDeviceContext()->Unmap(vertexBuffer, 0);
 	//インデックスバッファに書き込んでいく
 	ID3D11Buffer* indexBuffer = m_primitive.GetIndexBuffer();
 
 	Engine().GetDeviceContext()->UpdateSubresource(indexBuffer, 0, NULL, &m_indexBuffer[0], 0, 0);
-	Engine().GetDeviceContext()->Map(indexBuffer, 0, D3D11_MAP_WRITE, 0, &subresource);
-	pData = subresource.pData;
-	count = 0;
-	for (auto& list : m_indexBuffer)
-	{
-		*((DWORD*)pData + count) = list;
-		count++;
-	}
-	Engine().GetDeviceContext()->Unmap(indexBuffer, 0);
+	//GetEngine().GetDeviceContext()->Map(indexBuffer, 0, D3D11_MAP_WRITE, 0, &subresource);
+	//pData = subresource.pData;
+	//count = 0;
+	//for (auto& list : m_indexBuffer)
+	//{
+	//	*((DWORD*)pData + count) = list;
+	//	count++;
+	//}
+	//GetEngine().GetDeviceContext()->Unmap(indexBuffer, 0);
 
 	CMatrix mat;
 	mat.Mul(viewMatrix, projectionMatrix);

@@ -7,7 +7,7 @@ class IGameObject : Uncopyable
 public:
 	//コンストラクタ
 	IGameObject();
-
+	
 	//仮想デストラクタ(基底クラスのデストラクタは仮想関数でなくてはならない。)
 	virtual ~IGameObject();
 

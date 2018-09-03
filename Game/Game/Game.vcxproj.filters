@@ -49,6 +49,9 @@
     <Filter Include="ソース ファイル\UI\MiniMap">
       <UniqueIdentifier>{a154942c-4880-4acf-8542-357018c797c9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Item">
+      <UniqueIdentifier>{fe491995-d611-4183-8285-c214638a84fe}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -96,6 +99,9 @@
     <ClCompile Include="UI\Menu\Menu.cpp">
       <Filter>ソース ファイル\UI\Menu</Filter>
     </ClCompile>
+    <ClCompile Include="Itam\RecoveryItem.cpp">
+      <Filter>ソース ファイル\Item</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -139,6 +145,9 @@
     </ClInclude>
     <ClInclude Include="UI\Menu\Menu.h">
       <Filter>ソース ファイル\UI\Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="Itam\RecoveryItem.h">
+      <Filter>ソース ファイル\Item</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
