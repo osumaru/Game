@@ -5,15 +5,22 @@
 #include "../UI/MiniMap/MiniMap.h"
 #include "../UI/WeaponSelect/WeaponSelect.h"
 #include "../UI/PlayerHp/PlayerHp.h"
-
+#include "../UI/Menu/Menu.h"
 void CGameScene::Init()
+
 
 {
 	map = New<Map>(0);
 	map->Init(0);
 
+
+	CMenu* menu = New<CMenu>(0);
+	menu->Init();
+
 	CMiniMap* miniMap = New<CMiniMap>(0);
 	miniMap->Init();
+
+
 
 	damageNumber.Init();
 
@@ -22,10 +29,13 @@ void CGameScene::Init()
 
 	PlayerHp* playerHp = New<PlayerHp>(0);
 	playerHp->Init();
+
+	
 }
 
 void CGameScene::Update()
 {
 
 	//damageNumber.DamageCalculation(&GetPlayer().GetInstance(), map->GetEnemy());
+
 }

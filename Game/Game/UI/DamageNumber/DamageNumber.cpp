@@ -16,7 +16,10 @@ void CDamegeNumber::Init()
 	}
 }
 
-void CDamegeNumber::DamageCalculation(Player* player, CEnemy* enemy)
+
+void CDamegeNumber::DamageCalculation(CPlayer* player, CEnemy* enemy)
+
+
 {
 	Vector3 toEnemy = enemy->GetPosition() - player->GetPosition();
 	float length = toEnemy.Length();

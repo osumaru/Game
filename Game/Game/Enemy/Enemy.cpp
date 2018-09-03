@@ -12,6 +12,10 @@ void CEnemy::Init(Vector3 position)
 
 void CEnemy::Update()
 {
+	if (GetPad().IsTriggerButton(enButtonA)) {
+		Dead();
+	}
+
 	Quaternion rot;
 	rot.SetRotationDeg(Vector3::AxisX, -90.0f);
 

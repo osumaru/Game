@@ -31,9 +31,6 @@
     <Filter Include="ソース ファイル\UI">
       <UniqueIdentifier>{660794ff-c4a4-4d7b-8f0b-9724e227c179}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\UI\MiniMap">
-      <UniqueIdentifier>{f283ccba-aef8-4f5f-a5d2-15019b3b3c02}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソース ファイル\UI\DamageNumber">
       <UniqueIdentifier>{32f2ec74-b50e-4788-b125-04ae971952fa}</UniqueIdentifier>
     </Filter>
@@ -45,6 +42,12 @@
     </Filter>
     <Filter Include="ソース ファイル\UI\PlayerHp">
       <UniqueIdentifier>{248a276b-0149-4fbe-afb3-ee335170e663}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\UI\Menu">
+      <UniqueIdentifier>{20802979-009f-4ea3-861d-a988d477fe36}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\UI\MiniMap">
+      <UniqueIdentifier>{a154942c-4880-4acf-8542-357018c797c9}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -75,9 +78,6 @@
     <ClCompile Include="Enemy\Enemy.cpp">
       <Filter>ソース ファイル\Enemy</Filter>
     </ClCompile>
-    <ClCompile Include="UI\MiniMap\MiniMap.cpp">
-      <Filter>ソース ファイル\UI\MiniMap</Filter>
-    </ClCompile>
     <ClCompile Include="UI\DamageNumber\DamageNumber.cpp">
       <Filter>ソース ファイル\UI\DamageNumber</Filter>
     </ClCompile>
@@ -95,6 +95,12 @@
     </ClCompile>
     <ClCompile Include="Enemy\EnemyManager.cpp">
       <Filter>ソース ファイル\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\MiniMap\MiniMap.cpp">
+      <Filter>ソース ファイル\UI\MiniMap</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Menu\Menu.cpp">
+      <Filter>ソース ファイル\UI\Menu</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -122,9 +128,6 @@
     <ClInclude Include="Enemy\Enemy.h">
       <Filter>ソース ファイル\Enemy</Filter>
     </ClInclude>
-    <ClInclude Include="UI\MiniMap\MiniMap.h">
-      <Filter>ソース ファイル\UI\MiniMap</Filter>
-    </ClInclude>
     <ClInclude Include="UI\DamageNumber\DamageNumber.h">
       <Filter>ソース ファイル\UI\DamageNumber</Filter>
     </ClInclude>
@@ -142,6 +145,12 @@
     </ClInclude>
     <ClInclude Include="Enemy\EnemyManager.h">
       <Filter>ソース ファイル\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\MiniMap\MiniMap.h">
+      <Filter>ソース ファイル\UI\MiniMap</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Menu\Menu.h">
+      <Filter>ソース ファイル\UI\Menu</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -178,10 +187,10 @@
     <MeshContentTask Include="Assets\modelData\zombi.FBX">
       <Filter>ソース ファイル\Assets</Filter>
     </MeshContentTask>
-    <MeshContentTask Include="Assets\modelData\map2.FBX">
+    <MeshContentTask Include="Assets\modelData\Player.fbx">
       <Filter>ソース ファイル\Assets</Filter>
     </MeshContentTask>
-    <MeshContentTask Include="Assets\modelData\Player.fbx">
+    <MeshContentTask Include="Assets\modelData\map2.FBX">
       <Filter>ソース ファイル\Assets</Filter>
     </MeshContentTask>
   </ItemGroup>
