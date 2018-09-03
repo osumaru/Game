@@ -32,14 +32,14 @@ void Player::Update()
 
 	Move();					//移動処理
 	Rotation();				//回転処理
-	//AnimationMove();		//アニメーションの処理
+	AnimationMove();		//アニメーションの処理
 	StatusCalculation();	//ステータスの処理
 
 	if (GetPad().IsTriggerButton(enButtonB))
 	{
-		//m_status.ExperiencePoint += 43;
-		//m_status.AccumulationExp += 43;
-		m_animation.Play(0, 0.8f);
+		m_status.ExperiencePoint += 43;
+		m_status.AccumulationExp += 43;
+		//m_animation.Play(0, 0.8f);
 	}
 	m_animation.Update(GetGameTime().GetDeltaFrameTime());
 	//スキンモデルの更新
