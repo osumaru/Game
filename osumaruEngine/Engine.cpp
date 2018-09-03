@@ -124,9 +124,9 @@ void CEngine::InitD3D(HINSTANCE& hInst)
 	ZeroMemory(&depthDesc, sizeof(D3D11_DEPTH_STENCIL_DESC));
 
 	depthDesc.DepthFunc = D3D11_COMPARISON_LESS;
-	depthDesc.DepthEnable = false;
-	depthDesc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ALL;
-	depthDesc.StencilEnable = true;
+	depthDesc.DepthEnable = true;
+	//depthDesc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ALL;
+	//depthDesc.StencilEnable = true;
 	m_pD3DDevice->CreateDepthStencilState(&depthDesc, &depthStencilState);
 	m_pDeviceContext->OMSetDepthStencilState(depthStencilState, 0);
 	D3D11_RASTERIZER_DESC rasterizerDesc;
