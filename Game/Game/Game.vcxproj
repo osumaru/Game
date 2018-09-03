@@ -214,6 +214,7 @@
     <MeshContentTask Include="Assets\modelData\testGround.FBX" />
     <MeshContentTask Include="Assets\modelData\testRectangle.FBX" />
     <MeshContentTask Include="Assets\modelData\U2.FBX" />
+    <MeshContentTask Include="Assets\modelData\umi.FBX" />
     <MeshContentTask Include="Assets\modelData\Unitychan.FBX" />
     <MeshContentTask Include="Assets\modelData\Unitychan2.fbx" />
     <MeshContentTask Include="Assets\modelData\Wave.FBX" />

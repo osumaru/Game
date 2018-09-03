@@ -5,6 +5,13 @@
 	Quaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagUntagged, //タグ
 },
+//testGround
+{
+	L"umi",
+	Vector3(0.0f,  5.00f, 0.00f),             //平行移動
+	Quaternion(0.00f, 0.00f, 0.00f, 1.00f),  //回転
+	enMapTagUntagged, //タグ
+},
 //Unitychan
 {
 	L"Unitychan",

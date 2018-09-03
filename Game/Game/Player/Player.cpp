@@ -41,7 +41,7 @@ void CPlayer::Update()
 		m_status.AccumulationExp += 43;
 		
 	}
-	m_animation.Update(GetGameTime().GetDeltaFrameTime());
+	
 	//スキンモデルの更新
 	m_skinmodel.Update(m_position, m_rotation, { 1.0f, 1.0f, 1.0f }, true);
 
@@ -51,6 +51,7 @@ void CPlayer::Update()
 void CPlayer::Draw()
 {
 	m_skinmodel.Draw(GetGameCamera().GetViewMatrix(), GetGameCamera().GetProjectionMatrix());
+	
 }
 
 void CPlayer::Move()
@@ -140,7 +141,7 @@ void CPlayer::Rotation()
 
 		Quaternion rot = Quaternion::Identity;
 		rot.SetRotation(Vector3::AxisY, atan2f(playerVec.x, playerVec.z));		//Y軸周りの回転
-		m_rotation.Slerp(0.02f, m_rotation, rot);
+		m_rotation.Slerp(0.2f, m_rotation, rot);
 
 
 	}
