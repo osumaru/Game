@@ -5,6 +5,7 @@
 #include "../UI/MiniMap/MiniMap.h"
 #include "../UI/WeaponSelect/WeaponSelect.h"
 #include "../UI/PlayerHp/PlayerHp.h"
+
 void CGameScene::Init()
 
 {
@@ -25,5 +26,6 @@ void CGameScene::Init()
 
 void CGameScene::Update()
 {
+
 	//damageNumber.DamageCalculation(&GetPlayer().GetInstance(), map->GetEnemy());
 }

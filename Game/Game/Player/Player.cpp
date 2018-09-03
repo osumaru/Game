@@ -50,6 +50,7 @@ void Player::Update()
 
 void Player::Draw()
 {
+	//GetPhysicsWorld().DebugDraw(m_characterController.GetRigidBody().GetBody()->getWorldTransform(), m_characterController.GetRigidBody().GetBody()->getCollisionShape());
 	m_skinmodel.Draw(GetGameCamera().GetViewMatrix(), GetGameCamera().GetProjectionMatrix());
 }
 

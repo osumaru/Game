@@ -123,6 +123,11 @@ public:
 	}
 
 	void Draw();
+
+	RigidBody& GetRigidBody()
+	{
+		return m_rigidBody;
+	}
 private:
 	Vector3		m_position;					//À•W
 	Vector3		m_moveSpeed;				//ˆÚ“®‘¬“x

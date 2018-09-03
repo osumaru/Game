@@ -93,6 +93,9 @@
     <ClCompile Include="UI\PlayerHp\PlayerHp.cpp">
       <Filter>ソース ファイル\UI\PlayerHp</Filter>
     </ClCompile>
+    <ClCompile Include="Enemy\EnemyManager.cpp">
+      <Filter>ソース ファイル\Enemy</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -136,6 +139,9 @@
     </ClInclude>
     <ClInclude Include="UI\PlayerHp\PlayerHp.h">
       <Filter>ソース ファイル\UI\PlayerHp</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy\EnemyManager.h">
+      <Filter>ソース ファイル\Enemy</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

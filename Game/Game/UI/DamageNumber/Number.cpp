@@ -19,7 +19,7 @@ void CNumber::Update()
 
 void CNumber::Draw()
 {
-	//m_number[m_num].Draw();
+	m_number[m_num].Draw();
 }
 
 void CNumber::SetNumber(int num)
