@@ -5,7 +5,7 @@
 void GameCamera::Init()
 {
 	camera.Init();
-	camera.SetFar(500.0f);
+	camera.SetFar(10000.0f);
 	camera.SetNear(1.0f);
 	camera.SetAspect((float)FrameBufferWidth() / (float)FrameBufferHeight());
 	camera.SetAngle(Math::DegToRad(60.0f));
@@ -51,8 +51,10 @@ void GameCamera::Update()
 	}
 
 	Vector3 position = GetPlayer().GetPosition();
+	float interporation = 1.0f;
+	//position.y += interporation;
 	camera.SetTarget(position);
-
+	//position.y -= interporation;
 	position += m_cameraVec;
 	camera.SetPosition(position);
 	camera.Update();

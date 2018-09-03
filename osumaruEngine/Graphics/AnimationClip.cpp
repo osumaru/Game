@@ -78,7 +78,7 @@ void AnimationClip::Update(float deltaTime)
 	
 	if (m_isPlay)
 	{
-		m_frameTime += 1.0f / 30.0f * deltaTime * 30.0f;
+		m_frameTime += deltaTime / 10.0f;
 		if ((*m_topBoneKeyFrameList)[m_currentFrameNo]->time < m_frameTime)
 		{
 			int i = 0;
@@ -95,7 +95,6 @@ void AnimationClip::Update(float deltaTime)
 			{
 				m_isPlay = false;
 			}
-			m_frameTime = 0.0f;
 		}
 	}
 }
@@ -104,4 +103,5 @@ void AnimationClip::Play()
 {
 	m_isPlay = true;
 	m_currentFrameNo = 0;
+	m_frameTime = 0.0f;
 }

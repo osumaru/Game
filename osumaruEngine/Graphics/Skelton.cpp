@@ -75,6 +75,19 @@ bool Skelton::Load(wchar_t* filePath)
 		bindPoseMatrix.m[1][3] = 0.0f;
 		bindPoseMatrix.m[2][3] = 0.0f;
 		bindPoseMatrix.m[3][3] = 1.0f;
+		Vector3 scaleVec;
+		//scaleVec.x = ((Vector3*)bindPoseMatrix.m[0])->Length();
+		//scaleVec.y = ((Vector3*)bindPoseMatrix.m[1])->Length();
+		//scaleVec.z = ((Vector3*)bindPoseMatrix.m[2])->Length();
+		//bindPoseMatrix.m[0][0] /= scaleVec.x;
+		//bindPoseMatrix.m[0][1] /= scaleVec.x;
+		//bindPoseMatrix.m[0][2] /= scaleVec.x;
+		//bindPoseMatrix.m[1][0] /= scaleVec.y;
+		//bindPoseMatrix.m[1][1] /= scaleVec.y;
+		//bindPoseMatrix.m[1][2] /= scaleVec.y;
+		//bindPoseMatrix.m[2][0] /= scaleVec.z;
+		//bindPoseMatrix.m[2][1] /= scaleVec.z;
+		//bindPoseMatrix.m[2][2] /= scaleVec.z;
 
 		//float swap = bindPoseMatrix.m[3][2];
 		//bindPoseMatrix.m[3][2] = bindPoseMatrix.m[3][1];
@@ -90,6 +103,19 @@ bool Skelton::Load(wchar_t* filePath)
 		invBindPoseMatrix.m[1][3] = 0.0f;
 		invBindPoseMatrix.m[2][3] = 0.0f;
 		invBindPoseMatrix.m[3][3] = 1.0f;
+		//scaleVec.x = ((Vector3*)invBindPoseMatrix.m[0])->Length();
+		//scaleVec.y = ((Vector3*)invBindPoseMatrix.m[1])->Length();
+		//scaleVec.z = ((Vector3*)invBindPoseMatrix.m[2])->Length();
+		//invBindPoseMatrix.m[0][0] /= scaleVec.x;
+		//invBindPoseMatrix.m[0][1] /= scaleVec.x;
+		//invBindPoseMatrix.m[0][2] /= scaleVec.x;
+		//invBindPoseMatrix.m[1][0] /= scaleVec.y;
+		//invBindPoseMatrix.m[1][1] /= scaleVec.y;
+		//invBindPoseMatrix.m[1][2] /= scaleVec.y;
+		//invBindPoseMatrix.m[2][0] /= scaleVec.z;
+		//invBindPoseMatrix.m[2][1] /= scaleVec.z;
+		//invBindPoseMatrix.m[2][2] /= scaleVec.z;
+
 
 		//swap = invBindPoseMatrix.m[3][2];
 		//invBindPoseMatrix.m[3][2] = invBindPoseMatrix.m[3][1];
