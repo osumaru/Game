@@ -3,20 +3,24 @@
 #include "../../Player/Player.h"
 #include "../../Enemy/Enemy.h"
 
-void DamegeNumber::Init()
+void CDamegeNumber::Init()
 {
 	m_numPos = { 0.0f,0.0f };
 	m_numSize = { 100.0f,150.0f };
 
 	for (int i = 0; i < 3; i++) {
-		m_number[i] = New<Number>(0);
+		m_number[i] = New<CNumber>(0);
 		m_numPos.x = m_numSize.x * i;
 		m_number[i]->Init(m_numPos, m_numSize);
 		m_number[i]->SetIsActive(false);
 	}
 }
 
+<<<<<<< HEAD
 void DamegeNumber::DamageCalculation(CPlayer* player, Enemy* enemy)
+=======
+void CDamegeNumber::DamageCalculation(Player* player, CEnemy* enemy)
+>>>>>>> ed9bc0246e2bad51491e7c656892205c64bd0d5a
 {
 	Vector3 toEnemy = enemy->GetPosition() - player->GetPosition();
 	float length = toEnemy.Length();

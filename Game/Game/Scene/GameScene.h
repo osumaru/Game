@@ -3,7 +3,7 @@
 class Map;
 #include "../UI/DamageNumber/DamageNumber.h"
 
-class GameScene : public GameObject
+class CGameScene : public GameObject
 {
 public:
 	void Init();
@@ -12,5 +12,5 @@ public:
 
 private:
 	Map* map = nullptr;
-	DamegeNumber damageNumber;
+	CDamegeNumber damageNumber;
 };

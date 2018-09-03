@@ -1,6 +1,6 @@
 #pragma once
 
-class GameCamera : GameObject
+class CGameCamera : GameObject
 {
 public:
 
@@ -8,9 +8,9 @@ public:
 
 	void Update();
 
-	static GameCamera& GetInstance()
+	static CGameCamera& GetInstance()
 	{
-		static GameCamera gamecamera;
+		static CGameCamera gamecamera;
 		return gamecamera;
 	}
 
@@ -31,7 +31,7 @@ private:
 	Vector3 m_cameraVec;
 };
 
-static GameCamera& GetGameCamera()
+static CGameCamera& GetGameCamera()
 {
-	return GameCamera::GetInstance();
+	return CGameCamera::GetInstance();
 }
