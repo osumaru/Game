@@ -179,6 +179,7 @@ void Engine::GameLoop()
 			m_pad->Update();
 			m_pSwapChain->Present(0, 0);
 			sw.Stop();
+
 			float limitTime = 1.0f / 60.0f;
 			if (sw.GetElapsedTime() < limitTime)
 			{
@@ -186,6 +187,7 @@ void Engine::GameLoop()
 				Sleep(sleepTime);
 				GetGameTime().SetFrameDeltaTime(limitTime);
 			}
+
 			else
 			{
 				GetGameTime().SetFrameDeltaTime((float)sw.GetElapsedTime());
