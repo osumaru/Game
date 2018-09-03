@@ -1,6 +1,6 @@
 #pragma once
 
-class PlayerHp : public IGameObject
+class CPlayerHp : public IGameObject
 {
 public:
 	//初期化
@@ -11,6 +11,10 @@ public:
 
 	//描画
 	void Draw();
+
+	//プレイヤーHP
+	//DamageValue くらったダメージ量0～100
+	void PlayerDamage(float DamageValue);
 private:
 	CSprite m_playerHpSprite;		//プレイヤーのHPスプライト
 	CTexture m_playerHpTexture;		//プレイヤーのHPテクスチャ
