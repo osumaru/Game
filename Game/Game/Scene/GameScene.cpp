@@ -5,12 +5,9 @@
 #include "../UI/MiniMap/MiniMap.h"
 #include "../UI/WeaponSelect/WeaponSelect.h"
 #include "../UI/PlayerHp/PlayerHp.h"
-<<<<<<< HEAD
 #include "../UI/Menu/Menu.h"
-void GameScene::Init()
-=======
 void CGameScene::Init()
->>>>>>> ed9bc0246e2bad51491e7c656892205c64bd0d5a
+
 
 {
 	map = New<Map>(0);
@@ -20,7 +17,7 @@ void CGameScene::Init()
 	CMenu* menu = New<CMenu>(0);
 	menu->Init();
 
-	MiniMap* miniMap = New<MiniMap>(0);
+	CMiniMap* miniMap = New<CMiniMap>(0);
 	miniMap->Init();
 
 
