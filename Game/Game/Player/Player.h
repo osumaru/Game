@@ -1,6 +1,6 @@
 #pragma once
 
-struct playerStatus
+struct SplayerStatus
 {
 	int Strength;			//攻撃力
 	int Defense;			//防御力
@@ -13,7 +13,7 @@ struct playerStatus
 
 };
 
-class Player : public GameObject
+class CPlayer : public GameObject
 {
 
 public:
@@ -22,9 +22,9 @@ public:
 	void Init(Vector3 position);
 
 	//プレイヤーのインスタンスの取得
-	static Player& GetInstance()
+	static CPlayer& GetInstance()
 	{
-		static Player player;
+		static CPlayer player;
 		return player;
 	}
 
@@ -61,7 +61,7 @@ public:
 	}
 
 	//プレイヤーのステータスを取得
-	const playerStatus& GetStatus()
+	const SplayerStatus& GetStatus()
 	{
 		return m_status;
 	}
@@ -84,13 +84,13 @@ private:
 	CharacterController m_characterController;				//キャラクターコントローラー
 	Pad					m_pad;								//パッド
 	Animation			m_animation;						//アニメーション
-	playerStatus		m_status;							//プレイヤーのステータス
+	SplayerStatus		m_status;							//プレイヤーのステータス
 	bool				m_isSlip = false;					//スリップ判定
-	float				m_slipSpeed = 6.5f;
+	float				m_slipSpeed = 50.0f;
 
 };
 
-static Player& GetPlayer()
+static CPlayer& GetPlayer()
 {
-	return Player::GetInstance();
+	return CPlayer::GetInstance();
 }

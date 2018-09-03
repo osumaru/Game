@@ -4,7 +4,7 @@
 
 #pragma once
 
-class Player;
+class CPlayer;
 class Enemy;
 #include "Number.h"
 
@@ -17,7 +17,7 @@ public:
 	//ダメージ計算
 	//player	プレイヤークラスのポインタ
 	//enemy		エネミークラスのポインタ
-	void DamageCalculation(Player* player, Enemy* enemy);
+	void DamageCalculation(CPlayer* player, Enemy* enemy);
 
 private:
 	Number* m_number[3];	//数字のスプライト
