@@ -1,15 +1,15 @@
 #pragma once
 
-class CRecoveryItem : public GameObject
+class CRecoveryItem : public IGameObject
 {
 public:
-	void Init(Vector3 position);
+	void Init(CVector3 position);
 
 	void Update();
 
 	void Draw();
 
 private:
-	SkinModel m_skinModel;
-	Vector3 m_position;
+	CSkinModel m_skinModel;
+	CVector3 m_position;
 };

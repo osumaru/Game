@@ -15,7 +15,7 @@ void CGameCamera::Init()
 	camera.Update();
 	Add(this, 0);
 	m_cameraVec = camera.GetPosition();
-	GetPhysicsWorld().SetCamera(&camera);
+	PhysicsWorld().SetCamera(&camera);
 }
 
 void CGameCamera::Update()

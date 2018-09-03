@@ -22,13 +22,8 @@ CRigidBodyDraw::~CRigidBodyDraw()
 void CRigidBodyDraw::Init()
 {
 	//頂点数1万で空ノバッファを作成
-<<<<<<< HEAD
-	const int vertexNum = 10000;
-	RigidBodyVSLayout vertexBuffer[vertexNum];
-=======
 	const int vertexNum = 30000;
 	SRigidBodyVSLayout vertexBuffer[vertexNum];
->>>>>>> 8bcf991392eeaf5c18a6a8afd9e4aa83b57947e0
 	DWORD indexBuffer[vertexNum];
 	memset(vertexBuffer, 0, sizeof(vertexBuffer));
 	memset(indexBuffer, 0, sizeof(indexBuffer));
@@ -64,8 +59,7 @@ void CRigidBodyDraw::Draw(CMatrix viewMatrix, CMatrix projectionMatrix)
 	const int vertexNum = m_count * 2;
 	ID3D11Buffer* vertexBuffer = m_primitive.GetVertexBuffer();
 	D3D11_MAPPED_SUBRESOURCE subresource;
-<<<<<<< HEAD
-	GetEngine().GetDeviceContext()->UpdateSubresource(vertexBuffer, 0, NULL, &m_vertexBuffer[0], 0, 0);
+	Engine().GetDeviceContext()->UpdateSubresource(vertexBuffer, 0, NULL, &m_vertexBuffer[0], 0, 0);
 	//GetEngine().GetDeviceContext()->Map(vertexBuffer, 0, D3D11_MAP_WRITE, 0, &subresource);
 	//void* pData = subresource.pData;
 	//int count = 0;
@@ -78,7 +72,7 @@ void CRigidBodyDraw::Draw(CMatrix viewMatrix, CMatrix projectionMatrix)
 	//インデックスバッファに書き込んでいく
 	ID3D11Buffer* indexBuffer = m_primitive.GetIndexBuffer();
 
-	GetEngine().GetDeviceContext()->UpdateSubresource(indexBuffer, 0, NULL, &m_indexBuffer[0], 0, 0);
+	Engine().GetDeviceContext()->UpdateSubresource(indexBuffer, 0, NULL, &m_indexBuffer[0], 0, 0);
 	//GetEngine().GetDeviceContext()->Map(indexBuffer, 0, D3D11_MAP_WRITE, 0, &subresource);
 	//pData = subresource.pData;
 	//count = 0;
@@ -88,31 +82,6 @@ void CRigidBodyDraw::Draw(CMatrix viewMatrix, CMatrix projectionMatrix)
 	//	count++;
 	//}
 	//GetEngine().GetDeviceContext()->Unmap(indexBuffer, 0);
-=======
-	Engine().GetDeviceContext()->UpdateSubresource(vertexBuffer, 0, NULL, &m_vertexBuffer[0], 0, 0);
-	Engine().GetDeviceContext()->Map(vertexBuffer, 0, D3D11_MAP_WRITE, 0, &subresource);
-	void* pData = subresource.pData;
-	int count = 0;
-	for (auto& list : m_vertexBuffer)
-	{
-		*((SRigidBodyVSLayout*)pData + count) = list;
-		count++;
-	}
-	Engine().GetDeviceContext()->Unmap(vertexBuffer, 0);
-	//インデックスバッファに書き込んでいく
-	ID3D11Buffer* indexBuffer = m_primitive.GetIndexBuffer();
-
-	Engine().GetDeviceContext()->UpdateSubresource(indexBuffer, 0, NULL, &m_indexBuffer[0], 0, 0);
-	Engine().GetDeviceContext()->Map(indexBuffer, 0, D3D11_MAP_WRITE, 0, &subresource);
-	pData = subresource.pData;
-	count = 0;
-	for (auto& list : m_indexBuffer)
-	{
-		*((DWORD*)pData + count) = list;
-		count++;
-	}
-	Engine().GetDeviceContext()->Unmap(indexBuffer, 0);
->>>>>>> 8bcf991392eeaf5c18a6a8afd9e4aa83b57947e0
 
 	CMatrix mat;
 	mat.Mul(viewMatrix, projectionMatrix);

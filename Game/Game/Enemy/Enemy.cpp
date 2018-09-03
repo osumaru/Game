@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Enemy.h"
 #include "../GameCamera.h"
+#include "../Itam/RecoveryItem.h"
 
 void CEnemy::Init(CVector3 position)
 {
@@ -13,13 +14,14 @@ void CEnemy::Init(CVector3 position)
 void CEnemy::Update()
 {
 	//死亡時に回復アイテムとお金を出す
-	if (GetPad().IsTriggerButton(enButtonA)) {
+	//if (Pad().IsTriggerButton(enButtonA)) {
+	//	CRecoveryItem* recoveryItem = New<CRecoveryItem>(0);
+	//	recoveryItem->Init(m_position);
+	//	Dead();
+	//}
 
-		Dead();
-	}
-
-	Quaternion rot;
-	rot.SetRotationDeg(Vector3::AxisX, -90.0f);
+	CQuaternion rot;
+	rot.SetRotationDeg(CVector3::AxisX, -90.0f);
 
 	//m_characterController.SetPosition(m_position);
 	//m_characterController.Execute(GetGameTime().GetDeltaFrameTime());

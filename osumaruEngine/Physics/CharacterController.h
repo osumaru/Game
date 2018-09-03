@@ -124,7 +124,7 @@ public:
 
 	void Draw();
 
-	RigidBody& GetRigidBody()
+	CRigidBody& GetRigidBody()
 	{
 		return m_rigidBody;
 	}
