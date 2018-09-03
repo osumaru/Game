@@ -193,5 +193,11 @@
     <MeshContentTask Include="Assets\modelData\Warrok.fbx">
       <Filter>ソース ファイル\Assets</Filter>
     </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\TownHouse.fbx">
+      <Filter>ソース ファイル\Assets</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\TownHouse1.fbx">
+      <Filter>ソース ファイル\Assets</Filter>
+    </MeshContentTask>
   </ItemGroup>
 </Project>
