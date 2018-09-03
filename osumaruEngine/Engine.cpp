@@ -124,9 +124,9 @@ void Engine::InitD3D(HINSTANCE& hInst)
 	ZeroMemory(&depthDesc, sizeof(D3D11_DEPTH_STENCIL_DESC));
 
 	depthDesc.DepthFunc = D3D11_COMPARISON_LESS;
-	depthDesc.DepthEnable = true;
+	depthDesc.DepthEnable = false;
 	depthDesc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ALL;
-	//depthDesc.StencilEnable = true;
+	depthDesc.StencilEnable = true;
 	m_pD3DDevice->CreateDepthStencilState(&depthDesc, &depthStencilState);
 	m_pDeviceContext->OMSetDepthStencilState(depthStencilState, 0);
 	D3D11_RASTERIZER_DESC rasterizerDesc;
@@ -179,12 +179,15 @@ void Engine::GameLoop()
 			m_pad->Update();
 			m_pSwapChain->Present(0, 0);
 			sw.Stop();
-			if (sw.GetElapsedTime() < 1.0f / 30.0f)
+
+			float limitTime = 1.0f / 60.0f;
+			if (sw.GetElapsedTime() < limitTime)
 			{
-				DWORD sleepTime = max(0.0, (1.0 - 30.0) * 1000.0 - (DWORD)sw.GetElapsedTimeMill());
+				DWORD sleepTime = max(0.0, limitTime * 1000.0 - (DWORD)sw.GetElapsedTimeMill());
 				Sleep(sleepTime);
-				GetGameTime().SetFrameDeltaTime(1.0f / 30.0f);
+				GetGameTime().SetFrameDeltaTime(limitTime);
 			}
+
 			else
 			{
 				GetGameTime().SetFrameDeltaTime((float)sw.GetElapsedTime());

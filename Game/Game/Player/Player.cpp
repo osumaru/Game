@@ -56,11 +56,11 @@ void Player::Draw()
 void Player::Move()
 {
 
-	//m_moveSpeed = m_characterController.GetMoveSpeed();
+	m_moveSpeed = m_characterController.GetMoveSpeed();
 
 	Vector3 moveSpeed;
-	moveSpeed.z = GetPad().GetLeftStickY() * GetGameTime().GetDeltaFrameTime() * 5;
-	moveSpeed.x = GetPad().GetLeftStickX() * GetGameTime().GetDeltaFrameTime() * 5;
+	moveSpeed.z = GetPad().GetLeftStickY() * GetGameTime().GetDeltaFrameTime() * 100;
+	moveSpeed.x = GetPad().GetLeftStickX() * GetGameTime().GetDeltaFrameTime() * 100;
 
 	Matrix cameraVm = GetGameCamera().GetViewMatrix();
 	cameraVm.Inverse();	//カメラのビュー行列の逆行列

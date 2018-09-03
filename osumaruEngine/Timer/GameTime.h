@@ -24,7 +24,7 @@ public:
 	//1フレームの経過時間を設定
 	void SetFrameDeltaTime(float frameDeltaTime)
 	{
-		m_frameDeltaTime =  min(1.0f / 30.0f, frameDeltaTime);
+		m_frameDeltaTime =  min(1.0f / 60.0f, frameDeltaTime);
 	}
 
 	//1フレームの経過時間を取得 
