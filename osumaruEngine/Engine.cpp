@@ -187,7 +187,6 @@ void Engine::GameLoop()
 				Sleep(sleepTime);
 				GetGameTime().SetFrameDeltaTime(limitTime);
 			}
-
 			else
 			{
 				GetGameTime().SetFrameDeltaTime((float)sw.GetElapsedTime());
