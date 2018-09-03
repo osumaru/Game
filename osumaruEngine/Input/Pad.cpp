@@ -12,7 +12,7 @@ struct CorrespondencePad
 	DWORD		keyCode;
 };
 
-const CorrespondencePad correspondencePad[enButtonNum] = 
+const CorrespondencePad correspondencePad[enButtonNum] =
 {
 	{ enButtonUp,			XINPUT_GAMEPAD_DPAD_UP,			'W' },
 	{ enButtonDown,			XINPUT_GAMEPAD_DPAD_DOWN,		'S' },
@@ -28,6 +28,7 @@ const CorrespondencePad correspondencePad[enButtonNum] =
 	{ enButtonRStickPush,	XINPUT_GAMEPAD_RIGHT_THUMB,		'4' },
 	{ enButtonLB,			XINPUT_GAMEPAD_LEFT_SHOULDER,	'7' },
 	{ enButtonLStickPush,	XINPUT_GAMEPAD_LEFT_THUMB,		'9' }
+	
 };
 Pad::Pad() :
 	m_padNum(0),
@@ -51,7 +52,7 @@ Pad::~Pad()
 void Pad::Update()
 {
 	DWORD result = XInputGetState(m_padNum, &m_state);
-
+	
 	if (result == ERROR_SUCCESS)
 	{
 		for (const CorrespondencePad& pad : correspondencePad)
@@ -60,11 +61,14 @@ void Pad::Update()
 			{
 				m_isPadTrigger[pad.padButton] = 1 ^ m_isPadPress[pad.padButton];
 				m_isPadPress[pad.padButton] = 1;
+				
 			}
+
 			else
 			{
 				m_isPadTrigger[pad.padButton] = 0;
 				m_isPadPress[pad.padButton] = 0;
+				
 			}
 		}
 		float inputNormalize;
