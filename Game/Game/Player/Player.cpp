@@ -99,11 +99,11 @@ void Player::Move()
 	}
 	if(m_isSlip)
 	{
-		m_slipSpeed = m_slipSpeed - (0.8f * GetGameTime().GetDeltaFrameTime());
+		m_slipSpeed = m_slipSpeed - (1.0f * GetGameTime().GetDeltaFrameTime());
 		if (m_slipSpeed <= 0)
 		{
 			m_isSlip = false;
-			m_slipSpeed = 8.0f;
+			m_slipSpeed = 7.0f;
 			return;
 		}
 		Vector3 playerFlontVec = { m_skinmodel.GetWorldMatrix().m[2][0],0.0f,m_skinmodel.GetWorldMatrix().m[2][2] };
