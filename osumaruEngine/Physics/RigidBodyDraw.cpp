@@ -6,8 +6,8 @@
 
 
 CRigidBodyDraw::CRigidBodyDraw() :
-	m_indexBuffer(NULL),
-	m_vertexBuffer(NULL),
+	m_indexBuffer(),
+	m_vertexBuffer(),
 	m_primitive(),
 	m_count(0)
 {
@@ -22,12 +22,9 @@ CRigidBodyDraw::~CRigidBodyDraw()
 void CRigidBodyDraw::Init()
 {
 	//頂点数1万で空ノバッファを作成
-	const int vertexNum = 30000;
-	SRigidBodyVSLayout vertexBuffer[vertexNum];
-	DWORD indexBuffer[vertexNum];
-	memset(vertexBuffer, 0, sizeof(vertexBuffer));
-	memset(indexBuffer, 0, sizeof(indexBuffer));
-	m_primitive.Create(vertexBuffer, sizeof(SRigidBodyVSLayout), vertexNum, indexBuffer, vertexNum,  CPrimitive::enIndex32, CPrimitive::enTypeLineList);
+	memset(m_vertexBuffer, 0, sizeof(m_vertexBuffer));
+	memset(m_indexBuffer, 0, sizeof(m_indexBuffer));
+	m_primitive.Create(m_vertexBuffer, sizeof(SRigidBodyVSLayout), VERTEX_NUM, m_indexBuffer, VERTEX_NUM,  CPrimitive::enIndex32, CPrimitive::enTypeLineList);
 	m_vs.Load("Assets/shader/rigidBodyDraw.fx", "VSMain", CShader::enVS);
 	m_ps.Load("Assets/shader/rigidBodyDraw.fx", "PSMain", CShader::enPS);
 	CMatrix mat = CMatrix::Identity;
@@ -36,16 +33,20 @@ void CRigidBodyDraw::Init()
 
 void CRigidBodyDraw::drawLine(const btVector3 &from, const btVector3 &to, const btVector3& color)
 {
+	if (VERTEX_NUM <= m_count * 2)
+	{
+		return;
+	}
 	//頂点バッファとインデックスバッファにデータを追加
 	SRigidBodyVSLayout vertex;
 	vertex.pos = { from.x(), from.y(), from.z(), 1.0f };
 	vertex.color = {  color.x(), color.y(), color.z() };
-	m_vertexBuffer.push_back(vertex);
+	m_vertexBuffer[m_count * 2] = vertex;
 	vertex.pos = { to.x(), to.y(), to.z(), 1.0f };
 	vertex.color = { color.x(), color.y(), color.z() };
-	m_vertexBuffer.push_back(vertex);
-	m_indexBuffer.push_back(m_count * 2);
-	m_indexBuffer.push_back(m_count * 2 + 1);
+	m_vertexBuffer[m_count * 2 + 1] = vertex;
+	m_indexBuffer[m_count * 2] = m_count * 2;
+	m_indexBuffer[m_count * 2 + 1] = m_count * 2 + 1;
 	m_count++;
 }
 
@@ -56,24 +57,23 @@ void CRigidBodyDraw::Draw(CMatrix viewMatrix, CMatrix projectionMatrix)
 		return;
 	}
 	//頂点バッファに書き込んでいく
-	const int vertexNum = m_count * 2;
 	ID3D11Buffer* vertexBuffer = m_primitive.GetVertexBuffer();
 	D3D11_MAPPED_SUBRESOURCE subresource;
 	Engine().GetDeviceContext()->UpdateSubresource(vertexBuffer, 0, NULL, &m_vertexBuffer[0], 0, 0);
-	//GetEngine().GetDeviceContext()->Map(vertexBuffer, 0, D3D11_MAP_WRITE, 0, &subresource);
+	//Engine().GetDeviceContext()->Map(vertexBuffer, 0, D3D11_MAP_WRITE, 0, &subresource);
 	//void* pData = subresource.pData;
 	//int count = 0;
 	//for (auto& list : m_vertexBuffer)
 	//{
-	//	*((RigidBodyVSLayout*)pData + count) = list;
+	//	*((SRigidBodyVSLayout*)pData + count) = list;
 	//	count++;
 	//}
-	//GetEngine().GetDeviceContext()->Unmap(vertexBuffer, 0);
+	//Engine().GetDeviceContext()->Unmap(vertexBuffer, 0);
 	//インデックスバッファに書き込んでいく
 	ID3D11Buffer* indexBuffer = m_primitive.GetIndexBuffer();
 
 	Engine().GetDeviceContext()->UpdateSubresource(indexBuffer, 0, NULL, &m_indexBuffer[0], 0, 0);
-	//GetEngine().GetDeviceContext()->Map(indexBuffer, 0, D3D11_MAP_WRITE, 0, &subresource);
+	//Engine().GetDeviceContext()->Map(indexBuffer, 0, D3D11_MAP_WRITE, 0, &subresource);
 	//pData = subresource.pData;
 	//count = 0;
 	//for (auto& list : m_indexBuffer)
@@ -81,7 +81,7 @@ void CRigidBodyDraw::Draw(CMatrix viewMatrix, CMatrix projectionMatrix)
 	//	*((DWORD*)pData + count) = list;
 	//	count++;
 	//}
-	//GetEngine().GetDeviceContext()->Unmap(indexBuffer, 0);
+	//Engine().GetDeviceContext()->Unmap(indexBuffer, 0);
 
 	CMatrix mat;
 	mat.Mul(viewMatrix, projectionMatrix);

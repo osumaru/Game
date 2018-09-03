@@ -49,7 +49,7 @@ void CPlayer::Update()
 
 void CPlayer::Draw()
 {
-	//GetPhysicsWorld().DebugDraw(m_characterController.GetRigidBody().GetBody()->getWorldTransform(), m_characterController.GetRigidBody().GetBody()->getCollisionShape());
+	m_characterController.Draw();
 	m_skinmodel.Draw(GetGameCamera().GetViewMatrix(), GetGameCamera().GetProjectionMatrix());
 	
 }
@@ -121,10 +121,10 @@ void CPlayer::Move()
 		m_moveSpeed = playerFlontVec * m_slipSpeed;
 	}
 
-		m_characterController.SetMoveSpeed(m_moveSpeed);
-		m_characterController.SetPosition(m_position);
-		m_characterController.Execute(GameTime().GetDeltaFrameTime());
-		m_position = m_characterController.GetPosition();
+	m_characterController.SetMoveSpeed(m_moveSpeed);
+	m_characterController.SetPosition(m_position);
+	m_characterController.Execute(GameTime().GetDeltaFrameTime());
+	m_position = m_characterController.GetPosition();
 
 }
 

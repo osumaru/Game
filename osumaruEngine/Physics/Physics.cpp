@@ -50,7 +50,7 @@ void CPhysicsWorld::Draw()
 {
 	if (m_pCamera != nullptr)
 	{
-		//m_pRigidBodyDraw->Draw(m_pCamera->GetViewMatrix(), m_pCamera->GetProjectionMatrix());
+		m_pRigidBodyDraw->Draw(m_pCamera->GetViewMatrix(), m_pCamera->GetProjectionMatrix());
 		m_pRigidBodyDraw->Reset();
 	}
 }
