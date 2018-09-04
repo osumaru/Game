@@ -13,7 +13,6 @@ void CPlayerHp::Init()
 
 void CPlayerHp::Update()
 {
-
 }
 
 void CPlayerHp::PlayerDamage(float DamageValue)

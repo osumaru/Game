@@ -38,7 +38,22 @@ public:
 		return m_pShaderResource;
 	}
 
+	//テクスチャの横幅を取得
+	int GetWidth()
+	{
+		return m_width;
+	}
+
+	//テクスチャの縦幅を取得
+	int GetHeight()
+	{
+		return m_height;
+	}
+
 private:
+	int m_width;
+	int m_height;
+
 	ID3D11Resource*					m_pTexture;
 	ID3D11ShaderResourceView*		m_pShaderResource;
 };

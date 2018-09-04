@@ -1,5 +1,5 @@
 #pragma once
-class Math {
+class CMath {
 public:
 	static constexpr float PI = 3.14159265358979323846f;
 	static constexpr float PI2 = PI * 2.0f;
