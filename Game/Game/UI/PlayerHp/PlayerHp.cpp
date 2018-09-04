@@ -2,7 +2,7 @@
 #include "PlayerHp.h"
 
 
-void PlayerHp::Init()
+void CPlayerHp::Init()
 {
 	//プレイヤーHPのロード
 	m_playerHpTexture.Load(L"Assets/sprite/hp1.png");
@@ -11,12 +11,17 @@ void PlayerHp::Init()
 	m_playerHpSprite.SetSize({ m_playerHpSize });
 }
 
-void PlayerHp::Update()
+void CPlayerHp::Update()
 {
 
 }
 
-void PlayerHp::Draw()
+void CPlayerHp::PlayerDamage(float DamageValue)
+{
+	m_playerHpSprite.SetSize({ DamageValue,m_playerHpSize.y });
+}
+
+void CPlayerHp::Draw()
 {
 	m_playerHpSprite.Draw();
 }

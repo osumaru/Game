@@ -25,7 +25,7 @@ VS_OUTPUT VSMain(VS_INPUT In)
 	return Out;
 }
 
-float4 PSMain(VS_OUTPUT In) : SV_TARGET
+float4 PSMain(VS_OUTPUT In) : SV_TARGET0
 {
 	float4 color = float4(In.color.xyz, 1.0f);
 	return color;

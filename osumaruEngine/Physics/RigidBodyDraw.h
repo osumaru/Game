@@ -53,8 +53,6 @@ public:
 	{
 		//毎フレームインデックスバッファと頂点バッファをリセット
 		m_count = 0;
-		m_vertexBuffer.clear();
-		m_indexBuffer.clear();
 	}
 
 	//よくわかってない
@@ -64,8 +62,9 @@ public:
 	}
 
 private:
-	std::vector<DWORD> m_indexBuffer;			//インデックスバッファ
-	std::vector<SRigidBodyVSLayout> m_vertexBuffer;	//頂点バッファ
+	static const int VERTEX_NUM = 10000;
+	SRigidBodyVSLayout m_vertexBuffer[VERTEX_NUM];
+	DWORD m_indexBuffer[VERTEX_NUM];
 	CPrimitive		m_primitive;			//プリミティブ
 	int				m_count;				//プリミティブの数
 	CShader			m_vs;				//エフェクト

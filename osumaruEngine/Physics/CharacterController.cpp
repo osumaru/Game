@@ -187,7 +187,7 @@ CCharacterController::CCharacterController() :
 	m_groundHitObject(nullptr),
 	m_wallHitObject(nullptr),
 	m_wallNormal(0.0f, 0.0f, 0.0f),
-	m_rigidBodyManip(500.0f)
+	m_rigidBodyManip(0.0f)
 {
 }
 
@@ -507,5 +507,5 @@ void CCharacterController::Draw()
 
 	btVector3& position = transform.getOrigin();
 	position.setY(position.y() + m_radius + m_height * 0.5f - m_rigidBodyManip);
-	PhysicsWorld().DebugDraw(transform, const_cast<btCollisionShape*>(m_collider.GetBody()));
+	PhysicsWorld().DebugDraw(transform, m_collider.GetBody());
 }
