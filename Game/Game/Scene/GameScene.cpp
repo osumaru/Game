@@ -27,7 +27,7 @@ void CGameScene::Init()
 	CWeaponSelect* weaponSelect = New<CWeaponSelect>(0);
 	weaponSelect->Init();
 
-	PlayerHp* playerHp = New<PlayerHp>(0);
+	CPlayerHp* playerHp = New<CPlayerHp>(0);
 	playerHp->Init();
 
 	
