@@ -81,6 +81,18 @@ public:
 		m_angle = angle;
 	}
 
+	//描画するかのフラグを取得
+	bool IsDraw()
+	{
+		return m_isDraw;
+	}
+
+	//描画するかのフラグを設定
+	void SetIsDraw(bool isDraw)
+	{
+		m_isDraw = isDraw;
+	}
+
 private:
 	struct SVSLayout
 	{
@@ -104,4 +116,5 @@ private:
 	CVector2						m_centerPosition;	//スプライトの基点を表す座標
 	CVector2						m_size;				//スプライトのサイズ
 	CConstantBuffer					m_cb;
+	bool							m_isDraw;
 };
