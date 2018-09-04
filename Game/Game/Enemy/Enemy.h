@@ -1,20 +1,28 @@
+/*
+*	敵のインターフェースクラス
+*/
+
 #pragma once
 
-class CEnemy : public IGameObject
+class IEnemy : public IGameObject
 {
 public:
-	void Init(CVector3 position);
+	IEnemy();
+	~IEnemy();
 
-	void Update();
+	virtual void Init(CVector3 position) = 0;
 
-	void Draw();
+	virtual void Update() = 0;
+
+	virtual void Draw() = 0;
 
 	CVector3 GetPosition()
 	{
 		return m_position;
 	}
-private:
+
+protected:
+	CSkinModel				m_skinModel;
+	CCharacterController	m_characterController;
 	CVector3				m_position;
-	CSkinModel			m_skinmodel;
-	CCharacterController m_characterController;
 };
