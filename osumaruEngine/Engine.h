@@ -111,6 +111,7 @@ private:
 	CRenderTarget							m_backBuffer;
 	D3D_DRIVER_TYPE							m_driverType;
 	ID3D11RenderTargetView*					m_pBackBuffer;
+	ID3D11DepthStencilView*					m_depthStencil;
 	HWND									m_hwnd;
 	std::unique_ptr<CPhysicsWorld>			m_physicsWorld;				//物理ワールド
 	std::unique_ptr<CSoundEngine>			m_soundEngine;				//サウンドエンジン]
