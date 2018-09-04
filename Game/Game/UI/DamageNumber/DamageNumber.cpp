@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "DamageNumber.h"
 #include "../../Player/Player.h"
-#include "../../Enemy/Enemy.h"
+#include "../../Enemy/IEnemy.h"
 
 void CDamegeNumber::Init()
 {

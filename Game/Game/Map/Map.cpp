@@ -3,7 +3,7 @@
 #include "MapChip/MapChip.h"
 #include "MapChip\StaticMapObject.h"
 #include "../Player/Player.h"
-#include "../Enemy/Enemy.h"
+#include "../Enemy/IEnemy.h"
 #include "../Enemy/Zombie.h"
 
 std::vector<std::vector<SMapChipInfo>> mapChipInfo = 

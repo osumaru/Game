@@ -1,13 +1,13 @@
 #pragma once
 
-#include "Enemy/Enemy.h"
+#include "Enemy/IEnemy.h"
 
 class Zombie : public IEnemy
 {
 public:
-	void Init(CVector3 position) override;
+	void Init(CVector3 position);
 
-	void Update() override;
+	void Update();
 
-	void Draw() override;
+	void Draw();
 };

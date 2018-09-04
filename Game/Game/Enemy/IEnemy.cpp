@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "Enemy.h"
+#include "IEnemy.h"
 
 IEnemy::IEnemy()
 {

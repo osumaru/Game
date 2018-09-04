@@ -75,9 +75,6 @@
     <ClCompile Include="Player\Player.cpp">
       <Filter>ソース ファイル\Player</Filter>
     </ClCompile>
-    <ClCompile Include="Enemy\Enemy.cpp">
-      <Filter>ソース ファイル\Enemy</Filter>
-    </ClCompile>
     <ClCompile Include="UI\DamageNumber\DamageNumber.cpp">
       <Filter>ソース ファイル\UI\DamageNumber</Filter>
     </ClCompile>
@@ -105,6 +102,9 @@
     <ClCompile Include="Enemy\Zombie.cpp">
       <Filter>ソース ファイル\Enemy</Filter>
     </ClCompile>
+    <ClCompile Include="Enemy\IEnemy.cpp">
+      <Filter>ソース ファイル\Enemy</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -124,9 +124,6 @@
     </ClInclude>
     <ClInclude Include="Player\Player.h">
       <Filter>ソース ファイル\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Enemy\Enemy.h">
-      <Filter>ソース ファイル\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="UI\DamageNumber\DamageNumber.h">
       <Filter>ソース ファイル\UI\DamageNumber</Filter>
@@ -153,6 +150,9 @@
       <Filter>ソース ファイル\Item</Filter>
     </ClInclude>
     <ClInclude Include="Enemy\Zombie.h">
+      <Filter>ソース ファイル\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy\IEnemy.h">
       <Filter>ソース ファイル\Enemy</Filter>
     </ClInclude>
   </ItemGroup>

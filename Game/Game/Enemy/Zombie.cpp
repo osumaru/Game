@@ -5,10 +5,12 @@
 
 void Zombie::Init(CVector3 position)
 {
-	m_skinModel.Load(L"Assets/modelData/zombi.cmo");
+	m_skinModel.Load(L"Assets/modelData/zombi.cmo", &m_animation);
 	m_position = position;
-	m_characterController.Init(0.05f, 0.05f, m_position);
+	m_characterController.Init(0.7f, 0.7f, m_position);
 	m_characterController.SetGravity(-90.0f);
+	wchar_t* animClip[1] = { L"Assets/modelData/zombiWalk.tka" };
+	m_animation.Init(animClip, 1);
 }
 
 void Zombie::Update()
@@ -23,14 +25,20 @@ void Zombie::Update()
 	CQuaternion rot;
 	rot.SetRotationDeg(CVector3::AxisX, -90.0f);
 
-	//m_characterController.SetPosition(m_position);
-	//m_characterController.Execute(GetGameTime().GetDeltaFrameTime());
-	//m_position = m_characterController.GetPosition();
+	m_characterController.SetPosition(m_position);
+	m_characterController.Execute(GameTime().GetDeltaFrameTime());
+	m_position = m_characterController.GetPosition();
+
+	if (Pad().IsTriggerButton(enButtonA)) {
+		m_animation.Play(0);
+	}
+	m_animation.Update(GameTime().GetDeltaFrameTime());
 
 	m_skinModel.Update(m_position, rot, { 1.0f, 1.0f, 1.0f });
 }
 
 void Zombie::Draw()
 {
+	m_characterController.Draw();
 	m_skinModel.Draw(GetGameCamera().GetViewMatrix(), GetGameCamera().GetProjectionMatrix());
 }

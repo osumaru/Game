@@ -24,5 +24,6 @@ public:
 protected:
 	CSkinModel				m_skinModel;
 	CCharacterController	m_characterController;
+	CAnimation				m_animation;
 	CVector3				m_position;
 };
