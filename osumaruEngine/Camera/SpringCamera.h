@@ -13,6 +13,9 @@ public:
 
 	/*
 	初期化
+	target			注視店
+	position		座標
+	maxMoveSpeed	最大速度
 	*/
 	void Init(const CVector3& target, const CVector3& position, float maxMoveSpeed);
 
@@ -113,9 +116,15 @@ public:
 	}
 private:
 
+	/*
+	positionNow		今の座標
+	positionTarget	目標座標
+	moveSpeed		移動速度
+	*/
 	CVector3 CalcSpringVector(const CVector3& positionNow, const CVector3& positionTarget, CVector3& moveSpeed, float maxMoveSpeed, float dampingRate);
 
 	float CalcSpringScalar(float positionNow, float positionTarget, float& moveSpeed);
+
 private:
 	CCamera		m_camera;
 	CVector3 m_target;

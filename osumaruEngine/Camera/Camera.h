@@ -1,4 +1,5 @@
 #pragma once
+//カメラクラス
 class CCamera
 {
 public:
@@ -82,7 +83,6 @@ private:
 	CVector3			m_up;					//カメラの上方向
 	CVector3			m_flont;				//カメラの前方向
 	CVector3			m_right;				//カメラの横方向
-
 	float				m_Far;					//遠平面
 	float				m_Near;					//近平面
 	float				m_Aspect;				//アスペクト比
