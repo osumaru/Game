@@ -41,10 +41,10 @@ public class tkTools : EditorWindow
                 outputTxt += string.Format("//{0}\n", modelName);
                 outputTxt += "{\n";
                 outputTxt += string.Format("\tL\"{0}\",\n", modelName);
-                outputTxt += string.Format("\tVector3({0:f}f, {1:f}f, {2:f}f),             //平行移動\n", tr.position.x, tr.position.y, tr.position.z);
+                outputTxt += string.Format("\tCVector3({0:f}f, {1:f}f, {2:f}f),             //平行移動\n", tr.position.x, tr.position.y, tr.position.z);
                 Quaternion rot = tr.localRotation * mapChip.invRot;
                 rot *= tr.parent.localRotation;
-                outputTxt += string.Format("\tQuaternion({0:f}f, {1:f}f, {2:f}f, {3:f}f ),  //回転\n", rot.x, rot.y, rot.z, rot.w);
+                outputTxt += string.Format("\tCQuaternion({0:f}f, {1:f}f, {2:f}f, {3:f}f ),  //回転\n", rot.x, rot.y, rot.z, rot.w);
                 //GameObject mapChipObject = tr;
                 outputTxt += string.Format("\tenMapTag{0}, //タグ\n", tr.gameObject.tag);
                 outputTxt += "},\n";
