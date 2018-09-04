@@ -13,7 +13,6 @@ void PlayerHp::Init()
 
 void PlayerHp::Update()
 {
-
 }
 
 void PlayerHp::Draw()
