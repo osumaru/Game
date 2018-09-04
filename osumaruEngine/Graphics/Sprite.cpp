@@ -25,6 +25,8 @@ CSprite::~CSprite()
 void CSprite::Init(CTexture* texture)
 {
 	m_pTexture = texture;
+	m_size.x = m_pTexture->GetWidth();
+	m_size.y = m_pTexture->GetHeight();
 	m_vertexShader.Load("Assets/shader/sprite.fx", "VSMain", CShader::enVS);
 	m_pixelShader.Load("Assets/shader/sprite.fx", "PSMain", CShader::enPS);
 	SVSLayout vertexBufferLayout[4] = 

@@ -4,6 +4,8 @@
 
 
 CTexture::CTexture() :
+	m_width(0),
+	m_height(0),
 	m_pTexture(nullptr),
 	m_pShaderResource(nullptr)
 {
@@ -31,6 +33,8 @@ void CTexture::Load(const wchar_t* filepath)
 
 void CTexture::Create(int width, int height, EnTextureType textureType, DXGI_FORMAT format)
 {
+	m_width = width;
+	m_height = height;
 	UINT bindFlags = 0;
 	switch (textureType)
 	{
@@ -44,8 +48,8 @@ void CTexture::Create(int width, int height, EnTextureType textureType, DXGI_FOR
 	D3D11_TEXTURE2D_DESC tDesc;
 	ZeroMemory(&tDesc, sizeof(tDesc));
 
-	tDesc.Width = width;
-	tDesc.Height = height;
+	tDesc.Width = m_width;
+	tDesc.Height = m_height;
 	tDesc.Format = format;
 	tDesc.MiscFlags = 0;
 	tDesc.ArraySize = 1;
