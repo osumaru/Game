@@ -6,7 +6,7 @@ void CPlayer::Init(CVector3 position)
 {
 	m_skinmodel.Load(L"Assets/modelData/Player.cmo", &m_animation);
 	m_position = position;
-	m_characterController.Init(2.0f, 2.0f, m_position);
+	m_characterController.Init(1.0f, 0.1f, m_position);
 	m_characterController.SetGravity(-90.0f);
 	wchar_t* animClip[1] = { L"Assets/modelData/PlayerWalk.tka"};
 	m_animation.Init(animClip, 1);

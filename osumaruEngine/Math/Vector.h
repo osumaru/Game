@@ -554,7 +554,7 @@ public:
 	void SetRotationDeg(const CVector3& axis, float angle)
 	{
 		float s;
-		float halfAngle = Math::DegToRad(angle) * 0.5f;
+		float halfAngle = CMath::DegToRad(angle) * 0.5f;
 		s = sin(halfAngle);
 		w = cos(halfAngle);
 		x = axis.x * s;

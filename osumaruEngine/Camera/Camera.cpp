@@ -11,7 +11,7 @@ CCamera::CCamera() :
 	m_Far(1000.0),
 	m_Near(0.1f),
 	m_Aspect((float)FrameBufferWidth() / (float)FrameBufferHeight()),
-	m_angle(Math::PI / 4)
+	m_angle(CMath::PI / 4)
 {
 }
 

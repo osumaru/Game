@@ -2,6 +2,7 @@
 #include "Sprite.h"
 #include "../Engine.h"
 #include "Texture.h"
+#include "../Math/Math.h"
 
 CSprite::CSprite() :
 	m_pTexture(nullptr),
@@ -9,7 +10,9 @@ CSprite::CSprite() :
 	m_pixelShader(),
 	m_primitive(),
 	m_alpha(1.0f),
+	m_angle(0.0f),
 	m_position(0.0f, 0.0f),
+	m_centerPosition(0.5f, 0.5f),
 	m_size(FrameBufferWidth(), FrameBufferHeight())
 {
 
@@ -22,6 +25,8 @@ CSprite::~CSprite()
 void CSprite::Init(CTexture* texture)
 {
 	m_pTexture = texture;
+	m_size.x = m_pTexture->GetWidth();
+	m_size.y = m_pTexture->GetHeight();
 	m_vertexShader.Load("Assets/shader/sprite.fx", "VSMain", CShader::enVS);
 	m_pixelShader.Load("Assets/shader/sprite.fx", "PSMain", CShader::enPS);
 	SVSLayout vertexBufferLayout[4] = 
@@ -46,6 +51,7 @@ void CSprite::Draw()
 	CVector3 position;
 	position.x = m_position.x / (FrameBufferWidth() / 2.0f);
 	position.y = m_position.y / (FrameBufferHeight() / 2.0f);
+
 	position.z = 0.0f;
 	//拡大のスケールを変換
 	CVector3 size;
@@ -53,21 +59,37 @@ void CSprite::Draw()
 	size.y = m_size.y / FrameBufferHeight();
 	size.z = 1.0f;
 
+	CVector3 centerPos = CVector3::Zero;
+	centerPos.x = m_centerPosition.x;
+	centerPos.y = 1.0f - m_centerPosition.y;
+	centerPos.x -= 0.5f;
+	centerPos.y -= 0.5f;
+	centerPos.x *= -2.0f;
+	centerPos.y *= -2.0f;
+	centerPos.x *= size.x;
+	centerPos.y *= size.y;
+
+	
+
 	//移動行列を作成
-	CMatrix transform;
-	transform.MakeTranslation(position);
+	CMatrix centerTrans;
+	centerTrans.MakeTranslation(centerPos);
+	CMatrix trans;
+	trans.MakeTranslation(position);
 	//拡大行列を作成
 	CMatrix scale;
 	scale.MakeScaling(size);
 	//ワールド行列を作成
 	SSpriteCB cb;
 	CMatrix worldMatrix = CMatrix::Identity;
-	CQuaternion quat = CQuaternion::Identity;
+	CQuaternion quat;
+	quat.SetRotation({0.0f, 0.0f, -1.0f}, m_angle);
 	CMatrix rot;
 	rot.MakeRotationFromQuaternion(quat);
 	worldMatrix.Mul(worldMatrix, scale);
+	worldMatrix.Mul(worldMatrix, centerTrans);
 	worldMatrix.Mul(worldMatrix, rot);
-	worldMatrix.Mul(worldMatrix, transform);
+	worldMatrix.Mul(worldMatrix, trans);
 	worldMatrix.Transpose();
 	cb.worldMat = worldMatrix;
 	cb.alpha = m_alpha;

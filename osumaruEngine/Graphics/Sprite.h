@@ -62,6 +62,25 @@ public:
 		m_pTexture = pTexture;
 	}
 
+	/*
+	スプライトの基底の座標を変更
+	左上が(x,y) = (0.0f, 0.0f)
+	右下が(x,y) = (1.0f, 1.0f)
+	真ん中が(x, y) = (0.5f, 0.5f)
+	*/
+	void SetCenterPosition(CVector2 position)
+	{
+		m_centerPosition = position;
+	}
+	/*
+	スプライトの回転の角度を設定
+	angle	角度（ラジアン値）
+	*/
+	void SetRotationAngle(float angle)
+	{
+		m_angle = angle;
+	}
+
 private:
 	struct SVSLayout
 	{
@@ -80,6 +99,7 @@ private:
 	CShader							m_pixelShader;
 	CPrimitive						m_primitive;
 	float							m_alpha;
+	float							m_angle;			//回転角度
 	CVector2						m_position;			//スプライトのウィンドウ上での座標
 	CVector2						m_centerPosition;	//スプライトの基点を表す座標
 	CVector2						m_size;				//スプライトのサイズ
