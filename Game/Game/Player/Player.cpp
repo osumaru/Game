@@ -15,7 +15,7 @@ void CPlayer::Init(CVector3 position)
 							{ L"Assets/modelData/PlayerDamage.tka" } };		//ダメージアニメーション
 	m_animation.Init(animClip, 5);
 	m_animation.SetLoopFlg(0, true);
-	m_animation.SetLoopFlg(1, true);
+	m_animation.SetLoopFlg(1, false);
 
 	//プレイヤーのステータスの初期化
 	{
@@ -41,7 +41,6 @@ void CPlayer::Update()
 	CVector3 PlayerHipPos = { PlayerHip.m[3][0],PlayerHip.m[3][1],PlayerHip.m[3][2] };
 	m_position = PlayerHipPos;
 
-
 	AnimationMove();		//アニメーションの処理
 	Move();					//移動処理
 	Rotation();				//回転処理
@@ -56,13 +55,11 @@ void CPlayer::Update()
 	//スキンモデルの更新
 	m_skinmodel.Update(m_position, m_rotation, { 3.0f, 3.0f, 3.0f }, true);
 	
-
-
 }
 
 void CPlayer::Draw()
 {
-	m_characterController.Draw();
+	//m_characterController.Draw();
 	m_skinmodel.Draw(GetGameCamera().GetViewMatrix(), GetGameCamera().GetProjectionMatrix());
 	
 }
@@ -146,6 +143,8 @@ void CPlayer::Move()
 	}
 
 	m_characterController.SetMoveSpeed(m_moveSpeed);
+	
+
 	m_characterController.SetPosition(m_position);
 	m_characterController.Execute(GameTime().GetDeltaFrameTime());
 	m_position = m_characterController.GetPosition();
@@ -184,23 +183,31 @@ void CPlayer::AnimationMove()
 	//ジャンプアニメーションの処理
 	else if (Pad().IsTriggerButton(enButtonY))
 	{
-		m_animation.Play(1, 0.5);
+		m_animation.Play(2, 0.5);
 
 	}
 
 	//歩行アニメーションの処理
-	else if (Pad().GetLeftStickX() != 0 && Pad().GetLeftStickY() == 0 && m_animation.GetCurrentAnimationNum() == 0)
+	else if (Pad().GetLeftStickX() != 0 || Pad().GetLeftStickY() != 0 )
 	{
+		m_animation.SetLoopFlg(1, true);
+		if (m_animation.GetCurrentAnimationNum() != 1)
+		{
 
-		//m_animation.Play(1, GameTime().GetDeltaFrameTime());
-
+			m_animation.Play(1, 0.2);
+		}
 	}
 	
-
-	if (m_animation.GetCurrentAnimationNum() != 0 && m_animation.IsPlay() == false)
+	//待機モーション
+	if (m_animation.GetCurrentAnimationNum() != 0 && Pad().GetLeftStickX() == 0 && Pad().GetLeftStickY() == 0)
 	{
+		m_animation.SetLoopFlg(1, false);
+		if (!m_animation.IsPlay())
+		{
 
-		m_animation.Play(0, 0.2f);
+			m_animation.Play(0, 0.2f);
+
+		}
 
 	}
 
