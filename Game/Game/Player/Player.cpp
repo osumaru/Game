@@ -6,7 +6,7 @@ void CPlayer::Init(CVector3 position)
 {
 	m_skinmodel.Load(L"Assets/modelData/Player.cmo", &m_animation);
 	m_position = position;
-	m_characterController.Init(2.0f, 2.0f, m_position);
+	m_characterController.Init(1.0f, 0.1f, m_position);
 	m_characterController.SetGravity(-90.0f);
 	wchar_t* animClip[1] = { L"Assets/modelData/PlayerWalk.tka"};
 	m_animation.Init(animClip, 1);
@@ -41,7 +41,6 @@ void CPlayer::Update()
 		m_status.AccumulationExp += 43;
 		
 	}
-	m_animation.Update(GameTime().GetDeltaFrameTime());
 	//スキンモデルの更新
 	m_skinmodel.Update(m_position, m_rotation, { 1.0f, 1.0f, 1.0f }, true);
 
@@ -52,6 +51,7 @@ void CPlayer::Draw()
 {
 	m_characterController.Draw();
 	m_skinmodel.Draw(GetGameCamera().GetViewMatrix(), GetGameCamera().GetProjectionMatrix());
+	
 }
 
 void CPlayer::Move()
@@ -141,7 +141,7 @@ void CPlayer::Rotation()
 
 		CQuaternion rot = CQuaternion::Identity;
 		rot.SetRotation(CVector3::AxisY, atan2f(playerVec.x, playerVec.z));		//Y軸周りの回転
-		m_rotation.Slerp(0.02f, m_rotation, rot);
+		m_rotation.Slerp(0.2f, m_rotation, rot);
 
 
 	}

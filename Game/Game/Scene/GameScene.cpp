@@ -14,9 +14,7 @@ void CGameScene::Init()
 	map->Init(0);
 
 
-	CMenu* menu = New<CMenu>(0);
-	menu->Init();
-
+	
 	CMiniMap* miniMap = New<CMiniMap>(0);
 	miniMap->Init();
 
@@ -29,6 +27,9 @@ void CGameScene::Init()
 
 	CPlayerHp* playerHp = New<CPlayerHp>(0);
 	playerHp->Init();
+
+	CMenu* menu = New<CMenu>(0);
+	menu->Init();
 
 	
 }
