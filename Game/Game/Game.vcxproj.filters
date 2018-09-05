@@ -205,5 +205,9 @@
     <MeshContentTask Include="Assets\modelData\money.fbx">
       <Filter>ソース ファイル\Assets</Filter>
     </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\umi.FBX" />
+    <MeshContentTask Include="Assets\modelData\Sword.fbx">
+      <Filter>ソース ファイル\Assets</Filter>
+    </MeshContentTask>
   </ItemGroup>
 </Project>
