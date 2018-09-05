@@ -102,7 +102,8 @@ const CMatrix& CSkinModel::FindBoneWorldMatrix(wchar_t* boneName)
 	CBone* bone = m_skelton->FindBone(boneName);
 	if (bone != nullptr)
 	{
-		bone->GetWorldMatrix();
+		return bone->GetWorldMatrix();
+		
 	}
 	return CMatrix::Identity;
 }

@@ -51,7 +51,7 @@ void CGameCamera::Update()
 		}
 	}
 
-	CVector3 position = GetPlayer().GetPosition();
+	CVector3 position = GetPlayer().GetPlayerHead();
 	float interporation = 1.0f;
 	//position.y += interporation;
 	camera.SetTarget(position);

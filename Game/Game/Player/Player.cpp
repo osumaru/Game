@@ -9,12 +9,13 @@ void CPlayer::Init(CVector3 position)
 	m_characterController.Init(1.0f, 0.1f,{m_position.x,m_position.y + 2, m_position.z });
 	m_characterController.SetGravity(-9.8f);
 	wchar_t* animClip[5] = {{ L"Assets/modelData/PlayerStand.tka"},			//待機アニメーション	
-							{ L"Assets/modelData/PlayerWalk.tka" },			//歩行アニメーション
+							{ L"Assets/modelData/PlayerDash.tka" },			//歩行アニメーション
 							{ L"Assets/modelData/PlayerJump.tka" },			//ジャンプアニメーション
 							{ L"Assets/modelData/PlayerAttack.tka" },		//攻撃アニメーション
 							{ L"Assets/modelData/PlayerDamage.tka" } };		//ダメージアニメーション
 	m_animation.Init(animClip, 5);
 	m_animation.SetLoopFlg(0, true);
+	m_animation.SetLoopFlg(1, true);
 
 	//プレイヤーのステータスの初期化
 	{
@@ -35,9 +36,15 @@ void CPlayer::Init(CVector3 position)
 void CPlayer::Update()
 {
 
+	//プレイヤーの腰のボーンを取得
+	CMatrix PlayerHip = m_skinmodel.FindBoneWorldMatrix(L"Hips");
+	CVector3 PlayerHipPos = { PlayerHip.m[3][0],PlayerHip.m[3][1],PlayerHip.m[3][2] };
+	m_position = PlayerHipPos;
+
+
+	AnimationMove();		//アニメーションの処理
 	Move();					//移動処理
 	Rotation();				//回転処理
-	AnimationMove();		//アニメーションの処理
 	StatusCalculation();	//ステータスの処理
 
 	if (Pad().IsTriggerButton(enButtonB))
@@ -48,6 +55,7 @@ void CPlayer::Update()
 	}
 	//スキンモデルの更新
 	m_skinmodel.Update(m_position, m_rotation, { 3.0f, 3.0f, 3.0f }, true);
+	
 
 
 }
@@ -176,7 +184,7 @@ void CPlayer::AnimationMove()
 	//ジャンプアニメーションの処理
 	else if (Pad().IsTriggerButton(enButtonY))
 	{
-		m_animation.Play(2, 0.5);
+		m_animation.Play(1, 0.5);
 
 	}
 
