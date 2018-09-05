@@ -37,9 +37,7 @@ void CPlayer::Update()
 {
 
 	//プレイヤーの腰のボーンを取得
-	CMatrix PlayerHip = m_skinmodel.FindBoneWorldMatrix(L"Hips");
-	CVector3 PlayerHipPos = { PlayerHip.m[3][0],PlayerHip.m[3][1],PlayerHip.m[3][2] };
-	m_position = PlayerHipPos;
+	
 
 	AnimationMove();		//アニメーションの処理
 	Move();					//移動処理
