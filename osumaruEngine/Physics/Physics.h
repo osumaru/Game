@@ -15,7 +15,7 @@ class CPhysicsWorld : Uncopyable
 	std::unique_ptr<btSequentialImpulseConstraintSolver>	m_pConstraintSolver;			//コンストレイントソルバー。拘束条件の解決処理
 	std::unique_ptr<btDiscreteDynamicsWorld>				m_pDynamicWorld;				//ワールド
 	std::unique_ptr<CRigidBodyDraw>							m_pRigidBodyDraw;
-	CCamera*													m_pCamera;
+	CCamera*												m_pCamera;
 public:
 	//コンストラクタ
 	CPhysicsWorld();
@@ -42,6 +42,7 @@ public:
 	//剛体を物理ワールドから削除
 	void RemoveRigidBody(btRigidBody* rb);
 
+	//剛体描画用のカメラを設定
 	void SetCamera(CCamera* camera)
 	{
 		m_pCamera = camera;

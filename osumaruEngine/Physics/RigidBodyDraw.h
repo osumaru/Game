@@ -49,6 +49,7 @@ public:
 	//よくわかってない
 	void setDebugMode(int debugMode) {}
 
+	//カウントをリセット
 	void Reset()
 	{
 		//毎フレームインデックスバッファと頂点バッファをリセット
