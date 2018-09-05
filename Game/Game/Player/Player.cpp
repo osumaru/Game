@@ -39,9 +39,9 @@ void CPlayer::Update()
 	//プレイヤーの腰のボーンを取得
 	CMatrix PlayerHip = m_skinmodel.FindBoneWorldMatrix(L"Hips");
 	CVector3 PlayerHipPos = { PlayerHip.m[3][0],PlayerHip.m[3][1],PlayerHip.m[3][2] };
+	float comp = m_position.y;
 	m_position = PlayerHipPos;
-
-
+	m_position.y = comp;
 	AnimationMove();		//アニメーションの処理
 	Move();					//移動処理
 	Rotation();				//回転処理
@@ -133,23 +133,22 @@ void CPlayer::Move()
 
 	if(m_isSlip)
 	{
-		m_slipSpeed = m_slipSpeed - (60.0f * GameTime().GetDeltaFrameTime());
-		if (m_slipSpeed <= 0)
-		{
-			m_isSlip = false;
-			m_slipSpeed = 50.0f;
-			return;
-		}
-		CVector3 playerFlontVec = { m_skinmodel.GetWorldMatrix().m[2][0],0.0f,m_skinmodel.GetWorldMatrix().m[2][2] };
-		playerFlontVec.Normalize();
-		m_moveSpeed = playerFlontVec * m_slipSpeed;
+		//m_slipSpeed = m_slipSpeed - (60.0f * GameTime().GetDeltaFrameTime());
+		//if (m_slipSpeed <= 0)
+		//{
+		//	m_isSlip = false;
+		//	m_slipSpeed = 50.0f;
+		//	return;
+		//}
+		//CVector3 playerFlontVec = { m_skinmodel.GetWorldMatrix().m[2][0],0.0f,m_skinmodel.GetWorldMatrix().m[2][2] };
+		//playerFlontVec.Normalize();
+		//m_moveSpeed = playerFlontVec * m_slipSpeed;
 	}
 
 	m_characterController.SetMoveSpeed(m_moveSpeed);
 	m_characterController.SetPosition(m_position);
 	m_characterController.Execute(GameTime().GetDeltaFrameTime());
 	m_position = m_characterController.GetPosition();
-
 }
 
 //プレイヤーの回転を行う関数
