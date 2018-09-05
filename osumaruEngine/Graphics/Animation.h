@@ -49,7 +49,8 @@ public:
 	//アニメーションを再生しているか？
 	bool IsPlay() const
 	{
-		return m_animationClips[m_currentAnimationNum].IsPlay();
+		return	m_animationClips[m_currentAnimationNum].IsPlay();
+
 	}
 
 	//現在再生してるアニメーションの番号を取得

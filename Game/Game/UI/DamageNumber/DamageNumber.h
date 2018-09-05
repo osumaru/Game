@@ -19,7 +19,6 @@ public:
 	//ダメージ計算
 	//player	プレイヤークラスのポインタ
 	//enemy		エネミークラスのポインタ
-
 	void DamageCalculation(CPlayer* player, CEnemy* enemy);
 
 

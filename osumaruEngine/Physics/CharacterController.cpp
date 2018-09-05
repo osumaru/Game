@@ -219,7 +219,7 @@ void CCharacterController::Init(float radius, float height, const CVector3& posi
 
 void CCharacterController::Execute(float deltaTime)
 {
-	StaticExecute();
+	//StaticExecute();
 	CPhysicsWorld& physicsWorld = PhysicsWorld();
 	//速度に重力加速度を加える。
 	m_moveSpeed.y += m_gravity * deltaTime;
