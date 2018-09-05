@@ -94,6 +94,7 @@ public:
 		m_gravity = gravity;
 	}
 
+	//重力を取得
 	float GetGravity() const
 	{
 		return m_gravity;
@@ -102,44 +103,45 @@ public:
 	//剛体を削除。
 	void RemovedRigidBody();
 
+	//当たっている地面のオブジェクトを取得
 	const btCollisionObject* GetGroundCollisionObject() const
 	{
 		return m_groundHitObject;
 	}
 
+	//当たっている壁のオブジェクトを取得
 	const btCollisionObject* GetWallCollisionObject() const
 	{
 		return m_wallHitObject;
 	}
 
+	//壁の法線を取得
 	const CVector3& GetWallNormal() const
 	{
 		return m_wallNormal;
 	}
 
+	//ユーザーインデックスを設定
 	void SetUserIndex(int userNum)
 	{
 		m_rigidBody.SetUserIndex(userNum);
 	}
 
+	//剛体を描画
 	void Draw();
 
-	CRigidBody& GetRigidBody()
-	{
-		return m_rigidBody;
-	}
 private:
-	CVector3		m_position;					//座標
-	CVector3		m_moveSpeed;				//移動速度
-	bool			m_isJump;					//ジャンプしているか？
-	bool			m_isOnGround;				//地面に設置しているか？
-	CCapsuleCollider	m_collider;					//コライダー
-	float			m_radius;					//半径
-	float			m_height;					//高さ
-	CRigidBody		m_rigidBody;				//剛体
-	float			m_gravity;					//重力
-	const btCollisionObject* m_groundHitObject;
-	const btCollisionObject* m_wallHitObject;
-	CVector3		m_wallNormal;
-	const float		m_rigidBodyManip;
+	CVector3					m_position;				//座標
+	CVector3					m_moveSpeed;			//移動速度
+	bool						m_isJump;				//ジャンプしているか？
+	bool						m_isOnGround;			//地面に設置しているか？
+	CCapsuleCollider			m_collider;				//コライダー
+	float						m_radius;				//半径
+	float						m_height;				//高さ
+	CRigidBody					m_rigidBody;			//剛体
+	float						m_gravity;				//重力
+	const btCollisionObject*	m_groundHitObject;		//当たっている地面のオブジェクト
+	const btCollisionObject*	m_wallHitObject;		//当たっている壁のオブジェクト
+	CVector3					m_wallNormal;			//当たった壁の法線
+	const float					m_rigidBodyManip;		//補正値（今は使ってない
 };

@@ -48,12 +48,12 @@ public:
 	*/
 	void MapChipErase(std::list<MapChip*>::iterator iterator);
 
-	std::list<CEnemy*> GetEnemy()
-	{
-		return enemyList;
-	}
+	//std::list<CEnemy*> GetEnemy()
+	//{
+	//	return enemyList;
+	//}
 
 private:
 	std::list<MapChip*> m_mapChip;					//マップチップ
-	std::list<CEnemy*> enemyList;
+	//std::list<CEnemy*> enemyList;
 };

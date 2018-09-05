@@ -158,7 +158,11 @@
     </MeshContentTask>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Enemy\Enemy.cpp" />
+    <ClCompile Include="Enemy\EnemyIdle.cpp" />
+    <ClCompile Include="Enemy\EnemyStateMachine.cpp" />
+    <ClCompile Include="Enemy\EnemyWalk.cpp" />
+    <ClCompile Include="Enemy\IEnemy.cpp" />
+    <ClCompile Include="Enemy\Zombie.cpp" />
     <ClCompile Include="GameCamera.cpp" />
     <ClCompile Include="Itam\RecoveryItem.cpp" />
     <ClCompile Include="main.cpp" />
@@ -180,7 +184,13 @@
     <ClCompile Include="UI\WeaponSelect\WeaponSelect.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Enemy\Enemy.h" />
+    <ClInclude Include="Enemy\EnemyIdle.h" />
+    <ClInclude Include="Enemy\EnemyState.h" />
+    <ClInclude Include="Enemy\EnemyStateMachine.h" />
+    <ClInclude Include="Enemy\EnemyWalk.h" />
+    <ClInclude Include="Enemy\IEnemy.h" />
+    <ClInclude Include="Enemy\IEnemyState.h" />
+    <ClInclude Include="Enemy\Zombie.h" />
     <ClInclude Include="GameCamera.h" />
     <ClInclude Include="Itam\RecoveryItem.h" />
     <ClInclude Include="Map\Map.h" />

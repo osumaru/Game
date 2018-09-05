@@ -7,7 +7,7 @@ void CPlayer::Init(CVector3 position)
 	m_skinmodel.Load(L"Assets/modelData/Player.cmo", &m_animation);
 	m_position = position;
 	m_characterController.Init(1.0f, 0.1f,{m_position.x,m_position.y + 2, m_position.z });
-	m_characterController.SetGravity(-9.8f);
+	m_characterController.SetGravity(/*-9.8f*/-90.0f);
 	wchar_t* animClip[5] = {{ L"Assets/modelData/PlayerStand.tka"},			//待機アニメーション	
 							{ L"Assets/modelData/PlayerDash.tka" },			//歩行アニメーション
 							{ L"Assets/modelData/PlayerJump.tka" },			//ジャンプアニメーション
