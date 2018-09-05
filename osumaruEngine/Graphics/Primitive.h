@@ -4,17 +4,19 @@
 class CPrimitive
 {
 public:
+	//インデックスバッファの種類
 	enum EnFormatIndex
 	{
 		enIndex16,
 		enIndex32,
 	};
 
+	//プリミティブの種類
 	enum EnPrimitiveType
-	{
-		enTypeLineList,
-		enTypeTriangleStrip,
-		enTypeTriangleList,
+	{	
+		enTypeLineList,			//ラインリスト
+		enTypeTriangleStrip,	//トライアングルストリップ
+		enTypeTriangleList,		//トライアングルリスト
 	};
 
 	//コンストラクタ

@@ -1,4 +1,5 @@
 #pragma once
+//カメラクラス
 class CCamera
 {
 public:
@@ -75,14 +76,13 @@ public:
 	void Update();
 
 private:
-	CMatrix			m_viewMatrix;			//ビュー行列。カメラ行列とも言う。
-	CMatrix			m_projectionMatrix;		//プロジェクション行列。ビュー空間から射影空間に変換する。
+	CMatrix				m_viewMatrix;			//ビュー行列。カメラ行列とも言う。
+	CMatrix				m_projectionMatrix;		//プロジェクション行列。ビュー空間から射影空間に変換する。
 	CVector3			m_position;				//カメラの視点。
 	CVector3			m_target;				//カメラの注視点
 	CVector3			m_up;					//カメラの上方向
 	CVector3			m_flont;				//カメラの前方向
 	CVector3			m_right;				//カメラの横方向
-
 	float				m_Far;					//遠平面
 	float				m_Near;					//近平面
 	float				m_Aspect;				//アスペクト比

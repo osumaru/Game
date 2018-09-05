@@ -96,3 +96,13 @@ void CSkinModel::Draw(const CMatrix& view, const CMatrix& projection)
 	}
 	m_skinModel->Draw(GetDeviceContext(), common, world, view, projection);
 }
+
+const CMatrix& CSkinModel::FindBoneWorldMatrix(wchar_t* boneName)
+{
+	CBone* bone = m_skelton->FindBone(boneName);
+	if (bone != nullptr)
+	{
+		bone->GetWorldMatrix();
+	}
+	return CMatrix::Identity;
+}

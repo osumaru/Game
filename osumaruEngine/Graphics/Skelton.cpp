@@ -172,7 +172,7 @@ bool CSkelton::Load(wchar_t* filePath)
 	return true;
 }
 
-void CSkelton::Update(CMatrix mat)
+void CSkelton::Update(const CMatrix& mat)
 {
 	for (auto& bone : m_bones)
 	{
@@ -184,7 +184,7 @@ void CSkelton::Update(CMatrix mat)
 	}
 }
 
-void CSkelton::UpdateWorldMatrix(CBone* bone, CMatrix mat)
+void CSkelton::UpdateWorldMatrix(CBone* bone, const CMatrix& mat)
 {
 	CMatrix mBoneWorld;
 	CMatrix localMatrix = bone->GetLocalMatrix();

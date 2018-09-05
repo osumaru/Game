@@ -116,17 +116,16 @@ void CEngine::InitD3D(HINSTANCE& hInst)
 
 	m_backBuffer.Create(p_RT, (ID3D11Texture2D*)m_depthStencilTexture.GetTexture(), m_frameBufferWidth, m_frameBufferHeight, true);
 	m_pBackBuffer = m_backBuffer.GetRenderTarget();
-	ID3D11DepthStencilView* depthStencil = m_backBuffer.GetDepthStencil();
-	m_pDeviceContext->OMSetRenderTargets(1, &m_pBackBuffer, depthStencil);
+	m_depthStencil = m_backBuffer.GetDepthStencil();
+	m_pDeviceContext->OMSetRenderTargets(1, &m_pBackBuffer, m_depthStencil);
 
 	ID3D11DepthStencilState* depthStencilState;
 	D3D11_DEPTH_STENCIL_DESC depthDesc;
 	ZeroMemory(&depthDesc, sizeof(D3D11_DEPTH_STENCIL_DESC));
 
-	depthDesc.DepthFunc = D3D11_COMPARISON_LESS;
+	depthDesc.DepthFunc = D3D11_COMPARISON_LESS_EQUAL;
 	depthDesc.DepthEnable = true;
-	//depthDesc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ALL;
-	//depthDesc.StencilEnable = true;
+	depthDesc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ALL;
 	m_pD3DDevice->CreateDepthStencilState(&depthDesc, &depthStencilState);
 	m_pDeviceContext->OMSetDepthStencilState(depthStencilState, 0);
 	D3D11_RASTERIZER_DESC rasterizerDesc;
@@ -172,7 +171,7 @@ void CEngine::GameLoop()
 			sw.Start();
 			float color[4] = { 0.0f, 0.0f, 1.0f, 0.0f };
 			m_pDeviceContext->ClearRenderTargetView(m_pBackBuffer, color);
-			m_pDeviceContext->ClearDepthStencilView(m_backBuffer.GetDepthStencil(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
+			m_pDeviceContext->ClearDepthStencilView(m_depthStencil, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
 			m_objectManager.Execute();
 			m_physicsWorld->Update();
 			m_soundEngine->Update();

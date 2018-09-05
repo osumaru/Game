@@ -7,9 +7,10 @@ class CAnimation;
 class CSkinModel : Uncopyable
 {
 public:
+	//定数バッファ用の構造体
 	struct SSkinModelCB
 	{
-		CMatrix worldMat;		//ワールド行列
+		CMatrix worldMat;				//ワールド行列
 		CMatrix viewProjMat;			//ビュープロジェクション行列
 	};
 
@@ -42,6 +43,7 @@ public:
 	*/
 	void Draw(const CMatrix& view, const CMatrix& proj);
 
+
 	//モデルを取得
 	DirectX::Model* GetBody()
 	{
@@ -60,10 +62,17 @@ public:
 		return worldMatrix;
 	}
 
+	/*
+	骨のワールド行列を取得
+	boneName	探す骨の名前
+	ret			見つかった骨のワールド行列を返す、見つからなかったら単位行列を返す
+	*/
+	const CMatrix& FindBoneWorldMatrix(wchar_t* boneName);
+
 private:
-	std::unique_ptr<CSkelton>		m_skelton = nullptr;			//スケルトン
-	CConstantBuffer					constantBuffer;					//定数バッファ
-	std::unique_ptr<DirectX::Model> m_skinModel = nullptr;			//スキンモデル
+	std::unique_ptr<CSkelton>		m_skelton = nullptr;				//スケルトン
+	CConstantBuffer					constantBuffer;						//定数バッファ
+	std::unique_ptr<DirectX::Model> m_skinModel = nullptr;				//スキンモデル
 	CMatrix							worldMatrix = CMatrix::Identity;	//ワールド行列
 	
 };

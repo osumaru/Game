@@ -13,7 +13,8 @@ CSprite::CSprite() :
 	m_angle(0.0f),
 	m_position(0.0f, 0.0f),
 	m_centerPosition(0.5f, 0.5f),
-	m_size(FrameBufferWidth(), FrameBufferHeight())
+	m_size(FrameBufferWidth(), FrameBufferHeight()),
+	m_isDraw(true)
 {
 
 }
@@ -47,6 +48,10 @@ void CSprite::Init(CTexture* texture)
 
 void CSprite::Draw()
 {
+	if (!m_isDraw)
+	{
+		return;
+	}
 	//座標のスケールを変換
 	CVector3 position;
 	position.x = m_position.x / (FrameBufferWidth() / 2.0f);

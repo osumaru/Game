@@ -26,12 +26,6 @@ public:
 	//死ぬ前に一回だけ呼ばれる関数
 	virtual void BeforeDead() {};
 
-	void Reset()
-	{
-		m_isStart = false;
-		m_isDelete = false;
-	}
-
 	//死んでいるか？
 	bool IsDelete() const
 	{
@@ -43,12 +37,22 @@ public:
 		return m_isStart;
 	}
 
-
-	void Dead()
+	//アクティブフラグを設定
+	void SetIsActive(bool isActive)
 	{
-		m_isDelete = true;
+		m_isActive = isActive;
 	}
 
+	//アクティブか？
+	bool IsActive()
+	{
+		return m_isActive;
+	}
+
+	friend class CGameObjectManager;
+private:
+
+	//Start関数を呼ぶ関数
 	void Starter()
 	{
 		if (!m_isStart && !m_isDelete)
@@ -56,7 +60,7 @@ public:
 			m_isStart = Start();
 		}
 	}
-
+	//Update関数を呼ぶ関数
 	void Updater()
 	{
 		if (m_isStart && m_isActive && !m_isDelete)
@@ -64,7 +68,7 @@ public:
 			Update();
 		}
 	}
-
+	//Draw関数を呼ぶ関数
 	void Drawer()
 	{
 		if (m_isStart && m_isActive && !m_isDelete)
@@ -73,6 +77,7 @@ public:
 		}
 	}
 
+	//AfterDrawerを呼ぶ関数
 	void AfterDrawer()
 	{
 		if (m_isStart && m_isActive && !m_isDelete)
@@ -81,14 +86,13 @@ public:
 		}
 	}
 
-	void SetIsActive(bool isActive)
-	{
-		m_isActive = isActive;
-	}
 
-	bool IsActive()
+	//リセット関数、Addでオブジェクトマネージャーに登録されたものがDeleteされるときに呼ぶ
+	void Reset()
 	{
-		return m_isActive;
+		m_isStart = false;
+		m_isDelete = false;
+		m_isActive = true;
 	}
 private:
 	bool m_isDelete;			//インスタンスを消す時に建てるフラグ
