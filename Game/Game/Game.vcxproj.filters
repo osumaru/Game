@@ -187,9 +187,6 @@
     <MeshContentTask Include="Assets\modelData\Player.fbx">
       <Filter>ソース ファイル\Assets</Filter>
     </MeshContentTask>
-    <MeshContentTask Include="Assets\modelData\map2.FBX">
-      <Filter>ソース ファイル\Assets</Filter>
-    </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\Warrok.fbx">
       <Filter>ソース ファイル\Assets</Filter>
     </MeshContentTask>
@@ -207,6 +204,9 @@
     </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\umi.FBX" />
     <MeshContentTask Include="Assets\modelData\Sword.fbx">
+      <Filter>ソース ファイル\Assets</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\map2.FBX">
       <Filter>ソース ファイル\Assets</Filter>
     </MeshContentTask>
   </ItemGroup>

@@ -77,16 +77,16 @@ public:
 
 
 private:
-	CVector3				m_position;							//座標
-	CVector3				m_moveSpeed = CVector3::Zero;		//移動速度
-	CQuaternion			m_rotation = CQuaternion::Identity;	//回転
-	CSkinModel			m_skinmodel;						//スキンモデル
-	CCharacterController m_characterController;				//キャラクターコントローラー
-	CPad					m_pad;								//パッド
-	CAnimation			m_animation;						//アニメーション
-	SplayerStatus		m_status;							//プレイヤーのステータス
-	bool				m_isSlip = false;					//スリップ判定
-	float				m_slipSpeed = 50.0f;
+	CVector3				m_position;								//座標
+	CVector3				m_moveSpeed = CVector3::Zero;			//移動速度
+	CQuaternion				m_rotation = CQuaternion::Identity;		//回転
+	CSkinModel				m_skinmodel;							//スキンモデル
+	CCharacterController	m_characterController;					//キャラクターコントローラー
+	CPad					m_pad;									//パッド
+	CAnimation				m_animation;							//アニメーション
+	SplayerStatus			m_status;								//プレイヤーのステータス
+	bool					m_isSlip = false;						//スリップ判定
+	float					m_slipSpeed = 50.0f;					//回避移動時のスピード
 
 };
 

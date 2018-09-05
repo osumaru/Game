@@ -49,7 +49,7 @@ public:
 
 	bool IsPlay() const
 	{
-		m_animationClips[m_currentAnimationNum].IsPlay();
+		return	m_animationClips[m_currentAnimationNum].IsPlay();
 	}
 
 	int GetCurrentAnimationNum() const

@@ -6,6 +6,7 @@
 #include "../UI/WeaponSelect/WeaponSelect.h"
 #include "../UI/PlayerHp/PlayerHp.h"
 #include "../UI/Menu/Menu.h"
+#include"../GameCamera.h"
 void CGameScene::Init()
 
 
@@ -18,7 +19,7 @@ void CGameScene::Init()
 	CMiniMap* miniMap = New<CMiniMap>(0);
 	miniMap->Init();
 
-
+	GetGameCamera().Init();
 
 	damageNumber.Init();
 
