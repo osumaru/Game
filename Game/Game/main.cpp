@@ -13,7 +13,6 @@ int WINAPI wWinMain(
 {
 	//Direct3D‚ğ‰Šú‰»
 	Engine().InitD3D(hInst);
-	GetGameCamera().Init();
 	New<CGameScene>(0)->Init();
 	Engine().GameLoop();
 	return 0;

@@ -4,10 +4,11 @@
 class CTexture : Uncopyable
 {
 public:
+	//レンダリングターゲットの種類
 	enum EnTextureType
 	{
-		enRendertarget,
-		enDepthStencil,
+		enRendertarget,		//レンダリングターゲット
+		enDepthStencil,		//デプスステンシルバッファ
 	};
 	//コンストラクタ
 	CTexture();
@@ -51,9 +52,8 @@ public:
 	}
 
 private:
-	int m_width;
-	int m_height;
-
-	ID3D11Resource*					m_pTexture;
-	ID3D11ShaderResourceView*		m_pShaderResource;
+	int								m_width;			//テクスチャの横幅									
+	int								m_height;			//テクスチャの縦幅
+	ID3D11Resource*					m_pTexture;			//テクスチャ
+	ID3D11ShaderResourceView*		m_pShaderResource;	//SRV
 };

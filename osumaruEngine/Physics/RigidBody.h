@@ -67,37 +67,43 @@ public:
 		m_rigidBody->getWorldTransform().setRotation(btQuaternion(rotation.x, rotation.y, rotation.z, rotation.w));
 	}
 
+	//剛体を描画
 	void Draw();
 
+	//物理ワールドに剛体を登録
 	void PhysicsWorldAddRigidBody();
 
+	//物理ワールドに剛体をリストを外す
 	void PhysicsWorldRemoveRigidBody();
 
-
+	//ユーザーインデックスを設定
 	void SetUserIndex(int index)
 	{
 		m_rigidBody->setUserIndex(index);
 	}
 
+	//コリジョンフラグを設定
 	void SetCollisionFlags(int flag)
 	{
 		m_rigidBody->setCollisionFlags(flag);
 	}
 
+	//アクティベーションステートを設定
 	void SetActivationState(int state)
 	{
 		m_rigidBody->setActivationState(state);
 	}
 
-	void SetPlayerCollisionWallFlg(bool flg)
-	{
-		m_rigidBody->setPlayerCollisionWallFlg(flg);
-	}
+	
+	//void SetPlayerCollisionWallFlg(bool flg)
+	//{
+	//	m_rigidBody->setPlayerCollisionWallFlg(flg);
+	//}
 
-	void SetPlayerCollisionGroundFlg(bool flg)
-	{
-		m_rigidBody->setPlayerCollisionGroundFlg(flg);
-	}
+	//void SetPlayerCollisionGroundFlg(bool flg)
+	//{
+	//	m_rigidBody->setPlayerCollisionGroundFlg(flg);
+	//}
 
 
 private:

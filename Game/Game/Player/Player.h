@@ -66,6 +66,11 @@ public:
 		return m_status;
 	}
 
+	//プレイヤーのワールド行列を取得
+	const CMatrix& GetWorldMatrix()
+	{
+		return m_skinmodel.GetWorldMatrix();
+	}
 
 	const int GetStrength()
 	{
@@ -75,18 +80,29 @@ public:
 	//プレイヤーの装備の変更を行う処理
 	void WeaponChange();
 
+	const CVector3 GetPlayerHead()
+	{
+		
+		CMatrix PlayerHead = m_skinmodel.FindBoneWorldMatrix(L"Head");
+		CVector3 PlayerHeadPos = { PlayerHead.m[3][0],PlayerHead.m[3][1],PlayerHead.m[3][2] };
+
+		return PlayerHeadPos;
+	}
+
+
+
 
 private:
-	CVector3				m_position;							//座標
-	CVector3				m_moveSpeed = CVector3::Zero;		//移動速度
-	CQuaternion			m_rotation = CQuaternion::Identity;	//回転
-	CSkinModel			m_skinmodel;						//スキンモデル
-	CCharacterController m_characterController;				//キャラクターコントローラー
-	CPad					m_pad;								//パッド
-	CAnimation			m_animation;						//アニメーション
-	SplayerStatus		m_status;							//プレイヤーのステータス
-	bool				m_isSlip = false;					//スリップ判定
-	float				m_slipSpeed = 50.0f;
+	CVector3				m_position;								//座標
+	CVector3				m_moveSpeed = CVector3::Zero;			//移動速度
+	CQuaternion				m_rotation = CQuaternion::Identity;		//回転
+	CSkinModel				m_skinmodel;							//スキンモデル
+	CCharacterController	m_characterController;					//キャラクターコントローラー
+	CPad					m_pad;									//パッド
+	CAnimation				m_animation;							//アニメーション
+	SplayerStatus			m_status;								//プレイヤーのステータス
+	bool					m_isSlip = false;						//スリップ判定
+	float					m_slipSpeed = 50.0f;					//回避移動時のスピード
 
 };
 

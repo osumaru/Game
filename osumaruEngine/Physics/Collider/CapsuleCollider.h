@@ -1,5 +1,6 @@
 #pragma once
 #include "ICollider.h"
+//カプセルコライダー
 
 class CCapsuleCollider : public ICollider
 {

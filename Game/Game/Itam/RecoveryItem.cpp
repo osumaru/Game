@@ -5,7 +5,7 @@
 
 void CRecoveryItem::Init(CVector3 position)
 {
-	m_skinModel.Load(L"Assets/modelData/testChamferBox.cmo");
+	m_skinModel.Load(L"Assets/modelData/heart.cmo");
 	m_position = position;
 }
 
@@ -14,7 +14,7 @@ void CRecoveryItem::Update()
 	CVector3 toPlayer = m_position - GetPlayer().GetPosition();
 	float length = toPlayer.Length();
 	if (length < 10.0f) {
-		Dead();
+		Delete(this);
 	}
 
 	CQuaternion rotation;

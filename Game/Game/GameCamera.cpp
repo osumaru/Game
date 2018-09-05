@@ -9,8 +9,8 @@ void CGameCamera::Init()
 	camera.SetNear(1.0f);
 	camera.SetAspect((float)FrameBufferWidth() / (float)FrameBufferHeight());
 	camera.SetAngle(CMath::DegToRad(60.0f));
-	camera.SetPosition({ 0.0f, 6.0f, 4.0f });
-	camera.SetTarget({ 0.0f, 7.0f, 0.0f });
+	camera.SetPosition({ 0.0f, 10.0f, 15.0f });
+	camera.SetTarget({ 0.0f, 8.0f, 0.0f });
 	camera.SetUp({ 0.0f, 1.0f, 0.0f });
 	camera.Update();
 	Add(this, 0);
@@ -51,7 +51,7 @@ void CGameCamera::Update()
 		}
 	}
 
-	CVector3 position = GetPlayer().GetPosition();
+	CVector3 position = GetPlayer().GetPlayerHead();
 	float interporation = 1.0f;
 	//position.y += interporation;
 	camera.SetTarget(position);

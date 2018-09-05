@@ -10,11 +10,12 @@ public:
 	//デストラクタ
 	~CShader();
 
+	//シェーダーの種類
 	enum EnShaderType
 	{
-		enVS,
-		enPS,
-		enCS,
+		enVS,		//頂点シェーダー
+		enPS,		//ピクセルシェーダー
+		enCS,		//コンピュートシェーダー
 	};
 
 	/*
@@ -36,10 +37,13 @@ public:
 	{
 		return m_pInputLayout;
 	}
+
+	//シェーダーデータを取得
 	void* GetByteCode()
 	{
 		return m_blob->GetBufferPointer();
 	}
+	//シェーダーデータのサイズを取得。
 	size_t GetByteCodeSize()
 	{
 		return m_blob->GetBufferSize();
@@ -54,5 +58,5 @@ private:
 	std::unique_ptr<char[]>			m_pShaderData;		//シェーダーをコンパイルしたデータを格納するバッファ
 	ID3D11DeviceChild*				m_pShader;			//シェーダー
 	ID3D11InputLayout*				m_pInputLayout;		//頂点レイアウト
-	ID3DBlob*						m_blob;
+	ID3DBlob*						m_blob;				//シェーダーデータ
 };
