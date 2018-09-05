@@ -14,7 +14,7 @@ void CRecoveryItem::Update()
 	CVector3 toPlayer = m_position - GetPlayer().GetPosition();
 	float length = toPlayer.Length();
 	if (length < 10.0f) {
-		Dead();
+		Delete(this);
 	}
 
 	CQuaternion rotation;

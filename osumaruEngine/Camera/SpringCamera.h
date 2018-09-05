@@ -19,7 +19,7 @@ public:
 	*/
 	void Init(const CVector3& target, const CVector3& position, float maxMoveSpeed);
 
-	
+
 	//目標となる注視点を設定。
 	void SetTarTarget(const CVector3& target)
 	{
@@ -32,7 +32,7 @@ public:
 		m_camera.SetTarget(target);
 	}
 
-	
+
 	//目標となる視点を設定
 	void SetTarPosition(const CVector3& position)
 	{
@@ -96,7 +96,7 @@ public:
 	//バネカメラ用のパラメータをクリア
 	void ClearSpringParame()
 	{
-		m_target = {0.0f, 0.0f, 0.0f};
+		m_target = { 0.0f, 0.0f, 0.0f };
 		m_positionMoveSpeed = { 0.0f, 0.0f, 0.0f };
 	}
 
@@ -117,24 +117,34 @@ public:
 private:
 
 	/*
-	positionNow		今の座標
-	positionTarget	目標座標
+	現在の座標から目標の座標までバネ計算をした結果を求める
+	positionNow		現在の座標
+	positionTarget	目標の座標
 	moveSpeed		移動速度
-	maxMoveSpeed	
+	maxMoveSpeed	最大速度
+	danpingRate		減衰率
+	ret				計算後の座標
 	*/
 	CVector3 CalcSpringVector(const CVector3& positionNow, const CVector3& positionTarget, CVector3& moveSpeed, float maxMoveSpeed, float dampingRate);
 
+	/*
+	減衰率を求める
+	positionNow		現在の減衰率
+	positionTarget	目標の減衰率
+	moveSpeed		加速度
+	ret　			計算後の減衰率
+	*/
 	float CalcSpringScalar(float positionNow, float positionTarget, float& moveSpeed);
 
 private:
-	CCamera		m_camera;
-	CVector3 m_target;
-	CVector3 m_position;
-	CVector3 m_targetMoveSpeed;
-	CVector3 m_positionMoveSpeed;
-	float		m_maxMoveSpeed;
-	float		m_targetDampingRate;
-	float		m_dampingRate;
-	float		m_dampingRateVel;
-	const float m_dampingK;
+	CCamera			m_camera;				//カメラ
+	CVector3		m_target;				//注視点
+	CVector3		m_position;				//座標
+	CVector3		m_targetMoveSpeed;		//現在の注視点から目標の注視店までの移動速度
+	CVector3		m_positionMoveSpeed;	//現在の座標から目標の座標までの移動速度
+	float			m_maxMoveSpeed;			//バネカメラの最大速度
+	float			m_targetDampingRate;	//目標の減衰率
+	float			m_dampingRate;			//現在の減衰率
+	float			m_dampingRateVel;		//減衰率の加速度
+	const float		m_dampingK;				//減衰率の係数
 };

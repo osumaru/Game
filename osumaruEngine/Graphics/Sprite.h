@@ -94,27 +94,29 @@ public:
 	}
 
 private:
+	//頂点レイアウト
 	struct SVSLayout
 	{
 		CVector4 position;
 		CVector2	uv;
 	};
 
+	//定数バッファ
 	struct SSpriteCB
 	{
-		CMatrix worldMat;
-		float alpha;
+		CMatrix worldMat;	//ワールド行列
+		float alpha;		//アルファ値
 	};
 
-	CTexture*						m_pTexture;
-	CShader							m_vertexShader;
-	CShader							m_pixelShader;
-	CPrimitive						m_primitive;
-	float							m_alpha;
+	CTexture*						m_pTexture;			//テクスチャ
+	CShader							m_vertexShader;		//頂点シェーダー
+	CShader							m_pixelShader;		//ピクセルシェーダー
+	CPrimitive						m_primitive;		//プリミティブ
+	float							m_alpha;			//アルファ値
 	float							m_angle;			//回転角度
 	CVector2						m_position;			//スプライトのウィンドウ上での座標
 	CVector2						m_centerPosition;	//スプライトの基点を表す座標
 	CVector2						m_size;				//スプライトのサイズ
-	CConstantBuffer					m_cb;
-	bool							m_isDraw;
+	CConstantBuffer					m_cb;				//定数バッファ
+	bool							m_isDraw;			//描画するかどうか？
 };
