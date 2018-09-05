@@ -45,7 +45,7 @@ void Zombie::Update()
 	}
 	m_animation.Update(GameTime().GetDeltaFrameTime());
 
-	m_skinModel.Update(m_position, rot, { 1.0f, 1.0f, 1.0f });
+	m_skinModel.Update(m_position, rot, { 3.0f, 3.0f, 3.0f });
 }
 
 void Zombie::Draw()
