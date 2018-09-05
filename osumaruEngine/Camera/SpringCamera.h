@@ -120,6 +120,7 @@ private:
 	positionNow		今の座標
 	positionTarget	目標座標
 	moveSpeed		移動速度
+	maxMoveSpeed	
 	*/
 	CVector3 CalcSpringVector(const CVector3& positionNow, const CVector3& positionTarget, CVector3& moveSpeed, float maxMoveSpeed, float dampingRate);
 

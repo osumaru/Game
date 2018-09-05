@@ -46,6 +46,16 @@ public:
 		m_animationClips[animationNum].SetIsLoop(isLoop);
 	}
 
+
+	bool IsPlay() const
+	{
+		m_animationClips[m_currentAnimationNum].IsPlay();
+	}
+
+	int GetCurrentAnimationNum() const
+	{
+		return m_currentAnimationNum;
+	}
 private:
 	std::unique_ptr<CAnimationClip[]>	m_animationClips = nullptr;		//アニメーションクリップの配列
 	int									m_currentAnimationNum = 0;		//今再生しているアニメーションの番号

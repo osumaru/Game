@@ -72,7 +72,6 @@ void CMenu::StatusMath()
 	for (int i = 0; i < 7; i++)
 	{
 		
-
 			int num = 1111 * i;
 			wchar_t filePath[256];
 			swprintf(filePath, L"Assets/sprite/number/number%d.png", num / 1000);

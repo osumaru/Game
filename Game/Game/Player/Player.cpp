@@ -8,8 +8,13 @@ void CPlayer::Init(CVector3 position)
 	m_position = position;
 	m_characterController.Init(1.0f, 0.1f, m_position);
 	m_characterController.SetGravity(-90.0f);
-	wchar_t* animClip[1] = { L"Assets/modelData/PlayerWalk.tka"};
-	m_animation.Init(animClip, 1);
+	wchar_t* animClip[5] = {{ L"Assets/modelData/PlayerStand.tka"},			//待機アニメーション	
+							{ L"Assets/modelData/PlayerWalk.tka" },			//歩行アニメーション
+							{ L"Assets/modelData/PlayerJump.tka" },			//ジャンプアニメーション
+							{ L"Assets/modelData/PlayerAttack.tka" },		//攻撃アニメーション
+							{ L"Assets/modelData/PlayerDamage.tka" } };		//ダメージアニメーション
+	m_animation.Init(animClip, 5);
+	m_animation.SetLoopFlg(0, true);
 
 	//プレイヤーのステータスの初期化
 	{
@@ -49,7 +54,7 @@ void CPlayer::Update()
 
 void CPlayer::Draw()
 {
-	m_characterController.Draw();
+	//m_characterController.Draw();
 	m_skinmodel.Draw(GetGameCamera().GetViewMatrix(), GetGameCamera().GetProjectionMatrix());
 	
 }
@@ -97,9 +102,9 @@ void CPlayer::Move()
 	else if (Pad().IsTriggerButton(enButtonY))
 	{
 
-		m_moveSpeed.y += 50.0f;
+		//m_moveSpeed.y += 50.0f;
 	}
-
+	
 
 	//回避の処理
 	if (Pad().IsTriggerButton(enButtonRightTrigger))
@@ -128,10 +133,11 @@ void CPlayer::Move()
 
 }
 
+//プレイヤーの回転を行う関数
 void CPlayer::Rotation()
 {
 
-	CVector3 playerVec = m_moveSpeed;
+	CVector3 playerVec = m_moveSpeed; //
 	playerVec.y = 0.0f;
 
 
@@ -150,11 +156,27 @@ void CPlayer::Rotation()
 
 void CPlayer::AnimationMove()
 {
-
-	if (Pad().IsTriggerButton(enButtonA))
+	//攻撃アニメーションの処理
+	if (Pad().IsTriggerButton(enButtonX))
 	{
-		m_animation.Play(0);
+		m_animation.Play(3);
 	}
+
+	//ジャンプアニメーションの処理
+	else if (Pad().IsTriggerButton(enButtonY))
+	{
+		m_animation.Play(2);
+
+	}
+
+	//歩行アニメーションの処理
+	else if (Pad().GetLeftStickX() != 0 && Pad().GetLeftStickX() != 0)
+	{
+
+		m_animation.Play(1);
+
+	}
+
 
 	m_animation.Update(GameTime().GetDeltaFrameTime());
 

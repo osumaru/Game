@@ -76,8 +76,8 @@ public:
 	void Update();
 
 private:
-	CMatrix			m_viewMatrix;			//ビュー行列。カメラ行列とも言う。
-	CMatrix			m_projectionMatrix;		//プロジェクション行列。ビュー空間から射影空間に変換する。
+	CMatrix				m_viewMatrix;			//ビュー行列。カメラ行列とも言う。
+	CMatrix				m_projectionMatrix;		//プロジェクション行列。ビュー空間から射影空間に変換する。
 	CVector3			m_position;				//カメラの視点。
 	CVector3			m_target;				//カメラの注視点
 	CVector3			m_up;					//カメラの上方向
