@@ -9,12 +9,13 @@ void CPlayer::Init(CVector3 position)
 	m_characterController.Init(1.0f, 0.1f,{m_position.x,m_position.y + 2, m_position.z });
 	m_characterController.SetGravity(/*-9.8f*/-90.0f);
 	wchar_t* animClip[5] = {{ L"Assets/modelData/PlayerStand.tka"},			//待機アニメーション	
-							{ L"Assets/modelData/PlayerWalk.tka" },			//歩行アニメーション
+							{ L"Assets/modelData/PlayerDash.tka" },			//歩行アニメーション
 							{ L"Assets/modelData/PlayerJump.tka" },			//ジャンプアニメーション
 							{ L"Assets/modelData/PlayerAttack.tka" },		//攻撃アニメーション
 							{ L"Assets/modelData/PlayerDamage.tka" } };		//ダメージアニメーション
 	m_animation.Init(animClip, 5);
 	m_animation.SetLoopFlg(0, true);
+	m_animation.SetLoopFlg(1, false);
 
 	//プレイヤーのステータスの初期化
 	{
@@ -35,9 +36,16 @@ void CPlayer::Init(CVector3 position)
 void CPlayer::Update()
 {
 
+	//プレイヤーの腰のボーンを取得
+	CMatrix PlayerHip = m_skinmodel.FindBoneWorldMatrix(L"Hips");
+	CVector3 PlayerHipPos = { PlayerHip.m[3][0],PlayerHip.m[3][1],PlayerHip.m[3][2] };
+	float comp = m_position.y;
+	m_position = PlayerHipPos;
+	m_position.y = comp;
+
+	AnimationMove();		//アニメーションの処理
 	Move();					//移動処理
 	Rotation();				//回転処理
-	AnimationMove();		//アニメーションの処理
 	StatusCalculation();	//ステータスの処理
 
 	if (Pad().IsTriggerButton(enButtonB))
@@ -47,14 +55,12 @@ void CPlayer::Update()
 		
 	}
 	//スキンモデルの更新
-	m_skinmodel.Update(m_position, m_rotation, { 1.0f, 1.0f, 1.0f }, true);
-
-
+	m_skinmodel.Update(m_position, m_rotation, { 3.0f, 3.0f, 3.0f }, true);
 }
 
 void CPlayer::Draw()
 {
-	m_characterController.Draw();
+	//m_characterController.Draw();
 	m_skinmodel.Draw(GetGameCamera().GetViewMatrix(), GetGameCamera().GetProjectionMatrix());
 	
 }
@@ -125,23 +131,24 @@ void CPlayer::Move()
 
 	if(m_isSlip)
 	{
-		m_slipSpeed = m_slipSpeed - (60.0f * GameTime().GetDeltaFrameTime());
-		if (m_slipSpeed <= 0)
-		{
-			m_isSlip = false;
-			m_slipSpeed = 50.0f;
-			return;
-		}
-		CVector3 playerFlontVec = { m_skinmodel.GetWorldMatrix().m[2][0],0.0f,m_skinmodel.GetWorldMatrix().m[2][2] };
-		playerFlontVec.Normalize();
-		m_moveSpeed = playerFlontVec * m_slipSpeed;
+		//m_slipSpeed = m_slipSpeed - (60.0f * GameTime().GetDeltaFrameTime());
+		//if (m_slipSpeed <= 0)
+		//{
+		//	m_isSlip = false;
+		//	m_slipSpeed = 50.0f;
+		//	return;
+		//}
+		//CVector3 playerFlontVec = { m_skinmodel.GetWorldMatrix().m[2][0],0.0f,m_skinmodel.GetWorldMatrix().m[2][2] };
+		//playerFlontVec.Normalize();
+		//m_moveSpeed = playerFlontVec * m_slipSpeed;
 	}
 
 	m_characterController.SetMoveSpeed(m_moveSpeed);
+	
+
 	m_characterController.SetPosition(m_position);
 	m_characterController.Execute(GameTime().GetDeltaFrameTime());
 	m_position = m_characterController.GetPosition();
-
 }
 
 //プレイヤーの回転を行う関数
@@ -181,18 +188,26 @@ void CPlayer::AnimationMove()
 	}
 
 	//歩行アニメーションの処理
-	else if (Pad().GetLeftStickX() != 0 && Pad().GetLeftStickY() == 0 && m_animation.GetCurrentAnimationNum() == 0)
+	else if (Pad().GetLeftStickX() != 0 || Pad().GetLeftStickY() != 0 )
 	{
+		m_animation.SetLoopFlg(1, true);
+		if (m_animation.GetCurrentAnimationNum() != 1)
+		{
 
-		//m_animation.Play(1, GameTime().GetDeltaFrameTime());
-
+			m_animation.Play(1, 0.2);
+		}
 	}
 	
-
-	if (m_animation.GetCurrentAnimationNum() != 0 && m_animation.IsPlay() == false)
+	//待機モーション
+	if (m_animation.GetCurrentAnimationNum() != 0 && Pad().GetLeftStickX() == 0 && Pad().GetLeftStickY() == 0)
 	{
+		m_animation.SetLoopFlg(1, false);
+		if (!m_animation.IsPlay())
+		{
 
-		m_animation.Play(0, 0.2f);
+			m_animation.Play(0, 0.2f);
+
+		}
 
 	}
 

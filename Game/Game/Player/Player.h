@@ -80,6 +80,17 @@ public:
 	//プレイヤーの装備の変更を行う処理
 	void WeaponChange();
 
+	const CVector3 GetPlayerHead()
+	{
+		
+		CMatrix PlayerHead = m_skinmodel.FindBoneWorldMatrix(L"Head");
+		CVector3 PlayerHeadPos = { PlayerHead.m[3][0],PlayerHead.m[3][1],PlayerHead.m[3][2] };
+
+		return PlayerHeadPos;
+	}
+
+
+
 
 private:
 	CVector3				m_position;								//座標
