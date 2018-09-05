@@ -47,7 +47,7 @@ void CPlayer::Update()
 		
 	}
 	//スキンモデルの更新
-	m_skinmodel.Update(m_position, m_rotation, { 3.0f, 3.0f, 3.0f }, true);
+	m_skinmodel.Update(m_position, m_rotation, { 1.0f, 1.0f, 1.0f }, true);
 
 
 }
