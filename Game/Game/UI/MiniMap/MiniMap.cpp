@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "MiniMap.h"
+#include "../../Player/Player.h"
 
 void CMiniMap::Init()
 {

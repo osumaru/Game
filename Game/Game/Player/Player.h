@@ -66,6 +66,11 @@ public:
 		return m_status;
 	}
 
+	//プレイヤーのワールド行列を取得
+	const CMatrix& GetWorldMatrix()
+	{
+		return m_skinmodel.GetWorldMatrix();
+	}
 
 	const int GetStrength()
 	{

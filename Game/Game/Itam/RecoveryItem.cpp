@@ -5,7 +5,7 @@
 
 void CRecoveryItem::Init(CVector3 position)
 {
-	m_skinModel.Load(L"Assets/modelData/testChamferBox.cmo");
+	m_skinModel.Load(L"Assets/modelData/heart.cmo");
 	m_position = position;
 }
 

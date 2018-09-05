@@ -3,14 +3,24 @@
 #include "../GameCamera.h"
 #include "../Itam/RecoveryItem.h"
 
+Zombie::Zombie():
+	m_enemyStateMachine(this)
+{
+}
+
+Zombie::~Zombie()
+{
+}
+
 void Zombie::Init(CVector3 position)
 {
 	m_skinModel.Load(L"Assets/modelData/zombi.cmo", &m_animation);
 	m_position = position;
 	m_characterController.Init(0.7f, 0.7f, m_position);
 	m_characterController.SetGravity(-90.0f);
-	wchar_t* animClip[1] = { L"Assets/modelData/zombiWalk.tka" };
+	wchar_t* animClip[1] = { L"Assets/modelData/zombiStand.tka" };
 	m_animation.Init(animClip, 1);
+	Add(&m_enemyStateMachine, 0);
 }
 
 void Zombie::Update()
@@ -19,6 +29,7 @@ void Zombie::Update()
 	//if (Pad().IsTriggerButton(enButtonA)) {
 	//	CRecoveryItem* recoveryItem = New<CRecoveryItem>(0);
 	//	recoveryItem->Init(m_position);
+	//	m_enemyStateMachine.Release();
 	//	Dead();
 	//}
 

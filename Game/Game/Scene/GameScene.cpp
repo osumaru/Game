@@ -35,7 +35,7 @@ void CGameScene::Init()
 
 void CGameScene::Update()
 {
-
+	//ダメージ計算
 	//damageNumber.DamageCalculation(&GetPlayer().GetInstance(), map->GetEnemy());
 
 }
