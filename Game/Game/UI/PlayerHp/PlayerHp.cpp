@@ -18,7 +18,7 @@ void CPlayerHp::Init()
 	m_playerHpBackSprite.SetPosition({ m_playerHpBackPos });
 	m_playerHpBackSprite.SetSize({ m_playerHpBackSize });
 
-	//PlayerDamage(80.0f);
+	PlayerDamage(80.0f);
 }
 
 void CPlayerHp::Update()
