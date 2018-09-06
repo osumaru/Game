@@ -11,7 +11,7 @@ CSkinModel::~CSkinModel()
 {
 }
 
-void CSkinModel::Load(wchar_t* filePath, CAnimation* animation)
+void CSkinModel::Load(const wchar_t* filePath, CAnimation* animation)
 {
 	std::unique_ptr<CSkelton> skelton;
 	skelton = std::make_unique<CSkelton>();
