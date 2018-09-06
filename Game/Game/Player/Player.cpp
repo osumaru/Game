@@ -5,11 +5,12 @@
 void CPlayer::Init(CVector3 position)
 {
 	m_skinmodel.Load(L"Assets/modelData/Player.cmo", &m_animation);
+	m_Weaponskin.Load(L"Assets/modelData/Sword.cmo", NULL);
 	m_position = position;
-	m_characterController.Init(1.0f, 0.1f,{m_position.x,m_position.y + 2, m_position.z });
-	m_characterController.SetGravity(/*-9.8f*/-90.0f);
+	m_characterController.Init(3.5f, 0.05f,{m_position.x,m_position.y, m_position.z });
+	m_characterController.SetGravity(-9.8f);
 	wchar_t* animClip[5] = {{ L"Assets/modelData/PlayerStand.tka"},			//待機アニメーション	
-							{ L"Assets/modelData/PlayerDash.tka" },			//歩行アニメーション
+							{ L"Assets/modelData/PlayerDashStay.tka" },		//歩行アニメーション
 							{ L"Assets/modelData/PlayerJump.tka" },			//ジャンプアニメーション
 							{ L"Assets/modelData/PlayerAttack.tka" },		//攻撃アニメーション
 							{ L"Assets/modelData/PlayerDamage.tka" } };		//ダメージアニメーション
@@ -36,12 +37,7 @@ void CPlayer::Init(CVector3 position)
 void CPlayer::Update()
 {
 
-	//プレイヤーの腰のボーンを取得
-	CMatrix PlayerHip = m_skinmodel.FindBoneWorldMatrix(L"Hips");
-	CVector3 PlayerHipPos = { PlayerHip.m[3][0],PlayerHip.m[3][1],PlayerHip.m[3][2] };
-	float comp = m_position.y;
-	m_position = PlayerHipPos;
-	m_position.y = comp;
+	
 
 	AnimationMove();		//アニメーションの処理
 	Move();					//移動処理
@@ -56,12 +52,24 @@ void CPlayer::Update()
 	}
 	//スキンモデルの更新
 	m_skinmodel.Update(m_position, m_rotation, { 3.0f, 3.0f, 3.0f }, true);
+	//プレイヤーの手のボーンを取得
+	CMatrix PlayerHnd = m_skinmodel.FindBoneWorldMatrix(L"LeftHandMiddle1");
+	CVector3 PlayerHndPos = { PlayerHnd.m[3][0],PlayerHnd.m[3][1],PlayerHnd.m[3][2] };
+	
+	m_WeaponPosition = PlayerHndPos;
+	m_Weaponrotation.SetRotation(PlayerHnd);
+	CQuaternion Xrot = CQuaternion::Identity;
+	Xrot.SetRotationDeg(CVector3::AxisX, 90.0f);
+
+	m_Weaponskin.Update(m_WeaponPosition, m_Weaponrotation, { 3.0f, 3.0f, 3.0f }, true);
+	
 }
 
 void CPlayer::Draw()
 {
-	//m_characterController.Draw();
+	m_characterController.Draw();
 	m_skinmodel.Draw(GetGameCamera().GetViewMatrix(), GetGameCamera().GetProjectionMatrix());
+	m_Weaponskin.Draw(GetGameCamera().GetViewMatrix(), GetGameCamera().GetProjectionMatrix());
 	
 }
 
@@ -82,8 +90,8 @@ void CPlayer::Move()
 	//
 
 		CVector3 moveSpeed;
-		moveSpeed.z = Pad().GetLeftStickY() * GameTime().GetDeltaFrameTime() * 1000;
-		moveSpeed.x = Pad().GetLeftStickX() * GameTime().GetDeltaFrameTime() * 1000;
+		moveSpeed.z = Pad().GetLeftStickY() * GameTime().GetDeltaFrameTime() * 2500;
+		moveSpeed.x = Pad().GetLeftStickX() * GameTime().GetDeltaFrameTime() * 2500;
 
 		CMatrix cameraVm = GetGameCamera().GetViewMatrix();
 		cameraVm.Inverse();	//カメラのビュー行列の逆行列
@@ -119,7 +127,7 @@ void CPlayer::Move()
 	else if (Pad().IsTriggerButton(enButtonY))
 	{
 
-		m_moveSpeed.y += 50.0f;
+		//m_moveSpeed.y += 50.0f;
 	}
 	
 
@@ -202,7 +210,7 @@ void CPlayer::AnimationMove()
 	if (m_animation.GetCurrentAnimationNum() != 0 && Pad().GetLeftStickX() == 0 && Pad().GetLeftStickY() == 0)
 	{
 		m_animation.SetLoopFlg(1, false);
-		if (!m_animation.IsPlay())
+		if (!m_animation.IsPlay() || m_animation.GetCurrentAnimationNum() == 1)
 		{
 
 			m_animation.Play(0, 0.2f);
