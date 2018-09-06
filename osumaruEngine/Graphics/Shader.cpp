@@ -31,6 +31,7 @@ CShader::~CShader()
 
 void CShader::Load(const char* filepath, const char* entryFuncName, EnShaderType shaderType)
 {
+	//シェーダーファイルを開いて読み込む
 	FILE* file;
 	file = fopen(filepath, "rb");
 	fseek(file, 0, SEEK_END);
@@ -51,10 +52,12 @@ void CShader::Load(const char* filepath, const char* entryFuncName, EnShaderType
 	};
 	HRESULT hr = D3DCompile(m_pShaderData.get(), (int)filepos, nullptr,
 		nullptr, nullptr, entryFuncName, shaderTypeName[shaderType], shaderCompilerOption, 0, &m_blob, &errorBlob);
+	
 	if (FAILED(hr))
 	{
 		if (errorBlob != nullptr)
 		{
+			//エラーを吐き出していた場合それを表示して呼び出し元へ戻る
 			static char errorMessage[10240];
 			sprintf(errorMessage, "filePath : %s, %s", filepath, (char*)errorBlob->GetBufferPointer());
 			MessageBox(NULL, errorMessage, "シェーダーコンパイルエラー", MB_OK);
@@ -78,11 +81,13 @@ void CShader::Load(const char* filepath, const char* entryFuncName, EnShaderType
 
 void CShader::CreateInputLayout(ID3DBlob* blob)
 {
+	//頂点シェーダーのデータから頂点レイアウトの情報を読み込む
 	ID3D11ShaderReflection* shaderReflection;
 	D3DReflect(blob->GetBufferPointer(), blob->GetBufferSize(), IID_ID3D11ShaderReflection, (void**)&shaderReflection);
 	D3D11_SHADER_DESC desc;
 	shaderReflection->GetDesc(&desc);
 	std::vector<D3D11_INPUT_ELEMENT_DESC> descVector;
+	//頂点レイアウトを作成
 	for (int i = 0;i < desc.InputParameters;i++)
 	{
 		D3D11_SIGNATURE_PARAMETER_DESC signatureDesc;

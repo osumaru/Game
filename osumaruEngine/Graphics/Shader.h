@@ -27,13 +27,13 @@ public:
 	void Load(const char* filepath, const char* entryFuncName, EnShaderType shaderType);
 
 	//シェーダーを取得
-	ID3D11DeviceChild* GetBody()
+	ID3D11DeviceChild* GetBody()const
 	{
 		return m_pShader;
 	}
 
 	//頂点レイアウトを取得
-	ID3D11InputLayout* GetInputlayOut()
+	ID3D11InputLayout* GetInputlayOut() const
 	{
 		return m_pInputLayout;
 	}

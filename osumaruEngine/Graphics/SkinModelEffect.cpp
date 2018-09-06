@@ -10,6 +10,7 @@ CSkinModelEffect::CSkinModelEffect()
 
 void __cdecl ISkinModelEffect::Apply(_In_ ID3D11DeviceContext* deviceContext)
 {
+	//シェーダーを適用
 	if (textureResource != nullptr)
 	{
 		deviceContext->PSSetShaderResources(0, 1, &textureResource);
@@ -20,6 +21,7 @@ void __cdecl ISkinModelEffect::Apply(_In_ ID3D11DeviceContext* deviceContext)
 
 void __cdecl ISkinModelEffect::GetVertexShaderBytecode(_Out_ void const** pShaderByteCode, _Out_ size_t* pByteCodeLength)
 {
+	//シェーダーデータをコピー
 	*pShaderByteCode = vsShader.GetByteCode();
 	*pByteCodeLength = vsShader.GetByteCodeSize();
 
