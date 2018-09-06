@@ -13,10 +13,35 @@ void CMiniMap::Init()
 	m_playerIcon.Init(&m_playerIconTexture);
 	m_playerIcon.SetPosition({ 540.0f, -260.0f });
 	m_playerIcon.SetSize({ 50.0f,50.0f });
+	m_playerIconVec *= -1.0f;
 }
 
 void CMiniMap::Update()
 {
+	//プレイヤーのワールド行列からキャラクターの向きを取得
+	CMatrix playerWorldMatrix = GetPlayer().GetWorldMatrix();
+	CVector3 playerForward;
+	playerForward.x = playerWorldMatrix.m[2][0];
+	playerForward.y = 0.0f;
+	playerForward.z = playerWorldMatrix.m[2][2];
+	playerForward.Normalize();
+
+	float angle = playerForward.Dot(m_playerIconVec);
+	if (angle > 1.0f) {
+		angle = 1.0f;
+	}
+	else if (angle < -1.0f) {
+		angle = -1.0f;
+	}
+	angle = acosf(angle);
+
+	CVector3 Cross = playerForward;
+	Cross.Cross(m_playerIconVec);
+	if (Cross.y > 0.0f) {
+		angle *= -1.0f;
+	}
+
+	m_playerIcon.SetRotationAngle(angle);
 }
 
 void CMiniMap::Draw()

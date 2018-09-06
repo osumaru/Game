@@ -7,6 +7,7 @@ void CPlayer::Init(CVector3 position)
 	m_skinmodel.Load(L"Assets/modelData/Player.cmo", &m_animation);
 	m_Weaponskin.Load(L"Assets/modelData/Sword.cmo", NULL);
 	m_position = position;
+	m_rotation.SetRotationDeg(CVector3::AxisY, -180.0f);
 	m_characterController.Init(3.5f, 0.05f,{m_position.x,m_position.y, m_position.z });
 	m_characterController.SetGravity(-9.8f);
 	wchar_t* animClip[5] = {{ L"Assets/modelData/PlayerStand.tka"},			//待機アニメーション	
