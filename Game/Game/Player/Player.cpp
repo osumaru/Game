@@ -7,14 +7,15 @@ void CPlayer::Init(CVector3 position)
 	m_skinmodel.Load(L"Assets/modelData/Player.cmo", &m_animation);
 	m_Weaponskin.Load(L"Assets/modelData/Sword.cmo", NULL);
 	m_position = position;
-	m_characterController.Init(3.5f, 0.05f,{m_position.x,m_position.y, m_position.z });
+	m_characterController.Init(0.6f, 4.0f,m_position);
 	m_characterController.SetGravity(-9.8f);
-	wchar_t* animClip[5] = {{ L"Assets/modelData/PlayerStand.tka"},			//待機アニメーション	
+	wchar_t* animClip[enPlayerNum] = {{ L"Assets/modelData/PlayerStand.tka"},			//待機アニメーション	
+							{ L"Assets/modelData/PlayerWalkStay.tka" },		//歩行アニメーション
 							{ L"Assets/modelData/PlayerDashStay.tka" },		//歩行アニメーション
 							{ L"Assets/modelData/PlayerJump.tka" },			//ジャンプアニメーション
 							{ L"Assets/modelData/PlayerAttack.tka" },		//攻撃アニメーション
 							{ L"Assets/modelData/PlayerDamage.tka" } };		//ダメージアニメーション
-	m_animation.Init(animClip, 5);
+	m_animation.Init(animClip, enPlayerNum);
 	m_animation.SetLoopFlg(0, true);
 	m_animation.SetLoopFlg(1, false);
 
@@ -53,13 +54,16 @@ void CPlayer::Update()
 	//スキンモデルの更新
 	m_skinmodel.Update(m_position, m_rotation, { 3.0f, 3.0f, 3.0f }, true);
 	//プレイヤーの手のボーンを取得
-	CMatrix PlayerHnd = m_skinmodel.FindBoneWorldMatrix(L"LeftHandMiddle1");
+	CMatrix PlayerHnd = m_skinmodel.FindBoneWorldMatrix(L"LeftHand");
 	CVector3 PlayerHndPos = { PlayerHnd.m[3][0],PlayerHnd.m[3][1],PlayerHnd.m[3][2] };
+	PlayerHndPos.y -= 0.2f;
+	PlayerHndPos.x -= 0.05f;
 	
 	m_WeaponPosition = PlayerHndPos;
 	m_Weaponrotation.SetRotation(PlayerHnd);
 	CQuaternion Xrot = CQuaternion::Identity;
 	Xrot.SetRotationDeg(CVector3::AxisX, 90.0f);
+	//m_Weaponrotation.Multiply(Xrot);
 
 	m_Weaponskin.Update(m_WeaponPosition, m_Weaponrotation, { 3.0f, 3.0f, 3.0f }, true);
 	
@@ -69,7 +73,12 @@ void CPlayer::Draw()
 {
 	m_characterController.Draw();
 	m_skinmodel.Draw(GetGameCamera().GetViewMatrix(), GetGameCamera().GetProjectionMatrix());
-	m_Weaponskin.Draw(GetGameCamera().GetViewMatrix(), GetGameCamera().GetProjectionMatrix());
+	if (m_animation.GetCurrentAnimationNum() == enPlayerAtack)
+	{
+
+		m_Weaponskin.Draw(GetGameCamera().GetViewMatrix(), GetGameCamera().GetProjectionMatrix());
+
+	}
 	
 }
 
@@ -90,8 +99,8 @@ void CPlayer::Move()
 	//
 
 		CVector3 moveSpeed;
-		moveSpeed.z = Pad().GetLeftStickY() * GameTime().GetDeltaFrameTime() * 2500;
-		moveSpeed.x = Pad().GetLeftStickX() * GameTime().GetDeltaFrameTime() * 2500;
+		moveSpeed.z = Pad().GetLeftStickY() * GameTime().GetDeltaFrameTime() * WALK_SPEED;
+		moveSpeed.x = Pad().GetLeftStickX() * GameTime().GetDeltaFrameTime() * WALK_SPEED;
 
 		CMatrix cameraVm = GetGameCamera().GetViewMatrix();
 		cameraVm.Inverse();	//カメラのビュー行列の逆行列
@@ -120,14 +129,14 @@ void CPlayer::Move()
 	if (Pad().IsPressButton(enButtonRB))
 	{
 		
-		m_moveSpeed.x *= 5.0f;
-		m_moveSpeed.z *= 5.0f;
+		m_moveSpeed.x *= RUN_SPEED;
+		m_moveSpeed.z *= RUN_SPEED;
 	}
 
 	else if (Pad().IsTriggerButton(enButtonY))
 	{
-
-		//m_moveSpeed.y += 50.0f;
+		m_moveSpeed.y = 1;
+		m_moveSpeed.y *= 2.0f;
 	}
 	
 
@@ -183,40 +192,60 @@ void CPlayer::Rotation()
 void CPlayer::AnimationMove()
 {
 	//攻撃アニメーションの処理
-	if (Pad().IsTriggerButton(enButtonX) && m_animation.GetCurrentAnimationNum() != 3)
+	if (Pad().IsTriggerButton(enButtonX) && m_animation.GetCurrentAnimationNum() != enPlayerAtack)
 	{
-		m_animation.Play(3, 0.1f);
+		m_animation.Play(enPlayerAtack, 0.0f);
 	}
-
-	//ジャンプアニメーションの処理
-	else if (Pad().IsTriggerButton(enButtonY))
+	else
 	{
-		m_animation.Play(2, 0.5);
 
-	}
-
-	//歩行アニメーションの処理
-	else if (Pad().GetLeftStickX() != 0 || Pad().GetLeftStickY() != 0 )
-	{
-		m_animation.SetLoopFlg(1, true);
-		if (m_animation.GetCurrentAnimationNum() != 1)
+		//ジャンプアニメーションの処理
+		if (Pad().IsTriggerButton(enButtonY))
 		{
-
-			m_animation.Play(1, 0.2);
-		}
-	}
-	
-	//待機モーション
-	if (m_animation.GetCurrentAnimationNum() != 0 && Pad().GetLeftStickX() == 0 && Pad().GetLeftStickY() == 0)
-	{
-		m_animation.SetLoopFlg(1, false);
-		if (!m_animation.IsPlay() || m_animation.GetCurrentAnimationNum() == 1)
-		{
-
-			m_animation.Play(0, 0.2f);
+			m_animation.Play(enPlayerJump, 0.5);
 
 		}
 
+		//走りアニメーションの処理
+		else if (Pad().GetLeftStickX() != 0 || Pad().GetLeftStickY() != 0)
+		{
+			m_animation.SetLoopFlg(enPlayerRun, true);
+			m_animation.SetLoopFlg(enPlayerWalk, true);
+			CVector3 moveLen = m_characterController.GetMoveSpeed();
+
+			float len = moveLen.Length();
+			if (len < 0.0)
+			{
+				len *= -1.0f;
+			}
+
+			if (len < 18.0f &&m_animation.GetCurrentAnimationNum() != enPlayerWalk)
+			{
+
+				//m_animation.Play(enPlayerRun, 0.2);
+				m_animation.Play(enPlayerWalk, 0.2);
+			}
+
+			else if (len >= 18.0f && m_animation.GetCurrentAnimationNum() != enPlayerRun)
+			{
+
+				m_animation.Play(enPlayerRun, 0.2);
+
+			}
+		}
+
+		//待機モーション
+		if (m_animation.GetCurrentAnimationNum() != 0 && Pad().GetLeftStickX() == 0 && Pad().GetLeftStickY() == 0)
+		{
+			m_animation.SetLoopFlg(1, false);
+			if (!m_animation.IsPlay() || m_animation.GetCurrentAnimationNum() == enPlayerRun || m_animation.GetCurrentAnimationNum() == enPlayerWalk)
+			{
+
+				m_animation.Play(enPlayerStand, 0.2f);
+
+			}
+
+		}
 	}
 
 	m_animation.Update(GameTime().GetDeltaFrameTime());
