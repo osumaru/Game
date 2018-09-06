@@ -39,11 +39,13 @@ public:
 
 	}
 
+	//フレームバッファの横幅を取得
 	int GetFrameBufferWidth()
 	{
 		return m_frameBufferWidth;
 	}
 
+	//フレームバッファの縦幅を取得
 	int GetFrameBufferHeight()
 	{
 		return m_frameBufferHeight;

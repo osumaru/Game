@@ -34,7 +34,7 @@ public:
 	filePath	モデルのファイルパス
 	animation	アニメーションが有るモデルならアニメーションのインスタンス
 	*/
-	void Load(wchar_t* filePath, CAnimation* animation = nullptr);
+	void Load(const wchar_t* filePath, CAnimation* animation = nullptr);
 
 	/*
 	描画関数
@@ -45,19 +45,19 @@ public:
 
 
 	//モデルを取得
-	DirectX::Model* GetBody()
+	DirectX::Model* GetBody() const
 	{
 		return m_skinModel.get();
 	}
 
 	//スケルトンを取得
-	CSkelton* GetSkelton()
+	const CSkelton* GetSkelton() const
 	{
 		return m_skelton.get();
 	}
 
 	//ワールド行列の取得
-	const CMatrix& GetWorldMatrix()
+	const CMatrix& GetWorldMatrix() const
 	{
 		return worldMatrix;
 	}
@@ -67,7 +67,7 @@ public:
 	boneName	探す骨の名前
 	ret			見つかった骨のワールド行列を返す、見つからなかったら単位行列を返す
 	*/
-	const CMatrix& FindBoneWorldMatrix(wchar_t* boneName);
+	const CMatrix& FindBoneWorldMatrix(const wchar_t* boneName) const;
 
 	
 private:

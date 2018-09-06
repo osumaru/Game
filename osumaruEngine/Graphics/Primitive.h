@@ -50,25 +50,25 @@ public:
 	}
 
 	//頂点ストライドを取得
-	int GetVertexStride()
+	int GetVertexStride() const
 	{
 		return m_stride;
 	}
 
 	//インデックス数を取得
-	int GetIndexNum()
+	int GetIndexNum() const
 	{
 		return m_indexNum;
 	}
 
 	//プリミティブタイプを取得
-	D3D11_PRIMITIVE_TOPOLOGY GetPrimitiveType()
+	D3D11_PRIMITIVE_TOPOLOGY GetPrimitiveType() const
 	{
 		return m_primitiveType;
 	}
 
 	//インデクスバッファのフォーマットを取得
-	DXGI_FORMAT GetIndexFormat()
+	DXGI_FORMAT GetIndexFormat() const
 	{
 		return m_indexFormat;
 	}

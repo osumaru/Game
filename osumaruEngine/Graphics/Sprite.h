@@ -82,7 +82,7 @@ public:
 	}
 
 	//•`‰æ‚·‚é‚©‚Ìƒtƒ‰ƒO‚ðŽæ“¾
-	bool IsDraw()
+	bool IsDraw() const
 	{
 		return m_isDraw;
 	}

@@ -38,8 +38,9 @@ CSkelton::~CSkelton()
 	}
 }
 
-bool CSkelton::Load(wchar_t* filePath)
+bool CSkelton::Load(const wchar_t* filePath)
 {
+	//ファイルを開いて読み込む
 	FILE* fp = NULL;
 	fp = _wfopen(filePath, L"rb");
 	if (fp == NULL)
@@ -75,23 +76,6 @@ bool CSkelton::Load(wchar_t* filePath)
 		bindPoseMatrix.m[1][3] = 0.0f;
 		bindPoseMatrix.m[2][3] = 0.0f;
 		bindPoseMatrix.m[3][3] = 1.0f;
-		CVector3 scaleVec;
-		//scaleVec.x = ((Vector3*)bindPoseMatrix.m[0])->Length();
-		//scaleVec.y = ((Vector3*)bindPoseMatrix.m[1])->Length();
-		//scaleVec.z = ((Vector3*)bindPoseMatrix.m[2])->Length();
-		//bindPoseMatrix.m[0][0] /= scaleVec.x;
-		//bindPoseMatrix.m[0][1] /= scaleVec.x;
-		//bindPoseMatrix.m[0][2] /= scaleVec.x;
-		//bindPoseMatrix.m[1][0] /= scaleVec.y;
-		//bindPoseMatrix.m[1][1] /= scaleVec.y;
-		//bindPoseMatrix.m[1][2] /= scaleVec.y;
-		//bindPoseMatrix.m[2][0] /= scaleVec.z;
-		//bindPoseMatrix.m[2][1] /= scaleVec.z;
-		//bindPoseMatrix.m[2][2] /= scaleVec.z;
-
-		//float swap = bindPoseMatrix.m[3][2];
-		//bindPoseMatrix.m[3][2] = bindPoseMatrix.m[3][1];
-		//bindPoseMatrix.m[3][1] = swap;
 
 		//バインドポーズの逆行列。
 		CMatrix invBindPoseMatrix;
@@ -103,27 +87,11 @@ bool CSkelton::Load(wchar_t* filePath)
 		invBindPoseMatrix.m[1][3] = 0.0f;
 		invBindPoseMatrix.m[2][3] = 0.0f;
 		invBindPoseMatrix.m[3][3] = 1.0f;
-		//scaleVec.x = ((Vector3*)invBindPoseMatrix.m[0])->Length();
-		//scaleVec.y = ((Vector3*)invBindPoseMatrix.m[1])->Length();
-		//scaleVec.z = ((Vector3*)invBindPoseMatrix.m[2])->Length();
-		//invBindPoseMatrix.m[0][0] /= scaleVec.x;
-		//invBindPoseMatrix.m[0][1] /= scaleVec.x;
-		//invBindPoseMatrix.m[0][2] /= scaleVec.x;
-		//invBindPoseMatrix.m[1][0] /= scaleVec.y;
-		//invBindPoseMatrix.m[1][1] /= scaleVec.y;
-		//invBindPoseMatrix.m[1][2] /= scaleVec.y;
-		//invBindPoseMatrix.m[2][0] /= scaleVec.z;
-		//invBindPoseMatrix.m[2][1] /= scaleVec.z;
-		//invBindPoseMatrix.m[2][2] /= scaleVec.z;
-
-
-		//swap = invBindPoseMatrix.m[3][2];
-		//invBindPoseMatrix.m[3][2] = invBindPoseMatrix.m[3][1];
-		//invBindPoseMatrix.m[3][1] = swap;
 
 		std::unique_ptr<wchar_t[]> boneName;
 		boneName = std::make_unique<wchar_t[]>(256);
 		mbstowcs(boneName.get(), name.get(), 256);
+		//ボーンを作成
 		std::unique_ptr<CBone> bone = std::make_unique<CBone>(std::move(boneName), i, parentId, bindPoseMatrix, invBindPoseMatrix);
 		m_bones.push_back(std::move(bone));
 	}
@@ -131,6 +99,7 @@ bool CSkelton::Load(wchar_t* filePath)
 
 	for (auto& bone : m_bones)
 	{
+		//ルートボーンじゃなければ親のボーンに子供としてboneを追加する
 		if (bone->GetParentID() != -1)
 		{
 			m_bones[bone->GetParentID()]->AddChildren(bone.get());
@@ -143,13 +112,13 @@ bool CSkelton::Load(wchar_t* filePath)
 			bone->SetLocalMatrix(bone->GetWorldMatrix());
 		}
 	}
-
-
+	//ボーン用の行列を初期化
 	m_boneMat = std::make_unique<CMatrix[]>(m_bones.size());
 	for (int i = 0;i < m_bones.size();i++)
 	{
 		m_boneMat[i] = m_bones[i]->GetLocalMatrix();
 	}
+	//ストラクチャーバッファを作成
 	D3D11_BUFFER_DESC desc;
 	desc.ByteWidth = m_bones.size() * sizeof(CMatrix);
 	desc.StructureByteStride = sizeof(CMatrix);
@@ -159,8 +128,9 @@ bool CSkelton::Load(wchar_t* filePath)
 	desc.MiscFlags = D3D11_RESOURCE_MISC_BUFFER_STRUCTURED;
 	D3D11_SUBRESOURCE_DATA resource;
 	resource.pSysMem = m_boneMat.get();
-
 	GetDevice()->CreateBuffer(&desc, &resource, &m_structuredBuffer);
+
+	//シェーダーリソースビューをさくせい
 	D3D11_SHADER_RESOURCE_VIEW_DESC viewDesc;
 	ZeroMemory(&viewDesc, sizeof(viewDesc));
 	viewDesc.ViewDimension = D3D11_SRV_DIMENSION_BUFFEREX;
@@ -168,12 +138,14 @@ bool CSkelton::Load(wchar_t* filePath)
 	viewDesc.BufferEx.FirstElement = 0;
 	viewDesc.BufferEx.NumElements = m_bones.size();
 	GetDevice()->CreateShaderResourceView(m_structuredBuffer, &viewDesc, &m_shaderResourceView);
+
 	Update(CMatrix::Identity);
 	return true;
 }
 
 void CSkelton::Update(const CMatrix& mat)
 {
+	//ルートボーンを探し親からワールド行列を更新していく
 	for (auto& bone : m_bones)
 	{
 		if (bone->GetParentID() != -1)
@@ -186,6 +158,7 @@ void CSkelton::Update(const CMatrix& mat)
 
 void CSkelton::UpdateWorldMatrix(CBone* bone, const CMatrix& mat)
 {
+	//親のワールド行列を使って子のワールド行列を更新
 	CMatrix mBoneWorld;
 	CMatrix localMatrix = bone->GetLocalMatrix();
 	mBoneWorld.Mul(localMatrix, mat);
@@ -200,6 +173,7 @@ void CSkelton::UpdateWorldMatrix(CBone* bone, const CMatrix& mat)
 
 void CSkelton::Render()
 {
+	//ボーンの行列をシェーダーに送る
 	for (int i = 0;i < m_bones.size();i++)
 	{
 		m_boneMat[i].Mul(m_bones[i]->GetInvMatrix(), m_bones[i]->GetWorldMatrix());

@@ -24,15 +24,15 @@ public:
 	}
 
 	//子共の骨を取得。
-	std::vector<CBone*>& GetChildren()
+	const std::vector<CBone*>& GetChildren() const
 	{
 		return m_boneChilds;
 	}
 
 	/*
-	骨の番号を取得
+	親の骨の番号を取得
 	*/
-	int GetParentID()
+	int GetParentID() const
 	{
 		return m_parentID;
 	}
@@ -70,7 +70,7 @@ public:
 	/*
 	骨の名前を取得
 	*/
-	wchar_t* GetBoneName()
+	const wchar_t* GetBoneName() const
 	{
 		return m_boneName.get();
 	}
@@ -78,7 +78,7 @@ public:
 	/*
 	骨の番号を取得
 	*/
-	int GetBoneID()
+	int GetBoneID() const
 	{
 		return m_boneID;
 	}
@@ -110,14 +110,14 @@ public:
 	filePath	ファイルパス
 	ret			成功したか？
 	*/
-	bool Load(wchar_t* filePath);
+	bool Load(const wchar_t* filePath);
 
 	/*
 	骨の名前から骨の番号を取得
 	boneName	骨の名前
 	ret			骨の番号
 	*/
-	int FindBoneID(const wchar_t* boneName)
+	int FindBoneID(const wchar_t* boneName) const
 	{
 		for (auto& bone : m_bones)
 		{
@@ -142,7 +142,7 @@ public:
 	/*
 	骨の行列を取得
 	*/
-	const CMatrix& GetBoneMatrix(int boneIndex)
+	const CMatrix& GetBoneMatrix(int boneIndex) const
 	{
 		return m_bones[boneIndex]->GetLocalMatrix();
 	}
@@ -153,18 +153,11 @@ public:
 	*/
 	void Update(const CMatrix& mat);
 
-	/*
-	ワールド行列の更新
-	bone		骨
-	mat			ワールド行列
-	*/
-	void UpdateWorldMatrix(CBone* bone, const CMatrix& mat);
-
 	//描画
 	void Render();
 
 	//骨の数を取得
-	int GetBoneNum()
+	int GetBoneNum() const
 	{
 		return m_bones.size();
 	}
@@ -174,7 +167,7 @@ public:
 	boneName	探す骨の名前
 	ret			見つかった骨のインスタンスを返す、見つからなかったらnullを返す
 	*/
-	CBone* FindBone(wchar_t* boneName)
+	const CBone* FindBone(const wchar_t* boneName) const
 	{
 		for (int i = 0; i < m_bones.size(); i++)
 		{
@@ -185,6 +178,16 @@ public:
 		}
 		return nullptr;
 	}
+
+private:
+
+	/*
+	ワールド行列の更新
+	bone		骨
+	mat			ワールド行列
+	*/
+	void UpdateWorldMatrix(CBone* bone, const CMatrix& mat);
+
 private:
 	std::vector<std::unique_ptr<CBone>>		m_bones;				//骨達
 	ID3D11Buffer*							m_structuredBuffer;		//ストラクチャードバッファ

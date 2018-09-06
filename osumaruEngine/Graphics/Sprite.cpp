@@ -64,6 +64,7 @@ void CSprite::Draw()
 	size.y = m_size.y / FrameBufferHeight();
 	size.z = 1.0f;
 
+	//スプライトの基底座標を変えるための行列
 	CVector3 centerPos = CVector3::Zero;
 	centerPos.x = m_centerPosition.x;
 	centerPos.y = 1.0f - m_centerPosition.y;
@@ -74,8 +75,6 @@ void CSprite::Draw()
 	centerPos.x *= size.x;
 	centerPos.y *= size.y;
 
-	
-
 	//移動行列を作成
 	CMatrix centerTrans;
 	centerTrans.MakeTranslation(centerPos);
@@ -84,31 +83,35 @@ void CSprite::Draw()
 	//拡大行列を作成
 	CMatrix scale;
 	scale.MakeScaling(size);
-	CMatrix scale2;
+
+	//スクリーンの比率にスプライトを引き延ばすための行列(回転で使う)
+	CMatrix screenExtend;
 	size.x = (float)FrameBufferWidth() / (float)FrameBufferHeight();
 	size.y = 1.0f;
-	scale2.MakeScaling(size);
-	CMatrix scale3;
+	screenExtend.MakeScaling(size);
+
+	//1.0～0.0の間に縮める
+	CMatrix screenShrink;
 	size.x = (float)FrameBufferHeight() / (float)FrameBufferWidth();
 	size.y = 1.0f;
+	screenShrink.MakeScaling(size);
 
-	scale3.MakeScaling(size);
-
-	//ワールド行列を作成
-	SSpriteCB cb;
-	CMatrix worldMatrix = CMatrix::Identity;
+	//回転行列を作成
 	CQuaternion quat;
 	quat.SetRotation({0.0f, 0.0f, -1.0f}, m_angle);
-	
 	CMatrix rot;
 	rot.MakeRotationFromQuaternion(quat);
+
+	//ワールド行列を作成
+	CMatrix worldMatrix = CMatrix::Identity;
 	worldMatrix.Mul(worldMatrix, scale);
 	worldMatrix.Mul(worldMatrix, centerTrans);
-	worldMatrix.Mul(worldMatrix, scale2);
+	worldMatrix.Mul(worldMatrix, screenExtend);
 	worldMatrix.Mul(worldMatrix, rot);
-	worldMatrix.Mul(worldMatrix, scale3);
+	worldMatrix.Mul(worldMatrix, screenShrink);
 	worldMatrix.Mul(worldMatrix, trans);
-	worldMatrix.Transpose();
+	//定数バッファを更新
+	SSpriteCB cb;
 	cb.worldMat = worldMatrix;
 	cb.alpha = m_alpha;
 	m_cb.Update(&cb);

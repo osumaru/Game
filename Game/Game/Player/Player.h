@@ -98,6 +98,18 @@ public:
 
 
 private:
+	enum EnPlayerAnimeState
+	{
+		enPlayerStand,
+		enPlayerWalk,
+		enPlayerRun,
+		enPlayerJump,
+		enPlayerAtack,
+		enPlayerDamage,
+		enPlayerNum
+
+	};
+
 	CVector3				m_position;								//座標
 	CVector3				m_WeaponPosition;								//座標
 	CVector3				m_moveSpeed = CVector3::Zero;			//移動速度
@@ -111,7 +123,10 @@ private:
 	SplayerStatus			m_status;								//プレイヤーのステータス
 	bool					m_isSlip = false;						//スリップ判定
 	float					m_slipSpeed = 50.0f;					//回避移動時のスピード
+	EnPlayerAnimeState		m_State = enPlayerStand;
 
+	const float				RUN_SPEED = 1.8f;
+	const float				WALK_SPEED = 1500.0f;
 };
 
 static CPlayer& GetPlayer()

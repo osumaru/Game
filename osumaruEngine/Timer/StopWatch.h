@@ -23,6 +23,7 @@ public:
 		return m_time;
 	}
 
+	//Œo‰ßŠÔ‚ğæ“¾(’PˆÊ‚Íƒ~ƒŠ•b)
 	double GetElapsedTimeMill() const
 	{
 		return m_millTime;
