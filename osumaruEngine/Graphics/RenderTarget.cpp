@@ -31,6 +31,7 @@ void CRenderTarget::Create(ID3D11Texture2D* pRenderTarget, ID3D11Texture2D* pDep
 	m_pRenderTargetTexture->AddRef();
 	m_pDepthStencilTexture->AddRef();
 
+	//バックバッファである場合それを元にしてレンダリングターゲットを作る
 	if (isBackBuffer)
 	{
 		GetDevice()->CreateRenderTargetView(m_pRenderTargetTexture, NULL, &m_pRenderTarget);
@@ -44,7 +45,7 @@ void CRenderTarget::Create(ID3D11Texture2D* pRenderTarget, ID3D11Texture2D* pDep
 		renderTargetDesc.ViewDimension = D3D11_RTV_DIMENSION_TEXTURE2D;
 		GetDevice()->CreateRenderTargetView(m_pRenderTargetTexture, &renderTargetDesc, &m_pRenderTarget);
 	}
-
+	//デプスステンシルバッファを作る
 	D3D11_TEXTURE2D_DESC depthStencilTextureDesc;
 	m_pDepthStencilTexture->GetDesc(&depthStencilTextureDesc);
 	D3D11_DEPTH_STENCIL_VIEW_DESC descDepthStencilView;

@@ -69,7 +69,7 @@ public:
 	*/
 	IXAudio2SourceVoice* CreateSouceVoice(WAVEFORMATEX* format, bool is3DSound);
 
-	DWORD GetChannelNum()
+	DWORD GetChannelNum() const
 	{
 		return m_channelNum;
 	}

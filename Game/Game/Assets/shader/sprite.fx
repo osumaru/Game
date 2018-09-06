@@ -23,8 +23,7 @@ sampler Sampler : register(s0);
 VS_OUTPUT VSMain(VS_INPUT In)
 {
 	VS_OUTPUT Out;
-	Out.pos = In.pos;
-	Out.pos = mul(In.pos, mvp);
+	Out.pos = mul(mvp, In.pos);
 	Out.uv = In.uv;
 	return Out;
 }
