@@ -80,6 +80,7 @@ public:
 	//プレイヤーの装備の変更を行う処理
 	void WeaponChange();
 
+	//プレイヤーの頭のボーンの位置を取得
 	const CVector3 GetPlayerHead()
 	{
 		
@@ -121,7 +122,7 @@ private:
 	EnPlayerAnimeState		m_State = enPlayerStand;
 
 	const float				RUN_SPEED = 1.8f;
-	const float				WALK_SPEED = 1500.0f;
+	const float				WALK_SPEED = 200.0f;
 };
 
 static CPlayer& GetPlayer()

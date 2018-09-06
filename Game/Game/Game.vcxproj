@@ -216,7 +216,9 @@
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
+    <MeshContentTask Include="Assets\modelData\BOX.FBX" />
     <MeshContentTask Include="Assets\modelData\heart.fbx" />
+    <MeshContentTask Include="Assets\modelData\House.FBX" />
     <MeshContentTask Include="Assets\modelData\map2.FBX" />
     <MeshContentTask Include="Assets\modelData\money.fbx" />
     <MeshContentTask Include="Assets\modelData\ninja.FBX" />
