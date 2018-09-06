@@ -196,56 +196,53 @@ void CPlayer::AnimationMove()
 	{
 		m_animation.Play(enPlayerAtack, 0.0f);
 	}
-	else
+
+	//ジャンプアニメーションの処理
+	else if (Pad().IsTriggerButton(enButtonY))
 	{
+		m_animation.Play(enPlayerJump, 0.5);
 
-		//ジャンプアニメーションの処理
-		if (Pad().IsTriggerButton(enButtonY))
+	}
+
+	//走りアニメーションの処理
+	else if (Pad().GetLeftStickX() != 0 || Pad().GetLeftStickY() != 0 )
+	{
+		m_animation.SetLoopFlg(enPlayerRun, true);
+		m_animation.SetLoopFlg(enPlayerWalk, true);
+		CVector3 moveLen = m_characterController.GetMoveSpeed();
+		
+		float len = moveLen.Length();
+		if (len < 0.0)
 		{
-			m_animation.Play(enPlayerJump, 0.5);
+			len *= -1.0f;
+		}
+
+	 if (len < 18.0f &&m_animation.GetCurrentAnimationNum() != enPlayerWalk)
+		{
+
+			//m_animation.Play(enPlayerRun, 0.2);
+			m_animation.Play(enPlayerWalk, 0.2);
+		}
+
+	 else if (len >= 18.0f && m_animation.GetCurrentAnimationNum() != enPlayerRun)
+	 {
+
+		 m_animation.Play(enPlayerRun, 0.2);
+
+	 }
+	}
+	
+	//待機モーション
+	if (m_animation.GetCurrentAnimationNum() != 0 && Pad().GetLeftStickX() == 0 && Pad().GetLeftStickY() == 0)
+	{
+		m_animation.SetLoopFlg(1, false);
+		if (!m_animation.IsPlay() || m_animation.GetCurrentAnimationNum() == enPlayerRun ||  m_animation.GetCurrentAnimationNum() == enPlayerWalk)
+		{
+
+			m_animation.Play(enPlayerStand, 0.2f);
 
 		}
 
-		//走りアニメーションの処理
-		else if (Pad().GetLeftStickX() != 0 || Pad().GetLeftStickY() != 0)
-		{
-			m_animation.SetLoopFlg(enPlayerRun, true);
-			m_animation.SetLoopFlg(enPlayerWalk, true);
-			CVector3 moveLen = m_characterController.GetMoveSpeed();
-
-			float len = moveLen.Length();
-			if (len < 0.0)
-			{
-				len *= -1.0f;
-			}
-
-			if (len < 18.0f &&m_animation.GetCurrentAnimationNum() != enPlayerWalk)
-			{
-
-				//m_animation.Play(enPlayerRun, 0.2);
-				m_animation.Play(enPlayerWalk, 0.2);
-			}
-
-			else if (len >= 18.0f && m_animation.GetCurrentAnimationNum() != enPlayerRun)
-			{
-
-				m_animation.Play(enPlayerRun, 0.2);
-
-			}
-		}
-
-		//待機モーション
-		if (m_animation.GetCurrentAnimationNum() != 0 && Pad().GetLeftStickX() == 0 && Pad().GetLeftStickY() == 0)
-		{
-			m_animation.SetLoopFlg(1, false);
-			if (!m_animation.IsPlay() || m_animation.GetCurrentAnimationNum() == enPlayerRun || m_animation.GetCurrentAnimationNum() == enPlayerWalk)
-			{
-
-				m_animation.Play(enPlayerStand, 0.2f);
-
-			}
-
-		}
 	}
 
 	m_animation.Update(GameTime().GetDeltaFrameTime());
