@@ -56,8 +56,8 @@ void CSprite::Draw()
 	CVector3 position;
 	position.x = m_position.x / (FrameBufferWidth() / 2.0f);
 	position.y = m_position.y / (FrameBufferHeight() / 2.0f);
-
 	position.z = 0.0f;
+
 	//拡大のスケールを変換
 	CVector3 size;
 	size.x = m_size.x / FrameBufferWidth();
@@ -84,16 +84,29 @@ void CSprite::Draw()
 	//拡大行列を作成
 	CMatrix scale;
 	scale.MakeScaling(size);
+	CMatrix scale2;
+	size.x = (float)FrameBufferWidth() / (float)FrameBufferHeight();
+	size.y = 1.0f;
+	scale2.MakeScaling(size);
+	CMatrix scale3;
+	size.x = (float)FrameBufferHeight() / (float)FrameBufferWidth();
+	size.y = 1.0f;
+
+	scale3.MakeScaling(size);
+
 	//ワールド行列を作成
 	SSpriteCB cb;
 	CMatrix worldMatrix = CMatrix::Identity;
 	CQuaternion quat;
 	quat.SetRotation({0.0f, 0.0f, -1.0f}, m_angle);
+	
 	CMatrix rot;
 	rot.MakeRotationFromQuaternion(quat);
 	worldMatrix.Mul(worldMatrix, scale);
 	worldMatrix.Mul(worldMatrix, centerTrans);
+	worldMatrix.Mul(worldMatrix, scale2);
 	worldMatrix.Mul(worldMatrix, rot);
+	worldMatrix.Mul(worldMatrix, scale3);
 	worldMatrix.Mul(worldMatrix, trans);
 	worldMatrix.Transpose();
 	cb.worldMat = worldMatrix;

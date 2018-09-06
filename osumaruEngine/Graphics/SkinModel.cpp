@@ -71,6 +71,7 @@ void CSkinModel::Update(const CVector3& position, const CQuaternion& rotation, c
 	worldMatrix.Mul(scaleMat, biMat);
 	worldMatrix.Mul(worldMatrix, rotMat);
 	worldMatrix.Mul(worldMatrix, posMat);
+	
 	if (m_skelton != nullptr)
 	{
 		m_skelton->Update(worldMatrix);

@@ -69,10 +69,12 @@ public:
 	*/
 	const CMatrix& FindBoneWorldMatrix(wchar_t* boneName);
 
+	
 private:
 	std::unique_ptr<CSkelton>		m_skelton = nullptr;				//スケルトン
 	CConstantBuffer					constantBuffer;						//定数バッファ
 	std::unique_ptr<DirectX::Model> m_skinModel = nullptr;				//スキンモデル
 	CMatrix							worldMatrix = CMatrix::Identity;	//ワールド行列
+
 	
 };

@@ -392,7 +392,8 @@ void CCharacterController::Execute(float deltaTime)
 		}
 		m_groundHitObject = callback.hitObject;
 
-	}//上方向を調べる
+	}
+	//上方向を調べる
 	{
 		m_position = nextPosition;	//移動の仮確定。
 									//レイを作成する。
