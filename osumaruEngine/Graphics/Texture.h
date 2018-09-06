@@ -28,25 +28,25 @@ public:
 	void Create(int width, int height, EnTextureType textureType, DXGI_FORMAT format);
 
 	//テクスチャを取得
-	ID3D11Resource* GetTexture()
+	ID3D11Resource* GetTexture() const
 	{
 		return m_pTexture;
 	}
 
 	//シェーダーリソースビューを取得
-	ID3D11ShaderResourceView* GetShaderResource()
+	ID3D11ShaderResourceView* GetShaderResource() const
 	{
 		return m_pShaderResource;
 	}
 
 	//テクスチャの横幅を取得
-	int GetWidth()
+	int GetWidth() const
 	{
 		return m_width;
 	}
 
 	//テクスチャの縦幅を取得
-	int GetHeight()
+	int GetHeight() const
 	{
 		return m_height;
 	}

@@ -29,6 +29,7 @@ CPrimitive::~CPrimitive()
 void CPrimitive::Create(void* vertexBuffer, int vertexStride, int vertexNum, void* indexBuffer, int indexNum, EnFormatIndex formatIndex, EnPrimitiveType primitiveType)
 {
 	int size;
+	//インデックスバッファのフォーマットを決める
 	switch (formatIndex)
 	{
 	case enIndex16:
@@ -41,6 +42,7 @@ void CPrimitive::Create(void* vertexBuffer, int vertexStride, int vertexNum, voi
 		size = sizeof(DWORD);
 		break;
 	}
+	//プリミティブの種類を決める
 	switch (primitiveType)
 	{
 	case enTypeLineList:
@@ -53,6 +55,7 @@ void CPrimitive::Create(void* vertexBuffer, int vertexStride, int vertexNum, voi
 		m_primitiveType = D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP;
 		break;
 	}
+	//頂点バッファを作る
 	m_indexNum = indexNum;
 	D3D11_BUFFER_DESC bufferDesc;
 	D3D11_SUBRESOURCE_DATA subresourceData;
@@ -64,6 +67,8 @@ void CPrimitive::Create(void* vertexBuffer, int vertexStride, int vertexNum, voi
 	bufferDesc.StructureByteStride = vertexStride;
 	subresourceData.pSysMem = vertexBuffer;
 	HRESULT hr = GetDevice()->CreateBuffer(&bufferDesc, &subresourceData, &m_vertexBuffer);
+
+	//インデックスバッファを作る
 	D3D11_BUFFER_DESC bufferIndexDesc;
 	D3D11_SUBRESOURCE_DATA subresourceIndexData;
 	bufferIndexDesc.ByteWidth = m_indexNum * size;

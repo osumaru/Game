@@ -394,48 +394,48 @@ void CCharacterController::Execute(float deltaTime)
 
 	}
 	//上方向を調べる
-	//{
-	//	m_position = nextPosition;	//移動の仮確定。
-	//								//レイを作成する。
-	//	btTransform start, end;
-	//	start.setIdentity();
-	//	end.setIdentity();
-	//	//始点はカプセルコライダーの中心。
-	//	start.setOrigin(btVector3(m_position.x, m_position.y + m_height * 0.5f + m_radius, m_position.z));
-	//	//終点は地面上にいない場合は1m下を見る。
-	//	//地面上にいなくてジャンプで上昇中の場合は上昇量の0.01倍下を見る。
-	//	//地面上にいなくて降下中の場合はそのまま落下先を調べる。
-	//	CVector3 endPos;
-	//	endPos.Set(start.getOrigin());
-	//	if (!m_isOnGround)
-	//	{
-	//		if (addPosY.y > 0.0f)
-	//		{
-	//			//ジャンプ中とかで上昇中。
-	//			//上昇中でもXZに移動した結果めり込んでいる可能性があるので下を調べる。
-	//			endPos.y += addPosY.y;
-	//		}
-	//		else
-	//		{
-	//			endPos.y -= addPosY.y * 0.01f;
-	//		}
-	//	}
-	//	end.setOrigin(btVector3(endPos.x, endPos.y, endPos.z));
-	//	SSweepResultCeiling callback;
-	//	callback.me = m_rigidBody.GetBody();
-	//	callback.startPos.Set(start.getOrigin());
-	//	//衝突検出。
-	//	if (fabsf(addPosY.y) > FLT_EPSILON && (start.getOrigin().y() - end.getOrigin().y() != 0.0f))
-	//	{
-	//		physicsWorld.ConvexSweepTest((const btConvexShape*)m_collider.GetBody(), start, end, callback);
-	//	}
-	//	if (callback.isHit)
-	//	{
-	//		//当たった。
-	//		m_moveSpeed.y = 0.0f;
-	//		nextPosition.y = callback.hitPos.y - (m_height + m_radius * 2.0f + 0.1f);
-	//	}
-	//}
+	{
+		m_position = nextPosition;	//移動の仮確定。
+									//レイを作成する。
+		btTransform start, end;
+		start.setIdentity();
+		end.setIdentity();
+		//始点はカプセルコライダーの中心。
+		start.setOrigin(btVector3(m_position.x, m_position.y + m_height * 0.5f + m_radius, m_position.z));
+		//終点は地面上にいない場合は1m下を見る。
+		//地面上にいなくてジャンプで上昇中の場合は上昇量の0.01倍下を見る。
+		//地面上にいなくて降下中の場合はそのまま落下先を調べる。
+		CVector3 endPos;
+		endPos.Set(start.getOrigin());
+		if (!m_isOnGround)
+		{
+			if (addPosY.y > 0.0f)
+			{
+				//ジャンプ中とかで上昇中。
+				//上昇中でもXZに移動した結果めり込んでいる可能性があるので下を調べる。
+				endPos.y += addPosY.y;
+			}
+			else
+			{
+				endPos.y -= addPosY.y * 0.01f;
+			}
+		}
+		end.setOrigin(btVector3(endPos.x, endPos.y, endPos.z));
+		SSweepResultCeiling callback;
+		callback.me = m_rigidBody.GetBody();
+		callback.startPos.Set(start.getOrigin());
+		//衝突検出。
+		if (fabsf(addPosY.y) > FLT_EPSILON && (start.getOrigin().y() - end.getOrigin().y() != 0.0f))
+		{
+			physicsWorld.ConvexSweepTest((const btConvexShape*)m_collider.GetBody(), start, end, callback);
+		}
+		if (callback.isHit)
+		{
+			//当たった。
+			m_moveSpeed.y = 0.0f;
+			nextPosition.y = callback.hitPos.y - (m_height + m_radius * 2.0f + 0.1f);
+		}
+	}
 	//移動確定。
 	m_position = nextPosition;
 	m_position.y += m_rigidBodyManip;

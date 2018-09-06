@@ -38,7 +38,9 @@ void CAnimation::Play(int animationNum, float interpolationTime)
 
 void CAnimation::Update(float deltaTime)
 {
+	//再生中のアニメーションを更新
 	m_animationClips[m_currentAnimationNum].Update(deltaTime);
+	//再生が終わり、ループフラグが立っていればもう一度再生する
 	if (!m_animationClips[m_currentAnimationNum].IsPlay() && m_animationClips[m_currentAnimationNum].IsLoop())
 	{
 		m_animationClips[m_currentAnimationNum].Play();
@@ -48,20 +50,24 @@ void CAnimation::Update(float deltaTime)
 	std::vector<CMatrix> localMatrix2 = m_animationClips[m_curCurrentAnimationNum].GetLocalMatrix();
 
 	float progressTime = deltaTime;
+	//補間時間を計算
 	if (m_isInterpolation)
 	{
 		progressTime *= m_interpolationTime;
 	}
 	m_blendRate -=  progressTime;
+
 	for (int i = 0;i < m_skelton->GetBoneNum();i++)
 	{
 		CMatrix boneMat = localMatrix[i];
+		//補間する場合
 		if (m_isInterpolation)
 		{
 			if (0.0f < m_blendRate)
 			{
 				CMatrix mat = localMatrix[i];
 				CMatrix mat2 = localMatrix2[i];
+				//前再生していたアニメーションと今再生しているアニメーションを合成する
 				for (int j = 0;j < 16;j++)
 				{
 					mat.m[0][j] *= 1.0f - m_blendRate;

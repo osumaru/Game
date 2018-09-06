@@ -15,15 +15,18 @@ void CSkinModel::Load(wchar_t* filePath, CAnimation* animation)
 {
 	std::unique_ptr<CSkelton> skelton;
 	skelton = std::make_unique<CSkelton>();
+	//コンスタントバッファを作成
 	SSkinModelCB cb;
 	cb.worldMat = CMatrix::Identity;
 	cb.viewProjMat = CMatrix::Identity;
 	constantBuffer.Create(sizeof(SSkinModelCB), &cb);
+
+	//ファイル名の拡張子(cmo)を除きtksを追加しスケルトンのファイル名を作成
 	size_t pos = wcslen(filePath);
-	
 	wchar_t skeltonName[256] = {0};
 	wcsncpy(skeltonName, filePath, pos - 4);
 	wcscat(skeltonName, L".tks");
+	
 	if (skelton->Load(skeltonName))
 	{
 		if (animation != nullptr)
@@ -32,6 +35,8 @@ void CSkinModel::Load(wchar_t* filePath, CAnimation* animation)
 		}
 		m_skelton = std::move(skelton);
 		CSkinModelEffectFactory effectFactory(GetDevice());
+
+		//ボーンを探す関数
 		auto onFindBone = [&](
 			const wchar_t* boneName,
 			const VSD3DStarter::Bone* bone,
@@ -43,6 +48,7 @@ void CSkinModel::Load(wchar_t* filePath, CAnimation* animation)
 			}
 			localBoneIDtoGlobalBoneIDTbl.push_back(globalBoneID);
 		};
+
 		m_skinModel = Model::CreateFromCMO(GetDevice(), filePath, effectFactory, false, false, onFindBone);
 	}
 	else
@@ -98,9 +104,9 @@ void CSkinModel::Draw(const CMatrix& view, const CMatrix& projection)
 	m_skinModel->Draw(GetDeviceContext(), common, world, view, projection);
 }
 
-const CMatrix& CSkinModel::FindBoneWorldMatrix(wchar_t* boneName)
+const CMatrix& CSkinModel::FindBoneWorldMatrix(const wchar_t* boneName) const
 {
-	CBone* bone = m_skelton->FindBone(boneName);
+	const CBone* bone = m_skelton->FindBone(boneName);
 	if (bone != nullptr)
 	{
 		return bone->GetWorldMatrix();

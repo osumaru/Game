@@ -6,6 +6,7 @@ std::shared_ptr<DirectX::IEffect> __cdecl CSkinModelEffectFactory::CreateEffect(
 {
 	std::shared_ptr<ISkinModelEffect> effect;
 	ID3D11ShaderResourceView* view;
+	//スキン有りのモデルとスキン無しのモデルでエフェクトを分ける
 	if (info.enableSkinning)
 	{
 		effect = std::make_shared<CSkinModelEffect>();
@@ -14,6 +15,7 @@ std::shared_ptr<DirectX::IEffect> __cdecl CSkinModelEffectFactory::CreateEffect(
 	{
 		effect = std::make_shared<CNoSkinModelEffect>();
 	}
+	//テクスチャがある場合は作る
 	if (info.diffuseTexture != nullptr)
 	{
 		wchar_t filePath[256];

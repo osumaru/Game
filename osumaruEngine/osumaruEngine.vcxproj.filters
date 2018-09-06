@@ -162,6 +162,9 @@
     <ClCompile Include="Physics\RigidBodyDraw.cpp">
       <Filter>ソース ファイル\Physics</Filter>
     </ClCompile>
+    <ClCompile Include="Graphics\AnimationEvent.cpp">
+      <Filter>ソース ファイル\Graphics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Uncopyable.h">
@@ -283,6 +286,9 @@
     </ClInclude>
     <ClInclude Include="GameObject\GameObjectManager.h">
       <Filter>ソース ファイル\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\AnimationEvent.h">
+      <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

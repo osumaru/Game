@@ -173,6 +173,7 @@
     <ClCompile Include="GameObject\GameObjectManager.cpp" />
     <ClCompile Include="Graphics\Animation.cpp" />
     <ClCompile Include="Graphics\AnimationClip.cpp" />
+    <ClCompile Include="Graphics\AnimationEvent.cpp" />
     <ClCompile Include="Graphics\ConstantBuffer.cpp" />
     <ClCompile Include="Graphics\PostEffect\PostEffect.cpp" />
     <ClCompile Include="Graphics\Primitive.cpp" />
@@ -213,6 +214,7 @@
     <ClInclude Include="GameObject\GameObjectManager.h" />
     <ClInclude Include="Graphics\Animation.h" />
     <ClInclude Include="Graphics\AnimationClip.h" />
+    <ClInclude Include="Graphics\AnimationEvent.h" />
     <ClInclude Include="Graphics\ConstantBuffer.h" />
     <ClInclude Include="Graphics\PostEffect\PostEffect.h" />
     <ClInclude Include="Graphics\Primitive.h" />
