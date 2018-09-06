@@ -1,9 +1,10 @@
 #include "stdafx.h"
 #include "EnemyIdle.h"
-#include "Zombie.h"
+#include "../IEnemy.h"
 
 bool EnemyIdle::Start()
 {
+	m_enemy->SetAnimNum(EnemyState::enState_Idle);
 	return true;
 }
 

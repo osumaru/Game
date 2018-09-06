@@ -52,6 +52,9 @@
     <Filter Include="ソース ファイル\Item">
       <UniqueIdentifier>{fe491995-d611-4183-8285-c214638a84fe}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Enemy\EnemyState">
+      <UniqueIdentifier>{60565a7a-3ee7-45e5-8a4e-95544f8bb660}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -105,14 +108,23 @@
     <ClCompile Include="Enemy\IEnemy.cpp">
       <Filter>ソース ファイル\Enemy</Filter>
     </ClCompile>
-    <ClCompile Include="Enemy\EnemyStateMachine.cpp">
-      <Filter>ソース ファイル\Enemy</Filter>
+    <ClCompile Include="Enemy\EnemyState\EnemyAttack.cpp">
+      <Filter>ソース ファイル\Enemy\EnemyState</Filter>
     </ClCompile>
-    <ClCompile Include="Enemy\EnemyIdle.cpp">
-      <Filter>ソース ファイル\Enemy</Filter>
+    <ClCompile Include="Enemy\EnemyState\EnemyDamage.cpp">
+      <Filter>ソース ファイル\Enemy\EnemyState</Filter>
     </ClCompile>
-    <ClCompile Include="Enemy\EnemyWalk.cpp">
-      <Filter>ソース ファイル\Enemy</Filter>
+    <ClCompile Include="Enemy\EnemyState\EnemyDeath.cpp">
+      <Filter>ソース ファイル\Enemy\EnemyState</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy\EnemyState\EnemyIdle.cpp">
+      <Filter>ソース ファイル\Enemy\EnemyState</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy\EnemyState\EnemyStateMachine.cpp">
+      <Filter>ソース ファイル\Enemy\EnemyState</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy\EnemyState\EnemyWalk.cpp">
+      <Filter>ソース ファイル\Enemy\EnemyState</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -164,20 +176,29 @@
     <ClInclude Include="Enemy\IEnemy.h">
       <Filter>ソース ファイル\Enemy</Filter>
     </ClInclude>
-    <ClInclude Include="Enemy\IEnemyState.h">
-      <Filter>ソース ファイル\Enemy</Filter>
+    <ClInclude Include="Enemy\EnemyState\EnemyAttack.h">
+      <Filter>ソース ファイル\Enemy\EnemyState</Filter>
     </ClInclude>
-    <ClInclude Include="Enemy\EnemyStateMachine.h">
-      <Filter>ソース ファイル\Enemy</Filter>
+    <ClInclude Include="Enemy\EnemyState\EnemyDamage.h">
+      <Filter>ソース ファイル\Enemy\EnemyState</Filter>
     </ClInclude>
-    <ClInclude Include="Enemy\EnemyState.h">
-      <Filter>ソース ファイル\Enemy</Filter>
+    <ClInclude Include="Enemy\EnemyState\EnemyDeath.h">
+      <Filter>ソース ファイル\Enemy\EnemyState</Filter>
     </ClInclude>
-    <ClInclude Include="Enemy\EnemyIdle.h">
-      <Filter>ソース ファイル\Enemy</Filter>
+    <ClInclude Include="Enemy\EnemyState\EnemyIdle.h">
+      <Filter>ソース ファイル\Enemy\EnemyState</Filter>
     </ClInclude>
-    <ClInclude Include="Enemy\EnemyWalk.h">
-      <Filter>ソース ファイル\Enemy</Filter>
+    <ClInclude Include="Enemy\EnemyState\EnemyState.h">
+      <Filter>ソース ファイル\Enemy\EnemyState</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy\EnemyState\EnemyStateMachine.h">
+      <Filter>ソース ファイル\Enemy\EnemyState</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy\EnemyState\EnemyWalk.h">
+      <Filter>ソース ファイル\Enemy\EnemyState</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy\EnemyState\IEnemyState.h">
+      <Filter>ソース ファイル\Enemy\EnemyState</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

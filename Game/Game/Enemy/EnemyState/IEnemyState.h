@@ -13,6 +13,8 @@ class IEnemyState : public IGameObject
 {
 public:
 	//コンストラクタ
+	//enemy		エネミーのインターフェースクラスのポインタ
+	//esm		エネミーのステートマシンクラスのポインタ
 	IEnemyState(IEnemy* enemy, EnemyStateMachine* esm) :
 		m_enemy(enemy),
 		m_esm(esm)
@@ -20,7 +22,7 @@ public:
 	}
 
 	//デストラクタ
-	~IEnemyState() {}
+	virtual ~IEnemyState() {}
 
 	//更新
 	virtual void Update() = 0;

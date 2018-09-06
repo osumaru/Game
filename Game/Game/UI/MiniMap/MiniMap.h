@@ -17,10 +17,10 @@ public:
 	void Draw();
 
 private:
-	CSprite m_miniMap;				//ミニマップ
+	CSprite m_miniMap;							//ミニマップ
 	CTexture m_miniMapTexture;
 
-	CSprite m_playerIcon;			//プレイヤーアイコン
+	CSprite m_playerIcon;						//プレイヤーアイコン
 	CTexture m_playerIconTexture;
-	CVector3 m_playerFowardOld;
+	CVector3 m_playerIconVec = CVector3::AxisZ;	//プレイヤーアイコンの向き
 };

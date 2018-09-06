@@ -72,6 +72,11 @@ public:
 		return m_skinmodel.GetWorldMatrix();
 	}
 
+	const CVector3& GetMoveSpeed()
+	{
+		return m_moveSpeed;
+	}
+
 	const int GetStrength()
 	{
 		return m_status.Strength;

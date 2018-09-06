@@ -28,6 +28,15 @@ void EnemyStateMachine::ChangeState(EnemyState::EnState nextState)
 	case EnemyState::enState_Walk:
 		m_currentState = &m_enemyWalk;
 		break;
+	case EnemyState::enState_Attack:
+		m_currentState = &m_enemyAttack;
+		break;
+	case EnemyState::enState_Damage:
+		m_currentState = &m_enemyDamage;
+		break;
+	case EnemyState::enState_Death:
+		m_currentState = &m_enemyDeath;
+		break;
 	}
 
 	//変更したステートをゲームオブジェクトに追加
