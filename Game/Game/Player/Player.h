@@ -107,6 +107,7 @@ private:
 		enPlayerJump,
 		enPlayerAtack,
 		enPlayerDamage,
+		enPlayerAvoidance,
 		enPlayerNum
 
 	};
@@ -115,7 +116,7 @@ private:
 	CVector3				m_WeaponPosition;								//座標
 	CVector3				m_moveSpeed = CVector3::Zero;			//移動速度
 	CQuaternion				m_rotation = CQuaternion::Identity;		//回転
-	CQuaternion				m_Weaponrotation = CQuaternion::Identity;		//回転
+	CQuaternion				m_WeaponRotation = CQuaternion::Identity;		//回転
 	CSkinModel				m_skinmodel;							//スキンモデル
 	CSkinModel				m_Weaponskin;
 	CCharacterController	m_characterController;					//キャラクターコントローラー
@@ -123,7 +124,7 @@ private:
 	CAnimation				m_animation;							//アニメーション
 	SplayerStatus			m_status;								//プレイヤーのステータス
 	bool					m_isSlip = false;						//スリップ判定
-	float					m_slipSpeed = 50.0f;					//回避移動時のスピード
+	float					m_slipSpeed = 15.0f;					//回避移動時のスピード
 	EnPlayerAnimeState		m_State = enPlayerStand;
 
 	const float				RUN_SPEED = 1.8f;
