@@ -6,7 +6,7 @@ class CSkelton;
 class CAnimation : Uncopyable
 {
 public:
-
+	using AnimationEventListener = std::function<void(const wchar_t* clipName, const wchar_t* eventName)>;
 	/*
 	初期化関数
 	animFilePath	アニメーションのファイルパスの配列
@@ -58,6 +58,25 @@ public:
 	{
 		return m_currentAnimationNum;
 	}
+
+	//イベントリスナーを追加
+	void AddAnimationEvent(AnimationEventListener animEvent)
+	{
+		m_animationEventListener.push_back(animEvent);
+	}
+
+	/*
+	アニメーションイベントの通知
+	clipName	アニメーションクリップの名前
+	eventName	アニメーションイベントの名前
+	*/
+	void AnimationEventNotification(const wchar_t* clipName, const wchar_t* eventName)
+	{
+		for (auto& animEvent : m_animationEventListener)
+		{
+			animEvent(clipName, eventName);
+		}
+	}
 private:
 	std::unique_ptr<CAnimationClip[]>	m_animationClips = nullptr;		//アニメーションクリップの配列
 	int									m_currentAnimationNum = 0;		//今再生しているアニメーションの番号
@@ -66,4 +85,5 @@ private:
 	float								m_blendRate = 0.0f;				//アニメーション補間時のレート
 	bool								m_isInterpolation = false;		//補間しているか？
 	float								m_interpolationTime = 1.0f;		//アニメーション補間時の経過させる時間
+	std::vector<AnimationEventListener>	m_animationEventListener;
 };
