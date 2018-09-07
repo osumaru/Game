@@ -107,6 +107,7 @@ private:
 		enPlayerJump,
 		enPlayerAtack,
 		enPlayerDamage,
+		enPlayerAvoidance,
 		enPlayerNum
 
 	};
@@ -123,7 +124,7 @@ private:
 	CAnimation				m_animation;							//アニメーション
 	SplayerStatus			m_status;								//プレイヤーのステータス
 	bool					m_isSlip = false;						//スリップ判定
-	float					m_slipSpeed = 50.0f;					//回避移動時のスピード
+	float					m_slipSpeed = 15.0f;					//回避移動時のスピード
 	EnPlayerAnimeState		m_State = enPlayerStand;
 
 	const float				RUN_SPEED = 1.8f;
