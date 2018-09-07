@@ -94,7 +94,11 @@ public:
 		return PlayerHeadPos;
 	}
 
-
+	//デバック用関数
+	void GetDamage()
+	{
+		int damage = 0;
+	}
 
 
 private:
