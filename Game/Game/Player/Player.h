@@ -116,7 +116,7 @@ private:
 	CVector3				m_WeaponPosition;								//座標
 	CVector3				m_moveSpeed = CVector3::Zero;			//移動速度
 	CQuaternion				m_rotation = CQuaternion::Identity;		//回転
-	CQuaternion				m_Weaponrotation = CQuaternion::Identity;		//回転
+	CQuaternion				m_WeaponRotation = CQuaternion::Identity;		//回転
 	CSkinModel				m_skinmodel;							//スキンモデル
 	CSkinModel				m_Weaponskin;
 	CCharacterController	m_characterController;					//キャラクターコントローラー

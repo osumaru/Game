@@ -57,7 +57,7 @@ void CPlayer::Update()
 
 	//スキンモデルの更新
 	m_skinmodel.Update(m_position, m_rotation, { 1.0f, 1.0f, 1.0f }, true);
-	m_Weaponskin.Update(m_WeaponPosition, m_Weaponrotation, { 1.0f, 1.0f, 1.0f }, true);
+	m_Weaponskin.Update(m_WeaponPosition, m_WeaponRotation, { 1.0f, 1.0f, 1.0f }, true);
 	
 }
 
@@ -122,7 +122,7 @@ void CPlayer::Move()
 			else if (m_State == enPlayerJump)
 			{
 
-				m_moveSpeed.y = 10.0f;
+				m_moveSpeed.y = 1.0f;
 			}
 
 
@@ -174,10 +174,8 @@ void CPlayer::Rotation()
 	{
 		CMatrix PlayerHnd = m_skinmodel.FindBoneWorldMatrix(L"LeftHand");
 		CVector3 PlayerHndPos = { PlayerHnd.m[3][0],PlayerHnd.m[3][1],PlayerHnd.m[3][2] };
-		PlayerHndPos.y += 0.4f;
-		PlayerHndPos.z -= 0.1f;
 		m_WeaponPosition = PlayerHndPos;
-		m_Weaponrotation.SetRotation(PlayerHnd);
+		m_WeaponRotation.SetRotation(PlayerHnd);
 		CQuaternion Xrot = CQuaternion::Identity;
 		Xrot.SetRotationDeg(CVector3::AxisX, 90.0f);
 		//m_Weaponrotation.Multiply(Xrot);
