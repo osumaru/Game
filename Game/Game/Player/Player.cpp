@@ -8,7 +8,6 @@ void CPlayer::Init(CVector3 position)
 	m_skinmodel.Load(L"Assets/modelData/Player.cmo", &m_animation);
 	m_Weaponskin.Load(L"Assets/modelData/Sword.cmo", NULL);
 	m_position = position;
-	//m_rotation.SetRotationDeg(CVector3::AxisY, -180.0f);
 	m_characterController.Init(0.6f, 1.0f, m_position);
 	m_characterController.SetGravity(-9.8f);
 	wchar_t* animClip[enPlayerNum] = {	{ L"Assets/modelData/PlayerStand.tka"},			//待機アニメーション	
@@ -172,13 +171,27 @@ void CPlayer::Rotation()
 
 	//プレイヤーの手のボーンを取得
 	{
-		CMatrix PlayerHnd = m_skinmodel.FindBoneWorldMatrix(L"LeftHand");
+		CMatrix PlayerHnd = m_skinmodel.FindBoneWorldMatrix(L"LeftHandMiddle1");
+
 		CVector3 PlayerHndPos = { PlayerHnd.m[3][0],PlayerHnd.m[3][1],PlayerHnd.m[3][2] };
+
+		CVector3 PlayerHndScale = { PlayerHnd.m[0][0], PlayerHnd.m[0][1], PlayerHnd.m[0][2] };
+		float len = PlayerHndScale.Length();
+		PlayerHnd.m[0][0] /= len;
+		PlayerHnd.m[0][1] /= len;
+		PlayerHnd.m[0][2] /= len;
+
+		PlayerHnd.m[1][0] /= len;
+		PlayerHnd.m[1][1] /= len;
+		PlayerHnd.m[1][2] /= len;
+
+		PlayerHnd.m[2][0] /= len;
+		PlayerHnd.m[2][1] /= len;
+		PlayerHnd.m[2][2] /= len;
+
+
 		m_WeaponPosition = PlayerHndPos;
 		m_WeaponRotation.SetRotation(PlayerHnd);
-		CQuaternion Xrot = CQuaternion::Identity;
-		Xrot.SetRotationDeg(CVector3::AxisX, 90.0f);
-		//m_Weaponrotation.Multiply(Xrot);
 	}
 
 	//プレイヤーの回転の処理
@@ -201,8 +214,15 @@ void CPlayer::AnimationMove()
 	//攻撃アニメーションの処理
 	if (Pad().IsTriggerButton(enButtonX) && m_animation.GetCurrentAnimationNum() != enPlayerAtack)
 	{
-		m_animation.Play(enPlayerAtack, 0.0f);
+		m_animation.Play(enPlayerAtack, 0.5f);
 		m_State = enPlayerAtack;
+	}
+
+	//回避アニメーション
+	else if (Pad().IsTriggerButton(enButtonRightTrigger))
+	{
+
+		m_animation.Play(enPlayerAvoidance, 0.5f);
 	}
 
 	//ジャンプアニメーションの処理
@@ -213,12 +233,7 @@ void CPlayer::AnimationMove()
 
 	}
 
-	//回避アニメーション
-	else if (Pad().IsTriggerButton(enButtonRightTrigger))
-	{
-
-		m_animation.Play(enPlayerAvoidance, 0.5f);
-	}
+	
 
 	//移動アニメーションの処理
 	else if (Pad().GetLeftStickX() != 0 || Pad().GetLeftStickY() != 0 )
