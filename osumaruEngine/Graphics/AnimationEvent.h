@@ -25,6 +25,12 @@ public:
 		return m_eventName;
 	}
 
+	//イベント名を取得
+	void SetEventName(wchar_t* eventName)
+	{
+		m_eventName = eventName;
+	}
+
 	//イベント発生時間を設定
 	void SetInvokeTime(float time)
 	{

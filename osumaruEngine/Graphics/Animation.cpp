@@ -40,6 +40,7 @@ void CAnimation::Update(float deltaTime)
 {
 	//再生中のアニメーションを更新
 	m_animationClips[m_currentAnimationNum].Update(deltaTime);
+	m_animationClips[m_curCurrentAnimationNum].AnimationInvoke(this);
 	//再生が終わり、ループフラグが立っていればもう一度再生する
 	if (!m_animationClips[m_currentAnimationNum].IsPlay() && m_animationClips[m_currentAnimationNum].IsLoop())
 	{

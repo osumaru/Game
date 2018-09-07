@@ -1,7 +1,8 @@
 #pragma once
-class Skelton;
-class Keyframe;
-
+#include "AnimationEvent.h"
+class CSkelton;
+class CKeyframe;
+class CAnimation;
 
 /*!
 *@brief	アニメーションクリップのヘッダー。
@@ -76,14 +77,19 @@ public:
 		return m_isPlay;
 	}
 
+	//アニメーションイベントの更新
+	void AnimationInvoke(CAnimation* animation);
+
 private:
-	bool									m_isPlay;					//再生中か？
-	bool									m_isLoop;					//ループしてるか？
-	std::wstring							m_clipName;					//アニメーションクリップの名前。
-	std::vector<std::unique_ptr<SKeyframe>>	m_keyframes;				//キーフレーム。
-	std::vector<std::vector<SKeyframe*>>	m_keyFramePtrListArray;		//ボーン毎のキーフレームのリスト
-	std::vector<SKeyframe*>*				m_topBoneKeyFrameList;		//一番最初のキーフレーム
-	std::vector<CMatrix>					m_localMatrix;				//ボーンの行列を保存するためのもの
-	float									m_frameTime;				//フレームを進めるためのタイマー
-	int										m_currentFrameNo;			//現在のフレームナンバー
+	bool									m_isPlay = false;					//再生中か？
+	bool									m_isLoop = false;					//ループしてるか？
+	wchar_t*								m_clipName = nullptr;				//アニメーションクリップの名前。
+	std::vector<std::unique_ptr<SKeyframe>>	m_keyframes;						//キーフレーム。
+	std::vector<std::vector<SKeyframe*>>	m_keyFramePtrListArray;				//ボーン毎のキーフレームのリスト
+	std::vector<SKeyframe*>*				m_topBoneKeyFrameList = nullptr;	//一番最初のキーフレーム
+	std::vector<CMatrix>					m_localMatrix;						//ボーンの行列を保存するためのもの
+	float									m_frameTime = 0.0f;					//フレームを進めるためのタイマー
+	int										m_currentFrameNo = 0;				//現在のフレームナンバー
+	std::unique_ptr<CAnimationEvent[]>		m_animationEvent = nullptr;			//アニメーションイベント。
+	int										m_animationEventNum = 0;			//アニメーションイベントの数
 };

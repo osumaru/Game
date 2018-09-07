@@ -1,6 +1,8 @@
 #include "engineStdafx.h"
 #include "AnimationClip.h"
 #include "Skelton.h"
+#include "Animation.h"
+
 void CAnimationClip::Load(wchar_t * filePath)
 {
 	m_isLoop = false;
@@ -14,7 +16,7 @@ void CAnimationClip::Load(wchar_t * filePath)
 	fread(&header, sizeof(header), 1, fp);
 
 	if (header.numAnimationEvent > 0) {
-		//m_animationEvent = std::make_unique<CAnimationEvent[]>(header.numAnimationEvent);
+		m_animationEvent = std::make_unique<CAnimationEvent[]>(header.numAnimationEvent);
 		//アニメーションイベントがあるなら、イベント情報をロードする。
 		for (auto i = 0; i < header.numAnimationEvent; i++) {
 			SAnimationEvent animEvent;
@@ -24,11 +26,11 @@ void CAnimationClip::Load(wchar_t * filePath)
 			static wchar_t wEventName[256];
 			fread(eventName, animEvent.eventNameLength + 1, 1, fp);
 			mbstowcs(wEventName, eventName, 255);
-			//m_animationEvent[i].SetInvokeTime(animEvent.invokeTime);
-			//m_animationEvent[i].SetEventName(wEventName);
+			m_animationEvent[i].SetInvokeTime(animEvent.invokeTime);
+			m_animationEvent[i].SetEventName(wEventName);
 		}
 	}
-	//m_numAnimationEvent = header.numAnimationEvent;
+	m_animationEventNum = header.numAnimationEvent;
 
 	//中身をごそっとロード。
 	auto keyframes = std::make_unique<SKeyframeRow[]>(header.numKey);
@@ -94,6 +96,18 @@ void CAnimationClip::Update(float deltaTime)
 			{
 				m_isPlay = false;
 			}
+		}
+	}
+}
+
+void CAnimationClip::AnimationInvoke(CAnimation* animation)
+{
+	for (int i = 0; i < m_animationEventNum; i++)
+	{
+		if (m_animationEvent[i].GetInvokeTime() < m_frameTime && !m_animationEvent[i].IsInvoked())
+		{
+			animation->AnimationEventNotification(m_clipName, m_animationEvent[i].GetEventName());
+			m_animationEvent[i].SetInvokedFlg(true);
 		}
 	}
 }
