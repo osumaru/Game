@@ -3,6 +3,8 @@
 #include "GameObject/GameObjectManager.h"
 #include "Graphics/Texture.h"
 #include "Graphics\RenderTarget.h"
+#include "Resource/TextureResource.h"
+#include "Resource/SkinmodelResource.h"
 //エンジンクラス
 
 
@@ -69,6 +71,16 @@ public:
 		return *m_pad;
 	}
 
+	CSkinmodelResource& SkinmodelResource()
+	{
+		return m_skinmodelResource;
+	}
+
+	CTextureResource& TextureResource()
+	{
+		return m_textureResource;
+	}
+
 	ID3D11Device* GetDevice()
 	{
 		return m_pD3DDevice;
@@ -109,7 +121,7 @@ private:
 	IDXGISwapChain*							m_pSwapChain;
 	D3D_FEATURE_LEVEL						m_featureLevel;
 	ID3D11DeviceContext*					m_pDeviceContext;
-	CTexture									m_depthStencilTexture;
+	CTexture								m_depthStencilTexture;
 	CRenderTarget							m_backBuffer;
 	D3D_DRIVER_TYPE							m_driverType;
 	ID3D11RenderTargetView*					m_pBackBuffer;
@@ -118,6 +130,8 @@ private:
 	std::unique_ptr<CPhysicsWorld>			m_physicsWorld;				//物理ワールド
 	std::unique_ptr<CSoundEngine>			m_soundEngine;				//サウンドエンジン]
 	std::unique_ptr<CPad>					m_pad;
+	CTextureResource						m_textureResource;
+	CSkinmodelResource						m_skinmodelResource;
 };
 
 //エンジンクラスのインスタンスを取得。
@@ -167,6 +181,16 @@ static CPhysicsWorld& PhysicsWorld()
 static CSoundEngine& SoundEngine()
 {
 	return Engine().SoundEngine();
+}
+
+static CTextureResource& TextureResource()
+{
+	return Engine().TextureResource();
+}
+
+static CSkinmodelResource& SkinmodelResource()
+{
+	return Engine().SkinmodelResource();
 }
 
 static int FrameBufferWidth()
