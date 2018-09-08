@@ -52,6 +52,8 @@ public:
 	//カウントをリセット
 	void Reset()
 	{
+		ZeroMemory(m_vertexBuffer, sizeof(m_vertexBuffer));
+		ZeroMemory(m_indexBuffer, sizeof(m_indexBuffer));
 		//毎フレームインデックスバッファと頂点バッファをリセット
 		m_count = 0;
 	}

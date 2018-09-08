@@ -55,7 +55,7 @@ void Map::Init(int stageNum)
 			GetPlayer().Init(mInfo.m_position);
 			break;
 		case enMapTagEnemy:
-			enemy = New<Zombie>(0);
+			enemy = New<Zombie>(1);
 			enemy->Init(mInfo.m_position);
 			//enemyList.push_back(enemy);
 			break;

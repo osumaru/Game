@@ -46,4 +46,5 @@ void EnemyStateMachine::ChangeState(EnemyState::EnState nextState)
 void EnemyStateMachine::Release()
 {
 	Delete(m_currentState);
+	Delete(this);
 }

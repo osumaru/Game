@@ -36,10 +36,10 @@ void Zombie::Update()
 {
 	//死亡時に回復アイテムとお金を出す
 	if (Pad().IsTriggerButton(enButtonA)) {
-		CRecoveryItem* recoveryItem = New<CRecoveryItem>(0);
-		CVector3 itemPosition = m_position;
-		itemPosition.y += 0.5f;
-		recoveryItem->Init(itemPosition);
+		//CRecoveryItem* recoveryItem = New<CRecoveryItem>(0);
+		//CVector3 itemPosition = m_position;
+		//itemPosition.y += 0.5f;
+		//recoveryItem->Init(itemPosition);
 		m_enemyStateMachine.Release();
 		Delete(this);
 	}

@@ -46,6 +46,9 @@
     <Filter Include="ソース ファイル\Input">
       <UniqueIdentifier>{7012f079-d1f9-4016-9db6-b908046e581a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Resource">
+      <UniqueIdentifier>{4378fd90-2499-4762-ae95-1d3cebd9ef79}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="engineStdafx.cpp">
@@ -164,6 +167,12 @@
     </ClCompile>
     <ClCompile Include="Graphics\AnimationEvent.cpp">
       <Filter>ソース ファイル\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\TextureResource.cpp">
+      <Filter>ソース ファイル\Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\SkinmodelResource.cpp">
+      <Filter>ソース ファイル\Resource</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -287,8 +296,14 @@
     <ClInclude Include="GameObject\GameObjectManager.h">
       <Filter>ソース ファイル\GameObject</Filter>
     </ClInclude>
+    <ClInclude Include="Resource\TextureResource.h">
+      <Filter>ソース ファイル\Resource</Filter>
+    </ClInclude>
     <ClInclude Include="Graphics\AnimationEvent.h">
-      <Filter>ヘッダー ファイル</Filter>
+      <Filter>ソース ファイル\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\SkinmodelResource.h">
+      <Filter>ソース ファイル\Resource</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -15,7 +15,6 @@ CTexture::~CTexture()
 {
 	if (m_pTexture != nullptr)
 	{
-
 		m_pTexture->Release();
 		m_pTexture = nullptr;
 	}
