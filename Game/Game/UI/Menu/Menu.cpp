@@ -23,11 +23,12 @@ void CMenu::Init()
 	{
 		for (int j = 0; j < 4; j++)
 		{
-
-			m_numberTexture[i][j].Load(L"Assets/sprite/number/number0.png");
-			m_number[i][j].Init(&m_numberTexture[i][j]);
-			m_number[i][j].SetPosition({ m_numberPos});
-			m_number[i][j].SetSize({ 65.0f,65.0f });
+			m_numberTexture[i][j] = new CTexture;
+			m_number[i][j] = new CSprite;
+			m_numberTexture[i][j] = TextureResource().LoadTexture(L"Assets/sprite/number/number0.png");
+			m_number[i][j]->Init(m_numberTexture[i][j]);
+			m_number[i][j]->SetPosition({ m_numberPos});
+			m_number[i][j]->SetSize({ 65.0f,65.0f });
 			m_numberPos.x += 30.0;
 		}
 		if(i==4)
@@ -60,7 +61,7 @@ void CMenu::Update()
 	if (Pad().IsTriggerButton(enButtonSelect))
 	{
 
-		//StatusMath();
+		StatusMath();
 	}
 }
 
@@ -75,24 +76,27 @@ void CMenu::StatusMath()
 			int num = 1111 * i;
 			wchar_t filePath[256];
 			swprintf(filePath, L"Assets/sprite/number/number%d.png", num / 1000);
-			m_numberTexture[i][0].Load(filePath);
-			m_number[i][0].Init(&m_numberTexture[i][0]);
-			m_number[i][0].SetSize({ 65.0f,65.0f });
+			m_numberTexture[i][0] = m_numberTexture[i][0] = TextureResource().LoadTexture(filePath);
+			m_number[i][0]->Init(m_numberTexture[i][0]);
+			m_number[i][0]->SetSize({ 65.0f,65.0f });
 			num %= 1000;
-			swprintf(filePath, L"Assets/sprite/number/number%d.png", num / 100);
-			m_numberTexture[i][1].Load(filePath);
-			m_number[i][1].Init(&m_numberTexture[i][1]);
-			m_number[i][1].SetSize({ 65.0f,65.0f });
+			/*swprintf(filePath, L"Assets/sprite/number/number%d.png", num / 100);
+			m_numberTexture[i][1] = m_numberTexture[i][1] = TextureResource().LoadTexture(filePath);
+			m_number[i][1]->Init(m_numberTexture[i][1]);
+			m_number[i][1]->SetSize({ 65.0f,65.0f });
 			num %= 100;
+
 			swprintf(filePath, L"Assets/sprite/number/number%d.png", num / 10);
-			m_numberTexture[i][2].Load(filePath);
-			m_number[i][2].Init(&m_numberTexture[i][2]);
-			m_number[i][2].SetSize({ 65.0f,65.0f });
+			m_numberTexture[i][2] = m_numberTexture[i][2] = TextureResource().LoadTexture(filePath);
+			m_number[i][2]->Init(m_numberTexture[i][2]);
+			m_number[i][2]->SetSize({ 65.0f,65.0f });
 			num %= 10;
+
 			swprintf(filePath, L"Assets/sprite/number/number%d.png", num );
-			m_numberTexture[i][3].Load(filePath);
-			m_number[i][3].Init(&m_numberTexture[i][3]);
-			m_number[i][3].SetSize({ 65.0f,65.0f });
+			m_numberTexture[i][3] = m_numberTexture[i][3] = TextureResource().LoadTexture(filePath);
+			m_numberTexture[i][3]->Load(filePath);
+			m_number[i][3]->Init(m_numberTexture[i][3]);
+			m_number[i][3]->SetSize({ 65.0f,65.0f });*/
 
 
 	
@@ -112,7 +116,7 @@ void CMenu::Draw()
 			for (int j = 0; j < 4; j++)
 			{
 
-				m_number[i][j].Draw();
+				m_number[i][j]->Draw();
 			}
 		}
 
