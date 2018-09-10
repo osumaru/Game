@@ -6,7 +6,6 @@
 
 
 class CPlayer;
-class CEnemy;
 
 #include "Number.h"
 
@@ -17,11 +16,10 @@ public:
 	void Init();
 
 	//ダメージ計算
-	//player	プレイヤークラスのポインタ
-	//enemy		エネミークラスのポインタ
-	void DamageCalculation(CPlayer* player, CEnemy* enemy);
+	void DamageCalculation();
 
-
+	//ダメージ表示リセット
+	void Reset();
 private:
 	CNumber* m_number[3];	//数字のスプライト
 	CVector2 m_numPos;		//座標

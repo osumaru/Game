@@ -4,7 +4,8 @@
 
 bool EnemyWalk::Start()
 {
-	m_enemy->SetAnimNum(EnemyState::enState_Walk);
+	//歩きアニメーションを再生
+	m_enemy->PlayAnimation(EnemyState::enState_Walk);
 	return true;
 }
 

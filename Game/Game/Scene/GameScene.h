@@ -5,7 +5,6 @@
 #pragma once
 
 class Map;
-#include "../UI/DamageNumber/DamageNumber.h"
 
 class CGameScene : public IGameObject
 {
@@ -18,5 +17,4 @@ public:
 
 private:
 	Map* map = nullptr;			//マップ
-	CDamegeNumber damageNumber;	//ダメージ数値
 };

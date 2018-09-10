@@ -24,12 +24,10 @@ public:
 	void Move();
 
 private:
-	CSkinModel	m_skinModel;					//スキンモデル
-	CVector3	m_position;						//座標
-	CQuaternion m_rotation;						//回転
-	CCharacterController m_characterController;	//キャラクターコントローラー
-	CVector3	m_popPosition;
-	float		m_speed = 4.0f;
-	//CVector3	m_destination;
-	CVector3	m_initPosition;
+	CSkinModel				m_skinModel;			//スキンモデル
+	CVector3				m_position;				//座標
+	CQuaternion				m_rotation;				//回転
+	CCharacterController	m_characterController;	//キャラクターコントローラー
+	CVector3				m_popPosition;			//アイテムがポップする座標
+	float					m_speed = 4.0f;			//移動速度
 };

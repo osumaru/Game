@@ -5,7 +5,8 @@
 
 bool EnemyAttack::Start()
 {
-	m_enemy->SetAnimNum(EnemyState::enState_Attack);
+	//攻撃アニメーションを再生
+	m_enemy->PlayAnimation(EnemyState::enState_Attack);
 	return true;
 }
 
