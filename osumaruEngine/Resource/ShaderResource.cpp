@@ -1,45 +1,46 @@
 #include "engineStdafx.h"
 #include "ShaderResource.h"
 //
-//SShaderData* CShaderResource::ReadFile(char* filePath)
+//SShaderData CShaderResource::ReadFile(char* filePath)
 //{
-//	//int hash = MakeHash(filePath);
-//	//auto& map = m_shaderData.find(hash);
-//	//if (map == m_shaderData.end())
-//	//{
-//	//	char* data;
-//	//	//シェーダーファイルを開いて読み込む
-//	//	FILE* file;
-//	//	file = fopen(filePath, "rb");
-//	//	fseek(file, 0, SEEK_END);
-//	//	fpos_t filepos;
-//	//	fgetpos(file, &filepos);
-//	//	fseek(file, 0, SEEK_SET);
-//	//	data = new char[filepos];
-//	//	SShaderData ret;
-//	//	m_shaderData.insert({ hash, {data, filepos} });
-//	//	return nullptr;
-//	//}
-//	//else
-//	//{
-//	//	return &map->second;
-//	//}
-//	return nullptr;
+//	int hash = MakeHash(filePath);
+//	auto& map = m_shaderData.find(hash);
+//	if (map == m_shaderData.end())
+//	{
+//		char* data;
+//		//シェーダーファイルを開いて読み込む
+//		FILE* file;
+//		file = fopen(filePath, "rb");
+//		fseek(file, 0, SEEK_END);
+//		fpos_t filepos;
+//		fgetpos(file, &filepos);
+//		fseek(file, 0, SEEK_SET);
+//		data = new char[filepos];
+//		SShaderData ret;
+//		ret.data = data;
+//		ret.filepos = filepos;
+//		m_shaderData.insert({ hash, ret });
+//		return ret;
+//	}
+//	else
+//	{
+//		return map->second;
+//	}
 //}
 //
 //void CShaderResource::Load(const char * filepath, const char * entryFuncName, EnShaderType shaderType)
 //{
+//	DWORD shaderCompilerOption = 0;
+//	shaderCompilerOption |= D3DCOMPILE_ENABLE_STRICTNESS;
+//	shaderCompilerOption |= D3DCOMPILE_OPTIMIZATION_LEVEL3;
+//	ID3DBlob* errorBlob;
+//	char* shaderTypeName[] =
+//	{
+//		"vs_5_0",
+//		"ps_5_0",
+//		"cs_5_0"
+//	};
 //
-//	//DWORD shaderCompilerOption = 0;
-//	//shaderCompilerOption |= D3DCOMPILE_ENABLE_STRICTNESS;
-//	//shaderCompilerOption |= D3DCOMPILE_OPTIMIZATION_LEVEL3;
-//	//ID3DBlob* errorBlob;
-//	//char* shaderTypeName[] =
-//	//{
-//	//	"vs_5_0",
-//	//	"ps_5_0",
-//	//	"cs_5_0"
-//	//};
 //	//HRESULT hr = D3DCompile(m_pShaderData.get(), (int)filepos, nullptr,
 //	//	nullptr, nullptr, entryFuncName, shaderTypeName[shaderType], shaderCompilerOption, 0, &m_blob, &errorBlob);
 //
