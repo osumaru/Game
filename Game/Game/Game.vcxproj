@@ -167,6 +167,7 @@
     <ClCompile Include="Enemy\IEnemy.cpp" />
     <ClCompile Include="Enemy\Zombie.cpp" />
     <ClCompile Include="GameCamera.cpp" />
+    <ClCompile Include="Itam\Money.cpp" />
     <ClCompile Include="Itam\RecoveryItem.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Map\Map.cpp" />
@@ -198,6 +199,7 @@
     <ClInclude Include="Enemy\IEnemy.h" />
     <ClInclude Include="Enemy\Zombie.h" />
     <ClInclude Include="GameCamera.h" />
+    <ClInclude Include="Itam\Money.h" />
     <ClInclude Include="Itam\RecoveryItem.h" />
     <ClInclude Include="Map\Map.h" />
     <ClInclude Include="Map\MapChip\MapChip.h" />
@@ -222,14 +224,19 @@
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
+    <MeshContentTask Include="Assets\modelData\Arrow.fbx" />
+    <MeshContentTask Include="Assets\modelData\Barrel.FBX" />
     <MeshContentTask Include="Assets\modelData\heart.fbx" />
     <MeshContentTask Include="Assets\modelData\House.FBX" />
+    <MeshContentTask Include="Assets\modelData\LongBow.FBX" />
     <MeshContentTask Include="Assets\modelData\map2.FBX" />
     <MeshContentTask Include="Assets\modelData\money.fbx" />
     <MeshContentTask Include="Assets\modelData\ninja.FBX" />
     <MeshContentTask Include="Assets\modelData\Player.fbx" />
     <MeshContentTask Include="Assets\modelData\samurai.FBX" />
     <MeshContentTask Include="Assets\modelData\Sword.fbx" />
+    <MeshContentTask Include="Assets\modelData\Sword10.fbx" />
+    <MeshContentTask Include="Assets\modelData\Sword3.fbx" />
     <MeshContentTask Include="Assets\modelData\testChamferBox.FBX" />
     <MeshContentTask Include="Assets\modelData\testGround.FBX" />
     <MeshContentTask Include="Assets\modelData\testRectangle.FBX" />

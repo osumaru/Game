@@ -199,6 +199,7 @@
     <ClCompile Include="Physics\RigidBody.cpp" />
     <ClCompile Include="Physics\RigidBodyDraw.cpp" />
     <ClCompile Include="Random\Random.cpp" />
+    <ClCompile Include="Resource\ShaderResource.cpp" />
     <ClCompile Include="Resource\SkinmodelResource.cpp" />
     <ClCompile Include="Resource\TextureResource.cpp" />
     <ClCompile Include="Sound\SoundEngine.cpp" />
@@ -243,6 +244,7 @@
     <ClInclude Include="Physics\RigidBody.h" />
     <ClInclude Include="Physics\RigidBodyDraw.h" />
     <ClInclude Include="Random\Random.h" />
+    <ClInclude Include="Resource\ShaderResource.h" />
     <ClInclude Include="Resource\SkinmodelResource.h" />
     <ClInclude Include="Resource\TextureResource.h" />
     <ClInclude Include="Sound\SoundEngine.h" />

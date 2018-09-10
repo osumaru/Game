@@ -1,7 +1,7 @@
 #pragma once
 class CSkelton;
 
-class CSkinmodelResource
+class CSkinmodelResource : Uncopyable
 {
 public:
 	DirectX::Model* Load(const wchar_t* filePath, CSkelton* skelton = nullptr);
