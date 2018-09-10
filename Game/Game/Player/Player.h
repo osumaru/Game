@@ -101,6 +101,9 @@ public:
 		int damage = 0;
 	}
 
+	//
+	void PlayerKeyInput();
+
 
 private:
 	enum EnPlayerAnimeState

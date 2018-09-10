@@ -54,13 +54,9 @@ void CPlayer::Update()
 		
 	}
 
-
 		//スキンモデルの更新
 		m_skinmodel.Update(m_position, m_rotation, { 1.0f, 1.0f, 1.0f }, true);
 		m_Weaponskin.Update(m_WeaponPosition, m_WeaponRotation, { 1.0f, 1.0f, 1.0f }, true);
-
-	
-	
 }
 
 //描画処理
@@ -85,11 +81,9 @@ void CPlayer::Move()
 		if (m_State == enPlayerWalk || m_State == enPlayerRun)
 		{
 
-
 			CVector3 moveSpeed;
 			moveSpeed.z = Pad().GetLeftStickY() * GameTime().GetDeltaFrameTime() * WALK_SPEED;
 			moveSpeed.x = Pad().GetLeftStickX() * GameTime().GetDeltaFrameTime() * WALK_SPEED;
-
 			CMatrix cameraVm = GetGameCamera().GetViewMatrix();
 			cameraVm.Inverse();	//カメラのビュー行列の逆行列
 
@@ -127,9 +121,6 @@ void CPlayer::Move()
 				m_moveSpeed.y = 1.0f;
 			}
 
-
-			
-
 		}
 
 		else
@@ -166,8 +157,6 @@ void CPlayer::Move()
 		//	m_moveSpeed = playerFlontVec * m_slipSpeed;
 		//}
 
-
-		
 
 		if (m_State != enPlayerAvoidance)
 		{
@@ -230,77 +219,94 @@ void CPlayer::Rotation()
 
 void CPlayer::AnimationMove()
 {
-	//攻撃アニメーションの処理
-	if (Pad().IsTriggerButton(enButtonX) && m_animation.GetCurrentAnimationNum() != enPlayerAtack)
-	{
-		m_animation.Play(enPlayerAtack, 0.5f);
-		m_State = enPlayerAtack;
-	}
 
-	//回避アニメーション
-	else if (Pad().IsTriggerButton(enButtonRightTrigger))
-	{
-
-		m_animation.Play(enPlayerAvoidance, 0.0f);
-		m_State = enPlayerAvoidance;
-	}
-
-	//ジャンプアニメーションの処理
-	else if (Pad().IsTriggerButton(enButtonY) && m_animation.GetCurrentAnimationNum() != enPlayerJump)
-	{
-		m_animation.Play(enPlayerJump, 0.5);
-		m_State = enPlayerJump;
-
-	}
-
-	
-
-	//移動アニメーションの処理
-	else if (m_State != enPlayerAtack && (Pad().GetLeftStickX() != 0 || Pad().GetLeftStickY() != 0))
-	{
-		m_animation.SetLoopFlg(enPlayerRun, true);
-		m_animation.SetLoopFlg(enPlayerWalk, true);
-		CVector3 moveLen = m_characterController.GetMoveSpeed();
-		
-		float len = moveLen.Length();
-		if (len < 0.0)
-		{
-			len *= -1.0f;
-		}
-	
-	//歩行アニメーション
-	 if (len < 2.0f &&m_animation.GetCurrentAnimationNum() != enPlayerWalk)
+		//攻撃アニメーションの処理
+		if (Pad().IsTriggerButton(enButtonX) && m_animation.GetCurrentAnimationNum() != enPlayerAtack)
 		{
 
-
-			m_animation.Play(enPlayerWalk, 0.2);
-			m_State = enPlayerWalk;
-
-		}
-	 //走りアニメーション
-	 else if (len >= 2.0f && m_animation.GetCurrentAnimationNum() != enPlayerRun)
-	 {
-
-		 m_animation.Play(enPlayerRun, 0.5);
-		 m_State = enPlayerRun;
-
-	 }
-	}
-	
-	//待機モーション
-	if (m_State != enPlayerStand && Pad().GetLeftStickX() == 0 && Pad().GetLeftStickY() == 0)
-	{
-		m_animation.SetLoopFlg(1, false);
-		if (!m_animation.IsPlay() || m_animation.GetCurrentAnimationNum() == enPlayerRun ||  m_animation.GetCurrentAnimationNum() == enPlayerWalk)
-		{
-
-			m_animation.Play(enPlayerStand, 0.5f);
-			m_State = enPlayerStand;
+			m_animation.Play(enPlayerAtack, 0.5f);
+			m_State = enPlayerAtack;
 
 		}
 
-	}
 
+		//回避アニメーション
+		else if (Pad().IsTriggerButton(enButtonRightTrigger))
+		{
+
+			m_animation.Play(enPlayerAvoidance, 0.0f);
+			m_State = enPlayerAvoidance;
+		}
+
+		//ジャンプアニメーションの処理
+		else if (Pad().IsTriggerButton(enButtonY) && m_animation.GetCurrentAnimationNum() != enPlayerJump)
+		{
+
+			m_animation.Play(enPlayerJump, 0.5);
+			m_State = enPlayerJump;
+
+		}
+
+		//移動アニメーションの処理
+		else if (Pad().GetLeftStickX() != 0 || Pad().GetLeftStickY() != 0)
+		{
+
+			if (m_State == enPlayerAtack && m_animation.IsPlay())
+			{
+
+
+			}
+
+			else
+			{
+
+				m_animation.SetLoopFlg(enPlayerRun, true);
+				m_animation.SetLoopFlg(enPlayerWalk, true);
+				CVector3 moveLen = m_characterController.GetMoveSpeed();
+
+				float len = moveLen.Length();
+				if (len < 0.0)
+				{
+					len *= -1.0f;
+				}
+
+				//歩行アニメーション
+				if (len < 2.0f &&m_animation.GetCurrentAnimationNum() != enPlayerWalk)
+				{
+
+
+					m_animation.Play(enPlayerWalk, 0.2);
+					m_State = enPlayerWalk;
+
+				}
+				//走りアニメーション
+				else if (len >= 2.0f && m_animation.GetCurrentAnimationNum() != enPlayerRun)
+				{
+
+					m_animation.Play(enPlayerRun, 0.3);
+					m_State = enPlayerRun;
+
+				}
+
+			}
+
+		}
+
+		//待機モーション
+		if (m_State != enPlayerStand && Pad().GetLeftStickX() == 0 && Pad().GetLeftStickY() == 0)
+		{
+			m_animation.SetLoopFlg(1, false);
+			if (!m_animation.IsPlay() || m_animation.GetCurrentAnimationNum() == enPlayerRun || m_animation.GetCurrentAnimationNum() == enPlayerWalk)
+			{
+
+				m_animation.Play(enPlayerStand, 0.5f);
+				m_State = enPlayerStand;
+
+			}
+
+		}
+
+	//アニメーションの更新
 	m_animation.Update(GameTime().GetDeltaFrameTime());
 
 }
