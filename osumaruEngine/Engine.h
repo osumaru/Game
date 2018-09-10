@@ -5,6 +5,7 @@
 #include "Graphics\RenderTarget.h"
 #include "Resource/TextureResource.h"
 #include "Resource/SkinmodelResource.h"
+#include "Resource/ShaderResource.h"
 //エンジンクラス
 
 
@@ -81,6 +82,11 @@ public:
 		return m_textureResource;
 	}
 
+	CShaderResource& ShaderResource()
+	{
+		return m_shaderResource;
+	}
+
 	ID3D11Device* GetDevice()
 	{
 		return m_pD3DDevice;
@@ -132,6 +138,7 @@ private:
 	std::unique_ptr<CPad>					m_pad;
 	CTextureResource						m_textureResource;
 	CSkinmodelResource						m_skinmodelResource;
+	CShaderResource							m_shaderResource;
 };
 
 //エンジンクラスのインスタンスを取得。
@@ -191,6 +198,11 @@ static CTextureResource& TextureResource()
 static CSkinmodelResource& SkinmodelResource()
 {
 	return Engine().SkinmodelResource();
+}
+
+static CShaderResource& ShaderResource()
+{
+	return Engine().ShaderResource();
 }
 
 static int FrameBufferWidth()
