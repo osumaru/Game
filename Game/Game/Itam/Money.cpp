@@ -1,17 +1,17 @@
 #include "stdafx.h"
-#include "RecoveryItem.h"
-#include "../GameCamera.h"
+#include "Money.h"
 #include "../Player/Player.h"
+#include "../GameCamera.h"
 
-void CRecoveryItem::Init(CVector3 position)
+void CMoney::Init(CVector3 position)
 {
-	m_skinModel.Load(L"Assets/modelData/heart.cmo");
+	m_skinModel.Load(L"Assets/modelData/money.cmo");
 	m_position = position;
 	m_initPosition = m_position;
 	m_characterController.Init(0.2f, 0.2f, m_position);
 }
 
-bool CRecoveryItem::Start()
+bool CMoney::Start()
 {
 	//ƒ‰ƒ“ƒ_ƒ€‚ÉˆÚ“®æ‚ğŒˆ’è
 	float randomPositionX = (float)Random().GetRandDouble();
@@ -45,7 +45,7 @@ bool CRecoveryItem::Start()
 	return true;
 }
 
-void CRecoveryItem::Update()
+void CMoney::Update()
 {
 	Move();
 
@@ -62,15 +62,16 @@ void CRecoveryItem::Update()
 	m_position = m_characterController.GetPosition();
 
 	m_skinModel.Update(m_position, m_rotation, { 1.0f,1.0f,1.0f }, true);
+
 }
 
-void CRecoveryItem::Draw()
+void CMoney::Draw()
 {
 	m_characterController.Draw();
 	m_skinModel.Draw(GetGameCamera().GetViewMatrix(), GetGameCamera().GetProjectionMatrix());
 }
 
-void CRecoveryItem::Move()
+void CMoney::Move()
 {
 	//ˆÚ“®‘¬“x‚ğæ“¾
 	CVector3 moveSpeed = m_characterController.GetMoveSpeed();
