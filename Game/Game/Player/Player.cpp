@@ -28,7 +28,7 @@ void CPlayer::Init(CVector3 position)
 
 		m_status.Strength	= 10;						//攻撃力
 		m_status.Defense	= 3;						//防御力
-		m_status.Health		= 100;						//体力
+		m_status.Health		= 500;						//体力
 		m_status.Level		= 1;						//レベル
 		m_status.OldExp		= 15;						//ひとつ前のレベルに必要な経験値
 		m_status.NextExp	= ((m_status.OldExp * 1.1f + 0.5) + (m_status.Level * 12 )) / 2 + 0.5;		//次のレベルアップに必要な経験値
