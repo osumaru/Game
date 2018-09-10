@@ -1,6 +1,7 @@
 #pragma once
 //シェーダー(エフェクトファイル)を読み込むクラス
 
+
 class CShader : Uncopyable
 {
 public:
