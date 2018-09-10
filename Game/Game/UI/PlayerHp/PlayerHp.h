@@ -14,7 +14,7 @@ public:
 
 	//プレイヤーHP
 	//DamageValue くらったダメージ量0～100
-	void PlayerDamage(float DamageValue);
+	//void PlayerDamage(float DamageValue);
 private:
 	CSprite m_playerHpSprite;							//プレイヤーのHPスプライト
 	CTexture m_playerHpTexture;							//プレイヤーのHPテクスチャ
@@ -29,5 +29,6 @@ private:
 	CVector2 m_playerHpBackSize = { 300.0f,60.0f };			//プレイヤーのHPバックグラウンドサイズ
 	const CVector2 m_playerHpBackCenterPos = { 0.0f,1.0f };	//プレイヤーのHPバックグラウンド基点座標
 
+	int m_playerHp=100;										//プレイヤーのHPの値
 };
 
