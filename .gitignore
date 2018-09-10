@@ -30,6 +30,7 @@
 *.db
 *.suo
 
+/Game/.vs
 /Game/x64
 /Game/x64/Release
 /Game/x64/Debug
@@ -40,3 +41,4 @@
 /osumaruEngine/bulletPhysics/src/LinearMath/x64
 /osumaruEngine/x64
 /Game/Game/x64
+tkTools/Library

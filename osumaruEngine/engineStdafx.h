@@ -1,6 +1,6 @@
 #pragma once
 
-
+int MakeHash(const wchar_t* str);
 
 //#include "Random\Random.h"
 //#include "Graphics/Texture.h"

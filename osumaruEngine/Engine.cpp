@@ -6,6 +6,18 @@
 #include "Sound\SoundEngine.h"
 #include "Input\Pad.h"
 
+int MakeHash(const wchar_t* str)
+{
+	int hash = 0;
+	int len = (int)wcslen(str);
+	for (int i = 0; i < len; i++)
+	{
+		hash = hash * 37 + str[i];
+	}
+	return hash;
+}
+
+
 LRESULT WINAPI MsgProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
 	switch (msg)

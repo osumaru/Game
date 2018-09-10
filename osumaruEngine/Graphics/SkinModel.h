@@ -47,7 +47,7 @@ public:
 	//モデルを取得
 	DirectX::Model* GetBody() const
 	{
-		return m_skinModel.get();
+		return m_skinModel;
 	}
 
 	//スケルトンを取得
@@ -68,13 +68,10 @@ public:
 	ret			見つかった骨のワールド行列を返す、見つからなかったら単位行列を返す
 	*/
 	const CMatrix& FindBoneWorldMatrix(const wchar_t* boneName) const;
-
 	
 private:
 	std::unique_ptr<CSkelton>		m_skelton = nullptr;				//スケルトン
 	CConstantBuffer					constantBuffer;						//定数バッファ
-	std::unique_ptr<DirectX::Model> m_skinModel = nullptr;				//スキンモデル
+	DirectX::Model*					m_skinModel = nullptr;				//スキンモデル
 	CMatrix							worldMatrix = CMatrix::Identity;	//ワールド行列
-
-	
 };

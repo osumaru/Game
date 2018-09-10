@@ -13,6 +13,7 @@ CSkinModel::~CSkinModel()
 
 void CSkinModel::Load(const wchar_t* filePath, CAnimation* animation)
 {
+	m_skelton = nullptr;
 	std::unique_ptr<CSkelton> skelton;
 	skelton = std::make_unique<CSkelton>();
 	//コンスタントバッファを作成
@@ -35,27 +36,8 @@ void CSkinModel::Load(const wchar_t* filePath, CAnimation* animation)
 		}
 		m_skelton = std::move(skelton);
 		CSkinModelEffectFactory effectFactory(GetDevice());
-
-		//ボーンを探す関数
-		auto onFindBone = [&](
-			const wchar_t* boneName,
-			const VSD3DStarter::Bone* bone,
-			std::vector<int>& localBoneIDtoGlobalBoneIDTbl
-			) {
-			int globalBoneID = m_skelton->FindBoneID(boneName);
-			if (globalBoneID == -1) {
-				return;
-			}
-			localBoneIDtoGlobalBoneIDTbl.push_back(globalBoneID);
-		};
-
-		m_skinModel = Model::CreateFromCMO(GetDevice(), filePath, effectFactory, false, false, onFindBone);
 	}
-	else
-	{
-		CSkinModelEffectFactory effectFactory(GetDevice());
-		m_skinModel = Model::CreateFromCMO(GetDevice(), filePath, effectFactory);
-	}
+	m_skinModel = SkinmodelResource().Load(filePath, m_skelton.get());
 }
 
 void CSkinModel::Update(const CVector3& position, const CQuaternion& rotation, const CVector3& scale, bool isZup)
