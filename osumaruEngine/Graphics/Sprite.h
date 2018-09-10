@@ -55,7 +55,7 @@ public:
 	//テクスチャを設定
 	void SetTexture(CTexture* pTexture)
 	{
-		if(pTexture != nullptr)
+		if(pTexture == nullptr)
 		{
 			return;
 		}

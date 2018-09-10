@@ -51,12 +51,6 @@ public:
 	}
 
 private:
-
-	//頂点レイアウトを作る関数
-	void CreateInputLayout(ID3DBlob* blob);
-
-private:
-	std::unique_ptr<char[]>			m_pShaderData;		//シェーダーをコンパイルしたデータを格納するバッファ
 	ID3D11DeviceChild*				m_pShader;			//シェーダー
 	ID3D11InputLayout*				m_pInputLayout;		//頂点レイアウト
 	ID3DBlob*						m_blob;				//シェーダーデータ

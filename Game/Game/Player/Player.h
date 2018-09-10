@@ -98,9 +98,8 @@ public:
 	//デバック用関数
 	void GetDamage()
 	{
-		int damage = 0;
+		m_status.Health -= 5;
 	}
-
 
 private:
 	enum EnPlayerAnimeState
@@ -128,7 +127,7 @@ private:
 	CAnimation				m_animation;							//アニメーション
 	SplayerStatus			m_status;								//プレイヤーのステータス
 	bool					m_isSlip = false;						//スリップ判定
-	float					m_slipSpeed = 15.0f;					//回避移動時のスピード
+	float					m_slipSpeed = 2.0f;					//回避移動時のスピード
 	EnPlayerAnimeState		m_State = enPlayerStand;
 
 	const float				RUN_SPEED = 1.8f;
