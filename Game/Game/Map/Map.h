@@ -7,7 +7,10 @@ enum EnMapChipTag
 {
 	enMapTagUntagged,
 	enMapTagPlayer,
-	enMapTagEnemy,
+	enMapTagZombie,
+	enMapTagSamurai,
+	enMapTagNinja,
+	enMapTagWarrok,
 	enMapTagMapChip,
 	enMapTagNum,
 };

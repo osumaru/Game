@@ -57,7 +57,6 @@ void CRecoveryItem::Update()
 
 void CRecoveryItem::Draw()
 {
-	m_characterController.Draw();
 	m_skinModel.Draw(GetGameCamera().GetViewMatrix(), GetGameCamera().GetProjectionMatrix());
 }
 
