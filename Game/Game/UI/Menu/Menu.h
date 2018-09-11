@@ -11,6 +11,7 @@ public:
 	void Update();
 	void Draw();
 	void StatusMath();
+	void PlayerStatusInput();
 
 private:
 	CSprite			m_menu;					//メニュー画面のスプライト
@@ -18,8 +19,8 @@ private:
 	CSprite	*		m_number[7][4];			//プレイヤーのステータスのスプライト(数字)
 	CTexture*		m_numberTexture[7][4];	//プレイヤーのステータスのテクスチャ(数字)
 	CVector2		m_numberPos = { 500.0,220.0f };//CVector2::Zero;
-	SplayerStatus	m_PlayerStatus;			//プレイヤーのステータスを持つメンバ変数
-	bool		m_Draw = false;				//描画を行うかの判定をする変数。
+	int				m_PlayerStatus[7];			//プレイヤーのステータスを持つメンバ変数
+	bool			m_Draw = false;				//描画を行うかの判定をする変数。
 
 };
 

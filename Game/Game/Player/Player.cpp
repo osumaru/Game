@@ -11,17 +11,26 @@ void CPlayer::Init(CVector3 position)
 	m_rotation.SetRotationDeg(CVector3::AxisY, -180.0f);
 	m_characterController.Init(0.6f, 4.0f,m_position);
 	m_characterController.SetGravity(-9.8f);
-	wchar_t* animClip[enPlayerNum] = {	{ L"Assets/modelData/PlayerStand.tka"},			//待機アニメーション	
-										{ L"Assets/modelData/PlayerWalkStay.tka" },		//歩行アニメーション
-										{ L"Assets/modelData/PlayerDashStay.tka" },		//歩行アニメーション
-										{ L"Assets/modelData/PlayerJump.tka" },			//ジャンプアニメーション
-										{ L"Assets/modelData/PlayerAttack.tka" },		//攻撃アニメーション
-										{ L"Assets/modelData/PlayerDamage.tka" },		//ダメージアニメーション
-										{  L"Assets/modelData/PlayerKaihi.tka" }
-									 };
-	m_animation.Init(animClip, enPlayerNum);
-	m_animation.SetLoopFlg(0, true);
-	m_animation.SetLoopFlg(1, false);
+
+
+	//アニメーションの初期化
+	{
+		wchar_t* animClip[enPlayerNum] = {
+											{ L"Assets/modelData/PlayerStand.tka"},			//待機アニメーション	
+											{ L"Assets/modelData/PlayerWalkStay.tka" },		//歩行アニメーション
+											{ L"Assets/modelData/PlayerDashStay.tka" },		//歩行アニメーション
+											{ L"Assets/modelData/PlayerJump.tka" },			//ジャンプアニメーション
+											{ L"Assets/modelData/PlayerAttack.tka" },		//攻撃アニメーション
+											{ L"Assets/modelData/PlayerDamage.tka" },		//ダメージアニメーション
+											{  L"Assets/modelData/PlayerKaihi.tka" }		//回避アクション
+		};
+
+		m_animation.Init(animClip, enPlayerNum);
+		m_animation.SetLoopFlg(0, true);
+		m_animation.SetLoopFlg(1, false);
+
+	}
+
 
 	//プレイヤーのステータスの初期化
 	{
@@ -34,6 +43,7 @@ void CPlayer::Init(CVector3 position)
 		m_status.NextExp	= ((m_status.OldExp * 1.1f + 0.5) + (m_status.Level * 12 )) / 2 + 0.5;		//次のレベルアップに必要な経験値
 		m_status.ExperiencePoint = 0;					//経験値
 		m_status.AccumulationExp += m_status.OldExp;	//累積経験値
+		m_status.Gold = 0;								//所持金
 	}
 
 	Add(this, 0);
@@ -49,19 +59,20 @@ void CPlayer::Update()
 
 	if (Pad().IsTriggerButton(enButtonB))
 	{
-		m_status.ExperiencePoint += 43;
-		m_status.AccumulationExp += 43;
-		
+		ExpUP(100);
+
 	}
 
 		//スキンモデルの更新
 		m_skinmodel.Update(m_position, m_rotation, { 1.0f, 1.0f, 1.0f }, true);
 		m_Weaponskin.Update(m_WeaponPosition, m_WeaponRotation, { 1.0f, 1.0f, 1.0f }, true);
+
 }
 
 //描画処理
 void CPlayer::Draw()
 {
+
 	//m_characterController.Draw();
 	m_skinmodel.Draw(GetGameCamera().GetViewMatrix(), GetGameCamera().GetProjectionMatrix());
 	if (m_animation.GetCurrentAnimationNum() == enPlayerAtack)
@@ -75,6 +86,7 @@ void CPlayer::Draw()
 
 void CPlayer::Move()
 {
+
 		m_moveSpeed = m_characterController.GetMoveSpeed();
 
 		//移動しているかの判定
@@ -103,7 +115,6 @@ void CPlayer::Move()
 
 			//キャラクターを移動させる処理
 			m_moveSpeed.x = cameraX.x * moveSpeed.x + cameraZ.x * moveSpeed.z;
-			//m_moveSpeed.y = 0;
 			m_moveSpeed.z = cameraX.z * moveSpeed.x + cameraZ.z * moveSpeed.z;
 
 
@@ -115,48 +126,32 @@ void CPlayer::Move()
 				m_moveSpeed.z *= RUN_SPEED;
 			}
 
-			else if (m_State == enPlayerJump)
-			{
-
-				m_moveSpeed.y = 1.0f;
-			}
-
+			
 		}
 
-		else
+		else if (m_State == enPlayerJump)
+		{
+
+			m_moveSpeed.y = 1.0f;
+			m_moveSpeed.x = 0.0f;
+			m_moveSpeed.z = 0.0f;
+		}
+
+
+		else if(m_State == enPlayerStand)
 		{
 
 			m_moveSpeed.x = 0.0f;
 			m_moveSpeed.z = 0.0f;
 		}
 
+		//回避アクション時の処理
 		if (m_State == enPlayerAvoidance)
 		{
 
 			CMatrix PlayerHip = m_skinmodel.FindBoneWorldMatrix(L"Hips");
 			CVector3 PlayerHipPos = { PlayerHip.m[3][0],0.0f,PlayerHip.m[3][2] };
 		}
-
-		////回避の処理
-		// if (Pad().IsTriggerButton(enButtonRightTrigger))
-		//{
-		//	m_isSlip = true;
-		//}
-
-		//if (m_isSlip)
-		//{
-		//	m_slipSpeed = m_slipSpeed - (0.5f * GameTime().GetDeltaFrameTime());
-		//	if (m_slipSpeed <= 0)
-		//	{
-		//		m_isSlip = false;
-		//		m_slipSpeed = 2.0f;
-		//		return;
-		//	}
-		//	CVector3 playerFlontVec = { m_skinmodel.GetWorldMatrix().m[2][0],0.0f,m_skinmodel.GetWorldMatrix().m[2][2] };
-		//	playerFlontVec.Normalize();
-		//	m_moveSpeed = playerFlontVec * m_slipSpeed;
-		//}
-
 
 		if (m_State != enPlayerAvoidance)
 		{
@@ -165,6 +160,8 @@ void CPlayer::Move()
 			m_characterController.SetPosition(m_position);
 			m_characterController.Execute(GameTime().GetDeltaFrameTime());
 			m_position = m_characterController.GetPosition();
+
+
 		}
 
 
@@ -174,7 +171,7 @@ void CPlayer::Move()
 void CPlayer::Rotation()
 {
 
-	CVector3 playerVec = m_moveSpeed; //
+	CVector3 playerVec = m_moveSpeed; 
 	playerVec.y = 0.0f;
 
 	//プレイヤーの手のボーンを取得
@@ -234,7 +231,7 @@ void CPlayer::AnimationMove()
 		else if (Pad().IsTriggerButton(enButtonRightTrigger))
 		{
 
-			m_animation.Play(enPlayerAvoidance, 0.0f);
+			m_animation.Play(enPlayerAvoidance, 0.2f);
 			m_State = enPlayerAvoidance;
 		}
 
@@ -242,7 +239,7 @@ void CPlayer::AnimationMove()
 		else if (Pad().IsTriggerButton(enButtonY) && m_animation.GetCurrentAnimationNum() != enPlayerJump)
 		{
 
-			m_animation.Play(enPlayerJump, 0.5);
+			m_animation.Play(enPlayerJump, 0.2);
 			m_State = enPlayerJump;
 
 		}
@@ -251,54 +248,39 @@ void CPlayer::AnimationMove()
 		else if (Pad().GetLeftStickX() != 0 || Pad().GetLeftStickY() != 0)
 		{
 
-			if (m_State == enPlayerAtack && m_animation.IsPlay())
-			{
-
-
-			}
-
-			else
-			{
-
-				m_animation.SetLoopFlg(enPlayerRun, true);
-				m_animation.SetLoopFlg(enPlayerWalk, true);
 				CVector3 moveLen = m_characterController.GetMoveSpeed();
 
-				float len = moveLen.Length();
-				if (len < 0.0)
-				{
-					len *= -1.0f;
-				}
-
+				float len = moveLen.LengthSq() / 10;
 				//歩行アニメーション
-				if (len < 2.0f &&m_animation.GetCurrentAnimationNum() != enPlayerWalk)
+				if (len < 3.0f && m_State != enPlayerWalk)
 				{
 
-
+					m_animation.SetLoopFlg(enPlayerWalk, true);
 					m_animation.Play(enPlayerWalk, 0.2);
 					m_State = enPlayerWalk;
 
 				}
 				//走りアニメーション
-				else if (len >= 2.0f && m_animation.GetCurrentAnimationNum() != enPlayerRun)
+				else if (len >= 3.0f && m_State != enPlayerRun)
 				{
 
+					m_animation.SetLoopFlg(enPlayerRun, true);
 					m_animation.Play(enPlayerRun, 0.3);
 					m_State = enPlayerRun;
 
 				}
 
-			}
+			
 
 		}
 
 		//待機モーション
-		if (m_State != enPlayerStand && Pad().GetLeftStickX() == 0 && Pad().GetLeftStickY() == 0)
+		else if (m_State != enPlayerStand)
 		{
-			m_animation.SetLoopFlg(1, false);
-			if (!m_animation.IsPlay() || m_animation.GetCurrentAnimationNum() == enPlayerRun || m_animation.GetCurrentAnimationNum() == enPlayerWalk)
+			
+			if (!m_animation.IsPlay() ||m_State == enPlayerRun || m_State == enPlayerWalk)
 			{
-
+				m_animation.SetLoopFlg(1, false);
 				m_animation.Play(enPlayerStand, 0.5f);
 				m_State = enPlayerStand;
 

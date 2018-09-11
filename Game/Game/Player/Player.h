@@ -10,6 +10,7 @@ struct SplayerStatus
 	int NextExp;			//レベルアップまでに必要な経験値
 	int OldExp;				//現在のレベルアップに必要だった経験値
 	int AccumulationExp;	//累積経験値
+	int Gold;
 
 };
 
@@ -72,14 +73,10 @@ public:
 		return m_skinmodel.GetWorldMatrix();
 	}
 
+	//プレイヤーのスピードを取得する
 	const CVector3& GetMoveSpeed()
 	{
 		return m_moveSpeed;
-	}
-
-	const int GetStrength()
-	{
-		return m_status.Strength;
 	}
 
 	//プレイヤーの装備の変更を行う処理
@@ -119,14 +116,16 @@ private:
 
 	};
 
-	CVector3				m_position;								//座標
-	CVector3				m_WeaponPosition;								//座標
-	CVector3				m_moveSpeed = CVector3::Zero;			//移動速度
-	CQuaternion				m_rotation = CQuaternion::Identity;		//回転
-	CQuaternion				m_WeaponRotation = CQuaternion::Identity;		//回転
-	CSkinModel				m_skinmodel;							//スキンモデル
-	CSkinModel				m_Weaponskin;
-	CCharacterController	m_characterController;					//キャラクターコントローラー
+	CVector3				m_position;										//座標
+	CVector3				m_WeaponPosition;								//武器の座標
+	CVector3				m_moveSpeed = CVector3::Zero;					//移動速度
+	CQuaternion				m_rotation = CQuaternion::Identity;				//回転
+	CQuaternion				m_WeaponRotation = CQuaternion::Identity;		//武器の回転
+	CSkinModel				m_skinmodel;									//スキンモデル
+	CSkinModel				m_Weaponskin;									//武器のスキンモデル
+	CCharacterController	m_characterController;							//キャラクターコントローラー
+	CCharacterController	m_WeponCharacterController;						//武器のキャラコン
+
 	CPad					m_pad;									//パッド
 	CAnimation				m_animation;							//アニメーション
 	SplayerStatus			m_status;								//プレイヤーのステータス
