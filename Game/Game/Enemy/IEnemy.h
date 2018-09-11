@@ -70,6 +70,18 @@ public:
 		m_damageNumber.Reset();
 	}
 
+	//攻撃が当たったか
+	bool IsAttackHit() const
+	{
+		return m_isAttackHit;
+	}
+
+	//攻撃が当たったらフラグを設定する
+	void SetIsAttackHit(bool isAttackHit)
+	{
+		m_isAttackHit = isAttackHit;
+	}
+
 protected:
 	CSkinModel				m_skinModel;			//スキンモデル
 	CCharacterController	m_characterController;	//キャラクターコントローラー
@@ -80,4 +92,5 @@ protected:
 	CQuaternion				m_rotation;				//回転
 	int						m_animNum = 0;			//再生するアニメーション番号
 	int						m_animNumOld = 0;		//1つ前のアニメーション番号
+	bool					m_isAttackHit = false;	//攻撃が当たったか
 };

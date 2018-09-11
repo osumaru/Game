@@ -27,9 +27,11 @@ void EnemyAttack::Update()
 	if (length < 1.5f) {
 		//ƒ_ƒ[ƒW‚ðŽó‚¯‚½
 		GetPlayer().GetDamage();
+		m_enemy->SetIsAttackHit(true);
 	}
 
 	if (Pad().IsTriggerButton(enButtonA)) {
 		m_esm->ChangeState(EnemyState::enState_Damage);
+		m_enemy->SetIsAttackHit(false);
 	}
 }
