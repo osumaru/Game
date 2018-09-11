@@ -95,11 +95,8 @@ public:
 	//デバック用関数
 	void GetDamage()
 	{
-		int damage = 0;
+		m_status.Health -= 5;
 	}
-
-	//
-	void PlayerKeyInput();
 
 
 private:

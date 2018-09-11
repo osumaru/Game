@@ -57,7 +57,7 @@ void Map::Init(int stageNum)
 		case enMapTagEnemy:
 			enemy = New<Zombie>(1);
 			enemy->Init(mInfo.m_position);
-			//enemyList.push_back(enemy);
+			enemyList.push_back(enemy);
 			break;
 
 		default:

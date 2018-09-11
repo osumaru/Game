@@ -7,7 +7,6 @@ void CMoney::Init(CVector3 position)
 {
 	m_skinModel.Load(L"Assets/modelData/money.cmo");
 	m_position = position;
-	m_initPosition = m_position;
 	m_characterController.Init(0.2f, 0.2f, m_position);
 }
 
@@ -28,19 +27,11 @@ bool CMoney::Start()
 	toRandomPosition.y = 0.0f;
 	toRandomPosition.z = randomPositionZ;
 
-	////移動先のXZ座標を保存
-	//m_destination.x = m_initPosition.x + randomPositionX;
-	//m_destination.y = 0.0f;
-	//m_destination.z = m_initPosition.z + randomPositionZ;
-
 	//移動速度を計算
 	toRandomPosition.Normalize();
 	toRandomPosition *= m_speed;
-	CVector3 moveSpeed = m_characterController.GetMoveSpeed();
-	moveSpeed.x = toRandomPosition.x;
-	moveSpeed.y = 6.0f;
-	moveSpeed.z = toRandomPosition.z;
-	m_characterController.SetMoveSpeed(moveSpeed);
+	toRandomPosition.y = 6.0f;
+	m_characterController.SetMoveSpeed(toRandomPosition);
 
 	return true;
 }
@@ -76,18 +67,6 @@ void CMoney::Move()
 	//移動速度を取得
 	CVector3 moveSpeed = m_characterController.GetMoveSpeed();
 
-	////キャラクターコントローラーを使用しない場合
-	////移動先との距離をXZ平面で計算
-	//CVector3 toDestination = m_destination - m_position;
-	//toDestination.y = 0.0f;
-	//float length = toDestination.Length();
-	////近くなれば止める
-	//if (length <= 0.05f) {
-	//	moveSpeed.x = 0.0f;
-	//	moveSpeed.z = 0.0f;
-	//}
-
-	//キャラクターコントローラーを使用する場合
 	//地面に接地したら止める
 	if (m_characterController.IsOnGround()) {
 		moveSpeed.x = 0.0f;

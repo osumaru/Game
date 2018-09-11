@@ -4,7 +4,8 @@
 
 bool EnemyIdle::Start()
 {
-	m_enemy->SetAnimNum(EnemyState::enState_Idle);
+	//待機アニメーションを再生
+	m_enemy->PlayAnimation(EnemyState::enState_Idle);
 	return true;
 }
 
