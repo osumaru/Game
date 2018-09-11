@@ -56,7 +56,6 @@ CEngine::~CEngine()
 	Release();
 }
 
-
 void CEngine::InitD3D(HINSTANCE& hInst)
 {
 
@@ -181,6 +180,10 @@ void CEngine::GameLoop()
 		{
 			CStopWatch sw;
 			sw.Start();
+			if (GetAsyncKeyState(VK_RSHIFT))
+			{
+				m_shaderResource.ReLoad();
+			}
 			float color[4] = { 0.0f, 0.0f, 1.0f, 0.0f };
 			m_pDeviceContext->ClearRenderTargetView(m_pBackBuffer, color);
 			m_pDeviceContext->ClearDepthStencilView(m_depthStencil, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);

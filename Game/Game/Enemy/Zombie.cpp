@@ -2,15 +2,15 @@
 #include "Zombie.h"
 #include "../GameCamera.h"
 
-Zombie::Zombie()
+CZombie::CZombie()
 {
 }
 
-Zombie::~Zombie()
+CZombie::~CZombie()
 {
 }
 
-void Zombie::Init(CVector3 position)
+void CZombie::Init(CVector3 position)
 {
 	//ÉÇÉfÉãÇì«Ç›çûÇﬁ
 	m_skinModel.Load(L"Assets/modelData/zombi.cmo", &m_animation);
@@ -34,7 +34,7 @@ void Zombie::Init(CVector3 position)
 	m_damageNumber.Init();
 }
 
-void Zombie::Update()
+void CZombie::Update()
 {
 	m_characterController.SetPosition(m_position);
 	m_characterController.Execute(GameTime().GetDeltaFrameTime());
@@ -44,8 +44,7 @@ void Zombie::Update()
 	m_skinModel.Update(m_position, m_rotation, { 1.0f, 1.0f, 1.0f });
 }
 
-void Zombie::Draw()
+void CZombie::Draw()
 {
-	m_characterController.Draw();
 	m_skinModel.Draw(GetGameCamera().GetViewMatrix(), GetGameCamera().GetProjectionMatrix());
 }

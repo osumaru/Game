@@ -132,6 +132,15 @@
     <ClCompile Include="Itam\IItem.cpp">
       <Filter>ソース ファイル\Item</Filter>
     </ClCompile>
+    <ClCompile Include="Enemy\Samurai.cpp">
+      <Filter>ソース ファイル\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy\Ninja.cpp">
+      <Filter>ソース ファイル\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy\Warrok.cpp">
+      <Filter>ソース ファイル\Enemy</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -211,6 +220,15 @@
     </ClInclude>
     <ClInclude Include="Itam\IItem.h">
       <Filter>ソース ファイル\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy\Samurai.h">
+      <Filter>ソース ファイル\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy\Ninja.h">
+      <Filter>ソース ファイル\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy\Warrok.h">
+      <Filter>ソース ファイル\Enemy</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
