@@ -17,6 +17,7 @@ public:
 	virtual ~IEnemy();
 
 	//初期化
+	//position	座標
 	virtual void Init(CVector3 position) = 0;
 
 	//更新
@@ -31,16 +32,11 @@ public:
 		return m_position;
 	}
 
-	//再生したいアニメーションの番号を設定
-	void SetAnimNum(int animNum)
-	{
-		m_animNum = animNum;
-	}
-
 	//アニメーションを再生
+	//animNum	アニメーション番号
 	void PlayAnimation(int animNum)
 	{
-		m_animation.Play(animNum);
+		m_animation.Play(animNum, 0.3f);
 	}
 
 	//アニメーションを再生しているか
@@ -50,6 +46,7 @@ public:
 	}
 
 	//エネミーのボーンのワールド行列を取得
+	//boneName	ボーンの名前
 	const CMatrix& GetBoneWorldMatrix(const wchar_t* boneName) const
 	{
 		return m_skinModel.FindBoneWorldMatrix(boneName);
