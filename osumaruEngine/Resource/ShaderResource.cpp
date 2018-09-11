@@ -41,18 +41,18 @@ SShaderData CShaderResource::ReadFile(const char* filePath)
 	}
 }
 
-SShaderResource CShaderResource::Load(const char* filepath, const char* entryFuncName, CShader::EnShaderType shaderType)
+SShaderResource CShaderResource::Load(const char* filePath, const char* entryFuncName, CShader::EnShaderType shaderType)
 {
 
 	char hashName[100];
-	strcpy(hashName, filepath);
+	strcpy(hashName, filePath);
 	strcat(hashName, entryFuncName);
 
 	int hash = MakeHash(hashName);
 	auto& map = m_shaderResource.find(hash);
 	if (map == m_shaderResource.end())
 	{
-		SShaderData shaderData = ReadFile(filepath);
+		SShaderData shaderData = ReadFile(filePath);
 
 		DWORD shaderCompilerOption = 0;
 		shaderCompilerOption |= D3DCOMPILE_ENABLE_STRICTNESS;
@@ -77,7 +77,7 @@ SShaderResource CShaderResource::Load(const char* filepath, const char* entryFun
 			{
 				//エラーを吐き出していた場合それを表示して呼び出し元へ戻る
 				static char errorMessage[10240];
-				sprintf(errorMessage, "filePath : %s, %s", filepath, (char*)errorBlob->GetBufferPointer());
+				sprintf(errorMessage, "filePath : %s, %s", filePath, (char*)errorBlob->GetBufferPointer());
 				MessageBox(NULL, errorMessage, "シェーダーコンパイルエラー", MB_OK);
 				return shaderResource;
 			}
@@ -96,8 +96,8 @@ SShaderResource CShaderResource::Load(const char* filepath, const char* entryFun
 		}
 		shaderResource.entryFuncName = new char[strlen(entryFuncName)];
 		strcpy(shaderResource.entryFuncName, entryFuncName);
-		shaderResource.fileName= new char[strlen(filepath)];
-		strcpy(shaderResource.fileName, filepath);
+		shaderResource.fileName= new char[strlen(filePath)];
+		strcpy(shaderResource.fileName, filePath);
 		shaderResource.shaderType = shaderType;
 		m_shaderResource.insert({ hash, shaderResource });
 		return shaderResource;
