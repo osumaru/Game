@@ -4,6 +4,12 @@ class CSkelton;
 class CSkinmodelResource : Uncopyable
 {
 public:
+
+	~CSkinmodelResource()
+	{
+
+	}
+
 	DirectX::Model* Load(const wchar_t* filePath, CSkelton* skelton = nullptr);
 
 private:
