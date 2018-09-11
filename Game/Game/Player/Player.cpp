@@ -12,7 +12,7 @@ void CPlayer::Init(CVector3 position)
 	m_characterController.Init(0.6f, 4.0f,m_position);
 	m_characterController.SetGravity(-9.8f);
 
-	m_weponBoxCollider.Create({ 0.1f,0.3f,0.1f });
+	m_weponBoxCollider.Create({ 0.05f,0.4f,0.05f });
 	SRigidBodyInfo rInfo;
 	rInfo.collider = &m_weponBoxCollider;
 	rInfo.mass = 0.0f;
@@ -75,11 +75,10 @@ void CPlayer::Update()
 		ExpUP(100);
 
 	}
-
-	
 		//スキンモデルの更新
 		m_skinmodel.Update(m_position, m_rotation, { 1.0f, 1.0f, 1.0f }, true);
 		m_Weaponskin.Update(m_WeaponPosition, m_WeaponRotation, { 1.0f, 1.0f, 1.0f }, true);
+
 }
 
 //描画処理
@@ -87,15 +86,16 @@ void CPlayer::Draw()
 {
 
 	//m_characterController.Draw();
-	m_weponRigitBody.Draw();
 	m_skinmodel.Draw(GetGameCamera().GetViewMatrix(), GetGameCamera().GetProjectionMatrix());
 	if (m_isAttack)
 	{
 		CVector3 weponUpVec = { m_Weaponskin.GetWorldMatrix().m[2][0],m_Weaponskin.GetWorldMatrix().m[2][1],m_Weaponskin.GetWorldMatrix().m[2][2] };
+		weponUpVec *= 0.7f;
 		m_WeaponPosition.Add(weponUpVec);
 		m_weponRigitBody.SetPosition(m_WeaponPosition);
 		m_weponRigitBody.SetRotation(m_WeaponRotation);
 		m_Weaponskin.Draw(GetGameCamera().GetViewMatrix(), GetGameCamera().GetProjectionMatrix());
+		m_weponRigitBody.Draw();
 
 	}
 	
