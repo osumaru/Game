@@ -30,11 +30,8 @@ bool CMoney::Start()
 	//ˆÚ“®‘¬“x‚ðŒvŽZ
 	toRandomPosition.Normalize();
 	toRandomPosition *= m_speed;
-	CVector3 moveSpeed = m_characterController.GetMoveSpeed();
-	moveSpeed.x = toRandomPosition.x;
-	moveSpeed.y = 6.0f;
-	moveSpeed.z = toRandomPosition.z;
-	m_characterController.SetMoveSpeed(moveSpeed);
+	toRandomPosition.y = 6.0f;
+	m_characterController.SetMoveSpeed(toRandomPosition);
 
 	return true;
 }

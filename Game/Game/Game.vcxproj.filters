@@ -129,6 +129,9 @@
     <ClCompile Include="Itam\Money.cpp">
       <Filter>ソース ファイル\Item</Filter>
     </ClCompile>
+    <ClCompile Include="Itam\IItem.cpp">
+      <Filter>ソース ファイル\Item</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -204,6 +207,9 @@
       <Filter>ソース ファイル\Enemy\EnemyState</Filter>
     </ClInclude>
     <ClInclude Include="Itam\Money.h">
+      <Filter>ソース ファイル\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Itam\IItem.h">
       <Filter>ソース ファイル\Item</Filter>
     </ClInclude>
   </ItemGroup>

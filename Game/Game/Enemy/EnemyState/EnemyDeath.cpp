@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "EnemyDeath.h"
 #include "../IEnemy.h"
+#include "../../Itam/IItem.h"
 #include "../../Itam/RecoveryItem.h"
 #include "../../Itam/Money.h"
 
@@ -15,9 +16,9 @@ void EnemyDeath::Update()
 {
 	//死亡アニメーションが終わったら回復アイテムとお金を出す
 	if (!m_enemy->IsPlayAnimation()) {
-		CRecoveryItem* recoveryItem = New<CRecoveryItem>(0);
+		IItem* recoveryItem = New<CRecoveryItem>(0);
 		recoveryItem->Init(m_enemy->GetPosition());
-		CMoney* money = New<CMoney>(0);
+		IItem* money = New<CMoney>(0);
 		money->Init(m_enemy->GetPosition());
 		m_enemy->StateMachineRelease();
 		Delete(m_enemy);

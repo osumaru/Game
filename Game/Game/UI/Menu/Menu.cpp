@@ -56,7 +56,8 @@ void CMenu::Update()
 	}
 
 
-	m_PlayerStatus = GetPlayer().GetStatus();
+	 //プレイヤーのステータスを格納
+	 PlayerStatusInput();
 
 	if (Pad().IsTriggerButton(enButtonSelect))
 	{
@@ -64,6 +65,19 @@ void CMenu::Update()
 		StatusMath();
 	}
 }
+
+void CMenu::PlayerStatusInput()
+{
+	m_PlayerStatus[0] = GetPlayer().GetStatus().Health;
+	m_PlayerStatus[1] = GetPlayer().GetStatus().Level;
+	m_PlayerStatus[2] = GetPlayer().GetStatus().Strength;
+	m_PlayerStatus[3] = GetPlayer().GetStatus().Defense;
+	m_PlayerStatus[4] = GetPlayer().GetStatus().ExperiencePoint;
+	m_PlayerStatus[5] = GetPlayer().GetStatus().NextExp;
+	m_PlayerStatus[6] = GetPlayer().GetStatus().Gold;
+
+}
+
 
 //メニュー画面に表示されるプレイヤーのステータスの数値を決める処理
 void CMenu::StatusMath()
@@ -73,30 +87,75 @@ void CMenu::StatusMath()
 	for (int i = 0; i < 7; i++)
 	{
 		
-			int num = 1111 * i;
+			
 			wchar_t filePath[256];
-			swprintf(filePath, L"Assets/sprite/number/number%d.png", num / 1000);
-			m_numberTexture[i][0] = m_numberTexture[i][0] = TextureResource().LoadTexture(filePath);
-			m_number[i][0]->Init(m_numberTexture[i][0]);
-			m_number[i][0]->SetSize({ 65.0f,65.0f });
-			num %= 1000;
-			/*swprintf(filePath, L"Assets/sprite/number/number%d.png", num / 100);
-			m_numberTexture[i][1] = m_numberTexture[i][1] = TextureResource().LoadTexture(filePath);
-			m_number[i][1]->Init(m_numberTexture[i][1]);
-			m_number[i][1]->SetSize({ 65.0f,65.0f });
-			num %= 100;
+			//1000の位
+			int Box = m_PlayerStatus[i] / 1000;
+			swprintf(filePath, L"Assets/sprite/number/number%d.png", Box);
+			{
+				if (Box == 0)
+				{
+					m_number[i][0]->SetIsDraw(false);
+				}
+				else
+				{
 
-			swprintf(filePath, L"Assets/sprite/number/number%d.png", num / 10);
-			m_numberTexture[i][2] = m_numberTexture[i][2] = TextureResource().LoadTexture(filePath);
-			m_number[i][2]->Init(m_numberTexture[i][2]);
-			m_number[i][2]->SetSize({ 65.0f,65.0f });
-			num %= 10;
+					m_numberTexture[i][0] = m_numberTexture[i][0] = TextureResource().LoadTexture(filePath);
+					m_number[i][0]->SetTexture(m_numberTexture[i][0]);
+					m_number[i][0]->SetSize({ 65.0f,65.0f });
+					m_PlayerStatus[i] %= 1000;
+					m_number[i][0]->SetIsDraw(true);
+				}
 
-			swprintf(filePath, L"Assets/sprite/number/number%d.png", num );
+			}
+
+			//100の位
+			Box = m_PlayerStatus[i] / 100;
+			swprintf(filePath, L"Assets/sprite/number/number%d.png",Box );
+			{
+				if (Box == 0 && !m_number[i][0]->IsDraw())
+				{
+					m_number[i][1]->SetIsDraw(false);
+				}
+				else
+				{
+
+					m_numberTexture[i][1] = m_numberTexture[i][1] = TextureResource().LoadTexture(filePath);
+					m_number[i][1]->SetTexture(m_numberTexture[i][1]);
+					m_number[i][1]->SetSize({ 65.0f,65.0f });
+					m_PlayerStatus[i] %= 100;
+					m_number[i][1]->SetIsDraw(true);
+				}
+			}
+
+			//10の位
+			Box = m_PlayerStatus[i] / 10;
+			swprintf(filePath, L"Assets/sprite/number/number%d.png", Box);
+			{
+				if (Box == 0 && !m_number[i][1]->IsDraw())
+				{
+					m_number[i][2]->SetIsDraw(false);
+				}
+				else
+				{
+
+					m_numberTexture[i][2] = m_numberTexture[i][2] = TextureResource().LoadTexture(filePath);
+					m_number[i][2]->SetTexture(m_numberTexture[i][2]);
+					m_number[i][2]->SetSize({ 65.0f,65.0f });
+					m_PlayerStatus[i] %= 10;
+					m_number[i][2]->SetIsDraw(true);
+				}
+
+			}
+
+			//1の位
+			swprintf(filePath, L"Assets/sprite/number/number%d.png", m_PlayerStatus[i]);
 			m_numberTexture[i][3] = m_numberTexture[i][3] = TextureResource().LoadTexture(filePath);
 			m_numberTexture[i][3]->Load(filePath);
-			m_number[i][3]->Init(m_numberTexture[i][3]);
-			m_number[i][3]->SetSize({ 65.0f,65.0f });*/
+			m_number[i][3]->SetTexture(m_numberTexture[i][3]);
+			m_number[i][3]->SetSize({ 65.0f,65.0f });
+
+			
 
 
 	
