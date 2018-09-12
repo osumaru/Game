@@ -158,6 +158,7 @@
     </MeshContentTask>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Camera\GameCamera.cpp" />
     <ClCompile Include="Enemy\EnemyState\EnemyAttack.cpp" />
     <ClCompile Include="Enemy\EnemyState\EnemyDamage.cpp" />
     <ClCompile Include="Enemy\EnemyState\EnemyDeath.cpp" />
@@ -169,7 +170,6 @@
     <ClCompile Include="Enemy\Samurai.cpp" />
     <ClCompile Include="Enemy\Warrok.cpp" />
     <ClCompile Include="Enemy\Zombie.cpp" />
-    <ClCompile Include="GameCamera.cpp" />
     <ClCompile Include="Itam\IItem.cpp" />
     <ClCompile Include="Itam\Money.cpp" />
     <ClCompile Include="Itam\RecoveryItem.cpp" />
@@ -192,6 +192,7 @@
     <ClCompile Include="UI\WeaponSelect\WeaponSelect.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Camera\GameCamera.h" />
     <ClInclude Include="Enemy\EnemyState\EnemyAttack.h" />
     <ClInclude Include="Enemy\EnemyState\EnemyDamage.h" />
     <ClInclude Include="Enemy\EnemyState\EnemyDeath.h" />
@@ -205,7 +206,6 @@
     <ClInclude Include="Enemy\Samurai.h" />
     <ClInclude Include="Enemy\Warrok.h" />
     <ClInclude Include="Enemy\Zombie.h" />
-    <ClInclude Include="GameCamera.h" />
     <ClInclude Include="Itam\IItem.h" />
     <ClInclude Include="Itam\Money.h" />
     <ClInclude Include="Itam\RecoveryItem.h" />

@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "Zombie.h"
-#include "../GameCamera.h"
+#include"../../Game/Camera/GameCamera.h"
 
 CZombie::CZombie()
 {
@@ -47,4 +47,5 @@ void CZombie::Update()
 void CZombie::Draw()
 {
 	m_skinModel.Draw(GetGameCamera().GetViewMatrix(), GetGameCamera().GetProjectionMatrix());
+	m_characterController.Draw();
 }

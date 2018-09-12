@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "Player.h"
-#include "../GameCamera.h"
+#include"../../Game/Camera/GameCamera.h"
 #include "../Map/Map.h"
 
 void CPlayer::Init(CVector3 position)
@@ -9,7 +9,7 @@ void CPlayer::Init(CVector3 position)
 	m_Weaponskin.Load(L"Assets/modelData/Sword.cmo", NULL);
 	m_position = position;
 	m_rotation.SetRotationDeg(CVector3::AxisY, -180.0f);
-	m_characterController.Init(0.6f, 4.0f,m_position);
+	m_characterController.Init(0.3f, 1.0f,m_position);
 	m_characterController.SetGravity(-9.8f);
 
 	m_weponBoxCollider.Create({ 0.05f,0.4f,0.05f });
@@ -34,7 +34,8 @@ void CPlayer::Init(CVector3 position)
 											{ L"Assets/modelData/PlayerJump.tka" },			//ジャンプアニメーション
 											{ L"Assets/modelData/PlayerAttack.tka" },		//攻撃アニメーション
 											{ L"Assets/modelData/PlayerDamage.tka" },		//ダメージアニメーション
-											{  L"Assets/modelData/PlayerKaihi.tka" }		//回避アクション
+											{ L"Assets/modelData/PlayerKaihi.tka" }	,		//回避アクション
+											{ L"Assets/modelData/PlayerDeath.tka" }			//死亡アニメーション
 		};
 
 		m_animation.Init(animClip, enPlayerNum);
@@ -64,8 +65,9 @@ void CPlayer::Init(CVector3 position)
 
 void CPlayer::Update()
 {
-
+	
 	AnimationMove();		//アニメーションの処理
+	if (m_isDete) { return; }
 	Move();					//移動処理
 	Rotation();				//回転処理
 	StatusCalculation();	//ステータスの処理
@@ -87,8 +89,9 @@ void CPlayer::Update()
 void CPlayer::Draw()
 {
 
-	//m_characterController.Draw();
+	m_characterController.Draw();
 	m_skinmodel.Draw(GetGameCamera().GetViewMatrix(), GetGameCamera().GetProjectionMatrix());
+	m_weponRigitBody.Draw();
 	if (m_isAttack)
 	{
 		CVector3 weponUpVec = { m_Weaponskin.GetWorldMatrix().m[2][0],m_Weaponskin.GetWorldMatrix().m[2][1],m_Weaponskin.GetWorldMatrix().m[2][2] };
@@ -97,7 +100,6 @@ void CPlayer::Draw()
 		m_weponRigitBody.SetPosition(m_WeaponPosition);
 		m_weponRigitBody.SetRotation(m_WeaponRotation);
 		m_Weaponskin.Draw(GetGameCamera().GetViewMatrix(), GetGameCamera().GetProjectionMatrix());
-		m_weponRigitBody.Draw();
 
 	}
 	
@@ -169,7 +171,14 @@ void CPlayer::Move()
 		{
 
 			CMatrix PlayerHip = m_skinmodel.FindBoneWorldMatrix(L"Hips");
-			CVector3 PlayerHipPos = { PlayerHip.m[3][0],0.0f,PlayerHip.m[3][2] };
+			CVector3 PlayerHipPos = { PlayerHip.m[3][0],0.0,PlayerHip.m[3][2] };
+			
+
+			m_characterController.SetMoveSpeed(m_moveSpeed);
+			m_characterController.SetPosition(m_position);
+			m_characterController.Execute(GameTime().GetDeltaFrameTime());
+			m_position = m_characterController.GetPosition();
+		
 		}
 
 		if (m_State != enPlayerAvoidance)
@@ -249,6 +258,18 @@ void CPlayer::AnimationMove()
 			m_State = enPlayerAtack;
 			m_weponRigitBody.PhysicsWorldAddRigidBody();
 		}
+
+		//死亡アニメーションの処理
+		else if (m_status.Health <=0)
+		{
+
+			m_animation.Play(enPlayerDete, 0.5f);
+			m_State = enPlayerDete;
+	
+			
+		}
+
+		
 		//回避アニメーション
 		else if (Pad().IsTriggerButton(enButtonRightTrigger))
 		{
@@ -414,6 +435,16 @@ void CPlayer::AnimationMove()
 		}
 
 		break;
+
+	case enPlayerDete:
+
+		if (!m_animation.IsPlay())
+		{
+			m_isDete = true;
+			return;
+		}
+
+		break;
 		
 	
 	}
@@ -472,5 +503,12 @@ void  CPlayer::WeaponChange()
 {
 
 
+
+}
+
+void CPlayer::PlayerAttack()
+{
+
+	
 
 }

@@ -6,7 +6,7 @@
 #include "../UI/WeaponSelect/WeaponSelect.h"
 #include "../UI/PlayerHp/PlayerHp.h"
 #include "../UI/Menu/Menu.h"
-#include"../GameCamera.h"
+#include"../../Game/Camera/GameCamera.h"
 
 void CGameScene::Init()
 {

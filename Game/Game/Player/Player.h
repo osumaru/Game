@@ -92,6 +92,7 @@ public:
 		return PlayerHeadPos;
 	}
 
+	void PlayerAttack();
 	//デバック用関数
 	void GetDamage()
 	{
@@ -110,6 +111,7 @@ private:
 		enPlayerAtack,
 		enPlayerDamage,
 		enPlayerAvoidance,
+		enPlayerDete,
 		enPlayerNum
 
 	};
@@ -138,6 +140,7 @@ private:
 	bool					m_isDamege = false;
 	float					m_animetionFrame = 0.0f;
 	bool					m_isAttack = false;
+	bool					m_isDete = false;
 };
 
 static CPlayer& GetPlayer()

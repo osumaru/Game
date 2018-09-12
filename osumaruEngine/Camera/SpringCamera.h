@@ -114,6 +114,19 @@ public:
 	{
 		m_camera.Update();
 	}
+
+	//プロジェクション行列を取得
+	const CMatrix& GetProjectionMatrix()
+	{
+		return m_camera.GetProjectionMatrix();
+	}
+	
+	//ビュー行列を取得
+	const CMatrix& GetSpringViewMatrix()
+	{
+		return m_camera.GetViewMatrix();
+	}
+
 private:
 
 	/*
@@ -135,6 +148,8 @@ private:
 	ret　			計算後の減衰率
 	*/
 	float CalcSpringScalar(float positionNow, float positionTarget, float& moveSpeed);
+
+	
 
 private:
 	CCamera			m_camera;				//カメラ

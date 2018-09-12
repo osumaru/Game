@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "Samurai.h"
-#include "../GameCamera.h"
+#include "../Camera/GameCamera.h"
 
 CSamurai::CSamurai()
 {

@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Money.h"
 #include "../Player/Player.h"
-#include "../GameCamera.h"
+#include"../../Game/Camera/GameCamera.h"
 
 void CMoney::Init(CVector3 position)
 {

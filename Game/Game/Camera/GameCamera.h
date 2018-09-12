@@ -32,11 +32,21 @@ public:
 		return camera.GetProjectionMatrix();
 	}
 
-
+	//バネカメラのプロジェクション行列の取得
+	const CMatrix GetSpringProjectionMatrix()
+	{
+		return m_springCamera.GetProjectionMatrix();
+	}
+	//バネカメラのビュー行列の取得
+	const CMatrix GetSpringViewMatrix()
+	{
+		return m_springCamera.GetSpringViewMatrix();
+	}
 
 private:
 	CCamera camera;			//カメラ
 	CVector3 m_cameraVec;	//注視点からカメラへのベクトル
+	CSpringCamera	m_springCamera;
 };
 
 static CGameCamera& GetGameCamera()
