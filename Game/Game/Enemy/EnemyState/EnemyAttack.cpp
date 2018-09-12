@@ -6,7 +6,7 @@
 bool EnemyAttack::Start()
 {
 	//攻撃アニメーションを再生
-	m_enemy->PlayAnimation(EnemyState::enState_Attack);
+	m_enemy->PlayAnimation(CEnemyState::enState_Attack);
 	return true;
 }
 
@@ -31,7 +31,7 @@ void EnemyAttack::Update()
 	}
 
 	if (Pad().IsTriggerButton(enButtonA)) {
-		m_esm->ChangeState(EnemyState::enState_Damage);
+		m_esm->ChangeState(CEnemyState::enState_Damage);
 		m_enemy->SetIsAttackHit(false);
 	}
 }

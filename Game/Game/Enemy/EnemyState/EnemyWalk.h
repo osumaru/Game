@@ -12,7 +12,7 @@ public:
 	//コンストラクタ
 	//enemy		エネミーのインターフェースクラスのポインタ
 	//esm		エネミーのステートマシンクラスのポインタ
-	EnemyWalk(IEnemy* enemy, EnemyStateMachine* esm) :
+	EnemyWalk(IEnemy* enemy, CEnemyStateMachine* esm) :
 		IEnemyState(enemy, esm)
 	{
 	}
@@ -27,5 +27,6 @@ public:
 	void Update();
 
 private:
-
+	CVector3	m_destination;
+	const float m_speed = 2.0f;
 };

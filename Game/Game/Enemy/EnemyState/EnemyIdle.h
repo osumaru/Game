@@ -12,7 +12,7 @@ public:
 	//コンストラクタ
 	//enemy		エネミーのインターフェースクラスのポインタ
 	//esm		エネミーのステートマシンクラスのポインタ
-	EnemyIdle(IEnemy* enemy, EnemyStateMachine* esm):
+	EnemyIdle(IEnemy* enemy, CEnemyStateMachine* esm):
 		IEnemyState(enemy, esm)
 	{
 	}
@@ -27,5 +27,5 @@ public:
 	void Update();
 
 private:
-
+	float m_timer = 0.0f;
 };
