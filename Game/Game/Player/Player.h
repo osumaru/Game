@@ -96,6 +96,7 @@ public:
 	void GetDamage()
 	{
 		m_status.Health -= 5;
+		m_isDamege = true;
 	}
 
 
@@ -121,7 +122,9 @@ private:
 	CSkinModel				m_skinmodel;									//スキンモデル
 	CSkinModel				m_Weaponskin;									//武器のスキンモデル
 	CCharacterController	m_characterController;							//キャラクターコントローラー
-	CCharacterController	m_WeponCharacterController;						//武器のキャラコン
+	
+	CBoxCollider			m_weponBoxCollider;
+	CRigidBody				m_weponRigitBody;
 
 	CPad					m_pad;									//パッド
 	CAnimation				m_animation;							//アニメーション
@@ -132,6 +135,9 @@ private:
 
 	const float				RUN_SPEED = 1.8f;
 	const float				WALK_SPEED = 200.0f;
+	bool					m_isDamege = false;
+	float					m_animetionFrame = 0.0f;
+	bool					m_isAttack = false;
 };
 
 static CPlayer& GetPlayer()
