@@ -12,12 +12,12 @@
 #include "IEnemyState.h"
 #include "EnemyState.h"
 
-class EnemyStateMachine : public IGameObject
+class CEnemyStateMachine : public IGameObject
 {
 public:
 	//コンストラクタ
 	//enemy		エネミーのインターフェースクラスのポインタ
-	EnemyStateMachine(IEnemy* enemy) :
+	CEnemyStateMachine(IEnemy* enemy) :
 		m_enemyIdle(enemy, this),
 		m_enemyWalk(enemy, this),
 		m_enemyAttack(enemy, this),
@@ -27,7 +27,7 @@ public:
 	}
 
 	//デストラクタ
-	~EnemyStateMachine() {}
+	~CEnemyStateMachine() {}
 
 	//更新する前に一度だけ呼ばれる
 	bool Start();
@@ -38,17 +38,17 @@ public:
 	}
 
 	//ステートの切り替え
-	void ChangeState(EnemyState::EnState nextState);
+	void ChangeState(CEnemyState::EnState nextState);
 
 	//解放
 	void Release();
 
 private:
-	EnemyState::EnState m_state = EnemyState::enState_Invald;	//エネミーの状態
-	IEnemyState*		m_currentState = nullptr;				//現在の状態
-	EnemyIdle			m_enemyIdle;							//待機
-	EnemyWalk			m_enemyWalk;							//歩き
-	EnemyAttack			m_enemyAttack;							//攻撃
-	EnemyDamage			m_enemyDamage;							//ダメージ
-	EnemyDeath			m_enemyDeath;							//死亡
+	CEnemyState::EnState	m_state = CEnemyState::enState_Invald;	//エネミーの状態
+	IEnemyState*			m_currentState = nullptr;				//現在の状態
+	EnemyIdle				m_enemyIdle;							//待機
+	EnemyWalk				m_enemyWalk;							//歩き
+	EnemyAttack				m_enemyAttack;							//攻撃
+	EnemyDamage				m_enemyDamage;							//ダメージ
+	EnemyDeath				m_enemyDeath;							//死亡
 };

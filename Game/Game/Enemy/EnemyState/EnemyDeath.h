@@ -12,7 +12,7 @@ public:
 	//コンストラクタ
 	//enemy		エネミーのインターフェースクラスのポインタ
 	//esm		エネミーのステートマシンクラスのポインタ
-	EnemyDeath(IEnemy* enemy, EnemyStateMachine* esm) :
+	EnemyDeath(IEnemy* enemy, CEnemyStateMachine* esm) :
 		IEnemyState(enemy, esm)
 	{
 	}

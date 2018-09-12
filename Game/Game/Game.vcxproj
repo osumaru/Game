@@ -164,6 +164,7 @@
     <ClCompile Include="Enemy\EnemyState\EnemyIdle.cpp" />
     <ClCompile Include="Enemy\EnemyState\EnemyStateMachine.cpp" />
     <ClCompile Include="Enemy\EnemyState\EnemyWalk.cpp" />
+    <ClCompile Include="Enemy\EnemyTurn.cpp" />
     <ClCompile Include="Enemy\IEnemy.cpp" />
     <ClCompile Include="Enemy\Ninja.cpp" />
     <ClCompile Include="Enemy\Samurai.cpp" />
@@ -200,6 +201,7 @@
     <ClInclude Include="Enemy\EnemyState\EnemyStateMachine.h" />
     <ClInclude Include="Enemy\EnemyState\EnemyWalk.h" />
     <ClInclude Include="Enemy\EnemyState\IEnemyState.h" />
+    <ClInclude Include="Enemy\EnemyTurn.h" />
     <ClInclude Include="Enemy\IEnemy.h" />
     <ClInclude Include="Enemy\Ninja.h" />
     <ClInclude Include="Enemy\Samurai.h" />

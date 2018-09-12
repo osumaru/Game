@@ -6,6 +6,7 @@
 
 #include "../Enemy/EnemyState/EnemyStateMachine.h"
 #include "../UI/DamageNumber/DamageNumber.h"
+#include "EnemyTurn.h"
 
 class IEnemy : public IGameObject
 {
@@ -32,6 +33,36 @@ public:
 		return m_position;
 	}
 
+	//クォータニオンを取得
+	const CQuaternion& GetRotation() const
+	{
+		return m_rotation;
+	}
+
+	//クォータニオンを設定
+	void SetRotation(const CQuaternion& rotation)
+	{
+		m_rotation = rotation;
+	}
+
+	//初期座標を取得
+	const CVector3& GetInitPosition() const
+	{
+		return m_initPosition;
+	}
+
+	//移動速度を取得
+	const CVector3& GetMoveSpeed() const
+	{
+		return m_characterController.GetMoveSpeed();
+	}
+
+	//移動速度を設定
+	void SetMoveSpeed(const CVector3& moveSpeed)
+	{
+		m_characterController.SetMoveSpeed(moveSpeed);
+	}
+
 	//アニメーションを再生
 	//animNum	アニメーション番号
 	void PlayAnimation(int animNum)
@@ -43,6 +74,12 @@ public:
 	bool IsPlayAnimation() const
 	{
 		return m_animation.IsPlay();
+	}
+
+	//ワールド行列を取得
+	const CMatrix& GetWorldMatrix() const
+	{
+		return m_skinModel.GetWorldMatrix();
 	}
 
 	//エネミーのボーンのワールド行列を取得
@@ -86,10 +123,12 @@ protected:
 	CSkinModel				m_skinModel;			//スキンモデル
 	CCharacterController	m_characterController;	//キャラクターコントローラー
 	CAnimation				m_animation;			//アニメーション
-	EnemyStateMachine		m_enemyStateMachine;	//ステートマシン
+	CEnemyStateMachine		m_enemyStateMachine;	//ステートマシン
+	CEnemyTurn				m_enemyTurn;			//エネミーの回転
 	CDamegeNumber			m_damageNumber;			//ダメージ数値
 	CVector3				m_position;				//座標
 	CQuaternion				m_rotation;				//回転
+	CVector3				m_initPosition;			//初期座標
 	int						m_animNum = 0;			//再生するアニメーション番号
 	int						m_animNumOld = 0;		//1つ前のアニメーション番号
 	bool					m_isAttackHit = false;	//攻撃が当たったか

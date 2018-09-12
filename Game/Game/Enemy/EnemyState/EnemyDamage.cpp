@@ -5,7 +5,7 @@
 bool EnemyDamage::Start()
 {
 	//ダメージアニメーションを再生
-	m_enemy->PlayAnimation(EnemyState::enState_Damage);
+	m_enemy->PlayAnimation(CEnemyState::enState_Damage);
 
 	//ダメージ計算
 	m_enemy->DamageCalculation();
@@ -23,6 +23,6 @@ void EnemyDamage::Update()
 	}
 
 	if (Pad().IsTriggerButton(enButtonA)) {
-		m_esm->ChangeState(EnemyState::enState_Death);
+		m_esm->ChangeState(CEnemyState::enState_Death);
 	}
 }

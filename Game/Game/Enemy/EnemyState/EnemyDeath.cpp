@@ -8,7 +8,7 @@
 bool EnemyDeath::Start()
 {
 	//死亡アニメーションを再生
-	m_enemy->PlayAnimation(EnemyState::enState_Death);
+	m_enemy->PlayAnimation(CEnemyState::enState_Death);
 	return true;
 }
 

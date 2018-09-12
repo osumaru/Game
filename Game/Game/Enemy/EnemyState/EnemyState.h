@@ -4,7 +4,7 @@
 
 #pragma once
 
-class EnemyState {
+class CEnemyState {
 public:
 	enum EnState {
 		enState_Idle,	//‘Ò‹@

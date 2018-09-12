@@ -141,6 +141,9 @@
     <ClCompile Include="Enemy\Warrok.cpp">
       <Filter>ソース ファイル\Enemy</Filter>
     </ClCompile>
+    <ClCompile Include="Enemy\EnemyTurn.cpp">
+      <Filter>ソース ファイル\Enemy</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -228,6 +231,9 @@
       <Filter>ソース ファイル\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="Enemy\Warrok.h">
+      <Filter>ソース ファイル\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy\EnemyTurn.h">
       <Filter>ソース ファイル\Enemy</Filter>
     </ClInclude>
   </ItemGroup>
