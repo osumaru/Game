@@ -29,23 +29,17 @@ public:
 	};
 
 private:
-	CSprite m_weapon[enWeaponNum];			//武器
-	CTexture m_weaponTexture[enWeaponNum];
-
-	CSprite m_crossKey;					//十字キー
-	CTexture m_crossKeyTexture;
-
-	CSprite m_LBButton;					//LBボタン
-	CTexture m_LBButtonTexture;
-
-	CSprite m_RBButton;					//RBボタン
-	CTexture m_RBButtonTexture;
-
-	CVector2 crossKeyPos;				//十字キーの座標
-	CVector2 size;						//サイズ
-
-	int weaponNumber = enSword;			//変更する武器の番号
-	int weaponNumberOld = enSword;		//現在選択している武器の番号
-
-	bool	m_selectFlag[enWeaponNum];	//選択した武器フラグ
+	CSprite		m_weapon[enWeaponNum];			//武器
+	CTexture	m_weaponTexture[enWeaponNum];
+	CSprite		m_crossKey;						//十字キー
+	CTexture	m_crossKeyTexture;
+	CSprite		m_LBButton;						//LBボタン
+	CTexture	m_LBButtonTexture;
+	CSprite		m_RBButton;						//RBボタン
+	CTexture	m_RBButtonTexture;
+	CVector2	crossKeyPos;					//十字キーの座標
+	CVector2	size;							//サイズ
+	int			weaponNumber = enSword;			//変更する武器の番号
+	int			weaponNumberOld = enSword;		//現在選択している武器の番号
+	bool		m_selectFlag[enWeaponNum];		//選択した武器フラグ
 };

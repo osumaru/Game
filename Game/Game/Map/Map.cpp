@@ -5,15 +5,18 @@
 #include "../Player/Player.h"
 #include "../Enemy/IEnemy.h"
 #include "../Enemy/Zombie.h"
+#include "../Enemy/Ninja.h"
+#include "../Enemy/Samurai.h"
+#include "../Enemy/Warrok.h"
 
 std::vector<std::vector<SMapChipInfo>> mapChipInfo = 
 {
-//	{
-//#include "Location.h"
-//	}
 	{
-#include "Location2.h"
-	},
+#include "Location.h"
+	}
+//	{
+//#include "Location2.h"
+//	},
 //	{
 //#include "Location3.h"
 //	},
@@ -54,12 +57,26 @@ void Map::Init(int stageNum)
 		case enMapTagPlayer:
 			GetPlayer().Init(mInfo.m_position);
 			break;
-		case enMapTagEnemy:
-			enemy = New<Zombie>(1);
+		case enMapTagZombie:
+			enemy = New<CZombie>(1);
 			enemy->Init(mInfo.m_position);
-			//enemyList.push_back(enemy);
+			enemyList.push_back(enemy);
 			break;
-
+		case enMapTagNinja:
+			enemy = New<CNinja>(1);
+			enemy->Init(mInfo.m_position);
+			enemyList.push_back(enemy);
+			break;
+		case enMapTagSamurai:
+			enemy = New<CSamurai>(1);
+			enemy->Init(mInfo.m_position);
+			enemyList.push_back(enemy);
+			break;
+		case enMapTagWarrok:
+			enemy = New<CWarrok>(1);
+			enemy->Init(mInfo.m_position);
+			enemyList.push_back(enemy);
+			break;
 		default:
 			mapChip = New<StaticMapObject>(0);
 			break;

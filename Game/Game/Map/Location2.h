@@ -29,63 +29,77 @@
 //House
 {
 	L"House",
-	CVector3(361.50f, 0.00f, 199.40f),             //平行移動
+	CVector3(360.00f, 0.00f, 200.00f),             //平行移動
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagUntagged, //タグ
 },
 //House
 {
 	L"House",
-	CVector3(371.40f, 0.00f, 199.40f),             //平行移動
+	CVector3(370.00f, 0.00f, 200.00f),             //平行移動
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagUntagged, //タグ
 },
 //House
 {
 	L"House",
-	CVector3(381.60f, 0.00f, 199.40f),             //平行移動
+	CVector3(380.00f, 0.00f, 200.00f),             //平行移動
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagUntagged, //タグ
 },
 //House
 {
 	L"House",
-	CVector3(390.30f, 0.00f, 202.10f),             //平行移動
-	CQuaternion(0.00f, -0.71f, 0.00f, 0.71f ),  //回転
+	CVector3(390.00f, 0.00f, 200.00f),             //平行移動
+	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagUntagged, //タグ
 },
 //House
 {
 	L"House",
-	CVector3(390.30f, 0.00f, 211.67f),             //平行移動
-	CQuaternion(0.00f, -0.71f, 0.00f, 0.71f ),  //回転
+	CVector3(400.00f, 0.00f, 200.00f),             //平行移動
+	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagUntagged, //タグ
 },
 //House
 {
 	L"House",
-	CVector3(390.30f, 0.00f, 221.40f),             //平行移動
-	CQuaternion(0.00f, -0.71f, 0.00f, 0.71f ),  //回転
+	CVector3(415.00f, 0.00f, 200.00f),             //平行移動
+	CQuaternion(0.00f, 0.71f, 0.00f, 0.71f ),  //回転
 	enMapTagUntagged, //タグ
 },
 //House
 {
 	L"House",
-	CVector3(385.80f, 0.00f, 230.10f),             //平行移動
-	CQuaternion(0.00f, -1.00f, 0.00f, 0.00f ),  //回転
+	CVector3(365.00f, 0.00f, 220.00f),             //平行移動
+	CQuaternion(0.00f, 1.00f, 0.00f, 0.00f ),  //回転
 	enMapTagUntagged, //タグ
 },
 //House
 {
 	L"House",
-	CVector3(373.50f, 0.00f, 230.10f),             //平行移動
-	CQuaternion(0.00f, -1.00f, 0.00f, 0.00f ),  //回転
+	CVector3(375.00f, 0.00f, 220.00f),             //平行移動
+	CQuaternion(0.00f, 1.00f, 0.00f, 0.00f ),  //回転
 	enMapTagUntagged, //タグ
 },
 //House
 {
 	L"House",
-	CVector3(361.50f, 0.00f, 230.10f),             //平行移動
-	CQuaternion(0.00f, -1.00f, 0.00f, 0.00f ),  //回転
+	CVector3(385.00f, 0.00f, 220.00f),             //平行移動
+	CQuaternion(0.00f, 1.00f, 0.00f, 0.00f ),  //回転
+	enMapTagUntagged, //タグ
+},
+//House
+{
+	L"House",
+	CVector3(395.00f, 0.00f, 220.00f),             //平行移動
+	CQuaternion(0.00f, 1.00f, 0.00f, 0.00f ),  //回転
+	enMapTagUntagged, //タグ
+},
+//House
+{
+	L"House",
+	CVector3(405.00f, 0.00f, 220.00f),             //平行移動
+	CQuaternion(0.00f, 1.00f, 0.00f, 0.00f ),  //回転
 	enMapTagUntagged, //タグ
 },

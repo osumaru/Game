@@ -1,6 +1,12 @@
+/*
+*	お金のアイテムクラス
+*/
+
 #pragma once
 
-class CMoney : public IGameObject
+#include "IItem.h"
+
+class CMoney : public IItem
 {
 public:
 	//初期化
@@ -18,14 +24,4 @@ public:
 
 	//移動
 	void Move();
-
-private:
-	CSkinModel	m_skinModel;					//スキンモデル
-	CVector3	m_position;						//座標
-	CQuaternion m_rotation;						//回転
-	CCharacterController m_characterController;	//キャラクターコントローラー
-	CVector3	m_popPosition;
-	float		m_speed = 4.0f;
-	//CVector3	m_destination;
-	CVector3	m_initPosition;
 };

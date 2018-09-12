@@ -7,21 +7,16 @@
 #include "../UI/PlayerHp/PlayerHp.h"
 #include "../UI/Menu/Menu.h"
 #include"../GameCamera.h"
+
 void CGameScene::Init()
-
-
 {
 	map = New<Map>(0);
 	map->Init(0);
-
-
 	
 	CMiniMap* miniMap = New<CMiniMap>(0);
 	miniMap->Init();
 
 	GetGameCamera().Init();
-
-	damageNumber.Init();
 
 	CWeaponSelect* weaponSelect = New<CWeaponSelect>(0);
 	weaponSelect->Init();
@@ -31,13 +26,8 @@ void CGameScene::Init()
 
 	CMenu* menu = New<CMenu>(0);
 	menu->Init();
-
-	
 }
 
 void CGameScene::Update()
 {
-	//ダメージ計算
-	//damageNumber.DamageCalculation(&GetPlayer().GetInstance(), map->GetEnemy());
-
 }

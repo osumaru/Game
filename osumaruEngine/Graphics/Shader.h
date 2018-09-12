@@ -50,14 +50,20 @@ public:
 		return m_blob->GetBufferSize();
 	}
 
-private:
+	//ホットリロード用の関数
+	void ReLoad();
 
-	//頂点レイアウトを作る関数
-	void CreateInputLayout(ID3DBlob* blob);
-
+	void EraseFlgFold()
+	{
+		m_isErase = false;
+	}
 private:
-	std::unique_ptr<char[]>			m_pShaderData;		//シェーダーをコンパイルしたデータを格納するバッファ
 	ID3D11DeviceChild*				m_pShader;			//シェーダー
 	ID3D11InputLayout*				m_pInputLayout;		//頂点レイアウト
 	ID3DBlob*						m_blob;				//シェーダーデータ
+	const char*						m_filePath;
+	const char*						m_entryFuncName;
+	EnShaderType					m_shaderType;
+	std::list<CShader*>::iterator	m_it;
+	bool							m_isErase;
 };

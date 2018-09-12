@@ -16,7 +16,6 @@ CRigidBodyDraw::CRigidBodyDraw() :
 CRigidBodyDraw::~CRigidBodyDraw()
 {
 	
-	//m_primitive.Release();
 }
 
 void CRigidBodyDraw::Init()

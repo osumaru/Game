@@ -1,167 +1,45 @@
 #include "engineStdafx.h"
 #include "Shader.h"
+#include "../Resource/ShaderResource.h"
 
 CShader::CShader() :
-	m_pShaderData(nullptr),
 	m_pShader(nullptr),
 	m_pInputLayout(nullptr),
-	m_blob(nullptr)
+	m_blob(nullptr),
+	m_filePath(nullptr),
+	m_entryFuncName(nullptr),
+	m_isErase(true)
 {
-	
+	m_it = ShaderResource().ShaderPushBack(this);
 }
 
 CShader::~CShader()
 {
-	if (m_pShader != nullptr)
+	if (m_isErase)
 	{
-		m_pShader->Release();
-		m_pShader = nullptr;
-	}
-	if (m_pInputLayout != nullptr)
-	{
-		m_pInputLayout->Release();
-		m_pInputLayout = nullptr;
-	}
-	if (m_blob != nullptr)
-	{
-		m_blob->Release();
-		m_blob = nullptr;
+		ShaderResource().ShaderErase(m_it);
 	}
 }
 
 void CShader::Load(const char* filepath, const char* entryFuncName, EnShaderType shaderType)
 {
-	//シェーダーファイルを開いて読み込む
-	FILE* file;
-	file = fopen(filepath, "rb");
-	fseek(file, 0, SEEK_END);
-	fpos_t filepos;
-	fgetpos(file, &filepos);
-	fseek(file, 0, SEEK_SET);
-	m_pShaderData.reset(new char[filepos]);
-	fread(m_pShaderData.get(), filepos, 1, file);
-	DWORD shaderCompilerOption = 0;
-	shaderCompilerOption |= D3DCOMPILE_ENABLE_STRICTNESS;
-	shaderCompilerOption |= D3DCOMPILE_OPTIMIZATION_LEVEL3;
-	ID3DBlob* errorBlob;
-	char* shaderTypeName[] = 
-	{
-		"vs_5_0",
-		"ps_5_0",
-		"cs_5_0"
-	};
-	HRESULT hr = D3DCompile(m_pShaderData.get(), (int)filepos, nullptr,
-		nullptr, nullptr, entryFuncName, shaderTypeName[shaderType], shaderCompilerOption, 0, &m_blob, &errorBlob);
-	
-	if (FAILED(hr))
-	{
-		if (errorBlob != nullptr)
-		{
-			//エラーを吐き出していた場合それを表示して呼び出し元へ戻る
-			static char errorMessage[10240];
-			sprintf(errorMessage, "filePath : %s, %s", filepath, (char*)errorBlob->GetBufferPointer());
-			MessageBox(NULL, errorMessage, "シェーダーコンパイルエラー", MB_OK);
-			return;
-		}
-	}
-	switch (shaderType)
-	{
-	case enVS:
-		GetDevice()->CreateVertexShader(m_blob->GetBufferPointer(), m_blob->GetBufferSize(), NULL, (ID3D11VertexShader**)&m_pShader);
-		CreateInputLayout(m_blob);
-		break;
-	case enPS:
-		GetDevice()->CreatePixelShader(m_blob->GetBufferPointer(), m_blob->GetBufferSize(), NULL, (ID3D11PixelShader**)&m_pShader);
-		break;
-	case enCS:
-		break;
-	}
-
+	m_filePath = filepath;
+	m_entryFuncName = entryFuncName;
+	m_shaderType = shaderType;
+	SShaderResource shaderResource = ShaderResource().Load(filepath, entryFuncName, shaderType);
+	m_blob = shaderResource.m_blob;
+	m_pInputLayout = shaderResource.m_pInputLayout;
+	m_pShader = shaderResource.m_pShader;
 }
 
-void CShader::CreateInputLayout(ID3DBlob* blob)
+void CShader::ReLoad()
 {
-	//頂点シェーダーのデータから頂点レイアウトの情報を読み込む
-	ID3D11ShaderReflection* shaderReflection;
-	D3DReflect(blob->GetBufferPointer(), blob->GetBufferSize(), IID_ID3D11ShaderReflection, (void**)&shaderReflection);
-	D3D11_SHADER_DESC desc;
-	shaderReflection->GetDesc(&desc);
-	std::vector<D3D11_INPUT_ELEMENT_DESC> descVector;
-	//頂点レイアウトを作成
-	for (int i = 0;i < desc.InputParameters;i++)
+	if (m_entryFuncName == nullptr || m_filePath == nullptr)
 	{
-		D3D11_SIGNATURE_PARAMETER_DESC signatureDesc;
-		shaderReflection->GetInputParameterDesc(i, &signatureDesc);
-		D3D11_INPUT_ELEMENT_DESC desc;
-		desc.InputSlot = 0;
-		desc.SemanticIndex = signatureDesc.SemanticIndex;
-		desc.SemanticName = signatureDesc.SemanticName;
-		desc.InputSlotClass = D3D11_INPUT_PER_VERTEX_DATA;
-		desc.AlignedByteOffset = D3D11_APPEND_ALIGNED_ELEMENT;
-		desc.InstanceDataStepRate = 0;
-		if (signatureDesc.Mask == 1)
-		{
-			if (signatureDesc.ComponentType == D3D_REGISTER_COMPONENT_FLOAT32)
-			{
-				desc.Format = DXGI_FORMAT_R32_FLOAT;
-			}
-			else if (signatureDesc.ComponentType == D3D_REGISTER_COMPONENT_SINT32)
-			{
-				desc.Format = DXGI_FORMAT_R32_SINT;
-			}
-			else if (signatureDesc.ComponentType == D3D_REGISTER_COMPONENT_UINT32)
-			{
-				desc.Format = DXGI_FORMAT_R32_UINT;
-			}
-		}
-		else if (signatureDesc.Mask <= 3)
-		{
-			if (signatureDesc.ComponentType == D3D_REGISTER_COMPONENT_FLOAT32)
-			{
-				desc.Format = DXGI_FORMAT_R32G32_FLOAT;
-			}
-			else if (signatureDesc.ComponentType == D3D_REGISTER_COMPONENT_SINT32)
-			{
-				desc.Format = DXGI_FORMAT_R32G32_SINT;
-			}
-			else if (signatureDesc.ComponentType == D3D_REGISTER_COMPONENT_UINT32)
-			{
-				desc.Format = DXGI_FORMAT_R32G32_UINT;
-			}
-		}
-		else if (signatureDesc.Mask <= 7)
-		{
-			if (signatureDesc.ComponentType == D3D_REGISTER_COMPONENT_FLOAT32)
-			{
-				desc.Format = DXGI_FORMAT_R32G32B32_FLOAT;
-			}
-			else if (signatureDesc.ComponentType == D3D_REGISTER_COMPONENT_SINT32)
-			{
-				desc.Format = DXGI_FORMAT_R32G32B32_SINT;
-			}
-			else if (signatureDesc.ComponentType == D3D_REGISTER_COMPONENT_UINT32)
-			{
-				desc.Format = DXGI_FORMAT_R32G32B32_UINT;
-			}
-		}
-		else if (signatureDesc.Mask <= 15)
-		{
-			if (signatureDesc.ComponentType == D3D_REGISTER_COMPONENT_FLOAT32)
-			{
-				desc.Format = DXGI_FORMAT_R32G32B32A32_FLOAT;
-			}
-			else if (signatureDesc.ComponentType == D3D_REGISTER_COMPONENT_SINT32)
-			{
-				desc.Format = DXGI_FORMAT_R32G32B32A32_SINT;
-			}
-			else if (signatureDesc.ComponentType == D3D_REGISTER_COMPONENT_UINT32)
-			{
-				desc.Format = DXGI_FORMAT_R32G32B32A32_UINT;
-			}
-		}
-		descVector.push_back(desc);
+		return;
 	}
-
-	GetDevice()->CreateInputLayout(&descVector[0], descVector.size(), blob->GetBufferPointer(), blob->GetBufferSize(), &m_pInputLayout);
-
+	SShaderResource shaderResource = ShaderResource().Load(m_filePath, m_entryFuncName, m_shaderType);
+	m_blob = shaderResource.m_blob;
+	m_pInputLayout = shaderResource.m_pInputLayout;
+	m_pShader = shaderResource.m_pShader;
 }

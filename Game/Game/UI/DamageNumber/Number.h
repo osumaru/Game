@@ -22,7 +22,7 @@ public:
 	//int  num  数値
 	void SetNumber(int num);
 private:
-	CSprite	m_number[10];			//スプライト
-	CTexture m_numberTexture[10];	//テクスチャ
-	int		m_num = 0;				//数値を保存する変数
+	CSprite		m_number[10];			//スプライト
+	CTexture	m_numberTexture[10];	//テクスチャ
+	int			m_num = 0;				//数値を保存する変数
 };

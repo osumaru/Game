@@ -31,6 +31,6 @@ VS_OUTPUT VSMain(VS_INPUT In)
 float4 PSMain(VS_OUTPUT In) : SV_TARGET
 {
 	float4 color = colorTexture.Sample(Sampler, In.uv);
-	//color.w = alpha;
+	clip(color.w - 0.1f);
 	return color;
 }
