@@ -23,7 +23,6 @@ void CPlayerHp::Init()
 	m_playerHpBackSize.x = (float)m_playerHp;
 	m_playerHpBackSprite.SetSize(m_playerHpBackSize);
 
-	//PlayerDamage(80.0f);
 }
 
 void CPlayerHp::Update()
@@ -36,17 +35,12 @@ void CPlayerHp::Update()
 		//プレイヤーHp更新
 		m_playerHp = GetPlayer().GetStatus().Health;
 	}
+
 	//HPの背景を減らしていく処理
 	if (m_playerHpSize.x >= m_playerHpBackSize.x) { return; }
 	m_playerHpBackSize.x -= m_hpSubtractSpeed;
 	m_playerHpBackSprite.SetSize(m_playerHpBackSize);
 }
-
-//void CPlayerHp::PlayerDamage(float DamageValue)
-//{
-//	m_playerHpSize.x -= DamageValue;
-//	m_playerHpSprite.SetSize(m_playerHpSize);
-//}
 
 void CPlayerHp::Draw()
 {
