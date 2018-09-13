@@ -5,7 +5,7 @@
 void CPlayerHp::Init()
 {
 	//プレイヤーのHealthをHpのx方向のサイズに設定
-	m_playerHp = (float)GetPlayer().GetStatus().Health;
+	m_playerHp = GetPlayer().GetStatus().Health;
 
 	//プレイヤーHPのロード
 	m_playerHpTexture.Load(L"Assets/sprite/hp2.png");
@@ -30,10 +30,19 @@ void CPlayerHp::Update()
 	//プレイヤーのHpが変化したときにメンバ変数にプレイヤーHpを代入する
 	if (m_playerHp != GetPlayer().GetStatus().Health)
 	{
-		m_playerHpSize.x = (float)m_playerHp;
+		//Hpが増えたときに背景のサイズも増やす
+		if (m_playerHp < GetPlayer().GetStatus().Health)
+		{
+			m_playerHpBackSize.x = (float)GetPlayer().GetStatus().Health;
+			m_playerHpBackSprite.SetSize(m_playerHpSize);
+		}
+
+		m_playerHpSize.x = (float)GetPlayer().GetStatus().Health;
 		m_playerHpSprite.SetSize(m_playerHpSize);
+
 		//プレイヤーHp更新
 		m_playerHp = GetPlayer().GetStatus().Health;
+
 	}
 
 	//HPの背景を減らしていく処理
