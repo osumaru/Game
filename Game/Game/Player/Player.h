@@ -141,8 +141,10 @@ private:
 	float					m_slipSpeed = 2.0f;					//回避移動時のスピード
 	EnPlayerAnimeState		m_State = enPlayerStand;
 
-	const float				RUN_SPEED = 1.8f;
-	const float				WALK_SPEED = 200.0f;
+	const float				RUN_SPEED	= 1.8f;				//
+	const float				WALK_SPEED	= 200.0f;
+
+
 	bool					m_isDamege = false;
 	float					m_animetionFrame = 0.0f;
 	bool					m_isAttack = false;
