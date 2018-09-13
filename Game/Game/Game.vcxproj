@@ -159,7 +159,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Camera\GameCamera.cpp" />
+    <ClCompile Include="Enemy\EnemySearch.cpp" />
     <ClCompile Include="Enemy\EnemyState\EnemyAttack.cpp" />
+    <ClCompile Include="Enemy\EnemyState\EnemyChase.cpp" />
     <ClCompile Include="Enemy\EnemyState\EnemyDamage.cpp" />
     <ClCompile Include="Enemy\EnemyState\EnemyDeath.cpp" />
     <ClCompile Include="Enemy\EnemyState\EnemyIdle.cpp" />
@@ -195,7 +197,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera\GameCamera.h" />
+    <ClInclude Include="Enemy\EnemySearch.h" />
     <ClInclude Include="Enemy\EnemyState\EnemyAttack.h" />
+    <ClInclude Include="Enemy\EnemyState\EnemyChase.h" />
     <ClInclude Include="Enemy\EnemyState\EnemyDamage.h" />
     <ClInclude Include="Enemy\EnemyState\EnemyDeath.h" />
     <ClInclude Include="Enemy\EnemyState\EnemyIdle.h" />

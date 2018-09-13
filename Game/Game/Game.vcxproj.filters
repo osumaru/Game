@@ -153,6 +153,12 @@
     <ClCompile Include="UI\Result\Result.cpp">
       <Filter>ソース ファイル\UI\Result</Filter>
     </ClCompile>
+    <ClCompile Include="Enemy\EnemySearch.cpp">
+      <Filter>ソース ファイル\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy\EnemyState\EnemyChase.cpp">
+      <Filter>ソース ファイル\Enemy\EnemyState</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -247,6 +253,12 @@
     </ClInclude>
     <ClInclude Include="UI\Result\Result.h">
       <Filter>ソース ファイル\UI\Result</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy\EnemySearch.h">
+      <Filter>ソース ファイル\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy\EnemyState\EnemyChase.h">
+      <Filter>ソース ファイル\Enemy\EnemyState</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

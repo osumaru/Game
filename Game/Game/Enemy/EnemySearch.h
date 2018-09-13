@@ -1,17 +1,17 @@
 /*
-*	エネミーの回転クラス
+*	エネミー探索クラス
 */
 
 #pragma once
 
 class IEnemy;
 
-class CEnemyTurn : public IGameObject
+class CEnemySearch : public IGameObject
 {
 public:
 	//コンストラクタ
-	//enemy		エネミークラスのポインタ
-	CEnemyTurn(IEnemy* enemy) :
+	//enemy		エネミーのインターフェースクラスのポインタ
+	CEnemySearch(IEnemy* enemy) :
 		m_enemy(enemy)
 	{
 	}

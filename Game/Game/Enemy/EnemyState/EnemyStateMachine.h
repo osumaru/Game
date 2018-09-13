@@ -6,6 +6,7 @@
 
 #include "EnemyIdle.h"
 #include "EnemyWalk.h"
+#include "EnemyChase.h"
 #include "EnemyAttack.h"
 #include "EnemyDamage.h"
 #include "EnemyDeath.h"
@@ -20,6 +21,7 @@ public:
 	CEnemyStateMachine(IEnemy* enemy) :
 		m_enemyIdle(enemy, this),
 		m_enemyWalk(enemy, this),
+		m_enemyChase(enemy, this),
 		m_enemyAttack(enemy, this),
 		m_enemyDamage(enemy, this),
 		m_enemyDeath(enemy, this)
@@ -46,9 +48,10 @@ public:
 private:
 	CEnemyState::EnState	m_state = CEnemyState::enState_Invald;	//エネミーの状態
 	IEnemyState*			m_currentState = nullptr;				//現在の状態
-	EnemyIdle				m_enemyIdle;							//待機
-	EnemyWalk				m_enemyWalk;							//歩き
-	EnemyAttack				m_enemyAttack;							//攻撃
-	EnemyDamage				m_enemyDamage;							//ダメージ
-	EnemyDeath				m_enemyDeath;							//死亡
+	CEnemyIdle				m_enemyIdle;							//待機
+	CEnemyWalk				m_enemyWalk;							//歩き
+	CEnemyChase				m_enemyChase;							//追従
+	CEnemyAttack			m_enemyAttack;							//攻撃
+	CEnemyDamage			m_enemyDamage;							//ダメージ
+	CEnemyDeath				m_enemyDeath;							//死亡
 };

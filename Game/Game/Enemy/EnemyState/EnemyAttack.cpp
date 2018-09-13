@@ -3,14 +3,14 @@
 #include "../IEnemy.h"
 #include "../../Player/Player.h"
 
-bool EnemyAttack::Start()
+bool CEnemyAttack::Start()
 {
 	//攻撃アニメーションを再生
 	m_enemy->PlayAnimation(CEnemyState::enState_Attack);
 	return true;
 }
 
-void EnemyAttack::Update()
+void CEnemyAttack::Update()
 {
 	//手のボーンのワールド行列を取得
 	CMatrix leftHandMatrix = m_enemy->GetBoneWorldMatrix(L"LeftHand");

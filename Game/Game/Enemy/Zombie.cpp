@@ -31,6 +31,7 @@ void CZombie::Init(CVector3 position)
 	m_animation.SetLoopFlg(2, true);
 	Add(&m_enemyStateMachine, 0);
 	Add(&m_enemyTurn, 0);
+	Add(&m_enemySearch, 0);
 	//ダメージ表示の初期化
 	m_damageNumber.Init();
 }

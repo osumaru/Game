@@ -2,14 +2,14 @@
 #include "EnemyIdle.h"
 #include "../IEnemy.h"
 
-bool EnemyIdle::Start()
+bool CEnemyIdle::Start()
 {
 	//待機アニメーションを再生
 	m_enemy->PlayAnimation(CEnemyState::enState_Idle);
 	return true;
 }
 
-void EnemyIdle::Update()
+void CEnemyIdle::Update()
 {
 	//動かない
 	CVector3 moveSpeed = m_enemy->GetMoveSpeed();

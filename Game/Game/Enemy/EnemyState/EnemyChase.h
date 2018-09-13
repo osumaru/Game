@@ -1,24 +1,24 @@
 /*
-*	エネミーのダメージクラス
+*	エネミーの追従クラス
 */
 
 #pragma once
 
 #include "IEnemyState.h"
 
-class CEnemyDamage : public IEnemyState
+class CEnemyChase : public IEnemyState
 {
 public:
 	//コンストラクタ
 	//enemy		エネミーのインターフェースクラスのポインタ
 	//esm		エネミーのステートマシンクラスのポインタ
-	CEnemyDamage(IEnemy* enemy, CEnemyStateMachine* esm) :
+	CEnemyChase(IEnemy* enemy, CEnemyStateMachine* esm) :
 		IEnemyState(enemy, esm)
 	{
 	}
 
 	//デストラクタ
-	~CEnemyDamage() {}
+	~CEnemyChase() {}
 
 	//更新する前に一度だけ呼ばれる
 	bool Start();
@@ -27,5 +27,5 @@ public:
 	void Update();
 
 private:
-	float timer = 0.0f;		//タイマー
+
 };
