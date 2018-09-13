@@ -5,19 +5,19 @@
 
 #include "IEnemyState.h"
 
-class EnemyAttack : public IEnemyState
+class CEnemyAttack : public IEnemyState
 {
 public:
 	//コンストラクタ
 	//enemy		エネミーのインターフェースクラスのポインタ
 	//esm		エネミーのステートマシンクラスのポインタ
-	EnemyAttack(IEnemy* enemy, CEnemyStateMachine* esm) :
+	CEnemyAttack(IEnemy* enemy, CEnemyStateMachine* esm) :
 		IEnemyState(enemy, esm)
 	{
 	}
 
 	//デストラクタ
-	~EnemyAttack() {}
+	~CEnemyAttack() {}
 
 	//更新する前に一度だけ呼ばれる
 	bool Start();

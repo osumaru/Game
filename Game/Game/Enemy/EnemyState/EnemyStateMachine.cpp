@@ -28,6 +28,9 @@ void CEnemyStateMachine::ChangeState(CEnemyState::EnState nextState)
 	case CEnemyState::enState_Walk:
 		m_currentState = &m_enemyWalk;
 		break;
+	case CEnemyState::enState_Chase:
+		m_currentState = &m_enemyChase;
+		break;
 	case CEnemyState::enState_Attack:
 		m_currentState = &m_enemyAttack;
 		break;

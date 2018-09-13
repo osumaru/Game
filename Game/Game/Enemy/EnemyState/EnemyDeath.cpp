@@ -5,14 +5,14 @@
 #include "../../Itam/RecoveryItem.h"
 #include "../../Itam/Money.h"
 
-bool EnemyDeath::Start()
+bool CEnemyDeath::Start()
 {
 	//死亡アニメーションを再生
 	m_enemy->PlayAnimation(CEnemyState::enState_Death);
 	return true;
 }
 
-void EnemyDeath::Update()
+void CEnemyDeath::Update()
 {
 	//死亡アニメーションが終わったら回復アイテムとお金を出す
 	if (!m_enemy->IsPlayAnimation()) {

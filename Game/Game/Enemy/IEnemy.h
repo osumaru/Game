@@ -7,6 +7,7 @@
 #include "../Enemy/EnemyState/EnemyStateMachine.h"
 #include "../UI/DamageNumber/DamageNumber.h"
 #include "EnemyTurn.h"
+#include "EnemySearch.h"
 
 class IEnemy : public IGameObject
 {
@@ -119,12 +120,25 @@ public:
 		m_isAttackHit = isAttackHit;
 	}
 
+	//プレイヤーを発見したか
+	bool IsFind() const
+	{
+		return m_isFind;
+	}
+
+	//プレイヤーを発見したらフラグを設定する
+	void SetIsFind(bool isFind)
+	{
+		m_isFind = isFind;
+	}
+
 protected:
 	CSkinModel				m_skinModel;			//スキンモデル
 	CCharacterController	m_characterController;	//キャラクターコントローラー
 	CAnimation				m_animation;			//アニメーション
 	CEnemyStateMachine		m_enemyStateMachine;	//ステートマシン
-	CEnemyTurn				m_enemyTurn;			//エネミーの回転
+	CEnemyTurn				m_enemyTurn;			//向きを回転
+	CEnemySearch			m_enemySearch;			//プレイヤーを探索
 	CDamegeNumber			m_damageNumber;			//ダメージ数値
 	CVector3				m_position;				//座標
 	CQuaternion				m_rotation;				//回転
@@ -132,4 +146,5 @@ protected:
 	int						m_animNum = 0;			//再生するアニメーション番号
 	int						m_animNumOld = 0;		//1つ前のアニメーション番号
 	bool					m_isAttackHit = false;	//攻撃が当たったか
+	bool					m_isFind = false;		//プレイヤーを発見したか
 };

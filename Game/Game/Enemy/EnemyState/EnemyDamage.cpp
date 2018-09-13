@@ -2,7 +2,7 @@
 #include "EnemyDamage.h"
 #include "../IEnemy.h"
 
-bool EnemyDamage::Start()
+bool CEnemyDamage::Start()
 {
 	//ダメージアニメーションを再生
 	m_enemy->PlayAnimation(CEnemyState::enState_Damage);
@@ -13,7 +13,7 @@ bool EnemyDamage::Start()
 	return true;
 }
 
-void EnemyDamage::Update()
+void CEnemyDamage::Update()
 {
 	timer += GameTime().GetDeltaFrameTime();
 	if (timer > 2.0f) {

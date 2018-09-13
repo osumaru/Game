@@ -2,7 +2,7 @@
 #include "EnemyWalk.h"
 #include "../IEnemy.h"
 
-bool EnemyWalk::Start()
+bool CEnemyWalk::Start()
 {
 	//歩きアニメーションを再生
 	m_enemy->PlayAnimation(CEnemyState::enState_Walk);
@@ -33,7 +33,7 @@ bool EnemyWalk::Start()
 	return true;
 }
 
-void EnemyWalk::Update()
+void CEnemyWalk::Update()
 {
 	bool isMoveFinish = false;
 	//移動速度を取得

@@ -9,6 +9,7 @@ public:
 	enum EnState {
 		enState_Idle,	//‘Ò‹@
 		enState_Walk,	//•à‚«
+		enState_Chase,	//’Ç]
 		enState_Attack,	//UŒ‚
 		enState_Damage,	//ƒ_ƒ[ƒW
 		enState_Death,	//€–S
