@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "Warrok.h"
-#include "../GameCamera.h"
+#include "../Camera/GameCamera.h"
 
 CWarrok::CWarrok()
 {

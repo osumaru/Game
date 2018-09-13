@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "Player.h"
-#include "../GameCamera.h"
+#include"../../Game/Camera/GameCamera.h"
 #include "../Map/Map.h"
 
 void CPlayer::Init(CVector3 position)
@@ -9,7 +9,7 @@ void CPlayer::Init(CVector3 position)
 	m_Weaponskin.Load(L"Assets/modelData/Sword.cmo", NULL);
 	m_position = position;
 	m_rotation.SetRotationDeg(CVector3::AxisY, -180.0f);
-	m_characterController.Init(0.6f, 4.0f,m_position);
+	m_characterController.Init(0.3f, 1.0f,m_position);
 	m_characterController.SetGravity(-9.8f);
 
 	m_weponBoxCollider.Create({ 0.05f,0.4f,0.05f });
@@ -23,7 +23,8 @@ void CPlayer::Init(CVector3 position)
 	m_weponRigitBody.SetPosition(m_WeaponPosition);
 	m_weponRigitBody.SetRotation(m_WeaponRotation);
 	m_weponRigitBody.PhysicsWorldRemoveRigidBody();
-
+	
+	
 
 	//アニメーションの初期化
 	{
@@ -34,7 +35,8 @@ void CPlayer::Init(CVector3 position)
 											{ L"Assets/modelData/PlayerJump.tka" },			//ジャンプアニメーション
 											{ L"Assets/modelData/PlayerAttack.tka" },		//攻撃アニメーション
 											{ L"Assets/modelData/PlayerDamage.tka" },		//ダメージアニメーション
-											{  L"Assets/modelData/PlayerKaihi.tka" }		//回避アクション
+											{ L"Assets/modelData/PlayerKaihi.tka" }	,		//回避アクション
+											{ L"Assets/modelData/PlayerDeath.tka" }			//死亡アニメーション
 		};
 
 		m_animation.Init(animClip, enPlayerNum);
@@ -51,6 +53,7 @@ void CPlayer::Init(CVector3 position)
 		m_status.Strength	= 10;						//攻撃力
 		m_status.Defense	= 3;						//防御力
 		m_status.Health		= 500;						//体力
+		m_status.MaxHealth = m_status.Health;			//レベルごとの最大HP
 		m_status.Level		= 1;						//レベル
 		m_status.OldExp		= 15;						//ひとつ前のレベルに必要な経験値
 		m_status.NextExp	= ((m_status.OldExp * 1.1f + 0.5) + (m_status.Level * 12 )) / 2 + 0.5;		//次のレベルアップに必要な経験値
@@ -64,8 +67,9 @@ void CPlayer::Init(CVector3 position)
 
 void CPlayer::Update()
 {
-
+	
 	AnimationMove();		//アニメーションの処理
+	if (m_isDied) { return; }
 	Move();					//移動処理
 	Rotation();				//回転処理
 	StatusCalculation();	//ステータスの処理
@@ -73,6 +77,11 @@ void CPlayer::Update()
 	if (Pad().IsTriggerButton(enButtonB))
 	{
 		ExpUP(100);
+
+	}if (Pad().IsTriggerButton(enButtonA))
+	{
+		GetDamage();
+	
 
 	}
 		//スキンモデルの更新
@@ -85,8 +94,9 @@ void CPlayer::Update()
 void CPlayer::Draw()
 {
 
-	//m_characterController.Draw();
+	m_characterController.Draw();
 	m_skinmodel.Draw(GetGameCamera().GetViewMatrix(), GetGameCamera().GetProjectionMatrix());
+	m_weponRigitBody.Draw();
 	if (m_isAttack)
 	{
 		CVector3 weponUpVec = { m_Weaponskin.GetWorldMatrix().m[2][0],m_Weaponskin.GetWorldMatrix().m[2][1],m_Weaponskin.GetWorldMatrix().m[2][2] };
@@ -95,7 +105,6 @@ void CPlayer::Draw()
 		m_weponRigitBody.SetPosition(m_WeaponPosition);
 		m_weponRigitBody.SetRotation(m_WeaponRotation);
 		m_Weaponskin.Draw(GetGameCamera().GetViewMatrix(), GetGameCamera().GetProjectionMatrix());
-		m_weponRigitBody.Draw();
 
 	}
 	
@@ -167,7 +176,9 @@ void CPlayer::Move()
 		{
 
 			CMatrix PlayerHip = m_skinmodel.FindBoneWorldMatrix(L"Hips");
-			CVector3 PlayerHipPos = { PlayerHip.m[3][0],0.0f,PlayerHip.m[3][2] };
+			CVector3 PlayerHipPos = { PlayerHip.m[3][0],0.0,PlayerHip.m[3][2] };
+	
+		
 		}
 
 		if (m_State != enPlayerAvoidance)
@@ -247,6 +258,18 @@ void CPlayer::AnimationMove()
 			m_State = enPlayerAtack;
 			m_weponRigitBody.PhysicsWorldAddRigidBody();
 		}
+
+		//死亡アニメーションの処理
+		else if (m_status.Health <=0)
+		{
+
+			m_animation.Play(enPlayerDete, 0.5f);
+			m_State = enPlayerDete;
+	
+			
+		}
+
+		
 		//回避アニメーション
 		else if (Pad().IsTriggerButton(enButtonRightTrigger))
 		{
@@ -264,6 +287,7 @@ void CPlayer::AnimationMove()
 
 		}
 
+		//ダメージを受けた時の処理
 		else if (m_isDamege)
 		{
 			m_animation.Play(enPlayerDamage, 0.2);
@@ -409,6 +433,17 @@ void CPlayer::AnimationMove()
 			m_animation.Play(enPlayerStand, 0.5f);
 			m_State = enPlayerStand;
 			m_isDamege = false;
+		
+		}
+
+		break;
+
+	case enPlayerDete:
+
+		if (!m_animation.IsPlay())
+		{
+			m_isDied = true;
+			return;
 		}
 
 		break;
@@ -440,7 +475,8 @@ void CPlayer::StatusCalculation()
 
 			m_status.Strength	+= 9;
 			m_status.Defense	+= 6;
-			m_status.Health		+= 25;
+			m_status.MaxHealth	+= 25;
+			m_status.Health = m_status.MaxHealth;
 
 
 		}
@@ -450,7 +486,9 @@ void CPlayer::StatusCalculation()
 
 			m_status.Strength += 5;
 			m_status.Defense += 3;
-			m_status.Health += 14;
+			m_status.MaxHealth += 14;
+			m_status.Health = m_status.MaxHealth;
+
 
 		}
 
@@ -458,7 +496,8 @@ void CPlayer::StatusCalculation()
 		{
 			m_status.Strength += 2;
 			m_status.Defense += 2;
-			m_status.Health += 11;
+			m_status.MaxHealth += 11;
+			m_status.Health = m_status.MaxHealth;
 		}
 
 	}
@@ -470,5 +509,12 @@ void  CPlayer::WeaponChange()
 {
 
 
+
+}
+
+void CPlayer::PlayerAttack()
+{
+
+	
 
 }

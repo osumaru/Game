@@ -55,6 +55,12 @@
     <Filter Include="ソース ファイル\Enemy\EnemyState">
       <UniqueIdentifier>{60565a7a-3ee7-45e5-8a4e-95544f8bb660}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Camera">
+      <UniqueIdentifier>{67b0dd73-0c92-4e27-a6f2-f884555a7cf7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\UI\Result">
+      <UniqueIdentifier>{781de762-48a6-4427-8912-94ae152b0f15}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -71,9 +77,6 @@
     </ClCompile>
     <ClCompile Include="Map\MapChip\StaticMapObject.cpp">
       <Filter>ソース ファイル\Map\MapChip</Filter>
-    </ClCompile>
-    <ClCompile Include="GameCamera.cpp">
-      <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="Player\Player.cpp">
       <Filter>ソース ファイル\Player</Filter>
@@ -141,8 +144,14 @@
     <ClCompile Include="Enemy\Warrok.cpp">
       <Filter>ソース ファイル\Enemy</Filter>
     </ClCompile>
+    <ClCompile Include="Camera\GameCamera.cpp">
+      <Filter>ソース ファイル\Camera</Filter>
+    </ClCompile>
     <ClCompile Include="Enemy\EnemyTurn.cpp">
       <Filter>ソース ファイル\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Result\Result.cpp">
+      <Filter>ソース ファイル\UI\Result</Filter>
     </ClCompile>
     <ClCompile Include="Enemy\EnemySearch.cpp">
       <Filter>ソース ファイル\Enemy</Filter>
@@ -163,9 +172,6 @@
     </ClInclude>
     <ClInclude Include="Map\MapChip\StaticMapObject.h">
       <Filter>ソース ファイル\Map\MapChip</Filter>
-    </ClInclude>
-    <ClInclude Include="GameCamera.h">
-      <Filter>ソース ファイル</Filter>
     </ClInclude>
     <ClInclude Include="Player\Player.h">
       <Filter>ソース ファイル\Player</Filter>
@@ -239,8 +245,14 @@
     <ClInclude Include="Enemy\Warrok.h">
       <Filter>ソース ファイル\Enemy</Filter>
     </ClInclude>
+    <ClInclude Include="Camera\GameCamera.h">
+      <Filter>ソース ファイル\Camera</Filter>
+    </ClInclude>
     <ClInclude Include="Enemy\EnemyTurn.h">
       <Filter>ソース ファイル\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Result\Result.h">
+      <Filter>ソース ファイル\UI\Result</Filter>
     </ClInclude>
     <ClInclude Include="Enemy\EnemySearch.h">
       <Filter>ソース ファイル\Enemy</Filter>

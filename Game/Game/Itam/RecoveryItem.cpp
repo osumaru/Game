@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "RecoveryItem.h"
-#include "../GameCamera.h"
+#include"../../Game/Camera/GameCamera.h"
 #include "../Player/Player.h"
 
 void CRecoveryItem::Init(CVector3 position)
