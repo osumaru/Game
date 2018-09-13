@@ -1,7 +1,9 @@
 #include "stdafx.h"
 #include "Player.h"
 #include"../../Game/Camera/GameCamera.h"
-#include "../Map/Map.h"
+#include "../Map/Map.h"`
+#include "../Scene/SceneManager.h"
+
 
 void CPlayer::Init(CVector3 position)
 {
@@ -23,7 +25,6 @@ void CPlayer::Init(CVector3 position)
 	m_weponRigitBody.SetPosition(m_WeaponPosition);
 	m_weponRigitBody.SetRotation(m_WeaponRotation);
 	m_weponRigitBody.PhysicsWorldRemoveRigidBody();
-	
 	
 
 	//アニメーションの初期化
@@ -73,6 +74,7 @@ void CPlayer::Update()
 	Move();					//移動処理
 	Rotation();				//回転処理
 	StatusCalculation();	//ステータスの処理
+	
 
 	if (Pad().IsTriggerButton(enButtonB))
 	{

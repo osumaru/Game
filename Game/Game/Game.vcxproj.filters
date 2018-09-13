@@ -159,6 +159,9 @@
     <ClCompile Include="Enemy\EnemyState\EnemyChase.cpp">
       <Filter>ソース ファイル\Enemy\EnemyState</Filter>
     </ClCompile>
+    <ClCompile Include="Scene\SceneManager.cpp">
+      <Filter>ソース ファイル\Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -259,6 +262,9 @@
     </ClInclude>
     <ClInclude Include="Enemy\EnemyState\EnemyChase.h">
       <Filter>ソース ファイル\Enemy\EnemyState</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\SceneManager.h">
+      <Filter>ソース ファイル\Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
