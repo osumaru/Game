@@ -19,7 +19,13 @@ void CEnemyIdle::Update()
 
 	m_timer += GameTime().GetDeltaFrameTime();
 	if (m_timer >= 6.0f) {
+		//しばらくしたら歩き始める
 		m_timer = 0.0f;
 		m_esm->ChangeState(CEnemyState::enState_Walk);
+	}
+	if (m_enemy->IsFind()) {
+		//プレイヤーが視野内にいる
+		m_timer = 0.0f;
+		m_esm->ChangeState(CEnemyState::enState_Chase);
 	}
 }

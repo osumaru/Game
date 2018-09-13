@@ -28,7 +28,6 @@ void CZombie::Init(CVector3 position)
 	m_animation.Init(animClip, 5);
 	m_animation.SetLoopFlg(0, true);
 	m_animation.SetLoopFlg(1, true);
-	m_animation.SetLoopFlg(2, true);
 	Add(&m_enemyStateMachine, 0);
 	Add(&m_enemyTurn, 0);
 	Add(&m_enemySearch, 0);

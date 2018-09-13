@@ -35,7 +35,7 @@ bool CEnemyWalk::Start()
 
 void CEnemyWalk::Update()
 {
-	bool isMoveFinish = false;
+	bool isMoveEnd = false;
 	//移動速度を取得
 	CVector3 moveSpeed = m_enemy->GetMoveSpeed();
 	//現在の座標から移動先までの距離を計算
@@ -50,13 +50,17 @@ void CEnemyWalk::Update()
 		moveSpeed.z = distance.z;
 	}
 	else {
-		isMoveFinish = true;
+		isMoveEnd = true;
 	}
 	//移動速度を設定
 	m_enemy->SetMoveSpeed(moveSpeed);
 
-	//移動先まで移動したら止まる
-	if (isMoveFinish) {
+	if (isMoveEnd) {
+		//移動先まで移動したら止まる
 		m_esm->ChangeState(CEnemyState::enState_Idle);
+	}
+	if (m_enemy->IsFind()) {
+		//プレイヤーが視野内にいる
+		m_esm->ChangeState(CEnemyState::enState_Chase);
 	}
 }
