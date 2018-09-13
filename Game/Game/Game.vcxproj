@@ -240,29 +240,29 @@
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\Arrow.fbx" />
     <MeshContentTask Include="Assets\modelData\Barrel.FBX" />
-    <MeshContentTask Include="Assets\modelData\heart.fbx" />
+    <MeshContentTask Include="Assets\modelData\Heart.fbx" />
     <MeshContentTask Include="Assets\modelData\House.FBX" />
+    <MeshContentTask Include="Assets\modelData\LargeSword.fbx" />
     <MeshContentTask Include="Assets\modelData\LongBow.FBX" />
     <MeshContentTask Include="Assets\modelData\map2.FBX" />
-    <MeshContentTask Include="Assets\modelData\money.fbx" />
-    <MeshContentTask Include="Assets\modelData\ninja.FBX" />
+    <MeshContentTask Include="Assets\modelData\Money.fbx" />
+    <MeshContentTask Include="Assets\modelData\Ninja.FBX" />
     <MeshContentTask Include="Assets\modelData\Player.fbx" />
-    <MeshContentTask Include="Assets\modelData\samurai.FBX" />
+    <MeshContentTask Include="Assets\modelData\Samurai.FBX" />
     <MeshContentTask Include="Assets\modelData\Sword.fbx" />
-    <MeshContentTask Include="Assets\modelData\Sword10.fbx" />
-    <MeshContentTask Include="Assets\modelData\Sword3.fbx" />
     <MeshContentTask Include="Assets\modelData\testChamferBox.FBX" />
     <MeshContentTask Include="Assets\modelData\testGround.FBX" />
     <MeshContentTask Include="Assets\modelData\testRectangle.FBX" />
     <MeshContentTask Include="Assets\modelData\TownHouse.fbx" />
     <MeshContentTask Include="Assets\modelData\TownHouse1.fbx" />
+    <MeshContentTask Include="Assets\modelData\TwinSword.fbx" />
     <MeshContentTask Include="Assets\modelData\U2.FBX" />
     <MeshContentTask Include="Assets\modelData\umi.FBX" />
     <MeshContentTask Include="Assets\modelData\Unitychan.FBX" />
     <MeshContentTask Include="Assets\modelData\Unitychan2.fbx" />
     <MeshContentTask Include="Assets\modelData\Warrok.fbx" />
     <MeshContentTask Include="Assets\modelData\Wave.FBX" />
-    <MeshContentTask Include="Assets\modelData\zombi.FBX" />
+    <MeshContentTask Include="Assets\modelData\Zombi.FBX" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
