@@ -158,6 +158,7 @@
     </MeshContentTask>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Camera\GameCamera.cpp" />
     <ClCompile Include="Enemy\EnemySearch.cpp" />
     <ClCompile Include="Enemy\EnemyState\EnemyAttack.cpp" />
     <ClCompile Include="Enemy\EnemyState\EnemyChase.cpp" />
@@ -172,7 +173,6 @@
     <ClCompile Include="Enemy\Samurai.cpp" />
     <ClCompile Include="Enemy\Warrok.cpp" />
     <ClCompile Include="Enemy\Zombie.cpp" />
-    <ClCompile Include="GameCamera.cpp" />
     <ClCompile Include="Itam\IItem.cpp" />
     <ClCompile Include="Itam\Money.cpp" />
     <ClCompile Include="Itam\RecoveryItem.cpp" />
@@ -192,9 +192,11 @@
     <ClCompile Include="UI\Menu\Menu.cpp" />
     <ClCompile Include="UI\MiniMap\MiniMap.cpp" />
     <ClCompile Include="UI\PlayerHp\PlayerHp.cpp" />
+    <ClCompile Include="UI\Result\Result.cpp" />
     <ClCompile Include="UI\WeaponSelect\WeaponSelect.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Camera\GameCamera.h" />
     <ClInclude Include="Enemy\EnemySearch.h" />
     <ClInclude Include="Enemy\EnemyState\EnemyAttack.h" />
     <ClInclude Include="Enemy\EnemyState\EnemyChase.h" />
@@ -211,7 +213,6 @@
     <ClInclude Include="Enemy\Samurai.h" />
     <ClInclude Include="Enemy\Warrok.h" />
     <ClInclude Include="Enemy\Zombie.h" />
-    <ClInclude Include="GameCamera.h" />
     <ClInclude Include="Itam\IItem.h" />
     <ClInclude Include="Itam\Money.h" />
     <ClInclude Include="Itam\RecoveryItem.h" />
@@ -226,6 +227,7 @@
     <ClInclude Include="UI\Menu\Menu.h" />
     <ClInclude Include="UI\MiniMap\MiniMap.h" />
     <ClInclude Include="UI\PlayerHp\PlayerHp.h" />
+    <ClInclude Include="UI\Result\Result.h" />
     <ClInclude Include="UI\WeaponSelect\WeaponSelect.h" />
   </ItemGroup>
   <ItemGroup>
@@ -240,29 +242,29 @@
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\Arrow.fbx" />
     <MeshContentTask Include="Assets\modelData\Barrel.FBX" />
-    <MeshContentTask Include="Assets\modelData\heart.fbx" />
+    <MeshContentTask Include="Assets\modelData\Heart.fbx" />
     <MeshContentTask Include="Assets\modelData\House.FBX" />
+    <MeshContentTask Include="Assets\modelData\LargeSword.fbx" />
     <MeshContentTask Include="Assets\modelData\LongBow.FBX" />
     <MeshContentTask Include="Assets\modelData\map2.FBX" />
-    <MeshContentTask Include="Assets\modelData\money.fbx" />
-    <MeshContentTask Include="Assets\modelData\ninja.FBX" />
+    <MeshContentTask Include="Assets\modelData\Money.fbx" />
+    <MeshContentTask Include="Assets\modelData\Ninja.FBX" />
     <MeshContentTask Include="Assets\modelData\Player.fbx" />
-    <MeshContentTask Include="Assets\modelData\samurai.FBX" />
+    <MeshContentTask Include="Assets\modelData\Samurai.FBX" />
     <MeshContentTask Include="Assets\modelData\Sword.fbx" />
-    <MeshContentTask Include="Assets\modelData\Sword10.fbx" />
-    <MeshContentTask Include="Assets\modelData\Sword3.fbx" />
     <MeshContentTask Include="Assets\modelData\testChamferBox.FBX" />
     <MeshContentTask Include="Assets\modelData\testGround.FBX" />
     <MeshContentTask Include="Assets\modelData\testRectangle.FBX" />
     <MeshContentTask Include="Assets\modelData\TownHouse.fbx" />
     <MeshContentTask Include="Assets\modelData\TownHouse1.fbx" />
+    <MeshContentTask Include="Assets\modelData\TwinSword.fbx" />
     <MeshContentTask Include="Assets\modelData\U2.FBX" />
     <MeshContentTask Include="Assets\modelData\umi.FBX" />
     <MeshContentTask Include="Assets\modelData\Unitychan.FBX" />
     <MeshContentTask Include="Assets\modelData\Unitychan2.fbx" />
     <MeshContentTask Include="Assets\modelData\Warrok.fbx" />
     <MeshContentTask Include="Assets\modelData\Wave.FBX" />
-    <MeshContentTask Include="Assets\modelData\zombi.FBX" />
+    <MeshContentTask Include="Assets\modelData\Zombi.FBX" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

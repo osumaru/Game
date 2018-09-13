@@ -69,6 +69,7 @@ public:
 	//プロジェクション行列の取得。
 	const CMatrix& GetProjectionMatrix() const;
 
+
 	//初期化
 	void Init();
 

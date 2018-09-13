@@ -481,6 +481,7 @@ void CCharacterController::StaticExecute()
 		//もしレイが当たっていて、さらに押し戻す方向とオブジェクトの移動方向が一致している場合(引っ付き防止)
 		if(callback.isHit && callback.isRay /*&& fabs(rayLength - callback.dist) < m_radius + 0.1f*/)
 		{
+		
 			CVector3 hitNormal = callback.hitNormal;
 			hitNormal.y = 0.0f;
 			hitNormal.Normalize();

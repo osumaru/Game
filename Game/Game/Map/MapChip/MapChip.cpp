@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "MapChip.h"
-#include "../../GameCamera.h"
+#include "../../Camera/GameCamera.h"
 
 MapChip::MapChip():
 	m_position(0.0f, 0.0f, 0.0f),

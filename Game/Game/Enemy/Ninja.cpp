@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "Ninja.h"
-#include "../GameCamera.h"
+#include "../Camera/GameCamera.h"
 
 CNinja::CNinja()
 {

@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "GameCamera.h"
+#include "../../Game/Game/Camera/GameCamera.h"
 #include "Player\Player.h"
 #include "Scene\GameScene.h"
 
