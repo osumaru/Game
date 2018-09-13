@@ -23,7 +23,8 @@ void CPlayer::Init(CVector3 position)
 	m_weponRigitBody.SetPosition(m_WeaponPosition);
 	m_weponRigitBody.SetRotation(m_WeaponRotation);
 	m_weponRigitBody.PhysicsWorldRemoveRigidBody();
-
+	
+	
 
 	//アニメーションの初期化
 	{
@@ -52,6 +53,7 @@ void CPlayer::Init(CVector3 position)
 		m_status.Strength	= 10;						//攻撃力
 		m_status.Defense	= 3;						//防御力
 		m_status.Health		= 500;						//体力
+		m_status.MaxHealth = m_status.Health;			//レベルごとの最大HP
 		m_status.Level		= 1;						//レベル
 		m_status.OldExp		= 15;						//ひとつ前のレベルに必要な経験値
 		m_status.NextExp	= ((m_status.OldExp * 1.1f + 0.5) + (m_status.Level * 12 )) / 2 + 0.5;		//次のレベルアップに必要な経験値
@@ -67,7 +69,7 @@ void CPlayer::Update()
 {
 	
 	AnimationMove();		//アニメーションの処理
-	if (m_isDete) { return; }
+	if (m_isDied) { return; }
 	Move();					//移動処理
 	Rotation();				//回転処理
 	StatusCalculation();	//ステータスの処理
@@ -76,9 +78,12 @@ void CPlayer::Update()
 	{
 		ExpUP(100);
 
+	}if (Pad().IsTriggerButton(enButtonA))
+	{
+		GetDamage();
+	
+
 	}
-	
-	
 		//スキンモデルの更新
 		m_skinmodel.Update(m_position, m_rotation, { 1.0f, 1.0f, 1.0f }, true);
 		m_Weaponskin.Update(m_WeaponPosition, m_WeaponRotation, { 1.0f, 1.0f, 1.0f }, true);
@@ -172,12 +177,7 @@ void CPlayer::Move()
 
 			CMatrix PlayerHip = m_skinmodel.FindBoneWorldMatrix(L"Hips");
 			CVector3 PlayerHipPos = { PlayerHip.m[3][0],0.0,PlayerHip.m[3][2] };
-			
-
-			m_characterController.SetMoveSpeed(m_moveSpeed);
-			m_characterController.SetPosition(m_position);
-			m_characterController.Execute(GameTime().GetDeltaFrameTime());
-			m_position = m_characterController.GetPosition();
+	
 		
 		}
 
@@ -287,6 +287,7 @@ void CPlayer::AnimationMove()
 
 		}
 
+		//ダメージを受けた時の処理
 		else if (m_isDamege)
 		{
 			m_animation.Play(enPlayerDamage, 0.2);
@@ -432,6 +433,7 @@ void CPlayer::AnimationMove()
 			m_animation.Play(enPlayerStand, 0.5f);
 			m_State = enPlayerStand;
 			m_isDamege = false;
+		
 		}
 
 		break;
@@ -440,7 +442,7 @@ void CPlayer::AnimationMove()
 
 		if (!m_animation.IsPlay())
 		{
-			m_isDete = true;
+			m_isDied = true;
 			return;
 		}
 
@@ -473,7 +475,8 @@ void CPlayer::StatusCalculation()
 
 			m_status.Strength	+= 9;
 			m_status.Defense	+= 6;
-			m_status.Health		+= 25;
+			m_status.MaxHealth	+= 25;
+			m_status.Health = m_status.MaxHealth;
 
 
 		}
@@ -483,7 +486,9 @@ void CPlayer::StatusCalculation()
 
 			m_status.Strength += 5;
 			m_status.Defense += 3;
-			m_status.Health += 14;
+			m_status.MaxHealth += 14;
+			m_status.Health = m_status.MaxHealth;
+
 
 		}
 
@@ -491,7 +496,8 @@ void CPlayer::StatusCalculation()
 		{
 			m_status.Strength += 2;
 			m_status.Defense += 2;
-			m_status.Health += 11;
+			m_status.MaxHealth += 11;
+			m_status.Health = m_status.MaxHealth;
 		}
 
 	}

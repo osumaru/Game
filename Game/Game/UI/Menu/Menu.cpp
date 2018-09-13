@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "Menu.h"
+#include "../../Player/Player.h"
 
 
 CMenu::CMenu()
@@ -43,6 +44,7 @@ void CMenu::Init()
 
 void CMenu::Update()
 {
+	if (GetPlayer().GetIsDied()) { return; }
 	if (Pad().IsTriggerButton(enButtonSelect))
 	{
 		if (m_Draw)
@@ -167,6 +169,7 @@ void CMenu::StatusMath()
 //ƒƒjƒ…[‰æ–Ê‚Ì•`‰æˆ—
 void CMenu::Draw()
 {
+	if (GetPlayer().GetIsDied()) { return; }
 	if (m_Draw)
 	{
 		m_menu.Draw();

@@ -58,6 +58,9 @@
     <Filter Include="ソース ファイル\Camera">
       <UniqueIdentifier>{67b0dd73-0c92-4e27-a6f2-f884555a7cf7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\UI\Result">
+      <UniqueIdentifier>{781de762-48a6-4427-8912-94ae152b0f15}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -146,6 +149,9 @@
     </ClCompile>
     <ClCompile Include="Enemy\EnemyTurn.cpp">
       <Filter>ソース ファイル\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Result\Result.cpp">
+      <Filter>ソース ファイル\UI\Result</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -238,6 +244,9 @@
     </ClInclude>
     <ClInclude Include="Enemy\EnemyTurn.h">
       <Filter>ソース ファイル\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Result\Result.h">
+      <Filter>ソース ファイル\UI\Result</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

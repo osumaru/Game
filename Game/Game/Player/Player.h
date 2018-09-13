@@ -5,6 +5,7 @@ struct SplayerStatus
 	int Strength;			//攻撃力
 	int Defense;			//防御力
 	int	Health;				//体力
+	int MaxHealth;
 	int Level;				//レベル
 	int ExperiencePoint	;	//現在の経験値
 	int NextExp;			//レベルアップまでに必要な経験値
@@ -99,6 +100,11 @@ public:
 		m_status.Health -= 5;
 		m_isDamege = true;
 	}
+	//プレイヤーが生きているかの判定
+	bool GetIsDied()
+	{
+		return m_isDied;
+	}
 
 
 private:
@@ -140,7 +146,7 @@ private:
 	bool					m_isDamege = false;
 	float					m_animetionFrame = 0.0f;
 	bool					m_isAttack = false;
-	bool					m_isDete = false;
+	bool					m_isDied = false;
 };
 
 static CPlayer& GetPlayer()
