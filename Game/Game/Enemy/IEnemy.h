@@ -131,6 +131,16 @@ public:
 	{
 		m_isFind = isFind;
 	}
+	//ダメージを受けたか
+	bool IsDamage()const
+	{
+		return m_isDamage;
+	}
+	//ダメージを受けたかのフラグを設定
+	void SetIsDamage(bool isDamage)
+	{
+		m_isDamage = isDamage;
+	}
 
 protected:
 	CSkinModel				m_skinModel;			//スキンモデル
@@ -147,4 +157,5 @@ protected:
 	int						m_animNumOld = 0;		//1つ前のアニメーション番号
 	bool					m_isAttackHit = false;	//攻撃が当たったか
 	bool					m_isFind = false;		//プレイヤーを発見したか
+	bool					m_isDamage = false;		//ダメージを受けたかの判定
 };

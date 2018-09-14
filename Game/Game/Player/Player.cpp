@@ -3,14 +3,14 @@
 #include"../../Game/Camera/GameCamera.h"
 #include "../Map/Map.h"`
 #include "../Scene/SceneManager.h"
+#include "../Enemy/IEnemy.h"
 
 
 void CPlayer::Init(CVector3 position)
 {
 	m_skinmodel.Load(L"Assets/modelData/Player.cmo", &m_animation);
-	m_Weaponskin.Load(L"Assets/modelData/Sword.cmo", NULL);
+	m_Weaponskin.Load(L"Assets/modelData/LargeSword.cmo", NULL);
 	m_position = position;
-	m_rotation.SetRotationDeg(CVector3::AxisY, -180.0f);
 	m_characterController.Init(0.3f, 1.0f,m_position);
 	m_characterController.SetGravity(-9.8f);
 
@@ -74,6 +74,7 @@ void CPlayer::Update()
 	Move();					//移動処理
 	Rotation();				//回転処理
 	StatusCalculation();	//ステータスの処理
+	PlayerAttack();
 	
 
 	if (Pad().IsTriggerButton(enButtonB))
@@ -83,8 +84,9 @@ void CPlayer::Update()
 	}
 	
 		//スキンモデルの更新
-		m_skinmodel.Update(m_position, m_rotation, { 1.0f, 1.0f, 1.0f }, true);
 		m_Weaponskin.Update(m_WeaponPosition, m_WeaponRotation, { 1.0f, 1.0f, 1.0f }, true);
+		m_skinmodel.Update(m_position, m_rotation, { 1.0f, 1.0f, 1.0f }, true);
+		
 
 }
 
@@ -231,30 +233,46 @@ void CPlayer::Rotation()
 	//背中に武器を持たせる
 	else
 	{
-		CMatrix PlayerHnd = m_skinmodel.FindBoneWorldMatrix(L"Spine2");
+		CMatrix PlayerSpine = m_skinmodel.FindBoneWorldMatrix(L"Spine2");
 
-		CVector3 PlayerHndPos = { PlayerHnd.m[3][0],PlayerHnd.m[3][1],PlayerHnd.m[3][2] };
+		CVector3 PlayerSpinePos = { PlayerSpine.m[3][0],PlayerSpine.m[3][1],PlayerSpine.m[3][2] };
 
-		CVector3 PlayerHndScale = { PlayerHnd.m[0][0], PlayerHnd.m[0][1], PlayerHnd.m[0][2] };
+		CVector3 PlayerHndScale = { PlayerSpine.m[0][0], PlayerSpine.m[0][1], PlayerSpine.m[0][2] };
 		float len = PlayerHndScale.Length();
-		PlayerHnd.m[0][0] /= len;
-		PlayerHnd.m[0][1] /= len;
-		PlayerHnd.m[0][2] /= len;
+		PlayerSpine.m[0][0] /= len;
+		PlayerSpine.m[0][1] /= len;
+		PlayerSpine.m[0][2] /= len;
 
-		PlayerHnd.m[1][0] /= len;
-		PlayerHnd.m[1][1] /= len;
-		PlayerHnd.m[1][2] /= len;
+		PlayerSpine.m[1][0] /= len;
+		PlayerSpine.m[1][1] /= len;
+		PlayerSpine.m[1][2] /= len;
 
-		PlayerHnd.m[2][0] /= len;
-		PlayerHnd.m[2][1] /= len;
-		PlayerHnd.m[2][2] /= len;
-		m_WeaponPosition = PlayerHndPos;
-		CVector3 PlayerFront = { m_skinmodel.GetWorldMatrix().m[1][0],m_skinmodel.GetWorldMatrix().m[1][1],m_skinmodel.GetWorldMatrix().m[1][2] };
-		PlayerFront.Normalize();
-		PlayerFront *= 0.2f;
-		m_WeaponPosition.Add(PlayerFront);
+		PlayerSpine.m[2][0] /= len;
+		PlayerSpine.m[2][1] /= len;
+		PlayerSpine.m[2][2] /= len;
+		m_WeaponPosition = PlayerSpinePos;
+		
+		if (m_State == enPlayerRun ||m_State == enPlayerWalk )
+		{
+			CVector3 PlayerFront = { m_skinmodel.GetWorldMatrix().m[1][0],m_skinmodel.GetWorldMatrix().m[1][1],m_skinmodel.GetWorldMatrix().m[1][2] };
+			PlayerFront.Normalize();
+			PlayerFront *= 0.15f;
+			m_WeaponPosition = m_position;
+			m_WeaponPosition.y = PlayerSpinePos.y;
+			m_WeaponPosition.Add(PlayerFront);
 
-		m_WeaponRotation.SetRotation(PlayerHnd);
+		}
+		else
+		{
+			
+			CVector3 PlayerFront = { m_skinmodel.GetWorldMatrix().m[1][0],m_skinmodel.GetWorldMatrix().m[1][1],m_skinmodel.GetWorldMatrix().m[1][2] };
+			PlayerFront.Normalize();
+			PlayerFront *= 0.13f;
+			m_WeaponPosition.Add(PlayerFront);
+		}
+	
+
+		m_WeaponRotation.SetRotation(PlayerSpine);
 		CQuaternion rotX, rotY;
 		rotX.SetRotationDeg(CVector3::AxisX, 180.0f);
 		rotY.SetRotationDeg(CVector3::AxisY, 90.0f);
@@ -297,7 +315,7 @@ void CPlayer::AnimationMove()
 		}
 
 		//死亡アニメーションの処理
-		else if (m_status.Health <=0)
+		else if (m_status.Health <= 0)
 		{
 
 			m_animation.Play(enPlayerDete, 0.5f);
@@ -355,14 +373,14 @@ void CPlayer::AnimationMove()
 
 		}
 
-		else if (m_moveSpeed.Length() == 0)
+		else if (fabs(m_moveSpeed.Length()) == 0)
 		{
 			m_animation.SetLoopFlg(1, false);
 			m_animation.Play(enPlayerStand, 0.5f);
 			m_State = enPlayerStand;
 		}
 		
-		else if(m_moveSpeed.Length() >= 3.0f)
+		else if(fabs(m_moveSpeed.Length()) >= 3.0f)
 		{
 			//走りアニメーション
 			m_animation.SetLoopFlg(enPlayerRun, true);
@@ -384,7 +402,7 @@ void CPlayer::AnimationMove()
 
 		}
 
-		else if (m_moveSpeed.Length() == 0)
+		else if (fabs(m_moveSpeed.Length()) == 0)
 		{
 			m_animation.SetLoopFlg(1, false);
 			m_animation.Play(enPlayerStand, 0.5f);
@@ -397,16 +415,23 @@ void CPlayer::AnimationMove()
 	case  enPlayerAtack:
 
 		m_animetionFrame += GameTime().GetDeltaFrameTime();
-		if (m_animetionFrame > 0.4f)
+		if (m_animetionFrame > 0.6f)
 		{
 			m_isAttack = true;
 
 		}
 
+		
+
 
 		if (!m_animation.IsPlay())
 		{
-			
+			//攻撃モーション中はダメージモーションをさせない
+			if (m_isDamege)
+			{
+
+				m_isDamege = false;
+			}
 			if (Pad().GetLeftStickX() != 0 || Pad().GetLeftStickY() != 0)
 			{
 				//走りアニメーション
@@ -550,7 +575,25 @@ void  CPlayer::WeaponChange()
 
 void CPlayer::PlayerAttack()
 {
+	if (!m_isAttack) { return; }
+	int num = 0;
 
+	//エネミーのリストを取得
+	for (const auto& enemys : GetSceneManager().GetGameScene().GetMap()->GetEnemyList())
+	{
+		
+		CVector3 EnemyVec = enemys->GetPosition();
+		EnemyVec.y += 1.3f;
+		EnemyVec -= m_WeaponPosition;
+		float len = EnemyVec.Length();
+		
+		if (fabs(len) < 0.3f)
+		{
+			
+			enemys->SetIsDamage(true);
+		}
+	
+	}
 	
 
 }

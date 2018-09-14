@@ -97,8 +97,12 @@ public:
 	//デバック用関数
 	void GetDamage()
 	{
-		m_status.Health -= 5;
-		m_isDamege = true;
+		if (!m_isDamege)
+		{
+
+			m_status.Health -= 5;
+			m_isDamege = true;
+		}
 	}
 	//プレイヤーが生きているかの判定
 	bool GetIsDied()
@@ -141,7 +145,7 @@ private:
 	float					m_slipSpeed = 2.0f;					//回避移動時のスピード
 	EnPlayerAnimeState		m_State = enPlayerStand;
 
-	const float				RUN_SPEED	= 1.8f;				//
+	const float				RUN_SPEED	= 2.8f;				//
 	const float				WALK_SPEED	= 200.0f;
 
 

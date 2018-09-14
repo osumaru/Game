@@ -1,6 +1,12 @@
 #pragma once
 #include "GameScene.h"
 
+enum enSeceneState 
+{
+	enTitleScene,
+	enGameScene
+
+};
 
 class CSceneManager : public IGameObject
 {
