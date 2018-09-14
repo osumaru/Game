@@ -37,13 +37,14 @@ void CPlayer::Init(CVector3 position)
 											{ L"Assets/modelData/PlayerAttack.tka" },		//攻撃アニメーション
 											{ L"Assets/modelData/PlayerDamage.tka" },		//ダメージアニメーション
 											{ L"Assets/modelData/PlayerKaihi.tka" }	,		//回避アクション
-											{ L"Assets/modelData/PlayerDeath.tka" }			//死亡アニメーション
+											{ L"Assets/modelData/PlayerDeath.tka" },		//死亡アニメーション
+											{ L"Assets/modelData/PlayerArrowAttack.tka" }	//弓の攻撃アニメーション
 		};
 
 		m_animation.Init(animClip, enPlayerNum);
-		m_animation.SetLoopFlg(0, true);
-		m_animation.SetLoopFlg(1, false);
-		
+		m_animation.SetLoopFlg(enPlayerStand, true);
+		m_animation.SetLoopFlg(enPlayerWalk, true);
+		m_animation.SetLoopFlg(enPlayerRun, true);
 
 	}
 
@@ -62,20 +63,21 @@ void CPlayer::Init(CVector3 position)
 		m_status.AccumulationExp += m_status.OldExp;	//累積経験値
 		m_status.Gold = 0;								//所持金
 	}
-
-	Add(this, 0);
+	m_PlayerStateMachine.Start();
+	Add(&m_PlayerStateMachine,0);
+	Add(this, 1);
 }
 
 void CPlayer::Update()
 {
 	
-	AnimationMove();		//アニメーションの処理
+	//AnimationMove();		//アニメーションの処理
+	m_animation.Update(GameTime().GetDeltaFrameTime());
 	if (m_isDied) { return; }
 	Move();					//移動処理
 	Rotation();				//回転処理
 	StatusCalculation();	//ステータスの処理
 	PlayerAttack();
-	
 
 	if (Pad().IsTriggerButton(enButtonB))
 	{
@@ -167,7 +169,7 @@ void CPlayer::Move()
 		}
 
 
-		else if(m_State == enPlayerStand || m_State == enPlayerAtack)
+		else if(m_State == enPlayerStand || m_State == enPlayerAttack)
 		{
 
 			m_moveSpeed.x = 0.0f;
@@ -300,27 +302,34 @@ void CPlayer::Rotation()
 void CPlayer::AnimationMove()
 {
 
+	
 	switch (m_State)
 	{
 		//待機アニメーション中の処理
 	case enPlayerStand:
 
 		//攻撃アニメーションの処理
-		if (Pad().IsTriggerButton(enButtonX))
+		/*if (Pad().IsTriggerButton(enButtonX))
 		{
 
-			m_animation.Play(enPlayerAtack, 0.5f);
-			m_State = enPlayerAtack;
+			m_animation.Play(enPlayerAttack, 0.5f);
+			m_State = enPlayerAttack;
 			m_weponRigitBody.PhysicsWorldAddRigidBody();
-		}
+		}*/
 
 		//死亡アニメーションの処理
-		else if (m_status.Health <= 0)
+		if (m_status.Health <= 0)
 		{
 
 			m_animation.Play(enPlayerDete, 0.5f);
 			m_status.Health = 0;
 			m_State = enPlayerDete;	
+		}
+
+		else if (Pad().IsTriggerButton(enButtonB))
+		{
+			m_animation.Play(enPlayerArroAttack, 0.5f);
+			m_State = enPlayerArroAttack;
 		}
 
 		
@@ -368,8 +377,8 @@ void CPlayer::AnimationMove()
 		if (Pad().IsTriggerButton(enButtonX))
 		{
 
-			m_animation.Play(enPlayerAtack, 0.5f);
-			m_State = enPlayerAtack;
+			m_animation.Play(enPlayerAttack, 0.5f);
+			m_State = enPlayerAttack;
 
 		}
 
@@ -397,8 +406,8 @@ void CPlayer::AnimationMove()
 		if (Pad().IsTriggerButton(enButtonX))
 		{
 
-			m_animation.Play(enPlayerAtack, 0.5f);
-			m_State = enPlayerAtack;
+			m_animation.Play(enPlayerAttack, 0.5f);
+			m_State = enPlayerAttack;
 
 		}
 
@@ -412,7 +421,7 @@ void CPlayer::AnimationMove()
 		break;
 
 		//攻撃アニメーション中の処理
-	case  enPlayerAtack:
+	case  enPlayerAttack:
 
 		m_animetionFrame += GameTime().GetDeltaFrameTime();
 		if (m_animetionFrame > 0.6f)
@@ -485,7 +494,7 @@ void CPlayer::AnimationMove()
 
 
 		break;
-
+		//回避アニメーション中の処理　　　
 	case enPlayerAvoidance:
 
 		if (!m_animation.IsPlay())
@@ -498,7 +507,7 @@ void CPlayer::AnimationMove()
 		}
 
 		break;
-
+		//死亡アニメーション中の処理
 	case enPlayerDete:
 
 		if (!m_animation.IsPlay())
@@ -508,10 +517,24 @@ void CPlayer::AnimationMove()
 		}
 
 		break;
+
+		//弓での攻撃
+	case enPlayerArroAttack:
+
+
+		if (!m_animation.IsPlay())
+		{
+			m_animation.SetLoopFlg(1, false);
+			m_animation.Play(enPlayerStand, 0.5f);
+			m_State = enPlayerStand;
+			m_isDamege = false;
+		}
+
+		break;
 		
 	
 	}
-
+	
 	//アニメーションの更新
 	m_animation.Update(GameTime().GetDeltaFrameTime());
 

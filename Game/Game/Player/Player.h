@@ -1,4 +1,5 @@
 #pragma once
+#include "PlayerSate/PlayerStateMachine.h"
 
 struct SplayerStatus
 {
@@ -19,6 +20,20 @@ class CPlayer : public IGameObject
 {
 
 public:
+	enum EnPlayerAnimeState
+	{
+		enPlayerStand,		//待機アニメーション
+		enPlayerWalk,		//歩行アニメーション
+		enPlayerRun,		//走りアニメーション
+		enPlayerJump,		//ジャンプアニメーション
+		enPlayerAttack,		//攻撃アニメーション
+		enPlayerDamage,		//ダメージアニメーション
+		enPlayerAvoidance,	//回避アニメーション
+		enPlayerDete,		//死亡アニメーション
+		enPlayerArroAttack,	//弓のアニメーション
+		enPlayerNum			//アニメーションの数
+
+	};
 
 	//プレイヤーの初期化
 	void Init(CVector3 position);
@@ -60,6 +75,19 @@ public:
 	{
 		m_status.ExperiencePoint += expup;
 		m_status.AccumulationExp += expup;
+	}
+
+	//アニメーションの設定
+	void SetPlayerAnimation(const int animNumber, const float num)
+	{
+		m_animation.Play(animNumber, num);
+		m_State = (EnPlayerAnimeState)animNumber;
+	}
+
+	//アニメーションの取得
+	const CAnimation& GetAnimetion()
+	{
+		return m_animation;
 	}
 
 	//プレイヤーのステータスを取得
@@ -109,22 +137,14 @@ public:
 	{
 		return m_isDied;
 	}
-
+	
+	CPlayerStateMachine& SetPlayerStateMachine()
+	{
+		return m_PlayerStateMachine;
+	}
 
 private:
-	enum EnPlayerAnimeState
-	{
-		enPlayerStand,
-		enPlayerWalk,
-		enPlayerRun,
-		enPlayerJump,
-		enPlayerAtack,
-		enPlayerDamage,
-		enPlayerAvoidance,
-		enPlayerDete,
-		enPlayerNum
-
-	};
+	
 
 	CVector3				m_position;										//座標
 	CVector3				m_WeaponPosition;								//武器の座標
@@ -142,17 +162,17 @@ private:
 	CAnimation				m_animation;							//アニメーション
 	SplayerStatus			m_status;								//プレイヤーのステータス
 	bool					m_isSlip = false;						//スリップ判定
-	float					m_slipSpeed = 2.0f;					//回避移動時のスピード
-	EnPlayerAnimeState		m_State = enPlayerStand;
-
-	const float				RUN_SPEED	= 2.8f;				//
+	float					m_slipSpeed = 2.0f;						//回避移動時のスピード
+	EnPlayerAnimeState		m_State = enPlayerStand;				//アニメーションを遷移させるための変数
+	const float				RUN_SPEED	= 2.8f;				
 	const float				WALK_SPEED	= 200.0f;
-
-
 	bool					m_isDamege = false;
 	float					m_animetionFrame = 0.0f;
 	bool					m_isAttack = false;
 	bool					m_isDied = false;
+	CPlayerStateMachine		m_PlayerStateMachine;
+	
+
 };
 
 static CPlayer& GetPlayer()

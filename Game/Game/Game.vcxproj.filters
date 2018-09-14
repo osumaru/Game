@@ -61,6 +61,9 @@
     <Filter Include="ソース ファイル\UI\Result">
       <UniqueIdentifier>{781de762-48a6-4427-8912-94ae152b0f15}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Player\PlayerSate">
+      <UniqueIdentifier>{78a5d28b-6f9a-4978-9875-12bede60a5e2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -162,6 +165,18 @@
     <ClCompile Include="Scene\SceneManager.cpp">
       <Filter>ソース ファイル\Scene</Filter>
     </ClCompile>
+    <ClCompile Include="Player\PlayerSate\PlayerWalk.cpp">
+      <Filter>ソース ファイル\Player\PlayerSate</Filter>
+    </ClCompile>
+    <ClCompile Include="Player\PlayerSate\PlayerRun.cpp">
+      <Filter>ソース ファイル\Player\PlayerSate</Filter>
+    </ClCompile>
+    <ClCompile Include="Player\PlayerSate\PlayerStand.cpp">
+      <Filter>ソース ファイル\Player\PlayerSate</Filter>
+    </ClCompile>
+    <ClCompile Include="Player\PlayerSate\PlayerStateMachine.cpp">
+      <Filter>ソース ファイル\Player\PlayerSate</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -230,9 +245,6 @@
     <ClInclude Include="Enemy\EnemyState\EnemyWalk.h">
       <Filter>ソース ファイル\Enemy\EnemyState</Filter>
     </ClInclude>
-    <ClInclude Include="Enemy\EnemyState\IEnemyState.h">
-      <Filter>ソース ファイル\Enemy\EnemyState</Filter>
-    </ClInclude>
     <ClInclude Include="Itam\Money.h">
       <Filter>ソース ファイル\Item</Filter>
     </ClInclude>
@@ -265,6 +277,27 @@
     </ClInclude>
     <ClInclude Include="Scene\SceneManager.h">
       <Filter>ソース ファイル\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Player\PlayerSate\IPlayerState.h">
+      <Filter>ソース ファイル\Player\PlayerSate</Filter>
+    </ClInclude>
+    <ClInclude Include="Player\PlayerSate\PlayerWalk.h">
+      <Filter>ソース ファイル\Player\PlayerSate</Filter>
+    </ClInclude>
+    <ClInclude Include="Player\PlayerSate\PlayerRun.h">
+      <Filter>ソース ファイル\Player\PlayerSate</Filter>
+    </ClInclude>
+    <ClInclude Include="Player\PlayerSate\PlayerStand.h">
+      <Filter>ソース ファイル\Player\PlayerSate</Filter>
+    </ClInclude>
+    <ClInclude Include="Player\PlayerSate\PlayerStateMachine.h">
+      <Filter>ソース ファイル\Player\PlayerSate</Filter>
+    </ClInclude>
+    <ClInclude Include="Player\PlayerSate\PlayerState.h">
+      <Filter>ソース ファイル\Player\PlayerSate</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy\EnemyState\IEnemyState.h">
+      <Filter>ソース ファイル\Enemy\EnemyState</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
