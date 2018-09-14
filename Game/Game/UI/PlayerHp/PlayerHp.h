@@ -27,5 +27,6 @@ private:
 	const CVector2	m_playerHpBackCenterPos = { 0.0f,1.0f };	//プレイヤーのHPバックグラウンド基点座標
 
 	int				m_playerHp=100;								//プレイヤーのHPの値
+	int				m_playerHpSizeUp = 3;						//プレイヤーのHPの大きさを調整する用の変数
 };
 

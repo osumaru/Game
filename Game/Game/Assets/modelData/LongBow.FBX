@@ -10,11 +10,11 @@ FBXHeaderExtension:  {
 		Version: 1000
 		Year: 2018
 		Month: 9
-		Day: 7
-		Hour: 12
-		Minute: 8
+		Day: 13
+		Hour: 14
+		Minute: 18
 		Second: 20
-		Millisecond: 501
+		Millisecond: 644
 	}
 	Creator: "FBX SDK/FBX Plugins version 2017.0.1"
 	SceneInfo: "SceneInfo::GlobalInfo", "UserData" {
@@ -30,19 +30,19 @@ FBXHeaderExtension:  {
 			Comment: ""
 		}
 		Properties70:  {
-			P: "DocumentUrl", "KString", "Url", "", "C:\Users\kbc16b15\Desktop\河原\sotuken2\Game\Game\Game\Assets\modelData\LongBow.fbx"
-			P: "SrcDocumentUrl", "KString", "Url", "", "C:\Users\kbc16b15\Desktop\河原\sotuken2\Game\Game\Game\Assets\modelData\LongBow.fbx"
+			P: "DocumentUrl", "KString", "Url", "", "C:\Users\kbc16b15\Desktop\河原\sotuken2\new Ver\Game\Game\Game\Assets\modelData\LongBow.FBX"
+			P: "SrcDocumentUrl", "KString", "Url", "", "C:\Users\kbc16b15\Desktop\河原\sotuken2\new Ver\Game\Game\Game\Assets\modelData\LongBow.FBX"
 			P: "Original", "Compound", "", ""
 			P: "Original|ApplicationVendor", "KString", "", "", "Autodesk"
 			P: "Original|ApplicationName", "KString", "", "", "3ds Max"
 			P: "Original|ApplicationVersion", "KString", "", "", "2017"
-			P: "Original|DateTime_GMT", "DateTime", "", "", "07/09/2018 03:08:20.496"
-			P: "Original|FileName", "KString", "", "", "C:\Users\kbc16b15\Desktop\河原\sotuken2\Game\Game\Game\Assets\modelData\LongBow.fbx"
+			P: "Original|DateTime_GMT", "DateTime", "", "", "13/09/2018 05:18:20.639"
+			P: "Original|FileName", "KString", "", "", "C:\Users\kbc16b15\Desktop\河原\sotuken2\new Ver\Game\Game\Game\Assets\modelData\LongBow.FBX"
 			P: "LastSaved", "Compound", "", ""
 			P: "LastSaved|ApplicationVendor", "KString", "", "", "Autodesk"
 			P: "LastSaved|ApplicationName", "KString", "", "", "3ds Max"
 			P: "LastSaved|ApplicationVersion", "KString", "", "", "2017"
-			P: "LastSaved|DateTime_GMT", "DateTime", "", "", "07/09/2018 03:08:20.496"
+			P: "LastSaved|DateTime_GMT", "DateTime", "", "", "13/09/2018 05:18:20.639"
 			P: "Original|ApplicationActiveProject", "KString", "", "", "C:\Users\kbc16b15\Documents\3dsMax"
 			P: "Original|ApplicationNativeFile", "KString", "", "", "C:\Users\kbc16b15\Desktop\Scenes\LongBow.max"
 		}
@@ -79,7 +79,7 @@ GlobalSettings:  {
 
 Documents:  {
 	Count: 1
-	Document: 1839966960, "", "Scene" {
+	Document: 1187661200, "", "Scene" {
 		Properties70:  {
 			P: "SourceObject", "object", "", ""
 			P: "ActiveAnimStackName", "KString", "", "", ""
@@ -302,7 +302,7 @@ Definitions:  {
 ;------------------------------------------------------------------
 
 Objects:  {
-	Geometry: 1215026240, "Geometry::", "Mesh" {
+	Geometry: 1867289520, "Geometry::", "Mesh" {
 		Properties70:  {
 			P: "Color", "ColorRGB", "Color", "",0.341176470588235,0.87843137254902,0.776470588235294
 		}
@@ -1198,20 +1198,20 @@ Objects:  {
 			}
 		}
 	}
-	Model: 1755409552, "Model::default", "Mesh" {
+	Model: 1959928656, "Model::default", "Mesh" {
 		Version: 232
 		Properties70:  {
 			P: "InheritType", "enum", "", "",1
 			P: "ScalingMax", "Vector3D", "Vector", "",0,0,0
 			P: "DefaultAttributeIndex", "int", "Integer", "",0
 			P: "Lcl Rotation", "Lcl Rotation", "", "A",-90.0000025044782,89.9999974955218,0
-			P: "Lcl Scaling", "Lcl Scaling", "", "A",0.236325606703758,0.236325606703758,0.236325606703758
+			P: "Lcl Scaling", "Lcl Scaling", "", "A",0.0590814016759396,0.0590814016759396,0.0590814016759396
 			P: "MaxHandle", "int", "Integer", "UH",1
 		}
 		Shading: T
 		Culling: "CullingOff"
 	}
-	Material: 550529280, "Material::Material #25", "" {
+	Material: 549313392, "Material::Material #25", "" {
 		Version: 102
 		ShadingModel: "phong"
 		MultiLayer: 0
@@ -1233,16 +1233,16 @@ Objects:  {
 			P: "Reflectivity", "double", "Number", "",0
 		}
 	}
-	Video: 1776481152, "Video::マップ #1", "Clip" {
+	Video: 1957006208, "Video::マップ #1", "Clip" {
 		Type: "Clip"
 		Properties70:  {
 			P: "Path", "KString", "XRefUrl", "", "C:\Users\kbc16b15\Documents\ゲームエンジン\Unityファイル\Slime\Assets\Elven Long Bow\Textures\Elven Long Bow Diffuse.png"
 		}
 		UseMipMap: 0
 		Filename: "C:\Users\kbc16b15\Documents\ゲームエンジン\Unityファイル\Slime\Assets\Elven Long Bow\Textures\Elven Long Bow Diffuse.png"
-		RelativeFilename: "..\..\..\..\..\..\..\..\Documents\ゲームエンジン\Unityファイル\Slime\Assets\Elven Long Bow\Textures\Elven Long Bow Diffuse.png"
+		RelativeFilename: "..\..\..\..\..\..\..\..\..\Documents\ゲームエンジン\Unityファイル\Slime\Assets\Elven Long Bow\Textures\Elven Long Bow Diffuse.png"
 	}
-	Texture: 550523040, "Texture::マップ #1", "" {
+	Texture: 549310032, "Texture::マップ #1", "" {
 		Type: "TextureVideoClip"
 		Version: 202
 		TextureName: "Texture::マップ #1"
@@ -1252,19 +1252,19 @@ Objects:  {
 		}
 		Media: "Video::マップ #1"
 		FileName: "C:\Users\kbc16b15\Documents\ゲームエンジン\Unityファイル\Slime\Assets\Elven Long Bow\Textures\Elven Long Bow Diffuse.png"
-		RelativeFilename: "..\..\..\..\..\..\..\..\Documents\ゲームエンジン\Unityファイル\Slime\Assets\Elven Long Bow\Textures\Elven Long Bow Diffuse.png"
+		RelativeFilename: "..\..\..\..\..\..\..\..\..\Documents\ゲームエンジン\Unityファイル\Slime\Assets\Elven Long Bow\Textures\Elven Long Bow Diffuse.png"
 		ModelUVTranslation: 0,0
 		ModelUVScaling: 1,1
 		Texture_Alpha_Source: "Alpha_Black"
 		Cropping: 0,0,0,0
 	}
-	AnimationStack: 1041648272, "AnimStack::Take 001", "" {
+	AnimationStack: 1866464608, "AnimStack::Take 001", "" {
 		Properties70:  {
 			P: "LocalStop", "KTime", "Time", "",153953860000
 			P: "ReferenceStop", "KTime", "Time", "",153953860000
 		}
 	}
-	AnimationLayer: 1178671472, "AnimLayer::BaseLayer", "" {
+	AnimationLayer: 1181993104, "AnimLayer::BaseLayer", "" {
 	}
 }
 
@@ -1274,22 +1274,22 @@ Objects:  {
 Connections:  {
 	
 	;Model::default, Model::RootNode
-	C: "OO",1755409552,0
+	C: "OO",1959928656,0
 	
 	;AnimLayer::BaseLayer, AnimStack::Take 001
-	C: "OO",1178671472,1041648272
+	C: "OO",1181993104,1866464608
 	
 	;Geometry::, Model::default
-	C: "OO",1215026240,1755409552
+	C: "OO",1867289520,1959928656
 	
 	;Material::Material #25, Model::default
-	C: "OO",550529280,1755409552
+	C: "OO",549313392,1959928656
 	
 	;Texture::マップ #1, Material::Material #25
-	C: "OP",550523040,550529280, "DiffuseColor"
+	C: "OP",549310032,549313392, "DiffuseColor"
 	
 	;Video::マップ #1, Texture::マップ #1
-	C: "OO",1776481152,550523040
+	C: "OO",1957006208,549310032
 }
 ;Takes section
 ;----------------------------------------------------
