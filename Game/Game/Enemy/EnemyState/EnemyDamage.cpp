@@ -2,10 +2,10 @@
 #include "EnemyDamage.h"
 #include "../IEnemy.h"
 
-bool EnemyDamage::Start()
+bool CEnemyDamage::Start()
 {
 	//ダメージアニメーションを再生
-	m_enemy->PlayAnimation(EnemyState::enState_Damage);
+	m_enemy->PlayAnimation(CEnemyState::enState_Damage);
 
 	//ダメージ計算
 	m_enemy->DamageCalculation();
@@ -13,7 +13,7 @@ bool EnemyDamage::Start()
 	return true;
 }
 
-void EnemyDamage::Update()
+void CEnemyDamage::Update()
 {
 	timer += GameTime().GetDeltaFrameTime();
 	if (timer > 2.0f) {
@@ -23,6 +23,6 @@ void EnemyDamage::Update()
 	}
 
 	if (Pad().IsTriggerButton(enButtonA)) {
-		m_esm->ChangeState(EnemyState::enState_Death);
+		m_esm->ChangeState(CEnemyState::enState_Death);
 	}
 }

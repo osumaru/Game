@@ -6,19 +6,19 @@
 
 #include "IEnemyState.h"
 
-class EnemyDeath : public IEnemyState
+class CEnemyDeath : public IEnemyState
 {
 public:
 	//コンストラクタ
 	//enemy		エネミーのインターフェースクラスのポインタ
 	//esm		エネミーのステートマシンクラスのポインタ
-	EnemyDeath(IEnemy* enemy, EnemyStateMachine* esm) :
+	CEnemyDeath(IEnemy* enemy, CEnemyStateMachine* esm) :
 		IEnemyState(enemy, esm)
 	{
 	}
 
 	//デストラクタ
-	~EnemyDeath() {}
+	~CEnemyDeath() {}
 
 	//更新する前に一度だけ呼ばれる
 	bool Start();

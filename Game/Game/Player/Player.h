@@ -5,6 +5,7 @@ struct SplayerStatus
 	int Strength;			//攻撃力
 	int Defense;			//防御力
 	int	Health;				//体力
+	int MaxHealth;
 	int Level;				//レベル
 	int ExperiencePoint	;	//現在の経験値
 	int NextExp;			//レベルアップまでに必要な経験値
@@ -92,10 +93,17 @@ public:
 		return PlayerHeadPos;
 	}
 
+	void PlayerAttack();
 	//デバック用関数
 	void GetDamage()
 	{
 		m_status.Health -= 5;
+		m_isDamege = true;
+	}
+	//プレイヤーが生きているかの判定
+	bool GetIsDied()
+	{
+		return m_isDied;
 	}
 
 
@@ -109,6 +117,7 @@ private:
 		enPlayerAtack,
 		enPlayerDamage,
 		enPlayerAvoidance,
+		enPlayerDete,
 		enPlayerNum
 
 	};
@@ -121,7 +130,9 @@ private:
 	CSkinModel				m_skinmodel;									//スキンモデル
 	CSkinModel				m_Weaponskin;									//武器のスキンモデル
 	CCharacterController	m_characterController;							//キャラクターコントローラー
-	CCharacterController	m_WeponCharacterController;						//武器のキャラコン
+	
+	CBoxCollider			m_weponBoxCollider;
+	CRigidBody				m_weponRigitBody;
 
 	CPad					m_pad;									//パッド
 	CAnimation				m_animation;							//アニメーション
@@ -130,8 +141,14 @@ private:
 	float					m_slipSpeed = 2.0f;					//回避移動時のスピード
 	EnPlayerAnimeState		m_State = enPlayerStand;
 
-	const float				RUN_SPEED = 1.8f;
-	const float				WALK_SPEED = 200.0f;
+	const float				RUN_SPEED	= 1.8f;				//
+	const float				WALK_SPEED	= 200.0f;
+
+
+	bool					m_isDamege = false;
+	float					m_animetionFrame = 0.0f;
+	bool					m_isAttack = false;
+	bool					m_isDied = false;
 };
 
 static CPlayer& GetPlayer()

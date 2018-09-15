@@ -1,13 +1,13 @@
 #include "stdafx.h"
 #include "EnemyStateMachine.h"
 
-bool EnemyStateMachine::Start()
+bool CEnemyStateMachine::Start()
 {
-	ChangeState(EnemyState::enState_Idle);
+	ChangeState(CEnemyState::enState_Idle);
 	return true;
 }
 
-void EnemyStateMachine::ChangeState(EnemyState::EnState nextState)
+void CEnemyStateMachine::ChangeState(CEnemyState::EnState nextState)
 {
 	if (m_state == nextState) {
 		//同じステートなら返す
@@ -22,19 +22,22 @@ void EnemyStateMachine::ChangeState(EnemyState::EnState nextState)
 	m_state = nextState;
 
 	switch (m_state) {
-	case EnemyState::enState_Idle:
+	case CEnemyState::enState_Idle:
 		m_currentState = &m_enemyIdle;
 		break;
-	case EnemyState::enState_Walk:
+	case CEnemyState::enState_Walk:
 		m_currentState = &m_enemyWalk;
 		break;
-	case EnemyState::enState_Attack:
+	case CEnemyState::enState_Chase:
+		m_currentState = &m_enemyChase;
+		break;
+	case CEnemyState::enState_Attack:
 		m_currentState = &m_enemyAttack;
 		break;
-	case EnemyState::enState_Damage:
+	case CEnemyState::enState_Damage:
 		m_currentState = &m_enemyDamage;
 		break;
-	case EnemyState::enState_Death:
+	case CEnemyState::enState_Death:
 		m_currentState = &m_enemyDeath;
 		break;
 	}
@@ -43,7 +46,7 @@ void EnemyStateMachine::ChangeState(EnemyState::EnState nextState)
 	Add(m_currentState, 0);
 }
 
-void EnemyStateMachine::Release()
+void CEnemyStateMachine::Release()
 {
 	Delete(m_currentState);
 	Delete(this);

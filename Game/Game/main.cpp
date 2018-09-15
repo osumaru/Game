@@ -1,7 +1,8 @@
 #include "stdafx.h"
-#include "GameCamera.h"
+#include "../../Game/Game/Camera/GameCamera.h"
 #include "Player\Player.h"
 #include "Scene\GameScene.h"
+#include "Scene/SceneManager.h"
 
 using namespace std;
 int WINAPI wWinMain(
@@ -13,7 +14,8 @@ int WINAPI wWinMain(
 {
 	//Direct3D‚ğ‰Šú‰»
 	Engine().InitD3D(hInst);
-	New<CGameScene>(0)->Init();
+	//New<CGameScene>(0)->Init();
+	GetSceneManager().Init();
 	Engine().GameLoop();
 	return 0;
 }

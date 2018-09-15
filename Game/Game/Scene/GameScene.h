@@ -15,6 +15,11 @@ public:
 	//更新
 	void Update();
 
+	Map* GetMap()
+	{
+		return map;
+	}
+
 private:
 	Map* map = nullptr;			//マップ
 };

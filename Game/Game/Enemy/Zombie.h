@@ -6,14 +6,14 @@
 
 #include "Enemy/IEnemy.h"
 
-class Zombie : public IEnemy
+class CZombie : public IEnemy
 {
 public:
 	//コンストラクタ
-	Zombie();
+	CZombie();
 
 	//デストラクタ
-	~Zombie();
+	~CZombie();
 
 	//初期化
 	//position	座標

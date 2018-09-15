@@ -6,19 +6,19 @@
 
 #include "IEnemyState.h"
 
-class EnemyWalk : public IEnemyState
+class CEnemyWalk : public IEnemyState
 {
 public:
 	//コンストラクタ
 	//enemy		エネミーのインターフェースクラスのポインタ
 	//esm		エネミーのステートマシンクラスのポインタ
-	EnemyWalk(IEnemy* enemy, EnemyStateMachine* esm) :
+	CEnemyWalk(IEnemy* enemy, CEnemyStateMachine* esm) :
 		IEnemyState(enemy, esm)
 	{
 	}
 
 	//デストラクタ
-	~EnemyWalk() {}
+	~CEnemyWalk() {}
 
 	//更新する前に一度だけ呼ばれる
 	bool Start();
@@ -27,5 +27,6 @@ public:
 	void Update();
 
 private:
-
+	CVector3	m_destination;
+	const float m_speed = 2.0f;
 };

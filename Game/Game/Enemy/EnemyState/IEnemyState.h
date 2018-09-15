@@ -7,7 +7,7 @@
 #include "stdafx.h"
 
 class IEnemy;
-class EnemyStateMachine;
+class CEnemyStateMachine;
 
 class IEnemyState : public IGameObject
 {
@@ -15,7 +15,7 @@ public:
 	//コンストラクタ
 	//enemy		エネミーのインターフェースクラスのポインタ
 	//esm		エネミーのステートマシンクラスのポインタ
-	IEnemyState(IEnemy* enemy, EnemyStateMachine* esm) :
+	IEnemyState(IEnemy* enemy, CEnemyStateMachine* esm) :
 		m_enemy(enemy),
 		m_esm(esm)
 	{
@@ -29,5 +29,5 @@ public:
 
 protected:
 	IEnemy*				m_enemy = nullptr;	//エネミー
-	EnemyStateMachine*	m_esm = nullptr;	//ステートマシン
+	CEnemyStateMachine*	m_esm = nullptr;	//ステートマシン
 };

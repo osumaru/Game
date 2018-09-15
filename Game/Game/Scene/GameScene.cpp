@@ -6,7 +6,8 @@
 #include "../UI/WeaponSelect/WeaponSelect.h"
 #include "../UI/PlayerHp/PlayerHp.h"
 #include "../UI/Menu/Menu.h"
-#include"../GameCamera.h"
+#include "../UI/Result/Result.h"
+#include"../../Game/Camera/GameCamera.h"
 
 void CGameScene::Init()
 {
@@ -26,6 +27,9 @@ void CGameScene::Init()
 
 	CMenu* menu = New<CMenu>(0);
 	menu->Init();
+
+	CResult* result = New<CResult>(0);
+	result->Init();
 }
 
 void CGameScene::Update()

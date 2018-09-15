@@ -4,7 +4,7 @@
 
 #pragma once
 
-class EnemyState {
+class CEnemyState {
 public:
 	enum EnState {
 		enState_Idle,	//‘Ò‹@
@@ -12,6 +12,7 @@ public:
 		enState_Attack,	//UŒ‚
 		enState_Damage,	//ƒ_ƒ[ƒW
 		enState_Death,	//€–S
+		enState_Chase,	//’Ç]
 		enState_Invald,	//‰½‚à‚È‚¢
 	};
 };
