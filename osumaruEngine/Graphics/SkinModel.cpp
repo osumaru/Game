@@ -20,7 +20,9 @@ void CSkinModel::Load(const wchar_t* filePath, CAnimation* animation)
 	SSkinModelCB cb;
 	cb.worldMat = CMatrix::Identity;
 	cb.viewProjMat = CMatrix::Identity;
+	cb.isNormalMap = m_isNormalMap;
 	constantBuffer.Create(sizeof(SSkinModelCB), &cb);
+	m_lightCB.Create(sizeof(CLight), &m_light);
 
 	//ファイル名の拡張子(cmo)を除きtksを追加しスケルトンのファイル名を作成
 	size_t pos = wcslen(filePath);
@@ -69,6 +71,7 @@ void CSkinModel::Update(const CVector3& position, const CQuaternion& rotation, c
 
 void CSkinModel::Draw(const CMatrix& view, const CMatrix& projection)
 {
+
 	DirectX::CommonStates common(GetDevice());
 	CMatrix world = CMatrix::Identity;
 	SSkinModelCB cb;
@@ -76,9 +79,19 @@ void CSkinModel::Draw(const CMatrix& view, const CMatrix& projection)
 	viewProjMat.Mul(view, projection);
 	cb.viewProjMat = viewProjMat;
 	cb.worldMat = worldMatrix;
+	cb.isNormalMap = m_isNormalMap;
 	constantBuffer.Update(&cb);
+	m_lightCB.Update(&m_light);
 	ID3D11Buffer* cbBuffer = constantBuffer.GetBody();
 	GetDeviceContext()->VSSetConstantBuffers(0, 1, &cbBuffer);
+	GetDeviceContext()->PSSetConstantBuffers(0, 1, &cbBuffer);
+	cbBuffer = m_lightCB.GetBody();
+	GetDeviceContext()->PSSetConstantBuffers(1, 1, &cbBuffer);
+	if (m_pNormalTexture != nullptr)
+	{
+		ID3D11ShaderResourceView* srv = m_pNormalTexture->GetShaderResource();
+		GetDeviceContext()->PSSetShaderResources(11, 1, &srv);
+	}
 	if (m_skelton != nullptr)
 	{
 		m_skelton->Render();
@@ -96,4 +109,10 @@ const CMatrix& CSkinModel::FindBoneWorldMatrix(const wchar_t* boneName) const
 
 	}
 	return CMatrix::Identity;
+}
+
+void CSkinModel::LoadNormalmap(const wchar_t * filePath)
+{
+	m_pNormalTexture = TextureResource().LoadTexture(filePath);
+	m_isNormalMap = 1;
 }

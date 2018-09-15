@@ -1,5 +1,6 @@
 #pragma once
 #include "SkinModelEffectFactory.h"
+#include "Light.h"
 class CSkelton;
 class CAnimation;
 //スキンモデルクラス
@@ -12,6 +13,7 @@ public:
 	{
 		CMatrix worldMat;				//ワールド行列
 		CMatrix viewProjMat;			//ビュープロジェクション行列
+		int		isNormalMap;			//ノーマルマップがあるかのフラグ
 	};
 
 	//コンストラクタ
@@ -68,10 +70,25 @@ public:
 	ret			見つかった骨のワールド行列を返す、見つからなかったら単位行列を返す
 	*/
 	const CMatrix& FindBoneWorldMatrix(const wchar_t* boneName) const;
+
+	//ライトの設定
+	void SetLight(const CLight& light)
+	{
+		m_light = light;
+	}
+	/*
+	法線マップの読み込み
+
+	*/
+	void LoadNormalmap(const wchar_t* filePath);
 	
 private:
 	std::unique_ptr<CSkelton>		m_skelton = nullptr;				//スケルトン
 	CConstantBuffer					constantBuffer;						//定数バッファ
+	CConstantBuffer					m_lightCB;							//ライトのバッファ
+	CLight							m_light;							//ライト
 	DirectX::Model*					m_skinModel = nullptr;				//スキンモデル
 	CMatrix							worldMatrix = CMatrix::Identity;	//ワールド行列
+	CTexture*						m_pNormalTexture = nullptr;
+	int								m_isNormalMap = 0;
 };

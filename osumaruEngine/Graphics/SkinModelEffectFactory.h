@@ -15,6 +15,7 @@ public:
 	*/
 	std::shared_ptr<IEffect> __cdecl CreateEffect(_In_ const IEffectFactory::EffectInfo& info, _In_opt_ ID3D11DeviceContext* deviceContext)override;
 
+
 	/*
 	テクスチャを作る関数
 	name		テクスチャのファイル名

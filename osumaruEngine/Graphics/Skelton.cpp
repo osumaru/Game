@@ -179,5 +179,5 @@ void CSkelton::Render()
 		m_boneMat[i].Mul(m_bones[i]->GetInvMatrix(), m_bones[i]->GetWorldMatrix());
 	}
 	GetDeviceContext()->UpdateSubresource(m_structuredBuffer, 0, NULL, m_boneMat.get(), 0, 0);
-	GetDeviceContext()->VSSetShaderResources(0, 1, &m_shaderResourceView);
+	GetDeviceContext()->VSSetShaderResources(100, 1, &m_shaderResourceView);
 }

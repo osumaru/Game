@@ -5,7 +5,7 @@ CSkinModelEffect::CSkinModelEffect()
 {
 	textureResource = nullptr;
 	vsShader.Load("Assets/shader/model.fx", "VSSkinMain", CShader::enVS);
-	psShader.Load("Assets/shader/model.fx", "PSSkinMain", CShader::enPS);
+	psShader.Load("Assets/shader/model.fx", "PSMain", CShader::enPS);
 }
 
 void __cdecl ISkinModelEffect::Apply(_In_ ID3D11DeviceContext* deviceContext)
@@ -13,7 +13,7 @@ void __cdecl ISkinModelEffect::Apply(_In_ ID3D11DeviceContext* deviceContext)
 	//シェーダーを適用
 	if (textureResource != nullptr)
 	{
-		deviceContext->PSSetShaderResources(0, 1, &textureResource);
+		deviceContext->PSSetShaderResources(10, 1, &textureResource);
 	}
 	deviceContext->PSSetShader((ID3D11PixelShader*)psShader.GetBody(), nullptr, 0);
 	deviceContext->VSSetShader((ID3D11VertexShader*)vsShader.GetBody(), nullptr, 0);
@@ -24,7 +24,6 @@ void __cdecl ISkinModelEffect::GetVertexShaderBytecode(_Out_ void const** pShade
 	//シェーダーデータをコピー
 	*pShaderByteCode = vsShader.GetByteCode();
 	*pByteCodeLength = vsShader.GetByteCodeSize();
-
 }
 
 

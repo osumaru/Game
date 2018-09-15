@@ -50,6 +50,10 @@ void CGameObjectManager::Execute()
 
 void CGameObjectManager::Delete(IGameObject* deleteObject)
 {
+	if (deleteObject->m_isDelete)
+	{
+		return;
+	}
 	deleteObject->BeforeDead();
 	deleteObject->m_isDelete = true;
 }

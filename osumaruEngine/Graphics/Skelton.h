@@ -92,6 +92,7 @@ private:
 	CMatrix m_worldMatrix;					//ワールド行列
 	CMatrix m_invMatrix;					//バインドボーズの逆行列
 	std::vector<CBone*> m_boneChilds;		//子供
+
 };
 
 //スケルトン行列

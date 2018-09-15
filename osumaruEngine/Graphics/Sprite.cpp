@@ -126,6 +126,7 @@ void CSprite::Draw()
 	GetDeviceContext()->IASetInputLayout(m_vertexShader.GetInputlayOut());
 	ID3D11Buffer* buffer = m_cb.GetBody();
 	GetDeviceContext()->VSSetConstantBuffers(0, 1, &buffer);
+	GetDeviceContext()->PSSetConstantBuffers(0, 1, &buffer);
 	ID3D11ShaderResourceView* views[] = {m_pTexture->GetShaderResource()};
 	GetDeviceContext()->PSSetShaderResources(0, 1, views);
 	GetDeviceContext()->DrawIndexed(m_primitive.GetIndexNum(), 0, 0);
