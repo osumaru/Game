@@ -26,11 +26,22 @@ void CResult::Update()
 
 
 }
-
-void CResult::Draw()
+void CResult::AfterDraw()
 {
 	//ƒvƒŒƒCƒ„[‚ª¶‚«‚Ä‚¢‚é‚©‚Ì”»’è
 	if (!GetPlayer().GetIsDied()) { return; }
+	m_alphaTime += GameTime().GetDeltaFrameTime() / 5.0f;
+	if (m_alphaTime >= 1.0f)
+	{
+		m_alphaTime = 1.0f;
+	}
+	m_result.SetAlpha(m_alphaTime);
 	m_result.Draw();
+
+}
+
+void CResult::Draw()
+{
+	
 
 }

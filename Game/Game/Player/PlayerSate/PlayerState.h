@@ -13,7 +13,7 @@ public:
 		enPlayerAttack,		//攻撃アニメーション
 		enPlayerDamage,		//ダメージアニメーション
 		enPlayerAvoidance,	//回避アニメーション
-		enPlayerDete,		//死亡アニメーション
+		enPlayerDied,		//死亡アニメーション
 		enPlayerArroAttack,	//弓のアニメーション
 		enPlayerNum	,		//アニメーションの数
 		enState_Invald,		//何もない

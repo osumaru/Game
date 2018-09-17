@@ -37,23 +37,23 @@ void CPlayerStateMachine::ChangeState(CPlayerState::EnPlayerState nextState)
 
 	switch (m_state) {
 	case CPlayerState::enPlayerStand:
-		m_currentState = &m_playerStand;
+		m_currentState = &m_playerStand;	//待機アニメーションに遷移
 		break;
 	case CPlayerState::enPlayerWalk:
-		m_currentState = &m_playerWalk;
+		m_currentState = &m_playerWalk;		//歩行アニメーションに遷移
 		break;
 	case CPlayerState::enPlayerRun:
-		m_currentState = &m_playerRun;
+		m_currentState = &m_playerRun;		//走りアニメーションに遷移
 		break;
-	/*case CPlayerState::enState_Attack:
-		m_currentState = &m_enemyAttack;
+	case CPlayerState::enPlayerAttack:
+		m_currentState = &m_playerAttack;	//攻撃アニメーションに遷移
 		break;
-	case CPlayerState::enState_Damage:
-		m_currentState = &m_enemyDamage;
+	case CPlayerState::enPlayerDamage:
+		m_currentState = &m_playerDamege;	//ダメージアニメーションに遷移
 		break;
-	case CPlayerState::enState_Death:
-		m_currentState = &m_enemyDeath;
-		break;*/
+	case CPlayerState::enPlayerDied:
+		m_currentState = &m_playerDied;		//死亡アニメーションに遷移
+		break;
 	}
 
 	//変更したステートをゲームオブジェクトに追加

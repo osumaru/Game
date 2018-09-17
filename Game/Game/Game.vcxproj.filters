@@ -177,6 +177,15 @@
     <ClCompile Include="Player\PlayerSate\PlayerStateMachine.cpp">
       <Filter>ソース ファイル\Player\PlayerSate</Filter>
     </ClCompile>
+    <ClCompile Include="Player\PlayerSate\PlayerAttack.cpp">
+      <Filter>ソース ファイル\Player\PlayerSate</Filter>
+    </ClCompile>
+    <ClCompile Include="Player\PlayerSate\PlayerDied.cpp">
+      <Filter>ソース ファイル\Player\PlayerSate</Filter>
+    </ClCompile>
+    <ClCompile Include="Player\PlayerSate\PlayerDamage.cpp">
+      <Filter>ソース ファイル\Player\PlayerSate</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -298,6 +307,15 @@
     </ClInclude>
     <ClInclude Include="Enemy\EnemyState\IEnemyState.h">
       <Filter>ソース ファイル\Enemy\EnemyState</Filter>
+    </ClInclude>
+    <ClInclude Include="Player\PlayerSate\PlayerAttack.h">
+      <Filter>ソース ファイル\Player\PlayerSate</Filter>
+    </ClInclude>
+    <ClInclude Include="Player\PlayerSate\PlayerDied.h">
+      <Filter>ソース ファイル\Player\PlayerSate</Filter>
+    </ClInclude>
+    <ClInclude Include="Player\PlayerSate\PlayerDamage.h">
+      <Filter>ソース ファイル\Player\PlayerSate</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

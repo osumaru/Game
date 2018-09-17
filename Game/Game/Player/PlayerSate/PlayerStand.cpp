@@ -22,15 +22,26 @@ bool CPlayerStand::Start()
 
 void CPlayerStand::Update()
 {
+	if (GetPlayer().GetStatus().Health <= 0)
+	{
+		GetPlayer().SetPlayerStateMachine().ChangeState(CPlayerState::enPlayerDied);
+	}
+
+	else if (GetPlayer().GetIsDamage())
+	{
+		GetPlayer().SetPlayerStateMachine().ChangeState(CPlayerState::enPlayerDamage);
+	}
+
+	else if (Pad().IsTriggerButton(enButtonX))
+	{
+		GetPlayer().SetPlayerStateMachine().ChangeState(CPlayerState::enPlayerAttack);
+	}
+
 	//移動の入力があるなら歩きアニメーションに遷移
-	if (Pad().GetLeftStickX() != 0 || Pad().GetLeftStickY() != 0)
+	else if (Pad().GetLeftStickX() != 0 || Pad().GetLeftStickY() != 0)
 	{
 		GetPlayer().SetPlayerStateMachine().ChangeState(CPlayerState::enPlayerWalk);
 
 	}
-	/*else if ((GetPlayer().GetMoveSpeed().Length()) >= 0.3f)
-	{
-		GetPlayer().SetPlayerStateMachine().ChangeState(CPlayerState::enPlayerRun);
-
-	}*/
+	
 }

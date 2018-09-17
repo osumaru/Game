@@ -137,6 +137,32 @@ public:
 	{
 		return m_isDied;
 	}
+	//死亡したかを設定
+	void SetIsDeid(const bool SetDied)
+	{
+		m_isDied = SetDied;
+	}
+	//
+	//ダメージを受けたかの判定
+	bool GetIsDamage()
+	{
+		return m_isDamege;
+	}
+	void SetIsDamage(const bool SetDamage)
+	{
+		m_isDamege = SetDamage;
+	}
+
+	//攻撃をしたかの設定
+	void SetAttack(const bool SetA)
+	{
+		m_isAttack = SetA;
+	}
+	//武器の剛体の取得
+	CRigidBody& GetWeponBody()
+	{
+		return m_weponRigitBody;
+	}
 	
 	CPlayerStateMachine& SetPlayerStateMachine()
 	{
@@ -154,6 +180,7 @@ private:
 	CSkinModel				m_skinmodel;									//スキンモデル
 	CSkinModel				m_Weaponskin;									//武器のスキンモデル
 	CCharacterController	m_characterController;							//キャラクターコントローラー
+	CLight					m_light;
 	
 	CBoxCollider			m_weponBoxCollider;
 	CRigidBody				m_weponRigitBody;

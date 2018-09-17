@@ -13,6 +13,8 @@ void CPlayer::Init(CVector3 position)
 	m_position = position;
 	m_characterController.Init(0.3f, 1.0f,m_position);
 	m_characterController.SetGravity(-9.8f);
+	m_light.SetAmbientLight({ 1.0f,1.0f,1.0f,1.0f});
+	m_skinmodel.SetLight(m_light);
 
 	m_weponBoxCollider.Create({ 0.05f,0.4f,0.05f });
 	SRigidBodyInfo rInfo;

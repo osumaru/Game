@@ -4,6 +4,9 @@
 #include"PlayerStand.h"
 #include"PlayerWalk.h"
 #include"PlayerRun.h"
+#include "PlayerAttack.h"
+#include "PlayerDamage.h"
+#include "PlayerDied.h"
 
 class CPlayerStateMachine	:public IGameObject
 {
@@ -30,5 +33,8 @@ private:
 	CPlayerStand					m_playerStand;
 	CPlayerWalk						m_playerWalk;
 	CPlayerRun						m_playerRun;
+	CPlayerAttack					m_playerAttack;
+	CPlayerDamage					m_playerDamege;
+	CPlayerDied						m_playerDied;
 };
 
