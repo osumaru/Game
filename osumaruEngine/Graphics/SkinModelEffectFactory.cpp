@@ -20,7 +20,7 @@ std::shared_ptr<DirectX::IEffect> __cdecl CSkinModelEffectFactory::CreateEffect(
 	{
 		wchar_t filePath[256];
 		swprintf(filePath, L"Assets/modelData/%s", info.diffuseTexture);
-		EffectFactory::CreateTexture(filePath, GetDeviceContext(), &view);
+		CreateTexture(filePath, GetDeviceContext(), &view);
 		effect->SetTexture(view);
 	}
 	return effect;

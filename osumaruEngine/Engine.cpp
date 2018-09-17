@@ -146,7 +146,20 @@ void CEngine::InitD3D(HINSTANCE& hInst)
 	rasterizerDesc.CullMode = D3D11_CULL_FRONT;
 	m_pD3DDevice->CreateRasterizerState(&rasterizerDesc, &rasterizerState);
 	m_pDeviceContext->RSSetState(rasterizerState);
-	
+	ID3D11BlendState* blendState;
+	D3D11_BLEND_DESC blendDesc;
+	blendDesc.AlphaToCoverageEnable = false;
+	blendDesc.IndependentBlendEnable = false;
+	blendDesc.RenderTarget[0].BlendEnable = true;
+	blendDesc.RenderTarget[0].SrcBlend = D3D11_BLEND_SRC_COLOR;
+	blendDesc.RenderTarget[0].DestBlend = D3D11_BLEND_DEST_COLOR;
+	blendDesc.RenderTarget[0].BlendOp = D3D11_BLEND_OP_ADD;
+	blendDesc.RenderTarget[0].DestBlendAlpha = D3D11_BLEND_DEST_ALPHA;
+	blendDesc.RenderTarget[0].SrcBlendAlpha = D3D11_BLEND_SRC_ALPHA;
+	blendDesc.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP_ADD;
+	blendDesc.RenderTarget[0].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;
+	m_pD3DDevice->CreateBlendState(&blendDesc, &blendState);
+	m_pDeviceContext->OMSetBlendState(blendState, NULL, 0);
 	// ビューポート設定
 	D3D11_VIEWPORT vp;
 	vp.TopLeftX = 0;

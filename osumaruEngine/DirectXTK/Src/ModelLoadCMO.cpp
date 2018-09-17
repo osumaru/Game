@@ -684,10 +684,9 @@ std::unique_ptr<Model> DirectX::Model::CreateFromCMO(
                 info.specularColor = XMFLOAT3( m.pMaterial->Specular.x, m.pMaterial->Specular.y, m.pMaterial->Specular.z );
                 info.emissiveColor = XMFLOAT3( m.pMaterial->Emissive.x, m.pMaterial->Emissive.y, m.pMaterial->Emissive.z );
                 info.diffuseTexture = m.texture[0].c_str();
-
+				info.normalTexture = nullptr;
                 m.effect = fxFactory.CreateEffect( info, nullptr );
             }
-
 			CreateInputLayout( d3dDevice, m.effect.get(), &m.il, enableSkinning );
         }
 

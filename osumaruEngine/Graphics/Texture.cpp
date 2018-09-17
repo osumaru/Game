@@ -27,7 +27,8 @@ CTexture::~CTexture()
 
 void CTexture::Load(const wchar_t* filepath)
 {
-	CreateWICTextureFromFile(GetDevice(), filepath, &m_pTexture, &m_pShaderResource);
+	HRESULT hr;
+	hr = CreateWICTextureFromFile(GetDevice(), filepath, &m_pTexture, &m_pShaderResource);
 }
 
 void CTexture::Create(int width, int height, EnTextureType textureType, DXGI_FORMAT format)
