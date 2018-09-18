@@ -18,4 +18,13 @@ public:
 		enPlayerNum	,		//アニメーションの数
 		enState_Invald,		//何もない
 	};
+
+	enum EnPlayerWepon
+	{
+		enSword,			//片手剣
+		enLongSword,		//両手剣
+		enArro,				//弓矢
+		enTwinSword,		//二刀
+
+	};
 };

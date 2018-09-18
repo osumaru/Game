@@ -5,6 +5,7 @@
 #pragma once
 
 class Map;
+class CWeaponSelect;
 
 class CGameScene : public IGameObject
 {
@@ -20,6 +21,12 @@ public:
 		return map;
 	}
 
+	CWeaponSelect*	GetWeaponSelect()
+	{
+		return m_weaponSelect;
+	}
+
 private:
 	Map* map = nullptr;			//ƒ}ƒbƒv
+	CWeaponSelect* m_weaponSelect = nullptr;
 };

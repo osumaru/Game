@@ -41,7 +41,7 @@ void CNinja::Update()
 	m_characterController.Execute(GameTime().GetDeltaFrameTime());
 	m_position = m_characterController.GetPosition();
 
-	m_animation.Update(GameTime().GetDeltaFrameTime());
+	m_animation.Update(GameTime().GetDeltaFrameTime() * 2.0f);
 	m_skinModel.Update(m_position, m_rotation, { 1.0f, 1.0f, 1.0f }, true);
 }
 

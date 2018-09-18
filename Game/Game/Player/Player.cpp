@@ -8,12 +8,21 @@
 
 void CPlayer::Init(CVector3 position)
 {
+	
 	m_skinmodel.Load(L"Assets/modelData/Player.cmo", &m_animation);
-	m_Weaponskin.Load(L"Assets/modelData/LargeSword.cmo", NULL);
+	m_skinmodel.LoadNormalmap(L"Assets/modelData/Player_normal.png");
+	m_Weaponskin[0].Load(L"Assets/modelData/Sword.cmo", NULL);
+	m_Weaponskin[1].Load(L"Assets/modelData/LargeSword.cmo", NULL);
+	m_Weaponskin[2].Load(L"Assets/modelData/LongBow.cmo", NULL);
+	m_Weaponskin[3].Load(L"Assets/modelData/TwinSword.cmo", NULL);
+
 	m_position = position;
 	m_characterController.Init(0.3f, 1.0f,m_position);
 	m_characterController.SetGravity(-9.8f);
-	m_light.SetAmbientLight({ 1.0f,1.0f,1.0f,1.0f});
+	//ライトの設定
+	m_light.SetAmbientLight({ 0.5f,0.5f,0.5f,1.0f});
+	m_light.SetDiffuseLight(0, { 1.0f,1.0f,1.0f,1.0f });
+	/*m_light.SetDiffuseLightDir(0, { 0.0707f,0.0f,0.707f,1.0f });*/
 	m_skinmodel.SetLight(m_light);
 
 	m_weponBoxCollider.Create({ 0.05f,0.4f,0.05f });
@@ -88,7 +97,7 @@ void CPlayer::Update()
 	}
 	
 		//スキンモデルの更新
-		m_Weaponskin.Update(m_WeaponPosition, m_WeaponRotation, { 1.0f, 1.0f, 1.0f }, true);
+		m_Weaponskin[m_WeaponState].Update(m_WeaponPosition, m_WeaponRotation, { 1.0f, 1.0f, 1.0f }, true);
 		m_skinmodel.Update(m_position, m_rotation, { 1.0f, 1.0f, 1.0f }, true);
 		
 
@@ -103,16 +112,16 @@ void CPlayer::Draw()
 	//m_weponRigitBody.Draw();
 	if (m_isAttack)
 	{
-		CVector3 weponUpVec = { m_Weaponskin.GetWorldMatrix().m[2][0],m_Weaponskin.GetWorldMatrix().m[2][1],m_Weaponskin.GetWorldMatrix().m[2][2] };
+		CVector3 weponUpVec = { m_Weaponskin[m_WeaponState].GetWorldMatrix().m[2][0],m_Weaponskin[m_WeaponState].GetWorldMatrix().m[2][1],m_Weaponskin[m_WeaponState].GetWorldMatrix().m[2][2] };
 		weponUpVec *= 0.7f;
 		m_WeaponPosition.Add(weponUpVec);
 		m_weponRigitBody.SetPosition(m_WeaponPosition);
 		m_weponRigitBody.SetRotation(m_WeaponRotation);
-		m_Weaponskin.Draw(GetGameCamera().GetViewMatrix(), GetGameCamera().GetProjectionMatrix());
+		m_Weaponskin[m_WeaponState].Draw(GetGameCamera().GetViewMatrix(), GetGameCamera().GetProjectionMatrix());
 
 	}
 
-	m_Weaponskin.Draw(GetGameCamera().GetViewMatrix(), GetGameCamera().GetProjectionMatrix());
+	m_Weaponskin[m_WeaponState].Draw(GetGameCamera().GetViewMatrix(), GetGameCamera().GetProjectionMatrix());
 	
 }
 
@@ -611,7 +620,7 @@ void CPlayer::PlayerAttack()
 		EnemyVec.y += 1.3f;
 		EnemyVec -= m_WeaponPosition;
 		float len = EnemyVec.Length();
-		
+
 		if (fabs(len) < 0.3f)
 		{
 			

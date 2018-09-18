@@ -19,8 +19,8 @@ void CGameScene::Init()
 
 	GetGameCamera().Init();
 
-	CWeaponSelect* weaponSelect = New<CWeaponSelect>(0);
-	weaponSelect->Init();
+	m_weaponSelect = New<CWeaponSelect>(0);
+	m_weaponSelect->Init();
 
 	CPlayerHp* playerHp = New<CPlayerHp>(0);
 	playerHp->Init();
