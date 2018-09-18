@@ -2,6 +2,8 @@
 #include "PlayerStand.h"
 #include "IPlayerState.h"
 #include "../Player.h"
+#include "../../UI/WeaponSelect/WeaponSelect.h"
+#include"../../Scene/SceneManager.h"
 
 
 CPlayerStand::CPlayerStand()
@@ -22,16 +24,18 @@ bool CPlayerStand::Start()
 
 void CPlayerStand::Update()
 {
+	ChangeWepon();
+	//€–S‚µ‚½ê‡‚Ìˆ—
 	if (GetPlayer().GetStatus().Health <= 0)
 	{
 		GetPlayer().SetPlayerStateMachine().ChangeState(CPlayerState::enPlayerDied);
 	}
-
+	//ƒ_ƒ[ƒW‚ğó‚¯‚½ê‡‚Ìˆ—
 	else if (GetPlayer().GetIsDamage())
 	{
 		GetPlayer().SetPlayerStateMachine().ChangeState(CPlayerState::enPlayerDamage);
 	}
-
+	//UŒ‚‚ğ‚µ‚½‚Ìˆ—
 	else if (Pad().IsTriggerButton(enButtonX))
 	{
 		GetPlayer().SetPlayerStateMachine().ChangeState(CPlayerState::enPlayerAttack);
@@ -44,4 +48,9 @@ void CPlayerStand::Update()
 
 	}
 	
+}
+void CPlayerStand::ChangeWepon()
+{
+	GetPlayer().SetChangeWeapon(GetSceneManager().GetGameScene().GetWeaponSelect()->GetWeapon());
+
 }

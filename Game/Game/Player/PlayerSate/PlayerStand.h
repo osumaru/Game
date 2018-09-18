@@ -8,5 +8,6 @@ public:
 	~CPlayerStand();
 	bool Start();
 	void Update();
+	void ChangeWepon();
 };
 

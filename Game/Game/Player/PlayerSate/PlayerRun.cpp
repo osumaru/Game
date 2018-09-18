@@ -20,7 +20,18 @@ bool CPlayerRun::Start()
 
 void CPlayerRun::Update()
 {
-	if (fabs(GetPlayer().GetMoveSpeed().Length()) == 0.0f)
+
+	if (Pad().IsTriggerButton(enButtonX))
+	{
+		GetPlayer().SetPlayerStateMachine().ChangeState(CPlayerState::enPlayerAttack);
+	}
+
+	else if (fabs(GetPlayer().GetMoveSpeed().Length()) < 3.0f)
+	{
+		GetPlayer().SetPlayerStateMachine().ChangeState(CPlayerState::enPlayerWalk);
+	}
+
+	else if (fabs(GetPlayer().GetMoveSpeed().Length()) == 0.0f)
 	{
 		GetPlayer().SetPlayerStateMachine().ChangeState(CPlayerState::enPlayerStand);
 	}

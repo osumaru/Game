@@ -28,6 +28,11 @@ public:
 		enWeaponNum
 	};
 
+	int GetWeapon()
+	{
+		return weaponNumberOld;
+	}
+
 private:
 	CSprite		m_weapon[enWeaponNum];			//•Ší
 	CTexture	m_weaponTexture[enWeaponNum];

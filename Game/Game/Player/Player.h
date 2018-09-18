@@ -35,6 +35,15 @@ public:
 
 	};
 
+	enum EnPlayerWepon
+	{
+		enSword,			//片手剣
+		enLongSword,		//両手剣
+		enArro,				//弓矢
+		enTwinSword,		//二刀
+
+	};
+
 	//プレイヤーの初期化
 	void Init(CVector3 position);
 
@@ -148,6 +157,7 @@ public:
 	{
 		return m_isDamege;
 	}
+	//ダメージを受けたかの設定
 	void SetIsDamage(const bool SetDamage)
 	{
 		m_isDamege = SetDamage;
@@ -163,10 +173,15 @@ public:
 	{
 		return m_weponRigitBody;
 	}
-	
+	//ステートマシーンのしゅとく
 	CPlayerStateMachine& SetPlayerStateMachine()
 	{
 		return m_PlayerStateMachine;
+	}
+
+	void SetChangeWeapon(const int changeWeapon)
+	{
+		m_WeaponState = (EnPlayerWepon)changeWeapon;
 	}
 
 private:
@@ -178,7 +193,7 @@ private:
 	CQuaternion				m_rotation = CQuaternion::Identity;				//回転
 	CQuaternion				m_WeaponRotation = CQuaternion::Identity;		//武器の回転
 	CSkinModel				m_skinmodel;									//スキンモデル
-	CSkinModel				m_Weaponskin;									//武器のスキンモデル
+	CSkinModel				m_Weaponskin[4];									//武器のスキンモデル
 	CCharacterController	m_characterController;							//キャラクターコントローラー
 	CLight					m_light;
 	
@@ -191,7 +206,9 @@ private:
 	bool					m_isSlip = false;						//スリップ判定
 	float					m_slipSpeed = 2.0f;						//回避移動時のスピード
 	EnPlayerAnimeState		m_State = enPlayerStand;				//アニメーションを遷移させるための変数
-	const float				RUN_SPEED	= 2.8f;				
+	EnPlayerWepon			m_WeaponState = EnPlayerWepon::enArro;
+
+	const float				RUN_SPEED	= 1.4f;				
 	const float				WALK_SPEED	= 200.0f;
 	bool					m_isDamege = false;
 	float					m_animetionFrame = 0.0f;
