@@ -8,6 +8,7 @@
 #include "../UI/DamageNumber/DamageNumber.h"
 #include "EnemyTurn.h"
 #include "EnemySearch.h"
+class CEnemyGroup;
 
 class IEnemy : public IGameObject
 {
@@ -44,12 +45,6 @@ public:
 	void SetRotation(const CQuaternion& rotation)
 	{
 		m_rotation = rotation;
-	}
-
-	//初期座標を取得
-	const CVector3& GetInitPosition() const
-	{
-		return m_initPosition;
 	}
 
 	//移動速度を取得
@@ -108,6 +103,19 @@ public:
 		m_damageNumber.Reset();
 	}
 
+	//所属するグループを設定
+	//enemyGroup	エネミーの所属するグループのポインタ
+	void SetEnemyGroup(CEnemyGroup* enemyGroup)
+	{
+		m_enemyGroup = enemyGroup;
+	}
+
+	//所属しているグループを取得
+	CEnemyGroup* GetEnemyGroup()
+	{
+		return m_enemyGroup;
+	}
+
 	//攻撃が当たったか
 	bool IsAttackHit() const
 	{
@@ -150,9 +158,9 @@ protected:
 	CEnemyTurn				m_enemyTurn;			//向きを回転
 	CEnemySearch			m_enemySearch;			//プレイヤーを探索
 	CDamegeNumber			m_damageNumber;			//ダメージ数値
+	CEnemyGroup*			m_enemyGroup;			//エネミーグループ
 	CVector3				m_position;				//座標
 	CQuaternion				m_rotation;				//回転
-	CVector3				m_initPosition;			//初期座標
 	int						m_animNum = 0;			//再生するアニメーション番号
 	int						m_animNumOld = 0;		//1つ前のアニメーション番号
 	bool					m_isAttackHit = false;	//攻撃が当たったか

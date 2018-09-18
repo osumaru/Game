@@ -15,7 +15,6 @@ void CZombie::Init(CVector3 position)
 	//モデルを読み込む
 	m_skinModel.Load(L"Assets/modelData/zombi.cmo", &m_animation);
 	m_position = position;
-	m_initPosition = m_position;
 	m_characterController.Init(0.5f, 0.9f, m_position);
 	m_characterController.SetGravity(-90.0f);
 	wchar_t* animClip[5] = { 
@@ -33,6 +32,13 @@ void CZombie::Init(CVector3 position)
 	Add(&m_enemySearch, 0);
 	//ダメージ表示の初期化
 	m_damageNumber.Init();
+}
+
+bool CZombie::Start()
+{
+	m_enemyStateMachine.SetEnemyGroup(m_enemyGroup);
+
+	return true;
 }
 
 void CZombie::Update()

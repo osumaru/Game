@@ -13,6 +13,8 @@
 #include "IEnemyState.h"
 #include "EnemyState.h"
 
+class CEnemyGroup;
+
 class CEnemyStateMachine : public IGameObject
 {
 public:
@@ -45,6 +47,13 @@ public:
 	//解放
 	void Release();
 
+	//所属するグループを設定
+	//enemyGroup		所属するグループのポインタ
+	void SetEnemyGroup(CEnemyGroup* enemyGroup)
+	{
+		m_enemyGroup = enemyGroup;
+	}
+
 private:
 	CEnemyState::EnState	m_state = CEnemyState::enState_Invald;	//エネミーの状態
 	IEnemyState*			m_currentState = nullptr;				//現在の状態
@@ -54,4 +63,5 @@ private:
 	CEnemyAttack			m_enemyAttack;							//攻撃
 	CEnemyDamage			m_enemyDamage;							//ダメージ
 	CEnemyDeath				m_enemyDeath;							//死亡
+	CEnemyGroup*			m_enemyGroup = nullptr;					//エネミーグループ
 };

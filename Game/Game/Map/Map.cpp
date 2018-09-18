@@ -8,6 +8,7 @@
 #include "../Enemy/Ninja.h"
 #include "../Enemy/Samurai.h"
 #include "../Enemy/Warrok.h"
+#include "../Enemy/EnemyGroup.h"
 
 std::vector<std::vector<SMapChipInfo>> mapChipInfo = 
 {
@@ -44,9 +45,13 @@ void Map::Init(int stageNum)
 {
 	std::map<int, std::vector<SMapChipInfo>> instancingData;
 
+	std::vector<CEnemyGroup*> enemyGroupList;
+	//std::vector<IEnemy*> enemyList;
+
 	for (SMapChipInfo& mInfo : mapChipInfo[stageNum])
 	{
 		MapChip* mapChip = nullptr;
+		CEnemyGroup* enemyGroup = nullptr;
 		IEnemy* enemy = nullptr;
 
 		switch (mInfo.m_tag)
@@ -60,22 +65,27 @@ void Map::Init(int stageNum)
 		case enMapTagZombie:
 			enemy = New<CZombie>(1);
 			enemy->Init(mInfo.m_position);
-			enemyList.push_back(enemy);
+			m_enemyList.push_back(enemy);
 			break;
 		case enMapTagNinja:
 			enemy = New<CNinja>(1);
 			enemy->Init(mInfo.m_position);
-			enemyList.push_back(enemy);
+			m_enemyList.push_back(enemy);
 			break;
 		case enMapTagSamurai:
 			enemy = New<CSamurai>(1);
 			enemy->Init(mInfo.m_position);
-			enemyList.push_back(enemy);
+			m_enemyList.push_back(enemy);
 			break;
 		case enMapTagWarrok:
 			enemy = New<CWarrok>(1);
 			enemy->Init(mInfo.m_position);
-			enemyList.push_back(enemy);
+			m_enemyList.push_back(enemy);
+			break;
+		case enMapTagEnemyGroup:
+			enemyGroup = New<CEnemyGroup>(1);
+			enemyGroup->Init(mInfo.m_position);
+			enemyGroupList.push_back(enemyGroup);
 			break;
 		default:
 			mapChip = New<StaticMapObject>(0);
@@ -91,6 +101,29 @@ void Map::Init(int stageNum)
 			iterator--;
 			mapChip->SetIterator(this, iterator);
 		}
+	}
+
+	//Š‘®‚·‚éƒOƒ‹[ƒv‚ðŒˆ‚ß‚é
+	for (IEnemy* enemy : m_enemyList) 
+	{
+		CEnemyGroup* group = nullptr;
+		for (CEnemyGroup* enemyGroup : enemyGroupList) {
+			if (group == nullptr) 
+			{
+				group = enemyGroup;
+				continue;
+			}
+			CVector3 distance = group->GetPosition();
+			distance -= enemy->GetPosition();
+			CVector3 distance2 = enemyGroup->GetPosition();
+			distance2 -= enemy->GetPosition();
+			if (distance2.Length() <= distance.Length()) 
+			{
+				group = enemyGroup;
+			}
+		}
+		enemy->SetEnemyGroup(group);
+		group->Add(enemy);
 	}
 }
 

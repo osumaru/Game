@@ -2,6 +2,7 @@
 #include "EnemySearch.h"
 #include "IEnemy.h"
 #include "../Player/Player.h"
+#include "EnemyGroup.h"
 
 void CEnemySearch::Update()
 {
@@ -23,9 +24,48 @@ void CEnemySearch::Update()
 
 	if (fabsf(angle) < CMath::DegToRad(30.0f) && length < 8.0f) {
 		//プレイヤーを発見した
-		m_enemy->SetIsFind(true);
+		std::list<IEnemy*> groupList = m_enemy->GetEnemyGroup()->GetGroupList();
+		for (auto& enemy : groupList) 
+		{
+			//グループ全員に通知
+			enemy->SetIsFind(true);
+		}
 	}
 	else {
-		m_enemy->SetIsFind(false);
+		//所属するグループのリストを取得
+		std::list<IEnemy*> groupList = m_enemy->GetEnemyGroup()->GetGroupList();
+		std::list<float> lengthList;
+
+		for (auto& enemy : groupList) 
+		{
+			//グループ全員とプレイヤーの距離を計算
+			CVector3 enemyPos = enemy->GetPosition();
+			CVector3 toPlayerPos = GetPlayer().GetPosition() - enemyPos;
+			float length = toPlayerPos.Length();
+			lengthList.push_back(length);
+		}
+
+		bool isFar = false;
+		//グループ全員がプレイヤーから遠いか判定
+		for (float& len : lengthList)
+		{
+			if (len > 8.0f) {
+				isFar = true;
+			}
+			else {
+				//グループの一人でも近ければそのまま
+				isFar = false;
+				break;
+			}
+		}
+
+		if (isFar) {
+			//グループ全員がプレイヤーから遠い
+			for (auto& enemy : groupList)
+			{
+				//グループ全員に通知
+				enemy->SetIsFind(false);
+			}
+		}
 	}
 }

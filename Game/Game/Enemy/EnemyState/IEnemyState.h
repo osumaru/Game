@@ -8,6 +8,7 @@
 
 class IEnemy;
 class CEnemyStateMachine;
+class CEnemyGroup;
 
 class IEnemyState : public IGameObject
 {
@@ -27,7 +28,15 @@ public:
 	//更新
 	virtual void Update() = 0;
 
+	//所属するグループを設定
+	//enemyGroup	所属するグループのポインタ
+	void SetEnemyGroup(CEnemyGroup* enemyGroup)
+	{
+		m_enemyGroup = enemyGroup;
+	}
+
 protected:
-	IEnemy*				m_enemy = nullptr;	//エネミー
-	CEnemyStateMachine*	m_esm = nullptr;	//ステートマシン
+	IEnemy*				m_enemy = nullptr;		//エネミー
+	CEnemyStateMachine*	m_esm = nullptr;		//ステートマシン
+	CEnemyGroup*		m_enemyGroup = nullptr;	//エネミーグループ
 };
