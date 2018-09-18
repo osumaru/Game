@@ -171,7 +171,7 @@ void CPlayer::Move()
 			
 		}
 
-		else if (m_State == enPlayerJump)
+		else if (Pad().IsTriggerButton(enButtonY))
 		{
 
 			m_moveSpeed.y = 10.0f;
