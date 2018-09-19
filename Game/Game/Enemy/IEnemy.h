@@ -42,6 +42,7 @@ public:
 	}
 
 	//クォータニオンを設定
+	//rotation		クォータニオン
 	void SetRotation(const CQuaternion& rotation)
 	{
 		m_rotation = rotation;
@@ -54,6 +55,7 @@ public:
 	}
 
 	//移動速度を設定
+	//moveSpeed		移動速度
 	void SetMoveSpeed(const CVector3& moveSpeed)
 	{
 		m_characterController.SetMoveSpeed(moveSpeed);
@@ -139,11 +141,13 @@ public:
 	{
 		m_isFind = isFind;
 	}
+
 	//ダメージを受けたか
 	bool IsDamage()const
 	{
 		return m_isDamage;
 	}
+
 	//ダメージを受けたかのフラグを設定
 	void SetIsDamage(bool isDamage)
 	{

@@ -56,6 +56,10 @@ void CEnemyWalk::Update()
 	//移動速度を設定
 	m_enemy->SetMoveSpeed(moveSpeed);
 
+	if (m_enemy->IsDamage()) {
+		//ダメージを受けた
+		m_esm->ChangeState(CEnemyState::enState_Damage);
+	}
 	if (isMoveEnd) {
 		//移動先まで移動したら止まる
 		m_esm->ChangeState(CEnemyState::enState_Idle);

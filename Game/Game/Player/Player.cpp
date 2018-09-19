@@ -644,7 +644,7 @@ void CPlayer::PlayerAttack()
 		EnemyVec -= m_weaponPosition;
 		float len = EnemyVec.Length();
 
-		if (fabs(len) < 0.3f)
+		if (fabs(len) < /*0.3f*/1.5f)
 		{
 			
 			enemys->SetIsDamage(true);

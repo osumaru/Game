@@ -1,9 +1,12 @@
 #include "stdafx.h"
 #include "EnemyDamage.h"
 #include "../IEnemy.h"
+#include "../../Player/Player.h"
 
 bool CEnemyDamage::Start()
 {
+	m_enemy->SetIsDamage(false);
+
 	//ダメージアニメーションを再生
 	m_enemy->PlayAnimation(CEnemyState::enState_Damage);
 
@@ -22,7 +25,11 @@ void CEnemyDamage::Update()
 		timer = 0.0f;
 	}
 
-	if (Pad().IsTriggerButton(enButtonA)) {
-		m_esm->ChangeState(CEnemyState::enState_Death);
+	CVector3 playerPos = GetPlayer().GetPosition();
+	CVector3 toPlayerPos = playerPos - m_enemy->GetPosition();
+	float length = toPlayerPos.Length();
+
+	if (!m_enemy->IsPlayAnimation()) {
+		m_esm->ChangeState(CEnemyState::enState_Chase);
 	}
 }
