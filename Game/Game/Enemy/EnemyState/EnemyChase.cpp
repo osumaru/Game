@@ -26,6 +26,10 @@ void CEnemyChase::Update()
 	//移動速度を設定
 	m_enemy->SetMoveSpeed(moveSpeed);
 
+	if (m_enemy->IsDamage()){
+		//ダメージを受けた
+		m_esm->ChangeState(CEnemyState::enState_Damage);
+	}
 	if (length < 2.0f) {
 		//プレイヤーと距離が近い
 		m_esm->ChangeState(CEnemyState::enState_Attack);

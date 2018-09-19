@@ -18,6 +18,12 @@ void CEnemyIdle::Update()
 	m_enemy->SetMoveSpeed(moveSpeed);
 
 	m_timer += GameTime().GetDeltaFrameTime();
+
+	if (m_enemy->IsDamage()) {
+		//ダメージを受けた
+		m_timer = 0.0f;
+		m_esm->ChangeState(CEnemyState::enState_Damage);
+	}
 	if (m_timer >= 6.0f) {
 		//しばらくしたら歩き始める
 		m_timer = 0.0f;
