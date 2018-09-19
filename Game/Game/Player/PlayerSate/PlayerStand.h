@@ -1,5 +1,6 @@
 #pragma once
 #include "IPlayerState.h"
+#include "../../UI/WeaponSelect/WeaponSelect.h"
 
 class CPlayerStand	:	public IPlayerSate
 {
@@ -9,5 +10,7 @@ public:
 	bool Start();
 	void Update();
 	void ChangeWepon();
+private:
+	
 };
 
