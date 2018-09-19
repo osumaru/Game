@@ -20,7 +20,7 @@ void CEnemyIdle::Update()
 	m_timer += GameTime().GetDeltaFrameTime();
 
 	if (m_enemy->IsDamage()) {
-		//ダメージを受けている
+		//ダメージを受けた
 		m_timer = 0.0f;
 		m_esm->ChangeState(CEnemyState::enState_Damage);
 	}
