@@ -1,5 +1,6 @@
 #pragma once
 #include "PlayerSate/PlayerStateMachine.h"
+#include "PlayerSate/PlayerState.h"
 
 struct SplayerStatus
 {
@@ -31,11 +32,13 @@ public:
 		enPlayerAvoidance,	//回避アニメーション
 		enPlayerDete,		//死亡アニメーション
 		enPlayerArroAttack,	//弓のアニメーション
+		enPlayerLongSwordAttack,//大剣の攻撃アニメーション
+		enPlayerTwinSwordAttack,//二刀流の攻撃アニメーション
 		enPlayerNum			//アニメーションの数
 
 	};
 
-	enum EnPlayerWepon
+	enum EnPlayerWeapon
 	{
 		enSword,			//片手剣
 		enLongSword,		//両手剣
@@ -136,7 +139,6 @@ public:
 	{
 		if (!m_isDamege)
 		{
-
 			m_status.Health -= 5;
 			m_isDamege = true;
 		}
@@ -169,9 +171,9 @@ public:
 		m_isAttack = SetA;
 	}
 	//武器の剛体の取得
-	CRigidBody& GetWeponBody()
+	CRigidBody& GetWeaponBody()
 	{
-		return m_weponRigitBody;
+		return m_weaponRigitBody;
 	}
 	//ステートマシーンのしゅとく
 	CPlayerStateMachine& SetPlayerStateMachine()
@@ -181,7 +183,8 @@ public:
 
 	void SetChangeWeapon(const int changeWeapon)
 	{
-		m_WeaponState = (EnPlayerWepon)changeWeapon;
+		m_weaponState = (EnPlayerWeapon)changeWeapon;
+		
 	}
 
 private:
@@ -193,12 +196,11 @@ private:
 	CQuaternion				m_rotation = CQuaternion::Identity;				//回転
 	CQuaternion				m_WeaponRotation = CQuaternion::Identity;		//武器の回転
 	CSkinModel				m_skinmodel;									//スキンモデル
-	CSkinModel				m_Weaponskin[4];									//武器のスキンモデル
+	CSkinModel				m_Weaponskin[4];								//武器のスキンモデル
 	CCharacterController	m_characterController;							//キャラクターコントローラー
-	CLight					m_light;
-	
-	CBoxCollider			m_weponBoxCollider;
-	CRigidBody				m_weponRigitBody;
+	CLight					m_light;										//ライト
+	CBoxCollider			m_weaponBoxCollider;								//武器用のボックスコライダー
+	CRigidBody				m_weaponRigitBody;								//ボックス用のrigidBody
 
 	CPad					m_pad;									//パッド
 	CAnimation				m_animation;							//アニメーション
@@ -206,7 +208,7 @@ private:
 	bool					m_isSlip = false;						//スリップ判定
 	float					m_slipSpeed = 2.0f;						//回避移動時のスピード
 	EnPlayerAnimeState		m_State = enPlayerStand;				//アニメーションを遷移させるための変数
-	EnPlayerWepon			m_WeaponState = EnPlayerWepon::enArro;
+	EnPlayerWeapon			m_weaponState = EnPlayerWeapon::enSword;
 
 	const float				RUN_SPEED	= 1.4f;				
 	const float				WALK_SPEED	= 200.0f;
@@ -215,6 +217,7 @@ private:
 	bool					m_isAttack = false;
 	bool					m_isDied = false;
 	CPlayerStateMachine		m_PlayerStateMachine;
+	
 	
 
 };

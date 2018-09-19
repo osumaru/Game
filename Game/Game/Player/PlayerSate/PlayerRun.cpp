@@ -26,10 +26,10 @@ void CPlayerRun::Update()
 		GetPlayer().SetPlayerStateMachine().ChangeState(CPlayerState::enPlayerAttack);
 	}
 
-	else if (fabs(GetPlayer().GetMoveSpeed().Length()) < 3.0f)
+	/*else if (fabs(GetPlayer().GetMoveSpeed().Length()) < 3.0f)
 	{
 		GetPlayer().SetPlayerStateMachine().ChangeState(CPlayerState::enPlayerWalk);
-	}
+	}*/
 
 	else if (fabs(GetPlayer().GetMoveSpeed().Length()) == 0.0f)
 	{

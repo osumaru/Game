@@ -24,7 +24,7 @@ bool CPlayerStand::Start()
 
 void CPlayerStand::Update()
 {
-	ChangeWepon();
+	
 	//€–S‚µ‚½ê‡‚Ìˆ—
 	if (GetPlayer().GetStatus().Health <= 0)
 	{
@@ -51,6 +51,5 @@ void CPlayerStand::Update()
 }
 void CPlayerStand::ChangeWepon()
 {
-	GetPlayer().SetChangeWeapon(GetSceneManager().GetGameScene().GetWeaponSelect()->GetWeapon());
-
+	
 }

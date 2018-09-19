@@ -109,6 +109,8 @@ float4 PSMain(VS_OUTPUT In) : SV_TARGET
 	{	
 		float3 normalVector = -normalColor * isNormalMap + normalLight[i] * (1 - isNormalMap);
 		lig.xyz += diffuseLight[i].xyz * max(-dot(normal, normalLight[i]), 0.0f) * max(dot(normalVector, normalLight[i]), 0.0f);
+		
+		
 	}
 	lig.xyz += ambientLight;
 	color *= lig;
