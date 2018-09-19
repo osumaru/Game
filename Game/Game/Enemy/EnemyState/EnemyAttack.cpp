@@ -19,6 +19,7 @@ bool CEnemyAttack::Start()
 
 void CEnemyAttack::Update()
 {
+	//プレイヤーがダメージを受けていない
 	if (!GetPlayer().GetIsDamage()) {
 		//手のボーンのワールド行列を取得
 		CMatrix leftHandMatrix = m_enemy->GetBoneWorldMatrix(L"LeftHand");

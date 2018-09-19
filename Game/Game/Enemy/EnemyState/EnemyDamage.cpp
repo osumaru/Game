@@ -5,6 +5,7 @@
 
 bool CEnemyDamage::Start()
 {
+	//ダメージを受けたフラグを戻す
 	m_enemy->SetIsDamage(false);
 
 	//ダメージアニメーションを再生
@@ -18,6 +19,12 @@ bool CEnemyDamage::Start()
 
 void CEnemyDamage::Update()
 {
+	//ダメージを受けているときは動かない
+	CVector3 moveSpeed = m_enemy->GetMoveSpeed();
+	moveSpeed.x = 0.0f;
+	moveSpeed.z = 0.0f;
+	m_enemy->SetMoveSpeed(moveSpeed);
+
 	timer += GameTime().GetDeltaFrameTime();
 	if (timer > 2.0f) {
 		//ダメージ表示の描画をやめる
@@ -30,6 +37,7 @@ void CEnemyDamage::Update()
 	float length = toPlayerPos.Length();
 
 	if (!m_enemy->IsPlayAnimation()) {
+		//アニメーションが終了していればプレイヤーを追いかける
 		m_esm->ChangeState(CEnemyState::enState_Chase);
 	}
 }

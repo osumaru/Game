@@ -27,6 +27,7 @@ void CEnemyChase::Update()
 	m_enemy->SetMoveSpeed(moveSpeed);
 
 	if (m_enemy->IsDamage()){
+		//ƒ_ƒ[ƒW‚ðŽó‚¯‚½
 		m_esm->ChangeState(CEnemyState::enState_Damage);
 	}
 	if (length < 2.0f) {
