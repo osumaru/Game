@@ -15,7 +15,7 @@ CPlayerAttack::~CPlayerAttack()
 bool CPlayerAttack::Start()
 {
 
-	GetPlayer().SetPlayerAnimation(GetPlayer().SetPlayerStateMachine().GetAttackSate(), 0.2f);
+	GetPlayer().SetPlayerAnimation(GetPlayer().GetPlayerStateMachine().GetAttackSate(), 0.2f);
 	return true;
 }
 
@@ -40,7 +40,7 @@ void CPlayerAttack::Update()
 		if (Pad().GetLeftStickX() != 0 || Pad().GetLeftStickY() != 0)
 		{
 			//走りアニメーション
-			GetPlayer().SetPlayerStateMachine().ChangeState(CPlayerState::enPlayerRun);
+			GetPlayer().GetPlayerStateMachine().ChangeState(CPlayerState::enPlayerRun);
 			GetPlayer().GetWeaponBody().PhysicsWorldRemoveRigidBody();
 			GetPlayer().SetAttack(false);
 			m_animetionFrame = 0.0f;
@@ -48,7 +48,7 @@ void CPlayerAttack::Update()
 
 		else
 		{
-			GetPlayer().SetPlayerStateMachine().ChangeState(CPlayerState::enPlayerStand);
+			GetPlayer().GetPlayerStateMachine().ChangeState(CPlayerState::enPlayerStand);
 			GetPlayer().GetWeaponBody().PhysicsWorldRemoveRigidBody();
 			GetPlayer().SetAttack(false);
 			m_animetionFrame = 0.0f;

@@ -29,12 +29,12 @@ void CPlayer::Init(CVector3 position)
 	SRigidBodyInfo rInfo;
 	rInfo.collider = &m_weaponBoxCollider;
 	rInfo.mass = 0.0f;
-	rInfo.pos = m_WeaponPosition;
-	rInfo.rot = m_WeaponRotation;
+	rInfo.pos = m_weaponPosition;
+	rInfo.rot = m_weaponRotation;
 
 	m_weaponRigitBody.Create(rInfo);
-	m_weaponRigitBody.SetPosition(m_WeaponPosition);
-	m_weaponRigitBody.SetRotation(m_WeaponRotation);
+	m_weaponRigitBody.SetPosition(m_weaponPosition);
+	m_weaponRigitBody.SetRotation(m_weaponRotation);
 	m_weaponRigitBody.PhysicsWorldRemoveRigidBody();
 	
 
@@ -101,7 +101,7 @@ void CPlayer::Update()
 	}
 	
 		//スキンモデルの更新
-		m_Weaponskin[m_weaponState].Update(m_WeaponPosition, m_WeaponRotation, { 1.0f, 1.0f, 1.0f }, true);
+		m_Weaponskin[m_weaponState].Update(m_weaponPosition, m_weaponRotation, { 1.0f, 1.0f, 1.0f }, true);
 		m_skinmodel.Update(m_position, m_rotation, { 1.0f, 1.0f, 1.0f }, true);
 		
 
@@ -116,9 +116,9 @@ void CPlayer::Draw()
 	{
 		CVector3 weponUpVec = { m_Weaponskin[m_weaponState].GetWorldMatrix().m[2][0],m_Weaponskin[m_weaponState].GetWorldMatrix().m[2][1],m_Weaponskin[m_weaponState].GetWorldMatrix().m[2][2] };
 		weponUpVec *= 0.7f;
-		m_WeaponPosition.Add(weponUpVec);
-		m_weaponRigitBody.SetPosition(m_WeaponPosition);
-		m_weaponRigitBody.SetRotation(m_WeaponRotation);
+		m_weaponPosition.Add(weponUpVec);
+		m_weaponRigitBody.SetPosition(m_weaponPosition);
+		m_weaponRigitBody.SetRotation(m_weaponRotation);
 		m_Weaponskin[m_weaponState].Draw(GetGameCamera().GetViewMatrix(), GetGameCamera().GetProjectionMatrix());
 
 	}
@@ -218,12 +218,82 @@ void CPlayer::Rotation()
 
 	CVector3 playerVec = m_moveSpeed; 
 	playerVec.y = 0.0f;
+	WeaponRotation();
+	
+
+		//すべての武器を背中に持たせる
+	if (!m_isAttack)
+	{
+		CMatrix PlayerSpine = m_skinmodel.FindBoneWorldMatrix(L"Spine2");
+		CVector3 PlayerSpinePos = { PlayerSpine.m[3][0],PlayerSpine.m[3][1],PlayerSpine.m[3][2] };
+		CVector3 PlayerHndScale = { PlayerSpine.m[0][0], PlayerSpine.m[0][1], PlayerSpine.m[0][2] };
+		float len = PlayerHndScale.Length();
+		PlayerSpine.m[0][0] /= len;
+		PlayerSpine.m[0][1] /= len;
+		PlayerSpine.m[0][2] /= len;
+
+		PlayerSpine.m[1][0] /= len;
+		PlayerSpine.m[1][1] /= len;
+		PlayerSpine.m[1][2] /= len;
+
+		PlayerSpine.m[2][0] /= len;
+		PlayerSpine.m[2][1] /= len;
+		PlayerSpine.m[2][2] /= len;
+		m_weaponPosition = PlayerSpinePos;
+
+		if (m_State == enPlayerRun || m_State == enPlayerWalk)
+		{
+			CVector3 PlayerFront = { m_skinmodel.GetWorldMatrix().m[1][0],m_skinmodel.GetWorldMatrix().m[1][1],m_skinmodel.GetWorldMatrix().m[1][2] };
+			PlayerFront.Normalize();
+			PlayerFront *= 0.15f;
+			m_weaponPosition = m_position;
+			m_weaponPosition.y = PlayerSpinePos.y;
+			m_weaponPosition.Add(PlayerFront);
+
+		}
+		else
+		{
+
+			CVector3 PlayerFront = { m_skinmodel.GetWorldMatrix().m[1][0],m_skinmodel.GetWorldMatrix().m[1][1],m_skinmodel.GetWorldMatrix().m[1][2] };
+			PlayerFront.Normalize();
+			PlayerFront *= 0.13f;
+			m_weaponPosition.Add(PlayerFront);
+		}
+
+
+		m_weaponRotation.SetRotation(PlayerSpine);
+		CQuaternion rotX, rotY;
+		rotX.SetRotationDeg(CVector3::AxisX, 180.0f);
+		rotY.SetRotationDeg(CVector3::AxisY, 90.0f);
+		m_weaponRotation.Multiply(rotX);
+		m_weaponRotation.Multiply(rotY);
+	}
+	
+
+	//プレイヤーの回転の処理
+	if (playerVec.LengthSq() > 0.001f)
+	{
+
+
+		CQuaternion rot = CQuaternion::Identity;
+		rot.SetRotation(CVector3::AxisY, atan2f(playerVec.x, playerVec.z));		//Y軸周りの回転
+		m_rotation.Slerp(0.2f, m_rotation, rot);
+
+
+	}
+}
+
+//武器の向きの変更を行う関数
+void CPlayer::WeaponRotation()
+{
+	CVector3 playerVec = m_moveSpeed;
+	playerVec.y = 0.0f;
 
 	//プレイヤーの手のボーンに武器を持たせる処理
-	if(m_isAttack)
+	if (m_isAttack)
 	{
+		//プレイヤーの手のボーンを取得
 		CMatrix PlayerHnd = m_skinmodel.FindBoneWorldMatrix(L"LeftHandMiddle1");
-
 		CVector3 PlayerHndPos = { PlayerHnd.m[3][0],PlayerHnd.m[3][1],PlayerHnd.m[3][2] };
 
 		CVector3 PlayerHndScale = { PlayerHnd.m[0][0], PlayerHnd.m[0][1], PlayerHnd.m[0][2] };
@@ -239,76 +309,10 @@ void CPlayer::Rotation()
 		PlayerHnd.m[2][0] /= len;
 		PlayerHnd.m[2][1] /= len;
 		PlayerHnd.m[2][2] /= len;
-		m_WeaponPosition = PlayerHndPos;
-		m_WeaponRotation.SetRotation(PlayerHnd);
-		
-	}
-
-	//背中に武器を持たせる
-	else
-	{
-		CMatrix PlayerSpine = m_skinmodel.FindBoneWorldMatrix(L"Spine2");
-
-		CVector3 PlayerSpinePos = { PlayerSpine.m[3][0],PlayerSpine.m[3][1],PlayerSpine.m[3][2] };
-
-		CVector3 PlayerHndScale = { PlayerSpine.m[0][0], PlayerSpine.m[0][1], PlayerSpine.m[0][2] };
-		float len = PlayerHndScale.Length();
-		PlayerSpine.m[0][0] /= len;
-		PlayerSpine.m[0][1] /= len;
-		PlayerSpine.m[0][2] /= len;
-
-		PlayerSpine.m[1][0] /= len;
-		PlayerSpine.m[1][1] /= len;
-		PlayerSpine.m[1][2] /= len;
-
-		PlayerSpine.m[2][0] /= len;
-		PlayerSpine.m[2][1] /= len;
-		PlayerSpine.m[2][2] /= len;
-		m_WeaponPosition = PlayerSpinePos;
-		
-		if (m_State == enPlayerRun ||m_State == enPlayerWalk )
-		{
-			CVector3 PlayerFront = { m_skinmodel.GetWorldMatrix().m[1][0],m_skinmodel.GetWorldMatrix().m[1][1],m_skinmodel.GetWorldMatrix().m[1][2] };
-			PlayerFront.Normalize();
-			PlayerFront *= 0.15f;
-			m_WeaponPosition = m_position;
-			m_WeaponPosition.y = PlayerSpinePos.y;
-			m_WeaponPosition.Add(PlayerFront);
-
-		}
-		else
-		{
-			
-			CVector3 PlayerFront = { m_skinmodel.GetWorldMatrix().m[1][0],m_skinmodel.GetWorldMatrix().m[1][1],m_skinmodel.GetWorldMatrix().m[1][2] };
-			PlayerFront.Normalize();
-			PlayerFront *= 0.13f;
-			m_WeaponPosition.Add(PlayerFront);
-		}
-	
-
-		m_WeaponRotation.SetRotation(PlayerSpine);
-		CQuaternion rotX, rotY;
-		rotX.SetRotationDeg(CVector3::AxisX, 180.0f);
-		rotY.SetRotationDeg(CVector3::AxisY, 90.0f);
-		m_WeaponRotation.Multiply(rotX);
-		m_WeaponRotation.Multiply(rotY);
-	
-	
-	}
-
-	//プレイヤーの回転の処理
-	if (playerVec.LengthSq() > 0.001f)
-	{
-
-
-		CQuaternion rot = CQuaternion::Identity;
-		rot.SetRotation(CVector3::AxisY, atan2f(playerVec.x, playerVec.z));		//Y軸周りの回転
-		m_rotation.Slerp(0.2f, m_rotation, rot);
-
+		m_weaponPosition = PlayerHndPos;
+		m_weaponRotation.SetRotation(PlayerHnd);
 
 	}
-
-
 }
 
 void CPlayer::AnimationMove()
@@ -609,19 +613,19 @@ void  CPlayer::WeaponChange()
 	{
 		//片手剣の時の攻撃モーションの設定
 	case CWeaponSelect::enSword:
-		SetPlayerStateMachine().SetAttackState(CPlayerState::enPlayerAttack);
+		GetPlayerStateMachine().SetAttackState(CPlayerState::enPlayerAttack);
 		break;
 		//弓の時の攻撃モーションの設定
 	case CWeaponSelect::enBow:
-		SetPlayerStateMachine().SetAttackState(CPlayerState::enPlayerArroAttack);
+		GetPlayerStateMachine().SetAttackState(CPlayerState::enPlayerArroAttack);
 		break;
 		//大剣の時の攻撃モーションの設定
 	case CWeaponSelect::enLargeSword:
-		SetPlayerStateMachine().SetAttackState(CPlayerState::enPlayerLongSwordAttack);
+		GetPlayerStateMachine().SetAttackState(CPlayerState::enPlayerLongSwordAttack);
 		break;
 		//双剣の時の攻撃モーションの設定
 	case CWeaponSelect::enTwinSword:
-		SetPlayerStateMachine().SetAttackState(CPlayerState::enPlayerTwinSwordAttack);
+		GetPlayerStateMachine().SetAttackState(CPlayerState::enPlayerTwinSwordAttack);
 		break;
 	}
 }
@@ -637,7 +641,7 @@ void CPlayer::PlayerAttack()
 		
 		CVector3 EnemyVec = enemys->GetPosition();
 		EnemyVec.y += 1.3f;
-		EnemyVec -= m_WeaponPosition;
+		EnemyVec -= m_weaponPosition;
 		float len = EnemyVec.Length();
 
 		if (fabs(len) < 0.3f)
