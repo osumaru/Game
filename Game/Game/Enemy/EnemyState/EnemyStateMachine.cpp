@@ -3,6 +3,20 @@
 
 bool CEnemyStateMachine::Start()
 {
+	if (m_enemyGroup == nullptr) {
+		//グループが作られていなければ返す
+		return false;
+	}
+	else {
+		//状態クラスにグループを設定
+		m_enemyIdle.SetEnemyGroup(m_enemyGroup);
+		m_enemyWalk.SetEnemyGroup(m_enemyGroup);
+		m_enemyChase.SetEnemyGroup(m_enemyGroup);
+		m_enemyAttack.SetEnemyGroup(m_enemyGroup);
+		m_enemyDamage.SetEnemyGroup(m_enemyGroup);
+		m_enemyDeath.SetEnemyGroup(m_enemyGroup);
+	}
+
 	ChangeState(CEnemyState::enState_Idle);
 	return true;
 }

@@ -2,6 +2,8 @@
 class MapChip;
 class IEnemy;
 
+#include "../Enemy/EnemyGroup.h"
+
 //マップチップのタグ
 enum EnMapChipTag
 {
@@ -11,6 +13,7 @@ enum EnMapChipTag
 	enMapTagSamurai,
 	enMapTagNinja,
 	enMapTagWarrok,
+	enMapTagEnemyGroup,
 	enMapTagMapChip,
 	enMapTagNum,
 };
@@ -54,11 +57,11 @@ public:
 	//エネミーのリストを取得
 	std::list<IEnemy*> GetEnemyList()
 	{
-		return enemyList;
+		return m_enemyList;
 
 	}
 
 private:
 	std::list<MapChip*> m_mapChip;					//マップチップ
-	std::list<IEnemy*> enemyList;	//エネミーのリスト
+	std::list<IEnemy*> m_enemyList;		//エネミーリスト
 };

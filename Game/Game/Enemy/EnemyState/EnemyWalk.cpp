@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "EnemyWalk.h"
 #include "../IEnemy.h"
+#include "../EnemyGroup.h"
 
 bool CEnemyWalk::Start()
 {
@@ -23,7 +24,7 @@ bool CEnemyWalk::Start()
 	toRandomPosition.z = randomPositionZ;
 
 	//ˆÚ“®æ‚ÌÀ•W‚ð•Û‘¶
-	m_destination = m_enemy->GetInitPosition() + toRandomPosition;
+	m_destination = m_enemyGroup->GetPosition() + toRandomPosition;
 
 	//ˆÚ“®‘¬“x‚ðŒvŽZ
 	toRandomPosition.Normalize();

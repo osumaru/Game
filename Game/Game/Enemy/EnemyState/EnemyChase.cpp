@@ -30,7 +30,7 @@ void CEnemyChase::Update()
 		//プレイヤーと距離が近い
 		m_esm->ChangeState(CEnemyState::enState_Attack);
 	}
-	if (!m_enemy->IsFind() && length > 8.0f) {
+	if (!m_enemy->IsFind()) {
 		//プレイヤーが離れたら戻っていく
 		m_esm->ChangeState(CEnemyState::enState_Walk);
 	}

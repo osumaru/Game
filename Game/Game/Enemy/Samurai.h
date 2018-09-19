@@ -19,6 +19,9 @@ public:
 	//position	座標
 	void Init(CVector3 position);
 
+	//更新される前に一度だけ呼ばれる
+	bool Start();
+
 	//更新
 	void Update();
 
