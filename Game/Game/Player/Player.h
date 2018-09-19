@@ -193,9 +193,9 @@ private:
 	CQuaternion				m_rotation = CQuaternion::Identity;				//回転
 	CQuaternion				m_WeaponRotation = CQuaternion::Identity;		//武器の回転
 	CSkinModel				m_skinmodel;									//スキンモデル
-	CSkinModel				m_Weaponskin[4];									//武器のスキンモデル
+	CSkinModel				m_Weaponskin[4];								//武器のスキンモデル
 	CCharacterController	m_characterController;							//キャラクターコントローラー
-	CLight					m_light;
+	CLight					m_light;										//ライト
 	
 	CBoxCollider			m_weponBoxCollider;
 	CRigidBody				m_weponRigitBody;

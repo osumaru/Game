@@ -107,9 +107,7 @@ void CPlayer::Update()
 void CPlayer::Draw()
 {
 
-	//m_characterController.Draw();
 	m_skinmodel.Draw(GetGameCamera().GetViewMatrix(), GetGameCamera().GetProjectionMatrix());
-	//m_weponRigitBody.Draw();
 	if (m_isAttack)
 	{
 		CVector3 weponUpVec = { m_Weaponskin[m_WeaponState].GetWorldMatrix().m[2][0],m_Weaponskin[m_WeaponState].GetWorldMatrix().m[2][1],m_Weaponskin[m_WeaponState].GetWorldMatrix().m[2][2] };
