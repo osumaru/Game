@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "DamageNumber.h"
-#include "../../Player/Player.h"
-#include "../../Enemy/IEnemy.h"
+#include "Number.h"
 
 void CDamegeNumber::Init()
 {
@@ -9,7 +8,7 @@ void CDamegeNumber::Init()
 	m_numSize = { 30.0f,50.0f };
 
 	//数字のスプライトを初期化
-	for (int i = 0; i < 3; i++) {
+	for (int i = 0; i < EnDigit::enDigit_Num; i++) {
 		m_number[i] = New<CNumber>(0);
 		m_numPos.x = m_numSize.x * i;
 		m_number[i]->Init(m_numPos, m_numSize);
@@ -17,40 +16,45 @@ void CDamegeNumber::Init()
 	}
 }
 
-void CDamegeNumber::DamageCalculation()
+void CDamegeNumber::DamageCalculation(int dmg)
 {
-	//プレイヤーの攻撃力を取得
-	int playerStrength = GetPlayer().GetStatus().Strength;
-	playerStrength %= 1000;
-	if (playerStrength / 100 > 0) {
-		m_number[0]->SetIsActive(true);
-		m_number[0]->SetNumber(playerStrength / 100);
+	//受けたダメージを取得
+	int damage = dmg;
+	damage %= 1000;
+	if (damage / 100 > 0) {
+		//百の位を表示
+		m_number[EnDigit::enDigit_Hundred]->SetIsActive(true);
+		m_number[EnDigit::enDigit_Hundred]->SetNumber(damage / 100);
 	}
 	else {
-		m_number[0]->SetIsActive(false);
+		m_number[EnDigit::enDigit_Hundred]->SetIsActive(false);
 	}
-	playerStrength %= 100;
-	if (playerStrength / 10 > 0) {
-		m_number[1]->SetIsActive(true);
-		m_number[1]->SetNumber(playerStrength / 10);
+	damage %= 100;
+	if (damage / 10 > 0) {
+		//十の位を表示
+		m_number[EnDigit::enDigit_Ten]->SetIsActive(true);
+		m_number[EnDigit::enDigit_Ten]->SetNumber(damage / 10);
 	}
 	else {
-		if (m_number[0]->IsActive() == true) {
-			m_number[1]->SetNumber(0);
-			m_number[1]->SetIsActive(true);
+		//百の位も０の場合は十の位は表示しない
+		if (m_number[EnDigit::enDigit_Hundred]->IsActive() == true) {
+			m_number[EnDigit::enDigit_Ten]->SetNumber(0);
+			m_number[EnDigit::enDigit_Ten]->SetIsActive(true);
 		}
 		else {
-			m_number[1]->SetIsActive(false);
+			m_number[EnDigit::enDigit_Ten]->SetIsActive(false);
 		}
 	}
-	playerStrength %= 10;
-	m_number[2]->SetIsActive(true);
-	m_number[2]->SetNumber(playerStrength);
+	damage %= 10;
+	//一の位を表示
+	m_number[EnDigit::enDigit_One]->SetIsActive(true);
+	m_number[EnDigit::enDigit_One]->SetNumber(damage);
 }
 
 void CDamegeNumber::Reset()
 {
-	m_number[0]->SetIsActive(false);
-	m_number[1]->SetIsActive(false);
-	m_number[2]->SetIsActive(false);
+	//全ての位の表示をやめる
+	m_number[EnDigit::enDigit_Hundred]->SetIsActive(false);
+	m_number[EnDigit::enDigit_Ten]->SetIsActive(false);
+	m_number[EnDigit::enDigit_One]->SetIsActive(false);
 }

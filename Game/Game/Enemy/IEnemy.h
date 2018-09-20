@@ -8,7 +8,17 @@
 #include "../UI/DamageNumber/DamageNumber.h"
 #include "EnemyTurn.h"
 #include "EnemySearch.h"
+
 class CEnemyGroup;
+
+struct SEnemyStatus
+{
+	int Strength;			//攻撃力
+	int Defense;			//防御力
+	int	Hp;					//体力
+	int MaxHp;				//最大体力
+	int Gold;				//所持金額
+};
 
 class IEnemy : public IGameObject
 {
@@ -94,15 +104,29 @@ public:
 	}
 
 	//エネミーのダメージ計算
-	void DamageCalculation()
+	//dmg	ダメージ数値
+	void DamageCalculation(int dmg)
 	{
-		m_damageNumber.DamageCalculation();
+		m_damageNumber.DamageCalculation(dmg);
 	}
 
 	//ダメージ表示のリセット
 	void DamageIndicateReset()
 	{
 		m_damageNumber.Reset();
+	}
+
+	//ステータスを取得
+	const SEnemyStatus& GetStatus() const
+	{
+		return m_status;
+	}
+
+	//HPを減らす
+	//damage	ダメージ
+	void ReduceHp(int damage)
+	{
+		m_status.Hp -= damage;
 	}
 
 	//所属するグループを設定
@@ -116,18 +140,6 @@ public:
 	CEnemyGroup* GetEnemyGroup()
 	{
 		return m_enemyGroup;
-	}
-
-	//攻撃が当たったか
-	bool IsAttackHit() const
-	{
-		return m_isAttackHit;
-	}
-
-	//攻撃が当たったらフラグを設定する
-	void SetIsAttackHit(bool isAttackHit)
-	{
-		m_isAttackHit = isAttackHit;
 	}
 
 	//プレイヤーを発見したか
@@ -165,6 +177,7 @@ protected:
 	CEnemyGroup*			m_enemyGroup;			//エネミーグループ
 	CVector3				m_position;				//座標
 	CQuaternion				m_rotation;				//回転
+	SEnemyStatus			m_status;				//ステータス
 	int						m_animNum = 0;			//再生するアニメーション番号
 	int						m_animNumOld = 0;		//1つ前のアニメーション番号
 	bool					m_isAttackHit = false;	//攻撃が当たったか

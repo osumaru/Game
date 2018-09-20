@@ -46,7 +46,6 @@ void Map::Init(int stageNum)
 	std::map<int, std::vector<SMapChipInfo>> instancingData;
 
 	std::vector<CEnemyGroup*> enemyGroupList;
-	//std::vector<IEnemy*> enemyList;
 
 	for (SMapChipInfo& mInfo : mapChipInfo[stageNum])
 	{

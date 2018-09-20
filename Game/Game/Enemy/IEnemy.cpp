@@ -10,4 +10,6 @@ IEnemy::IEnemy() :
 
 IEnemy::~IEnemy()
 {
+	Delete(&m_enemyTurn);
+	Delete(&m_enemySearch);
 }
