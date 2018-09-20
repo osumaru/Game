@@ -176,7 +176,7 @@ void CPlayer::Move()
 		else if (Pad().IsTriggerButton(enButtonY))
 		{
 
-			m_moveSpeed.y = 1.0f;
+			m_moveSpeed.y = 10.0f;
 			m_moveSpeed.x = 0.0f;
 			m_moveSpeed.z = 0.0f;
 		}
@@ -646,7 +646,6 @@ void CPlayer::PlayerAttack()
 
 		if (fabs(len) < /*0.3f*/1.5f)
 		{
-			
 			enemys->SetIsDamage(true);
 		}
 	
