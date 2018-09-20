@@ -23,4 +23,8 @@ private:
 	CSprite m_playerIcon;						//プレイヤーアイコン
 	CTexture m_playerIconTexture;
 	CVector3 m_playerIconVec = CVector3::AxisZ;	//プレイヤーアイコンの向き
+
+	CSprite m_enemyIcon;						//プレイヤーアイコン
+	CTexture m_enemyIconTexture;
+	CVector3 m_enemyIconVec = CVector3::AxisZ;	//プレイヤーアイコンの向き
 };
