@@ -27,7 +27,9 @@ const SCorrespondencePad correspondencePad[enButtonNum] =
 	{ enButtonRB,			XINPUT_GAMEPAD_RIGHT_SHOULDER,	'2' },
 	{ enButtonRStickPush,	XINPUT_GAMEPAD_RIGHT_THUMB,		'4' },
 	{ enButtonLB,			XINPUT_GAMEPAD_LEFT_SHOULDER,	'7' },
-	{ enButtonLStickPush,	XINPUT_GAMEPAD_LEFT_THUMB,		'9' }
+	{ enButtonLStickPush,	XINPUT_GAMEPAD_LEFT_THUMB,		'9' },
+	{ enButtonLeftTrigger,	0,								'8' },
+	{ enButtonRightTrigger,	0,								'1' }
 	
 };
 CPad::CPad() :
@@ -57,13 +59,16 @@ void CPad::Update()
 	{
 		for (const SCorrespondencePad& pad : correspondencePad)
 		{
+			if (pad.padCode == (DWORD)-1)
+			{
+				continue;
+			}
 			if (m_state.Gamepad.wButtons & pad.padCode)
 			{
 				m_isPadTrigger[pad.padButton] = 1 ^ m_isPadPress[pad.padButton];
 				m_isPadPress[pad.padButton] = 1;
 				
 			}
-
 			else
 			{
 				m_isPadTrigger[pad.padButton] = 0;
