@@ -17,21 +17,30 @@ void CSamurai::Init(CVector3 position)
 	m_position = position;
 	m_characterController.Init(0.5f, 0.9f, m_position);
 	m_characterController.SetGravity(-90.0f);
-	wchar_t* animClip[5] = {
+	wchar_t* animClip[CEnemyState::enState_Num] = {
 		L"Assets/modelData/samuraiStand.tka",
 		L"Assets/modelData/samuraiWalk.tka",
+		L"Assets/modelData/samuraiDash.tka",
 		L"Assets/modelData/samuraiAttack.tka",
 		L"Assets/modelData/samuraiDamage.tka",
 		L"Assets/modelData/samuraiDeath.tka"
 	};
-	m_animation.Init(animClip, 5);
+	m_animation.Init(animClip, CEnemyState::enState_Num);
 	m_animation.SetLoopFlg(0, true);
 	m_animation.SetLoopFlg(1, true);
+	m_animation.SetLoopFlg(2, true);
 	Add(&m_enemyStateMachine, 0);
 	Add(&m_enemyTurn, 0);
 	Add(&m_enemySearch, 0);
 	//ダメージ表示の初期化
 	m_damageNumber.Init();
+
+	//ステータスを設定
+	m_status.Strength = 10;
+	m_status.Defense = 5;
+	m_status.Hp = 50;
+	m_status.MaxHp = m_status.Hp;
+	m_status.Gold = 100;
 }
 
 bool CSamurai::Start()
