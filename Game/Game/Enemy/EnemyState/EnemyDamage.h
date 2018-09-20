@@ -27,5 +27,5 @@ public:
 	void Update();
 
 private:
-	float timer = 0.0f;		//タイマー
+
 };

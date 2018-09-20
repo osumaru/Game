@@ -6,6 +6,10 @@ bool CEnemyIdle::Start()
 {
 	//待機アニメーションを再生
 	m_enemy->PlayAnimation(CEnemyState::enState_Idle);
+
+	//タイマーを初期化
+	m_timer = 0.0f;
+
 	return true;
 }
 
@@ -21,17 +25,14 @@ void CEnemyIdle::Update()
 
 	if (m_enemy->IsDamage()) {
 		//ダメージを受けた
-		m_timer = 0.0f;
 		m_esm->ChangeState(CEnemyState::enState_Damage);
 	}
 	if (m_timer >= 6.0f) {
 		//しばらくしたら歩き始める
-		m_timer = 0.0f;
 		m_esm->ChangeState(CEnemyState::enState_Walk);
 	}
 	if (m_enemy->IsFind()) {
 		//プレイヤーが視野内にいる
-		m_timer = 0.0f;
 		m_esm->ChangeState(CEnemyState::enState_Chase);
 	}
 }

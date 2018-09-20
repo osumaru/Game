@@ -5,9 +5,7 @@
 #pragma once
 
 
-class CPlayer;
-
-#include "Number.h"
+class CNumber;
 
 class CDamegeNumber
 {
@@ -16,7 +14,8 @@ public:
 	void Init();
 
 	//ダメージ計算
-	void DamageCalculation();
+	//dmg	受けたダメージ
+	void DamageCalculation(int dmg);
 
 	//ダメージ表示リセット
 	void Reset();
@@ -27,8 +26,16 @@ public:
 	{
 		m_numPos = position;
 	}
+
+	enum EnDigit {
+		enDigit_One,		//一の位
+		enDigit_Ten,		//十の位
+		enDigit_Hundred,	//百の位
+		enDigit_Num			//位の数
+	};
+
 private:
-	CNumber* m_number[3];	//数字のスプライト
-	CVector2 m_numPos;		//座標
-	CVector2 m_numSize;		//サイズ
+	CNumber* m_number[EnDigit::enDigit_Num];	//数字のスプライト
+	CVector2 m_numPos;							//座標
+	CVector2 m_numSize;							//サイズ
 };

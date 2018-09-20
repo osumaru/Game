@@ -2,6 +2,7 @@
 #include "EnemyDamage.h"
 #include "../IEnemy.h"
 #include "../../Player/Player.h"
+#include "../EnemyGroup.h"
 
 bool CEnemyDamage::Start()
 {
@@ -12,7 +13,11 @@ bool CEnemyDamage::Start()
 	m_enemy->PlayAnimation(CEnemyState::enState_Damage);
 
 	//ダメージ計算
-	m_enemy->DamageCalculation();
+	int playerStrength = GetPlayer().GetStatus().Strength;
+	int enemyDefence = m_enemy->GetStatus().Defense;
+	int damage = playerStrength - enemyDefence;
+	m_enemy->ReduceHp(damage);
+	m_enemy->DamageCalculation(damage);
 
 	return true;
 }
@@ -25,19 +30,30 @@ void CEnemyDamage::Update()
 	moveSpeed.z = 0.0f;
 	m_enemy->SetMoveSpeed(moveSpeed);
 
-	timer += GameTime().GetDeltaFrameTime();
-	if (timer > 2.0f) {
-		//ダメージ表示の描画をやめる
-		m_enemy->DamageIndicateReset();
-		timer = 0.0f;
-	}
-
 	CVector3 playerPos = GetPlayer().GetPosition();
 	CVector3 toPlayerPos = playerPos - m_enemy->GetPosition();
 	float length = toPlayerPos.Length();
 
 	if (!m_enemy->IsPlayAnimation()) {
-		//アニメーションが終了していればプレイヤーを追いかける
-		m_esm->ChangeState(CEnemyState::enState_Chase);
+		if (length < 2.0f) {
+			//近ければ攻撃
+			m_esm->ChangeState(CEnemyState::enState_Attack);
+		}
+		else if (m_enemy->IsFind()) {
+			//アニメーションが終了していればプレイヤーを追いかける
+			m_esm->ChangeState(CEnemyState::enState_Chase);
+		}
+		else {
+			//遠ければ歩き始める
+			m_esm->ChangeState(CEnemyState::enState_Walk);
+		}
+		//ダメージ表示の描画をやめる
+		m_enemy->DamageIndicateReset();
+	}
+	if (m_enemy->GetStatus().Hp <= 0) {
+		//HPが無くなれば死亡
+		m_esm->ChangeState(CEnemyState::enState_Death);
+		//ダメージ表示の描画をやめる
+		m_enemy->DamageIndicateReset();
 	}
 }

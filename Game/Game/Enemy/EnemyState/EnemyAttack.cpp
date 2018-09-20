@@ -46,6 +46,7 @@ void CEnemyAttack::Update()
 	}
 
 	if (m_enemy->IsDamage()) {
+		//ƒ_ƒ[ƒW‚ðŽó‚¯‚½
 		m_esm->ChangeState(CEnemyState::enState_Damage);
 	}
 	if (!m_enemy->IsPlayAnimation()) {
