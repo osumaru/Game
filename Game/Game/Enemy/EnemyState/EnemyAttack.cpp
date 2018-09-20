@@ -19,34 +19,35 @@ bool CEnemyAttack::Start()
 
 void CEnemyAttack::Update()
 {
-	//手のボーンのワールド行列を取得
-	CMatrix leftHandMatrix = m_enemy->GetBoneWorldMatrix(L"LeftHand");
-	CVector3 leftHandPosition;
-	leftHandPosition.x = leftHandMatrix.m[3][0];
-	leftHandPosition.y = leftHandMatrix.m[3][1];
-	leftHandPosition.z = leftHandMatrix.m[3][2];
+	//プレイヤーがダメージを受けていない
+	if (!GetPlayer().GetIsDamage()) {
+		//手のボーンのワールド行列を取得
+		CMatrix leftHandMatrix = m_enemy->GetBoneWorldMatrix(L"LeftHand");
+		CVector3 leftHandPosition;
+		leftHandPosition.x = leftHandMatrix.m[3][0];
+		leftHandPosition.y = leftHandMatrix.m[3][1];
+		leftHandPosition.z = leftHandMatrix.m[3][2];
 
-	//プレイヤーとの距離を計算
-	CVector3 playerPosition = GetPlayer().GetPosition();
-	CVector3 distance = playerPosition - m_enemy->GetPosition();
-	distance.y = 0.0f;
-	float length = distance.Length();
-	{
-		//敵の攻撃との距離を計算
-		playerPosition.y += 2.5f;
-		CVector3 distance = leftHandPosition - playerPosition;
-		float length = distance.Length();
-		if (length < 1.5f) {
-			//プレイヤーがダメージを受けた
-			GetPlayer().GetDamage();
-			m_enemy->SetIsAttackHit(true);
+		//プレイヤーとの距離を計算
+		CVector3 playerPosition = GetPlayer().GetPosition();
+		CVector3 distance = playerPosition - m_enemy->GetPosition();
+		distance.y = 0.0f;
+		length = distance.Length();
+		{
+			//敵の攻撃との距離を計算
+			playerPosition.y += 2.5f;
+			CVector3 distance = leftHandPosition - playerPosition;
+			float length = distance.Length();
+			if (length < 1.5f) {
+				//プレイヤーがダメージを受けた
+				GetPlayer().GetDamage();
+			}
 		}
 	}
 
-	//if (Pad().IsTriggerButton(enButtonA)) {
-	//	m_esm->ChangeState(CEnemyState::enState_Damage);
-	//	m_enemy->SetIsAttackHit(false);
-	//}
+	if (m_enemy->IsDamage()) {
+		m_esm->ChangeState(CEnemyState::enState_Damage);
+	}
 	if (!m_enemy->IsPlayAnimation()) {
 		//アニメーションが終了している
 		if (!m_enemy->IsFind()) {
