@@ -4,12 +4,13 @@
 #include "../Engine.h"
 #include "../Physics/Physics.h"
 
+
 void CGameObjectManager::Init()
 {
 	m_objectVector.resize(PRIORITY_MAX);
 }
 
-void CGameObjectManager::Execute()
+void CGameObjectManager::Execute(Deferred& deferred, PostEffect& postEffect)
 {
 	//初期化
 	for (GameObjectList& objList : m_objectVector)
@@ -27,6 +28,7 @@ void CGameObjectManager::Execute()
 			object.gameObject->Updater();
 		}
 	}
+	deferred.Start();
 	for (GameObjectList& objList : m_objectVector)
 	{
 		for (SGameObjectData& object : objList)
@@ -34,15 +36,17 @@ void CGameObjectManager::Execute()
 			object.gameObject->Drawer();
 		}
 	}
-	
 	PhysicsWorld().Draw();
-	for (GameObjectList& objList : m_objectVector)
-	{
-		for (SGameObjectData& object : objList)
-		{
-			object.gameObject->AfterDrawer();
-		}
-	}
+	deferred.End();
+	deferred.Draw();
+	postEffect.Draw();
+	//for (GameObjectList& objList : m_objectVector)
+	//{
+	//	for (SGameObjectData& object : objList)
+	//	{
+	//		object.gameObject->AfterDrawer();
+	//	}
+	//}
 
 	//最後にオブジェクトを消去
 	DeleteExecute();

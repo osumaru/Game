@@ -180,11 +180,11 @@
     <ClCompile Include="Graphics\Light.cpp">
       <Filter>ソース ファイル\Graphics</Filter>
     </ClCompile>
+    <ClCompile Include="Graphics\PostEffect\Deferred.cpp">
+      <Filter>ソース ファイル\Graphics\PostEffect</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Uncopyable.h">
-      <Filter>ソース ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="GameObject\GameObject.h">
       <Filter>ソース ファイル\GameObject</Filter>
     </ClInclude>
@@ -316,6 +316,12 @@
     </ClInclude>
     <ClInclude Include="Graphics\Light.h">
       <Filter>ソース ファイル\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\PostEffect\Deferred.h">
+      <Filter>ソース ファイル\Graphics\PostEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="Uncopyable.h">
+      <Filter>ソース ファイル</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

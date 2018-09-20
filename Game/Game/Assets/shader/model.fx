@@ -41,6 +41,14 @@ struct VS_OUTPUT
 	float2 uv : TEXCOORD0;
 };
 
+struct PS_OUTPUT
+{
+	float4 color		: SV_TARGET0;
+	float4 normalMap	: SV_TARGET1;
+	float4 normal		: SV_TARGET2;
+	float4 tangent		: SV_TARGET3;
+};
+
 Texture2D<float4> colorTexture : register(t10);
 Texture2D<float4> normalTexture : register(t11);
 sampler Sampler : register(s0);
@@ -82,37 +90,15 @@ VS_OUTPUT VSSkinMain(VS_SKIN_INPUT In)
 	return Out;
 }
 
-float4 PSMain(VS_OUTPUT In) : SV_TARGET
+PS_OUTPUT PSMain(VS_OUTPUT In)
 {
-	float4 color = colorTexture.Sample(Sampler, In.uv);
-	float3 normalColor = normalTexture.Sample(Sampler, In.uv);
-	normalColor -= 0.5f;
-	normalColor *= 2.0f;
-	normalColor = normalize(normalColor);
-	float4x4 mat = {
-		float4(In.tangent, 0.0f),
-		float4(In.binormal, 0.0f),
-		float4(In.normal, 0.0f),
-		float4(0.0f, 0.0f, 0.0f, 1.0f)
-	};
-	normalColor = mul(normalColor, mat);
-	float3 normal = In.normal;
-	float3 normalLight[4] = 
-	{
-		normalize(diffuseLightDir[0].xyz),
-		normalize(diffuseLightDir[1].xyz),
-		normalize(diffuseLightDir[2].xyz),
-		normalize(diffuseLightDir[3].xyz)
-	};
-	float4 lig = float4(0.0f, 0.0f, 0.0f, 1.0f);
-	for(int i = 0;i < 4;i++)
-	{	
-		float3 normalVector = -normalColor * isNormalMap + normalLight[i] * (1 - isNormalMap);
-		lig.xyz += diffuseLight[i].xyz * max(-dot(normal, normalLight[i]), 0.0f) * max(dot(normalVector, normalLight[i]), 0.0f);
-		
-		
-	}
-	lig.xyz += ambientLight;
-	color *= lig;
-	return color;
+	PS_OUTPUT Out;
+	Out.color = float4(colorTexture.Sample(Sampler, In.uv).xyz, 1.0f);
+	Out.normal = float4(In.normal, 1.0f);
+	Out.tangent = float4(In.tangent, 1.0f);
+	float3 normalColor = normalTexture.Sample(Sampler, In.uv) * isNormalMap + float3(0.0f, 0.0f, 1.0f) * (1 - isNormalMap);
+	Out.normalMap = float4(normalColor, 1.0f);
+	return Out;
 }
+
+

@@ -130,4 +130,5 @@ void CSprite::Draw()
 	ID3D11ShaderResourceView* views[] = {m_pTexture->GetShaderResource()};
 	GetDeviceContext()->PSSetShaderResources(0, 1, views);
 	GetDeviceContext()->DrawIndexed(m_primitive.GetIndexNum(), 0, 0);
+
 }
