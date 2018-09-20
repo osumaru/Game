@@ -103,6 +103,12 @@ public:
 		m_enemyStateMachine.Release();
 	}
 
+	//ダメージ表示の座標を設定
+	void SetDamagePos(const CVector2 pos)
+	{
+		m_damageNumber.SetPosition(pos);
+	}
+
 	//エネミーのダメージ計算
 	//dmg	ダメージ数値
 	void DamageCalculation(int dmg)
@@ -124,7 +130,7 @@ public:
 
 	//HPを減らす
 	//damage	ダメージ
-	void ReduceHp(int damage)
+	void HpDamage(int damage)
 	{
 		m_status.Hp -= damage;
 	}

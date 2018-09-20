@@ -20,13 +20,15 @@ void CWarrok::Init(CVector3 position)
 	wchar_t* animClip[5] = {
 		L"Assets/modelData/warrokStand.tka",
 		L"Assets/modelData/warrokWalk.tka",
+		//L"Assets/modelData/warrokDash.tka",
 		L"Assets/modelData/warrokAttack.tka",
 		L"Assets/modelData/warrokDamage.tka",
 		L"Assets/modelData/warrokDeath.tka"
 	};
 	m_animation.Init(animClip, 5);
 	m_animation.SetLoopFlg(0, true);
-	m_animation.SetLoopFlg(1, true);
+	m_animation.SetLoopFlg(1, true);	
+	m_animation.SetLoopFlg(2, true);
 	Add(&m_enemyStateMachine, 0);
 	Add(&m_enemyTurn, 0);
 	Add(&m_enemySearch, 0);

@@ -16,7 +16,12 @@ bool CEnemyDamage::Start()
 	int playerStrength = GetPlayer().GetStatus().Strength;
 	int enemyDefence = m_enemy->GetStatus().Defense;
 	int damage = playerStrength - enemyDefence;
-	m_enemy->ReduceHp(damage);
+	m_enemy->HpDamage(damage);
+	CVector3 enemyPos = m_enemy->GetPosition();
+	CVector2 damagePos;
+	damagePos.x = enemyPos.x;
+	damagePos.y = enemyPos.y;
+	m_enemy->SetDamagePos(damagePos);
 	m_enemy->DamageCalculation(damage);
 
 	return true;
