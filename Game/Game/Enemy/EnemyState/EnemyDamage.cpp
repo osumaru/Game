@@ -35,8 +35,18 @@ void CEnemyDamage::Update()
 	float length = toPlayerPos.Length();
 
 	if (!m_enemy->IsPlayAnimation()) {
-		//アニメーションが終了していればプレイヤーを追いかける
-		m_esm->ChangeState(CEnemyState::enState_Chase);
+		if (length < 2.0f) {
+			//近ければ攻撃
+			m_esm->ChangeState(CEnemyState::enState_Attack);
+		}
+		else if (m_enemy->IsFind()) {
+			//アニメーションが終了していればプレイヤーを追いかける
+			m_esm->ChangeState(CEnemyState::enState_Chase);
+		}
+		else {
+			//遠ければ歩き始める
+			m_esm->ChangeState(CEnemyState::enState_Walk);
+		}
 		//ダメージ表示の描画をやめる
 		m_enemy->DamageIndicateReset();
 	}
