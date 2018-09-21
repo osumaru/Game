@@ -40,10 +40,18 @@ void CMoney::Update()
 {
 	Move();
 
+	m_timer += GameTime().GetDeltaFrameTime();
 	//プレイヤーとの距離を計算
-	CVector3 toPlayer = m_position - GetPlayer().GetPosition();
+	CVector3 toPlayer = GetPlayer().GetPosition() - m_position;
 	float length = toPlayer.Length();
-	if (length < 1.0f) {
+	if (m_popEnd && m_characterController.IsOnGround() && length < 5.0f) {
+		m_moveSpeed = m_characterController.GetMoveSpeed();
+		CVector3 toPlayerNormalize = toPlayer;
+		toPlayerNormalize.Normalize();
+		m_moveSpeed += toPlayerNormalize * m_timer;
+		m_characterController.SetMoveSpeed(m_moveSpeed);
+	}
+	if (length < 2.0f) {
 		//近ければ獲得
 		Delete(this);
 	}
@@ -67,9 +75,10 @@ void CMoney::Move()
 	CVector3 moveSpeed = m_characterController.GetMoveSpeed();
 
 	//地面に接地したら止める
-	if (m_characterController.IsOnGround()) {
+	if (!m_popEnd && m_characterController.IsOnGround()) {
 		moveSpeed.x = 0.0f;
 		moveSpeed.z = 0.0f;
+		m_popEnd = true;
 	}
 
 	//キャラクターコントローラーに移動速度を設定
