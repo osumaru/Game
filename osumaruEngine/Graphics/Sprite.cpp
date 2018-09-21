@@ -14,7 +14,8 @@ CSprite::CSprite() :
 	m_position(0.0f, 0.0f),
 	m_centerPosition(0.5f, 0.5f),
 	m_size(FrameBufferWidth(), FrameBufferHeight()),
-	m_isDraw(true)
+	m_isDraw(true),
+	m_depthValue(0.0f)
 {
 
 }
@@ -41,6 +42,7 @@ void CSprite::Init(CTexture* texture)
 	SSpriteCB cb;
 	cb.worldMat = CMatrix::Identity;
 	cb.alpha = 1.0f;
+	cb.depthValue = m_depthValue;
 	m_cb.Create(sizeof(SSpriteCB), &cb);
 	m_primitive.Create(vertexBufferLayout, sizeof(SVSLayout), 4, indexBufferLayout, 4, CPrimitive::enIndex32, CPrimitive::enTypeTriangleStrip);
 
@@ -60,8 +62,8 @@ void CSprite::Draw()
 
 	//拡大のスケールを変換
 	CVector3 size;
-	size.x = m_size.x / FrameBufferWidth();
-	size.y = m_size.y / FrameBufferHeight();
+	size.x = m_size.x / FrameBufferWidth() * (1.0f - m_depthValue);
+	size.y = m_size.y / FrameBufferHeight() * (1.0f - m_depthValue);
 	size.z = 1.0f;
 
 	//スプライトの基底座標を変えるための行列
@@ -114,6 +116,7 @@ void CSprite::Draw()
 	SSpriteCB cb;
 	cb.worldMat = worldMatrix;
 	cb.alpha = m_alpha;
+	cb.depthValue = m_depthValue;
 	m_cb.Update(&cb);
 	GetDeviceContext()->VSSetShader((ID3D11VertexShader*)m_vertexShader.GetBody(), nullptr, 0);
 	GetDeviceContext()->PSSetShader((ID3D11PixelShader*)m_pixelShader.GetBody(), nullptr, 0);
@@ -130,5 +133,4 @@ void CSprite::Draw()
 	ID3D11ShaderResourceView* views[] = {m_pTexture->GetShaderResource()};
 	GetDeviceContext()->PSSetShaderResources(0, 1, views);
 	GetDeviceContext()->DrawIndexed(m_primitive.GetIndexNum(), 0, 0);
-
 }
