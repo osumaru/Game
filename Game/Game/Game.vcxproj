@@ -262,6 +262,7 @@
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\Arrow.fbx" />
     <MeshContentTask Include="Assets\modelData\Barrel.FBX" />
+    <MeshContentTask Include="Assets\modelData\Brock.FBX" />
     <MeshContentTask Include="Assets\modelData\Heart.fbx" />
     <MeshContentTask Include="Assets\modelData\House.FBX" />
     <MeshContentTask Include="Assets\modelData\LargeSword.fbx" />
@@ -284,6 +285,9 @@
     <MeshContentTask Include="Assets\modelData\Unitychan2.fbx" />
     <MeshContentTask Include="Assets\modelData\Warrok.fbx" />
     <MeshContentTask Include="Assets\modelData\Wave.FBX" />
+    <MeshContentTask Include="Assets\modelData\Yasikia.FBX" />
+    <MeshContentTask Include="Assets\modelData\Yasikib.FBX" />
+    <MeshContentTask Include="Assets\modelData\Yasikic.FBX" />
     <MeshContentTask Include="Assets\modelData\Zombi.FBX" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
