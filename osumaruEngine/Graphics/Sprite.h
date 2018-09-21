@@ -93,6 +93,14 @@ public:
 		m_isDraw = isDraw;
 	}
 
+	/*
+	スプライトのZ値を設定
+	0.0fが一番手前で1.0fが最奥
+	*/
+	void SetDepthValue(float depthValue)
+	{
+		m_depthValue = depthValue;
+	}
 private:
 	//頂点レイアウト
 	struct SVSLayout
@@ -106,6 +114,7 @@ private:
 	{
 		CMatrix worldMat;	//ワールド行列
 		float alpha;		//アルファ値
+		float depthValue;	//Zの値
 	};
 
 	CTexture*						m_pTexture;			//テクスチャ
@@ -119,4 +128,5 @@ private:
 	CVector2						m_size;				//スプライトのサイズ
 	CConstantBuffer					m_cb;				//定数バッファ
 	bool							m_isDraw;			//描画するかどうか？
+	float							m_depthValue;		//Zの値
 };

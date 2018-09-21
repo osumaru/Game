@@ -22,8 +22,8 @@ void CEnemySearch::Update()
 	float angle = toPlayerDir.Dot(forwardXZ);
 	angle = acosf(angle);
 
-	if (fabsf(angle) < CMath::DegToRad(30.0f) && length < 8.0f) {
-		//プレイヤーを発見した
+	if (fabsf(angle) < CMath::DegToRad(30.0f) && length < 8.0f || m_enemy->IsDamage()) {
+		//プレイヤーを発見した又はダメージを受けた
 		std::list<IEnemy*> groupList = m_enemy->GetEnemyGroup()->GetGroupList();
 		for (auto& enemy : groupList) 
 		{

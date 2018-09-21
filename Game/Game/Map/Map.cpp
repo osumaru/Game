@@ -14,13 +14,16 @@ std::vector<std::vector<SMapChipInfo>> mapChipInfo =
 {
 	{
 #include "Location.h"
+
 	}
 //	{
 //#include "Location2.h"
+
 //	},
 //	{
 //#include "Location3.h"
 //	},
+
 //	{
 //#include "Location4.h"
 //	},
@@ -46,7 +49,6 @@ void Map::Init(int stageNum)
 	std::map<int, std::vector<SMapChipInfo>> instancingData;
 
 	std::vector<CEnemyGroup*> enemyGroupList;
-	//std::vector<IEnemy*> enemyList;
 
 	for (SMapChipInfo& mInfo : mapChipInfo[stageNum])
 	{

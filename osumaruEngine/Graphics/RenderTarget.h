@@ -33,6 +33,18 @@ public:
 		return m_pDepthStencil;
 	}
 
+	//レンダリングターゲット用のテクスチャの取得
+	ID3D11Texture2D* GetRenderTargetTexture() const
+	{
+		return m_pRenderTargetTexture;
+	}
+
+
+	//デプスステンシルテクスチャ
+	ID3D11Texture2D* GetDepthStencilTexture() const
+	{
+		return m_pDepthStencilTexture;
+	}
 private:
 	ID3D11DepthStencilView*					m_pDepthStencil;		//デプスステンシルビュー
 	ID3D11RenderTargetView*					m_pRenderTarget;		//レンダリングターゲット

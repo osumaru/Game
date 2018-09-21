@@ -6,7 +6,7 @@
 bool CEnemyChase::Start()
 {
 	//歩きアニメーションを再生
-	m_enemy->PlayAnimation(CEnemyState::enState_Walk);
+	m_enemy->PlayAnimation(CEnemyState::enState_Chase);
 
 	return true;
 }

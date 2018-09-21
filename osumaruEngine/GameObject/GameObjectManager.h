@@ -1,6 +1,8 @@
 #pragma once
 class IGameObject;
 //オブジェクトマネージャー
+#include "../Graphics/PostEffect/Deferred.h"
+#include "../Graphics/PostEffect/PostEffect.h"
 
 struct SGameObjectData
 {
@@ -17,7 +19,7 @@ public:
 	void Init();
 
 	//ゲームの1ループを実行する関数
-	void Execute();
+	void Execute(Deferred& deferred, PostEffect& postEffect);
 
 	//ゲームのオブジェクトを消去する関数
 	void Delete(IGameObject* deleteObject);

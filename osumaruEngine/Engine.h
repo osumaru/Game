@@ -6,6 +6,11 @@
 #include "Resource/TextureResource.h"
 #include "Resource/SkinmodelResource.h"
 #include "Resource/ShaderResource.h"
+#include "Graphics/Primitive.h"
+#include "Graphics/Light.h"
+#include "Graphics/ConstantBuffer.h"
+#include  "Graphics/PostEffect/Deferred.h"
+
 //エンジンクラス
 
 
@@ -24,6 +29,13 @@ private:
 	//デストラクタ。シングルトンのためプライベートになっている
 	~CEngine();
 public:
+	//頂点レイアウト
+	struct SVSLayout
+	{
+		CVector4 position;
+		CVector2	uv;
+	};
+
 	//DirectXを初期化
 	void InitD3D(HINSTANCE& hInst);
 
@@ -115,10 +127,29 @@ public:
 	{
 		m_objectManager.Add(object, priority);
 	}
+	CLight& Light()
+	{
+
+		return m_light;
+	}
+	CRenderTarget& GetMainRenderTarget()
+	{
+		return m_mainRenderTarget[m_currentRenderTargetNum];
+	}
+
+	CTexture& GetMainRenderTargetTexture()
+	{
+		return m_renderTarget[m_currentRenderTargetNum];
+	}
+
+	void SwitchingRenderTarget()
+	{
+		m_currentRenderTargetNum ^= 1;
+	}
 
 
 private:
-
+	static const int						MAIN_RENDER_TARGET_NUM = 2;
 	CGameObjectManager						m_objectManager;			//オブジェクトマネージャー
 	WNDCLASSEX								m_wc;						//ウィンドウクラス
 	ID3D11Device*							m_pD3DDevice;
@@ -127,11 +158,11 @@ private:
 	IDXGISwapChain*							m_pSwapChain;
 	D3D_FEATURE_LEVEL						m_featureLevel;
 	ID3D11DeviceContext*					m_pDeviceContext;
-	CTexture								m_depthStencilTexture;
-	CRenderTarget							m_backBuffer;
+	CRenderTarget							m_mainRenderTarget[2];
+	CTexture								m_renderTarget[2];
+	CTexture								m_depthStencilTextures[2];
+	int										m_currentRenderTargetNum = 0;
 	D3D_DRIVER_TYPE							m_driverType;
-	ID3D11RenderTargetView*					m_pBackBuffer;
-	ID3D11DepthStencilView*					m_depthStencil;
 	HWND									m_hwnd;
 	std::unique_ptr<CPhysicsWorld>			m_physicsWorld;				//物理ワールド
 	std::unique_ptr<CSoundEngine>			m_soundEngine;				//サウンドエンジン]
@@ -139,6 +170,9 @@ private:
 	CTextureResource						m_textureResource;
 	CSkinmodelResource						m_skinmodelResource;
 	CShaderResource							m_shaderResource;
+	CLight									m_light;
+	Deferred								m_deferred;
+	PostEffect								m_postEffect;
 };
 
 //エンジンクラスのインスタンスを取得。
@@ -215,3 +249,17 @@ static int FrameBufferHeight()
 	return Engine().GetFrameBufferHeight();
 }
 
+static CLight& Light()
+{
+	return Engine().Light();
+}
+
+static CRenderTarget& MainRenderTarget()
+{
+	return Engine().GetMainRenderTarget();
+}
+
+static CTexture& MainRenderTargetTexture()
+{
+	return Engine().GetMainRenderTargetTexture();
+}

@@ -10,7 +10,6 @@ CShader::CShader() :
 	m_entryFuncName(nullptr),
 	m_isErase(true)
 {
-	m_it = ShaderResource().ShaderPushBack(this);
 }
 
 CShader::~CShader()
@@ -30,6 +29,7 @@ void CShader::Load(const char* filepath, const char* entryFuncName, EnShaderType
 	m_blob = shaderResource.m_blob;
 	m_pInputLayout = shaderResource.m_pInputLayout;
 	m_pShader = shaderResource.m_pShader;
+	m_it = ShaderResource().ShaderPushBack(this);
 }
 
 void CShader::ReLoad()

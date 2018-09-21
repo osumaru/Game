@@ -3,7 +3,7 @@
 
 void CNumber::Init(CVector2 numPos, CVector2 numSize)
 {
-	for (int i = 0; i < 10; i++) {
+	for (int i = 0; i < EnNumber::enNumber_Num; i++) {
 		wchar_t filePath[256];
 		swprintf(filePath, L"Assets/sprite/number/number%d.png", i);
 		m_numberTexture[i].Load(filePath);
