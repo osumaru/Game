@@ -6,16 +6,16 @@
 #include "Sound\SoundEngine.h"
 #include "Input\Pad.h"
 
-int MakeHash(const wchar_t* str)
-{
-	int hash = 0;
-	int len = (int)wcslen(str);
-	for (int i = 0; i < len; i++)
-	{
-		hash = hash * 37 + str[i];
-	}
-	return hash;
-}
+//int MakeHash(const wchar_t* str)
+//{
+//	int hash = 0;
+//	int len = (int)wcslen(str);
+//	for (int i = 0; i < len; i++)
+//	{
+//		hash = hash * 37 + str[i];
+//	}
+//	return hash;
+//}
 
 int MakeHash(const char* str)
 {
@@ -123,12 +123,6 @@ void CEngine::InitD3D(HINSTANCE& hInst)
 	}
 	ID3D11Texture2D * p_RT;
 	hr = m_pSwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (LPVOID*)(&p_RT));
-	m_depthStencilTexture.Create(m_frameBufferWidth, m_frameBufferHeight, CTexture::enDepthStencil, DXGI_FORMAT_D24_UNORM_S8_UINT);
-
-	m_backBuffer.Create(p_RT, (ID3D11Texture2D*)m_depthStencilTexture.GetTexture(), m_frameBufferWidth, m_frameBufferHeight, true);
-	m_pBackBuffer = m_backBuffer.GetRenderTarget();
-	m_depthStencil = m_backBuffer.GetDepthStencil();
-	m_pDeviceContext->OMSetRenderTargets(1, &m_pBackBuffer, m_depthStencil);
 
 	ID3D11DepthStencilState* depthStencilState;
 	D3D11_DEPTH_STENCIL_DESC depthDesc;
@@ -154,7 +148,7 @@ void CEngine::InitD3D(HINSTANCE& hInst)
 	blendDesc.RenderTarget[0].SrcBlend = D3D11_BLEND_SRC_COLOR;
 	blendDesc.RenderTarget[0].DestBlend = D3D11_BLEND_DEST_COLOR;
 	blendDesc.RenderTarget[0].BlendOp = D3D11_BLEND_OP_ADD;
-	blendDesc.RenderTarget[0].DestBlendAlpha = D3D11_BLEND_DEST_ALPHA;
+	blendDesc.RenderTarget[0].DestBlendAlpha = D3D11_BLEND_INV_SRC_ALPHA;
 	blendDesc.RenderTarget[0].SrcBlendAlpha = D3D11_BLEND_SRC_ALPHA;
 	blendDesc.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP_ADD;
 	blendDesc.RenderTarget[0].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;
@@ -174,6 +168,14 @@ void CEngine::InitD3D(HINSTANCE& hInst)
 	m_soundEngine = std::make_unique<CSoundEngine>();
 	m_soundEngine->Init();
 	m_pad = std::make_unique<CPad>();
+	for (int i = 0; i < 2; i++)
+	{
+		m_renderTarget[i].Create(m_frameBufferWidth, m_frameBufferHeight, CTexture::enRendertarget, DXGI_FORMAT_R32G32B32A32_FLOAT);
+		m_depthStencilTextures[i].Create(m_frameBufferWidth, m_frameBufferHeight, CTexture::enDepthStencil, DXGI_FORMAT_D32_FLOAT);
+		m_mainRenderTarget[i].Create((ID3D11Texture2D*)m_renderTarget[i].GetTexture(), (ID3D11Texture2D*)m_depthStencilTextures[i].GetTexture(), m_frameBufferWidth, m_frameBufferHeight, false);
+	}
+	m_deferred.Init();
+	m_postEffect.Init(m_pSwapChain);
 }
 
 void CEngine::GameLoop()
@@ -197,16 +199,12 @@ void CEngine::GameLoop()
 			{
 				m_shaderResource.ReLoad();
 			}
-			float color[4] = { 0.0f, 0.0f, 1.0f, 0.0f };
-			m_pDeviceContext->ClearRenderTargetView(m_pBackBuffer, color);
-			m_pDeviceContext->ClearDepthStencilView(m_depthStencil, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
-			m_objectManager.Execute();
+			m_objectManager.Execute(m_deferred, m_postEffect);
+			m_pSwapChain->Present(0, 0);
 			m_physicsWorld->Update();
 			m_soundEngine->Update();
 			m_pad->Update();
-			m_pSwapChain->Present(0, 0);
 			sw.Stop();
-
 			float limitTime = 1.0f / 60.0f;
 			if (sw.GetElapsedTime() < limitTime)
 			{
