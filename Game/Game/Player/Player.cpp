@@ -102,8 +102,7 @@ void CPlayer::Update()
 	
 		//スキンモデルの更新
 		m_Weaponskin[m_weaponState].Update(m_weaponPosition, m_weaponRotation, { 1.0f, 1.0f, 1.0f }, true);
-		m_skinmodel.Update(m_position, m_rotation, { 1.0f, 1.0f, 1.0f }, true);
-		
+		m_skinmodel.Update(m_position, m_rotation, { 1.0f, 1.0f, 1.0f }, true);		
 
 }
 
@@ -634,7 +633,7 @@ void CPlayer::PlayerAttack()
 {
 	if (!m_isAttack) { return; }
 	int num = 0;
-
+	
 	//エネミーのリストを取得
 	for (const auto& enemys : GetSceneManager().GetGameScene().GetMap()->GetEnemyList())
 	{
