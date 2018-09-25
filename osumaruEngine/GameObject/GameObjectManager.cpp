@@ -28,6 +28,7 @@ void CGameObjectManager::Execute(Deferred& deferred, PostEffect& postEffect)
 			object.gameObject->Updater();
 		}
 	}
+	//
 	deferred.Start();
 	for (GameObjectList& objList : m_objectVector)
 	{
@@ -37,7 +38,6 @@ void CGameObjectManager::Execute(Deferred& deferred, PostEffect& postEffect)
 		}
 	}
 	PhysicsWorld().Draw();
-	deferred.End();
 	deferred.Draw();
 	postEffect.Draw();
 	//for (GameObjectList& objList : m_objectVector)

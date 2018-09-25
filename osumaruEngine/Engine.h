@@ -137,11 +137,6 @@ public:
 		return m_mainRenderTarget[m_currentRenderTargetNum];
 	}
 
-	CTexture& GetMainRenderTargetTexture()
-	{
-		return m_renderTarget[m_currentRenderTargetNum];
-	}
-
 	void SwitchingRenderTarget()
 	{
 		m_currentRenderTargetNum ^= 1;
@@ -158,9 +153,7 @@ private:
 	IDXGISwapChain*							m_pSwapChain;
 	D3D_FEATURE_LEVEL						m_featureLevel;
 	ID3D11DeviceContext*					m_pDeviceContext;
-	CRenderTarget							m_mainRenderTarget[2];
-	CTexture								m_renderTarget[2];
-	CTexture								m_depthStencilTextures[2];
+	CRenderTarget							m_mainRenderTarget[MAIN_RENDER_TARGET_NUM];
 	int										m_currentRenderTargetNum = 0;
 	D3D_DRIVER_TYPE							m_driverType;
 	HWND									m_hwnd;
@@ -257,9 +250,4 @@ static CLight& Light()
 static CRenderTarget& MainRenderTarget()
 {
 	return Engine().GetMainRenderTarget();
-}
-
-static CTexture& MainRenderTargetTexture()
-{
-	return Engine().GetMainRenderTargetTexture();
 }
