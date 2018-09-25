@@ -40,13 +40,13 @@ void CGameObjectManager::Execute(Deferred& deferred, PostEffect& postEffect)
 	PhysicsWorld().Draw();
 	deferred.Draw();
 	postEffect.Draw();
-	//for (GameObjectList& objList : m_objectVector)
-	//{
-	//	for (SGameObjectData& object : objList)
-	//	{
-	//		object.gameObject->AfterDrawer();
-	//	}
-	//}
+	for (GameObjectList& objList : m_objectVector)
+	{
+		for (SGameObjectData& object : objList)
+		{
+			object.gameObject->AfterDrawer();
+		}
+	}
 
 	//最後にオブジェクトを消去
 	DeleteExecute();
