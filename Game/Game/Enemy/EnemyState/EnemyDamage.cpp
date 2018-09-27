@@ -6,8 +6,7 @@
 
 bool CEnemyDamage::Start()
 {
-	//ダメージを受けたフラグを戻す
-	m_enemy->SetIsDamage(false);
+	
 
 	//ダメージアニメーションを再生
 	m_enemy->PlayAnimation(CEnemyState::enState_Damage);
@@ -51,6 +50,8 @@ void CEnemyDamage::Update()
 		}
 		//ダメージ表示の描画をやめる
 		m_enemy->DamageIndicateReset();
+		//ダメージを受けたフラグを戻す
+		m_enemy->SetIsDamage(false);
 	}
 	if (m_enemy->GetStatus().Hp <= 0) {
 		//HPが無くなれば死亡

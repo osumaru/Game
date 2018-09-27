@@ -92,7 +92,6 @@ void CPlayer::Update()
 	if (m_isDied) { return; }
 	WeaponChange();
 	Move();					//移動処理
-	Rotation();				//回転処理
 	StatusCalculation();	//ステータスの処理
 	PlayerAttack();
 
@@ -214,51 +213,6 @@ void CPlayer::Move()
 }
 
 //プレイヤーの回転を行う関数
-void CPlayer::Rotation()
-{
-
-	/*CVector3 playerVec = m_moveSpeed; 
-	playerVec.y = 0.0f;*/
-	//
-	////プレイヤーの手のボーンに武器を持たせる処理
-	//if (m_isAttack)
-	//{
-	//	//プレイヤーの手のボーンを取得
-	//	CMatrix PlayerHnd = m_skinmodel.FindBoneWorldMatrix(L"LeftHandMiddle1");
-	//	CVector3 PlayerHndPos = { PlayerHnd.m[3][0],PlayerHnd.m[3][1],PlayerHnd.m[3][2] };
-
-	//	CVector3 PlayerHndScale = { PlayerHnd.m[0][0], PlayerHnd.m[0][1], PlayerHnd.m[0][2] };
-	//	float len = PlayerHndScale.Length();
-	//	PlayerHnd.m[0][0] /= len;
-	//	PlayerHnd.m[0][1] /= len;
-	//	PlayerHnd.m[0][2] /= len;
-
-	//	PlayerHnd.m[1][0] /= len;
-	//	PlayerHnd.m[1][1] /= len;
-	//	PlayerHnd.m[1][2] /= len;
-
-	//	PlayerHnd.m[2][0] /= len;
-	//	PlayerHnd.m[2][1] /= len;
-	//	PlayerHnd.m[2][2] /= len;
-	//	m_weaponPosition = PlayerHndPos;
-	//	m_weaponRotation.SetRotation(PlayerHnd);
-
-	//}
-	//すべての武器を背中に持たせる
-	
-	//プレイヤーの回転の処理
-	//if (playerVec.LengthSq() > 0.001f)
-	//{
-
-
-	//	CQuaternion rot = CQuaternion::Identity;
-	//	rot.SetRotation(CVector3::AxisY, atan2f(playerVec.x, playerVec.z));		//Y軸周りの回転
-	//	m_rotation.Slerp(0.2f, m_rotation, rot);
-
-
-	//}
-}
-
 
 void CPlayer::StatusCalculation()
 {
@@ -342,17 +296,19 @@ void CPlayer::PlayerAttack()
 	//エネミーのリストを取得
 	for (const auto& enemys : GetSceneManager().GetGameScene().GetMap()->GetEnemyList())
 	{
-		
-		CVector3 EnemyVec = enemys->GetPosition();
-		EnemyVec.y += 1.3f;
-		EnemyVec -= m_weaponPosition;
-		float len = EnemyVec.Length();
+		if (!enemys->IsDamage()) {
 
-		if (fabs(len) < 0.3f)
-		{
-			enemys->SetIsDamage(true);
+			CVector3 EnemyVec = enemys->GetPosition();
+			EnemyVec.y += 1.3f;
+			EnemyVec -= m_weaponPosition;
+			float len = EnemyVec.Length();
+
+			if (fabs(len) < 2.0f)
+			{
+				enemys->SetIsDamage(true);
+			}
+
 		}
-	
 	}
 	
 
