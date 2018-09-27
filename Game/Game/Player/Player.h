@@ -81,15 +81,16 @@ public:
 	//ステータスの計算処理を行う関数
 	void StatusCalculation();
 
-	//プレイヤーの経験値量を上げる関数（セットする関数ではないです）
-	//引数で倒した敵の経験値量を入れる
+	/*プレイヤーの経験値量を上げる関数（セットする関数ではないです）
+	引数で倒した敵の経験値量を入れる*/
 	void ExpUP(const int expup)
 	{
 		m_status.ExperiencePoint += expup;
 		m_status.AccumulationExp += expup;
 	}
 
-	//アニメーションの設定
+	/*アニメーションの設定
+	第一引数　アニメーメーションの番号　第二引数　補完時間*/
 	void SetPlayerAnimation(const int animNumber, const float num)
 	{
 		m_animation.Play(animNumber, num);
@@ -176,25 +177,28 @@ public:
 		return m_weaponRigitBody;
 	}
 	//ステートマシーンのしゅとく
-	CPlayerStateMachine& SetPlayerStateMachine()
+	CPlayerStateMachine& GetPlayerStateMachine()
 	{
 		return m_PlayerStateMachine;
 	}
-
+	//武器の切り替えを設定する関数
 	void SetChangeWeapon(const int changeWeapon)
 	{
 		m_weaponState = (EnPlayerWeapon)changeWeapon;
 		
 	}
 
+	//武器の向きの処理をする関数
+	void WeaponRotation();
+
 private:
 	
 
 	CVector3				m_position;										//座標
-	CVector3				m_WeaponPosition;								//武器の座標
+	CVector3				m_weaponPosition;								//武器の座標
 	CVector3				m_moveSpeed = CVector3::Zero;					//移動速度
 	CQuaternion				m_rotation = CQuaternion::Identity;				//回転
-	CQuaternion				m_WeaponRotation = CQuaternion::Identity;		//武器の回転
+	CQuaternion				m_weaponRotation = CQuaternion::Identity;		//武器の回転
 	CSkinModel				m_skinmodel;									//スキンモデル
 	CSkinModel				m_Weaponskin[4];								//武器のスキンモデル
 	CCharacterController	m_characterController;							//キャラクターコントローラー
