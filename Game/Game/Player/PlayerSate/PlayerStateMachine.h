@@ -7,6 +7,7 @@
 #include "PlayerAttack.h"
 #include "PlayerDamage.h"
 #include "PlayerDied.h"
+#include "PlayerJump.h"
 
 class CPlayerStateMachine	:public IGameObject
 {
@@ -43,11 +44,12 @@ private:
 	CPlayerState::EnPlayerState		m_AttackState = CPlayerState::enPlayerAttack;	//攻撃時のアニメーションの状態
 
 	IPlayerSate*					m_currentState = nullptr;
-	CPlayerStand					m_playerStand;
-	CPlayerWalk						m_playerWalk;
-	CPlayerRun						m_playerRun;
-	CPlayerAttack					m_playerAttack;
-	CPlayerDamage					m_playerDamege;
-	CPlayerDied						m_playerDied;
+	CPlayerStand					m_playerStand;			//待機モーション
+	CPlayerWalk						m_playerWalk;			//歩行モーション
+	CPlayerRun						m_playerRun;			//走りモーション
+	CPlayerAttack					m_playerAttack;			//攻撃モーション
+	CPlayerDamage					m_playerDamege;			//ダメージモーション
+	CPlayerDied						m_playerDied;			//死亡モーション
+	CPlayerJump						m_playerJump;			//ジャンプモーション
 };
 

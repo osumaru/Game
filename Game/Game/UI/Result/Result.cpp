@@ -42,6 +42,6 @@ void CResult::AfterDraw()
 
 void CResult::Draw()
 {
-	
+
 
 }

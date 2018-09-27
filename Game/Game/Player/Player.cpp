@@ -172,7 +172,7 @@ void CPlayer::Move()
 			
 		}
 		//ƒWƒƒƒ“ƒv‚ÌˆÚ“®ˆ—
-		else if (Pad().IsTriggerButton(enButtonY))
+		else if (Pad().IsTriggerButton(enButtonA))
 		{
 
 			m_moveSpeed.y = 10.0f;
