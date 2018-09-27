@@ -49,6 +49,11 @@ void CDamegeNumber::DamageCalculation(int dmg)
 	//ˆê‚ÌˆÊ‚ð•\Ž¦
 	m_number[EnDigit::enDigit_One]->SetIsActive(true);
 	m_number[EnDigit::enDigit_One]->SetNumber(damage);
+
+	for (int i = 0; i < EnDigit::enDigit_Num; i++) {
+		m_number[i]->SetPosition(m_numPos);
+		m_numPos.x = m_numSize.x * i;
+	}
 }
 
 void CDamegeNumber::Reset()

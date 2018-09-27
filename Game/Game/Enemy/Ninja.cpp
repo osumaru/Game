@@ -26,9 +26,9 @@ void CNinja::Init(CVector3 position)
 		L"Assets/modelData/ninjaDeath.tka"
 	};
 	m_animation.Init(animClip, CEnemyState::enState_Num);
-	m_animation.SetLoopFlg(0, true);
-	m_animation.SetLoopFlg(1, true);
-	m_animation.SetLoopFlg(2, true);
+	m_animation.SetLoopFlg(CEnemyState::enState_Idle, true);
+	m_animation.SetLoopFlg(CEnemyState::enState_Walk, true);
+	m_animation.SetLoopFlg(CEnemyState::enState_Chase, true);
 	Add(&m_enemyStateMachine, 0);
 	Add(&m_enemyTurn, 0);
 	Add(&m_enemySearch, 0);
@@ -57,7 +57,7 @@ void CNinja::Update()
 	m_position = m_characterController.GetPosition();
 
 	m_animation.Update(GameTime().GetDeltaFrameTime() * 2.0f);
-	m_skinModel.Update(m_position, m_rotation, { 1.0f, 1.0f, 1.0f }, true);
+ 	m_skinModel.Update(m_position, m_rotation, { 1.0f, 1.0f, 1.0f }, true);
 }
 
 void CNinja::Draw()

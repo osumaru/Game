@@ -18,10 +18,7 @@ bool CEnemyDamage::Start()
 	int damage = playerStrength - enemyDefence;
 	m_enemy->HpDamage(damage);
 	CVector3 enemyPos = m_enemy->GetPosition();
-	CVector2 damagePos;
-	damagePos.x = enemyPos.x;
-	damagePos.y = enemyPos.y;
-	m_enemy->SetDamagePos(damagePos);
+	m_enemy->SetDamagePos({ enemyPos.x, enemyPos.y });
 	m_enemy->DamageCalculation(damage);
 
 	return true;

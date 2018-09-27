@@ -1,6 +1,7 @@
 #pragma once
 #include "PlayerSate/PlayerStateMachine.h"
 #include "PlayerSate/PlayerState.h"
+#include "PlayerRotation.h"
 
 struct SplayerStatus
 {
@@ -68,6 +69,16 @@ public:
 	{
 		return m_position;
 	}
+	//プレイヤーの回転情報を取得
+	const CQuaternion& GetPlayerrRot()
+	{
+		return m_rotation;
+	}
+	//プレイヤーの回転の設定
+	void SetPlayerRot(const CQuaternion Setrot)
+	{
+		m_rotation = Setrot;
+	}
 
 	//プレイヤーの移動処理を行う関数
 	void Move();
@@ -81,15 +92,16 @@ public:
 	//ステータスの計算処理を行う関数
 	void StatusCalculation();
 
-	//プレイヤーの経験値量を上げる関数（セットする関数ではないです）
-	//引数で倒した敵の経験値量を入れる
+	/*プレイヤーの経験値量を上げる関数（セットする関数ではないです）
+	引数で倒した敵の経験値量を入れる*/
 	void ExpUP(const int expup)
 	{
 		m_status.ExperiencePoint += expup;
 		m_status.AccumulationExp += expup;
 	}
 
-	//アニメーションの設定
+	/*アニメーションの設定
+	第一引数　アニメーメーションの番号　第二引数　補完時間*/
 	void SetPlayerAnimation(const int animNumber, const float num)
 	{
 		m_animation.Play(animNumber, num);
@@ -164,6 +176,11 @@ public:
 	{
 		m_isDamege = SetDamage;
 	}
+	//攻撃中かを取得
+	bool GetIsAttack()
+	{
+		return m_isAttack;
+	}
 
 	//攻撃をしたかの設定
 	void SetAttack(const bool SetA)
@@ -176,25 +193,46 @@ public:
 		return m_weaponRigitBody;
 	}
 	//ステートマシーンのしゅとく
-	CPlayerStateMachine& SetPlayerStateMachine()
+	CPlayerStateMachine& GetPlayerStateMachine()
 	{
 		return m_PlayerStateMachine;
 	}
-
+	//武器の切り替えを設定する関数
 	void SetChangeWeapon(const int changeWeapon)
 	{
 		m_weaponState = (EnPlayerWeapon)changeWeapon;
 		
+	}
+	//武器の座標の設定
+	void SetWeaponPosition(const CVector3 swpos)
+	{
+		m_weaponPosition =  swpos;
+	}
+	//武器の座標を取得
+	const CVector3 GetWeaponPosition()
+	{
+		return m_weaponPosition;
+	}
+	//武器の向きの設定
+	void SetWeaponRotation(const CQuaternion setrot)
+	{
+		m_weaponRotation = setrot;
+	}
+	
+	//プレイヤーのスキンモデルの情報を取得
+	CSkinModel& GetPlayerSkin()
+	{
+		return m_skinmodel;
 	}
 
 private:
 	
 
 	CVector3				m_position;										//座標
-	CVector3				m_WeaponPosition;								//武器の座標
+	CVector3				m_weaponPosition;								//武器の座標
 	CVector3				m_moveSpeed = CVector3::Zero;					//移動速度
 	CQuaternion				m_rotation = CQuaternion::Identity;				//回転
-	CQuaternion				m_WeaponRotation = CQuaternion::Identity;		//武器の回転
+	CQuaternion				m_weaponRotation = CQuaternion::Identity;		//武器の回転
 	CSkinModel				m_skinmodel;									//スキンモデル
 	CSkinModel				m_Weaponskin[4];								//武器のスキンモデル
 	CCharacterController	m_characterController;							//キャラクターコントローラー
@@ -216,7 +254,9 @@ private:
 	float					m_animetionFrame = 0.0f;
 	bool					m_isAttack = false;
 	bool					m_isDied = false;
-	CPlayerStateMachine		m_PlayerStateMachine;
+
+	CPlayerStateMachine		m_PlayerStateMachine;							//プレイヤーのアニメーションの遷移を行うステートマシーン
+	CPlayerRotation			m_PlayerRotation;								
 	
 	
 

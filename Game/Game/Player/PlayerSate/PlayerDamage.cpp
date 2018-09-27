@@ -24,7 +24,7 @@ void CPlayerDamage::Update()
 	if (!GetPlayer().GetAnimetion().IsPlay())
 	{
 
-		GetPlayer().SetPlayerStateMachine().ChangeState(CPlayerState::enPlayerStand);
+		GetPlayer().GetPlayerStateMachine().ChangeState(CPlayerState::enPlayerStand);
 		GetPlayer().SetIsDamage(false);
 
 	}

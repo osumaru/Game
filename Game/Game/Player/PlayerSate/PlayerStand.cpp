@@ -28,23 +28,28 @@ void CPlayerStand::Update()
 	//死亡した場合の処理
 	if (GetPlayer().GetStatus().Health <= 0)
 	{
-		GetPlayer().SetPlayerStateMachine().ChangeState(CPlayerState::enPlayerDied);
+		GetPlayer().GetPlayerStateMachine().ChangeState(CPlayerState::enPlayerDied);
 	}
 	//ダメージを受けた場合の処理
 	else if (GetPlayer().GetIsDamage())
 	{
-		GetPlayer().SetPlayerStateMachine().ChangeState(CPlayerState::enPlayerDamage);
+		GetPlayer().GetPlayerStateMachine().ChangeState(CPlayerState::enPlayerDamage);
 	}
 	//攻撃をした時の処理
 	else if (Pad().IsTriggerButton(enButtonX))
 	{
-		GetPlayer().SetPlayerStateMachine().ChangeState(CPlayerState::enPlayerAttack);
+		GetPlayer().GetPlayerStateMachine().ChangeState(CPlayerState::enPlayerAttack);
+	}
+	
+	else if (Pad().IsTriggerButton(enButtonA))
+	{
+		GetPlayer().GetPlayerStateMachine().ChangeState(CPlayerState::enPlayerJump);
 	}
 
 	//移動の入力があるなら歩きアニメーションに遷移
 	else if (Pad().GetLeftStickX() != 0 || Pad().GetLeftStickY() != 0)
 	{
-		GetPlayer().SetPlayerStateMachine().ChangeState(CPlayerState::enPlayerWalk);
+		GetPlayer().GetPlayerStateMachine().ChangeState(CPlayerState::enPlayerWalk);
 
 	}
 	

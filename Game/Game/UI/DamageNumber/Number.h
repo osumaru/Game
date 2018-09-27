@@ -8,8 +8,8 @@ class CNumber : public IGameObject
 {
 public:
 	//初期化
-	//Vector2  numPos  座標
-	//Vector2  numSize サイズ
+	//numPos  座標
+	//numSize サイズ
 	void Init(CVector2 numPos, CVector2 numSize);
 
 	//更新
@@ -21,6 +21,16 @@ public:
 	//表示する数値を設定
 	//int  num  数値
 	void SetNumber(int num);
+
+	void SetPosition(CVector2 pos)
+	{
+		m_number[m_num].SetPosition(pos);
+	}
+
+	void SetDepthValue(float depth)
+	{
+		m_number[m_num].SetDepthValue(depth);
+	}
 
 	enum EnNumber {
 		enNumber_Zero,	//0

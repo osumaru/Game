@@ -21,18 +21,18 @@ bool CPlayerRun::Start()
 void CPlayerRun::Update()
 {
 
-	if (Pad().IsTriggerButton(enButtonX))
+	if (GetPlayer().GetIsDamage()       )
 	{
-		GetPlayer().SetPlayerStateMachine().ChangeState(CPlayerState::enPlayerAttack);
+		GetPlayer().GetPlayerStateMachine().ChangeState(CPlayerState::enPlayerDamage);
 	}
 
-	/*else if (fabs(GetPlayer().GetMoveSpeed().Length()) < 3.0f)
+	else if (Pad().IsTriggerButton(enButtonX))
 	{
-		GetPlayer().SetPlayerStateMachine().ChangeState(CPlayerState::enPlayerWalk);
-	}*/
+		GetPlayer().GetPlayerStateMachine().ChangeState(CPlayerState::enPlayerAttack);
+	}
 
 	else if (fabs(GetPlayer().GetMoveSpeed().Length()) == 0.0f)
 	{
-		GetPlayer().SetPlayerStateMachine().ChangeState(CPlayerState::enPlayerStand);
+		GetPlayer().GetPlayerStateMachine().ChangeState(CPlayerState::enPlayerStand);
 	}
 }
