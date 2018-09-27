@@ -17,18 +17,18 @@ void CWarrok::Init(CVector3 position)
 	m_position = position;
 	m_characterController.Init(0.5f, 0.9f, m_position);
 	m_characterController.SetGravity(-90.0f);
-	wchar_t* animClip[5] = {
+	wchar_t* animClip[CEnemyState::enState_Num] = {
 		L"Assets/modelData/warrokStand.tka",
 		L"Assets/modelData/warrokWalk.tka",
-		//L"Assets/modelData/warrokDash.tka",
+		L"Assets/modelData/warrokDash.tka",
 		L"Assets/modelData/warrokAttack.tka",
 		L"Assets/modelData/warrokDamage.tka",
 		L"Assets/modelData/warrokDeath.tka"
 	};
-	m_animation.Init(animClip, 5);
-	m_animation.SetLoopFlg(0, true);
-	m_animation.SetLoopFlg(1, true);	
-	m_animation.SetLoopFlg(2, true);
+	m_animation.Init(animClip, CEnemyState::enState_Num);
+	m_animation.SetLoopFlg(CEnemyState::enState_Idle, true);
+	m_animation.SetLoopFlg(CEnemyState::enState_Walk, true);
+	m_animation.SetLoopFlg(CEnemyState::enState_Chase, true);
 	Add(&m_enemyStateMachine, 0);
 	Add(&m_enemyTurn, 0);
 	Add(&m_enemySearch, 0);
