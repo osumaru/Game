@@ -189,6 +189,12 @@
     <ClCompile Include="Map\Map.cpp">
       <Filter>ソース ファイル\Map</Filter>
     </ClCompile>
+    <ClCompile Include="Player\PlayerSate\PlayerJump.cpp">
+      <Filter>ソース ファイル\Player\PlayerSate</Filter>
+    </ClCompile>
+    <ClCompile Include="Player\PlayerRotation.cpp">
+      <Filter>ソース ファイル\Player</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -322,6 +328,12 @@
     </ClInclude>
     <ClInclude Include="Map\Map.h">
       <Filter>ソース ファイル\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="Player\PlayerSate\PlayerJump.h">
+      <Filter>ソース ファイル\Player\PlayerSate</Filter>
+    </ClInclude>
+    <ClInclude Include="Player\PlayerRotation.h">
+      <Filter>ソース ファイル\Player</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

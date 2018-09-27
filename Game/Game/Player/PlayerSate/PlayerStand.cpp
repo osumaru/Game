@@ -40,6 +40,11 @@ void CPlayerStand::Update()
 	{
 		GetPlayer().GetPlayerStateMachine().ChangeState(CPlayerState::enPlayerAttack);
 	}
+	
+	else if (Pad().IsTriggerButton(enButtonA))
+	{
+		GetPlayer().GetPlayerStateMachine().ChangeState(CPlayerState::enPlayerJump);
+	}
 
 	//移動の入力があるなら歩きアニメーションに遷移
 	else if (Pad().GetLeftStickX() != 0 || Pad().GetLeftStickY() != 0)

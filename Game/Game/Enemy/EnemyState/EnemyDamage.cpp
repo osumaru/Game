@@ -6,8 +6,7 @@
 
 bool CEnemyDamage::Start()
 {
-	//ダメージを受けたフラグを戻す
-	m_enemy->SetIsDamage(false);
+	
 
 	//ダメージアニメーションを再生
 	m_enemy->PlayAnimation(CEnemyState::enState_Damage);
@@ -18,10 +17,7 @@ bool CEnemyDamage::Start()
 	int damage = playerStrength - enemyDefence;
 	m_enemy->HpDamage(damage);
 	CVector3 enemyPos = m_enemy->GetPosition();
-	CVector2 damagePos;
-	damagePos.x = enemyPos.x;
-	damagePos.y = enemyPos.y;
-	m_enemy->SetDamagePos(damagePos);
+	m_enemy->SetDamagePos({ enemyPos.x, enemyPos.y });
 	m_enemy->DamageCalculation(damage);
 
 	return true;
@@ -54,6 +50,8 @@ void CEnemyDamage::Update()
 		}
 		//ダメージ表示の描画をやめる
 		m_enemy->DamageIndicateReset();
+		//ダメージを受けたフラグを戻す
+		m_enemy->SetIsDamage(false);
 	}
 	if (m_enemy->GetStatus().Hp <= 0) {
 		//HPが無くなれば死亡
