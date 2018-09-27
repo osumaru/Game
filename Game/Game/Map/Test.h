@@ -99,28 +99,28 @@
 //TownHouse
 {
 	L"TownHouse",
-	CVector3(-1.43f, 21.47f, 41.00f),             //平行移動
+	CVector3(4.07f, 22.39f, 35.40f),             //平行移動
 	CQuaternion(0.00f, -0.18f, 0.00f, 0.98f ),  //回転
 	enMapTagUntagged, //タグ
 },
 //TownHouse1
 {
 	L"TownHouse1",
-	CVector3(-23.43f, 22.17f, 31.60f),             //平行移動
+	CVector3(-23.43f, 22.48f, 31.60f),             //平行移動
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagUntagged, //タグ
 },
 //TownHouse1
 {
 	L"TownHouse1",
-	CVector3(-18.30f, 22.87f, 77.30f),             //平行移動
+	CVector3(-21.03f, 22.87f, 79.20f),             //平行移動
 	CQuaternion(0.00f, 0.87f, 0.00f, 0.48f ),  //回転
 	enMapTagUntagged, //タグ
 },
 //TownHouse1
 {
 	L"TownHouse1",
-	CVector3(4.87f, 22.17f, 71.00f),             //平行移動
+	CVector3(10.57f, 22.72f, 80.00f),             //平行移動
 	CQuaternion(0.00f, -0.97f, 0.00f, 0.23f ),  //回転
 	enMapTagUntagged, //タグ
 },
@@ -274,7 +274,7 @@
 //Sphere
 {
 	L"Sphere",
-	CVector3(10.87f, 22.60f, 46.40f),             //平行移動
+	CVector3(10.87f, 23.82f, 46.40f),             //平行移動
 	CQuaternion(0.00f, 0.00f, 0.00f, 0.00f ),  //回転
 	enMapTagEnemyGroup, //タグ
 },
