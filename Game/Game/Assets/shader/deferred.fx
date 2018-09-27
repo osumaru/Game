@@ -71,7 +71,7 @@ float4 PSMain(VS_OUTPUT In) : SV_TARGET0
 	float4 lig = float4(0.0f, 0.0f, 0.0f, 1.0f);
 	for (int i = 0; i < 4; i++)
 	{
-		lig.xyz += diffuseLight[i].xyz * max(-dot(normal, normalLight[i]), 0.0f);// * max(-dot(normalColor, normalLight[i]), 0.0f);
+		lig.xyz += diffuseLight[i].xyz * max(-dot(normal, normalLight[i]), 0.0f) * max(-dot(normalColor, normalLight[i]), 0.0f);
 	}
 	lig.xyz += ambientLight;
 	color *= lig;
