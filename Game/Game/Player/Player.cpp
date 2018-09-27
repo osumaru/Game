@@ -65,7 +65,6 @@ void CPlayer::Init(CVector3 position)
 
 	//プレイヤーのステータスの初期化
 	{
-
 		m_status.Strength	= 10;						//攻撃力
 		m_status.Defense	= 3;						//防御力
 		m_status.Health		= 100;						//体力
