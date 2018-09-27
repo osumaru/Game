@@ -36,7 +36,11 @@ public:
 		{
 			m_AttackState = (CPlayerState::EnPlayerState)setAttack;
 		}
-
+		//Œ»İ‚ÌƒvƒŒƒCƒ„[‚Ìó‘Ô‚ğæ“¾
+		CPlayerState::EnPlayerState GetState()
+		{
+			return m_state;
+		}
 
 
 private:

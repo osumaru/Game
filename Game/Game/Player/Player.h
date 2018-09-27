@@ -1,6 +1,7 @@
 #pragma once
 #include "PlayerSate/PlayerStateMachine.h"
 #include "PlayerSate/PlayerState.h"
+#include "PlayerRotation.h"
 
 struct SplayerStatus
 {
@@ -67,6 +68,16 @@ public:
 	const CVector3 GetPosition()
 	{
 		return m_position;
+	}
+	//プレイヤーの回転情報を取得
+	const CQuaternion& GetPlayerrRot()
+	{
+		return m_rotation;
+	}
+	//プレイヤーの回転の設定
+	void SetPlayerRot(const CQuaternion Setrot)
+	{
+		m_rotation = Setrot;
 	}
 
 	//プレイヤーの移動処理を行う関数
@@ -165,6 +176,11 @@ public:
 	{
 		m_isDamege = SetDamage;
 	}
+	//攻撃中かを取得
+	bool GetIsAttack()
+	{
+		return m_isAttack;
+	}
 
 	//攻撃をしたかの設定
 	void SetAttack(const bool SetA)
@@ -187,9 +203,27 @@ public:
 		m_weaponState = (EnPlayerWeapon)changeWeapon;
 		
 	}
-
-	//武器の向きの処理をする関数
-	void WeaponRotation();
+	//武器の座標の設定
+	void SetWeaponPosition(const CVector3 swpos)
+	{
+		m_weaponPosition =  swpos;
+	}
+	//武器の座標を取得
+	const CVector3 GetWeaponPosition()
+	{
+		return m_weaponPosition;
+	}
+	//武器の向きの設定
+	void SetWeaponRotation(const CQuaternion setrot)
+	{
+		m_weaponRotation = setrot;
+	}
+	
+	//プレイヤーのスキンモデルの情報を取得
+	CSkinModel& GetPlayerSkin()
+	{
+		return m_skinmodel;
+	}
 
 private:
 	
@@ -220,7 +254,9 @@ private:
 	float					m_animetionFrame = 0.0f;
 	bool					m_isAttack = false;
 	bool					m_isDied = false;
-	CPlayerStateMachine		m_PlayerStateMachine;
+
+	CPlayerStateMachine		m_PlayerStateMachine;							//プレイヤーのアニメーションの遷移を行うステートマシーン
+	CPlayerRotation			m_PlayerRotation;								
 	
 	
 

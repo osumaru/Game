@@ -181,6 +181,7 @@
     <ClCompile Include="Map\Map.cpp" />
     <ClCompile Include="Map\MapChip\MapChip.cpp" />
     <ClCompile Include="Map\MapChip\StaticMapObject.cpp" />
+    <ClCompile Include="Player\PlayerRotation.cpp" />
     <ClCompile Include="Player\PlayerSate\PlayerJump.cpp" />
     <ClCompile Include="Player\PlayerSate\PlayerDamage.cpp" />
     <ClCompile Include="Player\PlayerSate\PlayerDied.cpp" />
@@ -230,6 +231,7 @@
     <ClInclude Include="Map\Map.h" />
     <ClInclude Include="Map\MapChip\MapChip.h" />
     <ClInclude Include="Map\MapChip\StaticMapObject.h" />
+    <ClInclude Include="Player\PlayerRotation.h" />
     <ClInclude Include="Player\PlayerSate\PlayerJump.h" />
     <ClInclude Include="Player\PlayerSate\PlayerDamage.h" />
     <ClInclude Include="Player\PlayerSate\PlayerDied.h" />
