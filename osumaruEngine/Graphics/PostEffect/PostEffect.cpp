@@ -17,20 +17,19 @@ void PostEffect::Init(IDXGISwapChain* swapChain)
 	m_primitive.Create(vertexBufferLayout, sizeof(SVSLayout), 4, indexBufferLayout, 4, CPrimitive::enIndex32, CPrimitive::enTypeTriangleStrip);
 	ID3D11Texture2D * p_RT;
 	HRESULT hr = swapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (LPVOID*)(&p_RT));
-	m_depthStencilTexture.Create(FrameBufferWidth(), FrameBufferHeight(), CTexture::enDepthStencil, DXGI_FORMAT_D24_UNORM_S8_UINT);
-	m_backBuffer.Create(p_RT, (ID3D11Texture2D*)m_depthStencilTexture.GetTexture(), FrameBufferWidth(), FrameBufferHeight(), true);
-	m_pBackBuffer = m_backBuffer.GetRenderTarget();
-	m_depthStencil = m_backBuffer.GetDepthStencil();
+	m_backBuffer.Create(FrameBufferWidth(), FrameBufferHeight(), p_RT);
+	m_pBackRenderTargetView = m_backBuffer.GetRenderTarget();
+	m_pBackDepthStencilView = m_backBuffer.GetDepthStencil();
 }
 
 void PostEffect::Draw()
 {
 	float color[4] = { 0.0f, 0.0f, 1.0f, 1.0f };
-	GetDeviceContext()->OMSetRenderTargets(1, &m_pBackBuffer, m_depthStencil);
-	GetDeviceContext()->ClearRenderTargetView(m_pBackBuffer, color);
-	GetDeviceContext()->ClearDepthStencilView(m_depthStencil, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
+	GetDeviceContext()->OMSetRenderTargets(1, &m_pBackRenderTargetView, m_pBackDepthStencilView);
+	GetDeviceContext()->ClearRenderTargetView(m_pBackRenderTargetView, color);
+	GetDeviceContext()->ClearDepthStencilView(m_pBackDepthStencilView, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
 	ID3D11ShaderResourceView* srviews[] = {
-		MainRenderTargetTexture().GetShaderResource() };
+		MainRenderTarget().GetRenderTargetTexture().GetShaderResource() };
 	GetDeviceContext()->PSSetShaderResources(0, 1, srviews);
 	GetDeviceContext()->VSSetShader((ID3D11VertexShader*)m_vertexShader.GetBody(), nullptr, 0);
 	GetDeviceContext()->PSSetShader((ID3D11PixelShader*)m_pixelShader.GetBody(), nullptr, 0);

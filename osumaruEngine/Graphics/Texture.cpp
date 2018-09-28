@@ -28,7 +28,7 @@ CTexture::~CTexture()
 void CTexture::Load(const wchar_t* filepath)
 {
 	HRESULT hr;
-	hr = CreateWICTextureFromFile(GetDevice(), filepath, (ID3D11Resource**)&m_pTexture, &m_pShaderResource);
+	hr = CreateWICTextureFromFile(GetDevice(), filepath, &m_pTexture, &m_pShaderResource);
 }
 
 void CTexture::Create(int width, int height, EnTextureType textureType, DXGI_FORMAT format)
@@ -59,6 +59,6 @@ void CTexture::Create(int width, int height, EnTextureType textureType, DXGI_FOR
 	tDesc.SampleDesc.Count = 1;
 	tDesc.SampleDesc.Quality = 0;
 	tDesc.Usage = D3D11_USAGE_DEFAULT;
-	HRESULT hr = GetDevice()->CreateTexture2D(&tDesc, NULL, &m_pTexture);
+	HRESULT hr = GetDevice()->CreateTexture2D(&tDesc, NULL, (ID3D11Texture2D**)&m_pTexture);
 	hr = GetDevice()->CreateShaderResourceView(m_pTexture, nullptr, &m_pShaderResource);
 }
