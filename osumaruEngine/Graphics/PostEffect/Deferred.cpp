@@ -58,6 +58,7 @@ void Deferred::Draw()
 		m_renderTarget[1].GetRenderTargetTexture().GetShaderResource(),
 		m_renderTarget[2].GetRenderTargetTexture().GetShaderResource(),
 		m_renderTarget[3].GetRenderTargetTexture().GetShaderResource() };
+	CLight light = Light();
 	m_lightCB.Update(&Light());
 	ID3D11Buffer* buffer = m_lightCB.GetBody();
 	GetDeviceContext()->PSSetConstantBuffers(0, 1, &buffer);

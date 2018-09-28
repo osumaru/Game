@@ -96,8 +96,7 @@ PS_OUTPUT PSMain(VS_OUTPUT In)
 	Out.color = float4(colorTexture.Sample(Sampler, In.uv).xyz, 1.0f);
 	Out.normal = float4(In.normal, 1.0f);
 	Out.tangent = float4(In.tangent, 1.0f);
-
-	float3 normalColor = normalTexture.Sample(Sampler, In.uv) * isNormalMap;// +float3(0.0f, 0.0f, 1.0f) * (1 - isNormalMap);
+	float3 normalColor = normalTexture.Sample(Sampler, In.uv) * isNormalMap + float3(0.0f, 0.0f, 1.0f) * (1 - isNormalMap);
 	Out.normalMap = float4(normalColor, 1.0f);
 	return Out;
 }
