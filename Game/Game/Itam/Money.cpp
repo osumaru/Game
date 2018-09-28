@@ -53,6 +53,7 @@ void CMoney::Update()
 	}
 	if (length < 2.0f) {
 		//‹ß‚¯‚ê‚ÎŠl“¾
+		GetPlayer().GainGold(m_gold);
 		Delete(this);
 	}
 

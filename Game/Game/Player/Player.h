@@ -99,6 +99,23 @@ public:
 		m_status.AccumulationExp += expup;
 	}
 
+	//プレイヤーのHP回復をする
+	//recoveryValue		回復値
+	void RecoveryHP(const int recoveryValue)
+	{
+		m_status.Health += recoveryValue;
+		if (m_status.Health >= m_status.MaxHealth) {
+			m_status.Health = m_status.MaxHealth;
+		}
+	}
+
+	//プレイヤーがお金を取得する
+	//gold		お金
+	void GainGold(const int gold)
+	{
+		m_status.Gold += gold;
+	}
+
 	/*アニメーションの設定
 	第一引数　アニメーメーションの番号　第二引数　補完時間*/
 	void SetPlayerAnimation(const int animNumber, const float num)

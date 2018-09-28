@@ -10,9 +10,7 @@ void Deferred::Init()
 {
 	for (int i = 0; i < RENDER_TARGET_NUM; i++)
 	{
-		m_renderTargetTexture[i].Create(FrameBufferWidth(), FrameBufferHeight(), CTexture::enRendertarget, DXGI_FORMAT_R32G32B32A32_FLOAT);
-		m_depthStencilTextures[i].Create(FrameBufferWidth(), FrameBufferWidth(), CTexture::enDepthStencil, DXGI_FORMAT_D32_FLOAT);
-		m_renderTarget[i].Create((ID3D11Texture2D*)m_renderTargetTexture[i].GetTexture(), (ID3D11Texture2D*)m_depthStencilTextures[i].GetTexture(), FrameBufferWidth(), FrameBufferHeight(), false);
+		m_renderTarget[i].Create(FrameBufferWidth(), FrameBufferHeight());
 	}
 	m_lightCB.Create(sizeof(CLight), &Light());
 	m_vertexShader.Load("Assets/shader/deferred.fx", "VSMain", CShader::enVS);
@@ -42,15 +40,9 @@ void Deferred::Start()
 	for (int i = 0; i < RENDER_TARGET_NUM; i++)
 	{
 		GetDeviceContext()->ClearRenderTargetView(m_renderTarget[i].GetRenderTarget(), color);
-		//m_pDeviceContext->ClearDepthStencilView(m_mainRenderTarget[i].GetDepthStencil(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
 	}
 	GetDeviceContext()->ClearDepthStencilView(m_renderTarget[0].GetDepthStencil(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
 	m_lightCB.Create(sizeof(CLight), &Light());
-}
-
-void Deferred::End()
-{
-
 }
 
 void Deferred::Draw()
@@ -62,10 +54,10 @@ void Deferred::Draw()
 	GetDeviceContext()->ClearRenderTargetView(backBuffer[0], color);
 	GetDeviceContext()->ClearDepthStencilView(MainRenderTarget().GetDepthStencil(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
 	ID3D11ShaderResourceView* srviews[] = {
-		m_renderTargetTexture[0].GetShaderResource(),
-		m_renderTargetTexture[1].GetShaderResource(),
-		m_renderTargetTexture[2].GetShaderResource(),
-		m_renderTargetTexture[3].GetShaderResource() };
+		m_renderTarget[0].GetRenderTargetTexture().GetShaderResource(),
+		m_renderTarget[1].GetRenderTargetTexture().GetShaderResource(),
+		m_renderTarget[2].GetRenderTargetTexture().GetShaderResource(),
+		m_renderTarget[3].GetRenderTargetTexture().GetShaderResource() };
 	m_lightCB.Update(&Light());
 	ID3D11Buffer* buffer = m_lightCB.GetBody();
 	GetDeviceContext()->PSSetConstantBuffers(0, 1, &buffer);

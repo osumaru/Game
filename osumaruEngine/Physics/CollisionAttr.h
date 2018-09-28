@@ -10,6 +10,7 @@ enum EnCollisionAttr
 	enCollisionAttr_Spring,
 	enCollisionAttr_Rotation,
 	enCollisionAttr_Detection,
+	enCollisionAttr_Item,
 	enCollisionAttr_MapChip,
 	enCollisionAttr_User,		//以下にユーザー定義のコリジョン属性を設定する。
 };

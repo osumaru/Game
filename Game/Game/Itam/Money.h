@@ -24,4 +24,13 @@ public:
 
 	//ˆÚ“®
 	void Move();
+
+	//‚¨‹à‚Ì’l‚ğİ’è
+	void SetGold(const int gold)
+	{
+		m_gold = gold;
+	}
+
+private:
+	int m_gold = 0;	//‚¨‹à‚Ì’l
 };
