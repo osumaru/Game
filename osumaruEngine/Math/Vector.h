@@ -372,13 +372,7 @@ public:
 	/*
 	*@brief 行列をかける
 	*/
-	void Mul(CMatrix& mat) const
-	{
-		DirectX::XMStoreFloat3(
-			const_cast<DirectX::XMFLOAT3*>(&vec),
-			DirectX::XMVector3Transform(*this, mat)
-		);
-	}
+	void Mul(CMatrix& mat) const;
 };
 /*!
 *@brief	4要素のベクトルクラス。
@@ -537,13 +531,7 @@ public:
 	/*
 	*@brief		行列をかける
 	*/
-	void Mul(CMatrix& mat) const
-	{
-		DirectX::XMStoreFloat4(
-			const_cast<DirectX::XMFLOAT4*>(&vec),
-			DirectX::XMVector4Transform(*this, mat)
-		);
-	}
+	void Mul(CMatrix& mat) const;
 };
 
 class CQuaternion : public CVector4 {
