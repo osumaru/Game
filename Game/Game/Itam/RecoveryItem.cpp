@@ -53,6 +53,7 @@ void CRecoveryItem::Update()
 	}
 	if (length < 2.0f) {
 		//‹ß‚¯‚ê‚ÎŠl“¾
+		GetPlayer().RecoveryHP(30);
 		Delete(this);
 	}
 
