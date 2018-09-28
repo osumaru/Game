@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "GameCamera.h"
 #include "Player\Player.h"
+#include "../Player/PlayerSate/PlayerStateMachine.h"
 
 void CGameCamera::Init()
 {
@@ -53,8 +54,19 @@ void CGameCamera::Update()
 			m_cameraVec = cameraVecOld;
 		}
 	}
+	CVector3 position;
+	if (GetPlayer().GetPlayerStateMachine().GetState() == CPlayerState::EnPlayerState::enPlayerAvoidance)
+	{
+		/*CMatrix PlayerHnd = GetPlayer().GetPlayerSkin().FindBoneWorldMatrix(L"Neck");
+		CVector3 PlayerHndPos = { PlayerHnd.m[3][0],PlayerHnd.m[3][1],PlayerHnd.m[3][2] };
+		position = PlayerHndPos;*/
+	}
 
-	CVector3 position = GetPlayer().GetPosition();//GetPlayerHead();
+	else
+	{
+		position = GetPlayer().GetPosition();//GetPlayerHead();
+
+	}
 	float interporation = 2.0f;
 	position.y += interporation;	
 	camera.SetTarget(position);

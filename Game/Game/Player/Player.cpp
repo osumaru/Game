@@ -97,7 +97,7 @@ void CPlayer::Update()
 
 	if (Pad().IsTriggerButton(enButtonB))
 	{
-		ExpUP(100);
+		ExpUP(100);	
 
 	}
 	

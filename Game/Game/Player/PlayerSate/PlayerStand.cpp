@@ -18,7 +18,7 @@ CPlayerStand::~CPlayerStand()
 bool CPlayerStand::Start()
 {
 	//待機アニメーションの再生
-	GetPlayer().SetPlayerAnimation(CPlayerState::enPlayerStand, 0.2f);
+	GetPlayer().SetPlayerAnimation(CPlayerState::enPlayerStand,0.2f);
 	return true;
 }
 
@@ -44,6 +44,11 @@ void CPlayerStand::Update()
 	else if (Pad().IsTriggerButton(enButtonA))
 	{
 		GetPlayer().GetPlayerStateMachine().ChangeState(CPlayerState::enPlayerJump);
+	}
+
+	else if (Pad().IsTriggerButton(enButtonRightTrigger))
+	{
+		GetPlayer().GetPlayerStateMachine().ChangeState(CPlayerState::enPlayerAvoidance);
 	}
 
 	//移動の入力があるなら歩きアニメーションに遷移

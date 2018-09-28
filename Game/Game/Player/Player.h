@@ -69,6 +69,11 @@ public:
 	{
 		return m_position;
 	}
+	//プレイヤーの座標を設定する関数
+	void SetPosition(const CVector3 setpos)
+	{
+		 m_position = setpos;
+	}
 	//プレイヤーの回転情報を取得
 	const CQuaternion& GetPlayerrRot()
 	{
@@ -82,12 +87,6 @@ public:
 
 	//プレイヤーの移動処理を行う関数
 	void Move();
-
-	//プレイヤーの回転を行う関数
-	void Rotation();
-
-	//プレイヤーのアニメーションの処理を行う関数
-	void AnimationMove();
 
 	//ステータスの計算処理を行う関数
 	void StatusCalculation();
