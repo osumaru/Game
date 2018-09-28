@@ -4,11 +4,14 @@
 
 #pragma once
 
+class IEnemy;
+
 class CMiniMap : public IGameObject
 {
 public:
 	//初期化
-	void Init();
+	//enemyNum		敵の数
+	void Init(std::list<IEnemy*> enemyList);
 
 	//更新
 	void Update();
@@ -24,7 +27,12 @@ private:
 	CTexture m_playerIconTexture;
 	CVector3 m_playerIconVec = CVector3::AxisZ;	//プレイヤーアイコンの向き
 
-	CSprite m_enemyIcon;						//プレイヤーアイコン
+	CCamera m_camera;
+
+	std::list<CSprite> m_enemyIconList;
 	CTexture m_enemyIconTexture;
-	CVector3 m_enemyIconVec = CVector3::AxisZ;	//プレイヤーアイコンの向き
+
+	std::list<IEnemy*> m_enemyList;
+
+	CVector2 m_mapCenterPos;
 };
