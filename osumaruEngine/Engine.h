@@ -142,6 +142,17 @@ public:
 		m_currentRenderTargetNum ^= 1;
 	}
 
+	//すべてのオブジェクトをアクティブ化
+	void AllActive()
+	{
+		m_objectManager.AllActive();
+	}
+
+	//すべてのオブジェクトを非アクティブ化
+	void AllInactive()
+	{
+		m_objectManager.AllInactive();
+	}
 
 private:
 	static const int						MAIN_RENDER_TARGET_NUM = 2;

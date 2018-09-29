@@ -51,6 +51,28 @@ public:
 		m_objectVector[priority].push_back({ object, false });
 	}
 
+	//すべてのオブジェクトを非アクティブ化する
+	void AllInactive()
+	{
+		for (auto& gameObjectVector : m_objectVector)
+		{
+			for (auto& gameObject : gameObjectVector)
+			{
+				gameObject.gameObject->IsActive = false;
+			}
+		}
+	}
+	//すべてのオブジェクトをアクティブ化する
+	void AllActive()
+	{
+		for (auto& gameObjectVector : m_objectVector)
+		{
+			for (auto& gameObject : gameObjectVector)
+			{
+				gameObject.gameObject->IsActive = true;
+			}
+		}
+	}
 
 
 private:
