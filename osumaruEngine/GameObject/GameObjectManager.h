@@ -3,7 +3,7 @@ class IGameObject;
 //オブジェクトマネージャー
 #include "../Graphics/PostEffect/Deferred.h"
 #include "../Graphics/PostEffect/PostEffect.h"
-
+#include "GameObject.h"
 struct SGameObjectData
 {
 	IGameObject* gameObject;		//オブジェクト
@@ -58,7 +58,7 @@ public:
 		{
 			for (auto& gameObject : gameObjectVector)
 			{
-				gameObject.gameObject->IsActive = false;
+				gameObject.gameObject->m_isActive = false;
 			}
 		}
 	}
@@ -69,7 +69,7 @@ public:
 		{
 			for (auto& gameObject : gameObjectVector)
 			{
-				gameObject.gameObject->IsActive = true;
+				gameObject.gameObject->m_isActive = true;
 			}
 		}
 	}
