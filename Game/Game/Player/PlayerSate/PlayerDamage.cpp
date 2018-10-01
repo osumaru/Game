@@ -26,6 +26,7 @@ void CPlayerDamage::Update()
 
 		GetPlayer().GetPlayerStateMachine().ChangeState(CPlayerState::enPlayerStand);
 		GetPlayer().SetIsDamage(false);
+		GetPlayer().SetInterval(true);			//–³“GŽžŠÔ‚ð“K‰ž‚³‚¹‚é
 
 	}
 }

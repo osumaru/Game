@@ -10,7 +10,7 @@ void CGameCamera::Init()
 	camera.SetNear(1.0f);
 	camera.SetAspect((float)FrameBufferWidth() / (float)FrameBufferHeight());
 	camera.SetAngle(CMath::DegToRad(60.0f));
-	camera.SetPosition({ 0.0f, 1.8f, 1.8f });
+	camera.SetPosition({ 0.0f, 1.8f, 2.8f });
 	camera.SetTarget({ 0.0f, 0.0f, 0.0f });
 	camera.SetUp({ 0.0f, 1.0f, 0.0f });
 	camera.Update();
@@ -55,18 +55,9 @@ void CGameCamera::Update()
 		}
 	}
 	CVector3 position;
-	if (GetPlayer().GetPlayerStateMachine().GetState() == CPlayerState::EnPlayerState::enPlayerAvoidance)
-	{
-		/*CMatrix PlayerHnd = GetPlayer().GetPlayerSkin().FindBoneWorldMatrix(L"Neck");
-		CVector3 PlayerHndPos = { PlayerHnd.m[3][0],PlayerHnd.m[3][1],PlayerHnd.m[3][2] };
-		position = PlayerHndPos;*/
-	}
+	
+	position = GetPlayer().GetPosition();//GetPlayerHead();
 
-	else
-	{
-		position = GetPlayer().GetPosition();//GetPlayerHead();
-
-	}
 	float interporation = 2.0f;
 	position.y += interporation;	
 	camera.SetTarget(position);

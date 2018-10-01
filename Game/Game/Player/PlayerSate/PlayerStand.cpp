@@ -18,7 +18,7 @@ CPlayerStand::~CPlayerStand()
 bool CPlayerStand::Start()
 {
 	//待機アニメーションの再生
-	GetPlayer().SetPlayerAnimation(CPlayerState::enPlayerStand,0.2f);
+	GetPlayer().SetPlayerAnimation(CPlayerState::enPlayerStand,0.5f);
 	return true;
 }
 
