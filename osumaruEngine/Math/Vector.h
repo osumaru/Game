@@ -369,6 +369,10 @@ public:
 		Div(s);
 		return *this;
 	}
+	/*
+	*@brief 行列をかける
+	*/
+	void Mul(CMatrix& mat) const;
 };
 /*!
 *@brief	4要素のベクトルクラス。
@@ -523,6 +527,11 @@ public:
 		xmv = DirectX::XMVectorScale(xmv, s);
 		DirectX::XMStoreFloat4(&vec, xmv);
 	}
+
+	/*
+	*@brief		行列をかける
+	*/
+	void Mul(CMatrix& mat) const;
 };
 
 class CQuaternion : public CVector4 {
