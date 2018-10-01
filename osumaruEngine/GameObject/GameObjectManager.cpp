@@ -1,5 +1,4 @@
 #include "engineStdafx.h"
-#include "GameObject.h"
 #include "GameObjectManager.h"
 #include "../Engine.h"
 #include "../Physics/Physics.h"
@@ -28,6 +27,7 @@ void CGameObjectManager::Execute(Deferred& deferred, PostEffect& postEffect)
 			object.gameObject->Updater();
 		}
 	}
+	//
 	deferred.Start();
 	for (GameObjectList& objList : m_objectVector)
 	{
@@ -37,16 +37,15 @@ void CGameObjectManager::Execute(Deferred& deferred, PostEffect& postEffect)
 		}
 	}
 	PhysicsWorld().Draw();
-	deferred.End();
 	deferred.Draw();
 	postEffect.Draw();
-	//for (GameObjectList& objList : m_objectVector)
-	//{
-	//	for (SGameObjectData& object : objList)
-	//	{
-	//		object.gameObject->AfterDrawer();
-	//	}
-	//}
+	for (GameObjectList& objList : m_objectVector)
+	{
+		for (SGameObjectData& object : objList)
+		{
+			object.gameObject->AfterDrawer();
+		}
+	}
 
 	//最後にオブジェクトを消去
 	DeleteExecute();

@@ -168,11 +168,9 @@ void CEngine::InitD3D(HINSTANCE& hInst)
 	m_soundEngine = std::make_unique<CSoundEngine>();
 	m_soundEngine->Init();
 	m_pad = std::make_unique<CPad>();
-	for (int i = 0; i < 2; i++)
+	for (int i = 0; i < MAIN_RENDER_TARGET_NUM; i++)
 	{
-		m_renderTarget[i].Create(m_frameBufferWidth, m_frameBufferHeight, CTexture::enRendertarget, DXGI_FORMAT_R32G32B32A32_FLOAT);
-		m_depthStencilTextures[i].Create(m_frameBufferWidth, m_frameBufferHeight, CTexture::enDepthStencil, DXGI_FORMAT_D32_FLOAT);
-		m_mainRenderTarget[i].Create((ID3D11Texture2D*)m_renderTarget[i].GetTexture(), (ID3D11Texture2D*)m_depthStencilTextures[i].GetTexture(), m_frameBufferWidth, m_frameBufferHeight, false);
+		m_mainRenderTarget[i].Create(m_frameBufferWidth, m_frameBufferHeight);
 	}
 	m_deferred.Init();
 	m_postEffect.Init(m_pSwapChain);

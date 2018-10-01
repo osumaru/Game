@@ -27,6 +27,11 @@ void CPlayerWalk::Update()
 		GetPlayer().GetPlayerStateMachine().ChangeState(CPlayerState::enPlayerStand);
 	}
 
+	else if (Pad().IsTriggerButton(enButtonA))
+	{
+		GetPlayer().GetPlayerStateMachine().ChangeState(CPlayerState::enPlayerJump);
+	}
+
 	//一定以上の速さならあ知りアニメーションに遷移
 	else if (fabs(GetPlayer().GetMoveSpeed().Length()) >= 3.0f)
 	{

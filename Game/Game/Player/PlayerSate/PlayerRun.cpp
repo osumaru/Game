@@ -14,14 +14,16 @@ CPlayerRun::~CPlayerRun()
 }
 bool CPlayerRun::Start()
 {
+	
 	GetPlayer().SetPlayerAnimation(CPlayerState::enPlayerRun, 0.2f);
+	
 	return true;
 }
 
 void CPlayerRun::Update()
 {
 
-	if (GetPlayer().GetIsDamage()       )
+	if (GetPlayer().GetIsDamage())
 	{
 		GetPlayer().GetPlayerStateMachine().ChangeState(CPlayerState::enPlayerDamage);
 	}
@@ -29,6 +31,11 @@ void CPlayerRun::Update()
 	else if (Pad().IsTriggerButton(enButtonX))
 	{
 		GetPlayer().GetPlayerStateMachine().ChangeState(CPlayerState::enPlayerAttack);
+	}
+
+	else if (Pad().IsTriggerButton(enButtonA))
+	{
+		GetPlayer().GetPlayerStateMachine().ChangeState(CPlayerState::enPlayerJump);
 	}
 
 	else if (fabs(GetPlayer().GetMoveSpeed().Length()) == 0.0f)

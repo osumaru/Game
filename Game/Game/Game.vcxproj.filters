@@ -195,6 +195,12 @@
     <ClCompile Include="Player\PlayerRotation.cpp">
       <Filter>ソース ファイル\Player</Filter>
     </ClCompile>
+    <ClCompile Include="Player\PlayerSate\PlayerAvoidance.cpp">
+      <Filter>ソース ファイル\Player\PlayerSate</Filter>
+    </ClCompile>
+    <ClCompile Include="Player\PlayerMove.cpp">
+      <Filter>ソース ファイル\Player</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -333,6 +339,12 @@
       <Filter>ソース ファイル\Player\PlayerSate</Filter>
     </ClInclude>
     <ClInclude Include="Player\PlayerRotation.h">
+      <Filter>ソース ファイル\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Player\PlayerSate\PlayerAvoidance.h">
+      <Filter>ソース ファイル\Player\PlayerSate</Filter>
+    </ClInclude>
+    <ClInclude Include="Player\PlayerMove.h">
       <Filter>ソース ファイル\Player</Filter>
     </ClInclude>
   </ItemGroup>

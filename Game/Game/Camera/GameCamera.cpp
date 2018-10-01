@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "GameCamera.h"
 #include "Player\Player.h"
+#include "../Player/PlayerSate/PlayerStateMachine.h"
 
 void CGameCamera::Init()
 {
@@ -9,7 +10,7 @@ void CGameCamera::Init()
 	camera.SetNear(1.0f);
 	camera.SetAspect((float)FrameBufferWidth() / (float)FrameBufferHeight());
 	camera.SetAngle(CMath::DegToRad(60.0f));
-	camera.SetPosition({ 0.0f, 1.8f, 1.8f });
+	camera.SetPosition({ 0.0f, 1.8f, 2.8f });
 	camera.SetTarget({ 0.0f, 0.0f, 0.0f });
 	camera.SetUp({ 0.0f, 1.0f, 0.0f });
 	camera.Update();
@@ -53,8 +54,10 @@ void CGameCamera::Update()
 			m_cameraVec = cameraVecOld;
 		}
 	}
+	CVector3 position;
+	
+	position = GetPlayer().GetPosition();//GetPlayerHead();
 
-	CVector3 position = GetPlayer().GetPosition();//GetPlayerHead();
 	float interporation = 2.0f;
 	position.y += interporation;	
 	camera.SetTarget(position);

@@ -42,25 +42,14 @@ float4 PSMain(VS_OUTPUT In) : SV_TARGET0
 	tangent = normalize(tangent);
 	binormal = normalize(binormal);
 	float3 normalColor = normalMapTexture.Sample(Sampler, In.uv);
-	normalColor -= 0.5f;
-	normalColor *= 2.0f;
 	normalColor = normalize(normalColor);
-	normal -= 0.5f;
-	normal *= 2.0f;
-	normal = normalize(normal);
-	tangent -= 0.5f;
-	tangent *= 2.0f;
-	tangent = normalize(tangent);
-	binormal -= 0.5f;
-	binormal *= 2.0f;
-	binormal = normalize(binormal);
 	float4x4 mat = {
 		float4(tangent, 0.0f),
 		float4(binormal, 0.0f),
 		float4(normal, 0.0f),
 		float4(0.0f, 0.0f, 0.0f, 1.0f)
 	};
-	normalColor = mul(mat, normalColor);
+	normalColor = mul(normalColor, mat);
 	float3 normalLight[4] =
 	{
 		normalize(diffuseLightDir[0].xyz),
@@ -71,7 +60,7 @@ float4 PSMain(VS_OUTPUT In) : SV_TARGET0
 	float4 lig = float4(0.0f, 0.0f, 0.0f, 1.0f);
 	for (int i = 0; i < 4; i++)
 	{
-		lig.xyz += diffuseLight[i].xyz * max(-dot(normal, normalLight[i]), 0.0f);// * max(-dot(normalColor, normalLight[i]), 0.0f);
+		lig.xyz += diffuseLight[i].xyz * max(-dot(normal, normalLight[i]), 0.0f) * max(-dot(normalColor, normalLight[i]), 0.0f);
 	}
 	lig.xyz += ambientLight;
 	color *= lig;

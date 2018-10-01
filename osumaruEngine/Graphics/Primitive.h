@@ -1,7 +1,7 @@
 #pragma once
 //プリミチィブクラス
 
-class CPrimitive
+class CPrimitive : Uncopyable
 {
 public:
 	//インデックスバッファの種類

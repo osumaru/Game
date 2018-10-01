@@ -20,7 +20,8 @@ struct SSweepResultGround : public btCollisionWorld::ConvexResultCallback
 	{
 		if (convexResult.m_hitCollisionObject == me ||
 			convexResult.m_hitCollisionObject->getUserIndex() == enCollisionAttr_Character ||
-			convexResult.m_hitCollisionObject->getUserIndex() == enCollisionAttr_Detection)
+			convexResult.m_hitCollisionObject->getUserIndex() == enCollisionAttr_Detection ||
+			convexResult.m_hitCollisionObject->getUserIndex() == enCollisionAttr_Item)
 		{
 			//自分に衝突した。orキャラクタ属性のコリジョンと衝突した。
 			return 0.0f;
@@ -73,7 +74,8 @@ struct SSweepResultCeiling : public btCollisionWorld::ConvexResultCallback
 	{
 		if (convexResult.m_hitCollisionObject == me ||
 			convexResult.m_hitCollisionObject->getUserIndex() == enCollisionAttr_Character ||
-			convexResult.m_hitCollisionObject->getUserIndex() == enCollisionAttr_Detection)
+			convexResult.m_hitCollisionObject->getUserIndex() == enCollisionAttr_Detection ||
+			convexResult.m_hitCollisionObject->getUserIndex() == enCollisionAttr_Item)
 		{
 			//自分に衝突した。orキャラクタ属性のコリジョンと衝突した。
 			return 0.0f;
