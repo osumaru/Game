@@ -91,9 +91,10 @@ public:
 	{
 		return m_animation;
 	}
-
-	//プレイヤーの移動処理を行う関数
-	void Move();
+	CCharacterController& GetCharacterController()
+	{
+		return m_characterController;
+	}
 
 	//ステータスの計算処理を行う関数
 	void StatusCalculation();

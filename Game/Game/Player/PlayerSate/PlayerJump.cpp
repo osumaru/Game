@@ -30,7 +30,7 @@ void CPlayerJump::Update()
 {
 
 
-	if (!GetPlayer().GetAnimetion().IsPlay())
+	if (!GetPlayer().GetAnimetion().IsPlay() || GetPlayer().GetIsGround())
 	{
 		if (Pad().GetLeftStickX() != 0 || Pad().GetLeftStickY() != 0)
 		{

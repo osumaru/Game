@@ -23,21 +23,40 @@ bool CPlayerMove::Start()
 
 void CPlayerMove::Update()
 {
-	if (!GetPlayer().GetIsGround() ||
-		GetPlayer().GetPlayerStateMachine().GetState() == CPlayerState::EnPlayerState::enPlayerJump) {
-		return;
-	}
+	//プレイヤーの速度を取得
 	m_PlayerMoveSpeed = GetPlayer().GetMoveSpeed();
 
-	if (GetPlayer().GetPlayerStateMachine().GetState() == CPlayerState::EnPlayerState::enPlayerAttack)
+	//ダメージを受けているときは移動しない
+	//プレイヤーが空中にいる時も移動させない
+	//攻撃中も移動させない
+	if (
+		GetPlayer().GetPlayerStateMachine().GetState() == CPlayerState::enPlayerDamage ||
+		GetPlayer().GetPlayerStateMachine().GetState() == CPlayerState::EnPlayerState::enPlayerAttack)
 	{
 		m_PlayerMoveSpeed = CVector3::Zero;
+	}
 
+
+	else if (GetPlayer().GetPlayerStateMachine().GetState() == CPlayerState::EnPlayerState::enPlayerAvoidance)
+	{
+		//プレイヤーのワールド行列の取得
+		CMatrix PlayerWorldMatrix = GetPlayer().GetPlayerSkin().GetWorldMatrix();
+		//プレイヤーの前方向の取得
+		CVector3 PlayerFront = { -PlayerWorldMatrix.m[1][0],-PlayerWorldMatrix.m[1][1],-PlayerWorldMatrix.m[1][2] };
+		PlayerFront.Normalize();
+
+		m_PlayerMoveSpeed = PlayerFront * 1.0f;
 	}
 
 	//移動の入力があるかの判定
-	else if (Pad().GetLeftStickX() != 0 || Pad().GetLeftStickY() != 0)
+	else if (GetPlayer().GetPlayerStateMachine().GetState() == CPlayerState::EnPlayerState::enPlayerWalk ||
+			GetPlayer().GetPlayerStateMachine().GetState() == CPlayerState::EnPlayerState::enPlayerRun ||
+			GetPlayer().GetPlayerStateMachine().GetState() == CPlayerState::EnPlayerState::enPlayerJump)
 	{
+
+
+
+
 		CVector3 moveSpeed;
 		//1フレームに進む距離
 		moveSpeed.z = Pad().GetLeftStickY() * GameTime().GetDeltaFrameTime() * WALK_SPEED;
@@ -64,7 +83,6 @@ void CPlayerMove::Update()
 		m_PlayerMoveSpeed.x = cameraX.x * moveSpeed.x + cameraZ.x * moveSpeed.z;
 		m_PlayerMoveSpeed.z = cameraX.z * moveSpeed.x + cameraZ.z * moveSpeed.z;
 
-
 		//ダッシュの処理
 		if (Pad().IsPressButton(enButtonRB))
 		{
@@ -72,21 +90,27 @@ void CPlayerMove::Update()
 			m_PlayerMoveSpeed.x *= RUN_SPEED;
 			m_PlayerMoveSpeed.z *= RUN_SPEED;
 		}
+
+
 		if (Pad().IsTriggerButton(enButtonA))
 		{
 			m_PlayerMoveSpeed.y += 5.0f;
 		}
 
 	}
-	
+
+	//立ちアニメーションの処理
 	else
 	{
 		m_PlayerMoveSpeed = CVector3::Zero;
-		/*CVector3 kansei = m_PlayerMoveSpeed;
-		kansei *= GameTime().GetDeltaFrameTime();
-		m_PlayerMoveSpeed -= kansei;*/
+	
 	}
 
-	GetPlayer().SetMoveSpeed(m_PlayerMoveSpeed);
+	GetPlayer().GetCharacterController().SetPosition(GetPlayer().GetPosition());
+	GetPlayer().GetCharacterController().SetMoveSpeed(m_PlayerMoveSpeed);
+	GetPlayer().GetCharacterController().Execute(GameTime().GetDeltaFrameTime());
+
+	GetPlayer().SetPosition(GetPlayer().GetCharacterController().GetPosition());
+	GetPlayer().SetMoveSpeed(GetPlayer().GetCharacterController().GetMoveSpeed());
 
 }

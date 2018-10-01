@@ -94,12 +94,12 @@ void CPlayer::Update()
 	m_animation.Update(GameTime().GetDeltaFrameTime());
 	if (m_isDied) { return; }
 	WeaponChange();
-	//Move();					//移動処理
-	m_characterController.SetMoveSpeed(m_moveSpeed);
+	/*m_characterController.SetMoveSpeed(m_moveSpeed);
 	m_characterController.SetPosition(m_position);
 	m_characterController.Execute(GameTime().GetDeltaFrameTime());
 	m_position = m_characterController.GetPosition();
-	m_moveSpeed = m_characterController.GetMoveSpeed();
+	m_moveSpeed = m_characterController.GetMoveSpeed();*/
+
 	m_isGround = m_characterController.IsOnGround();
 	if (m_intervalOn)
 	{
@@ -148,92 +148,6 @@ void CPlayer::Draw()
 	
 }
 
-void CPlayer::Move()
-{
-
-		m_moveSpeed = m_characterController.GetMoveSpeed();
-
-		//移動しているときの処理
-		if (m_State == enPlayerWalk || m_State == enPlayerRun )
-		{
-
-			CVector3 moveSpeed;
-			moveSpeed.z = Pad().GetLeftStickY() * GameTime().GetDeltaFrameTime() * WALK_SPEED;
-			moveSpeed.x = Pad().GetLeftStickX() * GameTime().GetDeltaFrameTime() * WALK_SPEED;
-			CMatrix cameraVm = GetGameCamera().GetViewMatrix();
-			cameraVm.Inverse();	//カメラのビュー行列の逆行列
-
-			//カメラの前方向
-			CVector3 cameraZ;
-			cameraZ.x = cameraVm.m[2][0];
-			cameraZ.y = 0.0f;
-			cameraZ.z = cameraVm.m[2][2];
-			cameraZ.Normalize();
-
-			//カメラの横方向
-			CVector3 cameraX;
-			cameraX.x = cameraVm.m[0][0];
-			cameraX.y = 0.0f;
-			cameraX.z = cameraVm.m[0][2];
-			cameraX.Normalize();
-
-
-			//キャラクターを移動させる処理
-			m_moveSpeed.x = cameraX.x * moveSpeed.x + cameraZ.x * moveSpeed.z;
-			m_moveSpeed.z = cameraX.z * moveSpeed.x + cameraZ.z * moveSpeed.z;
-
-
-			//ダッシュの処理
-			if (Pad().IsPressButton(enButtonRB))
-			{
-
-				m_moveSpeed.x *= RUN_SPEED;
-				m_moveSpeed.z *= RUN_SPEED;
-			}
-
-			
-		}
-		//ジャンプ時の移動処理
-		else if (m_State == enPlayerRun)
-		{
-
-			m_moveSpeed.y = 1.0f;
-			m_moveSpeed.x = 0.0f;
-			m_moveSpeed.z = 0.0f;
-		}
-		//待機状態や攻撃中の処理
-		else 
-		{
-
-			m_moveSpeed.x = 0.0f;
-			m_moveSpeed.z = 0.0f;
-		}
-
-		//回避アクション時の処理
-		if (m_State == enPlayerAvoidance)
-		{
-
-			CMatrix PlayerHip = m_skinmodel.FindBoneWorldMatrix(L"Hips");
-			CVector3 PlayerHipPos = { PlayerHip.m[3][0],0.0,PlayerHip.m[3][2] };
-	
-		
-		}
-
-		if (m_State != enPlayerAvoidance)
-		{
-
-			m_characterController.SetMoveSpeed(m_moveSpeed);
-			m_characterController.SetPosition(m_position);
-			m_characterController.Execute(GameTime().GetDeltaFrameTime());
-			m_position = m_characterController.GetPosition();
-
-
-		}
-
-
-}
-
-//プレイヤーの回転を行う関数
 
 void CPlayer::StatusCalculation()
 {

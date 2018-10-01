@@ -64,7 +64,7 @@ void CSkinModel::Update(const CVector3& position, const CQuaternion& rotation, c
 	
 	if (m_skelton != nullptr)
 	{
-		m_skelton->Update(worldMatrix);
+	m_skelton->Update(worldMatrix);
 	}
 }
 
