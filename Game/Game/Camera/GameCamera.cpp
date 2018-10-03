@@ -24,13 +24,13 @@ void CGameCamera::Init()
 
 void CGameCamera::Update()
 {
-	float rStick_x = Pad().GetRightStickX() * 180 * GameTime().GetDeltaFrameTime();
-	float rStick_y = Pad().GetRightStickY() * 180 * GameTime().GetDeltaFrameTime();
-
+	float rStick_x = Pad().GetRightStickX() * 10 * GameTime().GetDeltaFrameTime();
+	float rStick_y = Pad().GetRightStickY() * GameTime().GetDeltaFrameTime();
+	m_cameraVec = camera.GetPosition() - camera.GetTarget();
 	if (fabsf(rStick_x) > 0.0f) {
 		//Y軸周りの回転
 		CMatrix matrix;
-		matrix.MakeRotationY(0.01f * rStick_x);
+		matrix.MakeRotationY(rStick_x);
 		matrix.Mul(m_cameraVec);
 	}
 	if (fabsf(rStick_y) > 0.0f) {
@@ -39,7 +39,7 @@ void CGameCamera::Update()
 		rotAxis.Cross(CVector3::Up, m_cameraVec);
 		rotAxis.Normalize();
 		CMatrix matrix;
-		matrix.MakeRotationAxis(rotAxis, 0.01f * rStick_y);
+		matrix.MakeRotationAxis(rotAxis, rStick_y);
 		//1フレーム前のカメラベクトル
 		CVector3 cameraVecOld = m_cameraVec;
 
@@ -54,20 +54,43 @@ void CGameCamera::Update()
 			m_cameraVec = cameraVecOld;
 		}
 	}
-	CVector3 position;
-	
-	position = GetPlayer().GetPosition();//GetPlayerHead();
 
-	float interporation = 2.0f;
-	position.y += interporation;	
-	camera.SetTarget(position);
-	m_springCamera.SetTarTarget(position);
+	//プレイヤーの後ろに追従するカメラ
+	{
+		CVector3 position, toCameraXZ;
+		position = GetPlayer().GetPosition();
+		toCameraXZ = m_cameraVec;
+		float height = toCameraXZ.y;
+		toCameraXZ.y = 0.0f;
+		float toCameraLen = toCameraXZ.Length();
+		toCameraXZ.Normalize();
 
-	//position.y -= interporation;
-	position += m_cameraVec;
-	camera.SetPosition(position);
-	m_springCamera.SetTarPosition(position);
+		CVector3 target = GetPlayer().GetPosition();
+		target.y += 1.5f;
+		CVector3	toNewCameraPos = camera.GetPosition() - target;
+		toNewCameraPos.y = 0.0f;
+		toNewCameraPos.Normalize();
 
-	m_springCamera.Update();
+		float weight = 0.7f;  //このウェイトの値は0.0～1.0の値をとる。1.0に近づくほど追尾が強くなる。
+		toNewCameraPos = toNewCameraPos * weight + toCameraXZ * (1.0f - weight);
+		toNewCameraPos.Normalize();
+		toNewCameraPos *= toCameraLen;
+		toNewCameraPos.y = height;              //高さを戻す。
+		CVector3 pos = target + toNewCameraPos;  //これで新しい視点が決定。
+
+		camera.SetPosition(pos);
+		camera.SetTarget(target);
+	}
+	//float interporation = 2.0f;
+	//position.y += interporation;	
+	//camera.SetTarget(position);
+	//m_springCamera.SetTarTarget(position);
+
+	////position.y -= interporation;
+	//position += m_cameraVec;
+	//camera.SetPosition(position);
+	////m_springCamera.SetTarPosition(position);
+
+	////m_springCamera.Update();
 	camera.Update();
 }
