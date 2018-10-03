@@ -31,6 +31,7 @@ public:
 		enPlayerRunJump,	//走りジャンプ
 		enPlayerJump,		//ジャンプアニメーション
 		enPlayerAttack,		//攻撃アニメーション
+		enPlayerAttack2,
 		enPlayerDamage,		//ダメージアニメーション
 		enPlayerAvoidance,	//回避アニメーション
 		enPlayerDete,		//死亡アニメーション

@@ -48,6 +48,7 @@ void CPlayer::Init(CVector3 position)
 											{ L"Assets/modelData/PlayerJump3.tka" },		//走りジャンプアニメーション
 											{ L"Assets/modelData/PlayerJump.tka" },			//ジャンプアニメーション
 											{ L"Assets/modelData/PlayerAttack.tka" },		//攻撃アニメーション
+											{ L"Assets/modelData/PlayerThrustAttack.tka" },		//攻撃アニメーション
 											{ L"Assets/modelData/PlayerDamage.tka" },		//ダメージアニメーション
 											{ L"Assets/modelData/PlayerKaihiStay.tka" }	,		//回避アクション
 											{ L"Assets/modelData/PlayerDeath.tka" },		//死亡アニメーション
@@ -91,15 +92,17 @@ void CPlayer::Update()
 {
 	
 	//アニメーションの更新
-	m_animation.Update(GameTime().GetDeltaFrameTime());
+	if (m_State == enPlayerAttack || m_State == enPlayerAttack2 || m_State == enPlayerAvoidance)
+	{
+		m_animation.Update(GameTime().GetDeltaFrameTime()*1.7f);
+	}
+	else
+	{
+		m_animation.Update(GameTime().GetDeltaFrameTime());
+	}
+
 	if (m_isDied) { return; }
 	WeaponChange();
-	/*m_characterController.SetMoveSpeed(m_moveSpeed);
-	m_characterController.SetPosition(m_position);
-	m_characterController.Execute(GameTime().GetDeltaFrameTime());
-	m_position = m_characterController.GetPosition();
-	m_moveSpeed = m_characterController.GetMoveSpeed();*/
-
 	m_isGround = m_characterController.IsOnGround();
 	if (m_intervalOn)
 	{

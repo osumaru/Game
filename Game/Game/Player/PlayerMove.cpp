@@ -31,12 +31,13 @@ void CPlayerMove::Update()
 	//攻撃中も移動させない
 	if (
 		GetPlayer().GetPlayerStateMachine().GetState() == CPlayerState::enPlayerDamage ||
-		GetPlayer().GetPlayerStateMachine().GetState() == CPlayerState::EnPlayerState::enPlayerAttack)
+		GetPlayer().GetPlayerStateMachine().GetState() == CPlayerState::EnPlayerState::enPlayerAttack
+		)
 	{
 		m_PlayerMoveSpeed = CVector3::Zero;
 	}
 
-
+	//回避中の移動処理
 	else if (GetPlayer().GetPlayerStateMachine().GetState() == CPlayerState::EnPlayerState::enPlayerAvoidance)
 	{
 		//プレイヤーのワールド行列の取得
@@ -45,18 +46,15 @@ void CPlayerMove::Update()
 		CVector3 PlayerFront = { -PlayerWorldMatrix.m[1][0],-PlayerWorldMatrix.m[1][1],-PlayerWorldMatrix.m[1][2] };
 		PlayerFront.Normalize();
 
-		m_PlayerMoveSpeed = PlayerFront * 1.0f;
+		m_PlayerMoveSpeed = PlayerFront * GameTime().GetDeltaFrameTime() * WALK_SPEED;;
 	}
 
 	//移動の入力があるかの判定
 	else if (GetPlayer().GetPlayerStateMachine().GetState() == CPlayerState::EnPlayerState::enPlayerWalk ||
-			GetPlayer().GetPlayerStateMachine().GetState() == CPlayerState::EnPlayerState::enPlayerRun ||
-			GetPlayer().GetPlayerStateMachine().GetState() == CPlayerState::EnPlayerState::enPlayerJump)
+		GetPlayer().GetPlayerStateMachine().GetState() == CPlayerState::EnPlayerState::enPlayerRun ||
+		GetPlayer().GetPlayerStateMachine().GetState() == CPlayerState::EnPlayerState::enPlayerAvoidance||
+		GetPlayer().GetPlayerStateMachine().GetState() == CPlayerState::EnPlayerState::enPlayerJump)
 	{
-
-
-
-
 		CVector3 moveSpeed;
 		//1フレームに進む距離
 		moveSpeed.z = Pad().GetLeftStickY() * GameTime().GetDeltaFrameTime() * WALK_SPEED;
@@ -96,9 +94,8 @@ void CPlayerMove::Update()
 		{
 			m_PlayerMoveSpeed.y += 5.0f;
 		}
-
 	}
-
+		
 	//立ちアニメーションの処理
 	else
 	{
@@ -106,11 +103,13 @@ void CPlayerMove::Update()
 	
 	}
 
-	GetPlayer().GetCharacterController().SetPosition(GetPlayer().GetPosition());
-	GetPlayer().GetCharacterController().SetMoveSpeed(m_PlayerMoveSpeed);
-	GetPlayer().GetCharacterController().Execute(GameTime().GetDeltaFrameTime());
+	//キャラクターコントローラーのアップデート処理
+	{
+		GetPlayer().GetCharacterController().SetPosition(GetPlayer().GetPosition());
+		GetPlayer().GetCharacterController().SetMoveSpeed(m_PlayerMoveSpeed);
+		GetPlayer().GetCharacterController().Execute(GameTime().GetDeltaFrameTime());
 
-	GetPlayer().SetPosition(GetPlayer().GetCharacterController().GetPosition());
-	GetPlayer().SetMoveSpeed(GetPlayer().GetCharacterController().GetMoveSpeed());
-
+		GetPlayer().SetPosition(GetPlayer().GetCharacterController().GetPosition());
+		GetPlayer().SetMoveSpeed(GetPlayer().GetCharacterController().GetMoveSpeed());
+	}
 }
