@@ -103,7 +103,7 @@ void CPlayer::Update()
 
 	if (m_isDied) { return; }
 	WeaponChange();
-	m_isGround = m_characterController.IsOnGround();
+	//m_isGround = m_characterController.IsOnGround();
 	if (m_intervalOn)
 	{
 		m_intervalTime += GameTime().GetDeltaFrameTime();
@@ -142,11 +142,8 @@ void CPlayer::Draw()
 		weponUpVec *= 0.7f;
 		m_weaponPosition.Add(weponUpVec);
 		m_weaponRigitBody.SetPosition(m_weaponPosition);
-		m_weaponRigitBody.SetRotation(m_weaponRotation);
-		m_Weaponskin[m_weaponState].Draw(GetGameCamera().GetViewMatrix(), GetGameCamera().GetProjectionMatrix());
 
 	}
-
 	m_Weaponskin[m_weaponState].Draw(GetGameCamera().GetViewMatrix(), GetGameCamera().GetProjectionMatrix());
 	
 }
@@ -229,7 +226,6 @@ void  CPlayer::WeaponChange()
 void CPlayer::PlayerAttack()
 {
 	if (!m_isAttack) { return; }
-	int num = 0;
 	
 	//エネミーのリストを取得
 	for (const auto& enemys : GetSceneManager().GetGameScene().GetMap()->GetEnemyList())

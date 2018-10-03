@@ -354,8 +354,6 @@
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <MeshContentTask Include="Assets\modelData\Unitychan2.fbx" />
-    <MeshContentTask Include="Assets\modelData\umi.FBX" />
     <MeshContentTask Include="Assets\modelData\Arrow.fbx">
       <Filter>ソース ファイル\Assets</Filter>
     </MeshContentTask>
@@ -435,6 +433,12 @@
       <Filter>ソース ファイル\Assets</Filter>
     </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\Brock.FBX">
+      <Filter>ソース ファイル\Assets</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\umi.FBX">
+      <Filter>ソース ファイル\Assets</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\Unitychan2.fbx">
       <Filter>ソース ファイル\Assets</Filter>
     </MeshContentTask>
   </ItemGroup>

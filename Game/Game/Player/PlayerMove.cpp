@@ -90,7 +90,8 @@ void CPlayerMove::Update()
 		}
 
 
-		if (Pad().IsTriggerButton(enButtonA))
+		if (GetPlayer().GetCharacterController().IsOnGround() && 
+			Pad().IsPressButton(enButtonA))
 		{
 			m_PlayerMoveSpeed.y += 5.0f;
 		}
