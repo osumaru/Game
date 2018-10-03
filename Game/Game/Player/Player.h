@@ -2,6 +2,7 @@
 #include "PlayerSate/PlayerStateMachine.h"
 #include "PlayerSate/PlayerState.h"
 #include "PlayerRotation.h"
+#include "PlayerMove.h"
 
 struct SplayerStatus
 {
@@ -27,8 +28,10 @@ public:
 		enPlayerStand,		//待機アニメーション
 		enPlayerWalk,		//歩行アニメーション
 		enPlayerRun,		//走りアニメーション
+		enPlayerRunJump,	//走りジャンプ
 		enPlayerJump,		//ジャンプアニメーション
 		enPlayerAttack,		//攻撃アニメーション
+		enPlayerAttack2,
 		enPlayerDamage,		//ダメージアニメーション
 		enPlayerAvoidance,	//回避アニメーション
 		enPlayerDete,		//死亡アニメーション
@@ -69,6 +72,11 @@ public:
 	{
 		return m_position;
 	}
+	//プレイヤーの座標を設定する関数
+	void SetPosition(const CVector3 setpos)
+	{
+		 m_position = setpos;
+	}
 	//プレイヤーの回転情報を取得
 	const CQuaternion& GetPlayerrRot()
 	{
@@ -79,15 +87,15 @@ public:
 	{
 		m_rotation = Setrot;
 	}
-
-	//プレイヤーの移動処理を行う関数
-	void Move();
-
-	//プレイヤーの回転を行う関数
-	void Rotation();
-
-	//プレイヤーのアニメーションの処理を行う関数
-	void AnimationMove();
+	//アニメーションの情報を取得
+	const CAnimation& GetAnimation()
+	{
+		return m_animation;
+	}
+	CCharacterController& GetCharacterController()
+	{
+		return m_characterController;
+	}
 
 	//ステータスの計算処理を行う関数
 	void StatusCalculation();
@@ -149,6 +157,11 @@ public:
 		return m_moveSpeed;
 	}
 
+	//プレイヤーのスピードの設定
+	void SetMoveSpeed(const CVector3 setmovespeed)
+	{
+		m_moveSpeed = setmovespeed;
+	}
 	//プレイヤーの装備の変更を行う処理
 	void WeaponChange();
 
@@ -166,7 +179,7 @@ public:
 	//デバック用関数
 	void GetDamage()
 	{
-		if (!m_isDamege)
+		if (!m_isDamege && !m_intervalOn)
 		{
 			m_status.Health -= 5;
 			m_isDamege = true;
@@ -241,7 +254,16 @@ public:
 	{
 		return m_skinmodel;
 	}
-
+	//プレイヤーが浮いているかを取得
+	const bool GetIsGround()
+	{	
+		return m_isGround;
+	}
+	//無敵時間を設定する
+	void SetInterval(const bool set)
+	{
+		m_intervalOn = set;
+	}
 private:
 	
 
@@ -266,14 +288,20 @@ private:
 	EnPlayerWeapon			m_weaponState = EnPlayerWeapon::enSword;
 
 	const float				RUN_SPEED	= 1.4f;				
-	const float				WALK_SPEED	= 200.0f;
+	const float				WALK_SPEED	= 300.0f;
+	const float				INTERVAL = 1.5;								//ダメージを受けた後の無敵時間
 	bool					m_isDamege = false;
 	float					m_animetionFrame = 0.0f;
 	bool					m_isAttack = false;
 	bool					m_isDied = false;
+	bool					m_isGround = false;
+	bool					m_intervalOn = false;
+	float					m_intervalTime = 0.0f;
 
 	CPlayerStateMachine		m_PlayerStateMachine;							//プレイヤーのアニメーションの遷移を行うステートマシーン
-	CPlayerRotation			m_PlayerRotation;								
+	CPlayerRotation			m_PlayerRotation;								//プレイヤーの回転を扱うクラス
+	CPlayerMove				m_PlayerMove;									//プレイヤーの動きを扱うクラス
+
 	
 	
 

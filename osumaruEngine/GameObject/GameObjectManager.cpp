@@ -1,5 +1,4 @@
 #include "engineStdafx.h"
-#include "GameObject.h"
 #include "GameObjectManager.h"
 #include "../Engine.h"
 #include "../Physics/Physics.h"

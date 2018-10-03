@@ -1,6 +1,6 @@
 #include "engineStdafx.h"
 #include "Vector.h"
-
+#include "Matrix.h"
 
 const CVector4 CVector4::White = { 1.0f, 1.0f, 1.0f, 1.0f };
 const CVector4 CVector4::Black = { 0.0f, 0.0f, 0.0f, 1.0f };
@@ -27,4 +27,26 @@ const CQuaternion CQuaternion::Identity = { 0.0f,  0.0f, 0.0f, 1.0f };
 void CQuaternion::SetRotation(const CMatrix& m)
 {
 	DirectX::XMStoreFloat4(&vec, DirectX::XMQuaternionRotationMatrix(m));
+}
+
+/*
+*@brief çsóÒÇÇ©ÇØÇÈ
+*/
+void CVector3::Mul(CMatrix& mat) const
+{
+	DirectX::XMStoreFloat3(
+		const_cast<DirectX::XMFLOAT3*>(&vec),
+		DirectX::XMVector3Transform(*this, DirectX::XMLoadFloat4x4(&mat.mat))
+	);
+}
+
+/*
+*@brief		çsóÒÇÇ©ÇØÇÈ
+*/
+void CVector4::Mul(CMatrix& mat) const
+{
+	DirectX::XMStoreFloat4(
+		const_cast<DirectX::XMFLOAT4*>(&vec),
+		DirectX::XMVector4Transform(*this, mat)
+	);
 }

@@ -65,6 +65,16 @@ void CPlayerRotation::Update()
 			GetPlayer().SetWeaponPosition(weaponPosition);
 
 		}
+		//ジャンプ中の武器の位置
+		if (GetPlayer().GetPlayerStateMachine().GetState() == CPlayerState::enPlayerJump)
+		{
+			PlayerFront *= 0.0f;
+			weaponPosition = GetPlayer().GetPosition();
+			weaponPosition.y = PlayerSpinePos.y;
+			weaponPosition.Add(PlayerFront);
+			GetPlayer().SetWeaponPosition(weaponPosition);
+		}
+
 		//移動中以外の武器の座標の設定
 		else
 		{

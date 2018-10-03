@@ -8,6 +8,7 @@
 #include "PlayerDamage.h"
 #include "PlayerDied.h"
 #include "PlayerJump.h"
+#include "PlayerAvoidance.h"
 
 class CPlayerStateMachine	:public IGameObject
 {
@@ -55,5 +56,6 @@ private:
 	CPlayerDamage					m_playerDamege;			//ダメージモーション
 	CPlayerDied						m_playerDied;			//死亡モーション
 	CPlayerJump						m_playerJump;			//ジャンプモーション
+	CPlayerAvoidance				m_playerAvoidance;		//回避モーション
 };
 
