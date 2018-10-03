@@ -37,7 +37,6 @@ void CPlayer::Init(CVector3 position)
 	m_weaponRigitBody.SetPosition(m_weaponPosition);
 	m_weaponRigitBody.SetRotation(m_weaponRotation);
 	m_weaponRigitBody.PhysicsWorldRemoveRigidBody();
-	
 
 	//アニメーションの初期化
 	{
