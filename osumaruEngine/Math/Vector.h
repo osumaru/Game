@@ -369,16 +369,16 @@ public:
 		Div(s);
 		return *this;
 	}
-	/*
-	*@brief 行列をかける
-	*/
-	void Mul(CMatrix& mat) const
-	{
-		DirectX::XMStoreFloat3(
-			const_cast<DirectX::XMFLOAT3*>(&vec),
-			DirectX::XMVector3Transform(*this, mat)
-		);
-	}
+	///*
+	//*@brief 行列をかける
+	//*/
+	//void Mul(CMatrix& mat) const
+	//{
+	//	DirectX::XMStoreFloat3(
+	//		const_cast<DirectX::XMFLOAT3*>(&vec),
+	//		DirectX::XMVector3Transform(*this, mat)
+	//	);
+	//}
 };
 /*!
 *@brief	4要素のベクトルクラス。
@@ -534,16 +534,25 @@ public:
 		DirectX::XMStoreFloat4(&vec, xmv);
 	}
 
-	/*
-	*@brief		行列をかける
+	/*!
+	* @brief	除算。
 	*/
-	void Mul(CMatrix& mat) const
+	void Div(float d)
 	{
-		DirectX::XMStoreFloat4(
-			const_cast<DirectX::XMFLOAT4*>(&vec),
-			DirectX::XMVector4Transform(*this, mat)
-		);
+		float scale = 1.0f / d;
+		Scale(scale);
 	}
+
+	///*
+	//*@brief		行列をかける
+	//*/
+	//void Mul(CMatrix& mat) const
+	//{
+	//	DirectX::XMStoreFloat4(
+	//		const_cast<DirectX::XMFLOAT4*>(&vec),
+	//		DirectX::XMVector4Transform(*this, mat)
+	//	);
+	//}
 };
 
 class CQuaternion : public CVector4 {

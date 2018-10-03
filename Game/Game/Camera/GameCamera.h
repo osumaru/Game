@@ -20,6 +20,12 @@ public:
 		return gamecamera;
 	}
 
+	//カメラを取得
+	CCamera GetCamera()
+	{
+		return camera;
+	}
+
 	//ビュー行列を取得
 	CMatrix GetViewMatrix()
 	{
