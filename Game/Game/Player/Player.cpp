@@ -41,7 +41,7 @@ void CPlayer::Init(CVector3 position)
 	//アニメーションの初期化
 	{
 		wchar_t* animClip[enPlayerNum] = {
-											{ L"Assets/modelData/PlayerAnimTest3.tka"},			//待機アニメーション	
+											{ L"Assets/modelData/PlayerStand.tka"},			//待機アニメーション	
 											{ L"Assets/modelData/PlayerWalkStay.tka" },		//歩行アニメーション
 											{ L"Assets/modelData/PlayerDash60fps.tka" },	//走りアニメーション
 											{ L"Assets/modelData/PlayerJump3.tka" },		//走りジャンプアニメーション
