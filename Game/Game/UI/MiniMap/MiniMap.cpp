@@ -15,18 +15,18 @@ CMiniMap::~CMiniMap()
 void CMiniMap::Init(std::list<IEnemy*> enemyList)
 {
 	m_mapCenterPos = { 540.0f,-260.0f };
-
+	//ミニマップを初期化
 	m_miniMapTexture.Load(L"Assets/sprite/miniMap.png");
 	m_miniMap.Init(&m_miniMapTexture);
 	m_miniMap.SetPosition(m_mapCenterPos);
 	m_miniMap.SetSize({ 180.0f,180.0f });
 	m_miniMap.SetAlpha(0.8f);
-
+	//プレイヤーアイコンを初期化
 	m_playerIconTexture.Load(L"Assets/sprite/player_Icon.png");
 	m_playerIcon.Init(&m_playerIconTexture);
 	m_playerIcon.SetPosition(m_mapCenterPos);
 	m_playerIcon.SetSize({ 15.0f,15.0f });
-
+	//エネミーアイコンを初期化
 	m_enemyIconTexture.Load(L"Assets/sprite/enemy_Icon.png");
 	m_enemyList = enemyList;
 	for (int i = 0; i < m_enemyList.size(); i++) {
@@ -87,7 +87,7 @@ void CMiniMap::Update()
 		playerForward.y = 0.0f;
 		playerForward.z = playerWorldMatrix.m[2][2];
 		playerForward.Normalize();
-
+		//プレイヤーアイコンの向きを設定
 		CVector3 playerIconVec = cameraUp;
 		playerIconVec.Normalize();
 		float angle = playerForward.Dot(playerIconVec);
@@ -98,13 +98,13 @@ void CMiniMap::Update()
 			angle = -1.0f;
 		}
 		angle = acosf(angle);
-
+		//右回転か左回転か決める
 		CVector3 Cross = playerForward;
 		Cross.Cross(playerIconVec);
 		if (Cross.y > 0.0f) {
 			angle *= -1.0f;
 		}
-
+		//プレイヤーアイコンを回転させる
 		m_playerIcon.SetRotationAngle(angle);
 	}
 }
