@@ -31,6 +31,7 @@ public:
 		enPlayerRunJump,	//走りジャンプ
 		enPlayerJump,		//ジャンプアニメーション
 		enPlayerAttack,		//攻撃アニメーション
+		enPlayerAttack2,
 		enPlayerDamage,		//ダメージアニメーション
 		enPlayerAvoidance,	//回避アニメーション
 		enPlayerDete,		//死亡アニメーション
@@ -91,9 +92,10 @@ public:
 	{
 		return m_animation;
 	}
-
-	//プレイヤーの移動処理を行う関数
-	void Move();
+	CCharacterController& GetCharacterController()
+	{
+		return m_characterController;
+	}
 
 	//ステータスの計算処理を行う関数
 	void StatusCalculation();
