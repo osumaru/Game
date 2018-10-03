@@ -37,12 +37,11 @@ void CPlayer::Init(CVector3 position)
 	m_weaponRigitBody.SetPosition(m_weaponPosition);
 	m_weaponRigitBody.SetRotation(m_weaponRotation);
 	m_weaponRigitBody.PhysicsWorldRemoveRigidBody();
-	
 
 	//アニメーションの初期化
 	{
 		wchar_t* animClip[enPlayerNum] = {
-											{ L"Assets/modelData/PlayerStand.tka"},			//待機アニメーション	
+											{ L"Assets/modelData/PlayerAnimTest3.tka"},			//待機アニメーション	
 											{ L"Assets/modelData/PlayerWalkStay.tka" },		//歩行アニメーション
 											{ L"Assets/modelData/PlayerDash60fps.tka" },	//走りアニメーション
 											{ L"Assets/modelData/PlayerJump3.tka" },		//走りジャンプアニメーション
