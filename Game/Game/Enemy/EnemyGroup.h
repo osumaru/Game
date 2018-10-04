@@ -15,13 +15,6 @@ public:
 	//デストラクタ
 	virtual ~CEnemyGroup() {}
 
-	//グループのリストに追加
-	//enemy		エネミークラスのポインタ
-	void Add(IEnemy* enemy)
-	{
-		m_enemyGroupList.push_back(enemy);
-	}
-
 	//初期化
 	//position		座標
 	void Init(CVector3 position)
@@ -29,15 +22,20 @@ public:
 		m_position = position;
 	}
 
+	//更新
+	void Update();
+
+	//グループのリストに追加
+	//enemy		エネミークラスのポインタ
+	void Add(IEnemy* enemy)
+	{
+		m_enemyGroupList.push_back(enemy);
+	}
+
 	//座標を取得
 	const CVector3& GetPosition()
 	{
 		return m_position;
-	}
-
-	//更新
-	void Update()override
-	{
 	}
 
 	//グループのリストを取得

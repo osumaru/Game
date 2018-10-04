@@ -29,6 +29,7 @@ public:
 		enWeaponNum
 	};
 
+	//Œ»İ‚Ì‘I‘ğ‚µ‚Ä‚¢‚é•Ší‚Ì”Ô†‚ğæ“¾
 	int GetWeapon()
 	{
 		return weaponNumberOld;

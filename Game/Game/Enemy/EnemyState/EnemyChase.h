@@ -27,5 +27,5 @@ public:
 	void Update();
 
 private:
-	const float m_speed = 3.0f;
+	const float m_speed = 3.0f;	//ˆÚ“®‘¬“x
 };

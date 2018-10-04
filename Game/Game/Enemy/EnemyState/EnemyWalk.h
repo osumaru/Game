@@ -27,6 +27,6 @@ public:
 	void Update();
 
 private:
-	CVector3	m_destination;
-	const float m_speed = 2.0f;
+	CVector3	m_destination;		//ˆÚ“®æ‚ÌÀ•W
+	const float m_speed = 2.0f;		//ˆÚ“®‘¬“x
 };
