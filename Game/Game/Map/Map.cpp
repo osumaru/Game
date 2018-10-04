@@ -132,7 +132,19 @@ void Map::Init(int stageNum)
 
 void Map::Update()
 {
+	std::list<IEnemy*>::iterator it;
+	it = m_enemyList.begin();
 
+	while (it != m_enemyList.end()) {
+		if ((*it)->IsDelete()) {
+			//€–S‚µ‚Ä‚¢‚½‚çƒŠƒXƒg‚©‚çíœ
+			IEnemy* enemy = *it;
+			it = m_enemyList.erase(it);
+		}
+		else {
+			it++;
+		}
+	}
 }
 
 

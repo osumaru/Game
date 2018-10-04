@@ -19,6 +19,7 @@ bool CEnemyAttack::Start()
 
 void CEnemyAttack::Update()
 {
+	float length = 0.0f;
 	//プレイヤーがダメージを受けていない
 	if (!GetPlayer().GetIsDamage()) {
 		//手のボーンのワールド行列を取得
@@ -45,6 +46,19 @@ void CEnemyAttack::Update()
 		}
 	}
 
+	CMatrix enemyWorldMatrix = m_enemy->GetWorldMatrix();
+	CVector3 enemyForward;
+	enemyForward.x = enemyWorldMatrix.m[2][0];
+	enemyForward.y = 0.0f;
+	enemyForward.z = enemyWorldMatrix.m[2][2];
+	enemyForward.Normalize();
+	CVector3 playerPos = GetPlayer().GetPosition();
+	CVector3 toPlayerPos = playerPos - m_enemy->GetPosition();
+	toPlayerPos.y = 0.0f;
+	toPlayerPos.Normalize();
+	float angle = enemyForward.Dot(toPlayerPos);
+	angle = acosf(angle);
+
 	if (m_enemy->IsDamage()) {
 		//ダメージを受けた
 		m_esm->ChangeState(CEnemyState::enState_Damage);
@@ -55,13 +69,11 @@ void CEnemyAttack::Update()
 			//プレイヤーが視野内にいない
 			m_esm->ChangeState(CEnemyState::enState_Walk);
 		}
-		else if (m_enemy->IsFind() && length > 2.0f) {
-			//プレイヤーが視野内にいる且つ距離が遠いなら近づく
-			m_esm->ChangeState(CEnemyState::enState_Chase);
+		else if (fabsf(angle) < CMath::DegToRad(20.0f) && length > 2.0f) {
+			m_enemy->PlayAnimation(CEnemyState::enState_Attack);
 		}
 		else {
-			//もう一度攻撃させる
-			m_enemy->PlayAnimation(CEnemyState::enState_Attack);
+			m_esm->ChangeState(CEnemyState::enState_Chase);
 		}
 	}
 }

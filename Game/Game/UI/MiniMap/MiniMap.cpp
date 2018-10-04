@@ -3,6 +3,8 @@
 #include "../../Player/Player.h"
 #include "../../Enemy/IEnemy.h"
 #include "../../Camera/GameCamera.h"
+#include "../../Scene/SceneManager.h"
+#include "../../Map/Map.h"`
 
 CMiniMap::CMiniMap()
 {
@@ -12,7 +14,7 @@ CMiniMap::~CMiniMap()
 {
 }
 
-void CMiniMap::Init(std::list<IEnemy*> enemyList)
+void CMiniMap::Init()
 {
 	m_mapCenterPos = { 540.0f,-260.0f };
 	//ミニマップを初期化
@@ -28,7 +30,7 @@ void CMiniMap::Init(std::list<IEnemy*> enemyList)
 	m_playerIcon.SetSize({ 15.0f,15.0f });
 	//エネミーアイコンを初期化
 	m_enemyIconTexture.Load(L"Assets/sprite/enemy_Icon.png");
-	m_enemyList = enemyList;
+	m_enemyList = GetSceneManager().GetGameScene().GetMap()->GetEnemyList();
 	for (int i = 0; i < m_enemyList.size(); i++) {
 		m_enemyIcon.emplace_back(std::make_unique<CSprite>());
 		m_enemyIcon[i]->Init(&m_enemyIconTexture);
@@ -57,8 +59,9 @@ void CMiniMap::Update()
 
 	//敵アイコンの処理
 	{
+		m_enemyList = GetSceneManager().GetGameScene().GetMap()->GetEnemyList();
 		int idx = 0;
-		for (auto& enemy : m_enemyList) 
+		for (auto& enemy : m_enemyList)
 		{
 			CVector3 toCameraXZ = cameraPos - enemy->GetPosition();
 			toCameraXZ.y = 0.0f;

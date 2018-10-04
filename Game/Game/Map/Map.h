@@ -58,7 +58,6 @@ public:
 	std::list<IEnemy*> GetEnemyList()
 	{
 		return m_enemyList;
-
 	}
 
 private:

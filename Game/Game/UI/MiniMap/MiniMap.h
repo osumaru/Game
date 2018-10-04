@@ -16,8 +16,7 @@ public:
 	virtual ~CMiniMap();
 
 	//初期化
-	//enemyList		エネミーのリスト
-	void Init(std::list<IEnemy*> enemyList);
+	void Init();
 
 	//更新
 	void Update();

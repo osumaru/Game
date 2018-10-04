@@ -26,11 +26,23 @@ void CEnemyChase::Update()
 	//移動速度を設定
 	m_enemy->SetMoveSpeed(moveSpeed);
 
+	CMatrix enemyWorldMatrix = m_enemy->GetWorldMatrix();
+	CVector3 enemyForward;
+	enemyForward.x = enemyWorldMatrix.m[2][0];
+	enemyForward.y = 0.0f;
+	enemyForward.z = enemyWorldMatrix.m[2][2];
+	enemyForward.Normalize();
+	CVector3 toPlayerPos = playerPos - m_enemy->GetPosition();
+	toPlayerPos.y = 0.0f;
+	toPlayerPos.Normalize();
+	float angle = enemyForward.Dot(toPlayerPos);
+	angle = acosf(angle);
+
 	if (m_enemy->IsDamage()){
 		//ダメージを受けた
 		m_esm->ChangeState(CEnemyState::enState_Damage);
 	}
-	if (length < 2.0f) {
+	if (fabsf(angle) < CMath::DegToRad(30.0f) && length < 2.0f) {
 		//プレイヤーと距離が近い
 		m_esm->ChangeState(CEnemyState::enState_Attack);
 	}

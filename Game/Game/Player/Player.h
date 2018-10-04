@@ -176,7 +176,7 @@ public:
 	}
 
 	void PlayerAttack();
-	//デバック用関数
+	//プレイヤーのダメージ処理
 	void GetDamage()
 	{
 		if (!m_isDamege && !m_intervalOn)
