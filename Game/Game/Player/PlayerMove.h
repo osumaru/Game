@@ -10,8 +10,8 @@ public:
 	void Update();
 
 private:
-	const float				RUN_SPEED = 1.4f;
-	const float				WALK_SPEED = 300.0f;
+	const float				RUN_SPEED = 2.4f;
+	const float				WALK_SPEED = 2.8f;
 	CVector3				m_PlayerMoveSpeed;
 };
 

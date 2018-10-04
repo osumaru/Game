@@ -9,7 +9,7 @@ struct SplayerStatus
 	int Strength;			//攻撃力
 	int Defense;			//防御力
 	int	Health;				//体力
-	int MaxHealth;
+	int MaxHealth;			//レベルごとの最大HP
 	int Level;				//レベル
 	int ExperiencePoint	;	//現在の経験値
 	int NextExp;			//レベルアップまでに必要な経験値

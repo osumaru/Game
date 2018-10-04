@@ -51,6 +51,9 @@ void CPlayerStateMachine::ChangeState(CPlayerState::EnPlayerState nextState)
 	case CPlayerState::enPlayerJump:
 		m_currentState = &m_playerJump;		//ジャンプアニメーションに遷移	
 		break;
+	case CPlayerState::enPlayerRunJump:
+		m_currentState = &m_playerJump;		//走りジャンプアニメーションに遷移	
+		break;
 	case CPlayerState::enPlayerAttack:
 		m_currentState = &m_playerAttack;	//攻撃アニメーションに遷移
 		break;

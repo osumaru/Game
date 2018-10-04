@@ -91,15 +91,7 @@ void CPlayer::Update()
 {
 	
 	//アニメーションの更新
-	if (m_State == enPlayerAttack || m_State == enPlayerAttack2 || m_State == enPlayerAvoidance)
-	{
-		m_animation.Update(GameTime().GetDeltaFrameTime()*1.7f);
-	}
-	else
-	{
-		m_animation.Update(GameTime().GetDeltaFrameTime());
-	}
-
+	m_animation.Update(GameTime().GetDeltaFrameTime());
 	if (m_isDied) { return; }
 	WeaponChange();
 	//m_isGround = m_characterController.IsOnGround();
