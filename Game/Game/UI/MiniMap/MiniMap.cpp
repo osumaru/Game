@@ -58,22 +58,32 @@ void CMiniMap::Update()
 	//敵アイコンの処理
 	{
 		int idx = 0;
-		for (auto& enemy : m_enemyList) {
-			//ビュー変換
-			CVector4 viewPosition;
-			viewPosition.Set(enemy->GetPosition());
-			viewMatrix.Mul(viewPosition);
-			//プロジェクション変換
-			CVector4 projectionPosition = viewPosition;
-			projectionMatrix.Mul(projectionPosition);
-			projectionPosition = projectionPosition / projectionPosition.w;
-			//スクリーン変換
-			CVector2 screenPosition;
-			screenPosition.x = (1.0f + projectionPosition.x) / 2.0f * m_miniMap.GetSize().x - (m_miniMap.GetSize().x / 2.0f);
-			screenPosition.y = (1.0f + projectionPosition.y) / 2.0f * m_miniMap.GetSize().y - (m_miniMap.GetSize().y / 2.0f);
-			screenPosition += m_mapCenterPos;
-			//敵のアイコンの座標を更新
-			m_enemyIcon[idx]->SetPosition(screenPosition);
+		for (auto& enemy : m_enemyList) 
+		{
+			CVector3 toCameraXZ = cameraPos - enemy->GetPosition();
+			toCameraXZ.y = 0.0f;
+			float length = toCameraXZ.Length();
+			if (length <= 50.0f) {
+				//ビュー変換
+				CVector4 viewPosition;
+				viewPosition.Set(enemy->GetPosition());
+				viewMatrix.Mul(viewPosition);
+				//プロジェクション変換
+				CVector4 projectionPosition = viewPosition;
+				projectionMatrix.Mul(projectionPosition);
+				projectionPosition = projectionPosition / projectionPosition.w;
+				//スクリーン変換
+				CVector2 screenPosition;
+				screenPosition.x = (1.0f + projectionPosition.x) / 2.0f * m_miniMap.GetSize().x - (m_miniMap.GetSize().x / 2.0f);
+				screenPosition.y = (1.0f + projectionPosition.y) / 2.0f * m_miniMap.GetSize().y - (m_miniMap.GetSize().y / 2.0f);
+				screenPosition += m_mapCenterPos;
+				//敵のアイコンの座標を更新
+				m_enemyIcon[idx]->SetPosition(screenPosition);
+				m_enemyIcon[idx]->SetIsDraw(true);
+			}
+			else {
+				m_enemyIcon[idx]->SetIsDraw(false);
+			}
 			idx++;
 		}
 	}

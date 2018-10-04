@@ -2,12 +2,14 @@
 #include "RecoveryItem.h"
 #include"../../Game/Camera/GameCamera.h"
 #include "../Player/Player.h"
+#include "../../../osumaruEngine/Physics/CollisionAttr.h"
 
 void CRecoveryItem::Init(CVector3 position)
 {
 	m_skinModel.Load(L"Assets/modelData/heart.cmo");
 	m_position = position;
 	m_characterController.Init(0.2f, 0.2f, m_position);
+	m_characterController.SetUserIndex(EnCollisionAttr::enCollisionAttr_Item);
 }
 
 bool CRecoveryItem::Start()
