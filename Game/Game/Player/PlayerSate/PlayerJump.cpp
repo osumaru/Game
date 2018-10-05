@@ -14,7 +14,7 @@ CPlayerJump::~CPlayerJump()
 
 bool CPlayerJump::Start()
 {
-	if (Pad().GetLeftStickX() != 0 || Pad().GetLeftStickY() != 0)
+	if (GetPlayer().GetPlayerStateMachine().GetState() == CPlayerState::EnPlayerState::enPlayerRunJump)
 	{
 		GetPlayer().SetPlayerAnimation(CPlayerState::enPlayerRunJump, 0.0f);
 	}

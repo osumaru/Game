@@ -14,7 +14,7 @@ CPlayerAvoidance::~CPlayerAvoidance()
 
 bool CPlayerAvoidance::Start()
 {
-	GetPlayer().SetPlayerAnimation(CPlayerState::enPlayerAvoidance, 0.2f);
+	GetPlayer().SetPlayerAnimation(CPlayerState::enPlayerAvoidance, 0.1f);
 	return true;
 }
 

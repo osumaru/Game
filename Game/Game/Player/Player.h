@@ -3,13 +3,14 @@
 #include "PlayerSate/PlayerState.h"
 #include "PlayerRotation.h"
 #include "PlayerMove.h"
+#include "PlayerArrow.h"
 
 struct SplayerStatus
 {
 	int Strength;			//攻撃力
 	int Defense;			//防御力
 	int	Health;				//体力
-	int MaxHealth;
+	int MaxHealth;			//レベルごとの最大HP
 	int Level;				//レベル
 	int ExperiencePoint	;	//現在の経験値
 	int NextExp;			//レベルアップまでに必要な経験値
@@ -301,6 +302,7 @@ private:
 	CPlayerStateMachine		m_PlayerStateMachine;							//プレイヤーのアニメーションの遷移を行うステートマシーン
 	CPlayerRotation			m_PlayerRotation;								//プレイヤーの回転を扱うクラス
 	CPlayerMove				m_PlayerMove;									//プレイヤーの動きを扱うクラス
+	CPlayerArrow			m_playerArrow;
 
 	
 	

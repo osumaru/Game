@@ -201,8 +201,8 @@
     <ClCompile Include="Player\PlayerMove.cpp">
       <Filter>ソース ファイル\Player</Filter>
     </ClCompile>
-    <ClCompile Include="Player\PlayerSate\PlayerWireMove.cpp">
-      <Filter>ソース ファイル\Player\PlayerSate</Filter>
+    <ClCompile Include="Player\PlayerArrow.cpp">
+      <Filter>ソース ファイル\Player</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -350,8 +350,8 @@
     <ClInclude Include="Player\PlayerMove.h">
       <Filter>ソース ファイル\Player</Filter>
     </ClInclude>
-    <ClInclude Include="Player\PlayerSate\PlayerWireMove.h">
-      <Filter>ソース ファイル\Player\PlayerSate</Filter>
+    <ClInclude Include="Player\PlayerArrow.h">
+      <Filter>ソース ファイル\Player</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
