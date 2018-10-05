@@ -3,6 +3,7 @@
 #include "PlayerSate/PlayerState.h"
 #include "PlayerRotation.h"
 #include "PlayerMove.h"
+#include "PlayerArrow.h"
 
 struct SplayerStatus
 {
@@ -301,6 +302,7 @@ private:
 	CPlayerStateMachine		m_PlayerStateMachine;							//プレイヤーのアニメーションの遷移を行うステートマシーン
 	CPlayerRotation			m_PlayerRotation;								//プレイヤーの回転を扱うクラス
 	CPlayerMove				m_PlayerMove;									//プレイヤーの動きを扱うクラス
+	CPlayerArrow			m_playerArrow;
 
 	
 	

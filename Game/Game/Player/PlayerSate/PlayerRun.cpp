@@ -32,6 +32,11 @@ void CPlayerRun::Update()
 	{
 		GetPlayer().GetPlayerStateMachine().ChangeState(CPlayerState::enPlayerAttack);
 	}
+	//‘–‚è’†‚É‰ñ”ğ‚µ‚½‚Ìˆ—
+	else if (Pad().IsTriggerButton(enButtonRightTrigger))
+	{
+		GetPlayer().GetPlayerStateMachine().ChangeState(CPlayerState::enPlayerAvoidance);
+	}
 	//‘–‚Á‚Ä‚¢‚é‚ÉƒWƒƒƒ“ƒv‚ª‰Ÿ‚³‚ê‚½‚Æ‚«ˆ—
 	else if (Pad().IsTriggerButton(enButtonA))
 	{

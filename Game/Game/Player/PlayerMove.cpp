@@ -42,13 +42,13 @@ void CPlayerMove::Update()
 	//回避中の移動処理
 	else if (GetPlayer().GetPlayerStateMachine().GetState() == CPlayerState::EnPlayerState::enPlayerAvoidance)
 	{
-		//プレイヤーのワールド行列の取得
-		CMatrix PlayerWorldMatrix = GetPlayer().GetPlayerSkin().GetWorldMatrix();
-		//プレイヤーの前方向の取得
-		CVector3 PlayerFront = { -PlayerWorldMatrix.m[1][0],-PlayerWorldMatrix.m[1][1],-PlayerWorldMatrix.m[1][2] };
-		PlayerFront.Normalize();
+		////プレイヤーのワールド行列の取得
+		//CMatrix PlayerWorldMatrix = GetPlayer().GetPlayerSkin().GetWorldMatrix();
+		////プレイヤーの前方向の取得
+		//CVector3 PlayerFront = { -PlayerWorldMatrix.m[1][0],-PlayerWorldMatrix.m[1][1],-PlayerWorldMatrix.m[1][2] };
+		//PlayerFront.Normalize();
 
-		m_PlayerMoveSpeed = PlayerFront * GameTime().GetDeltaFrameTime() * WALK_SPEED;;
+		m_PlayerMoveSpeed -=  m_PlayerMoveSpeed * GameTime().GetDeltaFrameTime();
 	}
 
 	//移動の入力があるかの判定
@@ -89,10 +89,13 @@ void CPlayerMove::Update()
 		}
 
 
-		else if (Pad().IsTriggerButton(enButtonA))
+		if (Pad().IsTriggerButton(enButtonA))
 		{
-			if(GetPlayer().GetPlayerStateMachine().GetState() != CPlayerState::EnPlayerState::enPlayerRunJump)
-			m_PlayerMoveSpeed.y += 5.0f;
+			if (GetPlayer().GetPlayerStateMachine().GetState() != CPlayerState::EnPlayerState::enPlayerRunJump)
+			{
+
+				m_PlayerMoveSpeed.y += 5.0f;
+			}
 		}
 	}
 
