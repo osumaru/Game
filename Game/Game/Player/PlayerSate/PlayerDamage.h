@@ -1,6 +1,6 @@
 #pragma once
 #include "IPlayerState.h"
-class CPlayerDamage : public IPlayerSate
+class CPlayerDamage : public IPlayerState
 {
 public:
 	CPlayerDamage();

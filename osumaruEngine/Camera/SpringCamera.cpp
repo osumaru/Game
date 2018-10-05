@@ -8,7 +8,7 @@ CSpringCamera::CSpringCamera() :
 	m_targetMoveSpeed(0.0f, 0.0f, 0.0f),
 	m_positionMoveSpeed(0.0f, 0.0f, 0.0f),
 	m_maxMoveSpeed(0.0f),
-	m_targetDampingRate(0.0f),
+	m_targetDampingRate(1.0f),
 	m_dampingRate(1.0f),
 	m_dampingRateVel(0.0f),
 	m_dampingK(30.0f)

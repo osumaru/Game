@@ -2,7 +2,7 @@
 #include "IPlayerState.h"
 #include "../../UI/WeaponSelect/WeaponSelect.h"
 
-class CPlayerStand	:	public IPlayerSate
+class CPlayerStand	:	public IPlayerState
 {
 public:
 	CPlayerStand();
