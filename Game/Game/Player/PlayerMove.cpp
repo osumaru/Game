@@ -48,7 +48,10 @@ void CPlayerMove::Update()
 
 		m_PlayerMoveSpeed = PlayerFront * GameTime().GetDeltaFrameTime() * WALK_SPEED;;
 	}
+	else if (GetPlayer().GetPlayerStateMachine().GetState() == CPlayerState::enPlayerWireMove)
+	{
 
+	}
 	//ˆÚ“®‚Ì“ü—Í‚ª‚ ‚é‚©‚Ì”»’è
 	else if (GetPlayer().GetPlayerStateMachine().GetState() == CPlayerState::EnPlayerState::enPlayerWalk ||
 		GetPlayer().GetPlayerStateMachine().GetState() == CPlayerState::EnPlayerState::enPlayerRun ||

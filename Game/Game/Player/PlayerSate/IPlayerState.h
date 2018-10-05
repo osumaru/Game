@@ -4,7 +4,7 @@
 
 class CPlayerStateMachine;
 
-class IPlayerSate	:public IGameObject
+class IPlayerState	:public IGameObject
 {
 
 	virtual void Update() = 0;

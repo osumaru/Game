@@ -16,6 +16,7 @@ public:
 		enPlayerDamage,		//ダメージアニメーション
 		enPlayerAvoidance,	//回避アニメーション
 		enPlayerDied,		//死亡アニメーション
+		enPlayerWireMove,	//ワイヤーアニメーション
 
 		enPlayerArroAttack,	//弓のアニメーション
 		enPlayerLongSwordAttack,//大剣の攻撃アニメーション

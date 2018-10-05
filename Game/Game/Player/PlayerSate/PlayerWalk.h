@@ -1,7 +1,7 @@
 #pragma once
 #include "IPlayerState.h"
 
-class CPlayerWalk : public IPlayerSate
+class CPlayerWalk : public IPlayerState
 {
 public:
 	CPlayerWalk();
