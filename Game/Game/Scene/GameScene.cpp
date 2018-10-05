@@ -15,7 +15,7 @@ void CGameScene::Init()
 	map->Init(0);
 	
 	CMiniMap* miniMap = New<CMiniMap>(0);
-	miniMap->Init(map->GetEnemyList());
+	miniMap->Init();
 
 	GetGameCamera().Init();
 

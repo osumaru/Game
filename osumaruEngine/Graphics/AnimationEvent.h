@@ -25,7 +25,7 @@ public:
 		return m_eventName;
 	}
 
-	//イベント名を取得
+	//イベント名を設定
 	void SetEventName(wchar_t* eventName)
 	{
 		m_eventName = eventName;
