@@ -5,18 +5,18 @@
 #include "../Shader.h"
 #include "../ConstantBuffer.h"
 
+enum EnRenderTarget
+{
+	enRenderTargetColor,
+	enRenderTargetNormalMap,
+	enRenderTargetNormal,
+	enRenderTargetTangent,
+	enRenderTargetDepth,
+	enRenderTargetNum
+};
 
 class Deferred : Uncopyable
 {
-	enum EnRenderTarget
-	{
-		enRenderTargetColor,
-		enRenderTargetNormalMap,
-		enRenderTargetNormal,
-		enRenderTargetTangent,
-		enRenderTargetDepth,
-		enRenderTargetNum
-	};
 public:
 	//頂点レイアウト
 	struct SVSLayout
@@ -36,7 +36,15 @@ public:
 	//描画関数
 	void Draw();
 	
-private:			//Gバッファーの数
+	/*
+	シェーダーリソースを取得
+	*/
+	ID3D11ShaderResourceView* GetShaderResource(EnRenderTarget numRenderTarget)
+	{
+		return m_renderTarget[numRenderTarget].GetRenderTargetTexture().GetShaderResource();
+	}
+
+private:
 	CRenderTarget							m_renderTarget[enRenderTargetNum];	//Gバッファー
 	CPrimitive								m_primitive;						//プリミティブ
 	CShader									m_vertexShader;						//頂点シェーダー

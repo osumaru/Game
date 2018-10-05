@@ -89,9 +89,10 @@ void CPlayerRotation::Update()
 		//ïêäÌÇÃâÒì]ÇçsÇ§èàóù
 		{
 			weaponRot.SetRotation(PlayerSpine);
-			CQuaternion rotX, rotY;
+			CQuaternion rotX, rotY ,rotZ;
 			rotX.SetRotationDeg(CVector3::AxisX, 180.0f);
 			rotY.SetRotationDeg(CVector3::AxisY, 90.0f);
+			rotZ.SetRotationDeg(CVector3::AxisZ, 90.0f);
 			weaponRot.Multiply(rotX);
 			weaponRot.Multiply(rotY);
 			GetPlayer().SetWeaponRotation(weaponRot);
@@ -119,7 +120,10 @@ void CPlayerRotation::Update()
 		PlayerHnd.m[2][2] /= len;
 		weaponPosition = PlayerHndPos;
 		weaponRot.SetRotation(PlayerHnd);
-
+		CQuaternion multi;
+		multi.SetRotationDeg(CVector3::AxisY, 45.0f);
+		multi.SetRotationDeg(CVector3::AxisX, 90.0f);
+		weaponRot.Multiply(multi);
 		GetPlayer().SetWeaponPosition(weaponPosition);
 		GetPlayer().SetWeaponRotation(weaponRot);
 

@@ -49,6 +49,9 @@
     <Filter Include="ソース ファイル\Resource">
       <UniqueIdentifier>{4378fd90-2499-4762-ae95-1d3cebd9ef79}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Graphics\particle">
+      <UniqueIdentifier>{48145211-a576-4d0b-8d4a-42e445fd3d62}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="engineStdafx.cpp">
@@ -182,6 +185,12 @@
     </ClCompile>
     <ClCompile Include="Graphics\PostEffect\Deferred.cpp">
       <Filter>ソース ファイル\Graphics\PostEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\particle\Particle.cpp">
+      <Filter>ソース ファイル\Graphics\particle</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\particle\ParticleEmitter.cpp">
+      <Filter>ソース ファイル\Graphics\particle</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -322,6 +331,12 @@
     </ClInclude>
     <ClInclude Include="Uncopyable.h">
       <Filter>ソース ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\particle\Particle.h">
+      <Filter>ソース ファイル\Graphics\particle</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\particle\ParticleEmitter.h">
+      <Filter>ソース ファイル\Graphics\particle</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

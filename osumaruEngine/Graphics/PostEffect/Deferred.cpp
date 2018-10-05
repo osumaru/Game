@@ -29,6 +29,8 @@ void Deferred::Init()
 void Deferred::Start()
 {
 	float color[4] = { 0.0f, 0.0f, 1.0f, 0.0f };
+
+	float depthColor[4] = { 1.0f, 1.0f, 1.0f, 1.0f };
 	ID3D11RenderTargetView* mainViews[enRenderTargetNum];
 	for (int i = 0; i < enRenderTargetNum;i++)
 	{
@@ -38,7 +40,14 @@ void Deferred::Start()
 	GetDeviceContext()->OMSetRenderTargets(enRenderTargetNum, mainViews, m_renderTarget[0].GetDepthStencil());
 	for (int i = 0; i < enRenderTargetNum; i++)
 	{
-		GetDeviceContext()->ClearRenderTargetView(m_renderTarget[i].GetRenderTarget(), color);
+		if (i == enRenderTargetDepth)
+		{
+			GetDeviceContext()->ClearRenderTargetView(m_renderTarget[i].GetRenderTarget(), depthColor);
+		}
+		else
+		{
+			GetDeviceContext()->ClearRenderTargetView(m_renderTarget[i].GetRenderTarget(), color);
+		}
 	}
 	GetDeviceContext()->ClearDepthStencilView(m_renderTarget[0].GetDepthStencil(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
 	m_lightCB.Create(sizeof(CLight), &Light());
