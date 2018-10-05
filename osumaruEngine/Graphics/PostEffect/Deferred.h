@@ -5,8 +5,18 @@
 #include "../Shader.h"
 #include "../ConstantBuffer.h"
 
+
 class Deferred : Uncopyable
 {
+	enum EnRenderTarget
+	{
+		enRenderTargetColor,
+		enRenderTargetNormalMap,
+		enRenderTargetNormal,
+		enRenderTargetTangent,
+		enRenderTargetDepth,
+		enRenderTargetNum
+	};
 public:
 	//頂点レイアウト
 	struct SVSLayout
@@ -26,9 +36,8 @@ public:
 	//描画関数
 	void Draw();
 	
-private:
-	static const int						RENDER_TARGET_NUM = 4;				//Gバッファーの数
-	CRenderTarget							m_renderTarget[RENDER_TARGET_NUM];	//Gバッファー
+private:			//Gバッファーの数
+	CRenderTarget							m_renderTarget[enRenderTargetNum];	//Gバッファー
 	CPrimitive								m_primitive;						//プリミティブ
 	CShader									m_vertexShader;						//頂点シェーダー
 	CShader									m_pixelShader;						//ピクセルシェーダー

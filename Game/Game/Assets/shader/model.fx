@@ -39,6 +39,7 @@ struct VS_OUTPUT
 	float3 tangent : TANGENT;
 	float3 binormal : BINORMAL;
 	float2 uv : TEXCOORD0;
+	float4 worldPos : TEXCOORD1;
 };
 
 struct PS_OUTPUT
@@ -47,6 +48,7 @@ struct PS_OUTPUT
 	float4 normalMap	: SV_TARGET1;
 	float4 normal		: SV_TARGET2;
 	float4 tangent		: SV_TARGET3;
+	float4 depth		: SV_TARGET4;
 };
 
 Texture2D<float4> colorTexture : register(t10);
@@ -66,6 +68,7 @@ VS_OUTPUT VSMain(VS_INPUT In)
 	Out.binormal = cross(Out.normal, Out.tangent);
 	Out.binormal = normalize(Out.binormal);
 	Out.uv = In.uv;
+	Out.worldPos = Out.pos;
 	return Out;
 }
 
@@ -87,6 +90,7 @@ VS_OUTPUT VSSkinMain(VS_SKIN_INPUT In)
 	Out.binormal = cross(Out.normal, Out.tangent);
 	Out.binormal = normalize(Out.binormal);
 	Out.uv = In.uv;
+	Out.worldPos = Out.pos;
 	return Out;
 }
 
@@ -98,6 +102,7 @@ PS_OUTPUT PSMain(VS_OUTPUT In)
 	Out.tangent = float4(In.tangent, 1.0f);
 	float3 normalColor = normalTexture.Sample(Sampler, In.uv) * isNormalMap + float3(0.0f, 0.0f, 1.0f) * (1 - isNormalMap);
 	Out.normalMap = float4(normalColor, 1.0f);
+	Out.depth.x = In.worldPos.z / In.worldPos.w;
 	return Out;
 }
 
