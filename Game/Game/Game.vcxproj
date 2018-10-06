@@ -284,6 +284,7 @@
     <MeshContentTask Include="Assets\modelData\testChamferBox.FBX" />
     <MeshContentTask Include="Assets\modelData\testGround.FBX" />
     <MeshContentTask Include="Assets\modelData\testRectangle.FBX" />
+    <MeshContentTask Include="Assets\modelData\Toge.FBX" />
     <MeshContentTask Include="Assets\modelData\TownHouse.fbx" />
     <MeshContentTask Include="Assets\modelData\TownHouse1.fbx" />
     <MeshContentTask Include="Assets\modelData\TwinSword.fbx" />
