@@ -34,31 +34,33 @@ void CPlayerMove::Update()
 		GetPlayer().GetPlayerStateMachine().GetState() == CPlayerState::EnPlayerState::enPlayerAttack
 		)
 	{
-		m_PlayerMoveSpeed = CVector3::Zero;
+		
+		m_PlayerMoveSpeed.x = 0.0f;
+		m_PlayerMoveSpeed.z = 0.0f;
 	}
 
 	//回避中の移動処理
 	else if (GetPlayer().GetPlayerStateMachine().GetState() == CPlayerState::EnPlayerState::enPlayerAvoidance)
 	{
-		//プレイヤーのワールド行列の取得
-		CMatrix PlayerWorldMatrix = GetPlayer().GetPlayerSkin().GetWorldMatrix();
-		//プレイヤーの前方向の取得
-		CVector3 PlayerFront = { -PlayerWorldMatrix.m[1][0],-PlayerWorldMatrix.m[1][1],-PlayerWorldMatrix.m[1][2] };
-		PlayerFront.Normalize();
+		////プレイヤーのワールド行列の取得
+		//CMatrix PlayerWorldMatrix = GetPlayer().GetPlayerSkin().GetWorldMatrix();
+		////プレイヤーの前方向の取得
+		//CVector3 PlayerFront = { -PlayerWorldMatrix.m[1][0],-PlayerWorldMatrix.m[1][1],-PlayerWorldMatrix.m[1][2] };
+		//PlayerFront.Normalize();
 
-		m_PlayerMoveSpeed = PlayerFront * GameTime().GetDeltaFrameTime() * WALK_SPEED;;
+		m_PlayerMoveSpeed -=  m_PlayerMoveSpeed * GameTime().GetDeltaFrameTime();
 	}
+	else if (GetPlayer().GetPlayerStateMachine().GetState() == CPlayerState::enPlayerWireMove)
+	{
 
+	}
 	//移動の入力があるかの判定
-	else if (GetPlayer().GetPlayerStateMachine().GetState() == CPlayerState::EnPlayerState::enPlayerWalk ||
-		GetPlayer().GetPlayerStateMachine().GetState() == CPlayerState::EnPlayerState::enPlayerRun ||
-		GetPlayer().GetPlayerStateMachine().GetState() == CPlayerState::EnPlayerState::enPlayerAvoidance||
-		GetPlayer().GetPlayerStateMachine().GetState() == CPlayerState::EnPlayerState::enPlayerJump)
+	else if (Pad().GetLeftStickX() != 0 || Pad().GetLeftStickY() != 0)
 	{
 		CVector3 moveSpeed;
 		//1フレームに進む距離
-		moveSpeed.z = Pad().GetLeftStickY() * GameTime().GetDeltaFrameTime() * WALK_SPEED;
-		moveSpeed.x = Pad().GetLeftStickX() * GameTime().GetDeltaFrameTime() * WALK_SPEED;
+		moveSpeed.z = Pad().GetLeftStickY() * WALK_SPEED;
+		moveSpeed.x = Pad().GetLeftStickX() * WALK_SPEED;
 		CMatrix cameraVm = GetGameCamera().GetViewMatrix();
 		cameraVm.Inverse();	//カメラのビュー行列の逆行列
 
@@ -90,17 +92,23 @@ void CPlayerMove::Update()
 		}
 
 
-		if (GetPlayer().GetCharacterController().IsOnGround() && 
-			Pad().IsPressButton(enButtonA))
+		if (Pad().IsTriggerButton(enButtonA))
 		{
-			m_PlayerMoveSpeed.y += 5.0f;
+			if (GetPlayer().GetPlayerStateMachine().GetState() != CPlayerState::EnPlayerState::enPlayerRunJump)
+			{
+
+				m_PlayerMoveSpeed.y += 5.0f;
+			}
 		}
 	}
+
+
 		
 	//立ちアニメーションの処理
 	else
 	{
-		m_PlayerMoveSpeed = CVector3::Zero;
+		m_PlayerMoveSpeed.x = 0.0f;
+		m_PlayerMoveSpeed.z = 0.0f;
 	
 	}
 

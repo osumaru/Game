@@ -13,7 +13,8 @@ CZombie::~CZombie()
 void CZombie::Init(CVector3 position)
 {
 	//ÉÇÉfÉãÇì«Ç›çûÇﬁ
-	m_skinModel.Load(L"Assets/modelData/zombi.cmo", &m_animation);
+	m_skinModel.Load(L"Assets/modelData/Zombi.cmo", &m_animation);
+	m_skinModel.LoadNormalmap(L"Assets/modelData/Zombi_normal.png");
 	m_position = position;
 	m_characterController.Init(0.5f, 0.9f, m_position);
 	m_characterController.SetGravity(-90.0f);
@@ -52,11 +53,12 @@ bool CZombie::Start()
 
 void CZombie::Update()
 {
-	m_characterController.SetPosition(m_position);
-	m_characterController.Execute(GameTime().GetDeltaFrameTime());
-	m_position = m_characterController.GetPosition();
-
-	m_animation.Update(GameTime().GetDeltaFrameTime());
+	if (!m_isWireHit) {
+		m_characterController.SetPosition(m_position);
+		m_characterController.Execute(GameTime().GetDeltaFrameTime());
+		m_position = m_characterController.GetPosition();
+		m_animation.Update(GameTime().GetDeltaFrameTime());
+	}
 	m_skinModel.Update(m_position, m_rotation, { 1.0f, 1.0f, 1.0f }, true);
 }
 

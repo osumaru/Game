@@ -10,7 +10,7 @@ void CGameCamera::Init()
 	camera.SetNear(1.0f);
 	camera.SetAspect((float)FrameBufferWidth() / (float)FrameBufferHeight());
 	camera.SetAngle(CMath::DegToRad(60.0f));
-	camera.SetPosition({ 0.0f, 1.8f, 2.8f });
+	camera.SetPosition({ 0.0f, 1.8f, 3.8f });
 	camera.SetTarget({ 0.0f, 0.0f, 0.0f });
 	camera.SetUp({ 0.0f, 1.0f, 0.0f });
 	camera.Update();
@@ -18,13 +18,12 @@ void CGameCamera::Init()
 	m_cameraVec = camera.GetPosition();
 	PhysicsWorld().SetCamera(&camera);
 
-	m_springCamera.Init(camera.GetTarget(), camera.GetPosition(), 1.0f);
-	
+	m_springCamera.Init(camera.GetTarget(), camera.GetPosition(), 5000.0f);
 }
 
 void CGameCamera::Update()
 {
-	float rStick_x = Pad().GetRightStickX() * 10 * GameTime().GetDeltaFrameTime();
+	float rStick_x = Pad().GetRightStickX() * 2 * GameTime().GetDeltaFrameTime();
 	float rStick_y = Pad().GetRightStickY() * GameTime().GetDeltaFrameTime();
 	m_cameraVec = camera.GetPosition() - camera.GetTarget();
 	if (fabsf(rStick_x) > 0.0f) {
@@ -71,7 +70,7 @@ void CGameCamera::Update()
 		toNewCameraPos.y = 0.0f;
 		toNewCameraPos.Normalize();
 
-		float weight = 0.7f;  //このウェイトの値は0.0～1.0の値をとる。1.0に近づくほど追尾が強くなる。
+		float weight = 0.3f;  //このウェイトの値は0.0～1.0の値をとる。1.0に近づくほど追尾が強くなる。
 		toNewCameraPos = toNewCameraPos * weight + toCameraXZ * (1.0f - weight);
 		toNewCameraPos.Normalize();
 		toNewCameraPos *= toCameraLen;
@@ -80,6 +79,9 @@ void CGameCamera::Update()
 
 		camera.SetPosition(pos);
 		camera.SetTarget(target);
+		/*m_springCamera.SetTarPosition(pos);
+		m_springCamera.SetTarTarget(target);*/
+		
 	}
 	//float interporation = 2.0f;
 	//position.y += interporation;	
@@ -91,6 +93,6 @@ void CGameCamera::Update()
 	//camera.SetPosition(position);
 	////m_springCamera.SetTarPosition(position);
 
-	////m_springCamera.Update();
+	//m_springCamera.Update();
 	camera.Update();
 }

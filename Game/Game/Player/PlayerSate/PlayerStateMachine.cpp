@@ -51,6 +51,9 @@ void CPlayerStateMachine::ChangeState(CPlayerState::EnPlayerState nextState)
 	case CPlayerState::enPlayerJump:
 		m_currentState = &m_playerJump;		//ジャンプアニメーションに遷移	
 		break;
+	case CPlayerState::enPlayerRunJump:
+		m_currentState = &m_playerJump;		//走りジャンプアニメーションに遷移	
+		break;
 	case CPlayerState::enPlayerAttack:
 		m_currentState = &m_playerAttack;	//攻撃アニメーションに遷移
 		break;
@@ -60,6 +63,8 @@ void CPlayerStateMachine::ChangeState(CPlayerState::EnPlayerState nextState)
 	case CPlayerState::enPlayerDied:
 		m_currentState = &m_playerDied;		//死亡アニメーションに遷移
 		break;
+	case CPlayerState::enPlayerWireMove:
+		m_currentState = &m_playerWireMove;	//ワイヤーアニメーションに遷移
 	}
 
 	//変更したステートをゲームオブジェクトに追加

@@ -33,7 +33,7 @@ void CPlayerWalk::Update()
 	}
 
 	//一定以上の速さならあ知りアニメーションに遷移
-	else if (fabs(GetPlayer().GetMoveSpeed().Length()) >= 3.0f)
+	else if (fabs(GetPlayer().GetMoveSpeed().Length()) >= 1.3f)
 	{
 		GetPlayer().GetPlayerStateMachine().ChangeState(CPlayerState::enPlayerRun);
 	}

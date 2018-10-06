@@ -81,9 +81,11 @@ void CPlayer::Init(CVector3 position)
 	m_PlayerStateMachine.Start();
 	m_PlayerMove.Start();
 	m_PlayerRotation.Start();
+	m_playerArrow.Start();
 	Add(&m_PlayerStateMachine,0);
 	Add(&m_PlayerMove, 0);
 	Add(&m_PlayerRotation, 0);
+	Add(&m_playerArrow, 0);
 	Add(this, 1);
 }
 
@@ -91,15 +93,7 @@ void CPlayer::Update()
 {
 	
 	//アニメーションの更新
-	if (m_State == enPlayerAttack || m_State == enPlayerAttack2 || m_State == enPlayerAvoidance)
-	{
-		m_animation.Update(GameTime().GetDeltaFrameTime()*1.7f);
-	}
-	else
-	{
-		m_animation.Update(GameTime().GetDeltaFrameTime());
-	}
-
+	m_animation.Update(GameTime().GetDeltaFrameTime());
 	if (m_isDied) { return; }
 	WeaponChange();
 	//m_isGround = m_characterController.IsOnGround();
@@ -124,7 +118,6 @@ void CPlayer::Update()
 	
 	//スキンモデルの更新
 	m_Weaponskin[m_weaponState].Update(m_weaponPosition, m_weaponRotation, { 1.0f, 1.0f, 1.0f }, true);
-
 	m_skinmodel.Update(m_position, m_rotation, { 1.0f, 1.0f, 1.0f }, true);
 
 
@@ -133,8 +126,8 @@ void CPlayer::Update()
 //描画処理
 void CPlayer::Draw()
 {
-	m_characterController.Draw();
-	m_skinmodel.Draw(GetGameCamera().GetViewMatrix(), GetGameCamera().GetProjectionMatrix());
+	//m_characterController.Draw();
+	
 	if (m_isAttack)
 	{
 		CVector3 weponUpVec = { m_Weaponskin[m_weaponState].GetWorldMatrix().m[2][0],m_Weaponskin[m_weaponState].GetWorldMatrix().m[2][1],m_Weaponskin[m_weaponState].GetWorldMatrix().m[2][2] };
@@ -144,6 +137,7 @@ void CPlayer::Draw()
 
 	}
 	m_Weaponskin[m_weaponState].Draw(GetGameCamera().GetViewMatrix(), GetGameCamera().GetProjectionMatrix());
+	m_skinmodel.Draw(GetGameCamera().GetViewMatrix(), GetGameCamera().GetProjectionMatrix());
 	
 }
 
