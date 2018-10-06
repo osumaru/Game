@@ -447,5 +447,8 @@
     <MeshContentTask Include="Assets\modelData\Unitychan2.fbx">
       <Filter>ソース ファイル\Assets</Filter>
     </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\Toge.FBX">
+      <Filter>ソース ファイル\Assets</Filter>
+    </MeshContentTask>
   </ItemGroup>
 </Project>

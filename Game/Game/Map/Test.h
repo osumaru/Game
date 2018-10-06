@@ -99,28 +99,28 @@
 //TownHouse
 {
 	L"TownHouse",
-	CVector3(4.07f, 22.39f, 35.40f),             //平行移動
+	CVector3(-1.43f, 21.47f, 41.00f),             //平行移動
 	CQuaternion(0.00f, -0.18f, 0.00f, 0.98f ),  //回転
 	enMapTagUntagged, //タグ
 },
 //TownHouse1
 {
 	L"TownHouse1",
-	CVector3(-23.43f, 22.48f, 31.60f),             //平行移動
+	CVector3(-23.43f, 22.17f, 31.60f),             //平行移動
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagUntagged, //タグ
 },
 //TownHouse1
 {
 	L"TownHouse1",
-	CVector3(-21.03f, 22.87f, 79.20f),             //平行移動
+	CVector3(-18.30f, 22.87f, 77.30f),             //平行移動
 	CQuaternion(0.00f, 0.87f, 0.00f, 0.48f ),  //回転
 	enMapTagUntagged, //タグ
 },
 //TownHouse1
 {
 	L"TownHouse1",
-	CVector3(10.57f, 22.72f, 80.00f),             //平行移動
+	CVector3(4.87f, 22.17f, 71.00f),             //平行移動
 	CQuaternion(0.00f, -0.97f, 0.00f, 0.23f ),  //回転
 	enMapTagUntagged, //タグ
 },
@@ -197,28 +197,28 @@
 //ninja
 {
 	L"ninja",
-	CVector3(6.74f, 21.97f, 46.65f),             //平行移動
+	CVector3(6.74f, 22.21f, 46.65f),             //平行移動
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagNinja, //タグ
 },
 //samurai
 {
 	L"samurai",
-	CVector3(10.15f, 21.97f, 50.96f),             //平行移動
+	CVector3(10.15f, 22.27f, 50.96f),             //平行移動
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagSamurai, //タグ
 },
 //Warrok
 {
 	L"Warrok",
-	CVector3(14.34f, 21.97f, 45.22f),             //平行移動
+	CVector3(14.34f, 22.27f, 45.22f),             //平行移動
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagWarrok, //タグ
 },
 //zombi
 {
 	L"zombi",
-	CVector3(5.25f, 21.97f, 50.96f),             //平行移動
+	CVector3(5.25f, 22.27f, 50.96f),             //平行移動
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagZombie, //タグ
 },
@@ -274,7 +274,7 @@
 //Sphere
 {
 	L"Sphere",
-	CVector3(10.87f, 23.82f, 46.40f),             //平行移動
+	CVector3(10.87f, 22.60f, 46.40f),             //平行移動
 	CQuaternion(0.00f, 0.00f, 0.00f, 0.00f ),  //回転
 	enMapTagEnemyGroup, //タグ
 },
@@ -291,4 +291,88 @@
 	CVector3(-35.53f, 22.60f, 4.40f),             //平行移動
 	CQuaternion(0.00f, 0.00f, 0.00f, 0.00f ),  //回転
 	enMapTagEnemyGroup, //タグ
+},
+//Toge
+{
+	L"Toge",
+	CVector3(-40.13f, 20.94f, 53.10f),             //平行移動
+	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
+	enMapTagUntagged, //タグ
+},
+//Toge
+{
+	L"Toge",
+	CVector3(-40.13f, 20.94f, 65.10f),             //平行移動
+	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
+	enMapTagUntagged, //タグ
+},
+//Toge
+{
+	L"Toge",
+	CVector3(-40.13f, 20.42f, 77.00f),             //平行移動
+	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
+	enMapTagUntagged, //タグ
+},
+//Toge
+{
+	L"Toge",
+	CVector3(-40.13f, 19.77f, 88.60f),             //平行移動
+	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
+	enMapTagUntagged, //タグ
+},
+//Toge
+{
+	L"Toge",
+	CVector3(-40.13f, 20.94f, 41.40f),             //平行移動
+	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
+	enMapTagUntagged, //タグ
+},
+//Toge
+{
+	L"Toge",
+	CVector3(-40.13f, 20.94f, 29.60f),             //平行移動
+	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
+	enMapTagUntagged, //タグ
+},
+//Toge
+{
+	L"Toge",
+	CVector3(21.17f, 18.87f, 49.30f),             //平行移動
+	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
+	enMapTagUntagged, //タグ
+},
+//Toge
+{
+	L"Toge",
+	CVector3(21.17f, 18.87f, 61.30f),             //平行移動
+	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
+	enMapTagUntagged, //タグ
+},
+//Toge
+{
+	L"Toge",
+	CVector3(21.17f, 18.35f, 73.20f),             //平行移動
+	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
+	enMapTagUntagged, //タグ
+},
+//Toge
+{
+	L"Toge",
+	CVector3(21.17f, 17.70f, 84.80f),             //平行移動
+	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
+	enMapTagUntagged, //タグ
+},
+//Toge
+{
+	L"Toge",
+	CVector3(21.17f, 18.87f, 37.60f),             //平行移動
+	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
+	enMapTagUntagged, //タグ
+},
+//Toge
+{
+	L"Toge",
+	CVector3(21.17f, 17.10f, 25.80f),             //平行移動
+	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
+	enMapTagUntagged, //タグ
 },

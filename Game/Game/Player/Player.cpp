@@ -46,7 +46,7 @@ void CPlayer::Init(CVector3 position)
 											{ L"Assets/modelData/PlayerDash60fps.tka" },	//走りアニメーション
 											{ L"Assets/modelData/PlayerJump3.tka" },		//走りジャンプアニメーション
 											{ L"Assets/modelData/PlayerJump.tka" },			//ジャンプアニメーション
-											{ L"Assets/modelData/PlayerAttack.tka" },		//攻撃アニメーション
+											{ L"Assets/modelData/PlayerCombo3.tka" },		//攻撃アニメーション
 											{ L"Assets/modelData/PlayerThrustAttack.tka" },		//攻撃アニメーション
 											{ L"Assets/modelData/PlayerDamage.tka" },		//ダメージアニメーション
 											{ L"Assets/modelData/PlayerKaihiStay.tka" }	,		//回避アクション
