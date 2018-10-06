@@ -109,6 +109,11 @@ public:
 		return m_pDeviceContext;
 	}
 
+	ID3D11ShaderResourceView* GetShaderResource(EnRenderTarget numRenderTarget)
+	{
+		return  m_deferred.GetShaderResource(numRenderTarget);
+	}
+
 	//インスタンスの生成
 	template<class T, class... TArgs>
 	T* New(int priority, TArgs... args)
@@ -177,6 +182,9 @@ private:
 	CLight									m_light;
 	Deferred								m_deferred;
 	PostEffect								m_postEffect;
+	ID3D11BlendState* blendState;
+	ID3D11RasterizerState* rasterizerState;
+	ID3D11DepthStencilState* depthStencilState;
 };
 
 //エンジンクラスのインスタンスを取得。

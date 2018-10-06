@@ -8,10 +8,10 @@ void PostEffect::Init(IDXGISwapChain* swapChain)
 	m_pixelShader.Load("Assets/shader/postEffect.fx", "PSMain", CShader::enPS);
 	SVSLayout vertexBufferLayout[4] =
 	{
-		{ { -1.0f,  1.0f, 0.0f, 1.0f } , { 0.0f, 0.0f } },
-		{ {  1.0f,  1.0f, 0.0f, 1.0f } , { 1.0f, 0.0f } },
-		{ { -1.0f, -1.0f, 0.0f, 1.0f } , { 0.0f, 1.0f } },
-		{ {  1.0f, -1.0f, 0.0f, 1.0f } , { 1.0f, 1.0f } },
+		{ { -1.0f,  1.0f, 1.0f, 1.0f } , { 0.0f, 0.0f } },
+		{ {  1.0f,  1.0f, 1.0f, 1.0f } , { 1.0f, 0.0f } },
+		{ { -1.0f, -1.0f, 1.0f, 1.0f } , { 0.0f, 1.0f } },
+		{ {  1.0f, -1.0f, 1.0f, 1.0f } , { 1.0f, 1.0f } },
 	};
 	DWORD indexBufferLayout[4] = { 0, 2, 1, 3 };
 	m_primitive.Create(vertexBufferLayout, sizeof(SVSLayout), 4, indexBufferLayout, 4, CPrimitive::enIndex32, CPrimitive::enTypeTriangleStrip);
