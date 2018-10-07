@@ -188,6 +188,9 @@
     <ClCompile Include="Graphics\SkinModelEffect.cpp" />
     <ClCompile Include="Graphics\SkinModelEffectFactory.cpp" />
     <ClCompile Include="Graphics\Sprite.cpp" />
+    <ClCompile Include="Graphics\State\AlphaBlendState.cpp" />
+    <ClCompile Include="Graphics\State\DepthStencilState.cpp" />
+    <ClCompile Include="Graphics\State\RasterizerState.cpp" />
     <ClCompile Include="Graphics\Texture.cpp" />
     <ClCompile Include="Input\Pad.cpp" />
     <ClCompile Include="Math\Math.cpp" />
@@ -236,6 +239,9 @@
     <ClInclude Include="Graphics\SkinModelEffect.h" />
     <ClInclude Include="Graphics\SkinModelEffectFactory.h" />
     <ClInclude Include="Graphics\Sprite.h" />
+    <ClInclude Include="Graphics\State\AlphaBlendState.h" />
+    <ClInclude Include="Graphics\State\DepthStencilState.h" />
+    <ClInclude Include="Graphics\State\RasterizerState.h" />
     <ClInclude Include="Graphics\Texture.h" />
     <ClInclude Include="Input\Pad.h" />
     <ClInclude Include="Math\Math.h" />

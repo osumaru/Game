@@ -9,7 +9,11 @@
 #include "Graphics/Primitive.h"
 #include "Graphics/Light.h"
 #include "Graphics/ConstantBuffer.h"
-#include  "Graphics/PostEffect/Deferred.h"
+#include "Graphics/PostEffect/Deferred.h"
+#include "Graphics/State/AlphaBlendState.h"
+#include "Graphics/State/DepthStencilState.h"
+#include "Graphics/State/RasterizerState.h"
+
 
 //エンジンクラス
 
@@ -182,9 +186,9 @@ private:
 	CLight									m_light;
 	Deferred								m_deferred;
 	PostEffect								m_postEffect;
-	ID3D11BlendState* blendState;
-	ID3D11RasterizerState* rasterizerState;
-	ID3D11DepthStencilState* depthStencilState;
+	CAlphaBlendState						m_alphaBlend;
+	CRasterizerState						m_rasterizerState;
+	CDepthStencilState						m_depthState;
 };
 
 //エンジンクラスのインスタンスを取得。
