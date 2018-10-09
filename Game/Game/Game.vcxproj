@@ -195,6 +195,7 @@
     <ClCompile Include="Player\PlayerSate\PlayerStand.cpp" />
     <ClCompile Include="Player\PlayerSate\PlayerWalk.cpp" />
     <ClCompile Include="Player\Player.cpp" />
+    <ClCompile Include="Player\PlayerSate\PlayerWireMove.cpp" />
     <ClCompile Include="Scene\GameScene.cpp" />
     <ClCompile Include="Scene\SceneManager.cpp" />
     <ClCompile Include="stdafx.cpp">
@@ -251,6 +252,7 @@
     <ClInclude Include="Player\PlayerSate\PlayerWalk.h" />
     <ClInclude Include="Player\PlayerSate\IPlayerState.h" />
     <ClInclude Include="Player\Player.h" />
+    <ClInclude Include="Player\PlayerSate\PlayerWireMove.h" />
     <ClInclude Include="Scene\GameScene.h" />
     <ClInclude Include="Scene\SceneManager.h" />
     <ClInclude Include="stdafx.h" />
@@ -288,6 +290,7 @@
     <MeshContentTask Include="Assets\modelData\testChamferBox.FBX" />
     <MeshContentTask Include="Assets\modelData\testGround.FBX" />
     <MeshContentTask Include="Assets\modelData\testRectangle.FBX" />
+    <MeshContentTask Include="Assets\modelData\Toge.FBX" />
     <MeshContentTask Include="Assets\modelData\TownHouse.fbx" />
     <MeshContentTask Include="Assets\modelData\TownHouse1.fbx" />
     <MeshContentTask Include="Assets\modelData\TwinSword.fbx" />

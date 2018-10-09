@@ -1,7 +1,7 @@
 #pragma once
 #include "PlayerSate/IPlayerState.h"
 
-class CPlayerMove : public IPlayerSate
+class CPlayerMove : public IPlayerState
 {
 public:
 	CPlayerMove();

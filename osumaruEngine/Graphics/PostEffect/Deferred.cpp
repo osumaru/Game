@@ -8,7 +8,7 @@ Deferred::Deferred()
 
 void Deferred::Init()
 {
-	for (int i = 0; i < RENDER_TARGET_NUM; i++)
+	for (int i = 0; i < enRenderTargetNum; i++)
 	{
 		m_renderTarget[i].Create(FrameBufferWidth(), FrameBufferHeight());
 	}
@@ -29,17 +29,25 @@ void Deferred::Init()
 void Deferred::Start()
 {
 	float color[4] = { 0.0f, 0.0f, 1.0f, 0.0f };
-	ID3D11RenderTargetView* mainViews[] = {
-		m_renderTarget[0].GetRenderTarget(),
-		m_renderTarget[1].GetRenderTarget(),
-		m_renderTarget[2].GetRenderTarget(),
-		m_renderTarget[3].GetRenderTarget(),
+
+	float depthColor[4] = { 1.0f, 1.0f, 1.0f, 1.0f };
+	ID3D11RenderTargetView* mainViews[enRenderTargetNum];
+	for (int i = 0; i < enRenderTargetNum;i++)
+	{
+		mainViews[i] = m_renderTarget[i].GetRenderTarget();
 	};
 
-	GetDeviceContext()->OMSetRenderTargets(4, mainViews, m_renderTarget[0].GetDepthStencil());
-	for (int i = 0; i < RENDER_TARGET_NUM; i++)
+	GetDeviceContext()->OMSetRenderTargets(enRenderTargetNum, mainViews, m_renderTarget[0].GetDepthStencil());
+	for (int i = 0; i < enRenderTargetNum; i++)
 	{
-		GetDeviceContext()->ClearRenderTargetView(m_renderTarget[i].GetRenderTarget(), color);
+		if (i == enRenderTargetDepth)
+		{
+			GetDeviceContext()->ClearRenderTargetView(m_renderTarget[i].GetRenderTarget(), depthColor);
+		}
+		else
+		{
+			GetDeviceContext()->ClearRenderTargetView(m_renderTarget[i].GetRenderTarget(), color);
+		}
 	}
 	GetDeviceContext()->ClearDepthStencilView(m_renderTarget[0].GetDepthStencil(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
 	m_lightCB.Create(sizeof(CLight), &Light());
@@ -53,16 +61,16 @@ void Deferred::Draw()
 
 	GetDeviceContext()->ClearRenderTargetView(backBuffer[0], color);
 	GetDeviceContext()->ClearDepthStencilView(MainRenderTarget().GetDepthStencil(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
-	ID3D11ShaderResourceView* srviews[] = {
-		m_renderTarget[0].GetRenderTargetTexture().GetShaderResource(),
-		m_renderTarget[1].GetRenderTargetTexture().GetShaderResource(),
-		m_renderTarget[2].GetRenderTargetTexture().GetShaderResource(),
-		m_renderTarget[3].GetRenderTargetTexture().GetShaderResource() };
+	ID3D11ShaderResourceView* srviews[enRenderTargetNum];
+	for (int i = 0; i < enRenderTargetNum; i++)
+	{
+		srviews[i] = m_renderTarget[i].GetRenderTargetTexture().GetShaderResource();
+	};
 	CLight light = Light();
 	m_lightCB.Update(&Light());
 	ID3D11Buffer* buffer = m_lightCB.GetBody();
 	GetDeviceContext()->PSSetConstantBuffers(0, 1, &buffer);
-	GetDeviceContext()->PSSetShaderResources(0, 4, srviews);
+	GetDeviceContext()->PSSetShaderResources(0, enRenderTargetNum, srviews);
 	GetDeviceContext()->VSSetShader((ID3D11VertexShader*)m_vertexShader.GetBody(), nullptr, 0);
 	GetDeviceContext()->PSSetShader((ID3D11PixelShader*)m_pixelShader.GetBody(), nullptr, 0);
 	ID3D11Buffer* vertexBuffers[] = { m_primitive.GetVertexBuffer() };

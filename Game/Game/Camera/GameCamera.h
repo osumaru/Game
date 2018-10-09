@@ -21,7 +21,7 @@ public:
 	}
 
 	//ƒJƒƒ‰‚ğæ“¾
-	CCamera GetCamera()
+	const CCamera& GetCamera()
 	{
 		return camera;
 	}

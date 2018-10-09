@@ -9,7 +9,11 @@
 #include "Graphics/Primitive.h"
 #include "Graphics/Light.h"
 #include "Graphics/ConstantBuffer.h"
-#include  "Graphics/PostEffect/Deferred.h"
+#include "Graphics/PostEffect/Deferred.h"
+#include "Graphics/State/AlphaBlendState.h"
+#include "Graphics/State/DepthStencilState.h"
+#include "Graphics/State/RasterizerState.h"
+
 
 //エンジンクラス
 
@@ -109,6 +113,11 @@ public:
 		return m_pDeviceContext;
 	}
 
+	ID3D11ShaderResourceView* GetShaderResource(EnRenderTarget numRenderTarget)
+	{
+		return  m_deferred.GetShaderResource(numRenderTarget);
+	}
+
 	//インスタンスの生成
 	template<class T, class... TArgs>
 	T* New(int priority, TArgs... args)
@@ -177,6 +186,9 @@ private:
 	CLight									m_light;
 	Deferred								m_deferred;
 	PostEffect								m_postEffect;
+	CAlphaBlendState						m_alphaBlend;
+	CRasterizerState						m_rasterizerState;
+	CDepthStencilState						m_depthState;
 };
 
 //エンジンクラスのインスタンスを取得。

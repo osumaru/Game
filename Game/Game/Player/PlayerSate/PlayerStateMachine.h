@@ -10,6 +10,7 @@
 #include "PlayerDied.h"
 #include "PlayerJump.h"
 #include "PlayerAvoidance.h"
+#include "PlayerWireMove.h"
 
 class CPlayerStateMachine	:public IGameObject
 {
@@ -49,7 +50,7 @@ private:
 	CPlayerState::EnPlayerState		m_state = CPlayerState::enState_Invald;			//プレイヤーのアニメーションの状態
 	CPlayerState::EnPlayerState		m_AttackState = CPlayerState::enPlayerAttack;	//攻撃時のアニメーションの状態
 
-	IPlayerSate*					m_currentState = nullptr;
+	IPlayerState*					m_currentState = nullptr;
 	CPlayerStand					m_playerStand;			//待機モーション
 	CPlayerWalk						m_playerWalk;			//歩行モーション
 	CPlayerRun						m_playerRun;			//走りモーション
@@ -59,5 +60,6 @@ private:
 	CPlayerJump						m_playerJump;			//ジャンプモーション
 	CPlayerAvoidance				m_playerAvoidance;		//回避モーション
 	CPlayerArrowAttack				m_playerArrowAtack;		//弓での攻撃モーション
+	CPlayerWireMove					m_playerWireMove;		//ワイヤーモーション
 };
 

@@ -1,0 +1,46 @@
+cbuffer cb : register(b0)
+{
+	float4x4 mvp;	//ワールドビュープロジェクション行列
+};
+
+struct VS_INPUT
+{
+	float4 pos : SV_POSITION;
+	float2 uv : TEXCOORD0;
+};
+
+struct VS_OUTPUT
+{
+	float4 pos : SV_POSITION;
+	float2 uv : TEXCOORD0;
+	float4 worldPos : TEXCOORD1;
+};
+
+Texture2D<float4> colorTexture : register(t0);
+Texture2D<float4> depthTexture : register(t1);
+sampler Sampler : register(s0);
+
+//頂点シェーダー
+VS_OUTPUT VSMain(VS_INPUT In)
+{
+	VS_OUTPUT Out;
+	Out.pos =  mul(mvp, In.pos);
+	Out.uv = In.uv;
+	Out.worldPos = Out.pos;
+	return Out;
+
+}
+
+
+//ピクセルシェーダー
+float4 PSMain(VS_OUTPUT In) : SV_TARGET0
+{
+	float4 color = colorTexture.Sample(Sampler, In.uv);
+	clip(color.w - 0.1f);
+	float depth = In.worldPos.z / In.worldPos.w;
+	float2 uv = (In.worldPos.xy / In.worldPos.w + 1.0f) / 2.0f;
+	uv.y = 1.0f - uv.y;
+	float depthMap = depthTexture.Sample(Sampler, uv).x;
+	clip(depthMap - depth );
+	return color;
+}

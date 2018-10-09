@@ -28,8 +28,8 @@
 #include "../../osumaruEngine/Input/Pad.h"
 //#include "../osumaruEngine/Sound/SoundEngine.h"
 //#include "../osumaruEngine/Sound/SoundSource.h"
-//#include "../osumaruEngine/Particle/Particle.h"
-//#include "../osumaruEngine/Particle/ParticleEmitter.h"
+#include "../../osumaruEngine/Graphics/Particle/Particle.h"
+#include "../../osumaruEngine/Graphics/Particle/ParticleEmitter.h"
 //#include "../osumaruEngine/Font/Font.h"
 #include "../../osumaruEngine/Random/Random.h"
 #include <fstream>

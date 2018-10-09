@@ -56,7 +56,7 @@ public:
 private:
 	ID3D11DepthStencilView*					m_pDepthStencil;		//デプスステンシルビュー
 	ID3D11RenderTargetView*					m_pRenderTarget;		//レンダリングターゲット
-	ID3D11Texture2D*						m_pD3DRenderTargetTexture;	//レンダリングターゲット用のテクスチャ	
+	ID3D11Texture2D*						m_pD3DRenderTargetTexture;	//レンダリングターゲット用のテクスチャ
 	ID3D11Texture2D*						m_pD3DDepthStencilTexture;	//デプスステンシル用のテクスチャ
 	int										m_width;				//レンダリングターゲットの幅
 	int										m_height;				//レンダリングターゲットの高さ

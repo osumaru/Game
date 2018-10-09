@@ -124,36 +124,6 @@ void CEngine::InitD3D(HINSTANCE& hInst)
 	ID3D11Texture2D * p_RT;
 	hr = m_pSwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (LPVOID*)(&p_RT));
 
-	ID3D11DepthStencilState* depthStencilState;
-	D3D11_DEPTH_STENCIL_DESC depthDesc;
-	ZeroMemory(&depthDesc, sizeof(D3D11_DEPTH_STENCIL_DESC));
-
-	depthDesc.DepthFunc = D3D11_COMPARISON_LESS_EQUAL;
-	depthDesc.DepthEnable = true;
-	depthDesc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ALL;
-	m_pD3DDevice->CreateDepthStencilState(&depthDesc, &depthStencilState);
-	m_pDeviceContext->OMSetDepthStencilState(depthStencilState, 0);
-	D3D11_RASTERIZER_DESC rasterizerDesc;
-	ID3D11RasterizerState* rasterizerState;
-	ZeroMemory(&rasterizerDesc, sizeof(D3D11_RASTERIZER_DESC));
-	rasterizerDesc.FillMode = D3D11_FILL_SOLID;
-	rasterizerDesc.CullMode = D3D11_CULL_FRONT;
-	m_pD3DDevice->CreateRasterizerState(&rasterizerDesc, &rasterizerState);
-	m_pDeviceContext->RSSetState(rasterizerState);
-	ID3D11BlendState* blendState;
-	D3D11_BLEND_DESC blendDesc;
-	blendDesc.AlphaToCoverageEnable = false;
-	blendDesc.IndependentBlendEnable = false;
-	blendDesc.RenderTarget[0].BlendEnable = true;
-	blendDesc.RenderTarget[0].SrcBlend = D3D11_BLEND_SRC_COLOR;
-	blendDesc.RenderTarget[0].DestBlend = D3D11_BLEND_DEST_COLOR;
-	blendDesc.RenderTarget[0].BlendOp = D3D11_BLEND_OP_ADD;
-	blendDesc.RenderTarget[0].DestBlendAlpha = D3D11_BLEND_INV_SRC_ALPHA;
-	blendDesc.RenderTarget[0].SrcBlendAlpha = D3D11_BLEND_SRC_ALPHA;
-	blendDesc.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP_ADD;
-	blendDesc.RenderTarget[0].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;
-	m_pD3DDevice->CreateBlendState(&blendDesc, &blendState);
-	m_pDeviceContext->OMSetBlendState(blendState, NULL, 0);
 	// ビューポート設定
 	D3D11_VIEWPORT vp;
 	vp.TopLeftX = 0;
@@ -172,6 +142,12 @@ void CEngine::InitD3D(HINSTANCE& hInst)
 	{
 		m_mainRenderTarget[i].Create(m_frameBufferWidth, m_frameBufferHeight);
 	}
+	m_alphaBlend.Init(m_pD3DDevice);
+	m_depthState.Init(m_pD3DDevice);
+	m_rasterizerState.Init(m_pD3DDevice);
+	m_alphaBlend.SetBlendState(m_pDeviceContext, enAlphaBlendState3D);
+	m_rasterizerState.SetRasterizerState(m_pDeviceContext, enRasterizerState3D);
+	m_depthState.SetDepthStencilState(m_pDeviceContext, enDepthStencilState3D);
 	m_deferred.Init();
 	m_postEffect.Init(m_pSwapChain);
 }

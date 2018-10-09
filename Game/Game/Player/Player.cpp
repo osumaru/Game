@@ -41,17 +41,18 @@ void CPlayer::Init(CVector3 position)
 	//アニメーションの初期化
 	{
 		wchar_t* animClip[enPlayerNum] = {
-											{ L"Assets/modelData/PlayerStand.tka"},			//待機アニメーション	
-											{ L"Assets/modelData/PlayerWalkStay.tka" },		//歩行アニメーション
-											{ L"Assets/modelData/PlayerDash60fps.tka" },	//走りアニメーション
-											{ L"Assets/modelData/PlayerJump3.tka" },		//走りジャンプアニメーション
-											{ L"Assets/modelData/PlayerJump.tka" },			//ジャンプアニメーション
-											{ L"Assets/modelData/PlayerAttack.tka" },		//攻撃アニメーション
+											{ L"Assets/modelData/PlayerStand.tka"},				//待機アニメーション	
+											{ L"Assets/modelData/PlayerWalkStay.tka" },			//歩行アニメーション
+											{ L"Assets/modelData/PlayerDash60fps.tka" },		//走りアニメーション
+											{ L"Assets/modelData/PlayerJump3.tka" },			//走りジャンプアニメーション
+											{ L"Assets/modelData/PlayerJump.tka" },				//ジャンプアニメーション
+											{ L"Assets/modelData/PlayerCombo3.tka" },			//攻撃アニメーション
 											{ L"Assets/modelData/PlayerThrustAttack.tka" },		//攻撃アニメーション
-											{ L"Assets/modelData/PlayerDamage.tka" },		//ダメージアニメーション
+											{ L"Assets/modelData/PlayerDamage.tka" },			//ダメージアニメーション
 											{ L"Assets/modelData/PlayerKaihiStay.tka" }	,		//回避アクション
-											{ L"Assets/modelData/PlayerDeath.tka" },		//死亡アニメーション
-											{ L"Assets/modelData/PlayerArrowAttack.tka" },	//弓の攻撃アニメーション
+											{ L"Assets/modelData/PlayerDeath.tka" },			//死亡アニメーション
+
+											{ L"Assets/modelData/PlayerArrowAttack.tka" },		//弓の攻撃アニメーション
 											{ L"Assets/modelData/PlayerLeageSwordAttack.tka" },	//大剣の攻撃アニメーション
 											{ L"Assets/modelData/PlayerTwinSwordAttack.tka" }	//二刀流の攻撃アニメーション
 		};

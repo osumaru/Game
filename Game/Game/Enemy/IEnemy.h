@@ -161,15 +161,27 @@ public:
 	}
 
 	//ダメージを受けたか
-	bool IsDamage()const
+	bool IsDamage() const
 	{
 		return m_isDamage;
 	}
 
-	//ダメージを受けたかのフラグを設定
+	//ダメージを受けたらフラグを設定する
 	void SetIsDamage(bool isDamage)
 	{
 		m_isDamage = isDamage;
+	}
+
+	//ワイヤーが当たったか
+	bool IsWireHit() const
+	{
+		return m_isWireHit;
+	}
+
+	//ワイヤーが当たったらフラグを設定する
+	void SetIsWireHit(bool isWireHit)
+	{
+		m_isWireHit = isWireHit;
 	}
 
 protected:
@@ -188,5 +200,6 @@ protected:
 	int						m_animNumOld = 0;		//1つ前のアニメーション番号
 	bool					m_isAttackHit = false;	//攻撃が当たったか
 	bool					m_isFind = false;		//プレイヤーを発見したか
-	bool					m_isDamage = false;		//ダメージを受けたかの判定
+	bool					m_isDamage = false;		//ダメージを受けたか
+	bool					m_isWireHit = false;	//ワイヤーが当たったか
 };

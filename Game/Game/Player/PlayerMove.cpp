@@ -50,7 +50,10 @@ void CPlayerMove::Update()
 
 		m_PlayerMoveSpeed -=  m_PlayerMoveSpeed * GameTime().GetDeltaFrameTime();
 	}
+	else if (GetPlayer().GetPlayerStateMachine().GetState() == CPlayerState::enPlayerWireMove)
+	{
 
+	}
 	//ˆÚ“®‚Ì“ü—Í‚ª‚ ‚é‚©‚Ì”»’è
 	else if (Pad().GetLeftStickX() != 0 || Pad().GetLeftStickY() != 0)
 	{

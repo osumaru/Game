@@ -1,6 +1,6 @@
 #pragma once
 #include "IPlayerState.h"
-class CPlayerAvoidance: public IPlayerSate
+class CPlayerAvoidance: public IPlayerState
 {
 public:
 	CPlayerAvoidance();

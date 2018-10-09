@@ -66,6 +66,8 @@ void CPlayerStateMachine::ChangeState(CPlayerState::EnPlayerState nextState)
 	case CPlayerState::enPlayerDied:
 		m_currentState = &m_playerDied;		//死亡アニメーションに遷移
 		break;
+	case CPlayerState::enPlayerWireMove:
+		m_currentState = &m_playerWireMove;	//ワイヤーアニメーションに遷移
 	}
 
 	//変更したステートをゲームオブジェクトに追加

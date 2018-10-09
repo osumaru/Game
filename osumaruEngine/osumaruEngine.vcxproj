@@ -176,6 +176,8 @@
     <ClCompile Include="Graphics\AnimationEvent.cpp" />
     <ClCompile Include="Graphics\ConstantBuffer.cpp" />
     <ClCompile Include="Graphics\Light.cpp" />
+    <ClCompile Include="Graphics\particle\Particle.cpp" />
+    <ClCompile Include="Graphics\particle\ParticleEmitter.cpp" />
     <ClCompile Include="Graphics\PostEffect\Deferred.cpp" />
     <ClCompile Include="Graphics\PostEffect\PostEffect.cpp" />
     <ClCompile Include="Graphics\Primitive.cpp" />
@@ -186,6 +188,9 @@
     <ClCompile Include="Graphics\SkinModelEffect.cpp" />
     <ClCompile Include="Graphics\SkinModelEffectFactory.cpp" />
     <ClCompile Include="Graphics\Sprite.cpp" />
+    <ClCompile Include="Graphics\State\AlphaBlendState.cpp" />
+    <ClCompile Include="Graphics\State\DepthStencilState.cpp" />
+    <ClCompile Include="Graphics\State\RasterizerState.cpp" />
     <ClCompile Include="Graphics\Texture.cpp" />
     <ClCompile Include="Input\Pad.cpp" />
     <ClCompile Include="Math\Math.cpp" />
@@ -222,6 +227,8 @@
     <ClInclude Include="Graphics\AnimationEvent.h" />
     <ClInclude Include="Graphics\ConstantBuffer.h" />
     <ClInclude Include="Graphics\Light.h" />
+    <ClInclude Include="Graphics\particle\Particle.h" />
+    <ClInclude Include="Graphics\particle\ParticleEmitter.h" />
     <ClInclude Include="Graphics\PostEffect\Deferred.h" />
     <ClInclude Include="Graphics\PostEffect\PostEffect.h" />
     <ClInclude Include="Graphics\Primitive.h" />
@@ -232,6 +239,9 @@
     <ClInclude Include="Graphics\SkinModelEffect.h" />
     <ClInclude Include="Graphics\SkinModelEffectFactory.h" />
     <ClInclude Include="Graphics\Sprite.h" />
+    <ClInclude Include="Graphics\State\AlphaBlendState.h" />
+    <ClInclude Include="Graphics\State\DepthStencilState.h" />
+    <ClInclude Include="Graphics\State\RasterizerState.h" />
     <ClInclude Include="Graphics\Texture.h" />
     <ClInclude Include="Input\Pad.h" />
     <ClInclude Include="Math\Math.h" />

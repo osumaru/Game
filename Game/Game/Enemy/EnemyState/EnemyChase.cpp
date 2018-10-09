@@ -13,6 +13,11 @@ bool CEnemyChase::Start()
 
 void CEnemyChase::Update()
 {
+	if (m_enemy->IsWireHit()) {
+		//ワイヤーが当たっていたら何もしない
+		return;
+	}
+
 	//移動速度を取得
 	CVector3 moveSpeed = m_enemy->GetMoveSpeed();
 	//プレイヤーを追いかける

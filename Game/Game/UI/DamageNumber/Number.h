@@ -22,11 +22,15 @@ public:
 	//int  num  数値
 	void SetNumber(int num);
 
+	//座標を設定
+	//pos	座標
 	void SetPosition(CVector2 pos)
 	{
 		m_number[m_num].SetPosition(pos);
 	}
 
+	//Z値を設定
+	//depth		Z値
 	void SetDepthValue(float depth)
 	{
 		m_number[m_num].SetDepthValue(depth);
