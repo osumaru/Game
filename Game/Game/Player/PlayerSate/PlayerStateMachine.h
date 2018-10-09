@@ -5,6 +5,7 @@
 #include"PlayerWalk.h"
 #include"PlayerRun.h"
 #include "PlayerAttack.h"
+#include "PlayerArrowAttack.h"
 #include "PlayerDamage.h"
 #include "PlayerDied.h"
 #include "PlayerJump.h"
@@ -58,6 +59,7 @@ private:
 	CPlayerDied						m_playerDied;			//死亡モーション
 	CPlayerJump						m_playerJump;			//ジャンプモーション
 	CPlayerAvoidance				m_playerAvoidance;		//回避モーション
+	CPlayerArrowAttack				m_playerArrowAtack;		//弓での攻撃モーション
 	CPlayerWireMove					m_playerWireMove;		//ワイヤーモーション
 };
 

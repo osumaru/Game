@@ -25,6 +25,7 @@ void CGameCamera::Update()
 {
 	float rStick_x = Pad().GetRightStickX() * 2 * GameTime().GetDeltaFrameTime();
 	float rStick_y = Pad().GetRightStickY() * GameTime().GetDeltaFrameTime();
+
 	m_cameraVec = camera.GetPosition() - camera.GetTarget();
 	if (fabsf(rStick_x) > 0.0f) {
 		//Y軸周りの回転
@@ -46,7 +47,7 @@ void CGameCamera::Update()
 		CVector3 cameraDir = m_cameraVec;
 		cameraDir.Normalize();
 
-		if (cameraDir.y < -0.9f) {
+		if (cameraDir.y < -0.6f) {
 			m_cameraVec = cameraVecOld;
 		}
 		else if (cameraDir.y > 0.9f) {
@@ -64,18 +65,21 @@ void CGameCamera::Update()
 		float toCameraLen = toCameraXZ.Length();
 		toCameraXZ.Normalize();
 
-		CVector3 target = GetPlayer().GetPosition();
+		CVector3 target = GetPlayer().GetTargetPos();
 		target.y += 1.5f;
 		CVector3	toNewCameraPos = camera.GetPosition() - target;
+
+		
+		
 		toNewCameraPos.y = 0.0f;
 		toNewCameraPos.Normalize();
-
 		float weight = 0.3f;  //このウェイトの値は0.0～1.0の値をとる。1.0に近づくほど追尾が強くなる。
 		toNewCameraPos = toNewCameraPos * weight + toCameraXZ * (1.0f - weight);
 		toNewCameraPos.Normalize();
 		toNewCameraPos *= toCameraLen;
 		toNewCameraPos.y = height;              //高さを戻す。
 		CVector3 pos = target + toNewCameraPos;  //これで新しい視点が決定。
+		
 
 		camera.SetPosition(pos);
 		camera.SetTarget(target);

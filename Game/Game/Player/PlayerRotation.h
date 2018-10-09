@@ -7,8 +7,10 @@ public:
 	~CPlayerRotation();
 	bool Start();
 	void Update();
+	void WeaponRot();
 
 private:
+	
 
 };
 

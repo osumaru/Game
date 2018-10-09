@@ -13,15 +13,31 @@ StaticMapObject::~StaticMapObject()
 
 }
 
-void StaticMapObject::Init(const CVector3& position, const CQuaternion& rotation, const wchar_t* modelName, CAnimation* anim)
+void StaticMapObject::Init(const CVector3& position, const CQuaternion& rotation, const wchar_t* modelName, const bool collider, CAnimation* anim)
 {
-	MapChip::Init(position, rotation, modelName);
+	MapChip::Init(position, rotation, modelName,collider);
 
-	//メッシュコライダーからAABBを作成
-	m_boxCollider.reset(new CMeshCollider);
-	m_boxCollider->CreateCollider(&m_skinModel);
 	SRigidBodyInfo rInfo;
-	rInfo.collider = m_boxCollider.get();
+	
+	//メッシュコライダーからAABBを作成
+	if (!collider)
+	{
+		m_meshCollider.reset(new CMeshCollider);
+		m_meshCollider->CreateCollider(&m_skinModel);
+		rInfo.collider = m_meshCollider.get();
+	}
+	else
+	{
+		CMeshCollider mesh;
+		mesh.CreateCollider(&m_skinModel);
+		CVector3 boxsize = (mesh.GetAabbMax() - mesh.GetAabbMin()) / 2;
+		m_boxCollider.reset(new CBoxCollider);
+		m_boxCollider->Create({ boxsize.x,boxsize.y,boxsize.z });
+		rInfo.collider = m_boxCollider.get();
+	}
+
+
+	
 	rInfo.mass = 0.0f;
 	rInfo.pos = m_position;
 	rInfo.rot = m_rotation;

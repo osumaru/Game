@@ -17,7 +17,7 @@ MapChip::~MapChip()
 {
 }
 
-void MapChip::Init(const CVector3& position, const CQuaternion& rotation, const wchar_t* modelName, CAnimation* anim)
+void MapChip::Init(const CVector3& position, const CQuaternion& rotation, const wchar_t* modelName, const bool collider, CAnimation* anim)
 {
 	//ÉâÉCÉgÇÃê›íË
 	//float ambientLightColor = 0.4f;

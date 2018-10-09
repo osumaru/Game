@@ -38,7 +38,15 @@ void CPlayerStand::Update()
 	//UŒ‚‚ğ‚µ‚½‚Ìˆ—
 	else if (Pad().IsTriggerButton(enButtonX))
 	{
-		GetPlayer().GetPlayerStateMachine().ChangeState(CPlayerState::enPlayerAttack);
+		if (GetPlayer().GetPlayerStateMachine().GetAttackSate() == CPlayerState::enPlayerArrowAttack)
+		{
+			GetPlayer().GetPlayerStateMachine().ChangeState(CPlayerState::enPlayerArrowAttack);
+		}
+		else
+		{
+			GetPlayer().GetPlayerStateMachine().ChangeState(CPlayerState::enPlayerAttack);
+		}
+		
 	}
 	
 	else if (Pad().IsTriggerButton(enButtonA))

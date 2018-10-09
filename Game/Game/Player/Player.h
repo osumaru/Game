@@ -33,9 +33,10 @@ public:
 		enPlayerRunJump,	//走りジャンプ
 		enPlayerJump,		//ジャンプアニメーション
 		enPlayerAttack,		//攻撃アニメーション
-		enPlayerAttack2,
+		enPlayerAttack2,	//連撃アニメーション
 		enPlayerDamage,		//ダメージアニメーション
 		enPlayerAvoidance,	//回避アニメーション
+
 		enPlayerDete,		//死亡アニメーション
 		enPlayerArroAttack,	//弓のアニメーション
 		enPlayerLongSwordAttack,//大剣の攻撃アニメーション
@@ -134,13 +135,6 @@ public:
 		m_animation.Play(animNumber, num);
 		m_State = (EnPlayerAnimeState)animNumber;
 	}
-
-	//アニメーションの取得
-	const CAnimation& GetAnimetion()
-	{
-		return m_animation;
-	}
-
 	//プレイヤーのステータスを取得
 	const SplayerStatus& GetStatus()
 	{
@@ -278,16 +272,35 @@ public:
 	{
 		return m_isWireMove;
 	}
+
+	const CSkinModel& GetWeaponskin(int num)
+	{
+		return m_weaponskin[num];
+	}
+	 
+	const CVector3 GetTargetPos()
+	{
+		return m_cameraTargetPos;
+	}
+
+	void SetTargetPos(const CVector3 settar)
+	{
+		m_cameraTargetPos = settar;
+	}
+
 private:
 	
 
 	CVector3				m_position;										//座標
 	CVector3				m_weaponPosition;								//武器の座標
 	CVector3				m_moveSpeed = CVector3::Zero;					//移動速度
+	CVector3				m_weaponScale = CVector3::One;
+	CVector3				m_cameraTargetPos = CVector3::Zero;
+
 	CQuaternion				m_rotation = CQuaternion::Identity;				//回転
 	CQuaternion				m_weaponRotation = CQuaternion::Identity;		//武器の回転
 	CSkinModel				m_skinmodel;									//スキンモデル
-	CSkinModel				m_Weaponskin[4];								//武器のスキンモデル
+	CSkinModel				m_weaponskin[4];								//武器のスキンモデル
 	CCharacterController	m_characterController;							//キャラクターコントローラー
 	CLight					m_light;										//ライト
 	CBoxCollider			m_weaponBoxCollider;								//武器用のボックスコライダー
@@ -312,14 +325,14 @@ private:
 	bool					m_intervalOn = false;
 	float					m_intervalTime = 0.0f;
 
-	CPlayerStateMachine		m_PlayerStateMachine;							//プレイヤーのアニメーションの遷移を行うステートマシーン
-	CPlayerRotation			m_PlayerRotation;								//プレイヤーの回転を扱うクラス
-	CPlayerMove				m_PlayerMove;									//プレイヤーの動きを扱うクラス
-	CPlayerArrow			m_playerArrow;
+	CPlayerStateMachine			m_PlayerStateMachine;							//プレイヤーのアニメーションの遷移を行うステートマシーン
+	CPlayerRotation				m_PlayerRotation;								//プレイヤーの回転を扱うクラス
+	CPlayerMove					m_PlayerMove;									//プレイヤーの動きを扱うクラス
+	std::list<CPlayerArrow*>	m_arrowList;									//弓矢のリスト
 
-	bool					m_isWireMove = false;
-	CWireCollisionSolver	m_wireCollisionSolver;
-	CVector3				m_wirePosition;
+	bool					m_isWireMove = false;					//ワイヤー移動できるか
+	CWireCollisionSolver	m_wireCollisionSolver;					//ワイヤー移動のコリジョン処理クラス
+	CVector3				m_wirePosition;							//ワイヤー移動先の座標
 };
 
 static CPlayer& GetPlayer()

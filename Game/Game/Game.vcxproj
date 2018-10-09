@@ -181,6 +181,7 @@
     <ClCompile Include="Map\Map.cpp" />
     <ClCompile Include="Map\MapChip\MapChip.cpp" />
     <ClCompile Include="Map\MapChip\StaticMapObject.cpp" />
+    <ClCompile Include="Player\PlayerSate\PlayerArrowAttack.cpp" />
     <ClCompile Include="Player\PlayerArrow.cpp" />
     <ClCompile Include="Player\PlayerMove.cpp" />
     <ClCompile Include="Player\PlayerSate\PlayerAvoidance.cpp" />
@@ -205,6 +206,7 @@
     </ClCompile>
     <ClCompile Include="UI\DamageNumber\DamageNumber.cpp" />
     <ClCompile Include="UI\DamageNumber\Number.cpp" />
+    <ClCompile Include="UI\LevelUp\LevelUp.cpp" />
     <ClCompile Include="UI\Menu\Menu.cpp" />
     <ClCompile Include="UI\MiniMap\MiniMap.cpp" />
     <ClCompile Include="UI\PlayerHp\PlayerHp.cpp" />
@@ -236,6 +238,7 @@
     <ClInclude Include="Map\Map.h" />
     <ClInclude Include="Map\MapChip\MapChip.h" />
     <ClInclude Include="Map\MapChip\StaticMapObject.h" />
+    <ClInclude Include="Player\PlayerSate\PlayerArrowAttack.h" />
     <ClInclude Include="Player\PlayerArrow.h" />
     <ClInclude Include="Player\PlayerMove.h" />
     <ClInclude Include="Player\PlayerSate\PlayerAvoidance.h" />
@@ -258,6 +261,7 @@
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="UI\DamageNumber\DamageNumber.h" />
     <ClInclude Include="UI\DamageNumber\Number.h" />
+    <ClInclude Include="UI\LevelUp\LevelUp.h" />
     <ClInclude Include="UI\Menu\Menu.h" />
     <ClInclude Include="UI\MiniMap\MiniMap.h" />
     <ClInclude Include="UI\PlayerHp\PlayerHp.h" />
@@ -290,6 +294,7 @@
     <MeshContentTask Include="Assets\modelData\testChamferBox.FBX" />
     <MeshContentTask Include="Assets\modelData\testGround.FBX" />
     <MeshContentTask Include="Assets\modelData\testRectangle.FBX" />
+    <MeshContentTask Include="Assets\modelData\Toge.FBX" />
     <MeshContentTask Include="Assets\modelData\TownHouse.fbx" />
     <MeshContentTask Include="Assets\modelData\TownHouse1.fbx" />
     <MeshContentTask Include="Assets\modelData\TwinSword.fbx" />

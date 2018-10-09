@@ -21,7 +21,7 @@ bool CPlayerDamage::Start()
 void CPlayerDamage::Update()
 {
 
-	if (!GetPlayer().GetAnimetion().IsPlay())
+	if (!GetPlayer().GetAnimation().IsPlay())
 	{
 
 		GetPlayer().GetPlayerStateMachine().ChangeState(CPlayerState::enPlayerStand);

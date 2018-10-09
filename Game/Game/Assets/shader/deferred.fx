@@ -22,6 +22,7 @@ Texture2D<float4> colorTexture : register(t0);
 Texture2D<float4> normalMapTexture : register(t1);
 Texture2D<float4> normalTexture : register(t2);
 Texture2D<float4> tangentTexture : register(t3);
+Texture2D<float4> depthTexture : register(t4);
 sampler Sampler : register(s0);
 
 VS_OUTPUT VSMain(VS_INPUT In)

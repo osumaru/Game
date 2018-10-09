@@ -36,7 +36,7 @@ void CPlayerAttack::Update()
 	}
 
 	//攻撃アニメーションが終わった時の処理
-	if (!GetPlayer().GetAnimetion().IsPlay())
+	if (!GetPlayer().GetAnimation().IsPlay())
 	{
 		//攻撃モーション中はダメージモーションをさせない
 		if (m_conAtaack)

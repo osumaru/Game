@@ -12,10 +12,10 @@ void CPlayer::Init(CVector3 position)
 	m_skinmodel.Load(L"Assets/modelData/Player.cmo", &m_animation);
 	m_skinmodel.LoadNormalmap(L"Assets/modelData/Player_normal.png");
 	//武器のモデルのロード
-	m_Weaponskin[0].Load(L"Assets/modelData/Sword.cmo", NULL);
-	m_Weaponskin[1].Load(L"Assets/modelData/LargeSword.cmo", NULL);
-	m_Weaponskin[2].Load(L"Assets/modelData/LongBow.cmo", NULL);
-	m_Weaponskin[3].Load(L"Assets/modelData/TwinSword.cmo", NULL);
+	m_weaponskin[0].Load(L"Assets/modelData/Sword.cmo", NULL);
+	m_weaponskin[1].Load(L"Assets/modelData/LargeSword.cmo", NULL);
+	m_weaponskin[2].Load(L"Assets/modelData/LongBow.cmo", NULL);
+	m_weaponskin[3].Load(L"Assets/modelData/TwinSword.cmo", NULL);
 
 	m_position = position;
 	m_characterController.Init(0.3f, 1.0f,m_position);
@@ -43,17 +43,18 @@ void CPlayer::Init(CVector3 position)
 	//アニメーションの初期化
 	{
 		wchar_t* animClip[enPlayerNum] = {
-											{ L"Assets/modelData/PlayerStand.tka"},			//待機アニメーション	
-											{ L"Assets/modelData/PlayerWalkStay.tka" },		//歩行アニメーション
-											{ L"Assets/modelData/PlayerDash60fps.tka" },	//走りアニメーション
-											{ L"Assets/modelData/PlayerJump3.tka" },		//走りジャンプアニメーション
-											{ L"Assets/modelData/PlayerJump.tka" },			//ジャンプアニメーション
-											{ L"Assets/modelData/PlayerAttack.tka" },		//攻撃アニメーション
-											{ L"Assets/modelData/PlayerThrustAttack.tka" },		//攻撃アニメーション
-											{ L"Assets/modelData/PlayerDamage.tka" },		//ダメージアニメーション
+											{ L"Assets/modelData/PlayerStand.tka"},				//待機アニメーション	
+											{ L"Assets/modelData/PlayerWalkStay.tka" },			//歩行アニメーション
+											{ L"Assets/modelData/PlayerDash60fps.tka" },		//走りアニメーション
+											{ L"Assets/modelData/PlayerJump3.tka" },			//走りジャンプアニメーション
+											{ L"Assets/modelData/PlayerJump.tka" },				//ジャンプアニメーション
+											{ L"Assets/modelData/PlayerCombo3.tka" },			//攻撃アニメーション
+											{ L"Assets/modelData/PlayerThrustAttack.tka" },		//連撃アニメーション
+											{ L"Assets/modelData/PlayerDamage.tka" },			//ダメージアニメーション
 											{ L"Assets/modelData/PlayerKaihiStay.tka" }	,		//回避アクション
-											{ L"Assets/modelData/PlayerDeath.tka" },		//死亡アニメーション
-											{ L"Assets/modelData/PlayerArrowAttack.tka" },	//弓の攻撃アニメーション
+											{ L"Assets/modelData/PlayerDeath.tka" },			//死亡アニメーション
+
+											{ L"Assets/modelData/PlayerArrowAttack.tka" },		//弓の攻撃アニメーション
 											{ L"Assets/modelData/PlayerLeageSwordAttack.tka" },	//大剣の攻撃アニメーション
 											{ L"Assets/modelData/PlayerTwinSwordAttack.tka" }	//二刀流の攻撃アニメーション
 		};
@@ -83,11 +84,9 @@ void CPlayer::Init(CVector3 position)
 	m_PlayerStateMachine.Start();
 	m_PlayerMove.Start();
 	m_PlayerRotation.Start();
-	m_playerArrow.Start();
 	Add(&m_PlayerStateMachine,0);
 	Add(&m_PlayerMove, 0);
 	Add(&m_PlayerRotation, 0);
-	Add(&m_playerArrow, 0);
 	Add(this, 1);
 }
 
@@ -114,8 +113,28 @@ void CPlayer::Update()
 
 	if (Pad().IsTriggerButton(enButtonB))
 	{
-		ExpUP(100);	
+		ExpUP(100);
+		
 
+	}
+	if (Pad().IsTriggerButton(enButtonX))
+	{
+		CPlayerArrow*	Arrow = New<CPlayerArrow>(0);
+		Arrow->Start();
+		m_arrowList.push_back(Arrow);
+	}
+
+	std::list<CPlayerArrow*>::iterator it;
+	it = m_arrowList.begin();
+	while (it != m_arrowList.end()) {
+		if ((*it)->IsDelete()) {
+			//死亡していたらリストから削除
+			CPlayerArrow* enemy = *it;
+			it = m_arrowList.erase(it);
+		}
+		else {
+			it++;
+		}
 	}
 
 	m_isWireMove = false;
@@ -153,10 +172,9 @@ void CPlayer::Update()
 	}
 	
 	//スキンモデルの更新
-	m_Weaponskin[m_weaponState].Update(m_weaponPosition, m_weaponRotation, { 1.0f, 1.0f, 1.0f }, true);
 	m_skinmodel.Update(m_position, m_rotation, { 1.0f, 1.0f, 1.0f }, true);
-
-
+	m_weaponskin[m_weaponState].Update(m_weaponPosition, m_weaponRotation, m_weaponScale, true);
+	m_cameraTargetPos = m_position;
 }
 
 //描画処理
@@ -166,13 +184,13 @@ void CPlayer::Draw()
 	
 	if (m_isAttack)
 	{
-		CVector3 weponUpVec = { m_Weaponskin[m_weaponState].GetWorldMatrix().m[2][0],m_Weaponskin[m_weaponState].GetWorldMatrix().m[2][1],m_Weaponskin[m_weaponState].GetWorldMatrix().m[2][2] };
+		CVector3 weponUpVec = { m_weaponskin[m_weaponState].GetWorldMatrix().m[2][0],m_weaponskin[m_weaponState].GetWorldMatrix().m[2][1],m_weaponskin[m_weaponState].GetWorldMatrix().m[2][2] };
 		weponUpVec *= 0.7f;
 		m_weaponPosition.Add(weponUpVec);
 		m_weaponRigitBody.SetPosition(m_weaponPosition);
 
 	}
-	m_Weaponskin[m_weaponState].Draw(GetGameCamera().GetViewMatrix(), GetGameCamera().GetProjectionMatrix());
+	m_weaponskin[m_weaponState].Draw(GetGameCamera().GetViewMatrix(), GetGameCamera().GetProjectionMatrix());
 	m_skinmodel.Draw(GetGameCamera().GetViewMatrix(), GetGameCamera().GetProjectionMatrix());
 	
 }
@@ -239,7 +257,7 @@ void  CPlayer::WeaponChange()
 		break;
 		//弓の時の攻撃モーションの設定
 	case CWeaponSelect::enBow:
-		GetPlayerStateMachine().SetAttackState(CPlayerState::enPlayerArroAttack);
+		GetPlayerStateMachine().SetAttackState(CPlayerState::enPlayerArrowAttack);
 		break;
 		//大剣の時の攻撃モーションの設定
 	case CWeaponSelect::enLargeSword:

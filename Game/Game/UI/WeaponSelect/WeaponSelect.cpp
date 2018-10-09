@@ -102,8 +102,9 @@ void CWeaponSelect::ChangeWeapon()
 		weaponNumber = enTwinSword;		
 	}
 
+	//邪魔なので止めてます
 	//RBボタンかLBボタンで武器を変更する
-	if (Pad().IsTriggerButton(enButtonRB)) {
+	/*if (Pad().IsTriggerButton(enButtonRB)) {
 		weaponNumber++;
 		if (weaponNumber > enTwinSword) {
 			weaponNumber = enSword;
@@ -115,6 +116,6 @@ void CWeaponSelect::ChangeWeapon()
 			weaponNumber = enTwinSword;
 		}
 	}
-
+	*/
 	m_selectFlag[weaponNumber] = true;
 }
