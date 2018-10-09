@@ -30,7 +30,15 @@ void CPlayerRun::Update()
 	//‘–‚Á‚Ä‚¢‚é‚Æ‚«‚ÉUŒ‚‚µ‚½‚Ìˆ—
 	else if (Pad().IsTriggerButton(enButtonX))
 	{
-		GetPlayer().GetPlayerStateMachine().ChangeState(CPlayerState::enPlayerAttack);
+		if(GetPlayer().GetPlayerStateMachine().GetAttackSate() == CPlayerState::enPlayerArrowAttack)
+		{
+			GetPlayer().GetPlayerStateMachine().ChangeState(CPlayerState::enPlayerArrowAttack);
+		}
+		else
+		{
+
+			GetPlayer().GetPlayerStateMachine().ChangeState(CPlayerState::enPlayerAttack);
+		}
 	}
 	//‘–‚è’†‚É‰ñ”ğ‚µ‚½‚Ìˆ—
 	else if (Pad().IsTriggerButton(enButtonRightTrigger))

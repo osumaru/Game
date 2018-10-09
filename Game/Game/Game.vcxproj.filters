@@ -204,6 +204,9 @@
     <ClCompile Include="Player\PlayerArrow.cpp">
       <Filter>ソース ファイル\Player</Filter>
     </ClCompile>
+    <ClCompile Include="Player\PlayerSate\PlayerArrowAttack.cpp">
+      <Filter>ソース ファイル\Player\PlayerSate</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -352,6 +355,9 @@
     </ClInclude>
     <ClInclude Include="Player\PlayerArrow.h">
       <Filter>ソース ファイル\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Player\PlayerSate\PlayerArrowAttack.h">
+      <Filter>ソース ファイル\Player\PlayerSate</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

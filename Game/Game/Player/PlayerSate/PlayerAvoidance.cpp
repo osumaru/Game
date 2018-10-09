@@ -20,7 +20,7 @@ bool CPlayerAvoidance::Start()
 
 void CPlayerAvoidance::Update()
 {
-	if (!GetPlayer().GetAnimetion().IsPlay())
+	if (!GetPlayer().GetAnimation().IsPlay())
 	{
 
 		GetPlayer().GetPlayerStateMachine().ChangeState(CPlayerState::enPlayerStand);

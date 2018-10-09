@@ -12,10 +12,10 @@ void CPlayer::Init(CVector3 position)
 	m_skinmodel.Load(L"Assets/modelData/Player.cmo", &m_animation);
 	m_skinmodel.LoadNormalmap(L"Assets/modelData/Player_normal.png");
 	//武器のモデルのロード
-	m_Weaponskin[0].Load(L"Assets/modelData/Sword.cmo", NULL);
-	m_Weaponskin[1].Load(L"Assets/modelData/LargeSword.cmo", NULL);
-	m_Weaponskin[2].Load(L"Assets/modelData/LongBow.cmo", NULL);
-	m_Weaponskin[3].Load(L"Assets/modelData/TwinSword.cmo", NULL);
+	m_weaponskin[0].Load(L"Assets/modelData/Sword.cmo", NULL);
+	m_weaponskin[1].Load(L"Assets/modelData/LargeSword.cmo", NULL);
+	m_weaponskin[2].Load(L"Assets/modelData/LongBow.cmo", NULL);
+	m_weaponskin[3].Load(L"Assets/modelData/TwinSword.cmo", NULL);
 
 	m_position = position;
 	m_characterController.Init(0.3f, 1.0f,m_position);
@@ -117,10 +117,9 @@ void CPlayer::Update()
 	}
 	
 	//スキンモデルの更新
-	m_Weaponskin[m_weaponState].Update(m_weaponPosition, m_weaponRotation, { 1.0f, 1.0f, 1.0f }, true);
 	m_skinmodel.Update(m_position, m_rotation, { 1.0f, 1.0f, 1.0f }, true);
-
-
+	m_weaponskin[m_weaponState].Update(m_weaponPosition, m_weaponRotation, m_weaponScale, true);
+	m_cameraTargetPos = m_position;
 }
 
 //描画処理
@@ -130,13 +129,13 @@ void CPlayer::Draw()
 	
 	if (m_isAttack)
 	{
-		CVector3 weponUpVec = { m_Weaponskin[m_weaponState].GetWorldMatrix().m[2][0],m_Weaponskin[m_weaponState].GetWorldMatrix().m[2][1],m_Weaponskin[m_weaponState].GetWorldMatrix().m[2][2] };
+		CVector3 weponUpVec = { m_weaponskin[m_weaponState].GetWorldMatrix().m[2][0],m_weaponskin[m_weaponState].GetWorldMatrix().m[2][1],m_weaponskin[m_weaponState].GetWorldMatrix().m[2][2] };
 		weponUpVec *= 0.7f;
 		m_weaponPosition.Add(weponUpVec);
 		m_weaponRigitBody.SetPosition(m_weaponPosition);
 
 	}
-	m_Weaponskin[m_weaponState].Draw(GetGameCamera().GetViewMatrix(), GetGameCamera().GetProjectionMatrix());
+	m_weaponskin[m_weaponState].Draw(GetGameCamera().GetViewMatrix(), GetGameCamera().GetProjectionMatrix());
 	m_skinmodel.Draw(GetGameCamera().GetViewMatrix(), GetGameCamera().GetProjectionMatrix());
 	
 }
@@ -203,7 +202,7 @@ void  CPlayer::WeaponChange()
 		break;
 		//弓の時の攻撃モーションの設定
 	case CWeaponSelect::enBow:
-		GetPlayerStateMachine().SetAttackState(CPlayerState::enPlayerArroAttack);
+		GetPlayerStateMachine().SetAttackState(CPlayerState::enPlayerArrowAttack);
 		break;
 		//大剣の時の攻撃モーションの設定
 	case CWeaponSelect::enLargeSword:

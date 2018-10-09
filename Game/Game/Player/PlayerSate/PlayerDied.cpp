@@ -21,7 +21,7 @@ bool CPlayerDied::Start()
 void CPlayerDied::Update()
 {
 
-	if (!GetPlayer().GetAnimetion().IsPlay())
+	if (!GetPlayer().GetAnimation().IsPlay())
 	{
 		GetPlayer().SetIsDeid(true);
 

@@ -133,13 +133,6 @@ public:
 		m_animation.Play(animNumber, num);
 		m_State = (EnPlayerAnimeState)animNumber;
 	}
-
-	//アニメーションの取得
-	const CAnimation& GetAnimetion()
-	{
-		return m_animation;
-	}
-
 	//プレイヤーのステータスを取得
 	const SplayerStatus& GetStatus()
 	{
@@ -265,16 +258,34 @@ public:
 	{
 		m_intervalOn = set;
 	}
+	const CSkinModel& GetWeaponskin(int num)
+	{
+		return m_weaponskin[num];
+	}
+	 
+	const CVector3 GetTargetPos()
+	{
+		return m_cameraTargetPos;
+	}
+
+	void SetTargetPos(const CVector3 settar)
+	{
+		m_cameraTargetPos = settar;
+	}
+
 private:
 	
 
 	CVector3				m_position;										//座標
 	CVector3				m_weaponPosition;								//武器の座標
 	CVector3				m_moveSpeed = CVector3::Zero;					//移動速度
+	CVector3				m_weaponScale = CVector3::One;
+	CVector3				m_cameraTargetPos = CVector3::Zero;
+
 	CQuaternion				m_rotation = CQuaternion::Identity;				//回転
 	CQuaternion				m_weaponRotation = CQuaternion::Identity;		//武器の回転
 	CSkinModel				m_skinmodel;									//スキンモデル
-	CSkinModel				m_Weaponskin[4];								//武器のスキンモデル
+	CSkinModel				m_weaponskin[4];								//武器のスキンモデル
 	CCharacterController	m_characterController;							//キャラクターコントローラー
 	CLight					m_light;										//ライト
 	CBoxCollider			m_weaponBoxCollider;								//武器用のボックスコライダー
@@ -303,6 +314,7 @@ private:
 	CPlayerRotation			m_PlayerRotation;								//プレイヤーの回転を扱うクラス
 	CPlayerMove				m_PlayerMove;									//プレイヤーの動きを扱うクラス
 	CPlayerArrow			m_playerArrow;
+	std::list<CPlayerArrow*>	m_ArrowList;
 
 	
 	
