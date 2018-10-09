@@ -17,6 +17,8 @@ CPlayerArrow::~CPlayerArrow()
 bool CPlayerArrow::Start()
 {
 	m_arrowskin.Load(L"Assets/modelData/Arrow.cmo", NULL);
+	m_light.SetAmbientLight({ 0.0f,0.0f,1.0f ,1.0f });
+	m_arrowskin.SetLight(m_light);
 	m_scale = { 2.0f,2.0f,2.0f };
 	return true;
 }
@@ -24,7 +26,7 @@ bool CPlayerArrow::Start()
 void CPlayerArrow::Update()
 {
 	//if (GetPlayer().GetPlayerStateMachine().GetState() != CPlayerState::EnPlayerState::enPlayerArrowAttack) { return; }
-	if (GetPlayer().GetPlayerStateMachine().GetState() == CPlayerState::EnPlayerState::enPlayerArrowAttack/*Pad().IsPressButton(enButtonX) && !m_isMove*/)
+	if (GetPlayer().GetPlayerStateMachine().GetState() == CPlayerState::EnPlayerState::enPlayerArrowAttack && !m_isMove/*Pad().IsPressButton(enButtonX) && !m_isMove*/)
 	{
 		m_arrowPosition = GetPlayer().GetWeaponPosition();
 		CMatrix	mat = GetPlayer().GetPlayerSkin().GetWorldMatrix();
