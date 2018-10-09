@@ -4,6 +4,7 @@
 #include "PlayerRotation.h"
 #include "PlayerMove.h"
 #include "PlayerArrow.h"
+#include "WireCollisionSolver.h"
 
 struct SplayerStatus
 {
@@ -265,6 +266,18 @@ public:
 	{
 		m_intervalOn = set;
 	}
+
+	//ワイヤー移動する先の座標を取得
+	const CVector3& GetWirePosition()
+	{
+		return m_wirePosition;
+	}
+
+	//ワイヤー移動できるかを取得
+	bool IsWireMove()
+	{
+		return m_isWireMove;
+	}
 private:
 	
 
@@ -304,9 +317,9 @@ private:
 	CPlayerMove				m_PlayerMove;									//プレイヤーの動きを扱うクラス
 	CPlayerArrow			m_playerArrow;
 
-	
-	
-
+	bool					m_isWireMove = false;
+	CWireCollisionSolver	m_wireCollisionSolver;
+	CVector3				m_wirePosition;
 };
 
 static CPlayer& GetPlayer()

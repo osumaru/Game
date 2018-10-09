@@ -50,8 +50,9 @@ void CPlayerStand::Update()
 	{
 		GetPlayer().GetPlayerStateMachine().ChangeState(CPlayerState::enPlayerAvoidance);
 	}
-	else if (Pad().IsTriggerButton(enButtonY)) 
+	else if (GetPlayer().IsWireMove()) 
 	{
+		//ワイヤー移動できるなら遷移
 		GetPlayer().GetPlayerStateMachine().ChangeState(CPlayerState::enPlayerWireMove);
 	}
 	//移動の入力があるなら歩きアニメーションに遷移
