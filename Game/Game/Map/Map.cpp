@@ -89,14 +89,19 @@ void Map::Init(int stageNum)
 			enemyGroup->Init(mInfo.m_position);
 			enemyGroupList.push_back(enemyGroup);
 			break;
+		case enMapTagTerrain:
+			mapChip = New<StaticMapObject>(0);
+			m_collider = false;
+			break;
 		default:
 			mapChip = New<StaticMapObject>(0);
+			m_collider = true;
 			break;
 		}
 		if (mapChip != nullptr)
 		{
 			//マップチップを生成
-			mapChip->Init(mInfo.m_position, mInfo.m_rotation, mInfo.m_modelName);
+			mapChip->Init(mInfo.m_position, mInfo.m_rotation, mInfo.m_modelName,m_collider);
 			m_mapChip.push_back(mapChip);
 			//マップチップに自身のイテレーターとマップのインスタンスを渡す(削除の時に使う)
 			std::list<MapChip*>::iterator iterator = m_mapChip.end();

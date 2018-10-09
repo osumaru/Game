@@ -22,9 +22,6 @@
     <Filter Include="ソース ファイル\Assets">
       <UniqueIdentifier>{d2959fce-86b1-4097-a78a-08621cd7ae81}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\Player">
-      <UniqueIdentifier>{fec21044-c359-4445-b351-572f4bf9abdb}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソース ファイル\Enemy">
       <UniqueIdentifier>{0eaf0a26-752e-41b7-bc44-3a456ae73350}</UniqueIdentifier>
     </Filter>
@@ -61,7 +58,10 @@
     <Filter Include="ソース ファイル\UI\Result">
       <UniqueIdentifier>{781de762-48a6-4427-8912-94ae152b0f15}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\Player\PlayerSate">
+    <Filter Include="ソース ファイル\Map\Player">
+      <UniqueIdentifier>{fec21044-c359-4445-b351-572f4bf9abdb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Map\Player\PlayerSate">
       <UniqueIdentifier>{78a5d28b-6f9a-4978-9875-12bede60a5e2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -79,7 +79,7 @@
       <Filter>ソース ファイル\Map\MapChip</Filter>
     </ClCompile>
     <ClCompile Include="Player\Player.cpp">
-      <Filter>ソース ファイル\Player</Filter>
+      <Filter>ソース ファイル\Map\Player</Filter>
     </ClCompile>
     <ClCompile Include="UI\DamageNumber\DamageNumber.cpp">
       <Filter>ソース ファイル\UI\DamageNumber</Filter>
@@ -121,25 +121,25 @@
       <Filter>ソース ファイル\Scene</Filter>
     </ClCompile>
     <ClCompile Include="Player\PlayerSate\PlayerWalk.cpp">
-      <Filter>ソース ファイル\Player\PlayerSate</Filter>
+      <Filter>ソース ファイル\Map\Player\PlayerSate</Filter>
     </ClCompile>
     <ClCompile Include="Player\PlayerSate\PlayerRun.cpp">
-      <Filter>ソース ファイル\Player\PlayerSate</Filter>
+      <Filter>ソース ファイル\Map\Player\PlayerSate</Filter>
     </ClCompile>
     <ClCompile Include="Player\PlayerSate\PlayerStand.cpp">
-      <Filter>ソース ファイル\Player\PlayerSate</Filter>
+      <Filter>ソース ファイル\Map\Player\PlayerSate</Filter>
     </ClCompile>
     <ClCompile Include="Player\PlayerSate\PlayerStateMachine.cpp">
-      <Filter>ソース ファイル\Player\PlayerSate</Filter>
+      <Filter>ソース ファイル\Map\Player\PlayerSate</Filter>
     </ClCompile>
     <ClCompile Include="Player\PlayerSate\PlayerAttack.cpp">
-      <Filter>ソース ファイル\Player\PlayerSate</Filter>
+      <Filter>ソース ファイル\Map\Player\PlayerSate</Filter>
     </ClCompile>
     <ClCompile Include="Player\PlayerSate\PlayerDied.cpp">
-      <Filter>ソース ファイル\Player\PlayerSate</Filter>
+      <Filter>ソース ファイル\Map\Player\PlayerSate</Filter>
     </ClCompile>
     <ClCompile Include="Player\PlayerSate\PlayerDamage.cpp">
-      <Filter>ソース ファイル\Player\PlayerSate</Filter>
+      <Filter>ソース ファイル\Map\Player\PlayerSate</Filter>
     </ClCompile>
     <ClCompile Include="Enemy\EnemyState\EnemyAttack.cpp">
       <Filter>ソース ファイル\Enemy\EnemyState</Filter>
@@ -190,22 +190,25 @@
       <Filter>ソース ファイル\Map</Filter>
     </ClCompile>
     <ClCompile Include="Player\PlayerSate\PlayerJump.cpp">
-      <Filter>ソース ファイル\Player\PlayerSate</Filter>
+      <Filter>ソース ファイル\Map\Player\PlayerSate</Filter>
     </ClCompile>
     <ClCompile Include="Player\PlayerRotation.cpp">
-      <Filter>ソース ファイル\Player</Filter>
+      <Filter>ソース ファイル\Map\Player</Filter>
     </ClCompile>
     <ClCompile Include="Player\PlayerSate\PlayerAvoidance.cpp">
-      <Filter>ソース ファイル\Player\PlayerSate</Filter>
+      <Filter>ソース ファイル\Map\Player\PlayerSate</Filter>
     </ClCompile>
     <ClCompile Include="Player\PlayerMove.cpp">
-      <Filter>ソース ファイル\Player</Filter>
+      <Filter>ソース ファイル\Map\Player</Filter>
     </ClCompile>
     <ClCompile Include="Player\PlayerArrow.cpp">
-      <Filter>ソース ファイル\Player</Filter>
+      <Filter>ソース ファイル\Map\Player</Filter>
     </ClCompile>
     <ClCompile Include="Player\PlayerSate\PlayerArrowAttack.cpp">
-      <Filter>ソース ファイル\Player\PlayerSate</Filter>
+      <Filter>ソース ファイル\Map\Player\PlayerSate</Filter>
+    </ClCompile>
+    <ClCompile Include="Player\PlayerSate\PlayerWireMove.cpp">
+      <Filter>ソース ファイル\Map\Player\PlayerSate</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -219,7 +222,7 @@
       <Filter>ソース ファイル\Map\MapChip</Filter>
     </ClInclude>
     <ClInclude Include="Player\Player.h">
-      <Filter>ソース ファイル\Player</Filter>
+      <Filter>ソース ファイル\Map\Player</Filter>
     </ClInclude>
     <ClInclude Include="UI\DamageNumber\DamageNumber.h">
       <Filter>ソース ファイル\UI\DamageNumber</Filter>
@@ -261,31 +264,31 @@
       <Filter>ソース ファイル\Scene</Filter>
     </ClInclude>
     <ClInclude Include="Player\PlayerSate\IPlayerState.h">
-      <Filter>ソース ファイル\Player\PlayerSate</Filter>
+      <Filter>ソース ファイル\Map\Player\PlayerSate</Filter>
     </ClInclude>
     <ClInclude Include="Player\PlayerSate\PlayerWalk.h">
-      <Filter>ソース ファイル\Player\PlayerSate</Filter>
+      <Filter>ソース ファイル\Map\Player\PlayerSate</Filter>
     </ClInclude>
     <ClInclude Include="Player\PlayerSate\PlayerRun.h">
-      <Filter>ソース ファイル\Player\PlayerSate</Filter>
+      <Filter>ソース ファイル\Map\Player\PlayerSate</Filter>
     </ClInclude>
     <ClInclude Include="Player\PlayerSate\PlayerStand.h">
-      <Filter>ソース ファイル\Player\PlayerSate</Filter>
+      <Filter>ソース ファイル\Map\Player\PlayerSate</Filter>
     </ClInclude>
     <ClInclude Include="Player\PlayerSate\PlayerStateMachine.h">
-      <Filter>ソース ファイル\Player\PlayerSate</Filter>
+      <Filter>ソース ファイル\Map\Player\PlayerSate</Filter>
     </ClInclude>
     <ClInclude Include="Player\PlayerSate\PlayerState.h">
-      <Filter>ソース ファイル\Player\PlayerSate</Filter>
+      <Filter>ソース ファイル\Map\Player\PlayerSate</Filter>
     </ClInclude>
     <ClInclude Include="Player\PlayerSate\PlayerAttack.h">
-      <Filter>ソース ファイル\Player\PlayerSate</Filter>
+      <Filter>ソース ファイル\Map\Player\PlayerSate</Filter>
     </ClInclude>
     <ClInclude Include="Player\PlayerSate\PlayerDied.h">
-      <Filter>ソース ファイル\Player\PlayerSate</Filter>
+      <Filter>ソース ファイル\Map\Player\PlayerSate</Filter>
     </ClInclude>
     <ClInclude Include="Player\PlayerSate\PlayerDamage.h">
-      <Filter>ソース ファイル\Player\PlayerSate</Filter>
+      <Filter>ソース ファイル\Map\Player\PlayerSate</Filter>
     </ClInclude>
     <ClInclude Include="Enemy\EnemyState\EnemyAttack.h">
       <Filter>ソース ファイル\Enemy\EnemyState</Filter>
@@ -342,22 +345,25 @@
       <Filter>ソース ファイル\Map</Filter>
     </ClInclude>
     <ClInclude Include="Player\PlayerSate\PlayerJump.h">
-      <Filter>ソース ファイル\Player\PlayerSate</Filter>
+      <Filter>ソース ファイル\Map\Player\PlayerSate</Filter>
     </ClInclude>
     <ClInclude Include="Player\PlayerRotation.h">
-      <Filter>ソース ファイル\Player</Filter>
+      <Filter>ソース ファイル\Map\Player</Filter>
     </ClInclude>
     <ClInclude Include="Player\PlayerSate\PlayerAvoidance.h">
-      <Filter>ソース ファイル\Player\PlayerSate</Filter>
+      <Filter>ソース ファイル\Map\Player\PlayerSate</Filter>
     </ClInclude>
     <ClInclude Include="Player\PlayerMove.h">
-      <Filter>ソース ファイル\Player</Filter>
+      <Filter>ソース ファイル\Map\Player</Filter>
     </ClInclude>
     <ClInclude Include="Player\PlayerArrow.h">
-      <Filter>ソース ファイル\Player</Filter>
+      <Filter>ソース ファイル\Map\Player</Filter>
     </ClInclude>
     <ClInclude Include="Player\PlayerSate\PlayerArrowAttack.h">
-      <Filter>ソース ファイル\Player\PlayerSate</Filter>
+      <Filter>ソース ファイル\Map\Player\PlayerSate</Filter>
+    </ClInclude>
+    <ClInclude Include="Player\PlayerSate\PlayerWireMove.h">
+      <Filter>ソース ファイル\Map\Player\PlayerSate</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

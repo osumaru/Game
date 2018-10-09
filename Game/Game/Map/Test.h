@@ -3,7 +3,7 @@
 	L"map2",
 	CVector3(0.00f, 0.00f, 0.00f),             //平行移動
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
-	enMapTagUntagged, //タグ
+	enMapTagTerrain, //タグ
 },
 //Player
 {
@@ -17,84 +17,84 @@
 	L"Brock",
 	CVector3(-29.13f, 18.77f, 27.20f),             //平行移動
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
-	enMapTagUntagged, //タグ
+	enMapTagTerrain, //タグ
 },
 //Brock
 {
 	L"Brock",
 	CVector3(-9.13f, 18.77f, 27.20f),             //平行移動
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
-	enMapTagUntagged, //タグ
+	enMapTagTerrain, //タグ
 },
 //Brock
 {
 	L"Brock",
 	CVector3(10.87f, 18.77f, 27.20f),             //平行移動
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
-	enMapTagUntagged, //タグ
+	enMapTagTerrain, //タグ
 },
 //Brock
 {
 	L"Brock",
 	CVector3(-29.13f, 18.77f, 46.40f),             //平行移動
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
-	enMapTagUntagged, //タグ
+	enMapTagTerrain, //タグ
 },
 //Brock
 {
 	L"Brock",
 	CVector3(-9.13f, 18.77f, 46.40f),             //平行移動
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
-	enMapTagUntagged, //タグ
+	enMapTagTerrain, //タグ
 },
 //Brock
 {
 	L"Brock",
 	CVector3(10.87f, 18.77f, 46.40f),             //平行移動
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
-	enMapTagUntagged, //タグ
+	enMapTagTerrain, //タグ
 },
 //Brock
 {
 	L"Brock",
 	CVector3(-29.13f, 18.77f, 65.60f),             //平行移動
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
-	enMapTagUntagged, //タグ
+	enMapTagTerrain, //タグ
 },
 //Brock
 {
 	L"Brock",
 	CVector3(-9.13f, 18.77f, 65.60f),             //平行移動
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
-	enMapTagUntagged, //タグ
+	enMapTagTerrain, //タグ
 },
 //Brock
 {
 	L"Brock",
 	CVector3(10.87f, 18.77f, 65.60f),             //平行移動
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
-	enMapTagUntagged, //タグ
+	enMapTagTerrain, //タグ
 },
 //Brock
 {
 	L"Brock",
 	CVector3(-29.13f, 18.77f, 84.50f),             //平行移動
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
-	enMapTagUntagged, //タグ
+	enMapTagTerrain, //タグ
 },
 //Brock
 {
 	L"Brock",
 	CVector3(-9.13f, 18.77f, 84.50f),             //平行移動
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
-	enMapTagUntagged, //タグ
+	enMapTagTerrain, //タグ
 },
 //Brock
 {
 	L"Brock",
 	CVector3(10.87f, 18.77f, 84.50f),             //平行移動
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
-	enMapTagUntagged, //タグ
+	enMapTagTerrain, //タグ
 },
 //TownHouse
 {

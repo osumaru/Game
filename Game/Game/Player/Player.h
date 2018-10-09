@@ -32,9 +32,10 @@ public:
 		enPlayerRunJump,	//走りジャンプ
 		enPlayerJump,		//ジャンプアニメーション
 		enPlayerAttack,		//攻撃アニメーション
-		enPlayerAttack2,
+		enPlayerAttack2,	//連撃アニメーション
 		enPlayerDamage,		//ダメージアニメーション
 		enPlayerAvoidance,	//回避アニメーション
+
 		enPlayerDete,		//死亡アニメーション
 		enPlayerArroAttack,	//弓のアニメーション
 		enPlayerLongSwordAttack,//大剣の攻撃アニメーション
@@ -310,11 +311,10 @@ private:
 	bool					m_intervalOn = false;
 	float					m_intervalTime = 0.0f;
 
-	CPlayerStateMachine		m_PlayerStateMachine;							//プレイヤーのアニメーションの遷移を行うステートマシーン
-	CPlayerRotation			m_PlayerRotation;								//プレイヤーの回転を扱うクラス
-	CPlayerMove				m_PlayerMove;									//プレイヤーの動きを扱うクラス
-	CPlayerArrow			m_playerArrow;
-	std::list<CPlayerArrow*>	m_ArrowList;
+	CPlayerStateMachine			m_PlayerStateMachine;							//プレイヤーのアニメーションの遷移を行うステートマシーン
+	CPlayerRotation				m_PlayerRotation;								//プレイヤーの回転を扱うクラス
+	CPlayerMove					m_PlayerMove;									//プレイヤーの動きを扱うクラス
+	std::list<CPlayerArrow*>	m_arrowList;									//弓矢のリスト
 
 	
 	

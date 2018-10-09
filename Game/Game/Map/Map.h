@@ -15,6 +15,7 @@ enum EnMapChipTag
 	enMapTagWarrok,
 	enMapTagEnemyGroup,
 	enMapTagMapChip,
+	enMapTagTerrain,		//地形用のタグ
 	enMapTagNum,
 };
 
@@ -62,5 +63,6 @@ public:
 
 private:
 	std::list<MapChip*> m_mapChip;					//マップチップ
-	std::list<IEnemy*> m_enemyList;		//エネミーリスト
+	std::list<IEnemy*>	m_enemyList;		//エネミーリスト
+	bool				m_collider = false;
 };

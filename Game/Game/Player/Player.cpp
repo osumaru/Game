@@ -47,7 +47,7 @@ void CPlayer::Init(CVector3 position)
 											{ L"Assets/modelData/PlayerJump3.tka" },			//走りジャンプアニメーション
 											{ L"Assets/modelData/PlayerJump.tka" },				//ジャンプアニメーション
 											{ L"Assets/modelData/PlayerCombo3.tka" },			//攻撃アニメーション
-											{ L"Assets/modelData/PlayerThrustAttack.tka" },		//攻撃アニメーション
+											{ L"Assets/modelData/PlayerThrustAttack.tka" },		//連撃アニメーション
 											{ L"Assets/modelData/PlayerDamage.tka" },			//ダメージアニメーション
 											{ L"Assets/modelData/PlayerKaihiStay.tka" }	,		//回避アクション
 											{ L"Assets/modelData/PlayerDeath.tka" },			//死亡アニメーション
@@ -82,11 +82,9 @@ void CPlayer::Init(CVector3 position)
 	m_PlayerStateMachine.Start();
 	m_PlayerMove.Start();
 	m_PlayerRotation.Start();
-	m_playerArrow.Start();
 	Add(&m_PlayerStateMachine,0);
 	Add(&m_PlayerMove, 0);
 	Add(&m_PlayerRotation, 0);
-	Add(&m_playerArrow, 0);
 	Add(this, 1);
 }
 
@@ -113,9 +111,30 @@ void CPlayer::Update()
 
 	if (Pad().IsTriggerButton(enButtonB))
 	{
-		ExpUP(100);	
+		ExpUP(100);
+		
 
 	}
+	if (Pad().IsTriggerButton(enButtonX))
+	{
+		CPlayerArrow*	Arrow = New<CPlayerArrow>(0);
+		Arrow->Start();
+		m_arrowList.push_back(Arrow);
+	}
+
+	std::list<CPlayerArrow*>::iterator it;
+	it = m_arrowList.begin();
+	while (it != m_arrowList.end()) {
+		if ((*it)->IsDelete()) {
+			//死亡していたらリストから削除
+			CPlayerArrow* enemy = *it;
+			it = m_arrowList.erase(it);
+		}
+		else {
+			it++;
+		}
+	}
+
 	
 	//スキンモデルの更新
 	m_skinmodel.Update(m_position, m_rotation, { 1.0f, 1.0f, 1.0f }, true);
