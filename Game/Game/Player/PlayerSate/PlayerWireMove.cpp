@@ -7,31 +7,7 @@
 
 bool CPlayerWireMove::Start()
 {
-	float minLength = FLT_MAX;
-	std::list<IEnemy*> enemyList = GetSceneManager().GetGameScene().GetMap()->GetEnemyList();
-	//ワイヤーを飛ばす先を決める
-	for (auto& enemy : enemyList)
-	{
-		CVector3 enemyPos = enemy->GetPosition();
-		CVector3 toEnemyPos = enemyPos - GetPlayer().GetPosition();
-		float length = toEnemyPos.Length();
-		if (minLength > length) {
-			minLength = length;
-			//一番近い敵の位置を移動先とする
-			m_movePosition = enemyPos;
-		}
-	}
-
-	//一番近い敵にワイヤーが当たったフラグを設定する
-	for (auto& enemy : enemyList) 
-	{
-		CVector3 enemyPos = enemy->GetPosition();
-		CVector3 toMovePos = m_movePosition - enemyPos;
-		float length = toMovePos.Length();
-		if (length < 0.1f) {
-			enemy->SetIsWireHit(true);
-		}
-	}
+	m_movePosition = GetPlayer().GetWirePosition();
 
 	return true;
 }

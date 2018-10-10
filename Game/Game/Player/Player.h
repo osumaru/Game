@@ -4,6 +4,7 @@
 #include "PlayerRotation.h"
 #include "PlayerMove.h"
 #include "PlayerArrow.h"
+#include "WireCollisionSolver.h"
 
 struct SplayerStatus
 {
@@ -259,6 +260,19 @@ public:
 	{
 		m_intervalOn = set;
 	}
+
+	//ワイヤー移動する先の座標を取得
+	const CVector3& GetWirePosition()
+	{
+		return m_wirePosition;
+	}
+
+	//ワイヤー移動できるかを取得
+	bool IsWireMove()
+	{
+		return m_isWireMove;
+	}
+
 	const CSkinModel& GetWeaponskin(int num)
 	{
 		return m_weaponskin[num];
@@ -316,9 +330,9 @@ private:
 	CPlayerMove					m_PlayerMove;									//プレイヤーの動きを扱うクラス
 	std::list<CPlayerArrow*>	m_arrowList;									//弓矢のリスト
 
-	
-	
-
+	bool					m_isWireMove = false;					//ワイヤー移動できるか
+	CWireCollisionSolver	m_wireCollisionSolver;					//ワイヤー移動のコリジョン処理クラス
+	CVector3				m_wirePosition;							//ワイヤー移動先の座標
 };
 
 static CPlayer& GetPlayer()

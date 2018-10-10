@@ -26,6 +26,8 @@ void CPlayer::Init(CVector3 position)
 	/*m_light.SetDiffuseLightDir(0, { 0.0707f,0.0f,0.707f,1.0f });*/
 	m_skinmodel.SetLight(m_light);
 
+	m_wireCollisionSolver.Init(0.3f, 1.0f);
+
 	m_weaponBoxCollider.Create({ 0.05f,0.4f,0.05f });
 	SRigidBodyInfo rInfo;
 	rInfo.collider = &m_weaponBoxCollider;
@@ -135,6 +137,39 @@ void CPlayer::Update()
 		}
 	}
 
+	m_isWireMove = false;
+	if (Pad().IsTriggerButton(enButtonY))
+	{
+		float minLength = FLT_MAX;
+		std::list<IEnemy*> enemyList = GetSceneManager().GetGameScene().GetMap()->GetEnemyList();
+		//ワイヤーを飛ばす先を決める
+		for (auto& enemy : enemyList)
+		{
+			CVector3 enemyPos = enemy->GetPosition();
+			CVector3 toEnemyPos = enemyPos - GetPlayer().GetPosition();
+			float length = toEnemyPos.Length();
+			if (minLength > length) {
+				minLength = length;
+				//一番近い敵の位置を移動先とする
+				m_wirePosition = enemyPos;
+			}
+		}
+
+		if (!m_wireCollisionSolver.Execute(m_position, m_wirePosition)) {
+			//レイを飛ばしてプレイヤーとの間に障害物がないならワイヤーを使う
+			m_isWireMove = true;
+			for (auto& enemy : enemyList)
+			{
+				CVector3 enemyPos = enemy->GetPosition();
+				CVector3 toMovePos = m_wirePosition - enemyPos;
+				float length = toMovePos.Length();
+				if (length < 0.1f) {
+					//一番近い敵にワイヤーが当たったフラグを設定する
+					enemy->SetIsWireHit(true);
+				}
+			}
+		}
+	}
 	
 	//スキンモデルの更新
 	m_skinmodel.Update(m_position, m_rotation, { 1.0f, 1.0f, 1.0f }, true);
