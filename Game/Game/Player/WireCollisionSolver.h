@@ -16,6 +16,8 @@ public:
 	~CWireCollisionSolver();
 
 	//初期化
+	//radius	カプセルコライダーの半径
+	//height	カプセルコライダーの高さ
 	void Init(float radius, float height);
 
 	//コリジョン解決の実行

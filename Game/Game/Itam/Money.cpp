@@ -45,7 +45,7 @@ void CMoney::Update()
 	//プレイヤーとの距離を計算
 	CVector3 toPlayer = GetPlayer().GetPosition() - m_position;
 	float length = toPlayer.Length();
-	if (m_popEnd && m_characterController.IsOnGround() && length < 5.0f) {
+	if (m_popEnd && length < 5.0f) {
 		m_moveSpeed = m_characterController.GetMoveSpeed();
 		CVector3 toPlayerNormalize = toPlayer;
 		toPlayerNormalize.Normalize();
