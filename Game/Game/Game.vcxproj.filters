@@ -216,6 +216,9 @@
     <ClCompile Include="Player\PlayerSate\PlayerWireMove.cpp">
       <Filter>ソース ファイル\Player\PlayerSate</Filter>
     </ClCompile>
+    <ClCompile Include="Player\PlayerSate\PlayerWireMove.cpp">
+      <Filter>ソース ファイル\Player\PlayerSate</Filter>
+    </ClCompile>
     <ClCompile Include="Player\WireCollisionSolver.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
@@ -376,6 +379,9 @@
     </ClInclude>
     <ClInclude Include="UI\LevelUp\LevelUp.h">
       <Filter>ソース ファイル\UI\LevelUp</Filter>
+    </ClInclude>
+    <ClInclude Include="Player\PlayerSate\PlayerWireMove.h">
+      <Filter>ソース ファイル\Player\PlayerSate</Filter>
     </ClInclude>
     <ClInclude Include="Player\PlayerSate\PlayerWireMove.h">
       <Filter>ソース ファイル\Player\PlayerSate</Filter>
