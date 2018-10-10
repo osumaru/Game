@@ -43,7 +43,7 @@ public:
 	view	ビュー行列
 	proj	プロジェクション行列
 	*/
-	void Draw(const CMatrix& view, const CMatrix& proj);
+	void Draw(const CMatrix& view, const CMatrix& proj, bool isShadow = false);
 
 
 	//モデルを取得

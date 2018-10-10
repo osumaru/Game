@@ -180,6 +180,7 @@
     <ClCompile Include="Graphics\particle\ParticleEmitter.cpp" />
     <ClCompile Include="Graphics\PostEffect\Deferred.cpp" />
     <ClCompile Include="Graphics\PostEffect\PostEffect.cpp" />
+    <ClCompile Include="Graphics\PreRendering\ShadowMap.cpp" />
     <ClCompile Include="Graphics\Primitive.cpp" />
     <ClCompile Include="Graphics\RenderTarget.cpp" />
     <ClCompile Include="Graphics\Shader.cpp" />
@@ -231,6 +232,7 @@
     <ClInclude Include="Graphics\particle\ParticleEmitter.h" />
     <ClInclude Include="Graphics\PostEffect\Deferred.h" />
     <ClInclude Include="Graphics\PostEffect\PostEffect.h" />
+    <ClInclude Include="Graphics\PreRendering\ShadowMap.h" />
     <ClInclude Include="Graphics\Primitive.h" />
     <ClInclude Include="Graphics\RenderTarget.h" />
     <ClInclude Include="Graphics\Shader.h" />

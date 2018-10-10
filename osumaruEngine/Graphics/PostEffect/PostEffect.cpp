@@ -1,8 +1,11 @@
 #include "engineStdafx.h"
 #include "PostEffect.h"
 
+CPostEffect::~CPostEffect()
+{
+}
 
-void PostEffect::Init(IDXGISwapChain* swapChain)
+void CPostEffect::Init(IDXGISwapChain* swapChain)
 {
 	m_vertexShader.Load("Assets/shader/postEffect.fx", "VSMain", CShader::enVS);
 	m_pixelShader.Load("Assets/shader/postEffect.fx", "PSMain", CShader::enPS);
@@ -22,12 +25,15 @@ void PostEffect::Init(IDXGISwapChain* swapChain)
 	m_pBackDepthStencilView = m_backBuffer.GetDepthStencil();
 }
 
-void PostEffect::Draw()
+void CPostEffect::Draw()
 {
 	float color[4] = { 0.0f, 0.0f, 1.0f, 1.0f };
 	GetDeviceContext()->OMSetRenderTargets(1, &m_pBackRenderTargetView, m_pBackDepthStencilView);
 	GetDeviceContext()->ClearRenderTargetView(m_pBackRenderTargetView, color);
-	GetDeviceContext()->ClearDepthStencilView(m_pBackDepthStencilView, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
+	//GetDeviceContext()->ClearDepthStencilView(m_pBackDepthStencilView, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
+	Engine().SetAlphaBlendState(enAlphaBlendState3D);
+	Engine().SetDepthStencilState(enDepthStencilState2D);
+	Engine().SetRasterizerState(enRasterizerState2D);
 	ID3D11ShaderResourceView* srviews[] = {
 		MainRenderTarget().GetRenderTargetTexture().GetShaderResource() };
 	GetDeviceContext()->PSSetShaderResources(0, 1, srviews);
@@ -41,4 +47,7 @@ void PostEffect::Draw()
 	GetDeviceContext()->IASetIndexBuffer(m_primitive.GetIndexBuffer(), m_primitive.GetIndexFormat(), 0);
 	GetDeviceContext()->IASetInputLayout(m_vertexShader.GetInputlayOut());
 	GetDeviceContext()->DrawIndexed(m_primitive.GetIndexNum(), 0, 0);
+	Engine().SetAlphaBlendState(enAlphaBlendState2D);
+	Engine().SetDepthStencilState(enDepthStencilState3D);
+	Engine().SetRasterizerState(enRasterizerState2D);
 }

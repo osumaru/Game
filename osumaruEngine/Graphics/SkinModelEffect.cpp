@@ -6,6 +6,8 @@ CSkinModelEffect::CSkinModelEffect()
 	textureResource = nullptr;
 	vsShader.Load("Assets/shader/model.fx", "VSSkinMain", CShader::enVS);
 	psShader.Load("Assets/shader/model.fx", "PSMain", CShader::enPS);
+	shadowVsShader.Load("Assets/shader/model.fx", "VSShadowSkinMain", CShader::enVS);
+	shadowPsShader.Load("Assets/shader/model.fx", "PSShadowMain", CShader::enPS);
 }
 
 void __cdecl ISkinModelEffect::Apply(_In_ ID3D11DeviceContext* deviceContext)
@@ -15,8 +17,16 @@ void __cdecl ISkinModelEffect::Apply(_In_ ID3D11DeviceContext* deviceContext)
 	{
 		deviceContext->PSSetShaderResources(10, 1, &textureResource);
 	}
-	deviceContext->PSSetShader((ID3D11PixelShader*)psShader.GetBody(), nullptr, 0);
-	deviceContext->VSSetShader((ID3D11VertexShader*)vsShader.GetBody(), nullptr, 0);
+	if (isShadow)
+	{
+		deviceContext->PSSetShader((ID3D11PixelShader*)shadowPsShader.GetBody(), nullptr, 0);
+		deviceContext->VSSetShader((ID3D11VertexShader*)shadowVsShader.GetBody(), nullptr, 0);
+	}
+	else
+	{
+		deviceContext->PSSetShader((ID3D11PixelShader*)psShader.GetBody(), nullptr, 0);
+		deviceContext->VSSetShader((ID3D11VertexShader*)vsShader.GetBody(), nullptr, 0);
+	}
 }
 
 void __cdecl ISkinModelEffect::GetVertexShaderBytecode(_Out_ void const** pShaderByteCode, _Out_ size_t* pByteCodeLength)
@@ -32,4 +42,6 @@ CNoSkinModelEffect::CNoSkinModelEffect()
 	textureResource = nullptr;
 	vsShader.Load("Assets/shader/model.fx", "VSMain", CShader::enVS);
 	psShader.Load("Assets/shader/model.fx", "PSMain", CShader::enPS);
+	shadowVsShader.Load("Assets/shader/model.fx", "VSShadowMain", CShader::enVS);
+	shadowPsShader.Load("Assets/shader/model.fx", "PSShadowMain", CShader::enPS);
 }

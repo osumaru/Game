@@ -1,18 +1,30 @@
 #include "engineStdafx.h"
 #include "Deferred.h"
+#include "../../Camera/Camera.h"
 
-Deferred::Deferred()
+CDeferred::CDeferred()
 {
 
 }
 
-void Deferred::Init()
+void CDeferred::SetCamera(CCamera* camera)
+{
+	m_camera = camera;
+	CMatrix mat;
+	mat.Mul(m_camera->GetViewMatrix(), m_camera->GetProjectionMatrix());
+	mat.Inverse();
+	m_gameCameraCB.Create(sizeof(CMatrix), &mat);
+}
+
+void CDeferred::Init()
 {
 	for (int i = 0; i < enRenderTargetNum; i++)
 	{
 		m_renderTarget[i].Create(FrameBufferWidth(), FrameBufferHeight());
 	}
 	m_lightCB.Create(sizeof(CLight), &Light());
+	CMatrix mat = CMatrix::Identity;
+	m_shadowCB.Create(sizeof(CMatrix), &mat);
 	m_vertexShader.Load("Assets/shader/deferred.fx", "VSMain", CShader::enVS);
 	m_pixelShader.Load("Assets/shader/deferred.fx", "PSMain", CShader::enPS);
 	SVSLayout vertexBufferLayout[4] =
@@ -26,7 +38,7 @@ void Deferred::Init()
 	m_primitive.Create(vertexBufferLayout, sizeof(SVSLayout), 4, indexBufferLayout, 4, CPrimitive::enIndex32, CPrimitive::enTypeTriangleStrip);
 }
 
-void Deferred::Start()
+void CDeferred::Start()
 {
 	float color[4] = { 0.0f, 0.0f, 1.0f, 0.0f };
 
@@ -36,8 +48,11 @@ void Deferred::Start()
 	{
 		mainViews[i] = m_renderTarget[i].GetRenderTarget();
 	};
-
-	GetDeviceContext()->OMSetRenderTargets(enRenderTargetNum, mainViews, m_renderTarget[0].GetDepthStencil());
+	GetDeviceContext()->ClearDepthStencilView(Engine().GetPostEffect().GetDepthStencil(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
+	GetDeviceContext()->OMSetRenderTargets(enRenderTargetNum, mainViews, Engine().GetPostEffect().GetDepthStencil());
+	Engine().SetAlphaBlendState(enAlphaBlendState3D);
+	Engine().SetDepthStencilState(enDepthStencilState3D);
+	Engine().SetRasterizerState(enRasterizerState3D);
 	for (int i = 0; i < enRenderTargetNum; i++)
 	{
 		if (i == enRenderTargetDepth)
@@ -53,7 +68,17 @@ void Deferred::Start()
 	m_lightCB.Create(sizeof(CLight), &Light());
 }
 
-void Deferred::Draw()
+void CDeferred::SetConstantBuffer()
+{
+	CMatrix lightViewProj;
+	lightViewProj.Mul(m_viewMatrix, m_projectionMatrix);
+	m_shadowCB.Update(&lightViewProj);
+	ID3D11Buffer* buffer = m_lightCB.GetBody();
+	GetDeviceContext()->PSSetConstantBuffers(2, 1, &buffer);
+	GetDeviceContext()->VSSetConstantBuffers(2, 1, &buffer);
+}
+
+void CDeferred::Draw()
 {
 	float color[4] = { 0.0f, 0.0f, 1.0f, 0.0f };
 	ID3D11RenderTargetView* backBuffer[] = { MainRenderTarget().GetRenderTarget() };
@@ -61,16 +86,34 @@ void Deferred::Draw()
 
 	GetDeviceContext()->ClearRenderTargetView(backBuffer[0], color);
 	GetDeviceContext()->ClearDepthStencilView(MainRenderTarget().GetDepthStencil(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
-	ID3D11ShaderResourceView* srviews[enRenderTargetNum];
+	ID3D11ShaderResourceView* srviews[enRenderTargetNum + 1];
 	for (int i = 0; i < enRenderTargetNum; i++)
 	{
 		srviews[i] = m_renderTarget[i].GetRenderTargetTexture().GetShaderResource();
 	};
+	srviews[enRenderTargetNum] = Engine().GetShadowMap().GetRenderTarget().GetRenderTargetTexture().GetShaderResource();
 	CLight light = Light();
 	m_lightCB.Update(&Light());
-	ID3D11Buffer* buffer = m_lightCB.GetBody();
+	CMatrix lightViewProj;
+	lightViewProj.Mul(m_viewMatrix, m_projectionMatrix);
+	m_shadowCB.Update(&lightViewProj);
+	SetConstantBuffer();
+	ID3D11Buffer* buffer;
+	if (m_camera != nullptr)
+	{
+		CMatrix gameCameraMat;
+		gameCameraMat.Mul(m_camera->GetViewMatrix(), m_camera->GetProjectionMatrix());
+		gameCameraMat.Inverse();
+		m_gameCameraCB.Update(&gameCameraMat);
+		buffer = m_gameCameraCB.GetBody();
+		GetDeviceContext()->PSSetConstantBuffers(1, 1, &buffer);
+	}
+	buffer = m_lightCB.GetBody();
 	GetDeviceContext()->PSSetConstantBuffers(0, 1, &buffer);
-	GetDeviceContext()->PSSetShaderResources(0, enRenderTargetNum, srviews);
+
+	buffer = m_lightCB.GetBody();
+	GetDeviceContext()->PSSetConstantBuffers(0, 1, &buffer);
+	GetDeviceContext()->PSSetShaderResources(0, enRenderTargetNum + 1, srviews);
 	GetDeviceContext()->VSSetShader((ID3D11VertexShader*)m_vertexShader.GetBody(), nullptr, 0);
 	GetDeviceContext()->PSSetShader((ID3D11PixelShader*)m_pixelShader.GetBody(), nullptr, 0);
 	ID3D11Buffer* vertexBuffers[] = { m_primitive.GetVertexBuffer() };
