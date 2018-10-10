@@ -196,6 +196,7 @@
     <ClCompile Include="Player\PlayerSate\PlayerWalk.cpp" />
     <ClCompile Include="Player\Player.cpp" />
     <ClCompile Include="Player\PlayerSate\PlayerWireMove.cpp" />
+    <ClCompile Include="Player\WireCollisionSolver.cpp" />
     <ClCompile Include="Scene\GameScene.cpp" />
     <ClCompile Include="Scene\SceneManager.cpp" />
     <ClCompile Include="stdafx.cpp">
@@ -205,6 +206,7 @@
     </ClCompile>
     <ClCompile Include="UI\DamageNumber\DamageNumber.cpp" />
     <ClCompile Include="UI\DamageNumber\Number.cpp" />
+    <ClCompile Include="UI\LevelUp\LevelUp.cpp" />
     <ClCompile Include="UI\Menu\Menu.cpp" />
     <ClCompile Include="UI\MiniMap\MiniMap.cpp" />
     <ClCompile Include="UI\PlayerHp\PlayerHp.cpp" />
@@ -253,11 +255,13 @@
     <ClInclude Include="Player\PlayerSate\IPlayerState.h" />
     <ClInclude Include="Player\Player.h" />
     <ClInclude Include="Player\PlayerSate\PlayerWireMove.h" />
+    <ClInclude Include="Player\WireCollisionSolver.h" />
     <ClInclude Include="Scene\GameScene.h" />
     <ClInclude Include="Scene\SceneManager.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="UI\DamageNumber\DamageNumber.h" />
     <ClInclude Include="UI\DamageNumber\Number.h" />
+    <ClInclude Include="UI\LevelUp\LevelUp.h" />
     <ClInclude Include="UI\Menu\Menu.h" />
     <ClInclude Include="UI\MiniMap\MiniMap.h" />
     <ClInclude Include="UI\PlayerHp\PlayerHp.h" />

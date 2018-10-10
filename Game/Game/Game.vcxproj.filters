@@ -64,6 +64,9 @@
     <Filter Include="ソース ファイル\Map\Player\PlayerSate">
       <UniqueIdentifier>{78a5d28b-6f9a-4978-9875-12bede60a5e2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\UI\LevelUp">
+      <UniqueIdentifier>{2bc83c70-26ca-4ab4-9694-14dae86c8a8b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -209,6 +212,15 @@
     </ClCompile>
     <ClCompile Include="Player\PlayerSate\PlayerWireMove.cpp">
       <Filter>ソース ファイル\Map\Player\PlayerSate</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\LevelUp\LevelUp.cpp">
+      <Filter>ソース ファイル\UI\LevelUp</Filter>
+    </ClCompile>
+    <ClCompile Include="Player\PlayerSate\PlayerWireMove.cpp">
+      <Filter>ソース ファイル\Player\PlayerSate</Filter>
+    </ClCompile>
+    <ClCompile Include="Player\WireCollisionSolver.cpp">
+      <Filter>ソース ファイル\Player</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -364,6 +376,15 @@
     </ClInclude>
     <ClInclude Include="Player\PlayerSate\PlayerWireMove.h">
       <Filter>ソース ファイル\Map\Player\PlayerSate</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\LevelUp\LevelUp.h">
+      <Filter>ソース ファイル\UI\LevelUp</Filter>
+    </ClInclude>
+    <ClInclude Include="Player\PlayerSate\PlayerWireMove.h">
+      <Filter>ソース ファイル\Player\PlayerSate</Filter>
+    </ClInclude>
+    <ClInclude Include="Player\WireCollisionSolver.h">
+      <Filter>ソース ファイル\Player</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

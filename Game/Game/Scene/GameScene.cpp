@@ -7,6 +7,7 @@
 #include "../UI/PlayerHp/PlayerHp.h"
 #include "../UI/Menu/Menu.h"
 #include "../UI/Result/Result.h"
+#include "../UI/LevelUp/LevelUp.h"
 #include"../../Game/Camera/GameCamera.h"
 
 void CGameScene::Init()
@@ -24,6 +25,9 @@ void CGameScene::Init()
 
 	CPlayerHp* playerHp = New<CPlayerHp>(0);
 	playerHp->Init();
+
+	CLevelUp* levelUp = New<CLevelUp>(0);
+	levelUp->Init();
 
 	CMenu* menu = New<CMenu>(0);
 	menu->Init();

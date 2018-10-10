@@ -1,105 +1,42 @@
-﻿//map2
+﻿//Brock
 {
-	L"map2",
-	CVector3(0.00f, 0.00f, 0.00f),             //平行移動
+	L"Brock",
+	CVector3(0.00f, -3.99f, -15.78f),             //平行移動
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagUntagged, //タグ
-},
-//zombi
-{
-	L"zombi",
-	CVector3(445.97f, 0.00f, 239.00f),             //平行移動
-	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
-	enMapTagEnemy, //タグ
 },
 //Player
 {
 	L"Player",
-	CVector3(368.00f, 0.00f, 210.10f),             //平行移動
+	CVector3(0.00f, 0.00f, -9.19f),             //平行移動
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagPlayer, //タグ
 },
 //zombi
 {
 	L"zombi",
-	CVector3(442.00f, 0.00f, 239.00f),             //平行移動
+	CVector3(0.00f, 0.00f, -19.41f),             //平行移動
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
-	enMapTagEnemy, //タグ
+	enMapTagZombie, //タグ
 },
-//House
+//zombi
 {
-	L"House",
-	CVector3(360.00f, 0.00f, 200.00f),             //平行移動
+	L"zombi",
+	CVector3(2.38f, 0.00f, -22.28f),             //平行移動
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
-	enMapTagUntagged, //タグ
+	enMapTagZombie, //タグ
 },
-//House
+//zombi
 {
-	L"House",
-	CVector3(370.00f, 0.00f, 200.00f),             //平行移動
+	L"zombi",
+	CVector3(-2.06f, 0.00f, -22.24f),             //平行移動
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
-	enMapTagUntagged, //タグ
+	enMapTagZombie, //タグ
 },
-//House
+//Sphere
 {
-	L"House",
-	CVector3(380.00f, 0.00f, 200.00f),             //平行移動
-	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
-	enMapTagUntagged, //タグ
-},
-//House
-{
-	L"House",
-	CVector3(390.00f, 0.00f, 200.00f),             //平行移動
-	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
-	enMapTagUntagged, //タグ
-},
-//House
-{
-	L"House",
-	CVector3(400.00f, 0.00f, 200.00f),             //平行移動
-	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
-	enMapTagUntagged, //タグ
-},
-//House
-{
-	L"House",
-	CVector3(415.00f, 0.00f, 200.00f),             //平行移動
-	CQuaternion(0.00f, 0.71f, 0.00f, 0.71f ),  //回転
-	enMapTagUntagged, //タグ
-},
-//House
-{
-	L"House",
-	CVector3(365.00f, 0.00f, 220.00f),             //平行移動
-	CQuaternion(0.00f, 1.00f, 0.00f, 0.00f ),  //回転
-	enMapTagUntagged, //タグ
-},
-//House
-{
-	L"House",
-	CVector3(375.00f, 0.00f, 220.00f),             //平行移動
-	CQuaternion(0.00f, 1.00f, 0.00f, 0.00f ),  //回転
-	enMapTagUntagged, //タグ
-},
-//House
-{
-	L"House",
-	CVector3(385.00f, 0.00f, 220.00f),             //平行移動
-	CQuaternion(0.00f, 1.00f, 0.00f, 0.00f ),  //回転
-	enMapTagUntagged, //タグ
-},
-//House
-{
-	L"House",
-	CVector3(395.00f, 0.00f, 220.00f),             //平行移動
-	CQuaternion(0.00f, 1.00f, 0.00f, 0.00f ),  //回転
-	enMapTagUntagged, //タグ
-},
-//House
-{
-	L"House",
-	CVector3(405.00f, 0.00f, 220.00f),             //平行移動
-	CQuaternion(0.00f, 1.00f, 0.00f, 0.00f ),  //回転
-	enMapTagUntagged, //タグ
+	L"Sphere",
+	CVector3(0.16f, 0.00f, -21.43f),             //平行移動
+	CQuaternion(0.00f, 0.00f, 0.00f, 0.00f ),  //回転
+	enMapTagEnemyGroup, //タグ
 },
