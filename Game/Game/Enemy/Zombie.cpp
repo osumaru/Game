@@ -38,7 +38,7 @@ void CZombie::Init(CVector3 position)
 
 	//ステータスを設定
 	m_status.Strength = 10;
-	m_status.Defense = 5;
+	m_status.Defense = 0;
 	m_status.Hp = 50;
 	m_status.MaxHp = m_status.Hp;
 	m_status.Gold = 100;

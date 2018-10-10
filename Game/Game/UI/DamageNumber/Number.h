@@ -16,7 +16,7 @@ public:
 	void Update();
 
 	//•`‰æ
-	void Draw();
+	void AfterDraw();
 
 	//•\¦‚·‚é”’l‚ğİ’è
 	//int  num  ”’l

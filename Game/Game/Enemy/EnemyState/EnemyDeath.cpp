@@ -8,6 +8,12 @@ bool CEnemyDeath::Start()
 {
 	//死亡アニメーションを再生
 	m_enemy->PlayAnimation(CEnemyState::enState_Death);
+
+	//ダメージ表示の描画をやめる
+	m_enemy->DamageIndicateReset();
+	//ダメージを受けたフラグを戻す
+	m_enemy->SetIsDamage(false);
+
 	return true;
 }
 

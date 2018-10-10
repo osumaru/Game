@@ -5,12 +5,13 @@
 void CDamegeNumber::Init()
 {
 	m_numPos = { 0.0f,0.0f };
-	m_numSize = { 30.0f,50.0f };
+	//m_numSize = { 15.0f,25.0f };
+	m_numSize = { 100.0f,100.0f };
 
 	//数字のスプライトを初期化
 	for (int i = 0; i < EnDigit::enDigit_Num; i++) {
 		m_number[i] = New<CNumber>(0);
-		m_numPos.x = m_numSize.x * i;
+		m_numPos.x -= m_numSize.x * i;
 		m_number[i]->Init(m_numPos, m_numSize);
 		m_number[i]->SetIsActive(false);
 	}
@@ -52,7 +53,7 @@ void CDamegeNumber::DamageCalculation(int dmg)
 
 	for (int i = 0; i < EnDigit::enDigit_Num; i++) {
 		m_number[i]->SetPosition(m_numPos);
-		m_numPos.x = m_numSize.x * i;
+		m_numPos.x -= m_numSize.x * (i + 1);
 	}
 }
 

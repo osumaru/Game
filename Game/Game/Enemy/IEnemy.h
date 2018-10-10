@@ -104,7 +104,7 @@ public:
 	}
 
 	//ダメージ表示の座標を設定
-	void SetDamagePos(const CVector2 pos)
+	void SetDamagePos(const CVector2& pos)
 	{
 		m_damageNumber.SetPosition(pos);
 	}

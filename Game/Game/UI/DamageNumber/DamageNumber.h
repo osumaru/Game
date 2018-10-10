@@ -22,7 +22,7 @@ public:
 
 	//À•W‚ğİ’è
 	//position	À•W
-	void SetPosition(CVector2 position)
+	void SetPosition(const CVector2& position)
 	{
 		m_numPos = position;
 	}
