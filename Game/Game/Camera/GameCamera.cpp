@@ -10,23 +10,25 @@ void CGameCamera::Init()
 	camera.SetNear(1.0f);
 	camera.SetAspect((float)FrameBufferWidth() / (float)FrameBufferHeight());
 	camera.SetAngle(CMath::DegToRad(60.0f));
-	camera.SetPosition({ 0.0f, 1.8f, 3.8f });
+	camera.SetPosition({ 0.0f, 1.8f, 3.2f });
 	camera.SetTarget({ 0.0f, 0.0f, 0.0f });
 	camera.SetUp({ 0.0f, 1.0f, 0.0f });
 	camera.Update();
 	Add(this, 0);
 	m_cameraVec = camera.GetPosition();
 	PhysicsWorld().SetCamera(&camera);
-
+	m_arrowCamera = { 0.0f,1.0f,1.3f };
 	m_springCamera.Init(camera.GetTarget(), camera.GetPosition(), 5000.0f);
 }
 
 void CGameCamera::Update()
 {
+
 	float rStick_x = Pad().GetRightStickX() * 2 * GameTime().GetDeltaFrameTime();
 	float rStick_y = Pad().GetRightStickY() * GameTime().GetDeltaFrameTime();
 
 	m_cameraVec = camera.GetPosition() - camera.GetTarget();
+
 	if (fabsf(rStick_x) > 0.0f) {
 		//Y軸周りの回転
 		CMatrix matrix;
@@ -47,10 +49,12 @@ void CGameCamera::Update()
 		CVector3 cameraDir = m_cameraVec;
 		cameraDir.Normalize();
 
-		if (cameraDir.y < -0.6f) {
+		if (cameraDir.y < -0.5f)
+ {
 			m_cameraVec = cameraVecOld;
 		}
-		else if (cameraDir.y > 0.9f) {
+		else if (cameraDir.y > 0.7f) 
+		{
 			m_cameraVec = cameraVecOld;
 		}
 	}
@@ -64,13 +68,20 @@ void CGameCamera::Update()
 		toCameraXZ.y = 0.0f;
 		float toCameraLen = toCameraXZ.Length();
 		toCameraXZ.Normalize();
-
-		CVector3 target = GetPlayer().GetTargetPos();
+		//注視点の設定
+		CVector3 target = GetPlayer().GetPosition();
+		if (GetPlayer().GetPlayerStateMachine().GetState() == CPlayerState::EnPlayerState::enPlayerArrowAttack)
+		{
+			CMatrix	mat = GetPlayer().GetPlayerSkin().GetWorldMatrix();
+			CVector3 playerFlont = { -mat.m[0][0],-mat.m[0][1],-mat.m[0][2] };
+			playerFlont.Normalize();
+			target += playerFlont * 0.5f;
+			//target.x += 0.3f; //GetPlayer().GetWeaponPosition();
+		}
+		
 		target.y += 1.5f;
 		CVector3	toNewCameraPos = camera.GetPosition() - target;
 
-		
-		
 		toNewCameraPos.y = 0.0f;
 		toNewCameraPos.Normalize();
 		float weight = 0.3f;  //このウェイトの値は0.0～1.0の値をとる。1.0に近づくほど追尾が強くなる。

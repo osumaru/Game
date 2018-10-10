@@ -55,6 +55,7 @@ private:
 	CCamera camera;			//カメラ
 	CVector3 m_cameraVec;	//注視点からカメラへのベクトル
 	CSpringCamera	m_springCamera;
+	CVector3 m_arrowCamera;	//弓を構えている時のカメラの位置
 
 };
 
