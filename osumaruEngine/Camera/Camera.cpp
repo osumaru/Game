@@ -123,11 +123,12 @@ void CCamera::Update()
 {
 	m_viewMatrix.MakeLookAt(m_position, m_target, m_up);
 	m_projectionMatrix.MakeProjectionMatrix(m_angle, m_Aspect, m_Near, m_Far);
+	m_viewMatrixInv.Inverse(m_viewMatrix);
 
 	//ƒJƒƒ‰‚Ì‘O•ûŒü
-	m_flont = { m_viewMatrix.m[2][0],m_viewMatrix.m[2][1], m_viewMatrix.m[2][2] };
+	m_flont = { m_viewMatrixInv.m[2][0],m_viewMatrixInv.m[2][1], m_viewMatrixInv.m[2][2] };
 	//ƒJƒƒ‰‚Ì‰¡•ûŒü
-	m_right = { m_viewMatrix.m[0][0],m_viewMatrix.m[0][1], m_viewMatrix.m[0][2] };
+	m_right = { m_viewMatrixInv.m[0][0],m_viewMatrixInv.m[0][1], m_viewMatrixInv.m[0][2] };
 
 }
 

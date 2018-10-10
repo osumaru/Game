@@ -246,6 +246,7 @@ void CPlayer::StatusCalculation()
 
 void  CPlayer::WeaponChange()
 {
+	if (GetPlayerStateMachine().GetState() == CPlayerState::EnPlayerState::enPlayerAttack) { return; }
 	if (m_weaponState == (EnPlayerWeapon)GetSceneManager().GetGameScene().GetWeaponSelect()->GetWeapon()) { return; }
 	m_weaponState = (EnPlayerWeapon)GetSceneManager().GetGameScene().GetWeaponSelect()->GetWeapon();
 	switch (m_weaponState)
