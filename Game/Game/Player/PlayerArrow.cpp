@@ -20,6 +20,14 @@ bool CPlayerArrow::Start()
 	m_light.SetAmbientLight({ 0.0f,0.0f,1.0f ,1.0f });
 	m_arrowskin.SetLight(m_light);
 	m_scale = { 2.0f,2.0f,2.0f };
+
+	//プレイヤーHPのロード
+	m_texture.Load(L"Assets/sprite/arrowTag.png");
+	m_arrowtag.Init(&m_texture);
+	m_arrowtag.SetPosition({0.0f,0.0f  });
+	m_arrowtag.SetSize({ 50.0f,50.0f });
+	m_arrowtag.SetAlpha(1.0f);
+
 	return true;
 }
 
@@ -29,8 +37,7 @@ void CPlayerArrow::Update()
 	if (GetPlayer().GetPlayerStateMachine().GetState() == CPlayerState::EnPlayerState::enPlayerArrowAttack && !m_isMove/*Pad().IsPressButton(enButtonX) && !m_isMove*/)
 	{
 		m_arrowPosition = GetPlayer().GetWeaponPosition();
-		CMatrix	mat = GetPlayer().GetPlayerSkin().GetWorldMatrix();
-		CVector3 weaponFlont = { -mat.m[1][0],-mat.m[1][1],-mat.m[1][2] };
+		CVector3 weaponFlont = GetGameCamera().GetCamera().GetFlont();//{ -mat.m[1][0],-mat.m[1][1],-mat.m[1][2] };
 		weaponFlont.Normalize();
 		m_moveSpeed = weaponFlont * 10.0f;
 		m_arrowRot.SetRotation(CVector3::AxisY, atan2f(weaponFlont.x, weaponFlont.z));		//Y軸周りの回転
@@ -54,6 +61,9 @@ void CPlayerArrow::Update()
 
 void CPlayerArrow::Draw()
 {
-	
+	if (!m_isMove)
+	{
+		m_arrowtag.Draw();
+	}
 	m_arrowskin.Draw(GetGameCamera().GetViewMatrix(), GetGameCamera().GetProjectionMatrix());
 }
