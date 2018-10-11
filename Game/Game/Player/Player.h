@@ -38,6 +38,7 @@ public:
 		enPlayerAvoidance,	//回避アニメーション
 
 		enPlayerDete,		//死亡アニメーション
+		enPlayerWireMove,	//ワイヤー移動アニメーション
 		enPlayerArroAttack,	//弓のアニメーション
 		enPlayerLongSwordAttack,//大剣の攻撃アニメーション
 		enPlayerTwinSwordAttack,//二刀流の攻撃アニメーション

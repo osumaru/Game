@@ -2,7 +2,7 @@
 #include "DamageNumber.h"
 #include "Number.h"
 
-void CDamegeNumber::Init()
+void CDamageNumber::Init()
 {
 	m_numPos = { 0.0f,0.0f };
 	m_numSize = { 15.0f,25.0f };
@@ -16,7 +16,7 @@ void CDamegeNumber::Init()
 	}
 }
 
-void CDamegeNumber::DamageCalculation(int dmg)
+void CDamageNumber::DamageCalculation(int dmg)
 {
 	//受けたダメージを取得
 	int damage = dmg;
@@ -49,8 +49,20 @@ void CDamegeNumber::DamageCalculation(int dmg)
 	//一の位を表示
 	m_number[EnDigit::enDigit_One]->SetIsActive(true);
 	m_number[EnDigit::enDigit_One]->SetNumber(damage);
+}
 
-	for (int i = 0; i < EnDigit::enDigit_Num; i++) {
+void CDamageNumber::IndicateReset()
+{
+	m_number[EnDigit::enDigit_One]->SetIsActive(false);
+	m_number[EnDigit::enDigit_Ten]->SetIsActive(false);
+	m_number[EnDigit::enDigit_Hundred]->SetIsActive(false);
+}
+
+void CDamageNumber::SetPosition(const CVector2 & position)
+{
+	m_numPos = position;
+	for (int i = 0; i < EnDigit::enDigit_Num; i++)
+	{
 		m_number[i]->SetPosition(m_numPos);
 		m_numPos.x -= m_numSize.x * (i + 1);
 	}

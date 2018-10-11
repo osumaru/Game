@@ -23,7 +23,7 @@ void CEnemyAttack::Update()
 	//プレイヤーがダメージを受けていない
 	if (!GetPlayer().GetIsDamage()) {
 		//手のボーンのワールド行列を取得
-		CMatrix leftHandMatrix = m_enemy->GetBoneWorldMatrix(L"LeftHand");
+		CMatrix leftHandMatrix = m_enemy->GetBoneWorldMatrix(L"mixamorig:LeftHand");
 		CVector3 leftHandPosition;
 		leftHandPosition.x = leftHandMatrix.m[3][0];
 		leftHandPosition.y = leftHandMatrix.m[3][1];

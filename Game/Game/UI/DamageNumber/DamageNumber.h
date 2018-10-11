@@ -7,7 +7,7 @@
 
 class CNumber;
 
-class CDamegeNumber
+class CDamageNumber
 {
 public:
 	//初期化
@@ -17,12 +17,12 @@ public:
 	//dmg	受けたダメージ
 	void DamageCalculation(int dmg);
 
+	//表示リセット
+	void IndicateReset();
+
 	//座標を設定
 	//position	座標
-	void SetPosition(const CVector2& position)
-	{
-		m_numPos = position;
-	}
+	void SetPosition(const CVector2& position);
 
 	enum EnDigit {
 		enDigit_One,		//一の位

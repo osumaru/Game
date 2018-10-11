@@ -51,11 +51,11 @@ void CMoney::Update()
 		toPlayerNormalize.Normalize();
 		m_moveSpeed += toPlayerNormalize * m_timer;
 		m_characterController.SetMoveSpeed(m_moveSpeed);
-	}
-	if (length < 2.0f) {
-		//‹ß‚¯‚ê‚ÎŠl“¾
-		GetPlayer().GainGold(m_gold);
-		Delete(this);
+		if (length < 2.0f) {
+			//‹ß‚¯‚ê‚ÎŠl“¾
+			GetPlayer().GainGold(m_gold);
+			Delete(this);
+		}
 	}
 
 	m_characterController.SetPosition(m_position);

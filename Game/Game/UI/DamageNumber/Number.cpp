@@ -15,10 +15,6 @@ void CNumber::Init(CVector2 numPos, CVector2 numSize)
 
 void CNumber::Update()
 {
-	m_timer += GameTime().GetDeltaFrameTime();
-	if (m_timer > 3.0f) {
-		this->SetIsActive(false);
-	}
 }
 
 void CNumber::AfterDraw()
