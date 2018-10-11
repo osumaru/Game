@@ -84,17 +84,14 @@ float4 PSMain(VS_OUTPUT In) : SV_TARGET0
 	shadowMapPos /= shadowMapPos.w;
 	shadowMapPos = mul(lightViewProj, shadowMapPos);
 	shadowMapPos /= shadowMapPos.w;
-	shadowMapPos.xy += 1.0f;
-	shadowMapPos.xy /= 2.0f;
-	shadowMapPos.y = 1.0f - shadowMapPos.y;
 	float depth = shadowMapPos.z;
 	float shadowDepth = shadowTexture.Sample(Sampler, shadowMapPos.xy).x;
-	if(false)
+	if(shadowDepth < depth)
 	{
-		if(shadowMapPos.x <= 1.0f && 0.0f <= shadowMapPos.x &&
-		shadowMapPos.y <= 1.0f && 0.0f <= shadowMapPos.y)
+		if(shadowMapPos.x <= 1.0f && 0.0f <= shadowMapPos.x
+		 &&	shadowMapPos.y <= 1.0f && 0.0f <= shadowMapPos.y)
 		{
-			color.xyz = 0.0f;
+			//color.xyz = 0.0f;
 		}
 	}
 	return color;
