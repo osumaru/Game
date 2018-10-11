@@ -33,8 +33,6 @@ void CNinja::Init(CVector3 position)
 	Add(&m_enemyStateMachine, 0);
 	Add(&m_enemyTurn, 0);
 	Add(&m_enemySearch, 0);
-	//ダメージ表示の初期化
-	m_damageNumber.Init();
 
 	//ステータスを設定
 	m_status.Strength = 10;

@@ -30,8 +30,8 @@ bool CEnemyDamage::Start()
 	screenPosition.x = (1.0f + projectionPosition.x) / 2.0f * FrameBufferWidth() - (FrameBufferWidth() / 2.0f);
 	screenPosition.y = (1.0f + projectionPosition.y) / 2.0f * FrameBufferHeight() - (FrameBufferHeight() / 4.0f);
 
-	m_enemy->SetDamagePos(screenPosition);
-	m_enemy->DamageCalculation(damage);
+	m_damageNumber.SetPosition(screenPosition);
+	m_damageNumber.DamageCalculation(damage);
 
 	return true;
 }
@@ -73,16 +73,12 @@ void CEnemyDamage::Update()
 			//遠ければ歩き始める
 			m_esm->ChangeState(CEnemyState::enState_Walk);
 		}
-		//ダメージ表示の描画をやめる
-		m_enemy->DamageIndicateReset();
 		//ダメージを受けたフラグを戻す
 		m_enemy->SetIsDamage(false);
 	}
 	if (m_enemy->GetStatus().Hp <= 0) {
 		//HPが無くなれば死亡
 		m_esm->ChangeState(CEnemyState::enState_Death);
-		//ダメージ表示の描画をやめる
-		m_enemy->DamageIndicateReset();
 		//ダメージを受けたフラグを戻す
 		m_enemy->SetIsDamage(false);
 	}

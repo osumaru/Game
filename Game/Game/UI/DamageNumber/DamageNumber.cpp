@@ -5,8 +5,7 @@
 void CDamegeNumber::Init()
 {
 	m_numPos = { 0.0f,0.0f };
-	//m_numSize = { 15.0f,25.0f };
-	m_numSize = { 100.0f,100.0f };
+	m_numSize = { 15.0f,25.0f };
 
 	//数字のスプライトを初期化
 	for (int i = 0; i < EnDigit::enDigit_Num; i++) {
@@ -55,12 +54,4 @@ void CDamegeNumber::DamageCalculation(int dmg)
 		m_number[i]->SetPosition(m_numPos);
 		m_numPos.x -= m_numSize.x * (i + 1);
 	}
-}
-
-void CDamegeNumber::Reset()
-{
-	//全ての位の表示をやめる
-	m_number[EnDigit::enDigit_Hundred]->SetIsActive(false);
-	m_number[EnDigit::enDigit_Ten]->SetIsActive(false);
-	m_number[EnDigit::enDigit_One]->SetIsActive(false);
 }

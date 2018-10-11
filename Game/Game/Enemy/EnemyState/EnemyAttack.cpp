@@ -69,7 +69,7 @@ void CEnemyAttack::Update()
 			//ƒvƒŒƒCƒ„[‚ªŽ‹–ì“à‚É‚¢‚È‚¢
 			m_esm->ChangeState(CEnemyState::enState_Walk);
 		}
-		else if (fabsf(angle) < CMath::DegToRad(20.0f) && length > 2.0f) {
+		else if (fabsf(angle) < CMath::DegToRad(20.0f) && length < 2.0f) {
 			m_enemy->PlayAnimation(CEnemyState::enState_Attack);
 		}
 		else {

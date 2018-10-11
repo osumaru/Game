@@ -17,9 +17,6 @@ public:
 	//dmg	受けたダメージ
 	void DamageCalculation(int dmg);
 
-	//ダメージ表示リセット
-	void Reset();
-
 	//座標を設定
 	//position	座標
 	void SetPosition(const CVector2& position)

@@ -5,7 +5,6 @@
 #pragma once
 
 #include "../Enemy/EnemyState/EnemyStateMachine.h"
-#include "../UI/DamageNumber/DamageNumber.h"
 #include "EnemyTurn.h"
 #include "EnemySearch.h"
 
@@ -103,25 +102,6 @@ public:
 		m_enemyStateMachine.Release();
 	}
 
-	//ダメージ表示の座標を設定
-	void SetDamagePos(const CVector2& pos)
-	{
-		m_damageNumber.SetPosition(pos);
-	}
-
-	//エネミーのダメージ計算
-	//dmg	ダメージ数値
-	void DamageCalculation(int dmg)
-	{
-		m_damageNumber.DamageCalculation(dmg);
-	}
-
-	//ダメージ表示のリセット
-	void DamageIndicateReset()
-	{
-		m_damageNumber.Reset();
-	}
-
 	//ステータスを取得
 	const SEnemyStatus& GetStatus() const
 	{
@@ -191,7 +171,6 @@ protected:
 	CEnemyStateMachine		m_enemyStateMachine;	//ステートマシン
 	CEnemyTurn				m_enemyTurn;			//向きを回転
 	CEnemySearch			m_enemySearch;			//プレイヤーを探索
-	CDamegeNumber			m_damageNumber;			//ダメージ数値
 	CEnemyGroup*			m_enemyGroup;			//エネミーグループ
 	CVector3				m_position;				//座標
 	CQuaternion				m_rotation;				//回転
