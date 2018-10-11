@@ -33,11 +33,19 @@ public:
 		textureResource = texture;
 	}
 
+	void SetIsShadow(bool isshadow)
+	{
+		isShadow = isshadow;
+	}
+
 protected:
 	ID3D11ShaderResourceView*		textureResource;	//テクスチャのSRV
 	CConstantBuffer					constantBuffer;		//定数バッファ
 	CShader							vsShader;			//頂点シェーダー
 	CShader							psShader;			//ピクセルシェーダー
+	CShader							shadowVsShader;			//頂点シェーダー
+	CShader							shadowPsShader;			//ピクセルシェーダー
+	bool							isShadow = false;
 };
 
 //スキン有りモデルのエフェクト

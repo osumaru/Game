@@ -9,7 +9,7 @@ void CGameObjectManager::Init()
 	m_objectVector.resize(PRIORITY_MAX);
 }
 
-void CGameObjectManager::Execute(Deferred& deferred, PostEffect& postEffect)
+void CGameObjectManager::Execute(CDeferred& deferred, CPostEffect& postEffect)
 {
 	//‰Šú‰»
 	for (GameObjectList& objList : m_objectVector)
@@ -27,6 +27,7 @@ void CGameObjectManager::Execute(Deferred& deferred, PostEffect& postEffect)
 			object.gameObject->Updater();
 		}
 	}
+	Engine().GetShadowMap().Draw();
 	//
 	deferred.Start();
 	for (GameObjectList& objList : m_objectVector)

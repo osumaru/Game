@@ -150,6 +150,7 @@ void CEngine::InitD3D(HINSTANCE& hInst)
 	m_depthState.SetDepthStencilState(m_pDeviceContext, enDepthStencilState3D);
 	m_deferred.Init();
 	m_postEffect.Init(m_pSwapChain);
+	m_shadowMap.Init();
 }
 
 void CEngine::GameLoop()

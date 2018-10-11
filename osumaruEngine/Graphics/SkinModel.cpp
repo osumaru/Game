@@ -2,6 +2,7 @@
 #include "SkinModel.h"
 #include "Skelton.h"
 #include "Animation.h"
+#include "SkinModelEffect.h"
 
 CSkinModel::CSkinModel()
 {
@@ -23,7 +24,7 @@ void CSkinModel::Load(const wchar_t* filePath, CAnimation* animation)
 	cb.isNormalMap = m_isNormalMap;
 	constantBuffer.Create(sizeof(SSkinModelCB), &cb);
 	m_lightCB.Create(sizeof(CLight), &m_light);
-
+	Engine().GetDeferred().SetConstantBuffer();
 	//ファイル名の拡張子(cmo)を除きtksを追加しスケルトンのファイル名を作成
 	size_t pos = wcslen(filePath);
 	wchar_t skeltonName[256] = {0};
@@ -64,16 +65,18 @@ void CSkinModel::Update(const CVector3& position, const CQuaternion& rotation, c
 	
 	if (m_skelton != nullptr)
 	{
-	m_skelton->Update(worldMatrix);
+		m_skelton->Update(worldMatrix);
 	}
+	Engine().GetShadowMap().AddModel(this);
 }
 
 
-void CSkinModel::Draw(const CMatrix& view, const CMatrix& projection)
+void CSkinModel::Draw(const CMatrix& view, const CMatrix& projection, bool isShadow)
 {
-
 	DirectX::CommonStates common(GetDevice());
 	CMatrix world = CMatrix::Identity;
+	Engine().SetAlphaBlendState(enAlphaBlendState3D);
+	Engine().SetDepthStencilState(enDepthStencilState3D);
 	SSkinModelCB cb;
 	CMatrix viewProjMat;
 	viewProjMat.Mul(view, projection);
@@ -96,7 +99,15 @@ void CSkinModel::Draw(const CMatrix& view, const CMatrix& projection)
 	{
 		m_skelton->Render();
 	}
+	for (auto& modelMesh : m_skinModel->meshes)
+	{
+		for (auto& meshPart : modelMesh->meshParts)
+		{
+			((ISkinModelEffect*)(&*meshPart->effect))->SetIsShadow(isShadow);
+		}
+	}
 	m_skinModel->Draw(GetDeviceContext(), common, world, view, projection);
+	
 }
 
 const CMatrix& CSkinModel::FindBoneWorldMatrix(const wchar_t* boneName) const

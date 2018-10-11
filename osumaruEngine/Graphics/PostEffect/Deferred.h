@@ -5,6 +5,8 @@
 #include "../Shader.h"
 #include "../ConstantBuffer.h"
 
+class CCamera;
+
 enum EnRenderTarget
 {
 	enRenderTargetColor,
@@ -15,7 +17,7 @@ enum EnRenderTarget
 	enRenderTargetNum
 };
 
-class Deferred : Uncopyable
+class CDeferred : Uncopyable
 {
 public:
 	//頂点レイアウト
@@ -24,8 +26,9 @@ public:
 		CVector4 position;
 		CVector2	uv;
 	};
+
 	//コンストラクタ
-	Deferred();
+	CDeferred();
 
 	//初期化関数
 	void Init();
@@ -35,14 +38,39 @@ public:
 
 	//描画関数
 	void Draw();
-	
+
 	/*
-	シェーダーリソースを取得
+	シェーダーリソースビューを取得
+	numRenderTarget	レンダリングターゲットの番号
 	*/
 	ID3D11ShaderResourceView* GetShaderResource(EnRenderTarget numRenderTarget)
 	{
 		return m_renderTarget[numRenderTarget].GetRenderTargetTexture().GetShaderResource();
 	}
+
+	void SetViewMatrix(CMatrix& viewMatrix)
+	{
+		m_viewMatrix = viewMatrix;
+	}
+
+	void SetProjectionMatrix(CMatrix& projectionMatrix)
+	{
+		m_projectionMatrix = projectionMatrix;
+	}
+
+	CMatrix& GetViewMatrix()
+	{
+		return m_viewMatrix;
+	}
+
+	CMatrix& GetProjMatrix()
+	{
+		return m_projectionMatrix;
+	}
+
+	void SetConstantBuffer();
+
+	void SetCamera(CCamera* camera);
 
 private:
 	CRenderTarget							m_renderTarget[enRenderTargetNum];	//Gバッファー
@@ -50,4 +78,9 @@ private:
 	CShader									m_vertexShader;						//頂点シェーダー
 	CShader									m_pixelShader;						//ピクセルシェーダー
 	CConstantBuffer							m_lightCB;							//ライトの定数バッファ
+	CMatrix									m_viewMatrix;						
+	CMatrix									m_projectionMatrix;
+	CConstantBuffer							m_shadowCB;
+	CConstantBuffer							m_gameCameraCB;
+	CCamera*								m_camera = nullptr;
 };
