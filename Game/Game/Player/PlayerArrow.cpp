@@ -26,7 +26,7 @@ bool CPlayerArrow::Start()
 	m_arrowtag.Init(&m_texture);
 	m_arrowtag.SetPosition({0.0f,0.0f  });
 	m_arrowtag.SetSize({ 50.0f,50.0f });
-	m_arrowtag.SetAlpha(1.0f);
+	m_arrowtag.SetAlpha(0.7f);
 
 	return true;
 }
