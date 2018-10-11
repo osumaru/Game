@@ -12,6 +12,11 @@ cbuffer lightCB : register(b1)
 	float4 diffuseLightDir[4];
 };
 
+cbuffer shadowCB : register(b2)
+{
+	float4x4 lightViewProj;
+};
+
 StructuredBuffer<float4x4> boneMatrix : register(t100);
 
 struct VS_INPUT
@@ -40,6 +45,7 @@ struct VS_OUTPUT
 	float3 binormal : BINORMAL;
 	float2 uv : TEXCOORD0;
 	float4 worldPos : TEXCOORD1;
+	float4 shadowPos : TEXCOORD2;
 };
 
 struct PS_OUTPUT
@@ -49,17 +55,18 @@ struct PS_OUTPUT
 	float4 normal		: SV_TARGET2;
 	float4 tangent		: SV_TARGET3;
 	float4 depth		: SV_TARGET4;
+	float4 shadowColor	: SV_TARGET5;
 };
 
 Texture2D<float4> colorTexture : register(t10);
 Texture2D<float4> normalTexture : register(t11);
 sampler Sampler : register(s0);
 
-
 VS_OUTPUT VSMain(VS_INPUT In)
 {
 	VS_OUTPUT Out;
 	Out.pos = mul(mvp, In.pos);
+	Out.shadowPos = mul(lightViewProj, Out.pos);
 	Out.pos = mul(viewProj, Out.pos);
 	Out.normal = mul(mvp, In.normal);
 	Out.normal = normalize(Out.normal);
@@ -82,6 +89,7 @@ VS_OUTPUT VSSkinMain(VS_SKIN_INPUT In)
 		pos += boneMatrix[In.boneIndex[i]] * In.blendWeight[i];
 	}
 	Out.pos = mul(pos, In.pos);
+	Out.shadowPos = mul(lightViewProj, Out.pos);
 	Out.pos = mul(viewProj, Out.pos);
 	Out.normal = mul(pos, In.normal);
 	Out.normal = normalize(Out.normal);
@@ -103,7 +111,41 @@ PS_OUTPUT PSMain(VS_OUTPUT In)
 	float3 normalColor = normalTexture.Sample(Sampler, In.uv) * isNormalMap + float3(0.0f, 0.0f, 1.0f) * (1 - isNormalMap);
 	Out.normalMap = float4(normalColor, 1.0f);
 	Out.depth.x = In.worldPos.z / In.worldPos.w;
+	Out.shadowColor.x = In.shadowPos.z / In.shadowPos.w;
 	return Out;
 }
 
+VS_OUTPUT VSShadowMain(VS_INPUT In)
+{
+	VS_OUTPUT Out;
+	Out.pos = mul(mvp, In.pos);
+	Out.pos = mul(viewProj, Out.pos);
+	Out.worldPos = Out.pos;
+	return Out;
+}
+
+VS_OUTPUT VSShadowSkinMain(VS_SKIN_INPUT In)
+{
+	VS_OUTPUT Out;
+	float4x4 pos = 0;
+	float4 blendWeight;
+	for (int i = 0;i < 4;i++)
+	{
+		pos += boneMatrix[In.boneIndex[i]] * In.blendWeight[i];
+	}
+	Out.pos = mul(pos, In.pos);
+	Out.pos = mul(viewProj, Out.pos);
+	Out.worldPos = Out.pos;
+	return Out;
+}
+
+float4 PSShadowMain(VS_OUTPUT In) : SV_TARGET0
+{
+	float4 Out;
+	Out.x = In.worldPos.z / In.worldPos.w;
+	Out.y = In.worldPos.z / In.worldPos.w;
+	Out.z = In.worldPos.z / In.worldPos.w;
+	Out.w = 1.0f;
+	return Out;
+}
 

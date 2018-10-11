@@ -13,11 +13,9 @@
 #include "Graphics/State/AlphaBlendState.h"
 #include "Graphics/State/DepthStencilState.h"
 #include "Graphics/State/RasterizerState.h"
-
+#include "Graphics/PreRendering/ShadowMap.h"
 
 //エンジンクラス
-
-
 class CEffectManager;
 class CGameObject;
 class CPhysicsWorld;
@@ -143,9 +141,9 @@ public:
 	}
 	CLight& Light()
 	{
-
 		return m_light;
 	}
+
 	CRenderTarget& GetMainRenderTarget()
 	{
 		return m_mainRenderTarget[m_currentRenderTargetNum];
@@ -168,6 +166,35 @@ public:
 		m_objectManager.AllInactive();
 	}
 
+	CPostEffect& GetPostEffect()
+	{
+		return m_postEffect;
+	}
+
+	void SetAlphaBlendState(EnAlphaBlendState alphaBlendState)
+	{
+		m_alphaBlend.SetBlendState(m_pDeviceContext, alphaBlendState);
+	}
+
+	void SetDepthStencilState(EnDepthStencilState depthStencilState)
+	{
+		m_depthState.SetDepthStencilState(m_pDeviceContext, depthStencilState);
+	}
+
+	void SetRasterizerState(EnRasterizerState rasterizerState)
+	{
+		m_rasterizerState.SetRasterizerState(m_pDeviceContext, rasterizerState);
+	}
+
+	CDeferred& GetDeferred()
+	{
+		return m_deferred;
+	}
+
+	CShadowMap& GetShadowMap()
+	{
+		return m_shadowMap;
+	}
 private:
 	static const int						MAIN_RENDER_TARGET_NUM = 2;
 	CGameObjectManager						m_objectManager;			//オブジェクトマネージャー
@@ -189,11 +216,12 @@ private:
 	CSkinmodelResource						m_skinmodelResource;
 	CShaderResource							m_shaderResource;
 	CLight									m_light;
-	Deferred								m_deferred;
-	PostEffect								m_postEffect;
+	CDeferred								m_deferred;
+	CPostEffect								m_postEffect;
 	CAlphaBlendState						m_alphaBlend;
 	CRasterizerState						m_rasterizerState;
 	CDepthStencilState						m_depthState;
+	CShadowMap								m_shadowMap;
 };
 
 //エンジンクラスのインスタンスを取得。

@@ -55,6 +55,9 @@
     <Filter Include="ソース ファイル\Graphics\State">
       <UniqueIdentifier>{a743751e-99a1-4a6f-ab0e-34fa7199cb29}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Graphics\preRendering">
+      <UniqueIdentifier>{8c66b860-a17c-4894-8b9f-668daa0f3084}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="engineStdafx.cpp">
@@ -203,6 +206,9 @@
     </ClCompile>
     <ClCompile Include="Graphics\State\AlphaBlendState.cpp">
       <Filter>ソース ファイル\Graphics\State</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\PreRendering\ShadowMap.cpp">
+      <Filter>ソース ファイル\Graphics\preRendering</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -358,6 +364,9 @@
     </ClInclude>
     <ClInclude Include="Graphics\State\AlphaBlendState.h">
       <Filter>ソース ファイル\Graphics\State</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\PreRendering\ShadowMap.h">
+      <Filter>ソース ファイル\Graphics\preRendering</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
