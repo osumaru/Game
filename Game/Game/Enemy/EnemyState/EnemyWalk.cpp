@@ -42,6 +42,7 @@ void CEnemyWalk::Update()
 	//åªç›ÇÃç¿ïWÇ©ÇÁà⁄ìÆêÊÇ‹Ç≈ÇÃãóó£ÇåvéZ
 	CVector3 position = m_enemy->GetPosition();
 	CVector3 distance = m_destination - position;
+	distance.y = 0.0f;
 	float length = distance.Length();
 	if (length > 0.3f) {
 		//ãﬂÇ≠Ç»ÇØÇÍÇŒÇªÇÃÇ‹Ç‹êiÇﬁ

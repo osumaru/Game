@@ -44,6 +44,7 @@ void CPlayerWireMove::Update()
 	}
 
 	if (isMoveEnd) {
+		GetPlayer().SetIsWireMove(false);
 		//ˆÚ“®‚ªI‚í‚Á‚½
 		GetPlayer().GetPlayerStateMachine().ChangeState(CPlayerState::enPlayerStand);
 	}

@@ -1,8 +1,9 @@
 #include "stdafx.h"
 #include "EnemyDamage.h"
 #include "../IEnemy.h"
-#include "../../Player/Player.h"
 #include "../EnemyGroup.h"
+#include "../../Player/Player.h"
+#include "../../Camera/GameCamera.h"
 
 bool CEnemyDamage::Start()
 {
@@ -15,8 +16,22 @@ bool CEnemyDamage::Start()
 	int damage = playerStrength - enemyDefence;
 	m_enemy->HpDamage(damage);
 	CVector3 enemyPos = m_enemy->GetPosition();
-	m_enemy->SetDamagePos({ enemyPos.x, enemyPos.y });
-	m_enemy->DamageCalculation(damage);
+	CMatrix viewMatrix = GetGameCamera().GetViewMatrix();
+	CMatrix projectionMatrix = GetGameCamera().GetProjectionMatrix();
+	//ビュー変換
+	CVector4 viewPosition = enemyPos;
+	viewMatrix.Mul(viewPosition);
+	//プロジェクション変換
+	CVector4 projectionPosition = viewPosition;
+	projectionMatrix.Mul(projectionPosition);
+	projectionPosition = projectionPosition / projectionPosition.w;
+	//スクリーン変換
+	CVector2 screenPosition;
+	screenPosition.x = (1.0f + projectionPosition.x) / 2.0f * FrameBufferWidth() - (FrameBufferWidth() / 2.0f);
+	screenPosition.y = (1.0f + projectionPosition.y) / 2.0f * FrameBufferHeight() - (FrameBufferHeight() / 4.0f);
+
+	m_damageNumber.SetPosition(screenPosition);
+	m_damageNumber.DamageCalculation(damage);
 
 	return true;
 }
@@ -58,16 +73,12 @@ void CEnemyDamage::Update()
 			//遠ければ歩き始める
 			m_esm->ChangeState(CEnemyState::enState_Walk);
 		}
-		//ダメージ表示の描画をやめる
-		m_enemy->DamageIndicateReset();
 		//ダメージを受けたフラグを戻す
 		m_enemy->SetIsDamage(false);
 	}
 	if (m_enemy->GetStatus().Hp <= 0) {
 		//HPが無くなれば死亡
 		m_esm->ChangeState(CEnemyState::enState_Death);
-		//ダメージ表示の描画をやめる
-		m_enemy->DamageIndicateReset();
 		//ダメージを受けたフラグを戻す
 		m_enemy->SetIsDamage(false);
 	}

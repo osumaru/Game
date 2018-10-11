@@ -35,7 +35,7 @@ void CWireCollisionSolver::Init(float radius, float height)
 {
 	m_radius = radius;
 	m_height = height;
-	m_collider.Create(radius, height);
+	m_collider.Create(m_radius / 2.0f, m_height / 2.0f);
 }
 
 bool CWireCollisionSolver::Execute(const CVector3 & position, const CVector3 target)
@@ -52,12 +52,15 @@ bool CWireCollisionSolver::Execute(const CVector3 & position, const CVector3 tar
 	CVector3 posTmp = position;
 	posTmp.y += m_height * 0.5f + m_radius + 0.2f;
 
+	CVector3 targetPos = target;
+	targetPos.y += m_height * 0.5f + m_radius + 0.2f;
+
 	//ÉåÉCÇçÏê¨Ç∑ÇÈ
 	btTransform btStart, btEnd;
 	btStart.setIdentity();
 	btEnd.setIdentity();
 	btStart.setOrigin(btVector3(posTmp.x, posTmp.y, posTmp.z));
-	btEnd.setOrigin(btVector3(target.x, posTmp.y, target.z));
+	btEnd.setOrigin(btVector3(targetPos.x, targetPos.y, targetPos.z));
 
 	SConvexSweepCallBack callback;
 	Engine().PhysicsWorld().ConvexSweepTest((const btConvexShape*)m_collider.GetBody(), btStart, btEnd, callback);

@@ -116,6 +116,11 @@ public:
 		return  m_deferred.GetShaderResource(numRenderTarget);
 	}
 
+	CAlphaBlendState& GetAlphaBlendState()
+	{
+		return m_alphaBlend;
+	}
+
 	//インスタンスの生成
 	template<class T, class... TArgs>
 	T* New(int priority, TArgs... args)

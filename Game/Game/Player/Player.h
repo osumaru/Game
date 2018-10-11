@@ -267,10 +267,16 @@ public:
 		return m_wirePosition;
 	}
 
-	//ワイヤー移動できるかを取得
+	//ワイヤー移動しているか
 	bool IsWireMove()
 	{
 		return m_isWireMove;
+	}
+
+	//ワイヤー移動しているかを設定
+	void SetIsWireMove(bool isWireMove)
+	{
+		m_isWireMove = isWireMove;
 	}
 
 	const CSkinModel& GetWeaponskin(int num)

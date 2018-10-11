@@ -137,8 +137,7 @@ void CPlayer::Update()
 		}
 	}
 
-	m_isWireMove = false;
-	if (Pad().IsTriggerButton(enButtonY))
+	if (Pad().IsTriggerButton(enButtonY) && !m_isWireMove)
 	{
 		float minLength = FLT_MAX;
 		std::list<IEnemy*> enemyList = GetSceneManager().GetGameScene().GetMap()->GetEnemyList();
