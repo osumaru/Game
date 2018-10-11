@@ -3,12 +3,7 @@
 
 CShaderResource::~CShaderResource()
 {
-	while (!m_shaders.empty())
-	{
-		CShader* shader = m_shaders.back();
-		shader->EraseFlgFold();
-		m_shaders.pop_back();
-	}
+	m_shaders.clear();
 }
 
 SShaderData CShaderResource::ReadFile(const char* filePath)
@@ -284,5 +279,9 @@ std::list<CShader*>::iterator CShaderResource::ShaderPushBack(CShader* shader)
 
 void CShaderResource::ShaderErase(std::list<CShader*>::iterator it)
 {
+	if (m_shaders.empty())
+	{
+		return;
+	}
 	m_shaders.erase(it);
 }
