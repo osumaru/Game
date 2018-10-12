@@ -19,7 +19,7 @@ void CNumber::Update()
 
 void CNumber::AfterDraw()
 {
-	Engine().GetAlphaBlendState().SetBlendState(Engine().GetDeviceContext(), enAlphaBlendState2D);
+	Engine().SetAlphaBlendState(enAlphaBlendState2D);
 	m_number[m_num].Draw();
-	Engine().GetAlphaBlendState().SetBlendState(Engine().GetDeviceContext(), enAlphaBlendState3D);
+	Engine().SetAlphaBlendState(enAlphaBlendState3D);
 }

@@ -16,28 +16,6 @@ bool CEnemyDamage::Start()
 	int damage = playerStrength - enemyDefence;
 	m_enemy->HpDamage(damage);
 
-	//CMatrix leftShoulderMatrix = m_enemy->GetBoneWorldMatrix(L"mixamorig:LeftShoulder");
-	//CVector3 leftShoulderPos;
-	//leftShoulderPos.x = leftShoulderMatrix.m[3][0];
-	//leftShoulderPos.y = leftShoulderMatrix.m[3][1];
-	//leftShoulderPos.z = leftShoulderMatrix.m[3][2];
-	//CMatrix viewMatrix = GetGameCamera().GetViewMatrix();
-	//CMatrix projectionMatrix = GetGameCamera().GetProjectionMatrix();
-	////ビュー変換
-	//CVector4 viewPosition = leftShoulderPos;
-	//viewMatrix.Mul(viewPosition);
-	////プロジェクション変換
-	//CVector4 projectionPosition = viewPosition;
-	//projectionMatrix.Mul(projectionPosition);
-	//projectionPosition = projectionPosition / projectionPosition.w;
-	////スクリーン変換
-	//CVector2 screenPosition;
-	//screenPosition.x = (1.0f + projectionPosition.x) / 2.0f * FrameBufferWidth() - (FrameBufferWidth() / 2.0f);
-	//screenPosition.y = (1.0f + projectionPosition.y) / 2.0f * FrameBufferHeight() - (FrameBufferHeight() / 2.0f);
-
-	//m_enemy->DamageCaluc(damage);
-	//m_enemy->SetDamageCalucPos(screenPosition);
-
 	return true;
 }
 
@@ -48,7 +26,7 @@ void CEnemyDamage::Update()
 	int enemyDefence = m_enemy->GetStatus().Defense;
 	int damage = playerStrength - enemyDefence;
 
-	CMatrix leftShoulderMatrix = m_enemy->GetBoneWorldMatrix(L"mixamorig:LeftShoulder");
+	CMatrix leftShoulderMatrix = m_enemy->GetBoneWorldMatrix(L"LeftShoulder");
 	CVector3 leftShoulderPos;
 	leftShoulderPos.x = leftShoulderMatrix.m[3][0];
 	leftShoulderPos.y = leftShoulderMatrix.m[3][1];
