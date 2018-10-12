@@ -1,8 +1,9 @@
 #include "stdafx.h"
 #include "EnemyDamage.h"
 #include "../IEnemy.h"
-#include "../../Player/Player.h"
 #include "../EnemyGroup.h"
+#include "../../Player/Player.h"
+#include "../../Camera/GameCamera.h"
 
 bool CEnemyDamage::Start()
 {
@@ -14,15 +15,39 @@ bool CEnemyDamage::Start()
 	int enemyDefence = m_enemy->GetStatus().Defense;
 	int damage = playerStrength - enemyDefence;
 	m_enemy->HpDamage(damage);
-	CVector3 enemyPos = m_enemy->GetPosition();
-	m_enemy->SetDamagePos({ enemyPos.x, enemyPos.y });
-	m_enemy->DamageCalculation(damage);
 
 	return true;
 }
 
 void CEnemyDamage::Update()
 {
+	//ダメージ計算
+	int playerStrength = GetPlayer().GetStatus().Strength;
+	int enemyDefence = m_enemy->GetStatus().Defense;
+	int damage = playerStrength - enemyDefence;
+
+	CMatrix leftShoulderMatrix = m_enemy->GetBoneWorldMatrix(L"LeftShoulder");
+	CVector3 leftShoulderPos;
+	leftShoulderPos.x = leftShoulderMatrix.m[3][0];
+	leftShoulderPos.y = leftShoulderMatrix.m[3][1];
+	leftShoulderPos.z = leftShoulderMatrix.m[3][2];
+	CMatrix viewMatrix = GetGameCamera().GetViewMatrix();
+	CMatrix projectionMatrix = GetGameCamera().GetProjectionMatrix();
+	//ビュー変換
+	CVector4 viewPosition = leftShoulderPos;
+	viewMatrix.Mul(viewPosition);
+	//プロジェクション変換
+	CVector4 projectionPosition = viewPosition;
+	projectionMatrix.Mul(projectionPosition);
+	projectionPosition = projectionPosition / projectionPosition.w;
+	//スクリーン変換
+	CVector2 screenPosition;
+	screenPosition.x = (1.0f + projectionPosition.x) / 2.0f * FrameBufferWidth() - (FrameBufferWidth() / 2.0f);
+	screenPosition.y = (1.0f + projectionPosition.y) / 2.0f * FrameBufferHeight() - (FrameBufferHeight() / 2.0f);
+
+	m_enemy->DamageCaluc(damage);
+	m_enemy->SetDamageCalucPos(screenPosition);
+
 	//ダメージを受けているときは動かない
 	CVector3 moveSpeed = m_enemy->GetMoveSpeed();
 	moveSpeed.x = 0.0f;
@@ -58,7 +83,7 @@ void CEnemyDamage::Update()
 			//遠ければ歩き始める
 			m_esm->ChangeState(CEnemyState::enState_Walk);
 		}
-		//ダメージ表示の描画をやめる
+		//ダメージ表示をやめる
 		m_enemy->DamageIndicateReset();
 		//ダメージを受けたフラグを戻す
 		m_enemy->SetIsDamage(false);
@@ -66,7 +91,7 @@ void CEnemyDamage::Update()
 	if (m_enemy->GetStatus().Hp <= 0) {
 		//HPが無くなれば死亡
 		m_esm->ChangeState(CEnemyState::enState_Death);
-		//ダメージ表示の描画をやめる
+		//ダメージ表示をやめる
 		m_enemy->DamageIndicateReset();
 		//ダメージを受けたフラグを戻す
 		m_enemy->SetIsDamage(false);

@@ -37,11 +37,12 @@ public:
 		enPlayerDamage,		//ダメージアニメーション
 		enPlayerAvoidance,	//回避アニメーション
 		enPlayerDete,		//死亡アニメーション
-
+		
 		enPlayerArroAttack,	//弓のアニメーション
 		enPlayerArrowShoot,	//弓を放つアニメーション
 		enPlayerLongSwordAttack,//大剣の攻撃アニメーション
 		enPlayerTwinSwordAttack,//二刀流の攻撃アニメーション
+		enPlayerWireMove,	//ワイヤー移動アニメーション
 		enPlayerNum			//アニメーションの数
 
 	};
@@ -268,10 +269,17 @@ public:
 		return m_wirePosition;
 	}
 
-	//ワイヤー移動できるかを取得
+	//ワイヤー移動しているか
 	bool IsWireMove()
 	{
 		return m_isWireMove;
+	}
+	
+
+	//ワイヤー移動しているかを設定
+	void SetIsWireMove(bool isWireMove)
+	{
+		m_isWireMove = isWireMove;
 	}
 	//武器のスキン情報の取得
 	const CSkinModel& GetWeaponskin(int num)

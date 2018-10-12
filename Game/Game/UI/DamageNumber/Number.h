@@ -16,11 +16,14 @@ public:
 	void Update();
 
 	//描画
-	void Draw();
+	void AfterDraw();
 
 	//表示する数値を設定
 	//int  num  数値
-	void SetNumber(int num);
+	void SetNumber(int num)
+	{
+		m_num = num;
+	}
 
 	//座標を設定
 	//pos	座標
@@ -54,4 +57,5 @@ private:
 	CSprite		m_number[EnNumber::enNumber_Num];			//スプライト
 	CTexture	m_numberTexture[EnNumber::enNumber_Num];	//テクスチャ
 	int			m_num = 0;									//数値を保存する変数
+	float		m_timer = 0.0f;								//タイマー
 };

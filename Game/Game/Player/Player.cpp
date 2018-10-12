@@ -53,6 +53,7 @@ void CPlayer::Init(CVector3 position)
 											{ L"Assets/modelData/PlayerDamage.tka" },			//ダメージアニメーション
 											{ L"Assets/modelData/PlayerKaihiStay.tka" }	,		//回避アクション
 											{ L"Assets/modelData/PlayerDeath.tka" },			//死亡アニメーション
+											{ L"Assets/modelData/PlayerWire.tka" },				//ワイヤー移動アニメーション
 
 											{ L"Assets/modelData/PlayerArrowAttack.tka" },		//弓の攻撃アニメーション
 											{ L"Assets/modelData/PlayerArrowAttackEvent.tka" },
@@ -140,8 +141,7 @@ void CPlayer::Update()
 		}
 	}
 
-	m_isWireMove = false;
-	if (Pad().IsTriggerButton(enButtonY))
+	if (Pad().IsTriggerButton(enButtonY) && !m_isWireMove)
 	{
 		float minLength = FLT_MAX;
 		std::list<IEnemy*> enemyList = GetSceneManager().GetGameScene().GetMap()->GetEnemyList();
