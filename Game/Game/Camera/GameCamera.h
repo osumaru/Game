@@ -3,10 +3,20 @@
 */
 
 #pragma once
+#include "NormalGameCamera.h"
+#include "ArrowGameCamera.h"
 
 class CGameCamera : IGameObject
 {
 public:
+
+	enum EnCameraState 
+	{
+		enNormal,
+		enArrow,
+		enFree,
+		enNum,
+	};
 	//初期化
 	void Init();
 
@@ -24,6 +34,14 @@ public:
 	const CCamera& GetCamera()
 	{
 		return camera;
+	}
+
+	//カメラのポジションを設定
+	//第一引数　カメラの座標　第二引数　ターゲットの座標
+	void SetCameraPosition(const CVector3 pos,const CVector3 tag)
+	{
+		camera.SetPosition(pos);
+		camera.SetTarget(tag);
 	}
 
 	//ビュー行列を取得
@@ -50,12 +68,19 @@ public:
 	{
 		return m_springCamera.GetSpringViewMatrix();
 	}
+	void SetCmareaState(EnCameraState cameraState)
+	{
+		m_cameraState = cameraState;
+	}
 
 private:
 	CCamera camera;			//カメラ
+	EnCameraState	m_cameraState = EnCameraState::enNormal;
+	CNormalGameCamera	m_normalCamera;
+	CArrowGameCamera	m_arrowCamera;
+
 	CVector3 m_cameraVec;	//注視点からカメラへのベクトル
 	CSpringCamera	m_springCamera;
-	CVector3 m_arrowCamera;	//弓を構えている時のカメラの位置
 
 };
 

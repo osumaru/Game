@@ -3,6 +3,7 @@
 #include "Player.h"
 #include "PlayerSate/PlayerStateMachine.h"
 #include "PlayerSate/PlayerState.h"
+#include "../Camera/GameCamera.h"
 
 
 CPlayerRotation::CPlayerRotation()
@@ -139,10 +140,18 @@ void CPlayerRotation::Update()
 
 	}
 
-	
+	if (GetPlayer().GetPlayerStateMachine().GetState() == CPlayerState::enPlayerArrowAttack)
+	{
+		CQuaternion rotXZ, rotY;
+		CVector3 cameraFlont = GetGameCamera().GetCamera().GetFlont();
+		rotXZ.SetRotation(CVector3::AxisY, atan2f(cameraFlont.x, cameraFlont.z));
+		rotY.SetRotation(CVector3::AxisX, atanf(-cameraFlont.y));
+		rotXZ.Multiply(rotY);
+		GetPlayer().SetPlayerRot(rotXZ);
+	}
 
 	//ƒvƒŒƒCƒ„[‚Ì‰ñ“]‚Ìˆ—
-	if (playerVec.LengthSq() > 0.001f)
+	else if (playerVec.LengthSq() > 0.001f)
 	{
 		if (GetPlayer().GetPlayerStateMachine().GetState() == CPlayerState::EnPlayerState::enPlayerArrowAttack) { return; }
 		CQuaternion Playerrot = GetPlayer().GetPlayerrRot();

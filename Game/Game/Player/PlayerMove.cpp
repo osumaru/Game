@@ -43,12 +43,22 @@ void CPlayerMove::Update()
 	else if (GetPlayer().GetPlayerStateMachine().GetState() == CPlayerState::EnPlayerState::enPlayerAvoidance)
 	{
 		////プレイヤーのワールド行列の取得
-		//CMatrix PlayerWorldMatrix = GetPlayer().GetPlayerSkin().GetWorldMatrix();
+		CMatrix PlayerWorldMatrix = GetPlayer().GetPlayerSkin().GetWorldMatrix();
 		////プレイヤーの前方向の取得
-		//CVector3 PlayerFront = { -PlayerWorldMatrix.m[1][0],-PlayerWorldMatrix.m[1][1],-PlayerWorldMatrix.m[1][2] };
-		//PlayerFront.Normalize();
+		CVector3 PlayerFront = { PlayerWorldMatrix.m[1][0],PlayerWorldMatrix.m[1][1],PlayerWorldMatrix.m[1][2] };
+		PlayerFront.Normalize();
+		PlayerFront *= 100.0f;
+		CVector3 OneVec = CVector3::One;
+		if (m_PlayerMoveSpeed.Length() == 0)
+		{
+			m_PlayerMoveSpeed -= PlayerFront * GameTime().GetDeltaFrameTime();
+		}
+		else
+		{
 
-		m_PlayerMoveSpeed -=  m_PlayerMoveSpeed * GameTime().GetDeltaFrameTime();
+			m_PlayerMoveSpeed -= m_PlayerMoveSpeed * GameTime().GetDeltaFrameTime();
+
+		}
 	}
 	else if (GetPlayer().GetPlayerStateMachine().GetState() == CPlayerState::enPlayerWireMove)
 	{
