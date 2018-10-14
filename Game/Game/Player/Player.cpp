@@ -184,8 +184,8 @@ void CPlayer::Update()
 	viewMat.MakeLookAt(cameraPos, m_position, CVector3(1.0f, 0.0f, 0.0f));
 	CMatrix projMat;
 	projMat.MakeOrthoProjectionMatrix(5, 5, 1.0f, 100.0f);
-	Engine().GetDeferred().SetViewMatrix(viewMat);
-	Engine().GetDeferred().SetProjectionMatrix(projMat);
+	Engine().GetShadowMap().SetViewMatrix(viewMat);
+	Engine().GetShadowMap().SetProjectionMatrix(projMat);
 }
 
 //ï`âÊèàóù

@@ -6,7 +6,7 @@ cbuffer lightCB : register(b0)
 	float4 diffuseLightDir[4];
 };
 
-cbuffer shadowCB : register(b1)
+cbuffer shadowConB : register(b1)
 {
 	float4x4 gameViewProj;
 };
@@ -79,19 +79,24 @@ float4 PSMain(VS_OUTPUT In) : SV_TARGET0
 	lig.xyz += ambientLight;
 	color *= lig;
 	
-	In.screenPos.z = depthTexture.Sample(Sampler, In.uv).x;
-	float4 shadowMapPos = mul(gameViewProj, In.screenPos);
-	shadowMapPos /= shadowMapPos.w;
+	In.screenPos = depthTexture.Sample(Sampler, In.uv);
+	float4 shadowMapPos = In.screenPos;
+	//shadowMapPos = mul(gameViewProj, shadowMapPos);
+	//shadowMapPos /= shadowMapPos.w;
 	shadowMapPos = mul(lightViewProj, shadowMapPos);
 	shadowMapPos /= shadowMapPos.w;
+	shadowMapPos.xy += 1.0f;
+	shadowMapPos.xy /= 2.0f;
+	shadowMapPos.y = 1.0f - shadowMapPos.y;
 	float depth = shadowMapPos.z;
 	float shadowDepth = shadowTexture.Sample(Sampler, shadowMapPos.xy).x;
-	if(shadowDepth < depth)
+	//return shadowTexture.Sample(Sampler, In.uv);
+	if(depth < shadowDepth + 0.1f)
 	{
 		if(shadowMapPos.x <= 1.0f && 0.0f <= shadowMapPos.x
 		 &&	shadowMapPos.y <= 1.0f && 0.0f <= shadowMapPos.y)
 		{
-			//color.xyz = 0.0f;
+			color.xyz = 0.0f;
 		}
 	}
 	return color;

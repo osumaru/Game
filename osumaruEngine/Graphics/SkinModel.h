@@ -82,6 +82,21 @@ public:
 	*/
 	void LoadNormalmap(const wchar_t* filePath);
 	
+	/*
+	シャドウマップへ書き込むモデルとして登録
+	*/
+	void ShadowMapEntry();
+
+	void SetIsShadowReceiver(bool isShadowReceiver)
+	{
+		m_isShadowReceiver = isShadowReceiver;
+	}
+
+	void SetIsShadowCaster(bool isShadowCaster)
+	{
+		m_isShadowCaster = isShadowCaster;
+	}
+
 private:
 	std::unique_ptr<CSkelton>		m_skelton = nullptr;				//スケルトン
 	CConstantBuffer					constantBuffer;						//定数バッファ
@@ -91,4 +106,7 @@ private:
 	CMatrix							worldMatrix = CMatrix::Identity;	//ワールド行列
 	CTexture*						m_pNormalTexture = nullptr;
 	int								m_isNormalMap = 0;
+	bool							m_isShadowCaster = false;
+	bool							m_isShadowReceiver = false;
+
 };
