@@ -53,8 +53,10 @@ void CPlayer::Init(CVector3 position)
 											{ L"Assets/modelData/PlayerDamage.tka" },			//ダメージアニメーション
 											{ L"Assets/modelData/PlayerKaihiStay.tka" }	,		//回避アクション
 											{ L"Assets/modelData/PlayerDeath.tka" },			//死亡アニメーション
+											{ L"Assets/modelData/PlayerWire.tka" },				//ワイヤー移動アニメーション
 
 											{ L"Assets/modelData/PlayerArrowAttack.tka" },		//弓の攻撃アニメーション
+											{ L"Assets/modelData/PlayerArrowAttackEvent.tka" },
 											{ L"Assets/modelData/PlayerLeageSwordAttack.tka" },	//大剣の攻撃アニメーション
 											{ L"Assets/modelData/PlayerTwinSwordAttack.tka" }	//二刀流の攻撃アニメーション
 		};
@@ -95,7 +97,7 @@ void CPlayer::Update()
 	
 	//アニメーションの更新
 	m_animation.Update(GameTime().GetDeltaFrameTime());
-	if (m_isDied) { return; }
+	if (m_isDied) {return; }
 	WeaponChange();
 	//m_isGround = m_characterController.IsOnGround();
 	if (m_intervalOn)
@@ -117,11 +119,13 @@ void CPlayer::Update()
 		
 
 	}
-	if (Pad().IsTriggerButton(enButtonX))
+	if (Pad().IsTriggerButton(enButtonRightTrigger) && !m_initArrow && 
+		GetPlayerStateMachine().GetState() == CPlayerState::enPlayerArrowAttack)
 	{
 		CPlayerArrow*	Arrow = New<CPlayerArrow>(0);
 		Arrow->Start();
 		m_arrowList.push_back(Arrow);
+		m_initArrow = true;
 	}
 
 	std::list<CPlayerArrow*>::iterator it;

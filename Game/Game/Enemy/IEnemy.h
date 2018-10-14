@@ -7,6 +7,7 @@
 #include "../Enemy/EnemyState/EnemyStateMachine.h"
 #include "EnemyTurn.h"
 #include "EnemySearch.h"
+#include "../UI/DamageNumber/DamageNumber.h"
 
 class CEnemyGroup;
 
@@ -102,6 +103,25 @@ public:
 		m_enemyStateMachine.Release();
 	}
 
+	//ダメージ計算を行う
+	//damage	ダメージの値
+	void DamageCaluc(int damage)
+	{
+		m_damageNumber.DamageCalculation(damage);
+	}
+
+	//ダメージ表示をやめる
+	void DamageIndicateReset()
+	{
+		m_damageNumber.IndicateReset();
+	}
+
+	//ダメージ表示の座標を設定
+	void SetDamageCalucPos(const CVector2& position)
+	{
+		m_damageNumber.SetPosition(position);
+	}
+
 	//ステータスを取得
 	const SEnemyStatus& GetStatus() const
 	{
@@ -172,6 +192,7 @@ protected:
 	CEnemyTurn				m_enemyTurn;			//向きを回転
 	CEnemySearch			m_enemySearch;			//プレイヤーを探索
 	CEnemyGroup*			m_enemyGroup;			//エネミーグループ
+	CDamageNumber			m_damageNumber;			//ダメージ数値
 	CVector3				m_position;				//座標
 	CQuaternion				m_rotation;				//回転
 	SEnemyStatus			m_status;				//ステータス

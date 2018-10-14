@@ -44,11 +44,21 @@ public:
 		{
 			return m_state;
 		}
+		//現在のプレイヤーの状態を取得
+		const CPlayerState::EnPlayerState GetArrowState()
+		{
+			return m_ArrowAttackState;
+		}
+		void SetArrowAttackState(const int setAttack)
+		{
+			m_ArrowAttackState = (CPlayerState::EnPlayerState)setAttack;
+		}
 
 
 private:
-	CPlayerState::EnPlayerState		m_state = CPlayerState::enState_Invald;			//プレイヤーのアニメーションの状態
-	CPlayerState::EnPlayerState		m_AttackState = CPlayerState::enPlayerAttack;	//攻撃時のアニメーションの状態
+	CPlayerState::EnPlayerState		m_state = CPlayerState::enState_Invald;				//プレイヤーのアニメーションの状態
+	CPlayerState::EnPlayerState		m_AttackState = CPlayerState::enPlayerAttack;		//攻撃時のアニメーションの状態
+	CPlayerState::EnPlayerState		m_ArrowAttackState = CPlayerState::enPlayerArrowAttack;	//弓矢での攻撃時のアニメーションの状態
 
 	IPlayerState*					m_currentState = nullptr;
 	CPlayerStand					m_playerStand;			//待機モーション

@@ -16,10 +16,11 @@ public:
 		enPlayerDamage,			//ダメージアニメーション
 		enPlayerAvoidance,		//回避アニメーション
 		enPlayerDied,			//死亡アニメーション
+		enPlayerWireMove,		//ワイヤーアニメーション
 		enPlayerArrowAttack,	//弓のアニメーション
+		enPlayerArrowShoot,		//弓を放つアニメーション
 		enPlayerLongSwordAttack,//大剣の攻撃アニメーション
 		enPlayerTwinSwordAttack,//二刀流の攻撃アニメーション
-		enPlayerWireMove,	//ワイヤーアニメーション
 		enPlayerNum,			//アニメーションの数
 		enState_Invald,			//何もない
 	};

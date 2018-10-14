@@ -7,6 +7,7 @@
 
 bool CPlayerWireMove::Start()
 {
+	GetPlayer().SetPlayerAnimation(CPlayerState::enPlayerWireMove, 0.1f);
 	m_movePosition = GetPlayer().GetWirePosition();
 
 	return true;
