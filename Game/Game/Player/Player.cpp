@@ -174,6 +174,14 @@ void CPlayer::Update()
 	m_skinmodel.Update(m_position, m_rotation, { 1.0f, 1.0f, 1.0f }, true);
 	m_weaponskin[m_weaponState].Update(m_weaponPosition, m_weaponRotation, m_weaponScale, true);
 	m_cameraTargetPos = m_position;
+	CMatrix viewMat;
+	CVector3 cameraPos = m_position;
+	cameraPos.y += 50.0f;
+	viewMat.MakeLookAt(cameraPos, m_position, CVector3(1.0f, 0.0f, 0.0f));
+	CMatrix projMat;
+	projMat.MakeOrthoProjectionMatrix(5, 5, 1.0f, 100.0f);
+	Engine().GetDeferred().SetViewMatrix(viewMat);
+	Engine().GetDeferred().SetProjectionMatrix(projMat);
 }
 
 //ï`âÊèàóù

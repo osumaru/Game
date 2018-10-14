@@ -19,6 +19,7 @@ void CGameCamera::Init()
 	PhysicsWorld().SetCamera(&camera);
 	m_arrowCamera = { 0.0f,1.0f,1.3f };
 	m_springCamera.Init(camera.GetTarget(), camera.GetPosition(), 5000.0f);
+	Engine().GetDeferred().SetCamera(&camera);
 }
 
 void CGameCamera::Update()

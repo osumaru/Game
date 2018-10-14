@@ -1,8 +1,8 @@
-#include "stdafx.h"
-#include "WireCollisionSolver.h"
-#include "../../../osumaruEngine/Physics/CollisionAttr.h"
-#include "../../../osumaruEngine/Physics/Physics.h"
-#include "../../../osumaruEngine/Engine.h"
+#include "engineStdafx.h"
+#include "RayTest.h"
+#include "CollisionAttr.h"
+#include "../Engine.h"
+#include "Physics.h"
 
 struct SConvexSweepCallBack : public btCollisionWorld::ConvexResultCallback
 {
@@ -10,7 +10,7 @@ struct SConvexSweepCallBack : public btCollisionWorld::ConvexResultCallback
 
 	virtual btScalar	addSingleResult(btCollisionWorld::LocalConvexResult& convexResult, bool normalInWorldSpace)
 	{
-		if (convexResult.m_hitCollisionObject->getUserIndex() == enCollisionAttr_Character) 
+		if (convexResult.m_hitCollisionObject->getUserIndex() == enCollisionAttr_Character)
 		{
 			return 0.0f;
 		}
@@ -23,22 +23,22 @@ struct SConvexSweepCallBack : public btCollisionWorld::ConvexResultCallback
 	}
 };
 
-CWireCollisionSolver::CWireCollisionSolver()
+CRayTest::CRayTest()
 {
 }
 
-CWireCollisionSolver::~CWireCollisionSolver()
+CRayTest::~CRayTest()
 {
 }
 
-void CWireCollisionSolver::Init(float radius, float height)
+void CRayTest::Init(float radius, float height)
 {
 	m_radius = radius;
 	m_height = height;
 	m_collider.Create(m_radius / 2.0f, m_height / 2.0f);
 }
 
-bool CWireCollisionSolver::Execute(const CVector3 & position, const CVector3 target)
+bool CRayTest::Execute(const CVector3 & position, const CVector3 target)
 {
 	CVector3 vWK;
 	vWK.Subtract(target, position);
@@ -63,7 +63,7 @@ bool CWireCollisionSolver::Execute(const CVector3 & position, const CVector3 tar
 	btEnd.setOrigin(btVector3(targetPos.x, targetPos.y, targetPos.z));
 
 	SConvexSweepCallBack callback;
-	Engine().PhysicsWorld().ConvexSweepTest((const btConvexShape*)m_collider.GetBody(), btStart, btEnd, callback);
+	PhysicsWorld().ConvexSweepTest((const btConvexShape*)m_collider.GetBody(), btStart, btEnd, callback);
 	if (callback.isHit) {
 		return true;
 	}
