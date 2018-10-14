@@ -4,7 +4,6 @@
 #include "PlayerRotation.h"
 #include "PlayerMove.h"
 #include "PlayerArrow.h"
-#include "WireCollisionSolver.h"
 
 struct SplayerStatus
 {
