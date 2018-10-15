@@ -136,7 +136,6 @@ void CPlayerRotation::Update()
 			weaponRot.Multiply(rotY);
 			GetPlayer().SetWeaponRotation(weaponRot);
 		}
-		//GetPlayer().SetWeaponRotation(weaponRot);
 
 	}
 
