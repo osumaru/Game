@@ -22,7 +22,7 @@ bool CPlayerArrow::Start()
 	m_arrowskin.Load(L"Assets/modelData/Arrow.cmo", NULL);
 	m_light.SetAmbientLight({ 0.0f,0.0f,1.0f ,1.0f });
 	m_arrowskin.SetLight(m_light);
-	m_scale = { 5.0f,5.0f,5.0f };
+	m_scale = { 3.0f,3.0f,3.0f };
 
 	//プレイヤーHPのロード
 	m_texture.Load(L"Assets/sprite/arrowTag.png");

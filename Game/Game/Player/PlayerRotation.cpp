@@ -22,6 +22,7 @@ bool CPlayerRotation::Start()
 
 void CPlayerRotation::Update()
 {
+	GetPlayer().GetPlayerSkin().Update(GetPlayer().GetPosition(), GetPlayer().GetPlayerrRot(), { 1.0f,1.0f,1.0f },true);
 	CVector3 playerVec = GetPlayer().GetMoveSpeed();
 	playerVec.y = 0.0f;
 	//プレイヤーのワールド行列の取得
@@ -59,11 +60,11 @@ void CPlayerRotation::Update()
 		if (GetPlayer().GetPlayerStateMachine().GetState() == CPlayerState::enPlayerWalk ||
 			GetPlayer().GetPlayerStateMachine().GetState() == CPlayerState::enPlayerRun)
 		{
-			PlayerFront *= 0.0f;
+			/*PlayerFront *= 0.0f;
 			weaponPosition = GetPlayer().GetPosition();
 			weaponPosition.y = PlayerSpinePos.y;
 			weaponPosition.Add(PlayerFront);
-			GetPlayer().SetWeaponPosition(weaponPosition);
+			GetPlayer().SetWeaponPosition(weaponPosition);*/
 
 		}
 		//ジャンプ中の武器の位置
@@ -105,7 +106,6 @@ void CPlayerRotation::Update()
 		//プレイヤーの手のボーンを取得
 		CMatrix PlayerHnd = GetPlayer().GetPlayerSkin().FindBoneWorldMatrix(L"LeftHandMiddle1");
 		CVector3 PlayerHndPos = { PlayerHnd.m[3][0],PlayerHnd.m[3][1],PlayerHnd.m[3][2] };
-
 		CVector3 PlayerHndScale = { PlayerHnd.m[0][0], PlayerHnd.m[0][1], PlayerHnd.m[0][2] };
 		float len = PlayerHndScale.Length();
 		PlayerHnd.m[0][0] /= len;

@@ -30,7 +30,9 @@ void StaticMapObject::Init(const CVector3& position, const CQuaternion& rotation
 	{
 		CMeshCollider mesh;
 		mesh.CreateCollider(&m_skinModel);
-		CVector3 boxsize = (mesh.GetAabbMax() - mesh.GetAabbMin()) / 2;
+		CVector3 boxsize = (mesh.GetAabbMax() - mesh.GetAabbMin());
+		boxsize.x /= 2.0f;
+		boxsize.z /= 2.0f;
 		m_boxCollider.reset(new CBoxCollider);
 		m_boxCollider->Create({ boxsize.x,boxsize.y,boxsize.z });
 		rInfo.collider = m_boxCollider.get();

@@ -177,8 +177,10 @@ void CPlayer::Update()
 	}
 	
 	//スキンモデルの更新
-	m_weaponskin[m_weaponState].Update(m_weaponPosition, m_weaponRotation, m_weaponScale, true);
 	m_skinmodel.Update(m_position, m_rotation, { 1.0f, 1.0f, 1.0f }, true);
+
+	m_weaponskin[m_weaponState].Update(m_weaponPosition, m_weaponRotation, m_weaponScale, true);
+
 	m_cameraTargetPos = m_position;
 	CMatrix viewMat;
 	CVector3 cameraPos = m_position;
