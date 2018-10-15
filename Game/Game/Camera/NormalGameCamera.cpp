@@ -25,7 +25,13 @@ void CNormalGameCamera::Update()
 	float rStick_x = Pad().GetRightStickX() * 2 * GameTime().GetDeltaFrameTime();
 	float rStick_y = Pad().GetRightStickY() * GameTime().GetDeltaFrameTime();
 
+	CVector3	oldCameraVec = GetGameCamera().GetCamera().GetPosition() - GetGameCamera().GetCamera().GetTarget();
 	m_cameraVec = m_cameraPosition - m_targetPosition;
+	if (oldCameraVec.Length() < m_cameraVec.Length())
+	{
+		float len = m_cameraVec.Length() / oldCameraVec.Length();
+		m_cameraVec = oldCameraVec * len;
+	}
 
 	if (fabsf(rStick_x) > 0.0f) {
 		//YŽ²Žü‚è‚Ì‰ñ“]
