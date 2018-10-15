@@ -64,6 +64,7 @@ void CArrowGameCamera::Update()
 	CVector3 cameraPos;
 	CVector3 target = GetPlayer().GetPosition();
 	target.y += 1.5f;
+	//プレイヤーの前方向を取得
 	CMatrix	mat = GetPlayer().GetPlayerSkin().GetWorldMatrix();
 	CVector3 playerFlont = { -mat.m[0][0],-mat.m[0][1],-mat.m[0][2] };
 	playerFlont.Normalize();

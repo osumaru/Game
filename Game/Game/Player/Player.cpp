@@ -99,7 +99,8 @@ void CPlayer::Update()
 	m_animation.Update(GameTime().GetDeltaFrameTime());
 	if (m_isDied) {return; }
 	WeaponChange();
-	//m_isGround = m_characterController.IsOnGround();
+	
+	//無敵時間の処理
 	if (m_intervalOn)
 	{
 		m_intervalTime += GameTime().GetDeltaFrameTime();
@@ -141,6 +142,7 @@ void CPlayer::Update()
 		}
 	}
 
+	//ワイヤーの処理
 	if (Pad().IsTriggerButton(enButtonY) && !m_isWireMove)
 	{
 		float minLength = FLT_MAX;
@@ -175,8 +177,8 @@ void CPlayer::Update()
 	}
 	
 	//スキンモデルの更新
-	m_skinmodel.Update(m_position, m_rotation, { 1.0f, 1.0f, 1.0f }, true);
 	m_weaponskin[m_weaponState].Update(m_weaponPosition, m_weaponRotation, m_weaponScale, true);
+	m_skinmodel.Update(m_position, m_rotation, { 1.0f, 1.0f, 1.0f }, true);
 	m_cameraTargetPos = m_position;
 }
 

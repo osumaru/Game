@@ -1,5 +1,8 @@
 #include "stdafx.h"
 #include"../../Game/Camera/GameCamera.h"
+#include "../Scene/SceneManager.h"
+#include "../Map/Map.h"
+#include "../Enemy/IEnemy.h"
 #include "PlayerArrow.h"
 #include "Player.h"
 
@@ -50,6 +53,22 @@ void CPlayerArrow::Update()
 		m_isMove = true;
 		m_arrowPosition += m_moveSpeed * GameTime().GetDeltaFrameTime();
 		m_lifeTime += GameTime().GetDeltaFrameTime();
+		for (const auto& enemys :GetSceneManager().GetGameScene().GetMap()->GetEnemyList())
+		{
+			if (!enemys->IsDamage()) {
+
+				CVector3 EnemyVec = enemys->GetPosition();
+				EnemyVec.y += 1.3f;
+				EnemyVec.Subtract(m_arrowPosition);
+				float len = EnemyVec.Length();
+
+				if (fabs(len) < 0.5f)
+				{
+					enemys->SetIsDamage(true);
+				}
+
+			}
+		}
 		
 	}
 	
