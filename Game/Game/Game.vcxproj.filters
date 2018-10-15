@@ -222,9 +222,6 @@
     <ClCompile Include="Player\PlayerSate\PlayerWireMove.cpp">
       <Filter>ソース ファイル\Player\PlayerSate</Filter>
     </ClCompile>
-    <ClCompile Include="Player\WireCollisionSolver.cpp">
-      <Filter>ソース ファイル\Player</Filter>
-    </ClCompile>
     <ClCompile Include="Camera\NormalGameCamera.cpp">
       <Filter>ソース ファイル\Camera</Filter>
     </ClCompile>
@@ -395,9 +392,6 @@
     <ClInclude Include="Player\PlayerSate\PlayerWireMove.h">
       <Filter>ソース ファイル\Player\PlayerSate</Filter>
     </ClInclude>
-    <ClInclude Include="Player\WireCollisionSolver.h">
-      <Filter>ソース ファイル\Player</Filter>
-    </ClInclude>
     <ClInclude Include="Camera\NormalGameCamera.h">
       <Filter>ソース ファイル\Camera</Filter>
     </ClInclude>
@@ -477,13 +471,10 @@
     <MeshContentTask Include="Assets\modelData\umi.FBX">
       <Filter>ソース ファイル\Assets</Filter>
     </MeshContentTask>
-    <MeshContentTask Include="Assets\modelData\Unitychan.fbx">
+    <MeshContentTask Include="Assets\modelData\Unitychan.FBX">
       <Filter>ソース ファイル\Assets</Filter>
     </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\Unitychan2.fbx">
-      <Filter>ソース ファイル\Assets</Filter>
-    </MeshContentTask>
-    <MeshContentTask Include="Assets\modelData\Unitychan3.FBX">
       <Filter>ソース ファイル\Assets</Filter>
     </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\Warrok.fbx">
@@ -502,6 +493,12 @@
       <Filter>ソース ファイル\Assets</Filter>
     </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\Zombi.FBX">
+      <Filter>ソース ファイル\Assets</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\BowArrow.FBX">
+      <Filter>ソース ファイル\Assets</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\Bow.FBX">
       <Filter>ソース ファイル\Assets</Filter>
     </MeshContentTask>
   </ItemGroup>

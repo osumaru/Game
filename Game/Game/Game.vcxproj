@@ -282,6 +282,8 @@
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\Arrow.fbx" />
     <MeshContentTask Include="Assets\modelData\Barrel.FBX" />
+    <MeshContentTask Include="Assets\modelData\Bow.FBX" />
+    <MeshContentTask Include="Assets\modelData\BowArrow.FBX" />
     <MeshContentTask Include="Assets\modelData\Brock.FBX" />
     <MeshContentTask Include="Assets\modelData\Heart.fbx" />
     <MeshContentTask Include="Assets\modelData\House.FBX" />
@@ -302,9 +304,8 @@
     <MeshContentTask Include="Assets\modelData\TwinSword.fbx" />
     <MeshContentTask Include="Assets\modelData\U2.FBX" />
     <MeshContentTask Include="Assets\modelData\umi.FBX" />
-    <MeshContentTask Include="Assets\modelData\Unitychan.fbx" />
+    <MeshContentTask Include="Assets\modelData\Unitychan.FBX" />
     <MeshContentTask Include="Assets\modelData\Unitychan2.fbx" />
-    <MeshContentTask Include="Assets\modelData\Unitychan3.FBX" />
     <MeshContentTask Include="Assets\modelData\Warrok.fbx" />
     <MeshContentTask Include="Assets\modelData\Wave.FBX" />
     <MeshContentTask Include="Assets\modelData\Yasikia.FBX" />
