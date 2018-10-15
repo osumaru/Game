@@ -198,7 +198,6 @@
     <ClCompile Include="Player\PlayerSate\PlayerWalk.cpp" />
     <ClCompile Include="Player\Player.cpp" />
     <ClCompile Include="Player\PlayerSate\PlayerWireMove.cpp" />
-    <ClCompile Include="Player\WireCollisionSolver.cpp" />
     <ClCompile Include="Scene\GameScene.cpp" />
     <ClCompile Include="Scene\SceneManager.cpp" />
     <ClCompile Include="stdafx.cpp">
@@ -259,7 +258,6 @@
     <ClInclude Include="Player\PlayerSate\IPlayerState.h" />
     <ClInclude Include="Player\Player.h" />
     <ClInclude Include="Player\PlayerSate\PlayerWireMove.h" />
-    <ClInclude Include="Player\WireCollisionSolver.h" />
     <ClInclude Include="Scene\GameScene.h" />
     <ClInclude Include="Scene\SceneManager.h" />
     <ClInclude Include="stdafx.h" />
@@ -304,8 +302,9 @@
     <MeshContentTask Include="Assets\modelData\TwinSword.fbx" />
     <MeshContentTask Include="Assets\modelData\U2.FBX" />
     <MeshContentTask Include="Assets\modelData\umi.FBX" />
-    <MeshContentTask Include="Assets\modelData\Unitychan.FBX" />
+    <MeshContentTask Include="Assets\modelData\Unitychan.fbx" />
     <MeshContentTask Include="Assets\modelData\Unitychan2.fbx" />
+    <MeshContentTask Include="Assets\modelData\Unitychan3.FBX" />
     <MeshContentTask Include="Assets\modelData\Warrok.fbx" />
     <MeshContentTask Include="Assets\modelData\Wave.FBX" />
     <MeshContentTask Include="Assets\modelData\Yasikia.FBX" />

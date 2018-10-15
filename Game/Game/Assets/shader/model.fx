@@ -48,6 +48,12 @@ struct VS_OUTPUT
 	float4 shadowPos : TEXCOORD2;
 };
 
+struct VS_SHADOW_OUTPUT
+{
+	float4 pos : SV_POSITION;
+	float4 worldPos : TEXCOORD1;
+};
+
 struct PS_OUTPUT
 {
 	float4 color		: SV_TARGET0;
@@ -66,6 +72,7 @@ VS_OUTPUT VSMain(VS_INPUT In)
 {
 	VS_OUTPUT Out;
 	Out.pos = mul(mvp, In.pos);
+	Out.worldPos = Out.pos;
 	Out.shadowPos = mul(lightViewProj, Out.pos);
 	Out.pos = mul(viewProj, Out.pos);
 	Out.normal = mul(mvp, In.normal);
@@ -75,7 +82,6 @@ VS_OUTPUT VSMain(VS_INPUT In)
 	Out.binormal = cross(Out.normal, Out.tangent);
 	Out.binormal = normalize(Out.binormal);
 	Out.uv = In.uv;
-	Out.worldPos = Out.pos;
 	return Out;
 }
 
@@ -89,6 +95,7 @@ VS_OUTPUT VSSkinMain(VS_SKIN_INPUT In)
 		pos += boneMatrix[In.boneIndex[i]] * In.blendWeight[i];
 	}
 	Out.pos = mul(pos, In.pos);
+	Out.worldPos = Out.pos;
 	Out.shadowPos = mul(lightViewProj, Out.pos);
 	Out.pos = mul(viewProj, Out.pos);
 	Out.normal = mul(pos, In.normal);
@@ -98,7 +105,6 @@ VS_OUTPUT VSSkinMain(VS_SKIN_INPUT In)
 	Out.binormal = cross(Out.normal, Out.tangent);
 	Out.binormal = normalize(Out.binormal);
 	Out.uv = In.uv;
-	Out.worldPos = Out.pos;
 	return Out;
 }
 
@@ -110,23 +116,24 @@ PS_OUTPUT PSMain(VS_OUTPUT In)
 	Out.tangent = float4(In.tangent, 1.0f);
 	float3 normalColor = normalTexture.Sample(Sampler, In.uv) * isNormalMap + float3(0.0f, 0.0f, 1.0f) * (1 - isNormalMap);
 	Out.normalMap = float4(normalColor, 1.0f);
-	Out.depth.x = In.worldPos.z / In.worldPos.w;
-	Out.shadowColor.x = In.shadowPos.z / In.shadowPos.w;
+	Out.depth = In.worldPos;//In.worldPos.z / In.worldPos.w;
+	Out.shadowColor.xyz = In.shadowPos.z / In.shadowPos.w;
+	Out.shadowColor.w = 1.0f;
 	return Out;
 }
 
-VS_OUTPUT VSShadowMain(VS_INPUT In)
+VS_SHADOW_OUTPUT VSShadowMain(VS_INPUT In)
 {
-	VS_OUTPUT Out;
+	VS_SHADOW_OUTPUT Out;
 	Out.pos = mul(mvp, In.pos);
 	Out.pos = mul(viewProj, Out.pos);
 	Out.worldPos = Out.pos;
 	return Out;
 }
 
-VS_OUTPUT VSShadowSkinMain(VS_SKIN_INPUT In)
+VS_SHADOW_OUTPUT VSShadowSkinMain(VS_SKIN_INPUT In)
 {
-	VS_OUTPUT Out;
+	VS_SHADOW_OUTPUT Out;
 	float4x4 pos = 0;
 	float4 blendWeight;
 	for (int i = 0;i < 4;i++)
@@ -139,12 +146,10 @@ VS_OUTPUT VSShadowSkinMain(VS_SKIN_INPUT In)
 	return Out;
 }
 
-float4 PSShadowMain(VS_OUTPUT In) : SV_TARGET0
+float4 PSShadowMain(VS_SHADOW_OUTPUT In) : SV_TARGET0
 {
 	float4 Out;
-	Out.x = In.worldPos.z / In.worldPos.w;
-	Out.y = In.worldPos.z / In.worldPos.w;
-	Out.z = In.worldPos.z / In.worldPos.w;
+	Out.xyz = In.worldPos.z / In.worldPos.w;
 	Out.w = 1.0f;
 	return Out;
 }

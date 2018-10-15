@@ -204,6 +204,7 @@
     <ClCompile Include="Physics\Collider\MeshCollider.cpp" />
     <ClCompile Include="Physics\Collider\SphereCollider.cpp" />
     <ClCompile Include="Physics\Physics.cpp" />
+    <ClCompile Include="Physics\RayTest.cpp" />
     <ClCompile Include="Physics\RigidBody.cpp" />
     <ClCompile Include="Physics\RigidBodyDraw.cpp" />
     <ClCompile Include="Random\Random.cpp" />
@@ -257,6 +258,7 @@
     <ClInclude Include="Physics\Collider\SphereCollider.h" />
     <ClInclude Include="Physics\CollisionAttr.h" />
     <ClInclude Include="Physics\Physics.h" />
+    <ClInclude Include="Physics\RayTest.h" />
     <ClInclude Include="Physics\RigidBody.h" />
     <ClInclude Include="Physics\RigidBodyDraw.h" />
     <ClInclude Include="Random\Random.h" />

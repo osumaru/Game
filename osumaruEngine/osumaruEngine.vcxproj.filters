@@ -210,6 +210,9 @@
     <ClCompile Include="Graphics\PreRendering\ShadowMap.cpp">
       <Filter>ソース ファイル\Graphics\preRendering</Filter>
     </ClCompile>
+    <ClCompile Include="Physics\RayTest.cpp">
+      <Filter>ソース ファイル\Physics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject\GameObject.h">
@@ -367,6 +370,9 @@
     </ClInclude>
     <ClInclude Include="Graphics\PreRendering\ShadowMap.h">
       <Filter>ソース ファイル\Graphics\preRendering</Filter>
+    </ClInclude>
+    <ClInclude Include="Physics\RayTest.h">
+      <Filter>ソース ファイル\Physics</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

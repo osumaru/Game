@@ -1,19 +1,18 @@
+#pragma once
 /*
-*	ワイヤーの当たり判定クラス
+*	レイを飛ばしあたっているかを判定するクラス
 */
 
-#pragma once
+#include "Collider/CapsuleCollider.h"
 
-#include "../../../osumaruEngine/Physics/Collider/CapsuleCollider.h"
-
-class CWireCollisionSolver
+class CRayTest
 {
 public:
 	//コンストラクタ
-	CWireCollisionSolver();
+	CRayTest();
 
 	//デストラクタ
-	~CWireCollisionSolver();
+	~CRayTest();
 
 	//初期化
 	//radius	カプセルコライダーの半径

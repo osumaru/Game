@@ -4,7 +4,6 @@
 #include "PlayerRotation.h"
 #include "PlayerMove.h"
 #include "PlayerArrow.h"
-#include "WireCollisionSolver.h"
 
 struct SplayerStatus
 {
@@ -348,7 +347,7 @@ private:
 	std::list<CPlayerArrow*>	m_arrowList;									//弓矢のリスト
 
 	bool					m_isWireMove = false;					//ワイヤー移動できるか
-	CWireCollisionSolver	m_wireCollisionSolver;					//ワイヤー移動のコリジョン処理クラス
+	CRayTest				m_wireCollisionSolver;					//ワイヤー移動のコリジョン処理クラス
 	CVector3				m_wirePosition;							//ワイヤー移動先の座標
 };
 

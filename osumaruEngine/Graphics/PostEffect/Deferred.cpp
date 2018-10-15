@@ -23,8 +23,6 @@ void CDeferred::Init()
 		m_renderTarget[i].Create(FrameBufferWidth(), FrameBufferHeight());
 	}
 	m_lightCB.Create(sizeof(CLight), &Light());
-	CMatrix mat = CMatrix::Identity;
-	m_shadowCB.Create(sizeof(CMatrix), &mat);
 	m_vertexShader.Load("Assets/shader/deferred.fx", "VSMain", CShader::enVS);
 	m_pixelShader.Load("Assets/shader/deferred.fx", "PSMain", CShader::enPS);
 	SVSLayout vertexBufferLayout[4] =
@@ -68,15 +66,6 @@ void CDeferred::Start()
 	m_lightCB.Create(sizeof(CLight), &Light());
 }
 
-void CDeferred::SetConstantBuffer()
-{
-	CMatrix lightViewProj;
-	lightViewProj.Mul(m_viewMatrix, m_projectionMatrix);
-	m_shadowCB.Update(&lightViewProj);
-	ID3D11Buffer* buffer = m_lightCB.GetBody();
-	GetDeviceContext()->PSSetConstantBuffers(2, 1, &buffer);
-	GetDeviceContext()->VSSetConstantBuffers(2, 1, &buffer);
-}
 
 void CDeferred::Draw()
 {
@@ -94,10 +83,7 @@ void CDeferred::Draw()
 	srviews[enRenderTargetNum] = Engine().GetShadowMap().GetRenderTarget().GetRenderTargetTexture().GetShaderResource();
 	CLight light = Light();
 	m_lightCB.Update(&Light());
-	CMatrix lightViewProj;
-	lightViewProj.Mul(m_viewMatrix, m_projectionMatrix);
-	m_shadowCB.Update(&lightViewProj);
-	SetConstantBuffer();
+	Engine().GetShadowMap().SetConstantBuffer();
 	ID3D11Buffer* buffer;
 	if (m_camera != nullptr)
 	{
@@ -108,8 +94,6 @@ void CDeferred::Draw()
 		buffer = m_gameCameraCB.GetBody();
 		GetDeviceContext()->PSSetConstantBuffers(1, 1, &buffer);
 	}
-	buffer = m_lightCB.GetBody();
-	GetDeviceContext()->PSSetConstantBuffers(0, 1, &buffer);
 
 	buffer = m_lightCB.GetBody();
 	GetDeviceContext()->PSSetConstantBuffers(0, 1, &buffer);
