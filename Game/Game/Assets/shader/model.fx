@@ -17,6 +17,11 @@ cbuffer shadowCB : register(b2)
 	float4x4 lightViewProj;
 };
 
+cbuffer materialCB : register(b3)
+{
+	int isShadowReceiver;
+};
+
 StructuredBuffer<float4x4> boneMatrix : register(t100);
 
 struct VS_INPUT
@@ -56,12 +61,13 @@ struct VS_SHADOW_OUTPUT
 
 struct PS_OUTPUT
 {
-	float4 color		: SV_TARGET0;
-	float4 normalMap	: SV_TARGET1;
-	float4 normal		: SV_TARGET2;
-	float4 tangent		: SV_TARGET3;
-	float4 depth		: SV_TARGET4;
-	float4 shadowColor	: SV_TARGET5;
+	float4	color		: SV_TARGET0;
+	float4	normalMap	: SV_TARGET1;
+	float4	normal		: SV_TARGET2;
+	float4	tangent		: SV_TARGET3;
+	float4	depth		: SV_TARGET4;
+	int4	material	: SV_TARGET5;
+	float4	shadowColor	: SV_TARGET6;
 };
 
 Texture2D<float4> colorTexture : register(t10);
@@ -119,6 +125,7 @@ PS_OUTPUT PSMain(VS_OUTPUT In)
 	Out.depth = In.worldPos;//In.worldPos.z / In.worldPos.w;
 	Out.shadowColor.xyz = In.shadowPos.z / In.shadowPos.w;
 	Out.shadowColor.w = 1.0f;
+	Out.material.xyzw = isShadowReceiver;
 	return Out;
 }
 

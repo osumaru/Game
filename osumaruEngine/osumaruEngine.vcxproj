@@ -241,6 +241,7 @@
     <ClInclude Include="Graphics\SkinModel.h" />
     <ClInclude Include="Graphics\SkinModelEffect.h" />
     <ClInclude Include="Graphics\SkinModelEffectFactory.h" />
+    <ClInclude Include="Graphics\SkinModelShaderFlgCommon.h" />
     <ClInclude Include="Graphics\Sprite.h" />
     <ClInclude Include="Graphics\State\AlphaBlendState.h" />
     <ClInclude Include="Graphics\State\DepthStencilState.h" />

@@ -15,9 +15,10 @@ public:
 	レンダリングターゲットの作成
 	width			レンダリングターゲットの幅
 	height			レンダリングターゲットの高さ
+	format			テクスチャのフォーマット
 	pRenderTarget	レンダリングターゲットに使うテクスチャ
 	*/
-	void Create(int width, int height, ID3D11Texture2D* pRenderTarget = nullptr);
+	void Create(int width, int height, DXGI_FORMAT format, ID3D11Texture2D* pRenderTarget = nullptr);
 
 	//レンダリングターゲットの取得
 	ID3D11RenderTargetView* GetRenderTarget() const

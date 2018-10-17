@@ -6,7 +6,7 @@
 
 void CShadowMap::Init()
 {
-	m_renderTarget.Create(FrameBufferWidth(), FrameBufferHeight());
+	m_renderTarget.Create(FrameBufferWidth(), FrameBufferHeight(), DXGI_FORMAT_R32G32B32A32_FLOAT);
 	CMatrix mat = CMatrix::Identity;
 	m_CB.Create(sizeof(CMatrix), &mat);
 

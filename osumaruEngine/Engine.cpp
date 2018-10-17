@@ -140,7 +140,7 @@ void CEngine::InitD3D(HINSTANCE& hInst)
 	m_pad = std::make_unique<CPad>();
 	for (int i = 0; i < MAIN_RENDER_TARGET_NUM; i++)
 	{
-		m_mainRenderTarget[i].Create(m_frameBufferWidth, m_frameBufferHeight);
+		m_mainRenderTarget[i].Create(m_frameBufferWidth, m_frameBufferHeight, DXGI_FORMAT_R32G32B32A32_FLOAT);
 	}
 	m_alphaBlend.Init(m_pD3DDevice);
 	m_depthState.Init(m_pD3DDevice);

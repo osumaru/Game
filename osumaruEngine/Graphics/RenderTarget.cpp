@@ -33,7 +33,7 @@ CRenderTarget::~CRenderTarget()
 
 }
 
-void CRenderTarget::Create(int width, int height, ID3D11Texture2D* pRenderTarget)
+void CRenderTarget::Create(int width, int height, DXGI_FORMAT format, ID3D11Texture2D* pRenderTarget)
 {
 	m_pD3DRenderTargetTexture = pRenderTarget;
 	HRESULT hr;
@@ -45,7 +45,7 @@ void CRenderTarget::Create(int width, int height, ID3D11Texture2D* pRenderTarget
 	else
 	{
 		m_pRenderTargetTexture = std::make_unique<CTexture>();
-		m_pRenderTargetTexture->Create(width, height, CTexture::enRendertarget, DXGI_FORMAT_R32G32B32A32_FLOAT);
+		m_pRenderTargetTexture->Create(width, height, CTexture::enRendertarget, format);
 		m_pD3DRenderTargetTexture = m_pRenderTargetTexture->GetTexture();
 		D3D11_TEXTURE2D_DESC renderTargetTextureDesc;
 		m_pD3DRenderTargetTexture->GetDesc(&renderTargetTextureDesc);
