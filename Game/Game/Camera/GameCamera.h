@@ -36,26 +36,33 @@ public:
 		return camera;
 	}
 
+	//バネカメラの取得
+	const CSpringCamera& GetSpringCamera()
+	{
+		return m_springCamera;
+	}
+
 	//カメラのポジションを設定
 	//第一引数　カメラの座標　第二引数　ターゲットの座標
 	void SetCameraPosition(const CVector3 pos,const CVector3 tag)
 	{
-		camera.SetPosition(pos);
-		camera.SetTarget(tag);
+
+		m_springCamera.SetTarPosition(pos);
+		m_springCamera.SetTarTarget(tag);
 	}
 
 	//ビュー行列を取得
 	CMatrix GetViewMatrix()
 	{
-		return camera.GetViewMatrix();
-		//return m_springCamera.GetSpringViewMatrix();
+		//return camera.GetViewMatrix();
+		return m_springCamera.GetSpringViewMatrix();
 	}
 
 	//プロジェクション行列を取得
 	CMatrix GetProjectionMatrix()
 	{
-		return camera.GetProjectionMatrix();
-		//return m_springCamera.GetProjectionMatrix();
+		//return camera.GetProjectionMatrix();
+		return m_springCamera.GetProjectionMatrix();
 	}
 
 	//バネカメラのプロジェクション行列の取得

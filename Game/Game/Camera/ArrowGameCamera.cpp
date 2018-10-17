@@ -22,16 +22,16 @@ void CArrowGameCamera::Start(const CVector3 pos, const CVector3 tag)
 
 void CArrowGameCamera::Update()
 {
-	float rStick_x = Pad().GetRightStickX() * 2 * GameTime().GetDeltaFrameTime();
-	float rStick_y = Pad().GetRightStickY() * GameTime().GetDeltaFrameTime();
+	float rStick_x = Pad().GetRightStickX();
+	float rStick_y = Pad().GetRightStickY();
 
 	//m_cameraVec = m_cameraPosition - m_targetPosition;
-	m_cameraVec = GetGameCamera().GetCamera().GetPosition() - GetGameCamera().GetCamera().GetTarget();
+	m_cameraVec = GetGameCamera().GetSpringCamera().GetPosition() - GetGameCamera().GetSpringCamera().GetTarget();;
 
 	if (fabsf(rStick_x) > 0.0f) {
 		//Y軸周りの回転
 		CMatrix matrix;
-		matrix.MakeRotationY(rStick_x);
+		matrix.MakeRotationY(rStick_x * ARROW_CAMERA_SPEED * GameTime().GetDeltaFrameTime());
 		matrix.Mul(m_cameraVec);
 	}
 
@@ -42,7 +42,7 @@ void CArrowGameCamera::Update()
 		rotAxis.Cross(CVector3::Up, m_cameraVec);
 		rotAxis.Normalize();
 		CMatrix matrix;
-		matrix.MakeRotationAxis(rotAxis, rStick_y);
+		matrix.MakeRotationAxis(rotAxis, rStick_y * ARROW_CAMERA_SPEED * GameTime().GetDeltaFrameTime());
 		//1フレーム前のカメラベクトル
 		CVector3 cameraVecOld = m_cameraVec;
 
@@ -50,11 +50,11 @@ void CArrowGameCamera::Update()
 		CVector3 cameraDir = m_cameraVec;
 		cameraDir.Normalize();
 
-		if (cameraDir.y < -0.3f)
+		if (cameraDir.y < -0.8f)
 		{
 			m_cameraVec = cameraVecOld;
 		}
-		else if (cameraDir.y > 0.5f)
+		else if (cameraDir.y > 0.8f)
 		{
 			m_cameraVec = cameraVecOld;
 

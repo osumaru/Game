@@ -39,7 +39,7 @@ void CPlayerArrow::Update()
 	if (GetPlayer().GetPlayerStateMachine().GetState() == CPlayerState::EnPlayerState::enPlayerArrowAttack && !m_isMove)
 	{
 		m_arrowPosition = GetPlayer().GetWeaponPosition();
-		CVector3 weaponFlont = GetGameCamera().GetCamera().GetFlont();//{ -mat.m[1][0],-mat.m[1][1],-mat.m[1][2] };
+		CVector3 weaponFlont = GetGameCamera().GetSpringCamera().GetCamera()->GetFlont();//{ -mat.m[1][0],-mat.m[1][1],-mat.m[1][2] };
 		weaponFlont.Normalize();
 		m_moveSpeed = weaponFlont * 50.0f;
 		CQuaternion rotY;

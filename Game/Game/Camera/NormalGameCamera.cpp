@@ -22,10 +22,10 @@ void CNormalGameCamera::Start(const CVector3 pos, const CVector3 tag)
 
 void CNormalGameCamera::Update()
 {
-	float rStick_x = Pad().GetRightStickX() * 2 * GameTime().GetDeltaFrameTime();
-	float rStick_y = Pad().GetRightStickY() * GameTime().GetDeltaFrameTime();
+	float rStick_x = Pad().GetRightStickX();
+	float rStick_y = Pad().GetRightStickY();
 
-	CVector3	oldCameraVec = GetGameCamera().GetCamera().GetPosition() - GetGameCamera().GetCamera().GetTarget();
+	CVector3	oldCameraVec = GetGameCamera().GetSpringCamera().GetPosition() - GetGameCamera().GetSpringCamera().GetTarget();
 	m_cameraVec = m_cameraPosition - m_targetPosition;
 	if (oldCameraVec.Length() < m_cameraVec.Length())
 	{
@@ -36,7 +36,7 @@ void CNormalGameCamera::Update()
 	if (fabsf(rStick_x) > 0.0f) {
 		//Y軸周りの回転
 		CMatrix matrix;
-		matrix.MakeRotationY(rStick_x);
+		matrix.MakeRotationY(rStick_x * CAMERA_SPEED * GameTime().GetDeltaFrameTime());
 		matrix.Mul(m_cameraVec);
 	}
 
@@ -47,7 +47,7 @@ void CNormalGameCamera::Update()
 		rotAxis.Cross(CVector3::Up, m_cameraVec);
 		rotAxis.Normalize();
 		CMatrix matrix;
-		matrix.MakeRotationAxis(rotAxis, rStick_y);
+		matrix.MakeRotationAxis(rotAxis, rStick_y * CAMERA_SPEED * GameTime().GetDeltaFrameTime());
 		//1フレーム前のカメラベクトル
 		CVector3 cameraVecOld = m_cameraVec;
 
@@ -55,7 +55,7 @@ void CNormalGameCamera::Update()
 		CVector3 cameraDir = m_cameraVec;
 		cameraDir.Normalize();
 
-		if (cameraDir.y < -0.5f)
+		if (cameraDir.y < -0.f)
 		{
 			m_cameraVec = cameraVecOld;
 		}
@@ -73,16 +73,18 @@ void CNormalGameCamera::Update()
 		toCameraXZ.Normalize();
 		//注視点の設定
 		CVector3 target = GetPlayer().GetPosition();
-		target.y += 1.5f;
+		target.y += TARGET_OFFSET_Y;
 
 		CVector3	toNewCameraPos = m_cameraPosition - target;
 		toNewCameraPos.y = 0.0f;
 		toNewCameraPos.Normalize();
-		float weight = 0.3f;  //このウェイトの値は0.0～1.0の値をとる。1.0に近づくほど追尾が強くなる。
+		float weight = 0.5f;  //このウェイトの値は0.0～1.0の値をとる。1.0に近づくほど追尾が強くなる。
 		toNewCameraPos = toNewCameraPos * weight + toCameraXZ * (1.0f - weight);
 		toNewCameraPos.Normalize();
 		toNewCameraPos *= toCameraLen;
 		toNewCameraPos.y = height;              //高さを戻す。
+
+
 		CVector3 pos = target + toNewCameraPos;  //これで新しい視点が決定。
 		GetGameCamera().SetCameraPosition(pos, target);
 		m_cameraPosition = pos;
