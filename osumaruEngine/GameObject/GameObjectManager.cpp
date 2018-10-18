@@ -30,7 +30,7 @@ void CGameObjectManager::Execute(CDeferred& deferred, CPostEffect& postEffect)
 	Engine().GetShadowMap().Draw();
 	//
 
-	Engine().SetAlphaBlendState(enAlphaBlendState3D);
+	Engine().SetAlphaBlendState(enAlphaBlendStateNone);
 	Engine().SetDepthStencilState(enDepthStencilState3D);
 	deferred.Start();
 	for (GameObjectList& objList : m_objectVector)

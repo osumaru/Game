@@ -31,7 +31,7 @@ void CPostEffect::Draw()
 	GetDeviceContext()->OMSetRenderTargets(1, &m_pBackRenderTargetView, m_pBackDepthStencilView);
 	GetDeviceContext()->ClearRenderTargetView(m_pBackRenderTargetView, color);
 	//GetDeviceContext()->ClearDepthStencilView(m_pBackDepthStencilView, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
-	Engine().SetAlphaBlendState(enAlphaBlendState3D);
+	Engine().SetAlphaBlendState(enAlphaBlendStateNone);
 	Engine().SetDepthStencilState(enDepthStencilState2D);
 	Engine().SetRasterizerState(enRasterizerState2D);
 	ID3D11ShaderResourceView* srviews[] = {
@@ -47,7 +47,7 @@ void CPostEffect::Draw()
 	GetDeviceContext()->IASetIndexBuffer(m_primitive.GetIndexBuffer(), m_primitive.GetIndexFormat(), 0);
 	GetDeviceContext()->IASetInputLayout(m_vertexShader.GetInputlayOut());
 	GetDeviceContext()->DrawIndexed(m_primitive.GetIndexNum(), 0, 0);
-	Engine().SetAlphaBlendState(enAlphaBlendState2D);
+	Engine().SetAlphaBlendState(enAlphaBlendStateAdd);
 	Engine().SetDepthStencilState(enDepthStencilState3D);
 	Engine().SetRasterizerState(enRasterizerState2D);
 }

@@ -63,7 +63,7 @@ void CDeferred::Start()
 	};
 	GetDeviceContext()->ClearDepthStencilView(Engine().GetPostEffect().GetDepthStencil(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
 	GetDeviceContext()->OMSetRenderTargets(enRenderTargetNum, mainViews, Engine().GetPostEffect().GetDepthStencil());
-	Engine().SetAlphaBlendState(enAlphaBlendState3D);
+	Engine().SetAlphaBlendState(enAlphaBlendStateNone);
 	Engine().SetDepthStencilState(enDepthStencilState3D);
 	Engine().SetRasterizerState(enRasterizerState3D);
 	float *pColor = color;

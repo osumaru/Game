@@ -30,7 +30,7 @@ void CShadowMap::Draw()
 	float color[] = { 0.0f, 0.0f, 0.0f, 1.0f };
 	Engine().GetDeviceContext()->ClearRenderTargetView(m_renderTarget.GetRenderTarget(), color);
 	Engine().GetDeviceContext()->ClearDepthStencilView(m_renderTarget.GetDepthStencil(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
-	Engine().SetAlphaBlendState(enAlphaBlendState3D);
+	Engine().SetAlphaBlendState(enAlphaBlendStateNone);
 	Engine().SetDepthStencilState(enDepthStencilState3D);
 	CMatrix viewMat = m_viewMatrix;
 	CMatrix projMat = m_projectionMatrix;

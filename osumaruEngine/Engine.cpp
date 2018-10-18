@@ -145,7 +145,7 @@ void CEngine::InitD3D(HINSTANCE& hInst)
 	m_alphaBlend.Init(m_pD3DDevice);
 	m_depthState.Init(m_pD3DDevice);
 	m_rasterizerState.Init(m_pD3DDevice);
-	m_alphaBlend.SetBlendState(m_pDeviceContext, enAlphaBlendState3D);
+	m_alphaBlend.SetBlendState(m_pDeviceContext, enAlphaBlendStateNone);
 	m_rasterizerState.SetRasterizerState(m_pDeviceContext, enRasterizerState3D);
 	m_depthState.SetDepthStencilState(m_pDeviceContext, enDepthStencilState3D);
 	m_deferred.Init();
