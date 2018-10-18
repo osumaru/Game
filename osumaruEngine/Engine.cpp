@@ -125,14 +125,8 @@ void CEngine::InitD3D(HINSTANCE& hInst)
 	hr = m_pSwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (LPVOID*)(&p_RT));
 
 	// ビューポート設定
-	D3D11_VIEWPORT vp;
-	vp.TopLeftX = 0;
-	vp.TopLeftY = 0;
-	vp.Width = 1280;
-	vp.Height = 720;
-	vp.MinDepth = 0.0f;
-	vp.MaxDepth = 1.0f;
-	m_pDeviceContext->RSSetViewports(1, &vp);
+	m_viewPortState.Init();
+	m_viewPortState.SetViewPort(enViewPortGame);
 	m_physicsWorld = std::make_unique<CPhysicsWorld>();
 	m_physicsWorld->Init();
 	m_soundEngine = std::make_unique<CSoundEngine>();

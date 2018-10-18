@@ -14,6 +14,7 @@
 #include "Graphics/State/DepthStencilState.h"
 #include "Graphics/State/RasterizerState.h"
 #include "Graphics/PreRendering/ShadowMap.h"
+#include "Graphics/State/ViewPortState.h"
 
 //エンジンクラス
 class CEffectManager;
@@ -181,6 +182,11 @@ public:
 		m_rasterizerState.SetRasterizerState(m_pDeviceContext, rasterizerState);
 	}
 
+	void SetViewPortState(EnViewPortState viewPortNum)
+	{
+		m_viewPortState.SetViewPort(viewPortNum);
+	}
+
 	CDeferred& GetDeferred()
 	{
 		return m_deferred;
@@ -217,6 +223,7 @@ private:
 	CRasterizerState						m_rasterizerState;
 	CDepthStencilState						m_depthState;
 	CShadowMap								m_shadowMap;
+	CViewPortState							m_viewPortState;
 };
 
 //エンジンクラスのインスタンスを取得。

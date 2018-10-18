@@ -6,8 +6,8 @@
 
 void CShadowMap::Init()
 {
-	m_renderTarget.CreateRenderTarget(FrameBufferWidth(), FrameBufferHeight(), DXGI_FORMAT_R32G32B32A32_FLOAT);
-	m_renderTarget.CreateDepthStencilBuffer(FrameBufferWidth(), FrameBufferHeight());
+	m_renderTarget.CreateRenderTarget(SHADOW_MAP_SIZE, SHADOW_MAP_SIZE, DXGI_FORMAT_R32G32B32A32_FLOAT);
+	m_renderTarget.CreateDepthStencilBuffer(SHADOW_MAP_SIZE, SHADOW_MAP_SIZE);
 	CMatrix mat = CMatrix::Identity;
 	m_CB.Create(sizeof(CMatrix), &mat);
 
@@ -35,10 +35,12 @@ void CShadowMap::Draw()
 	Engine().SetDepthStencilState(enDepthStencilState3D);
 	CMatrix viewMat = m_viewMatrix;
 	CMatrix projMat = m_projectionMatrix;
+	Engine().SetViewPortState(enViewPortShadow);
 	for (auto& model : m_modelList)
 	{
 		model->Draw(viewMat, projMat, true);
 	}
 	m_modelList.clear();
+	Engine().SetViewPortState(enViewPortGame);
 }
 

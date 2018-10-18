@@ -7,7 +7,7 @@
 
 class CCamera;
 
-enum EnRenderTarget
+enum EnRenderTarget 
 {
 	enRenderTargetColor,
 	enRenderTargetNormalMap,

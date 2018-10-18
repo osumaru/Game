@@ -41,7 +41,13 @@ public:
 
 	void SetConstantBuffer();
 
+	static int GetShadowMapSize()
+	{
+		return SHADOW_MAP_SIZE;
+	}
+
 private:
+	static const int						SHADOW_MAP_SIZE = 1024;
 	std::vector<CSkinModel*>				m_modelList;
 	CRenderTarget							m_renderTarget;
 	CMatrix									m_viewMatrix;
