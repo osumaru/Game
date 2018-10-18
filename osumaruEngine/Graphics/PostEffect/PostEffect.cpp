@@ -18,9 +18,10 @@ void CPostEffect::Init(IDXGISwapChain* swapChain)
 	};
 	DWORD indexBufferLayout[4] = { 0, 2, 1, 3 };
 	m_primitive.Create(vertexBufferLayout, sizeof(SVSLayout), 4, indexBufferLayout, 4, CPrimitive::enIndex32, CPrimitive::enTypeTriangleStrip);
-	ID3D11Texture2D * p_RT;
+	ID3D11Texture2D* p_RT;
 	HRESULT hr = swapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (LPVOID*)(&p_RT));
-	m_backBuffer.Create(FrameBufferWidth(), FrameBufferHeight(), DXGI_FORMAT_R32G32B32A32_FLOAT,  p_RT);
+	m_backBuffer.CreateRenderTarget(FrameBufferWidth(), FrameBufferHeight(), DXGI_FORMAT_R32G32B32A32_FLOAT,  p_RT);
+	m_backBuffer.CreateDepthStencilBuffer(FrameBufferWidth(), FrameBufferHeight());
 	m_pBackRenderTargetView = m_backBuffer.GetRenderTarget();
 	m_pBackDepthStencilView = m_backBuffer.GetDepthStencil();
 }

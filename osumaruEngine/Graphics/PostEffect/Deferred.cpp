@@ -30,8 +30,10 @@ void CDeferred::Init()
 		default:
 			break;
 		}
-		m_renderTarget[i].Create(FrameBufferWidth(), FrameBufferHeight(), format);
+		m_renderTarget[i].CreateRenderTarget(FrameBufferWidth(), FrameBufferHeight(), format);
 	}
+	m_renderTarget[0].CreateDepthStencilBuffer(FrameBufferWidth(), FrameBufferHeight());
+
 	SFrameSizeCB frameSizeCB;
 	frameSizeCB.frameBufferWidth = FrameBufferWidth();
 	frameSizeCB.frameBufferHeight = FrameBufferHeight();

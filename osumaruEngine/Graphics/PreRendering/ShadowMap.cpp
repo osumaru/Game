@@ -6,7 +6,8 @@
 
 void CShadowMap::Init()
 {
-	m_renderTarget.Create(FrameBufferWidth(), FrameBufferHeight(), DXGI_FORMAT_R32G32B32A32_FLOAT);
+	m_renderTarget.CreateRenderTarget(FrameBufferWidth(), FrameBufferHeight(), DXGI_FORMAT_R32G32B32A32_FLOAT);
+	m_renderTarget.CreateDepthStencilBuffer(FrameBufferWidth(), FrameBufferHeight());
 	CMatrix mat = CMatrix::Identity;
 	m_CB.Create(sizeof(CMatrix), &mat);
 
