@@ -81,7 +81,7 @@ void CPlayer::Init(CVector3 position)
 		m_status.AccumulationExp += m_status.OldExp;	//—İÏŒoŒ±’l
 		m_status.Gold = 0;								//Š‹à
 	}
-
+	
 	m_PlayerStateMachine.Start();
 	m_PlayerMove.Start();
 	m_PlayerRotation.Start();
@@ -205,6 +205,7 @@ void CPlayer::Draw()
 	}
 	m_weaponskin[m_weaponState].Draw(GetGameCamera().GetViewMatrix(), GetGameCamera().GetProjectionMatrix());
 	m_skinmodel.Draw(GetGameCamera().GetViewMatrix(), GetGameCamera().GetProjectionMatrix());
+	
 	
 }
 

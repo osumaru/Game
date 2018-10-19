@@ -47,19 +47,19 @@ void CNormalGameCamera::Update()
 		rotAxis.Cross(CVector3::Up, m_cameraVec);
 		rotAxis.Normalize();
 		CMatrix matrix;
-		matrix.MakeRotationAxis(rotAxis, rStick_y * CAMERA_SPEED * GameTime().GetDeltaFrameTime());
+		matrix.MakeRotationAxis(rotAxis, rStick_y * CAMERA_SPEED / 2 * GameTime().GetDeltaFrameTime());
 		//1フレーム前のカメラベクトル
 		CVector3 cameraVecOld = m_cameraVec;
 
-		//matrix.Mul(m_cameraVec);
+		matrix.Mul(m_cameraVec);
 		CVector3 cameraDir = m_cameraVec;
 		cameraDir.Normalize();
 
-		if (cameraDir.y < -0.5f)
+		if (cameraDir.y < -0.6f)
 		{
 			m_cameraVec = cameraVecOld;
 		}
-		else if (cameraDir.y > 0.5f)
+		else if (cameraDir.y > 0.8f)
 		{
 			m_cameraVec = cameraVecOld;
 
