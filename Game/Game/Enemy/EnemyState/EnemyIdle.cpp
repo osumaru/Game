@@ -23,16 +23,16 @@ void CEnemyIdle::Update()
 
 	m_timer += GameTime().GetDeltaFrameTime();
 
-	//if (m_enemy->IsDamage()) {
-	//	//ダメージを受けた
-	//	m_esm->ChangeState(CEnemyState::enState_Damage);
-	//}
-	//if (m_timer >= 6.0f) {
-	//	//しばらくしたら歩き始める
-	//	m_esm->ChangeState(CEnemyState::enState_Walk);
-	//}
-	//if (m_enemy->IsFind()) {
-	//	//プレイヤーが視野内にいる
-	//	m_esm->ChangeState(CEnemyState::enState_Chase);
-	//}
+	if (m_enemy->IsDamage()) {
+		//ダメージを受けた
+		m_esm->ChangeState(CEnemyState::enState_Damage);
+	}
+	if (m_timer >= 6.0f) {
+		//しばらくしたら歩き始める
+		m_esm->ChangeState(CEnemyState::enState_Walk);
+	}
+	if (m_enemy->IsFind()) {
+		//プレイヤーが視野内にいる
+		m_esm->ChangeState(CEnemyState::enState_Chase);
+	}
 }

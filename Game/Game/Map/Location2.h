@@ -1,11 +1,4 @@
-﻿//map2
-{
-	L"map2",
-	CVector3(-382.00f, -11.00f, -237.00f),             //平行移動
-	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
-	enMapTagUntagged, //タグ
-},
-//Player
+﻿//Player
 {
 	L"Player",
 	CVector3(2.38f, 0.00f, -7.73f),             //平行移動
@@ -137,4 +130,11 @@
 	CVector3(-7.62f, -7.30f, -7.24f),             //平行移動
 	CQuaternion(0.00f, 0.00f, 0.00f, 0.00f ),  //回転
 	enMapTagRootPoint, //タグ
+},
+//Brock
+{
+	L"Brock",
+	CVector3(0.00f, -4.70f, -15.50f),             //平行移動
+	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
+	enMapTagUntagged, //タグ
 },
