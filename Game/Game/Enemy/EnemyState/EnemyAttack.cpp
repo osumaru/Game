@@ -61,7 +61,7 @@ void CEnemyAttack::Update()
 
 	if (m_enemy->IsDamage()) {
 		//ダメージを受けた
-		m_esm->ChangeState(CEnemyState::enState_Damage);
+		m_esm->ChangeState(CEnemyState::enState_Damage); 
 	}
 	if (!m_enemy->IsPlayAnimation()) {
 		//アニメーションが終了している

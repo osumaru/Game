@@ -23,7 +23,6 @@ void CPlayer::Init(CVector3 position)
 	//ライトの設定
 	m_light.SetAmbientLight({ 0.5f,0.5f,0.5f,1.0f});
 	m_light.SetDiffuseLight(0, { 1.0f,1.0f,1.0f,1.0f });
-	/*m_light.SetDiffuseLightDir(0, { 0.0707f,0.0f,0.707f,1.0f });*/
 	m_skinmodel.SetLight(m_light);
 
 	m_wireCollisionSolver.Init(0.3f, 1.0f);
@@ -82,7 +81,7 @@ void CPlayer::Init(CVector3 position)
 		m_status.AccumulationExp += m_status.OldExp;	//累積経験値
 		m_status.Gold = 0;								//所持金
 	}
-
+	
 	m_PlayerStateMachine.Start();
 	m_PlayerMove.Start();
 	m_PlayerRotation.Start();
@@ -196,8 +195,6 @@ void CPlayer::Update()
 //描画処理
 void CPlayer::Draw()
 {
-	//m_characterController.Draw();
-	
 	if (m_isAttack)
 	{
 		CVector3 weponUpVec = { m_weaponskin[m_weaponState].GetWorldMatrix().m[2][0],m_weaponskin[m_weaponState].GetWorldMatrix().m[2][1],m_weaponskin[m_weaponState].GetWorldMatrix().m[2][2] };
@@ -208,6 +205,7 @@ void CPlayer::Draw()
 	}
 	m_weaponskin[m_weaponState].Draw(GetGameCamera().GetViewMatrix(), GetGameCamera().GetProjectionMatrix());
 	m_skinmodel.Draw(GetGameCamera().GetViewMatrix(), GetGameCamera().GetProjectionMatrix());
+	
 	
 }
 

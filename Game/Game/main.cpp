@@ -14,7 +14,6 @@ int WINAPI wWinMain(
 {
 	//Direct3D‚ğ‰Šú‰»
 	Engine().InitD3D(hInst);
-	//New<CGameScene>(0)->Init();
 	GetSceneManager().Init();
 	Engine().GameLoop();
 	return 0;
