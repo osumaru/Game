@@ -302,6 +302,12 @@ public:
 		m_cameraTargetPos = settar;
 	}
 
+	//プレイヤームーブクラスのアクティブ設定
+	void PlayerMoveSetIsActive(bool isActive)
+	{
+		m_PlayerMove.SetIsActive(isActive);
+	}
+
 private:
 	
 
