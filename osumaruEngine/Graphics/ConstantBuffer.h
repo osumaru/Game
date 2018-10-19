@@ -15,7 +15,7 @@ public:
 	bufferSize	バッファのストライズ(サイズ)
 	initData	初期化用のデータ
 	*/
-	void Create(int bufferSize, void* initData);
+	void Create(int bufferSize, const void* initData);
 
 	/*
 	リソースの更新

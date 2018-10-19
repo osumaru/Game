@@ -14,6 +14,7 @@ enum EnRenderTarget
 	enRenderTargetNormal,
 	enRenderTargetTangent,
 	enRenderTargetDepth,
+	enRenderTargetMaterial,
 	enRenderTargetNum
 };
 
@@ -51,11 +52,18 @@ public:
 	void SetCamera(CCamera* camera);
 
 private:
+	struct SFrameSizeCB
+	{
+		int frameBufferWidth;
+		int frameBufferHeight;
+	};
 	CRenderTarget							m_renderTarget[enRenderTargetNum];	//Gバッファー
 	CPrimitive								m_primitive;						//プリミティブ
 	CShader									m_vertexShader;						//頂点シェーダー
 	CShader									m_pixelShader;						//ピクセルシェーダー
 	CConstantBuffer							m_lightCB;							//ライトの定数バッファ
 	CConstantBuffer							m_gameCameraCB;
+	CConstantBuffer							m_materialCB;
+	CConstantBuffer							m_frameSizeCB;
 	CCamera*								m_camera = nullptr;
 };

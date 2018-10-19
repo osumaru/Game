@@ -6,7 +6,8 @@
 
 void CShadowMap::Init()
 {
-	m_renderTarget.Create(FrameBufferWidth(), FrameBufferHeight());
+	m_renderTarget.CreateRenderTarget(FrameBufferWidth(), FrameBufferHeight(), DXGI_FORMAT_R32G32B32A32_FLOAT);
+	m_renderTarget.CreateDepthStencilBuffer(FrameBufferWidth(), FrameBufferHeight());
 	CMatrix mat = CMatrix::Identity;
 	m_CB.Create(sizeof(CMatrix), &mat);
 
@@ -30,7 +31,7 @@ void CShadowMap::Draw()
 	float color[] = { 0.0f, 0.0f, 0.0f, 1.0f };
 	Engine().GetDeviceContext()->ClearRenderTargetView(m_renderTarget.GetRenderTarget(), color);
 	Engine().GetDeviceContext()->ClearDepthStencilView(m_renderTarget.GetDepthStencil(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
-	Engine().SetAlphaBlendState(enAlphaBlendState3D);
+	Engine().SetAlphaBlendState(enAlphaBlendStateNone);
 	Engine().SetDepthStencilState(enDepthStencilState3D);
 	CMatrix viewMat = m_viewMatrix;
 	CMatrix projMat = m_projectionMatrix;

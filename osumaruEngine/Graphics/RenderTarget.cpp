@@ -33,7 +33,7 @@ CRenderTarget::~CRenderTarget()
 
 }
 
-void CRenderTarget::Create(int width, int height, ID3D11Texture2D* pRenderTarget)
+void CRenderTarget::CreateRenderTarget(int width, int height, DXGI_FORMAT format, ID3D11Texture2D* pRenderTarget)
 {
 	m_pD3DRenderTargetTexture = pRenderTarget;
 	HRESULT hr;
@@ -45,7 +45,7 @@ void CRenderTarget::Create(int width, int height, ID3D11Texture2D* pRenderTarget
 	else
 	{
 		m_pRenderTargetTexture = std::make_unique<CTexture>();
-		m_pRenderTargetTexture->Create(width, height, CTexture::enRendertarget, DXGI_FORMAT_R32G32B32A32_FLOAT);
+		m_pRenderTargetTexture->Create(width, height, CTexture::enRendertarget, format);
 		m_pD3DRenderTargetTexture = m_pRenderTargetTexture->GetTexture();
 		D3D11_TEXTURE2D_DESC renderTargetTextureDesc;
 		m_pD3DRenderTargetTexture->GetDesc(&renderTargetTextureDesc);
@@ -55,7 +55,10 @@ void CRenderTarget::Create(int width, int height, ID3D11Texture2D* pRenderTarget
 		renderTargetDesc.ViewDimension = D3D11_RTV_DIMENSION_TEXTURE2D;
 		hr = GetDevice()->CreateRenderTargetView(m_pD3DRenderTargetTexture, &renderTargetDesc, &m_pRenderTarget);
 	}
+}
 
+void CRenderTarget::CreateDepthStencilBuffer(int width, int height)
+{
 	m_pDepthStencilTexture = std::make_unique<CTexture>();
 	m_pDepthStencilTexture->Create(width, height, CTexture::enDepthStencil, DXGI_FORMAT_D32_FLOAT);
 	m_pD3DDepthStencilTexture = m_pDepthStencilTexture->GetTexture();
@@ -68,5 +71,5 @@ void CRenderTarget::Create(int width, int height, ID3D11Texture2D* pRenderTarget
 	descDepthStencilView.ViewDimension = D3D11_DSV_DIMENSION_TEXTURE2D;
 	descDepthStencilView.Texture2D.MipSlice = 0;
 
-	hr = GetDevice()->CreateDepthStencilView(m_pD3DDepthStencilTexture, &descDepthStencilView, &m_pDepthStencil);
+	HRESULT hr = GetDevice()->CreateDepthStencilView(m_pD3DDepthStencilTexture, &descDepthStencilView, &m_pDepthStencil);
 }

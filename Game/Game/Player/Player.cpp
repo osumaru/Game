@@ -89,6 +89,7 @@ void CPlayer::Init(CVector3 position)
 	Add(&m_PlayerMove, 0);
 	Add(&m_PlayerRotation, 0);
 	Add(this, 1);
+	m_skinmodel.SetIsShadowCaster(true);
 }
 
 void CPlayer::Update()

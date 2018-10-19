@@ -15,6 +15,17 @@ cbuffer shadowCB : register(b2)
 {
 	float4x4 lightViewProj;
 };
+cbuffer materialCB : register(b3)
+{
+	int isShadowReceiver;
+	int isNormalMapFlg;
+};
+
+cbuffer framesizeCB : register(b4)
+{
+	int frameBufferWidth;
+	int frameBufferHeight;
+};
 
 struct VS_INPUT
 {
@@ -34,7 +45,8 @@ Texture2D<float4> normalMapTexture : register(t1);
 Texture2D<float4> normalTexture : register(t2);
 Texture2D<float4> tangentTexture : register(t3);
 Texture2D<float4> depthTexture : register(t4);
-Texture2D<float4> shadowTexture : register(t5);
+Texture2D<int4> materialTexture : register(t5);
+Texture2D<float4> shadowTexture : register(t6);
 sampler Sampler : register(s0);
 
 VS_OUTPUT VSMain(VS_INPUT In)
@@ -90,14 +102,19 @@ float4 PSMain(VS_OUTPUT In) : SV_TARGET0
 	shadowMapPos.y = 1.0f - shadowMapPos.y;
 	float depth = shadowMapPos.z;
 	float shadowDepth = shadowTexture.Sample(Sampler, shadowMapPos.xy).x;
-	//return shadowTexture.Sample(Sampler, In.uv);
-	if(depth < shadowDepth + 0.1f)
+	float shadowValue = 1.0f;
+	if (depth < shadowDepth + 0.3f)
 	{
-		if(shadowMapPos.x <= 1.0f && 0.0f <= shadowMapPos.x
-		 &&	shadowMapPos.y <= 1.0f && 0.0f <= shadowMapPos.y)
+		if (shadowMapPos.x <= 1.0f && 0.0f <= shadowMapPos.x
+			&&	shadowMapPos.y <= 1.0f && 0.0f <= shadowMapPos.y)
 		{
-			color.xyz = 0.0f;
+			int3 uv;
+			uv.z = 0;
+			uv.x = (int)(In.uv.x * 1280.0f);
+			uv.y = (int)(In.uv.y * 720.0f);
+			shadowValue *= 1 - materialTexture.Load(uv, int2(0, 0)).x & isShadowReceiver;
 		}
 	}
+	color.xyz *= shadowValue;
 	return color;
 }

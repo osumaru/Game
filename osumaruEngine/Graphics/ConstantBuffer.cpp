@@ -17,7 +17,7 @@ CConstantBuffer::~CConstantBuffer()
 
 }
 
-void CConstantBuffer::Create(int bufferSize, void* initData)
+void CConstantBuffer::Create(int bufferSize, const void* initData)
 {
 	D3D11_BUFFER_DESC desc;
 	desc.ByteWidth = (((bufferSize - 1) / 16) + 1) * 16;

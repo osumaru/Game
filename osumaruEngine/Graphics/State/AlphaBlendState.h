@@ -2,8 +2,9 @@
 
 enum EnAlphaBlendState
 {
-	enAlphaBlendState2D,
-	enAlphaBlendState3D,
+	enAlphaBlendStateAdd,
+	enAlphaBlendStateTranslucent,
+	enAlphaBlendStateNone,
 	enAlphaBlendStateNum,
 };
 

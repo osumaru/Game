@@ -40,9 +40,6 @@
     <Filter Include="ソース ファイル\Random">
       <UniqueIdentifier>{6baa6860-2c88-4675-b7f0-5ff0a20bf333}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\Sound">
-      <UniqueIdentifier>{bbc2202a-b2bf-4ae4-8505-d0bdc67b57a9}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソース ファイル\Input">
       <UniqueIdentifier>{7012f079-d1f9-4016-9db6-b908046e581a}</UniqueIdentifier>
     </Filter>
@@ -57,6 +54,9 @@
     </Filter>
     <Filter Include="ソース ファイル\Graphics\preRendering">
       <UniqueIdentifier>{8c66b860-a17c-4894-8b9f-668daa0f3084}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Resource\Sound">
+      <UniqueIdentifier>{bbc2202a-b2bf-4ae4-8505-d0bdc67b57a9}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -154,13 +154,13 @@
       <Filter>ソース ファイル\Random</Filter>
     </ClCompile>
     <ClCompile Include="Sound\SoundEngine.cpp">
-      <Filter>ソース ファイル\Sound</Filter>
+      <Filter>ソース ファイル\Resource\Sound</Filter>
     </ClCompile>
     <ClCompile Include="Sound\SoundSource.cpp">
-      <Filter>ソース ファイル\Sound</Filter>
+      <Filter>ソース ファイル\Resource\Sound</Filter>
     </ClCompile>
     <ClCompile Include="Sound\WaveFileOpen.cpp">
-      <Filter>ソース ファイル\Sound</Filter>
+      <Filter>ソース ファイル\Resource\Sound</Filter>
     </ClCompile>
     <ClCompile Include="Input\Pad.cpp">
       <Filter>ソース ファイル\Input</Filter>
@@ -306,13 +306,13 @@
       <Filter>ソース ファイル\Random</Filter>
     </ClInclude>
     <ClInclude Include="Sound\SoundEngine.h">
-      <Filter>ソース ファイル\Sound</Filter>
+      <Filter>ソース ファイル\Resource\Sound</Filter>
     </ClInclude>
     <ClInclude Include="Sound\SoundSource.h">
-      <Filter>ソース ファイル\Sound</Filter>
+      <Filter>ソース ファイル\Resource\Sound</Filter>
     </ClInclude>
     <ClInclude Include="Sound\WaveFileOpen.h">
-      <Filter>ソース ファイル\Sound</Filter>
+      <Filter>ソース ファイル\Resource\Sound</Filter>
     </ClInclude>
     <ClInclude Include="Input\Pad.h">
       <Filter>ソース ファイル\Input</Filter>
@@ -373,6 +373,9 @@
     </ClInclude>
     <ClInclude Include="Physics\RayTest.h">
       <Filter>ソース ファイル\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\SkinModelShaderFlgCommon.h">
+      <Filter>ソース ファイル</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

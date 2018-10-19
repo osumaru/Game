@@ -19,7 +19,7 @@ void CNumber::Update()
 
 void CNumber::AfterDraw()
 {
-	Engine().SetAlphaBlendState(enAlphaBlendState2D);
+	Engine().SetAlphaBlendState(enAlphaBlendStateAdd);
 	m_number[m_num].Draw();
-	Engine().SetAlphaBlendState(enAlphaBlendState3D);
+	Engine().SetAlphaBlendState(enAlphaBlendStateNone);
 }
