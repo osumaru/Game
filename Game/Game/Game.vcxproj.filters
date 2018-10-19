@@ -67,6 +67,9 @@
     <Filter Include="ソース ファイル\Player\PlayerSate">
       <UniqueIdentifier>{78a5d28b-6f9a-4978-9875-12bede60a5e2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Enemy\PathFinding">
+      <UniqueIdentifier>{bf4c8159-1303-485d-9c80-82c329b1db42}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -221,6 +224,12 @@
     </ClCompile>
     <ClCompile Include="Player\PlayerSate\PlayerWireMove.cpp">
       <Filter>ソース ファイル\Player\PlayerSate</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy\PathFinding\PathFinding.cpp">
+      <Filter>ソース ファイル\Enemy\PathFinding</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy\PathFinding\RootPoint.cpp">
+      <Filter>ソース ファイル\Enemy\PathFinding</Filter>
     </ClCompile>
     <ClCompile Include="Camera\NormalGameCamera.cpp">
       <Filter>ソース ファイル\Camera</Filter>
@@ -391,6 +400,15 @@
     </ClInclude>
     <ClInclude Include="Player\PlayerSate\PlayerWireMove.h">
       <Filter>ソース ファイル\Player\PlayerSate</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy\PathFinding\PathFinding.h">
+      <Filter>ソース ファイル\Enemy\PathFinding</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy\PathFinding\RootPoint.h">
+      <Filter>ソース ファイル\Enemy\PathFinding</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy\PathFinding\MapData.h">
+      <Filter>ソース ファイル\Enemy\PathFinding</Filter>
     </ClInclude>
     <ClInclude Include="Camera\NormalGameCamera.h">
       <Filter>ソース ファイル\Camera</Filter>
