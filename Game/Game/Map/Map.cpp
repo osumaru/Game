@@ -9,11 +9,13 @@
 #include "../Enemy/Samurai.h"
 #include "../Enemy/Warrok.h"
 #include "../Enemy/EnemyGroup.h"
+#include "../Enemy/PathFinding/RootPoint.h"
+#include "../Enemy/PathFinding/PathFinding.h"
 
 std::vector<std::vector<SMapChipInfo>> mapChipInfo = 
 {
 	{
-//#include "Location.h"
+//#include "Location2.h"
 #include "Test.h"
 	}
 //	{
@@ -49,12 +51,14 @@ void Map::Init(int stageNum)
 	std::map<int, std::vector<SMapChipInfo>> instancingData;
 
 	std::vector<CEnemyGroup*> enemyGroupList;
+	int rootNumber = 0;
 
 	for (SMapChipInfo& mInfo : mapChipInfo[stageNum])
 	{
 		MapChip* mapChip = nullptr;
 		CEnemyGroup* enemyGroup = nullptr;
 		IEnemy* enemy = nullptr;
+		CRootPoint* rootPoint = nullptr;
 
 		switch (mInfo.m_tag)
 		{
@@ -89,6 +93,12 @@ void Map::Init(int stageNum)
 			enemyGroup->Init(mInfo.m_position);
 			enemyGroupList.push_back(enemyGroup);
 			break;
+		case enMapTagRootPoint:
+			rootPoint = New<CRootPoint>(0);
+			rootPoint->Init(mInfo.m_position, rootNumber);
+			m_rootPointList.push_back(rootPoint);
+			rootNumber++;
+			break;
 		case enMapTagTerrain:
 			mapChip = New<StaticMapObject>(0);
 			m_collider = false;
@@ -110,9 +120,9 @@ void Map::Init(int stageNum)
 		}
 	}
 
-	//所属するグループを決める
 	for (IEnemy* enemy : m_enemyList) 
 	{
+		//所属するグループを決める
 		CEnemyGroup* group = nullptr;
 		for (CEnemyGroup* enemyGroup : enemyGroupList) {
 			if (group == nullptr) 
@@ -131,18 +141,40 @@ void Map::Init(int stageNum)
 		}
 		enemy->SetEnemyGroup(group);
 		group->Add(enemy);
+
+		//エネミーの初期位置に近いポイントを決める
+		CRootPoint* point = nullptr;
+		for (CRootPoint* rootPoint : m_rootPointList) {
+			if (point == nullptr) 
+			{
+				point = rootPoint;
+				continue;
+			}
+			CVector3 distance = point->GetPosition();
+			distance -= enemy->GetPosition();
+			CVector3 distance2 = rootPoint->GetPosition();
+			distance2 -= enemy->GetPosition();
+			if (distance2.Length() <= distance.Length()) 
+			{
+				point = rootPoint;
+			}
+		}
+		enemy->SetRootPoint(point);
+	}
+	if (!m_rootPointList.empty()) {
+		g_pathFinding.BuildNodes(m_rootPointList);
 	}
 }
 
 
 void Map::Update()
 {
+	//エネミーが死亡していたらリストから削除
 	std::list<IEnemy*>::iterator it;
 	it = m_enemyList.begin();
-
 	while (it != m_enemyList.end()) {
 		if ((*it)->IsDelete()) {
-			//死亡していたらリストから削除
+			//死亡している
 			IEnemy* enemy = *it;
 			it = m_enemyList.erase(it);
 		}
@@ -150,6 +182,45 @@ void Map::Update()
 			it++;
 		}
 	}
+
+	//エネミーのルート上のポイントを更新
+	for (IEnemy* enemy : m_enemyList) {
+		CRootPoint* point = nullptr;
+		for (CRootPoint* rootPoint : m_rootPointList) {
+			if (point == nullptr)
+			{
+				point = rootPoint;
+				continue;
+			}
+			CVector3 distance = point->GetPosition();
+			distance -= enemy->GetPosition();
+			CVector3 distance2 = rootPoint->GetPosition();
+			distance2 -= enemy->GetPosition();
+			if (distance2.Length() <= distance.Length())
+			{
+				point = rootPoint;
+			}
+		}
+		enemy->SetRootPoint(point);
+	}
+
+	CRootPoint* point = nullptr;
+	for (CRootPoint* rootPoint : m_rootPointList) {
+		if (point == nullptr)
+		{
+			point = rootPoint;
+			continue;
+		}
+		CVector3 distance = point->GetPosition();
+		distance -= GetPlayer().GetPosition();
+		CVector3 distance2 = rootPoint->GetPosition();
+		distance2 -= GetPlayer().GetPosition();
+		if (distance2.Length() <= distance.Length())
+		{
+			point = rootPoint;
+		}
+	}
+	GetPlayer().SetRootPoint(point);
 }
 
 

@@ -10,6 +10,7 @@
 #include "../UI/DamageNumber/DamageNumber.h"
 
 class CEnemyGroup;
+class CRootPoint;
 
 struct SEnemyStatus
 {
@@ -148,6 +149,13 @@ public:
 		return m_enemyGroup;
 	}
 
+	//ルート上のエネミーがいるポイントを設定
+	//rootPoint		エネミーがいるポイント
+	void SetRootPoint(CRootPoint* rootPoint)
+	{
+		m_rootPoint = rootPoint;
+	}
+
 	//プレイヤーを発見したか
 	bool IsFind() const
 	{
@@ -192,6 +200,7 @@ protected:
 	CEnemyTurn				m_enemyTurn;			//向きを回転
 	CEnemySearch			m_enemySearch;			//プレイヤーを探索
 	CEnemyGroup*			m_enemyGroup;			//エネミーグループ
+	CRootPoint*				m_rootPoint;			//ルートポイント
 	CDamageNumber			m_damageNumber;			//ダメージ数値
 	CVector3				m_position;				//座標
 	CQuaternion				m_rotation;				//回転

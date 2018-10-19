@@ -1,6 +1,9 @@
 #include "stdafx.h"
 #include "Zombie.h"
-#include"../../Game/Camera/GameCamera.h"
+#include "../Player/Player.h"
+#include "../../Game/Camera/GameCamera.h"
+#include "PathFinding/RootPoint.h"
+#include "PathFinding/PathFinding.h"
 
 CZombie::CZombie()
 {
@@ -53,6 +56,21 @@ bool CZombie::Start()
 
 void CZombie::Update()
 {
+	if (m_isFind && m_rootPoint != nullptr) {
+		//å©Ç¬Ç©Ç¡ÇƒÇ¢ÇÍÇŒåoòHíTçıÇ∑ÇÈ
+		std::vector<CVector2> root;
+		g_pathFinding.FindRoot(root, m_rootPoint->GetListNumber(), GetPlayer().GetRootPoint()->GetListNumber());
+		if (!root.empty()) {
+			CVector3 moveSpeed = { root[0].x, 0.0f, root[0].y };
+			CVector3 pos = m_position;
+			pos.y = 0.0f;
+			moveSpeed -= pos;
+			moveSpeed.Normalize();
+			moveSpeed *= 2.0f;
+			m_characterController.SetMoveSpeed(moveSpeed);
+		}
+	}
+
 	if (!m_isWireHit) {
 		m_characterController.SetPosition(m_position);
 		m_characterController.Execute(GameTime().GetDeltaFrameTime());
