@@ -23,7 +23,6 @@ void CPlayer::Init(CVector3 position)
 	//ƒ‰ƒCƒg‚Ìİ’è
 	m_light.SetAmbientLight({ 0.5f,0.5f,0.5f,1.0f});
 	m_light.SetDiffuseLight(0, { 1.0f,1.0f,1.0f,1.0f });
-	/*m_light.SetDiffuseLightDir(0, { 0.0707f,0.0f,0.707f,1.0f });*/
 	m_skinmodel.SetLight(m_light);
 
 	m_wireCollisionSolver.Init(0.3f, 1.0f);
@@ -195,8 +194,6 @@ void CPlayer::Update()
 //•`‰æˆ—
 void CPlayer::Draw()
 {
-	//m_characterController.Draw();
-	
 	if (m_isAttack)
 	{
 		CVector3 weponUpVec = { m_weaponskin[m_weaponState].GetWorldMatrix().m[2][0],m_weaponskin[m_weaponState].GetWorldMatrix().m[2][1],m_weaponskin[m_weaponState].GetWorldMatrix().m[2][2] };

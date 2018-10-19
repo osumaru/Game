@@ -51,20 +51,21 @@ void CNormalGameCamera::Update()
 		//1フレーム前のカメラベクトル
 		CVector3 cameraVecOld = m_cameraVec;
 
-		matrix.Mul(m_cameraVec);
+		//matrix.Mul(m_cameraVec);
 		CVector3 cameraDir = m_cameraVec;
 		cameraDir.Normalize();
 
-		if (cameraDir.y < -0.f)
+		if (cameraDir.y < -0.5f)
 		{
 			m_cameraVec = cameraVecOld;
 		}
-		else if (cameraDir.y > 0.7f)
+		else if (cameraDir.y > 0.5f)
 		{
 			m_cameraVec = cameraVecOld;
 
 		}
 	}
+
 		CVector3 toCameraXZ;
 		toCameraXZ = m_cameraVec;
 		float height = toCameraXZ.y;
@@ -78,7 +79,7 @@ void CNormalGameCamera::Update()
 		CVector3	toNewCameraPos = m_cameraPosition - target;
 		toNewCameraPos.y = 0.0f;
 		toNewCameraPos.Normalize();
-		float weight = 0.5f;  //このウェイトの値は0.0～1.0の値をとる。1.0に近づくほど追尾が強くなる。
+		float weight = 0.75f;  //このウェイトの値は0.0～1.0の値をとる。1.0に近づくほど追尾が強くなる。
 		toNewCameraPos = toNewCameraPos * weight + toCameraXZ * (1.0f - weight);
 		toNewCameraPos.Normalize();
 		toNewCameraPos *= toCameraLen;

@@ -152,7 +152,8 @@ void CPlayerRotation::Update()
 	//ƒvƒŒƒCƒ„[‚Ì‰ñ“]‚Ìˆ—
 	else if (playerVec.LengthSq() > 0.001f)
 	{
-		if (GetPlayer().GetPlayerStateMachine().GetState() == CPlayerState::EnPlayerState::enPlayerArrowAttack) { return; }
+		if (GetPlayer().GetPlayerStateMachine().GetState() == CPlayerState::EnPlayerState::enPlayerArrowAttack ||
+			GetPlayer().GetPlayerStateMachine().GetState() == CPlayerState::EnPlayerState::enPlayerArrowShoot) { return; }
 		CQuaternion Playerrot = GetPlayer().GetPlayerrRot();
 		CQuaternion rot = CQuaternion::Identity;
 		rot.SetRotation(CVector3::AxisY, atan2f(playerVec.x, playerVec.z));		//YŽ²Žü‚è‚Ì‰ñ“]
