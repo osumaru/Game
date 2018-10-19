@@ -1,6 +1,9 @@
 #include "stdafx.h"
 #include "Ninja.h"
+#include "../Player/Player.h"
 #include "../Camera/GameCamera.h"
+#include "PathFinding/RootPoint.h"
+#include "PathFinding/PathFinding.h"
 
 CNinja::CNinja()
 {
@@ -31,6 +34,7 @@ void CNinja::Init(CVector3 position)
 	m_animation.SetLoopFlg(CEnemyState::enState_Walk, true);
 	m_animation.SetLoopFlg(CEnemyState::enState_Chase, true);
 	Add(&m_enemyStateMachine, 0);
+	Add(&m_enemyMove, 0);
 	Add(&m_enemyTurn, 0);
 	Add(&m_enemySearch, 0);
 	//ダメージ表示の初期化
@@ -53,6 +57,21 @@ bool CNinja::Start()
 
 void CNinja::Update()
 {
+	if (m_isFind && m_rootPoint != nullptr) {
+		//見つかっていれば経路探索する
+		std::vector<CVector2> root;
+		g_pathFinding.FindRoot(root, m_rootPoint->GetListNumber(), GetPlayer().GetRootPoint()->GetListNumber());
+		if (!root.empty()) {
+			CVector3 moveSpeed = { root[0].x, 0.0f, root[0].y };
+			CVector3 pos = m_position;
+			pos.y = 0.0f;
+			moveSpeed -= pos;
+			moveSpeed.Normalize();
+			moveSpeed *= 2.0f;
+			m_characterController.SetMoveSpeed(moveSpeed);
+		}
+	}
+
 	if (!m_isWireHit) {
 		m_characterController.SetPosition(m_position);
 		m_characterController.Execute(GameTime().GetDeltaFrameTime());

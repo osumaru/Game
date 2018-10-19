@@ -4,7 +4,8 @@
 
 #pragma once
 
-#include "../Enemy/EnemyState/EnemyStateMachine.h"
+#include "EnemyState/EnemyStateMachine.h"
+#include "EnemyMove.h"
 #include "EnemyTurn.h"
 #include "EnemySearch.h"
 #include "../UI/DamageNumber/DamageNumber.h"
@@ -44,6 +45,12 @@ public:
 	const CVector3& GetPosition() const
 	{
 		return m_position;
+	}
+
+	//敵の座標を設定
+	void SetPosition(const CVector3& position)
+	{
+		m_position = position;
 	}
 
 	//クォータニオンを取得
@@ -197,6 +204,7 @@ protected:
 	CCharacterController	m_characterController;	//キャラクターコントローラー
 	CAnimation				m_animation;			//アニメーション
 	CEnemyStateMachine		m_enemyStateMachine;	//ステートマシン
+	CEnemyMove				m_enemyMove;			//移動
 	CEnemyTurn				m_enemyTurn;			//向きを回転
 	CEnemySearch			m_enemySearch;			//プレイヤーを探索
 	CEnemyGroup*			m_enemyGroup;			//エネミーグループ

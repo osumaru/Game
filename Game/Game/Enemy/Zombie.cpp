@@ -34,6 +34,7 @@ void CZombie::Init(CVector3 position)
 	m_animation.SetLoopFlg(CEnemyState::enState_Walk, true);
 	m_animation.SetLoopFlg(CEnemyState::enState_Chase, true);
 	Add(&m_enemyStateMachine, 0);
+	Add(&m_enemyMove, 0);
 	Add(&m_enemyTurn, 0);
 	Add(&m_enemySearch, 0);
 	//ダメージ表示の初期化

@@ -54,6 +54,12 @@ public:
 		m_enemyGroup = enemyGroup;
 	}
 
+	//エネミーのステートを取得
+	CEnemyState::EnState GetState()
+	{
+		return m_state;
+	}
+
 private:
 	CEnemyState::EnState	m_state = CEnemyState::enState_Invald;	//エネミーの状態
 	IEnemyState*			m_currentState = nullptr;				//現在の状態
