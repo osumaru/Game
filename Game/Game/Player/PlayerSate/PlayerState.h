@@ -18,6 +18,7 @@ public:
 		enPlayerDied,			//死亡アニメーション
 		enPlayerWireMove,		//ワイヤーアニメーション
 		enPlayerArrowAttack,	//弓のアニメーション
+		enPlayerArrowShoot,		//弓を放つアニメーション
 		enPlayerLongSwordAttack,//大剣の攻撃アニメーション
 		enPlayerTwinSwordAttack,//二刀流の攻撃アニメーション
 		enPlayerNum,			//アニメーションの数

@@ -14,6 +14,7 @@ enum EnRenderTarget
 	enRenderTargetNormal,
 	enRenderTargetTangent,
 	enRenderTargetDepth,
+	enRenderTargetMaterial,
 	enRenderTargetNum
 };
 
@@ -48,39 +49,21 @@ public:
 		return m_renderTarget[numRenderTarget].GetRenderTargetTexture().GetShaderResource();
 	}
 
-	void SetViewMatrix(CMatrix& viewMatrix)
-	{
-		m_viewMatrix = viewMatrix;
-	}
-
-	void SetProjectionMatrix(CMatrix& projectionMatrix)
-	{
-		m_projectionMatrix = projectionMatrix;
-	}
-
-	CMatrix& GetViewMatrix()
-	{
-		return m_viewMatrix;
-	}
-
-	CMatrix& GetProjMatrix()
-	{
-		return m_projectionMatrix;
-	}
-
-	void SetConstantBuffer();
-
 	void SetCamera(CCamera* camera);
 
 private:
+	struct SFrameSizeCB
+	{
+		int frameBufferWidth;
+		int frameBufferHeight;
+	};
 	CRenderTarget							m_renderTarget[enRenderTargetNum];	//Gバッファー
 	CPrimitive								m_primitive;						//プリミティブ
 	CShader									m_vertexShader;						//頂点シェーダー
 	CShader									m_pixelShader;						//ピクセルシェーダー
 	CConstantBuffer							m_lightCB;							//ライトの定数バッファ
-	CMatrix									m_viewMatrix;						
-	CMatrix									m_projectionMatrix;
-	CConstantBuffer							m_shadowCB;
 	CConstantBuffer							m_gameCameraCB;
+	CConstantBuffer							m_materialCB;
+	CConstantBuffer							m_frameSizeCB;
 	CCamera*								m_camera = nullptr;
 };

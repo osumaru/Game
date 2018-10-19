@@ -17,8 +17,6 @@ void CPathFinding::BuildNodes(std::vector<CRootPoint*> rootPoint)
 	for (int y = 0; y < MAP_HEIGHT; y++) {
 		for (int x = 0; x < MAP_WIDTH; x++) {
 			SNode* node = &m_nodes[y][x];
-			//マップIDを入れる
-			//node->mapID = g_map[y][x];
 			//隣接マップをNULL初期化
 			node->linkNode[0] = NULL;
 			node->linkNode[1] = NULL;

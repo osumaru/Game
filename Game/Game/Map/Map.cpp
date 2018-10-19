@@ -161,7 +161,9 @@ void Map::Init(int stageNum)
 		}
 		enemy->SetRootPoint(point);
 	}
-	g_pathFinding.BuildNodes(m_rootPointList);
+	if (!m_rootPointList.empty()) {
+		g_pathFinding.BuildNodes(m_rootPointList);
+	}
 }
 
 

@@ -25,9 +25,10 @@ void CAlphaBlendState::Init(ID3D11Device* device)
 	blendDesc.RenderTarget[0].SrcBlendAlpha = D3D11_BLEND_SRC_ALPHA;
 	blendDesc.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP_ADD;
 	blendDesc.RenderTarget[0].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;
-	device->CreateBlendState(&blendDesc, &m_blendState[enAlphaBlendState2D]);
+	device->CreateBlendState(&blendDesc, &m_blendState[enAlphaBlendStateAdd]);
+	device->CreateBlendState(&blendDesc, &m_blendState[enAlphaBlendStateTranslucent]);
 
 	blendDesc.RenderTarget[0].BlendEnable = false;
-	device->CreateBlendState(&blendDesc, &m_blendState[enAlphaBlendState3D]);
+	device->CreateBlendState(&blendDesc, &m_blendState[enAlphaBlendStateNone]);
 
 }

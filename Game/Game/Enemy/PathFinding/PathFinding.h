@@ -12,7 +12,6 @@ class CRootPoint;
 struct SNode {
 	SNode*		linkNode[LINK_NODE_MAX];	//隣接ノード。NULLであれば隣接ノードなし。
 	SNode*		parentNode;					//親のノード
-	//int			mapID;						//マップ番号
 	CVector2	position;					//ノードの座標
 	int			moveCost;					//移動コスト
 	bool		isDone;						//調査済みフラグ
@@ -25,9 +24,9 @@ public:
 	//ノードの構築
 	void BuildNodes(std::vector<CRootPoint*> rootPoint);
 	//ルートの検索
-	//root
-	//startPos
-	//targetPos
+	//root			ルートの座標を格納するリスト
+	//startNumber	スタートのポイントの番号		
+	//targetNumber	ゴールのポイントの番号
 	void FindRoot(std::vector<CVector2>& root, int startNumber, int targetNumber);
 private:
 	SNode m_nodes[MAP_HEIGHT][MAP_WIDTH];	//ノードの配列

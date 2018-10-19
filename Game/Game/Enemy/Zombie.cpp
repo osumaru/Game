@@ -56,7 +56,8 @@ bool CZombie::Start()
 
 void CZombie::Update()
 {
-	if (m_isFind) {
+	if (m_isFind && m_rootPoint != nullptr) {
+		//Œ©‚Â‚©‚Á‚Ä‚¢‚ê‚ÎŒo˜H’Tõ‚·‚é
 		std::vector<CVector2> root;
 		g_pathFinding.FindRoot(root, m_rootPoint->GetListNumber(), GetPlayer().GetRootPoint()->GetListNumber());
 		if (!root.empty()) {

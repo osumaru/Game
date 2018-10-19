@@ -55,7 +55,7 @@ void MapChip::Init(const CVector3& position, const CQuaternion& rotation, const 
 	m_rotation = rotation;
 	m_scale = { 1.0f, 1.0f, 1.0f };
 	//m_skinModel.SetShadowCasterFlg(true);
-	//m_skinModel.SetShadowReceiverFlg(true);
+	m_skinModel.SetIsShadowReceiver(true);
 	////基本的に動かさないのでワールド行列を最初の一回だけ更新しておく。
 	//m_skinModel.Update(m_position, m_rotation, m_scale);
 	//m_skinModel.SetShadowCompesationFlg(true);
@@ -80,7 +80,7 @@ bool MapChip::Start()
 void MapChip::Update()
 {
 	//影を描画するのでシャドウマップに登録
-	//m_skinModel.ShadowMapEntry();
+	m_skinModel.ShadowMapEntry();
 }
 
 void MapChip::Draw()

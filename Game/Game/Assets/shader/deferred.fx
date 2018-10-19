@@ -6,7 +6,7 @@ cbuffer lightCB : register(b0)
 	float4 diffuseLightDir[4];
 };
 
-cbuffer shadowCB : register(b1)
+cbuffer shadowConB : register(b1)
 {
 	float4x4 gameViewProj;
 };
@@ -14,6 +14,17 @@ cbuffer shadowCB : register(b1)
 cbuffer shadowCB : register(b2)
 {
 	float4x4 lightViewProj;
+};
+cbuffer materialCB : register(b3)
+{
+	int isShadowReceiver;
+	int isNormalMapFlg;
+};
+
+cbuffer framesizeCB : register(b4)
+{
+	int frameBufferWidth;
+	int frameBufferHeight;
 };
 
 struct VS_INPUT
@@ -34,7 +45,8 @@ Texture2D<float4> normalMapTexture : register(t1);
 Texture2D<float4> normalTexture : register(t2);
 Texture2D<float4> tangentTexture : register(t3);
 Texture2D<float4> depthTexture : register(t4);
-Texture2D<float4> shadowTexture : register(t5);
+Texture2D<int4> materialTexture : register(t5);
+Texture2D<float4> shadowTexture : register(t6);
 sampler Sampler : register(s0);
 
 VS_OUTPUT VSMain(VS_INPUT In)
@@ -79,20 +91,30 @@ float4 PSMain(VS_OUTPUT In) : SV_TARGET0
 	lig.xyz += ambientLight;
 	color *= lig;
 	
-	In.screenPos.z = depthTexture.Sample(Sampler, In.uv).x;
-	float4 shadowMapPos = mul(gameViewProj, In.screenPos);
-	shadowMapPos /= shadowMapPos.w;
+	In.screenPos = depthTexture.Sample(Sampler, In.uv);
+	float4 shadowMapPos = In.screenPos;
+	//shadowMapPos = mul(gameViewProj, shadowMapPos);
+	//shadowMapPos /= shadowMapPos.w;
 	shadowMapPos = mul(lightViewProj, shadowMapPos);
 	shadowMapPos /= shadowMapPos.w;
+	shadowMapPos.xy += 1.0f;
+	shadowMapPos.xy /= 2.0f;
+	shadowMapPos.y = 1.0f - shadowMapPos.y;
 	float depth = shadowMapPos.z;
 	float shadowDepth = shadowTexture.Sample(Sampler, shadowMapPos.xy).x;
-	if(shadowDepth < depth)
+	float shadowValue = 1.0f;
+	if (depth < shadowDepth + 0.3f)
 	{
-		if(shadowMapPos.x <= 1.0f && 0.0f <= shadowMapPos.x
-		 &&	shadowMapPos.y <= 1.0f && 0.0f <= shadowMapPos.y)
+		if (shadowMapPos.x <= 1.0f && 0.0f <= shadowMapPos.x
+			&&	shadowMapPos.y <= 1.0f && 0.0f <= shadowMapPos.y)
 		{
-			//color.xyz = 0.0f;
+			int3 uv;
+			uv.z = 0;
+			uv.x = (int)(In.uv.x * 1280.0f);
+			uv.y = (int)(In.uv.y * 720.0f);
+			shadowValue *= 1 - materialTexture.Load(uv, int2(0, 0)).x & isShadowReceiver;
 		}
 	}
+	color.xyz *= shadowValue;
 	return color;
 }

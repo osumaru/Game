@@ -4,7 +4,6 @@
 #include "PlayerRotation.h"
 #include "PlayerMove.h"
 #include "PlayerArrow.h"
-#include "WireCollisionSolver.h"
 
 class CRootPoint;
 
@@ -38,12 +37,13 @@ public:
 		enPlayerAttack2,	//連撃アニメーション
 		enPlayerDamage,		//ダメージアニメーション
 		enPlayerAvoidance,	//回避アニメーション
-
 		enPlayerDete,		//死亡アニメーション
-		enPlayerWireMove,	//ワイヤー移動アニメーション
+		
 		enPlayerArroAttack,	//弓のアニメーション
+		enPlayerArrowShoot,	//弓を放つアニメーション
 		enPlayerLongSwordAttack,//大剣の攻撃アニメーション
 		enPlayerTwinSwordAttack,//二刀流の攻撃アニメーション
+		enPlayerWireMove,	//ワイヤー移動アニメーション
 		enPlayerNum			//アニメーションの数
 
 	};
@@ -275,6 +275,7 @@ public:
 	{
 		return m_isWireMove;
 	}
+	
 
 	//ワイヤー移動しているかを設定
 	void SetIsWireMove(bool isWireMove)
@@ -294,9 +295,16 @@ public:
 		return m_rootPoint;
 	}
 
+	//武器のスキン情報の取得
 	const CSkinModel& GetWeaponskin(int num)
 	{
 		return m_weaponskin[num];
+	}
+
+	//矢を生成しているかの設定
+	void SetInitArrow(const bool set)
+	{
+		m_initArrow = set;
 	}
 	 
 	const CVector3 GetTargetPos()
@@ -340,10 +348,12 @@ private:
 	const float				INTERVAL = 1.5;								//ダメージを受けた後の無敵時間
 	bool					m_isDamege = false;
 	float					m_animetionFrame = 0.0f;
-	bool					m_isAttack = false;
-	bool					m_isDied = false;
-	bool					m_isGround = false;
-	bool					m_intervalOn = false;
+	bool					m_isAttack = false;							//攻撃中かの判定
+	bool					m_isDied = false;							//死んでいるかの判定
+	bool					m_isGround = false;							//地面にいるかの判定
+	bool					m_intervalOn = false;						//無敵中かの判定
+	bool					m_initArrow = false;						//弓を生成しているかの判定
+
 	float					m_intervalTime = 0.0f;
 
 	CPlayerStateMachine			m_PlayerStateMachine;							//プレイヤーのアニメーションの遷移を行うステートマシーン
@@ -352,7 +362,7 @@ private:
 	std::list<CPlayerArrow*>	m_arrowList;									//弓矢のリスト
 
 	bool					m_isWireMove = false;					//ワイヤー移動できるか
-	CWireCollisionSolver	m_wireCollisionSolver;					//ワイヤー移動のコリジョン処理クラス
+	CRayTest				m_wireCollisionSolver;					//ワイヤー移動のコリジョン処理クラス
 	CVector3				m_wirePosition;							//ワイヤー移動先の座標
 
 	CRootPoint*				m_rootPoint;

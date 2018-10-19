@@ -158,6 +158,7 @@
     </MeshContentTask>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Camera\ArrowGameCamera.cpp" />
     <ClCompile Include="Camera\GameCamera.cpp" />
     <ClCompile Include="Enemy\EnemyGroup.cpp" />
     <ClCompile Include="Enemy\EnemySearch.cpp" />
@@ -183,6 +184,7 @@
     <ClCompile Include="Map\Map.cpp" />
     <ClCompile Include="Map\MapChip\MapChip.cpp" />
     <ClCompile Include="Map\MapChip\StaticMapObject.cpp" />
+    <ClCompile Include="Camera\NormalGameCamera.cpp" />
     <ClCompile Include="Player\PlayerSate\PlayerArrowAttack.cpp" />
     <ClCompile Include="Player\PlayerArrow.cpp" />
     <ClCompile Include="Player\PlayerMove.cpp" />
@@ -198,7 +200,6 @@
     <ClCompile Include="Player\PlayerSate\PlayerWalk.cpp" />
     <ClCompile Include="Player\Player.cpp" />
     <ClCompile Include="Player\PlayerSate\PlayerWireMove.cpp" />
-    <ClCompile Include="Player\WireCollisionSolver.cpp" />
     <ClCompile Include="Scene\GameScene.cpp" />
     <ClCompile Include="Scene\SceneManager.cpp" />
     <ClCompile Include="stdafx.cpp">
@@ -216,6 +217,7 @@
     <ClCompile Include="UI\WeaponSelect\WeaponSelect.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Camera\ArrowGameCamera.h" />
     <ClInclude Include="Camera\GameCamera.h" />
     <ClInclude Include="Enemy\EnemyGroup.h" />
     <ClInclude Include="Enemy\EnemySearch.h" />
@@ -243,6 +245,7 @@
     <ClInclude Include="Map\Map.h" />
     <ClInclude Include="Map\MapChip\MapChip.h" />
     <ClInclude Include="Map\MapChip\StaticMapObject.h" />
+    <ClInclude Include="Camera\NormalGameCamera.h" />
     <ClInclude Include="Player\PlayerSate\PlayerArrowAttack.h" />
     <ClInclude Include="Player\PlayerArrow.h" />
     <ClInclude Include="Player\PlayerMove.h" />
@@ -260,7 +263,6 @@
     <ClInclude Include="Player\PlayerSate\IPlayerState.h" />
     <ClInclude Include="Player\Player.h" />
     <ClInclude Include="Player\PlayerSate\PlayerWireMove.h" />
-    <ClInclude Include="Player\WireCollisionSolver.h" />
     <ClInclude Include="Scene\GameScene.h" />
     <ClInclude Include="Scene\SceneManager.h" />
     <ClInclude Include="stdafx.h" />
@@ -285,6 +287,8 @@
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\Arrow.fbx" />
     <MeshContentTask Include="Assets\modelData\Barrel.FBX" />
+    <MeshContentTask Include="Assets\modelData\Bow.FBX" />
+    <MeshContentTask Include="Assets\modelData\BowArrow.FBX" />
     <MeshContentTask Include="Assets\modelData\Brock.FBX" />
     <MeshContentTask Include="Assets\modelData\Heart.fbx" />
     <MeshContentTask Include="Assets\modelData\House.FBX" />

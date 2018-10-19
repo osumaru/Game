@@ -56,6 +56,7 @@ void CPlayer::Init(CVector3 position)
 											{ L"Assets/modelData/PlayerWire.tka" },				//ワイヤー移動アニメーション
 
 											{ L"Assets/modelData/PlayerArrowAttack.tka" },		//弓の攻撃アニメーション
+											{ L"Assets/modelData/PlayerArrowAttackEvent.tka" },
 											{ L"Assets/modelData/PlayerLeageSwordAttack.tka" },	//大剣の攻撃アニメーション
 											{ L"Assets/modelData/PlayerTwinSwordAttack.tka" }	//二刀流の攻撃アニメーション
 		};
@@ -89,6 +90,7 @@ void CPlayer::Init(CVector3 position)
 	Add(&m_PlayerMove, 0);
 	Add(&m_PlayerRotation, 0);
 	Add(this, 1);
+	m_skinmodel.SetIsShadowCaster(true);
 }
 
 void CPlayer::Update()
@@ -96,9 +98,10 @@ void CPlayer::Update()
 	
 	//アニメーションの更新
 	m_animation.Update(GameTime().GetDeltaFrameTime());
-	if (m_isDied) { return; }
+	if (m_isDied) {return; }
 	WeaponChange();
-	//m_isGround = m_characterController.IsOnGround();
+	
+	//無敵時間の処理
 	if (m_intervalOn)
 	{
 		m_intervalTime += GameTime().GetDeltaFrameTime();
@@ -118,11 +121,13 @@ void CPlayer::Update()
 		
 
 	}
-	if (Pad().IsTriggerButton(enButtonX))
+	if (Pad().IsTriggerButton(enButtonRightTrigger) && !m_initArrow && 
+		GetPlayerStateMachine().GetState() == CPlayerState::enPlayerArrowAttack)
 	{
 		CPlayerArrow*	Arrow = New<CPlayerArrow>(0);
 		Arrow->Start();
 		m_arrowList.push_back(Arrow);
+		m_initArrow = true;
 	}
 
 	std::list<CPlayerArrow*>::iterator it;
@@ -138,6 +143,7 @@ void CPlayer::Update()
 		}
 	}
 
+	//ワイヤーの処理
 	if (Pad().IsTriggerButton(enButtonY) && !m_isWireMove)
 	{
 		float minLength = FLT_MAX;
@@ -173,8 +179,18 @@ void CPlayer::Update()
 	
 	//スキンモデルの更新
 	m_skinmodel.Update(m_position, m_rotation, { 1.0f, 1.0f, 1.0f }, true);
+
 	m_weaponskin[m_weaponState].Update(m_weaponPosition, m_weaponRotation, m_weaponScale, true);
+
 	m_cameraTargetPos = m_position;
+	CMatrix viewMat;
+	CVector3 cameraPos = m_position;
+	cameraPos.y += 50.0f;
+	viewMat.MakeLookAt(cameraPos, m_position, CVector3(1.0f, 0.0f, 0.0f));
+	CMatrix projMat;
+	projMat.MakeOrthoProjectionMatrix(5, 5, 1.0f, 100.0f);
+	Engine().GetShadowMap().SetViewMatrix(viewMat);
+	Engine().GetShadowMap().SetProjectionMatrix(projMat);
 }
 
 //描画処理

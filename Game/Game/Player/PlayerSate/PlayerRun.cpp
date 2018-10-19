@@ -28,7 +28,7 @@ void CPlayerRun::Update()
 		GetPlayer().GetPlayerStateMachine().ChangeState(CPlayerState::enPlayerDamage);
 	}
 	//‘–‚Á‚Ä‚¢‚é‚Æ‚«‚ÉUŒ‚‚µ‚½‚Ìˆ—
-	else if (Pad().IsTriggerButton(enButtonX))
+	else if (Pad().IsTriggerButton(enButtonRightTrigger))
 	{
 		if(GetPlayer().GetPlayerStateMachine().GetAttackSate() == CPlayerState::enPlayerArrowAttack)
 		{
@@ -41,7 +41,7 @@ void CPlayerRun::Update()
 		}
 	}
 	//‘–‚è’†‚É‰ñ”ğ‚µ‚½‚Ìˆ—
-	else if (Pad().IsTriggerButton(enButtonRightTrigger))
+	else if (Pad().IsTriggerButton(enButtonB))
 	{
 		GetPlayer().GetPlayerStateMachine().ChangeState(CPlayerState::enPlayerAvoidance);
 	}

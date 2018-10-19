@@ -28,7 +28,7 @@ void CPlayerAttack::Update()
 
 	}
 	//UŒ‚’†‚ÉUŒ‚‚Ì“ü—Í‚ª‚³‚ê‚½ê‡‚Í˜AŒ‚‚ÉˆÚs‚·‚é
-	if (Pad().IsTriggerButton(enButtonX) && !m_rock)
+	if (Pad().IsTriggerButton(enButtonRightTrigger) && !m_rock)
 	{
 		m_conAtaack = true;
 		m_rock = true;

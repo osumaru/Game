@@ -1,5 +1,6 @@
 #pragma once
 #include "SkinModelEffectFactory.h"
+#include "SkinModelShaderFlgCommon.h"
 #include "Light.h"
 class CSkelton;
 class CAnimation;
@@ -82,13 +83,33 @@ public:
 	*/
 	void LoadNormalmap(const wchar_t* filePath);
 	
+	/*
+	シャドウマップへ書き込むモデルとして登録
+	*/
+	void ShadowMapEntry();
+
+	void SetIsShadowReceiver(bool isShadowReceiver)
+	{
+		m_materialFlg.isShadowReceiver = g_materialFlg.isShadowReceiver * isShadowReceiver;
+	}
+
+	void SetIsShadowCaster(bool isShadowCaster)
+	{
+		m_isShadowCaster = isShadowCaster;
+	}
+
 private:
 	std::unique_ptr<CSkelton>		m_skelton = nullptr;				//スケルトン
 	CConstantBuffer					constantBuffer;						//定数バッファ
 	CConstantBuffer					m_lightCB;							//ライトのバッファ
+	CConstantBuffer					m_materialCB;
 	CLight							m_light;							//ライト
 	DirectX::Model*					m_skinModel = nullptr;				//スキンモデル
 	CMatrix							worldMatrix = CMatrix::Identity;	//ワールド行列
 	CTexture*						m_pNormalTexture = nullptr;
+	SMaterialFlg					m_materialFlg;
 	int								m_isNormalMap = 0;
+	bool							m_isShadowCaster = false;
+	int								m_isShadowReceiver = 0;
+
 };
