@@ -126,7 +126,7 @@ void CEngine::InitD3D(HINSTANCE& hInst)
 
 	// ビューポート設定
 	m_viewPortState.Init();
-	m_viewPortState.SetViewPort(enViewPortGame);
+	m_viewPortState.SetViewPort(m_pDeviceContext, enViewPortGame);
 	m_physicsWorld = std::make_unique<CPhysicsWorld>();
 	m_physicsWorld->Init();
 	m_soundEngine = std::make_unique<CSoundEngine>();
