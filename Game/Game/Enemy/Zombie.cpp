@@ -19,8 +19,6 @@ void CZombie::Init(CVector3 position)
 	m_skinModel.Load(L"Assets/modelData/Zombi.cmo", &m_animation);
 	m_skinModel.LoadNormalmap(L"Assets/modelData/Zombi_normal.png");
 	m_position = position;
-	m_characterController.Init(0.5f, 0.9f, m_position);
-	m_characterController.SetGravity(-90.0f);
 	wchar_t* animClip[CEnemyState::enState_Num] = { 
 		L"Assets/modelData/zombiStand.tka",
 		L"Assets/modelData/zombiWalk.tka",
@@ -34,6 +32,7 @@ void CZombie::Init(CVector3 position)
 	m_animation.SetLoopFlg(CEnemyState::enState_Walk, true);
 	m_animation.SetLoopFlg(CEnemyState::enState_Chase, true);
 	Add(&m_enemyStateMachine, 0);
+	Add(&m_enemyMove, 0);
 	Add(&m_enemyTurn, 0);
 	Add(&m_enemySearch, 0);
 	//É_ÉÅÅ[ÉWï\é¶ÇÃèâä˙âª
@@ -56,25 +55,22 @@ bool CZombie::Start()
 
 void CZombie::Update()
 {
-	if (m_isFind && m_rootPoint != nullptr) {
-		//å©Ç¬Ç©Ç¡ÇƒÇ¢ÇÍÇŒåoòHíTçıÇ∑ÇÈ
-		std::vector<CVector2> root;
-		g_pathFinding.FindRoot(root, m_rootPoint->GetListNumber(), GetPlayer().GetRootPoint()->GetListNumber());
-		if (!root.empty()) {
-			CVector3 moveSpeed = { root[0].x, 0.0f, root[0].y };
-			CVector3 pos = m_position;
-			pos.y = 0.0f;
-			moveSpeed -= pos;
-			moveSpeed.Normalize();
-			moveSpeed *= 2.0f;
-			m_characterController.SetMoveSpeed(moveSpeed);
-		}
-	}
+	//if (m_isFind && m_rootPoint != nullptr) {
+	//	//å©Ç¬Ç©Ç¡ÇƒÇ¢ÇÍÇŒåoòHíTçıÇ∑ÇÈ
+	//	std::vector<CVector2> root;
+	//	g_pathFinding.FindRoot(root, m_rootPoint->GetListNumber(), GetPlayer().GetRootPoint()->GetListNumber());
+	//	if (!root.empty()) {
+	//		CVector3 moveSpeed = { root[0].x, 0.0f, root[0].y };
+	//		CVector3 pos = m_position;
+	//		pos.y = 0.0f;
+	//		moveSpeed -= pos;
+	//		moveSpeed.Normalize();
+	//		moveSpeed *= 2.0f;
+	//		m_characterController.SetMoveSpeed(moveSpeed);
+	//	}
+	//}
 
 	if (!m_isWireHit) {
-		m_characterController.SetPosition(m_position);
-		m_characterController.Execute(GameTime().GetDeltaFrameTime());
-		m_position = m_characterController.GetPosition();
 		m_animation.Update(GameTime().GetDeltaFrameTime());
 	}
 	m_skinModel.Update(m_position, m_rotation, { 1.0f, 1.0f, 1.0f }, true);
@@ -83,5 +79,4 @@ void CZombie::Update()
 void CZombie::Draw()
 {
 	m_skinModel.Draw(GetGameCamera().GetViewMatrix(), GetGameCamera().GetProjectionMatrix());
-	m_characterController.Draw();
 }

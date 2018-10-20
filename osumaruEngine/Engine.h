@@ -223,6 +223,11 @@ public:
 		return m_rasterizerState.GetCurrentState();
 	}
 
+	CPointLightManager& GetPointLightManager()
+	{
+		return m_pointLightManager;
+	}
+
 private:
 	static const int						MAIN_RENDER_TARGET_NUM = 2;
 	CGameObjectManager						m_objectManager;			//オブジェクトマネージャー

@@ -12,7 +12,7 @@ class CPointLightManager
 public:
 	void Init();
 
-	void AddPointLight(SPointLight pointLight);
+	void AddPointLight(CVector3 pos, CVector3 color);
 
 	void Update();
 
@@ -24,4 +24,5 @@ private:
 	int							index = 0;
 	ID3D11Buffer*				buffer;
 	ID3D11ShaderResourceView*	srv;
+	ID3D11UnorderedAccessView*	uav;
 };

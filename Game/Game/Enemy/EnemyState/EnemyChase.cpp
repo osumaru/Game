@@ -18,18 +18,10 @@ void CEnemyChase::Update()
 		return;
 	}
 
-	//移動速度を取得
-	CVector3 moveSpeed = m_enemy->GetMoveSpeed();
 	//プレイヤーを追いかける
 	CVector3 playerPos = GetPlayer().GetPosition();
 	CVector3 toPlayerDir = playerPos - m_enemy->GetPosition();
 	float length = toPlayerDir.Length();
-	toPlayerDir.Normalize();
-	toPlayerDir *= m_speed;
-	moveSpeed.x = toPlayerDir.x;
-	moveSpeed.z = toPlayerDir.z;
-	//移動速度を設定
-	m_enemy->SetMoveSpeed(moveSpeed);
 
 	CMatrix enemyWorldMatrix = m_enemy->GetWorldMatrix();
 	CVector3 enemyForward;
@@ -51,7 +43,7 @@ void CEnemyChase::Update()
 		//プレイヤーと距離が近い
 		m_esm->ChangeState(CEnemyState::enState_Attack);
 	}
-	if (!m_enemy->IsFind()) {
+	if (length > 15.0f) {
 		//プレイヤーが離れたら戻っていく
 		m_esm->ChangeState(CEnemyState::enState_Walk);
 	}

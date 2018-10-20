@@ -237,6 +237,9 @@
     <ClCompile Include="Camera\ArrowGameCamera.cpp">
       <Filter>ソース ファイル\Camera</Filter>
     </ClCompile>
+    <ClCompile Include="Enemy\EnemyMove.cpp">
+      <Filter>ソース ファイル\Enemy</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -416,6 +419,9 @@
     <ClInclude Include="Camera\ArrowGameCamera.h">
       <Filter>ソース ファイル\Camera</Filter>
     </ClInclude>
+    <ClInclude Include="Enemy\EnemyMove.h">
+      <Filter>ソース ファイル\Enemy</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="Assets\shader\sprite.fx">
@@ -426,13 +432,13 @@
     <MeshContentTask Include="Assets\modelData\Yasikic.FBX">
       <Filter>ソース ファイル\Assets</Filter>
     </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\Barrel.FBX">
+      <Filter>ソース ファイル\Assets</Filter>
+    </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\Zombi.FBX">
       <Filter>ソース ファイル\Assets</Filter>
     </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\Arrow.fbx">
-      <Filter>ソース ファイル\Assets</Filter>
-    </MeshContentTask>
-    <MeshContentTask Include="Assets\modelData\Barrel.FBX">
       <Filter>ソース ファイル\Assets</Filter>
     </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\Brock.FBX">
