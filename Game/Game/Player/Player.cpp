@@ -6,6 +6,26 @@
 #include "../Enemy/IEnemy.h"
 
 
+void CPlayer::OnInvokeAnimationEvent(//アニメーションイベントが呼ばれるごとに呼び出される？
+	const wchar_t* animClipName,
+	const wchar_t* eventName
+)
+{
+	if (wcscmp(animClipName, L"Assets/modelData/PlayerDash60fps.tka") == 0) {//イベント名で処理を変える？
+		/*auto soundSource = New<CSoundSource>(0);
+		soundSource->Init("sound/Footstep_00.wav");
+		soundSource->Play(false);*/
+		ExpUP(100000);
+	}
+
+	if (wcscmp(animClipName, L"Assets/modelData/PlayerThrustAttack.tka") == 0) {//たぶん呼ばれた
+		/*auto soundSource = New<CSoundSource>(0);
+		soundSource->Init("sound/Footstep_00.wav");
+		soundSource->Play(false);*/
+		ExpUP(100000);
+	}
+}
+
 void CPlayer::Init(CVector3 position)
 {
 	
@@ -65,6 +85,10 @@ void CPlayer::Init(CVector3 position)
 		m_animation.SetLoopFlg(enPlayerWalk, true);
 		m_animation.SetLoopFlg(enPlayerRun, true);
 
+		//イベントリスナーの登録　呼び出される関数の登録？
+		m_animation.AddAnimationEvent([&](auto animClipname, auto eventName) {
+			OnInvokeAnimationEvent(animClipname, eventName);
+		});
 	}
 
 
