@@ -178,6 +178,7 @@
     <ClCompile Include="Graphics\Light.cpp" />
     <ClCompile Include="Graphics\particle\Particle.cpp" />
     <ClCompile Include="Graphics\particle\ParticleEmitter.cpp" />
+    <ClCompile Include="Graphics\PointLightManager.cpp" />
     <ClCompile Include="Graphics\PostEffect\Deferred.cpp" />
     <ClCompile Include="Graphics\PostEffect\PostEffect.cpp" />
     <ClCompile Include="Graphics\PreRendering\ShadowMap.cpp" />
@@ -232,6 +233,7 @@
     <ClInclude Include="Graphics\Light.h" />
     <ClInclude Include="Graphics\particle\Particle.h" />
     <ClInclude Include="Graphics\particle\ParticleEmitter.h" />
+    <ClInclude Include="Graphics\PointLightManager.h" />
     <ClInclude Include="Graphics\PostEffect\Deferred.h" />
     <ClInclude Include="Graphics\PostEffect\PostEffect.h" />
     <ClInclude Include="Graphics\PreRendering\ShadowMap.h" />

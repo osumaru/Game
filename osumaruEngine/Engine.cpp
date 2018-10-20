@@ -146,6 +146,7 @@ void CEngine::InitD3D(HINSTANCE& hInst)
 	m_deferred.Init();
 	m_postEffect.Init(m_pSwapChain);
 	m_shadowMap.Init();
+	m_pointLightManager.Init();
 }
 
 void CEngine::GameLoop()
