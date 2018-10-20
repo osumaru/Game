@@ -3,6 +3,7 @@
 #include "../../Camera/Camera.h"
 #include "../SkinModelShaderFlgCommon.h"
 #include "../../Engine.h"
+
 CDeferred::CDeferred()
 {
 
@@ -117,7 +118,7 @@ void CDeferred::Draw()
 		buffer = m_gameCameraCB.GetBody();
 		GetDeviceContext()->PSSetConstantBuffers(1, 1, &buffer);
 	}
-
+	Engine().GetPointLightManager().Draw();
 	buffer = m_lightCB.GetBody();
 	GetDeviceContext()->PSSetConstantBuffers(0, 1, &buffer);
 	buffer = m_materialCB.GetBody();
