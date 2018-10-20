@@ -72,7 +72,8 @@ void CPlayer::Init(CVector3 position)
 											{ L"Assets/modelData/PlayerDamage.tka" },			//ダメージアニメーション
 											{ L"Assets/modelData/PlayerKaihiStay.tka" }	,		//回避アクション
 											{ L"Assets/modelData/PlayerDeath.tka" },			//死亡アニメーション
-											{ L"Assets/modelData/PlayerWire.tka" },				//ワイヤー移動アニメーション
+											{ L"Assets/modelData/PlayerWire2.tka" },				//ワイヤー移動アニメーション
+
 
 											{ L"Assets/modelData/PlayerArrowAttack.tka" },		//弓の攻撃アニメーション
 											{ L"Assets/modelData/PlayerArrowAttackEvent.tka" },
@@ -85,7 +86,7 @@ void CPlayer::Init(CVector3 position)
 		m_animation.SetLoopFlg(enPlayerWalk, true);
 		m_animation.SetLoopFlg(enPlayerRun, true);
 
-		//イベントリスナーの登録　呼び出される関数の登録？
+		//アニメーションイベントリスナーの登録　呼び出される関数の登録？
 		m_animation.AddAnimationEvent([&](auto animClipname, auto eventName) {
 			OnInvokeAnimationEvent(animClipname, eventName);
 		});
