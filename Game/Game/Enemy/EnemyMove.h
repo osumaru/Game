@@ -22,8 +22,21 @@ public:
 	//更新
 	void Update();
 
+	//移動しているか
+	bool GetIsMove()
+	{
+		return m_isMove;
+	}
+
+	//移動速度を取得
+	const CVector3& GetMoveSpeed() const
+	{
+		return m_characterController.GetMoveSpeed();
+	}
+
 private:
 	CCharacterController	m_characterController;			//キャラクターコントローラー
 	IEnemy*					m_enemy = nullptr;				//エネミー
-	CVector3				m_moveSpeed = CVector3::Zero;	//移動速度
+	CVector3				m_destination;					//移動先の座標
+	bool					m_isMove = false;				//移動しているか
 };

@@ -69,14 +69,7 @@ public:
 	//移動速度を取得
 	const CVector3& GetMoveSpeed() const
 	{
-		return m_characterController.GetMoveSpeed();
-	}
-
-	//移動速度を設定
-	//moveSpeed		移動速度
-	void SetMoveSpeed(const CVector3& moveSpeed)
-	{
-		m_characterController.SetMoveSpeed(moveSpeed);
+		return m_enemyMove.GetMoveSpeed();
 	}
 
 	//アニメーションを再生
@@ -109,6 +102,18 @@ public:
 	void StateMachineRelease()
 	{
 		m_enemyStateMachine.Release();
+	}
+
+	//エネミーのステートを取得
+	CEnemyState::EnState GetState()
+	{
+		return m_enemyStateMachine.GetState();
+	}
+
+	//移動しているか
+	bool GetIsMove()
+	{
+		return m_enemyMove.GetIsMove();
 	}
 
 	//ダメージ計算を行う
@@ -201,7 +206,6 @@ public:
 
 protected:
 	CSkinModel				m_skinModel;			//スキンモデル
-	CCharacterController	m_characterController;	//キャラクターコントローラー
 	CAnimation				m_animation;			//アニメーション
 	CEnemyStateMachine		m_enemyStateMachine;	//ステートマシン
 	CEnemyMove				m_enemyMove;			//移動
