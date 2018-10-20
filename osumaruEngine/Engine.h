@@ -219,7 +219,7 @@ public:
 	//現在のラスタライザの設定を取得
 	EnRasterizerState GetCurrentRasterizerState()
 	{
-		return m_rasterizerState.GetCurrentState;
+		return m_rasterizerState.GetCurrentState();
 	}
 
 private:
