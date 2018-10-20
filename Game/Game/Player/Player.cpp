@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Player.h"
 #include"../../Game/Camera/GameCamera.h"
-#include "../Map/Map.h"`
+#include "../Map/Map.h"
 #include "../Scene/SceneManager.h"
 #include "../Enemy/IEnemy.h"
 
@@ -72,7 +72,7 @@ void CPlayer::Init(CVector3 position)
 											{ L"Assets/modelData/PlayerDamage.tka" },			//ダメージアニメーション
 											{ L"Assets/modelData/PlayerKaihiStay.tka" }	,		//回避アクション
 											{ L"Assets/modelData/PlayerDeath.tka" },			//死亡アニメーション
-											{ L"Assets/modelData/PlayerWire2.tka" },				//ワイヤー移動アニメーション
+											{ L"Assets/modelData/PlayerWire.tka" },				//ワイヤー移動アニメーション
 
 
 											{ L"Assets/modelData/PlayerArrowAttack.tka" },		//弓の攻撃アニメーション
