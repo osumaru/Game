@@ -37,8 +37,8 @@ private:
 	CPrimitive		m_primitive;	//プリミティブ
 	CMatrix			m_worldMatrix;	//ワールド行列
 	CQuaternion		m_rotation;		//回転
-	CShader			m_vs;		//頂点シェーダー
-	CShader			m_ps;		//ピクセルシェーダー
+	CShader			m_vs;			//頂点シェーダー
+	CShader			m_ps;			//ピクセルシェーダー
 	CConstantBuffer m_cb;
 	CVector3		m_position;		//座標
 	const CCamera*	m_camera;		//カメラ
