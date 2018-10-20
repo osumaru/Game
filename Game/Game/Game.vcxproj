@@ -172,6 +172,8 @@
     <ClCompile Include="Enemy\EnemyTurn.cpp" />
     <ClCompile Include="Enemy\IEnemy.cpp" />
     <ClCompile Include="Enemy\Ninja.cpp" />
+    <ClCompile Include="Enemy\PathFinding\PathFinding.cpp" />
+    <ClCompile Include="Enemy\PathFinding\RootPoint.cpp" />
     <ClCompile Include="Enemy\Samurai.cpp" />
     <ClCompile Include="Enemy\Warrok.cpp" />
     <ClCompile Include="Enemy\Zombie.cpp" />
@@ -231,6 +233,9 @@
     <ClInclude Include="Enemy\EnemyTurn.h" />
     <ClInclude Include="Enemy\IEnemy.h" />
     <ClInclude Include="Enemy\Ninja.h" />
+    <ClInclude Include="Enemy\PathFinding\MapData.h" />
+    <ClInclude Include="Enemy\PathFinding\PathFinding.h" />
+    <ClInclude Include="Enemy\PathFinding\RootPoint.h" />
     <ClInclude Include="Enemy\Samurai.h" />
     <ClInclude Include="Enemy\Warrok.h" />
     <ClInclude Include="Enemy\Zombie.h" />
@@ -282,8 +287,6 @@
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\Arrow.fbx" />
     <MeshContentTask Include="Assets\modelData\Barrel.FBX" />
-    <MeshContentTask Include="Assets\modelData\Bow.FBX" />
-    <MeshContentTask Include="Assets\modelData\BowArrow.FBX" />
     <MeshContentTask Include="Assets\modelData\Brock.FBX" />
     <MeshContentTask Include="Assets\modelData\Heart.fbx" />
     <MeshContentTask Include="Assets\modelData\House.FBX" />
@@ -304,9 +307,8 @@
     <MeshContentTask Include="Assets\modelData\TwinSword.fbx" />
     <MeshContentTask Include="Assets\modelData\U2.FBX" />
     <MeshContentTask Include="Assets\modelData\umi.FBX" />
-    <MeshContentTask Include="Assets\modelData\Unitychan.fbx" />
+    <MeshContentTask Include="Assets\modelData\Unitychan.FBX" />
     <MeshContentTask Include="Assets\modelData\Unitychan2.fbx" />
-    <MeshContentTask Include="Assets\modelData\Unitychan3.FBX" />
     <MeshContentTask Include="Assets\modelData\Warrok.fbx" />
     <MeshContentTask Include="Assets\modelData\Wave.FBX" />
     <MeshContentTask Include="Assets\modelData\Yasikia.FBX" />

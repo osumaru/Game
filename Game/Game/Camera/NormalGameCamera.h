@@ -10,8 +10,9 @@ private:
 	CVector3	m_cameraPosition;
 	CVector3	m_targetPosition;
 	CVector3	m_cameraVec;
-	const float TARGET_OFFSET_Y = 2.0f;
-	const float CAMERA_SPEED = 5.0f;
+	CVector3	m_oldVec;
+	const float TARGET_OFFSET_Y = 2.0f;	//ターゲットのＹ方向に対する補正値
+	const float CAMERA_SPEED = 10.0f;  //カメラの回転速度
 
 };
 

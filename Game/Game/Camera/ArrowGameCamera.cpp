@@ -50,11 +50,11 @@ void CArrowGameCamera::Update()
 		CVector3 cameraDir = m_cameraVec;
 		cameraDir.Normalize();
 
-		if (cameraDir.y < -0.8f)
+		if (cameraDir.y < -0.5f)
 		{
 			m_cameraVec = cameraVecOld;
 		}
-		else if (cameraDir.y > 0.8f)
+		else if (cameraDir.y > 0.5f)
 		{
 			m_cameraVec = cameraVecOld;
 

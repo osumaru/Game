@@ -57,6 +57,7 @@ float CSpringCamera::CalcSpringScalar(float positionNow, float positionTarget, f
 	springAccel *= deltaTime;
 	moveSpeed += springAccel;
 
+
 	float newPos = positionNow;
 	float addPos = moveSpeed;
 	addPos *= deltaTime;
@@ -82,7 +83,7 @@ float CSpringCamera::CalcSpringScalar(float positionNow, float positionTarget, f
 
 CVector3 CSpringCamera::CalcSpringVector(const CVector3& positionNow, const CVector3& positionTarget, CVector3& moveSpeed, float maxMoveSpeed, float dampingRate)
 {
-	float deltaTime = GameTime().GetDeltaFrameTime();
+	float deltaTime = min(1.0f / 30.0f, GameTime().GetDeltaFrameTime());
 	//現在の位置と目標の位置との差分を求める。
 	CVector3 distance;
 	distance = positionTarget - positionNow;
