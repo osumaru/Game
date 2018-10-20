@@ -1,10 +1,6 @@
 #include "engineStdafx.h"
 #include "RasterizerState.h"
 
-CRasterizerState::~CRasterizerState()
-{
-
-}
 
 void CRasterizerState::Init(ID3D11Device* device)
 {

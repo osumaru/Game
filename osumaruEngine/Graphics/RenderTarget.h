@@ -55,11 +55,13 @@ public:
 		return m_pD3DDepthStencilTexture;
 	}
 
+	//レンダリングターゲットのテクスチャを取得
 	CTexture& GetRenderTargetTexture()
 	{
 		return *m_pRenderTargetTexture;
 	}
 
+	//デプスステンシルバッファのテクスチャを取得
 	CTexture& GetDepthStencilTexture()
 	{
 		return *m_pDepthStencilTexture;

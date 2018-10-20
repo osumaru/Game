@@ -213,6 +213,12 @@
     <ClCompile Include="Physics\RayTest.cpp">
       <Filter>ソース ファイル\Physics</Filter>
     </ClCompile>
+    <ClCompile Include="Graphics\State\ViewPortState.cpp">
+      <Filter>ソース ファイル\Graphics\State</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\PointLightManager.cpp">
+      <Filter>ソース ファイル\Graphics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject\GameObject.h">
@@ -374,8 +380,14 @@
     <ClInclude Include="Physics\RayTest.h">
       <Filter>ソース ファイル\Physics</Filter>
     </ClInclude>
+    <ClInclude Include="Graphics\State\ViewPortState.h">
+      <Filter>ソース ファイル\Graphics\State</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\PointLightManager.h">
+      <Filter>ソース ファイル\Graphics</Filter>
+    </ClInclude>
     <ClInclude Include="Graphics\SkinModelShaderFlgCommon.h">
-      <Filter>ソース ファイル</Filter>
+      <Filter>ソース ファイル\Graphics</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

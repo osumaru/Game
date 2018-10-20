@@ -317,6 +317,15 @@ public:
 		m_cameraTargetPos = settar;
 	}
 
+	//プレイヤームーブクラスのアクティブ設定
+	void PlayerMoveSetIsActive(bool isActive)
+	{
+		m_PlayerMove.SetIsActive(isActive);
+	}
+
+	//アニメーションイベントが起きた時に呼ばれる処理。
+	void OnInvokeAnimationEvent(const wchar_t* animClipName, const wchar_t* eventName);
+
 private:
 	
 

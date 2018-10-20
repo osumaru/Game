@@ -429,7 +429,7 @@
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <MeshContentTask Include="Assets\modelData\Arrow.fbx">
+    <MeshContentTask Include="Assets\modelData\Yasikic.FBX">
       <Filter>ソース ファイル\Assets</Filter>
     </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\Barrel.FBX">
@@ -438,7 +438,13 @@
     <MeshContentTask Include="Assets\modelData\Bow.FBX">
       <Filter>ソース ファイル\Assets</Filter>
     </MeshContentTask>
-    <MeshContentTask Include="Assets\modelData\BowArrow.FBX">
+    <MeshContentTask Include="Assets\modelData\Zombi.FBX">
+      <Filter>ソース ファイル\Assets</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\Arrow.fbx">
+      <Filter>ソース ファイル\Assets</Filter>
+    </MeshContentTask>
+      <MeshContentTask Include="Assets\modelData\BowArrow.FBX">
       <Filter>ソース ファイル\Assets</Filter>
     </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\Brock.FBX">
@@ -517,12 +523,6 @@
       <Filter>ソース ファイル\Assets</Filter>
     </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\Yasikib.FBX">
-      <Filter>ソース ファイル\Assets</Filter>
-    </MeshContentTask>
-    <MeshContentTask Include="Assets\modelData\Yasikic.FBX">
-      <Filter>ソース ファイル\Assets</Filter>
-    </MeshContentTask>
-    <MeshContentTask Include="Assets\modelData\Zombi.FBX">
       <Filter>ソース ファイル\Assets</Filter>
     </MeshContentTask>
   </ItemGroup>

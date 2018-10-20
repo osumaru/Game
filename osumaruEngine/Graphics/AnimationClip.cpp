@@ -5,6 +5,7 @@
 
 void CAnimationClip::Load(wchar_t * filePath)
 {
+	m_clipName = filePath;
 	m_isLoop = false;
 	m_currentFrameNo = 0;
 	m_frameTime = 0.0f;
