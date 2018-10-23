@@ -9,7 +9,7 @@
 #include "Graphics/Primitive.h"
 #include "Graphics/Light.h"
 #include "Graphics/ConstantBuffer.h"
-#include "Graphics/PostEffect/Deferred.h"
+#include "Graphics/PostRendering/Deferred.h"
 #include "Graphics/State/AlphaBlendState.h"
 #include "Graphics/State/DepthStencilState.h"
 #include "Graphics/State/RasterizerState.h"

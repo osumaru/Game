@@ -19,9 +19,6 @@
     <Filter Include="ソース ファイル\Graphics">
       <UniqueIdentifier>{5d4f20b3-0e65-4ce6-b192-b41ef8419e64}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\Graphics\PostEffect">
-      <UniqueIdentifier>{9ab22faf-3a68-48ca-8fc5-2fc4ace8b540}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソース ファイル\Math">
       <UniqueIdentifier>{d636a4d5-1835-4ed3-9a77-3767de162654}</UniqueIdentifier>
     </Filter>
@@ -58,6 +55,9 @@
     <Filter Include="ソース ファイル\Resource\Sound">
       <UniqueIdentifier>{bbc2202a-b2bf-4ae4-8505-d0bdc67b57a9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Graphics\PostRendering">
+      <UniqueIdentifier>{9ab22faf-3a68-48ca-8fc5-2fc4ace8b540}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="engineStdafx.cpp">
@@ -68,9 +68,6 @@
     </ClCompile>
     <ClCompile Include="GameObject\GameObject.cpp">
       <Filter>ソース ファイル\GameObject</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphics\PostEffect\PostEffect.cpp">
-      <Filter>ソース ファイル\Graphics\PostEffect</Filter>
     </ClCompile>
     <ClCompile Include="Engine.cpp">
       <Filter>ソース ファイル</Filter>
@@ -189,9 +186,6 @@
     <ClCompile Include="Graphics\Light.cpp">
       <Filter>ソース ファイル\Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics\PostEffect\Deferred.cpp">
-      <Filter>ソース ファイル\Graphics\PostEffect</Filter>
-    </ClCompile>
     <ClCompile Include="Graphics\particle\Particle.cpp">
       <Filter>ソース ファイル\Graphics\particle</Filter>
     </ClCompile>
@@ -219,13 +213,19 @@
     <ClCompile Include="Graphics\PointLightManager.cpp">
       <Filter>ソース ファイル\Graphics</Filter>
     </ClCompile>
+    <ClCompile Include="Graphics\PostRendering\Deferred.cpp">
+      <Filter>ソース ファイル\Graphics\PostRendering</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\PostRendering\PostEffect.cpp">
+      <Filter>ソース ファイル\Graphics\PostRendering</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\PostRendering\TBDR.cpp">
+      <Filter>ソース ファイル\Graphics\PostRendering</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject\GameObject.h">
       <Filter>ソース ファイル\GameObject</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\PostEffect\PostEffect.h">
-      <Filter>ソース ファイル\Graphics\PostEffect</Filter>
     </ClInclude>
     <ClInclude Include="Engine.h">
       <Filter>ソース ファイル</Filter>
@@ -353,9 +353,6 @@
     <ClInclude Include="Graphics\Light.h">
       <Filter>ソース ファイル\Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics\PostEffect\Deferred.h">
-      <Filter>ソース ファイル\Graphics\PostEffect</Filter>
-    </ClInclude>
     <ClInclude Include="Uncopyable.h">
       <Filter>ソース ファイル</Filter>
     </ClInclude>
@@ -388,6 +385,15 @@
     </ClInclude>
     <ClInclude Include="Graphics\SkinModelShaderFlgCommon.h">
       <Filter>ソース ファイル\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\PostRendering\Deferred.h">
+      <Filter>ソース ファイル\Graphics\PostRendering</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\PostRendering\PostEffect.h">
+      <Filter>ソース ファイル\Graphics\PostRendering</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\PostRendering\TBDR.h">
+      <Filter>ソース ファイル\Graphics\PostRendering</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

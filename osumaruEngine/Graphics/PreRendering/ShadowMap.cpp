@@ -1,7 +1,7 @@
 #include "engineStdafx.h"
 #include "ShadowMap.h"
 #include "../../Graphics/SkinModel.h"
-#include "../PostEffect/Deferred.h"
+#include "../PostRendering/Deferred.h"
 #include "../../Engine.h"
 
 void CShadowMap::Init()

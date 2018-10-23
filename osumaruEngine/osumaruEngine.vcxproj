@@ -179,8 +179,9 @@
     <ClCompile Include="Graphics\particle\Particle.cpp" />
     <ClCompile Include="Graphics\particle\ParticleEmitter.cpp" />
     <ClCompile Include="Graphics\PointLightManager.cpp" />
-    <ClCompile Include="Graphics\PostEffect\Deferred.cpp" />
-    <ClCompile Include="Graphics\PostEffect\PostEffect.cpp" />
+    <ClCompile Include="Graphics\PostRendering\Deferred.cpp" />
+    <ClCompile Include="Graphics\PostRendering\PostEffect.cpp" />
+    <ClCompile Include="Graphics\PostRendering\TBDR.cpp" />
     <ClCompile Include="Graphics\PreRendering\ShadowMap.cpp" />
     <ClCompile Include="Graphics\Primitive.cpp" />
     <ClCompile Include="Graphics\RenderTarget.cpp" />
@@ -234,8 +235,9 @@
     <ClInclude Include="Graphics\particle\Particle.h" />
     <ClInclude Include="Graphics\particle\ParticleEmitter.h" />
     <ClInclude Include="Graphics\PointLightManager.h" />
-    <ClInclude Include="Graphics\PostEffect\Deferred.h" />
-    <ClInclude Include="Graphics\PostEffect\PostEffect.h" />
+    <ClInclude Include="Graphics\PostRendering\Deferred.h" />
+    <ClInclude Include="Graphics\PostRendering\PostEffect.h" />
+    <ClInclude Include="Graphics\PostRendering\TBDR.h" />
     <ClInclude Include="Graphics\PreRendering\ShadowMap.h" />
     <ClInclude Include="Graphics\Primitive.h" />
     <ClInclude Include="Graphics\RenderTarget.h" />
