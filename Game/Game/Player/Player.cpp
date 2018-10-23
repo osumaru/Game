@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Player.h"
 #include"../../Game/Camera/GameCamera.h"
-#include "../Map/Map.h"`
+#include "../Map/Map.h"
 #include "../Scene/SceneManager.h"
 #include "../Enemy/IEnemy.h"
 
@@ -74,6 +74,7 @@ void CPlayer::Init(CVector3 position)
 											{ L"Assets/modelData/PlayerDeath.tka" },			//死亡アニメーション
 											{ L"Assets/modelData/PlayerWire.tka" },				//ワイヤー移動アニメーション
 
+
 											{ L"Assets/modelData/PlayerArrowAttack.tka" },		//弓の攻撃アニメーション
 											{ L"Assets/modelData/PlayerArrowAttackEvent.tka" },
 											{ L"Assets/modelData/PlayerLeageSwordAttack.tka" },	//大剣の攻撃アニメーション
@@ -85,7 +86,7 @@ void CPlayer::Init(CVector3 position)
 		m_animation.SetLoopFlg(enPlayerWalk, true);
 		m_animation.SetLoopFlg(enPlayerRun, true);
 
-		//イベントリスナーの登録　呼び出される関数の登録？
+		//アニメーションイベントリスナーの登録　呼び出される関数の登録？
 		m_animation.AddAnimationEvent([&](auto animClipname, auto eventName) {
 			OnInvokeAnimationEvent(animClipname, eventName);
 		});
