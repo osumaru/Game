@@ -39,7 +39,7 @@ void CTexture::Create(int width, int height, EnTextureType textureType, DXGI_FOR
 	switch (textureType)
 	{
 	case enRendertarget:
-		bindFlags = D3D11_BIND_RENDER_TARGET | D3D11_BIND_SHADER_RESOURCE;
+		bindFlags = D3D11_BIND_RENDER_TARGET | D3D11_BIND_SHADER_RESOURCE | D3D11_BIND_UNORDERED_ACCESS;
 		break;
 	case enDepthStencil:
 		bindFlags = D3D11_BIND_DEPTH_STENCIL;
@@ -61,4 +61,5 @@ void CTexture::Create(int width, int height, EnTextureType textureType, DXGI_FOR
 	tDesc.Usage = D3D11_USAGE_DEFAULT;
 	HRESULT hr = GetDevice()->CreateTexture2D(&tDesc, NULL, (ID3D11Texture2D**)&m_pTexture);
 	hr = GetDevice()->CreateShaderResourceView(m_pTexture, nullptr, &m_pShaderResource);
+	hr = GetDevice()->CreateUnorderedAccessView(m_pTexture, nullptr, &m_pUnorderedAccess);
 }

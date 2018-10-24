@@ -5,6 +5,7 @@ struct SPointLight
 {
 	CVector4	m_position;
 	CVector4	m_color;
+	CVector4    m_attn;
 };
 
 class CPointLightManager
@@ -16,7 +17,7 @@ public:
 
 	void Update();
 
-	void Draw();
+	void Draw(CMatrix& view);
 
 private:
 	static const int MAX_POINTLIGHT_NUM = 512;

@@ -126,9 +126,5 @@ float4 PSMain(VS_OUTPUT In) : SV_TARGET0
 		}
 	}
 	color.xyz *= shadowValue;
-	for (int i = 0; i < 512; i++)
-	{
-		color.xyz += pow(1.0f / (0.1f + length(worldPos.xyz - pointLightList[i].pos.xyz)), 4.0f) * pointLightList[i].color.xyz;
-	}
 	return color;
 }

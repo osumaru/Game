@@ -115,6 +115,7 @@ void CPlayer::Init(CVector3 position)
 	Add(&m_PlayerRotation, 0);
 	Add(this, 1);
 	m_skinmodel.SetIsShadowCaster(true);
+	
 }
 
 void CPlayer::Update()
@@ -200,7 +201,10 @@ void CPlayer::Update()
 			}
 		}
 	}
-	
+	if (Pad().IsTriggerButton(enButtonX))
+	{
+		Engine().GetPointLightManager().AddPointLight(m_position, {(float)Random().GetRandDouble(), (float)Random().GetRandDouble(), (float)Random().GetRandDouble()});
+	}
 	//スキンモデルの更新
 	m_skinmodel.Update(m_position, m_rotation, { 1.0f, 1.0f, 1.0f }, true);
 

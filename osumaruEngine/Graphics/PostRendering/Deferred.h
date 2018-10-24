@@ -53,7 +53,7 @@ public:
 	カメラのセッター
 	camera	ゲームカメラ
 	*/
-	void SetCamera(CCamera* camera);
+	void SetCamera(const CCamera* camera);
 
 private:
 	struct SFrameSizeCB
@@ -61,6 +61,15 @@ private:
 		int frameBufferWidth;
 		int frameBufferHeight;
 	};
+	struct SPointLightCB
+	{
+		CMatrix viewMat;
+		CMatrix projectionMat;
+		CMatrix viewMatRotOnry;
+		CVector2 screenParam;
+	};
+	CShader									m_cs;
+	CConstantBuffer							m_pointLightCB;
 	CRenderTarget							m_renderTarget[enRenderTargetNum];	//Gバッファー
 	CPrimitive								m_primitive;						//プリミティブ
 	CShader									m_vertexShader;						//頂点シェーダー
@@ -69,5 +78,5 @@ private:
 	CConstantBuffer							m_gameCameraCB;						//ゲームカメラの定数バッファ
 	CConstantBuffer							m_materialCB;						//マテリアル情報
 	CConstantBuffer							m_frameSizeCB;						//フレーム情報
-	CCamera*								m_camera = nullptr;					//定数バッファの更新に使うゲームカメラ
+	const CCamera*								m_camera = nullptr;					//定数バッファの更新に使うゲームカメラ
 };

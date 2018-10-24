@@ -21,7 +21,12 @@ void CGameCamera::Init()
 	//PhysicsWorld().SetCamera(&camera);
 	m_springCamera.Init(camera.GetTarget(), camera.GetPosition(), 10000.0f);
 	//PhysicsWorld().SetCamera(m_springCamera.GetCamera());
-	Engine().GetDeferred().SetCamera(&camera);
+	Engine().GetDeferred().SetCamera(m_springCamera.GetCamera());
+
+	CVector3 cameraDir = camera.GetTarget() - camera.GetPosition();
+	CVector3 cameraPos = GetPlayer().GetPosition() + cameraDir;
+	m_springCamera.SetPosition(cameraPos);
+	m_springCamera.SetTarget(GetPlayer().GetPosition());
 }
 
 void CGameCamera::Update()

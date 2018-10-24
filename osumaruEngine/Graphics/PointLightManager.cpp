@@ -21,6 +21,7 @@ void CPointLightManager::AddPointLight(CVector3 pos, CVector3 color)
 {
 	m_pointLightList[index].m_position = { pos.x, pos.y, pos.z, 1.0f };
 	m_pointLightList[index].m_color = { color.x, color.y, color.z, 1.0f };
+	m_pointLightList[index].m_attn = { 3.0f, 0.0f, 0.0f, 0.0f };
 	index++;
 }
 
@@ -28,11 +29,18 @@ void CPointLightManager::Update()
 {
 }
 
-void CPointLightManager::Draw()
+void CPointLightManager::Draw(CMatrix& view)
 {
-	GetDeviceContext()->UpdateSubresource(buffer, 0, 0, m_pointLightList, 0, 0);
+	SPointLight pointLightList[MAX_POINTLIGHT_NUM];
+	memcpy(pointLightList, m_pointLightList, sizeof(m_pointLightList));
+	for (int i = 0; i < index; i++)
+	{
+		pointLightList[i].m_position.Mul(view);
+	}
+	GetDeviceContext()->UpdateSubresource(buffer, 0, 0, pointLightList, 0, 0);
 	
 	ID3D11ShaderResourceView* srviews[] = { srv };
 	GetDeviceContext()->VSSetShaderResources(10, 1, srviews);
 	GetDeviceContext()->PSSetShaderResources(10, 1, srviews);
+	GetDeviceContext()->CSSetShaderResources(5, 1, srviews);
 }

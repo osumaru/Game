@@ -80,13 +80,14 @@ SShaderResource CShaderResource::Load(const char* filePath, const char* entryFun
 		switch (shaderType)
 		{
 		case CShader::enVS:
-			GetDevice()->CreateVertexShader(shaderResource.m_blob->GetBufferPointer(), shaderResource.m_blob->GetBufferSize(), NULL, (ID3D11VertexShader**)&shaderResource.m_pShader);
+			hr = GetDevice()->CreateVertexShader(shaderResource.m_blob->GetBufferPointer(), shaderResource.m_blob->GetBufferSize(), NULL, (ID3D11VertexShader**)&shaderResource.m_pShader);
 			CreateInputLayout(shaderResource.m_blob, &shaderResource.m_pInputLayout);
 			break;
 		case CShader::enPS:
-			GetDevice()->CreatePixelShader(shaderResource.m_blob->GetBufferPointer(), shaderResource.m_blob->GetBufferSize(), NULL, (ID3D11PixelShader**)&shaderResource.m_pShader);
+			hr = GetDevice()->CreatePixelShader(shaderResource.m_blob->GetBufferPointer(), shaderResource.m_blob->GetBufferSize(), NULL, (ID3D11PixelShader**)&shaderResource.m_pShader);
 			break;
 		case CShader::enCS:
+			hr = GetDevice()->CreateComputeShader(shaderResource.m_blob->GetBufferPointer(), shaderResource.m_blob->GetBufferSize(), NULL, (ID3D11ComputeShader**)&shaderResource.m_pShader);
 			break;
 		}
 		shaderResource.entryFuncName = new char[strlen(entryFuncName)];
@@ -174,6 +175,7 @@ void CShaderResource::ReLoad()
 			GetDevice()->CreatePixelShader(map.second.m_blob->GetBufferPointer(), map.second.m_blob->GetBufferSize(), NULL, (ID3D11PixelShader**)&map.second.m_pShader);
 			break;
 		case CShader::enCS:
+			GetDevice()->CreateComputeShader(map.second.m_blob->GetBufferPointer(), map.second.m_blob->GetBufferSize(), NULL, (ID3D11ComputeShader**)&map.second.m_pShader);
 			break;
 		}
 	}

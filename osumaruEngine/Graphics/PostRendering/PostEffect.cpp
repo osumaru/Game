@@ -31,7 +31,7 @@ void CPostEffect::Draw()
 	float color[4] = { 0.0f, 0.0f, 1.0f, 1.0f };
 	GetDeviceContext()->OMSetRenderTargets(1, &m_pBackRenderTargetView, m_pBackDepthStencilView);
 	GetDeviceContext()->ClearRenderTargetView(m_pBackRenderTargetView, color);
-	//GetDeviceContext()->ClearDepthStencilView(m_pBackDepthStencilView, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
+	GetDeviceContext()->ClearDepthStencilView(m_pBackDepthStencilView, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
 	Engine().SetAlphaBlendState(enAlphaBlendStateNone);
 	Engine().SetDepthStencilState(enDepthStencilState2D);
 	Engine().SetRasterizerState(enRasterizerState2D);
