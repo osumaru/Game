@@ -21,11 +21,20 @@ cbuffer materialCB : register(b3)
 	int isNormalMapFlg;
 };
 
+
 cbuffer framesizeCB : register(b4)
 {
 	int frameBufferWidth;
 	int frameBufferHeight;
 };
+struct SPointLight
+{
+	float4 pos;
+	float4 color;
+};
+
+StructuredBuffer<SPointLight> pointLightList : register(t10);
+
 
 struct VS_INPUT
 {
@@ -93,6 +102,7 @@ float4 PSMain(VS_OUTPUT In) : SV_TARGET0
 	
 	In.screenPos = depthTexture.Sample(Sampler, In.uv);
 	float4 shadowMapPos = In.screenPos;
+	float4 worldPos = In.screenPos;
 	//shadowMapPos = mul(gameViewProj, shadowMapPos);
 	//shadowMapPos /= shadowMapPos.w;
 	shadowMapPos = mul(lightViewProj, shadowMapPos);

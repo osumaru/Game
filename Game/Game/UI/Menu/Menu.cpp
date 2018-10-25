@@ -1,7 +1,9 @@
 #include "stdafx.h"
 #include "Menu.h"
 #include "../../Player/Player.h"
-
+#include "../../Map/Map.h"
+#include "../../Scene/SceneManager.h"
+#include "../../Enemy/IEnemy.h"
 
 CMenu::CMenu()
 {
@@ -49,12 +51,23 @@ void CMenu::Update()
 	{
 		if (m_Draw)
 		{
+
 			m_Draw = false;
 		}
 		else
 		{
 			m_Draw = true;
+
 		}
+		std::list<IEnemy*> enemyList = GetSceneManager().GetGameScene().GetMap()->GetEnemyList();
+		//敵のアクティブ設定
+		for (auto& enemy : enemyList)
+		{
+			enemy->SetIsActive(!m_Draw);
+
+		}
+		//プレイヤーの動きの設定
+		GetPlayer().PlayerMoveSetIsActive(!m_Draw);
 	}
 
 

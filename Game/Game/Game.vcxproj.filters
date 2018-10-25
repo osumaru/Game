@@ -237,6 +237,12 @@
     <ClCompile Include="Camera\ArrowGameCamera.cpp">
       <Filter>ソース ファイル\Camera</Filter>
     </ClCompile>
+    <ClCompile Include="Enemy\EnemyMove.cpp">
+      <Filter>ソース ファイル\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Player\PlayerSate\PlayerArrowShoot.cpp">
+      <Filter>ソース ファイル\Player\PlayerSate</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -415,6 +421,12 @@
     </ClInclude>
     <ClInclude Include="Camera\ArrowGameCamera.h">
       <Filter>ソース ファイル\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy\EnemyMove.h">
+      <Filter>ソース ファイル\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Player\PlayerSate\PlayerArrowShoot.h">
+      <Filter>ソース ファイル\Player\PlayerSate</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

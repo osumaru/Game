@@ -48,12 +48,6 @@ void CEnemyDamage::Update()
 	m_enemy->DamageCaluc(damage);
 	m_enemy->SetDamageCalucPos(screenPosition);
 
-	//ƒ_ƒ[ƒW‚ðŽó‚¯‚Ä‚¢‚é‚Æ‚«‚Í“®‚©‚È‚¢
-	CVector3 moveSpeed = m_enemy->GetMoveSpeed();
-	moveSpeed.x = 0.0f;
-	moveSpeed.z = 0.0f;
-	m_enemy->SetMoveSpeed(moveSpeed);
-
 	CVector3 playerPos = GetPlayer().GetPosition();
 	CVector3 toPlayerPos = playerPos - m_enemy->GetPosition();
 	float length = toPlayerPos.Length();

@@ -88,11 +88,13 @@ public:
 	*/
 	void ShadowMapEntry();
 
+	//シャドウを落とすかのフラグを設定
 	void SetIsShadowReceiver(bool isShadowReceiver)
 	{
 		m_materialFlg.isShadowReceiver = g_materialFlg.isShadowReceiver * isShadowReceiver;
 	}
 
+	//シャドウマップに書き込むモデル化のフラグを設定
 	void SetIsShadowCaster(bool isShadowCaster)
 	{
 		m_isShadowCaster = isShadowCaster;

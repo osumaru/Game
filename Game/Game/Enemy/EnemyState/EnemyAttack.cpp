@@ -8,12 +8,6 @@ bool CEnemyAttack::Start()
 	//UŒ‚ƒAƒjƒ[ƒVƒ‡ƒ“‚ðÄ¶
 	m_enemy->PlayAnimation(CEnemyState::enState_Attack);
 
-	//UŒ‚‚·‚é‚Æ‚«‚ÍˆÚ“®‚ð‚â‚ß‚é
-	CVector3 moveSpeed = m_enemy->GetMoveSpeed();
-	moveSpeed.x = 0.0f;
-	moveSpeed.z = 0.0f;
-	m_enemy->SetMoveSpeed(moveSpeed);
-
 	return true;
 }
 

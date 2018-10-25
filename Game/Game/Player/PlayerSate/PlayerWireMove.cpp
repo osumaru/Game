@@ -20,7 +20,7 @@ void CPlayerWireMove::Update()
 	CVector3 toMovePos = m_movePosition - playerPos;
 
 	float length = toMovePos.Length();
-	if (length > 1.5f) {
+	if (length > 2.0f) {
 		//“G‚Æ‚Ì‹——£‚ª—£‚ê‚Ä‚¢‚ê‚ÎˆÚ“®æ‚Éi‚Ş
 		toMovePos.Normalize();
 		toMovePos *= m_speed;
@@ -35,12 +35,7 @@ void CPlayerWireMove::Update()
 		std::list<IEnemy*> enemyList = GetSceneManager().GetGameScene().GetMap()->GetEnemyList();
 		for (auto& enemy : enemyList)
 		{
-			CVector3 enemyPos = enemy->GetPosition();
-			CVector3 toMovePos = m_movePosition - enemyPos;
-			float length = toMovePos.Length();
-			if (length < 0.1f) {
-				enemy->SetIsWireHit(false);
-			}
+			enemy->SetIsWireHit(false);
 		}
 	}
 

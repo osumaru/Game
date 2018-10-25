@@ -17,9 +17,6 @@ private:
 	CQuaternion		m_arrowRot;
 	CVector3		m_scale = CVector3::Zero;
 	CVector3		m_moveSpeed = CVector3::Zero;
-	CLight			m_light;
-	CSprite			m_arrowtag;
-	CTexture		m_texture;
 	float			m_lifeTime = 0.0f;
 	bool			m_isMove = false;
 };

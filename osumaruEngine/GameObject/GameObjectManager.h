@@ -1,8 +1,8 @@
 #pragma once
 class IGameObject;
 //オブジェクトマネージャー
-#include "../Graphics/PostEffect/Deferred.h"
-#include "../Graphics/PostEffect/PostEffect.h"
+#include "../Graphics/PostRendering/Deferred.h"
+#include "../Graphics/PostRendering/PostEffect.h"
 #include "GameObject.h"
 struct SGameObjectData
 {

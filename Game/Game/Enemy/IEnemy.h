@@ -4,7 +4,8 @@
 
 #pragma once
 
-#include "../Enemy/EnemyState/EnemyStateMachine.h"
+#include "EnemyState/EnemyStateMachine.h"
+#include "EnemyMove.h"
 #include "EnemyTurn.h"
 #include "EnemySearch.h"
 #include "../UI/DamageNumber/DamageNumber.h"
@@ -46,6 +47,12 @@ public:
 		return m_position;
 	}
 
+	//敵の座標を設定
+	void SetPosition(const CVector3& position)
+	{
+		m_position = position;
+	}
+
 	//クォータニオンを取得
 	const CQuaternion& GetRotation() const
 	{
@@ -62,14 +69,7 @@ public:
 	//移動速度を取得
 	const CVector3& GetMoveSpeed() const
 	{
-		return m_characterController.GetMoveSpeed();
-	}
-
-	//移動速度を設定
-	//moveSpeed		移動速度
-	void SetMoveSpeed(const CVector3& moveSpeed)
-	{
-		m_characterController.SetMoveSpeed(moveSpeed);
+		return m_enemyMove.GetMoveSpeed();
 	}
 
 	//アニメーションを再生
@@ -102,6 +102,18 @@ public:
 	void StateMachineRelease()
 	{
 		m_enemyStateMachine.Release();
+	}
+
+	//エネミーのステートを取得
+	CEnemyState::EnState GetState()
+	{
+		return m_enemyStateMachine.GetState();
+	}
+
+	//移動しているか
+	bool GetIsMove()
+	{
+		return m_enemyMove.GetIsMove();
 	}
 
 	//ダメージ計算を行う
@@ -194,9 +206,9 @@ public:
 
 protected:
 	CSkinModel				m_skinModel;			//スキンモデル
-	CCharacterController	m_characterController;	//キャラクターコントローラー
 	CAnimation				m_animation;			//アニメーション
 	CEnemyStateMachine		m_enemyStateMachine;	//ステートマシン
+	CEnemyMove				m_enemyMove;			//移動
 	CEnemyTurn				m_enemyTurn;			//向きを回転
 	CEnemySearch			m_enemySearch;			//プレイヤーを探索
 	CEnemyGroup*			m_enemyGroup;			//エネミーグループ

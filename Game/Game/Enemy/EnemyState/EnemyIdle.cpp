@@ -15,12 +15,6 @@ bool CEnemyIdle::Start()
 
 void CEnemyIdle::Update()
 {
-	//“®‚©‚È‚¢
-	CVector3 moveSpeed = m_enemy->GetMoveSpeed();
-	moveSpeed.x = 0.0f;
-	moveSpeed.z = 0.0f;
-	m_enemy->SetMoveSpeed(moveSpeed);
-
 	m_timer += GameTime().GetDeltaFrameTime();
 
 	if (m_enemy->IsDamage()) {

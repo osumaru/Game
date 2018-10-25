@@ -61,7 +61,7 @@ void CPlayerStateMachine::ChangeState(CPlayerState::EnPlayerState nextState)
 		m_currentState = &m_playerArrowAtack;
 		break;
 	case CPlayerState::enPlayerArrowShoot:	//弓の攻撃アニメーションに遷移
-		m_currentState = &m_playerArrowAtack;
+		m_currentState = &m_playerArrowShoot;
 		break;
 	case CPlayerState::enPlayerDamage:
 		m_currentState = &m_playerDamege;	//ダメージアニメーションに遷移

@@ -39,6 +39,11 @@ public:
 		return m_pShaderResource;
 	}
 
+	ID3D11UnorderedAccessView* GetUnorderedAccessView()
+	{
+		return m_pUnorderedAccess;
+	}
+
 	//テクスチャの横幅を取得
 	int GetWidth() const
 	{
@@ -56,4 +61,5 @@ private:
 	int								m_height;			//テクスチャの縦幅
 	ID3D11Resource*					m_pTexture;			//テクスチャ
 	ID3D11ShaderResourceView*		m_pShaderResource;	//SRV
+	ID3D11UnorderedAccessView*		m_pUnorderedAccess;	//UAV
 };

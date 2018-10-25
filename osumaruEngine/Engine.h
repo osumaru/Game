@@ -9,11 +9,13 @@
 #include "Graphics/Primitive.h"
 #include "Graphics/Light.h"
 #include "Graphics/ConstantBuffer.h"
-#include "Graphics/PostEffect/Deferred.h"
+#include "Graphics/PostRendering/Deferred.h"
 #include "Graphics/State/AlphaBlendState.h"
 #include "Graphics/State/DepthStencilState.h"
 #include "Graphics/State/RasterizerState.h"
 #include "Graphics/PreRendering/ShadowMap.h"
+#include "Graphics/State/ViewPortState.h"
+#include "Graphics/PointLightManager.h"
 
 //エンジンクラス
 class CEffectManager;
@@ -161,35 +163,71 @@ public:
 		m_objectManager.AllInactive();
 	}
 
+	//ポストエフェクトを取得
 	CPostEffect& GetPostEffect()
 	{
 		return m_postEffect;
 	}
 
-	void SetAlphaBlendState(EnAlphaBlendState alphaBlendState)
-	{
-		m_alphaBlend.SetBlendState(m_pDeviceContext, alphaBlendState);
-	}
-
-	void SetDepthStencilState(EnDepthStencilState depthStencilState)
-	{
-		m_depthState.SetDepthStencilState(m_pDeviceContext, depthStencilState);
-	}
-
-	void SetRasterizerState(EnRasterizerState rasterizerState)
-	{
-		m_rasterizerState.SetRasterizerState(m_pDeviceContext, rasterizerState);
-	}
-
+	//ディファードを取得
 	CDeferred& GetDeferred()
 	{
 		return m_deferred;
 	}
 
+	//シャドウマップを取得
 	CShadowMap& GetShadowMap()
 	{
 		return m_shadowMap;
 	}
+
+	//アルファブレンドの設定を変更
+	void SetAlphaBlendState(EnAlphaBlendState alphaBlendState)
+	{
+		m_alphaBlend.SetBlendState(m_pDeviceContext, alphaBlendState);
+	}
+
+	//深度の設定を変更
+	void SetDepthStencilState(EnDepthStencilState depthStencilState)
+	{
+		m_depthState.SetDepthStencilState(m_pDeviceContext, depthStencilState);
+	}
+
+	//ラスタライザの設定を変更
+	void SetRasterizerState(EnRasterizerState rasterizerState)
+	{
+		m_rasterizerState.SetRasterizerState(m_pDeviceContext, rasterizerState);
+	}
+
+	//ビューポートの設定を変更
+	void SetViewPortState(EnViewPortState viewPortNum)
+	{
+		m_viewPortState.SetViewPort(m_pDeviceContext, viewPortNum);
+	}
+
+	//現在のビューポートの設定を取得
+	EnViewPortState GetCurrentViewPortState()
+	{
+		return m_viewPortState.GetCurrentState();
+	}
+
+	//現在の深度設定を取得
+	EnDepthStencilState GetCurrentDepthStencilState()
+	{
+		return m_depthState.GetCurrentDepthState();
+	}
+
+	//現在のラスタライザの設定を取得
+	EnRasterizerState GetCurrentRasterizerState()
+	{
+		return m_rasterizerState.GetCurrentState();
+	}
+
+	CPointLightManager& GetPointLightManager()
+	{
+		return m_pointLightManager;
+	}
+
 private:
 	static const int						MAIN_RENDER_TARGET_NUM = 2;
 	CGameObjectManager						m_objectManager;			//オブジェクトマネージャー
@@ -217,6 +255,8 @@ private:
 	CRasterizerState						m_rasterizerState;
 	CDepthStencilState						m_depthState;
 	CShadowMap								m_shadowMap;
+	CViewPortState							m_viewPortState;
+	CPointLightManager						m_pointLightManager;
 };
 
 //エンジンクラスのインスタンスを取得。

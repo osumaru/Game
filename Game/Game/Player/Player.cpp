@@ -1,14 +1,34 @@
 #include "stdafx.h"
 #include "Player.h"
 #include"../../Game/Camera/GameCamera.h"
-#include "../Map/Map.h"`
+#include "../Map/Map.h"
 #include "../Scene/SceneManager.h"
 #include "../Enemy/IEnemy.h"
 
 
+void CPlayer::OnInvokeAnimationEvent(//アニメーションイベントが呼ばれるごとに呼び出される？
+	const wchar_t* animClipName,
+	const wchar_t* eventName
+)
+{
+	if (wcscmp(animClipName, L"Assets/modelData/PlayerDash60fps.tka") == 0) {//イベント名で処理を変える？
+		/*auto soundSource = New<CSoundSource>(0);
+		soundSource->Init("sound/Footstep_00.wav");
+		soundSource->Play(false);*/
+		ExpUP(100000);
+	}
+
+	if (wcscmp(animClipName, L"Assets/modelData/PlayerThrustAttack.tka") == 0) {//たぶん呼ばれた
+		/*auto soundSource = New<CSoundSource>(0);
+		soundSource->Init("sound/Footstep_00.wav");
+		soundSource->Play(false);*/
+		ExpUP(100000);
+	}
+}
+
 void CPlayer::Init(CVector3 position)
 {
-	
+	//プレイヤーのスキンンモデルのロード
 	m_skinmodel.Load(L"Assets/modelData/Player.cmo", &m_animation);
 	m_skinmodel.LoadNormalmap(L"Assets/modelData/Player_normal.png");
 	//武器のモデルのロード
@@ -39,6 +59,15 @@ void CPlayer::Init(CVector3 position)
 	m_weaponRigitBody.SetRotation(m_weaponRotation);
 	m_weaponRigitBody.PhysicsWorldRemoveRigidBody();
 
+	//サークルの読み込み
+	{
+		m_arrowtexture.Load(L"Assets/sprite/arrowTag.png");
+		m_arrowtag.Init(&m_arrowtexture);
+		m_arrowtag.SetPosition({ 0.0f,0.0f });
+		m_arrowtag.SetSize({ 50.0f,50.0f });
+		m_arrowtag.SetAlpha(0.7f);
+	}
+
 	//アニメーションの初期化
 	{
 		wchar_t* animClip[enPlayerNum] = {
@@ -54,6 +83,7 @@ void CPlayer::Init(CVector3 position)
 											{ L"Assets/modelData/PlayerDeath.tka" },			//死亡アニメーション
 											{ L"Assets/modelData/PlayerWire.tka" },				//ワイヤー移動アニメーション
 
+
 											{ L"Assets/modelData/PlayerArrowAttack.tka" },		//弓の攻撃アニメーション
 											{ L"Assets/modelData/PlayerArrowAttackEvent.tka" },
 											{ L"Assets/modelData/PlayerLeageSwordAttack.tka" },	//大剣の攻撃アニメーション
@@ -65,6 +95,10 @@ void CPlayer::Init(CVector3 position)
 		m_animation.SetLoopFlg(enPlayerWalk, true);
 		m_animation.SetLoopFlg(enPlayerRun, true);
 
+		//アニメーションイベントリスナーの登録　呼び出される関数の登録？
+		m_animation.AddAnimationEvent([&](auto animClipname, auto eventName) {
+			OnInvokeAnimationEvent(animClipname, eventName);
+		});
 	}
 
 
@@ -90,16 +124,17 @@ void CPlayer::Init(CVector3 position)
 	Add(&m_PlayerRotation, 0);
 	Add(this, 1);
 	m_skinmodel.SetIsShadowCaster(true);
+	
 }
 
 void CPlayer::Update()
 {
-	
+
 	//アニメーションの更新
 	m_animation.Update(GameTime().GetDeltaFrameTime());
-	if (m_isDied) {return; }
+	if (m_isDied) { return; }
 	WeaponChange();
-	
+
 	//無敵時間の処理
 	if (m_intervalOn)
 	{
@@ -117,18 +152,8 @@ void CPlayer::Update()
 	if (Pad().IsTriggerButton(enButtonB))
 	{
 		ExpUP(100);
-		
-
 	}
-	if (Pad().IsTriggerButton(enButtonRightTrigger) && !m_initArrow && 
-		GetPlayerStateMachine().GetState() == CPlayerState::enPlayerArrowAttack)
-	{
-		CPlayerArrow*	Arrow = New<CPlayerArrow>(0);
-		Arrow->Start();
-		m_arrowList.push_back(Arrow);
-		m_initArrow = true;
-	}
-
+	
 	std::list<CPlayerArrow*>::iterator it;
 	it = m_arrowList.begin();
 	while (it != m_arrowList.end()) {
@@ -175,7 +200,22 @@ void CPlayer::Update()
 			}
 		}
 	}
-	
+	if (Pad().IsTriggerButton(enButtonX))
+	{
+		Engine().GetPointLightManager().AddPointLight(m_position, { (float)Random().GetRandDouble(), (float)Random().GetRandDouble(), (float)Random().GetRandDouble() });
+	}
+
+	if (Pad().GetLeftTrigger())
+	{
+		GetGameCamera().SetCmareaState(GetGameCamera().enArrow);
+		m_isZoom = true;
+	}
+	else
+	{
+		GetGameCamera().SetCmareaState(GetGameCamera().enNormal);
+		m_isZoom = false;
+	}
+
 	//スキンモデルの更新
 	m_skinmodel.Update(m_position, m_rotation, { 1.0f, 1.0f, 1.0f }, true);
 
@@ -203,12 +243,23 @@ void CPlayer::Draw()
 		m_weaponRigitBody.SetPosition(m_weaponPosition);
 
 	}
+	if (m_isZoom)
+	{
+		m_arrowtag.Draw();
+	}
 	m_weaponskin[m_weaponState].Draw(GetGameCamera().GetViewMatrix(), GetGameCamera().GetProjectionMatrix());
 	m_skinmodel.Draw(GetGameCamera().GetViewMatrix(), GetGameCamera().GetProjectionMatrix());
 	
 	
 }
 
+void CPlayer::InitArrow()
+{
+	CPlayerArrow*	Arrow = New<CPlayerArrow>(0);
+	Arrow->Start();
+	m_arrowList.push_back(Arrow);
+	m_initArrow = true;
+}
 
 void CPlayer::StatusCalculation()
 {
