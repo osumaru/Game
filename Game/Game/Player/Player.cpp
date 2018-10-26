@@ -5,24 +5,23 @@
 #include "../Scene/SceneManager.h"
 #include "../Enemy/IEnemy.h"
 
-
 void CPlayer::OnInvokeAnimationEvent(//アニメーションイベントが呼ばれるごとに呼び出される？
 	const wchar_t* animClipName,
 	const wchar_t* eventName
 )
 {
 	if (wcscmp(animClipName, L"Assets/modelData/PlayerDash60fps.tka") == 0) {//イベント名で処理を変える？
-		/*auto soundSource = New<CSoundSource>(0);
-		soundSource->Init("sound/Footstep_00.wav");
-		soundSource->Play(false);*/
-		ExpUP(100000);
+		/*footSound = New<CSoundSource>(0);
+		footSound->Init("sound/Footstep_00.wav");
+		footSound->Play(false);*/
+		//ExpUP(100000);
 	}
 
 	if (wcscmp(animClipName, L"Assets/modelData/PlayerThrustAttack.tka") == 0) {//たぶん呼ばれた
 		/*auto soundSource = New<CSoundSource>(0);
 		soundSource->Init("sound/Footstep_00.wav");
 		soundSource->Play(false);*/
-		ExpUP(100000);
+		//ExpUP(100000);
 	}
 }
 
@@ -120,7 +119,7 @@ void CPlayer::Init(CVector3 position)
 
 void CPlayer::Update()
 {
-	
+
 	//アニメーションの更新
 	m_animation.Update(GameTime().GetDeltaFrameTime());
 	if (m_isDied) {return; }

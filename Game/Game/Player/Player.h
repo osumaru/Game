@@ -327,7 +327,7 @@ public:
 	void OnInvokeAnimationEvent(const wchar_t* animClipName, const wchar_t* eventName);
 
 private:
-	
+
 
 	CVector3				m_position;										//À•W
 	CVector3				m_weaponPosition;								//•Ší‚ÌÀ•W
