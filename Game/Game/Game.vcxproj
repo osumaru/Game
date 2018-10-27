@@ -186,6 +186,7 @@
     <ClCompile Include="Map\MapChip\MapChip.cpp" />
     <ClCompile Include="Map\MapChip\StaticMapObject.cpp" />
     <ClCompile Include="Camera\NormalGameCamera.cpp" />
+    <ClCompile Include="Player\PlayerSate\PlayerArrowShoot.cpp" />
     <ClCompile Include="Player\PlayerSate\PlayerArrowAttack.cpp" />
     <ClCompile Include="Player\PlayerArrow.cpp" />
     <ClCompile Include="Player\PlayerMove.cpp" />
@@ -248,6 +249,7 @@
     <ClInclude Include="Map\MapChip\MapChip.h" />
     <ClInclude Include="Map\MapChip\StaticMapObject.h" />
     <ClInclude Include="Camera\NormalGameCamera.h" />
+    <ClInclude Include="Player\PlayerSate\PlayerArrowShoot.h" />
     <ClInclude Include="Player\PlayerSate\PlayerArrowAttack.h" />
     <ClInclude Include="Player\PlayerArrow.h" />
     <ClInclude Include="Player\PlayerMove.h" />
@@ -289,7 +291,9 @@
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\Arrow.fbx" />
     <MeshContentTask Include="Assets\modelData\Barrel.FBX" />
+    <MeshContentTask Include="Assets\modelData\BOX.FBX" />
     <MeshContentTask Include="Assets\modelData\Brock.FBX" />
+    <MeshContentTask Include="Assets\modelData\Grass.FBX" />
     <MeshContentTask Include="Assets\modelData\Heart.fbx" />
     <MeshContentTask Include="Assets\modelData\House.FBX" />
     <MeshContentTask Include="Assets\modelData\LargeSword.fbx" />
@@ -298,10 +302,12 @@
     <MeshContentTask Include="Assets\modelData\Money.fbx" />
     <MeshContentTask Include="Assets\modelData\Ninja.FBX" />
     <MeshContentTask Include="Assets\modelData\Player.fbx" />
+    <MeshContentTask Include="Assets\modelData\Player2.fbx" />
     <MeshContentTask Include="Assets\modelData\Samurai.FBX" />
     <MeshContentTask Include="Assets\modelData\Sword.fbx" />
     <MeshContentTask Include="Assets\modelData\testChamferBox.FBX" />
     <MeshContentTask Include="Assets\modelData\testGround.FBX" />
+    <MeshContentTask Include="Assets\modelData\testGround2.FBX" />
     <MeshContentTask Include="Assets\modelData\testRectangle.FBX" />
     <MeshContentTask Include="Assets\modelData\Toge.FBX" />
     <MeshContentTask Include="Assets\modelData\TownHouse.fbx" />

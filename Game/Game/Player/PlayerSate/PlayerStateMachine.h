@@ -10,6 +10,7 @@
 #include "PlayerDied.h"
 #include "PlayerJump.h"
 #include "PlayerAvoidance.h"
+#include "PlayerArrowShoot.h"
 #include "PlayerWireMove.h"
 
 class CPlayerStateMachine	:public IGameObject
@@ -70,6 +71,7 @@ private:
 	CPlayerJump						m_playerJump;			//ジャンプモーション
 	CPlayerAvoidance				m_playerAvoidance;		//回避モーション
 	CPlayerArrowAttack				m_playerArrowAtack;		//弓での攻撃モーション
+	CPlayerArrowShoot				m_playerArrowShoot;		//弓を放つモーション
 	CPlayerWireMove					m_playerWireMove;		//ワイヤーモーション
 };
 
