@@ -27,7 +27,7 @@ void CPlayer::OnInvokeAnimationEvent(//ƒAƒjƒ[ƒVƒ‡ƒ“ƒCƒxƒ“ƒg‚ªŒÄ‚Î‚ê‚é‚²‚Æ‚ÉŒÄ‚
 
 void CPlayer::Init(CVector3 position)
 {
-	
+	//ƒvƒŒƒCƒ„[‚ÌƒXƒLƒ“ƒ“ƒ‚ƒfƒ‹‚Ìƒ[ƒh
 	m_skinmodel.Load(L"Assets/modelData/Player.cmo", &m_animation);
 	m_skinmodel.LoadNormalmap(L"Assets/modelData/Player_normal.png");
 	//•Ší‚Ìƒ‚ƒfƒ‹‚Ìƒ[ƒh
@@ -57,6 +57,15 @@ void CPlayer::Init(CVector3 position)
 	m_weaponRigitBody.SetPosition(m_weaponPosition);
 	m_weaponRigitBody.SetRotation(m_weaponRotation);
 	m_weaponRigitBody.PhysicsWorldRemoveRigidBody();
+
+	//ƒT[ƒNƒ‹‚Ì“Ç‚İ‚İ
+	{
+		m_arrowtexture.Load(L"Assets/sprite/arrowTag.png");
+		m_arrowtag.Init(&m_arrowtexture);
+		m_arrowtag.SetPosition({ 0.0f,0.0f });
+		m_arrowtag.SetSize({ 50.0f,50.0f });
+		m_arrowtag.SetAlpha(0.7f);
+	}
 
 	//ƒAƒjƒ[ƒVƒ‡ƒ“‚Ì‰Šú‰»
 	{
@@ -122,9 +131,9 @@ void CPlayer::Update()
 
 	//ƒAƒjƒ[ƒVƒ‡ƒ“‚ÌXV
 	m_animation.Update(GameTime().GetDeltaFrameTime());
-	if (m_isDied) {return; }
+	if (m_isDied) { return; }
 	WeaponChange();
-	
+
 	//–³“GŠÔ‚Ìˆ—
 	if (m_intervalOn)
 	{
@@ -142,18 +151,8 @@ void CPlayer::Update()
 	if (Pad().IsTriggerButton(enButtonB))
 	{
 		ExpUP(100);
-		
-
 	}
-	if (Pad().IsTriggerButton(enButtonRightTrigger) && !m_initArrow && 
-		GetPlayerStateMachine().GetState() == CPlayerState::enPlayerArrowAttack)
-	{
-		CPlayerArrow*	Arrow = New<CPlayerArrow>(0);
-		Arrow->Start();
-		m_arrowList.push_back(Arrow);
-		m_initArrow = true;
-	}
-
+	
 	std::list<CPlayerArrow*>::iterator it;
 	it = m_arrowList.begin();
 	while (it != m_arrowList.end()) {
@@ -202,8 +201,20 @@ void CPlayer::Update()
 	}
 	if (Pad().IsTriggerButton(enButtonX))
 	{
-		Engine().GetPointLightManager().AddPointLight(m_position, {(float)Random().GetRandDouble(), (float)Random().GetRandDouble(), (float)Random().GetRandDouble()});
+		Engine().GetPointLightManager().AddPointLight(m_position, { (float)Random().GetRandDouble(), (float)Random().GetRandDouble(), (float)Random().GetRandDouble() });
 	}
+
+	if (Pad().GetLeftTrigger())
+	{
+		GetGameCamera().SetCmareaState(GetGameCamera().enArrow);
+		m_isZoom = true;
+	}
+	else
+	{
+		GetGameCamera().SetCmareaState(GetGameCamera().enNormal);
+		m_isZoom = false;
+	}
+
 	//ƒXƒLƒ“ƒ‚ƒfƒ‹‚ÌXV
 	m_skinmodel.Update(m_position, m_rotation, { 1.0f, 1.0f, 1.0f }, true);
 
@@ -231,12 +242,23 @@ void CPlayer::Draw()
 		m_weaponRigitBody.SetPosition(m_weaponPosition);
 
 	}
+	if (m_isZoom)
+	{
+		m_arrowtag.Draw();
+	}
 	m_weaponskin[m_weaponState].Draw(GetGameCamera().GetViewMatrix(), GetGameCamera().GetProjectionMatrix());
 	m_skinmodel.Draw(GetGameCamera().GetViewMatrix(), GetGameCamera().GetProjectionMatrix());
 	
 	
 }
 
+void CPlayer::InitArrow()
+{
+	CPlayerArrow*	Arrow = New<CPlayerArrow>(0);
+	Arrow->Start();
+	m_arrowList.push_back(Arrow);
+	m_initArrow = true;
+}
 
 void CPlayer::StatusCalculation()
 {

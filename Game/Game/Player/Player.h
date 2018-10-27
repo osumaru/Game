@@ -326,14 +326,17 @@ public:
 	//アニメーションイベントが起きた時に呼ばれる処理。
 	void OnInvokeAnimationEvent(const wchar_t* animClipName, const wchar_t* eventName);
 
+	//弓を生成する関数
+	void InitArrow();
+
 private:
 
 
 	CVector3				m_position;										//座標
 	CVector3				m_weaponPosition;								//武器の座標
 	CVector3				m_moveSpeed = CVector3::Zero;					//移動速度
-	CVector3				m_weaponScale = CVector3::One;
-	CVector3				m_cameraTargetPos = CVector3::Zero;
+	CVector3				m_weaponScale = CVector3::One;					//武器のスケール
+	CVector3				m_cameraTargetPos = CVector3::Zero;				//カメラ用のターゲット
 
 	CQuaternion				m_rotation = CQuaternion::Identity;				//回転
 	CQuaternion				m_weaponRotation = CQuaternion::Identity;		//武器の回転
@@ -369,6 +372,9 @@ private:
 	CPlayerRotation				m_PlayerRotation;								//プレイヤーの回転を扱うクラス
 	CPlayerMove					m_PlayerMove;									//プレイヤーの動きを扱うクラス
 	std::list<CPlayerArrow*>	m_arrowList;									//弓矢のリスト
+	CSprite						m_arrowtag;										//サークルのスプライト
+	CTexture					m_arrowtexture;
+	bool						m_isZoom;										//弓用の視点に切り替えるかの判定をする変数
 
 	bool					m_isWireMove = false;					//ワイヤー移動できるか
 	CRayTest				m_wireCollisionSolver;					//ワイヤー移動のコリジョン処理クラス
