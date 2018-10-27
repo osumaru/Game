@@ -330,7 +330,7 @@ public:
 	void InitArrow();
 
 private:
-	
+
 
 	CVector3				m_position;										//À•W
 	CVector3				m_weaponPosition;								//•Ší‚ÌÀ•W

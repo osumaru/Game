@@ -5,24 +5,24 @@
 #include "../Scene/SceneManager.h"
 #include "../Enemy/IEnemy.h"
 
-
 void CPlayer::OnInvokeAnimationEvent(//アニメーションイベントが呼ばれるごとに呼び出される？
 	const wchar_t* animClipName,
 	const wchar_t* eventName
 )
 {
-	if (wcscmp(animClipName, L"Assets/modelData/PlayerDash60fps.tka") == 0) {//イベント名で処理を変える？
-		/*auto soundSource = New<CSoundSource>(0);
-		soundSource->Init("sound/Footstep_00.wav");
-		soundSource->Play(false);*/
-		ExpUP(100);
+	if (wcscmp(animClipName, L"Assets/modelData/PlayerDash60fpsEvent.tka") == 0) {//イベント名で処理を変える？
+		const float footVolume = 1.0f;
+		CSoundSource* footSound = New<CSoundSource>(0);
+		footSound->Init("Assets/sound/Jump.wav");
+		footSound->Play(false);
+		footSound->SetVolume(footVolume);
+
 	}
 
 	if (wcscmp(animClipName, L"Assets/modelData/PlayerThrustAttack.tka") == 0) {//たぶん呼ばれた
 		/*auto soundSource = New<CSoundSource>(0);
 		soundSource->Init("sound/Footstep_00.wav");
 		soundSource->Play(false);*/
-		ExpUP(100);
 	}
 }
 
@@ -73,7 +73,7 @@ void CPlayer::Init(CVector3 position)
 		wchar_t* animClip[enPlayerNum] = {
 											{ L"Assets/modelData/PlayerStand.tka"},				//待機アニメーション	
 											{ L"Assets/modelData/PlayerWalkStay.tka" },			//歩行アニメーション
-											{ L"Assets/modelData/PlayerDash60fps.tka" },		//走りアニメーション
+											{ L"Assets/modelData/PlayerDash60fpsEvent.tka" },		//走りアニメーション
 											{ L"Assets/modelData/PlayerJump3.tka" },			//走りジャンプアニメーション
 											{ L"Assets/modelData/PlayerJump.tka" },				//ジャンプアニメーション
 											{ L"Assets/modelData/PlayerCombo3.tka" },			//攻撃アニメーション
