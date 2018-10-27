@@ -25,7 +25,6 @@ void CArrowGameCamera::Update()
 	float rStick_x = Pad().GetRightStickX();
 	float rStick_y = Pad().GetRightStickY();
 
-	//m_cameraVec = m_cameraPosition - m_targetPosition;
 	m_cameraVec = GetGameCamera().GetSpringCamera().GetPosition() - GetGameCamera().GetSpringCamera().GetTarget();;
 
 	if (fabsf(rStick_x) > 0.0f) {
@@ -64,11 +63,13 @@ void CArrowGameCamera::Update()
 	CVector3 cameraPos;
 	CVector3 target = GetPlayer().GetPosition();
 	target.y += 1.5f;
+
 	//プレイヤーの前方向を取得
 	CMatrix	mat = GetPlayer().GetPlayerSkin().GetWorldMatrix();
 	CVector3 playerFlont = { -mat.m[0][0],-mat.m[0][1],-mat.m[0][2] };
 	playerFlont.Normalize();
 	target += playerFlont * 0.5f;
+
 	//ターゲットからカメラの場所までの長さを出す
 	CVector3	toNewCameraPos = GetGameCamera().GetCamera().GetPosition() - target;
 	toNewCameraPos.Normalize();

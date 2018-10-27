@@ -85,7 +85,6 @@ private:
 	EnCameraState	m_cameraState = EnCameraState::enNormal;
 	CNormalGameCamera	m_normalCamera;
 	CArrowGameCamera	m_arrowCamera;
-
 	CVector3 m_cameraVec;	//注視点からカメラへのベクトル
 	CSpringCamera	m_springCamera;
 

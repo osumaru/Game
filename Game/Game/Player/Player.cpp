@@ -15,14 +15,14 @@ void CPlayer::OnInvokeAnimationEvent(//ƒAƒjƒ[ƒVƒ‡ƒ“ƒCƒxƒ“ƒg‚ªŒÄ‚Î‚ê‚é‚²‚Æ‚ÉŒÄ‚
 		/*auto soundSource = New<CSoundSource>(0);
 		soundSource->Init("sound/Footstep_00.wav");
 		soundSource->Play(false);*/
-		ExpUP(100000);
+		ExpUP(100);
 	}
 
 	if (wcscmp(animClipName, L"Assets/modelData/PlayerThrustAttack.tka") == 0) {//‚½‚Ô‚ñŒÄ‚Î‚ê‚½
 		/*auto soundSource = New<CSoundSource>(0);
 		soundSource->Init("sound/Footstep_00.wav");
 		soundSource->Play(false);*/
-		ExpUP(100000);
+		ExpUP(100);
 	}
 }
 
@@ -200,6 +200,7 @@ void CPlayer::Update()
 			}
 		}
 	}
+
 	if (Pad().IsTriggerButton(enButtonX))
 	{
 		Engine().GetPointLightManager().AddPointLight(m_position, { (float)Random().GetRandDouble(), (float)Random().GetRandDouble(), (float)Random().GetRandDouble() });
@@ -210,6 +211,7 @@ void CPlayer::Update()
 		GetGameCamera().SetCmareaState(GetGameCamera().enArrow);
 		m_isZoom = true;
 	}
+
 	else
 	{
 		GetGameCamera().SetCmareaState(GetGameCamera().enNormal);
