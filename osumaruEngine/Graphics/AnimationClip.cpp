@@ -108,8 +108,9 @@ void CAnimationClip::AnimationInvoke(CAnimation* animation)
 		if (m_animationEvent[i].GetInvokeTime() < m_frameTime && !m_animationEvent[i].IsInvoked())
 		{
 			animation->AnimationEventNotification(m_clipName, m_animationEvent[i].GetEventName());
-			//m_animationEvent[i].SetInvokedFlg(true);
+			m_animationEvent[i].SetInvokedFlg(true);
 		}
+
 	}
 }
 

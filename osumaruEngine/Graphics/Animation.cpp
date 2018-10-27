@@ -25,6 +25,7 @@ void CAnimation::Play(int animationNum)
 	m_curCurrentAnimationNum = m_currentAnimationNum;
 	m_currentAnimationNum = animationNum;
 	m_animationClips[m_currentAnimationNum].Play();
+	m_animationClips[m_curCurrentAnimationNum].Reset();
 }
 
 void CAnimation::Play(int animationNum, float interpolationTime)
@@ -40,10 +41,11 @@ void CAnimation::Update(float deltaTime)
 {
 	//再生中のアニメーションを更新
 	m_animationClips[m_currentAnimationNum].Update(deltaTime);
-	m_animationClips[m_curCurrentAnimationNum].AnimationInvoke(this);
+	m_animationClips[m_currentAnimationNum].AnimationInvoke(this);
 	//再生が終わり、ループフラグが立っていればもう一度再生する
 	if (!m_animationClips[m_currentAnimationNum].IsPlay() && m_animationClips[m_currentAnimationNum].IsLoop())
 	{
+		m_animationClips[m_currentAnimationNum].Reset();
 		m_animationClips[m_currentAnimationNum].Play();
 	}
 
