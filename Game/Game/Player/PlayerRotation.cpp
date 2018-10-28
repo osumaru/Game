@@ -15,13 +15,12 @@ CPlayerRotation::~CPlayerRotation()
 {
 }
 
-bool CPlayerRotation::Start()
-{
-	return true;
-}
-
 void CPlayerRotation::Update()
 {
+	if (!m_isActive)
+	{
+		return;
+	}
 	GetPlayer().GetPlayerSkin().Update(GetPlayer().GetPosition(), GetPlayer().GetPlayerrRot(), { 1.0f,1.0f,1.0f },true);
 	CVector3 playerVec = GetPlayer().GetMoveSpeed();
 	playerVec.y = 0.0f;
@@ -159,8 +158,6 @@ void CPlayerRotation::Update()
 		rot.SetRotation(CVector3::AxisY, atan2f(playerVec.x, playerVec.z));		//YŽ²Žü‚è‚Ì‰ñ“]
 		Playerrot.Slerp(0.2f, Playerrot, rot);
 		GetPlayer().SetPlayerRot(Playerrot);
-
-
 	}
 }
 

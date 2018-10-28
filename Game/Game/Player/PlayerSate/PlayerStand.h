@@ -1,14 +1,14 @@
 #pragma once
-#include "IPlayerState.h"
+#include "PlayerState.h"
 #include "../../UI/WeaponSelect/WeaponSelect.h"
 
-class CPlayerStand	:	public IPlayerState
+class CPlayerStand : public IPlayerState
 {
 public:
-	CPlayerStand();
-	~CPlayerStand();
-	bool Start();
-	void Update();
+	void Init()override;
+
+	void Update()override;
+
 	void ChangeWepon();
 private:
 	

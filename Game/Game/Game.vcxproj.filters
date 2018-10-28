@@ -240,6 +240,12 @@
     <ClCompile Include="Enemy\EnemyMove.cpp">
       <Filter>ソース ファイル\Enemy</Filter>
     </ClCompile>
+    <ClCompile Include="Player\PlayerSate\PlayerArrowShoot.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Player\PlayerSate\PlayerState.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -292,9 +298,6 @@
     </ClInclude>
     <ClInclude Include="Scene\SceneManager.h">
       <Filter>ソース ファイル\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="Player\PlayerSate\IPlayerState.h">
-      <Filter>ソース ファイル\Player\PlayerSate</Filter>
     </ClInclude>
     <ClInclude Include="Player\PlayerSate\PlayerWalk.h">
       <Filter>ソース ファイル\Player\PlayerSate</Filter>
@@ -422,6 +425,12 @@
     <ClInclude Include="Enemy\EnemyMove.h">
       <Filter>ソース ファイル\Enemy</Filter>
     </ClInclude>
+    <ClInclude Include="Player\PlayerSate\PlayerArrowShoot.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Player\PlayerSate\PlayerStateCommon.h">
+      <Filter>ソース ファイル\Player\PlayerSate</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="Assets\shader\sprite.fx">
@@ -522,5 +531,8 @@
     <MeshContentTask Include="Assets\modelData\Skyball_WithCap.FBX">
       <Filter>ソース ファイル\Assets</Filter>
     </MeshContentTask>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\modelData\UnityChan.max" />
   </ItemGroup>
 </Project>

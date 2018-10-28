@@ -1,13 +1,12 @@
 #pragma once
-#include "IPlayerState.h"
+#include "PlayerState.h"
 
 class CPlayerWalk : public IPlayerState
 {
 public:
-	CPlayerWalk();
-	~CPlayerWalk();
-	bool Start();
-	void Update();
+	void Init()override;
+
+	void Update()override;
 
 private:
 };

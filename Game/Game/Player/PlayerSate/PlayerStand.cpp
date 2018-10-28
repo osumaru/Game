@@ -1,25 +1,14 @@
 #include "stdafx.h"
 #include "PlayerStand.h"
-#include "IPlayerState.h"
+#include "PlayerState.h"
 #include "../Player.h"
 #include "../../UI/WeaponSelect/WeaponSelect.h"
 #include"../../Scene/SceneManager.h"
 
-
-CPlayerStand::CPlayerStand()
-{
-}
-
-
-CPlayerStand::~CPlayerStand()
-{
-	
-}
-bool CPlayerStand::Start()
+void CPlayerStand::Init()
 {
 	//待機アニメーションの再生
 	GetPlayer().SetPlayerAnimation(CPlayerState::enPlayerStand,0.5f);
-	return true;
 }
 
 void CPlayerStand::Update()

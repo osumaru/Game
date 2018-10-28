@@ -2,22 +2,9 @@
 #include "PlayerStateMachine.h"
 
 
-CPlayerStateMachine::CPlayerStateMachine()
-{
-
-
-}
-
-
-CPlayerStateMachine::~CPlayerStateMachine()
-{
-
-}
-
-bool CPlayerStateMachine::Start()
+void CPlayerStateMachine::Init()
 {
 	ChangeState(CPlayerState::enPlayerStand);
-	return true;
 }
 
 
@@ -26,11 +13,6 @@ void CPlayerStateMachine::ChangeState(CPlayerState::EnPlayerState nextState)
 	if (m_state == nextState) {
 		//同じステートなら返す
 		return;
-	}
-
-	//現在のステートをゲームオブジェクトから削除
-	if (m_currentState != nullptr) {
-		Delete(m_currentState);
 	}
 
 	m_state = nextState;
@@ -73,16 +55,10 @@ void CPlayerStateMachine::ChangeState(CPlayerState::EnPlayerState nextState)
 		m_currentState = &m_playerWireMove;	//ワイヤーアニメーションに遷移
 	}
 
-	//変更したステートをゲームオブジェクトに追加
-	Add(m_currentState, 0);
+	m_currentState->Init();
 }
 
 void CPlayerStateMachine::Update()
-{	
-}
-
-void CPlayerStateMachine::Release()
 {
-	Delete(m_currentState);
-	Delete(this);
+	m_currentState->Update();
 }

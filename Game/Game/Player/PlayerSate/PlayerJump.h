@@ -1,12 +1,10 @@
 #pragma once
-#include "IPlayerState.h"
+#include "PlayerState.h"
 class CPlayerJump: public IPlayerState
 {
 public:
-	CPlayerJump();
-	~CPlayerJump();
-	bool Start();
+	void Init()override;
 
-	void Update();
+	void Update()override;
 };
 

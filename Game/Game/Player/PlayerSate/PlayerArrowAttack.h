@@ -1,12 +1,13 @@
 #pragma once
-#include "IPlayerState.h"
+#include "PlayerState.h"
 class CPlayerArrowAttack : public IPlayerState
 {
 public:
-	CPlayerArrowAttack();
-	~CPlayerArrowAttack();
-	bool Start();
-	void Update();
+
+	void Init()override;
+
+	void Update()override;
+
 	const bool IsCharge()
 	{
 		return	m_isCharge;

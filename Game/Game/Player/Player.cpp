@@ -117,12 +117,7 @@ void CPlayer::Init(CVector3 position)
 		m_status.Gold = 0;								//Š‹à
 	}
 	
-	m_PlayerStateMachine.Start();
-	m_PlayerMove.Start();
-	m_PlayerRotation.Start();
-	Add(&m_PlayerStateMachine,0);
-	Add(&m_PlayerMove, 0);
-	Add(&m_PlayerRotation, 0);
+	m_PlayerStateMachine.Init();
 	Add(this, 1);
 	m_skinmodel.SetIsShadowCaster(true);
 	
@@ -234,6 +229,9 @@ void CPlayer::Update()
 	projMat.MakeOrthoProjectionMatrix(5, 5, 1.0f, 100.0f);
 	Engine().GetShadowMap().SetViewMatrix(viewMat);
 	Engine().GetShadowMap().SetProjectionMatrix(projMat);
+	m_PlayerStateMachine.Update();
+	m_PlayerRotation.Update();
+	m_PlayerMove.Update();
 }
 
 //•`‰æˆ—

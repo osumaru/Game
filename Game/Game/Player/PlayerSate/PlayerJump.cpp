@@ -3,16 +3,7 @@
 #include "../Player.h"
 
 
-CPlayerJump::CPlayerJump()
-{
-}
-
-
-CPlayerJump::~CPlayerJump()
-{
-}
-
-bool CPlayerJump::Start()
+void CPlayerJump::Init()
 {
 	if (GetPlayer().GetPlayerStateMachine().GetState() == CPlayerState::EnPlayerState::enPlayerRunJump)
 	{
@@ -20,10 +11,8 @@ bool CPlayerJump::Start()
 	}
 	else
 	{
-
 		GetPlayer().SetPlayerAnimation(CPlayerState::enPlayerJump, 0.2f);
 	}
-	return true;
 }
 
 void CPlayerJump::Update()

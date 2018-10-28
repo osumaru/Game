@@ -3,19 +3,10 @@
 #include "../Player.h"
 
 
-CPlayerAvoidance::CPlayerAvoidance()
-{
-}
 
-
-CPlayerAvoidance::~CPlayerAvoidance()
-{
-}
-
-bool CPlayerAvoidance::Start()
+void CPlayerAvoidance::Init()
 {
 	GetPlayer().SetPlayerAnimation(CPlayerState::enPlayerAvoidance, 0.1f);
-	return true;
 }
 
 void CPlayerAvoidance::Update()

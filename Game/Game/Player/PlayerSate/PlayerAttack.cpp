@@ -3,20 +3,10 @@
 #include "../Player.h"
 
 
-CPlayerAttack::CPlayerAttack()
+
+void CPlayerAttack::Init()
 {
-}
-
-
-CPlayerAttack::~CPlayerAttack()
-{
-}
-
-bool CPlayerAttack::Start()
-{
-
 	GetPlayer().SetPlayerAnimation(GetPlayer().GetPlayerStateMachine().GetAttackSate(), 0.2f);
-	return true;
 }
 
 void CPlayerAttack::Update()
@@ -41,7 +31,7 @@ void CPlayerAttack::Update()
 		//攻撃モーション中はダメージモーションをさせない
 		if (m_conAtaack)
 		{
-			Start();
+			Init();
 			GetPlayer().GetWeaponBody().PhysicsWorldRemoveRigidBody();
 			m_conAtaack = false;
 			m_animetionFrame = 0.0f;

@@ -6,23 +6,12 @@
 #include "../Player/PlayerSate/PlayerStateMachine.h"
 
 
-CPlayerMove::CPlayerMove()
-{
-}
-
-
-CPlayerMove::~CPlayerMove()
-{
-}
-
-bool CPlayerMove::Start()
-{
-
-	return true;
-}
-
 void CPlayerMove::Update()
 {
+	if (!m_isActive)
+	{
+		return;
+	}
 	//プレイヤーの速度を取得
 	m_PlayerMoveSpeed = GetPlayer().GetMoveSpeed();
 

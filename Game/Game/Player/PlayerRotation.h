@@ -1,16 +1,20 @@
 #pragma once
 
-class CPlayerRotation : public IGameObject
+class CPlayerRotation
 {
 public:
 	CPlayerRotation();
 	~CPlayerRotation();
-	bool Start();
 	void Update();
 	void WeaponRot();
 
+	void SetIsActive(bool isActive)
+	{
+		m_isActive = isActive;
+	}
+
 private:
-	
+	bool m_isActive = true;
 
 };
 
