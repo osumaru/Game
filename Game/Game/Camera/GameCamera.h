@@ -54,27 +54,27 @@ public:
 	//ビュー行列を取得
 	CMatrix GetViewMatrix()
 	{
-		//return camera.GetViewMatrix();
-		return m_springCamera.GetSpringViewMatrix();
+		return camera.GetViewMatrix();
+		//return m_springCamera.GetSpringViewMatrix();
 	}
 
 	//プロジェクション行列を取得
 	CMatrix GetProjectionMatrix()
 	{
-		//return camera.GetProjectionMatrix();
-		return m_springCamera.GetProjectionMatrix();
+		return camera.GetProjectionMatrix();
+		//return m_springCamera.GetProjectionMatrix();
 	}
 
-	//バネカメラのプロジェクション行列の取得
-	const CMatrix GetSpringProjectionMatrix()
-	{
-		return m_springCamera.GetProjectionMatrix();
-	}
-	//バネカメラのビュー行列の取得
-	const CMatrix GetSpringViewMatrix()
-	{
-		return m_springCamera.GetSpringViewMatrix();
-	}
+	////バネカメラのプロジェクション行列の取得
+	//const CMatrix GetSpringProjectionMatrix()
+	//{
+	//	return m_springCamera.GetProjectionMatrix();
+	//}
+	////バネカメラのビュー行列の取得
+	//const CMatrix GetSpringViewMatrix()
+	//{
+	//	return m_springCamera.GetSpringViewMatrix();
+	//}
 	void SetCmareaState(EnCameraState cameraState)
 	{
 		m_cameraState = cameraState;

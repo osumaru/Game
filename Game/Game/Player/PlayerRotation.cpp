@@ -142,7 +142,7 @@ void CPlayerRotation::Update()
 	if (GetPlayer().GetPlayerStateMachine().GetState() == CPlayerState::enPlayerArrowAttack)
 	{
 		CQuaternion rotXZ, rotY;
-		CVector3 cameraFlont = GetGameCamera().GetSpringCamera().GetCamera()->GetFlont();
+		CVector3 cameraFlont = GetGameCamera().GetCamera().GetFlont();
 		rotXZ.SetRotation(CVector3::AxisY, atan2f(cameraFlont.x, cameraFlont.z));
 		rotY.SetRotation(CVector3::AxisX, atanf(-cameraFlont.y));
 		rotXZ.Multiply(rotY);

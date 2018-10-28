@@ -23,54 +23,42 @@ public:
 	//目標となる注視点を設定。
 	void SetTarTarget(const CVector3& target)
 	{
-		m_target = target;
+		m_tarTarget = target;
 	}
 
 	//注視点を設定
 	void SetTarget(const CVector3& target)
 	{
-		m_camera.SetTarget(target);
+		m_target = target;
 	}
 
 
 	//目標となる視点を設定
 	void SetTarPosition(const CVector3& position)
 	{
-		m_position = position;
+		m_tarPosition = position;
 	}
 
 	//視点を設定
 	void SetPosition(const CVector3& position)
 	{
-		m_camera.SetPosition(position);
-	}
-
-	//遠平面を取得
-	void SetFar(float _far)
-	{
-		m_camera.SetFar(_far);
+		m_position = position;
 	}
 
 	//注視点を取得
 	const CVector3& GetTarget() const
 	{
-		return m_camera.GetTarget();
+		return m_target;
 	}
 
 	//視点を取得
 	const CVector3& GetPosition() const
 	{
-		return m_camera.GetPosition();
+		return m_position;
 	}
 
 	//更新関数
 	void Update();
-
-	//カメラを取得
-	const CCamera* GetCamera() const
-	{
-		return &m_camera;
-	}
 
 	/*
 	バネの減衰率を設定
@@ -84,13 +72,13 @@ public:
 	//目標となる注視点を取得
 	const CVector3& GetTarTarget() const
 	{
-		return m_target;
+		return m_tarTarget;
 	}
 
 	//目標となる視点を取得
 	const CVector3& GetTarPosition() const
 	{
-		return m_position;
+		return m_tarPosition;
 	}
 
 	//バネカメラ用のパラメータをクリア
@@ -98,33 +86,6 @@ public:
 	{
 		m_target = { 0.0f, 0.0f, 0.0f };
 		m_positionMoveSpeed = { 0.0f, 0.0f, 0.0f };
-	}
-
-	/*
-	バネカメラの更新
-	バネカメラのみ更新したいときに使う
-	*/
-	void UpdateSpringCamera();
-
-	/*
-	カメラの更新
-	カメラのみ更新したいときに使う
-	*/
-	void UpdateCamera()
-	{
-		m_camera.Update();
-	}
-
-	//プロジェクション行列を取得
-	const CMatrix& GetProjectionMatrix()
-	{
-		return m_camera.GetProjectionMatrix();
-	}
-	
-	//ビュー行列を取得
-	const CMatrix& GetSpringViewMatrix()
-	{
-		return m_camera.GetViewMatrix();
 	}
 
 private:
@@ -152,9 +113,10 @@ private:
 	
 
 private:
-	CCamera			m_camera;				//カメラ
-	CVector3		m_target;				//注視点
-	CVector3		m_position;				//座標
+	CVector3		m_tarTarget;			//目標の注視点
+	CVector3		m_tarPosition;			//目標の座標
+	CVector3		m_target;				//現在の注視点
+	CVector3		m_position;				//現在の座標
 	CVector3		m_targetMoveSpeed;		//現在の注視点から目標の注視店までの移動速度
 	CVector3		m_positionMoveSpeed;	//現在の座標から目標の座標までの移動速度
 	float			m_maxMoveSpeed;			//バネカメラの最大速度
