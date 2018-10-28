@@ -153,13 +153,14 @@ public:
 	//プレイヤーのスピードを取得する
 	const CVector3& GetMoveSpeed()
 	{
-		return m_moveSpeed;
+		return m_characterController.GetMoveSpeed();
 	}
 
 	//プレイヤーのスピードの設定
 	void SetMoveSpeed(const CVector3 setmovespeed)
 	{
-		m_moveSpeed = setmovespeed;
+		
+		//m_moveSpeed = setmovespeed;
 	}
 	//プレイヤーの装備の変更を行う処理
 	void WeaponChange();
@@ -320,7 +321,7 @@ public:
 	//プレイヤームーブクラスのアクティブ設定
 	void PlayerMoveSetIsActive(bool isActive)
 	{
-		m_PlayerMove.SetIsActive(isActive);
+		//m_isMoveActive = isActive;
 	}
 
 	//アニメーションイベントが起きた時に呼ばれる処理。
@@ -338,12 +339,19 @@ public:
 
 	//弓を生成する関数
 	void InitArrow();
-private:
 
+	void PlayerMove();
+
+	void Rotation();
+private:
+	//const float				RUN_SPEED = 1.8f;
+	//const float				WALK_SPEED = 3.8f;
+	//CVector3				m_PlayerMoveSpeed;
+	//bool					m_isMoveActive = true;
 
 	CVector3				m_position;										//座標
 	CVector3				m_weaponPosition;								//武器の座標
-	CVector3				m_moveSpeed = CVector3::Zero;					//移動速度
+	//CVector3				m_moveSpeed = CVector3::Zero;					//移動速度
 	CVector3				m_weaponScale = CVector3::One;					//武器のスケール
 	CVector3				m_cameraTargetPos = CVector3::Zero;				//カメラ用のターゲット
 
@@ -363,9 +371,6 @@ private:
 	float					m_slipSpeed = 2.0f;						//回避移動時のスピード
 	EnPlayerAnimeState		m_State = enPlayerStand;				//アニメーションを遷移させるための変数
 	EnPlayerWeapon			m_weaponState = EnPlayerWeapon::enSword;
-
-	const float				RUN_SPEED	= 1.4f;				
-	const float				WALK_SPEED	= 300.0f;
 	const float				INTERVAL = 1.5;								//ダメージを受けた後の無敵時間
 	bool					m_isDamege = false;
 	float					m_animetionFrame = 0.0f;
@@ -378,8 +383,8 @@ private:
 	float					m_intervalTime = 0.0f;
 
 	CPlayerStateMachine			m_PlayerStateMachine;							//プレイヤーのアニメーションの遷移を行うステートマシーン
-	CPlayerRotation				m_PlayerRotation;								//プレイヤーの回転を扱うクラス
-	CPlayerMove					m_PlayerMove;									//プレイヤーの動きを扱うクラス
+	//CPlayerRotation				m_PlayerRotation;								//プレイヤーの回転を扱うクラス
+	//CPlayerMove					m_PlayerMove;									//プレイヤーの動きを扱うクラス
 	std::list<CPlayerArrow*>	m_arrowList;									//弓矢のリスト
 	CSprite						m_arrowtag;										//サークルのスプライト
 	CTexture					m_arrowtexture;
