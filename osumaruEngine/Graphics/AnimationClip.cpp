@@ -110,6 +110,7 @@ void CAnimationClip::AnimationInvoke(CAnimation* animation)
 			animation->AnimationEventNotification(m_clipName, m_animationEvent[i].GetEventName());
 			m_animationEvent[i].SetInvokedFlg(true);
 		}
+
 	}
 }
 

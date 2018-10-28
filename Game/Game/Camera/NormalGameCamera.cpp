@@ -64,6 +64,7 @@ void CNormalGameCamera::Update()
 			m_cameraVec = cameraVecOld;
 
 		}
+
 	}
 
 		CVector3 toCameraXZ;

@@ -58,7 +58,7 @@ public:
 
 	//アニメーションを再生。
 	void Play();
-	
+
 	//ループフラグを設定。
 	void SetIsLoop(bool isLoop)
 	{
@@ -79,6 +79,15 @@ public:
 
 	//アニメーションイベントの更新
 	void AnimationInvoke(CAnimation* animation);
+
+	void Reset()
+	{
+		for (int i = 0; i < m_animationEventNum; i++)
+		{
+			m_animationEvent[i].SetInvokedFlg(false);
+
+		}
+	}
 
 private:
 	bool									m_isPlay = false;					//再生中か？
