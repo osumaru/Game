@@ -26,14 +26,14 @@
 //#include "../../osumaruEngine/Physics/CollisionDetection.h"
 #include "../../osumaruEngine/Physics/CollisionAttr.h"
 #include "../../osumaruEngine/Input/Pad.h"
-//#include "../osumaruEngine/Sound/SoundEngine.h"
-//#include "../osumaruEngine/Sound/SoundSource.h"
+#include "../../osumaruEngine/Sound/SoundEngine.h"
+#include "../../osumaruEngine/Sound/SoundSource.h"
 #include "../../osumaruEngine/Graphics/Particle/Particle.h"
 #include "../../osumaruEngine/Graphics/Particle/ParticleEmitter.h"
 //#include "../osumaruEngine/Font/Font.h"
 #include "../../osumaruEngine/Random/Random.h"
 #include "../../osumaruEngine/Physics/RayTest.h"
-
+#include "../../osumaruEngine/Sky.h"
 #include <fstream>
 #include <iostream>
 #include <stdio.h>

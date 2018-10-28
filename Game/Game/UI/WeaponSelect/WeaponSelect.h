@@ -15,7 +15,7 @@ public:
 	void Update();
 
 	//•`‰æ
-	void Draw();
+	void AfterDraw();
 
 	//•Ší•ÏX
 	void ChangeWeapon();

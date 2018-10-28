@@ -326,6 +326,15 @@ public:
 	//アニメーションイベントが起きた時に呼ばれる処理。
 	void OnInvokeAnimationEvent(const wchar_t* animClipName, const wchar_t* eventName);
 
+	void SetAnimationPlay(EnPlayerAnimeState state, float interporationTime)
+	{
+		m_animation.Play(state, interporationTime);
+	}
+
+	void SetAnimationPlay(EnPlayerAnimeState state)
+	{
+		m_animation.Play(state);
+	}
 private:
 	
 

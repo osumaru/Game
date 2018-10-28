@@ -54,6 +54,19 @@ void CDeferred::Init()
 	m_pointLightCB.Create(sizeof(SPointLightCB), nullptr);
 	DWORD indexBufferLayout[4] = { 0, 2, 1, 3 };
 	m_primitive.Create(vertexBufferLayout, sizeof(SVSLayout), 4, indexBufferLayout, 4, CPrimitive::enIndex32, CPrimitive::enTypeTriangleStrip);
+	m_lightCB.Create(sizeof(CLight), &Light());
+	D3D11_SAMPLER_DESC desc;
+	ZeroMemory(&desc, sizeof(D3D11_SAMPLER_DESC));
+	desc.AddressU = D3D11_TEXTURE_ADDRESS_CLAMP;
+	desc.AddressV = D3D11_TEXTURE_ADDRESS_CLAMP;
+	desc.AddressW = D3D11_TEXTURE_ADDRESS_CLAMP;
+	desc.MaxLOD = D3D11_FLOAT32_MAX;
+	desc.ComparisonFunc = D3D11_COMPARISON_ALWAYS;
+	desc.MaxAnisotropy = 1;
+	desc.Filter = D3D11_FILTER_ANISOTROPIC;
+	GetDevice()->CreateSamplerState(&desc, &m_pAnisotropicSampler);
+	desc.Filter = D3D11_FILTER_MIN_MAG_MIP_LINEAR;
+	GetDevice()->CreateSamplerState(&desc, &m_pLinearSampler);
 }
 
 void CDeferred::Start()
@@ -89,7 +102,7 @@ void CDeferred::Start()
 		GetDeviceContext()->ClearRenderTargetView(m_renderTarget[i].GetRenderTarget(), pColor);
 	}
 	GetDeviceContext()->ClearDepthStencilView(m_renderTarget[0].GetDepthStencil(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
-	m_lightCB.Create(sizeof(CLight), &Light());
+
 }
 
 
@@ -116,7 +129,7 @@ void CDeferred::Draw()
 		{
 			CMatrix gameCameraMat;
 			gameCameraMat.Mul(m_camera->GetViewMatrix(), m_camera->GetProjectionMatrix());
-			gameCameraMat.Inverse();
+			//gameCameraMat.Inverse();
 			m_gameCameraCB.Update(&gameCameraMat);
 			buffer = m_gameCameraCB.GetBody();
 			GetDeviceContext()->PSSetConstantBuffers(1, 1, &buffer);
@@ -130,6 +143,8 @@ void CDeferred::Draw()
 		GetDeviceContext()->PSSetShaderResources(0, enRenderTargetNum + 1, srviews);
 		GetDeviceContext()->VSSetShader((ID3D11VertexShader*)m_vertexShader.GetBody(), nullptr, 0);
 		GetDeviceContext()->PSSetShader((ID3D11PixelShader*)m_pixelShader.GetBody(), nullptr, 0);
+		ID3D11SamplerState* samplers[] = { m_pAnisotropicSampler };
+		GetDeviceContext()->PSSetSamplers(1, 1, samplers);
 		ID3D11Buffer* vertexBuffers[] = { m_primitive.GetVertexBuffer() };
 		UINT strides[] = { m_primitive.GetVertexStride() };
 		UINT offset = 0;

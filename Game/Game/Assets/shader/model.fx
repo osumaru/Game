@@ -67,7 +67,6 @@ struct PS_OUTPUT
 	float4	tangent		: SV_TARGET3;
 	float4	depth		: SV_TARGET4;
 	int4	material	: SV_TARGET5;
-	float4	shadowColor	: SV_TARGET6;
 };
 
 Texture2D<float4> colorTexture : register(t10);
@@ -123,8 +122,6 @@ PS_OUTPUT PSMain(VS_OUTPUT In)
 	float3 normalColor = normalTexture.Sample(Sampler, In.uv) * isNormalMap + float3(0.0f, 0.0f, 1.0f) * (1 - isNormalMap);
 	Out.normalMap = float4(normalColor, 1.0f);
 	Out.depth = In.worldPos;//In.worldPos.z / In.worldPos.w;
-	Out.shadowColor.xyz = In.shadowPos.z / In.shadowPos.w;
-	Out.shadowColor.w = 1.0f;
 	Out.material.xyzw = isShadowReceiver;
 	return Out;
 }

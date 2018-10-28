@@ -61,7 +61,7 @@ void CPlayerHp::Update()
 	}
 }
 
-void CPlayerHp::Draw()
+void CPlayerHp::AfterDraw()
 {
 	m_playerHpBackSprite.Draw();
 	m_playerHpSprite.Draw();

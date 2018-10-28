@@ -194,6 +194,7 @@
     <ClCompile Include="Graphics\State\AlphaBlendState.cpp" />
     <ClCompile Include="Graphics\State\DepthStencilState.cpp" />
     <ClCompile Include="Graphics\State\RasterizerState.cpp" />
+    <ClCompile Include="Graphics\State\SamplerState.cpp" />
     <ClCompile Include="Graphics\State\ViewPortState.cpp" />
     <ClCompile Include="Graphics\Texture.cpp" />
     <ClCompile Include="Input\Pad.cpp" />
@@ -214,6 +215,7 @@
     <ClCompile Include="Resource\ShaderResource.cpp" />
     <ClCompile Include="Resource\SkinmodelResource.cpp" />
     <ClCompile Include="Resource\TextureResource.cpp" />
+    <ClCompile Include="Sky.cpp" />
     <ClCompile Include="Sound\SoundEngine.cpp" />
     <ClCompile Include="Sound\SoundSource.cpp" />
     <ClCompile Include="Sound\WaveFileOpen.cpp" />
@@ -251,6 +253,7 @@
     <ClInclude Include="Graphics\State\AlphaBlendState.h" />
     <ClInclude Include="Graphics\State\DepthStencilState.h" />
     <ClInclude Include="Graphics\State\RasterizerState.h" />
+    <ClInclude Include="Graphics\State\SamplerState.h" />
     <ClInclude Include="Graphics\State\ViewPortState.h" />
     <ClInclude Include="Graphics\Texture.h" />
     <ClInclude Include="Input\Pad.h" />
@@ -272,6 +275,7 @@
     <ClInclude Include="Resource\ShaderResource.h" />
     <ClInclude Include="Resource\SkinmodelResource.h" />
     <ClInclude Include="Resource\TextureResource.h" />
+    <ClInclude Include="Sky.h" />
     <ClInclude Include="Sound\SoundEngine.h" />
     <ClInclude Include="Sound\SoundSource.h" />
     <ClInclude Include="Sound\WaveFileOpen.h" />

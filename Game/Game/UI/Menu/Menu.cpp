@@ -180,7 +180,7 @@ void CMenu::StatusMath()
 }
 
 //ƒƒjƒ…[‰æ–Ê‚Ì•`‰æˆ—
-void CMenu::Draw()
+void CMenu::AfterDraw()
 {
 	if (GetPlayer().GetIsDied()) { return; }
 	if (m_Draw)

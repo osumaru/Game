@@ -7,6 +7,7 @@ CTexture::CTexture() :
 	m_width(0),
 	m_height(0),
 	m_pTexture(nullptr),
+	m_pUnorderedAccess(nullptr),
 	m_pShaderResource(nullptr)
 {
 }
