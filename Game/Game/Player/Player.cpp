@@ -387,7 +387,6 @@ void CPlayer::PlayerAttack()
 
 			CVector3 EnemyVec = enemys->GetPosition();
 			EnemyVec.y += 1.3f;
-			//EnemyVec -= m_weaponPosition;
 			float len = EnemyVec.Length();
 
 			if (fabs(len) < 2.0f)

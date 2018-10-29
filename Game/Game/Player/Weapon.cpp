@@ -26,8 +26,6 @@ void CWeapon::Init(CPlayer* player)
 	m_attackRotation.Multiply(multi);
 	multi.SetRotationDeg(CVector3::AxisY, 90.0f);
 	m_attackRotation.Multiply(multi);
-	//multi.SetRotationDeg(CVector3::AxisX, -20.0f);
-	//m_attackRotation.Multiply(multi);
 	m_attackPosition = { 10.0f, 0.0f, 0.0f };
 }
 
