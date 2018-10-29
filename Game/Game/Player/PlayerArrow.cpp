@@ -28,28 +28,46 @@ void CPlayerArrow::Update()
 {
 	if (GetPlayer().GetPlayerStateMachine().GetState() == CPlayerState::EnPlayerState::enPlayerArrowAttack && !m_isMove)
 	{
-		m_arrowPosition = CVector3::Zero;// GetPlayer().GetWeaponPosition();
+		m_arrowPosition =  GetPlayer().GetWeapon().GetPosition();
 		//カメラの前方向を取得
 		CVector3 weaponFlont = GetGameCamera().GetCamera().GetFlont();
 		weaponFlont.Normalize();
-		m_moveSpeed = weaponFlont * 50.0f;
+		m_moveSpeed = weaponFlont * 10.0f;
 		CQuaternion rotY;
 		m_arrowRot.SetRotation(CVector3::AxisY, atan2f(weaponFlont.x, weaponFlont.z));		//Y軸周りの回転
-		rotY.SetRotation(CVector3::AxisX, atanf(-weaponFlont.y));		//Y軸周りの回転
+		rotY.SetRotation(CVector3::AxisX, atanf(-weaponFlont.y));		//X軸周りの回転
 		m_arrowRot.Multiply(rotY);
 	}
 	//矢を飛ばす処理
 	else
 	{
 		m_isMove = true;
+		CVector3 flont, newVec,oldpos;
+		//弓の前方向
+		flont = { m_arrowskin.GetWorldMatrix().m[2][0],m_arrowskin.GetWorldMatrix().m[2][1],m_arrowskin.GetWorldMatrix().m[2][2] };
+		//１フレーム前の座標
+		oldpos = m_arrowPosition;
+		//目標位置の計算
+		m_moveSpeed.y += GRAVITY * GameTime().GetDeltaFrameTime();
 		m_arrowPosition += m_moveSpeed * GameTime().GetDeltaFrameTime();
+		//今の座標から目標地点に向かうベクトル
+		newVec = m_arrowPosition - oldpos;
+		//正規化
+		newVec.Normalize();
+		flont.Normalize();
+		float rot = newVec.Dot(flont);
+		rot = acos(rot);
+		CQuaternion rotX;
+		rotX.SetRotation(CVector3::AxisX,CMath::DegToRad(rot));
+		m_arrowRot.Multiply(rotX);
+
 		m_lifeTime += GameTime().GetDeltaFrameTime();
+
 		for (const auto& enemys :GetSceneManager().GetGameScene().GetMap()->GetEnemyList())
 		{
 			if (!enemys->IsDamage()) {
 
 				CVector3 EnemyVec = enemys->GetPosition();
-				EnemyVec.y += 1.3f;
 				EnemyVec.Subtract(m_arrowPosition);
 				float len = EnemyVec.Length();
 
@@ -63,7 +81,7 @@ void CPlayerArrow::Update()
 		
 	}
 	
-	if (m_lifeTime >= 5.0f)
+	if (m_lifeTime >= 20.0f)
 	{
 		Delete(this);
 		return;

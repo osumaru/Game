@@ -9,7 +9,8 @@
 void CPlayerStand::Init()
 {
 	//待機アニメーションの再生
-	GetPlayer().SetPlayerAnimation(CPlayerState::enPlayerStand,0.5f);
+	GetPlayer().SetPlayerAnimation(CPlayerState::enPlayerStand,0.5f);	
+	m_pPlayer->SetMoveSpeed(CVector3::Zero);
 }
 
 void CPlayerStand::Update()

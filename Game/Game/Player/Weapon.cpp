@@ -11,22 +11,65 @@ void CWeapon::Init(CPlayer* player)
 	m_weaponskin[2].Load(L"Assets/modelData/LongBow.cmo", NULL);
 	m_weaponskin[3].Load(L"Assets/modelData/TwinSword.cmo", NULL);
 	m_boneMat = &m_pPlayer->GetPlayerSkin().FindBoneWorldMatrix(L"LeftShoulder");
-	m_position = {0.0f, 0.0f, -10.0f};
-	m_rotation = CQuaternion::Identity;
+	m_position[enWeaponArrow] = {0.0f, 0.0f, -10.0f};
+	m_rotation[enWeaponArrow] = CQuaternion::Identity;
 	CQuaternion multi;
 	multi.SetRotationDeg(CVector3::AxisX, 90.0f);
-	m_rotation.Multiply(multi);
+	m_rotation[enWeaponArrow].Multiply(multi);
 	multi.SetRotationDeg(CVector3::AxisZ, 90.0f);
-	m_rotation.Multiply(multi);
+	m_rotation[enWeaponArrow].Multiply(multi);
 	multi.SetRotationDeg(CVector3::AxisX, -20.0f);
-	m_rotation.Multiply(multi);
+	m_rotation[enWeaponArrow].Multiply(multi);
 
-	m_attackRotation = CQuaternion::Identity;
+	m_attackRotation[enWeaponArrow] = CQuaternion::Identity;
 	multi.SetRotationDeg(CVector3::AxisX, 90.0f);
-	m_attackRotation.Multiply(multi);
+	m_attackRotation[enWeaponArrow].Multiply(multi);
 	multi.SetRotationDeg(CVector3::AxisY, 90.0f);
-	m_attackRotation.Multiply(multi);
-	m_attackPosition = { 10.0f, 0.0f, 0.0f };
+	m_attackRotation[enWeaponArrow].Multiply(multi);
+	m_attackPosition[enWeaponArrow] = { 10.0f, 0.0f, 0.0f };
+
+
+	m_position[enWeaponSword] = { 0.0f, 0.0f, -10.0f };
+	m_rotation[enWeaponSword] = CQuaternion::Identity;
+	multi.SetRotationDeg(CVector3::AxisX, 90.0f);
+	m_rotation[enWeaponSword].Multiply(multi);
+	multi.SetRotationDeg(CVector3::AxisZ, 90.0f);
+	m_rotation[enWeaponSword].Multiply(multi);
+	multi.SetRotationDeg(CVector3::AxisX, -20.0f);
+	m_rotation[enWeaponSword].Multiply(multi);
+
+	m_attackRotation[enWeaponSword] = CQuaternion::Identity;
+	multi.SetRotationDeg(CVector3::AxisZ, 90.0f);
+	m_attackRotation[enWeaponSword].Multiply(multi);
+	m_attackPosition[enWeaponSword] = { 10.0f, 0.0f, 0.0f };
+
+	m_position[enWeaponTwinSword] = { 0.0f, 0.0f, -10.0f };
+	m_rotation[enWeaponTwinSword] = CQuaternion::Identity;
+	multi.SetRotationDeg(CVector3::AxisX, 90.0f);
+	m_rotation[enWeaponTwinSword].Multiply(multi);
+	multi.SetRotationDeg(CVector3::AxisZ, 90.0f);
+	m_rotation[enWeaponTwinSword].Multiply(multi);
+
+	m_attackRotation[enWeaponTwinSword] = CQuaternion::Identity;
+	multi.SetRotationDeg(CVector3::AxisX, 90.0f);
+	m_attackRotation[enWeaponTwinSword].Multiply(multi);
+	multi.SetRotationDeg(CVector3::AxisY, 90.0f);
+	m_attackRotation[enWeaponTwinSword].Multiply(multi);
+	m_attackPosition[enWeaponTwinSword] = { 10.0f, 0.0f, 0.0f };
+
+	m_position[enWeaponLongSword] = { 0.0f, 0.0f, -10.0f };
+	m_rotation[enWeaponLongSword] = CQuaternion::Identity;
+	multi.SetRotationDeg(CVector3::AxisX, 90.0f);
+	m_rotation[enWeaponLongSword].Multiply(multi);
+	multi.SetRotationDeg(CVector3::AxisZ, 90.0f);
+	m_rotation[enWeaponLongSword].Multiply(multi);
+	multi.SetRotationDeg(CVector3::AxisX, -20.0f);
+	m_rotation[enWeaponLongSword].Multiply(multi);
+
+	m_attackRotation[enWeaponLongSword] = CQuaternion::Identity;
+	multi.SetRotationDeg(CVector3::AxisZ, 90.0f);
+	m_attackRotation[enWeaponLongSword].Multiply(multi);
+	m_attackPosition[enWeaponLongSword] = { 10.0f, 0.0f, 0.0f };
 }
 
 
@@ -40,30 +83,31 @@ void CWeapon::Update()
 	{
 		m_weaponState = enWeaponArrow;
 	}
-	else if (Pad().IsTriggerButton(enButtonRight))
+	else if (Pad().IsTriggerButton(enButtonLeft))
 	{
 		m_weaponState = enWeaponTwinSword;
 	}
-	else if (Pad().IsTriggerButton(enButtonLeft))
+	else if (Pad().IsTriggerButton(enButtonRight))
 	{
 		m_weaponState = enWeaponLongSword;
 	}
-	CVector3 position = m_position;
-	CQuaternion rotation = m_rotation;
+	CVector3 position;
+	CQuaternion rotation;
 	if (m_pPlayer->GetIsAttack())
 	{
 
 		m_boneMat = &m_pPlayer->GetPlayerSkin().FindBoneWorldMatrix(L"LeftHand");
-		position = m_attackPosition;
-		rotation = m_attackRotation;
+		position = m_attackPosition[m_weaponState];
+		rotation = m_attackRotation[m_weaponState];
 	}
 	else
 	{
 		m_boneMat = &m_pPlayer->GetPlayerSkin().FindBoneWorldMatrix(L"LeftShoulder");
-		position = m_position;
-		rotation = m_rotation;
+		position = m_position[m_weaponState];
+		rotation = m_rotation[m_weaponState];
 	}
 	position.Mul(*m_boneMat);
+	m_worldPos[m_weaponState] = position;
 	CMatrix rotMat = *m_boneMat;
 	((CVector3*)rotMat.m[0])->Div(((CVector3*)rotMat.m[0])->Length());
 	((CVector3*)rotMat.m[1])->Div(((CVector3*)rotMat.m[1])->Length());

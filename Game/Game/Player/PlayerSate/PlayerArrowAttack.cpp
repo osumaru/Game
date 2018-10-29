@@ -10,6 +10,7 @@ void CPlayerArrowAttack::Init()
 	GetPlayer().InitArrow();
 	GetPlayer().SetPlayerAnimation(CPlayerState::enPlayerArrowAttack, 0.5f);
 	GetPlayer().SetAttack(true);
+	m_pPlayer->SetMoveSpeed(CVector3::Zero);
 	//‹|—p‚Ì‹“_‚É•ÏX
 }
 
