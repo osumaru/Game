@@ -21,7 +21,7 @@ void CPlayerRotation::Update()
 	{
 		return;
 	}
-	GetPlayer().GetPlayerSkin().Update(GetPlayer().GetPosition(), GetPlayer().GetPlayerrRot(), { 1.0f,1.0f,1.0f },true);
+	//GetPlayer().GetPlayerSkin().Update(GetPlayer().GetPosition(), GetPlayer().GetPlayerrRot(), { 1.0f,1.0f,1.0f },true);
 	CVector3 playerVec = GetPlayer().GetMoveSpeed();
 	playerVec.y = 0.0f;
 	//プレイヤーのワールド行列の取得

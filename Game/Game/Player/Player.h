@@ -259,7 +259,7 @@ public:
 	//}
 	
 	//プレイヤーのスキンモデルの情報を取得
-	CSkinModel& GetPlayerSkin()
+	const CSkinModel& GetPlayerSkin() const
 	{
 		return m_skinmodel;
 	}

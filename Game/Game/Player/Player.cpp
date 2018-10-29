@@ -346,7 +346,7 @@ void CPlayer::Rotation()
 {
 	CVector3 moveSpeed = m_characterController.GetMoveSpeed();
 
-	CVector3 playerFront = *((CVector3*)m_skinmodel.GetWorldMatrix().m[2]);
+	CVector3 playerFront = CVector3::AxisZ;
 	if (moveSpeed.x == 0.0f && moveSpeed.z == 0.0f)
 	{
 		moveSpeed = playerFront;
@@ -371,9 +371,17 @@ void CPlayer::Rotation()
 	{
 		rad = -rad;
 	}
-	CQuaternion multi;
-	multi.SetRotation(CVector3::AxisY, rad);
-	m_rotation.Multiply(multi);
+	m_rotation.SetRotation(CVector3::AxisY, rad);
+
+	if (m_weapon.GetCurrentState() == CWeapon::enWeaponArrow && m_isAttack)
+	{
+		CQuaternion rotXZ, rotY;
+		CVector3 cameraFlont = GetGameCamera().GetCamera().GetFlont();
+		rotXZ.SetRotation(CVector3::AxisY, atan2f(cameraFlont.x, cameraFlont.z));
+		rotY.SetRotation(CVector3::AxisX, atanf(-cameraFlont.y));
+		rotXZ.Multiply(rotY);
+		m_rotation = rotXZ;
+	}
 }
 
 void CPlayer::PlayerAttack()
