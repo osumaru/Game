@@ -349,12 +349,10 @@ void CPlayer::Rotation()
 	CVector3 playerFront = CVector3::AxisZ;
 	if (moveSpeed.x == 0.0f && moveSpeed.z == 0.0f)
 	{
-		moveSpeed = playerFront;
+		moveSpeed.x = m_skinmodel.GetWorldMatrix().m[2][0];
+		moveSpeed.z = m_skinmodel.GetWorldMatrix().m[2][2];
 	}
-	moveSpeed.y = 0.0f;
-	playerFront.y = 0.0f;
 	moveSpeed.Normalize();
-	playerFront.Normalize();
 	float rad = moveSpeed.Dot(playerFront);
 	if (1.0f <= rad)
 	{
