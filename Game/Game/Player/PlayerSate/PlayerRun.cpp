@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "PlayerRun.h"
 #include "../Player.h"
+#include "../../Camera/GameCamera.h"
 
 void CPlayerRun::Init()
 {
@@ -9,6 +10,21 @@ void CPlayerRun::Init()
 
 void CPlayerRun::Update()
 {
+	const CCamera& gameCamera = GetGameCamera().GetCamera();
+	CVector3 frontVec = gameCamera.GetTarget() - gameCamera.GetPosition();
+	frontVec.y = 0.0f;
+	frontVec.Normalize();
+	CVector3 rightVec;
+	rightVec.Cross(CVector3::AxisY, frontVec);
+	rightVec.Normalize();
+	CVector3 moveSpeed = m_pPlayer->GetMoveSpeed();
+	moveSpeed.x = 0.0f;
+	moveSpeed.z = 0.0f;
+	const float speed = 4.0f;
+	moveSpeed += frontVec * Pad().GetLeftStickY() * speed;
+	moveSpeed += rightVec * Pad().GetLeftStickX() * speed;
+	m_pPlayer->SetMoveSpeed(moveSpeed);
+
 	//‘–‚è’†‚Éƒ_ƒ[ƒW‚ðŽó‚¯‚½ê‡
 	if (GetPlayer().GetIsDamage())
 	{
@@ -17,7 +33,7 @@ void CPlayerRun::Update()
 	//‘–‚Á‚Ä‚¢‚é‚Æ‚«‚ÉUŒ‚‚µ‚½Žž‚Ìˆ—
 	else if (Pad().IsTriggerButton(enButtonRightTrigger))
 	{
-		if(GetPlayer().GetPlayerStateMachine().GetAttackSate() == CPlayerState::enPlayerArrowAttack)
+		if(m_pPlayer->GetWeapon().GetCurrentState() == CWeapon::enWeaponArrow)
 		{
 			GetPlayer().GetPlayerStateMachine().ChangeState(CPlayerState::enPlayerArrowAttack);
 		}

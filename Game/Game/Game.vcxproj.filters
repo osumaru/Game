@@ -240,8 +240,14 @@
     <ClCompile Include="Enemy\EnemyMove.cpp">
       <Filter>ソース ファイル\Enemy</Filter>
     </ClCompile>
+    <ClCompile Include="Player\Weapon.cpp">
+      <Filter>ソース ファイル\Player</Filter>
+    </ClCompile>
     <ClCompile Include="Player\PlayerSate\PlayerState.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>ソース ファイル\Player\PlayerSate</Filter>
+    </ClCompile>
+    <ClCompile Include="Player\PlayerSate\PlayerArrowShoot.cpp">
+      <Filter>ソース ファイル\Player\PlayerSate</Filter>
     </ClCompile>
     <ClCompile Include="Player\PlayerSate\PlayerArrowShoot.cpp">
       <Filter>ソース ファイル\Player\PlayerSate</Filter>
@@ -427,6 +433,9 @@
     </ClInclude>
     <ClInclude Include="Player\PlayerSate\PlayerStateCommon.h">
       <Filter>ソース ファイル\Player\PlayerSate</Filter>
+    </ClInclude>
+    <ClInclude Include="Player\Weapon.h">
+      <Filter>ソース ファイル\Player</Filter>
     </ClInclude>
     <ClInclude Include="Player\PlayerSate\PlayerArrowShoot.h">
       <Filter>ソース ファイル\Player\PlayerSate</Filter>

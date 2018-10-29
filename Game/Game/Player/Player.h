@@ -4,6 +4,7 @@
 #include "PlayerRotation.h"
 #include "PlayerMove.h"
 #include "PlayerArrow.h"
+#include "Weapon.h"
 
 class CRootPoint;
 
@@ -26,6 +27,8 @@ class CPlayer : public IGameObject
 {
 
 public:
+	
+
 	enum EnPlayerAnimeState
 	{
 		enPlayerStand,		//待機アニメーション
@@ -48,14 +51,7 @@ public:
 
 	};
 
-	enum EnPlayerWeapon
-	{
-		enSword,			//片手剣
-		enLongSword,		//両手剣
-		enArro,				//弓矢
-		enTwinSword,		//二刀
 
-	};
 
 	//プレイヤーの初期化
 	void Init(CVector3 position);
@@ -153,14 +149,15 @@ public:
 	//プレイヤーのスピードを取得する
 	const CVector3& GetMoveSpeed()
 	{
-		return m_moveSpeed;
+		return m_characterController.GetMoveSpeed();
 	}
 
-	//プレイヤーのスピードの設定
-	void SetMoveSpeed(const CVector3 setmovespeed)
-	{
-		m_moveSpeed = setmovespeed;
-	}
+	////プレイヤーのスピードの設定
+	//void SetMoveSpeed(const CVector3 setmovespeed)
+	//{
+	//	
+	//	//m_moveSpeed = setmovespeed;
+	//}
 	//プレイヤーの装備の変更を行う処理
 	void WeaponChange();
 
@@ -170,7 +167,6 @@ public:
 		
 		CMatrix PlayerHead = m_skinmodel.FindBoneWorldMatrix(L"Head");
 		CVector3 PlayerHeadPos = { PlayerHead.m[3][0],PlayerHead.m[3][1],PlayerHead.m[3][2] };
-
 		return PlayerHeadPos;
 	}
 
@@ -226,27 +222,41 @@ public:
 	{
 		return m_PlayerStateMachine;
 	}
+
+	void SetMoveSpeed(CVector3 moveSpeed)
+	{
+		m_characterController.SetMoveSpeed(moveSpeed);
+	}
+
+	const CVector3& GetMoveSpeed()const
+	{
+		m_characterController.GetMoveSpeed();
+	}
+	const CWeapon& GetWeapon() const
+	{
+		return m_weapon;
+	}
 	//武器の切り替えを設定する関数
-	void SetChangeWeapon(const int changeWeapon)
-	{
-		m_weaponState = (EnPlayerWeapon)changeWeapon;
-		
-	}
-	//武器の座標の設定
-	void SetWeaponPosition(const CVector3 swpos)
-	{
-		m_weaponPosition =  swpos;
-	}
-	//武器の座標を取得
-	const CVector3 GetWeaponPosition()
-	{
-		return m_weaponPosition;
-	}
-	//武器の向きの設定
-	void SetWeaponRotation(const CQuaternion setrot)
-	{
-		m_weaponRotation = setrot;
-	}
+	//void SetChangeWeapon(CWeapon::EnPlayerWeapon changeWeapon)
+	//{
+	//	m_weapon.SetChangeWeapon(changeWeapon);
+	//	
+	//}
+	////武器の座標の設定
+	//void SetWeaponPosition(const CVector3 swpos)
+	//{
+	//	m_weaponPosition =  swpos;
+	//}
+	////武器の座標を取得
+	//const CVector3 GetWeaponPosition()
+	//{
+	//	return m_weaponPosition;
+	//}
+	////武器の向きの設定
+	//void SetWeaponRotation(const CQuaternion setrot)
+	//{
+	//	m_weaponRotation = setrot;
+	//}
 	
 	//プレイヤーのスキンモデルの情報を取得
 	CSkinModel& GetPlayerSkin()
@@ -256,7 +266,7 @@ public:
 	//プレイヤーが浮いているかを取得
 	const bool GetIsGround()
 	{	
-		return m_isGround;
+		return m_characterController.IsOnGround();
 	}
 	//無敵時間を設定する
 	void SetInterval(const bool set)
@@ -296,10 +306,10 @@ public:
 	}
 
 	//武器のスキン情報の取得
-	const CSkinModel& GetWeaponskin(int num)
-	{
-		return m_weaponskin[num];
-	}
+	//const CSkinModel& GetWeaponskin(int num)
+	//{
+	//	return m_weaponskin[num];
+	//}
 
 	//矢を生成しているかの設定
 	void SetInitArrow(const bool set)
@@ -320,7 +330,7 @@ public:
 	//プレイヤームーブクラスのアクティブ設定
 	void PlayerMoveSetIsActive(bool isActive)
 	{
-		m_PlayerMove.SetIsActive(isActive);
+		//m_isMoveActive = isActive;
 	}
 
 	//アニメーションイベントが起きた時に呼ばれる処理。
@@ -338,34 +348,38 @@ public:
 
 	//弓を生成する関数
 	void InitArrow();
-private:
 
+	void PlayerMove();
+
+	void Rotation();
+private:
+	CWeapon					m_weapon;
+	//const float				RUN_SPEED = 1.8f;
+	//const float				WALK_SPEED = 3.8f;
+	//CVector3				m_PlayerMoveSpeed;
+	//bool					m_isMoveActive = true;
 
 	CVector3				m_position;										//座標
-	CVector3				m_weaponPosition;								//武器の座標
-	CVector3				m_moveSpeed = CVector3::Zero;					//移動速度
+	//CVector3				m_weaponPosition;								//武器の座標
+	//CVector3				m_moveSpeed = CVector3::Zero;					//移動速度
 	CVector3				m_weaponScale = CVector3::One;					//武器のスケール
 	CVector3				m_cameraTargetPos = CVector3::Zero;				//カメラ用のターゲット
 
 	CQuaternion				m_rotation = CQuaternion::Identity;				//回転
-	CQuaternion				m_weaponRotation = CQuaternion::Identity;		//武器の回転
+	//CQuaternion				m_weaponRotation = CQuaternion::Identity;		//武器の回転
 	CSkinModel				m_skinmodel;									//スキンモデル
-	CSkinModel				m_weaponskin[4];								//武器のスキンモデル
+	//CSkinModel				m_weaponskin[4];								//武器のスキンモデル
 	CCharacterController	m_characterController;							//キャラクターコントローラー
 	CLight					m_light;										//ライト
 	CBoxCollider			m_weaponBoxCollider;								//武器用のボックスコライダー
 	CRigidBody				m_weaponRigitBody;								//ボックス用のrigidBody
 
-	CPad					m_pad;									//パッド
 	CAnimation				m_animation;							//アニメーション
 	SplayerStatus			m_status;								//プレイヤーのステータス
 	bool					m_isSlip = false;						//スリップ判定
 	float					m_slipSpeed = 2.0f;						//回避移動時のスピード
 	EnPlayerAnimeState		m_State = enPlayerStand;				//アニメーションを遷移させるための変数
-	EnPlayerWeapon			m_weaponState = EnPlayerWeapon::enSword;
-
-	const float				RUN_SPEED	= 1.4f;				
-	const float				WALK_SPEED	= 300.0f;
+	//EnPlayerWeapon			m_weaponState = EnPlayerWeapon::enSword;
 	const float				INTERVAL = 1.5;								//ダメージを受けた後の無敵時間
 	bool					m_isDamege = false;
 	float					m_animetionFrame = 0.0f;
@@ -378,8 +392,8 @@ private:
 	float					m_intervalTime = 0.0f;
 
 	CPlayerStateMachine			m_PlayerStateMachine;							//プレイヤーのアニメーションの遷移を行うステートマシーン
-	CPlayerRotation				m_PlayerRotation;								//プレイヤーの回転を扱うクラス
-	CPlayerMove					m_PlayerMove;									//プレイヤーの動きを扱うクラス
+	//CPlayerRotation				m_PlayerRotation;								//プレイヤーの回転を扱うクラス
+	//CPlayerMove					m_PlayerMove;									//プレイヤーの動きを扱うクラス
 	std::list<CPlayerArrow*>	m_arrowList;									//弓矢のリスト
 	CSprite						m_arrowtag;										//サークルのスプライト
 	CTexture					m_arrowtexture;

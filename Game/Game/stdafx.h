@@ -37,6 +37,7 @@
 #include <fstream>
 #include <iostream>
 #include <stdio.h>
+#include <algorithm>
 
 const int PLAYER_PRIORITY = 1;
 const int STAGE_GIMMICK_PRIORITY = 0;
