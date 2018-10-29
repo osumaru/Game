@@ -7,6 +7,7 @@
 void CPlayerAttack::Init()
 {
 	GetPlayer().SetPlayerAnimation(GetPlayer().GetPlayerStateMachine().GetAttackSate(), 0.2f);
+	m_pPlayer->SetMoveSpeed(CVector3::Zero);
 }
 
 void CPlayerAttack::Update()

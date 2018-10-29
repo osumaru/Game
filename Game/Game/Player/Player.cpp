@@ -116,12 +116,12 @@ void CPlayer::Init(CVector3 position)
 		m_status.AccumulationExp += m_status.OldExp;	//—ÝÏŒoŒ±’l
 		m_status.Gold = 0;								//ŠŽ‹à
 	}
-	
+
+	m_PlayerStateMachine.SetPlayer(this);
 	m_PlayerStateMachine.Init();
 	Add(this, 1);
 	m_skinmodel.SetIsShadowCaster(true);
 	m_weapon.Init(this);
-	m_PlayerStateMachine.SetPlayer(this);
 }
 
 void CPlayer::Update()
@@ -387,7 +387,7 @@ void CPlayer::PlayerAttack()
 
 			CVector3 EnemyVec = enemys->GetPosition();
 			EnemyVec.y += 1.3f;
-			//EnemyVec -= m_weaponPosition;
+			EnemyVec -= m_weapon.GetPosition();
 			float len = EnemyVec.Length();
 
 			if (fabs(len) < 2.0f)

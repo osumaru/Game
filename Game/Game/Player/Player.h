@@ -223,7 +223,7 @@ public:
 		return m_PlayerStateMachine;
 	}
 
-	void SetMoveSpeed(CVector3 moveSpeed)
+	void SetMoveSpeed(const CVector3& moveSpeed)
 	{
 		m_characterController.SetMoveSpeed(moveSpeed);
 	}
