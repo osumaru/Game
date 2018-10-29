@@ -21,13 +21,13 @@ void CPlayerRotation::Update()
 	{
 		return;
 	}
-	GetPlayer().GetPlayerSkin().Update(GetPlayer().GetPosition(), GetPlayer().GetPlayerrRot(), { 1.0f,1.0f,1.0f },true);
+	//GetPlayer().GetPlayerSkin().Update(GetPlayer().GetPosition(), GetPlayer().GetPlayerrRot(), { 1.0f,1.0f,1.0f },true);
 	CVector3 playerVec = GetPlayer().GetMoveSpeed();
 	playerVec.y = 0.0f;
 	//プレイヤーのワールド行列の取得
 	CMatrix PlayerWorldMatrix = GetPlayer().GetPlayerSkin().GetWorldMatrix();
 	//武器の座標と回転の初期化
-	CVector3		weaponPosition = GetPlayer().GetWeaponPosition();
+	CVector3		weaponPosition = CVector3::Zero;//GetPlayer().GetWeaponPosition();
 	CQuaternion		weaponRot;
 	//プレイヤーの前方向の取得
 	CVector3 PlayerFront = { PlayerWorldMatrix.m[1][0],PlayerWorldMatrix.m[1][1],PlayerWorldMatrix.m[1][2] };
@@ -53,7 +53,7 @@ void CPlayerRotation::Update()
 		PlayerSpine.m[2][0] /= len;
 		PlayerSpine.m[2][1] /= len;
 		PlayerSpine.m[2][2] /= len;
-		GetPlayer().SetWeaponPosition(PlayerSpinePos);
+		//GetPlayer().SetWeaponPosition(PlayerSpinePos);
 
 		//移動中の武器の座標の設定
 		if (GetPlayer().GetPlayerStateMachine().GetState() == CPlayerState::enPlayerWalk ||
@@ -73,7 +73,7 @@ void CPlayerRotation::Update()
 			weaponPosition = GetPlayer().GetPosition();
 			weaponPosition.y = PlayerSpinePos.y;
 			weaponPosition.Add(PlayerFront);
-			GetPlayer().SetWeaponPosition(weaponPosition);
+			//GetPlayer().SetWeaponPosition(weaponPosition);
 		}
 
 		//移動中以外の武器の座標の設定
@@ -84,7 +84,7 @@ void CPlayerRotation::Update()
 			weaponPosition = GetPlayer().GetPosition();
 			weaponPosition.y = PlayerSpinePos.y;
 			weaponPosition.Add(PlayerFront);
-			GetPlayer().SetWeaponPosition(weaponPosition);
+			//GetPlayer().SetWeaponPosition(weaponPosition);
 		}
 
 		//武器の回転を行う処理
@@ -96,7 +96,7 @@ void CPlayerRotation::Update()
 			rotZ.SetRotationDeg(CVector3::AxisZ, 90.0f);
 			weaponRot.Multiply(rotX);
 			weaponRot.Multiply(rotY);
-			GetPlayer().SetWeaponRotation(weaponRot);
+			//GetPlayer().SetWeaponRotation(weaponRot);
 		}
 	}
 	//プレイヤーの手のボーンに武器を持たせる処理
@@ -124,7 +124,7 @@ void CPlayerRotation::Update()
 		multi.SetRotationDeg(CVector3::AxisY, 45.0f);
 		multi.SetRotationDeg(CVector3::AxisX, 90.0f);
 		weaponRot.Multiply(multi);
-		GetPlayer().SetWeaponPosition(weaponPosition);
+		//GetPlayer().SetWeaponPosition(weaponPosition);
 		//武器の回転処理
 		{
 			weaponRot.SetRotation(PlayerHnd);
@@ -133,7 +133,7 @@ void CPlayerRotation::Update()
 			rotY.SetRotationDeg(CVector3::AxisY, 180.0f);
 			weaponRot.Multiply(rotX);
 			weaponRot.Multiply(rotY);
-			GetPlayer().SetWeaponRotation(weaponRot);
+			//GetPlayer().SetWeaponRotation(weaponRot);
 		}
 
 	}

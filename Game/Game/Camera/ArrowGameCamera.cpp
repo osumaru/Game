@@ -49,11 +49,11 @@ void CArrowGameCamera::Update()
 		CVector3 cameraDir = m_cameraVec;
 		cameraDir.Normalize();
 
-		if (cameraDir.y < -0.5f)
+		if (cameraDir.y < CAMERA_Y_DOWN_LIMIT)
 		{
 			m_cameraVec = cameraVecOld;
 		}
-		else if (cameraDir.y > 0.5f)
+		else if (cameraDir.y > CAMERA_Y_UP_LIMIT)
 		{
 			m_cameraVec = cameraVecOld;
 
@@ -62,7 +62,7 @@ void CArrowGameCamera::Update()
 	//注視点の設定
 	CVector3 cameraPos;
 	CVector3 target = GetPlayer().GetPosition();
-	target.y += 1.5f;
+	target.y += TARGET_OFFSET_Y;
 
 	//プレイヤーの前方向を取得
 	CMatrix	mat = GetPlayer().GetPlayerSkin().GetWorldMatrix();

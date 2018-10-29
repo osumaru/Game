@@ -1,4 +1,3 @@
-#include "engineStdafx.h"
 #include "Skelton.h"
 
 
@@ -162,7 +161,6 @@ void CSkelton::UpdateWorldMatrix(CBone* bone, const CMatrix& mat)
 	CMatrix mBoneWorld;
 	CMatrix localMatrix = bone->GetLocalMatrix();
 	mBoneWorld.Mul(localMatrix, mat);
-
 	bone->SetWorldMatrix(mBoneWorld);
 	for (auto& childBone : bone->GetChildren()) {
 		UpdateWorldMatrix(childBone, mBoneWorld);

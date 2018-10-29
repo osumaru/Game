@@ -4,11 +4,13 @@
 #include "../Player.h"
 #include "../../UI/WeaponSelect/WeaponSelect.h"
 #include"../../Scene/SceneManager.h"
+#include "../Weapon.h"
 
 void CPlayerStand::Init()
 {
 	//待機アニメーションの再生
-	GetPlayer().SetPlayerAnimation(CPlayerState::enPlayerStand,0.5f);
+	GetPlayer().SetPlayerAnimation(CPlayerState::enPlayerStand,0.5f);	
+	m_pPlayer->SetMoveSpeed(CVector3::Zero);
 }
 
 void CPlayerStand::Update()
@@ -27,7 +29,7 @@ void CPlayerStand::Update()
 	//攻撃をした時の処理
 	else if (Pad().IsTriggerButton(enButtonRightTrigger))
 	{
-		if (GetPlayer().GetPlayerStateMachine().GetAttackSate() == CPlayerState::enPlayerArrowAttack)
+		if (m_pPlayer->GetWeapon().GetCurrentState() == CWeapon::enWeaponArrow)
 		{
 			GetPlayer().GetPlayerStateMachine().ChangeState(CPlayerState::enPlayerArrowAttack);
 		}

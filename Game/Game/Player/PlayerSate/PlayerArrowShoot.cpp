@@ -12,18 +12,16 @@ CPlayerArrowShoot::~CPlayerArrowShoot()
 {
 }
 
-bool CPlayerArrowShoot::Start()
+void CPlayerArrowShoot::Init()
 {
 	//ã|Çë≈Ç¬ÉÇÅ[ÉVÉáÉì
 	GetPlayer().SetPlayerAnimation(CPlayerState::enPlayerArrowShoot, 0.5f);
 	GetPlayer().SetAttack(true);
 	m_isShoot = false;
-	return true;
 }
 
 void CPlayerArrowShoot::Update()
 {
-
 	if (Pad().GetRightTrigger())
 	{
 		m_isShoot = true;

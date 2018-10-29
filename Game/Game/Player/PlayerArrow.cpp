@@ -28,7 +28,7 @@ void CPlayerArrow::Update()
 {
 	if (GetPlayer().GetPlayerStateMachine().GetState() == CPlayerState::EnPlayerState::enPlayerArrowAttack && !m_isMove)
 	{
-		m_arrowPosition = GetPlayer().GetWeaponPosition();
+		m_arrowPosition =  GetPlayer().GetWeapon().GetPosition();
 		//ƒJƒƒ‰‚Ì‘O•ûŒü‚ğæ“¾
 		CVector3 weaponFlont = GetGameCamera().GetCamera().GetFlont();
 		weaponFlont.Normalize();

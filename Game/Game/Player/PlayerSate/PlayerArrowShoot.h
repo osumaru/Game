@@ -5,7 +5,7 @@ class CPlayerArrowShoot : public IPlayerState
 public:
 	CPlayerArrowShoot();
 	~CPlayerArrowShoot();
-	bool Start();
+	void Init();
 	void Update();
 private:
 	bool	m_isShoot = false;

@@ -17,10 +17,16 @@ CMenu::~CMenu()
 
 void CMenu::Init()
 {
-	m_Texture.Load(L"Assets/sprite/Menu.png");
+	m_Texture.Load(L"Assets/sprite/MenuUI/Menu.png");
 	m_menu.Init(&m_Texture);
 	m_menu.SetPosition({ -1.0f, -1.0f });
 	m_menu.SetSize({ 1290.0f,720.0f });
+
+	//羽ペンアイコン
+	m_menuUITexture.Load(L"Assets/sprite/MenuUI/menuUI.png");
+	m_menuUI.Init(&m_menuUITexture);
+	m_menuUI.SetPosition(m_menuUIPosition);
+	m_menuUI.SetSize(m_menuUIScale);
 
 	for (int i = 0; i < 7; i++)
 	{
@@ -78,6 +84,22 @@ void CMenu::Update()
 	{
 
 		StatusMath();
+	}
+}
+
+void CMenu::KeyInputMenu()
+{
+
+	if (Pad().IsTriggerButton(enButtonDown) && m_menuUIPosition.y > UI_POSITION_Y_DOWN_LIMIT)
+	{
+		m_menuUIPosition.y -= UI_OFFSET_Y;
+		m_menuUI.SetPosition(m_menuUIPosition);
+	}
+
+	else if (Pad().IsTriggerButton(enButtonUp) && m_menuUIPosition.y < UI_POSITION_Y_UP_LIMIT)
+	{
+		m_menuUIPosition.y += UI_OFFSET_Y;
+		m_menuUI.SetPosition(m_menuUIPosition);
 	}
 }
 
@@ -185,7 +207,9 @@ void CMenu::AfterDraw()
 	if (GetPlayer().GetIsDied()) { return; }
 	if (m_Draw)
 	{
+		KeyInputMenu();
 		m_menu.Draw();
+		m_menuUI.Draw();
 		for (int i = 0; i < 7; i++)
 		{
 			for (int j = 0; j < 4; j++)
@@ -194,9 +218,6 @@ void CMenu::AfterDraw()
 				m_number[i][j]->Draw();
 			}
 		}
-
-
-
 
 	}
 

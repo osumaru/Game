@@ -372,7 +372,7 @@ public:
 	/*
 	*@brief 行列をかける
 	*/
-	void Mul(CMatrix& mat) const;
+	void Mul(const CMatrix& mat) const;
 };
 /*!
 *@brief	4要素のベクトルクラス。

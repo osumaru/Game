@@ -32,7 +32,7 @@ void CQuaternion::SetRotation(const CMatrix& m)
 /*
 *@brief çsóÒÇÇ©ÇØÇÈ
 */
-void CVector3::Mul(CMatrix& mat) const
+void CVector3::Mul(const CMatrix& mat) const
 {
 	DirectX::XMStoreFloat3(
 		const_cast<DirectX::XMFLOAT3*>(&vec),
