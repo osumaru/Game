@@ -97,9 +97,7 @@ void CPlayer::Init(CVector3 position)
 		m_animation.SetLoopFlg(enPlayerRun, true);
 
 		//アニメーションイベントリスナーの登録　呼び出される関数の登録？
-		m_animation.AddAnimationEvent([&](auto animClipname, auto eventName) {
-			OnInvokeAnimationEvent(animClipname, eventName);
-		});
+		m_animation.AddAnimationEvent(OnInvokeAnimationEvent);
 	}
 
 
