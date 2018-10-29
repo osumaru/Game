@@ -20,7 +20,7 @@ CPlayerArrow::~CPlayerArrow()
 bool CPlayerArrow::Start()
 {
 	m_arrowskin.Load(L"Assets/modelData/Arrow.cmo", NULL);
-	m_scale = { 3.0f,3.0f,3.0f };
+	m_scale = { 1.0f,1.0f,1.0f };
 	return true;
 }
 
@@ -68,7 +68,7 @@ void CPlayerArrow::Update()
 		Delete(this);
 		return;
 	}
-	m_arrowskin.Update(m_arrowPosition, m_arrowRot, m_scale,true);
+	m_arrowskin.Update(m_arrowPosition, m_arrowRot, m_scale);
 }
 
 void CPlayerArrow::Draw()

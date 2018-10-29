@@ -375,6 +375,7 @@ void CPlayer::Rotation()
 	{
 		CQuaternion rotXZ, rotY;
 		CVector3 cameraFlont = GetGameCamera().GetCamera().GetFlont();
+		cameraFlont.Normalize();
 		rotXZ.SetRotation(CVector3::AxisY, atan2f(cameraFlont.x, cameraFlont.z));
 		rotY.SetRotation(CVector3::AxisX, atanf(-cameraFlont.y));
 		rotXZ.Multiply(rotY);
