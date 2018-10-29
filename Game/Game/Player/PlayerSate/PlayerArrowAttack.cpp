@@ -4,23 +4,13 @@
 #include "../../Camera/GameCamera.h"
 
 
-CPlayerArrowAttack::CPlayerArrowAttack()
-{
-}
-
-
-CPlayerArrowAttack::~CPlayerArrowAttack()
-{
-}
-
-bool CPlayerArrowAttack::Start()
+void CPlayerArrowAttack::Init()
 {
 	//ã|ÇÃê∂ê¨
 	GetPlayer().InitArrow();
 	GetPlayer().SetPlayerAnimation(CPlayerState::enPlayerArrowAttack, 0.5f);
 	GetPlayer().SetAttack(true);
 	//ã|ópÇÃéãì_Ç…ïœçX
-	return true;
 }
 
 void CPlayerArrowAttack::Update()

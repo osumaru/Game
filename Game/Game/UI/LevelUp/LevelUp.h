@@ -12,7 +12,7 @@ public:
 	void Update();
 
 	//描画
-	void Draw();
+	void AfterDraw();
 
 private:
 	CSprite			m_playerLevelUpSprite;							//プレイヤーレベルアップスプライト

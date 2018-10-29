@@ -1,11 +1,11 @@
 #pragma once
-#include "IPlayerState.h"
+#include "PlayerState.h"
 class CPlayerDamage : public IPlayerState
 {
 public:
-	CPlayerDamage();
-	~CPlayerDamage();
-	bool Start();
-	void Update();
+	void Init()override;
+
+	void Update()override;
+
 };
 

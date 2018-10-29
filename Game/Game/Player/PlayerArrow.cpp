@@ -30,7 +30,7 @@ void CPlayerArrow::Update()
 	{
 		m_arrowPosition = GetPlayer().GetWeaponPosition();
 		//ƒJƒƒ‰‚Ì‘O•ûŒü‚ðŽæ“¾
-		CVector3 weaponFlont = GetGameCamera().GetSpringCamera().GetCamera()->GetFlont();
+		CVector3 weaponFlont = GetGameCamera().GetCamera().GetFlont();
 		weaponFlont.Normalize();
 		m_moveSpeed = weaponFlont * 50.0f;
 		CQuaternion rotY;

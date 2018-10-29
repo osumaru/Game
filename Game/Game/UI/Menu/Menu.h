@@ -9,8 +9,8 @@ public:
 
 	void Init();
 	void Update();
+
 	void AfterDraw();
-	void Draw();
 	void StatusMath();
 	void PlayerStatusInput();
 

@@ -25,7 +25,7 @@ void CArrowGameCamera::Update()
 	float rStick_x = Pad().GetRightStickX();
 	float rStick_y = Pad().GetRightStickY();
 
-	m_cameraVec = GetGameCamera().GetSpringCamera().GetPosition() - GetGameCamera().GetSpringCamera().GetTarget();;
+	m_cameraVec = GetGameCamera().GetCamera().GetPosition() - GetGameCamera().GetCamera().GetTarget();
 
 	if (fabsf(rStick_x) > 0.0f) {
 		//YŽ²Žü‚è‚Ì‰ñ“]

@@ -4,7 +4,7 @@
 
 #pragma once
 
-#include "IPlayerState.h"
+#include "PlayerState.h"
 
 class CPlayerWireMove : public IPlayerState
 {
@@ -15,11 +15,10 @@ public:
 	//デストラクタ
 	~CPlayerWireMove() {}
 
-	//更新される前に一度だけ呼ばれる
-	bool Start();
+	void Init()override;
 
 	//更新
-	void Update();
+	void Update()override;
 
 private:
 	CVector3	m_movePosition;		//移動先の座標

@@ -33,7 +33,7 @@
 //#include "../osumaruEngine/Font/Font.h"
 #include "../../osumaruEngine/Random/Random.h"
 #include "../../osumaruEngine/Physics/RayTest.h"
-
+#include "../../osumaruEngine/Sky.h"
 #include <fstream>
 #include <iostream>
 #include <stdio.h>

@@ -2,9 +2,10 @@
 #include "SpringCamera.h"
 #include "../Timer/GameTime.h"
 CSpringCamera::CSpringCamera() :
-	m_camera(),
 	m_target(0.0f, 0.0f, 0.0f),
 	m_position(0.0f, 0.0f, 0.0f),
+	m_tarTarget(0.0f, 0.0f, 0.0f),
+	m_tarPosition(0.0f, 0.0f, 0.0f),
 	m_targetMoveSpeed(0.0f, 0.0f, 0.0f),
 	m_positionMoveSpeed(0.0f, 0.0f, 0.0f),
 	m_maxMoveSpeed(0.0f),
@@ -23,9 +24,8 @@ CSpringCamera::~CSpringCamera()
 
 void CSpringCamera::Init(const CVector3& target, const CVector3& position, float maxMoveSpeed)
 {
-	m_camera.SetTarget(target);
-
-	m_camera.SetPosition(position);
+	m_target = target;
+	m_position = position;
 	m_target = target;
 	m_position = position;
 	m_targetMoveSpeed = { 0.0f, 0.0f, 0.0f };
@@ -124,17 +124,11 @@ CVector3 CSpringCamera::CalcSpringVector(const CVector3& positionNow, const CVec
 
 }
 
-void CSpringCamera::UpdateSpringCamera()
-{
-	m_dampingRate = CalcSpringScalar(m_dampingRate, m_targetDampingRate, m_dampingRateVel);
-	CVector3 target = CalcSpringVector(m_camera.GetTarget(), m_target, m_targetMoveSpeed, m_maxMoveSpeed, m_dampingRate);
-	CVector3 position = CalcSpringVector(m_camera.GetPosition(), m_position, m_positionMoveSpeed, m_maxMoveSpeed, m_dampingRate);
-	m_camera.SetTarget(target);
-	m_camera.SetPosition(position);
-}
-
 void CSpringCamera::Update()
 {
-	UpdateSpringCamera();
-	UpdateCamera();
+	m_dampingRate = CalcSpringScalar(m_dampingRate, m_targetDampingRate, m_dampingRateVel);
+	CVector3 target = CalcSpringVector(m_target, m_tarTarget, m_targetMoveSpeed, m_maxMoveSpeed, m_dampingRate);
+	CVector3 position = CalcSpringVector(m_position, m_tarPosition, m_positionMoveSpeed, m_maxMoveSpeed, m_dampingRate);
+	m_target = target;
+	m_position = position;
 }

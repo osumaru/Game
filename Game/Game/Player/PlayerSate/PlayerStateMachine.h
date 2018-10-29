@@ -1,9 +1,9 @@
 #pragma once
-#include"IPlayerState.h"
-#include"PlayerState.h"
-#include"PlayerStand.h"
-#include"PlayerWalk.h"
-#include"PlayerRun.h"
+#include "PlayerState.h"
+#include "PlayerStateCommon.h"
+#include "PlayerStand.h"
+#include "PlayerWalk.h"
+#include "PlayerRun.h"
 #include "PlayerAttack.h"
 #include "PlayerArrowAttack.h"
 #include "PlayerDamage.h"
@@ -13,47 +13,42 @@
 #include "PlayerArrowShoot.h"
 #include "PlayerWireMove.h"
 
-class CPlayerStateMachine	:public IGameObject
+class CPlayerStateMachine
 {
 public:
-	CPlayerStateMachine();
-		~CPlayerStateMachine();
 
-		bool Start();
+	void Init();
 
-		// 更新
-		void Update();
+	// 更新
+	void Update();
 			
-		//ステートの切り替え
-		void ChangeState(CPlayerState::EnPlayerState nextState);
+	//ステートの切り替え
+	void ChangeState(CPlayerState::EnPlayerState nextState);
 
-		//解放
-		void Release();
-
-		//攻撃の状態を取得
-		int GetAttackSate()
-		{
-			return m_AttackState;
-		}
-		//武器によって攻撃のモーションを変更させる
-		void SetAttackState(const int setAttack)
-		{
-			m_AttackState = (CPlayerState::EnPlayerState)setAttack;
-		}
-		//現在のプレイヤーの状態を取得
-		CPlayerState::EnPlayerState GetState()
-		{
-			return m_state;
-		}
-		//現在のプレイヤーの状態を取得
-		const CPlayerState::EnPlayerState GetArrowState()
-		{
-			return m_ArrowAttackState;
-		}
-		void SetArrowAttackState(const int setAttack)
-		{
-			m_ArrowAttackState = (CPlayerState::EnPlayerState)setAttack;
-		}
+	//攻撃の状態を取得
+	int GetAttackSate()
+	{
+		return m_AttackState;
+	}
+	//武器によって攻撃のモーションを変更させる
+	void SetAttackState(const int setAttack)
+	{
+		m_AttackState = (CPlayerState::EnPlayerState)setAttack;
+	}
+	//現在のプレイヤーの状態を取得
+	CPlayerState::EnPlayerState GetState()
+	{
+		return m_state;
+	}
+	//現在のプレイヤーの状態を取得
+	const CPlayerState::EnPlayerState GetArrowState()
+	{
+		return m_ArrowAttackState;
+	}
+	void SetArrowAttackState(const int setAttack)
+	{
+		m_ArrowAttackState = (CPlayerState::EnPlayerState)setAttack;
+	}
 
 
 private:

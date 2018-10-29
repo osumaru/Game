@@ -5,12 +5,10 @@
 #include "../../Map/Map.h"
 #include "../../Enemy/IEnemy.h"
 
-bool CPlayerWireMove::Start()
+void CPlayerWireMove::Init()
 {
 	GetPlayer().SetPlayerAnimation(CPlayerState::enPlayerWireMove, 0.1f);
 	m_movePosition = GetPlayer().GetWirePosition();
-
-	return true;
 }
 
 void CPlayerWireMove::Update()

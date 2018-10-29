@@ -222,6 +222,12 @@
     <ClCompile Include="Graphics\PostRendering\TBDR.cpp">
       <Filter>ソース ファイル\Graphics\PostRendering</Filter>
     </ClCompile>
+    <ClCompile Include="Sky.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\State\SamplerState.cpp">
+      <Filter>ソース ファイル\Graphics\State</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject\GameObject.h">
@@ -394,6 +400,12 @@
     </ClInclude>
     <ClInclude Include="Graphics\PostRendering\TBDR.h">
       <Filter>ソース ファイル\Graphics\PostRendering</Filter>
+    </ClInclude>
+    <ClInclude Include="Sky.h">
+      <Filter>ソース ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\State\SamplerState.h">
+      <Filter>ソース ファイル\Graphics\State</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

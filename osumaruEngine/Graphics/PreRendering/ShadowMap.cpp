@@ -28,7 +28,7 @@ void CShadowMap::Draw()
 
 	ID3D11RenderTargetView* rtv[] = { m_renderTarget.GetRenderTarget() };
 	Engine().GetDeviceContext()->OMSetRenderTargets(1, rtv, m_renderTarget.GetDepthStencil());
-	float color[] = { 0.0f, 0.0f, 0.0f, 1.0f };
+	float color[] = { 1.0f, 1.0f, 1.0f, 1.0f };
 	Engine().GetDeviceContext()->ClearRenderTargetView(m_renderTarget.GetRenderTarget(), color);
 	Engine().GetDeviceContext()->ClearDepthStencilView(m_renderTarget.GetDepthStencil(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
 	Engine().SetAlphaBlendState(enAlphaBlendStateNone);

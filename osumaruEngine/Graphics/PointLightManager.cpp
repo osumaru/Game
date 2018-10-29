@@ -42,5 +42,5 @@ void CPointLightManager::Draw(CMatrix& view)
 	ID3D11ShaderResourceView* srviews[] = { srv };
 	GetDeviceContext()->VSSetShaderResources(10, 1, srviews);
 	GetDeviceContext()->PSSetShaderResources(10, 1, srviews);
-	GetDeviceContext()->CSSetShaderResources(5, 1, srviews);
+	GetDeviceContext()->CSSetShaderResources(5,  1, srviews);
 }

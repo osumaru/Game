@@ -3,20 +3,11 @@
 #include "../Player.h"
 
 
-CPlayerWalk::CPlayerWalk()
-{
-}
 
-
-CPlayerWalk::~CPlayerWalk()
-{
-}
-
-bool CPlayerWalk::Start()
+void CPlayerWalk::Init()
 {
 	//歩きアニメーションの再生
 	GetPlayer().SetPlayerAnimation(CPlayerState::enPlayerWalk, 0.2f);
-	return true;
 }
 
 void CPlayerWalk::Update()

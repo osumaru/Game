@@ -1,12 +1,12 @@
 #pragma once
-#include"IPlayerState.h"
+#include"PlayerState.h"
 class CPlayerAttack : public  IPlayerState
 {
 public:
-	CPlayerAttack();
-	~CPlayerAttack();
-	bool Start();
-	void Update();
+	void Init()override;
+
+	void Update()override;
+
 private:
 	float					m_animetionFrame = 0.0f;
 	bool					m_conAtaack = false;

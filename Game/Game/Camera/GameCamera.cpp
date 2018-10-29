@@ -18,15 +18,15 @@ void CGameCamera::Init()
 	m_arrowCamera.Start(camera.GetPosition(), camera.GetTarget());
 	Add(this, 0);
 	m_cameraVec = camera.GetPosition();
-	//PhysicsWorld().SetCamera(&camera);
 	m_springCamera.Init(camera.GetTarget(), camera.GetPosition(), 10000.0f);
-	//PhysicsWorld().SetCamera(m_springCamera.GetCamera());
-	Engine().GetDeferred().SetCamera(m_springCamera.GetCamera());
-
+	PhysicsWorld().SetCamera(&camera);
+	Engine().GetDeferred().SetCamera(&camera);
+	Sky().Init(&camera);
 	CVector3 cameraDir = camera.GetTarget() - camera.GetPosition();
 	CVector3 cameraPos = GetPlayer().GetPosition() + cameraDir;
 	m_springCamera.SetPosition(cameraPos);
 	m_springCamera.SetTarget(GetPlayer().GetPosition());
+
 }
 
 void CGameCamera::Update()
@@ -50,4 +50,7 @@ void CGameCamera::Update()
 		break;
 	}
 	m_springCamera.Update();
+	camera.SetPosition(m_springCamera.GetPosition());
+	camera.SetTarget(m_springCamera.GetTarget());
+	camera.Update();
 }

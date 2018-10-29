@@ -117,12 +117,7 @@ void CPlayer::Init(CVector3 position)
 		m_status.Gold = 0;								//所持金
 	}
 	
-	m_PlayerStateMachine.Start();
-	m_PlayerMove.Start();
-	m_PlayerRotation.Start();
-	Add(&m_PlayerStateMachine,0);
-	Add(&m_PlayerMove, 0);
-	Add(&m_PlayerRotation, 0);
+	m_PlayerStateMachine.Init();
 	Add(this, 1);
 	m_skinmodel.SetIsShadowCaster(true);
 	
@@ -130,7 +125,6 @@ void CPlayer::Init(CVector3 position)
 
 void CPlayer::Update()
 {
-
 	//アニメーションの更新
 	m_animation.Update(GameTime().GetDeltaFrameTime());
 	if (m_isDied) { return; }
@@ -201,8 +195,7 @@ void CPlayer::Update()
 			}
 		}
 	}
-
-	if (Pad().IsTriggerButton(enButtonX))
+	if (Pad().IsPressButton(enButtonX))
 	{
 		Engine().GetPointLightManager().AddPointLight(m_position, { (float)Random().GetRandDouble(), (float)Random().GetRandDouble(), (float)Random().GetRandDouble() });
 	}
@@ -228,11 +221,17 @@ void CPlayer::Update()
 	CMatrix viewMat;
 	CVector3 cameraPos = m_position;
 	cameraPos.y += 50.0f;
-	viewMat.MakeLookAt(cameraPos, m_position, CVector3(1.0f, 0.0f, 0.0f));
+	CVector3 shadowCameraUp = GetGameCamera().GetSpringCamera().GetTarget() - GetGameCamera().GetSpringCamera().GetPosition();
+	shadowCameraUp.y = 0.0f;
+	shadowCameraUp.Normalize();
+	viewMat.MakeLookAt(cameraPos, m_position, CVector3::AxisX);
 	CMatrix projMat;
 	projMat.MakeOrthoProjectionMatrix(5, 5, 1.0f, 100.0f);
 	Engine().GetShadowMap().SetViewMatrix(viewMat);
 	Engine().GetShadowMap().SetProjectionMatrix(projMat);
+	m_PlayerStateMachine.Update();
+	m_PlayerRotation.Update();
+	m_PlayerMove.Update();
 }
 
 //描画処理
@@ -252,8 +251,6 @@ void CPlayer::Draw()
 	}
 	m_weaponskin[m_weaponState].Draw(GetGameCamera().GetViewMatrix(), GetGameCamera().GetProjectionMatrix());
 	m_skinmodel.Draw(GetGameCamera().GetViewMatrix(), GetGameCamera().GetProjectionMatrix());
-	
-	
 }
 
 void CPlayer::InitArrow()

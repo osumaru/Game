@@ -3,19 +3,9 @@
 #include "PlayerDied.h"
 
 
-CPlayerDied::CPlayerDied()
-{
-}
-
-
-CPlayerDied::~CPlayerDied()
-{
-}
-
-bool CPlayerDied::Start()
+void CPlayerDied::Init()
 {
 	GetPlayer().SetPlayerAnimation(CPlayerState::enPlayerDied, 0.2f);
-	return true;
 }
 
 void CPlayerDied::Update()
