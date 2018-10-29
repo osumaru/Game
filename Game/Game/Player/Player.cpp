@@ -80,7 +80,7 @@ void CPlayer::Init(CVector3 position)
 											{ L"Assets/modelData/PlayerCombo3.tka" },			//攻撃アニメーション
 											{ L"Assets/modelData/PlayerThrustAttack.tka" },		//連撃アニメーション
 											{ L"Assets/modelData/PlayerDamage.tka" },			//ダメージアニメーション
-											{ L"Assets/modelData/PlayerKaihiStay.tka" }	,		//回避アクション
+											{ L"Assets/modelData/PlayerKaihi.tka" }	,		//回避アクション
 											{ L"Assets/modelData/PlayerDeath.tka" },			//死亡アニメーション
 											{ L"Assets/modelData/PlayerWire.tka" },				//ワイヤー移動アニメーション
 
@@ -126,8 +126,6 @@ void CPlayer::Init(CVector3 position)
 
 void CPlayer::Update()
 {
-	//アニメーションの更新
-	m_animation.Update(GameTime().GetDeltaFrameTime());
 	if (m_isDied) { return; }
 	WeaponChange();
 
@@ -235,6 +233,8 @@ void CPlayer::Update()
 
 	m_characterController.Execute(GameTime().GetDeltaFrameTime());
 	m_position = m_characterController.GetPosition();
+	//アニメーションの更新
+	m_animation.Update(GameTime().GetDeltaFrameTime());
 	//スキンモデルの更新
 	m_skinmodel.Update(m_position, m_rotation, { 1.0f, 1.0f, 1.0f }, true);
 	m_weapon.Update();
@@ -346,15 +346,13 @@ void CPlayer::Rotation()
 {
 	CVector3 moveSpeed = m_characterController.GetMoveSpeed();
 
-	CVector3 playerFront = *((CVector3*)m_skinmodel.GetWorldMatrix().m[2]);
+	CVector3 playerFront = CVector3::AxisZ;
 	if (moveSpeed.x == 0.0f && moveSpeed.z == 0.0f)
 	{
-		moveSpeed = playerFront;
+		moveSpeed.x = m_skinmodel.GetWorldMatrix().m[2][0];
+		moveSpeed.z = m_skinmodel.GetWorldMatrix().m[2][2];
 	}
-	moveSpeed.y = 0.0f;
-	playerFront.y = 0.0f;
 	moveSpeed.Normalize();
-	playerFront.Normalize();
 	float rad = moveSpeed.Dot(playerFront);
 	if (1.0f <= rad)
 	{
@@ -371,9 +369,17 @@ void CPlayer::Rotation()
 	{
 		rad = -rad;
 	}
-	CQuaternion multi;
-	multi.SetRotation(CVector3::AxisY, rad);
-	m_rotation.Multiply(multi);
+	m_rotation.SetRotation(CVector3::AxisY, rad);
+
+	if (m_weapon.GetCurrentState() == CWeapon::enWeaponArrow && m_isAttack)
+	{
+		CQuaternion rotXZ, rotY;
+		CVector3 cameraFlont = GetGameCamera().GetCamera().GetFlont();
+		rotXZ.SetRotation(CVector3::AxisY, atan2f(cameraFlont.x, cameraFlont.z));
+		rotY.SetRotation(CVector3::AxisX, atanf(-cameraFlont.y));
+		rotXZ.Multiply(rotY);
+		m_rotation = rotXZ;
+	}
 }
 
 void CPlayer::PlayerAttack()

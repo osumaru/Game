@@ -22,9 +22,7 @@ void CWeapon::Init(CPlayer* player)
 	m_rotation[enWeaponArrow].Multiply(multi);
 
 	m_attackRotation[enWeaponArrow] = CQuaternion::Identity;
-	multi.SetRotationDeg(CVector3::AxisX, 90.0f);
-	m_attackRotation[enWeaponArrow].Multiply(multi);
-	multi.SetRotationDeg(CVector3::AxisY, 90.0f);
+	multi.SetRotationDeg(CVector3::AxisZ, 90.0f);
 	m_attackRotation[enWeaponArrow].Multiply(multi);
 	m_attackPosition[enWeaponArrow] = { 10.0f, 0.0f, 0.0f };
 

@@ -77,7 +77,7 @@ public:
 	//プレイヤーの座標を設定する関数
 	void SetPosition(const CVector3 setpos)
 	{
-		 m_position = setpos;
+		 m_characterController.SetPosition(setpos);
 	}
 	//プレイヤーの回転情報を取得
 	const CQuaternion& GetPlayerrRot()
@@ -259,7 +259,7 @@ public:
 	//}
 	
 	//プレイヤーのスキンモデルの情報を取得
-	CSkinModel& GetPlayerSkin()
+	const CSkinModel& GetPlayerSkin() const
 	{
 		return m_skinmodel;
 	}
