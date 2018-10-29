@@ -249,6 +249,9 @@
     <ClCompile Include="Player\PlayerSate\PlayerArrowShoot.cpp">
       <Filter>ソース ファイル\Player\PlayerSate</Filter>
     </ClCompile>
+    <ClCompile Include="Player\PlayerSate\PlayerArrowShoot.cpp">
+      <Filter>ソース ファイル\Player\PlayerSate</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">

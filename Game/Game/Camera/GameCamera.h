@@ -55,14 +55,12 @@ public:
 	CMatrix GetViewMatrix()
 	{
 		return camera.GetViewMatrix();
-		//return m_springCamera.GetSpringViewMatrix();
 	}
 
 	//プロジェクション行列を取得
 	CMatrix GetProjectionMatrix()
 	{
 		return camera.GetProjectionMatrix();
-		//return m_springCamera.GetProjectionMatrix();
 	}
 
 	////バネカメラのプロジェクション行列の取得
