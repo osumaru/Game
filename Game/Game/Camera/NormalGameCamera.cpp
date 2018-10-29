@@ -15,9 +15,9 @@ CNormalGameCamera::~CNormalGameCamera()
 
 void CNormalGameCamera::Start(const CVector3 pos, const CVector3 tag)
 {
+	m_pPlayerBoneMat = &GetPlayer().GetPlayerSkin().FindBoneWorldMatrix(L"Spine2");
 	m_cameraPosition = pos;
 	m_targetPosition = tag;
-
 }
 
 void CNormalGameCamera::Update()
@@ -75,7 +75,10 @@ void CNormalGameCamera::Update()
 		toCameraXZ.Normalize();
 		//’Ž‹“_‚ÌÝ’è
 		CVector3 target = GetPlayer().GetPosition();
-		target.y += TARGET_OFFSET_Y;
+		target.x = m_pPlayerBoneMat->m[3][0];
+		target.y = m_pPlayerBoneMat->m[3][1];
+		target.z = m_pPlayerBoneMat->m[3][2];
+		//target.y += TARGET_OFFSET_Y;
 
 		CVector3	toNewCameraPos = m_cameraPosition - target;
 		toNewCameraPos.y = 0.0f;

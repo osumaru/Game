@@ -80,7 +80,7 @@ void CPlayer::Init(CVector3 position)
 											{ L"Assets/modelData/PlayerCombo3.tka" },			//攻撃アニメーション
 											{ L"Assets/modelData/PlayerThrustAttack.tka" },		//連撃アニメーション
 											{ L"Assets/modelData/PlayerDamage.tka" },			//ダメージアニメーション
-											{ L"Assets/modelData/PlayerKaihiStay.tka" }	,		//回避アクション
+											{ L"Assets/modelData/PlayerKaihi.tka" }	,		//回避アクション
 											{ L"Assets/modelData/PlayerDeath.tka" },			//死亡アニメーション
 											{ L"Assets/modelData/PlayerWire.tka" },				//ワイヤー移動アニメーション
 
@@ -126,8 +126,6 @@ void CPlayer::Init(CVector3 position)
 
 void CPlayer::Update()
 {
-	//アニメーションの更新
-	m_animation.Update(GameTime().GetDeltaFrameTime());
 	if (m_isDied) { return; }
 	WeaponChange();
 
@@ -235,6 +233,8 @@ void CPlayer::Update()
 
 	m_characterController.Execute(GameTime().GetDeltaFrameTime());
 	m_position = m_characterController.GetPosition();
+	//アニメーションの更新
+	m_animation.Update(GameTime().GetDeltaFrameTime());
 	//スキンモデルの更新
 	m_skinmodel.Update(m_position, m_rotation, { 1.0f, 1.0f, 1.0f }, true);
 	m_weapon.Update();
