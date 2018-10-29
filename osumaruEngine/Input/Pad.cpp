@@ -28,8 +28,8 @@ const SCorrespondencePad correspondencePad[enButtonNum] =
 	{ enButtonRStickPush,	XINPUT_GAMEPAD_RIGHT_THUMB,		'4' },
 	{ enButtonLB,			XINPUT_GAMEPAD_LEFT_SHOULDER,	'7' },
 	{ enButtonLStickPush,	XINPUT_GAMEPAD_LEFT_THUMB,		'9' },
-	{ enButtonLeftTrigger,	0,								'8' },
-	{ enButtonRightTrigger,	0,								'1' }
+	{ enButtonLeftTrigger,	-1,								'8' },
+	{ enButtonRightTrigger,	-1,								'1' }
 	
 };
 CPad::CPad() :
