@@ -4,6 +4,7 @@
 #include "../Player.h"
 #include "../../UI/WeaponSelect/WeaponSelect.h"
 #include"../../Scene/SceneManager.h"
+#include "../Weapon.h"
 
 void CPlayerStand::Init()
 {
@@ -27,7 +28,7 @@ void CPlayerStand::Update()
 	//UŒ‚‚ð‚µ‚½Žž‚Ìˆ—
 	else if (Pad().IsTriggerButton(enButtonRightTrigger))
 	{
-		if (GetPlayer().GetPlayerStateMachine().GetAttackSate() == CPlayerState::enPlayerArrowAttack)
+		if (m_pPlayer->GetWeapon().GetCurrentState() == CWeapon::enWeaponArrow)
 		{
 			GetPlayer().GetPlayerStateMachine().ChangeState(CPlayerState::enPlayerArrowAttack);
 		}

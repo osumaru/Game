@@ -10,7 +10,6 @@ void CPlayerDied::Init()
 
 void CPlayerDied::Update()
 {
-
 	if (!GetPlayer().GetAnimation().IsPlay())
 	{
 		GetPlayer().SetIsDeid(true);
