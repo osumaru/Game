@@ -45,6 +45,6 @@ private:
 	CCharacterController	m_characterController;			//キャラクターコントローラー
 	IEnemy*					m_enemy = nullptr;				//エネミー
 	CVector3				m_destination;					//移動先の座標
-	int						m_interval = 0;
+	int						m_interval = 0;					//インターバル
 	bool					m_isMove = false;				//移動しているか
 };
