@@ -73,7 +73,7 @@ void CMenu::Update()
 
 		}
 		//ƒvƒŒƒCƒ„[‚Ì“®‚«‚Ìİ’è
-		GetPlayer().PlayerMoveSetIsActive(!m_Draw);
+		GetPlayer().SetIsActive(!m_Draw);
 	}
 
 

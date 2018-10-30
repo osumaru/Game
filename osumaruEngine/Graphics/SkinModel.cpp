@@ -60,14 +60,20 @@ void CSkinModel::Update(const CVector3& position, const CQuaternion& rotation, c
 	rotMat.MakeRotationFromQuaternion(rotation);
 	CMatrix scaleMat;
 	scaleMat.MakeScaling(scale);
-	worldMatrix.Mul(scaleMat, biMat);
-	worldMatrix.Mul(worldMatrix, rotMat);
-	worldMatrix.Mul(worldMatrix, posMat);
+	m_worldMatrix.Mul(scaleMat, biMat);
+	m_worldMatrix.Mul(m_worldMatrix, rotMat);
+	m_worldMatrix.Mul(m_worldMatrix, posMat);
 	if (m_skelton != nullptr)
 	{
-		m_skelton->Update(worldMatrix);
+		m_skelton->Update(m_worldMatrix);
 	}
 	ShadowMapEntry();
+	if (isZup)
+	{
+		m_worldMatrix.Mul(scaleMat, rotMat);
+		m_worldMatrix.Mul(m_worldMatrix, posMat);
+		
+	}
 }
 
 
@@ -87,7 +93,7 @@ void CSkinModel::Draw(const CMatrix& view, const CMatrix& projection, bool isSha
 	CMatrix viewProjMat;
 	viewProjMat.Mul(view, projection);
 	cb.viewProjMat = viewProjMat;
-	cb.worldMat = worldMatrix;
+	cb.worldMat = m_worldMatrix;
 	cb.isNormalMap = m_isNormalMap;
 	constantBuffer.Update(&cb);
 	int materialCB = m_materialFlg.isShadowReceiver;
