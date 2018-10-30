@@ -2,6 +2,8 @@
 #include "LevelUp.h"
 #include "../../Player/Player.h"
 
+//Result‚Ìyoudied‚Æ—‚½Š´‚¶‚Éo‚µ‚½‚Ù‚¤‚ª‚©‚Á‚±‚¢‚¢‚©‚à’m‚ê‚È‚¢
+
 CLevelUp::CLevelUp()
 {
 }

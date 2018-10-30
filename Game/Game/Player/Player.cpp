@@ -5,6 +5,8 @@
 #include "../Scene/SceneManager.h"
 #include "../Enemy/IEnemy.h"
 
+CPlayer *CPlayer::m_player = NULL;
+
 void CPlayer::OnInvokeAnimationEvent(//アニメーションイベントが呼ばれるごとに呼び出される？
 	const wchar_t* animClipName,
 	const wchar_t* eventName
@@ -103,7 +105,7 @@ void CPlayer::Init(CVector3 position)
 
 	m_PlayerStateMachine.SetPlayer(this);
 	m_PlayerStateMachine.Init();
-	Add(this, 1);
+	//Add(this, 1);
 	m_skinmodel.SetIsShadowCaster(true);
 	m_weapon.Init(this);
 }

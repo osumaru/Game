@@ -1,21 +1,27 @@
 #pragma once
 #include "GameScene.h"
+#include "TitleScene.h"
 
-enum enSeceneState 
-{
-	enTitleScene,
-	enGameScene
-
-};
 
 class CSceneManager : public IGameObject
 {
 public:
+	enum EnSceneState {
+		enTitleScene,	//タイトル
+		enGameScene,	//ゲーム
+		enResultScene,	//リザルト
+		enSceneNum		//シーンの数
+	};
 
-
+	//初期化
 	void Init();
 
+	//更新
 	void Update();
+
+	//シーン変化
+	//scene		遷移したいシーン
+	void ChangeScene(EnSceneState scene);
 
 	//ゲームシーンの取得
 	CGameScene& GetGameScene()
@@ -30,15 +36,22 @@ public:
 		return sceneManager;
 	}
 
+
 private:
-
-
-	CGameScene		m_gameScene;	//ゲームシーン
+	EnSceneState	m_sceneState;			//シーンのステート（現在のシーンを入れておく用）
+	CGameScene		m_gameScene;			//ゲームシーン
+	CTitleScene		m_titleScene;			//タイトルシーン
 
 };
 
+//シーンマネージャーのインスタンスを取得
 static CSceneManager& GetSceneManager()
 {
-
 	return CSceneManager::GetInstance();
+}
+
+//ゲームシーンの取得
+static CGameScene& GetSceneGame()
+{
+	return GetSceneManager().GetGameScene();
 }

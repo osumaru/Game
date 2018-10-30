@@ -56,8 +56,23 @@ public:
 	//プレイヤーのインスタンスの取得
 	static CPlayer& GetInstance()
 	{
-		static CPlayer player;
-		return player;
+		return *m_player;
+	}
+
+	//インスタンスの生成
+	static void CPlayer::Create()
+	{
+		if (!m_player)
+		{
+			m_player = New<CPlayer>(1);
+		}
+	}
+
+	//インスタンスの消去
+	static void CPlayer::Destroy()
+	{
+		Delete(m_player);
+		m_player = nullptr;
 	}
 
 	//プレイヤーの更新関数
@@ -277,6 +292,7 @@ private:
 	//アニメーションイベントが起きた時に呼ばれる処理。
 	void OnInvokeAnimationEvent(const wchar_t* animClipName, const wchar_t* eventName);
 private:
+	static CPlayer*				m_player;								//プレイヤー
 	CWeapon					m_weapon;
 	CVector3				m_position;									//座標
 	CQuaternion				m_rotation = CQuaternion::Identity;			//回転

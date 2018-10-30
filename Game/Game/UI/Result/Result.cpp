@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Result.h"
 #include "../../Player/Player.h"
-
+#include "../../Scene/SceneManager.h"
 
 CResult::CResult()
 {
@@ -34,6 +34,9 @@ void CResult::AfterDraw()
 	if (m_alphaTime >= 1.0f)
 	{
 		m_alphaTime = 1.0f;
+
+		//ƒQ[ƒ€ƒV[ƒ“‚É‘JˆÚ
+		GetSceneManager().GetInstance().ChangeScene(GetSceneManager().enGameScene);
 	}
 	m_result.SetAlpha(m_alphaTime);
 	m_result.Draw();
