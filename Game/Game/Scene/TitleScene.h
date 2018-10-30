@@ -1,3 +1,6 @@
+/*
+*	タイトルシーンクラス
+*/
 #pragma once
 class CTitleScene :public IGameObject
 {
@@ -6,10 +9,10 @@ public:
 	void Init();
 
 	//更新
-	void Update();
+	void Update() override;
 
 	//遅延描画
-	void AfterDraw();
+	void AfterDraw() override;
 
 private:
 	CSprite			m_title;					//Title画面のスプライト

@@ -3,7 +3,6 @@
 */
 
 #pragma once
-
 class Map;
 class CWeaponSelect;
 class CMiniMap;
@@ -15,6 +14,7 @@ class CResult;
 class CGameScene : public IGameObject
 {
 public:
+
 	//開放
 	void Release();
 
@@ -22,7 +22,7 @@ public:
 	void Init();
 
 	//更新
-	void Update();
+	void Update() override;
 
 	//マップの取得
 	Map* GetMap()

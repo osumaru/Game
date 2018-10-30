@@ -1,9 +1,11 @@
+/*
+*	シーンマネージャークラス
+*/
 #pragma once
 #include "GameScene.h"
 #include "TitleScene.h"
 
-
-class CSceneManager : public IGameObject
+class CSceneManager:public IGameObject
 {
 public:
 	enum EnSceneState {
@@ -26,7 +28,7 @@ public:
 	//ゲームシーンの取得
 	CGameScene& GetGameScene()
 	{
-		return m_gameScene;
+		return *m_gameScene;
 	}
 
 	//シーンマネージャーのインスタンスを取得
@@ -38,10 +40,10 @@ public:
 
 
 private:
-	EnSceneState	m_sceneState;			//シーンのステート（現在のシーンを入れておく用）
-	CGameScene		m_gameScene;			//ゲームシーン
-	CTitleScene		m_titleScene;			//タイトルシーン
-
+	EnSceneState	m_sceneState= enSceneNum;//シーンのステート（現在のシーンを入れておく用）
+	CGameScene*		m_gameScene;			//ゲームシーン
+	CTitleScene*	m_titleScene;			//タイトルシーン
+	//IScene*			m_scene;			//シーンのインターフェース
 };
 
 //シーンマネージャーのインスタンスを取得
