@@ -8,13 +8,13 @@ void CPlayerJump::Init()
 	CVector3 moveSpeed = m_pPlayer->GetMoveSpeed();
 	moveSpeed.y += 10.0f;
 	m_pPlayer->SetMoveSpeed(moveSpeed);
-	if (GetPlayer().GetPlayerStateMachine().GetState() == CPlayerState::EnPlayerState::enPlayerRunJump)
+	if (m_pPlayer->GetPlayerStateMachine().GetState() == CPlayerState::EnPlayerState::enPlayerRunJump)
 	{
-		GetPlayer().SetPlayerAnimation(CPlayerState::enPlayerRunJump, 0.0f);
+		m_pPlayer->SetPlayerAnimation(CPlayerState::enPlayerRunJump, 0.0f);
 	}
 	else
 	{
-		GetPlayer().SetPlayerAnimation(CPlayerState::enPlayerJump, 0.2f);
+		m_pPlayer->SetPlayerAnimation(CPlayerState::enPlayerJump, 0.2f);
 	}
 }
 
@@ -22,16 +22,16 @@ void CPlayerJump::Update()
 {
 
 
-	if (/*!GetPlayer().GetAnimation().IsPlay() || */GetPlayer().GetIsGround())
+	if (/*!GetPlayer().GetAnimation().IsPlay() || */m_pPlayer->GetCharacterController().IsOnGround())
 	{
 		if (Pad().GetLeftStickX() != 0 || Pad().GetLeftStickY() != 0)
 		{
-			GetPlayer().GetPlayerStateMachine().ChangeState(CPlayerState::enPlayerRun);
+			m_pPlayer->GetPlayerStateMachine().SetState(CPlayerState::enPlayerRun);
 		}
 		else
 		{
 
-			GetPlayer().GetPlayerStateMachine().ChangeState(CPlayerState::enPlayerStand);
+			m_pPlayer->GetPlayerStateMachine().SetState(CPlayerState::enPlayerStand);
 
 		}
 

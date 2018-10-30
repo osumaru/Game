@@ -4,11 +4,11 @@
 
 void CPlayerStateMachine::Init()
 {
-	ChangeState(CPlayerState::enPlayerStand);
+	SetState(CPlayerState::enPlayerStand);
 }
 
 
-void CPlayerStateMachine::ChangeState(CPlayerState::EnPlayerState nextState)
+void CPlayerStateMachine::SetState(CPlayerState::EnPlayerState nextState)
 {
 	if (m_state == nextState) {
 		//同じステートなら返す

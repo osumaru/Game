@@ -78,7 +78,7 @@ private:
 	CConstantBuffer							m_gameCameraCB;						//ゲームカメラの定数バッファ
 	CConstantBuffer							m_materialCB;						//マテリアル情報
 	CConstantBuffer							m_frameSizeCB;						//フレーム情報
-	const CCamera*								m_camera = nullptr;					//定数バッファの更新に使うゲームカメラ
+	const CCamera*							m_camera = nullptr;					//定数バッファの更新に使うゲームカメラ
 	ID3D11SamplerState*						m_pLinearSampler;
 	ID3D11SamplerState*						m_pAnisotropicSampler;
 };

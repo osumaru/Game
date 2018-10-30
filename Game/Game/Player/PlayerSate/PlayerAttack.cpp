@@ -6,7 +6,7 @@
 
 void CPlayerAttack::Init()
 {
-	GetPlayer().SetPlayerAnimation(GetPlayer().GetPlayerStateMachine().GetAttackSate(), 0.2f);
+	m_pPlayer->SetPlayerAnimation(m_pPlayer->GetPlayerStateMachine().GetState(), 0.2f);
 	m_pPlayer->SetMoveSpeed(CVector3::Zero);
 }
 
@@ -15,7 +15,7 @@ void CPlayerAttack::Update()
 	m_animetionFrame += GameTime().GetDeltaFrameTime();
 	if (m_animetionFrame > 0.3f)
 	{
-		GetPlayer().SetAttack(true);
+		m_pPlayer->SetAttack(true);
 
 	}
 	//攻撃中に攻撃の入力がされた場合は連撃に移行する
@@ -23,37 +23,34 @@ void CPlayerAttack::Update()
 	{
 		m_conAtaack = true;
 		m_rock = true;
-		GetPlayer().GetPlayerStateMachine().SetAttackState(CPlayerState::enPlayerAttack2);
+		m_pPlayer->GetPlayerStateMachine().SetState(CPlayerState::enPlayerAttack2);
 	}
 
 	//攻撃アニメーションが終わった時の処理
-	if (!GetPlayer().GetAnimation().IsPlay())
+	if (!m_pPlayer->GetAnimation().IsPlay())
 	{
 		//攻撃モーション中はダメージモーションをさせない
 		if (m_conAtaack)
 		{
 			Init();
-			GetPlayer().GetWeaponBody().PhysicsWorldRemoveRigidBody();
 			m_conAtaack = false;
 			m_animetionFrame = 0.0f;
 		}
 		else if (Pad().GetLeftStickX() != 0 || Pad().GetLeftStickY() != 0)
 		{
 			//走りアニメーション
-			GetPlayer().GetPlayerStateMachine().SetAttackState(CPlayerState::enPlayerAttack);
-			GetPlayer().GetPlayerStateMachine().ChangeState(CPlayerState::enPlayerRun);
-			GetPlayer().GetWeaponBody().PhysicsWorldRemoveRigidBody();
-			GetPlayer().SetAttack(false);
+			m_pPlayer->GetPlayerStateMachine().SetState(CPlayerState::enPlayerAttack);
+			m_pPlayer->GetPlayerStateMachine().SetState(CPlayerState::enPlayerRun);
+			m_pPlayer->SetAttack(false);
 			m_rock = false;
 			m_animetionFrame = 0.0f;
 		}
 
 		else
 		{
-			GetPlayer().GetPlayerStateMachine().SetAttackState(CPlayerState::enPlayerAttack);
-			GetPlayer().GetPlayerStateMachine().ChangeState(CPlayerState::enPlayerStand);
-			GetPlayer().GetWeaponBody().PhysicsWorldRemoveRigidBody();
-			GetPlayer().SetAttack(false);
+			m_pPlayer->GetPlayerStateMachine().SetState(CPlayerState::enPlayerAttack);
+			m_pPlayer->GetPlayerStateMachine().SetState(CPlayerState::enPlayerStand);
+			m_pPlayer->SetAttack(false);
 			m_rock = false;
 			m_animetionFrame = 0.0f;
 

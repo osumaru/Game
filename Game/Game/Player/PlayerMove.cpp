@@ -115,11 +115,11 @@ void CPlayerMove::Update()
 
 	//キャラクターコントローラーのアップデート処理
 	{
-		GetPlayer().GetCharacterController().SetPosition(GetPlayer().GetPosition());
-		GetPlayer().GetCharacterController().SetMoveSpeed(m_PlayerMoveSpeed);
-		GetPlayer().GetCharacterController().Execute(GameTime().GetDeltaFrameTime());
+		//GetPlayer().GetCharacterController().SetPosition(GetPlayer().GetPosition());
+		//GetPlayer().GetCharacterController().SetMoveSpeed(m_PlayerMoveSpeed);
+		//GetPlayer().GetCharacterController().Execute(GameTime().GetDeltaFrameTime());
 
-		GetPlayer().SetPosition(GetPlayer().GetCharacterController().GetPosition());
-		GetPlayer().SetMoveSpeed(GetPlayer().GetCharacterController().GetMoveSpeed());
+		//GetPlayer().SetPosition(GetPlayer().GetCharacterController().GetPosition());
+		//GetPlayer().SetMoveSpeed(GetPlayer().GetCharacterController().GetMoveSpeed());
 	}
 }

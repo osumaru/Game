@@ -6,16 +6,16 @@
 
 void CPlayerDamage::Init()
 {
-	GetPlayer().SetPlayerAnimation(CPlayerState::enPlayerDamage, 0.2f);
+	m_pPlayer->SetPlayerAnimation(CPlayerState::enPlayerDamage, 0.2f);
 }
 
 void CPlayerDamage::Update()
 {
-	if (!GetPlayer().GetAnimation().IsPlay())
+	if (!m_pPlayer->GetAnimation().IsPlay())
 	{
-		GetPlayer().GetPlayerStateMachine().ChangeState(CPlayerState::enPlayerStand);
-		GetPlayer().SetIsDamage(false);
-		GetPlayer().SetInterval(true);			//–³“GŽžŠÔ‚ð“K‰ž‚³‚¹‚é
+		m_pPlayer->GetPlayerStateMachine().SetState(CPlayerState::enPlayerStand);
+		m_pPlayer->SetIsDamage(false);
+		m_pPlayer->SetInterval(true);			//–³“GŽžŠÔ‚ð“K‰ž‚³‚¹‚é
 
 	}
 }

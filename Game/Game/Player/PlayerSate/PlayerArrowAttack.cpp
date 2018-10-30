@@ -7,9 +7,9 @@
 void CPlayerArrowAttack::Init()
 {
 	//‹|‚Ì¶¬
-	GetPlayer().InitArrow();
-	GetPlayer().SetPlayerAnimation(CPlayerState::enPlayerArrowAttack, 0.5f);
-	GetPlayer().SetAttack(true);
+	m_pPlayer->InitArrow();
+	m_pPlayer->SetPlayerAnimation(CPlayerState::enPlayerArrowAttack, 0.5f);
+	m_pPlayer->SetAttack(true);
 	m_pPlayer->SetMoveSpeed(CVector3::Zero);
 	//‹|—p‚ÌŽ‹“_‚É•ÏX
 }
@@ -31,8 +31,7 @@ void CPlayerArrowAttack::Update()
 		if (!m_isCharge)
 		{
 
-			GetPlayer().GetPlayerStateMachine().ChangeState(CPlayerState::enPlayerArrowShoot);
-			GetPlayer().GetWeaponBody().PhysicsWorldRemoveRigidBody();
+			m_pPlayer->GetPlayerStateMachine().SetState(CPlayerState::enPlayerArrowShoot);
 		}
 		
 	}

@@ -24,32 +24,14 @@ public:
 	void Update();
 			
 	//ステートの切り替え
-	void ChangeState(CPlayerState::EnPlayerState nextState);
+	void SetState(CPlayerState::EnPlayerState nextState);
 
-	//攻撃の状態を取得
-	int GetAttackSate()
-	{
-		return m_AttackState;
-	}
-	//武器によって攻撃のモーションを変更させる
-	void SetAttackState(const int setAttack)
-	{
-		m_AttackState = (CPlayerState::EnPlayerState)setAttack;
-	}
 	//現在のプレイヤーの状態を取得
-	CPlayerState::EnPlayerState GetState()
+	CPlayerState::EnPlayerState GetState() const
 	{
 		return m_state;
 	}
-	//現在のプレイヤーの状態を取得
-	const CPlayerState::EnPlayerState GetArrowState()
-	{
-		return m_ArrowAttackState;
-	}
-	void SetArrowAttackState(const int setAttack)
-	{
-		m_ArrowAttackState = (CPlayerState::EnPlayerState)setAttack;
-	}
+
 	void SetPlayer(CPlayer* player)
 	{
 		m_playerStand.SetPlayer(player);

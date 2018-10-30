@@ -6,7 +6,7 @@
 
 void CPlayerAvoidance::Init()
 {
-	GetPlayer().SetPlayerAnimation(CPlayerState::enPlayerAvoidance, 0.1f);
+	m_pPlayer->SetPlayerAnimation(CPlayerState::enPlayerAvoidance, 0.1f);
 	m_pPlayer->SetMoveSpeed(CVector3::Zero);
 }
 
@@ -21,7 +21,7 @@ void CPlayerAvoidance::Update()
 		position.z = boneMat.m[3][2];
 		m_pPlayer->SetPosition(position);
 
-		GetPlayer().GetPlayerStateMachine().ChangeState(CPlayerState::enPlayerStand);
+		GetPlayer().GetPlayerStateMachine().SetState(CPlayerState::enPlayerStand);
 		GetPlayer().SetAnimationPlay(CPlayer::enPlayerStand, 0.1f);
 
 	}

@@ -15,8 +15,8 @@ CPlayerArrowShoot::~CPlayerArrowShoot()
 void CPlayerArrowShoot::Init()
 {
 	//‹|‚ð‘Å‚Âƒ‚[ƒVƒ‡ƒ“
-	GetPlayer().SetPlayerAnimation(CPlayerState::enPlayerArrowShoot, 0.5f);
-	GetPlayer().SetAttack(true);
+	m_pPlayer->SetPlayerAnimation(CPlayerState::enPlayerArrowShoot, 0.5f);
+	m_pPlayer->SetAttack(true);
 	m_isShoot = false;
 }
 
@@ -33,15 +33,12 @@ void CPlayerArrowShoot::Update()
 		//˜AŽËŽž‚Ìˆ—
 		if (m_isShoot)
 		{
-			GetPlayer().GetPlayerStateMachine().ChangeState(CPlayerState::enPlayerArrowAttack);
+			GetPlayer().GetPlayerStateMachine().SetState(CPlayerState::enPlayerArrowAttack);
 		}
 		else
 		{
-
-			GetPlayer().GetPlayerStateMachine().SetArrowAttackState(CPlayerState::enPlayerArrowAttack);
-			GetPlayer().GetPlayerStateMachine().ChangeState(CPlayerState::enPlayerStand);
-			GetPlayer().GetWeaponBody().PhysicsWorldRemoveRigidBody();
-			GetPlayer().SetAttack(false);
+			m_pPlayer->GetPlayerStateMachine().SetState(CPlayerState::enPlayerStand);
+			m_pPlayer->SetAttack(false);
 
 		}
 	}
