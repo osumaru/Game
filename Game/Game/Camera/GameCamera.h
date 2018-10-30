@@ -6,7 +6,7 @@
 #include "NormalGameCamera.h"
 #include "ArrowGameCamera.h"
 
-class CGameCamera : IGameObject
+class CGameCamera : public IGameObject
 {
 public:
 
@@ -19,7 +19,7 @@ public:
 	};
 	//‰Šú‰»
 	void Init();
-
+	
 	//XV
 	void Update();
 

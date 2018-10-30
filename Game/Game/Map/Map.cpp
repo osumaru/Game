@@ -11,6 +11,7 @@
 #include "../Enemy/EnemyGroup.h"
 #include "../Enemy/PathFinding/RootPoint.h"
 #include "../Enemy/PathFinding/PathFinding.h"
+#include "../../Scene/SceneManager.h"
 
 std::vector<std::vector<SMapChipInfo>> mapChipInfo = 
 {
@@ -44,6 +45,7 @@ Map::Map() :
 
 Map::~Map()
 {
+
 }
 
 void Map::Init(int stageNum)
@@ -66,7 +68,10 @@ void Map::Init(int stageNum)
 			mapChip = New<MapChip>(STAGE_GIMMICK_PRIORITY);
 			break;
 		case enMapTagPlayer:
-			GetPlayer().Init(mInfo.m_position);
+			if (!GetSceneManager().GetEndInit())
+			{
+				GetPlayer().Init(mInfo.m_position);
+			}
 			break;
 		case enMapTagZombie:
 			enemy = New<CZombie>(1);
@@ -233,6 +238,11 @@ void Map::MapChipErase(std::list<MapChip*>::iterator iterator)
 void Map::BeforeDead()
 {
 	//Delete(m_player);
+	for (IEnemy* enemy : m_enemyList)
+	{
+		Delete(enemy);
+	}
+	m_enemyList.clear();
 	for (MapChip* mapchip : m_mapChip)
 	{
 		Delete(mapchip);

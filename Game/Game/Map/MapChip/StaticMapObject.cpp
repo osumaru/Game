@@ -10,7 +10,6 @@ StaticMapObject::StaticMapObject() :
 
 StaticMapObject::~StaticMapObject()
 {
-
 }
 
 void StaticMapObject::Init(const CVector3& position, const CQuaternion& rotation, const wchar_t* modelName, const bool collider, CAnimation* anim)
