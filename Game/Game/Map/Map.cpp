@@ -165,12 +165,18 @@ void Map::MapChipErase(std::list<MapChip*>::iterator iterator)
 
 void Map::BeforeDead()
 {
+	//プレイヤーの消去
 	GetPlayer().Destroy();
+
+	//エネミーの消去
 	for (IEnemy* enemy : m_enemyList)
 	{
 		Delete(enemy);
 	}
 	m_enemyList.clear();
+
+
+	//マップチップの消去
 	for (MapChip* mapchip : m_mapChip)
 	{
 		Delete(mapchip);

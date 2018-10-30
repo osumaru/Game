@@ -12,7 +12,7 @@
 
 void CGameScene::Release()
 {
-	//デリートの順番考えてないです
+	//デリートの順番考えてない
 	Delete(m_map);
 	Delete(m_miniMap);
 	Delete(m_weaponSelect);
