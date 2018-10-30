@@ -19,5 +19,9 @@ private:
 	CVector3		m_moveSpeed = CVector3::Zero;
 	float			m_lifeTime = 0.0f;
 	bool			m_isMove = false;
+	const float		GRAVITY  =  -3.0f;
+	const float     MOVE_POWRE	= 40.0f;
+	const float		ARROW_LIFE	= 10.0f;
+	const float		OFFSET_Y	=  1.0f;
 };
 
