@@ -1,27 +1,45 @@
 #pragma once
 
+enum EnPlayerAnimation
+{
+	enPlayerAnimationStand,			//待機アニメーション
+	enPlayerAnimationWalk,			//歩行アニメーション
+	enPlayerAnimationRun,			//走りアニメーション
+	enPlayerAnimationRunJump,		//走りジャンプ
+	enPlayerAnimationJump,			//ジャンプアニメーション
+	enPlayerAnimationAttack,			//攻撃アニメーション
+	enPlayerAnimationAttack2,		//連撃アニメーション
+	enPlayerAnimationDamage,			//ダメージアニメーション
+	enPlayerAnimationAvoidance,		//回避アニメーション
+	enPlayerAnimationDete,			//死亡アニメーション
+	enPlayerAnimationWireMove,		//ワイヤー移動アニメーション
+	enPlayerAnimationArrowAttack,		//弓のアニメーション
+	enPlayerAnimationArrowShoot,		//弓を放つアニメーション
+	enPlayerAnimationLongSwordAttack,//大剣の攻撃アニメーション
+	enPlayerAnimationTwinSwordAttack,//二刀流の攻撃アニメーション
+	enPlayerAnimationNum				//アニメーションの数
+};
+
 class CPlayerState
 {
 public:
 	enum EnPlayerState
 	{
-		enPlayerStand,			//待機アニメーション
-		enPlayerWalk,			//歩行アニメーション
-		enPlayerRun,			//走りアニメーション
-		enPlayerRunJump,		//走りジャンプ
-		enPlayerJump,			//ジャンプアニメーション
-		enPlayerAttack,			//攻撃アニメーション
-		enPlayerAttack2,		//連撃モーション
-		enPlayerDamage,			//ダメージアニメーション
-		enPlayerAvoidance,		//回避アニメーション
-		enPlayerDied,			//死亡アニメーション
-		enPlayerWireMove,		//ワイヤーアニメーション
-		enPlayerArrowAttack,	//弓のアニメーション
-		enPlayerArrowShoot,		//弓を放つアニメーション
-		enPlayerLongSwordAttack,//大剣の攻撃アニメーション
-		enPlayerTwinSwordAttack,//二刀流の攻撃アニメーション
-		enPlayerNum,			//アニメーションの数
-		enState_Invald,			//何もない
+		enPlayerStateStand,			//待機アニメーション
+		enPlayerStateWalk,			//歩行アニメーション
+		enPlayerStateRun,			//走りアニメーション
+		enPlayerStateRunJump,		//走りジャンプ
+		enPlayerStateJump,			//ジャンプアニメーション
+		enPlayerStateAttack,			//攻撃アニメーション
+		enPlayerStateDamage,			//ダメージアニメーション
+		enPlayerStateAvoidance,		//回避アニメーション
+		enPlayerStateDied,			//死亡アニメーション
+		enPlayerStateWireMove,		//ワイヤーアニメーション
+		enPlayerStateArrowAttack,	//弓のアニメーション
+		enPlayerStateArrowShoot,		//弓を放つアニメーション
+		enPlayerStateLongSwordAttack,//大剣の攻撃アニメーション
+		enPlayerStateTwinSwordAttack,//二刀流の攻撃アニメーション
+		enPlayerStateNum,			//アニメーションの数
 	};
 
 	enum EnPlayerWepon

@@ -5,7 +5,7 @@
 
 void CPlayerRun::Init()
 {
-	m_pPlayer->SetPlayerAnimation(CPlayerState::enPlayerRun, 0.2f);
+	m_pPlayer->SetPlayerAnimation(enPlayerAnimationRun, 0.2f);
 }
 
 void CPlayerRun::Update()
@@ -28,39 +28,39 @@ void CPlayerRun::Update()
 	//走り中にダメージを受けた場合
 	if (m_pPlayer->GetIsDamage())
 	{
-		m_pPlayer->GetPlayerStateMachine().SetState(CPlayerState::enPlayerDamage);
+		m_pPlayer->GetPlayerStateMachine().SetState(CPlayerState::enPlayerStateDamage);
 	}
 	//走っているときに攻撃した時の処理
 	else if (Pad().IsTriggerButton(enButtonRightTrigger))
 	{
 		if(m_pPlayer->GetWeapon().GetCurrentState() == CWeapon::enWeaponArrow)
 		{
-			m_pPlayer->GetPlayerStateMachine().SetState(CPlayerState::enPlayerArrowAttack);
+			m_pPlayer->GetPlayerStateMachine().SetState(CPlayerState::enPlayerStateArrowAttack);
 		}
 		else
 		{
 
-			m_pPlayer->GetPlayerStateMachine().SetState(CPlayerState::enPlayerAttack);
+			m_pPlayer->GetPlayerStateMachine().SetState(CPlayerState::enPlayerStateAttack);
 		}
 	}
 	//走り中に回避した時の処理
 	else if (Pad().IsTriggerButton(enButtonB))
 	{
-		m_pPlayer->GetPlayerStateMachine().SetState(CPlayerState::enPlayerAvoidance);
+		m_pPlayer->GetPlayerStateMachine().SetState(CPlayerState::enPlayerStateAvoidance);
 	}
 	//走っている時にジャンプが押されたとき処理
 	else if (Pad().IsTriggerButton(enButtonA))
 	{
-		m_pPlayer->GetPlayerStateMachine().SetState(CPlayerState::enPlayerRunJump);
+		m_pPlayer->GetPlayerStateMachine().SetState(CPlayerState::enPlayerStateRunJump);
 	}
 
 	else if (fabs(m_pPlayer->GetMoveSpeed().Length()) == 0.0f)
 	{
-		m_pPlayer->GetPlayerStateMachine().SetState(CPlayerState::enPlayerStand);
+		m_pPlayer->GetPlayerStateMachine().SetState(CPlayerState::enPlayerStateStand);
 	}
 	else if (m_pPlayer->IsWireMove())
 	{
 		//ワイヤー移動できるなら遷移
-		m_pPlayer->GetPlayerStateMachine().SetState(CPlayerState::enPlayerWireMove);
+		m_pPlayer->GetPlayerStateMachine().SetState(CPlayerState::enPlayerStateWireMove);
 	}
 }

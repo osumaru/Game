@@ -7,7 +7,7 @@
 void CPlayerWalk::Init()
 {
 	//歩きアニメーションの再生
-	m_pPlayer->SetPlayerAnimation(CPlayerState::enPlayerWalk, 0.2f);
+	m_pPlayer->SetPlayerAnimation(enPlayerAnimationWalk, 0.2f);
 }
 
 void CPlayerWalk::Update()
@@ -30,18 +30,18 @@ void CPlayerWalk::Update()
 	//移動の入力がなければ待機アニメーションに遷移
 	if (Pad().GetLeftStickX() == 0 && Pad().GetLeftStickY() == 0)
 	{
-		m_pPlayer->GetPlayerStateMachine().SetState(CPlayerState::enPlayerStand);
+		m_pPlayer->GetPlayerStateMachine().SetState(CPlayerState::enPlayerStateStand);
 	}
 
 	else if (Pad().IsTriggerButton(enButtonA))
 	{
-		m_pPlayer->GetPlayerStateMachine().SetState(CPlayerState::enPlayerJump);
+		m_pPlayer->GetPlayerStateMachine().SetState(CPlayerState::enPlayerStateJump);
 	}
 
 	//一定以上の速さならあ知りアニメーションに遷移
 	else if (fabs(m_pPlayer->GetMoveSpeed().Length()) >= 1.3f)
 	{
-		m_pPlayer->GetPlayerStateMachine().SetState(CPlayerState::enPlayerRun);
+		m_pPlayer->GetPlayerStateMachine().SetState(CPlayerState::enPlayerStateRun);
 	}
 
 }

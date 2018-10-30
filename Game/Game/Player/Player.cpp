@@ -57,7 +57,7 @@ void CPlayer::Init(CVector3 position)
 
 	//アニメーションの初期化
 	{
-		wchar_t* animClip[enPlayerNum] = {
+		wchar_t* animClip[enPlayerAnimationNum] = {
 											{ L"Assets/modelData/PlayerStand.tka"},				//待機アニメーション	
 											{ L"Assets/modelData/PlayerWalkStay.tka" },			//歩行アニメーション
 											{ L"Assets/modelData/PlayerDash60fpsEvent.tka" },		//走りアニメーション
@@ -69,18 +69,16 @@ void CPlayer::Init(CVector3 position)
 											{ L"Assets/modelData/PlayerKaihi.tka" }	,		//回避アクション
 											{ L"Assets/modelData/PlayerDeath.tka" },			//死亡アニメーション
 											{ L"Assets/modelData/PlayerWire.tka" },				//ワイヤー移動アニメーション
-
-
 											{ L"Assets/modelData/PlayerArrowAttack.tka" },		//弓の攻撃アニメーション
 											{ L"Assets/modelData/PlayerArrowAttackEvent.tka" },
 											{ L"Assets/modelData/PlayerLeageSwordAttack.tka" },	//大剣の攻撃アニメーション
 											{ L"Assets/modelData/PlayerTwinSwordAttack.tka" }	//二刀流の攻撃アニメーション
 		};
 
-		m_animation.Init(animClip, enPlayerNum);
-		m_animation.SetLoopFlg(enPlayerStand, true);
-		m_animation.SetLoopFlg(enPlayerWalk, true);
-		m_animation.SetLoopFlg(enPlayerRun, true);
+		m_animation.Init(animClip, enPlayerAnimationNum);
+		m_animation.SetLoopFlg(enPlayerAnimationStand, true);
+		m_animation.SetLoopFlg(enPlayerAnimationWalk, true);
+		m_animation.SetLoopFlg(enPlayerAnimationRun, true);
 
 		//アニメーションイベントリスナーの登録　呼び出される関数の登録？
 		m_animation.AddAnimationEvent([&](auto animClipname, auto eventName) {
@@ -127,11 +125,6 @@ void CPlayer::Update()
 
 	StatusCalculation();	//ステータスの処理
 	PlayerAttack();
-
-	if (Pad().IsTriggerButton(enButtonB))
-	{
-		ExpUP(100);
-	}
 	
 	std::list<CPlayerArrow*>::iterator it;
 	it = m_arrowList.begin();
@@ -179,10 +172,6 @@ void CPlayer::Update()
 			}
 		}
 	}
-	if (Pad().IsPressButton(enButtonX))
-	{
-		Engine().GetPointLightManager().AddPointLight(m_position, { (float)Random().GetRandDouble(), (float)Random().GetRandDouble(), (float)Random().GetRandDouble() });
-	}
 
 	if (Pad().GetLeftTrigger())
 	{
@@ -196,9 +185,6 @@ void CPlayer::Update()
 		m_isZoom = false;
 	}
 
-
-	//m_weaponskin[m_weaponState].Update(m_weaponPosition, m_weaponRotation, m_weaponScale, true);
-
 	CMatrix viewMat;
 	CVector3 cameraPos = m_position;
 	cameraPos.y += 50.0f;
@@ -211,7 +197,6 @@ void CPlayer::Update()
 	Engine().GetShadowMap().SetViewMatrix(viewMat);
 	Engine().GetShadowMap().SetProjectionMatrix(projMat);
 	m_PlayerStateMachine.Update();
-	//m_PlayerRotation.Update();
 	Rotation();
 	PlayerMove();
 
@@ -222,7 +207,6 @@ void CPlayer::Update()
 	//スキンモデルの更新
 	m_skinmodel.Update(m_position, m_rotation, { 1.0f, 1.0f, 1.0f }, true);
 	m_weapon.Update();
-	//m_PlayerMove.Update();
 }
 
 void CPlayer::PlayerMove()
@@ -233,19 +217,10 @@ void CPlayer::PlayerMove()
 //描画処理
 void CPlayer::Draw()
 {
-	if (m_isAttack)
-	{
-		//CVector3 weponUpVec = { m_weaponskin[m_weaponState].GetWorldMatrix().m[2][0],m_weaponskin[m_weaponState].GetWorldMatrix().m[2][1],m_weaponskin[m_weaponState].GetWorldMatrix().m[2][2] };
-		//weponUpVec *= 0.7f;
-		//m_weaponPosition.Add(weponUpVec);
-		//m_weaponRigitBody.SetPosition(m_weaponPosition);
-
-	}
 	if (m_isZoom)
 	{
 		m_arrowtag.Draw();
 	}
-	//m_weaponskin[m_weaponState].Draw(GetGameCamera().GetViewMatrix(), GetGameCamera().GetProjectionMatrix());
 	m_weapon.Draw();
 	m_skinmodel.Draw(GetGameCamera().GetViewMatrix(), GetGameCamera().GetProjectionMatrix());
 }
@@ -303,13 +278,13 @@ void CPlayer::StatusCalculation()
 void CPlayer::Rotation()
 {
 	CVector3 moveSpeed = m_characterController.GetMoveSpeed();
-
 	CVector3 playerFront = CVector3::AxisZ;
 	if (moveSpeed.x == 0.0f && moveSpeed.z == 0.0f)
 	{
 		moveSpeed.x = m_skinmodel.GetWorldMatrix().m[2][0];
 		moveSpeed.z = m_skinmodel.GetWorldMatrix().m[2][2];
 	}
+	moveSpeed.y = 0.0f;
 	moveSpeed.Normalize();
 	float rad = moveSpeed.Dot(playerFront);
 	if (1.0f <= rad)

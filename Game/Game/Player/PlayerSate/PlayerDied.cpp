@@ -5,7 +5,7 @@
 
 void CPlayerDied::Init()
 {
-	m_pPlayer->SetPlayerAnimation(CPlayerState::enPlayerDied, 0.2f);
+	m_pPlayer->SetPlayerAnimation(enPlayerAnimationDete, 0.2f);
 }
 
 void CPlayerDied::Update()

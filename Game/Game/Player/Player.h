@@ -1,10 +1,9 @@
 #pragma once
 #include "PlayerSate/PlayerStateMachine.h"
 #include "PlayerSate/PlayerState.h"
-#include "PlayerRotation.h"
-#include "PlayerMove.h"
 #include "PlayerArrow.h"
 #include "Weapon.h"
+#include "PlayerSate/PlayerStateCommon.h"
 
 struct SplayerStatus
 {
@@ -21,34 +20,12 @@ struct SplayerStatus
 
 };
 
+
+
 class CPlayer : public IGameObject
 {
 
 public:
-	
-
-	enum EnPlayerAnimeState
-	{
-		enPlayerStand,			//待機アニメーション
-		enPlayerWalk,			//歩行アニメーション
-		enPlayerRun,			//走りアニメーション
-		enPlayerRunJump,		//走りジャンプ
-		enPlayerJump,			//ジャンプアニメーション
-		enPlayerAttack,			//攻撃アニメーション
-		enPlayerAttack2,		//連撃アニメーション
-		enPlayerDamage,			//ダメージアニメーション
-		enPlayerAvoidance,		//回避アニメーション
-		enPlayerDete,			//死亡アニメーション
-		
-		enPlayerArroAttack,		//弓のアニメーション
-		enPlayerArrowShoot,		//弓を放つアニメーション
-		enPlayerLongSwordAttack,//大剣の攻撃アニメーション
-		enPlayerTwinSwordAttack,//二刀流の攻撃アニメーション
-		enPlayerWireMove,		//ワイヤー移動アニメーション
-		enPlayerNum				//アニメーションの数
-	};
-
-
 
 	//プレイヤーの初期化
 	void Init(CVector3 position);
@@ -133,10 +110,10 @@ public:
 
 	/*アニメーションの設定
 	第一引数　アニメーメーションの番号　第二引数　補完時間*/
-	void SetPlayerAnimation(const int animNumber, const float num)
+	void SetPlayerAnimation(EnPlayerAnimation animNumber, const float num)
 	{
 		m_animation.Play(animNumber, num);
-		m_State = (EnPlayerAnimeState)animNumber;
+		m_State = animNumber;
 	}
 
 	//プレイヤーのステータスを取得
@@ -272,12 +249,12 @@ public:
 	}
 
 
-	void SetAnimationPlay(EnPlayerAnimeState state, float interporationTime)
+	void SetAnimationPlay(EnPlayerAnimation state, float interporationTime)
 	{
 		m_animation.Play(state, interporationTime);
 	}
 
-	void SetAnimationPlay(EnPlayerAnimeState state)
+	void SetAnimationPlay(EnPlayerAnimation state)
 	{
 		m_animation.Play(state);
 	}
@@ -302,7 +279,7 @@ private:
 	SplayerStatus			m_status;									//プレイヤーのステータス
 	bool					m_isSlip = false;							//スリップ判定
 	float					m_slipSpeed = 2.0f;							//回避移動時のスピード
-	EnPlayerAnimeState		m_State = enPlayerStand;					//アニメーションを遷移させるための変数
+	EnPlayerAnimation		m_State = enPlayerAnimationStand;			//アニメーションを遷移させるための変数
 	const float				INTERVAL = 1.5;								//ダメージを受けた後の無敵時間
 	bool					m_isDamege = false;
 	float					m_animetionFrame = 0.0f;

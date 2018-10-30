@@ -48,9 +48,7 @@ public:
 	}
 
 private:
-	CPlayerState::EnPlayerState		m_state = CPlayerState::enState_Invald;				//プレイヤーのアニメーションの状態
-	CPlayerState::EnPlayerState		m_AttackState = CPlayerState::enPlayerAttack;		//攻撃時のアニメーションの状態
-	CPlayerState::EnPlayerState		m_ArrowAttackState = CPlayerState::enPlayerArrowAttack;	//弓矢での攻撃時のアニメーションの状態
+	CPlayerState::EnPlayerState		m_state = CPlayerState::enPlayerStateNum;				//プレイヤーのアニメーションの状態
 	
 	IPlayerState*					m_currentState = nullptr;
 	CPlayerStand					m_playerStand;			//待機モーション

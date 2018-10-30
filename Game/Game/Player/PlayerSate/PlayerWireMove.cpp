@@ -7,7 +7,7 @@
 
 void CPlayerWireMove::Init()
 {
-	GetPlayer().SetPlayerAnimation(CPlayerState::enPlayerWireMove, 0.1f);
+	GetPlayer().SetPlayerAnimation(enPlayerAnimationWireMove, 0.1f);
 	m_movePosition = GetPlayer().GetWirePosition();
 }
 
@@ -40,6 +40,6 @@ void CPlayerWireMove::Update()
 	if (isMoveEnd) {
 		GetPlayer().SetIsWireMove(false);
 		//à⁄ìÆÇ™èIÇÌÇ¡ÇΩ
-		GetPlayer().GetPlayerStateMachine().SetState(CPlayerState::enPlayerStand);
+		GetPlayer().GetPlayerStateMachine().SetState(CPlayerState::enPlayerStateStand);
 	}
 }
