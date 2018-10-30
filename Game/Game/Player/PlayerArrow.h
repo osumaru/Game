@@ -19,6 +19,7 @@ private:
 	CVector3		m_moveSpeed = CVector3::Zero;
 	float			m_lifeTime = 0.0f;
 	bool			m_isMove = false;
-	const float		GRAVITY = -1.5f;
+	const float		GRAVITY = -10.0f;
+	const float     MOVE_POWRE = 10.0f;
 };
 
