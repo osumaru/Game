@@ -34,12 +34,9 @@ void CResult::AfterDraw()
 	if (m_alphaTime >= 1.0f)
 	{
 		m_alphaTime = 1.0f;
-		if (!m_isEnd)
-		{
-			//ƒQ[ƒ€ƒV[ƒ“‚É‘JˆÚ
-			GetSceneManager().GetInstance().ChangeScene(GetSceneManager().enGameScene);
-			m_isEnd = true;
-		}
+
+		//ƒQ[ƒ€ƒV[ƒ“‚É‘JˆÚ
+		GetSceneManager().GetInstance().ChangeScene(GetSceneManager().enGameScene);
 	}
 	m_result.SetAlpha(m_alphaTime);
 	m_result.Draw();

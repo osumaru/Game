@@ -29,7 +29,7 @@ public:
 	{
 		return m_map;
 	}
-	
+
 	//武器選択の取得
 	CWeaponSelect*	GetWeaponSelect()
 	{
@@ -37,11 +37,11 @@ public:
 	}
 
 private:
-	Map* m_map = nullptr;						//マップ
-	CWeaponSelect* m_weaponSelect = nullptr;	//武器選択
-	CMiniMap* m_miniMap = nullptr;				//ミニマップ
-	CPlayerHp* m_playerHp = nullptr;			//プレイヤーHP
-	CLevelUp* m_levelUp = nullptr;				//レベルアップ表示
-	CMenu* m_menu = nullptr;					//メニュー
-	CResult* m_result = nullptr;				//リザルト
+	Map*			m_map = nullptr;			//マップ
+	CWeaponSelect*	m_weaponSelect = nullptr;	//武器選択
+	CMiniMap*		m_miniMap = nullptr;		//ミニマップ
+	CPlayerHp*		m_playerHp = nullptr;		//プレイヤーHP
+	CLevelUp*		m_levelUp = nullptr;		//レベルアップ表示
+	CMenu*			m_menu = nullptr;			//メニュー
+	CResult*		m_result = nullptr;			//リザルト
 };

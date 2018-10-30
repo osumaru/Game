@@ -1,6 +1,7 @@
 #pragma once
 class MapChip;
 class IEnemy;
+class Player;
 
 //マップチップのタグ
 enum EnMapChipTag

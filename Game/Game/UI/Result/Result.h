@@ -13,7 +13,5 @@ private:
 	CSprite			m_result;						//Result画面のスプライト
 	CTexture		m_resultTexture;				//Result画面のテクスチャ
 	float			m_alphaTime = 0.0f;
-	
-	bool			m_isEnd = false;
 };
 

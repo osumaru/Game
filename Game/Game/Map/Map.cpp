@@ -10,7 +10,6 @@
 #include "../Enemy/Warrok.h"
 #include "../Enemy/EnemyGroup.h"
 #include "../Enemy/PathFinding/PathFinding.h"
-#include "../../Scene/SceneManager.h"
 
 std::vector<std::vector<SMapChipInfo>> mapChipInfo = 
 {
@@ -65,10 +64,8 @@ void Map::Init(int stageNum)
 			mapChip = New<MapChip>(STAGE_GIMMICK_PRIORITY);
 			break;
 		case enMapTagPlayer:
-			if (!GetSceneManager().GetEndInit())
-			{
-				GetPlayer().Init(mInfo.m_position);
-			}
+			GetPlayer().Create();
+			GetPlayer().Init(mInfo.m_position);
 			break;
 		case enMapTagZombie:
 			enemy = New<CZombie>(1);
@@ -168,7 +165,7 @@ void Map::MapChipErase(std::list<MapChip*>::iterator iterator)
 
 void Map::BeforeDead()
 {
-	//Delete(m_player);
+	GetPlayer().Destroy();
 	for (IEnemy* enemy : m_enemyList)
 	{
 		Delete(enemy);

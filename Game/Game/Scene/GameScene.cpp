@@ -9,10 +9,10 @@
 #include "../UI/Result/Result.h"
 #include "../UI/LevelUp/LevelUp.h"
 #include "../../Game/Camera/GameCamera.h"
-#include "SceneManager.h"
 
 void CGameScene::Release()
 {
+	//デリートの順番考えてないです
 	Delete(m_map);
 	Delete(m_miniMap);
 	Delete(m_weaponSelect);
@@ -20,7 +20,7 @@ void CGameScene::Release()
 	Delete(m_levelUp);
 	Delete(m_menu);
 	Delete(m_result);
-
+	GetGameCamera().Destroy();
 }
 
 void CGameScene::Init()
@@ -31,11 +31,10 @@ void CGameScene::Init()
 	m_miniMap = New<CMiniMap>(0);
 	m_miniMap->Init();
 
-	//初期化していたらInitを呼ばない
-	if (!GetSceneManager().GetEndInit())
-	{
-		GetGameCamera().Init();
-	}
+	//カメラを生成
+	GetGameCamera().Create();
+	GetGameCamera().Init();
+
 	m_weaponSelect = New<CWeaponSelect>(0);
 	m_weaponSelect->Init();
 
@@ -51,9 +50,9 @@ void CGameScene::Init()
 	m_result = New<CResult>(0);
 	m_result->Init();
 
-	GetSceneManager().GetInstance().SetEndInit(true);
 }
 
 void CGameScene::Update()
 {
 }
+
