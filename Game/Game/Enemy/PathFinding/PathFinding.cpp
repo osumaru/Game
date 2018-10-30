@@ -40,9 +40,9 @@ void CPathFinding::BuildNodes()
 				node->linkNode[3] = &m_nodes[y - 1][x];
 			}
 			//座標を設定する
-			CVector2 position = { -3.0f * MAP_WIDTH / 2, 3.0f * MAP_HEIGHT / 2 };
-			position.x += 5.0f * x;
-			position.y -= 5.0f * y;
+			CVector2 position = { -m_gridSize * MAP_WIDTH / 2, m_gridSize * MAP_HEIGHT / 2 };
+			position.x += m_gridSize * x;
+			position.y -= m_gridSize * y;
 			node->position = position;
 		}
 	}
@@ -109,8 +109,8 @@ void CPathFinding::FindRoot(std::vector<CVector2>& root, CVector2 startPos, CVec
 				continue;
 			}
 			int cost = processNode->moveCost + 1;
-			bool needsUpdae = (node->moveCost < 0) || (node->moveCost > cost);
-			if (needsUpdae) {
+			bool needsUpdate = (node->moveCost < 0) || (node->moveCost > cost);
+			if (needsUpdate) {
 				//更新の必要あり
 				node->moveCost = cost;
 				node->parentNode = processNode;
