@@ -27,7 +27,8 @@ public:
 	//targetNumber	ゴールのポイントの番号
 	void FindRoot(std::vector<CVector2>& root, CVector2 stratPos, CVector2 targetPos);
 private:
-	SNode m_nodes[MAP_HEIGHT][MAP_WIDTH];	//ノードの配列
+	SNode		m_nodes[MAP_HEIGHT][MAP_WIDTH];	//ノードの配列
+	const float m_gridSize = 3.0f;
 };
 
 extern CPathFinding g_pathFinding;
