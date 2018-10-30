@@ -4,6 +4,7 @@
 #include "../Player/Player.h"
 #include "EnemyState/EnemyState.h"
 #include "EnemyGroup.h"
+#include "PathFinding/PathFinding.h"
 
 bool CEnemyMove::Start()
 {
@@ -59,13 +60,36 @@ void CEnemyMove::Update()
 	}
 	else if (state == CEnemyState::enState_Chase) 
 	{
-		//プレイヤーを追いかける
 		CVector3 playerPos = GetPlayer().GetPosition();
-		CVector3 toPlayerDir = playerPos - m_enemy->GetPosition();
-		toPlayerDir.Normalize();
-		toPlayerDir *= speed;
-		moveSpeed.x = toPlayerDir.x;
-		moveSpeed.z = toPlayerDir.z;
+		CVector3 enemyPos = m_enemy->GetPosition();
+		CVector3 toPlayerDir = playerPos - enemyPos;
+		float length = toPlayerDir.Length();
+		if (length > 3.0f) {
+			//見つかっていれば経路探索する
+			m_interval++;
+			if (m_interval % 5 == 0) {
+				std::vector<CVector2> root;
+				CVector3 startPos = enemyPos;
+				CVector3 targetPos = GetPlayer().GetPosition();
+				g_pathFinding.FindRoot(root, { startPos.x, startPos.z }, { targetPos.x, targetPos.z });
+				if (!root.empty()) {
+					CVector3 rootPos = { root[0].x, 0.0f, root[0].y };
+					CVector3 pos = enemyPos;
+					pos.y = 0.0f;
+					rootPos -= pos;
+					rootPos.Normalize();
+					moveSpeed.x = rootPos.x * 2.0f;
+					moveSpeed.z = rootPos.z * 2.0f;
+				}
+			}
+		}
+		else {
+			//プレイヤーを追いかける
+			toPlayerDir.Normalize();
+			toPlayerDir *= speed;
+			moveSpeed.x = toPlayerDir.x;
+			moveSpeed.z = toPlayerDir.z;
+		}
 	}
 	else
 	{

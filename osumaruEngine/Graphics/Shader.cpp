@@ -8,13 +8,14 @@ CShader::CShader() :
 	m_blob(nullptr),
 	m_filePath(nullptr),
 	m_entryFuncName(nullptr),
-	m_isErase(true)
+	m_isErase(true),
+	m_isInit(false)
 {
 }
 
 CShader::~CShader()
 {
-	if (m_isErase)
+	if (m_isErase && m_isInit)
 	{
 		ShaderResource().ShaderErase(m_it);
 	}
@@ -30,6 +31,7 @@ void CShader::Load(const char* filepath, const char* entryFuncName, EnShaderType
 	m_pInputLayout = shaderResource.m_pInputLayout;
 	m_pShader = shaderResource.m_pShader;
 	m_it = ShaderResource().ShaderPushBack(this);
+	m_isInit = true;
 }
 
 void CShader::ReLoad()

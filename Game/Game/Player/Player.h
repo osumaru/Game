@@ -6,8 +6,6 @@
 #include "PlayerArrow.h"
 #include "Weapon.h"
 
-class CRootPoint;
-
 struct SplayerStatus
 {
 	int Strength;			//攻撃力
@@ -293,18 +291,6 @@ public:
 		m_isWireMove = isWireMove;
 	}
 
-	//ルート上のポイントを設定
-	void SetRootPoint(CRootPoint* rootPoint)
-	{
-		m_rootPoint = rootPoint;
-	}
-
-	//プレイヤーのいるルート上のポイントを取得
-	CRootPoint* GetRootPoint()
-	{
-		return m_rootPoint;
-	}
-
 	//武器のスキン情報の取得
 	//const CSkinModel& GetWeaponskin(int num)
 	//{
@@ -402,8 +388,6 @@ private:
 	bool					m_isWireMove = false;					//ワイヤー移動できるか
 	CRayTest				m_wireCollisionSolver;					//ワイヤー移動のコリジョン処理クラス
 	CVector3				m_wirePosition;							//ワイヤー移動先の座標
-
-	CRootPoint*				m_rootPoint;
 };
 
 static CPlayer& GetPlayer()
