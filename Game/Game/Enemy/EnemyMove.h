@@ -34,9 +34,17 @@ public:
 		return m_characterController.GetMoveSpeed();
 	}
 
+	//移動速度を設定
+	//moveSpeed		移動速度
+	void SetMoveSpeed(const CVector3& moveSpeed)
+	{
+		m_characterController.SetMoveSpeed(moveSpeed);
+	}
+
 private:
 	CCharacterController	m_characterController;			//キャラクターコントローラー
 	IEnemy*					m_enemy = nullptr;				//エネミー
 	CVector3				m_destination;					//移動先の座標
+	int						m_interval = 0;
 	bool					m_isMove = false;				//移動しているか
 };

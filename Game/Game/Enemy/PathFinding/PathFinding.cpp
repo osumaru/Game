@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "PathFinding.h"
-#include "RootPoint.h"
 
 CPathFinding g_pathFinding;
 
@@ -12,7 +11,7 @@ CPathFinding::~CPathFinding()
 {
 }
 
-void CPathFinding::BuildNodes(std::vector<CRootPoint*> rootPoint)
+void CPathFinding::BuildNodes()
 {
 	for (int y = 0; y < MAP_HEIGHT; y++) {
 		for (int x = 0; x < MAP_WIDTH; x++) {
@@ -41,13 +40,15 @@ void CPathFinding::BuildNodes(std::vector<CRootPoint*> rootPoint)
 				node->linkNode[3] = &m_nodes[y - 1][x];
 			}
 			//座標を設定する
-			CVector3 position = rootPoint[x + y * MAP_WIDTH]->GetPosition();
-			node->position = { position.x, position.z };
+			CVector2 position = { -3.0f * MAP_WIDTH / 2, 3.0f * MAP_HEIGHT / 2 };
+			position.x += 5.0f * x;
+			position.y -= 5.0f * y;
+			node->position = position;
 		}
 	}
 }
 
-void CPathFinding::FindRoot(std::vector<CVector2>& root, int startNumber, int targetNumber)
+void CPathFinding::FindRoot(std::vector<CVector2>& root, CVector2 startPos, CVector2 targetPos)
 {
 	root.clear();
 	//初期化
@@ -59,8 +60,20 @@ void CPathFinding::FindRoot(std::vector<CVector2>& root, int startNumber, int ta
 		}
 	}
 	//開始ノードを取得する
-	int startY = startNumber / MAP_WIDTH;
-	int startX = startNumber - startY * MAP_WIDTH;
+	int startY = 0;
+	int startX = 0;
+	float minLength = FLT_MAX;
+	for (int y = 0; y < MAP_HEIGHT; y++) {
+		for (int x = 0; x < MAP_WIDTH; x++) {
+			CVector2 distance = m_nodes[y][x].position - startPos;
+			float length = sqrt(pow(distance.x, 2.0f) + pow(distance.y, 2.0f));
+			if (length < minLength) {
+				minLength = length;
+				startY = y;
+				startX = x;
+			}
+		}
+	}
 	SNode* startNode = &m_nodes[startY][startX];
 	startNode->moveCost = 0;
 	while (true) {
@@ -105,8 +118,20 @@ void CPathFinding::FindRoot(std::vector<CVector2>& root, int startNumber, int ta
 		}
 	}
 	//ルートを作る
-	int targetY = targetNumber / MAP_WIDTH;
-	int targetX = targetNumber - targetY * MAP_WIDTH;
+	int targetY = 0;
+	int targetX = 0;
+	minLength = FLT_MAX;
+	for (int y = 0; y < MAP_HEIGHT; y++) {
+		for (int x = 0; x < MAP_WIDTH; x++) {
+			CVector2 distance = m_nodes[y][x].position - targetPos;
+			float length = sqrt(pow(distance.x, 2.0f) + pow(distance.y, 2.0f));
+			if (length < minLength) {
+				minLength = length;
+				targetY = y;
+				targetX = x;
+			}
+		}
+	}
 	SNode* node = &m_nodes[targetY][targetX];
 
 	while (node != startNode) {

@@ -129,8 +129,8 @@ void CPlayerRotation::Update()
 		{
 			weaponRot.SetRotation(PlayerHnd);
 			CQuaternion rotX, rotY;
-			rotX.SetRotationDeg(CVector3::AxisX, 90.0f);
-			rotY.SetRotationDeg(CVector3::AxisY, 180.0f);
+			//rotX.SetRotationDeg(CVector3::AxisX, 90.0f);
+			//rotY.SetRotationDeg(CVector3::AxisY, 180.0f);
 			weaponRot.Multiply(rotX);
 			weaponRot.Multiply(rotY);
 			//GetPlayer().SetWeaponRotation(weaponRot);

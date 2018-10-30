@@ -66,4 +66,5 @@ private:
 	EnShaderType					m_shaderType;
 	std::list<CShader*>::iterator	m_it;
 	bool							m_isErase;
+	bool							m_isInit;
 };

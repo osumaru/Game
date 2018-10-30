@@ -1,7 +1,6 @@
 #pragma once
 class MapChip;
 class IEnemy;
-class CRootPoint;
 
 //マップチップのタグ
 enum EnMapChipTag
@@ -13,7 +12,6 @@ enum EnMapChipTag
 	enMapTagNinja,
 	enMapTagWarrok,
 	enMapTagEnemyGroup,
-	enMapTagRootPoint,
 	enMapTagMapChip,
 	enMapTagTerrain,		//地形用のタグ
 	enMapTagNum,
@@ -61,15 +59,8 @@ public:
 		return m_enemyList;
 	}
 
-	//ルートポイントのリストを取得
-	std::vector<CRootPoint*> GetRootPointList()
-	{
-		return m_rootPointList;
-	}
-
 private:
 	std::list<MapChip*>			m_mapChip;				//マップチップ
 	std::list<IEnemy*>			m_enemyList;			//エネミーリスト
-	std::vector<CRootPoint*>	m_rootPointList;		//ルートポイントリスト
 	bool						m_collider = false;
 };

@@ -6,8 +6,6 @@
 
 #include "MapData.h"
 
-class CRootPoint;
-
 #define LINK_NODE_MAX 4		//隣接ノードの最大数
 struct SNode {
 	SNode*		linkNode[LINK_NODE_MAX];	//隣接ノード。NULLであれば隣接ノードなし。
@@ -22,12 +20,12 @@ public:
 	CPathFinding();
 	~CPathFinding();
 	//ノードの構築
-	void BuildNodes(std::vector<CRootPoint*> rootPoint);
+	void BuildNodes();
 	//ルートの検索
 	//root			ルートの座標を格納するリスト
 	//startNumber	スタートのポイントの番号		
 	//targetNumber	ゴールのポイントの番号
-	void FindRoot(std::vector<CVector2>& root, int startNumber, int targetNumber);
+	void FindRoot(std::vector<CVector2>& root, CVector2 stratPos, CVector2 targetPos);
 private:
 	SNode m_nodes[MAP_HEIGHT][MAP_WIDTH];	//ノードの配列
 };
