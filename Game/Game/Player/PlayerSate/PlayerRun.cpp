@@ -5,7 +5,7 @@
 
 void CPlayerRun::Init()
 {
-	m_pPlayer->SetPlayerAnimation(enPlayerAnimationRun, 0.2f);
+	m_pPlayer->PlayAnimation(enPlayerAnimationRun, 0.2f);
 }
 
 void CPlayerRun::Update()

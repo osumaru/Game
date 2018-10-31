@@ -58,6 +58,8 @@ public:
 	//プレイヤーの描画関数
 	void Draw()override;
 
+	void AfterDraw();
+
 	//プレイヤーの座標を取得する関数
 	const CVector3& GetPosition() const
 	{
@@ -68,10 +70,56 @@ public:
 	{
 		 m_characterController.SetPosition(setpos);
 	}
-	//プレイヤーの回転情報を取得
-	const CQuaternion& GetPlayerrRot()
+
+	//プレイヤーのスピードを取得する
+	const CVector3& GetMoveSpeed() const
 	{
-		return m_rotation;
+		return m_characterController.GetMoveSpeed();
+	}
+
+	//移動速度を設定
+	void SetMoveSpeed(const CVector3& moveSpeed)
+	{
+		m_characterController.SetMoveSpeed(moveSpeed);
+	}
+
+	//プレイヤーのステータスを取得
+	const SplayerStatus& GetStatus() const
+	{
+		return m_status;
+	}
+
+	//プレイヤーのワールド行列を取得
+	const CMatrix& GetWorldMatrix() const
+	{
+		return m_skinmodel.GetWorldMatrix();
+	}
+
+	//ステートマシーンの取得
+	CPlayerStateMachine& GetPlayerStateMachine()
+	{
+		return m_PlayerStateMachine;
+	}
+
+	//武器を管理するクラスを取得
+	const CWeapon& GetWeapon() const
+	{
+		return m_weapon;
+	}
+
+	//プレイヤーのスキンモデルの情報を取得
+	const CSkinModel& GetPlayerSkin() const
+	{
+		return m_skinmodel;
+	}
+
+	//プレイヤーの頭のボーンの位置を取得
+	CVector3 GetPlayerHead() const
+	{
+
+		CMatrix PlayerHead = m_skinmodel.FindBoneWorldMatrix(L"Head");
+		CVector3 PlayerHeadPos = { PlayerHead.m[3][0],PlayerHead.m[3][1],PlayerHead.m[3][2] };
+		return PlayerHeadPos;
 	}
 
 	//アニメーションの情報を取得
@@ -108,43 +156,6 @@ public:
 		m_status.Gold += gold;
 	}
 
-	/*アニメーションの設定
-	第一引数　アニメーメーションの番号　第二引数　補完時間*/
-	void SetPlayerAnimation(EnPlayerAnimation animNumber, const float num)
-	{
-		m_animation.Play(animNumber, num);
-		m_State = animNumber;
-	}
-
-	//プレイヤーのステータスを取得
-	const SplayerStatus& GetStatus() const
-	{
-		return m_status;
-	}
-
-	//プレイヤーのワールド行列を取得
-	const CMatrix& GetWorldMatrix() const
-	{
-		return m_skinmodel.GetWorldMatrix();
-	}
-
-	//プレイヤーのスピードを取得する
-	const CVector3& GetMoveSpeed() const
-	{
-		return m_characterController.GetMoveSpeed();
-	}
-
-	//プレイヤーの頭のボーンの位置を取得
-	CVector3 GetPlayerHead() const
-	{
-		
-		CMatrix PlayerHead = m_skinmodel.FindBoneWorldMatrix(L"Head");
-		CVector3 PlayerHeadPos = { PlayerHead.m[3][0],PlayerHead.m[3][1],PlayerHead.m[3][2] };
-		return PlayerHeadPos;
-	}
-
-	void PlayerAttack();
-
 	//プレイヤーのダメージ処理
 	void GetDamage()
 	{
@@ -178,6 +189,7 @@ public:
 	{
 		m_isDamege = SetDamage;
 	}
+
 	//攻撃中かを取得
 	bool GetIsAttack() const
 	{
@@ -185,31 +197,9 @@ public:
 	}
 
 	//攻撃をしたかの設定
-	void SetAttack(bool SetA)
+	void SetIsAttack(bool SetA)
 	{
 		m_isAttack = SetA;
-	}
-
-	//ステートマシーンのしゅとく
-	CPlayerStateMachine& GetPlayerStateMachine()
-	{
-		return m_PlayerStateMachine;
-	}
-
-	void SetMoveSpeed(const CVector3& moveSpeed)
-	{
-		m_characterController.SetMoveSpeed(moveSpeed);
-	}
-
-	const CWeapon& GetWeapon() const
-	{
-		return m_weapon;
-	}
-	
-	//プレイヤーのスキンモデルの情報を取得
-	const CSkinModel& GetPlayerSkin() const
-	{
-		return m_skinmodel;
 	}
 
 	//無敵時間を設定する
@@ -224,6 +214,7 @@ public:
 		return m_wirePosition;
 	}
 
+	//キャラクターコントローラーを取得
 	const CCharacterController& GetCharacterController() const
 	{
 		return m_characterController;
@@ -234,7 +225,6 @@ public:
 	{
 		return m_isWireMove;
 	}
-	
 
 	//ワイヤー移動しているかを設定
 	void SetIsWireMove(bool isWireMove)
@@ -248,22 +238,35 @@ public:
 		m_initArrow = set;
 	}
 
-
-	void SetAnimationPlay(EnPlayerAnimation state, float interporationTime)
+	/*
+	アニメーションを補間つきで再生する関数
+	state				アニメーションの番号
+	interporationTime	補間時間
+	*/
+	void PlayAnimation(EnPlayerAnimation state, float interporationTime)
 	{
+		m_state = state;
 		m_animation.Play(state, interporationTime);
 	}
 
-	void SetAnimationPlay(EnPlayerAnimation state)
+	/*
+	アニメーション再生関数
+	state		アニメーションの番号
+	*/
+	void PlayAnimation(EnPlayerAnimation state)
 	{
-		m_animation.Play(state);
+		m_state = state;
+		m_animation.Play(m_state);
 	}
 
 	//弓を生成する関数
 	void InitArrow();
 private:
-	void PlayerMove();
 
+	//プレイヤーがエネミーに攻撃する処理
+	void PlayerAttack();
+
+	//プレイヤーの回転をする関数
 	void Rotation();
 
 	//アニメーションイベントが起きた時に呼ばれる処理。
@@ -279,7 +282,7 @@ private:
 	SplayerStatus			m_status;									//プレイヤーのステータス
 	bool					m_isSlip = false;							//スリップ判定
 	float					m_slipSpeed = 2.0f;							//回避移動時のスピード
-	EnPlayerAnimation		m_State = enPlayerAnimationStand;			//アニメーションを遷移させるための変数
+	EnPlayerAnimation		m_state = enPlayerAnimationStand;			//アニメーションを遷移させるための変数
 	const float				INTERVAL = 1.5;								//ダメージを受けた後の無敵時間
 	bool					m_isDamege = false;
 	float					m_animetionFrame = 0.0f;

@@ -8,8 +8,8 @@ void CPlayerArrowAttack::Init()
 {
 	//‹|‚Ì¶¬
 	m_pPlayer->InitArrow();
-	m_pPlayer->SetPlayerAnimation(enPlayerAnimationArrowAttack, 0.5f);
-	m_pPlayer->SetAttack(true);
+	m_pPlayer->PlayAnimation(enPlayerAnimationArrowAttack, 0.5f);
+	m_pPlayer->SetIsAttack(true);
 	m_pPlayer->SetMoveSpeed(CVector3::Zero);
 	//‹|—p‚Ì‹“_‚É•ÏX
 }

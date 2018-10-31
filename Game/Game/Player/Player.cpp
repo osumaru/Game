@@ -198,7 +198,6 @@ void CPlayer::Update()
 	Engine().GetShadowMap().SetProjectionMatrix(projMat);
 	m_PlayerStateMachine.Update();
 	Rotation();
-	PlayerMove();
 
 	m_characterController.Execute(GameTime().GetDeltaFrameTime());
 	m_position = m_characterController.GetPosition();
@@ -209,20 +208,19 @@ void CPlayer::Update()
 	m_weapon.Update();
 }
 
-void CPlayer::PlayerMove()
-{
-
-}
-
 //ï`âÊèàóù
 void CPlayer::Draw()
+{
+	m_weapon.Draw();
+	m_skinmodel.Draw(GetGameCamera().GetViewMatrix(), GetGameCamera().GetProjectionMatrix());
+}
+
+void CPlayer::AfterDraw()
 {
 	if (m_isZoom)
 	{
 		m_arrowtag.Draw();
 	}
-	m_weapon.Draw();
-	m_skinmodel.Draw(GetGameCamera().GetViewMatrix(), GetGameCamera().GetProjectionMatrix());
 }
 
 void CPlayer::InitArrow()

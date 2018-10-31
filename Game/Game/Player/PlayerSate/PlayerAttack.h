@@ -2,13 +2,17 @@
 #include"PlayerState.h"
 #include "PlayerStateCommon.h"
 
+
 class CPlayerAttack : public  IPlayerState
 {
 public:
+	//コンストラクタ
 	CPlayerAttack();
 
+	//初期化
 	void Init()override;
-
+	
+	//
 	void Update()override;
 
 private:

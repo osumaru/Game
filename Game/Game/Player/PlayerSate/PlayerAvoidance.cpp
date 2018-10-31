@@ -6,7 +6,7 @@
 
 void CPlayerAvoidance::Init()
 {
-	m_pPlayer->SetPlayerAnimation(enPlayerAnimationAvoidance, 0.1f);
+	m_pPlayer->PlayAnimation(enPlayerAnimationAvoidance, 0.1f);
 	m_pPlayer->SetMoveSpeed(CVector3::Zero);
 }
 
@@ -22,7 +22,6 @@ void CPlayerAvoidance::Update()
 		m_pPlayer->SetPosition(position);
 
 		GetPlayer().GetPlayerStateMachine().SetState(CPlayerState::enPlayerStateStand);
-		GetPlayer().SetAnimationPlay(enPlayerAnimationStand, 0.1f);
 
 	}
 
