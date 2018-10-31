@@ -4,6 +4,7 @@
 #include "../Map/Map.h"
 #include "../Scene/SceneManager.h"
 #include "../Enemy/IEnemy.h"
+#include "../Itam/IItem.h"
 
 CPlayer *CPlayer::m_player = NULL;
 
@@ -199,7 +200,6 @@ void CPlayer::Update()
 	Engine().GetShadowMap().SetProjectionMatrix(projMat);
 	m_PlayerStateMachine.Update();
 	Rotation();
-	PlayerMove();
 
 	m_characterController.Execute(GameTime().GetDeltaFrameTime());
 	m_position = m_characterController.GetPosition();
@@ -210,20 +210,19 @@ void CPlayer::Update()
 	m_weapon.Update();
 }
 
-void CPlayer::PlayerMove()
-{
-
-}
-
 //描画処理
 void CPlayer::Draw()
+{
+	m_weapon.Draw();
+	m_skinmodel.Draw(GetGameCamera().GetViewMatrix(), GetGameCamera().GetProjectionMatrix());
+}
+
+void CPlayer::AfterDraw()
 {
 	if (m_isZoom)
 	{
 		m_arrowtag.Draw();
 	}
-	m_weapon.Draw();
-	m_skinmodel.Draw(GetGameCamera().GetViewMatrix(), GetGameCamera().GetProjectionMatrix());
 }
 
 void CPlayer::InitArrow()
@@ -339,4 +338,20 @@ void CPlayer::PlayerAttack()
 	}
 	
 
+}
+
+void CPlayer::UseItem(int number)
+{
+	if (!m_itemList.empty()) 
+	{
+		//選んだアイテムを使う
+		std::list<IItem*>::iterator it;
+		it = m_itemList.begin();
+		for (int i = 0; i < number; i++) {
+			it++;
+		}
+		(*it)->Use();
+		//使ったアイテムをリストから削除する
+		m_itemList.erase(it);
+	}
 }

@@ -14,18 +14,19 @@ public:
 	void Init(CVector3 position);
 
 	//更新する前に一度だけ呼ばれる
-	bool Start();
+	bool Start() override;
 
 	//更新
-	void Update();
+	void Update() override;
 
 	//描画
-	void Draw();
+	void Draw() override;
 
-	//移動
-	void Move();
+	//ポップさせる
+	void Pop();
 
 	//お金の値を設定
+	//gold		お金
 	void SetGold(const int gold)
 	{
 		m_gold = gold;

@@ -6,7 +6,7 @@
 
 void CPlayerDamage::Init()
 {
-	m_pPlayer->SetPlayerAnimation(enPlayerAnimationDamage, 0.2f);
+	m_pPlayer->PlayAnimation(enPlayerAnimationDamage, 0.2f);
 }
 
 void CPlayerDamage::Update()

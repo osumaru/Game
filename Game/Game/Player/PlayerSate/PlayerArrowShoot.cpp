@@ -15,8 +15,8 @@ CPlayerArrowShoot::~CPlayerArrowShoot()
 void CPlayerArrowShoot::Init()
 {
 	//‹|‚ð‘Å‚Âƒ‚[ƒVƒ‡ƒ“
-	m_pPlayer->SetPlayerAnimation(enPlayerAnimationArrowShoot, 0.5f);
-	m_pPlayer->SetAttack(true);
+	m_pPlayer->PlayAnimation(enPlayerAnimationArrowShoot, 0.5f);
+	m_pPlayer->SetIsAttack(true);
 	m_isShoot = false;
 }
 
@@ -38,7 +38,7 @@ void CPlayerArrowShoot::Update()
 		else
 		{
 			m_pPlayer->GetPlayerStateMachine().SetState(CPlayerState::enPlayerStateStand);
-			m_pPlayer->SetAttack(false);
+			m_pPlayer->SetIsAttack(false);
 
 		}
 	}

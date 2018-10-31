@@ -10,11 +10,11 @@ void CPlayerJump::Init()
 	m_pPlayer->SetMoveSpeed(moveSpeed);
 	if (m_pPlayer->GetPlayerStateMachine().GetState() == CPlayerState::EnPlayerState::enPlayerStateRunJump)
 	{
-		m_pPlayer->SetPlayerAnimation(enPlayerAnimationRunJump, 0.0f);
+		m_pPlayer->PlayAnimation(enPlayerAnimationRunJump, 0.0f);
 	}
 	else
 	{
-		m_pPlayer->SetPlayerAnimation(enPlayerAnimationJump, 0.2f);
+		m_pPlayer->PlayAnimation(enPlayerAnimationJump, 0.2f);
 	}
 }
 

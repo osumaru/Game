@@ -40,7 +40,7 @@ bool CRecoveryItem::Start()
 
 void CRecoveryItem::Update()
 {
-	Move();
+	Pop();
 
 	m_timer += GameTime().GetDeltaFrameTime();
 	//プレイヤーとの距離を計算
@@ -54,8 +54,8 @@ void CRecoveryItem::Update()
 		m_characterController.SetMoveSpeed(m_moveSpeed);
 		if (length < 2.0f) {
 			//近ければ獲得
-			GetPlayer().RecoveryHP(30);
-			Delete(this);
+			GetPlayer().AddItemList(this);
+			SetIsActive(false);
 		}
 	}
 
@@ -71,7 +71,14 @@ void CRecoveryItem::Draw()
 	m_skinModel.Draw(GetGameCamera().GetViewMatrix(), GetGameCamera().GetProjectionMatrix());
 }
 
-void CRecoveryItem::Move()
+void CRecoveryItem::Use()
+{
+	m_isUse = true;
+	GetPlayer().RecoveryHP(m_recoveryValue);
+	Delete(this);
+}
+
+void CRecoveryItem::Pop()
 {
 	//移動速度を取得
 	CVector3 moveSpeed = m_characterController.GetMoveSpeed();

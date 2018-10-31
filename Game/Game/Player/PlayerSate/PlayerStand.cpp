@@ -9,7 +9,7 @@
 void CPlayerStand::Init()
 {
 	//待機アニメーションの再生
-	m_pPlayer->SetPlayerAnimation(enPlayerAnimationStand,0.5f);
+	m_pPlayer->PlayAnimation(enPlayerAnimationStand);
 	m_pPlayer->SetMoveSpeed(CVector3::Zero);
 }
 

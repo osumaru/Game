@@ -7,7 +7,7 @@
 void CPlayerWalk::Init()
 {
 	//歩きアニメーションの再生
-	m_pPlayer->SetPlayerAnimation(enPlayerAnimationWalk, 0.2f);
+	m_pPlayer->PlayAnimation(enPlayerAnimationWalk, 0.2f);
 }
 
 void CPlayerWalk::Update()

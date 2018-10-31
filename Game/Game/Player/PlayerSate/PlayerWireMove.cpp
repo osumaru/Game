@@ -7,7 +7,7 @@
 
 void CPlayerWireMove::Init()
 {
-	GetPlayer().SetPlayerAnimation(enPlayerAnimationWireMove, 0.1f);
+	GetPlayer().PlayAnimation(enPlayerAnimationWireMove, 0.1f);
 	m_movePosition = GetPlayer().GetWirePosition();
 }
 
