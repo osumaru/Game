@@ -4,6 +4,7 @@
 #pragma once
 #include "GameScene.h"
 #include "TitleScene.h"
+#include "../UI/Fade/Fade.h"
 
 class CSceneManager:public IGameObject
 {
@@ -37,12 +38,17 @@ public:
 		static CSceneManager sceneManager;
 		return sceneManager;
 	}
+	CFade* GetFade()
+	{
+		return m_fade;
+	}
 
 
 private:
 	EnSceneState	m_sceneState= enSceneNum;//シーンのステート（現在のシーンを入れておく用）
 	CGameScene*		m_gameScene;			//ゲームシーン
 	CTitleScene*	m_titleScene;			//タイトルシーン
+	CFade*			m_fade;					//フェイド
 	//IScene*			m_scene;			//シーンのインターフェース
 };
 

@@ -3,7 +3,8 @@
 
 void CSceneManager::Init()
 {
-
+	m_fade = new CFade;
+	Add(m_fade, 15);
 }
 
 void CSceneManager::Update()
