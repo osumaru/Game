@@ -9,7 +9,7 @@
 void CPlayerStand::Init()
 {
 	//待機アニメーションの再生
-	GetPlayer().SetPlayerAnimation(CPlayerState::enPlayerStand,0.5f);	
+	m_pPlayer->PlayAnimation(enPlayerAnimationStand);
 	m_pPlayer->SetMoveSpeed(CVector3::Zero);
 }
 
@@ -17,47 +17,47 @@ void CPlayerStand::Update()
 {
 	
 	//死亡した場合の処理
-	if (GetPlayer().GetStatus().Health <= 0)
+	if (m_pPlayer->GetStatus().Health <= 0)
 	{
-		GetPlayer().GetPlayerStateMachine().ChangeState(CPlayerState::enPlayerDied);
+		m_pPlayer->GetPlayerStateMachine().SetState(CPlayerState::enPlayerStateDied);
 	}
 	//ダメージを受けた場合の処理
-	else if (GetPlayer().GetIsDamage())
+	else if (m_pPlayer->GetIsDamage())
 	{
-		GetPlayer().GetPlayerStateMachine().ChangeState(CPlayerState::enPlayerDamage);
+		m_pPlayer->GetPlayerStateMachine().SetState(CPlayerState::enPlayerStateDamage);
 	}
 	//攻撃をした時の処理
 	else if (Pad().IsTriggerButton(enButtonRightTrigger))
 	{
 		if (m_pPlayer->GetWeapon().GetCurrentState() == CWeapon::enWeaponArrow)
 		{
-			GetPlayer().GetPlayerStateMachine().ChangeState(CPlayerState::enPlayerArrowAttack);
+			m_pPlayer->GetPlayerStateMachine().SetState(CPlayerState::enPlayerStateArrowAttack);
 		}
 		else
 		{
-			GetPlayer().GetPlayerStateMachine().ChangeState(CPlayerState::enPlayerAttack);
+			m_pPlayer->GetPlayerStateMachine().SetState(CPlayerState::enPlayerStateAttack);
 		}
 		
 	}
 	
 	else if (Pad().IsTriggerButton(enButtonA))
 	{
-		GetPlayer().GetPlayerStateMachine().ChangeState(CPlayerState::enPlayerJump);
+		GetPlayer().GetPlayerStateMachine().SetState(CPlayerState::enPlayerStateJump);
 	}
 
 	else if (Pad().IsTriggerButton(enButtonB))
 	{
-		GetPlayer().GetPlayerStateMachine().ChangeState(CPlayerState::enPlayerAvoidance);
+		GetPlayer().GetPlayerStateMachine().SetState(CPlayerState::enPlayerStateAvoidance);
 	}
 	else if (GetPlayer().IsWireMove()) 
 	{
 		//ワイヤー移動できるなら遷移
-		GetPlayer().GetPlayerStateMachine().ChangeState(CPlayerState::enPlayerWireMove);
+		GetPlayer().GetPlayerStateMachine().SetState(CPlayerState::enPlayerStateWireMove);
 	}
 	//移動の入力があるなら歩きアニメーションに遷移
 	else if (Pad().GetLeftStickX() != 0 || Pad().GetLeftStickY() != 0)
 	{
-		GetPlayer().GetPlayerStateMachine().ChangeState(CPlayerState::enPlayerWalk);
+		GetPlayer().GetPlayerStateMachine().SetState(CPlayerState::enPlayerStateWalk);
 
 	}
 	

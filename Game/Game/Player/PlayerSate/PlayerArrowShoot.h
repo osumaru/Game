@@ -1,5 +1,6 @@
 #pragma once
 #include "PlayerState.h"
+//‹|‚ð
 class CPlayerArrowShoot : public IPlayerState
 {
 public:

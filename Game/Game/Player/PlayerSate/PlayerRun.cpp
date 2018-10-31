@@ -5,7 +5,7 @@
 
 void CPlayerRun::Init()
 {
-	GetPlayer().SetPlayerAnimation(CPlayerState::enPlayerRun, 0.2f);
+	m_pPlayer->PlayAnimation(enPlayerAnimationRun, 0.2f);
 }
 
 void CPlayerRun::Update()
@@ -26,41 +26,41 @@ void CPlayerRun::Update()
 	m_pPlayer->SetMoveSpeed(moveSpeed);
 
 	//走り中にダメージを受けた場合
-	if (GetPlayer().GetIsDamage())
+	if (m_pPlayer->GetIsDamage())
 	{
-		GetPlayer().GetPlayerStateMachine().ChangeState(CPlayerState::enPlayerDamage);
+		m_pPlayer->GetPlayerStateMachine().SetState(CPlayerState::enPlayerStateDamage);
 	}
 	//走っているときに攻撃した時の処理
 	else if (Pad().IsTriggerButton(enButtonRightTrigger))
 	{
 		if(m_pPlayer->GetWeapon().GetCurrentState() == CWeapon::enWeaponArrow)
 		{
-			GetPlayer().GetPlayerStateMachine().ChangeState(CPlayerState::enPlayerArrowAttack);
+			m_pPlayer->GetPlayerStateMachine().SetState(CPlayerState::enPlayerStateArrowAttack);
 		}
 		else
 		{
 
-			GetPlayer().GetPlayerStateMachine().ChangeState(CPlayerState::enPlayerAttack);
+			m_pPlayer->GetPlayerStateMachine().SetState(CPlayerState::enPlayerStateAttack);
 		}
 	}
 	//走り中に回避した時の処理
 	else if (Pad().IsTriggerButton(enButtonB))
 	{
-		GetPlayer().GetPlayerStateMachine().ChangeState(CPlayerState::enPlayerAvoidance);
+		m_pPlayer->GetPlayerStateMachine().SetState(CPlayerState::enPlayerStateAvoidance);
 	}
 	//走っている時にジャンプが押されたとき処理
 	else if (Pad().IsTriggerButton(enButtonA))
 	{
-		GetPlayer().GetPlayerStateMachine().ChangeState(CPlayerState::enPlayerRunJump);
+		m_pPlayer->GetPlayerStateMachine().SetState(CPlayerState::enPlayerStateRunJump);
 	}
 
-	else if (fabs(GetPlayer().GetMoveSpeed().Length()) == 0.0f)
+	else if (fabs(m_pPlayer->GetMoveSpeed().Length()) == 0.0f)
 	{
-		GetPlayer().GetPlayerStateMachine().ChangeState(CPlayerState::enPlayerStand);
+		m_pPlayer->GetPlayerStateMachine().SetState(CPlayerState::enPlayerStateStand);
 	}
-	else if (GetPlayer().IsWireMove()) 
+	else if (m_pPlayer->IsWireMove())
 	{
 		//ワイヤー移動できるなら遷移
-		GetPlayer().GetPlayerStateMachine().ChangeState(CPlayerState::enPlayerWireMove);
+		m_pPlayer->GetPlayerStateMachine().SetState(CPlayerState::enPlayerStateWireMove);
 	}
 }

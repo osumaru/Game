@@ -8,34 +8,51 @@
 #include "../UI/Menu/Menu.h"
 #include "../UI/Result/Result.h"
 #include "../UI/LevelUp/LevelUp.h"
-#include"../../Game/Camera/GameCamera.h"
+#include "../../Game/Camera/GameCamera.h"
+
+void CGameScene::Release()
+{
+	//デリートの順番考えてない
+	Delete(m_map);
+	Delete(m_miniMap);
+	Delete(m_weaponSelect);
+	Delete(m_playerHp);
+	Delete(m_levelUp);
+	Delete(m_menu);
+	Delete(m_result);
+	GetGameCamera().Destroy();
+}
 
 void CGameScene::Init()
 {
-	map = New<Map>(0);
-	map->Init(0);
-	
-	CMiniMap* miniMap = New<CMiniMap>(0);
-	miniMap->Init();
+	m_map = New<Map>(0);
+	m_map->Init(0);
 
+	m_miniMap = New<CMiniMap>(0);
+	m_miniMap->Init();
+
+	//カメラを生成
+	GetGameCamera().Create();
 	GetGameCamera().Init();
 
 	m_weaponSelect = New<CWeaponSelect>(0);
 	m_weaponSelect->Init();
 
-	CPlayerHp* playerHp = New<CPlayerHp>(0);
-	playerHp->Init();
+	m_playerHp = New<CPlayerHp>(0);
+	m_playerHp->Init();
 
-	CLevelUp* levelUp = New<CLevelUp>(0);
-	levelUp->Init();
+	m_levelUp = New<CLevelUp>(0);
+	m_levelUp->Init();
 
-	CMenu* menu = New<CMenu>(0);
-	menu->Init();
+	m_menu = New<CMenu>(0);
+	m_menu->Init();
 
-	CResult* result = New<CResult>(0);
-	result->Init();
+	m_result = New<CResult>(0);
+	m_result->Init();
+
 }
 
 void CGameScene::Update()
 {
 }
+

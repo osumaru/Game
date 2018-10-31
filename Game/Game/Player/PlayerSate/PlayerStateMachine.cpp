@@ -4,11 +4,11 @@
 
 void CPlayerStateMachine::Init()
 {
-	ChangeState(CPlayerState::enPlayerStand);
+	SetState(CPlayerState::enPlayerStateStand);
 }
 
 
-void CPlayerStateMachine::ChangeState(CPlayerState::EnPlayerState nextState)
+void CPlayerStateMachine::SetState(CPlayerState::EnPlayerState nextState)
 {
 	if (m_state == nextState) {
 		//同じステートなら返す
@@ -18,41 +18,41 @@ void CPlayerStateMachine::ChangeState(CPlayerState::EnPlayerState nextState)
 	m_state = nextState;
 
 	switch (m_state) {
-	case CPlayerState::enPlayerStand:
-		m_currentState = &m_playerStand;	//待機アニメーションに遷移
+	case CPlayerState::enPlayerStateStand:
+		m_currentState = &m_playerStand;			//待機アニメーションに遷移
 		break;
-	case CPlayerState::enPlayerWalk:
-		m_currentState = &m_playerWalk;		//歩行アニメーションに遷移
+	case CPlayerState::enPlayerStateWalk:
+		m_currentState = &m_playerWalk;				//歩行アニメーションに遷移
 		break;
-	case CPlayerState::enPlayerRun:
-		m_currentState = &m_playerRun;		//走りアニメーションに遷移
+	case CPlayerState::enPlayerStateRun:
+		m_currentState = &m_playerRun;				//走りアニメーションに遷移
 		break;
-	case CPlayerState::enPlayerAvoidance:
-		m_currentState = &m_playerAvoidance;//回避アニメーションに遷移
+	case CPlayerState::enPlayerStateAvoidance:
+		m_currentState = &m_playerAvoidance;		//回避アニメーションに遷移
 		break;
-	case CPlayerState::enPlayerJump:
-		m_currentState = &m_playerJump;		//ジャンプアニメーションに遷移	
+	case CPlayerState::enPlayerStateJump:
+		m_currentState = &m_playerJump;				//ジャンプアニメーションに遷移	
 		break;
-	case CPlayerState::enPlayerRunJump:
-		m_currentState = &m_playerJump;		//走りジャンプアニメーションに遷移	
+	case CPlayerState::enPlayerStateRunJump:
+		m_currentState = &m_playerJump;				//走りジャンプアニメーションに遷移	
 		break;
-	case CPlayerState::enPlayerAttack:
-		m_currentState = &m_playerAttack;	//攻撃アニメーションに遷移
+	case CPlayerState::enPlayerStateAttack:
+		m_currentState = &m_playerAttack;			//攻撃アニメーションに遷移
 		break;
-	case CPlayerState::enPlayerArrowAttack:	//弓の攻撃アニメーションに遷移
+	case CPlayerState::enPlayerStateArrowAttack:	//弓の攻撃アニメーションに遷移
 		m_currentState = &m_playerArrowAtack;
 		break;
-	case CPlayerState::enPlayerArrowShoot:	//弓の攻撃アニメーションに遷移
+	case CPlayerState::enPlayerStateArrowShoot:		//弓の攻撃アニメーションに遷移
 		m_currentState = &m_playerArrowShoot;
 		break;
-	case CPlayerState::enPlayerDamage:
-		m_currentState = &m_playerDamege;	//ダメージアニメーションに遷移
+	case CPlayerState::enPlayerStateDamage:
+		m_currentState = &m_playerDamege;			//ダメージアニメーションに遷移
 		break;
-	case CPlayerState::enPlayerDied:
-		m_currentState = &m_playerDied;		//死亡アニメーションに遷移
+	case CPlayerState::enPlayerStateDied:
+		m_currentState = &m_playerDied;				//死亡アニメーションに遷移
 		break;
-	case CPlayerState::enPlayerWireMove:
-		m_currentState = &m_playerWireMove;	//ワイヤーアニメーションに遷移
+	case CPlayerState::enPlayerStateWireMove:
+		m_currentState = &m_playerWireMove;			//ワイヤーアニメーションに遷移
 	}
 
 	m_currentState->Init();
