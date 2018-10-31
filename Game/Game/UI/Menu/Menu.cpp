@@ -76,6 +76,10 @@ void CMenu::Update()
 		GetPlayer().SetIsActive(!m_Draw);
 	}
 
+	if (m_Draw && Pad().IsTriggerButton(enButtonA)) {
+		//アイテムを使用する
+		GetPlayer().UseItem(0);
+	}
 
 	 //プレイヤーのステータスを格納
 	 PlayerStatusInput();

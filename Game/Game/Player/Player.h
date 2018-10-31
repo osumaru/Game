@@ -6,6 +6,8 @@
 #include "PlayerArrow.h"
 #include "Weapon.h"
 
+class IItem;
+
 struct SplayerStatus
 {
 	int Strength;			//攻撃力
@@ -270,6 +272,17 @@ public:
 		m_initArrow = set;
 	}
 
+	//所持アイテムリストに追加
+	//item		インベントリに追加するアイテム
+	void AddItemList(IItem* item)
+	{
+		m_itemList.push_back(item);
+	}
+
+	//所持アイテムを使う
+	//number		アイテムの番号
+	void UseItem(int number);
+
 	//アニメーションイベントが起きた時に呼ばれる処理。
 	void OnInvokeAnimationEvent(const wchar_t* animClipName, const wchar_t* eventName);
 
@@ -328,6 +341,8 @@ private:
 	bool					m_isWireMove = false;					//ワイヤー移動できるか
 	CRayTest				m_wireCollisionSolver;					//ワイヤー移動のコリジョン処理クラス
 	CVector3				m_wirePosition;							//ワイヤー移動先の座標
+
+	std::list<IItem*>		m_itemList;								//所持アイテムのリスト
 };
 
 static CPlayer& GetPlayer()

@@ -14,14 +14,20 @@ public:
 	void Init(CVector3 position);
 
 	//更新する前に一度だけ呼ばれる
-	bool Start();
+	bool Start() override;
 
 	//更新
-	void Update();
+	void Update() override;
 
 	//描画
-	void Draw();
+	void Draw() override;
 
-	//移動
-	void Move();
+	//アイテムを使う
+	void Use() override;
+
+	//ポップさせる
+	void Pop();
+
+private:
+	int m_recoveryValue = 30;	//回復値
 };

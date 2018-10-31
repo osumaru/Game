@@ -145,7 +145,6 @@ void Map::Update()
 	while (it != m_enemyList.end()) {
 		if ((*it)->IsDelete()) {
 			//Ž€–S‚µ‚Ä‚¢‚é
-			IEnemy* enemy = *it;
 			it = m_enemyList.erase(it);
 		}
 		else {

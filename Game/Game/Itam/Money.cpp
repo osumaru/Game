@@ -39,7 +39,7 @@ bool CMoney::Start()
 
 void CMoney::Update()
 {
-	Move();
+	Pop();
 
 	m_timer += GameTime().GetDeltaFrameTime();
 	//プレイヤーとの距離を計算
@@ -71,7 +71,7 @@ void CMoney::Draw()
 	m_skinModel.Draw(GetGameCamera().GetViewMatrix(), GetGameCamera().GetProjectionMatrix());
 }
 
-void CMoney::Move()
+void CMoney::Pop()
 {
 	//移動速度を取得
 	CVector3 moveSpeed = m_characterController.GetMoveSpeed();

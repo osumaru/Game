@@ -4,6 +4,7 @@
 #include "../Map/Map.h"
 #include "../Scene/SceneManager.h"
 #include "../Enemy/IEnemy.h"
+#include "../Itam/IItem.h"
 
 void CPlayer::OnInvokeAnimationEvent(//アニメーションイベントが呼ばれるごとに呼び出される？
 	const wchar_t* animClipName,
@@ -406,4 +407,20 @@ void CPlayer::PlayerAttack()
 	}
 	
 
+}
+
+void CPlayer::UseItem(int number)
+{
+	if (!m_itemList.empty()) 
+	{
+		//選んだアイテムを使う
+		std::list<IItem*>::iterator it;
+		it = m_itemList.begin();
+		for (int i = 0; i < number; i++) {
+			it++;
+		}
+		(*it)->Use();
+		//使ったアイテムをリストから削除する
+		m_itemList.erase(it);
+	}
 }
