@@ -177,6 +177,7 @@ void CPlayer::Update()
 	{
 		GetGameCamera().SetCmareaState(GetGameCamera().enArrow);
 		m_isZoom = true;
+		ExpUP(20);
 	}
 
 	else
@@ -226,7 +227,6 @@ void CPlayer::AfterDraw()
 void CPlayer::InitArrow()
 {
 	CPlayerArrow*	Arrow = New<CPlayerArrow>(0);
-	Arrow->Start();
 	m_arrowList.push_back(Arrow);
 	m_initArrow = true;
 }
