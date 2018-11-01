@@ -36,8 +36,8 @@ void CInventory::Init(CMenu* menu)
 				m_recoveryItem[idx].Init(itemTexure);
 				CVector2 position = m_basePos;
 				position.x += m_size.x * (idx % m_inventoryWidth);
-				position.y -= m_size.y * idx * m_inventoryHeight;
-				if (idx % m_inventoryWidth == m_inventoryWidth - 1)
+				position.y -= m_size.y * (idx / m_inventoryWidth);
+				if (idx % m_inventoryWidth == 0)
 				{
 					m_inventoryHeight++;
 				}
@@ -103,9 +103,9 @@ void CInventory::Update()
 	{
 		position.y -= m_size.y;
 		number += m_inventoryWidth;
-		if (position.y <= m_basePos.y - m_size.y * m_inventoryHeight)
+		if (position.y <= m_basePos.y - m_size.y * (m_inventoryHeight - 1))
 		{
-			position.y = m_basePos.y - m_size.y * m_inventoryHeight;
+			position.y = m_basePos.y - m_size.y * (m_inventoryHeight - 1);
 		}
 		else 
 		{
