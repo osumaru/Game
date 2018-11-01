@@ -11,6 +11,7 @@
 //#include "../osumaruEngine/Graphics/Primitive.h"
 #include "../../osumaruEngine/Graphics/SkinModel.h"
 //#include "../osumaruEngine/Graphics/SkinModel/SkinModelData.h"
+#include "../../osumaruEngine/Graphics/Skelton.h"
 #include "../../osumaruEngine/Graphics/Animation.h"
 #include "../../osumaruEngine/Camera/Camera.h"
 #include "../../osumaruEngine/Camera/SpringCamera.h"

@@ -23,6 +23,7 @@ void CPlayerWireMove::Update()
 		toMovePos.Normalize();
 		toMovePos *= m_speed;
 		GetPlayer().SetMoveSpeed(toMovePos);
+		m_pPlayer->GetCharacterController().Execute(GameTime().GetDeltaFrameTime());
 	}
 	else {
 		isMoveEnd = true;

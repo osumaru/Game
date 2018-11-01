@@ -14,7 +14,6 @@ CConstantBuffer::~CConstantBuffer()
 		m_buffer->Release();
 		m_buffer = nullptr;
 	}
-
 }
 
 void CConstantBuffer::Create(int bufferSize, const void* initData)
