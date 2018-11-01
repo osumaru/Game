@@ -255,6 +255,9 @@
     <ClCompile Include="Scene\TitleScene.cpp">
       <Filter>ソース ファイル\Scene</Filter>
     </ClCompile>
+    <ClCompile Include="UI\Menu\Inventory.cpp">
+      <Filter>ソース ファイル\UI\Menu</Filter>
+    </ClCompile>
     <ClCompile Include="UI\Fade\Fade.cpp">
       <Filter>ソース ファイル\UI\Fade</Filter>
     </ClCompile>
@@ -451,6 +454,9 @@
     </ClInclude>
     <ClInclude Include="Scene\TitleScene.h">
       <Filter>ソース ファイル\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Menu\Inventory.h">
+      <Filter>ソース ファイル\UI\Menu</Filter>
     </ClInclude>
     <ClInclude Include="UI\Fade\Fade.h">
       <Filter>ソース ファイル\UI\Fade</Filter>

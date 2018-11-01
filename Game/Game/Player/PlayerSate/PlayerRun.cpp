@@ -24,6 +24,7 @@ void CPlayerRun::Update()
 	moveSpeed += frontVec * Pad().GetLeftStickY() * speed;
 	moveSpeed += rightVec * Pad().GetLeftStickX() * speed;
 	m_pPlayer->SetMoveSpeed(moveSpeed);
+	m_pPlayer->GetCharacterController().Execute(GameTime().GetDeltaFrameTime());
 
 	//‘–‚è’†‚Éƒ_ƒ[ƒW‚ðŽó‚¯‚½ê‡
 	if (m_pPlayer->GetIsDamage())

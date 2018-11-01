@@ -111,6 +111,7 @@ void CPlayer::Init(CVector3 position)
 
 void CPlayer::Update()
 {
+	m_position = m_characterController.GetPosition();
 	if (m_isDied) { return; }
 
 	//無敵時間の処理
@@ -199,8 +200,6 @@ void CPlayer::Update()
 	Engine().GetShadowMap().SetProjectionMatrix(projMat);
 	m_PlayerStateMachine.Update();
 	Rotation();
-
-	m_characterController.Execute(GameTime().GetDeltaFrameTime());
 	m_position = m_characterController.GetPosition();
 	//アニメーションの更新
 	m_animation.Update(GameTime().GetDeltaFrameTime());
