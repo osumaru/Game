@@ -180,6 +180,9 @@
     <ClCompile Include="Enemy\Samurai.cpp" />
     <ClCompile Include="Enemy\Warrok.cpp" />
     <ClCompile Include="Enemy\Zombie.cpp" />
+    <ClCompile Include="NPC\INpcState.cpp" />
+    <ClCompile Include="NPC\NpcManager.cpp" />
+    <ClCompile Include="NPC\ShopNPC.cpp" />
     <ClCompile Include="UI\Fade\Fade.cpp" />
     <ClCompile Include="Itam\IItem.cpp" />
     <ClCompile Include="Itam\Money.cpp" />
@@ -216,6 +219,7 @@
     <ClCompile Include="UI\DamageNumber\DamageNumber.cpp" />
     <ClCompile Include="UI\DamageNumber\Number.cpp" />
     <ClCompile Include="UI\LevelUp\LevelUp.cpp" />
+    <ClCompile Include="UI\Menu\Inventory.cpp" />
     <ClCompile Include="UI\Menu\Menu.cpp" />
     <ClCompile Include="UI\MiniMap\MiniMap.cpp" />
     <ClCompile Include="UI\PlayerHp\PlayerHp.cpp" />
@@ -246,6 +250,9 @@
     <ClInclude Include="Enemy\Samurai.h" />
     <ClInclude Include="Enemy\Warrok.h" />
     <ClInclude Include="Enemy\Zombie.h" />
+    <ClInclude Include="NPC\INpcState.h" />
+    <ClInclude Include="NPC\NpcManager.h" />
+    <ClInclude Include="NPC\ShopNPC.h" />
     <ClInclude Include="UI\Fade\Fade.h" />
     <ClInclude Include="Itam\IItem.h" />
     <ClInclude Include="Itam\Money.h" />
@@ -278,6 +285,7 @@
     <ClInclude Include="UI\DamageNumber\DamageNumber.h" />
     <ClInclude Include="UI\DamageNumber\Number.h" />
     <ClInclude Include="UI\LevelUp\LevelUp.h" />
+    <ClInclude Include="UI\Menu\Inventory.h" />
     <ClInclude Include="UI\Menu\Menu.h" />
     <ClInclude Include="UI\MiniMap\MiniMap.h" />
     <ClInclude Include="UI\PlayerHp\PlayerHp.h" />
