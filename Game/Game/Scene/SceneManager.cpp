@@ -7,10 +7,6 @@ void CSceneManager::Init()
 	Add(m_fade, 15);
 }
 
-void CSceneManager::Update()
-{
-}
-
 //シーンの切り替え関数
 void CSceneManager::ChangeScene(EnSceneState scene)
 {
@@ -33,6 +29,10 @@ void CSceneManager::ChangeScene(EnSceneState scene)
 	case EnSceneState::enResultScene:
 		//リザルト開放の処理をかく
 		break;
+		//ロードシーンの開放
+	case EnSceneState::enLoadScene:
+		//ロード開放の処理をかく
+		break;
 	default:
 		break;
 	}
@@ -54,6 +54,10 @@ void CSceneManager::ChangeScene(EnSceneState scene)
 		break;
 		//リザルトシーンへの遷移
 	case EnSceneState::enResultScene:
+		break;
+		//リザルトシーンへの遷移
+	case EnSceneState::enLoadScene:
+		//ロード開放の処理をかく
 		break;
 	default:
 		break;
