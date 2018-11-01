@@ -5,21 +5,16 @@
 #include "GameScene.h"
 #include "TitleScene.h"
 
-class CSceneManager:public IGameObject
+class CSceneManager
 {
 public:
 	enum EnSceneState {
 		enTitleScene,	//タイトル
 		enGameScene,	//ゲーム
 		enResultScene,	//リザルト
+		enLoadScene,	//ロード
 		enSceneNum		//シーンの数
 	};
-
-	//初期化
-	void Init();
-
-	//更新
-	void Update();
 
 	//シーン変化
 	//scene		遷移したいシーン
