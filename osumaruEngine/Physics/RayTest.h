@@ -20,8 +20,8 @@ public:
 	void Init(float radius, float height);
 
 	//コリジョン解決の実行
-	//position	プレイヤーの座標
-	//target	ワイヤーの移動先の座標
+	//position	レイの始点
+	//target	レイの終点
 	bool Execute(const CVector3& position, const CVector3 target);
 
 private:

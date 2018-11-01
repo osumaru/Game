@@ -17,20 +17,25 @@ void CPlayerAvoidance::Init()
 
 void CPlayerAvoidance::Update()
 {
+	//プレイヤーの前のフレームのボーンの座標から今のボーンの座標をレイテストしてめり込んでいれば押し戻す
 	CVector3 playerPos = m_pPlayer->GetPosition();
 	CVector3 bonePos;
 	bonePos.x = m_pBoneMat->m[3][0];
 	bonePos.y = m_pBoneMat->m[3][1];
 	bonePos.z = m_pBoneMat->m[3][2];
+	
+	//前のフレームとの座標と今の座標を引いて移動量を計算
 	CVector3 moveSpeed = bonePos - m_preBonePos;
 	moveSpeed.y = 0.0f;
 	CCharacterController& characon = m_pPlayer->GetCharacterController();
 	float gravity = characon.GetGravity();
-	characon.SetMoveSpeed(moveSpeed);
 	characon.SetGravity(-0.3f);
+	//高さをプレイヤ―の座標でそろえる
 	m_preBonePos.y = playerPos.y;
+	characon.SetMoveSpeed(moveSpeed);
 	characon.SetPosition(m_preBonePos);
 	characon.Execute(1.0f);
+
 	if (characon.GetWallCollisionObject() != nullptr)
 	{
 		CVector3 movePos = characon.GetPosition() - bonePos;
@@ -52,10 +57,7 @@ void CPlayerAvoidance::Update()
 	if (!GetPlayer().GetAnimation().IsPlay())
 	{
 		CVector3 position;
-		position = GetPlayer().GetPosition();
-		position.x = m_pBoneMat->m[3][0];
-		position.y = m_pBoneMat->m[3][1];
-		position.z = m_pBoneMat->m[3][2];
+		position = bonePos;
 		position += m_manipVec;
 		m_pPlayer->SetPosition(position);
 
