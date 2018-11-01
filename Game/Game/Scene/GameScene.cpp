@@ -18,8 +18,8 @@ void CGameScene::Release()
 	Delete(m_levelUp);
 	Delete(m_playerHp);
 	Delete(m_weaponSelect);
-	Delete(m_miniMap);
 	GetGameCamera().Destroy();
+	Delete(m_miniMap);
 	Delete(m_map);
 
 }
