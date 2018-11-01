@@ -308,7 +308,7 @@ void CPlayer::Rotation()
 	}
 	m_rotation.SetRotation(CVector3::AxisY, rad);
 
-	if (m_weapon.GetCurrentState() == CWeapon::enWeaponArrow && m_isAttack)
+	if (m_weapon.GetCurrentState() == CWeapon::enArrow && m_isAttack)
 	{
 		CQuaternion rotXZ, rotY;
 		CVector3 cameraFlont = GetGameCamera().GetCamera().GetFlont();

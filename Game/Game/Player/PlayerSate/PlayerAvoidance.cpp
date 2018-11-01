@@ -35,7 +35,7 @@ void CPlayerAvoidance::Update()
 	characon.SetMoveSpeed(moveSpeed);
 	characon.SetPosition(m_preBonePos);
 	characon.Execute(1.0f);
-
+	//何かに当たっていればプレイヤーの座標を動かしてアニメーションの移動量を打ち消す
 	if (characon.GetWallCollisionObject() != nullptr)
 	{
 		CVector3 movePos = characon.GetPosition() - bonePos;

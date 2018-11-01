@@ -19,7 +19,6 @@ struct SplayerStatus
 	int OldExp;				//現在のレベルアップに必要だった経験値
 	int AccumulationExp;	//累積経験値
 	int Gold;
-
 };
 
 
