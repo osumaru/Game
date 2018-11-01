@@ -20,6 +20,7 @@ void CTitleScene::Update()
 	{
 		//ƒQ[ƒ€ƒV[ƒ“‚Ö‘JˆÚ
 		GetSceneManager().ChangeScene(GetSceneManager().enGameScene);
+		
 	}
 }
 

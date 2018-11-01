@@ -21,6 +21,7 @@ void CPlayerJump::Init()
 void CPlayerJump::Update()
 {
 
+	m_pPlayer->GetCharacterController().Execute(GameTime().GetDeltaFrameTime());
 
 	if (/*!GetPlayer().GetAnimation().IsPlay() || */m_pPlayer->GetCharacterController().IsOnGround())
 	{

@@ -135,12 +135,6 @@ void CMenu::KeyInputMenu()
 		GetPlayer().SetIsActive(!m_Draw);
 	}
 
-	//if (m_Draw && Pad().IsTriggerButton(enButtonA)) {
-	//	//アイテムを使用する
-	//	GetPlayer().UseItem(0);
-	//}
-
-
 	if (Pad().IsTriggerButton(enButtonSelect))
 	{
 		//プレイヤーのステータスを格納

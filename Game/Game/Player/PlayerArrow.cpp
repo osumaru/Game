@@ -58,7 +58,7 @@ void CPlayerArrow::Update()
 		float rot = flont.Dot(newVec);
 		rot = acos(rot) ;
 		CQuaternion rotX = CQuaternion::Identity;
-		rotX.SetRotation(CVector3::AxisX, CMath::DegToRad(rot));
+		rotX.SetRotation(CVector3::AxisX, rot);
 		m_arrowRot.Multiply(rotX);
 		m_lifeTime += GameTime().GetDeltaFrameTime();
 

@@ -125,7 +125,7 @@ public:
 	}
 
 	//アニメーションの情報を取得
-	const CAnimation& GetAnimation() const
+	CAnimation& GetAnimation()
 	{
 		return m_animation;
 	}
@@ -217,7 +217,7 @@ public:
 	}
 
 	//キャラクターコントローラーを取得
-	const CCharacterController& GetCharacterController() const
+	CCharacterController& GetCharacterController()
 	{
 		return m_characterController;
 	}

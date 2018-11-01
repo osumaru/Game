@@ -65,6 +65,11 @@ public:
 		m_animationEventListener.push_back(animEvent);
 	}
 
+	void SetBoneFreezeFlg(int boneID, bool isFreezeX, bool isFreezeY, bool isFreezeZ)
+	{
+		m_animationClips[m_currentAnimationNum].SetBoneFreezeFlg(boneID, isFreezeX, isFreezeY, isFreezeZ);
+	}
+
 	/*
 	アニメーションイベントの通知
 	clipName	アニメーションクリップの名前
@@ -86,4 +91,5 @@ private:
 	bool								m_isInterpolation = false;		//補間しているか？
 	float								m_interpolationTime = 1.0f;		//アニメーション補間時の経過させる時間
 	std::vector<AnimationEventListener>	m_animationEventListener;
+
 };
