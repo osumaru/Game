@@ -133,6 +133,10 @@ void CMenu::KeyInputMenu()
 	if (m_Draw && Pad().IsTriggerButton(enButtonA)) {
 		//アイテムを使用する
 		GetPlayer().UseItem(0);
+		//プレイヤーのステータスを格納
+		PlayerStatusInput();
+		//表示する数値を計算する処理
+		StatusMath();
 	}
 
 

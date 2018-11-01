@@ -178,7 +178,6 @@ void CPlayer::Update()
 	{
 		GetGameCamera().SetCmareaState(GetGameCamera().enArrow);
 		m_isZoom = true;
-		ExpUP(20);
 	}
 
 	else

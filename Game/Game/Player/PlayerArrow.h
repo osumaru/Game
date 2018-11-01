@@ -24,6 +24,6 @@ private:
 	const float		ARROW_LIFE	= 10.0f;				//‹|‚Ì¶‘¶ŠÔ
 	const float		OFFSET_Y	=  1.0f;				//Y•ûŒü‚É‘Î‚µ‚Ä‚Ì•â³’l
 	const float		HIT_LENGTH	=  0.5f;				//–î‚Ì“–‚½‚è”»’è‚Ü‚Å‚Ì‹——£
-	const CVector3  ARROW_SCALE = { 1.0f,1.0f,1.0f };	//–î‚Ì‘å‚«‚³
+	const CVector3  ARROW_SCALE = { 2.5f,2.5f,2.5f };	//–î‚Ì‘å‚«‚³
 };
 
