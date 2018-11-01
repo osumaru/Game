@@ -28,4 +28,12 @@ private:
 	std::list<IItem*>	m_itemList;
 
 	CMenu*				m_menu = nullptr;
+
+	CVector2			m_basePos = CVector2::Zero;
+	CVector2			m_size = CVector2::Zero;
+
+	int					m_inventoryWidth = 0;
+	int					m_inventoryHeight = 0;
+
+	int					m_pointerNum = 0;
 };
