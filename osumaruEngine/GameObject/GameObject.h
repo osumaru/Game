@@ -40,13 +40,38 @@ public:
 	//アクティブフラグを設定
 	void SetIsActive(bool isActive)
 	{
-		m_isActive = isActive;
+		m_isActiveUpdate = isActive;
+		m_isActiveDraw = isActive;
+	}
+
+	//更新のアクティブフラグを設定
+	void SetIsActiveUpdate(bool isActive)
+	{
+		m_isActiveUpdate = isActive;
+	}
+
+	//更新がアクティブか？
+	bool IsActiveUpdate()
+	{
+		return m_isActiveUpdate;
+	}
+
+	//描画のアクティブフラグを設定
+	void SetIsActiveDraw(bool isActive)
+	{
+		m_isActiveDraw = isActive;
+	}
+
+	//描画がアクティブか？
+	bool IsActiveDraw()
+	{
+		return m_isActiveDraw;
 	}
 
 	//アクティブか？
 	bool IsActive()
 	{
-		return m_isActive;
+		return m_isActiveUpdate && m_isActiveDraw;
 	}
 
 	friend class CGameObjectManager;
@@ -63,7 +88,7 @@ private:
 	//Update関数を呼ぶ関数
 	void Updater()
 	{
-		if (m_isStart && m_isActive && !m_isDelete)
+		if (m_isStart && m_isActiveUpdate && !m_isDelete)
 		{
 			Update();
 		}
@@ -71,7 +96,7 @@ private:
 	//Draw関数を呼ぶ関数
 	void Drawer()
 	{
-		if (m_isStart && m_isActive && !m_isDelete)
+		if (m_isStart && m_isActiveDraw && !m_isDelete)
 		{
 			Draw();
 		}
@@ -80,7 +105,7 @@ private:
 	//AfterDrawerを呼ぶ関数
 	void AfterDrawer()
 	{
-		if (m_isStart && m_isActive && !m_isDelete)
+		if (m_isStart && m_isActiveDraw && !m_isDelete)
 		{
 			AfterDraw();
 		}
@@ -92,10 +117,12 @@ private:
 	{
 		m_isStart = false;
 		m_isDelete = false;
-		m_isActive = true;
+		m_isActiveUpdate = true;
+		m_isActiveDraw = true;
 	}
 private:
 	bool m_isDelete;			//インスタンスを消す時に建てるフラグ
 	bool m_isStart;				//初期化してるかのフラグ
-	bool m_isActive;			//アクティブかどうかのフラグ
+	bool m_isActiveUpdate;		//描画がアクティブかどうかのフラグ
+	bool m_isActiveDraw;		//描画がアクティブかどうかのフラグ
 };

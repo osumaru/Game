@@ -320,7 +320,6 @@ private:
 	CSprite						m_arrowtag;										//サークルのスプライト
 	CTexture					m_arrowtexture;
 	bool						m_isZoom;										//弓用の視点に切り替えるかの判定をする変数
-
 	bool					m_isWireMove = false;					//ワイヤー移動できるか
 	CRayTest				m_wireCollisionSolver;					//ワイヤー移動のコリジョン処理クラス
 	CVector3				m_wirePosition;							//ワイヤー移動先の座標
