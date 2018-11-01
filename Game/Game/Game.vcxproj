@@ -180,6 +180,9 @@
     <ClCompile Include="Enemy\Samurai.cpp" />
     <ClCompile Include="Enemy\Warrok.cpp" />
     <ClCompile Include="Enemy\Zombie.cpp" />
+    <ClCompile Include="NPC\INpcState.cpp" />
+    <ClCompile Include="NPC\NpcManager.cpp" />
+    <ClCompile Include="NPC\ShopNPC.cpp" />
     <ClCompile Include="UI\Fade\Fade.cpp" />
     <ClCompile Include="Itam\IItem.cpp" />
     <ClCompile Include="Itam\Money.cpp" />
@@ -246,6 +249,9 @@
     <ClInclude Include="Enemy\Samurai.h" />
     <ClInclude Include="Enemy\Warrok.h" />
     <ClInclude Include="Enemy\Zombie.h" />
+    <ClInclude Include="NPC\INpcState.h" />
+    <ClInclude Include="NPC\NpcManager.h" />
+    <ClInclude Include="NPC\ShopNPC.h" />
     <ClInclude Include="UI\Fade\Fade.h" />
     <ClInclude Include="Itam\IItem.h" />
     <ClInclude Include="Itam\Money.h" />

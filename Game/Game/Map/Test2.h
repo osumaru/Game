@@ -12,6 +12,13 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagPlayer, //タグ
 },
+//ShopNpc
+{
+	L"shopNpc",
+	CVector3(-5.73f, 22.97f, 34.02f),             //平行移動
+	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f),  //回転
+	enMapTagShopNpc, //タグ
+},
 //Brock
 {
 	L"Brock",

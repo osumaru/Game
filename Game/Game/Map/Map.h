@@ -2,6 +2,7 @@
 class MapChip;
 class IEnemy;
 class Player;
+class INpcState;
 
 //マップチップのタグ
 enum EnMapChipTag
@@ -15,6 +16,7 @@ enum EnMapChipTag
 	enMapTagEnemyGroup,
 	enMapTagMapChip,
 	enMapTagTerrain,		//地形用のタグ
+	enMapTagShopNpc,			//店NPC用のタグ
 	enMapTagNum,
 };
 
@@ -63,5 +65,6 @@ public:
 private:
 	std::list<MapChip*>			m_mapChip;				//マップチップ
 	std::list<IEnemy*>			m_enemyList;			//エネミーリスト
+	std::list<INpcState*>		m_npcList;				//NPCのリスト
 	bool						m_collider = false;
 };

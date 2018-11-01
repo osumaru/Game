@@ -271,6 +271,13 @@ public:
 		m_state = state;
 		m_animation.Play(m_state);
 	}
+	//”ƒ‚¢•¨‚ğ‚µ‚½‚ÌŒvZ‚ğs‚¤
+	bool BuyMoney(const int buy)
+	{
+		if (m_status.Gold < buy) { return false; }
+		m_status.Gold -= buy;
+		return true;
+	}
 
 	//‹|‚ğ¶¬‚·‚éŠÖ”
 	void InitArrow();

@@ -73,6 +73,9 @@
     <Filter Include="ソース ファイル\UI\Fade">
       <UniqueIdentifier>{70b91111-2788-4727-b710-6469d3552a00}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\NPC">
+      <UniqueIdentifier>{a67babc6-6fe9-451a-9889-0df1ba6fc2ef}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -254,6 +257,15 @@
     </ClCompile>
     <ClCompile Include="UI\Fade\Fade.cpp">
       <Filter>ソース ファイル\UI\Fade</Filter>
+    </ClCompile>
+    <ClCompile Include="NPC\NpcManager.cpp">
+      <Filter>ソース ファイル\NPC</Filter>
+    </ClCompile>
+    <ClCompile Include="NPC\INpcState.cpp">
+      <Filter>ソース ファイル\NPC</Filter>
+    </ClCompile>
+    <ClCompile Include="NPC\ShopNPC.cpp">
+      <Filter>ソース ファイル\NPC</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -442,6 +454,15 @@
     </ClInclude>
     <ClInclude Include="UI\Fade\Fade.h">
       <Filter>ソース ファイル\UI\Fade</Filter>
+    </ClInclude>
+    <ClInclude Include="NPC\NpcManager.h">
+      <Filter>ソース ファイル\NPC</Filter>
+    </ClInclude>
+    <ClInclude Include="NPC\INpcState.h">
+      <Filter>ソース ファイル\NPC</Filter>
+    </ClInclude>
+    <ClInclude Include="NPC\ShopNPC.h">
+      <Filter>ソース ファイル\NPC</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

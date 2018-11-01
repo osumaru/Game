@@ -10,12 +10,14 @@
 #include "../Enemy/Warrok.h"
 #include "../Enemy/EnemyGroup.h"
 #include "../Enemy/PathFinding/PathFinding.h"
+#include "../NPC/ShopNPC.h"
 
 std::vector<std::vector<SMapChipInfo>> mapChipInfo = 
 {
 	{
 //#include "Location2.h"
 #include "Test2.h"
+// #include "ShopTest.h"
 	}
 //	{
 //#include "Location2.h"
@@ -57,6 +59,7 @@ void Map::Init(int stageNum)
 		MapChip* mapChip = nullptr;
 		CEnemyGroup* enemyGroup = nullptr;
 		IEnemy* enemy = nullptr;
+		INpcState* npc = nullptr;
 
 		switch (mInfo.m_tag)
 		{
@@ -95,6 +98,11 @@ void Map::Init(int stageNum)
 		case enMapTagTerrain:
 			mapChip = New<StaticMapObject>(0);
 			m_collider = false;
+			break;
+		case enMapTagShopNpc:
+			npc = New<CShopNPC>(0);
+			npc->Init(mInfo.m_position, mInfo.m_rotation);
+			m_npcList.push_back(npc);
 			break;
 		default:
 			mapChip = New<StaticMapObject>(0);
