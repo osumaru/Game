@@ -58,7 +58,8 @@ public:
 		{
 			for (auto& gameObject : gameObjectVector)
 			{
-				gameObject.gameObject->m_isActive = false;
+				gameObject.gameObject->m_isActiveUpdate = false;
+				gameObject.gameObject->m_isActiveDraw = false;
 			}
 		}
 	}
@@ -69,7 +70,8 @@ public:
 		{
 			for (auto& gameObject : gameObjectVector)
 			{
-				gameObject.gameObject->m_isActive = true;
+				gameObject.gameObject->m_isActiveUpdate = true; 
+				gameObject.gameObject->m_isActiveDraw = true;
 			}
 		}
 	}
