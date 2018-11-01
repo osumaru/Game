@@ -85,6 +85,7 @@ void CPlayer::Init(CVector3 position)
 		m_animation.AddAnimationEvent([&](auto animClipname, auto eventName) {
 			OnInvokeAnimationEvent(animClipname, eventName);
 		});
+		
 	}
 
 
