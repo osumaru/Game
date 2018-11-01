@@ -4,12 +4,8 @@
 #include "../Player/Player.h"
 #include "../../../osumaruEngine/Physics/CollisionAttr.h"
 
-void CRecoveryItem::Init(CVector3 position)
+void CRecoveryItem::Init()
 {
-	m_skinModel.Load(L"Assets/modelData/heart.cmo");
-	m_position = position;
-	m_characterController.Init(0.2f, 0.2f, m_position);
-	m_characterController.SetUserIndex(EnCollisionAttr::enCollisionAttr_Item);
 	m_itemType = Recovery;
 }
 
@@ -41,7 +37,18 @@ bool CRecoveryItem::Start()
 
 void CRecoveryItem::Update()
 {
-	Pop();
+	//移動速度を取得
+	CVector3 moveSpeed = m_characterController.GetMoveSpeed();
+
+	//地面に接地したら止める
+	if (!m_popEnd && m_characterController.IsOnGround()) {
+		moveSpeed.x = 0.0f;
+		moveSpeed.z = 0.0f;
+		m_popEnd = true;
+	}
+
+	//キャラクターコントローラーに移動速度を設定
+	m_characterController.SetMoveSpeed(moveSpeed);
 
 	m_timer += GameTime().GetDeltaFrameTime();
 	//プレイヤーとの距離を計算
@@ -78,18 +85,11 @@ void CRecoveryItem::Use()
 	Delete(this);
 }
 
-void CRecoveryItem::Pop()
+void CRecoveryItem::Pop(CVector3 position)
 {
-	//移動速度を取得
-	CVector3 moveSpeed = m_characterController.GetMoveSpeed();
-
-	//地面に接地したら止める
-	if (!m_popEnd && m_characterController.IsOnGround()) {
-		moveSpeed.x = 0.0f;
-		moveSpeed.z = 0.0f;
-		m_popEnd = true;
-	}
-
-	//キャラクターコントローラーに移動速度を設定
-	m_characterController.SetMoveSpeed(moveSpeed);
+	m_skinModel.Load(L"Assets/modelData/heart.cmo");
+	m_position = position;
+	m_characterController.Init(0.2f, 0.2f, m_position);
+	m_characterController.SetUserIndex(EnCollisionAttr::enCollisionAttr_Item);
+	m_itemType = Recovery;
 }

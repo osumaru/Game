@@ -17,7 +17,8 @@ void CEnemyDeath::Update()
 	//死亡アニメーションが終わったら回復アイテムとお金を出す
 	if (!m_enemy->IsPlayAnimation()) {
 		CRecoveryItem* recoveryItem = New<CRecoveryItem>(0);
-		recoveryItem->Init(m_enemy->GetPosition());
+		recoveryItem->Pop(m_enemy->GetPosition());
+		//recoveryItem->Init(m_enemy->GetPosition());
 		CMoney* money = New<CMoney>(0);
 		money->Init(m_enemy->GetPosition());
 		money->SetGold(m_enemy->GetStatus().Gold);
