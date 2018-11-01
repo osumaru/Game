@@ -8,8 +8,8 @@ public:
 
 	void Update()override;
 private:
-	const CMatrix* m_pBoneMat;
-	CVector3 m_manipVec;
-	CVector3 m_preBonePos;
+	const CMatrix* m_pBoneMat;	//ボーンの行列のポインタ
+	CVector3 m_manipVec;		//ボーンの座標からプレイヤーの座標までのベクトル
+	CVector3 m_preBonePos;		//前のフレームのボーンの座標
 };
 

@@ -24,7 +24,7 @@ void CMenu::Init()
 	m_menu.SetSize({ 1290.0f,720.0f });
 
 	//羽ペンアイコン
-	m_menuUITexture.Load(L"Assets/sprite/MenuUI/menuUI.png");
+	m_menuUITexture.Load(L"Assets/sprite/MenuUI/Select.png");
 	m_menuUI.Init(&m_menuUITexture);
 	m_menuUI.SetPosition(m_menuUIPosition);
 	m_menuUI.SetSize(m_menuUIScale);
