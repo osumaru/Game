@@ -30,17 +30,25 @@ void CPlayerAvoidance::Update()
 	characon.SetGravity(-0.3f);
 	m_preBonePos.y = playerPos.y;
 	characon.SetPosition(m_preBonePos);
-	m_preBonePos = bonePos;
 	characon.Execute(1.0f);
+	if (characon.GetWallCollisionObject() != nullptr)
+	{
+		CVector3 movePos = characon.GetPosition() - bonePos;
+		movePos.y = 0.0f;
+		//CVector3 playerFront;
+		//playerFront.x = m_pPlayer->GetWorldMatrix().m[2][0];
+		//playerFront.y = m_pPlayer->GetWorldMatrix().m[2][1];
+		//playerFront.z = m_pPlayer->GetWorldMatrix().m[2][2];
+		//if (playerFront.Dot(movePos) < 0.0f)
+		//{
+			playerPos += movePos;
+		//}
+	}
 	playerPos.y = characon.GetPosition().y;
 	m_pPlayer->SetPosition(playerPos);
 	characon.SetMoveSpeed(CVector3::Zero);
 	characon.SetGravity(gravity);
-	if (characon.GetWallCollisionObject() != nullptr)
-	{
-		int boneID = m_pPlayer->GetPlayerSkin().GetSkelton()->FindBone(L"Hips")->GetBoneID();
-		m_pPlayer->GetAnimation().SetBoneFreezeFlg(boneID, true, true, false);
-	}
+	m_preBonePos = bonePos;
 	if (!GetPlayer().GetAnimation().IsPlay())
 	{
 		CVector3 position;
