@@ -174,6 +174,11 @@ void CPlayer::Update()
 		}
 	}
 
+	if (Pad().IsPressButton(enButtonX))
+	{
+		m_status.Health = 5;
+	}
+
 	if (Pad().GetLeftTrigger())
 	{
 		GetGameCamera().SetCmareaState(GetGameCamera().enArrow);

@@ -13,14 +13,15 @@
 void CGameScene::Release()
 {
 	//デリートの順番考えてない
-	Delete(m_map);
-	Delete(m_miniMap);
-	Delete(m_weaponSelect);
-	Delete(m_playerHp);
-	Delete(m_levelUp);
-	Delete(m_menu);
 	Delete(m_result);
+	Delete(m_menu);
+	Delete(m_levelUp);
+	Delete(m_playerHp);
+	Delete(m_weaponSelect);
+	Delete(m_miniMap);
 	GetGameCamera().Destroy();
+	Delete(m_map);
+
 }
 
 void CGameScene::Init()
@@ -36,7 +37,10 @@ void CGameScene::Init()
 	//カメラを生成
 	GetGameCamera().Create();
 	GetGameCamera().Init();
-
+	/*if (!GetGameCamera().IsStart())
+	{
+		GetGameCamera().Start();
+	}*/
 	//UIの初期化
 	{
 		m_weaponSelect = New<CWeaponSelect>(0);

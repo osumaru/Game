@@ -2,7 +2,7 @@
 class MapChip;
 class IEnemy;
 class Player;
-
+class CEnemyGroup;
 //マップチップのタグ
 enum EnMapChipTag
 {
@@ -63,5 +63,6 @@ public:
 private:
 	std::list<MapChip*>			m_mapChip;				//マップチップ
 	std::list<IEnemy*>			m_enemyList;			//エネミーリスト
-	bool						m_collider = false;
+	std::vector<CEnemyGroup*>	m_enemyGroupList;		//エネミーグループのベクター
+	bool						m_collider = false;		//AABBを作成するかどうか
 };
