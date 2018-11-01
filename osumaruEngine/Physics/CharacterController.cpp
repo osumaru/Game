@@ -35,7 +35,7 @@ struct SSweepResultGround : public btCollisionWorld::ConvexResultCallback
 		float angle = hitNormalTmp.Dot(up);
 		
 		angle = fabsf(acosf(angle));
-		if (angle < cPI * 0.3f ||		//地面の傾斜が54度より小さいので地面とみなす。角度がラジアン単位なので180度がcPI
+		if (angle < cPI * 0.45f ||		//地面の傾斜が54度より小さいので地面とみなす。角度がラジアン単位なので180度がcPI
 			convexResult.m_hitCollisionObject->getUserIndex() == enCollisionAttr_Ground)//もしくはコリジョン属性が地面と指定されている。
 		{
 

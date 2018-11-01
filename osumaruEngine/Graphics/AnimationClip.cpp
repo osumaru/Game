@@ -61,6 +61,7 @@ void CAnimationClip::Load(wchar_t * filePath)
 	}
 
 	m_localMatrix.resize(m_keyFramePtrListArray.size());
+	m_freezeFlg.resize(m_keyFramePtrListArray.size());
 	for (int i = 0;i < m_localMatrix.size();i++)
 	{
 		if (!m_keyFramePtrListArray[i].empty())
@@ -71,6 +72,7 @@ void CAnimationClip::Load(wchar_t * filePath)
 		{
 			m_localMatrix[i] = CMatrix::Identity;
 		}
+		m_freezeFlg[i] = { false, false, false };
 	}
 }
 
@@ -88,7 +90,20 @@ void CAnimationClip::Update(float deltaTime)
 			{
 				if (!keyframe.empty())
 				{
+					CMatrix localMatrix = m_localMatrix[i];
 					m_localMatrix[i] = keyframe[m_currentFrameNo]->transform;
+					if (m_freezeFlg[i].isFreezeX)
+					{
+						m_localMatrix[i].m[3][0] = localMatrix.m[3][0];
+					}
+					if (m_freezeFlg[i].isFreezeY)
+					{
+						m_localMatrix[i].m[3][1] = localMatrix.m[3][1];
+					}
+					if (m_freezeFlg[i].isFreezeZ)
+					{
+						m_localMatrix[i].m[3][2] = localMatrix.m[3][2];
+					}
 				}
 				i++;
 			}
@@ -96,6 +111,12 @@ void CAnimationClip::Update(float deltaTime)
 			if (m_topBoneKeyFrameList->size() <= m_currentFrameNo)
 			{
 				m_isPlay = false;
+				for (auto& freezeFlg : m_freezeFlg)
+				{
+					freezeFlg.isFreezeX = false;
+					freezeFlg.isFreezeY = false;
+					freezeFlg.isFreezeZ = false;
+				}
 			}
 		}
 	}

@@ -3,6 +3,7 @@ class MapChip;
 class IEnemy;
 class Player;
 class CEnemyGroup;
+class INpcState;
 //マップチップのタグ
 enum EnMapChipTag
 {
@@ -15,6 +16,7 @@ enum EnMapChipTag
 	enMapTagEnemyGroup,
 	enMapTagMapChip,
 	enMapTagTerrain,		//地形用のタグ
+	enMapTagShopNpc,			//店NPC用のタグ
 	enMapTagNum,
 };
 
@@ -65,4 +67,5 @@ private:
 	std::list<IEnemy*>			m_enemyList;			//エネミーリスト
 	std::vector<CEnemyGroup*>	m_enemyGroupList;		//エネミーグループのベクター
 	bool						m_collider = false;		//AABBを作成するかどうか
+	std::list<INpcState*>		m_npcList;				//NPCのリスト
 };

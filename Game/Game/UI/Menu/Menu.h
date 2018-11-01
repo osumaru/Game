@@ -1,6 +1,8 @@
 #pragma once
 #include "../../Player/Player.h"
 
+class CInventory;
+
 class CMenu : public IGameObject
 {
 public:
@@ -51,5 +53,7 @@ private:
 
 	EnMenuState		m_MenuState = enMiniMap;
 	int				m_StateNum = 0;
+
+	CInventory*		m_inventory = nullptr;
 };
 

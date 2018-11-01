@@ -25,13 +25,21 @@ public:
 	//アイテムを使う
 	virtual void Use() {};
 
-	//アイテムを使うかの判定
-	bool IsUse()
+	enum EnInventoryItemType {
+		Recovery,	//回復
+		Buff,		//バフ
+		TypeNum,	//種類の数
+		Invald		//何もない
+	};
+
+	//アイテムの種類を取得
+	EnInventoryItemType GetItemType()
 	{
-		return m_isUse;
+		return m_itemType;
 	}
 
 protected:
+	EnInventoryItemType		m_itemType = Invald;		//インベントリのアイテムの種類
 	CSkinModel				m_skinModel;				//スキンモデル
 	CVector3				m_position;					//座標
 	CQuaternion				m_rotation;					//回転
@@ -41,5 +49,4 @@ protected:
 	const float				m_speed = 4.0f;				//速度
 	float					m_timer = 0.0f;				//タイマー
 	bool					m_popEnd = false;			//ポップし終わったか
-	bool					m_isUse = false;			//アイテムを使うか
 };

@@ -125,7 +125,7 @@ public:
 	}
 
 	//アニメーションの情報を取得
-	const CAnimation& GetAnimation() const
+	CAnimation& GetAnimation()
 	{
 		return m_animation;
 	}
@@ -217,7 +217,7 @@ public:
 	}
 
 	//キャラクターコントローラーを取得
-	const CCharacterController& GetCharacterController() const
+	CCharacterController& GetCharacterController()
 	{
 		return m_characterController;
 	}
@@ -244,7 +244,15 @@ public:
 	//item		インベントリに追加するアイテム
 	void AddItemList(IItem* item)
 	{
-		m_itemList.push_back(item);
+		if (m_itemList.size() <= m_itemLimit) {
+			m_itemList.push_back(item);
+		}
+	}
+
+	//所持アイテムリストを取得
+	std::list<IItem*> GetItemList()
+	{
+		return m_itemList;
 	}
 
 	//所持アイテムを使う
@@ -270,6 +278,13 @@ public:
 	{
 		m_state = state;
 		m_animation.Play(m_state);
+	}
+	//買い物をした時の計算を行う
+	bool BuyMoney(const int buy)
+	{
+		if (m_status.Gold < buy) { return false; }
+		m_status.Gold -= buy;
+		return true;
 	}
 
 	//弓を生成する関数
@@ -316,6 +331,7 @@ private:
 	CVector3				m_wirePosition;							//ワイヤー移動先の座標
 
 	std::list<IItem*>		m_itemList;								//所持アイテムのリスト
+	const int	m_itemLimit = 15;
 };
 
 static CPlayer& GetPlayer()

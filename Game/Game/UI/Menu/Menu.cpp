@@ -4,6 +4,7 @@
 #include "../../Map/Map.h"
 #include "../../Scene/SceneManager.h"
 #include "../../Enemy/IEnemy.h"
+#include "Inventory.h"
 
 CMenu::CMenu()
 {
@@ -23,7 +24,7 @@ void CMenu::Init()
 	m_menu.SetSize({ 1290.0f,720.0f });
 
 	//羽ペンアイコン
-	m_menuUITexture.Load(L"Assets/sprite/MenuUI/menuUI.png");
+	m_menuUITexture.Load(L"Assets/sprite/MenuUI/Select.png");
 	m_menuUI.Init(&m_menuUITexture);
 	m_menuUI.SetPosition(m_menuUIPosition);
 	m_menuUI.SetSize(m_menuUIScale);
@@ -62,7 +63,11 @@ void CMenu::Update()
 		break;
 
 	case enItems:			//インベントリの確認
-		
+		if (Pad().IsTriggerButton(enButtonA)) 
+		{
+			m_inventory = New<CInventory>(0);
+			m_inventory->Init(this);
+		}
 		break;
 
 	case enWeapons:			//装備の確認
@@ -129,16 +134,6 @@ void CMenu::KeyInputMenu()
 		//プレイヤーの動きの設定
 		GetPlayer().SetIsActive(!m_Draw);
 	}
-
-	if (m_Draw && Pad().IsTriggerButton(enButtonA)) {
-		//アイテムを使用する
-		GetPlayer().UseItem(0);
-		//プレイヤーのステータスを格納
-		PlayerStatusInput();
-		//表示する数値を計算する処理
-		StatusMath();
-	}
-
 
 	if (Pad().IsTriggerButton(enButtonSelect))
 	{
