@@ -29,8 +29,9 @@ public:
 	/*
 	再生
 	isLoop		ループさせるか？trueならループ、falseならループしない
+	isBegin		途中から再生開始するときに使うフラグ、trueなら最初から、falseなら前回停止いたところの続きから
 	*/
-	void Play(bool isLoop);
+	void Play(bool isLoop, bool isBegin = false);
 
 	//一時停止
 	void Stop();
@@ -52,6 +53,8 @@ public:
 	{
 		m_sourceVoice->SetVolume(volume, XAUDIO2_COMMIT_NOW);
 	}
+
+	
 
 	int GetInputChannelNum()
 	{

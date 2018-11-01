@@ -79,10 +79,10 @@ void CSoundSource::Update()
 	}
 }
 
-void CSoundSource::Play(bool isLoop)
+void CSoundSource::Play(bool isLoop, bool isBegin)
 {
 	m_isLoop = isLoop;
-	if (m_isPlaying)
+	if (m_isPlaying && !isBegin)
 	{
 		m_sourceVoice->Start();
 	}
