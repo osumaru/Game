@@ -28,9 +28,9 @@ void CMenu::Init()
 	m_menuUI.SetPosition(m_menuUIPosition);
 	m_menuUI.SetSize(m_menuUIScale);
 
-	for (int i = 0; i < 7; i++)
+	for (int i = 0; i < NUMBER_LINE; i++)
 	{
-		for (int j = 0; j < 4; j++)
+		for (int j = 0; j < NUMBER_COLUMN; j++)
 		{
 			m_numberTexture[i][j] = new CTexture;
 			m_number[i][j] = new CSprite;
@@ -53,8 +53,62 @@ void CMenu::Init()
 void CMenu::Update()
 {
 	if (GetPlayer().GetIsDied()) { return; }
+
+	KeyInputMenu();
+	switch (m_MenuState)
+	{
+	case enMiniMap:			//ミニマップの確認
+		
+		break;
+
+	case enItems:			//インベントリの確認
+		
+		break;
+
+	case enWeapons:			//装備の確認
+		
+		break;
+
+	case enSaveGame:		//データのセーブ
+		
+		break;
+
+	case enExsitGame:		//タイトル画面に戻る
+		
+		break;
+
+	}
+
+	
+	
+}
+
+void CMenu::KeyInputMenu()
+{
+	//メニュー画面が開いてる時だけ行う処理
+	if (m_Draw)
+	{
+		if (Pad().IsTriggerButton(enButtonDown) && m_menuUIPosition.y > UI_POSITION_Y_DOWN_LIMIT)
+		{
+			m_menuUIPosition.y -= UI_OFFSET_Y;
+			m_menuUI.SetPosition(m_menuUIPosition);
+			m_StateNum++;
+			m_MenuState = (EnMenuState)m_StateNum;
+		}
+
+		else if (Pad().IsTriggerButton(enButtonUp) && m_menuUIPosition.y < UI_POSITION_Y_UP_LIMIT)
+		{
+			m_menuUIPosition.y += UI_OFFSET_Y;
+			m_menuUI.SetPosition(m_menuUIPosition);
+			m_StateNum--;
+			m_MenuState = (EnMenuState)m_StateNum;
+		}
+	}
+
+	//セレクトボタンが押された時の処理
 	if (Pad().IsTriggerButton(enButtonSelect))
 	{
+		StatusMath();
 		if (m_Draw)
 		{
 
@@ -76,31 +130,25 @@ void CMenu::Update()
 		GetPlayer().SetIsActive(!m_Draw);
 	}
 
+	if (m_Draw && Pad().IsTriggerButton(enButtonA)) {
+		//アイテムを使用する
+		GetPlayer().UseItem(0);
+		//プレイヤーのステータスを格納
+		PlayerStatusInput();
+		//表示する数値を計算する処理
+		StatusMath();
+	}
 
-	 //プレイヤーのステータスを格納
-	 PlayerStatusInput();
 
 	if (Pad().IsTriggerButton(enButtonSelect))
 	{
-
+		//プレイヤーのステータスを格納
+		PlayerStatusInput();
+		//表示する数値を計算する処理
 		StatusMath();
 	}
-}
 
-void CMenu::KeyInputMenu()
-{
-
-	if (Pad().IsTriggerButton(enButtonDown) && m_menuUIPosition.y > UI_POSITION_Y_DOWN_LIMIT)
-	{
-		m_menuUIPosition.y -= UI_OFFSET_Y;
-		m_menuUI.SetPosition(m_menuUIPosition);
-	}
-
-	else if (Pad().IsTriggerButton(enButtonUp) && m_menuUIPosition.y < UI_POSITION_Y_UP_LIMIT)
-	{
-		m_menuUIPosition.y += UI_OFFSET_Y;
-		m_menuUI.SetPosition(m_menuUIPosition);
-	}
+	
 }
 
 void CMenu::PlayerStatusInput()
@@ -121,7 +169,7 @@ void CMenu::StatusMath()
 {
 
 
-	for (int i = 0; i < 7; i++)
+	for (int i = 0; i < NUMBER_LINE; i++)
 	{
 		
 			
@@ -139,7 +187,6 @@ void CMenu::StatusMath()
 
 					m_numberTexture[i][0] = m_numberTexture[i][0] = TextureResource().LoadTexture(filePath);
 					m_number[i][0]->SetTexture(m_numberTexture[i][0]);
-					m_number[i][0]->SetSize({ 65.0f,65.0f });
 					m_PlayerStatus[i] %= 1000;
 					m_number[i][0]->SetIsDraw(true);
 				}
@@ -159,7 +206,6 @@ void CMenu::StatusMath()
 
 					m_numberTexture[i][1] = m_numberTexture[i][1] = TextureResource().LoadTexture(filePath);
 					m_number[i][1]->SetTexture(m_numberTexture[i][1]);
-					m_number[i][1]->SetSize({ 65.0f,65.0f });
 					m_PlayerStatus[i] %= 100;
 					m_number[i][1]->SetIsDraw(true);
 				}
@@ -178,7 +224,6 @@ void CMenu::StatusMath()
 
 					m_numberTexture[i][2] = m_numberTexture[i][2] = TextureResource().LoadTexture(filePath);
 					m_number[i][2]->SetTexture(m_numberTexture[i][2]);
-					m_number[i][2]->SetSize({ 65.0f,65.0f });
 					m_PlayerStatus[i] %= 10;
 					m_number[i][2]->SetIsDraw(true);
 				}
@@ -190,10 +235,6 @@ void CMenu::StatusMath()
 			m_numberTexture[i][3] = m_numberTexture[i][3] = TextureResource().LoadTexture(filePath);
 			m_numberTexture[i][3]->Load(filePath);
 			m_number[i][3]->SetTexture(m_numberTexture[i][3]);
-			m_number[i][3]->SetSize({ 65.0f,65.0f });
-
-			
-
 
 	
 	}
@@ -207,12 +248,11 @@ void CMenu::AfterDraw()
 	if (GetPlayer().GetIsDied()) { return; }
 	if (m_Draw)
 	{
-		KeyInputMenu();
 		m_menu.Draw();
 		m_menuUI.Draw();
-		for (int i = 0; i < 7; i++)
+		for (int i = 0; i < NUMBER_LINE; i++)
 		{
-			for (int j = 0; j < 4; j++)
+			for (int j = 0; j < NUMBER_COLUMN; j++)
 			{
 
 				m_number[i][j]->Draw();

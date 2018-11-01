@@ -107,6 +107,7 @@ private:
 	CConstantBuffer					m_materialCB;
 	CLight							m_light;							//ライト
 	DirectX::Model*					m_skinModel = nullptr;				//スキンモデル
+	CMatrix							m_worldMatrixZUp = CMatrix::Identity;	//ZUpのワールド行列
 	CMatrix							m_worldMatrix = CMatrix::Identity;	//ワールド行列
 	CTexture*						m_pNormalTexture = nullptr;
 	SMaterialFlg					m_materialFlg;

@@ -52,11 +52,11 @@
     <Filter Include="ソース ファイル\Graphics\preRendering">
       <UniqueIdentifier>{8c66b860-a17c-4894-8b9f-668daa0f3084}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\Resource\Sound">
-      <UniqueIdentifier>{bbc2202a-b2bf-4ae4-8505-d0bdc67b57a9}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソース ファイル\Graphics\PostRendering">
       <UniqueIdentifier>{9ab22faf-3a68-48ca-8fc5-2fc4ace8b540}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Sound">
+      <UniqueIdentifier>{bbc2202a-b2bf-4ae4-8505-d0bdc67b57a9}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -151,13 +151,13 @@
       <Filter>ソース ファイル\Random</Filter>
     </ClCompile>
     <ClCompile Include="Sound\SoundEngine.cpp">
-      <Filter>ソース ファイル\Resource\Sound</Filter>
+      <Filter>ソース ファイル\Sound</Filter>
     </ClCompile>
     <ClCompile Include="Sound\SoundSource.cpp">
-      <Filter>ソース ファイル\Resource\Sound</Filter>
+      <Filter>ソース ファイル\Sound</Filter>
     </ClCompile>
     <ClCompile Include="Sound\WaveFileOpen.cpp">
-      <Filter>ソース ファイル\Resource\Sound</Filter>
+      <Filter>ソース ファイル\Sound</Filter>
     </ClCompile>
     <ClCompile Include="Input\Pad.cpp">
       <Filter>ソース ファイル\Input</Filter>
@@ -318,13 +318,13 @@
       <Filter>ソース ファイル\Random</Filter>
     </ClInclude>
     <ClInclude Include="Sound\SoundEngine.h">
-      <Filter>ソース ファイル\Resource\Sound</Filter>
+      <Filter>ソース ファイル\Sound</Filter>
     </ClInclude>
     <ClInclude Include="Sound\SoundSource.h">
-      <Filter>ソース ファイル\Resource\Sound</Filter>
+      <Filter>ソース ファイル\Sound</Filter>
     </ClInclude>
     <ClInclude Include="Sound\WaveFileOpen.h">
-      <Filter>ソース ファイル\Resource\Sound</Filter>
+      <Filter>ソース ファイル\Sound</Filter>
     </ClInclude>
     <ClInclude Include="Input\Pad.h">
       <Filter>ソース ファイル\Input</Filter>

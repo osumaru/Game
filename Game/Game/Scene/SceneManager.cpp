@@ -1,6 +1,12 @@
 #include "stdafx.h"
 #include "SceneManager.h"
 
+void CSceneManager::Init()
+{
+	m_fade = new CFade;
+	Add(m_fade, 15);
+}
+
 //ƒV[ƒ“‚ÌØ‚è‘Ö‚¦ŠÖ”
 void CSceneManager::ChangeScene(EnSceneState scene)
 {

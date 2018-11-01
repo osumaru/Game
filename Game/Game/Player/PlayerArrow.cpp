@@ -16,17 +16,17 @@ CPlayerArrow::~CPlayerArrow()
 {
 
 }
-
+//–î‚Ì‰Šú‰»
 bool CPlayerArrow::Start()
 {
 	m_arrowskin.Load(L"Assets/modelData/Arrow.cmo", NULL);
-	m_scale = { 3.0f,3.0f,3.0f };
+	m_scale = ARROW_SCALE;
 	return true;
 }
 
 void CPlayerArrow::Update()
 {
-	if (GetPlayer().GetPlayerStateMachine().GetState() == CPlayerState::EnPlayerState::enPlayerArrowAttack && !m_isMove)
+	if (GetPlayer().GetPlayerStateMachine().GetState() == CPlayerState::EnPlayerState::enPlayerStateArrowAttack && !m_isMove)
 	{
 		m_arrowPosition =  GetPlayer().GetWeapon().GetPosition();
 		//ƒJƒƒ‰‚Ì‘O•ûŒü‚ðŽæ“¾
@@ -58,13 +58,11 @@ void CPlayerArrow::Update()
 		float rot = flont.Dot(newVec);
 		rot = acos(rot) ;
 		CQuaternion rotX = CQuaternion::Identity;
-		rotX.SetRotation(CVector3::AxisX, CMath::DegToRad(rot));
+		rotX.SetRotation(CVector3::AxisX, rot);
 		m_arrowRot.Multiply(rotX);
-
-
-
 		m_lifeTime += GameTime().GetDeltaFrameTime();
 
+		//“G‚Æ‚Ì“–‚½‚è”»’è‚ÌŒvŽZ
 		for (const auto& enemys :GetSceneManager().GetGameScene().GetMap()->GetEnemyList())
 		{
 			if (!enemys->IsDamage()) {
@@ -74,7 +72,7 @@ void CPlayerArrow::Update()
 				EnemyVec.Subtract(m_arrowPosition);
 				float len = EnemyVec.Length();
 
-				if (fabs(len) < 0.5f)
+				if (fabs(len) < HIT_LENGTH)
 				{
 					enemys->SetIsDamage(true);
 				}

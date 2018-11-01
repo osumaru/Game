@@ -180,6 +180,7 @@
     <ClCompile Include="Enemy\Samurai.cpp" />
     <ClCompile Include="Enemy\Warrok.cpp" />
     <ClCompile Include="Enemy\Zombie.cpp" />
+    <ClCompile Include="UI\Fade\Fade.cpp" />
     <ClCompile Include="Itam\IItem.cpp" />
     <ClCompile Include="Itam\Money.cpp" />
     <ClCompile Include="Itam\RecoveryItem.cpp" />
@@ -191,9 +192,7 @@
     <ClCompile Include="Player\PlayerSate\PlayerArrowShoot.cpp" />
     <ClCompile Include="Player\PlayerSate\PlayerArrowAttack.cpp" />
     <ClCompile Include="Player\PlayerArrow.cpp" />
-    <ClCompile Include="Player\PlayerMove.cpp" />
     <ClCompile Include="Player\PlayerSate\PlayerAvoidance.cpp" />
-    <ClCompile Include="Player\PlayerRotation.cpp" />
     <ClCompile Include="Player\PlayerSate\PlayerJump.cpp" />
     <ClCompile Include="Player\PlayerSate\PlayerDamage.cpp" />
     <ClCompile Include="Player\PlayerSate\PlayerDied.cpp" />
@@ -247,6 +246,7 @@
     <ClInclude Include="Enemy\Samurai.h" />
     <ClInclude Include="Enemy\Warrok.h" />
     <ClInclude Include="Enemy\Zombie.h" />
+    <ClInclude Include="UI\Fade\Fade.h" />
     <ClInclude Include="Itam\IItem.h" />
     <ClInclude Include="Itam\Money.h" />
     <ClInclude Include="Itam\RecoveryItem.h" />
@@ -257,9 +257,7 @@
     <ClInclude Include="Player\PlayerSate\PlayerArrowShoot.h" />
     <ClInclude Include="Player\PlayerSate\PlayerArrowAttack.h" />
     <ClInclude Include="Player\PlayerArrow.h" />
-    <ClInclude Include="Player\PlayerMove.h" />
     <ClInclude Include="Player\PlayerSate\PlayerAvoidance.h" />
-    <ClInclude Include="Player\PlayerRotation.h" />
     <ClInclude Include="Player\PlayerSate\PlayerJump.h" />
     <ClInclude Include="Player\PlayerSate\PlayerDamage.h" />
     <ClInclude Include="Player\PlayerSate\PlayerDied.h" />

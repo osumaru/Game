@@ -1,10 +1,11 @@
 #pragma once
 #include "PlayerSate/PlayerStateMachine.h"
 #include "PlayerSate/PlayerState.h"
-#include "PlayerRotation.h"
-#include "PlayerMove.h"
 #include "PlayerArrow.h"
 #include "Weapon.h"
+#include "PlayerSate/PlayerStateCommon.h"
+
+class IItem;
 
 struct SplayerStatus
 {
@@ -21,35 +22,12 @@ struct SplayerStatus
 
 };
 
+
+
 class CPlayer : public IGameObject
 {
 
 public:
-	
-
-	enum EnPlayerAnimeState
-	{
-		enPlayerStand,		//待機アニメーション
-		enPlayerWalk,		//歩行アニメーション
-		enPlayerRun,		//走りアニメーション
-		enPlayerRunJump,	//走りジャンプ
-		enPlayerJump,		//ジャンプアニメーション
-		enPlayerAttack,		//攻撃アニメーション
-		enPlayerAttack2,	//連撃アニメーション
-		enPlayerDamage,		//ダメージアニメーション
-		enPlayerAvoidance,	//回避アニメーション
-		enPlayerDete,		//死亡アニメーション
-		
-		enPlayerArroAttack,	//弓のアニメーション
-		enPlayerArrowShoot,	//弓を放つアニメーション
-		enPlayerLongSwordAttack,//大剣の攻撃アニメーション
-		enPlayerTwinSwordAttack,//二刀流の攻撃アニメーション
-		enPlayerWireMove,	//ワイヤー移動アニメーション
-		enPlayerNum			//アニメーションの数
-
-	};
-
-
 
 	//プレイヤーの初期化
 	void Init(CVector3 position);
@@ -82,8 +60,10 @@ public:
 	//プレイヤーの描画関数
 	void Draw()override;
 
+	void AfterDraw();
+
 	//プレイヤーの座標を取得する関数
-	const CVector3 GetPosition()
+	const CVector3& GetPosition() const
 	{
 		return m_position;
 	}
@@ -92,24 +72,62 @@ public:
 	{
 		 m_characterController.SetPosition(setpos);
 	}
-	//プレイヤーの回転情報を取得
-	const CQuaternion& GetPlayerrRot()
+
+	//プレイヤーのスピードを取得する
+	const CVector3& GetMoveSpeed() const
 	{
-		return m_rotation;
+		return m_characterController.GetMoveSpeed();
 	}
-	//プレイヤーの回転の設定
-	void SetPlayerRot(const CQuaternion Setrot)
+
+	//移動速度を設定
+	void SetMoveSpeed(const CVector3& moveSpeed)
 	{
-		m_rotation = Setrot;
+		m_characterController.SetMoveSpeed(moveSpeed);
 	}
+
+	//プレイヤーのステータスを取得
+	const SplayerStatus& GetStatus() const
+	{
+		return m_status;
+	}
+
+	//プレイヤーのワールド行列を取得
+	const CMatrix& GetWorldMatrix() const
+	{
+		return m_skinmodel.GetWorldMatrix();
+	}
+
+	//ステートマシーンの取得
+	CPlayerStateMachine& GetPlayerStateMachine()
+	{
+		return m_PlayerStateMachine;
+	}
+
+	//武器を管理するクラスを取得
+	const CWeapon& GetWeapon() const
+	{
+		return m_weapon;
+	}
+
+	//プレイヤーのスキンモデルの情報を取得
+	const CSkinModel& GetPlayerSkin() const
+	{
+		return m_skinmodel;
+	}
+
+	//プレイヤーの頭のボーンの位置を取得
+	CVector3 GetPlayerHead() const
+	{
+
+		CMatrix PlayerHead = m_skinmodel.FindBoneWorldMatrix(L"Head");
+		CVector3 PlayerHeadPos = { PlayerHead.m[3][0],PlayerHead.m[3][1],PlayerHead.m[3][2] };
+		return PlayerHeadPos;
+	}
+
 	//アニメーションの情報を取得
-	const CAnimation& GetAnimation()
+	const CAnimation& GetAnimation() const
 	{
 		return m_animation;
-	}
-	CCharacterController& GetCharacterController()
-	{
-		return m_characterController;
 	}
 
 	//ステータスの計算処理を行う関数
@@ -140,44 +158,6 @@ public:
 		m_status.Gold += gold;
 	}
 
-	/*アニメーションの設定
-	第一引数　アニメーメーションの番号　第二引数　補完時間*/
-	void SetPlayerAnimation(const int animNumber, const float num)
-	{
-		m_animation.Play(animNumber, num);
-		m_State = (EnPlayerAnimeState)animNumber;
-	}
-	//プレイヤーのステータスを取得
-	const SplayerStatus& GetStatus()
-	{
-		return m_status;
-	}
-
-	//プレイヤーのワールド行列を取得
-	const CMatrix& GetWorldMatrix()
-	{
-		return m_skinmodel.GetWorldMatrix();
-	}
-
-	//プレイヤーのスピードを取得する
-	const CVector3& GetMoveSpeed()
-	{
-		return m_characterController.GetMoveSpeed();
-	}
-
-	//プレイヤーの装備の変更を行う処理
-	void WeaponChange();
-
-	//プレイヤーの頭のボーンの位置を取得
-	const CVector3 GetPlayerHead()
-	{
-		
-		CMatrix PlayerHead = m_skinmodel.FindBoneWorldMatrix(L"Head");
-		CVector3 PlayerHeadPos = { PlayerHead.m[3][0],PlayerHead.m[3][1],PlayerHead.m[3][2] };
-		return PlayerHeadPos;
-	}
-
-	void PlayerAttack();
 	//プレイヤーのダメージ処理
 	void GetDamage()
 	{
@@ -187,73 +167,43 @@ public:
 			m_isDamege = true;
 		}
 	}
+
 	//プレイヤーが生きているかの判定
-	bool GetIsDied()
+	bool GetIsDied() const
 	{
 		return m_isDied;
 	}
+
 	//死亡したかを設定
-	void SetIsDeid(const bool SetDied)
+	void SetIsDeid(bool SetDied)
 	{
 		m_isDied = SetDied;
 	}
-	//
+
 	//ダメージを受けたかの判定
-	bool GetIsDamage()
+	bool GetIsDamage() const
 	{
 		return m_isDamege;
 	}
+
 	//ダメージを受けたかの設定
-	void SetIsDamage(const bool SetDamage)
+	void SetIsDamage(bool SetDamage)
 	{
 		m_isDamege = SetDamage;
 	}
+
 	//攻撃中かを取得
-	bool GetIsAttack()
+	bool GetIsAttack() const
 	{
 		return m_isAttack;
 	}
 
 	//攻撃をしたかの設定
-	void SetAttack(const bool SetA)
+	void SetIsAttack(bool SetA)
 	{
 		m_isAttack = SetA;
 	}
-	//武器の剛体の取得
-	CRigidBody& GetWeaponBody()
-	{
-		return m_weaponRigitBody;
-	}
-	//ステートマシーンのしゅとく
-	CPlayerStateMachine& GetPlayerStateMachine()
-	{
-		return m_PlayerStateMachine;
-	}
 
-	void SetMoveSpeed(const CVector3& moveSpeed)
-	{
-		m_characterController.SetMoveSpeed(moveSpeed);
-	}
-
-	const CVector3& GetMoveSpeed()const
-	{
-		m_characterController.GetMoveSpeed();
-	}
-	const CWeapon& GetWeapon() const
-	{
-		return m_weapon;
-	}
-	
-	//プレイヤーのスキンモデルの情報を取得
-	const CSkinModel& GetPlayerSkin() const
-	{
-		return m_skinmodel;
-	}
-	//プレイヤーが浮いているかを取得
-	const bool GetIsGround()
-	{	
-		return m_characterController.IsOnGround();
-	}
 	//無敵時間を設定する
 	void SetInterval(const bool set)
 	{
@@ -266,12 +216,17 @@ public:
 		return m_wirePosition;
 	}
 
+	//キャラクターコントローラーを取得
+	const CCharacterController& GetCharacterController() const
+	{
+		return m_characterController;
+	}
+
 	//ワイヤー移動しているか
 	bool IsWireMove()
 	{
 		return m_isWireMove;
 	}
-	
 
 	//ワイヤー移動しているかを設定
 	void SetIsWireMove(bool isWireMove)
@@ -285,54 +240,69 @@ public:
 		m_initArrow = set;
 	}
 
-	//アニメーションイベントが起きた時に呼ばれる処理。
-	void OnInvokeAnimationEvent(const wchar_t* animClipName, const wchar_t* eventName);
-
-	void SetAnimationPlay(EnPlayerAnimeState state, float interporationTime)
+	//所持アイテムリストに追加
+	//item		インベントリに追加するアイテム
+	void AddItemList(IItem* item)
 	{
+		m_itemList.push_back(item);
+	}
+
+	//所持アイテムを使う
+	//number		アイテムの番号
+	void UseItem(int number);
+
+	/*
+	アニメーションを補間つきで再生する関数
+	state				アニメーションの番号
+	interporationTime	補間時間
+	*/
+	void PlayAnimation(EnPlayerAnimation state, float interporationTime)
+	{
+		m_state = state;
 		m_animation.Play(state, interporationTime);
 	}
 
-	void SetAnimationPlay(EnPlayerAnimeState state)
+	/*
+	アニメーション再生関数
+	state		アニメーションの番号
+	*/
+	void PlayAnimation(EnPlayerAnimation state)
 	{
-		m_animation.Play(state);
+		m_state = state;
+		m_animation.Play(m_state);
 	}
 
 	//弓を生成する関数
 	void InitArrow();
 private:
-	void PlayerMove();
 
+	//プレイヤーがエネミーに攻撃する処理
+	void PlayerAttack();
+
+	//プレイヤーの回転をする関数
 	void Rotation();
+
+	//アニメーションイベントが起きた時に呼ばれる処理。
+	void OnInvokeAnimationEvent(const wchar_t* animClipName, const wchar_t* eventName);
 private:
 	static CPlayer*				m_player;								//プレイヤー
 	CWeapon					m_weapon;
-
-	CVector3				m_position;										//座標
-	CVector3				m_weaponScale = CVector3::One;					//武器のスケール
-	CVector3				m_cameraTargetPos = CVector3::Zero;				//カメラ用のターゲット
-
-	CQuaternion				m_rotation = CQuaternion::Identity;				//回転
-	CSkinModel				m_skinmodel;									//スキンモデル
-	CCharacterController	m_characterController;							//キャラクターコントローラー
-	CLight					m_light;										//ライト
-	CBoxCollider			m_weaponBoxCollider;								//武器用のボックスコライダー
-	CRigidBody				m_weaponRigitBody;								//ボックス用のrigidBody
-
-	CAnimation				m_animation;							//アニメーション
-	SplayerStatus			m_status;								//プレイヤーのステータス
-	bool					m_isSlip = false;						//スリップ判定
-	float					m_slipSpeed = 2.0f;						//回避移動時のスピード
-	EnPlayerAnimeState		m_State = enPlayerStand;				//アニメーションを遷移させるための変数
+	CVector3				m_position;									//座標
+	CQuaternion				m_rotation = CQuaternion::Identity;			//回転
+	CSkinModel				m_skinmodel;								//スキンモデル
+	CCharacterController	m_characterController;						//キャラクターコントローラー
+	CAnimation				m_animation;								//アニメーション
+	SplayerStatus			m_status;									//プレイヤーのステータス
+	bool					m_isSlip = false;							//スリップ判定
+	float					m_slipSpeed = 2.0f;							//回避移動時のスピード
+	EnPlayerAnimation		m_state = enPlayerAnimationStand;			//アニメーションを遷移させるための変数
 	const float				INTERVAL = 1.5;								//ダメージを受けた後の無敵時間
 	bool					m_isDamege = false;
 	float					m_animetionFrame = 0.0f;
 	bool					m_isAttack = false;							//攻撃中かの判定
 	bool					m_isDied = false;							//死んでいるかの判定
-	bool					m_isGround = false;							//地面にいるかの判定
 	bool					m_intervalOn = false;						//無敵中かの判定
 	bool					m_initArrow = false;						//弓を生成しているかの判定
-
 	float					m_intervalTime = 0.0f;
 
 	CPlayerStateMachine			m_PlayerStateMachine;							//プレイヤーのアニメーションの遷移を行うステートマシーン
@@ -344,6 +314,8 @@ private:
 	bool					m_isWireMove = false;					//ワイヤー移動できるか
 	CRayTest				m_wireCollisionSolver;					//ワイヤー移動のコリジョン処理クラス
 	CVector3				m_wirePosition;							//ワイヤー移動先の座標
+
+	std::list<IItem*>		m_itemList;								//所持アイテムのリスト
 };
 
 static CPlayer& GetPlayer()
