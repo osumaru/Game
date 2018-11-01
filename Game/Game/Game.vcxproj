@@ -215,6 +215,7 @@
     <ClCompile Include="UI\DamageNumber\DamageNumber.cpp" />
     <ClCompile Include="UI\DamageNumber\Number.cpp" />
     <ClCompile Include="UI\LevelUp\LevelUp.cpp" />
+    <ClCompile Include="UI\Menu\Inventory.cpp" />
     <ClCompile Include="UI\Menu\Menu.cpp" />
     <ClCompile Include="UI\MiniMap\MiniMap.cpp" />
     <ClCompile Include="UI\PlayerHp\PlayerHp.cpp" />
@@ -276,6 +277,7 @@
     <ClInclude Include="UI\DamageNumber\DamageNumber.h" />
     <ClInclude Include="UI\DamageNumber\Number.h" />
     <ClInclude Include="UI\LevelUp\LevelUp.h" />
+    <ClInclude Include="UI\Menu\Inventory.h" />
     <ClInclude Include="UI\Menu\Menu.h" />
     <ClInclude Include="UI\MiniMap\MiniMap.h" />
     <ClInclude Include="UI\PlayerHp\PlayerHp.h" />

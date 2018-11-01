@@ -4,6 +4,7 @@
 #include "../../Map/Map.h"
 #include "../../Scene/SceneManager.h"
 #include "../../Enemy/IEnemy.h"
+#include "Inventory.h"
 
 CMenu::CMenu()
 {
@@ -62,7 +63,11 @@ void CMenu::Update()
 		break;
 
 	case enItems:			//インベントリの確認
-		
+		if (Pad().IsTriggerButton(enButtonA)) 
+		{
+			m_inventory = New<CInventory>(0);
+			m_inventory->Init(this);
+		}
 		break;
 
 	case enWeapons:			//装備の確認
@@ -130,10 +135,10 @@ void CMenu::KeyInputMenu()
 		GetPlayer().SetIsActive(!m_Draw);
 	}
 
-	if (m_Draw && Pad().IsTriggerButton(enButtonA)) {
-		//アイテムを使用する
-		GetPlayer().UseItem(0);
-	}
+	//if (m_Draw && Pad().IsTriggerButton(enButtonA)) {
+	//	//アイテムを使用する
+	//	GetPlayer().UseItem(0);
+	//}
 
 
 	if (Pad().IsTriggerButton(enButtonSelect))

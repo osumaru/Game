@@ -10,6 +10,7 @@ void CRecoveryItem::Init(CVector3 position)
 	m_position = position;
 	m_characterController.Init(0.2f, 0.2f, m_position);
 	m_characterController.SetUserIndex(EnCollisionAttr::enCollisionAttr_Item);
+	m_itemType = Recovery;
 }
 
 bool CRecoveryItem::Start()
@@ -73,7 +74,6 @@ void CRecoveryItem::Draw()
 
 void CRecoveryItem::Use()
 {
-	m_isUse = true;
 	GetPlayer().RecoveryHP(m_recoveryValue);
 	Delete(this);
 }

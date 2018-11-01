@@ -244,7 +244,15 @@ public:
 	//item		インベントリに追加するアイテム
 	void AddItemList(IItem* item)
 	{
-		m_itemList.push_back(item);
+		if (m_itemList.size() <= m_itemLimit) {
+			m_itemList.push_back(item);
+		}
+	}
+
+	//所持アイテムリストを取得
+	std::list<IItem*> GetItemList()
+	{
+		return m_itemList;
 	}
 
 	//所持アイテムを使う
@@ -316,6 +324,7 @@ private:
 	CVector3				m_wirePosition;							//ワイヤー移動先の座標
 
 	std::list<IItem*>		m_itemList;								//所持アイテムのリスト
+	const int	m_itemLimit = 15;
 };
 
 static CPlayer& GetPlayer()

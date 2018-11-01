@@ -249,6 +249,9 @@
     <ClCompile Include="Scene\TitleScene.cpp">
       <Filter>ソース ファイル\Scene</Filter>
     </ClCompile>
+    <ClCompile Include="UI\Menu\Inventory.cpp">
+      <Filter>ソース ファイル\UI\Menu</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -433,6 +436,9 @@
     </ClInclude>
     <ClInclude Include="Scene\TitleScene.h">
       <Filter>ソース ファイル\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Menu\Inventory.h">
+      <Filter>ソース ファイル\UI\Menu</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
