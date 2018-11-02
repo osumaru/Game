@@ -27,7 +27,7 @@ bool CMoney::Start()
 	//ˆÚ“®‘¬“x‚ðŒvŽZ
 	toRandomPosition.Normalize();
 	toRandomPosition *= m_speed;
-	toRandomPosition.y = 6.0f;
+	toRandomPosition.y = m_speed * 1.5f;
 	m_characterController.SetMoveSpeed(toRandomPosition);
 
 	return true;

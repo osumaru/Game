@@ -273,6 +273,9 @@
     <ClCompile Include="Item\RecoveryItem.cpp">
       <Filter>ソース ファイル\Item</Filter>
     </ClCompile>
+    <ClCompile Include="Item\Equipment.cpp">
+      <Filter>ソース ファイル\Item</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -474,6 +477,9 @@
       <Filter>ソース ファイル\Item</Filter>
     </ClInclude>
     <ClInclude Include="Item\RecoveryItem.h">
+      <Filter>ソース ファイル\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Item\Equipment.h">
       <Filter>ソース ファイル\Item</Filter>
     </ClInclude>
   </ItemGroup>
