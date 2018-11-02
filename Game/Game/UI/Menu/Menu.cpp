@@ -56,7 +56,7 @@ void CMenu::Update()
 	if (GetPlayer().GetIsDied()) { return; }
 
 	KeyInputMenu();
-	switch (m_MenuState)
+	switch (m_menuState)
 	{
 	case enMiniMap:			//ミニマップの確認
 		
@@ -81,6 +81,9 @@ void CMenu::Update()
 	case enExsitGame:		//タイトル画面に戻る
 		
 		break;
+	case enNoneMenu:
+
+		break;
 
 	}
 
@@ -98,7 +101,7 @@ void CMenu::KeyInputMenu()
 			m_menuUIPosition.y -= UI_OFFSET_Y;
 			m_menuUI.SetPosition(m_menuUIPosition);
 			m_StateNum++;
-			m_MenuState = (EnMenuState)m_StateNum;
+			m_menuState = (EnMenuState)m_StateNum;
 		}
 
 		else if (Pad().IsTriggerButton(enButtonUp) && m_menuUIPosition.y < UI_POSITION_Y_UP_LIMIT)
@@ -106,7 +109,7 @@ void CMenu::KeyInputMenu()
 			m_menuUIPosition.y += UI_OFFSET_Y;
 			m_menuUI.SetPosition(m_menuUIPosition);
 			m_StateNum--;
-			m_MenuState = (EnMenuState)m_StateNum;
+			m_menuState = (EnMenuState)m_StateNum;
 		}
 	}
 
@@ -118,10 +121,12 @@ void CMenu::KeyInputMenu()
 		{
 
 			m_Draw = false;
+			m_menuState = enNoneMenu;
 		}
 		else
 		{
 			m_Draw = true;
+			m_menuState = enMiniMap;
 
 		}
 		std::list<IEnemy*> enemyList = GetSceneManager().GetGameScene().GetMap()->GetEnemyList();

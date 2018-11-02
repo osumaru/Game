@@ -100,7 +100,7 @@ void CShopNPC::Update()
 			{ 
 				m_isTextureDraw = true;
 				m_shopState = enShopBuy;
-				m_bgmSound.Play(true);
+				m_bgmSound.Play(true,true);
 			}
 			
 		}

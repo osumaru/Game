@@ -28,6 +28,7 @@ private:
 		enWeapons,
 		enSaveGame,
 		enExsitGame,
+		enNoneMenu,
 		num,
 	};
 
@@ -51,7 +52,7 @@ private:
 	int				m_PlayerStatus[7];			//プレイヤーのステータスを持つメンバ変数
 	bool			m_Draw = false;				//描画を行うかの判定をする変数。
 
-	EnMenuState		m_MenuState = enMiniMap;
+	EnMenuState		m_menuState = enNoneMenu;
 	int				m_StateNum = 0;
 
 	CInventory*		m_inventory = nullptr;
