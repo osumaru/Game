@@ -35,8 +35,12 @@ void CResult::AfterDraw()
 	{
 		m_alphaTime = 1.0f;
 
-		//ゲームシーンに遷移
-		GetSceneManager().GetInstance().ChangeScene(GetSceneManager().enGameScene);
+		//フェードアウトが開始したか
+		if (!GetSceneManager().GetInstance().GetFadeOut())
+		{
+			//シーン遷移
+			GetSceneManager().ChangeScene(GetSceneManager().enTitleScene);
+		}
 	}
 	m_result.SetAlpha(m_alphaTime);
 	m_result.Draw();

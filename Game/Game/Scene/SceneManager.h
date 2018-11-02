@@ -6,7 +6,7 @@
 #include "TitleScene.h"
 #include "../UI/Fade/Fade.h"
 
-class CSceneManager
+class CSceneManager:public IGameObject
 {
 public:
 	enum EnSceneState {
@@ -14,11 +14,15 @@ public:
 		enGameScene,	//ゲーム
 		enResultScene,	//リザルト
 		enLoadScene,	//ロード
+		enClearScene,	//クリア
 		enSceneNum		//シーンの数
 	};
 
 	//初期化
 	void Init();
+
+	//更新
+	void Update();
 
 	//シーン変化
 	//scene		遷移したいシーン
@@ -42,12 +46,20 @@ public:
 		return m_fade;
 	}
 
+	//フェードアウトが開始したか
+	bool GetFadeOut()
+	{
+		return m_isFadeOut;
+	}
 
 private:
-	EnSceneState	m_sceneState= enSceneNum;//シーンのステート（現在のシーンを入れておく用）
+	EnSceneState	m_preSceneState= enSceneNum;//シーンのステート（現在のシーンを入れておく用）
+	EnSceneState	m_nextSceneState = enSceneNum;//シーンのステート（次のシーンを入れておく用）
 	CGameScene*		m_gameScene;			//ゲームシーン
 	CTitleScene*	m_titleScene;			//タイトルシーン
 	CFade*			m_fade;					//フェイド
+
+	bool			m_isFadeOut = false;		//フェードアウトしたかどうか
 	//IScene*			m_scene;			//シーンのインターフェース
 };
 
@@ -62,3 +74,9 @@ static CGameScene& GetSceneGame()
 {
 	return GetSceneManager().GetGameScene();
 }
+
+//フェードの取得
+//static CFade& Fade()
+//{
+//	return GetSceneManager().GetFade();
+//}

@@ -66,7 +66,7 @@ void CFade::AfterDraw()
 {
 	if (!m_isExecute)
 	{
-		return;
+	//	return;
 	}
 	m_fadeSprite.Draw();
 }
