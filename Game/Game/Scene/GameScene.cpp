@@ -13,15 +13,13 @@
 
 CGameScene::CGameScene()
 {
-	//フェードアウトの開始
-	GetSceneManager().GetFade()->FadeIn();
 }
 
 CGameScene::~CGameScene()
 {
 }
 
-void CGameScene::Release()
+void CGameScene::BeforeDead()
 {
 	//デリートの順番考えてない
 	Delete(m_result);
@@ -40,45 +38,40 @@ bool CGameScene::Start()
 	//フェードの実行が終わったらtrueを返す
 	if (!GetSceneManager().GetFade()->IsExecute())
 	{
+		//マップの初期化
+		m_map = New<Map>(0);
+		m_map->Init(0);
+
+		//ミニマップの初期化
+		m_miniMap = New<CMiniMap>(0);
+		m_miniMap->Init();
+
+		//カメラを生成
+		GetGameCamera().Create();
+		GetGameCamera().Init();
+
+		//UIの初期化
+		{
+			m_weaponSelect = New<CWeaponSelect>(0);
+			m_weaponSelect->Init();
+
+			m_playerHp = New<CPlayerHp>(0);
+			m_playerHp->Init();
+
+			m_levelUp = New<CLevelUp>(0);
+			m_levelUp->Init();
+
+			m_menu = New<CMenu>(0);
+			m_menu->Init();
+
+			m_result = New<CResult>(0);
+			m_result->Init();
+		}
+		//フェードインの開始
+		GetSceneManager().GetFade()->FadeIn();
 		return true;
 	}
 	return false;
-}
-
-void CGameScene::Init()
-{
-	//マップの初期化
-	m_map = New<Map>(0);
-	m_map->Init(0);
-
-	//ミニマップの初期化
-	m_miniMap = New<CMiniMap>(0);
-	m_miniMap->Init();
-
-	//カメラを生成
-	GetGameCamera().Create();
-	GetGameCamera().Init();
-	/*if (!GetGameCamera().IsStart())
-	{
-		GetGameCamera().Start();
-	}*/
-	//UIの初期化
-	{
-		m_weaponSelect = New<CWeaponSelect>(0);
-		m_weaponSelect->Init();
-
-		m_playerHp = New<CPlayerHp>(0);
-		m_playerHp->Init();
-
-		m_levelUp = New<CLevelUp>(0);
-		m_levelUp->Init();
-
-		m_menu = New<CMenu>(0);
-		m_menu->Init();
-
-		m_result = New<CResult>(0);
-		m_result->Init();
-	}
 }
 
 void CGameScene::Update()
