@@ -10,6 +10,7 @@ class CPlayerHp;
 class CLevelUp;
 class CMenu;
 class CResult;
+class CGameSound;
 
 class CGameScene : public IGameObject
 {
@@ -18,17 +19,15 @@ public:
 	CGameScene();
 	//デストラクタ
 	~CGameScene();
-	//開放
-	void Release();
 
 	//trueが返されるまで繰り返し呼ばれる
 	bool Start() override;
 
-	//初期化
-	void Init();
-
 	//更新
 	void Update() override;
+
+	//死ぬ前に呼び出される
+	void BeforeDead() override;
 
 	//マップの取得
 	Map* GetMap()
@@ -42,6 +41,11 @@ public:
 		return m_weaponSelect;
 	}
 
+	CGameSound* GetGameSound()
+	{
+		return m_gameSound;
+	}
+
 private:
 	Map*			m_map = nullptr;			//マップ
 	CWeaponSelect*	m_weaponSelect = nullptr;	//武器選択
@@ -50,4 +54,5 @@ private:
 	CLevelUp*		m_levelUp = nullptr;		//レベルアップ表示
 	CMenu*			m_menu = nullptr;			//メニュー
 	CResult*		m_result = nullptr;			//リザルト
+	CGameSound*		m_gameSound = nullptr;		//ゲームサウンド
 };

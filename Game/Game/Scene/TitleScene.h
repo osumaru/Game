@@ -12,9 +12,6 @@ public:
 	//true‚ª•Ô‚³‚ê‚é‚Ü‚ÅŒJ‚è•Ô‚µŒÄ‚Î‚ê‚é
 	bool Start() override;
 
-	//‰Šú‰»
-	void Init();
-
 	//XV
 	void Update() override;
 
