@@ -24,10 +24,11 @@ void CMenu::Init()
 	m_menu.SetSize({ 1290.0f,720.0f });
 
 	//羽ペンアイコン
-	m_menuUITexture.Load(L"Assets/sprite/MenuUI/Select.png");
-	m_menuUI.Init(&m_menuUITexture);
-	m_menuUI.SetPosition(m_menuUIPosition);
-	m_menuUI.SetSize(m_menuUIScale);
+	m_selectTexture.Load(L"Assets/sprite/MenuUI/Select.png");
+	m_selectSprite.Init(&m_selectTexture);
+	m_selectPosition = SELECT_TEX_POS;
+	m_selectSprite.SetPosition(m_selectPosition);
+	m_selectSprite.SetSize(m_selectScale);
 
 	for (int i = 0; i < NUMBER_LINE; i++)
 	{
@@ -68,6 +69,7 @@ void CMenu::Update()
 			m_inventory = New<CInventory>(0);
 			m_inventory->Init(this);
 		}
+		StatusConversion();
 		break;
 
 	case enWeapons:			//装備の確認
@@ -94,22 +96,22 @@ void CMenu::Update()
 void CMenu::KeyInputMenu()
 {
 	//メニュー画面が開いてる時だけ行う処理
-	if (m_Draw)
+	if (m_draw)
 	{
-		if (Pad().IsTriggerButton(enButtonDown) && m_menuUIPosition.y > UI_POSITION_Y_DOWN_LIMIT)
+		if (Pad().IsTriggerButton(enButtonDown) && m_selectPosition.y > UI_POSITION_Y_DOWN_LIMIT)
 		{
-			m_menuUIPosition.y -= UI_OFFSET_Y;
-			m_menuUI.SetPosition(m_menuUIPosition);
-			m_StateNum++;
-			m_menuState = (EnMenuState)m_StateNum;
+			m_selectPosition.y -= UI_OFFSET_Y;
+			m_selectSprite.SetPosition(m_selectPosition);
+			m_stateNum++;
+			m_menuState = (EnMenuState)m_stateNum;
 		}
 
-		else if (Pad().IsTriggerButton(enButtonUp) && m_menuUIPosition.y < UI_POSITION_Y_UP_LIMIT)
+		else if (Pad().IsTriggerButton(enButtonUp) && m_selectPosition.y < UI_POSITION_Y_UP_LIMIT)
 		{
-			m_menuUIPosition.y += UI_OFFSET_Y;
-			m_menuUI.SetPosition(m_menuUIPosition);
-			m_StateNum--;
-			m_menuState = (EnMenuState)m_StateNum;
+			m_selectPosition.y += UI_OFFSET_Y;
+			m_selectSprite.SetPosition(m_selectPosition);
+			m_stateNum--;
+			m_menuState = (EnMenuState)m_stateNum;
 		}
 	}
 
@@ -117,27 +119,32 @@ void CMenu::KeyInputMenu()
 	if (Pad().IsTriggerButton(enButtonSelect))
 	{
 		StatusMath();
-		if (m_Draw)
+		if (m_draw)
 		{
 
-			m_Draw = false;
+			m_draw = false;
 			m_menuState = enNoneMenu;
+			m_stateNum = enNoneMenu;
+			m_selectPosition = SELECT_TEX_POS;
+			m_selectSprite.SetPosition(m_selectPosition);
 		}
 		else
 		{
-			m_Draw = true;
+			m_draw = true;
 			m_menuState = enMiniMap;
+			m_stateNum = enMiniMap;
+			
 
 		}
 		std::list<IEnemy*> enemyList = GetSceneManager().GetGameScene().GetMap()->GetEnemyList();
 		//敵のアクティブ設定
 		for (auto& enemy : enemyList)
 		{
-			enemy->SetIsActive(!m_Draw);
+			enemy->SetIsActive(!m_draw);
 
 		}
 		//プレイヤーの動きの設定
-		GetPlayer().SetIsActive(!m_Draw);
+		GetPlayer().SetIsActive(!m_draw);
 	}
 
 	if (Pad().IsTriggerButton(enButtonSelect))
@@ -161,6 +168,14 @@ void CMenu::PlayerStatusInput()
 	m_PlayerStatus[5] = GetPlayer().GetStatus().NextExp;
 	m_PlayerStatus[6] = GetPlayer().GetStatus().Gold;
 
+}
+
+void CMenu::StatusConversion()
+{
+	if (!GetPlayer().GetIsStatusConversion()) { return; }
+	PlayerStatusInput();
+	StatusMath();
+	GetPlayer().SetIsStatusConversion(false);
 }
 
 
@@ -246,10 +261,10 @@ void CMenu::StatusMath()
 void CMenu::AfterDraw()
 {
 	if (GetPlayer().GetIsDied()) { return; }
-	if (m_Draw)
+	if (m_draw)
 	{
 		m_menu.Draw();
-		m_menuUI.Draw();
+		m_selectSprite.Draw();
 		for (int i = 0; i < NUMBER_LINE; i++)
 		{
 			for (int j = 0; j < NUMBER_COLUMN; j++)

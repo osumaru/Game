@@ -148,6 +148,7 @@ public:
 		if (m_status.Health >= m_status.MaxHealth) {
 			m_status.Health = m_status.MaxHealth;
 		}
+		m_isStatusConversion = true;
 	}
 
 	//プレイヤーがお金を取得する
@@ -283,6 +284,17 @@ public:
 
 	//弓を生成する関数
 	void InitArrow();
+	//ステータスが変化したかを取得
+	const bool GetIsStatusConversion()
+	{
+		return m_isStatusConversion;
+	}
+	//ステータスが変化したかを設定
+	void  SetIsStatusConversion(const bool iscon)
+	{
+		m_isStatusConversion = iscon;
+	}
+
 private:
 
 	//プレイヤーがエネミーに攻撃する処理
@@ -312,6 +324,7 @@ private:
 	bool					m_isDied = false;							//死んでいるかの判定
 	bool					m_intervalOn = false;						//無敵中かの判定
 	bool					m_initArrow = false;						//弓を生成しているかの判定
+	bool					m_isStatusConversion = false;				//ステータスが変化したかを判定する
 	float					m_intervalTime = 0.0f;
 
 	CPlayerStateMachine			m_PlayerStateMachine;							//プレイヤーのアニメーションの遷移を行うステートマシーン
