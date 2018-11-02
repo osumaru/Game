@@ -4,8 +4,9 @@
 #include "../Map/Map.h"
 #include "../Scene/SceneManager.h"
 #include "../Enemy/IEnemy.h"
-#include "../Itam/IItem.h"
-#include "../UI/Menu/Inventory.h"
+#include "../Item/IItem.h"
+#include "../UI/Menu/ItemInventory.h"
+#include "../UI/Menu/EquipInventory.h"
 
 CPlayer *CPlayer::m_player = NULL;
 
@@ -361,10 +362,29 @@ void CPlayer::UseItem(int number)
 	}
 }
 
+void CPlayer::ChangeEquip(int number)
+{
+	if (!m_equipList.empty())
+	{
+		//選んだ装備と現在の装備を交換する
+
+	}
+}
+
 void CPlayer::AddItemList(IItem * item)
 {
-	if (m_itemList.size() < CInventory::GetItemLimit()) {
+	if (m_itemList.size() < CItemInventory::GetItemLimit()) 
+	{
 		//所持上限を超えていなければアイテムリストに追加
 		m_itemList.push_back(item);
+	}
+}
+
+void CPlayer::AddEquipList(IItem* item)
+{
+	if (m_equipList.size() < CEquipInventory::GetEquipLimit())
+	{
+		//所持上限を超えていなければ装備リストに追加
+		m_equipList.push_back(item);
 	}
 }

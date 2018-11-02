@@ -4,7 +4,7 @@
 #include "../../Map/Map.h"
 #include "../../Scene/SceneManager.h"
 #include "../../Enemy/IEnemy.h"
-#include "Inventory.h"
+#include "ItemInventory.h"
 
 CMenu::CMenu()
 {
@@ -65,8 +65,8 @@ void CMenu::Update()
 	case enItems:			//インベントリの確認
 		if (Pad().IsTriggerButton(enButtonA)) 
 		{
-			m_inventory = New<CInventory>(0);
-			m_inventory->Init(this);
+			m_itemInventory = New<CItemInventory>(0);
+			m_itemInventory->Init(this);
 		}
 		break;
 

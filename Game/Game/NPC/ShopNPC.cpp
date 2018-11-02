@@ -2,7 +2,7 @@
 #include "ShopNPC.h"
 #include "../Camera/GameCamera.h"
 #include "../Player/Player.h"
-#include "../Itam/RecoveryItem.h"
+#include "../Item/RecoveryItem.h"
 
 
 CShopNPC::CShopNPC()

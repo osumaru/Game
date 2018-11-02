@@ -241,8 +241,12 @@ public:
 	}
 
 	//所持アイテムリストに追加
-	//item		インベントリに追加するアイテム
+	//item		アイテムリストに追加するアイテム
 	void AddItemList(IItem* item);
+
+	//所持装備リストに追加
+	//item		装備リストに追加するアイテム
+	void AddEquipList(IItem* item);
 
 	//所持アイテムリストを取得
 	std::list<IItem*> GetItemList()
@@ -250,9 +254,19 @@ public:
 		return m_itemList;
 	}
 
+	//所持装備リストを取得
+	std::list<IItem*> GetEquipList()
+	{
+		return m_equipList;
+	}
+
 	//所持アイテムを使う
 	//number		アイテムの番号
 	void UseItem(int number);
+
+	//装備の変更
+	//number		変更したい装備の番号
+	void ChangeEquip(int number);
 
 	/*
 	アニメーションを補間つきで再生する関数
@@ -325,6 +339,7 @@ private:
 	CVector3				m_wirePosition;							//ワイヤー移動先の座標
 
 	std::list<IItem*>		m_itemList;								//所持アイテムのリスト
+	std::list<IItem*>		m_equipList;							//所持装備のリスト
 };
 
 static CPlayer& GetPlayer()
