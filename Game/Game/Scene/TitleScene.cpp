@@ -4,16 +4,7 @@
 
 CTitleScene::CTitleScene()
 {
-	//初回起動じゃなかったとき
-	if (m_isGameStart)
-	{
-		m_isGameStart = false;
-	}
-	else
-	{
-		//フェードアウトの開始
-		GetSceneManager().GetFade()->FadeIn();
-	}
+
 }
 
 CTitleScene::~CTitleScene()

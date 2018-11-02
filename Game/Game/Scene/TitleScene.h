@@ -25,6 +25,6 @@ private:
 	CSprite			m_title;					//Title画面のスプライト
 	CTexture		m_titleTexture;				//Title画面のテクスチャ
 
-	bool			m_isGameStart=true;			//初回起動時かどうか
+
 };
 

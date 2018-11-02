@@ -48,6 +48,16 @@ void CSceneManager::Update()
 		{
 			//タイトルシーンへの遷移
 		case EnSceneState::enTitleScene:
+			//初回起動
+			if (m_isGameStart)
+			{
+				m_isGameStart = false;
+			}
+			else
+			{
+				//フェードアウトの開始
+				GetSceneManager().GetFade()->FadeIn();
+			}
 			m_titleScene = New<CTitleScene>(0);
 			m_titleScene->Init();
 			break;
