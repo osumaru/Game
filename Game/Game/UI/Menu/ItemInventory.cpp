@@ -139,7 +139,7 @@ void CItemInventory::Update()
 	SplayerStatus playerStatus = GetPlayer().GetStatus();
 	int playerHP = playerStatus.Health;
 	int playerHPMax = playerStatus.MaxHealth;
-	if (playerHP < playerHPMax)
+	if (playerHP >= playerHPMax)
 	{
 		//ƒvƒŒƒCƒ„[‚ÌHP‚ªÅ‘å‚É‚È‚Á‚Ä‚¢‚é
 		isPlayerHpMax = true;
