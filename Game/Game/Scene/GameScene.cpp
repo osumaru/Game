@@ -9,6 +9,7 @@
 #include "../UI/Result/Result.h"
 #include "../UI/LevelUp/LevelUp.h"
 #include "../../Game/Camera/GameCamera.h"
+#include "../GameSound/GameSound.h"
 #include "SceneManager.h"
 
 CGameScene::CGameScene()
@@ -30,6 +31,7 @@ void CGameScene::BeforeDead()
 	GetGameCamera().Destroy();
 	Delete(m_miniMap);
 	Delete(m_map);
+	Delete(m_gameSound);
 
 }
 
@@ -66,12 +68,15 @@ bool CGameScene::Start()
 
 			m_result = New<CResult>(0);
 			m_result->Init();
+
+			m_gameSound = New<CGameSound>(0);
 		}
 		//フェードインの開始
 		GetSceneManager().GetFade()->FadeIn();
 		return true;
 	}
 	return false;
+
 }
 
 void CGameScene::Update()

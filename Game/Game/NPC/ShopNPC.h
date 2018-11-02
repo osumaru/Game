@@ -29,15 +29,11 @@ private:
 	CTexture			m_shopTexture[TEXTURE_NUM];
 	CVector2			m_texturePos = {-500.0f,200.0f};
 	CVector2			m_textureSize = {200.0f,50.0f};
-	
-
-	CSoundSource		m_bgmSound;
-	CSoundSource		m_seSound;
-
+	CSoundSource		m_seSound;						//システム音
 	bool				m_isTextureDraw = false;		//UIを描画するかの判定
-	EShopState			m_shopState = enShopNone;
-	const float			SHOP_DRAW_LENGTH = 4.0f;
-	const int			RECOVERY_MONEY = 20;
+	EShopState			m_shopState = enShopNone;		//ショップの状態
+	const float			SHOP_DRAW_LENGTH = 3.5f;		//ショップの影響を受ける長さ
+	const int			RECOVERY_MONEY = 20;			//回復アイテムの値段
 	
 };
 

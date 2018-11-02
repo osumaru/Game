@@ -76,6 +76,9 @@
     <Filter Include="ソース ファイル\NPC">
       <UniqueIdentifier>{a67babc6-6fe9-451a-9889-0df1ba6fc2ef}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\GameSound">
+      <UniqueIdentifier>{3802cec0-1cc4-4811-9f46-0f4a30099628}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -258,14 +261,8 @@
     <ClCompile Include="NPC\ShopNPC.cpp">
       <Filter>ソース ファイル\NPC</Filter>
     </ClCompile>
-    <ClCompile Include="UI\Menu\EquipInventory.cpp">
-      <Filter>ソース ファイル\UI\Menu</Filter>
-    </ClCompile>
-    <ClCompile Include="UI\Menu\ItemInventory.cpp">
-      <Filter>ソース ファイル\UI\Menu</Filter>
-    </ClCompile>
-    <ClCompile Include="Item\IItem.cpp">
-      <Filter>ソース ファイル\Item</Filter>
+    <ClCompile Include="GameSound\GameSound.cpp">
+      <Filter>ソース ファイル\GameSound</Filter>
     </ClCompile>
     <ClCompile Include="Item\Money.cpp">
       <Filter>ソース ファイル\Item</Filter>
@@ -275,6 +272,15 @@
     </ClCompile>
     <ClCompile Include="Item\Equipment.cpp">
       <Filter>ソース ファイル\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Item\IItem.cpp">
+      <Filter>ソース ファイル\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Menu\EquipInventory.cpp">
+      <Filter>ソース ファイル\UI\Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Menu\ItemInventory.cpp">
+      <Filter>ソース ファイル\UI\Menu</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -464,11 +470,11 @@
     <ClInclude Include="NPC\ShopNPC.h">
       <Filter>ソース ファイル\NPC</Filter>
     </ClInclude>
-    <ClInclude Include="UI\Menu\EquipInventory.h">
-      <Filter>ソース ファイル\UI\Menu</Filter>
+    <ClInclude Include="GameSound\GameSound.h">
+      <Filter>ソース ファイル\GameSound</Filter>
     </ClInclude>
-    <ClInclude Include="UI\Menu\ItemInventory.h">
-      <Filter>ソース ファイル\UI\Menu</Filter>
+    <ClInclude Include="Item\Equipment.h">
+      <Filter>ソース ファイル\Item</Filter>
     </ClInclude>
     <ClInclude Include="Item\IItem.h">
       <Filter>ソース ファイル\Item</Filter>
@@ -479,8 +485,11 @@
     <ClInclude Include="Item\RecoveryItem.h">
       <Filter>ソース ファイル\Item</Filter>
     </ClInclude>
-    <ClInclude Include="Item\Equipment.h">
-      <Filter>ソース ファイル\Item</Filter>
+    <ClInclude Include="UI\Menu\EquipInventory.h">
+      <Filter>ソース ファイル\UI\Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Menu\ItemInventory.h">
+      <Filter>ソース ファイル\UI\Menu</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
