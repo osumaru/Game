@@ -1,14 +1,14 @@
 #include "stdafx.h"
-#include "Equipment.h"
+#include "TreasureChest.h"
 #include "../Player/Player.h"
 #include"../../Game/Camera/GameCamera.h"
 
-void CEquipment::Init()
+void CTreasureChest::Init()
 {
 	m_itemType = Equip;
 }
 
-bool CEquipment::Start()
+bool CTreasureChest::Start()
 {
 	CVector3 popSpeed = CVector3::Zero;
 	popSpeed.y = m_speed / 2.0f;
@@ -17,7 +17,7 @@ bool CEquipment::Start()
 	return true;
 }
 
-void CEquipment::Update()
+void CTreasureChest::Update()
 {
 	if (GetPlayer().GetIsDied() || m_timer > m_itemDeadTime)
 	{
@@ -59,12 +59,12 @@ void CEquipment::Update()
 	m_skinModel.Update(m_position, m_rotation, { 1.0f,1.0f,1.0f }, true);
 }
 
-void CEquipment::Draw()
+void CTreasureChest::Draw()
 {
 	m_skinModel.Draw(GetGameCamera().GetViewMatrix(), GetGameCamera().GetProjectionMatrix());
 }
 
-void CEquipment::Pop(CVector3 position)
+void CTreasureChest::Pop(CVector3 position)
 {
 	m_skinModel.Load(L"Assets/modelData/heart.cmo");
 	m_position = position;
