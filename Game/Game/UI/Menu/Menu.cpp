@@ -17,9 +17,9 @@ CMenu::~CMenu()
 
 void CMenu::BeforeDead()
 {
-	if (m_inventory != nullptr)
+	if (m_itemInventory!= nullptr)
 	{
-		Delete(m_inventory);
+		Delete(m_itemInventory);
 	}
 }
 

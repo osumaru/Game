@@ -64,6 +64,7 @@ void CFade::Update()
 
 void CFade::AfterDraw()
 {
+	//ÀsˆÈŠO‚Í•`‰æ‚µ‚È‚¢
 	if (!m_isExecute)
 	{
 	//	return;
