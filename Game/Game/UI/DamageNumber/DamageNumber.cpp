@@ -67,3 +67,10 @@ void CDamageNumber::SetPosition(const CVector2 & position)
 		m_numPos.x -= m_numSize.x * (i + 1);
 	}
 }
+
+void CDamageNumber::Relese()
+{
+	for (int i = 0; i < EnDigit::enDigit_Num; i++) {
+		Delete(m_number[i]);
+	}
+}

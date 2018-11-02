@@ -38,6 +38,12 @@ public:
 		return m_itemType;
 	}
 
+	//アイテムが使用されたか
+	bool GetIsUse()
+	{
+		return m_isUse;
+	}
+
 protected:
 	EnInventoryItemType		m_itemType = Invald;		//インベントリのアイテムの種類
 	CSkinModel				m_skinModel;				//スキンモデル
@@ -49,4 +55,5 @@ protected:
 	const float				m_speed = 4.0f;				//速度
 	float					m_timer = 0.0f;				//タイマー
 	bool					m_popEnd = false;			//ポップし終わったか
+	bool					m_isUse = false;			//アイテムが使用されたか
 };

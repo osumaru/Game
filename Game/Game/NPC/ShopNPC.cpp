@@ -69,6 +69,7 @@ void CShopNPC::Update()
 			if (GetPlayer().BuyMoney(RECOVERY_MONEY))
 			{
 				CRecoveryItem* item = new CRecoveryItem;
+				item->Init();
 				GetPlayer().AddItemList(item);
 				CSoundSource* se = new CSoundSource;
 				se->Init("Assets/sound/Shop/BuySe.wav");

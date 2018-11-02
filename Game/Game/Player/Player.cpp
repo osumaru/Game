@@ -5,6 +5,7 @@
 #include "../Scene/SceneManager.h"
 #include "../Enemy/IEnemy.h"
 #include "../Itam/IItem.h"
+#include "../UI/Menu/Inventory.h"
 
 CPlayer *CPlayer::m_player = NULL;
 
@@ -100,7 +101,7 @@ void CPlayer::Init(CVector3 position)
 		m_status.NextExp	= ((m_status.OldExp * 1.1f + 0.5) + (m_status.Level * 12 )) / 2 + 0.5;		//次のレベルアップに必要な経験値
 		m_status.ExperiencePoint = 0;					//経験値
 		m_status.AccumulationExp += m_status.OldExp;	//累積経験値
-		m_status.Gold = 100;								//所持金
+		m_status.Gold = 400;							//所持金
 	}
 
 	m_PlayerStateMachine.SetPlayer(this);
@@ -174,6 +175,11 @@ void CPlayer::Update()
 				}
 			}
 		}
+	}
+
+	if (Pad().IsPressButton(enButtonX))
+	{
+		m_status.Health = 5;
 	}
 
 	if (Pad().GetLeftTrigger())
@@ -302,7 +308,7 @@ void CPlayer::Rotation()
 	}
 	m_rotation.SetRotation(CVector3::AxisY, rad);
 
-	if (m_weapon.GetCurrentState() == CWeapon::enWeaponArrow && m_isAttack)
+	if (m_weapon.GetCurrentState() == CWeapon::enArrow && m_isAttack)
 	{
 		CQuaternion rotXZ, rotY;
 		CVector3 cameraFlont = GetGameCamera().GetCamera().GetFlont();
@@ -352,5 +358,13 @@ void CPlayer::UseItem(int number)
 		(*it)->Use();
 		//使ったアイテムをリストから削除する
 		m_itemList.erase(it);
+	}
+}
+
+void CPlayer::AddItemList(IItem * item)
+{
+	if (m_itemList.size() < CInventory::GetItemLimit()) {
+		//所持上限を超えていなければアイテムリストに追加
+		m_itemList.push_back(item);
 	}
 }

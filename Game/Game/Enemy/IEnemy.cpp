@@ -14,4 +14,5 @@ IEnemy::~IEnemy()
 	Delete(&m_enemyMove);
 	Delete(&m_enemyTurn);
 	Delete(&m_enemySearch);
+	m_damageNumber.Relese();
 }

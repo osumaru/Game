@@ -19,7 +19,6 @@ struct SplayerStatus
 	int OldExp;				//現在のレベルアップに必要だった経験値
 	int AccumulationExp;	//累積経験値
 	int Gold;
-
 };
 
 
@@ -242,12 +241,7 @@ public:
 
 	//所持アイテムリストに追加
 	//item		インベントリに追加するアイテム
-	void AddItemList(IItem* item)
-	{
-		if (m_itemList.size() <= m_itemLimit) {
-			m_itemList.push_back(item);
-		}
-	}
+	void AddItemList(IItem* item);
 
 	//所持アイテムリストを取得
 	std::list<IItem*> GetItemList()
@@ -325,13 +319,11 @@ private:
 	CSprite						m_arrowtag;										//サークルのスプライト
 	CTexture					m_arrowtexture;
 	bool						m_isZoom;										//弓用の視点に切り替えるかの判定をする変数
-
 	bool					m_isWireMove = false;					//ワイヤー移動できるか
 	CRayTest				m_wireCollisionSolver;					//ワイヤー移動のコリジョン処理クラス
 	CVector3				m_wirePosition;							//ワイヤー移動先の座標
 
 	std::list<IItem*>		m_itemList;								//所持アイテムのリスト
-	const int	m_itemLimit = 15;
 };
 
 static CPlayer& GetPlayer()

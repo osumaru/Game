@@ -1,7 +1,7 @@
 #pragma once
 #include"PlayerState.h"
 #include "PlayerStateCommon.h"
-
+//プレイヤーの攻撃(コンボ攻撃等も含む)のステート
 
 class CPlayerAttack : public  IPlayerState
 {
@@ -12,7 +12,7 @@ public:
 	//初期化
 	void Init()override;
 	
-	//
+	//更新
 	void Update()override;
 
 private:
