@@ -1,22 +1,22 @@
 #include "stdafx.h"
-#include "Inventory.h"
+#include "ItemInventory.h"
 #include "Menu.h"
 #include "../../Player/Player.h"
-#include "../../Itam/IItem.h"
+#include "../../Item/IItem.h"
 
-CInventory::CInventory(){}
+CItemInventory::CItemInventory(){}
 
-CInventory::~CInventory(){}
+CItemInventory::~CItemInventory(){}
 
-void CInventory::Init(CMenu* menu)
+void CItemInventory::Init(CMenu* menu)
 {
 	m_menu = menu;
 	//座標とサイズを初期化
 	m_basePos = { -560.0f, 180.0f };
 	m_size = { 150.0f, 150.0f };
 	//インベントリの背景を初期化
-	m_inventoryTexture.Load(L"Assets/sprite/MenuUI/Back_Menu.png");
-	m_inventory.Init(&m_inventoryTexture);
+	m_backGroundTexture.Load(L"Assets/sprite/MenuUI/Back_Menu.png");
+	m_backGround.Init(&m_backGroundTexture);
 	//カーソルを初期化
 	m_pointerTexture.Load(L"Assets/sprite/Pointer.png");
 	m_pointer.Init(&m_pointerTexture);
@@ -24,8 +24,8 @@ void CInventory::Init(CMenu* menu)
 	m_pointer.SetSize(m_size);
 	//アイテムリストを取得
 	m_itemList = GetPlayer().GetItemList();
-	m_inventoryWidth = 5;
-	m_inventoryHeight = 1;
+	m_width = 5;
+	m_height = 1;
 	if (!m_itemList.empty()) {
 		//リストにアイテムがある
 		int idx = 0;
@@ -40,12 +40,12 @@ void CInventory::Init(CMenu* menu)
 			}
 			//座標とサイズを決める
 			CVector2 position = m_basePos;
-			position.x += m_size.x * (idx % m_inventoryWidth);
-			position.y -= m_size.y * (idx / m_inventoryWidth);
-			if (idx != 0 && idx % m_inventoryWidth == 0)
+			position.x += m_size.x * (idx % m_width);
+			position.y -= m_size.y * (idx / m_width);
+			if (idx != 0 && idx % m_width == 0)
 			{
 				//インベントリの幅を超えたら行を下げる
-				m_inventoryHeight++;
+				m_height++;
 			}
 			m_item[idx].SetPosition(position);
 			m_item[idx].SetSize(m_size);
@@ -54,17 +54,17 @@ void CInventory::Init(CMenu* menu)
 	}
 }
 
-bool CInventory::Start()
+bool CItemInventory::Start()
 {
 	//メニューを動かさないようにする
 	m_menu->SetIsActive(false);
 	return true;
 }
 
-void CInventory::Update()
+void CItemInventory::Update()
 {
 	//アイテムの数を取得
-	int itemNum = m_itemList.size();
+	size_t itemNum = m_itemList.size();
 	int number = m_pointerNum;
 	CVector2 position = m_pointer.GetPosition();
 	float offset = m_size.x / 2.0f;
@@ -73,10 +73,10 @@ void CInventory::Update()
 		//右にカーソルを動かす
 		position.x += m_size.x;
 		number++;
-		if(position.x > m_basePos.x + m_size.x * (m_inventoryWidth - 1) + offset)
+		if(position.x > m_basePos.x + m_size.x * (m_width - 1) + offset)
 		{
 			//右端だった場合はそのまま
-			position.x = m_basePos.x + m_size.x * (m_inventoryWidth - 1);
+			position.x = m_basePos.x + m_size.x * (m_width - 1);
 		}
 		else 
 		{
@@ -104,7 +104,7 @@ void CInventory::Update()
 	{
 		//上にカーソルを動かす
 		position.y += m_size.y;
-		number -= m_inventoryWidth;
+		number -= m_width;
 		if (position.y > m_basePos.y + offset) 
 		{
 			//上端だった場合はそのまま
@@ -120,11 +120,11 @@ void CInventory::Update()
 	{
 		//下にカーソルを動かす
 		position.y -= m_size.y;
-		number += m_inventoryWidth;
-		if (position.y < m_basePos.y - m_size.y * (m_inventoryHeight - 1) - offset)
+		number += m_width;
+		if (position.y < m_basePos.y - m_size.y * (m_height - 1) - offset)
 		{
 			//下端だった場合はそのまま
-			position.y = m_basePos.y - m_size.y * (m_inventoryHeight - 1);
+			position.y = m_basePos.y - m_size.y * (m_height - 1);
 		}
 		else 
 		{
@@ -135,14 +135,24 @@ void CInventory::Update()
 	//座標を更新
 	m_pointer.SetPosition(position);
 
-	if (m_pointerNum < itemNum && Pad().IsTriggerButton(enButtonA))
+	bool isPlayerHpMax = false;
+	SplayerStatus playerStatus = GetPlayer().GetStatus();
+	int playerHP = playerStatus.Health;
+	int playerHPMax = playerStatus.MaxHealth;
+	if (playerHP < playerHPMax)
+	{
+		//プレイヤーのHPが最大になっている
+		isPlayerHpMax = true;
+	}
+
+	if (m_pointerNum < itemNum && Pad().IsTriggerButton(enButtonA) && !isPlayerHpMax)
 	{
 		//カーソルで選んでいるアイテムを使う
 		GetPlayer().UseItem(m_pointerNum);
 		//空いたスペースを詰める
 		m_itemList = GetPlayer().GetItemList();
-		m_inventoryWidth = 5;
-		m_inventoryHeight = 1;
+		m_width = 5;
+		m_height = 1;
 		if (!m_itemList.empty()) {
 			//リストにアイテムがある
 			int idx = 0;
@@ -150,12 +160,12 @@ void CInventory::Update()
 			{
 				//座標とサイズを決める
 				CVector2 position = m_basePos;
-				position.x += m_size.x * (idx % m_inventoryWidth);
-				position.y -= m_size.y * (idx / m_inventoryWidth);
-				if (idx != 0 && idx % m_inventoryWidth == 0)
+				position.x += m_size.x * (idx % m_width);
+				position.y -= m_size.y * (idx / m_width);
+				if (idx != 0 && idx % m_width == 0)
 				{
 					//インベントリの幅を超えたら行を下げる
-					m_inventoryHeight++;
+					m_height++;
 				}
 				m_item[idx].SetPosition(position);
 				m_item[idx].SetSize(m_size);
@@ -171,9 +181,9 @@ void CInventory::Update()
 	}
 }
 
-void CInventory::AfterDraw()
+void CItemInventory::AfterDraw()
 {
-	m_inventory.Draw();
+	m_backGround.Draw();
 	for (int i = 0; i < m_itemList.size(); i++) {
 		m_item[i].Draw();
 	}

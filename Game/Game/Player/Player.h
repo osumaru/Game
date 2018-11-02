@@ -148,6 +148,7 @@ public:
 		if (m_status.Health >= m_status.MaxHealth) {
 			m_status.Health = m_status.MaxHealth;
 		}
+		m_isStatusConversion = true;
 	}
 
 	//プレイヤーがお金を取得する
@@ -240,8 +241,12 @@ public:
 	}
 
 	//所持アイテムリストに追加
-	//item		インベントリに追加するアイテム
+	//item		アイテムリストに追加するアイテム
 	void AddItemList(IItem* item);
+
+	//所持装備リストに追加
+	//item		装備リストに追加するアイテム
+	void AddEquipList(IItem* item);
 
 	//所持アイテムリストを取得
 	std::list<IItem*> GetItemList()
@@ -249,9 +254,19 @@ public:
 		return m_itemList;
 	}
 
+	//所持装備リストを取得
+	std::list<IItem*> GetEquipList()
+	{
+		return m_equipList;
+	}
+
 	//所持アイテムを使う
 	//number		アイテムの番号
 	void UseItem(int number);
+
+	//装備の変更
+	//number		変更したい装備の番号
+	void ChangeEquip(int number);
 
 	/*
 	アニメーションを補間つきで再生する関数
@@ -283,6 +298,17 @@ public:
 
 	//弓を生成する関数
 	void InitArrow();
+	//ステータスが変化したかを取得
+	const bool GetIsStatusConversion()
+	{
+		return m_isStatusConversion;
+	}
+	//ステータスが変化したかを設定
+	void  SetIsStatusConversion(const bool iscon)
+	{
+		m_isStatusConversion = iscon;
+	}
+
 private:
 
 	//プレイヤーがエネミーに攻撃する処理
@@ -312,6 +338,7 @@ private:
 	bool					m_isDied = false;							//死んでいるかの判定
 	bool					m_intervalOn = false;						//無敵中かの判定
 	bool					m_initArrow = false;						//弓を生成しているかの判定
+	bool					m_isStatusConversion = false;				//ステータスが変化したかを判定する
 	float					m_intervalTime = 0.0f;
 
 	CPlayerStateMachine			m_PlayerStateMachine;							//プレイヤーのアニメーションの遷移を行うステートマシーン
@@ -324,6 +351,7 @@ private:
 	CVector3				m_wirePosition;							//ワイヤー移動先の座標
 
 	std::list<IItem*>		m_itemList;								//所持アイテムのリスト
+	std::list<IItem*>		m_equipList;							//所持装備のリスト
 };
 
 static CPlayer& GetPlayer()

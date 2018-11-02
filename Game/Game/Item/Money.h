@@ -11,7 +11,7 @@ class CMoney : public IItem
 public:
 	//初期化
 	//position	座標
-	void Init(CVector3 position);
+	void Init();
 
 	//更新する前に一度だけ呼ばれる
 	bool Start() override;
@@ -23,7 +23,7 @@ public:
 	void Draw() override;
 
 	//ポップさせる
-	void Pop();
+	void Pop(CVector3 position);
 
 	//お金の値を設定
 	//gold		お金

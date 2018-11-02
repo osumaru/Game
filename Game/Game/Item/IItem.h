@@ -28,6 +28,7 @@ public:
 	enum EnInventoryItemType {
 		Recovery,	//回復
 		Buff,		//バフ
+		Equip,		//装備
 		TypeNum,	//種類の数
 		Invald		//何もない
 	};
@@ -36,12 +37,6 @@ public:
 	EnInventoryItemType GetItemType()
 	{
 		return m_itemType;
-	}
-
-	//アイテムが使用されたか
-	bool GetIsUse()
-	{
-		return m_isUse;
 	}
 
 protected:
@@ -55,5 +50,4 @@ protected:
 	const float				m_speed = 4.0f;				//速度
 	float					m_timer = 0.0f;				//タイマー
 	bool					m_popEnd = false;			//ポップし終わったか
-	bool					m_isUse = false;			//アイテムが使用されたか
 };

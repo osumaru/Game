@@ -1,7 +1,7 @@
 #pragma once
 #include "../../Player/Player.h"
 
-class CInventory;
+class CItemInventory;
 
 class CMenu : public IGameObject
 {
@@ -21,6 +21,8 @@ public:
 	void PlayerStatusInput();	
 	//キーの入力による処理を行う関数
 	void KeyInputMenu();
+	//プレイヤーのステータスが変化した場合に再度数値を書き換える処理
+	void StatusConversion();
 
 private:
 	enum EnMenuState
@@ -30,16 +32,19 @@ private:
 		enWeapons,
 		enSaveGame,
 		enExsitGame,
+		enNoneMenu,
 		num,
 	};
 
 	CSprite			m_menu;					//メニュー画面のスプライト
 	CTexture		m_Texture;				//メニュー画面のテクスチャ
 
-	CSprite			m_menuUI;						//メニュー画面の羽ペンアイコンのスプライト
-	CTexture		m_menuUITexture;				//メニュー画面の羽ペンアイコンテクスチャ
-	CVector2		m_menuUIPosition = { -270.0f,320.0f };
-	CVector2		m_menuUIScale = { 70.0f,70.0f };
+	CSprite			m_selectSprite;						//メニュー画面の羽ペンアイコンのスプライト
+	CTexture		m_selectTexture;				//メニュー画面の羽ペンアイコンテクスチャ
+	CVector2		m_selectPosition = CVector2::Zero;
+	CVector2		m_selectScale = { 70.0f,70.0f };
+	const CVector2  SELECT_TEX_POS = { -270.0f,320.0f };
+
 	const float		UI_POSITION_Y_UP_LIMIT = 320.0f;
 	const float		UI_POSITION_Y_DOWN_LIMIT = -280.0f;
 	const float		UI_OFFSET_Y = 150.0f;
@@ -51,11 +56,12 @@ private:
 
 	CVector2		m_numberPos = { 500.0,220.0f };//CVector2::Zero;
 	int				m_PlayerStatus[7];			//プレイヤーのステータスを持つメンバ変数
-	bool			m_Draw = false;				//描画を行うかの判定をする変数。
+	bool			m_draw = false;				//描画を行うかの判定をする変数。
+	
 
-	EnMenuState		m_MenuState = enMiniMap;
-	int				m_StateNum = 0;
+	EnMenuState		m_menuState = enNoneMenu;
+	int				m_stateNum = 0;
 
-	CInventory*		m_inventory = nullptr;
+	CItemInventory*	m_itemInventory = nullptr;
 };
 

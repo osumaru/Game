@@ -1,8 +1,8 @@
 #include "stdafx.h"
 #include "EnemyDeath.h"
 #include "../IEnemy.h"
-#include "../../Itam/RecoveryItem.h"
-#include "../../Itam/Money.h"
+#include "../../Item/RecoveryItem.h"
+#include "../../Item/Money.h"
 
 bool CEnemyDeath::Start()
 {
@@ -18,9 +18,8 @@ void CEnemyDeath::Update()
 	if (!m_enemy->IsPlayAnimation()) {
 		CRecoveryItem* recoveryItem = New<CRecoveryItem>(0);
 		recoveryItem->Pop(m_enemy->GetPosition());
-		//recoveryItem->Init(m_enemy->GetPosition());
 		CMoney* money = New<CMoney>(0);
-		money->Init(m_enemy->GetPosition());
+		money->Pop(m_enemy->GetPosition());
 		money->SetGold(m_enemy->GetStatus().Gold);
 		m_enemy->StateMachineRelease();
 		Delete(m_enemy);

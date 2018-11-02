@@ -36,7 +36,7 @@ private:
 
 	bool				m_isTextureDraw = false;		//UI‚ð•`‰æ‚·‚é‚©‚Ì”»’è
 	EShopState			m_shopState = enShopNone;
-	const float			SHOP_DRAW_LENGHT = 4.0f;
+	const float			SHOP_DRAW_LENGTH = 4.0f;
 	const int			RECOVERY_MONEY = 20;
 	
 };
