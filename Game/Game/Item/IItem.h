@@ -49,5 +49,6 @@ protected:
 	CVector3				m_moveSpeed;				//移動速度
 	const float				m_speed = 4.0f;				//速度
 	float					m_timer = 0.0f;				//タイマー
+	const float				m_itemDeadTime = 15.0f;		//アイテムが消滅するまでの時間
 	bool					m_popEnd = false;			//ポップし終わったか
 };

@@ -22,7 +22,8 @@ void CEquipInventory::Init(CMenu * menu)
 	m_pointer.Init(&m_pointerTexture);
 	m_pointer.SetPosition(m_basePos);
 	m_pointer.SetSize(m_size);
-	//アイテムリストを取得
+	//装備リストを取得
+	m_equipList = GetPlayer().GetEquipList();
 	m_width = 5;
 	m_height = 1;
 	if (!m_equipList.empty()) {

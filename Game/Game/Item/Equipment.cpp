@@ -19,6 +19,14 @@ bool CEquipment::Start()
 
 void CEquipment::Update()
 {
+	if (GetPlayer().GetIsDied() || m_timer > m_itemDeadTime)
+	{
+		//プレイヤーが死亡した又は一定時間で削除
+		Delete(this);
+		return;
+	}
+	m_timer += GameTime().GetDeltaFrameTime();
+
 	//移動速度を取得
 	CVector3 moveSpeed = m_characterController.GetMoveSpeed();
 

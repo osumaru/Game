@@ -1,3 +1,7 @@
+/*
+*	装備インベントリクラス
+*/
+
 #pragma once
 
 class CMenu;

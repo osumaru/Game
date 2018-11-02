@@ -5,6 +5,7 @@
 #include "../../Scene/SceneManager.h"
 #include "../../Enemy/IEnemy.h"
 #include "ItemInventory.h"
+#include "EquipInventory.h"
 
 CMenu::CMenu()
 {
@@ -20,6 +21,10 @@ void CMenu::BeforeDead()
 	if (m_itemInventory!= nullptr)
 	{
 		Delete(m_itemInventory);
+	}
+	if (m_equipInventory != nullptr)
+	{
+		Delete(m_equipInventory);
 	}
 }
 
@@ -80,7 +85,11 @@ void CMenu::Update()
 		break;
 
 	case enWeapons:			//装備の確認
-		
+		if (Pad().IsTriggerButton(enButtonA))
+		{
+			m_equipInventory = New<CEquipInventory>(0);
+			m_equipInventory->Init(this);
+		}
 		break;
 
 	case enSaveGame:		//データのセーブ

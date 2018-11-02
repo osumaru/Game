@@ -36,6 +36,13 @@ bool CRecoveryItem::Start()
 
 void CRecoveryItem::Update()
 {
+	if (GetPlayer().GetIsDied() || m_timer > m_itemDeadTime)
+	{
+		//プレイヤーが死亡した又は一定時間で削除
+		Delete(this);
+		return;
+	}
+
 	//移動速度を取得
 	CVector3 moveSpeed = m_characterController.GetMoveSpeed();
 
