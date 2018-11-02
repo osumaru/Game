@@ -18,9 +18,14 @@ public:
 	void Update()override;
 
 	void Draw()override;
+
+	void SetCamera(const CCamera* camera)
+	{
+		m_camera = camera;
+	}
 private:
 	CSkinModel m_skinModel;
-	const CCamera* m_camera;
+	const CCamera* m_camera = nullptr;
 };
 
 static CSky& Sky()

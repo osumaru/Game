@@ -3,12 +3,8 @@
 #include "../Player/Player.h"
 #include"../../Game/Camera/GameCamera.h"
 
-void CMoney::Init(CVector3 position)
+void CMoney::Init()
 {
-	m_skinModel.Load(L"Assets/modelData/money.cmo");
-	m_position = position;
-	m_characterController.Init(0.2f, 0.2f, m_position);
-	m_characterController.SetUserIndex(EnCollisionAttr::enCollisionAttr_Item);
 }
 
 bool CMoney::Start()
@@ -31,7 +27,7 @@ bool CMoney::Start()
 	//移動速度を計算
 	toRandomPosition.Normalize();
 	toRandomPosition *= m_speed;
-	toRandomPosition.y = 6.0f;
+	toRandomPosition.y = m_speed * 1.5f;
 	m_characterController.SetMoveSpeed(toRandomPosition);
 
 	return true;
@@ -39,7 +35,18 @@ bool CMoney::Start()
 
 void CMoney::Update()
 {
-	Pop();
+	//移動速度を取得
+	CVector3 moveSpeed = m_characterController.GetMoveSpeed();
+
+	//地面に接地したら止める
+	if (!m_popEnd && m_characterController.IsOnGround()) {
+		moveSpeed.x = 0.0f;
+		moveSpeed.z = 0.0f;
+		m_popEnd = true;
+	}
+
+	//キャラクターコントローラーに移動速度を設定
+	m_characterController.SetMoveSpeed(moveSpeed);
 
 	m_timer += GameTime().GetDeltaFrameTime();
 	//プレイヤーとの距離を計算
@@ -71,18 +78,10 @@ void CMoney::Draw()
 	m_skinModel.Draw(GetGameCamera().GetViewMatrix(), GetGameCamera().GetProjectionMatrix());
 }
 
-void CMoney::Pop()
+void CMoney::Pop(CVector3 position)
 {
-	//移動速度を取得
-	CVector3 moveSpeed = m_characterController.GetMoveSpeed();
-
-	//地面に接地したら止める
-	if (!m_popEnd && m_characterController.IsOnGround()) {
-		moveSpeed.x = 0.0f;
-		moveSpeed.z = 0.0f;
-		m_popEnd = true;
-	}
-
-	//キャラクターコントローラーに移動速度を設定
-	m_characterController.SetMoveSpeed(moveSpeed);
+	m_skinModel.Load(L"Assets/modelData/money.cmo");
+	m_position = position;
+	m_characterController.Init(0.2f, 0.2f, m_position);
+	m_characterController.SetUserIndex(EnCollisionAttr::enCollisionAttr_Item);
 }

@@ -173,7 +173,6 @@ void Map::MapChipErase(std::list<MapChip*>::iterator iterator)
 
 void Map::BeforeDead()
 {
-
 	//マップチップの消去
 	for (MapChip* mapchip : m_mapChip)
 	{
@@ -188,8 +187,12 @@ void Map::BeforeDead()
 	}
 	m_npcList.clear();
 
-	//プレイヤーの消去
-	GetPlayer().Destroy();
+	//エネミーグループの消去
+	for (CEnemyGroup* enemygroup : m_enemyGroupList)
+	{
+		Delete(enemygroup);
+	}
+	m_enemyGroupList.clear();
 
 	//エネミーの消去
 	for (IEnemy* enemy : m_enemyList)
@@ -198,11 +201,8 @@ void Map::BeforeDead()
 	}
 	m_enemyList.clear();
 
-	//エネミーグループの消去
-	for (CEnemyGroup* enemygroup : m_enemyGroupList)
-	{
-		Delete(enemygroup);
-	}
-	m_enemyGroupList.clear();
+	//プレイヤーの消去
+	GetPlayer().Destroy();
+
 
 }

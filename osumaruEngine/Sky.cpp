@@ -17,5 +17,9 @@ void CSky::Update()
 
 void CSky::Draw()
 {
+	if (m_camera == nullptr)
+	{
+		return;
+	}
 	m_skinModel.Draw(m_camera->GetViewMatrix(), m_camera->GetProjectionMatrix());
 }

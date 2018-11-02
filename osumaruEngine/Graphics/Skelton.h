@@ -141,11 +141,19 @@ public:
 	}
 
 	/*
-	骨の行列を取得
+	骨のローカル行列を取得
 	*/
 	const CMatrix& GetBoneMatrix(int boneIndex) const
 	{
 		return m_bones[boneIndex]->GetLocalMatrix();
+	}
+
+	/*
+	骨のワールド行列を取得
+	*/
+	const CMatrix& GetBoneWorldMatrix(int boneIndex) const
+	{
+		return m_bones[boneIndex]->GetWorldMatrix();
 	}
 
 	/*

@@ -10,6 +10,18 @@
 #include "../UI/LevelUp/LevelUp.h"
 #include "../../Game/Camera/GameCamera.h"
 #include "../GameSound/GameSound.h"
+#include "SceneManager.h"
+
+CGameScene::CGameScene()
+{
+	//フェードアウトの開始
+	GetSceneManager().GetFade()->FadeIn();
+}
+
+CGameScene::~CGameScene()
+{
+}
+
 
 void CGameScene::Release()
 {
@@ -24,6 +36,16 @@ void CGameScene::Release()
 	Delete(m_map);
 	Delete(m_gameSound);
 
+}
+
+bool CGameScene::Start()
+{
+	//フェードの実行が終わったらtrueを返す
+	if (!GetSceneManager().GetFade()->IsExecute())
+	{
+		return true;
+	}
+	return false;
 }
 
 void CGameScene::Init()

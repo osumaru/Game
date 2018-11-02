@@ -2,7 +2,6 @@
 #include "RecoveryItem.h"
 #include"../../Game/Camera/GameCamera.h"
 #include "../Player/Player.h"
-#include "../../../osumaruEngine/Physics/CollisionAttr.h"
 
 void CRecoveryItem::Init()
 {
@@ -29,7 +28,7 @@ bool CRecoveryItem::Start()
 	//ˆÚ“®‘¬“x‚ðŒvŽZ
 	toRandomPosition.Normalize();
 	toRandomPosition *= m_speed;
-	toRandomPosition.y = 6.0f;
+	toRandomPosition.y = m_speed * 1.5f;
 	m_characterController.SetMoveSpeed(toRandomPosition);
 
 	return true;

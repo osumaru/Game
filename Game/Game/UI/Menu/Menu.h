@@ -1,7 +1,7 @@
 #pragma once
 #include "../../Player/Player.h"
 
-class CInventory;
+class CItemInventory;
 
 class CMenu : public IGameObject
 {
@@ -11,6 +11,8 @@ public:
 
 	void Init();
 	void Update();
+
+	void BeforeDead()override;
 
 	void AfterDraw();
 	//ステータスを計算する関数
@@ -60,6 +62,6 @@ private:
 	EnMenuState		m_menuState = enNoneMenu;
 	int				m_stateNum = 0;
 
-	CInventory*		m_inventory = nullptr;
+	CItemInventory*	m_itemInventory = nullptr;
 };
 

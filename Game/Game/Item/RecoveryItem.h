@@ -10,7 +10,6 @@ class CRecoveryItem : public IItem
 {
 public:
 	//初期化
-	//position	座標
 	void Init();
 
 	//更新する前に一度だけ呼ばれる
@@ -26,6 +25,7 @@ public:
 	void Use() override;
 
 	//ポップさせる
+	//position	座標
 	void Pop(CVector3 position);
 
 private:

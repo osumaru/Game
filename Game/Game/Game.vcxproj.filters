@@ -117,15 +117,6 @@
     <ClCompile Include="UI\Menu\Menu.cpp">
       <Filter>ソース ファイル\UI\Menu</Filter>
     </ClCompile>
-    <ClCompile Include="Itam\RecoveryItem.cpp">
-      <Filter>ソース ファイル\Item</Filter>
-    </ClCompile>
-    <ClCompile Include="Itam\Money.cpp">
-      <Filter>ソース ファイル\Item</Filter>
-    </ClCompile>
-    <ClCompile Include="Itam\IItem.cpp">
-      <Filter>ソース ファイル\Item</Filter>
-    </ClCompile>
     <ClCompile Include="Camera\GameCamera.cpp">
       <Filter>ソース ファイル\Camera</Filter>
     </ClCompile>
@@ -258,9 +249,6 @@
     <ClCompile Include="Scene\TitleScene.cpp">
       <Filter>ソース ファイル\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="UI\Menu\Inventory.cpp">
-      <Filter>ソース ファイル\UI\Menu</Filter>
-    </ClCompile>
     <ClCompile Include="UI\Fade\Fade.cpp">
       <Filter>ソース ファイル\UI\Fade</Filter>
     </ClCompile>
@@ -275,6 +263,24 @@
     </ClCompile>
     <ClCompile Include="GameSound\GameSound.cpp">
       <Filter>ソース ファイル\GameSound</Filter>
+    </ClCompile>
+    <ClCompile Include="Item\Money.cpp">
+      <Filter>ソース ファイル\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Item\RecoveryItem.cpp">
+      <Filter>ソース ファイル\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Item\Equipment.cpp">
+      <Filter>ソース ファイル\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Item\IItem.cpp">
+      <Filter>ソース ファイル\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Menu\EquipInventory.cpp">
+      <Filter>ソース ファイル\UI\Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Menu\ItemInventory.cpp">
+      <Filter>ソース ファイル\UI\Menu</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -310,15 +316,6 @@
     </ClInclude>
     <ClInclude Include="UI\Menu\Menu.h">
       <Filter>ソース ファイル\UI\Menu</Filter>
-    </ClInclude>
-    <ClInclude Include="Itam\RecoveryItem.h">
-      <Filter>ソース ファイル\Item</Filter>
-    </ClInclude>
-    <ClInclude Include="Itam\Money.h">
-      <Filter>ソース ファイル\Item</Filter>
-    </ClInclude>
-    <ClInclude Include="Itam\IItem.h">
-      <Filter>ソース ファイル\Item</Filter>
     </ClInclude>
     <ClInclude Include="Camera\GameCamera.h">
       <Filter>ソース ファイル\Camera</Filter>
@@ -461,9 +458,6 @@
     <ClInclude Include="Scene\TitleScene.h">
       <Filter>ソース ファイル\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="UI\Menu\Inventory.h">
-      <Filter>ソース ファイル\UI\Menu</Filter>
-    </ClInclude>
     <ClInclude Include="UI\Fade\Fade.h">
       <Filter>ソース ファイル\UI\Fade</Filter>
     </ClInclude>
@@ -478,6 +472,24 @@
     </ClInclude>
     <ClInclude Include="GameSound\GameSound.h">
       <Filter>ソース ファイル\GameSound</Filter>
+    </ClInclude>
+    <ClInclude Include="Item\Equipment.h">
+      <Filter>ソース ファイル\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Item\IItem.h">
+      <Filter>ソース ファイル\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Item\Money.h">
+      <Filter>ソース ファイル\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Item\RecoveryItem.h">
+      <Filter>ソース ファイル\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Menu\EquipInventory.h">
+      <Filter>ソース ファイル\UI\Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Menu\ItemInventory.h">
+      <Filter>ソース ファイル\UI\Menu</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

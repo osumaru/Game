@@ -6,14 +6,14 @@
 class CMenu;
 class IItem;
 
-class CInventory : public IGameObject
+class CItemInventory : public IGameObject
 {
 public:
 	//コンストラクタ
-	CInventory();
+	CItemInventory();
 
 	//デストラクタ
-	~CInventory();
+	~CItemInventory();
 
 	//初期化
 	//menu	メニューのポインタ
@@ -36,8 +36,8 @@ public:
 
 private:
 	static const int	m_itemLimit = 15;				//アイテム所持上限
-	CSprite				m_inventory;					//インベントリ
-	CTexture			m_inventoryTexture;
+	CSprite				m_backGround;					//背景
+	CTexture			m_backGroundTexture;
 	CSprite				m_pointer;						//カーソル
 	CTexture			m_pointerTexture;
 	CSprite				m_item[m_itemLimit];			//アイテム
@@ -45,7 +45,7 @@ private:
 	CMenu*				m_menu = nullptr;				//メニュー
 	CVector2			m_basePos = CVector2::Zero;		//初期座標
 	CVector2			m_size = CVector2::Zero;		//初期サイズ
-	int					m_inventoryWidth = 0;			//インベントリの幅
-	int					m_inventoryHeight = 0;			//インベントリの高さ
+	int					m_width = 0;					//インベントリの幅
+	int					m_height = 0;					//インベントリの高さ
 	int					m_pointerNum = 0;				//カーソルで選んでいるアイテムの番号
 };

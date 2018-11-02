@@ -14,8 +14,14 @@ int WINAPI wWinMain(
 {
 	//Direct3Dを初期化
 	Engine().InitD3D(hInst);
+	//初期化フェードなどの
 	GetSceneManager().Init();
-	GetSceneManager().ChangeScene(GetSceneManager().enGameScene);
+	//フェードインの開始
+	//GetSceneManager().GetFade()->FadeIn();
+	//ゲームシーンへ遷移
+	GetSceneManager().ChangeScene(GetSceneManager().enTitleScene);
+	GetSceneManager().GetInstance().Update();
+
 	Engine().GameLoop();
 	return 0;
 }
