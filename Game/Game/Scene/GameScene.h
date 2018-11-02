@@ -10,6 +10,7 @@ class CPlayerHp;
 class CLevelUp;
 class CMenu;
 class CResult;
+class CGameSound;
 
 class CGameScene : public IGameObject
 {
@@ -36,6 +37,11 @@ public:
 		return m_weaponSelect;
 	}
 
+	CGameSound* GetGameSound()
+	{
+		return m_gameSound;
+	}
+
 private:
 	Map*			m_map = nullptr;			//マップ
 	CWeaponSelect*	m_weaponSelect = nullptr;	//武器選択
@@ -44,4 +50,5 @@ private:
 	CLevelUp*		m_levelUp = nullptr;		//レベルアップ表示
 	CMenu*			m_menu = nullptr;			//メニュー
 	CResult*		m_result = nullptr;			//リザルト
+	CGameSound*		m_gameSound = nullptr;		//ゲームサウンド
 };

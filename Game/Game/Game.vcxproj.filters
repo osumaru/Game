@@ -76,6 +76,9 @@
     <Filter Include="ソース ファイル\NPC">
       <UniqueIdentifier>{a67babc6-6fe9-451a-9889-0df1ba6fc2ef}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\GameSound">
+      <UniqueIdentifier>{3802cec0-1cc4-4811-9f46-0f4a30099628}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -269,6 +272,9 @@
     </ClCompile>
     <ClCompile Include="NPC\ShopNPC.cpp">
       <Filter>ソース ファイル\NPC</Filter>
+    </ClCompile>
+    <ClCompile Include="GameSound\GameSound.cpp">
+      <Filter>ソース ファイル\GameSound</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -469,6 +475,9 @@
     </ClInclude>
     <ClInclude Include="NPC\ShopNPC.h">
       <Filter>ソース ファイル\NPC</Filter>
+    </ClInclude>
+    <ClInclude Include="GameSound\GameSound.h">
+      <Filter>ソース ファイル\GameSound</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

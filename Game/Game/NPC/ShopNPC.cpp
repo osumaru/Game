@@ -3,6 +3,8 @@
 #include "../Camera/GameCamera.h"
 #include "../Player/Player.h"
 #include "../Itam/RecoveryItem.h"
+#include "../GameSound/GameSound.h"
+#include "../Scene/SceneManager.h"
 
 
 CShopNPC::CShopNPC()
@@ -42,9 +44,7 @@ void CShopNPC::Init(const CVector3 position, const CQuaternion rotation)
 		offsetpos.y -= 100;
 
 	}
-	m_bgmSound.Init("Assets/sound/Shop/ShopBgm.wav");
 	m_seSound.Init("Assets/sound/Shop/BuySe.wav");
-	m_bgmSound.SetVolume(1.0f);
 	m_seSound.SetVolume(1.0f);
 	
 
@@ -71,10 +71,10 @@ void CShopNPC::Update()
 				CRecoveryItem* item = new CRecoveryItem;
 				item->Init();
 				GetPlayer().AddItemList(item);
-				CSoundSource* se = new CSoundSource;
+				CSoundSource* se = New<CSoundSource>(0);
 				se->Init("Assets/sound/Shop/BuySe.wav");
 				se->SetVolume(1.0f);
-				se->Play(true);
+				se->Play(false);
 			}
 		}
 		break;
@@ -91,7 +91,7 @@ void CShopNPC::Update()
 			m_shopState = enShopNone;
 			m_selectTexPosition = { -350.0f,200.0f };
 			m_selectSprite.SetPosition(m_selectTexPosition);
-			m_bgmSound.Stop();
+			GetSceneManager().GetGameScene().GetGameSound()->SetIsShop(false);
 		}
 		break;
 	case enShopNone:
@@ -101,7 +101,7 @@ void CShopNPC::Update()
 			{ 
 				m_isTextureDraw = true;
 				m_shopState = enShopBuy;
-				m_bgmSound.Play(true,true);
+				GetSceneManager().GetGameScene().GetGameSound()->SetIsShop(true);
 			}
 			
 		}
@@ -114,7 +114,7 @@ void CShopNPC::Update()
 		m_shopState = enShopNone;
 		m_selectTexPosition = { -350.0f,200.0f };
 		m_selectSprite.SetPosition(m_selectTexPosition);
-		m_bgmSound.Stop();
+		GetSceneManager().GetGameScene().GetGameSound()->SetIsShop(false);
 	}
 	m_skinModel.Update(m_position, m_rotation, m_scale,true);
 }

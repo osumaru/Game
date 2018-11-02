@@ -9,6 +9,7 @@
 #include "../UI/Result/Result.h"
 #include "../UI/LevelUp/LevelUp.h"
 #include "../../Game/Camera/GameCamera.h"
+#include "../GameSound/GameSound.h"
 
 void CGameScene::Release()
 {
@@ -21,6 +22,7 @@ void CGameScene::Release()
 	GetGameCamera().Destroy();
 	Delete(m_miniMap);
 	Delete(m_map);
+	Delete(m_gameSound);
 
 }
 
@@ -58,6 +60,7 @@ void CGameScene::Init()
 		m_result = New<CResult>(0);
 		m_result->Init();
 	}
+	m_gameSound = New<CGameSound>(0);
 }
 
 void CGameScene::Update()
