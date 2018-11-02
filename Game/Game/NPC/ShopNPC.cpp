@@ -95,20 +95,20 @@ void CShopNPC::Update()
 		}
 		break;
 	case enShopNone:
-		if (len < SHOP_DRAW_LENGHT)
+		if (len < SHOP_DRAW_LENGTH)
 		{
 			if(Pad().IsTriggerButton(enButtonX))
 			{ 
 				m_isTextureDraw = true;
 				m_shopState = enShopBuy;
-				m_bgmSound.Play(true);
+				m_bgmSound.Play(true,true);
 			}
 			
 		}
 		break;
 	}
 
-	if (m_shopState != enShopNone && len >= SHOP_DRAW_LENGHT)
+	if (m_shopState != enShopNone && len >= SHOP_DRAW_LENGTH)
 	{
 		m_isTextureDraw = false;
 		m_shopState = enShopNone;

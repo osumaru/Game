@@ -1,5 +1,6 @@
 #pragma once
 
+//プレイヤーアニメーションの列挙型
 enum EnPlayerAnimation
 {
 	enPlayerAnimationStand,			//待機アニメーション
@@ -17,37 +18,30 @@ enum EnPlayerAnimation
 	enPlayerAnimationArrowShoot,	//弓を放つアニメーション
 	enPlayerAnimationLongSwordAttack,//大剣の攻撃アニメーション
 	enPlayerAnimationTwinSwordAttack,//二刀流の攻撃アニメーション
-	enPlayerAnimationNum				//アニメーションの数
+	enPlayerAnimationNum			//アニメーションの数
 };
+
 
 class CPlayerState
 {
 public:
+	//ステートマシンの列挙型
 	enum EnPlayerState
 	{
-		enPlayerStateStand,				//待機アニメーション
-		enPlayerStateWalk,				//歩行アニメーション
-		enPlayerStateRun,				//走りアニメーション
+		enPlayerStateStand,				//待機ステート
+		enPlayerStateWalk,				//歩行ステート
+		enPlayerStateRun,				//走りステート
 		enPlayerStateRunJump,			//走りジャンプ
-		enPlayerStateJump,				//ジャンプアニメーション
-		enPlayerStateAttack,			//攻撃アニメーション
-		enPlayerStateDamage,			//ダメージアニメーション
-		enPlayerStateAvoidance,			//回避アニメーション
-		enPlayerStateDied,				//死亡アニメーション
-		enPlayerStateWireMove,			//ワイヤーアニメーション
-		enPlayerStateArrowAttack,		//弓のアニメーション
-		enPlayerStateArrowShoot,		//弓を放つアニメーション
-		enPlayerStateLongSwordAttack,	//大剣の攻撃アニメーション
-		enPlayerStateTwinSwordAttack,	//二刀流の攻撃アニメーション
-		enPlayerStateNum,				//アニメーションの数
-	};
-
-	enum EnPlayerWepon
-	{
-		enSword,			//片手剣
-		enLongSword,		//両手剣
-		enArro,				//弓矢
-		enTwinSword,		//二刀
-
+		enPlayerStateJump,				//ジャンプステート
+		enPlayerStateAttack,			//攻撃ステート
+		enPlayerStateDamage,			//ダメージステート
+		enPlayerStateAvoidance,			//回避ステート
+		enPlayerStateDied,				//死亡ステート
+		enPlayerStateWireMove,			//ワイヤーステート
+		enPlayerStateArrowAttack,		//弓のステート
+		enPlayerStateArrowShoot,		//弓を放つステート
+		enPlayerStateLongSwordAttack,	//大剣の攻撃ステート
+		enPlayerStateTwinSwordAttack,	//二刀流の攻撃ステート
+		enPlayerStateNum,				//ステートの数
 	};
 };

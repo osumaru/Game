@@ -1,7 +1,7 @@
+#include "../../Player/Weapon.h"
 /*
 *	武器選択のUIクラス
 */
-
 #pragma once
 
 
@@ -20,24 +20,10 @@ public:
 	//武器変更
 	void ChangeWeapon();
 
-	//武器の種類
-	enum EnWeaponType {
-		enSword,		//剣
-		enLargeSword,	//大剣
-		enBow,			//弓
-		enTwinSword,	//双剣
-		enWeaponNum
-	};
-
-	//現在の選択している武器の番号を取得
-	int GetWeapon()
-	{
-		return weaponNumberOld;
-	}
 
 private:
-	CSprite		m_weapon[enWeaponNum];			//武器
-	CTexture	m_weaponTexture[enWeaponNum];
+	CSprite		m_weapon[CWeapon::enWeaponNum];			//武器
+	CTexture	m_weaponTexture[CWeapon::enWeaponNum];
 	CSprite		m_crossKey;						//十字キー
 	CTexture	m_crossKeyTexture;
 	CSprite		m_LBButton;						//LBボタン
@@ -46,7 +32,7 @@ private:
 	CTexture	m_RBButtonTexture;
 	CVector2	crossKeyPos;					//十字キーの座標
 	CVector2	size;							//サイズ
-	int			weaponNumber = enSword;			//変更する武器の番号
-	int			weaponNumberOld = enSword;		//現在選択している武器の番号
-	bool		m_selectFlag[enWeaponNum];		//選択した武器フラグ
+	int			weaponNumber = CWeapon::enSword;			//変更する武器の番号
+	int			weaponNumberOld = CWeapon::enSword;		//現在選択している武器の番号
+	bool		m_selectFlag[CWeapon::enWeaponNum];		//選択した武器フラグ
 };
