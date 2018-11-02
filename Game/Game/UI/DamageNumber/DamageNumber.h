@@ -24,6 +24,8 @@ public:
 	//position	À•W
 	void SetPosition(const CVector2& position);
 
+	void Relese();
+
 	enum EnDigit {
 		enDigit_One,		//ˆê‚ÌˆÊ
 		enDigit_Ten,		//\‚ÌˆÊ

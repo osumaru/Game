@@ -11,7 +11,13 @@ IEnemy::IEnemy() :
 
 IEnemy::~IEnemy()
 {
+}
+
+void IEnemy::BeforeDead()
+{
 	Delete(&m_enemyMove);
 	Delete(&m_enemyTurn);
 	Delete(&m_enemySearch);
+	m_damageNumber.Relese();
+	m_enemyStateMachine.Release();
 }

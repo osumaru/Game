@@ -12,10 +12,6 @@ CDeferred::CDeferred()
 void CDeferred::SetCamera(const CCamera* camera)
 {
 	m_camera = camera;
-	CMatrix mat;
-	mat.Mul(m_camera->GetViewMatrix(), m_camera->GetProjectionMatrix());
-	mat.Inverse();
-	m_gameCameraCB.Create(sizeof(CMatrix), &mat);
 }
 
 void CDeferred::Init()
@@ -67,6 +63,7 @@ void CDeferred::Init()
 	GetDevice()->CreateSamplerState(&desc, &m_pAnisotropicSampler);
 	desc.Filter = D3D11_FILTER_MIN_MAG_MIP_LINEAR;
 	GetDevice()->CreateSamplerState(&desc, &m_pLinearSampler);
+	m_gameCameraCB.Create(sizeof(CMatrix), nullptr);
 }
 
 void CDeferred::Start()

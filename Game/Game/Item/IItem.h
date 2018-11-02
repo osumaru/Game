@@ -28,6 +28,7 @@ public:
 	enum EnInventoryItemType {
 		Recovery,	//‰ñ•œ
 		Buff,		//ƒoƒt
+		Equip,		//‘•”õ
 		TypeNum,	//í—Ş‚Ì”
 		Invald		//‰½‚à‚È‚¢
 	};

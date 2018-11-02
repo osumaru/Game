@@ -4,7 +4,8 @@
 IGameObject::IGameObject() :
 	m_isDelete(false),
 	m_isStart(false),
-	m_isActive(true)
+	m_isActiveUpdate(true),
+	m_isActiveDraw(true)
 {
 }
 

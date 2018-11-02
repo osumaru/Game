@@ -34,7 +34,7 @@ void CPlayerRun::Update()
 	//‘–‚Á‚Ä‚¢‚é‚Æ‚«‚ÉUŒ‚‚µ‚½Žž‚Ìˆ—
 	else if (Pad().IsTriggerButton(enButtonRightTrigger))
 	{
-		if(m_pPlayer->GetWeapon().GetCurrentState() == CWeapon::enWeaponArrow)
+		if(m_pPlayer->GetWeapon().GetCurrentState() == CWeapon::enArrow)
 		{
 			m_pPlayer->GetPlayerStateMachine().SetState(CPlayerState::enPlayerStateArrowAttack);
 		}

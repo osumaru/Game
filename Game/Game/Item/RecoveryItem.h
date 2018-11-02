@@ -1,17 +1,17 @@
 /*
-*	お金のアイテムクラス
+*	回復アイテムクラス
 */
 
 #pragma once
 
 #include "IItem.h"
 
-class CMoney : public IItem
+class CRecoveryItem : public IItem
 {
 public:
 	//初期化
 	//position	座標
-	void Init(CVector3 position);
+	void Init();
 
 	//更新する前に一度だけ呼ばれる
 	bool Start() override;
@@ -22,16 +22,12 @@ public:
 	//描画
 	void Draw() override;
 
-	//ポップさせる
-	void Pop();
+	//アイテムを使う
+	void Use() override;
 
-	//お金の値を設定
-	//gold		お金
-	void SetGold(const int gold)
-	{
-		m_gold = gold;
-	}
+	//ポップさせる
+	void Pop(CVector3 position);
 
 private:
-	int m_gold = 0;	//お金の値
+	int m_recoveryValue = 30;	//回復値
 };

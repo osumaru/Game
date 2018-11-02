@@ -1,16 +1,17 @@
 #pragma once
 
 class CPlayer;
+//武器を管理するクラス
 
 class CWeapon
 {
 public:
 	enum EnPlayerWeapon
 	{
-		enWeaponSword,			//片手剣
-		enWeaponLongSword,		//両手剣
-		enWeaponArrow,				//弓矢
-		enWeaponTwinSword,		//二刀
+		enSword,			//片手剣
+		enLongSword,		//両手剣
+		enArrow,				//弓矢
+		enTwinSword,		//二刀
 		enWeaponNum
 	};
 
@@ -41,5 +42,5 @@ private:
 	CSkinModel				m_weaponskin[enWeaponNum];								//武器のスキンモデル
 	CBoxCollider			m_weaponBoxCollider;									//武器用のボックスコライダー
 	CRigidBody				m_weaponRigitBody;										//ボックス用のrigidBody
-	EnPlayerWeapon			m_weaponState = EnPlayerWeapon::enWeaponSword;
+	EnPlayerWeapon			m_weaponState = EnPlayerWeapon::enSword;
 };

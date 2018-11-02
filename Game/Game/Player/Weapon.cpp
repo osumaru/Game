@@ -11,63 +11,63 @@ void CWeapon::Init(CPlayer* player)
 	m_weaponskin[2].Load(L"Assets/modelData/LongBow.cmo", NULL);
 	m_weaponskin[3].Load(L"Assets/modelData/TwinSword.cmo", NULL);
 	m_boneMat = &m_pPlayer->GetPlayerSkin().FindBoneWorldMatrix(L"LeftShoulder");
-	m_position[enWeaponArrow] = {0.0f, 0.0f, -10.0f};
-	m_rotation[enWeaponArrow] = CQuaternion::Identity;
+	m_position[enArrow] = {0.0f, 0.0f, -10.0f};
+	m_rotation[enArrow] = CQuaternion::Identity;
 	CQuaternion multi;
 	multi.SetRotationDeg(CVector3::AxisX, 90.0f);
-	m_rotation[enWeaponArrow].Multiply(multi);
+	m_rotation[enArrow].Multiply(multi);
 	multi.SetRotationDeg(CVector3::AxisZ, 90.0f);
-	m_rotation[enWeaponArrow].Multiply(multi);
+	m_rotation[enArrow].Multiply(multi);
 	multi.SetRotationDeg(CVector3::AxisX, -20.0f);
-	m_rotation[enWeaponArrow].Multiply(multi);
+	m_rotation[enArrow].Multiply(multi);
 
-	m_attackRotation[enWeaponArrow] = CQuaternion::Identity;
+	m_attackRotation[enArrow] = CQuaternion::Identity;
 	multi.SetRotationDeg(CVector3::AxisZ, 90.0f);
-	m_attackRotation[enWeaponArrow].Multiply(multi);
-	m_attackPosition[enWeaponArrow] = { 10.0f, 0.0f, 0.0f };
+	m_attackRotation[enArrow].Multiply(multi);
+	m_attackPosition[enArrow] = { 10.0f, 0.0f, 0.0f };
 
 
-	m_position[enWeaponSword] = { 0.0f, 0.0f, -10.0f };
-	m_rotation[enWeaponSword] = CQuaternion::Identity;
+	m_position[enSword] = { 0.0f, 0.0f, -10.0f };
+	m_rotation[enSword] = CQuaternion::Identity;
 	multi.SetRotationDeg(CVector3::AxisX, 90.0f);
-	m_rotation[enWeaponSword].Multiply(multi);
+	m_rotation[enSword].Multiply(multi);
 	multi.SetRotationDeg(CVector3::AxisZ, 90.0f);
-	m_rotation[enWeaponSword].Multiply(multi);
+	m_rotation[enSword].Multiply(multi);
 	multi.SetRotationDeg(CVector3::AxisX, -20.0f);
-	m_rotation[enWeaponSword].Multiply(multi);
+	m_rotation[enSword].Multiply(multi);
 
-	m_attackRotation[enWeaponSword] = CQuaternion::Identity;
+	m_attackRotation[enSword] = CQuaternion::Identity;
 	multi.SetRotationDeg(CVector3::AxisZ, 90.0f);
-	m_attackRotation[enWeaponSword].Multiply(multi);
-	m_attackPosition[enWeaponSword] = { 10.0f, 0.0f, 0.0f };
+	m_attackRotation[enSword].Multiply(multi);
+	m_attackPosition[enSword] = { 10.0f, 0.0f, 0.0f };
 
-	m_position[enWeaponTwinSword] = { 0.0f, 0.0f, -10.0f };
-	m_rotation[enWeaponTwinSword] = CQuaternion::Identity;
+	m_position[enTwinSword] = { 0.0f, 0.0f, -10.0f };
+	m_rotation[enTwinSword] = CQuaternion::Identity;
 	multi.SetRotationDeg(CVector3::AxisX, 90.0f);
-	m_rotation[enWeaponTwinSword].Multiply(multi);
+	m_rotation[enTwinSword].Multiply(multi);
 	multi.SetRotationDeg(CVector3::AxisZ, 90.0f);
-	m_rotation[enWeaponTwinSword].Multiply(multi);
+	m_rotation[enTwinSword].Multiply(multi);
 
-	m_attackRotation[enWeaponTwinSword] = CQuaternion::Identity;
+	m_attackRotation[enTwinSword] = CQuaternion::Identity;
 	multi.SetRotationDeg(CVector3::AxisX, 90.0f);
-	m_attackRotation[enWeaponTwinSword].Multiply(multi);
+	m_attackRotation[enTwinSword].Multiply(multi);
 	multi.SetRotationDeg(CVector3::AxisY, 90.0f);
-	m_attackRotation[enWeaponTwinSword].Multiply(multi);
-	m_attackPosition[enWeaponTwinSword] = { 10.0f, 0.0f, 0.0f };
+	m_attackRotation[enTwinSword].Multiply(multi);
+	m_attackPosition[enTwinSword] = { 10.0f, 0.0f, 0.0f };
 
-	m_position[enWeaponLongSword] = { 0.0f, 0.0f, -10.0f };
-	m_rotation[enWeaponLongSword] = CQuaternion::Identity;
+	m_position[enLongSword] = { 0.0f, 0.0f, -10.0f };
+	m_rotation[enLongSword] = CQuaternion::Identity;
 	multi.SetRotationDeg(CVector3::AxisX, 90.0f);
-	m_rotation[enWeaponLongSword].Multiply(multi);
+	m_rotation[enLongSword].Multiply(multi);
 	multi.SetRotationDeg(CVector3::AxisZ, 90.0f);
-	m_rotation[enWeaponLongSword].Multiply(multi);
+	m_rotation[enLongSword].Multiply(multi);
 	multi.SetRotationDeg(CVector3::AxisX, -20.0f);
-	m_rotation[enWeaponLongSword].Multiply(multi);
+	m_rotation[enLongSword].Multiply(multi);
 
-	m_attackRotation[enWeaponLongSword] = CQuaternion::Identity;
+	m_attackRotation[enLongSword] = CQuaternion::Identity;
 	multi.SetRotationDeg(CVector3::AxisZ, 90.0f);
-	m_attackRotation[enWeaponLongSword].Multiply(multi);
-	m_attackPosition[enWeaponLongSword] = { 10.0f, 0.0f, 0.0f };
+	m_attackRotation[enLongSword].Multiply(multi);
+	m_attackPosition[enLongSword] = { 10.0f, 0.0f, 0.0f };
 }
 
 
@@ -75,19 +75,19 @@ void CWeapon::Update()
 {
 	if (Pad().IsTriggerButton(enButtonUp))
 	{
-		m_weaponState = enWeaponSword;
+		m_weaponState = enSword;
 	}
 	else if (Pad().IsTriggerButton(enButtonDown))
 	{
-		m_weaponState = enWeaponArrow;
+		m_weaponState = enArrow;
 	}
 	else if (Pad().IsTriggerButton(enButtonLeft))
 	{
-		m_weaponState = enWeaponTwinSword;
+		m_weaponState = enTwinSword;
 	}
 	else if (Pad().IsTriggerButton(enButtonRight))
 	{
-		m_weaponState = enWeaponLongSword;
+		m_weaponState = enLongSword;
 	}
 	CVector3 position;
 	CQuaternion rotation;
