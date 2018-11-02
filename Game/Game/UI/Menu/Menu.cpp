@@ -15,6 +15,13 @@ CMenu::~CMenu()
 {
 }
 
+void CMenu::BeforeDead()
+{
+	if (m_inventory != nullptr)
+	{
+		Delete(m_inventory);
+	}
+}
 
 void CMenu::Init()
 {

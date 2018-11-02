@@ -12,6 +12,8 @@ public:
 	void Init();
 	void Update();
 
+	void BeforeDead()override;
+
 	void AfterDraw();
 	//ステータスを計算する関数
 	void StatusMath();			

@@ -40,6 +40,9 @@ public:
 	//描画
 	virtual void Draw() = 0;
 
+	//死ぬ前に呼ばれる関数、解放処理などに使う
+	void BeforeDead()override;
+
 	//敵の座標を取得
 	const CVector3& GetPosition() const
 	{
