@@ -180,6 +180,7 @@
     <ClCompile Include="Enemy\Samurai.cpp" />
     <ClCompile Include="Enemy\Warrok.cpp" />
     <ClCompile Include="Enemy\Zombie.cpp" />
+    <ClCompile Include="Item\Equipment.cpp" />
     <ClCompile Include="Item\IItem.cpp" />
     <ClCompile Include="Item\Money.cpp" />
     <ClCompile Include="Item\RecoveryItem.cpp" />
@@ -251,6 +252,7 @@
     <ClInclude Include="Enemy\Samurai.h" />
     <ClInclude Include="Enemy\Warrok.h" />
     <ClInclude Include="Enemy\Zombie.h" />
+    <ClInclude Include="Item\Equipment.h" />
     <ClInclude Include="Item\IItem.h" />
     <ClInclude Include="Item\Money.h" />
     <ClInclude Include="Item\RecoveryItem.h" />
