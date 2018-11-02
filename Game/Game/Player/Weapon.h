@@ -31,7 +31,32 @@ public:
 		return m_worldPos[m_weaponState];
 	}
 
+	struct SWeaponStatus
+	{
+		int attack = 0;
+		int diffence = 0;
+		EnPlayerWeapon weaponNum;
+	};
+
+	/*
+	武器のステータスを設定
+	status		武器のステータス
+	*/
+	void SetStatus(SWeaponStatus& status)
+	{
+		m_weaponStatus[status.weaponNum] = status;
+	}
+	/*
+	武器のステータスを取得
+	weaponNum	武器の種類
+	*/
+	const SWeaponStatus& GetStatus(EnPlayerWeapon weaponNum) const
+	{
+		return m_weaponStatus[weaponNum];
+	}
+
 private:
+	SWeaponStatus			m_weaponStatus[enWeaponNum];
 	const CMatrix*			m_boneMat = nullptr;
 	CPlayer*				m_pPlayer = nullptr;
 	CVector3				m_position[enWeaponNum];
