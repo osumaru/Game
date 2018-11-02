@@ -37,7 +37,14 @@ public:
 			return nullptr;
 		}
 		T* newObject = new T(args...);
-		m_objectVector[priority].push_back({ newObject, true });
+		if (priority == 1)
+		{
+			m_objectVector[priority].push_back({ newObject, true });
+		}
+		else
+		{
+			m_objectVector[priority].push_back({ newObject, true });
+		}
 		return newObject;
 	}
 
@@ -48,6 +55,16 @@ public:
 	*/
 	void Add(IGameObject* object, int priority)
 	{
+		for (GameObjectList& objList : m_objectVector)
+		{
+			for (SGameObjectData& obj : objList)
+			{
+				if (object == obj.gameObject)
+				{
+					return;
+				}
+			}
+		}
 		m_objectVector[priority].push_back({ object, false });
 	}
 

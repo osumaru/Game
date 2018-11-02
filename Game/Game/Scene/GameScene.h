@@ -14,9 +14,15 @@ class CResult;
 class CGameScene : public IGameObject
 {
 public:
-
+	//コンストラクタ
+	CGameScene();
+	//デストラクタ
+	~CGameScene();
 	//開放
 	void Release();
+
+	//trueが返されるまで繰り返し呼ばれる
+	bool Start() override;
 
 	//初期化
 	void Init();

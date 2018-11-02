@@ -43,6 +43,9 @@ public:
 	{
 		Delete(m_gameCamera);
 		m_gameCamera = nullptr;
+		PhysicsWorld().SetCamera(nullptr);
+		Engine().GetDeferred().SetCamera(nullptr);
+		Sky().SetCamera(nullptr);
 	}
 
 	//ƒJƒƒ‰‚ğæ“¾

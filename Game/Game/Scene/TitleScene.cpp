@@ -2,6 +2,26 @@
 #include "TitleScene.h"
 #include "SceneManager.h"
 
+CTitleScene::CTitleScene()
+{
+
+}
+
+CTitleScene::~CTitleScene()
+{
+
+}
+
+bool CTitleScene::Start()
+{
+	//フェードの実行が終わったらtrueを返す
+	if (!GetSceneManager().GetFade()->IsExecute())
+	{
+		return true;
+	}
+	return false;
+}
+
 void CTitleScene::Init()
 {
 	const CVector2	titlePos = { -1.0f,-1.0f };		//タイトル座標
