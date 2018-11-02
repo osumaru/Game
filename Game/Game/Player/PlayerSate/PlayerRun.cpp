@@ -2,6 +2,7 @@
 #include "PlayerRun.h"
 #include "../Player.h"
 #include "../../Camera/GameCamera.h"
+#include "../../Player/WireAction.h"
 
 void CPlayerRun::Init()
 {
@@ -40,7 +41,6 @@ void CPlayerRun::Update()
 		}
 		else
 		{
-
 			m_pPlayer->GetPlayerStateMachine().SetState(CPlayerState::enPlayerStateAttack);
 		}
 	}
@@ -59,7 +59,7 @@ void CPlayerRun::Update()
 	{
 		m_pPlayer->GetPlayerStateMachine().SetState(CPlayerState::enPlayerStateStand);
 	}
-	else if (m_pPlayer->IsWireMove())
+	else if (m_pPlayer->GetWireAction().IsWireMove())
 	{
 		//ƒƒCƒ„[ˆÚ“®‚Å‚«‚é‚È‚ç‘JˆÚ
 		m_pPlayer->GetPlayerStateMachine().SetState(CPlayerState::enPlayerStateWireMove);
