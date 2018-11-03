@@ -19,22 +19,22 @@ void CBreakMapObject::Init(const CVector3& position, const CQuaternion& rotation
 	SRigidBodyInfo rInfo;
 
 	//メッシュコライダーからAABBを作成
-	//if (!collider)
-	//{
+	/*if (!collider)
+	{
 		m_meshCollider.reset(new CMeshCollider);
 		m_meshCollider->CreateCollider(&m_skinModel);
 		rInfo.collider = m_meshCollider.get();
-	//}
-	//else
-	//{
-	//	CMeshCollider mesh;
-	//	mesh.CreateCollider(&m_skinModel);
-	//	CVector3 boxsize = (mesh.GetAabbMax() - mesh.GetAabbMin());
-	//	boxsize.x /= 2.0f;
-	//	boxsize.z /= 2.0f;
-	//	m_boxCollider.reset(new CBoxCollider);
-	//	m_boxCollider->Create({ boxsize.x,boxsize.y,boxsize.z });
-	//	rInfo.collider = m_boxCollider.get();
+	}
+	else
+	{*/
+		CMeshCollider mesh;
+		mesh.CreateCollider(&m_skinModel);
+		CVector3 boxsize = (mesh.GetAabbMax() - mesh.GetAabbMin());
+		boxsize.x /= 2.0f;
+		boxsize.z /= 2.0f;
+		m_boxCollider.reset(new CBoxCollider);
+		m_boxCollider->Create({ boxsize.x,boxsize.y,boxsize.z });
+		rInfo.collider = m_boxCollider.get();
 	//}
 
 
@@ -56,19 +56,38 @@ void CBreakMapObject::Init(const CVector3& position, const CQuaternion& rotation
 
 void CBreakMapObject::Update()
 {
-	//if(m_rigidBody.get()->GetBody()->getFlags)
-	//m_meshCollider.get()->GetAabbMax
-	//m_meshCollider.get()->GetBody()->getAabb(m_rigidBody.get()->GetBody()->getWorldTransform(), m_meshCollider.get()->GetAabbMin, m_meshCollider.get()->GetAabbMax);
+	float killZ = 30.0f;
+	float fallinSpeed = 0.02f;
+	float breakMaxLength = 3.0f;
 
-
-	if (GetMaw().GetBreakObjectHit())
+	//攻撃していたら
+	if (GetMaw().GetIsAttack())
 	{
-		m_position.y -= 0.02f;
-		if (m_position.y < 30.0f)
+		CVector3 BossLeftHandPos = GetMaw().GetLeftHandBone();
+		CVector3 distance = BossLeftHandPos - m_position;
+		float BreakLength = distance.Length();
+		//腕に当たっていたらかつ壊れていなかったら
+		if (BreakLength < breakMaxLength && !isBreak)
+		{
+			isBreak = true;
+		}
+	}
+	/*if (GetMaw().GetBreakObjectHit()&&!isBreak)
+	{
+		isBreak = true;
+	}*/
+	//
+	//下に落としていく処理
+	if (isBreak) 
+	{
+		m_position.y -= fallinSpeed;
+		//killZより下だったら消去
+		if (m_position.y < killZ)
 		{
 			this->MapChipDelete();
 		}
 	}
+	
 		
 	MapChip::Update();
 	//剛体の座標と回転を更新

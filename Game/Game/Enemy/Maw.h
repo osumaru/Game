@@ -1,3 +1,6 @@
+/*
+*	ボスクラス
+*/
 #pragma once
 
 struct SmawStatus {
@@ -94,6 +97,20 @@ public:
 	bool GetIsDamage()
 	{
 		return m_isDamage;
+	}
+
+	//攻撃判定を取得
+	bool GetIsAttack()
+	{
+		return m_isAttack;
+	}
+
+	//ワールド行列を取得
+	const CVector3& GetLeftHandBone() const
+	{
+		CMatrix MawHand = m_skinModel.FindBoneWorldMatrix(L"LeftHand");
+		CVector3 LeftHandPos = { MawHand.m[3][0],MawHand.m[3][1] ,MawHand.m[3][2] };
+		return LeftHandPos;
 	}
 
 	//ダメージ判定を設定

@@ -154,15 +154,15 @@ void CMaw::Update()
 	}
 
 	//ボスの体が落ちるオブジェクトに触れていたら
-	if (m_characterController.GetGroundCollisionObject() != nullptr)
-	{
-		//接触している地面のオブジェクトがCF_KINEMATIC_OBJECTだったら
-		if (m_characterController.GetGroundCollisionObject()->getUserIndex() == m_characterController.GetGroundCollisionObject()->CF_KINEMATIC_OBJECT)
-		{
-			m_isBreakObjectHit = true;
-		}
+	//if (m_characterController.GetGroundCollisionObject() != nullptr)
+	//{
+	//	//接触している地面のオブジェクトがCF_KINEMATIC_OBJECTだったら
+	//	if (m_characterController.GetGroundCollisionObject()->getUserIndex() == m_characterController.GetGroundCollisionObject()->CF_KINEMATIC_OBJECT)
+	//	{
+	//		m_isBreakObjectHit = true;
+	//	}
 
-	}
+	//}
 	/////////////////////////////////////////////////
 
 	//キャラコンへの座標設定
@@ -208,31 +208,21 @@ void CMaw::Attack()
 		//次の行動の選択
 		ActionStateOrder();
 	}
-	float PlayerLength = 0.0f;
+
 	//プレイヤーがダメージを受けていなかったら
 	if (!GetPlayer().GetIsDamage()) {
 		//手のボーンのワールド行列を取得
-		CMatrix leftHandMatrix = m_skinModel.FindBoneWorldMatrix(L"LeftHand");
-		CVector3 leftHandPosition;
-		leftHandPosition.x = leftHandMatrix.m[3][0];
-		leftHandPosition.y = leftHandMatrix.m[3][1];
-		leftHandPosition.z = leftHandMatrix.m[3][2];
-
-		//プレイヤーとの距離を計算
+		CVector3 leftHandPosition = GetLeftHandBone();
+		//プレイヤー座標を取得
 		CVector3 playerPosition = GetPlayer().GetPosition();
-		CVector3 distance = playerPosition - m_position;
-		distance.y = 0.0f;
-		PlayerLength = distance.Length();
-		{
-			//敵の攻撃との距離を計算
-			playerPosition.y += PlayerHeight;
-			CVector3 distance = leftHandPosition - playerPosition;
-			float PlayerDamageLength = distance.Length();
-			if (PlayerLength < PlayerDamageLengthMax) {
-				//プレイヤーがダメージを受けた
-				GetPlayer().GetDamage();
-			}
+		//敵の攻撃との距離を計算
+		CVector3 distance = leftHandPosition - playerPosition;
+		float PlayerDamageLength = distance.Length();
+		if (PlayerDamageLength < PlayerDamageLengthMax) {
+			//プレイヤーがダメージを受けた
+			GetPlayer().GetDamage();
 		}
+		
 	}
 }
 //特殊攻撃
