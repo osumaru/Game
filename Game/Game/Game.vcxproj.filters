@@ -282,6 +282,12 @@
     <ClCompile Include="UI\Menu\ItemInventory.cpp">
       <Filter>ソース ファイル\UI\Menu</Filter>
     </ClCompile>
+    <ClCompile Include="Map\MapChip\BreakMapObject.cpp">
+      <Filter>ソース ファイル\Map\MapChip</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy\Maw.cpp">
+      <Filter>ソース ファイル\Enemy</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -491,6 +497,12 @@
     <ClInclude Include="UI\Menu\ItemInventory.h">
       <Filter>ソース ファイル\UI\Menu</Filter>
     </ClInclude>
+    <ClInclude Include="Map\MapChip\BreakMapObject.h">
+      <Filter>ソース ファイル\Map\MapChip</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy\Maw.h">
+      <Filter>ソース ファイル\Enemy</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="Assets\shader\sprite.fx">
@@ -589,6 +601,9 @@
       <Filter>ソース ファイル\Assets</Filter>
     </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\Skyball_WithCap.FBX">
+      <Filter>ソース ファイル\Assets</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\Maw.fbx">
       <Filter>ソース ファイル\Assets</Filter>
     </MeshContentTask>
   </ItemGroup>

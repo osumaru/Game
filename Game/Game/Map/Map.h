@@ -13,10 +13,12 @@ enum EnMapChipTag
 	enMapTagSamurai,
 	enMapTagNinja,
 	enMapTagWarrok,
+	enMapTagMaw,
 	enMapTagEnemyGroup,
 	enMapTagMapChip,
 	enMapTagTerrain,		//地形用のタグ
 	enMapTagShopNpc,			//店NPC用のタグ
+	enMapTagBreakBrock,
 	enMapTagNum,
 };
 

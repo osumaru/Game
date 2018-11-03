@@ -71,7 +71,7 @@ void CSceneManager::Update()
 //シーンの切り替え関数
 void CSceneManager::ChangeScene(EnSceneState scene)
 {
-	//
+	//フェードアウトしていなかったら
 	if (!m_isFadeOut)
 	{
 		m_fade->FadeOut();

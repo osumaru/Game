@@ -318,6 +318,8 @@ private:
 	void Rotation();
 
 	//アニメーションイベントが起きた時に呼ばれる処理。
+	//animClipName アニメーションのファイルパス
+	//enentName		アニメーションイベント名
 	void OnInvokeAnimationEvent(const wchar_t* animClipName, const wchar_t* eventName);
 private:
 	static CPlayer*				m_player;								//プレイヤー

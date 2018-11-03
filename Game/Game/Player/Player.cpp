@@ -4,6 +4,7 @@
 #include "../Map/Map.h"
 #include "../Scene/SceneManager.h"
 #include "../Enemy/IEnemy.h"
+#include "../Enemy/Maw.h"
 #include "../Item/IItem.h"
 #include "../UI/Menu/ItemInventory.h"
 #include "../UI/Menu/EquipInventory.h"
@@ -341,6 +342,20 @@ void CPlayer::PlayerAttack()
 			}
 
 		}
+	}
+
+	if (!GetMaw().GetIsDamage()) {
+
+		CVector3 EnemyVec = GetMaw().GetPosition();
+		EnemyVec.y += 1.3f;
+		EnemyVec -= m_weapon.GetPosition();
+		float len = EnemyVec.Length();
+
+		if (fabs(len) < 30.0f)
+		{
+			GetMaw().SetIsDamage(true);
+		}
+
 	}
 	
 

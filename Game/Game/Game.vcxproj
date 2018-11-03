@@ -174,6 +174,7 @@
     <ClCompile Include="Enemy\EnemyState\EnemyWalk.cpp" />
     <ClCompile Include="Enemy\EnemyTurn.cpp" />
     <ClCompile Include="Enemy\IEnemy.cpp" />
+    <ClCompile Include="Enemy\Maw.cpp" />
     <ClCompile Include="Enemy\Ninja.cpp" />
     <ClCompile Include="Enemy\PathFinding\PathFinding.cpp" />
     <ClCompile Include="Enemy\PathFinding\RootPoint.cpp" />
@@ -185,6 +186,7 @@
     <ClCompile Include="Item\IItem.cpp" />
     <ClCompile Include="Item\Money.cpp" />
     <ClCompile Include="Item\RecoveryItem.cpp" />
+    <ClCompile Include="Map\MapChip\BreakMapObject.cpp" />
     <ClCompile Include="NPC\INpcState.cpp" />
     <ClCompile Include="NPC\NpcManager.cpp" />
     <ClCompile Include="NPC\ShopNPC.cpp" />
@@ -246,6 +248,7 @@
     <ClInclude Include="Enemy\EnemyState\IEnemyState.h" />
     <ClInclude Include="Enemy\EnemyTurn.h" />
     <ClInclude Include="Enemy\IEnemy.h" />
+    <ClInclude Include="Enemy\Maw.h" />
     <ClInclude Include="Enemy\Ninja.h" />
     <ClInclude Include="Enemy\PathFinding\MapData.h" />
     <ClInclude Include="Enemy\PathFinding\PathFinding.h" />
@@ -258,6 +261,7 @@
     <ClInclude Include="Item\IItem.h" />
     <ClInclude Include="Item\Money.h" />
     <ClInclude Include="Item\RecoveryItem.h" />
+    <ClInclude Include="Map\MapChip\BreakMapObject.h" />
     <ClInclude Include="NPC\INpcState.h" />
     <ClInclude Include="NPC\NpcManager.h" />
     <ClInclude Include="NPC\ShopNPC.h" />
@@ -316,6 +320,7 @@
     <MeshContentTask Include="Assets\modelData\LargeSword.fbx" />
     <MeshContentTask Include="Assets\modelData\LongBow.FBX" />
     <MeshContentTask Include="Assets\modelData\map2.FBX" />
+    <MeshContentTask Include="Assets\modelData\Maw.fbx" />
     <MeshContentTask Include="Assets\modelData\Money.fbx" />
     <MeshContentTask Include="Assets\modelData\Ninja.FBX" />
     <MeshContentTask Include="Assets\modelData\Player.fbx" />
