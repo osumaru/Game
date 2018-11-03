@@ -7,7 +7,6 @@
 #include "../Scene/SceneManager.h"
 #include "../Item/RecoveryItem.h"
 
-
 CShopNPC::CShopNPC()
 {
 }
@@ -47,8 +46,6 @@ void CShopNPC::Init(const CVector3 position, const CQuaternion rotation)
 	}
 	m_seSound.Init("Assets/sound/Shop/BuySe.wav");
 	m_seSound.SetVolume(1.0f);
-	
-
 }
 
 void CShopNPC::Update()

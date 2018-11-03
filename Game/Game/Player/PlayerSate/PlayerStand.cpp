@@ -42,22 +42,22 @@ void CPlayerStand::Update()
 	
 	else if (Pad().IsTriggerButton(enButtonA))
 	{
-		GetPlayer().GetPlayerStateMachine().SetState(CPlayerState::enPlayerStateJump);
+		m_pPlayer->GetPlayerStateMachine().SetState(CPlayerState::enPlayerStateJump);
 	}
 
 	else if (Pad().IsTriggerButton(enButtonB))
 	{
-		GetPlayer().GetPlayerStateMachine().SetState(CPlayerState::enPlayerStateAvoidance);
+		m_pPlayer->GetPlayerStateMachine().SetState(CPlayerState::enPlayerStateAvoidance);
 	}
-	else if (GetPlayer().IsWireMove()) 
+	else if (m_pPlayer->GetWireAction().IsWireMove()) 
 	{
 		//ワイヤー移動できるなら遷移
-		GetPlayer().GetPlayerStateMachine().SetState(CPlayerState::enPlayerStateWireMove);
+		m_pPlayer->GetPlayerStateMachine().SetState(CPlayerState::enPlayerStateWireMove);
 	}
 	//移動の入力があるなら歩きアニメーションに遷移
 	else if (Pad().GetLeftStickX() != 0 || Pad().GetLeftStickY() != 0)
 	{
-		GetPlayer().GetPlayerStateMachine().SetState(CPlayerState::enPlayerStateWalk);
+		m_pPlayer->GetPlayerStateMachine().SetState(CPlayerState::enPlayerStateWalk);
 
 	}
 	
