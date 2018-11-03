@@ -29,17 +29,33 @@ void CEquipInventory::Init(CMenu * menu)
 	if (!m_equipList.empty()) {
 		//リストにアイテムがある
 		int idx = 0;
-		for (auto& item : m_equipList)
+		for (auto& equip : m_equipList)
 		{
 			//アイテムの種類を取得
-			IItem::EnInventoryItemType itemType = item->GetItemType();
-			if (itemType == IItem::Equip) {		//装備アイテムだった場合
-				//装備アイテムの初期化
-				//////////////////////		
-				//装備によって変わる
-				CTexture* itemTexure = TextureResource().LoadTexture(L"Assets/sprite/Recovery.png");
+			CWeapon::EnPlayerWeapon weaponNum = equip.weaponNum;
+			if (weaponNum == CWeapon::enSword)
+			{	
+				//剣
+				CTexture* itemTexure = TextureResource().LoadTexture(L"Assets/sprite/sword.png");
 				m_equip[idx].Init(itemTexure);
-				/////////////////////
+			}
+			else if (weaponNum == CWeapon::enLongSword) 
+			{
+				//大剣
+				CTexture* itemTexure = TextureResource().LoadTexture(L"Assets/sprite/largeSword.png");
+				m_equip[idx].Init(itemTexure);
+			}
+			else if (weaponNum == CWeapon::enArrow)
+			{
+				//弓
+				CTexture* itemTexure = TextureResource().LoadTexture(L"Assets/sprite/bow.png");
+				m_equip[idx].Init(itemTexure);
+			}
+			else if (weaponNum == CWeapon::enTwinSword)
+			{
+				//双剣
+				CTexture* itemTexure = TextureResource().LoadTexture(L"Assets/sprite/twinSword.png");
+				m_equip[idx].Init(itemTexure);
 			}
 			//座標とサイズを決める
 			CVector2 position = m_basePos;

@@ -1,11 +1,47 @@
 #include "stdafx.h"
 #include "TreasureChest.h"
 #include "../Player/Player.h"
-#include"../../Game/Camera/GameCamera.h"
+#include "../../Game/Camera/GameCamera.h"
 
-void CTreasureChest::Init()
+void CTreasureChest::Init(CVector3 position)
 {
-	m_itemType = Equip;
+	//モデルの初期化
+	m_skinModel.Load(L"Assets/modelData/heart.cmo");
+	m_position = position;
+	m_characterController.Init(0.2f, 0.2f, m_position);
+
+	//中に入れる武器の種類とステータスをランダムで決める
+	//種類
+	int weaponNumber = Random().GetRandSInt();
+	weaponNumber %= CWeapon::enWeaponNum;
+	//ステータス
+	int weaponAttack = Random().GetRandSInt();
+	weaponAttack %= 100;
+	if (weaponNumber == CWeapon::EnPlayerWeapon::enSword)
+	{
+		//剣
+		m_weaponStatus.weaponNum = CWeapon::EnPlayerWeapon::enSword;
+		weaponAttack += 50;
+	}
+	else if (weaponNumber == CWeapon::EnPlayerWeapon::enLongSword)
+	{
+		//大剣
+		m_weaponStatus.weaponNum = CWeapon::EnPlayerWeapon::enLongSword;
+		weaponAttack += 70;
+	}
+	else if (weaponNumber == CWeapon::EnPlayerWeapon::enArrow)
+	{
+		//弓
+		m_weaponStatus.weaponNum = CWeapon::EnPlayerWeapon::enArrow;
+		weaponAttack += 20;
+	}
+	else if (weaponNumber == CWeapon::EnPlayerWeapon::enTwinSword) 
+	{
+		//双剣
+		m_weaponStatus.weaponNum = CWeapon::EnPlayerWeapon::enTwinSword;
+		weaponAttack += 30;
+	}
+	m_weaponStatus.attack = weaponAttack;
 }
 
 bool CTreasureChest::Start()
@@ -47,8 +83,10 @@ void CTreasureChest::Update()
 		//近ければ獲得
 		//if (!m_animation.IsPlay())
 		//{
-			GetPlayer().AddEquipList(this);
+			GetPlayer().AddEquipList(m_weaponStatus);
+			m_characterController.RemovedRigidBody();
 			SetIsActive(false);
+			return;
 		//}
 	}
 
@@ -62,12 +100,4 @@ void CTreasureChest::Update()
 void CTreasureChest::Draw()
 {
 	m_skinModel.Draw(GetGameCamera().GetViewMatrix(), GetGameCamera().GetProjectionMatrix());
-}
-
-void CTreasureChest::Pop(CVector3 position)
-{
-	m_skinModel.Load(L"Assets/modelData/heart.cmo");
-	m_position = position;
-	m_characterController.Init(0.2f, 0.2f, m_position);
-	m_itemType = Equip;
 }

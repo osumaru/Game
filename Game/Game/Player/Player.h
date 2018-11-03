@@ -246,7 +246,7 @@ public:
 
 	//所持装備リストに追加
 	//item		装備リストに追加するアイテム
-	void AddEquipList(IItem* item);
+	void AddEquipList(CWeapon::SWeaponStatus equip);
 
 	//所持アイテムリストを取得
 	std::list<IItem*> GetItemList()
@@ -255,7 +255,7 @@ public:
 	}
 
 	//所持装備リストを取得
-	std::list<IItem*> GetEquipList()
+	std::list<CWeapon::SWeaponStatus> GetEquipList()
 	{
 		return m_equipList;
 	}
@@ -351,7 +351,7 @@ private:
 	CVector3				m_wirePosition;							//ワイヤー移動先の座標
 
 	std::list<IItem*>		m_itemList;								//所持アイテムのリスト
-	std::list<IItem*>		m_equipList;							//所持装備のリスト
+	std::list<CWeapon::SWeaponStatus> m_equipList;					//所持装備のリスト
 };
 
 static CPlayer& GetPlayer()

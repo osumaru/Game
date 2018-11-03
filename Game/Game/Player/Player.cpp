@@ -380,11 +380,11 @@ void CPlayer::AddItemList(IItem * item)
 	}
 }
 
-void CPlayer::AddEquipList(IItem* item)
+void CPlayer::AddEquipList(CWeapon::SWeaponStatus equip)
 {
 	if (m_equipList.size() < CEquipInventory::GetEquipLimit())
 	{
 		//ŠŽãŒÀ‚ð’´‚¦‚Ä‚¢‚È‚¯‚ê‚Î‘•”õƒŠƒXƒg‚É’Ç‰Á
-		m_equipList.push_back(item);
+		m_equipList.push_back(equip);
 	}
 }
