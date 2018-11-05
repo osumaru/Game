@@ -270,9 +270,6 @@
     <ClCompile Include="Item\RecoveryItem.cpp">
       <Filter>ソース ファイル\Item</Filter>
     </ClCompile>
-    <ClCompile Include="Item\Equipment.cpp">
-      <Filter>ソース ファイル\Item</Filter>
-    </ClCompile>
     <ClCompile Include="Item\IItem.cpp">
       <Filter>ソース ファイル\Item</Filter>
     </ClCompile>
@@ -281,6 +278,9 @@
     </ClCompile>
     <ClCompile Include="UI\Menu\ItemInventory.cpp">
       <Filter>ソース ファイル\UI\Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="Item\TreasureChest.cpp">
+      <Filter>ソース ファイル\Item</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -473,9 +473,6 @@
     <ClInclude Include="GameSound\GameSound.h">
       <Filter>ソース ファイル\GameSound</Filter>
     </ClInclude>
-    <ClInclude Include="Item\Equipment.h">
-      <Filter>ソース ファイル\Item</Filter>
-    </ClInclude>
     <ClInclude Include="Item\IItem.h">
       <Filter>ソース ファイル\Item</Filter>
     </ClInclude>
@@ -490,6 +487,9 @@
     </ClInclude>
     <ClInclude Include="UI\Menu\ItemInventory.h">
       <Filter>ソース ファイル\UI\Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="Item\TreasureChest.h">
+      <Filter>ソース ファイル\Item</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
