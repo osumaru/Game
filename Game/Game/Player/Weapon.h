@@ -12,7 +12,8 @@ public:
 		enLongSword,		//—¼èŒ•
 		enArrow,				//‹|–î
 		enTwinSword,		//“ñ“
-		enWeaponNum
+		enWeaponNum,
+		enInvalid			//‰½‚à‚È‚¢
 	};
 
 	void Init(CPlayer* player);
@@ -30,6 +31,13 @@ public:
 	{
 		return m_worldPos[m_weaponState];
 	}
+
+	struct SWeaponStatus
+	{
+		int attack = 0;
+		int diffence = 0;
+		EnPlayerWeapon weaponNum = enInvalid;
+	};
 
 private:
 	const CMatrix*			m_boneMat = nullptr;

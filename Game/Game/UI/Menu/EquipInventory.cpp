@@ -29,17 +29,33 @@ void CEquipInventory::Init(CMenu * menu)
 	if (!m_equipList.empty()) {
 		//リストにアイテムがある
 		int idx = 0;
-		for (auto& item : m_equipList)
+		for (auto& equip : m_equipList)
 		{
 			//アイテムの種類を取得
-			IItem::EnInventoryItemType itemType = item->GetItemType();
-			if (itemType == IItem::Equip) {		//装備アイテムだった場合
-				//装備アイテムの初期化
-				//////////////////////		
-				//装備によって変わる
-				CTexture* itemTexure = TextureResource().LoadTexture(L"Assets/sprite/Recovery.png");
+			CWeapon::EnPlayerWeapon weaponNum = equip.weaponNum;
+			if (weaponNum == CWeapon::enSword)
+			{
+				//剣
+				CTexture* itemTexure = TextureResource().LoadTexture(L"Assets/sprite/sword.png");
 				m_equip[idx].Init(itemTexure);
-				/////////////////////
+			}
+			else if (weaponNum == CWeapon::enLongSword)
+			{
+				//大剣
+				CTexture* itemTexure = TextureResource().LoadTexture(L"Assets/sprite/largeSword.png");
+				m_equip[idx].Init(itemTexure);
+			}
+			else if (weaponNum == CWeapon::enArrow)
+			{
+				//弓
+				CTexture* itemTexure = TextureResource().LoadTexture(L"Assets/sprite/bow.png");
+				m_equip[idx].Init(itemTexure);
+			}
+			else if (weaponNum == CWeapon::enTwinSword)
+			{
+				//双剣
+				CTexture* itemTexure = TextureResource().LoadTexture(L"Assets/sprite/twinSword.png");
+				m_equip[idx].Init(itemTexure);
 			}
 			//座標とサイズを決める
 			CVector2 position = m_basePos;
@@ -141,7 +157,55 @@ void CEquipInventory::Update()
 	if (m_pointerNum < equipNum && Pad().IsTriggerButton(enButtonA))
 	{
 		//カーソルで選んでいる装備をつける
-
+		GetPlayer().ChangeEquip(m_pointerNum);
+		m_equipList = GetPlayer().GetEquipList();
+		m_width = 5;
+		m_height = 1;
+		if (!m_equipList.empty()) {
+			//リストにアイテムがある
+			int idx = 0;
+			for (auto& equip : m_equipList)
+			{
+				//アイテムの種類を取得
+				CWeapon::EnPlayerWeapon weaponNum = equip.weaponNum;
+				if (weaponNum == CWeapon::enSword)
+				{
+					//剣
+					CTexture* itemTexure = TextureResource().LoadTexture(L"Assets/sprite/sword.png");
+					m_equip[idx].SetTexture(itemTexure);
+				}
+				else if (weaponNum == CWeapon::enLongSword)
+				{
+					//大剣
+					CTexture* itemTexure = TextureResource().LoadTexture(L"Assets/sprite/largeSword.png");
+					m_equip[idx].SetTexture(itemTexure);
+				}
+				else if (weaponNum == CWeapon::enArrow)
+				{
+					//弓
+					CTexture* itemTexure = TextureResource().LoadTexture(L"Assets/sprite/bow.png");
+					m_equip[idx].SetTexture(itemTexure);
+				}
+				else if (weaponNum == CWeapon::enTwinSword)
+				{
+					//双剣
+					CTexture* itemTexure = TextureResource().LoadTexture(L"Assets/sprite/twinSword.png");
+					m_equip[idx].SetTexture(itemTexure);
+				}
+				//座標とサイズを決める
+				CVector2 position = m_basePos;
+				position.x += m_size.x * (idx % m_width);
+				position.y -= m_size.y * (idx / m_width);
+				if (idx != 0 && idx % m_width == 0)
+				{
+					//インベントリの幅を超えたら行を下げる
+					m_height++;
+				}
+				m_equip[idx].SetPosition(position);
+				m_equip[idx].SetSize(m_size);
+				idx++;
+			}
+		}
 	}
 
 	if (Pad().IsTriggerButton(enButtonB)) {

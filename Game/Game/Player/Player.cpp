@@ -367,7 +367,26 @@ void CPlayer::ChangeEquip(int number)
 	if (!m_equipList.empty())
 	{
 		//‘I‚ñ‚¾‘•”õ‚ÆŒ»İ‚Ì‘•”õ‚ğŒğŠ·‚·‚é
-
+		std::list<CWeapon::SWeaponStatus>::iterator it;
+		it = m_equipList.begin();
+		for (int i = 0; i < number; i++)
+		{
+			it++;
+		}
+		int weaponNumber = (*it).weaponNum;
+		if (m_equipWeapon[weaponNumber].weaponNum == CWeapon::enInvalid)
+		{
+			//‰½‚à‘•”õ‚µ‚Ä‚¢‚È‚¢
+			m_equipWeapon[weaponNumber] = (*it);
+			m_equipList.erase(it);
+		}
+		else
+		{
+			//‘•”õ‚ğŒğŠ·‚·‚é
+			CWeapon::SWeaponStatus equipWeapon = m_equipWeapon[weaponNumber];
+			m_equipWeapon[weaponNumber] = (*it);
+			(*it) = equipWeapon;
+		}
 	}
 }
 
@@ -380,7 +399,7 @@ void CPlayer::AddItemList(IItem * item)
 	}
 }
 
-void CPlayer::AddEquipList(IItem* item)
+void CPlayer::AddEquipList(CWeapon::SWeaponStatus item)
 {
 	if (m_equipList.size() < CEquipInventory::GetEquipLimit())
 	{
