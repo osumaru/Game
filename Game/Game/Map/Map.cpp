@@ -17,7 +17,7 @@ std::vector<std::vector<SMapChipInfo>> mapChipInfo =
 	{
 //#include "Location2.h"
 #include "Test2.h"
-// #include "ShopTest.h"
+//	#include "ShopTest.h"
 	}
 //	{
 //#include "Location2.h"

@@ -47,7 +47,6 @@ void CPlayer::Init(CVector3 position)
 	Light().SetDiffuseLightDir(0, { 0.0f, -1.0f, 1.0f, 1.0f });
 
 
-
 	//サークルの読み込み
 	{
 		m_arrowtexture.Load(L"Assets/sprite/arrowTag.png");
@@ -337,7 +336,26 @@ void CPlayer::ChangeEquip(int number)
 	if (!m_equipList.empty())
 	{
 		//選んだ装備と現在の装備を交換する
-
+		std::list<CWeapon::SWeaponStatus>::iterator it;
+		it = m_equipList.begin();
+		for (int i = 0; i < number; i++)
+		{
+			it++;
+		}
+		int weaponNumber = (*it).weaponNum;
+		if (m_equipWeapon[weaponNumber].weaponNum == CWeapon::enInvalid)
+		{
+			//何も装備していない
+			m_equipWeapon[weaponNumber] = (*it);
+			m_equipList.erase(it);
+		}
+		else
+		{
+			//装備を交換する
+			CWeapon::SWeaponStatus equipWeapon = m_equipWeapon[weaponNumber];
+			m_equipWeapon[weaponNumber] = (*it);
+			(*it) = equipWeapon;
+		}
 	}
 }
 
@@ -350,7 +368,7 @@ void CPlayer::AddItemList(IItem * item)
 	}
 }
 
-void CPlayer::AddEquipList(IItem* item)
+void CPlayer::AddEquipList(CWeapon::SWeaponStatus item)
 {
 	if (m_equipList.size() < CEquipInventory::GetEquipLimit())
 	{

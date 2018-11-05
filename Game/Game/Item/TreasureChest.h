@@ -5,12 +5,14 @@
 #pragma once
 
 #include "IItem.h"
+#include "../Player/Weapon.h"
 
 class CTreasureChest : public IItem
 {
 public:
 	//初期化
-	void Init();
+	//position		座標
+	void Init(CVector3 position);
 
 	//更新する前に一度だけ呼ばれる
 	bool Start() override;
@@ -20,10 +22,6 @@ public:
 
 	//描画
 	void Draw() override;
-
-	//ポップさせる
-	//position		座標
-	void Pop(CVector3 position);
 private:
-
+	CWeapon::SWeaponStatus m_weaponStatus;	//武器のステータス
 };

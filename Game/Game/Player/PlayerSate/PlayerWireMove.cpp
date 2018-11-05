@@ -4,7 +4,6 @@
 #include "../../Scene/SceneManager.h"
 #include "../../Map/Map.h"
 #include "../../Enemy/IEnemy.h"
-#include "../WireAction.h"
 
 void CPlayerWireMove::Init()
 {
@@ -16,8 +15,8 @@ void CPlayerWireMove::Init()
 
 void CPlayerWireMove::Update()
 {
-	CVector3 playerPos = m_pPlayer->GetPosition();
 	bool isMoveEnd = false;
+	CVector3 playerPos = GetPlayer().GetPosition();
 	CVector3 toMovePos = m_movePosition - playerPos;
 
 	float length = toMovePos.Length();
@@ -46,15 +45,14 @@ void CPlayerWireMove::Update()
 		m_pPlayer->GetCharacterController().Execute(GameTime().GetDeltaFrameTime());
 	}
 	else {
-		m_pPlayer->GetWireAction().SetIsWireMove(false);
 		isMoveEnd = true;
 	}
 
 	if (isMoveEnd) {
 		//移動が終わった
 		GetPlayer().GetPlayerStateMachine().SetState(CPlayerState::enPlayerStateStand);
-		std::list<IEnemy*> enemyList = GetSceneManager().GetGameScene().GetMap()->GetEnemyList();
-		switch (m_pPlayer->GetWireAction().GetState())
+		std::list<IEnemy*> enemyList = GetSceneGame().GetMap()->GetEnemyList();
+		switch(m_pPlayer->GetWireAction().GetState())
 		{
 		case CWireAction::enStateEnemy:
 			//移動し終わったら敵のフラグを戻してやる
@@ -77,6 +75,11 @@ void CPlayerWireMove::Update()
 			}
 			break;
 		}
+	}
 
+	if (isMoveEnd) {
+		GetPlayer().GetWireAction().SetIsWireMove(false);
+		//移動が終わった
+		GetPlayer().GetPlayerStateMachine().SetState(CPlayerState::enPlayerStateStand);
 	}
 }

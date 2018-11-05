@@ -1,8 +1,6 @@
 #include "stdafx.h"
 #include "MapChip.h"
 #include "../../Camera/GameCamera.h"
-#include "../../Player/WireAction.h"
-#include "../../Player/Player.h"
 
 MapChip::MapChip():
 	m_position(0.0f, 0.0f, 0.0f),
@@ -59,7 +57,7 @@ void MapChip::Init(const CVector3& position, const CQuaternion& rotation, const 
 	//m_skinModel.SetIsShadowCaster(true);
 	m_skinModel.SetIsShadowReceiver(true);
 	////基本的に動かさないのでワールド行列を最初の一回だけ更新しておく。
-	m_skinModel.Update(m_position, m_rotation, m_scale);
+	//m_skinModel.Update(m_position, m_rotation, m_scale);
 	//m_skinModel.SetShadowCompesationFlg(true);
 }
 

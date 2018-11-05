@@ -229,7 +229,7 @@ public:
 
 	//所持装備リストに追加
 	//item		装備リストに追加するアイテム
-	void AddEquipList(IItem* item);
+	void AddEquipList(CWeapon::SWeaponStatus item);
 
 	//所持アイテムリストを取得
 	std::list<IItem*> GetItemList()
@@ -238,7 +238,7 @@ public:
 	}
 
 	//所持装備リストを取得
-	std::list<IItem*> GetEquipList()
+	std::list<CWeapon::SWeaponStatus> GetEquipList()
 	{
 		return m_equipList;
 	}
@@ -336,8 +336,9 @@ private:
 	bool						m_isZoom;										//弓用の視点に切り替えるかの判定をする変数
 
 	std::list<IItem*>		m_itemList;								//所持アイテムのリスト
-	std::list<IItem*>		m_equipList;							//所持装備のリスト
-	CWireAction				m_wireAction;
+	std::list<CWeapon::SWeaponStatus> m_equipList;					//所持装備のリスト
+	CWeapon::SWeaponStatus	m_equipWeapon[CWeapon::enWeaponNum];	//装備中の武器
+	CWireAction				m_wireAction;							//ワイヤーの飛ぶかどうかの判定をしたりするところ
 };
 
 static CPlayer& GetPlayer()

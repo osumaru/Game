@@ -282,6 +282,9 @@
     <ClCompile Include="Item\TreasureChest.cpp">
       <Filter>ソース ファイル\Item</Filter>
     </ClCompile>
+    <ClCompile Include="Enemy\Maw.cpp">
+      <Filter>ソース ファイル\Enemy</Filter>
+    </ClCompile>
     <ClCompile Include="Player\WireAction.cpp">
       <Filter>ソース ファイル\Player</Filter>
     </ClCompile>
@@ -493,6 +496,9 @@
     </ClInclude>
     <ClInclude Include="Item\TreasureChest.h">
       <Filter>ソース ファイル\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy\Maw.h">
+      <Filter>ソース ファイル\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="Player\WireAction.h">
       <Filter>ソース ファイル\Player</Filter>

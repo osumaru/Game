@@ -23,7 +23,14 @@ void CEnemyDeath::Update()
 		money->Pop(m_enemy->GetPosition());
 		money->SetGold(m_enemy->GetStatus().Gold);
 		CTreasureChest* treasureChest = New<CTreasureChest>(0);
-		treasureChest->Pop(m_enemy->GetPosition());
+		treasureChest->Init(m_enemy->GetPosition());
+		/////////////////////////////
+		//デバック用
+		CTreasureChest* treasureChest2 = New<CTreasureChest>(0);
+		treasureChest2->Init(m_enemy->GetPosition());
+		CTreasureChest* treasureChest3 = New<CTreasureChest>(0);
+		treasureChest3->Init(m_enemy->GetPosition());
+		/////////////////////////////
 		m_enemy->StateMachineRelease();
 		Delete(m_enemy);
 	}

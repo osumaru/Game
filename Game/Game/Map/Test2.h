@@ -14,7 +14,7 @@
 },
 //ShopNpc
 {
-	L"ShopNpc",
+	L"shopNpc",
 	CVector3(-5.73f, 22.97f, 34.02f),             //平行移動
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f),  //回転
 	enMapTagShopNpc, //タグ
@@ -107,7 +107,7 @@
 {
 	L"TownHouse",
 	CVector3(-1.43f, 22.50f, 41.00f),             //平行移動
-	CQuaternion(0.00f, 0.0f, 0.00f, 1.0f ),  //回転
+	CQuaternion(0.00f, -0.18f, 0.00f, 0.98f ),  //回転
 	enMapTagUntagged, //タグ
 },
 //TownHouse1

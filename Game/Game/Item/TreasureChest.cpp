@@ -3,9 +3,42 @@
 #include "../Player/Player.h"
 #include"../../Game/Camera/GameCamera.h"
 
-void CTreasureChest::Init()
+void CTreasureChest::Init(CVector3 position)
 {
-	m_itemType = Equip;
+	m_skinModel.Load(L"Assets/modelData/heart.cmo");
+	m_position = position;
+	m_characterController.Init(0.2f, 0.2f, m_position);
+
+	//武器のステータスをランダムで決める
+	int weaponNumber = Random().GetRandSInt();
+	weaponNumber %= CWeapon::enWeaponNum;
+	int weaponAttack = Random().GetRandSInt();
+	weaponAttack %= 100;
+	if (weaponNumber == CWeapon::EnPlayerWeapon::enSword)
+	{
+		//剣
+		m_weaponStatus.weaponNum = CWeapon::EnPlayerWeapon::enSword;
+		weaponAttack += 50;
+	}
+	else if (weaponNumber == CWeapon::EnPlayerWeapon::enLongSword)
+	{
+		//大剣
+		m_weaponStatus.weaponNum = CWeapon::EnPlayerWeapon::enLongSword;
+		weaponAttack += 70;
+	}
+	else if (weaponNumber == CWeapon::EnPlayerWeapon::enArrow)
+	{
+		//弓
+		m_weaponStatus.weaponNum = CWeapon::EnPlayerWeapon::enArrow;
+		weaponAttack += 20;
+	}
+	else if (weaponNumber == CWeapon::EnPlayerWeapon::enTwinSword)
+	{
+		//双剣
+		m_weaponStatus.weaponNum = CWeapon::EnPlayerWeapon::enTwinSword;
+		weaponAttack += 30;
+	}
+	m_weaponStatus.attack = weaponAttack;
 }
 
 bool CTreasureChest::Start()
@@ -44,12 +77,8 @@ void CTreasureChest::Update()
 	CVector3 toPlayer = GetPlayer().GetPosition() - m_position;
 	float length = toPlayer.Length();
 	if (m_popEnd && length < 2.0f && Pad().IsTriggerButton(enButtonA)) {
-		//近ければ獲得
-		//if (!m_animation.IsPlay())
-		//{
-			GetPlayer().AddEquipList(this);
-			SetIsActive(false);
-		//}
+		GetPlayer().AddEquipList(m_weaponStatus);
+		Delete(this);
 	}
 
 	m_characterController.SetPosition(m_position);
@@ -62,12 +91,4 @@ void CTreasureChest::Update()
 void CTreasureChest::Draw()
 {
 	m_skinModel.Draw(GetGameCamera().GetViewMatrix(), GetGameCamera().GetProjectionMatrix());
-}
-
-void CTreasureChest::Pop(CVector3 position)
-{
-	m_skinModel.Load(L"Assets/modelData/heart.cmo");
-	m_position = position;
-	m_characterController.Init(0.2f, 0.2f, m_position);
-	m_itemType = Equip;
 }

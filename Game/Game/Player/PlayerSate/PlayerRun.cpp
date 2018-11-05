@@ -2,7 +2,6 @@
 #include "PlayerRun.h"
 #include "../Player.h"
 #include "../../Camera/GameCamera.h"
-#include "../../Player/WireAction.h"
 
 void CPlayerRun::Init()
 {
@@ -41,6 +40,7 @@ void CPlayerRun::Update()
 		}
 		else
 		{
+
 			m_pPlayer->GetPlayerStateMachine().SetState(CPlayerState::enPlayerStateAttack);
 		}
 	}
