@@ -40,7 +40,7 @@ void CPlayer::Init(CVector3 position)
 
 	m_position = position;
 	m_characterController.Init(0.3f, 1.0f,m_position);
-	m_characterController.SetGravity(-9.8f);
+	m_characterController.SetGravity(-30.0f);
 	//ライトの設定
 	Light().SetAmbientLight({ 0.5f,0.5f,0.5f,1.0f});
 	Light().SetDiffuseLight(0, { 1.0f,1.0f,1.0f,1.0f });
@@ -63,24 +63,26 @@ void CPlayer::Init(CVector3 position)
 											{ L"Assets/modelData/PlayerStand.tka"},				//待機アニメーション	
 											{ L"Assets/modelData/PlayerWalkStay.tka" },			//歩行アニメーション
 											{ L"Assets/modelData/PlayerDash60fpsEvent.tka" },		//走りアニメーション
-											{ L"Assets/modelData/PlayerJump3.tka" },			//走りジャンプアニメーション
-											{ L"Assets/modelData/PlayerJump.tka" },				//ジャンプアニメーション
-											{ L"Assets/modelData/PlayerCombo3.tka" },			//攻撃アニメーション
+											{ L"Assets/modelData/PlayerRunJump.tka" },			//走りジャンプアニメーション
+											{ L"Assets/modelData/PlayerJump2.tka" },				//ジャンプアニメーション
+											{ L"Assets/modelData/PlayerCombo4.tka" },			//攻撃アニメーション
 											{ L"Assets/modelData/PlayerThrustAttack.tka" },		//連撃アニメーション
 											{ L"Assets/modelData/PlayerDamage.tka" },			//ダメージアニメーション
 											{ L"Assets/modelData/PlayerKaihi.tka" }	,		//回避アクション
 											{ L"Assets/modelData/PlayerDeath.tka" },			//死亡アニメーション
-											{ L"Assets/modelData/PlayerWire.tka" },				//ワイヤー移動アニメーション
+											{ L"Assets/modelData/PlayerWireMove.tka" },				//ワイヤー移動アニメーション
 											{ L"Assets/modelData/PlayerArrowAttack.tka" },		//弓の攻撃アニメーション
 											{ L"Assets/modelData/PlayerArrowAttackEvent.tka" },
 											{ L"Assets/modelData/PlayerLeageSwordAttack.tka" },	//大剣の攻撃アニメーション
-											{ L"Assets/modelData/PlayerTwinSwordAttack.tka" }	//二刀流の攻撃アニメーション
+											{ L"Assets/modelData/PlayerTwinSwordAttack.tka" },	//二刀流の攻撃アニメーション
+											{ L"Assets/modelData/PlayerLanding.tka" }
 		};
 
 		m_animation.Init(animClip, enPlayerAnimationNum);
 		m_animation.SetLoopFlg(enPlayerAnimationStand, true);
 		m_animation.SetLoopFlg(enPlayerAnimationWalk, true);
 		m_animation.SetLoopFlg(enPlayerAnimationRun, true);
+		m_animation.SetLoopFlg(enPlayerAnimationWireMove, true);
 
 		//アニメーションイベントリスナーの登録　呼び出される関数の登録？
 		m_animation.AddAnimationEvent([&](auto animClipname, auto eventName) {
@@ -187,6 +189,7 @@ void CPlayer::Update()
 void CPlayer::Draw()
 {
 	m_weapon.Draw();
+	//m_characterController.Draw();
 	m_skinmodel.Draw(GetGameCamera().GetViewMatrix(), GetGameCamera().GetProjectionMatrix());
 }
 

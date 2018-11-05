@@ -1,6 +1,5 @@
 #pragma once
 class CPlayer;
-
 class CWireAction
 {
 public:
@@ -57,10 +56,19 @@ public:
 	}
 
 private:
+	struct SWireInfo
+	{
+		float value;
+		CVector3 wirePos;
+	};
+
+private:
 	const CPlayer*					m_pPlayer = nullptr;					//プレイヤーのインスタンス
 	bool							m_isWireMove = false;					//ワイヤー移動できるか
 	CRayTest						m_wireCollisionSolver;					//ワイヤー移動のコリジョン処理クラス
-	CVector3						m_wirePosition;							//ワイヤー移動先の座標
+	CVector3						m_wirePosition;
+	static const int				WIRE_POS_LIST_NUM = 10;
+	SWireInfo						m_wirePositionList[WIRE_POS_LIST_NUM];							//ワイヤー移動先の座標
 	std::vector<const CVector3*>	m_posWireFly;							//飛ぶ先の地点リスト
-	EnWireState						m_state = enStateMap;					//ワイヤーの状態
+	EnWireState						m_state = enStateEnemy;					//ワイヤーの状態
 };

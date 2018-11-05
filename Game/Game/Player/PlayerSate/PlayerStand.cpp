@@ -15,7 +15,14 @@ void CPlayerStand::Init()
 
 void CPlayerStand::Update()
 {
-	
+	if (m_pPlayer->GetAnimation().GetCurrentAnimationNum() != enPlayerAnimationStand)
+	{
+		if (!m_pPlayer->GetAnimation().IsPlay())
+		{
+			m_pPlayer->PlayAnimation(enPlayerAnimationStand);
+		}
+		return;
+	}
 	//€–S‚µ‚½ê‡‚Ìˆ—
 	if (m_pPlayer->GetStatus().Health <= 0)
 	{

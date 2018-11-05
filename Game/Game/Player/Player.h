@@ -211,29 +211,11 @@ public:
 		m_intervalOn = set;
 	}
 
-	////ワイヤー移動する先の座標を取得
-	//const CVector3& GetWirePosition()
-	//{
-	//	return m_wirePosition;
-	//}
-
 	//キャラクターコントローラーを取得
 	CCharacterController& GetCharacterController()
 	{
 		return m_characterController;
 	}
-
-	////ワイヤー移動しているか
-	//bool IsWireMove()
-	//{
-	//	return m_isWireMove;
-	//}
-
-	////ワイヤー移動しているかを設定
-	//void SetIsWireMove(bool isWireMove)
-	//{
-	//	m_isWireMove = isWireMove;
-	//}
 
 	//矢を生成しているかの設定
 	void SetInitArrow(const bool set)
