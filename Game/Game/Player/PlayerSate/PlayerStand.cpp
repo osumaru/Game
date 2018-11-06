@@ -9,13 +9,20 @@
 void CPlayerStand::Init()
 {
 	//待機アニメーションの再生
-	m_pPlayer->PlayAnimation(enPlayerAnimationStand);
+	m_pPlayer->PlayAnimation(enPlayerAnimationStand,0.5f);
 	m_pPlayer->SetMoveSpeed(CVector3::Zero);
 }
 
 void CPlayerStand::Update()
 {
-	
+	if (m_pPlayer->GetAnimation().GetCurrentAnimationNum() != enPlayerAnimationStand)
+	{
+		if (!m_pPlayer->GetAnimation().IsPlay())
+		{
+			m_pPlayer->PlayAnimation(enPlayerAnimationStand);
+		}
+		return;
+	}
 	//死亡した場合の処理
 	if (m_pPlayer->GetStatus().Health <= 0)
 	{
@@ -49,7 +56,7 @@ void CPlayerStand::Update()
 	{
 		GetPlayer().GetPlayerStateMachine().SetState(CPlayerState::enPlayerStateAvoidance);
 	}
-	else if (GetPlayer().IsWireMove()) 
+	else if (GetPlayer().GetWireAction().IsWireMove()) 
 	{
 		//ワイヤー移動できるなら遷移
 		GetPlayer().GetPlayerStateMachine().SetState(CPlayerState::enPlayerStateWireMove);

@@ -4,11 +4,17 @@
 #include "../Scene/SceneManager.h"
 #include "../Scene/GameScene.h"
 #include "../Map/Map.h"
+#include "../Camera/GameCamera.h"
 
 void CWireAction::Init(const CPlayer* player)
 {
 	m_pPlayer = player;
 	m_wireCollisionSolver.Init(0.3f, 1.0f);
+	for (int i = 0; i < WIRE_POS_LIST_NUM; i++)
+	{
+		m_wirePositionList[i].wirePos = CVector3::Zero;
+		m_wirePositionList[i].value = 0.0f;
+	}
 }
 
 void CWireAction::Add(const CSkinModel& skinModel)
@@ -27,6 +33,7 @@ void CWireAction::Add(const CSkinModel& skinModel)
 
 void CWireAction::Update()
 {
+	int wireListCount = 0;
 	//ワイヤーの処理
 	if (Pad().IsTriggerButton(enButtonY) && !m_isWireMove)
 	{
@@ -41,46 +48,85 @@ void CWireAction::Update()
 				CVector3 enemyPos = enemy->GetPosition();
 				CVector3 toEnemyPos = enemyPos - GetPlayer().GetPosition();
 				float length = toEnemyPos.Length();
-				if (minLength > length) {
+				if (minLength > length)
+				{
 					minLength = length;
-					//一番近い敵の位置を移動先とする
-					m_wirePosition = enemyPos;
+					for (int i = WIRE_POS_LIST_NUM - 2; 0 <= i; i--)
+					{
+						m_wirePositionList[i + 1].wirePos = m_wirePositionList[i].wirePos;
+						m_wirePositionList[i + 1].value = m_wirePositionList[i].value;
+					}
+					m_wirePositionList[0].wirePos = enemyPos;
+					m_wirePositionList[0].value = minLength;
+					wireListCount++;
 				}
 			}
 			break;
 		case enStateMap:
+			const CCamera& gameCamera = GetGameCamera().GetCamera();
+			CVector3 frontVec = gameCamera.GetTarget() - gameCamera.GetPosition();
+			frontVec.y = 0.0f;
+			frontVec.Normalize();
+			CVector3 rightVec;
+			rightVec.Cross(CVector3::AxisY, frontVec);
+			rightVec.Normalize();
+			CVector3 playerDir;
+			playerDir = frontVec * Pad().GetLeftStickY();
+			playerDir += rightVec * Pad().GetLeftStickX();
+			playerDir.Normalize();
+			float dt = 0.0f;
 			for (const CVector3* pos : m_posWireFly)
 			{
-				CVector3 distance = m_pPlayer->GetPosition() - *pos;
-				if (distance.LengthSq() < minLength)
+				CVector3 distance =  *pos - m_pPlayer->GetPosition();
+				if (distance.Length() < 70.0f)
 				{
-					minLength = distance.LengthSq();
-					m_wirePosition = *pos;
+					distance.y = 0.0f;
+					distance.Normalize();
+					if (dt < distance.Dot(playerDir))
+					{
+						dt = distance.Dot(playerDir);
+						for (int i = WIRE_POS_LIST_NUM - 2; 0 <= i; i--)
+						{
+							m_wirePositionList[i + 1].wirePos = m_wirePositionList[i].wirePos;
+							m_wirePositionList[i + 1].value = m_wirePositionList[i].value;
+						}
+						m_wirePositionList[0].wirePos = *pos;
+						m_wirePositionList[0].value = dt;
+						wireListCount++;
+					}
 				}
 			}
 			break;
 		}
-
-		if (!m_wireCollisionSolver.Execute(m_pPlayer->GetPosition(), m_wirePosition)) 
+		if (WIRE_POS_LIST_NUM < wireListCount)
 		{
-			//レイを飛ばしてプレイヤーとの間に障害物がないならワイヤーを使う
-			m_isWireMove = true;
-			switch (m_state)
+			wireListCount = WIRE_POS_LIST_NUM;
+		}
+		for (int i = 0; i < wireListCount; i++)
+		{
+			if (!m_wireCollisionSolver.Execute(m_pPlayer->GetPosition(), m_wirePositionList[i].wirePos))
 			{
-			case enStateEnemy:
-				for (auto& enemy : enemyList)
+				m_wirePosition = m_wirePositionList[i].wirePos;
+				//レイを飛ばしてプレイヤーとの間に障害物がないならワイヤーを使う
+				m_isWireMove = true;
+				switch (m_state)
 				{
-					CVector3 enemyPos = enemy->GetPosition();
-					CVector3 toMovePos = m_wirePosition - enemyPos;
-					float length = toMovePos.Length();
-					if (length < 0.1f) {
-						//一番近い敵にワイヤーが当たったフラグを設定する
-						enemy->SetIsWireHit(true);
+				case enStateEnemy:
+					for (auto& enemy : enemyList)
+					{
+						CVector3 enemyPos = enemy->GetPosition();
+						CVector3 toMovePos = m_wirePosition - enemyPos;
+						float length = toMovePos.Length();
+						if (length < 0.1f) {
+							//一番近い敵にワイヤーが当たったフラグを設定する
+							enemy->SetIsWireHit(true);
+						}
 					}
-				}
-				break;
+					break;
 
-			case enStateMap:
+				case enStateMap:
+					break;
+				}
 				break;
 			}
 		}

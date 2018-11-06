@@ -20,7 +20,7 @@ void CPlayerRun::Update()
 	CVector3 moveSpeed = m_pPlayer->GetMoveSpeed();
 	moveSpeed.x = 0.0f;
 	moveSpeed.z = 0.0f;
-	const float speed = 4.0f;
+	const float speed = 8.0f;
 	moveSpeed += frontVec * Pad().GetLeftStickY() * speed;
 	moveSpeed += rightVec * Pad().GetLeftStickX() * speed;
 	m_pPlayer->SetMoveSpeed(moveSpeed);
@@ -59,7 +59,7 @@ void CPlayerRun::Update()
 	{
 		m_pPlayer->GetPlayerStateMachine().SetState(CPlayerState::enPlayerStateStand);
 	}
-	else if (m_pPlayer->IsWireMove())
+	else if (m_pPlayer->GetWireAction().IsWireMove())
 	{
 		//ƒƒCƒ„[ˆÚ“®‚Å‚«‚é‚È‚ç‘JˆÚ
 		m_pPlayer->GetPlayerStateMachine().SetState(CPlayerState::enPlayerStateWireMove);
