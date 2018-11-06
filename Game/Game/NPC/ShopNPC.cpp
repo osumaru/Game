@@ -21,18 +21,48 @@ void CShopNPC::Init(const CVector3 position, const CQuaternion rotation)
 {
 	m_position = position;
 	m_rotation = rotation;
+	/*std::ifstream file;
+	
+	file.open("NPC/LineupData.txt");
+	if (file.fail())
+	{
+		exit(1);
+	}
+	for (int num = 0; num < enPotionNum;num++)
+	{
+		file >> num;
+	}
+	file.close();*/
 
 	m_skinModel.Load(L"Assets/modelData/U2.cmo",NULL);
 	m_backTexture.Load(L"Assets/sprite/MenuUI/Back_Menu.png");
-	m_backSprite.Init(&m_backTexture);
-	m_backSprite.SetPosition({ -480.0f,0.0f });
-	m_backSprite.SetSize({ 320.0f,600.0f });
-	m_backSprite.SetAlpha(0.8f);
+	for (int num = 0;num < BACK_TEXTURE_NUM;num++)
+	{
+		m_backSprite[num].Init(&m_backTexture);
+		m_backSprite[num].SetPosition(m_backPosition);
+		m_backSprite[num].SetSize({ 320.0f,600.0f });
+		m_backSprite[num].SetAlpha(0.8f);
+		m_backPosition.x += 350.0f;
+	}
 
 	m_selectTexture.Load(L"Assets/sprite/MenuUI/Select.png");
 	m_selectSprite.Init(&m_selectTexture);
 	m_selectSprite.SetPosition(m_selectTexPosition);
 	m_selectSprite.SetSize({ 50.0f,50.0f });
+
+	m_lineupTexture[0].Load(L"Assets/sprite/ShopUI/BluePotion.png");
+	m_lineupTexture[1].Load(L"Assets/sprite/ShopUI/ReadPotion.png");
+	m_lineupTexture[2].Load(L"Assets/sprite/ShopUI/GreenPotion.png");
+	m_lineupTexture[3].Load(L"Assets/sprite/ShopUI/YellowPotion.png");
+	for (int num = 0;num < enPotionNum;num++)
+	{
+		m_lineupSprite[num].Init(&m_lineupTexture[num]);
+		m_lineupSprite[num].SetPosition(m_lineupTexPosition);
+		m_lineupSprite[num].SetSize({ 200.0f,50.0f });
+		m_lineupSprite[num].SetAlpha(1.0f);
+		m_lineupTexPosition.y  -= 50.0f;
+	}
+	
 
 	m_shopTexture[0].Load(L"Assets/sprite/ShopUI/Buy.png");
 	m_shopTexture[1].Load(L"Assets/sprite/ShopUI/Execute.png");
@@ -66,17 +96,43 @@ void CShopNPC::Update()
 		}
 		else if (Pad().IsTriggerButton(enButtonX))
 		{
-			//‚¨‹à‚ª‘«‚è‚Ä‚¢‚ê‚Îw“ü‚·‚é‚±‚Æ‚ª‚Å‚«‚é
-			if (GetPlayer().BuyMoney(RECOVERY_MONEY))
-			{
-				CRecoveryItem* item = new CRecoveryItem;
-				item->Init();
-				GetPlayer().AddItemList(item);
-				CSoundSource* se = New<CSoundSource>(0);
-				se->Init("Assets/sound/Shop/BuySe.wav");
-				se->SetVolume(1.0f);
-				se->Play(false);
-			}
+			m_drawLineup = true;
+			m_shopState = enShopLineup;
+			////‚¨‹à‚ª‘«‚è‚Ä‚¢‚ê‚Îw“ü‚·‚é‚±‚Æ‚ª‚Å‚«‚é
+			//if (GetPlayer().BuyMoney(RECOVERY_MONEY))
+			//{
+			//	CRecoveryItem* item = new CRecoveryItem;
+			//	item->Init();
+			//	GetPlayer().AddItemList(item);
+			//	CSoundSource* se = New<CSoundSource>(0);
+			//	se->Init("Assets/sound/Shop/BuySe.wav");
+			//	se->SetVolume(1.0f);
+			//	se->Play(false);
+			//}
+		}
+		break;
+	case enShopLineup:
+		if (Pad().IsTriggerButton(enButtonX))
+		{
+			m_isBuy = true;
+		}
+		if (m_isBuy) { return; }
+		switch (m_lineupState)
+		{
+		case enBluePotion:
+
+			break;
+		case enRedPotion:
+
+			break;
+		case enGreenPotion:
+
+			break;
+		case enYellowPotion:
+
+			break;
+		
+
 		}
 		break;
 	case enShopExecute:
@@ -128,11 +184,22 @@ void CShopNPC::Draw()
 void CShopNPC::AfterDraw()
 {
 	if (!m_isTextureDraw) { return; }
-	m_backSprite.Draw();
+	
+	m_backSprite[0].Draw();
+	
+
 	m_selectSprite.Draw();
+	
 	for (int num = 0;num < TEXTURE_NUM;num++)
 	{
 		m_shopSprite[num].Draw();
 
 	}
+	if (!m_drawLineup) { return; }
+	m_backSprite[1].Draw();
+	for (int num = 0;num < enPotionNum;num++)
+	{
+		m_lineupSprite[num].Draw();
+	}
+	
 }

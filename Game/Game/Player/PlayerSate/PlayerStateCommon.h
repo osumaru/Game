@@ -18,6 +18,7 @@ enum EnPlayerAnimation
 	enPlayerAnimationArrowShoot,	//弓を放つアニメーション
 	enPlayerAnimationLongSwordAttack,//大剣の攻撃アニメーション
 	enPlayerAnimationTwinSwordAttack,//二刀流の攻撃アニメーション
+	enPlayerAnimationLanding,//着地アニメーション
 	enPlayerAnimationNum			//アニメーションの数
 };
 
@@ -42,6 +43,5 @@ public:
 		enPlayerStateArrowShoot,		//弓を放つステート
 		enPlayerStateLongSwordAttack,	//大剣の攻撃ステート
 		enPlayerStateTwinSwordAttack,	//二刀流の攻撃ステート
-		enPlayerStateNum,				//ステートの数
 	};
 };

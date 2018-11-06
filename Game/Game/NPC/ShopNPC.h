@@ -16,14 +16,35 @@ private:
 		enShopBuy,			//買い物を行うとき
 		enShopExecute,		//店を出るとき
 		enShopNone,			//何も行っていないとき
+		enShopLineup,
 		enShopNum,
 	};
+	enum EnShopLineup
+	{
+		enBluePotion,
+		enRedPotion,
+		enGreenPotion,
+		enYellowPotion, 
+		enPotionNum,
+	};
+
 	static const int			TEXTURE_NUM = 2;
-	CSprite				m_backSprite;
-	CTexture			m_backTexture;
+	static const int			BACK_TEXTURE_NUM = 2;
+	CSprite				m_backSprite[2];				//背景のスプライト	
+	CTexture			m_backTexture;					//背景のテクスチャ
+	CVector2			m_backPosition = { -480.0f,0.0f };
+
 	CSprite				m_selectSprite;					//羽ペンのスプライト
 	CTexture			m_selectTexture;				//羽ペンのテクスチャ
 	CVector2			m_selectTexPosition = { -350.0f,200.0f };
+
+	CSprite				m_lineupSprite[enPotionNum];	//商品のスプライト
+	CTexture			m_lineupTexture[enPotionNum];	//商品のテクスチャ
+	CVector2			m_lineupTexPosition = { -130.0f,50.0f };
+	EnShopLineup		m_lineupState = enBluePotion;
+	int					m_lineupPrice[enPotionNum];
+	bool				m_drawLineup = false;
+	bool				m_isBuy = false;
 
 	CSprite				m_shopSprite[TEXTURE_NUM];
 	CTexture			m_shopTexture[TEXTURE_NUM];

@@ -50,9 +50,9 @@ protected:
 
 protected:
 	CSkinModel		m_skinModel;				//スキンモデル
-	CVector3		m_position;					//座標
+	CVector3			m_position;					//座標
 	CQuaternion		m_rotation;					//回転
-	CVector3		m_scale;					//拡大
+	CVector3			m_scale;					//拡大
 	Map*			m_pMap;						//デリートする時のためのポインタ
 	std::list<MapChip*>::iterator m_iterator;	//自身のイテレーター
 	bool			m_isActive;					//アクティブか？

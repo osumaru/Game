@@ -4,6 +4,7 @@
 #include "PlayerArrow.h"
 #include "Weapon.h"
 #include "PlayerSate/PlayerStateCommon.h"
+#include "WireAction.h"
 
 class IItem;
 
@@ -210,28 +211,10 @@ public:
 		m_intervalOn = set;
 	}
 
-	//ワイヤー移動する先の座標を取得
-	const CVector3& GetWirePosition()
-	{
-		return m_wirePosition;
-	}
-
 	//キャラクターコントローラーを取得
 	CCharacterController& GetCharacterController()
 	{
 		return m_characterController;
-	}
-
-	//ワイヤー移動しているか
-	bool IsWireMove()
-	{
-		return m_isWireMove;
-	}
-
-	//ワイヤー移動しているかを設定
-	void SetIsWireMove(bool isWireMove)
-	{
-		m_isWireMove = isWireMove;
 	}
 
 	//矢を生成しているかの設定
@@ -246,7 +229,7 @@ public:
 
 	//所持装備リストに追加
 	//item		装備リストに追加するアイテム
-	void AddEquipList(IItem* item);
+	void AddEquipList(CWeapon::SWeaponStatus item);
 
 	//所持アイテムリストを取得
 	std::list<IItem*> GetItemList()
@@ -255,7 +238,7 @@ public:
 	}
 
 	//所持装備リストを取得
-	std::list<IItem*> GetEquipList()
+	std::list<CWeapon::SWeaponStatus> GetEquipList()
 	{
 		return m_equipList;
 	}
@@ -309,6 +292,11 @@ public:
 		m_isStatusConversion = iscon;
 	}
 
+	CWireAction& GetWireAction()
+	{
+		return m_wireAction;
+	}
+
 private:
 
 	//プレイヤーがエネミーに攻撃する処理
@@ -318,8 +306,6 @@ private:
 	void Rotation();
 
 	//アニメーションイベントが起きた時に呼ばれる処理。
-	//animClipName アニメーションのファイルパス
-	//enentName		アニメーションイベント名
 	void OnInvokeAnimationEvent(const wchar_t* animClipName, const wchar_t* eventName);
 private:
 	static CPlayer*				m_player;								//プレイヤー
@@ -348,12 +334,11 @@ private:
 	CSprite						m_arrowtag;										//サークルのスプライト
 	CTexture					m_arrowtexture;
 	bool						m_isZoom;										//弓用の視点に切り替えるかの判定をする変数
-	bool					m_isWireMove = false;					//ワイヤー移動できるか
-	CRayTest				m_wireCollisionSolver;					//ワイヤー移動のコリジョン処理クラス
-	CVector3				m_wirePosition;							//ワイヤー移動先の座標
 
 	std::list<IItem*>		m_itemList;								//所持アイテムのリスト
-	std::list<IItem*>		m_equipList;							//所持装備のリスト
+	std::list<CWeapon::SWeaponStatus> m_equipList;					//所持装備のリスト
+	CWeapon::SWeaponStatus	m_equipWeapon[CWeapon::enWeaponNum];	//装備中の武器
+	CWireAction				m_wireAction;							//ワイヤーの飛ぶかどうかの判定をしたりするところ
 };
 
 static CPlayer& GetPlayer()

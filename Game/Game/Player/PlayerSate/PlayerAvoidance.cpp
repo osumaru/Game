@@ -12,7 +12,7 @@ void CPlayerAvoidance::Init()
 	CVector3 bonePos = { m_pBoneMat->m[3][0], m_pBoneMat->m[3][1], m_pBoneMat->m[3][2] };
 	m_manipVec = m_pPlayer->GetPosition() - bonePos;
 	m_preBonePos = bonePos;
-
+	m_pPlayer->SetInterval(true);
 }
 
 void CPlayerAvoidance::Update()
@@ -61,6 +61,7 @@ void CPlayerAvoidance::Update()
 		position += m_manipVec;
 		m_pPlayer->SetPosition(position);
 
+		m_pPlayer->SetInterval(false);
 		GetPlayer().GetPlayerStateMachine().SetState(CPlayerState::enPlayerStateStand);
 	}
 }

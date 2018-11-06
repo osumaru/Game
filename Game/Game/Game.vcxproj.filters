@@ -270,9 +270,6 @@
     <ClCompile Include="Item\RecoveryItem.cpp">
       <Filter>ソース ファイル\Item</Filter>
     </ClCompile>
-    <ClCompile Include="Item\Equipment.cpp">
-      <Filter>ソース ファイル\Item</Filter>
-    </ClCompile>
     <ClCompile Include="Item\IItem.cpp">
       <Filter>ソース ファイル\Item</Filter>
     </ClCompile>
@@ -282,11 +279,14 @@
     <ClCompile Include="UI\Menu\ItemInventory.cpp">
       <Filter>ソース ファイル\UI\Menu</Filter>
     </ClCompile>
-    <ClCompile Include="Map\MapChip\BreakMapObject.cpp">
-      <Filter>ソース ファイル\Map\MapChip</Filter>
+    <ClCompile Include="Item\TreasureChest.cpp">
+      <Filter>ソース ファイル\Item</Filter>
     </ClCompile>
     <ClCompile Include="Enemy\Maw.cpp">
       <Filter>ソース ファイル\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Player\WireAction.cpp">
+      <Filter>ソース ファイル\Player</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -479,9 +479,6 @@
     <ClInclude Include="GameSound\GameSound.h">
       <Filter>ソース ファイル\GameSound</Filter>
     </ClInclude>
-    <ClInclude Include="Item\Equipment.h">
-      <Filter>ソース ファイル\Item</Filter>
-    </ClInclude>
     <ClInclude Include="Item\IItem.h">
       <Filter>ソース ファイル\Item</Filter>
     </ClInclude>
@@ -497,11 +494,14 @@
     <ClInclude Include="UI\Menu\ItemInventory.h">
       <Filter>ソース ファイル\UI\Menu</Filter>
     </ClInclude>
-    <ClInclude Include="Map\MapChip\BreakMapObject.h">
-      <Filter>ソース ファイル\Map\MapChip</Filter>
+    <ClInclude Include="Item\TreasureChest.h">
+      <Filter>ソース ファイル\Item</Filter>
     </ClInclude>
     <ClInclude Include="Enemy\Maw.h">
       <Filter>ソース ファイル\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Player\WireAction.h">
+      <Filter>ソース ファイル\Player</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -510,16 +510,13 @@
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <MeshContentTask Include="Assets\modelData\Yasikic.FBX">
+    <None Include="Assets\modelData\UnityChan.max" />
+  </ItemGroup>
+  <ItemGroup>
+    <MeshContentTask Include="Assets\modelData\Arrow.fbx">
       <Filter>ソース ファイル\Assets</Filter>
     </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\Barrel.FBX">
-      <Filter>ソース ファイル\Assets</Filter>
-    </MeshContentTask>
-    <MeshContentTask Include="Assets\modelData\Zombi.FBX">
-      <Filter>ソース ファイル\Assets</Filter>
-    </MeshContentTask>
-    <MeshContentTask Include="Assets\modelData\Arrow.fbx">
       <Filter>ソース ファイル\Assets</Filter>
     </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\Brock.FBX">
@@ -552,13 +549,16 @@
     <MeshContentTask Include="Assets\modelData\Samurai.FBX">
       <Filter>ソース ファイル\Assets</Filter>
     </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\Skyball_WithCap.FBX">
+      <Filter>ソース ファイル\Assets</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\Skyball_WithoutCap.FBX">
+      <Filter>ソース ファイル\Assets</Filter>
+    </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\Sword.fbx">
       <Filter>ソース ファイル\Assets</Filter>
     </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\testChamferBox.FBX">
-      <Filter>ソース ファイル\Assets</Filter>
-    </MeshContentTask>
-    <MeshContentTask Include="Assets\modelData\testGround.FBX">
       <Filter>ソース ファイル\Assets</Filter>
     </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\testRectangle.FBX">
@@ -582,10 +582,13 @@
     <MeshContentTask Include="Assets\modelData\umi.FBX">
       <Filter>ソース ファイル\Assets</Filter>
     </MeshContentTask>
-    <MeshContentTask Include="Assets\modelData\Unitychan.FBX">
+    <MeshContentTask Include="Assets\modelData\Unitychan.fbx">
       <Filter>ソース ファイル\Assets</Filter>
     </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\Unitychan2.fbx">
+      <Filter>ソース ファイル\Assets</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\Unitychan3.FBX">
       <Filter>ソース ファイル\Assets</Filter>
     </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\Warrok.fbx">
@@ -594,20 +597,38 @@
     <MeshContentTask Include="Assets\modelData\Wave.FBX">
       <Filter>ソース ファイル\Assets</Filter>
     </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\WireTest.FBX">
+      <Filter>ソース ファイル\Assets</Filter>
+    </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\Yasikia.FBX">
       <Filter>ソース ファイル\Assets</Filter>
     </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\Yasikib.FBX">
       <Filter>ソース ファイル\Assets</Filter>
     </MeshContentTask>
-    <MeshContentTask Include="Assets\modelData\Skyball_WithCap.FBX">
+    <MeshContentTask Include="Assets\modelData\Yasikic.FBX">
       <Filter>ソース ファイル\Assets</Filter>
     </MeshContentTask>
-    <MeshContentTask Include="Assets\modelData\Maw.fbx">
+    <MeshContentTask Include="Assets\modelData\Zombi.FBX">
       <Filter>ソース ファイル\Assets</Filter>
     </MeshContentTask>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Assets\modelData\UnityChan.max" />
+    <MeshContentTask Include="Assets\modelData\TestBox1.FBX">
+      <Filter>ソース ファイル\Assets</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\TestBox2.FBX">
+      <Filter>ソース ファイル\Assets</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\TestBox3.FBX">
+      <Filter>ソース ファイル\Assets</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\TestBox4.FBX">
+      <Filter>ソース ファイル\Assets</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\TestBox5.FBX">
+      <Filter>ソース ファイル\Assets</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\TestGround.FBX">
+      <Filter>ソース ファイル\Assets</Filter>
+    </MeshContentTask>
   </ItemGroup>
 </Project>

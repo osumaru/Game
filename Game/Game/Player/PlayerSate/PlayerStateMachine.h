@@ -48,7 +48,7 @@ public:
 	}
 
 private:
-	CPlayerState::EnPlayerState		m_state = CPlayerState::enPlayerStateNum;				//プレイヤーのアニメーションの状態
+	CPlayerState::EnPlayerState		m_state = (CPlayerState::EnPlayerState)-1;				//プレイヤーのアニメーションの状態
 	
 	IPlayerState*					m_currentState = nullptr;
 	CPlayerStand					m_playerStand;			//待機モーション

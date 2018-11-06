@@ -7,27 +7,25 @@ class INpcState;
 //マップチップのタグ
 enum EnMapChipTag
 {
-	enMapTagUntagged,		//タグなし
-	enMapTagPlayer,			//プレイヤータグ
-	enMapTagZombie,			//Zombieタグ
-	enMapTagSamurai,		//Samuraiタグ
-	enMapTagNinja,			//NInjaタグ
-	enMapTagWarrok,			//Warrokタグ
-	enMapTagMaw,			//Mawタグ
-	enMapTagEnemyGroup,		//エネミーグループのタグ
-	enMapTagMapChip,		//マップチップ
+	enMapTagUntagged,
+	enMapTagPlayer,
+	enMapTagZombie,
+	enMapTagSamurai,
+	enMapTagNinja,
+	enMapTagWarrok,
+	enMapTagEnemyGroup,
+	enMapTagMapChip,
 	enMapTagTerrain,		//地形用のタグ
-	enMapTagShopNpc,		//店NPC用のタグ
-	enMapTagBreakBrock,		//消せるオブジェクトのタグ
-	enMapTagNum,			//タグの数
+	enMapTagShopNpc,			//店NPC用のタグ
+	enMapTagNum,
 };
 
 struct SMapChipInfo
 {
-	wchar_t*		m_modelName;	//モデル名
-	CVector3		m_position;		//座標
-	CQuaternion		m_rotation;		//回転
-	EnMapChipTag	m_tag;			//タグ
+	wchar_t*			m_modelName;
+	CVector3		m_position;
+	CQuaternion	m_rotation;
+	EnMapChipTag	m_tag;
 };
 
 //マップのオブジェクトを配置するクラス

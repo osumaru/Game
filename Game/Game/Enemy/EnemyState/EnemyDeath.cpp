@@ -3,7 +3,7 @@
 #include "../IEnemy.h"
 #include "../../Item/RecoveryItem.h"
 #include "../../Item/Money.h"
-#include "../../Item/Equipment.h"
+#include "../../Item/TreasureChest.h"
 
 bool CEnemyDeath::Start()
 {
@@ -22,8 +22,15 @@ void CEnemyDeath::Update()
 		CMoney* money = New<CMoney>(0);
 		money->Pop(m_enemy->GetPosition());
 		money->SetGold(m_enemy->GetStatus().Gold);
-		CEquipment* equipment = New<CEquipment>(0);
-		equipment->Pop(m_enemy->GetPosition());
+		CTreasureChest* treasureChest = New<CTreasureChest>(0);
+		treasureChest->Init(m_enemy->GetPosition());
+		/////////////////////////////
+		//デバック用
+		CTreasureChest* treasureChest2 = New<CTreasureChest>(0);
+		treasureChest2->Init(m_enemy->GetPosition());
+		CTreasureChest* treasureChest3 = New<CTreasureChest>(0);
+		treasureChest3->Init(m_enemy->GetPosition());
+		/////////////////////////////
 		m_enemy->StateMachineRelease();
 		Delete(m_enemy);
 	}

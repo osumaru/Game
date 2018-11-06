@@ -182,14 +182,14 @@
     <ClCompile Include="Enemy\Warrok.cpp" />
     <ClCompile Include="Enemy\Zombie.cpp" />
     <ClCompile Include="GameSound\GameSound.cpp" />
-    <ClCompile Include="Item\Equipment.cpp" />
     <ClCompile Include="Item\IItem.cpp" />
     <ClCompile Include="Item\Money.cpp" />
     <ClCompile Include="Item\RecoveryItem.cpp" />
-    <ClCompile Include="Map\MapChip\BreakMapObject.cpp" />
+    <ClCompile Include="Item\TreasureChest.cpp" />
     <ClCompile Include="NPC\INpcState.cpp" />
     <ClCompile Include="NPC\NpcManager.cpp" />
     <ClCompile Include="NPC\ShopNPC.cpp" />
+    <ClCompile Include="Player\WireAction.cpp" />
     <ClCompile Include="UI\Fade\Fade.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Map\Map.cpp" />
@@ -257,14 +257,14 @@
     <ClInclude Include="Enemy\Warrok.h" />
     <ClInclude Include="Enemy\Zombie.h" />
     <ClInclude Include="GameSound\GameSound.h" />
-    <ClInclude Include="Item\Equipment.h" />
     <ClInclude Include="Item\IItem.h" />
     <ClInclude Include="Item\Money.h" />
     <ClInclude Include="Item\RecoveryItem.h" />
-    <ClInclude Include="Map\MapChip\BreakMapObject.h" />
+    <ClInclude Include="Item\TreasureChest.h" />
     <ClInclude Include="NPC\INpcState.h" />
     <ClInclude Include="NPC\NpcManager.h" />
     <ClInclude Include="NPC\ShopNPC.h" />
+    <ClInclude Include="Player\WireAction.h" />
     <ClInclude Include="UI\Fade\Fade.h" />
     <ClInclude Include="Map\Map.h" />
     <ClInclude Include="Map\MapChip\MapChip.h" />
@@ -312,6 +312,9 @@
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\modelData\UnityChan.max" />
+  </ItemGroup>
+  <ItemGroup>
     <MeshContentTask Include="Assets\modelData\Arrow.fbx" />
     <MeshContentTask Include="Assets\modelData\Barrel.FBX" />
     <MeshContentTask Include="Assets\modelData\Brock.FBX" />
@@ -320,15 +323,20 @@
     <MeshContentTask Include="Assets\modelData\LargeSword.fbx" />
     <MeshContentTask Include="Assets\modelData\LongBow.FBX" />
     <MeshContentTask Include="Assets\modelData\map2.FBX" />
-    <MeshContentTask Include="Assets\modelData\Maw.fbx" />
     <MeshContentTask Include="Assets\modelData\Money.fbx" />
     <MeshContentTask Include="Assets\modelData\Ninja.FBX" />
     <MeshContentTask Include="Assets\modelData\Player.fbx" />
     <MeshContentTask Include="Assets\modelData\Samurai.FBX" />
     <MeshContentTask Include="Assets\modelData\Skyball_WithCap.FBX" />
+    <MeshContentTask Include="Assets\modelData\Skyball_WithoutCap.FBX" />
     <MeshContentTask Include="Assets\modelData\Sword.fbx" />
+    <MeshContentTask Include="Assets\modelData\TestBox1.FBX" />
+    <MeshContentTask Include="Assets\modelData\TestBox2.FBX" />
+    <MeshContentTask Include="Assets\modelData\TestBox3.FBX" />
+    <MeshContentTask Include="Assets\modelData\TestBox4.FBX" />
+    <MeshContentTask Include="Assets\modelData\TestBox5.FBX" />
     <MeshContentTask Include="Assets\modelData\testChamferBox.FBX" />
-    <MeshContentTask Include="Assets\modelData\testGround.FBX" />
+    <MeshContentTask Include="Assets\modelData\TestGround.FBX" />
     <MeshContentTask Include="Assets\modelData\testRectangle.FBX" />
     <MeshContentTask Include="Assets\modelData\Toge.FBX" />
     <MeshContentTask Include="Assets\modelData\TownHouse.fbx" />
@@ -336,17 +344,16 @@
     <MeshContentTask Include="Assets\modelData\TwinSword.fbx" />
     <MeshContentTask Include="Assets\modelData\U2.FBX" />
     <MeshContentTask Include="Assets\modelData\umi.FBX" />
-    <MeshContentTask Include="Assets\modelData\Unitychan.FBX" />
+    <MeshContentTask Include="Assets\modelData\Unitychan.fbx" />
     <MeshContentTask Include="Assets\modelData\Unitychan2.fbx" />
+    <MeshContentTask Include="Assets\modelData\Unitychan3.FBX" />
     <MeshContentTask Include="Assets\modelData\Warrok.fbx" />
     <MeshContentTask Include="Assets\modelData\Wave.FBX" />
+    <MeshContentTask Include="Assets\modelData\WireTest.FBX" />
     <MeshContentTask Include="Assets\modelData\Yasikia.FBX" />
     <MeshContentTask Include="Assets\modelData\Yasikib.FBX" />
     <MeshContentTask Include="Assets\modelData\Yasikic.FBX" />
     <MeshContentTask Include="Assets\modelData\Zombi.FBX" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Assets\modelData\UnityChan.max" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

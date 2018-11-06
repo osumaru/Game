@@ -1,5 +1,7 @@
 #include "stdafx.h"
 #include "StaticMapObject.h"
+#include "../../Player/Player.h"
+#include "../../Player/WireAction.h"
 
 StaticMapObject::StaticMapObject() :
 	m_rigidBody(),
@@ -17,8 +19,15 @@ void StaticMapObject::Init(const CVector3& position, const CQuaternion& rotation
 	MapChip::Init(position, rotation, modelName,collider);
 
 	SRigidBodyInfo rInfo;
-	
+
+	rInfo.mass = 0.0f;
+	rInfo.pos = m_position;
+	rInfo.rot = m_rotation;
+	CQuaternion multi = CQuaternion::Identity;
+	//multi.SetRotationDeg(CVector3::AxisX, -90.0f);
+	rInfo.rot.Multiply(multi);
 	//メッシュコライダーからAABBを作成
+	isCollider = collider;
 	if (!collider)
 	{
 		m_meshCollider.reset(new CMeshCollider);
@@ -27,11 +36,14 @@ void StaticMapObject::Init(const CVector3& position, const CQuaternion& rotation
 	}
 	else
 	{
+		CMatrix rotMat;
+		rotMat.MakeRotationFromQuaternion(multi);
 		CMeshCollider mesh;
 		mesh.CreateCollider(&m_skinModel);
-		CVector3 boxsize = (mesh.GetAabbMax() - mesh.GetAabbMin());
-		boxsize.x /= 2.0f;
-		boxsize.z /= 2.0f;
+		CVector3 boxsize = (mesh.GetAabbMax() - mesh.GetAabbMin()) / 2.0f;
+		CVector3 pos = (mesh.GetAabbMax() + mesh.GetAabbMin()) / 2.0f;
+		pos.Mul(rotMat);
+		rInfo.pos = pos + m_position;
 		m_boxCollider.reset(new CBoxCollider);
 		m_boxCollider->Create({ boxsize.x,boxsize.y,boxsize.z });
 		rInfo.collider = m_boxCollider.get();
@@ -39,26 +51,23 @@ void StaticMapObject::Init(const CVector3& position, const CQuaternion& rotation
 
 
 	
-	rInfo.mass = 0.0f;
-	rInfo.pos = m_position;
-	rInfo.rot = m_rotation;
 
 	//剛体を作成
 	m_rigidBody.reset(new CRigidBody);
 	m_rigidBody->Create(rInfo);
 	m_skinModel.Update(m_position, m_rotation, m_scale);
 	//m_skinModel.SetShaderTechnique(enShaderTechniqueDithering);
+	GetPlayer().GetWireAction().Add(m_skinModel);
 }
 
 
 void StaticMapObject::Update()
 {
 	MapChip::Update();
-	//m_skinModel.Update(m_position, m_rotation, m_scale);
 }
 
 void StaticMapObject::Draw()
 {
 	MapChip::Draw();
-	//GetPhysicsWorld().DebugDraw(m_rigidBody->GetBody()->getWorldTransform(), m_rigidBody->GetBody()->getCollisionShape());
+	m_rigidBody->Draw();
 }

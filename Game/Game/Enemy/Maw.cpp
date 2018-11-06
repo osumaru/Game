@@ -98,7 +98,6 @@ void CMaw::Init(CVector3 position)
 		});
 	}
 	//最初の行動を選択
-	//ActionStateOrder();
 	m_actionPattern = EnMawActionPattern::enActionPatternStand;
 }
 //更新
@@ -171,6 +170,20 @@ void CMaw::ActionStateOrder()
 	{
 		//ダウン状態へ
 		m_actionPattern = EnMawActionPattern::enActionPatternDown;
+		return;
+	}
+
+	float Length = 30.0f;//範囲距離
+	//遠距離攻撃アニメーション
+	//Anim(EnMawState::enState_Idle);
+
+	CVector3 toPlayerDir = GetPlayer().GetPosition() - m_position;
+	float length = toPlayerDir.Length();
+
+	//プレイヤーが遠くに離れたら
+	if (length > Length)
+	{
+		//遠距離攻撃ステートへ
 	}
 }
 //攻撃行動
@@ -277,8 +290,9 @@ void CMaw::Find()
 	else
 	{
 		CQuaternion addRot;
+		float RotSpeed = 0.005f;
 		//Y軸のクォータニオンを作成
-		addRot.SetRotation(CVector3::AxisY,0.005f);
+		addRot.SetRotation(CVector3::AxisY,RotSpeed);
 
 		CQuaternion rot = m_rotation;
 		//クォータニオンを乗算

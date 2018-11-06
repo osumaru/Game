@@ -22,5 +22,7 @@ public:
 
 private:
 	CVector3	m_movePosition;		//ˆÚ“®æ‚ÌÀ•W
-	const float m_speed = 20.0f;	//ˆÚ“®‘¬“x
+	const float m_speed = 40.0f;	//ˆÚ“®‘¬“x
+	float		m_accel = 0.0f;
+	float		m_moveSpeed = 0.0f;
 };
