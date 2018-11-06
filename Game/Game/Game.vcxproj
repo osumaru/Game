@@ -182,6 +182,7 @@
     <ClCompile Include="Enemy\Warrok.cpp" />
     <ClCompile Include="Enemy\Zombie.cpp" />
     <ClCompile Include="GameSound\GameSound.cpp" />
+    <ClCompile Include="NPC\Shop\ItemShop.cpp" />
     <ClCompile Include="Item\IItem.cpp" />
     <ClCompile Include="Item\Money.cpp" />
     <ClCompile Include="Item\RecoveryItem.cpp" />
@@ -230,6 +231,7 @@
     <ClCompile Include="UI\PlayerHp\PlayerHp.cpp" />
     <ClCompile Include="UI\Result\Result.cpp" />
     <ClCompile Include="UI\WeaponSelect\WeaponSelect.cpp" />
+    <ClCompile Include="NPC\Shop\WeaponShop.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera\ArrowGameCamera.h" />
@@ -257,6 +259,7 @@
     <ClInclude Include="Enemy\Warrok.h" />
     <ClInclude Include="Enemy\Zombie.h" />
     <ClInclude Include="GameSound\GameSound.h" />
+    <ClInclude Include="NPC\Shop\ItemShop.h" />
     <ClInclude Include="Item\IItem.h" />
     <ClInclude Include="Item\Money.h" />
     <ClInclude Include="Item\RecoveryItem.h" />
@@ -301,6 +304,7 @@
     <ClInclude Include="UI\PlayerHp\PlayerHp.h" />
     <ClInclude Include="UI\Result\Result.h" />
     <ClInclude Include="UI\WeaponSelect\WeaponSelect.h" />
+    <ClInclude Include="NPC\Shop\WeaponShop.h" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="Assets\shader\sprite.fx">
