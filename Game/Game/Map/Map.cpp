@@ -71,6 +71,7 @@ void Map::Init(int stageNum)
 		case enMapTagMaw:
 			GetMaw().Create();
 			GetMaw().Init(mInfo.m_position);
+			break;
 		case enMapTagZombie:
 			enemy = New<CZombie>(1);
 			enemy->Init(mInfo.m_position);
