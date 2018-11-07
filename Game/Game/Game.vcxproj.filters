@@ -82,6 +82,9 @@
     <Filter Include="ソース ファイル\NPC\Shop">
       <UniqueIdentifier>{14c91c9c-7902-4237-ba30-1c31f4a768b1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\UI\BossHp">
+      <UniqueIdentifier>{29508926-c18b-423f-afbf-7633ea7ef856}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -299,6 +302,9 @@
     </ClCompile>
     <ClCompile Include="NPC\Shop\WeaponShop.cpp">
       <Filter>ソース ファイル\NPC\Shop</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\BossHp\BossHp.cpp">
+      <Filter>ソース ファイル\UI\BossHp</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -523,6 +529,9 @@
     </ClInclude>
     <ClInclude Include="NPC\Shop\WeaponShop.h">
       <Filter>ソース ファイル\NPC\Shop</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\BossHp\BossHp.h">
+      <Filter>ソース ファイル\UI\BossHp</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

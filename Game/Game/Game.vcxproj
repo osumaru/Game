@@ -192,6 +192,7 @@
     <ClCompile Include="NPC\NpcManager.cpp" />
     <ClCompile Include="NPC\ShopNPC.cpp" />
     <ClCompile Include="Player\WireAction.cpp" />
+    <ClCompile Include="UI\BossHp\BossHp.cpp" />
     <ClCompile Include="UI\Fade\Fade.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Map\Map.cpp" />
@@ -270,6 +271,7 @@
     <ClInclude Include="NPC\NpcManager.h" />
     <ClInclude Include="NPC\ShopNPC.h" />
     <ClInclude Include="Player\WireAction.h" />
+    <ClInclude Include="UI\BossHp\BossHp.h" />
     <ClInclude Include="UI\Fade\Fade.h" />
     <ClInclude Include="Map\Map.h" />
     <ClInclude Include="Map\MapChip\MapChip.h" />

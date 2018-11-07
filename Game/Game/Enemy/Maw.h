@@ -10,6 +10,7 @@ struct SmawStatus {
 	int MaxHp;				//最大体力
 	int Gold;				//所持金額
 };
+
 class CMaw :
 	public IGameObject
 {
@@ -115,6 +116,12 @@ public:
 		CMatrix MawHand = m_skinModel.FindBoneWorldMatrix(L"RightHand");
 		CVector3 LeftHandPos = { MawHand.m[3][0],MawHand.m[3][1] ,MawHand.m[3][2] };
 		return LeftHandPos;
+	}
+
+	//ステータスの取得
+	const SmawStatus& GetSmawStatus() const
+	{
+		return m_status;
 	}
 
 	//ダメージ判定を設定

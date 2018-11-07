@@ -11,6 +11,7 @@
 #include "../../Game/Camera/GameCamera.h"
 #include "../GameSound/GameSound.h"
 #include "SceneManager.h"
+#include "../UI/BossHp/BossHp.h"
 
 CGameScene::CGameScene()
 {
@@ -27,6 +28,7 @@ void CGameScene::BeforeDead()
 	Delete(m_menu);
 	Delete(m_levelUp);
 	Delete(m_playerHp);
+	Delete(m_bossHp);
 	Delete(m_weaponSelect);
 	GetGameCamera().Destroy();
 	Delete(m_miniMap);
@@ -59,6 +61,10 @@ bool CGameScene::Start()
 
 			m_playerHp = New<CPlayerHp>(0);
 			m_playerHp->Init();
+
+			m_bossHp = New<CBossHp>(0);
+			m_bossHp->Init();
+			m_bossHp->SetIsActive(false);
 
 			m_levelUp = New<CLevelUp>(0);
 			m_levelUp->Init();
