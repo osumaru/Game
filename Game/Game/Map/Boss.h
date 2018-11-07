@@ -47,13 +47,6 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagBreakBrock, //タグ
 },
-//zombi
-{
-	L"zombi",
-	CVector3(26.18f, -8.24f, 24.15f),             //平行移動
-	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
-	enMapTagMaw, //タグ
-},
 //Brock
 {
 	L"Brock",
@@ -67,6 +60,13 @@
 	CVector3(64.28f, -0.04f, 62.55f),             //平行移動
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagBreakBrock, //タグ
+},
+//Maw
+{
+	L"Maw",
+	CVector3(26.18f, -8.24f, 24.15f),             //平行移動
+	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
+	enMapTagMaw, //タグ
 },
 //map2
 {

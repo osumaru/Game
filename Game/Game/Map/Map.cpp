@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Map.h"
 #include "MapChip/MapChip.h"
+#include "MapChip\BreakMapObject.h"
 #include "MapChip\StaticMapObject.h"
 #include "../Player/Player.h"
 #include "../Enemy/IEnemy.h"
@@ -8,6 +9,7 @@
 #include "../Enemy/Ninja.h"
 #include "../Enemy/Samurai.h"
 #include "../Enemy/Warrok.h"
+#include "../Enemy/Maw.h"
 #include "../Enemy/EnemyGroup.h"
 #include "../Enemy/PathFinding/PathFinding.h"
 #include "../NPC/ShopNPC.h"
@@ -15,7 +17,7 @@
 std::vector<std::vector<SMapChipInfo>> mapChipInfo = 
 {
 	{
-	#include "Test2.h"
+	#include "Boss.h"
 	}
 //	{
 //#include "Location2.h"
@@ -66,6 +68,9 @@ void Map::Init(int stageNum)
 			GetPlayer().Create();
 			GetPlayer().Init(mInfo.m_position);
 			break;
+		case enMapTagMaw:
+			GetMaw().Create();
+			GetMaw().Init(mInfo.m_position);
 		case enMapTagZombie:
 			enemy = New<CZombie>(1);
 			enemy->Init(mInfo.m_position);
@@ -90,6 +95,10 @@ void Map::Init(int stageNum)
 			enemyGroup = New<CEnemyGroup>(1);
 			enemyGroup->Init(mInfo.m_position);
 			m_enemyGroupList.push_back(enemyGroup);
+			break;
+		case enMapTagBreakBrock:
+			mapChip = New<CBreakMapObject>(0);
+			m_collider = true;
 			break;
 		case enMapTagTerrain:
 			mapChip = New<StaticMapObject>(0);
@@ -168,6 +177,7 @@ void Map::MapChipErase(std::list<MapChip*>::iterator iterator)
 
 void Map::BeforeDead()
 {
+	GetMaw().Destroy();
 	//マップチップの消去
 	for (MapChip* mapchip : m_mapChip)
 	{

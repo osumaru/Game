@@ -288,6 +288,9 @@
     <ClCompile Include="Player\WireAction.cpp">
       <Filter>ソース ファイル\Player</Filter>
     </ClCompile>
+    <ClCompile Include="Map\MapChip\BreakMapObject.cpp">
+      <Filter>ソース ファイル\Map\MapChip</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -503,6 +506,9 @@
     <ClInclude Include="Player\WireAction.h">
       <Filter>ソース ファイル\Player</Filter>
     </ClInclude>
+    <ClInclude Include="Map\MapChip\BreakMapObject.h">
+      <Filter>ソース ファイル\Map\MapChip</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="Assets\shader\sprite.fx">
@@ -628,6 +634,9 @@
       <Filter>ソース ファイル\Assets</Filter>
     </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\TestGround.FBX">
+      <Filter>ソース ファイル\Assets</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\Maw.fbx">
       <Filter>ソース ファイル\Assets</Filter>
     </MeshContentTask>
   </ItemGroup>

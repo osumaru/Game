@@ -1,5 +1,6 @@
 #pragma once
 class MapChip;
+class BreakMapObject;
 class IEnemy;
 class Player;
 class CEnemyGroup;
@@ -9,22 +10,24 @@ enum EnMapChipTag
 {
 	enMapTagUntagged,
 	enMapTagPlayer,
+	enMapTagMaw,
 	enMapTagZombie,
 	enMapTagSamurai,
 	enMapTagNinja,
 	enMapTagWarrok,
 	enMapTagEnemyGroup,
 	enMapTagMapChip,
+	enMapTagBreakBrock,
 	enMapTagTerrain,		//地形用のタグ
-	enMapTagShopNpc,			//店NPC用のタグ
+	enMapTagShopNpc,		//店NPC用のタグ
 	enMapTagNum,
 };
 
 struct SMapChipInfo
 {
-	wchar_t*			m_modelName;
+	wchar_t*		m_modelName;
 	CVector3		m_position;
-	CQuaternion	m_rotation;
+	CQuaternion		m_rotation;
 	EnMapChipTag	m_tag;
 };
 

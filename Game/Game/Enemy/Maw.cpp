@@ -65,7 +65,7 @@ void CMaw::Init(CVector3 position)
 
 	//プレイヤーのスキンンモデルのロード
 	m_skinModel.Load(L"Assets/modelData/Maw.cmo", &m_animation);
-	m_skinModel.LoadNormalmap(L"Assets/modelData/MAW_normal.png");
+	//m_skinModel.LoadNormalmap(L"Assets/modelData/MAW_normal.png");
 
 	m_position = position;
 	m_characterController.Init(radius,Height, m_position);

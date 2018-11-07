@@ -67,22 +67,22 @@ void CBreakMapObject::Update()
 		SetIsActiveDraw(true);
 	}
 	//UŒ‚‚µ‚Ä‚¢‚½‚ç
-	if (GetMaw().GetIsAttack())
-	{
+	//if (GetMaw().GetIsAttack())
+	//{
 		//¶è‚Ìƒ{[ƒ“‚ÌÀ•W‚ğæ“¾
 		CVector3 BossLeftHandPos = GetMaw().GetLeftHandBone();
 		CVector3 distance = BossLeftHandPos - m_position;
 		//distance.y+=5.0f;
 		float BreakLength = distance.Length();
 		//˜r‚É“–‚½‚Á‚Ä‚¢‚½‚ç‚©‚Â‰ó‚ê‚Ä‚¢‚È‚©‚Á‚½‚ç
-		if (BreakLength < breakMaxLength && !isBreak)
+		if (BreakLength < breakMaxLength && !m_isBreak)
 		{
-			isBreak = true;
+			m_isBreak = true;
 		}
-	}
+	//}
 
 	//‰º‚É—‚Æ‚µ‚Ä‚¢‚­ˆ—
-	if (isBreak) 
+	if (m_isBreak) 
 	{
 		m_position.y -= fallinSpeed;
 		//killZ‚æ‚è‰º‚¾‚Á‚½‚çÁ‹
