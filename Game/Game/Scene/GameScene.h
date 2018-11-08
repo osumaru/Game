@@ -7,8 +7,6 @@ class Map;
 class CWeaponSelect;
 class CMiniMap;
 class CPlayerHp;
-//class CBossHp;
-//class CWeekPoint;
 class CLevelUp;
 class CMenu;
 class CResult;
@@ -54,8 +52,6 @@ private:
 	CWeaponSelect*	m_weaponSelect = nullptr;	//武器選択
 	CMiniMap*		m_miniMap = nullptr;		//ミニマップ
 	CPlayerHp*		m_playerHp = nullptr;		//プレイヤーHP
-	//CBossHp*		m_bossHp = nullptr;			//ボスHP
-	//CWeekPoint*		m_weekPoint = nullptr;		//ボスの弱点スプライト
 	CLevelUp*		m_levelUp = nullptr;		//レベルアップ表示
 	CMenu*			m_menu = nullptr;			//メニュー
 	CResult*		m_result = nullptr;			//リザルト

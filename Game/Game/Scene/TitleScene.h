@@ -15,7 +15,6 @@ public:
 	//XV
 	void Update() override;
 
-	void Draw() override;
 	//’x‰„•`‰æ
 	void AfterDraw() override;
 

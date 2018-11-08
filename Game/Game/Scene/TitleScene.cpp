@@ -41,11 +41,7 @@ void CTitleScene::Update()
 	}
 }
 
-void CTitleScene::Draw()
-{
-	m_title.Draw();
-}
 void CTitleScene::AfterDraw()
 {
-	//m_title.Draw();
+	m_title.Draw();
 }

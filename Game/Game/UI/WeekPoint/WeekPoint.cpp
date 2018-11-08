@@ -13,7 +13,7 @@ void CWeekPoint::Init()
 	m_weekSprite.SetSize(WeekSize);
 	//m_weekSprite.SetAlpha(WeekAlpha);
 
-	//this->SetIsActive(false);
+	this->SetIsActive(false);
 }
 
 void CWeekPoint::Update()

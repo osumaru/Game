@@ -108,6 +108,8 @@ void CMaw::Init(CVector3 position)
 	}
 	//最初の行動を選択
 	m_actionPattern = EnMawActionPattern::enActionPatternStand;
+
+	m_weekPoint->SetIsActive(true);
 }
 //更新
 void CMaw::Update()
@@ -142,29 +144,6 @@ void CMaw::Update()
 	default:
 		break;
 	}
-	//const float EnemyDeg=60;
-	//const float EnemyLength=50;
-	//CVector3 CameraForward = GetGameCamera().GetCamera().GetFlont();
-	//CameraForward.Normalize();
-
-	////CVector3 mawPos = m_position;
-	////mawPos.y += 10.0f;
-	//CVector3 toEnemyDir =  m_position- GetGameCamera().GetCamera().GetPosition();
-	//float length = toEnemyDir.Length();
-	//toEnemyDir.y = 0.0f;
-	//toEnemyDir.Normalize();
-
-	//float angle = toEnemyDir.Dot(CameraForward);
-	//angle = acosf(angle);
-
-	/*if (fabsf(angle) < CMath::DegToRad(EnemyDeg) && length < EnemyLength&&!m_weekPoint->IsActive())
-	{
-		m_weekPoint->SetIsActive(true);
-	}
-	else if (fabsf(angle) >= CMath::DegToRad(EnemyDeg)&&length >= EnemyLength&&m_weekPoint->IsActive())
-	{
-		m_weekPoint->SetIsActive(false);
-	}*/
 	//ダメージ間隔が0以上だったら
 	if (m_damageInterval >= 0.0f&&!m_isDeath)
 	{
@@ -285,7 +264,7 @@ void CMaw::Down()
 		ActionStateOrder();
 		m_downTime = 0.0f;
 		m_isDown = false;
-		m_weekPoint->SetIsActive(false);
+		//m_weekPoint->SetIsActive(false);
 	}
 }
 //探す状態
@@ -424,7 +403,7 @@ void CMaw::SetIsDamage(bool isDamage)
 	if (m_downCount > MaxDownCount)
 	{
 		m_isDown = true;//ダウンさせる
-		m_weekPoint->SetIsActive(true);
+		//m_weekPoint->SetIsActive(true);
 		m_downCount = 0;
 	}
 	//ダメージ間隔を最大にする

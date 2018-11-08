@@ -61,8 +61,6 @@ private:
 	CFade*			m_fade;					//フェイド
 
 	bool			m_isFadeOut = false;		//フェードアウトしたかどうか
-	//bool			m_isGameStart = true;			//初回起動時かどうか
-	//IScene*			m_scene;			//シーンのインターフェース
 };
 
 //シーンマネージャーのインスタンスを取得
