@@ -58,6 +58,9 @@
     <Filter Include="ソース ファイル\Sound">
       <UniqueIdentifier>{bbc2202a-b2bf-4ae4-8505-d0bdc67b57a9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Graphics\Font">
+      <UniqueIdentifier>{85b73a04-1e2d-4ed2-8c3c-e218cd2a361c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="engineStdafx.cpp">
@@ -227,6 +230,9 @@
     </ClCompile>
     <ClCompile Include="Graphics\State\SamplerState.cpp">
       <Filter>ソース ファイル\Graphics\State</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\Font\Font.cpp">
+      <Filter>ソース ファイル\Graphics\Font</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -406,6 +412,9 @@
     </ClInclude>
     <ClInclude Include="Graphics\State\SamplerState.h">
       <Filter>ソース ファイル\Graphics\State</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Font\Font.h">
+      <Filter>ソース ファイル\Graphics\Font</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

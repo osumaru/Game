@@ -31,7 +31,7 @@
 #include "../../osumaruEngine/Sound/SoundSource.h"
 #include "../../osumaruEngine/Graphics/Particle/Particle.h"
 #include "../../osumaruEngine/Graphics/Particle/ParticleEmitter.h"
-//#include "../osumaruEngine/Font/Font.h"
+#include "../../osumaruEngine/Graphics/Font/Font.h"
 #include "../../osumaruEngine/Random/Random.h"
 #include "../../osumaruEngine/Physics/RayTest.h"
 #include "../../osumaruEngine/Sky.h"

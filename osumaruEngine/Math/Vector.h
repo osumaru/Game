@@ -10,6 +10,11 @@ public:
 		struct { float x, y; };
 		float v[2];
 	};
+	//XMVECTOR�ւ̈Öق̕ϊ��B
+	operator DirectX::XMVECTOR() const
+	{
+		return DirectX::XMLoadFloat2(&vec);
+	}
 
 	static const CVector2 Zero;
 	CVector2()

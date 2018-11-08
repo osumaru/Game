@@ -177,6 +177,7 @@
     <ClCompile Include="Graphics\AnimationClip.cpp" />
     <ClCompile Include="Graphics\AnimationEvent.cpp" />
     <ClCompile Include="Graphics\ConstantBuffer.cpp" />
+    <ClCompile Include="Graphics\Font\Font.cpp" />
     <ClCompile Include="Graphics\Light.cpp" />
     <ClCompile Include="Graphics\particle\Particle.cpp" />
     <ClCompile Include="Graphics\particle\ParticleEmitter.cpp" />
@@ -235,6 +236,7 @@
     <ClInclude Include="Graphics\AnimationClip.h" />
     <ClInclude Include="Graphics\AnimationEvent.h" />
     <ClInclude Include="Graphics\ConstantBuffer.h" />
+    <ClInclude Include="Graphics\Font\Font.h" />
     <ClInclude Include="Graphics\Light.h" />
     <ClInclude Include="Graphics\particle\Particle.h" />
     <ClInclude Include="Graphics\particle\ParticleEmitter.h" />
