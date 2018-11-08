@@ -51,7 +51,7 @@ void CBreakMapObject::Init(const CVector3& position, const CQuaternion& rotation
 	//m_rigidBody.get()->SetCollisionFlags(m_rigidBody.get()->GetBody()->CF_KINEMATIC_OBJECT);
 	m_rigidBody.get()->SetUserIndex(m_rigidBody.get()->GetBody()->CF_KINEMATIC_OBJECT);
 	//描画しないようにする
-	this->SetIsActiveDraw(false);
+	//this->SetIsActiveDraw(false);
 }
 
 
@@ -61,16 +61,16 @@ void CBreakMapObject::Update()
 	float fallinSpeed = 0.02f;	//落ちる速度
 	float breakMaxLength = 12.0f;//最大破壊距離
 
-	//ボスとの戦闘が始まったら
-	if (GetMaw().GetIsFind()&&!IsActiveDraw())
-	{
-		SetIsActiveDraw(true);
-	}
 	//攻撃していたら
 	//if (GetMaw().GetIsAttack())
 	//{
 		//左手のボーンの座標を取得
-		CVector3 BossLeftHandPos = GetMaw().GetLeftHandBone();
+		CMatrix BossLeftHandMat = GetMaw().GetBoneMatrix(L"RightHand");
+		CVector3 BossLeftHandPos;
+
+		BossLeftHandPos.x =BossLeftHandMat.m[3][0];
+		BossLeftHandPos.y =BossLeftHandMat.m[3][1];
+		BossLeftHandPos.z =BossLeftHandMat.m[3][2];
 		CVector3 distance = BossLeftHandPos - m_position;
 		//distance.y+=5.0f;
 		float BreakLength = distance.Length();

@@ -85,6 +85,9 @@
     <Filter Include="ソース ファイル\UI\BossHp">
       <UniqueIdentifier>{29508926-c18b-423f-afbf-7633ea7ef856}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\UI\WeekPoint">
+      <UniqueIdentifier>{c173ee8f-8c07-4e43-b2e8-9cd82916a1b4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -305,6 +308,9 @@
     </ClCompile>
     <ClCompile Include="UI\BossHp\BossHp.cpp">
       <Filter>ソース ファイル\UI\BossHp</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\WeekPoint\WeekPoint.cpp">
+      <Filter>ソース ファイル\UI\WeekPoint</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -532,6 +538,9 @@
     </ClInclude>
     <ClInclude Include="UI\BossHp\BossHp.h">
       <Filter>ソース ファイル\UI\BossHp</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\WeekPoint\WeekPoint.h">
+      <Filter>ソース ファイル\UI\WeekPoint</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

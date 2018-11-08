@@ -3,6 +3,8 @@
 */
 #pragma once
 
+class CBossHp;
+class CWeekPoint;
 struct SmawStatus {
 	int Strength;			//攻撃力
 	int Defense;			//防御力
@@ -106,18 +108,30 @@ public:
 	}
 
 	//発見判定を取得
-	bool GetIsFind()
-	{
-		return m_isFind;
-	}
+	//bool GetIsFind()
+	//{
+	//	return m_isFind;
+	//}
 	//手のワールド行列を取得
-	const CVector3& GetLeftHandBone() const
-	{
-		CMatrix MawHand = m_skinModel.FindBoneWorldMatrix(L"RightHand");
-		CVector3 LeftHandPos = { MawHand.m[3][0],MawHand.m[3][1] ,MawHand.m[3][2] };
-		return LeftHandPos;
-	}
+	//const CVector3& GetLeftHandBone() const
+	//{
+	//	CMatrix MawHand = m_skinModel.FindBoneWorldMatrix(L"RightHand");
+	//	CVector3 LeftHandPos = { MawHand.m[3][0],MawHand.m[3][1] ,MawHand.m[3][2] };
+	//	return LeftHandPos;
+	//}
 
+	////頭のワールド行列を取得
+	//const CVector3& GetHeadBone() const
+	//{
+	//	CMatrix MawHead = m_skinModel.FindBoneWorldMatrix(L"Neck");
+	//	CVector3 HeadPos = { MawHead.m[3][0],MawHead.m[3][1] ,MawHead.m[3][2] };
+	//	return HeadPos;
+	//}
+	//ボーンのワールド行列を取得
+	const CMatrix& GetBoneMatrix(const wchar_t* boneName) const
+	{
+		return m_skinModel.FindBoneWorldMatrix(boneName);
+	}
 	//ステータスの取得
 	const SmawStatus& GetSmawStatus() const
 	{
@@ -152,7 +166,7 @@ private:
 	static CMaw*			m_maw;										//ボス
 	CVector3				m_position;									//座標
 	CQuaternion				m_rotation = CQuaternion::Identity;			//回転
-	CVector3				m_scale = { 10.0f,10.0f, 10.0f };			//拡大
+	const CVector3			m_scale = { 10.0f,10.0f, 10.0f };			//拡大
 	CSkinModel				m_skinModel;								//スキンモデル
 	CCharacterController	m_characterController;						//キャラクターコントローラー
 	CAnimation				m_animation;								//アニメーション
@@ -168,7 +182,10 @@ private:
 	bool					m_isDamage = false;							//ダメージ判定
 	bool					m_isDown = false;							//ダウン判定
 	bool					m_isDeath = false;							//死亡判定
-	bool					m_isFind = false;							//発見判定
+	//bool					m_isFind = false;							//発見判定
+
+	CBossHp*		m_bossHp = nullptr;			//ボスHP
+	CWeekPoint*		m_weekPoint = nullptr;		//ボスの弱点スプライト
 };
 
 //ボスの取得

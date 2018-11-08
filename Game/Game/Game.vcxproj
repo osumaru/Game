@@ -234,6 +234,7 @@
     <ClCompile Include="UI\Result\Result.cpp" />
     <ClCompile Include="UI\WeaponSelect\WeaponSelect.cpp" />
     <ClCompile Include="NPC\Shop\WeaponShop.cpp" />
+    <ClCompile Include="UI\WeekPoint\WeekPoint.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera\ArrowGameCamera.h" />
@@ -309,6 +310,7 @@
     <ClInclude Include="UI\Result\Result.h" />
     <ClInclude Include="UI\WeaponSelect\WeaponSelect.h" />
     <ClInclude Include="NPC\Shop\WeaponShop.h" />
+    <ClInclude Include="UI\WeekPoint\WeekPoint.h" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="Assets\shader\sprite.fx">

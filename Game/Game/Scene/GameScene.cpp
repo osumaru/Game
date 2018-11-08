@@ -1,6 +1,8 @@
 #include "stdafx.h"
-#include "../Scene/GameScene.h"
+#include "SceneManager.h"
+#include "GameScene.h"
 #include "Map/Map.h"
+#include "../../Game/Camera/GameCamera.h"
 #include "../Player/Player.h"
 #include "../UI/MiniMap/MiniMap.h"
 #include "../UI/WeaponSelect/WeaponSelect.h"
@@ -8,10 +10,9 @@
 #include "../UI/Menu/Menu.h"
 #include "../UI/Result/Result.h"
 #include "../UI/LevelUp/LevelUp.h"
-#include "../../Game/Camera/GameCamera.h"
+//#include "../UI/BossHp/BossHp.h"
+//#include "../UI/WeekPoint/WeekPoint.h"
 #include "../GameSound/GameSound.h"
-#include "SceneManager.h"
-#include "../UI/BossHp/BossHp.h"
 
 CGameScene::CGameScene()
 {
@@ -28,7 +29,8 @@ void CGameScene::BeforeDead()
 	Delete(m_menu);
 	Delete(m_levelUp);
 	Delete(m_playerHp);
-	Delete(m_bossHp);
+	//Delete(m_bossHp);
+	//Delete(m_weekPoint);
 	Delete(m_weaponSelect);
 	GetGameCamera().Destroy();
 	Delete(m_miniMap);
@@ -62,9 +64,11 @@ bool CGameScene::Start()
 			m_playerHp = New<CPlayerHp>(0);
 			m_playerHp->Init();
 
-			m_bossHp = New<CBossHp>(0);
+			/*m_bossHp = New<CBossHp>(0);
 			m_bossHp->Init();
-			m_bossHp->SetIsActive(false);
+
+			m_weekPoint = New<CWeekPoint>(0);
+			m_weekPoint->Init();*/
 
 			m_levelUp = New<CLevelUp>(0);
 			m_levelUp->Init();

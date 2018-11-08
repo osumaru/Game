@@ -2,6 +2,8 @@
 #include "Maw.h"
 #include "../Camera/GameCamera.h"
 #include "../Player/Player.h"
+#include "../UI/BossHp/BossHp.h"
+#include "../UI/WeekPoint/WeekPoint.h"
 
 CMaw *CMaw::m_maw = NULL;
 
@@ -15,6 +17,8 @@ CMaw::CMaw()
 
 CMaw::~CMaw()
 {
+	Delete(m_bossHp);
+	Delete(m_weekPoint);
 }
 
 //アニメーションイベントが呼ばれるごとに呼び出される
@@ -24,28 +28,33 @@ void CMaw::OnInvokeAnimationEvent(
 )
 {
 	//もう一度呼ばれる間攻撃判定をオンにしておく
-	//if (wcscmp(animClipName, L"Assets/modelData/MawAttack.tka") == 0&&!m_isAttack) 
-	//{
-	//	m_isAttack = true;
-	//}
-	//else if((wcscmp(animClipName, L"Assets/modelData/MawAttack.tka") == 0 &&m_isAttack))
-	//{
-	//	m_isAttack = false;
-	//}
+	if (wcscmp(animClipName, L"Assets/modelData/MawAttack.tka") == 0&&!m_isAttack) 
+	{
+		m_isAttack = true;
+	}
+	else if((wcscmp(animClipName, L"Assets/modelData/MawAttack.tka") == 0 &&m_isAttack))
+	{
+		m_isAttack = false;
+	}
 
-	////もう一度呼ばれる間攻撃判定をオンにしておく
-	//if (wcscmp(animClipName, L"Assets/modelData/MawSpecialAttack.tka") == 0 && !m_isAttack)
-	//{
-	//	m_isAttack = true;
-	//}
-	//else if ((wcscmp(animClipName, L"Assets/modelData/MawSpecialAttack.tka") == 0 && m_isAttack))
-	//{
-	//	m_isAttack = false;
-	//}
+	//もう一度呼ばれる間攻撃判定をオンにしておく
+	if (wcscmp(animClipName, L"Assets/modelData/MawSpecialAttack.tka") == 0 && !m_isAttack)
+	{
+		m_isAttack = true;
+	}
+	else if ((wcscmp(animClipName, L"Assets/modelData/MawSpecialAttack.tka") == 0 && m_isAttack))
+	{
+		m_isAttack = false;
+	}
 }
 //初期化
 void CMaw::Init(CVector3 position)
 {
+	m_bossHp = New<CBossHp>(0);
+	m_bossHp->Init();
+
+	m_weekPoint = New<CWeekPoint>(0);
+	m_weekPoint->Init();
 	//ステータスを設定
 	m_status.Strength = 10;
 	m_status.Defense = 0;
@@ -133,7 +142,29 @@ void CMaw::Update()
 	default:
 		break;
 	}
-	
+	//const float EnemyDeg=60;
+	//const float EnemyLength=50;
+	//CVector3 CameraForward = GetGameCamera().GetCamera().GetFlont();
+	//CameraForward.Normalize();
+
+	////CVector3 mawPos = m_position;
+	////mawPos.y += 10.0f;
+	//CVector3 toEnemyDir =  m_position- GetGameCamera().GetCamera().GetPosition();
+	//float length = toEnemyDir.Length();
+	//toEnemyDir.y = 0.0f;
+	//toEnemyDir.Normalize();
+
+	//float angle = toEnemyDir.Dot(CameraForward);
+	//angle = acosf(angle);
+
+	/*if (fabsf(angle) < CMath::DegToRad(EnemyDeg) && length < EnemyLength&&!m_weekPoint->IsActive())
+	{
+		m_weekPoint->SetIsActive(true);
+	}
+	else if (fabsf(angle) >= CMath::DegToRad(EnemyDeg)&&length >= EnemyLength&&m_weekPoint->IsActive())
+	{
+		m_weekPoint->SetIsActive(false);
+	}*/
 	//ダメージ間隔が0以上だったら
 	if (m_damageInterval >= 0.0f&&!m_isDeath)
 	{
@@ -173,7 +204,7 @@ void CMaw::ActionStateOrder()
 		return;
 	}
 
-	float Length = 30.0f;//範囲距離
+	const float Length = 30.0f;//範囲距離
 	//遠距離攻撃アニメーション
 	//Anim(EnMawState::enState_Idle);
 
@@ -189,7 +220,7 @@ void CMaw::ActionStateOrder()
 //攻撃行動
 void CMaw::Attack()
 {
-	float PlayerDamageLengthMax = 10.5f;//ダメージを受ける最大距離
+	const float PlayerDamageLengthMax = 10.5f;//ダメージを受ける最大距離
 
 	//アニメーション再生
 	bool IsAnim=Anim(EnMawState::enState_Attack);
@@ -206,7 +237,7 @@ void CMaw::Attack()
 //特殊攻撃
 void CMaw::SpecialAttack()
 {
-	float PlayerDamageLengthMax = 10.5f;//ダメージを受ける最大距離
+	const float PlayerDamageLengthMax = 10.5f;//ダメージを受ける最大距離
 
 	//アニメーション再生
 	bool IsAnim = Anim(EnMawState::enState_SpecialAttack);
@@ -223,7 +254,7 @@ void CMaw::SpecialAttack()
 //ダウン状態
 void CMaw::Down()
 {
-	float MaxDownTime = 50.0f;		//最大ダウン時間
+	const float MaxDownTime = 50.0f;		//最大ダウン時間
 
 	//アニメーション再生
 	Anim(EnMawState::enState_Down);
@@ -254,13 +285,14 @@ void CMaw::Down()
 		ActionStateOrder();
 		m_downTime = 0.0f;
 		m_isDown = false;
+		m_weekPoint->SetIsActive(false);
 	}
 }
 //探す状態
 void CMaw::Find()
 {
-	float FindDeg = 50.0f;			//発見範囲
-	float FindLength = 30.0f;		//発見距離
+	const float FindDeg = 50.0f;			//発見範囲
+	const float FindLength = 30.0f;		//発見距離
 
 	//アニメーション再生
 	Anim(EnMawState::enState_Idle);
@@ -285,12 +317,12 @@ void CMaw::Find()
 	if (fabsf(angle) < CMath::DegToRad(FindDeg) && length <FindLength) {
 		//次の行動の選択
 		ActionStateOrder();
-		m_isFind = true;
+		//m_isFind = true;
 	}
 	else
 	{
 		CQuaternion addRot;
-		float RotSpeed = 0.005f;
+		const float RotSpeed = 0.005f;
 		//Y軸のクォータニオンを作成
 		addRot.SetRotation(CVector3::AxisY,RotSpeed);
 
@@ -304,7 +336,7 @@ void CMaw::Find()
 //待機状態
 void CMaw::Stand()
 {
-	float FindLength = 80.0f;//範囲距離
+	const float FindLength = 80.0f;//範囲距離
 	//アニメーション
 	Anim(EnMawState::enState_Idle);
 
@@ -331,7 +363,7 @@ void CMaw::Death()
 //アニメーション
 bool CMaw::Anim(EnMawState animState)
 {
-	float InterpolationTime = 0.3f;//補間時間
+	const float InterpolationTime = 0.3f;//補間時間
 	//現在のアニメーションじゃなかったら
 	if (m_animation.GetCurrentAnimationNum() != animState)
 	{
@@ -354,11 +386,15 @@ void CMaw::HandAttack(float DamageLength)
 
 	float PlayerDamageLengthMax=DamageLength;
 	//手のボーンのワールド行列を取得
-	CVector3 leftHandPosition = GetLeftHandBone();
+	CMatrix BossLeftHandMat = m_skinModel.FindBoneWorldMatrix(L"RightHand");
+	CVector3 BossLeftHandPos;
+	BossLeftHandPos.x = BossLeftHandMat.m[3][0];
+	BossLeftHandPos.y = BossLeftHandMat.m[3][1];
+	BossLeftHandPos.z = BossLeftHandMat.m[3][2];
 	//プレイヤー座標を取得
 	CVector3 playerPosition = GetPlayer().GetPosition();
 	//敵の攻撃との距離を計算
-	CVector3 distance = leftHandPosition - playerPosition;
+	CVector3 distance = BossLeftHandPos - playerPosition;
 	float PlayerDamageLength = distance.Length();
 	if (PlayerDamageLength < PlayerDamageLengthMax) {
 		//プレイヤーがダメージを受けた
@@ -371,8 +407,8 @@ void CMaw::SetIsDamage(bool isDamage)
 {
 	//ダメージ間隔が0より大きかったら
 	if (m_damageInterval > 0.0f) { return; }
-	float		MaxInterval = 5.0f;	//最大ダメージ間隔
-	const int	MaxDownCount = 3;	//最大ダウンカウント
+	const float		MaxInterval = 5.0f;	//最大ダメージ間隔
+	const int		MaxDownCount = 3;	//最大ダウンカウント
 
 	m_isDamage = isDamage;
 
@@ -387,6 +423,7 @@ void CMaw::SetIsDamage(bool isDamage)
 	if (m_downCount > MaxDownCount)
 	{
 		m_isDown = true;//ダウンさせる
+		m_weekPoint->SetIsActive(true);
 		m_downCount = 0;
 	}
 	//ダメージ間隔を最大にする
