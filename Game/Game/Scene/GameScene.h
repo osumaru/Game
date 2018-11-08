@@ -12,6 +12,7 @@ class CMenu;
 class CResult;
 class CGameSound;
 
+
 class CGameScene : public IGameObject
 {
 public:

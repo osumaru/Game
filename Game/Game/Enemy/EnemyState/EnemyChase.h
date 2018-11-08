@@ -21,10 +21,10 @@ public:
 	~CEnemyChase() {}
 
 	//更新する前に一度だけ呼ばれる
-	bool Start();
+	bool Start() override;
 
 	//更新
-	void Update();
+	void Update() override;
 
 private:
 	const float m_speed = 3.0f;	//移動速度

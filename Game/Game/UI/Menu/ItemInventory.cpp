@@ -35,7 +35,7 @@ void CItemInventory::Init(CMenu* menu)
 			IItem::EnInventoryItemType itemType = item->GetItemType();
 			if (itemType == IItem::Recovery) {		//回復アイテムだった場合
 				//回復アイテムの初期化
-				CTexture* itemTexure = TextureResource().LoadTexture(L"Assets/sprite/Recovery.png");
+				CTexture* itemTexure = TextureResource().LoadTexture(L"Assets/sprite/ShopUI/Potion/RedPotion.png");
 				m_item[idx].Init(itemTexure);
 			}
 			//座標とサイズを決める

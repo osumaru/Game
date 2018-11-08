@@ -7,6 +7,7 @@
 #include "../Item/IItem.h"
 #include "../UI/Menu/ItemInventory.h"
 #include "../UI/Menu/EquipInventory.h"
+#include "../Enemy/Maw.h"
 
 CPlayer *CPlayer::m_player = NULL;
 
@@ -357,6 +358,21 @@ void CPlayer::PlayerAttack()
 			}
 
 		}
+	}
+
+	
+	if (!GetMaw().GetIsDamage()) {
+
+		CVector3 EnemyVec = GetMaw().GetPosition();
+		//EnemyVec.y += 10.3f;
+		EnemyVec -= m_weapon.GetPosition();
+		float len = EnemyVec.Length();
+
+		if (fabs(len) < 12.0f)
+		{
+			GetMaw().SetIsDamage(true);
+		}
+
 	}
 	
 

@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/TestWire.unity
+- path: Assets/BossTest.unity
   isLoaded: 1
   isActive: 1
