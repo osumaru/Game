@@ -38,6 +38,8 @@ int MakeHash(const char* str);
 #include "DirectXTK/Inc/Effects.h"
 #include "DirectXTK/Inc/WICTextureLoader.h"
 #include "DirectXTK/Inc/DDSTextureLoader.h"
+#include "DirectXTK/Inc/SpriteFont.h"
+#include "DirectXTK/Inc/SpriteBatch.h"
 
 #include "../osumaruEngine/bulletPhysics/src/btBulletDynamicsCommon.h"
 
