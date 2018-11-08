@@ -79,6 +79,9 @@
     <Filter Include="ソース ファイル\GameSound">
       <UniqueIdentifier>{3802cec0-1cc4-4811-9f46-0f4a30099628}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\NPC\Shop">
+      <UniqueIdentifier>{14c91c9c-7902-4237-ba30-1c31f4a768b1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -287,6 +290,12 @@
     </ClCompile>
     <ClCompile Include="Player\WireAction.cpp">
       <Filter>ソース ファイル\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="NPC\Shop\ItemShop.cpp">
+      <Filter>ソース ファイル\NPC\Shop</Filter>
+    </ClCompile>
+    <ClCompile Include="NPC\Shop\WeaponShop.cpp">
+      <Filter>ソース ファイル\NPC\Shop</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -502,6 +511,12 @@
     </ClInclude>
     <ClInclude Include="Player\WireAction.h">
       <Filter>ソース ファイル\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="NPC\Shop\ItemShop.h">
+      <Filter>ソース ファイル\NPC\Shop</Filter>
+    </ClInclude>
+    <ClInclude Include="NPC\Shop\WeaponShop.h">
+      <Filter>ソース ファイル\NPC\Shop</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
