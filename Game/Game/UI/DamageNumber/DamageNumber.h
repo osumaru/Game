@@ -39,5 +39,5 @@ private:
 	CVector2 m_numSize;							//サイズ
 	float    m_timer = 0.0f;					//タイマー
 	float    m_alphaTime = 0.0f;				//アルファ値を計算するための時間
-	const float m_drawTime = 2.0f;				//描画している時間
+	const float m_drawTime = 1.0f;				//描画している時間
 };
