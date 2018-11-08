@@ -13,7 +13,7 @@ bool CEnemyAttack::Start()
 
 void CEnemyAttack::Update()
 {
-	float length = 0.0f;
+	//float length = 0.0f;
 	//プレイヤーがダメージを受けていない
 	if (!GetPlayer().GetIsDamage()) {
 		//手のボーンのワールド行列を取得
@@ -27,7 +27,7 @@ void CEnemyAttack::Update()
 		CVector3 playerPosition = GetPlayer().GetPosition();
 		CVector3 distance = playerPosition - m_enemy->GetPosition();
 		distance.y = 0.0f;
-		length = distance.Length();
+		//length = distance.Length();
 		{
 			//敵の攻撃との距離を計算
 			playerPosition.y += 2.5f;
@@ -40,18 +40,13 @@ void CEnemyAttack::Update()
 		}
 	}
 
-	CMatrix enemyWorldMatrix = m_enemy->GetWorldMatrix();
-	CVector3 enemyForward;
-	enemyForward.x = enemyWorldMatrix.m[2][0];
-	enemyForward.y = 0.0f;
-	enemyForward.z = enemyWorldMatrix.m[2][2];
-	enemyForward.Normalize();
+	//プレイヤーとの距離を計算
 	CVector3 playerPos = GetPlayer().GetPosition();
-	CVector3 toPlayerPos = playerPos - m_enemy->GetPosition();
-	toPlayerPos.y = 0.0f;
-	toPlayerPos.Normalize();
-	float angle = enemyForward.Dot(toPlayerPos);
-	angle = acosf(angle);
+	CVector3 distance = playerPos - m_enemy->GetPosition();
+	distance.y = 0.0f;
+	float length = distance.Length();
+	//扇状の範囲に入っているか
+	bool isRange = m_enemy->CalucFanShape(20.0f, playerPos);
 
 	if (m_enemy->IsDamage()) {
 		//ダメージを受けた
@@ -63,7 +58,7 @@ void CEnemyAttack::Update()
 			//プレイヤーが視野内にいない
 			m_esm->ChangeState(CEnemyState::enState_Walk);
 		}
-		else if (fabsf(angle) < CMath::DegToRad(20.0f) && length < 2.0f) {
+		else if (isRange && length < 1.2f) {
 			m_enemy->PlayAnimation(CEnemyState::enState_Attack);
 		}
 		else {

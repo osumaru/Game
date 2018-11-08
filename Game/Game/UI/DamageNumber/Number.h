@@ -4,7 +4,7 @@
 
 #pragma once
 
-class CNumber : public IGameObject
+class CNumber
 {
 public:
 	//初期化
@@ -12,11 +12,8 @@ public:
 	//numSize サイズ
 	void Init(CVector2 numPos, CVector2 numSize);
 
-	//更新
-	void Update();
-
 	//描画
-	void AfterDraw();
+	void Draw();
 
 	//表示する数値を設定
 	//int  num  数値
@@ -39,6 +36,25 @@ public:
 		m_number[m_num].SetDepthValue(depth);
 	}
 
+	//アルファ値を設定
+	//alpha		アルファ値
+	void SetAlpha(float alpha)
+	{
+		m_number[m_num].SetAlpha(alpha);
+	}
+
+	//描画するかどうかを設定
+	void SetIsDraw(bool isDraw)
+	{
+		m_number[m_num].SetIsDraw(isDraw);
+	}
+
+	//描画するかの判定を取得
+	bool GetIsDraw()
+	{
+		return m_number[m_num].IsDraw();
+	}
+
 	enum EnNumber {
 		enNumber_Zero,	//0
 		enNumber_One,	//1
@@ -57,5 +73,4 @@ private:
 	CSprite		m_number[EnNumber::enNumber_Num];			//スプライト
 	CTexture	m_numberTexture[EnNumber::enNumber_Num];	//テクスチャ
 	int			m_num = 0;									//数値を保存する変数
-	float		m_timer = 0.0f;								//タイマー
 };

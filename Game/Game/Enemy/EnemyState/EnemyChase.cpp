@@ -13,37 +13,23 @@ bool CEnemyChase::Start()
 
 void CEnemyChase::Update()
 {
-	if (m_enemy->IsWireHit()) {
-		//ワイヤーが当たっていたら何もしない
-		return;
-	}
-
-	//プレイヤーを追いかける
+	//プレイヤーとの距離を計算
 	CVector3 playerPos = GetPlayer().GetPosition();
 	CVector3 toPlayerDir = playerPos - m_enemy->GetPosition();
 	float length = toPlayerDir.Length();
 
-	CMatrix enemyWorldMatrix = m_enemy->GetWorldMatrix();
-	CVector3 enemyForward;
-	enemyForward.x = enemyWorldMatrix.m[2][0];
-	enemyForward.y = 0.0f;
-	enemyForward.z = enemyWorldMatrix.m[2][2];
-	enemyForward.Normalize();
-	CVector3 toPlayerPos = playerPos - m_enemy->GetPosition();
-	toPlayerPos.y = 0.0f;
-	toPlayerPos.Normalize();
-	float angle = enemyForward.Dot(toPlayerPos);
-	angle = acosf(angle);
+	//扇状の範囲に入っているか
+	bool isRange = m_enemy->CalucFanShape(20.0f, playerPos);
 
 	if (m_enemy->IsDamage()){
 		//ダメージを受けた
 		m_esm->ChangeState(CEnemyState::enState_Damage);
 	}
-	if (fabsf(angle) < CMath::DegToRad(30.0f) && length < 2.0f) {
-		//プレイヤーと距離が近い
+	if (isRange && length < 1.2f) {
+		//プレイヤーと距離が近い且つ攻撃範囲にいる
 		m_esm->ChangeState(CEnemyState::enState_Attack);
 	}
-	if (length > 15.0f) {
+	if (!m_enemy->IsFind()) {
 		//プレイヤーが離れたら戻っていく
 		m_esm->ChangeState(CEnemyState::enState_Walk);
 	}

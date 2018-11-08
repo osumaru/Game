@@ -17,7 +17,7 @@ public:
 	}
 
 	//更新
-	void Update();
+	void Update() override;
 
 private:
 	IEnemy* m_enemy = nullptr;	//エネミー

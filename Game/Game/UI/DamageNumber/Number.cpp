@@ -13,11 +13,7 @@ void CNumber::Init(CVector2 numPos, CVector2 numSize)
 	}
 }
 
-void CNumber::Update()
-{
-}
-
-void CNumber::AfterDraw()
+void CNumber::Draw()
 {
 	m_number[m_num].Draw();
 }

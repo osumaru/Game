@@ -6,6 +6,8 @@
 
 #include "IEnemyState.h"
 
+class CDamageNumber;
+
 class CEnemyDamage : public IEnemyState
 {
 public:
@@ -18,14 +20,14 @@ public:
 	}
 
 	//デストラクタ
-	~CEnemyDamage() {}
+	~CEnemyDamage();
 
 	//更新する前に一度だけ呼ばれる
-	bool Start();
+	bool Start() override;
 
 	//更新
-	void Update();
-
+	void Update() override;
 private:
-
+	CVector3		m_damagePos;				//ダメージ表示させる座標
+	CDamageNumber*	m_damageNumber = nullptr;	//ダメージ表示
 };
