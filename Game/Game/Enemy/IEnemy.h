@@ -8,7 +8,6 @@
 #include "EnemyMove.h"
 #include "EnemyTurn.h"
 #include "EnemySearch.h"
-#include "../UI/DamageNumber/DamageNumber.h"
 
 class CEnemyGroup;
 
@@ -38,10 +37,15 @@ public:
 	virtual void Update() = 0;
 
 	//描画
-	virtual void Draw() = 0;
+	virtual void Draw() {};
 
 	//死ぬ前に呼ばれる関数、解放処理などに使う
 	void BeforeDead()override;
+
+	//敵の向いている方向から扇上の範囲に入っているか判定する
+	//degree	角度(デグリー)
+	//position	扇上の範囲にいるか調べたい座標
+	bool CalucFanShape(float degree, const CVector3& position);
 
 	//敵の座標を取得
 	const CVector3& GetPosition() const
@@ -118,25 +122,6 @@ public:
 		return m_enemyMove.GetIsMove();
 	}
 
-	//ダメージ計算を行う
-	//damage	ダメージの値
-	void DamageCaluc(int damage)
-	{
-		m_damageNumber.DamageCalculation(damage);
-	}
-
-	//ダメージ表示をやめる
-	void DamageIndicateReset()
-	{
-		m_damageNumber.IndicateReset();
-	}
-
-	//ダメージ表示の座標を設定
-	void SetDamageCalucPos(const CVector2& position)
-	{
-		m_damageNumber.SetPosition(position);
-	}
-
 	//ステータスを取得
 	const SEnemyStatus& GetStatus() const
 	{
@@ -207,12 +192,9 @@ protected:
 	CEnemyTurn				m_enemyTurn;			//向きを回転
 	CEnemySearch			m_enemySearch;			//プレイヤーを探索
 	CEnemyGroup*			m_enemyGroup;			//エネミーグループ
-	CDamageNumber			m_damageNumber;			//ダメージ数値
 	CVector3				m_position;				//座標
 	CQuaternion				m_rotation;				//回転
 	SEnemyStatus			m_status;				//ステータス
-	int						m_animNum = 0;			//再生するアニメーション番号
-	int						m_animNumOld = 0;		//1つ前のアニメーション番号
 	bool					m_isAttackHit = false;	//攻撃が当たったか
 	bool					m_isFind = false;		//プレイヤーを発見したか
 	bool					m_isDamage = false;		//ダメージを受けたか

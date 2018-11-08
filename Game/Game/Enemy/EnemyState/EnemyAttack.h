@@ -20,11 +20,8 @@ public:
 	~CEnemyAttack() {}
 
 	//更新する前に一度だけ呼ばれる
-	bool Start();
+	bool Start() override;
 
 	//更新
-	void Update();
-
-private:
-
+	void Update() override;
 };

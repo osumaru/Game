@@ -6,23 +6,14 @@
 
 void CEnemySearch::Update()
 {
-	//ワールド行列からモデルの前方向を取得
-	CMatrix worldMatrix = m_enemy->GetWorldMatrix();
-	CVector3 forwardXZ;
-	forwardXZ.x = worldMatrix.m[2][0];
-	forwardXZ.y = 0.0f;
-	forwardXZ.z = worldMatrix.m[2][2];
-	forwardXZ.Normalize();
+	//プレイヤーとの距離を計算
+	CVector3 playerPos = GetPlayer().GetPosition();
+	CVector3 distance = playerPos - m_enemy->GetPosition();
+	float length = distance.Length();
+	//視野内にプレイヤーがいるか判定
+	bool isFindPlayer = m_enemy->CalucFanShape(45.0f, playerPos);
 
-	CVector3 toPlayerDir = GetPlayer().GetPosition() - m_enemy->GetPosition();
-	float length = toPlayerDir.Length();
-	toPlayerDir.y = 0.0f;
-	toPlayerDir.Normalize();
-
-	float angle = toPlayerDir.Dot(forwardXZ);
-	angle = acosf(angle);
-
-	if (fabsf(angle) < CMath::DegToRad(50.0f) && length < 15.0f || m_enemy->IsDamage() || m_enemy->IsWireHit()) {
+	if (isFindPlayer && length < 15.0f || m_enemy->IsDamage() || m_enemy->IsWireHit()) {
 		//プレイヤーを発見した又はダメージを受けた
 		std::list<IEnemy*> groupList = m_enemy->GetEnemyGroup()->GetGroupList();
 		for (auto& enemy : groupList) 

@@ -34,7 +34,7 @@ public:
 	virtual ~CEnemyStateMachine() {}
 
 	//更新する前に一度だけ呼ばれる
-	bool Start();
+	bool Start() override;
 
 	//更新
 	void Update() 
