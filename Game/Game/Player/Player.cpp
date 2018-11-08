@@ -65,9 +65,10 @@ void CPlayer::Init(CVector3 position)
 											{ L"Assets/modelData/PlayerRunJump.tka" },			//走りジャンプアニメーション
 											{ L"Assets/modelData/PlayerJump2.tka" },				//ジャンプアニメーション
 											{ L"Assets/modelData/PlayerCombo4.tka" },			//攻撃アニメーション
-											{ L"Assets/modelData/PlayerThrustAttack.tka" },		//連撃アニメーション
+											{ L"Assets/modelData/PlayerCombo5.tka" },		//連撃アニメーション
+											{ L"Assets/modelData/PlayerCombo6.tka" },		//連撃アニメーション
 											{ L"Assets/modelData/PlayerDamage.tka" },			//ダメージアニメーション
-											{ L"Assets/modelData/PlayerKaihi.tka" }	,		//回避アクション
+											{ L"Assets/modelData/PlayerRoll.tka" }	,		//回避アクション
 											{ L"Assets/modelData/PlayerDeath.tka" },			//死亡アニメーション
 											{ L"Assets/modelData/PlayerWireMove.tka" },				//ワイヤー移動アニメーション
 											{ L"Assets/modelData/PlayerArrowAttack.tka" },		//弓の攻撃アニメーション
@@ -251,8 +252,9 @@ void CPlayer::StatusCalculation()
 
 void CPlayer::Rotation()
 {
+	
 	CVector3 moveSpeed = m_characterController.GetMoveSpeed();
-	CVector3 playerFront = CVector3::AxisZ;
+	CVector3 playerFront = CVector3::Front;
 	if (moveSpeed.x == 0.0f && moveSpeed.z == 0.0f)
 	{
 		moveSpeed.x = m_skinmodel.GetWorldMatrix().m[2][0];
@@ -287,6 +289,51 @@ void CPlayer::Rotation()
 		rotY.SetRotation(CVector3::AxisX, atanf(-cameraFlont.y));
 		rotXZ.Multiply(rotY);
 		m_rotation = rotXZ;
+	}
+	else if (m_wireAction.IsWireMove())
+	{
+		CVector3 moveSpeed = m_characterController.GetMoveSpeed();
+		CVector3 moveSpeedXZ = moveSpeed;
+		moveSpeedXZ.y = 0.0f;
+		moveSpeed.Normalize();
+		moveSpeedXZ.Normalize();
+		rad = moveSpeedXZ.Dot(CVector3::Front);
+		if (1.0f <= rad)
+		{
+			rad = 1.0f;
+		}
+		if (rad <= -1.0f)
+		{
+			rad = -1.0f;
+		}
+		rad = acosf(rad);
+		CVector3 judgeAxis;
+		judgeAxis.Cross(moveSpeedXZ, CVector3::Front);
+		if (0.0f < judgeAxis.y)
+		{
+			rad = -rad;
+		}
+		CQuaternion multiY;
+		multiY.SetRotation(CVector3::AxisY, rad);
+		rad = moveSpeed.Dot(moveSpeedXZ);
+		if (1.0f <= rad)
+		{
+			rad = 1.0f;
+		}
+		if (rad <= -1.0f)
+		{
+			rad = -1.0f;
+		}
+		rad = acosf(rad);
+		if (moveSpeed.y > 0.0f)
+		{
+			rad = -rad;
+		}
+		CQuaternion multiX;
+		multiX.SetRotation(CVector3::AxisX, rad);
+		m_rotation = CQuaternion::Identity;
+		m_rotation.Multiply(multiY);
+		m_rotation.Multiply(multiX);
 	}
 }
 

@@ -6,6 +6,7 @@ CPlayerAttack::CPlayerAttack()
 {
 	m_attackAnimation[0] = enPlayerAnimationAttack;
 	m_attackAnimation[1] = enPlayerAnimationAttack2;
+	m_attackAnimation[2] = enPlayerAnimationAttack3;
 }
 
 void CPlayerAttack::Init()
