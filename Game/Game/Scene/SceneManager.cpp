@@ -6,6 +6,7 @@ void CSceneManager::Init()
 	m_fade = new CFade;
 	Add(m_fade, 15);
 
+	//SceneManagerクラスをAdd
 	Add(this, 0);
 	m_isFadeOut = true;
 }
@@ -30,9 +31,10 @@ void CSceneManager::Update()
 			Delete(m_gameScene);
 			m_gameScene = nullptr;
 			break;
-			//リザルトシーンの開放
-		case EnSceneState::enResultScene:
-			//リザルト開放の処理をかく
+			//クリアシーンの開放
+		case EnSceneState::enClearScene:
+			Delete(m_clearScene);
+			m_clearScene = nullptr;
 			break;
 			//ロードシーンの開放
 		case EnSceneState::enLoadScene:
@@ -53,8 +55,9 @@ void CSceneManager::Update()
 		case EnSceneState::enGameScene:
 			m_gameScene = New<CGameScene>(0);
 			break;
-			//リザルトシーンへの遷移
-		case EnSceneState::enResultScene:
+			//クリアシーンへの遷移
+		case EnSceneState::enClearScene:
+			m_clearScene = New<CClearScene>(0);
 			break;
 			//リザルトシーンへの遷移
 		case EnSceneState::enLoadScene:
@@ -71,7 +74,7 @@ void CSceneManager::Update()
 //シーンの切り替え関数
 void CSceneManager::ChangeScene(EnSceneState scene)
 {
-	//
+	//フェードアウトしていなかったら
 	if (!m_isFadeOut)
 	{
 		m_fade->FadeOut();
@@ -81,6 +84,4 @@ void CSceneManager::ChangeScene(EnSceneState scene)
 
 	//変更するシーンを現在のシーンにする
 	m_nextSceneState = scene;
-
-
 }

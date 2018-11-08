@@ -312,6 +312,9 @@
     <ClCompile Include="UI\WeekPoint\WeekPoint.cpp">
       <Filter>ソース ファイル\UI\WeekPoint</Filter>
     </ClCompile>
+    <ClCompile Include="Scene\ClearScene.cpp">
+      <Filter>ソース ファイル\Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -541,6 +544,9 @@
     </ClInclude>
     <ClInclude Include="UI\WeekPoint\WeekPoint.h">
       <Filter>ソース ファイル\UI\WeekPoint</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\ClearScene.h">
+      <Filter>ソース ファイル\Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

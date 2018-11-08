@@ -4,6 +4,7 @@
 #pragma once
 #include "GameScene.h"
 #include "TitleScene.h"
+#include "ClearScene.h"
 #include "../UI/Fade/Fade.h"
 
 class CSceneManager:public IGameObject
@@ -12,7 +13,6 @@ public:
 	enum EnSceneState {
 		enTitleScene,	//タイトル
 		enGameScene,	//ゲーム
-		enResultScene,	//リザルト
 		enLoadScene,	//ロード
 		enClearScene,	//クリア
 		enSceneNum		//シーンの数
@@ -55,8 +55,9 @@ public:
 private:
 	EnSceneState	m_preSceneState= enSceneNum;//シーンのステート（現在のシーンを入れておく用）
 	EnSceneState	m_nextSceneState = enSceneNum;//シーンのステート（次のシーンを入れておく用）
-	CGameScene*		m_gameScene;			//ゲームシーン
-	CTitleScene*	m_titleScene;			//タイトルシーン
+	CGameScene*		m_gameScene=nullptr;			//ゲームシーン
+	CTitleScene*	m_titleScene = nullptr;			//タイトルシーン
+	CClearScene*	m_clearScene = nullptr;			//クリアシーン
 	CFade*			m_fade;					//フェイド
 
 	bool			m_isFadeOut = false;		//フェードアウトしたかどうか

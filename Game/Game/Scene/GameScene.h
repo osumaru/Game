@@ -7,12 +7,13 @@ class Map;
 class CWeaponSelect;
 class CMiniMap;
 class CPlayerHp;
-class CBossHp;
-class CWeekPoint;
+//class CBossHp;
+//class CWeekPoint;
 class CLevelUp;
 class CMenu;
 class CResult;
 class CGameSound;
+
 
 class CGameScene : public IGameObject
 {

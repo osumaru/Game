@@ -43,6 +43,9 @@ public:
 	//プレイヤーの描画関数
 	void Draw()override;
 
+	//死亡する前に呼ばれる関数
+	void BeforeDead() override;
+
 	//行動の選択
 	void ActionStateOrder();
 

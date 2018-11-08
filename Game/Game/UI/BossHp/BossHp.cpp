@@ -30,6 +30,7 @@ void CBossHp::Init()
 
 void CBossHp::Update()
 {
+	//if (GetMaw().) { return; }
 	//最大HPが変化したらステータスから取得する
 	if (m_bossMaxHp != GetMaw().GetSmawStatus().MaxHp)
 	{

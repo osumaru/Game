@@ -4,6 +4,7 @@
 #include "../Player/Player.h"
 #include "../UI/BossHp/BossHp.h"
 #include "../UI/WeekPoint/WeekPoint.h"
+#include "../Scene/SceneManager.h"
 
 CMaw *CMaw::m_maw = NULL;
 
@@ -17,8 +18,7 @@ CMaw::CMaw()
 
 CMaw::~CMaw()
 {
-	Delete(m_bossHp);
-	Delete(m_weekPoint);
+
 }
 
 //アニメーションイベントが呼ばれるごとに呼び出される
@@ -357,7 +357,8 @@ void CMaw::Death()
 	bool IsAnim = Anim(EnMawState::enState_Death);
 	if (!IsAnim)
 	{
-		//クリアシーンへ遷移？
+		//クリアシーンへ遷移
+		GetSceneManager().ChangeScene(GetSceneManager().enClearScene);
 	}
 }
 //アニメーション
@@ -433,4 +434,11 @@ void CMaw::SetIsDamage(bool isDamage)
 void CMaw::Draw()
 {
 	m_skinModel.Draw(GetGameCamera().GetViewMatrix(), GetGameCamera().GetProjectionMatrix());
+}
+
+//死亡する前に呼ばれる関数
+void CMaw::BeforeDead()
+{
+	Delete(m_bossHp);
+	Delete(m_weekPoint);
 }
