@@ -8,6 +8,7 @@
 
 CEnemyDamage::~CEnemyDamage()
 {
+	//‚È‚ñ‚©ƒNƒ‰ƒbƒVƒ…‚µ‚½
 	Delete(m_damageNumber);
 }
 

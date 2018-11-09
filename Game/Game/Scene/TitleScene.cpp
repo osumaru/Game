@@ -35,6 +35,11 @@ void CTitleScene::Update()
 {
 	if (Pad().IsTriggerButton(enButtonStart) || GetAsyncKeyState('V'))
 	{
+		//フェードの実行中は返す
+		if (GetSceneManager().GetFade()->IsExecute())
+		{
+			return;
+		}
 		//ゲームシーンへ遷移
 		GetSceneManager().ChangeScene(GetSceneManager().enGameScene);
 		
