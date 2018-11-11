@@ -13,20 +13,22 @@ CPathFinding::~CPathFinding()
 
 void CPathFinding::BuildNodes()
 {
-	std::vector<CNavigationMesh::SNaviMesh>& naviMesh = m_naviMesh.GetMeshData();
+	const std::vector<CNavigationMesh::SPoligonInfo>& naviMesh = m_naviMesh.GetMeshData();
 	m_nodes.resize(naviMesh.size());
+	//メッシュデータからノードリンクを作成
 	for (int i = 0; i < naviMesh.size(); i++)
 	{
 		for (int j = 0; j < naviMesh.size(); j++)
 		{
+			//3つの頂点を調査して同じ頂点が2つ以上ある場合隣接するポリゴンなのでノードをリンクさせる
 			int indexCount = 0;
-			for (int k = 0; k < 3; k++)
+			for (int parentVertexIndex = 0; parentVertexIndex < 3; parentVertexIndex++)
 			{
-				for (int l = 0; l < 3; l++)
+				for (int childVertexIndex = 0; childVertexIndex < 3; childVertexIndex++)
 				{
-					if (naviMesh[i].vertexPos[k].x == naviMesh[j].vertexPos[l].x &&
-						naviMesh[i].vertexPos[k].y == naviMesh[j].vertexPos[l].y &&
-						naviMesh[i].vertexPos[k].z == naviMesh[j].vertexPos[l].z)
+					if (naviMesh[i].vertexPos[parentVertexIndex].x == naviMesh[j].vertexPos[childVertexIndex].x &&
+						naviMesh[i].vertexPos[parentVertexIndex].y == naviMesh[j].vertexPos[childVertexIndex].y &&
+						naviMesh[i].vertexPos[parentVertexIndex].z == naviMesh[j].vertexPos[childVertexIndex].z)
 					{
 						indexCount++;
 					}
