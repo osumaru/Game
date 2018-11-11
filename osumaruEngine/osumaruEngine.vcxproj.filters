@@ -234,6 +234,9 @@
     <ClCompile Include="Graphics\Font\Font.cpp">
       <Filter>ソース ファイル\Graphics\Font</Filter>
     </ClCompile>
+    <ClCompile Include="NavigationMesh.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject\GameObject.h">
@@ -415,6 +418,9 @@
     </ClInclude>
     <ClInclude Include="Graphics\Font\Font.h">
       <Filter>ソース ファイル\Graphics\Font</Filter>
+    </ClInclude>
+    <ClInclude Include="NavigationMesh.h">
+      <Filter>ソース ファイル</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

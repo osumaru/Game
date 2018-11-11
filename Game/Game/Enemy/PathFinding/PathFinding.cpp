@@ -13,87 +13,76 @@ CPathFinding::~CPathFinding()
 
 void CPathFinding::BuildNodes()
 {
-	for (int y = 0; y < MAP_HEIGHT; y++) {
-		for (int x = 0; x < MAP_WIDTH; x++) {
-			SNode* node = &m_nodes[y][x];
-			//隣接マップをNULL初期化
-			node->linkNode[0] = NULL;
-			node->linkNode[1] = NULL;
-			node->linkNode[2] = NULL;
-			node->linkNode[3] = NULL;
-			node->moveCost = 0;
-			//隣接マップのノードを入れる
-			//右のノード
-			if (x + 1 < MAP_WIDTH) {
-				node->linkNode[0] = &m_nodes[y][x + 1];
+	std::vector<CNavigationMesh::SNaviMesh>& naviMesh = m_naviMesh.GetMeshData();
+	m_nodes.resize(naviMesh.size());
+	for (int i = 0; i < naviMesh.size(); i++)
+	{
+		for (int j = 0; j < naviMesh.size(); j++)
+		{
+			int indexCount = 0;
+			for (int k = 0; k < 3; k++)
+			{
+				for (int l = 0; l < 3; l++)
+				{
+					if (naviMesh[i].vertexPos[k].x == naviMesh[j].vertexPos[l].x &&
+						naviMesh[i].vertexPos[k].y == naviMesh[j].vertexPos[l].y &&
+						naviMesh[i].vertexPos[k].z == naviMesh[j].vertexPos[l].z)
+					{
+						indexCount++;
+					}
+				}
 			}
-			//左のノード
-			if (x - 1 >= 0) {
-				node->linkNode[1] = &m_nodes[y][x - 1];
+			if (2 <= indexCount && i != j)
+			{
+				m_nodes[i].linkNode.push_back(&m_nodes[j]);
 			}
-			//上のノード
-			if (y + 1 < MAP_HEIGHT) {
-				node->linkNode[2] = &m_nodes[y + 1][x];
-			}
-			//下のノード
-			if (y - 1 >= 0) {
-				node->linkNode[3] = &m_nodes[y - 1][x];
-			}
-			//座標を設定する
-			CVector2 position = { -m_gridSize * MAP_WIDTH / 2, m_gridSize * MAP_HEIGHT / 2 };
-			position.x += m_gridSize * x;
-			position.y -= m_gridSize * y;
-			node->position = position;
+
 		}
+		m_nodes[i].position = naviMesh[i].position;
+		m_nodes[i].moveCost = 0;
 	}
 }
 
-void CPathFinding::FindRoot(std::vector<CVector2>& root, CVector2 startPos, CVector2 targetPos)
+void CPathFinding::FindRoot(std::vector<CVector3>& root, CVector3 startPos, CVector3 targetPos)
 {
 	root.clear();
 	//初期化
-	for (int y = 0; y < MAP_HEIGHT; y++) {
-		for (int x = 0; x < MAP_WIDTH; x++) {
-			m_nodes[y][x].moveCost = -1;
-			m_nodes[y][x].isDone = false;
-			m_nodes[y][x].parentNode = NULL;
-		}
+	for (auto& node : m_nodes)
+	{
+		node.moveCost = -1;
+		node.isDone = false;
+		node.parentNode = NULL;
+
 	}
 	//開始ノードを取得する
-	int startY = 0;
-	int startX = 0;
+	int startIndex = 0;
 	float minLength = FLT_MAX;
-	for (int y = 0; y < MAP_HEIGHT; y++) {
-		for (int x = 0; x < MAP_WIDTH; x++) {
-			CVector2 distance = m_nodes[y][x].position - startPos;
-			float length = sqrt(pow(distance.x, 2.0f) + pow(distance.y, 2.0f));
-			if (length < minLength) {
-				minLength = length;
-				startY = y;
-				startX = x;
-			}
+	for (int i = 0; i < m_nodes.size(); i++) {
+		CVector3 distance = m_nodes[i].position - startPos;
+		float length = distance.Length();
+		if (length < minLength) {
+			minLength = length;
+			startIndex = i;
 		}
 	}
-	SNode* startNode = &m_nodes[startY][startX];
+	SNode* startNode = &m_nodes[startIndex];
 	startNode->moveCost = 0;
 	while (true) {
 		SNode* processNode = NULL;
 		//全ノードに対して確認/アップデートを行う
-		for (int y = 0; y < MAP_HEIGHT; y++) {
-			for (int x = 0; x < MAP_WIDTH; x++) {
-				SNode* node = &m_nodes[y][x];
-				if (node->isDone || node->moveCost < 0) {
-					continue;
-				}
-				//処理中のノードがなければ現在のノード
-				if (!processNode) {
-					processNode = node;
-					continue;
-				}
-				if (node->moveCost < processNode->moveCost) {
-					//さらに安い
-					processNode = node;
-				}
+		for (int i = 0; i < m_nodes.size(); i++) {
+			SNode* node = &m_nodes[i];
+			if (node->isDone || node->moveCost < 0) {
+				continue;
+			}
+			//処理中のノードがなければ現在のノード
+			if (!processNode) {
+				processNode = node;
+				continue;
+			}
+			if (node->moveCost < processNode->moveCost) {
+				//さらに安い
+				processNode = node;
 			}
 		}
 		//処理中のノードがなくなったら
@@ -103,7 +92,7 @@ void CPathFinding::FindRoot(std::vector<CVector2>& root, CVector2 startPos, CVec
 		//調査済みにする
 		processNode->isDone = true;
 		//隣接しているノードにコストを設定する
-		for (int i = 0; i < LINK_NODE_MAX; i++) {
+		for (int i = 0; i < processNode->linkNode.size(); i++) {
 			SNode* node = processNode->linkNode[i];
 			if (node == NULL) {
 				continue;
@@ -118,21 +107,17 @@ void CPathFinding::FindRoot(std::vector<CVector2>& root, CVector2 startPos, CVec
 		}
 	}
 	//ルートを作る
-	int targetY = 0;
-	int targetX = 0;
+	int targetIndex = 0;
 	minLength = FLT_MAX;
-	for (int y = 0; y < MAP_HEIGHT; y++) {
-		for (int x = 0; x < MAP_WIDTH; x++) {
-			CVector2 distance = m_nodes[y][x].position - targetPos;
-			float length = sqrt(pow(distance.x, 2.0f) + pow(distance.y, 2.0f));
-			if (length < minLength) {
-				minLength = length;
-				targetY = y;
-				targetX = x;
-			}
+	for (int i = 0; i < m_nodes.size(); i++) {
+		CVector3 distance = m_nodes[i].position - targetPos;
+		float length = distance.Length();
+		if (length < minLength) {
+			minLength = length;
+			targetIndex= i;
 		}
 	}
-	SNode* node = &m_nodes[targetY][targetX];
+	SNode* node = &m_nodes[targetIndex];
 
 	while (node != startNode) {
 		root.push_back(node->position);
