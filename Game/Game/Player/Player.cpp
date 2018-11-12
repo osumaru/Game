@@ -400,6 +400,7 @@ void CPlayer::PlayerAttack()
 			}
 		}
 	}
+
 }
 
 void CPlayer::UseItem(int number)

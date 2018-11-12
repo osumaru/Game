@@ -50,13 +50,13 @@ void CBreakMapObject::Init(const CVector3& position, const CQuaternion& rotation
 	//m_boxCollider.get()->GetBody()->setUserIndex(m_boxCollider.get()->GetBody()->getUserIndex());
 	//m_rigidBody.get()->SetCollisionFlags(m_rigidBody.get()->GetBody()->CF_KINEMATIC_OBJECT);
 	m_rigidBody.get()->SetUserIndex(m_rigidBody.get()->GetBody()->CF_KINEMATIC_OBJECT);
-	//描画しないようにする
-	//this->SetIsActiveDraw(false);
+
 }
 
 
 void CBreakMapObject::Update()
 {
+
 	float killY = -50.0f;		//消す位置
 	float fallinSpeed = 0.02f;	//落ちる速度
 	float breakMaxLength = 12.0f;//最大破壊距離
@@ -92,13 +92,7 @@ void CBreakMapObject::Update()
 		}
 	}
 	
-		
-	MapChip::Update();
-	//剛体の座標と回転を更新
-	m_rigidBody.get()->SetPosition(m_position);
-	//m_rigidBody.get()->SetRotation(m_rotation);
-	//スキンモデルを更新
-	m_skinModel.Update(m_position, m_rotation, m_scale);
+	
 }
 
 void CBreakMapObject::Draw()

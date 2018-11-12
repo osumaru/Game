@@ -2,6 +2,7 @@
 #include "StaticMapObject.h"
 #include "../../Player/Player.h"
 #include "../../Player/WireAction.h"
+#include "../../Enemy/PathFinding/PathFinding.h"
 
 StaticMapObject::StaticMapObject() :
 	m_rigidBody(),
@@ -26,6 +27,7 @@ void StaticMapObject::Init(const CVector3& position, const CQuaternion& rotation
 	CQuaternion multi = CQuaternion::Identity;
 	//multi.SetRotationDeg(CVector3::AxisX, -90.0f);
 	rInfo.rot.Multiply(multi);
+	m_skinModel.Update(m_position, m_rotation, m_scale);
 	//メッシュコライダーからAABBを作成
 	isCollider = collider;
 	if (!collider)
@@ -33,6 +35,7 @@ void StaticMapObject::Init(const CVector3& position, const CQuaternion& rotation
 		m_meshCollider.reset(new CMeshCollider);
 		m_meshCollider->CreateCollider(&m_skinModel);
 		rInfo.collider = m_meshCollider.get();
+		g_pathFinding.Init(&m_skinModel);
 	}
 	else
 	{
@@ -55,7 +58,6 @@ void StaticMapObject::Init(const CVector3& position, const CQuaternion& rotation
 	//剛体を作成
 	m_rigidBody.reset(new CRigidBody);
 	m_rigidBody->Create(rInfo);
-	m_skinModel.Update(m_position, m_rotation, m_scale);
 	//m_skinModel.SetShaderTechnique(enShaderTechniqueDithering);
 	GetPlayer().GetWireAction().Add(m_skinModel);
 }

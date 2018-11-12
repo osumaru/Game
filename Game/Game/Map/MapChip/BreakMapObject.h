@@ -32,7 +32,8 @@ public:
 	//}
 
 private:
-	//int m_breakId = 0;
+
+
 	bool m_isBreak = false;
 	std::unique_ptr<CRigidBody>			m_rigidBody;		//剛体
 	std::unique_ptr<CMeshCollider>		m_meshCollider;		//コライダー
