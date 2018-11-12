@@ -106,6 +106,12 @@ void CMaw::Init(CVector3 position)
 			OnInvokeAnimationEvent(animClipname, eventName);
 		});
 	}
+	//弱点の頭のボーンを取得
+	CMatrix WeekMat = m_skinModel.FindBoneWorldMatrix(L"Head");
+	m_weekPosition.x = WeekMat.m[3][0];
+	m_weekPosition.y = WeekMat.m[3][1];
+	m_weekPosition.z = WeekMat.m[3][2];
+	m_weekPosition.Normalize();
 	//最初の行動を選択
 	m_actionPattern = EnMawActionPattern::enActionPatternStand;
 
@@ -144,6 +150,37 @@ void CMaw::Update()
 	default:
 		break;
 	}
+	const float CameraDeg=50.0f;
+	const float CameraLength=30.0f;
+	CVector3 CameraForward=GetGameCamera().GetCamera().GetFlont();
+	CameraForward.y = 0.0f;
+	CameraForward.Normalize();
+	CVector3 toEnemyDir = m_position - CameraForward;
+	float length = toEnemyDir.Length();
+	toEnemyDir.y = 0.0f;
+	toEnemyDir.Normalize();
+
+	float angle = toEnemyDir.Dot(CameraForward);
+	angle = acosf(angle);
+
+	//カメラの視界に入ったら
+	if (fabsf(angle) <= CMath::DegToRad(CameraDeg)/* && !m_weekPoint->IsActive()*/) {
+
+		//次の行動の選択
+		m_weekPoint->SetIsActive(true);
+	}
+	else if(fabsf(angle) > CMath::DegToRad(CameraDeg)/*&&m_weekPoint->IsActive()*/)
+	{
+		m_weekPoint->SetIsActive(false);
+	}
+	
+	//弱点の頭のボーンを取得
+	CMatrix WeekMat=m_skinModel.FindBoneWorldMatrix(L"Head");
+	m_weekPosition.x = WeekMat.m[3][0];
+	m_weekPosition.y = WeekMat.m[3][1];
+	m_weekPosition.z = WeekMat.m[3][2];
+	m_weekPosition.Normalize();
+	
 	//ダメージ間隔が0以上だったら
 	if (m_damageInterval >= 0.0f&&!m_isDeath)
 	{
@@ -183,7 +220,8 @@ void CMaw::ActionStateOrder()
 		return;
 	}
 
-	const float Length = 30.0f;//範囲距離
+	const float Length = 30.0f;		//範囲距離
+	const float StandLength = 80.0f;//戦闘終了距離
 	//遠距離攻撃アニメーション
 	//Anim(EnMawState::enState_Idle);
 
@@ -194,6 +232,11 @@ void CMaw::ActionStateOrder()
 	if (length > Length)
 	{
 		//遠距離攻撃ステートへ
+	}
+	else if (length > StandLength)
+	{
+		//待機ステートへ
+		//m_actionPattern = EnMawActionPattern::enActionPatternStand;
 	}
 }
 //攻撃行動
@@ -233,7 +276,7 @@ void CMaw::SpecialAttack()
 //ダウン状態
 void CMaw::Down()
 {
-	const float MaxDownTime = 50.0f;		//最大ダウン時間
+	const float MaxDownTime = 10.0f;		//最大ダウン時間
 
 	//アニメーション再生
 	Anim(EnMawState::enState_Down);
@@ -264,7 +307,7 @@ void CMaw::Down()
 		ActionStateOrder();
 		m_downTime = 0.0f;
 		m_isDown = false;
-		//m_weekPoint->SetIsActive(false);
+		m_weekPoint->SetIsActive(true);
 	}
 }
 //探す状態
@@ -327,6 +370,7 @@ void CMaw::Stand()
 	{
 		//発見ステートへ
 		m_actionPattern = EnMawActionPattern::enActionPatternFind;
+		m_isBattle = true;
 	}
 }
 //死亡状態
@@ -388,7 +432,7 @@ void CMaw::SetIsDamage(bool isDamage)
 	//ダメージ間隔が0より大きかったら
 	if (m_damageInterval > 0.0f) { return; }
 	const float		MaxInterval = 5.0f;	//最大ダメージ間隔
-	const int		MaxDownCount = 3;	//最大ダウンカウント
+	const int		MaxDownCount = 0;	//最大ダウンカウント
 
 	m_isDamage = isDamage;
 
@@ -403,7 +447,7 @@ void CMaw::SetIsDamage(bool isDamage)
 	if (m_downCount > MaxDownCount)
 	{
 		m_isDown = true;//ダウンさせる
-		//m_weekPoint->SetIsActive(true);
+		m_weekPoint->SetIsActive(false);
 		m_downCount = 0;
 	}
 	//ダメージ間隔を最大にする

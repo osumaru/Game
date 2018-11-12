@@ -10,6 +10,12 @@ bool CEnemyIdle::Start()
 	//タイマーを初期化
 	m_timer = 0.0f;
 
+	CVector3 moveSpeed = m_enemy->GetMoveSpeed();
+	CVector3 speed = CVector3::Zero;
+	moveSpeed.x = speed.x;
+	moveSpeed.z = speed.z;
+	m_enemy->SetMoveSpeed(moveSpeed);
+
 	return true;
 }
 
