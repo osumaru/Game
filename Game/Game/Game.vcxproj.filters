@@ -46,9 +46,6 @@
     <Filter Include="ソース ファイル\UI\MiniMap">
       <UniqueIdentifier>{a154942c-4880-4acf-8542-357018c797c9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\Item">
-      <UniqueIdentifier>{fe491995-d611-4183-8285-c214638a84fe}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソース ファイル\Enemy\EnemyState">
       <UniqueIdentifier>{60565a7a-3ee7-45e5-8a4e-95544f8bb660}</UniqueIdentifier>
     </Filter>
@@ -81,6 +78,9 @@
     </Filter>
     <Filter Include="ソース ファイル\NPC\Shop">
       <UniqueIdentifier>{14c91c9c-7902-4237-ba30-1c31f4a768b1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\GameSound\Item">
+      <UniqueIdentifier>{fe491995-d611-4183-8285-c214638a84fe}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -268,13 +268,13 @@
       <Filter>ソース ファイル\GameSound</Filter>
     </ClCompile>
     <ClCompile Include="Item\Money.cpp">
-      <Filter>ソース ファイル\Item</Filter>
+      <Filter>ソース ファイル\GameSound\Item</Filter>
     </ClCompile>
     <ClCompile Include="Item\RecoveryItem.cpp">
-      <Filter>ソース ファイル\Item</Filter>
+      <Filter>ソース ファイル\GameSound\Item</Filter>
     </ClCompile>
     <ClCompile Include="Item\IItem.cpp">
-      <Filter>ソース ファイル\Item</Filter>
+      <Filter>ソース ファイル\GameSound\Item</Filter>
     </ClCompile>
     <ClCompile Include="UI\Menu\EquipInventory.cpp">
       <Filter>ソース ファイル\UI\Menu</Filter>
@@ -283,7 +283,7 @@
       <Filter>ソース ファイル\UI\Menu</Filter>
     </ClCompile>
     <ClCompile Include="Item\TreasureChest.cpp">
-      <Filter>ソース ファイル\Item</Filter>
+      <Filter>ソース ファイル\GameSound\Item</Filter>
     </ClCompile>
     <ClCompile Include="Enemy\Maw.cpp">
       <Filter>ソース ファイル\Enemy</Filter>
@@ -489,13 +489,13 @@
       <Filter>ソース ファイル\GameSound</Filter>
     </ClInclude>
     <ClInclude Include="Item\IItem.h">
-      <Filter>ソース ファイル\Item</Filter>
+      <Filter>ソース ファイル\GameSound\Item</Filter>
     </ClInclude>
     <ClInclude Include="Item\Money.h">
-      <Filter>ソース ファイル\Item</Filter>
+      <Filter>ソース ファイル\GameSound\Item</Filter>
     </ClInclude>
     <ClInclude Include="Item\RecoveryItem.h">
-      <Filter>ソース ファイル\Item</Filter>
+      <Filter>ソース ファイル\GameSound\Item</Filter>
     </ClInclude>
     <ClInclude Include="UI\Menu\EquipInventory.h">
       <Filter>ソース ファイル\UI\Menu</Filter>
@@ -504,7 +504,7 @@
       <Filter>ソース ファイル\UI\Menu</Filter>
     </ClInclude>
     <ClInclude Include="Item\TreasureChest.h">
-      <Filter>ソース ファイル\Item</Filter>
+      <Filter>ソース ファイル\GameSound\Item</Filter>
     </ClInclude>
     <ClInclude Include="Enemy\Maw.h">
       <Filter>ソース ファイル\Enemy</Filter>
