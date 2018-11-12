@@ -68,8 +68,10 @@ void CPlayer::Init(CVector3 position)
 											{ L"Assets/modelData/PlayerCombo4.tka" },			//攻撃アニメーション
 											{ L"Assets/modelData/PlayerCombo5.tka" },		//連撃アニメーション
 											{ L"Assets/modelData/PlayerCombo6.tka" },		//連撃アニメーション
+											{ L"Assets/modelData/PlayerAttackCombine.tka" },		//連撃アニメーション
 											{ L"Assets/modelData/PlayerDamage.tka" },			//ダメージアニメーション
 											{ L"Assets/modelData/PlayerRoll.tka" }	,		//回避アクション
+											{ L"Assets/modelData/PlayerRollCombine.tka" }	,		//回避アクション
 											{ L"Assets/modelData/PlayerDeath.tka" },			//死亡アニメーション
 											{ L"Assets/modelData/PlayerWireMove.tka" },				//ワイヤー移動アニメーション
 											{ L"Assets/modelData/PlayerArrowAttack.tka" },		//弓の攻撃アニメーション

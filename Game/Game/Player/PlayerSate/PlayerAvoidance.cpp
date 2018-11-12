@@ -62,6 +62,7 @@ void CPlayerAvoidance::Update()
 		m_pPlayer->SetPosition(position);
 
 		m_pPlayer->SetInterval(false);
+		GetPlayer().PlayAnimation(enPlayerAnimationAvoidanceCombine);
 		GetPlayer().GetPlayerStateMachine().SetState(CPlayerState::enPlayerStateStand);
 	}
 }

@@ -96,6 +96,7 @@ void CPlayerAttack::Update()
 
 			m_pPlayer->SetInterval(false);
 			GetPlayer().GetPlayerStateMachine().SetState(CPlayerState::enPlayerStateStand);
+			GetPlayer().PlayAnimation(enPlayerAnimationAttackCombine);
 			if (Pad().GetLeftStickX() != 0 || Pad().GetLeftStickY() != 0)
 			{
 				//走りアニメーション
