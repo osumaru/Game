@@ -21,5 +21,8 @@ private:
 	int							m_attackCount = 0;					//連続攻撃してる回数
 	bool						m_isContinuationAttack = false;		//連続攻撃してるかのフラグ
 	EnPlayerAnimation			m_attackAnimation[MAX_ATTACK_NUM];	//攻撃のアニメーション番号
+	const CMatrix* m_pBoneMat;	//ボーンの行列のポインタ
+	CVector3 m_manipVec;		//ボーンの座標からプレイヤーの座標までのベクトル
+	CVector3 m_preBonePos;		//前のフレームのボーンの座標
 };
 

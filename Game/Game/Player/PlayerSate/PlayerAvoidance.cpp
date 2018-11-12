@@ -29,7 +29,7 @@ void CPlayerAvoidance::Update()
 	moveSpeed.y = 0.0f;
 	CCharacterController& characon = m_pPlayer->GetCharacterController();
 	float gravity = characon.GetGravity();
-	characon.SetGravity(-0.3f);
+	characon.SetGravity(-0.1f);
 	//高さをプレイヤ―の座標でそろえる
 	m_preBonePos.y = playerPos.y;
 	characon.SetMoveSpeed(moveSpeed);
@@ -46,7 +46,7 @@ void CPlayerAvoidance::Update()
 		//playerFront.z = m_pPlayer->GetWorldMatrix().m[2][2];
 		//if (playerFront.Dot(movePos) < 0.0f)
 		//{
-			//playerPos += movePos;
+			playerPos += movePos;
 		//}
 	}
 	playerPos.y = characon.GetPosition().y;

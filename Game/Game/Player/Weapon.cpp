@@ -39,7 +39,7 @@ void CWeapon::Init(CPlayer* player)
 	m_attackRotation[enSword] = CQuaternion::Identity;
 	multi.SetRotationDeg(CVector3::AxisZ, 90.0f);
 	m_attackRotation[enSword].Multiply(multi);
-	m_attackPosition[enSword] = { 10.0f, 0.0f, 0.0f };
+	m_attackPosition[enSword] = { -10.0f, 0.0f, 0.0f };
 
 	m_position[enTwinSword] = { 0.0f, 0.0f, -10.0f };
 	m_rotation[enTwinSword] = CQuaternion::Identity;
@@ -53,7 +53,7 @@ void CWeapon::Init(CPlayer* player)
 	m_attackRotation[enTwinSword].Multiply(multi);
 	multi.SetRotationDeg(CVector3::AxisY, 90.0f);
 	m_attackRotation[enTwinSword].Multiply(multi);
-	m_attackPosition[enTwinSword] = { 10.0f, 0.0f, 0.0f };
+	m_attackPosition[enTwinSword] = { -10.0f, 0.0f, 0.0f };
 
 	m_position[enLongSword] = { 0.0f, 0.0f, -10.0f };
 	m_rotation[enLongSword] = CQuaternion::Identity;
@@ -67,7 +67,7 @@ void CWeapon::Init(CPlayer* player)
 	m_attackRotation[enLongSword] = CQuaternion::Identity;
 	multi.SetRotationDeg(CVector3::AxisZ, 90.0f);
 	m_attackRotation[enLongSword].Multiply(multi);
-	m_attackPosition[enLongSword] = { 10.0f, 0.0f, 0.0f };
+	m_attackPosition[enLongSword] = { -10.0f, 0.0f, 0.0f };
 }
 
 
@@ -94,7 +94,7 @@ void CWeapon::Update()
 	if (m_pPlayer->GetIsAttack())
 	{
 
-		m_boneMat = &m_pPlayer->GetPlayerSkin().FindBoneWorldMatrix(L"LeftHand");
+		m_boneMat = &m_pPlayer->GetPlayerSkin().FindBoneWorldMatrix(L"RightHand");
 		position = m_attackPosition[m_weaponState];
 		rotation = m_attackRotation[m_weaponState];
 	}

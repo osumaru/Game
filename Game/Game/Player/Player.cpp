@@ -361,19 +361,19 @@ void CPlayer::PlayerAttack()
 	}
 
 	
-	if (!GetMaw().GetIsDamage()) {
+	//if (!GetMaw().GetIsDamage()) {
 
-		CVector3 EnemyVec = GetMaw().GetPosition();
-		//EnemyVec.y += 10.3f;
-		EnemyVec -= m_weapon.GetPosition();
-		float len = EnemyVec.Length();
+	//	CVector3 EnemyVec = GetMaw().GetPosition();
+	//	//EnemyVec.y += 10.3f;
+	//	EnemyVec -= m_weapon.GetPosition();
+	//	float len = EnemyVec.Length();
 
-		if (fabs(len) < 12.0f)
-		{
-			GetMaw().SetIsDamage(true);
-		}
+	//	if (fabs(len) < 12.0f)
+	//	{
+	//		GetMaw().SetIsDamage(true);
+	//	}
 
-	}
+	//}
 	
 
 }
