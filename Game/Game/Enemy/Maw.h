@@ -3,6 +3,8 @@
 */
 #pragma once
 
+class CBossHp;
+class CWeekPoint;
 struct SmawStatus {
 	int Strength;			//攻撃力
 	int Defense;			//防御力
@@ -10,19 +12,22 @@ struct SmawStatus {
 	int MaxHp;				//最大体力
 	int Gold;				//所持金額
 };
+
 class CMaw :
 	public IGameObject
 {
 public:
 
 	enum EnMawState {
-		enState_Idle,	//待機
-		enState_Walk,	//歩き
-		enState_Attack,	//攻撃
-		enState_Damage,	//ダメージ
-		enState_Death,	//死亡
-		enState_Num,	//状態の数
-		enState_Invald,	//何もない
+		enState_Idle,			//待機
+		enState_Walk,			//歩き
+		enState_Attack,			//攻撃
+		enState_SpecialAttack,	//特殊攻撃
+		enState_Damage,			//ダメージ
+		enState_Down,			//ダウン
+		enState_Death,			//死亡
+		enState_Num,			//状態の数
+		enState_Invald,			//何もない
 	};
 	//コンストラクタ
 	CMaw();
@@ -37,6 +42,9 @@ public:
 
 	//プレイヤーの描画関数
 	void Draw()override;
+
+	//死亡する前に呼ばれる関数
+	void BeforeDead() override;
 
 	//行動の選択
 	void ActionStateOrder();
@@ -59,7 +67,10 @@ public:
 	//死亡
 	void Death();
 
-	//プレイヤーのインスタンスの取得
+	//アニメーション
+	bool Anim(EnMawState animState);
+
+	//インスタンスの取得
 	static CMaw& GetInstance()
 	{
 		return *m_maw;
@@ -87,10 +98,10 @@ public:
 		return m_position;
 	}
 
-	//壊れるオブジェクトに当たった判定
-	bool GetBreakObjectHit()
+	//弱点座標を取得
+	const CVector3& GetWeekPosition() const
 	{
-		return m_isBreakObjectHit;
+		return m_weekPosition;
 	}
 
 	//ダメージ判定を取得
@@ -105,25 +116,35 @@ public:
 		return m_isAttack;
 	}
 
-	//ワールド行列を取得
-	const CVector3& GetLeftHandBone() const
+	//発見判定を取得
+	bool GetIsBattle()
 	{
-		CMatrix MawHand = m_skinModel.FindBoneWorldMatrix(L"LeftHand");
-		CVector3 LeftHandPos = { MawHand.m[3][0],MawHand.m[3][1] ,MawHand.m[3][2] };
-		return LeftHandPos;
+		return m_isBattle;
+	}
+
+	//ダウン状態を取得
+	bool GetIsDown()
+	{
+		return m_isDown;
+	}
+
+	//ボーンのワールド行列を取得
+	const CMatrix& GetBoneMatrix(const wchar_t* boneName) const
+	{
+		return m_skinModel.FindBoneWorldMatrix(boneName);
+	}
+	//ステータスの取得
+	const SmawStatus& GetSmawStatus() const
+	{
+		return m_status;
 	}
 
 	//ダメージ判定を設定
 	//isDamage	ダメージフラグ
 	void SetIsDamage(bool isDamage);
 
-
-	////HPを減らす
-	////damage	ダメージ
-	//void HpDamage(int damage)
-	//{
-	//	m_status.Hp -= damage;
-	//}
+	//手を使った攻撃
+	void HandAttack(float DamageLength);
 
 	//アニメーションイベントが起きた時に呼ばれる処理。
 	//animClipName アニメーションのファイルパス
@@ -146,29 +167,27 @@ private:
 	static CMaw*			m_maw;										//ボス
 	CVector3				m_position;									//座標
 	CQuaternion				m_rotation = CQuaternion::Identity;			//回転
-	CVector3				m_scale = { 10.0f,10.0f, 10.0f };			//拡大
+	const CVector3			m_scale = { 10.0f,10.0f, 10.0f };			//拡大
 	CSkinModel				m_skinModel;								//スキンモデル
 	CCharacterController	m_characterController;						//キャラクターコントローラー
 	CAnimation				m_animation;								//アニメーション
 	SmawStatus				m_status;									//ステータス
 	EnMawActionPattern		m_actionPattern;							//行動パターン
+	CVector3				m_weekPosition;								//弱点座標
 
 	int						m_downCount = 0;							//何回攻撃を受けたか
-	const int				m_attackPattern = 2;						//攻撃の種類の数
 	float					m_downTime=0.0f;							//ダウンしている時間
 	float					m_damageInterval = 0.0f;					//ダメージ間隔
 
-	bool					m_isAttack=false;							//攻撃判定
-	bool					m_isSpecialAttack = false;					//特殊攻撃判定
-	bool					m_isBreakObjectHit = false;					//壊れるオブジェクトに当たったかどうか
+	bool					m_isAttack = false;							//攻撃判定
 	bool					m_isStand = false;							//待機判定
 	bool					m_isDamage = false;							//ダメージ判定
 	bool					m_isDown = false;							//ダウン判定
 	bool					m_isDeath = false;							//死亡判定
+	bool					m_isBattle = false;							//発見判定
 
-
-	/////AnimationEventを入れるまでの攻撃判定用
-	float m_attackTime=0.0f;											//攻撃時間
+	CBossHp*		m_bossHp = nullptr;			//ボスHP
+	CWeekPoint*		m_weekPoint = nullptr;		//ボスの弱点スプライト
 };
 
 //ボスの取得

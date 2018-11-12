@@ -1,15 +1,16 @@
 #pragma once
 #include "INpcState.h"
-class CShopNPC : public INpcState
+#include "NpcManager.h"
+
+class CShopNPC:public IGameObject
 {
 public:
 	CShopNPC();
 	~CShopNPC();
-	void Init(const CVector3 position, const CQuaternion rotation);
 	void Update();
 	void Draw();
-	void AfterDraw();
 	void Transaction(const int Gold);
+	
 
 private:
 	enum EShopState
@@ -20,17 +21,16 @@ private:
 		enShopLineup,
 		enShopNum,
 	};
-	enum EnShopLineup
-	{
-		enBluePotion,
-		enRedPotion,
-		enGreenPotion,
-		enYellowPotion, 
-		enPotionNum,
-	};
+
+
 
 	static const int			TEXTURE_NUM = 2;
 	static const int			BACK_TEXTURE_NUM = 2;
+	CSkinModel		m_skinModel;						//スキンモデル
+	CVector3		m_position = CVector3::Zero;		//ポジション
+	CVector3		m_scale = CVector3::One;			//スケール
+	CQuaternion		m_rotation = CQuaternion::Identity;	//回転
+
 	CSprite				m_backSprite[2];				//背景のスプライト	
 	CTexture			m_backTexture;					//背景のテクスチャ
 	CVector2			m_backPosition	= { -480.0f,0.0f };
@@ -43,14 +43,6 @@ private:
 	const CVector2		LINEUP_SELECT_POSITION = { 50.0f,200.0f };
 	CVector2			m_lineupSelectTexPosition = LINEUP_SELECT_POSITION;
 
-	CSprite				m_lineupSprite[enPotionNum];	//商品のスプライト
-	CTexture			m_lineupTexture[enPotionNum];	//商品のテクスチャ
-	CVector2			m_lineupTexPosition = { -140.0f,200.0f };
-	CVector2			m_lineupTexSize = { 250.0f,50.0f };
-	EnShopLineup		m_lineupState = enBluePotion;
-	int					m_lineupPrice[enPotionNum];
-	bool				m_drawLineup = false;
-	bool				m_isBuy = false;
 
 	CSprite				m_shopSprite[TEXTURE_NUM];
 	CTexture			m_shopTexture[TEXTURE_NUM];

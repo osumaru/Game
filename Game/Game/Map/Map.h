@@ -1,30 +1,34 @@
 #pragma once
 class MapChip;
+class BreakMapObject;
 class IEnemy;
 class Player;
 class CEnemyGroup;
-class INpcState;
+class CNpcManager;
 //マップチップのタグ
 enum EnMapChipTag
 {
 	enMapTagUntagged,
 	enMapTagPlayer,
+	enMapTagMaw,
 	enMapTagZombie,
 	enMapTagSamurai,
 	enMapTagNinja,
 	enMapTagWarrok,
 	enMapTagEnemyGroup,
 	enMapTagMapChip,
+	enMapTagBreakBrock,
 	enMapTagTerrain,		//地形用のタグ
-	enMapTagShopNpc,			//店NPC用のタグ
+	enMapTagItemShop,		//アイテムショップ用のタグ
+	enMapTagWeaponShop,
 	enMapTagNum,
 };
 
 struct SMapChipInfo
 {
-	wchar_t*			m_modelName;
+	wchar_t*		m_modelName;
 	CVector3		m_position;
-	CQuaternion	m_rotation;
+	CQuaternion		m_rotation;
 	EnMapChipTag	m_tag;
 };
 
@@ -67,5 +71,6 @@ private:
 	std::list<IEnemy*>			m_enemyList;			//エネミーリスト
 	std::vector<CEnemyGroup*>	m_enemyGroupList;		//エネミーグループのベクター
 	bool						m_collider = false;		//AABBを作成するかどうか
-	std::list<INpcState*>		m_npcList;				//NPCのリスト
+	//std::list<CShopNPC*>		m_npcList;				//NPCのリスト
+	CNpcManager*				m_shopNpcManager;
 };

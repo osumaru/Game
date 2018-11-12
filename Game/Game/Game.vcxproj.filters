@@ -46,9 +46,6 @@
     <Filter Include="ソース ファイル\UI\MiniMap">
       <UniqueIdentifier>{a154942c-4880-4acf-8542-357018c797c9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\Item">
-      <UniqueIdentifier>{fe491995-d611-4183-8285-c214638a84fe}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソース ファイル\Enemy\EnemyState">
       <UniqueIdentifier>{60565a7a-3ee7-45e5-8a4e-95544f8bb660}</UniqueIdentifier>
     </Filter>
@@ -81,6 +78,15 @@
     </Filter>
     <Filter Include="ソース ファイル\NPC\Shop">
       <UniqueIdentifier>{14c91c9c-7902-4237-ba30-1c31f4a768b1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\GameSound\Item">
+      <UniqueIdentifier>{fe491995-d611-4183-8285-c214638a84fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\UI\BossHp">
+      <UniqueIdentifier>{29508926-c18b-423f-afbf-7633ea7ef856}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\UI\WeekPoint">
+      <UniqueIdentifier>{c173ee8f-8c07-4e43-b2e8-9cd82916a1b4}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -265,13 +271,13 @@
       <Filter>ソース ファイル\GameSound</Filter>
     </ClCompile>
     <ClCompile Include="Item\Money.cpp">
-      <Filter>ソース ファイル\Item</Filter>
+      <Filter>ソース ファイル\GameSound\Item</Filter>
     </ClCompile>
     <ClCompile Include="Item\RecoveryItem.cpp">
-      <Filter>ソース ファイル\Item</Filter>
+      <Filter>ソース ファイル\GameSound\Item</Filter>
     </ClCompile>
     <ClCompile Include="Item\IItem.cpp">
-      <Filter>ソース ファイル\Item</Filter>
+      <Filter>ソース ファイル\GameSound\Item</Filter>
     </ClCompile>
     <ClCompile Include="UI\Menu\EquipInventory.cpp">
       <Filter>ソース ファイル\UI\Menu</Filter>
@@ -280,7 +286,7 @@
       <Filter>ソース ファイル\UI\Menu</Filter>
     </ClCompile>
     <ClCompile Include="Item\TreasureChest.cpp">
-      <Filter>ソース ファイル\Item</Filter>
+      <Filter>ソース ファイル\GameSound\Item</Filter>
     </ClCompile>
     <ClCompile Include="Enemy\Maw.cpp">
       <Filter>ソース ファイル\Enemy</Filter>
@@ -288,11 +294,23 @@
     <ClCompile Include="Player\WireAction.cpp">
       <Filter>ソース ファイル\Player</Filter>
     </ClCompile>
+    <ClCompile Include="Map\MapChip\BreakMapObject.cpp">
+      <Filter>ソース ファイル\Map\MapChip</Filter>
+    </ClCompile>
     <ClCompile Include="NPC\Shop\ItemShop.cpp">
       <Filter>ソース ファイル\NPC\Shop</Filter>
     </ClCompile>
     <ClCompile Include="NPC\Shop\WeaponShop.cpp">
       <Filter>ソース ファイル\NPC\Shop</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\BossHp\BossHp.cpp">
+      <Filter>ソース ファイル\UI\BossHp</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\WeekPoint\WeekPoint.cpp">
+      <Filter>ソース ファイル\UI\WeekPoint</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\ClearScene.cpp">
+      <Filter>ソース ファイル\Scene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -483,13 +501,13 @@
       <Filter>ソース ファイル\GameSound</Filter>
     </ClInclude>
     <ClInclude Include="Item\IItem.h">
-      <Filter>ソース ファイル\Item</Filter>
+      <Filter>ソース ファイル\GameSound\Item</Filter>
     </ClInclude>
     <ClInclude Include="Item\Money.h">
-      <Filter>ソース ファイル\Item</Filter>
+      <Filter>ソース ファイル\GameSound\Item</Filter>
     </ClInclude>
     <ClInclude Include="Item\RecoveryItem.h">
-      <Filter>ソース ファイル\Item</Filter>
+      <Filter>ソース ファイル\GameSound\Item</Filter>
     </ClInclude>
     <ClInclude Include="UI\Menu\EquipInventory.h">
       <Filter>ソース ファイル\UI\Menu</Filter>
@@ -498,7 +516,7 @@
       <Filter>ソース ファイル\UI\Menu</Filter>
     </ClInclude>
     <ClInclude Include="Item\TreasureChest.h">
-      <Filter>ソース ファイル\Item</Filter>
+      <Filter>ソース ファイル\GameSound\Item</Filter>
     </ClInclude>
     <ClInclude Include="Enemy\Maw.h">
       <Filter>ソース ファイル\Enemy</Filter>
@@ -506,11 +524,23 @@
     <ClInclude Include="Player\WireAction.h">
       <Filter>ソース ファイル\Player</Filter>
     </ClInclude>
+    <ClInclude Include="Map\MapChip\BreakMapObject.h">
+      <Filter>ソース ファイル\Map\MapChip</Filter>
+    </ClInclude>
     <ClInclude Include="NPC\Shop\ItemShop.h">
       <Filter>ソース ファイル\NPC\Shop</Filter>
     </ClInclude>
     <ClInclude Include="NPC\Shop\WeaponShop.h">
       <Filter>ソース ファイル\NPC\Shop</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\BossHp\BossHp.h">
+      <Filter>ソース ファイル\UI\BossHp</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\WeekPoint\WeekPoint.h">
+      <Filter>ソース ファイル\UI\WeekPoint</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\ClearScene.h">
+      <Filter>ソース ファイル\Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -637,6 +667,12 @@
       <Filter>ソース ファイル\Assets</Filter>
     </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\TestGround.FBX">
+      <Filter>ソース ファイル\Assets</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\Maw.fbx">
+      <Filter>ソース ファイル\Assets</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\map3.FBX">
       <Filter>ソース ファイル\Assets</Filter>
     </MeshContentTask>
   </ItemGroup>
