@@ -28,6 +28,9 @@ public:
 	//更新
 	virtual void Update() = 0;
 
+	//解放
+	virtual void Release() {};
+
 	//所属するグループを設定
 	//enemyGroup	所属するグループのポインタ
 	void SetEnemyGroup(CEnemyGroup* enemyGroup)

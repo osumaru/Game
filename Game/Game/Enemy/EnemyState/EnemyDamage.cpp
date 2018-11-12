@@ -1,14 +1,12 @@
 #include "stdafx.h"
 #include "EnemyDamage.h"
 #include "../IEnemy.h"
-#include "../EnemyGroup.h"
 #include "../../Player/Player.h"
 #include "../../Camera/GameCamera.h"
 #include "../../UI/DamageNumber/DamageNumber.h"
 
 CEnemyDamage::~CEnemyDamage()
 {
-	Delete(m_damageNumber);
 }
 
 bool CEnemyDamage::Start()
@@ -31,6 +29,17 @@ bool CEnemyDamage::Start()
 	m_damagePos.y = leftShoulderMatrix.m[3][1];
 	m_damagePos.z = leftShoulderMatrix.m[3][2];
 
+	//ダメージを受けたフラグを戻す
+	m_enemy->SetIsDamage(false);
+
+	CVector3 moveSpeed = m_enemy->GetMoveSpeed();
+	m_knockBack = m_enemy->GetPosition() - GetPlayer().GetPosition();
+	m_knockBack.y = 0.0f;
+	m_knockBack *= m_knockBackSpeed;
+	moveSpeed.x = m_knockBack.x;
+	moveSpeed.z = m_knockBack.z;
+	m_enemy->SetMoveSpeed(moveSpeed);
+
 	return true;
 }
 
@@ -51,6 +60,12 @@ void CEnemyDamage::Update()
 	screenPosition.y = (1.0f + projectionPosition.y) / 2.0f * FrameBufferHeight() - (FrameBufferHeight() / 2.0f);
 	m_damageNumber->SetPosition(screenPosition);
 
+	CVector3 moveSpeed = m_enemy->GetMoveSpeed();
+	CVector3 knockBack = moveSpeed;
+	knockBack *= GameTime().GetDeltaFrameTime();
+	moveSpeed -= knockBack;
+	m_enemy->SetMoveSpeed(moveSpeed);
+
 	//プレイヤーとの距離を計算する
 	CVector3 playerPos = GetPlayer().GetPosition();
 	CVector3 toPlayerPos = playerPos - m_enemy->GetPosition();
@@ -64,17 +79,20 @@ void CEnemyDamage::Update()
 			//近ければ攻撃
 			m_esm->ChangeState(CEnemyState::enState_Attack);
 		}
-		else if (m_enemy->IsFind()) {
-			//発見されていたらプレイヤーを追いかける
+		else {
+			//プレイヤーを追いかける
 			m_esm->ChangeState(CEnemyState::enState_Chase);
 		}
-		//ダメージを受けたフラグを戻す
-		m_enemy->SetIsDamage(false);
 	}
 	if (m_enemy->GetStatus().Hp <= 0) {
 		//HPが無くなれば死亡
 		m_esm->ChangeState(CEnemyState::enState_Death);
-		//ダメージを受けたフラグを戻す
-		m_enemy->SetIsDamage(false);
+	}
+}
+
+void CEnemyDamage::Release()
+{
+	if (m_damageNumber != nullptr) {
+		Delete(m_damageNumber);
 	}
 }
