@@ -10,8 +10,14 @@ public:
 		struct { float x, y; };
 		float v[2];
 	};
+	//XMVECTOR�ւ̈Öق̕ϊ��B
+	operator DirectX::XMVECTOR() const
+	{
+		return DirectX::XMLoadFloat2(&vec);
+	}
 
 	static const CVector2 Zero;
+	static const CVector2 One;
 	CVector2()
 	{
 
@@ -387,6 +393,9 @@ public:
 	static const CVector4 White;
 	static const CVector4 Black;
 	static const CVector4 Yellow;
+	static const CVector4 Red;
+	static const CVector4 Blue;
+	static const CVector4 Green;
 public:
 	operator DirectX::XMVECTOR() const
 	{

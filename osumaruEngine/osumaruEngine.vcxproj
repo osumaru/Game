@@ -177,6 +177,7 @@
     <ClCompile Include="Graphics\AnimationClip.cpp" />
     <ClCompile Include="Graphics\AnimationEvent.cpp" />
     <ClCompile Include="Graphics\ConstantBuffer.cpp" />
+    <ClCompile Include="Graphics\Font\Font.cpp" />
     <ClCompile Include="Graphics\Light.cpp" />
     <ClCompile Include="Graphics\particle\Particle.cpp" />
     <ClCompile Include="Graphics\particle\ParticleEmitter.cpp" />
@@ -203,6 +204,7 @@
     <ClCompile Include="Math\Math.cpp" />
     <ClCompile Include="Math\Matrix.cpp" />
     <ClCompile Include="Math\Vector.cpp" />
+    <ClCompile Include="NavigationMesh.cpp" />
     <ClCompile Include="Physics\CharacterController.cpp" />
     <ClCompile Include="Physics\Collider\BoxCollider.cpp" />
     <ClCompile Include="Physics\Collider\CapsuleCollider.cpp" />
@@ -235,6 +237,7 @@
     <ClInclude Include="Graphics\AnimationClip.h" />
     <ClInclude Include="Graphics\AnimationEvent.h" />
     <ClInclude Include="Graphics\ConstantBuffer.h" />
+    <ClInclude Include="Graphics\Font\Font.h" />
     <ClInclude Include="Graphics\Light.h" />
     <ClInclude Include="Graphics\particle\Particle.h" />
     <ClInclude Include="Graphics\particle\ParticleEmitter.h" />
@@ -262,6 +265,7 @@
     <ClInclude Include="Math\Math.h" />
     <ClInclude Include="Math\Matrix.h" />
     <ClInclude Include="Math\Vector.h" />
+    <ClInclude Include="NavigationMesh.h" />
     <ClInclude Include="Physics\CharacterController.h" />
     <ClInclude Include="Physics\Collider\BoxCollider.h" />
     <ClInclude Include="Physics\Collider\CapsuleCollider.h" />

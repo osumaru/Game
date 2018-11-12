@@ -21,12 +21,8 @@ public:
 	~CEnemyWalk() {}
 
 	//更新する前に一度だけ呼ばれる
-	bool Start();
+	bool Start() override;
 
 	//更新
-	void Update();
-
-private:
-	CVector3	m_destination;		//移動先の座標
-	const float m_speed = 2.0f;		//移動速度
+	void Update() override;
 };

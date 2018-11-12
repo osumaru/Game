@@ -82,6 +82,12 @@
     <Filter Include="ソース ファイル\GameSound\Item">
       <UniqueIdentifier>{fe491995-d611-4183-8285-c214638a84fe}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\UI\BossHp">
+      <UniqueIdentifier>{29508926-c18b-423f-afbf-7633ea7ef856}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\UI\WeekPoint">
+      <UniqueIdentifier>{c173ee8f-8c07-4e43-b2e8-9cd82916a1b4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -291,11 +297,23 @@
     <ClCompile Include="Player\WireAction.cpp">
       <Filter>ソース ファイル\Player</Filter>
     </ClCompile>
+    <ClCompile Include="Map\MapChip\BreakMapObject.cpp">
+      <Filter>ソース ファイル\Map\MapChip</Filter>
+    </ClCompile>
     <ClCompile Include="NPC\Shop\ItemShop.cpp">
       <Filter>ソース ファイル\NPC\Shop</Filter>
     </ClCompile>
     <ClCompile Include="NPC\Shop\WeaponShop.cpp">
       <Filter>ソース ファイル\NPC\Shop</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\BossHp\BossHp.cpp">
+      <Filter>ソース ファイル\UI\BossHp</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\WeekPoint\WeekPoint.cpp">
+      <Filter>ソース ファイル\UI\WeekPoint</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\ClearScene.cpp">
+      <Filter>ソース ファイル\Scene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -512,11 +530,23 @@
     <ClInclude Include="Player\WireAction.h">
       <Filter>ソース ファイル\Player</Filter>
     </ClInclude>
+    <ClInclude Include="Map\MapChip\BreakMapObject.h">
+      <Filter>ソース ファイル\Map\MapChip</Filter>
+    </ClInclude>
     <ClInclude Include="NPC\Shop\ItemShop.h">
       <Filter>ソース ファイル\NPC\Shop</Filter>
     </ClInclude>
     <ClInclude Include="NPC\Shop\WeaponShop.h">
       <Filter>ソース ファイル\NPC\Shop</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\BossHp\BossHp.h">
+      <Filter>ソース ファイル\UI\BossHp</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\WeekPoint\WeekPoint.h">
+      <Filter>ソース ファイル\UI\WeekPoint</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\ClearScene.h">
+      <Filter>ソース ファイル\Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -643,6 +673,12 @@
       <Filter>ソース ファイル\Assets</Filter>
     </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\TestGround.FBX">
+      <Filter>ソース ファイル\Assets</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\Maw.fbx">
+      <Filter>ソース ファイル\Assets</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\map3.FBX">
       <Filter>ソース ファイル\Assets</Filter>
     </MeshContentTask>
   </ItemGroup>

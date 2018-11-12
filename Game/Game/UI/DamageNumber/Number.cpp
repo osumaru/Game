@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "../DamageNumber/Number.h"
+#include "Number.h"
 
 void CNumber::Init(CVector2 numPos, CVector2 numSize)
 {
@@ -13,13 +13,7 @@ void CNumber::Init(CVector2 numPos, CVector2 numSize)
 	}
 }
 
-void CNumber::Update()
+void CNumber::Draw()
 {
-}
-
-void CNumber::AfterDraw()
-{
-	Engine().SetAlphaBlendState(enAlphaBlendStateAdd);
 	m_number[m_num].Draw();
-	Engine().SetAlphaBlendState(enAlphaBlendStateNone);
 }

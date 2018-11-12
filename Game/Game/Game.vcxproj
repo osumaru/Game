@@ -187,10 +187,13 @@
     <ClCompile Include="Item\Money.cpp" />
     <ClCompile Include="Item\RecoveryItem.cpp" />
     <ClCompile Include="Item\TreasureChest.cpp" />
+    <ClCompile Include="Map\MapChip\BreakMapObject.cpp" />
     <ClCompile Include="NPC\INpcState.cpp" />
     <ClCompile Include="NPC\NpcManager.cpp" />
     <ClCompile Include="NPC\ShopNPC.cpp" />
     <ClCompile Include="Player\WireAction.cpp" />
+    <ClCompile Include="Scene\ClearScene.cpp" />
+    <ClCompile Include="UI\BossHp\BossHp.cpp" />
     <ClCompile Include="UI\Fade\Fade.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Map\Map.cpp" />
@@ -232,6 +235,7 @@
     <ClCompile Include="UI\Result\Result.cpp" />
     <ClCompile Include="UI\WeaponSelect\WeaponSelect.cpp" />
     <ClCompile Include="NPC\Shop\WeaponShop.cpp" />
+    <ClCompile Include="UI\WeekPoint\WeekPoint.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera\ArrowGameCamera.h" />
@@ -264,10 +268,13 @@
     <ClInclude Include="Item\Money.h" />
     <ClInclude Include="Item\RecoveryItem.h" />
     <ClInclude Include="Item\TreasureChest.h" />
+    <ClInclude Include="Map\MapChip\BreakMapObject.h" />
     <ClInclude Include="NPC\INpcState.h" />
     <ClInclude Include="NPC\NpcManager.h" />
     <ClInclude Include="NPC\ShopNPC.h" />
     <ClInclude Include="Player\WireAction.h" />
+    <ClInclude Include="Scene\ClearScene.h" />
+    <ClInclude Include="UI\BossHp\BossHp.h" />
     <ClInclude Include="UI\Fade\Fade.h" />
     <ClInclude Include="Map\Map.h" />
     <ClInclude Include="Map\MapChip\MapChip.h" />
@@ -305,6 +312,7 @@
     <ClInclude Include="UI\Result\Result.h" />
     <ClInclude Include="UI\WeaponSelect\WeaponSelect.h" />
     <ClInclude Include="NPC\Shop\WeaponShop.h" />
+    <ClInclude Include="UI\WeekPoint\WeekPoint.h" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="Assets\shader\sprite.fx">
@@ -327,6 +335,8 @@
     <MeshContentTask Include="Assets\modelData\LargeSword.fbx" />
     <MeshContentTask Include="Assets\modelData\LongBow.FBX" />
     <MeshContentTask Include="Assets\modelData\map2.FBX" />
+    <MeshContentTask Include="Assets\modelData\map3.FBX" />
+    <MeshContentTask Include="Assets\modelData\Maw.fbx" />
     <MeshContentTask Include="Assets\modelData\Money.fbx" />
     <MeshContentTask Include="Assets\modelData\Ninja.FBX" />
     <MeshContentTask Include="Assets\modelData\Player.fbx" />

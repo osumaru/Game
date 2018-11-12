@@ -1,6 +1,8 @@
 #include "stdafx.h"
-#include "../Scene/GameScene.h"
+#include "SceneManager.h"
+#include "GameScene.h"
 #include "Map/Map.h"
+#include "../../Game/Camera/GameCamera.h"
 #include "../Player/Player.h"
 #include "../UI/MiniMap/MiniMap.h"
 #include "../UI/WeaponSelect/WeaponSelect.h"
@@ -8,9 +10,7 @@
 #include "../UI/Menu/Menu.h"
 #include "../UI/Result/Result.h"
 #include "../UI/LevelUp/LevelUp.h"
-#include "../../Game/Camera/GameCamera.h"
 #include "../GameSound/GameSound.h"
-#include "SceneManager.h"
 
 CGameScene::CGameScene()
 {

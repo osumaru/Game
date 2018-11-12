@@ -23,7 +23,7 @@ public:
 	}
 
 	//更新
-	void Update();
+	void Update() override;
 
 	//グループのリストに追加
 	//enemy		エネミークラスのポインタ

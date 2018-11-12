@@ -46,7 +46,7 @@ void CPlayerAvoidance::Update()
 		//playerFront.z = m_pPlayer->GetWorldMatrix().m[2][2];
 		//if (playerFront.Dot(movePos) < 0.0f)
 		//{
-			playerPos += movePos;
+			//playerPos += movePos;
 		//}
 	}
 	playerPos.y = characon.GetPosition().y;

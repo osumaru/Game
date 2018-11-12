@@ -56,45 +56,43 @@ void CBreakMapObject::Init(const CVector3& position, const CQuaternion& rotation
 
 void CBreakMapObject::Update()
 {
-	float killZ = 30.0f;
-	float fallinSpeed = 0.02f;
-	float breakMaxLength = 3.0f;
+
+	float killY = -50.0f;		//消す位置
+	float fallinSpeed = 0.02f;	//落ちる速度
+	float breakMaxLength = 12.0f;//最大破壊距離
 
 	//攻撃していたら
-	if (GetMaw().GetIsAttack())
-	{
-		CVector3 BossLeftHandPos = GetMaw().GetLeftHandBone();
+	//if (GetMaw().GetIsAttack())
+	//{
+		//左手のボーンの座標を取得
+		CMatrix BossLeftHandMat = GetMaw().GetBoneMatrix(L"RightHand");
+		CVector3 BossLeftHandPos;
+
+		BossLeftHandPos.x =BossLeftHandMat.m[3][0];
+		BossLeftHandPos.y =BossLeftHandMat.m[3][1];
+		BossLeftHandPos.z =BossLeftHandMat.m[3][2];
 		CVector3 distance = BossLeftHandPos - m_position;
+		//distance.y+=5.0f;
 		float BreakLength = distance.Length();
 		//腕に当たっていたらかつ壊れていなかったら
-		if (BreakLength < breakMaxLength && !isBreak)
+		if (BreakLength < breakMaxLength && !m_isBreak)
 		{
-			isBreak = true;
+			m_isBreak = true;
 		}
-	}
-	/*if (GetMaw().GetBreakObjectHit()&&!isBreak)
-	{
-		isBreak = true;
-	}*/
-	//
+	//}
+
 	//下に落としていく処理
-	if (isBreak) 
+	if (m_isBreak) 
 	{
 		m_position.y -= fallinSpeed;
 		//killZより下だったら消去
-		if (m_position.y < killZ)
+		if (m_position.y < killY)
 		{
 			this->MapChipDelete();
 		}
 	}
 	
-		
-	MapChip::Update();
-	//剛体の座標と回転を更新
-	m_rigidBody.get()->SetPosition(m_position);
-	//m_rigidBody.get()->SetRotation(m_rotation);
-	//スキンモデルを更新
-	m_skinModel.Update(m_position, m_rotation, m_scale);
+	
 }
 
 void CBreakMapObject::Draw()
