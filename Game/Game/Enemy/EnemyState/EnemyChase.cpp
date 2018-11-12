@@ -49,10 +49,10 @@ void CEnemyChase::Move(float length)
 		//åoòHíTçıÇ∑ÇÈ
 		m_interval++;
 		if (m_interval % 5 == 0) {
-			std::vector<CVector2> root;
+			std::vector<CVector3> root;
 			CVector3 startPos = enemyPos;
 			CVector3 targetPos = playerPos;
-			g_pathFinding.FindRoot(root, { startPos.x, startPos.z }, { targetPos.x, targetPos.z });
+			g_pathFinding.FindRoot(root, startPos, targetPos);
 			if (!root.empty()) {
 				CVector3 rootPos = { root[0].x, 0.0f, root[0].y };
 				CVector3 pos = enemyPos;
