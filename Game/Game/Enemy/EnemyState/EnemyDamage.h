@@ -22,6 +22,9 @@ public:
 	//デストラクタ
 	~CEnemyDamage() {};
 
+	//初期化
+	void Init();
+
 	//更新する前に一度だけ呼ばれる
 	bool Start() override;
 
@@ -31,7 +34,6 @@ public:
 	//解放
 	void Release() override;
 private:
-	//CVector3		m_damagePos;				//ダメージ表示させる座標
 	CDamageNumber*	m_damageNumber = nullptr;	//ダメージ表示
 	CVector3		m_knockBack;
 	const float		m_knockBackSpeed = 1.0f;
