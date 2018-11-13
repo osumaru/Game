@@ -166,6 +166,18 @@ public:
 		m_isDamage = isDamage;
 	}
 
+	//ダメージを受けられるか
+	bool IsDamagePossible() const
+	{
+		return m_isDamagePossible;
+	}
+
+	//ダメージを受けられるかのフラグを設定する
+	void SetIsDamagePossible(bool isDamage)
+	{
+		m_isDamagePossible = isDamage;
+	}
+
 	//ワイヤーが当たったか
 	bool IsWireHit() const
 	{
@@ -192,5 +204,6 @@ protected:
 	bool					m_isAttackHit = false;	//攻撃が当たったか
 	bool					m_isFind = false;		//プレイヤーを発見したか
 	bool					m_isDamage = false;		//ダメージを受けたか
+	bool					m_isDamagePossible = true;//ダメージを受けられるか
 	bool					m_isWireHit = false;	//ワイヤーが当たったか
 };

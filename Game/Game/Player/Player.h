@@ -28,7 +28,6 @@ class CPlayer : public IGameObject
 {
 
 public:
-
 	//プレイヤーの初期化
 	void Init(CVector3 position);
 
@@ -298,9 +297,6 @@ public:
 	}
 
 private:
-
-	//プレイヤーがエネミーに攻撃する処理
-	void PlayerAttack();
 
 	//プレイヤーの回転をする関数
 	void Rotation();
