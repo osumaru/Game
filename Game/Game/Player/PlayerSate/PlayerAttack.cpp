@@ -156,10 +156,7 @@ void CPlayerAttack::EnemyAttack()
 	}
 
 	//ボスが作られていなかったら
-	if (&GetMaw() == NULL)
-	{
-		return;
-	}
+	if (&GetMaw() == NULL){return;}
 	//if (!GetMaw().GetIsBattle()) { return; }
 	//ボスがダメージを受けていなかったら
 	if (!GetMaw().GetIsDamage()) {
