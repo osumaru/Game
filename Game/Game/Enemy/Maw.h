@@ -47,7 +47,10 @@ public:
 	void BeforeDead() override;
 
 	//行動の選択
-	void ActionStateOrder();
+	//void ActionStateOrder();
+
+	//弱点スプライト描画
+	void WeekPointUpdate();
 
 	//通常攻撃
 	void Attack();
@@ -59,10 +62,10 @@ public:
 	void Down();
 
 	//プレイヤーを探す回転なども
-	void Find();
+	void Search();
 
 	//待機状態
-	void Stand();
+	void Idle();
 
 	//死亡
 	void Death();
@@ -157,8 +160,8 @@ private:
 	{
 		enActionPatternAttack,			//攻撃
 		enActionPatternSpecialAttack,	//特殊攻撃
-		enActionPatternStand,			//待機
-		enActionPatternFind,			//探す
+		enActionPatternIdle,			//待機
+		enActionPatternSearch,			//探す
 		enActionPatternDown,			//ダウン
 		enActionPatternDeath,			//死亡
 		enActionPatternNum,				//数
