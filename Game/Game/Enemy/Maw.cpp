@@ -301,7 +301,7 @@ void CMaw::Down()
 		m_actionPattern = EnMawActionPattern::enActionPatternSearch;
 		//ActionStateOrder();
 		m_downTime = 0.0f;
-		//m_isDown = false;
+		m_isDown = false;
 		m_weekPoint->SetIsActive(true);
 	}
 }
@@ -446,7 +446,7 @@ void CMaw::HandAttack(float DamageLength)
 	float PlayerDamageLength = distance.Length();
 	if (PlayerDamageLength < PlayerDamageLengthMax) {
 		//プレイヤーがダメージを受けた
-		GetPlayer().GetDamage();
+		GetPlayer().GetDamage(m_status.Strength);
 	}
 	
 }
@@ -472,8 +472,9 @@ void CMaw::SetIsDamage(bool isDamage)
 	if (m_downCount > MaxDownCount)
 	{
 		//ダウンさせる
+		m_isDamage = isDamage;
 		m_actionPattern = EnMawActionPattern::enActionPatternDown;
-		//m_isDown = true;
+		m_isDown = true;
 		m_weekPoint->SetIsActive(false);
 		m_downCount = 0;
 	}

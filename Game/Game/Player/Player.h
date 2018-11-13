@@ -159,11 +159,11 @@ public:
 	}
 
 	//プレイヤーのダメージ処理
-	void GetDamage()
+	void GetDamage(int DamageValue)
 	{
 		if (!m_isDamege && !m_intervalOn)
 		{
-			m_status.Health -= 5;
+			m_status.Health -= DamageValue;
 			m_isDamege = true;
 		}
 	}
