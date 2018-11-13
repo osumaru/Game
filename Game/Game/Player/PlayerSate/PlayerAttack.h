@@ -15,6 +15,11 @@ public:
 	//更新
 	void Update()override;
 
+	//エネミーに攻撃する
+	void EnemyAttack();
+
+	void Move();
+
 private:
 	static const int			MAX_ATTACK_NUM = 3;					//最大連続攻撃回数
 	float						m_animetionFrame = 0.0f;			

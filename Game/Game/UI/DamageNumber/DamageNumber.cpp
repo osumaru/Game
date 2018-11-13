@@ -1,7 +1,10 @@
 #include "stdafx.h"
 #include "DamageNumber.h"
+#include "../../Enemy/IEnemy.h"
+#include "../../Player/Player.h"
+#include "../../Camera/GameCamera.h"
 
-void CDamageNumber::Init()
+void CDamageNumber::Init(IEnemy* enemy)
 {
 	m_numPos = { 0.0f,0.0f };
 	m_numSize = { 15.0f,25.0f };
@@ -11,10 +14,44 @@ void CDamageNumber::Init()
 		m_numPos.x -= m_numSize.x * i;
 		m_number[i].Init(m_numPos, m_numSize);
 	}
+
+	m_enemy = enemy;
+}
+
+bool CDamageNumber::Start()
+{
+	//ダメージ計算
+	DamageCalculation();
+
+	CMatrix leftShoulderMatrix = m_enemy->GetBoneWorldMatrix(L"LeftShoulder");
+	m_damagePos.x = leftShoulderMatrix.m[3][0];
+	m_damagePos.y = leftShoulderMatrix.m[3][1];
+	m_damagePos.z = leftShoulderMatrix.m[3][2];
+
+	return true;
 }
 
 void CDamageNumber::Update()
 {
+	CMatrix viewMatrix = GetGameCamera().GetViewMatrix();
+	CMatrix projectionMatrix = GetGameCamera().GetProjectionMatrix();
+	//ビュー変換
+	CVector4 viewPosition = m_damagePos;
+	viewMatrix.Mul(viewPosition);
+	//プロジェクション変換
+	CVector4 projectionPosition = viewPosition;
+	projectionMatrix.Mul(projectionPosition);
+	projectionPosition = projectionPosition / projectionPosition.w;
+	//スクリーン変換
+	CVector2 screenPosition;
+	screenPosition.x = (1.0f + projectionPosition.x) / 2.0f * FrameBufferWidth() - (FrameBufferWidth() / 2.0f);
+	screenPosition.y = (1.0f + projectionPosition.y) / 2.0f * FrameBufferHeight() - (FrameBufferHeight() / 2.0f);
+	for (int i = 0; i < EnDigit::enDigit_Num; i++)
+	{
+		m_number[i].SetPosition(screenPosition);
+		screenPosition.x -= m_numSize.x * (i + 1);
+	}
+
 	m_timer += GameTime().GetDeltaFrameTime();
 
 	if (m_timer > m_drawTime) {
@@ -42,10 +79,19 @@ void CDamageNumber::AfterDraw()
 	}
 }
 
-void CDamageNumber::DamageCalculation(int dmg)
+void CDamageNumber::DamageCalculation()
 {
+	//ダメージ計算
+	int playerStrength = GetPlayer().GetStatus().Strength;
+	int enemyDefence = m_enemy->GetStatus().Defense;
+	int damage = playerStrength - enemyDefence;
+	if (damage < 0)
+	{
+		damage = 0;
+	}
+	m_enemy->HpDamage(damage);
+
 	//受けたダメージを取得
-	int damage = dmg;
 	damage %= 1000;
 	if (damage / 100 > 0) {
 		//百の位を表示
@@ -75,14 +121,4 @@ void CDamageNumber::DamageCalculation(int dmg)
 	//一の位を表示
 	m_number[EnDigit::enDigit_One].SetIsDraw(true);
 	m_number[EnDigit::enDigit_One].SetNumber(damage);
-}
-
-void CDamageNumber::SetPosition(const CVector2 & position)
-{
-	CVector2 pos = position;
-	for (int i = 0; i < EnDigit::enDigit_Num; i++)
-	{
-		m_number[i].SetPosition(pos);
-		pos.x -= m_numSize.x * (i + 1);
-	}
 }

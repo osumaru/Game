@@ -68,8 +68,10 @@ void CPlayer::Init(CVector3 position)
 											{ L"Assets/modelData/PlayerCombo4.tka" },			//攻撃アニメーション
 											{ L"Assets/modelData/PlayerCombo5.tka" },		//連撃アニメーション
 											{ L"Assets/modelData/PlayerCombo6.tka" },		//連撃アニメーション
+											{ L"Assets/modelData/PlayerAttackCombine.tka" },		//連撃アニメーション
 											{ L"Assets/modelData/PlayerDamage.tka" },			//ダメージアニメーション
 											{ L"Assets/modelData/PlayerRoll.tka" }	,		//回避アクション
+											{ L"Assets/modelData/PlayerRollCombine.tka" }	,		//回避アクション
 											{ L"Assets/modelData/PlayerDeath.tka" },			//死亡アニメーション
 											{ L"Assets/modelData/PlayerWireMove.tka" },				//ワイヤー移動アニメーション
 											{ L"Assets/modelData/PlayerArrowAttack.tka" },		//弓の攻撃アニメーション
@@ -132,7 +134,6 @@ void CPlayer::Update()
 	}
 
 	StatusCalculation();	//ステータスの処理
-	PlayerAttack();
 	
 	std::list<CPlayerArrow*>::iterator it;
 	it = m_arrowList.begin();
@@ -336,71 +337,6 @@ void CPlayer::Rotation()
 		m_rotation.Multiply(multiY);
 		m_rotation.Multiply(multiX);
 	}
-}
-
-void CPlayer::PlayerAttack()
-{
-	if (!m_isAttack) { return; }
-	
-	//エネミーのリストを取得
-	for (const auto& enemys : GetSceneManager().GetGameScene().GetMap()->GetEnemyList())
-	{
-		if (!enemys->IsDamage()) {
-
-			CVector3 EnemyVec = enemys->GetPosition();
-			EnemyVec.y += 1.3f;
-			EnemyVec -= m_weapon.GetPosition();
-			float len = EnemyVec.Length();
-
-			if (fabs(len) < 2.0f)
-			{
-				enemys->SetIsDamage(true);
-			}
-
-		}
-	}
-
-	//ボスが作られていなかったら
-	if (&GetMaw() == NULL)
-	{
-		return;
-	}
-	if (!GetMaw().GetIsBattle()) { return; }
-	//ボスがダメージを受けていなかったら
-	if (!GetMaw().GetIsDamage()) {
-		//ダウンしていなかったら
-		if (!GetMaw().GetIsDown())
-		{
-			const float BossWeekLenge = 40.0f;
-			//ボスの弱点の座標取得
-			CVector3 EnemyVec = GetMaw().GetWeekPosition();
-			EnemyVec -= m_weapon.GetPosition();
-			float len = EnemyVec.Length();
-
-			if (fabs(len) < BossWeekLenge)
-			{
-				GetMaw().SetIsDamage(true);
-				return;
-			}
-		}
-		else
-		{
-			const float BossHeight = 10.0f;
-			const float BossLenge = 12.0f;
-			//ボスの座標取得
-			CVector3 EnemyVec = GetMaw().GetPosition();
-			EnemyVec.y += BossHeight;
-			EnemyVec -= m_weapon.GetPosition();
-			float len = EnemyVec.Length();
-
-			if (fabs(len) < BossLenge)
-			{
-				GetMaw().SetIsDamage(true);
-				return;
-			}
-		}
-	}
-
 }
 
 void CPlayer::UseItem(int number)

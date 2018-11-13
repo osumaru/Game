@@ -11,8 +11,10 @@ enum EnPlayerAnimation
 	enPlayerAnimationAttack,		//攻撃アニメーション
 	enPlayerAnimationAttack2,		//連撃アニメーション
 	enPlayerAnimationAttack3,		//連撃アニメーション
+	enPlayerAnimationAttackCombine,		//連撃アニメーション
 	enPlayerAnimationDamage,		//ダメージアニメーション
 	enPlayerAnimationAvoidance,		//回避アニメーション
+	enPlayerAnimationAvoidanceCombine,	//回避の後の合成用ポーズのアニメーション
 	enPlayerAnimationDete,			//死亡アニメーション
 	enPlayerAnimationWireMove,		//ワイヤー移動アニメーション
 	enPlayerAnimationArrowAttack,	//弓のアニメーション

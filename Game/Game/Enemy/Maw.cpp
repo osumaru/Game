@@ -356,24 +356,24 @@ void CMaw::Search()
 		m_rotation = rot;
 
 	}
-	const float LengeAttackLength = 30.0f;		//遠距離攻撃距離
-	const float StandLength = 75.0f;			//戦闘終了距離
-	//遠距離攻撃アニメーション
-	//Anim(EnMawState::enState_Idle);
+	//const float LengeAttackLength = 30.0f;		//遠距離攻撃距離
+	//const float StandLength = 75.0f;			//戦闘終了距離
+	////遠距離攻撃アニメーション
+	////Anim(EnMawState::enState_Idle);
 
-	CVector3 toPlayerDir = GetPlayer().GetPosition() - m_position;
-	float length = toPlayerDir.Length();
+	//CVector3 toPlayerDir = GetPlayer().GetPosition() - m_position;
+	//float length = toPlayerDir.Length();
 
-	//プレイヤーが遠くに離れたら
-	if (length > StandLength)
-	{
-		//待機ステートへ
-		m_actionPattern = EnMawActionPattern::enActionPatternIdle;
-	}
-	else if (length > LengeAttackLength)
-	{
-		//遠距離攻撃ステートへ
-	}
+	////プレイヤーが遠くに離れたら
+	//if (length > StandLength)
+	//{
+	//	//待機ステートへ
+	//	m_actionPattern = EnMawActionPattern::enActionPatternIdle;
+	//}
+	//else if (length > LengeAttackLength)
+	//{
+	//	//遠距離攻撃ステートへ
+	//}
 }
 
 //待機状態

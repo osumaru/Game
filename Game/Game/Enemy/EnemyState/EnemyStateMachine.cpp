@@ -63,6 +63,7 @@ void CEnemyStateMachine::ChangeState(CEnemyState::EnState nextState)
 
 void CEnemyStateMachine::Release()
 {
+	m_currentState->Release();
 	Delete(m_currentState);
 	Delete(this);
 }
