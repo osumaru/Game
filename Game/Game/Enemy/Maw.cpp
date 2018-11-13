@@ -47,6 +47,7 @@ void CMaw::OnInvokeAnimationEvent(
 		m_isAttack = false;
 	}
 }
+
 //初期化
 void CMaw::Init(CVector3 position)
 {
@@ -63,8 +64,8 @@ void CMaw::Init(CVector3 position)
 	m_status.Gold = 100;
 
 	//キャラコンの設定
-	const float Height = 10.0f;
-	const float radius = 3.0f;
+	const float Height = 12.0f;
+	const float radius = 4.0f;
 	const float Gravity = -9.8f;
 
 	//ライトの設定
@@ -89,7 +90,7 @@ void CMaw::Init(CVector3 position)
 		wchar_t* animClip[EnMawState::enState_Num] = {
 			{ L"Assets/modelData/MawStand.tka"},			//待機アニメーション	
 			{ L"Assets/modelData/MawWalk.tka" },			//歩行アニメーション
-			{ L"Assets/modelData/MawAttack.tka" },			//攻撃アニメーション
+			{ L"Assets/modelData/MawAttack2.tka" },			//攻撃アニメーション
 			{ L"Assets/modelData/MawSpecialAttack.tka" },	//攻撃アニメーション
 			{ L"Assets/modelData/MawDamage.tka" },			//ダメージアニメーション
 			{ L"Assets/modelData/MawDown.tka" },			//ダウンアニメーション
@@ -115,8 +116,9 @@ void CMaw::Init(CVector3 position)
 	//最初の行動を選択
 	m_actionPattern = EnMawActionPattern::enActionPatternStand;
 
-	m_weekPoint->SetIsActive(true);
+	//m_weekPoint->SetIsActive(true);
 }
+
 //更新
 void CMaw::Update()
 {
@@ -152,24 +154,25 @@ void CMaw::Update()
 	}
 	const float CameraDeg=50.0f;
 	const float CameraLength=30.0f;
-	CVector3 CameraForward=GetGameCamera().GetCamera().GetFlont();
+	CVector3 CameraForward = GetGameCamera().GetCamera().GetFlont();
 	CameraForward.y = 0.0f;
 	CameraForward.Normalize();
-	CVector3 toEnemyDir = m_position - CameraForward;
+	CVector3 toEnemyDir = m_position - GetGameCamera().GetCamera().GetPosition();
 	float length = toEnemyDir.Length();
 	toEnemyDir.y = 0.0f;
 	toEnemyDir.Normalize();
 
 	float angle = toEnemyDir.Dot(CameraForward);
-	angle = acosf(angle);
+	//angle = acosf(angle);
 
 	//カメラの視界に入ったら
-	if (fabsf(angle) <= CMath::DegToRad(CameraDeg)/* && !m_weekPoint->IsActive()*/) {
+	if (angle > 0.0f)//fabsf(angle) <= CMath::DegToRad(CameraDeg)/* && !m_weekPoint->IsActive()*/) 
+	{
 
 		//次の行動の選択
 		m_weekPoint->SetIsActive(true);
 	}
-	else if(fabsf(angle) > CMath::DegToRad(CameraDeg)/*&&m_weekPoint->IsActive()*/)
+	else //if(fabsf(angle) > CMath::DegToRad(CameraDeg)/*&&m_weekPoint->IsActive()*/)
 	{
 		m_weekPoint->SetIsActive(false);
 	}
@@ -199,6 +202,7 @@ void CMaw::Update()
 	//スキンモデルの更新
 	m_skinModel.Update(m_position, m_rotation,m_scale, true);
 }
+
 //行動の選択
 void CMaw::ActionStateOrder()
 {
@@ -239,6 +243,7 @@ void CMaw::ActionStateOrder()
 		//m_actionPattern = EnMawActionPattern::enActionPatternStand;
 	}
 }
+
 //攻撃行動
 void CMaw::Attack()
 {
@@ -273,6 +278,7 @@ void CMaw::SpecialAttack()
 
 	HandAttack(PlayerDamageLengthMax);
 }
+
 //ダウン状態
 void CMaw::Down()
 {
@@ -310,6 +316,7 @@ void CMaw::Down()
 		m_weekPoint->SetIsActive(true);
 	}
 }
+
 //探す状態
 void CMaw::Find()
 {
@@ -355,6 +362,7 @@ void CMaw::Find()
 
 	}
 }
+
 //待機状態
 void CMaw::Stand()
 {
@@ -373,6 +381,7 @@ void CMaw::Stand()
 		m_isBattle = true;
 	}
 }
+
 //死亡状態
 void CMaw::Death()
 {
@@ -384,6 +393,7 @@ void CMaw::Death()
 		GetSceneManager().ChangeScene(GetSceneManager().enClearScene);
 	}
 }
+
 //アニメーション
 bool CMaw::Anim(EnMawState animState)
 {
@@ -402,6 +412,7 @@ bool CMaw::Anim(EnMawState animState)
 	}
 	return true;
 }
+
 //手での攻撃
 void CMaw::HandAttack(float DamageLength)
 {
@@ -426,6 +437,7 @@ void CMaw::HandAttack(float DamageLength)
 	}
 	
 }
+
 //ダメージ処理
 void CMaw::SetIsDamage(bool isDamage)
 {
@@ -453,10 +465,12 @@ void CMaw::SetIsDamage(bool isDamage)
 	//ダメージ間隔を最大にする
 	m_damageInterval = MaxInterval;
 }
+
 //描画
 void CMaw::Draw()
 {
 	m_skinModel.Draw(GetGameCamera().GetViewMatrix(), GetGameCamera().GetProjectionMatrix());
+	m_characterController.Draw();
 }
 
 //死亡する前に呼ばれる関数
