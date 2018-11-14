@@ -9,7 +9,6 @@ void CEnemyGroup::Update()
 
 	while (it != m_enemyGroupList.end()) {
 		if ((*it)->IsDelete()) {
-			IEnemy* enemy = *it;
 			it = m_enemyGroupList.erase(it);
 		}
 		else {

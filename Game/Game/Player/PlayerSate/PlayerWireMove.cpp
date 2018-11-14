@@ -52,7 +52,7 @@ void CPlayerWireMove::Update()
 		//ˆÚ“®‚ªI‚í‚Á‚½
 		GetPlayer().GetWireAction().SetIsWireMove(false);
 		GetPlayer().GetPlayerStateMachine().SetState(CPlayerState::enPlayerStateStand);
-		std::list<IEnemy*> enemyList = GetSceneGame().GetMap()->GetEnemyList();
+		std::list<IEnemy*>& enemyList = GetSceneGame().GetMap()->GetEnemyList();
 		switch(m_pPlayer->GetWireAction().GetState())
 		{
 		case CWireAction::enStateEnemy:
