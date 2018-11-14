@@ -1,5 +1,8 @@
 #pragma once
 #include "stdafx.h"
+#include "../PlayerGetter.h"
+
+
 class CPlayer;
 //プレイヤーのステートの基底クラス
 
@@ -16,10 +19,12 @@ public:
 	virtual void Update() = 0;
 
 	//プレイヤーのインスタンスを設定
-	void SetPlayer(CPlayer* player)
+	void SetPlayer(CPlayer* player, CPlayerGetter* playerGetter)
 	{
 		m_pPlayer = player;
+		m_pPlayerGetter = playerGetter;
 	}
 protected:
 	CPlayer*		m_pPlayer = nullptr;	//プレイヤーのインスタンス
+	CPlayerGetter*	m_pPlayerGetter = nullptr;
 };

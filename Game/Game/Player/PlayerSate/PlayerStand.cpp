@@ -9,62 +9,62 @@
 void CPlayerStand::Init()
 {
 	//待機アニメーションの再生
-	m_pPlayer->PlayAnimation(enPlayerAnimationStand);
-	m_pPlayer->SetMoveSpeed(CVector3::Zero);
+	m_pPlayerGetter->GetAnimation().Play(enPlayerAnimationStand, 0.5f);
+	m_pPlayerGetter->SetMoveSpeed(CVector3::Zero);
 }
 
 void CPlayerStand::Update()
 {
-	if (m_pPlayer->GetAnimation().GetCurrentAnimationNum() != enPlayerAnimationStand)
+	if (m_pPlayerGetter->GetAnimation().GetCurrentAnimationNum() != enPlayerAnimationStand)
 	{
-		if (!m_pPlayer->GetAnimation().IsPlay())
+		if (!m_pPlayerGetter->GetAnimation().IsPlay())
 		{
-			m_pPlayer->PlayAnimation(enPlayerAnimationStand);
+			m_pPlayerGetter->GetAnimation().Play(enPlayerAnimationStand);
 		}
 		return;
 	}
 	//死亡した場合の処理
 	if (m_pPlayer->GetStatus().Health <= 0)
 	{
-		m_pPlayer->GetPlayerStateMachine().SetState(CPlayerState::enPlayerStateDied);
+		m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateDied);
 	}
 	//ダメージを受けた場合の処理
 	else if (m_pPlayer->GetIsDamage())
 	{
-		m_pPlayer->GetPlayerStateMachine().SetState(CPlayerState::enPlayerStateDamage);
+		m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateDamage);
 	}
 	//攻撃をした時の処理
 	else if (Pad().IsTriggerButton(enButtonRightTrigger))
 	{
 		if (m_pPlayer->GetWeapon().GetCurrentState() == CWeapon::enArrow)
 		{
-			m_pPlayer->GetPlayerStateMachine().SetState(CPlayerState::enPlayerStateArrowAttack);
+			m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateArrowAttack);
 		}
 		else
 		{
-			m_pPlayer->GetPlayerStateMachine().SetState(CPlayerState::enPlayerStateAttack);
+			m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateAttack);
 		}
 		
 	}
 	
 	else if (Pad().IsTriggerButton(enButtonA))
 	{
-		GetPlayer().GetPlayerStateMachine().SetState(CPlayerState::enPlayerStateJump);
+		GetPlayer().GetStateMachine().SetState(CPlayerState::enPlayerStateJump);
 	}
 
 	else if (Pad().IsTriggerButton(enButtonB))
 	{
-		GetPlayer().GetPlayerStateMachine().SetState(CPlayerState::enPlayerStateAvoidance);
+		GetPlayer().GetStateMachine().SetState(CPlayerState::enPlayerStateAvoidance);
 	}
 	else if (GetPlayer().GetWireAction().IsWireMove()) 
 	{
 		//ワイヤー移動できるなら遷移
-		GetPlayer().GetPlayerStateMachine().SetState(CPlayerState::enPlayerStateWireMove);
+		GetPlayer().GetStateMachine().SetState(CPlayerState::enPlayerStateWireMove);
 	}
 	//移動の入力があるなら歩きアニメーションに遷移
 	else if (Pad().GetLeftStickX() != 0 || Pad().GetLeftStickY() != 0)
 	{
-		GetPlayer().GetPlayerStateMachine().SetState(CPlayerState::enPlayerStateWalk);
+		GetPlayer().GetStateMachine().SetState(CPlayerState::enPlayerStateWalk);
 
 	}
 	

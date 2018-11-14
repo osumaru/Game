@@ -17,6 +17,7 @@
 std::vector<std::vector<SMapChipInfo>> mapChipInfo = 
 {
 	{
+	//#include "Test.h"
 	#include "Test2.h"
 	}
 //	{
@@ -178,7 +179,11 @@ void Map::MapChipErase(std::list<MapChip*>::iterator iterator)
 
 void Map::BeforeDead()
 {
-	GetMaw().Destroy();
+	//ボスが作られていなかったら
+	if (&GetMaw() != NULL)
+	{
+		GetMaw().Destroy();
+	}
 	//マップチップの消去
 	for (MapChip* mapchip : m_mapChip)
 	{

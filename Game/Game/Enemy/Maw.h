@@ -47,7 +47,10 @@ public:
 	void BeforeDead() override;
 
 	//行動の選択
-	void ActionStateOrder();
+	//void ActionStateOrder();
+
+	//弱点スプライト描画
+	void WeekPointUpdate();
 
 	//通常攻撃
 	void Attack();
@@ -59,10 +62,10 @@ public:
 	void Down();
 
 	//プレイヤーを探す回転なども
-	void Find();
+	void Search();
 
 	//待機状態
-	void Stand();
+	void Idle();
 
 	//死亡
 	void Death();
@@ -70,7 +73,7 @@ public:
 	//アニメーション
 	bool Anim(EnMawState animState);
 
-	//プレイヤーのインスタンスの取得
+	//インスタンスの取得
 	static CMaw& GetInstance()
 	{
 		return *m_maw;
@@ -98,6 +101,12 @@ public:
 		return m_position;
 	}
 
+	//弱点座標を取得
+	const CVector3& GetWeekPosition() const
+	{
+		return m_weekPosition;
+	}
+
 	//ダメージ判定を取得
 	bool GetIsDamage()
 	{
@@ -111,25 +120,17 @@ public:
 	}
 
 	//発見判定を取得
-	//bool GetIsFind()
-	//{
-	//	return m_isFind;
-	//}
-	//手のワールド行列を取得
-	//const CVector3& GetLeftHandBone() const
-	//{
-	//	CMatrix MawHand = m_skinModel.FindBoneWorldMatrix(L"RightHand");
-	//	CVector3 LeftHandPos = { MawHand.m[3][0],MawHand.m[3][1] ,MawHand.m[3][2] };
-	//	return LeftHandPos;
-	//}
+	bool GetIsBattle()
+	{
+		return m_isBattle;
+	}
 
-	////頭のワールド行列を取得
-	//const CVector3& GetHeadBone() const
-	//{
-	//	CMatrix MawHead = m_skinModel.FindBoneWorldMatrix(L"Neck");
-	//	CVector3 HeadPos = { MawHead.m[3][0],MawHead.m[3][1] ,MawHead.m[3][2] };
-	//	return HeadPos;
-	//}
+	//ダウン状態を取得
+	bool GetIsDown()
+	{
+		return m_isDown;
+	}
+
 	//ボーンのワールド行列を取得
 	const CMatrix& GetBoneMatrix(const wchar_t* boneName) const
 	{
@@ -159,8 +160,8 @@ private:
 	{
 		enActionPatternAttack,			//攻撃
 		enActionPatternSpecialAttack,	//特殊攻撃
-		enActionPatternStand,			//待機
-		enActionPatternFind,			//探す
+		enActionPatternIdle,			//待機
+		enActionPatternSearch,			//探す
 		enActionPatternDown,			//ダウン
 		enActionPatternDeath,			//死亡
 		enActionPatternNum,				//数
@@ -175,6 +176,7 @@ private:
 	CAnimation				m_animation;								//アニメーション
 	SmawStatus				m_status;									//ステータス
 	EnMawActionPattern		m_actionPattern;							//行動パターン
+	CVector3				m_weekPosition;								//弱点座標
 
 	int						m_downCount = 0;							//何回攻撃を受けたか
 	float					m_downTime=0.0f;							//ダウンしている時間
@@ -185,7 +187,7 @@ private:
 	bool					m_isDamage = false;							//ダメージ判定
 	bool					m_isDown = false;							//ダウン判定
 	bool					m_isDeath = false;							//死亡判定
-	//bool					m_isFind = false;							//発見判定
+	bool					m_isBattle = false;							//発見判定
 
 	CBossHp*		m_bossHp = nullptr;			//ボスHP
 	CWeekPoint*		m_weekPoint = nullptr;		//ボスの弱点スプライト

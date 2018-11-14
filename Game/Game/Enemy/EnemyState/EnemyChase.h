@@ -26,6 +26,8 @@ public:
 	//更新
 	void Update() override;
 
+	void Move(float length);
+
 private:
-	const float m_speed = 3.0f;	//移動速度
+	int	m_interval = 0;	//インターバル
 };

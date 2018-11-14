@@ -17,7 +17,8 @@ void CPlayer::OnInvokeAnimationEvent(//ƒAƒjƒ[ƒVƒ‡ƒ“ƒCƒxƒ“ƒg‚ªŒÄ‚Î‚ê‚é‚²‚Æ‚ÉŒÄ‚
 )
 {
 
-	if (wcscmp(animClipName, L"Assets/modelData/PlayerDash60fpsEvent.tka") == 0) {//ƒCƒxƒ“ƒg–¼‚Åˆ—‚ğ•Ï‚¦‚éH
+	if (wcscmp(animClipName, L"Assets/modelData/PlayerDash60fpsEvent.tka") == 0)
+	{//ƒCƒxƒ“ƒg–¼‚Åˆ—‚ğ•Ï‚¦‚éH
 		const float footVolume = 1.0f;
 		CSoundSource* footSound = New<CSoundSource>(0);
 		footSound->Init("Assets/sound/Jump.wav");
@@ -26,12 +27,16 @@ void CPlayer::OnInvokeAnimationEvent(//ƒAƒjƒ[ƒVƒ‡ƒ“ƒCƒxƒ“ƒg‚ªŒÄ‚Î‚ê‚é‚²‚Æ‚ÉŒÄ‚
 
 	}
 
-	if (wcscmp(animClipName, L"Assets/modelData/PlayerThrustAttack.tka") == 0) {//‚½‚Ô‚ñŒÄ‚Î‚ê‚½
-		/*auto soundSource = New<CSoundSource>(0);
+	if (wcscmp(animClipName, L"Assets/modelData/PlayerThrustAttack.tka") == 0)
+	{//‚½‚Ô‚ñŒÄ‚Î‚ê‚½
+		/*
+		auto soundSource = New<CSoundSource>(0);
 		soundSource->Init("sound/Footstep_00.wav");
-		soundSource->Play(false);*/
+		soundSource->Play(false);
+		*/
 	}
 }
+
 
 void CPlayer::Init(CVector3 position)
 {
@@ -40,10 +45,10 @@ void CPlayer::Init(CVector3 position)
 	m_skinmodel.LoadNormalmap(L"Assets/modelData/Player_normal.png");
 
 	m_position = position;
-	m_characterController.Init(0.3f, 1.0f,m_position);
+	m_characterController.Init(0.3f, 1.0f, m_position);
 	m_characterController.SetGravity(-30.0f);
 	//ƒ‰ƒCƒg‚Ìİ’è
-	Light().SetAmbientLight({ 0.5f,0.5f,0.5f,1.0f});
+	Light().SetAmbientLight({ 0.5f,0.5f,0.5f,1.0f });
 	Light().SetDiffuseLight(0, { 1.0f,1.0f,1.0f,1.0f });
 	Light().SetDiffuseLightDir(0, { 0.0f, -1.0f, 1.0f, 1.0f });
 
@@ -60,23 +65,25 @@ void CPlayer::Init(CVector3 position)
 	//ƒAƒjƒ[ƒVƒ‡ƒ“‚Ì‰Šú‰»
 	{
 		wchar_t* animClip[enPlayerAnimationNum] = {
-											{ L"Assets/modelData/PlayerStand.tka"},				//‘Ò‹@ƒAƒjƒ[ƒVƒ‡ƒ“	
-											{ L"Assets/modelData/PlayerWalkStay.tka" },			//•àsƒAƒjƒ[ƒVƒ‡ƒ“
-											{ L"Assets/modelData/PlayerDash60fpsEvent.tka" },		//‘–‚èƒAƒjƒ[ƒVƒ‡ƒ“
-											{ L"Assets/modelData/PlayerRunJump.tka" },			//‘–‚èƒWƒƒƒ“ƒvƒAƒjƒ[ƒVƒ‡ƒ“
-											{ L"Assets/modelData/PlayerJump2.tka" },				//ƒWƒƒƒ“ƒvƒAƒjƒ[ƒVƒ‡ƒ“
-											{ L"Assets/modelData/PlayerCombo4.tka" },			//UŒ‚ƒAƒjƒ[ƒVƒ‡ƒ“
-											{ L"Assets/modelData/PlayerCombo5.tka" },		//˜AŒ‚ƒAƒjƒ[ƒVƒ‡ƒ“
-											{ L"Assets/modelData/PlayerCombo6.tka" },		//˜AŒ‚ƒAƒjƒ[ƒVƒ‡ƒ“
-											{ L"Assets/modelData/PlayerDamage.tka" },			//ƒ_ƒ[ƒWƒAƒjƒ[ƒVƒ‡ƒ“
-											{ L"Assets/modelData/PlayerRoll.tka" }	,		//‰ñ”ğƒAƒNƒVƒ‡ƒ“
-											{ L"Assets/modelData/PlayerDeath.tka" },			//€–SƒAƒjƒ[ƒVƒ‡ƒ“
-											{ L"Assets/modelData/PlayerWireMove.tka" },				//ƒƒCƒ„[ˆÚ“®ƒAƒjƒ[ƒVƒ‡ƒ“
-											{ L"Assets/modelData/PlayerArrowAttack.tka" },		//‹|‚ÌUŒ‚ƒAƒjƒ[ƒVƒ‡ƒ“
-											{ L"Assets/modelData/PlayerArrowAttackEvent.tka" },
-											{ L"Assets/modelData/PlayerLeageSwordAttack.tka" },	//‘åŒ•‚ÌUŒ‚ƒAƒjƒ[ƒVƒ‡ƒ“
-											{ L"Assets/modelData/PlayerTwinSwordAttack.tka" },	//“ñ“—¬‚ÌUŒ‚ƒAƒjƒ[ƒVƒ‡ƒ“
-											{ L"Assets/modelData/PlayerLanding.tka" }
+									{ L"Assets/modelData/PlayerStand.tka"},				//‘Ò‹@ƒAƒjƒ[ƒVƒ‡ƒ“	
+									{ L"Assets/modelData/PlayerWalkStay.tka" },			//•àsƒAƒjƒ[ƒVƒ‡ƒ“
+									{ L"Assets/modelData/PlayerDash60fpsEvent.tka" },		//‘–‚èƒAƒjƒ[ƒVƒ‡ƒ“
+									{ L"Assets/modelData/PlayerRunJump.tka" },			//‘–‚èƒWƒƒƒ“ƒvƒAƒjƒ[ƒVƒ‡ƒ“
+									{ L"Assets/modelData/PlayerJump2.tka" },				//ƒWƒƒƒ“ƒvƒAƒjƒ[ƒVƒ‡ƒ“
+									{ L"Assets/modelData/PlayerCombo4.tka" },			//UŒ‚ƒAƒjƒ[ƒVƒ‡ƒ“
+									{ L"Assets/modelData/PlayerCombo5.tka" },		//˜AŒ‚ƒAƒjƒ[ƒVƒ‡ƒ“
+									{ L"Assets/modelData/PlayerCombo6.tka" },		//˜AŒ‚ƒAƒjƒ[ƒVƒ‡ƒ“
+									{ L"Assets/modelData/PlayerAttackCombine.tka" },		//˜AŒ‚ƒAƒjƒ[ƒVƒ‡ƒ“
+									{ L"Assets/modelData/PlayerDamage.tka" },			//ƒ_ƒ[ƒWƒAƒjƒ[ƒVƒ‡ƒ“
+									{ L"Assets/modelData/PlayerRoll.tka" }	,		//‰ñ”ğƒAƒNƒVƒ‡ƒ“
+									{ L"Assets/modelData/PlayerRollCombine.tka" }	,		//‰ñ”ğƒAƒNƒVƒ‡ƒ“
+									{ L"Assets/modelData/PlayerDeath.tka" },			//€–SƒAƒjƒ[ƒVƒ‡ƒ“
+									{ L"Assets/modelData/PlayerWireMove.tka" },				//ƒƒCƒ„[ˆÚ“®ƒAƒjƒ[ƒVƒ‡ƒ“
+									{ L"Assets/modelData/PlayerArrowAttack.tka" },		//‹|‚ÌUŒ‚ƒAƒjƒ[ƒVƒ‡ƒ“
+									{ L"Assets/modelData/PlayerArrowAttackEvent.tka" },
+									{ L"Assets/modelData/PlayerLeageSwordAttack.tka" },	//‘åŒ•‚ÌUŒ‚ƒAƒjƒ[ƒVƒ‡ƒ“
+									{ L"Assets/modelData/PlayerTwinSwordAttack.tka" },	//“ñ“—¬‚ÌUŒ‚ƒAƒjƒ[ƒVƒ‡ƒ“
+									{ L"Assets/modelData/PlayerLanding.tka" }
 		};
 
 		m_animation.Init(animClip, enPlayerAnimationNum);
@@ -86,28 +93,29 @@ void CPlayer::Init(CVector3 position)
 		m_animation.SetLoopFlg(enPlayerAnimationWireMove, true);
 
 		//ƒAƒjƒ[ƒVƒ‡ƒ“ƒCƒxƒ“ƒgƒŠƒXƒi[‚Ì“o˜^@ŒÄ‚Ño‚³‚ê‚éŠÖ”‚Ì“o˜^H
-		m_animation.AddAnimationEvent([&](auto animClipname, auto eventName) {
+		m_animation.AddAnimationEvent([&](auto animClipname, auto eventName)
+		{
 			OnInvokeAnimationEvent(animClipname, eventName);
 		});
-		
+
 	}
 
 
 	//ƒvƒŒƒCƒ„[‚ÌƒXƒe[ƒ^ƒX‚Ì‰Šú‰»
 	{
-		m_status.Strength	= 10;						//UŒ‚—Í
-		m_status.Defense	= 3;						//–hŒä—Í
-		m_status.Health		= 100;						//‘Ì—Í
+		m_status.Strength = 10;						//UŒ‚—Í
+		m_status.Defense = 3;						//–hŒä—Í
+		m_status.Health = 100;						//‘Ì—Í
 		m_status.MaxHealth = m_status.Health;			//ƒŒƒxƒ‹‚²‚Æ‚ÌÅ‘åHP
-		m_status.Level		= 1;						//ƒŒƒxƒ‹
-		m_status.OldExp		= 15;						//‚Ğ‚Æ‚Â‘O‚ÌƒŒƒxƒ‹‚É•K—v‚ÈŒoŒ±’l
-		m_status.NextExp	= ((m_status.OldExp * 1.1f + 0.5) + (m_status.Level * 12 )) / 2 + 0.5;		//Ÿ‚ÌƒŒƒxƒ‹ƒAƒbƒv‚É•K—v‚ÈŒoŒ±’l
+		m_status.Level = 1;						//ƒŒƒxƒ‹
+		m_status.OldExp = 15;						//‚Ğ‚Æ‚Â‘O‚ÌƒŒƒxƒ‹‚É•K—v‚ÈŒoŒ±’l
+		m_status.NextExp = ((m_status.OldExp * 1.1f + 0.5) + (m_status.Level * 12)) / 2 + 0.5;		//Ÿ‚ÌƒŒƒxƒ‹ƒAƒbƒv‚É•K—v‚ÈŒoŒ±’l
 		m_status.ExperiencePoint = 0;					//ŒoŒ±’l
 		m_status.AccumulationExp += m_status.OldExp;	//—İÏŒoŒ±’l
 		m_status.Gold = 400;							//Š‹à
 	}
-
-	m_PlayerStateMachine.SetPlayer(this);
+	m_playerGetter.SetPlayer(this);
+	m_PlayerStateMachine.SetPlayer(this, &m_playerGetter);
 	m_PlayerStateMachine.Init();
 	//Add(this, 1);
 	m_skinmodel.SetIsShadowCaster(true);
@@ -118,31 +126,26 @@ void CPlayer::Init(CVector3 position)
 void CPlayer::Update()
 {
 	m_position = m_characterController.GetPosition();
-	if (m_isDied) { return; }
-
-	//–³“GŠÔ‚Ìˆ—
-	if (m_intervalOn)
+	if (m_isDied)
 	{
-		m_intervalTime += GameTime().GetDeltaFrameTime();
-		if (m_intervalTime >= INTERVAL)
-		{
-			m_intervalOn = false;
-			m_intervalTime = 0.0f;
-		}
+		return;
 	}
 
 	StatusCalculation();	//ƒXƒe[ƒ^ƒX‚Ìˆ—
-	PlayerAttack();
-	
+
 	std::list<CPlayerArrow*>::iterator it;
 	it = m_arrowList.begin();
-	while (it != m_arrowList.end()) {
-		if ((*it)->IsDelete()) {
+	it = m_arrowList.begin();
+	while (it != m_arrowList.end())
+	{
+		if ((*it)->IsDelete())
+		{
 			//€–S‚µ‚Ä‚¢‚½‚çƒŠƒXƒg‚©‚çíœ
 			CPlayerArrow* enemy = *it;
 			it = m_arrowList.erase(it);
 		}
-		else {
+		else
+		{
 			it++;
 		}
 	}
@@ -206,7 +209,6 @@ void CPlayer::InitArrow()
 {
 	CPlayerArrow*	Arrow = New<CPlayerArrow>(0);
 	m_arrowList.push_back(Arrow);
-	m_initArrow = true;
 }
 
 void CPlayer::StatusCalculation()
@@ -227,9 +229,9 @@ void CPlayer::StatusCalculation()
 		if (m_status.Level % 10 == 0)
 		{
 
-			m_status.Strength	+= 9;
-			m_status.Defense	+= 6;
-			m_status.MaxHealth	+= 25;
+			m_status.Strength += 9;
+			m_status.Defense += 6;
+			m_status.MaxHealth += 25;
 		}
 		else if (m_status.Level % 2 == 0)
 		{
@@ -253,7 +255,7 @@ void CPlayer::StatusCalculation()
 
 void CPlayer::Rotation()
 {
-	
+
 	CVector3 moveSpeed = m_characterController.GetMoveSpeed();
 	CVector3 playerFront = CVector3::Front;
 	if (moveSpeed.x == 0.0f && moveSpeed.z == 0.0f)
@@ -338,54 +340,15 @@ void CPlayer::Rotation()
 	}
 }
 
-void CPlayer::PlayerAttack()
-{
-	if (!m_isAttack) { return; }
-	
-	//ƒGƒlƒ~[‚ÌƒŠƒXƒg‚ğæ“¾
-	for (const auto& enemys : GetSceneManager().GetGameScene().GetMap()->GetEnemyList())
-	{
-		if (!enemys->IsDamage()) {
-
-			CVector3 EnemyVec = enemys->GetPosition();
-			EnemyVec.y += 1.3f;
-			EnemyVec -= m_weapon.GetPosition();
-			float len = EnemyVec.Length();
-
-			if (fabs(len) < 2.0f)
-			{
-				enemys->SetIsDamage(true);
-			}
-
-		}
-	}
-
-	
-	//if (!GetMaw().GetIsDamage()) {
-
-	//	CVector3 EnemyVec = GetMaw().GetPosition();
-	//	//EnemyVec.y += 10.3f;
-	//	EnemyVec -= m_weapon.GetPosition();
-	//	float len = EnemyVec.Length();
-
-	//	if (fabs(len) < 12.0f)
-	//	{
-	//		GetMaw().SetIsDamage(true);
-	//	}
-
-	//}
-	
-
-}
-
 void CPlayer::UseItem(int number)
 {
-	if (!m_itemList.empty()) 
+	if (!m_itemList.empty())
 	{
 		//‘I‚ñ‚¾ƒAƒCƒeƒ€‚ğg‚¤
 		std::list<IItem*>::iterator it;
 		it = m_itemList.begin();
-		for (int i = 0; i < number; i++) {
+		for (int i = 0; i < number; i++)
+		{
 			it++;
 		}
 		(*it)->Use();
@@ -424,7 +387,7 @@ void CPlayer::ChangeEquip(int number)
 
 void CPlayer::AddItemList(IItem * item)
 {
-	if (m_itemList.size() < CItemInventory::GetItemLimit()) 
+	if (m_itemList.size() < CItemInventory::GetItemLimit())
 	{
 		//ŠãŒÀ‚ğ’´‚¦‚Ä‚¢‚È‚¯‚ê‚ÎƒAƒCƒeƒ€ƒŠƒXƒg‚É’Ç‰Á
 		m_itemList.push_back(item);

@@ -17,6 +17,8 @@ void CZombie::Init(CVector3 position)
 	m_skinModel.Load(L"Assets/modelData/Zombi.cmo", &m_animation);
 	m_skinModel.LoadNormalmap(L"Assets/modelData/Zombi_normal.png");
 	m_position = position;
+	m_characterController.Init(0.5f, 0.9f, position);
+	m_characterController.SetGravity(-90.0f);
 	wchar_t* animClip[CEnemyState::enState_Num] = { 
 		L"Assets/modelData/zombiStand.tka",
 		L"Assets/modelData/zombiWalk.tka",
@@ -30,7 +32,6 @@ void CZombie::Init(CVector3 position)
 	m_animation.SetLoopFlg(CEnemyState::enState_Walk, true);
 	m_animation.SetLoopFlg(CEnemyState::enState_Chase, true);
 	Add(&m_enemyStateMachine, 0);
-	Add(&m_enemyMove, 0);
 	Add(&m_enemyTurn, 0);
 	Add(&m_enemySearch, 0);
 
@@ -54,6 +55,11 @@ void CZombie::Update()
 	if (!m_isWireHit) {
 		m_animation.Update(GameTime().GetDeltaFrameTime());
 	}
+
+	m_characterController.SetPosition(m_position);
+	m_characterController.Execute(GameTime().GetDeltaFrameTime());
+	m_position = m_characterController.GetPosition();
+
 	m_skinModel.Update(m_position, m_rotation, { 1.0f, 1.0f, 1.0f }, true);
 }
 

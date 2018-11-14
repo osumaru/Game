@@ -5,7 +5,6 @@
 #pragma once
 
 #include "EnemyState/EnemyStateMachine.h"
-#include "EnemyMove.h"
 #include "EnemyTurn.h"
 #include "EnemySearch.h"
 
@@ -75,7 +74,14 @@ public:
 	//移動速度を取得
 	const CVector3& GetMoveSpeed() const
 	{
-		return m_enemyMove.GetMoveSpeed();
+		return m_characterController.GetMoveSpeed();
+	}
+
+	//移動速度を設定
+	//moveSpeed		移動速度
+	void SetMoveSpeed(const CVector3& moveSpeed)
+	{
+		m_characterController.SetMoveSpeed(moveSpeed);
 	}
 
 	//アニメーションを再生
@@ -108,18 +114,6 @@ public:
 	void StateMachineRelease()
 	{
 		m_enemyStateMachine.Release();
-	}
-
-	//エネミーのステートを取得
-	CEnemyState::EnState GetState()
-	{
-		return m_enemyStateMachine.GetState();
-	}
-
-	//移動しているか
-	bool GetIsMove()
-	{
-		return m_enemyMove.GetIsMove();
 	}
 
 	//ステータスを取得
@@ -172,6 +166,18 @@ public:
 		m_isDamage = isDamage;
 	}
 
+	//ダメージを受けられるか
+	bool IsDamagePossible() const
+	{
+		return m_isDamagePossible;
+	}
+
+	//ダメージを受けられるかのフラグを設定する
+	void SetIsDamagePossible(bool isDamage)
+	{
+		m_isDamagePossible = isDamage;
+	}
+
 	//ワイヤーが当たったか
 	bool IsWireHit() const
 	{
@@ -188,15 +194,16 @@ protected:
 	CSkinModel				m_skinModel;			//スキンモデル
 	CAnimation				m_animation;			//アニメーション
 	CEnemyStateMachine		m_enemyStateMachine;	//ステートマシン
-	CEnemyMove				m_enemyMove;			//移動
 	CEnemyTurn				m_enemyTurn;			//向きを回転
 	CEnemySearch			m_enemySearch;			//プレイヤーを探索
 	CEnemyGroup*			m_enemyGroup;			//エネミーグループ
 	CVector3				m_position;				//座標
 	CQuaternion				m_rotation;				//回転
+	CCharacterController	m_characterController;	//キャラクターコントローラー
 	SEnemyStatus			m_status;				//ステータス
 	bool					m_isAttackHit = false;	//攻撃が当たったか
 	bool					m_isFind = false;		//プレイヤーを発見したか
 	bool					m_isDamage = false;		//ダメージを受けたか
+	bool					m_isDamagePossible = true;//ダメージを受けられるか
 	bool					m_isWireHit = false;	//ワイヤーが当たったか
 };

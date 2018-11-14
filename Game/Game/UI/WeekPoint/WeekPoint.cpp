@@ -5,7 +5,7 @@
 void CWeekPoint::Init()
 {
 	const CVector2 WeekPos = {0.0f,0.0f};
-	const CVector2 WeekSize = {50.0f,50.0f};
+	const CVector2 WeekSize = {80.0f,80.0f};
 	//const float WeekAlpha = 0.7f;
 	m_weekTexture.Load(L"Assets/sprite/arrowTag.png");
 	m_weekSprite.Init(&m_weekTexture);
@@ -38,7 +38,7 @@ void CWeekPoint::Update()
 
 	CVector2 screenPos;
 	screenPos.x=(1.0f+projPos.x) / 2.0f*FrameBufferWidth() - (FrameBufferWidth() / 2.0f);
-	screenPos.y=(1.0f+projPos.y) / 2.0f*FrameBufferWidth() - (FrameBufferWidth() / 2.0f);
+	screenPos.y=(1.0f+projPos.y) / 2.0f*FrameBufferHeight() - (FrameBufferHeight() / 2.0f);
 
 	m_weekSprite.SetPosition(screenPos);
 }

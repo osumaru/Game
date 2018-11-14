@@ -5,7 +5,7 @@
 #include "../Enemy/IEnemy.h"
 #include "PlayerArrow.h"
 #include "Player.h"
-
+#include "../Enemy/Maw.h"
 
 CPlayerArrow::CPlayerArrow()
 {
@@ -26,7 +26,7 @@ bool CPlayerArrow::Start()
 
 void CPlayerArrow::Update()
 {
-	if (GetPlayer().GetPlayerStateMachine().GetState() == CPlayerState::EnPlayerState::enPlayerStateArrowAttack && !m_isMove)
+	if (GetPlayer().GetStateMachine().GetState() == CPlayerState::EnPlayerState::enPlayerStateArrowAttack && !m_isMove)
 	{
 		m_arrowPosition =  GetPlayer().GetWeapon().GetPosition();
 		//カメラの前方向を取得
@@ -77,6 +77,47 @@ void CPlayerArrow::Update()
 					enemys->SetIsDamage(true);
 				}
 
+			}
+		}
+
+		//ボスが作られていたら
+		if (&GetMaw() != NULL)
+		{
+		
+		//ボスがダメージを受けていなかったら
+			if (!GetMaw().GetIsDamage()) {
+				//ダウンしていなかったら
+				if (!GetMaw().GetIsDown())
+				{
+					const float BossWeekLenge = 50.0f;
+					//ボスの弱点の座標取得
+					CVector3 EnemyVec = GetMaw().GetWeekPosition();
+					EnemyVec -= m_arrowPosition;
+					float len = EnemyVec.Length();
+
+					//弱点との判定
+					if (fabs(len) < BossWeekLenge)
+					{
+						GetMaw().SetIsDamage(true);
+						//return;
+					}
+				}
+				else
+				{
+					const float BossHeight = 10.0f;
+					const float BossLenge = 12.0f;
+					//ボスの座標取得
+					CVector3 EnemyVec = GetMaw().GetPosition();
+					EnemyVec.y += BossHeight;
+					EnemyVec -= m_arrowPosition;
+					float len = EnemyVec.Length();
+					//ボスとの判定
+					if (fabs(len) < BossLenge)
+					{
+						GetMaw().SetIsDamage(true);
+						//return;
+					}
+				}
 			}
 		}
 		

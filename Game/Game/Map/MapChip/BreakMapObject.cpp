@@ -29,9 +29,9 @@ void CBreakMapObject::Init(const CVector3& position, const CQuaternion& rotation
 	{*/
 		CMeshCollider mesh;
 		mesh.CreateCollider(&m_skinModel);
-		CVector3 boxsize = (mesh.GetAabbMax() - mesh.GetAabbMin());
-		boxsize.x /= 2.0f;
-		boxsize.z /= 2.0f;
+		CVector3 boxsize = (mesh.GetAabbMax() - mesh.GetAabbMin()) / 2.0f;		
+		CVector3 pos = (mesh.GetAabbMax() + mesh.GetAabbMin()) / 2.0f;
+		rInfo.pos = pos;
 		m_boxCollider.reset(new CBoxCollider);
 		m_boxCollider->Create({ boxsize.x,boxsize.y,boxsize.z });
 		rInfo.collider = m_boxCollider.get();
@@ -39,8 +39,8 @@ void CBreakMapObject::Init(const CVector3& position, const CQuaternion& rotation
 
 
 
-	rInfo.mass = 1.0f;
-	rInfo.pos = m_position;
+	rInfo.mass = 0.0f;
+	rInfo.pos += m_position;
 	rInfo.rot = m_rotation;
 
 	//„‘Ì‚ğì¬
@@ -77,20 +77,21 @@ void CBreakMapObject::Update()
 		//˜r‚É“–‚½‚Á‚Ä‚¢‚½‚ç‚©‚Â‰ó‚ê‚Ä‚¢‚È‚©‚Á‚½‚ç
 		if (BreakLength < breakMaxLength && !m_isBreak)
 		{
-			m_isBreak = true;
+			this->MapChipDelete();
+			//m_isBreak = true;
 		}
 	//}
 
 	//‰º‚É—‚Æ‚µ‚Ä‚¢‚­ˆ—
-	if (m_isBreak) 
-	{
-		m_position.y -= fallinSpeed;
-		//killZ‚æ‚è‰º‚¾‚Á‚½‚çÁ‹
-		if (m_position.y < killY)
-		{
-			this->MapChipDelete();
-		}
-	}
+	//if (m_isBreak) 
+	//{
+	//	m_position.y -= fallinSpeed;
+	//	//killZ‚æ‚è‰º‚¾‚Á‚½‚çÁ‹
+	//	if (m_position.y < killY)
+	//	{
+	//		this->MapChipDelete();
+	//	}
+	//}
 	
 	
 }
@@ -98,4 +99,5 @@ void CBreakMapObject::Update()
 void CBreakMapObject::Draw()
 {
 	MapChip::Draw();
+	m_rigidBody->Draw();
 }

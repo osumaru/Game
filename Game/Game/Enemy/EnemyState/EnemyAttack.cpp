@@ -8,12 +8,17 @@ bool CEnemyAttack::Start()
 	//攻撃アニメーションを再生
 	m_enemy->PlayAnimation(CEnemyState::enState_Attack);
 
+	CVector3 moveSpeed = m_enemy->GetMoveSpeed();
+	CVector3 speed = CVector3::Zero;
+	moveSpeed.x = speed.x;
+	moveSpeed.z = speed.z;
+	m_enemy->SetMoveSpeed(moveSpeed);
+
 	return true;
 }
 
 void CEnemyAttack::Update()
 {
-	//float length = 0.0f;
 	//プレイヤーがダメージを受けていない
 	if (!GetPlayer().GetIsDamage()) {
 		//手のボーンのワールド行列を取得
@@ -27,7 +32,6 @@ void CEnemyAttack::Update()
 		CVector3 playerPosition = GetPlayer().GetPosition();
 		CVector3 distance = playerPosition - m_enemy->GetPosition();
 		distance.y = 0.0f;
-		//length = distance.Length();
 		{
 			//敵の攻撃との距離を計算
 			playerPosition.y += 2.5f;
@@ -35,7 +39,7 @@ void CEnemyAttack::Update()
 			float length = distance.Length();
 			if (length < 1.5f) {
 				//プレイヤーがダメージを受けた
-				GetPlayer().GetDamage();
+				GetPlayer().SetDamage(m_enemy->GetStatus().Strength);
 			}
 		}
 	}
@@ -52,13 +56,14 @@ void CEnemyAttack::Update()
 		//ダメージを受けた
 		m_esm->ChangeState(CEnemyState::enState_Damage); 
 	}
-	if (!m_enemy->IsPlayAnimation()) {
+	else if (!m_enemy->IsPlayAnimation()) {
 		//アニメーションが終了している
 		if (!m_enemy->IsFind()) {
 			//プレイヤーが視野内にいない
 			m_esm->ChangeState(CEnemyState::enState_Walk);
 		}
 		else if (isRange && length < 1.2f) {
+			//攻撃範囲にはいっている
 			m_enemy->PlayAnimation(CEnemyState::enState_Attack);
 		}
 		else {

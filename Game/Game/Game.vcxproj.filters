@@ -61,9 +61,6 @@
     <Filter Include="ソース ファイル\Player">
       <UniqueIdentifier>{fec21044-c359-4445-b351-572f4bf9abdb}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\Player\PlayerSate">
-      <UniqueIdentifier>{78a5d28b-6f9a-4978-9875-12bede60a5e2}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソース ファイル\Enemy\PathFinding">
       <UniqueIdentifier>{bf4c8159-1303-485d-9c80-82c329b1db42}</UniqueIdentifier>
     </Filter>
@@ -79,14 +76,17 @@
     <Filter Include="ソース ファイル\NPC\Shop">
       <UniqueIdentifier>{14c91c9c-7902-4237-ba30-1c31f4a768b1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\GameSound\Item">
-      <UniqueIdentifier>{fe491995-d611-4183-8285-c214638a84fe}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソース ファイル\UI\BossHp">
       <UniqueIdentifier>{29508926-c18b-423f-afbf-7633ea7ef856}</UniqueIdentifier>
     </Filter>
     <Filter Include="ソース ファイル\UI\WeekPoint">
       <UniqueIdentifier>{c173ee8f-8c07-4e43-b2e8-9cd82916a1b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Player\PlayerState">
+      <UniqueIdentifier>{78a5d28b-6f9a-4978-9875-12bede60a5e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Item">
+      <UniqueIdentifier>{fe491995-d611-4183-8285-c214638a84fe}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -136,25 +136,25 @@
       <Filter>ソース ファイル\Scene</Filter>
     </ClCompile>
     <ClCompile Include="Player\PlayerSate\PlayerWalk.cpp">
-      <Filter>ソース ファイル\Player\PlayerSate</Filter>
+      <Filter>ソース ファイル\Player\PlayerState</Filter>
     </ClCompile>
     <ClCompile Include="Player\PlayerSate\PlayerRun.cpp">
-      <Filter>ソース ファイル\Player\PlayerSate</Filter>
+      <Filter>ソース ファイル\Player\PlayerState</Filter>
     </ClCompile>
     <ClCompile Include="Player\PlayerSate\PlayerStand.cpp">
-      <Filter>ソース ファイル\Player\PlayerSate</Filter>
+      <Filter>ソース ファイル\Player\PlayerState</Filter>
     </ClCompile>
     <ClCompile Include="Player\PlayerSate\PlayerStateMachine.cpp">
-      <Filter>ソース ファイル\Player\PlayerSate</Filter>
+      <Filter>ソース ファイル\Player\PlayerState</Filter>
     </ClCompile>
     <ClCompile Include="Player\PlayerSate\PlayerAttack.cpp">
-      <Filter>ソース ファイル\Player\PlayerSate</Filter>
+      <Filter>ソース ファイル\Player\PlayerState</Filter>
     </ClCompile>
     <ClCompile Include="Player\PlayerSate\PlayerDied.cpp">
-      <Filter>ソース ファイル\Player\PlayerSate</Filter>
+      <Filter>ソース ファイル\Player\PlayerState</Filter>
     </ClCompile>
     <ClCompile Include="Player\PlayerSate\PlayerDamage.cpp">
-      <Filter>ソース ファイル\Player\PlayerSate</Filter>
+      <Filter>ソース ファイル\Player\PlayerState</Filter>
     </ClCompile>
     <ClCompile Include="Enemy\EnemyState\EnemyAttack.cpp">
       <Filter>ソース ファイル\Enemy\EnemyState</Filter>
@@ -205,22 +205,22 @@
       <Filter>ソース ファイル\Map</Filter>
     </ClCompile>
     <ClCompile Include="Player\PlayerSate\PlayerJump.cpp">
-      <Filter>ソース ファイル\Player\PlayerSate</Filter>
+      <Filter>ソース ファイル\Player\PlayerState</Filter>
     </ClCompile>
     <ClCompile Include="Player\PlayerSate\PlayerAvoidance.cpp">
-      <Filter>ソース ファイル\Player\PlayerSate</Filter>
+      <Filter>ソース ファイル\Player\PlayerState</Filter>
     </ClCompile>
     <ClCompile Include="Player\PlayerArrow.cpp">
       <Filter>ソース ファイル\Player</Filter>
     </ClCompile>
     <ClCompile Include="Player\PlayerSate\PlayerArrowAttack.cpp">
-      <Filter>ソース ファイル\Player\PlayerSate</Filter>
+      <Filter>ソース ファイル\Player\PlayerState</Filter>
     </ClCompile>
     <ClCompile Include="UI\LevelUp\LevelUp.cpp">
       <Filter>ソース ファイル\UI\LevelUp</Filter>
     </ClCompile>
     <ClCompile Include="Player\PlayerSate\PlayerWireMove.cpp">
-      <Filter>ソース ファイル\Player\PlayerSate</Filter>
+      <Filter>ソース ファイル\Player\PlayerState</Filter>
     </ClCompile>
     <ClCompile Include="Player\PlayerSate\PlayerWireMove.cpp">
       <Filter>ソース ファイル\Player</Filter>
@@ -240,17 +240,14 @@
     <ClCompile Include="Camera\ArrowGameCamera.cpp">
       <Filter>ソース ファイル\Camera</Filter>
     </ClCompile>
-    <ClCompile Include="Enemy\EnemyMove.cpp">
-      <Filter>ソース ファイル\Enemy</Filter>
-    </ClCompile>
     <ClCompile Include="Player\Weapon.cpp">
       <Filter>ソース ファイル\Player</Filter>
     </ClCompile>
     <ClCompile Include="Player\PlayerSate\PlayerState.cpp">
-      <Filter>ソース ファイル\Player\PlayerSate</Filter>
+      <Filter>ソース ファイル\Player\PlayerState</Filter>
     </ClCompile>
     <ClCompile Include="Player\PlayerSate\PlayerArrowShoot.cpp">
-      <Filter>ソース ファイル\Player\PlayerSate</Filter>
+      <Filter>ソース ファイル\Player\PlayerState</Filter>
     </ClCompile>
     <ClCompile Include="Player\PlayerSate\PlayerArrowShoot.cpp">
       <Filter>ソース ファイル\Player\PlayerSate</Filter>
@@ -274,13 +271,13 @@
       <Filter>ソース ファイル\GameSound</Filter>
     </ClCompile>
     <ClCompile Include="Item\Money.cpp">
-      <Filter>ソース ファイル\GameSound\Item</Filter>
+      <Filter>ソース ファイル\Item</Filter>
     </ClCompile>
     <ClCompile Include="Item\RecoveryItem.cpp">
-      <Filter>ソース ファイル\GameSound\Item</Filter>
+      <Filter>ソース ファイル\Item</Filter>
     </ClCompile>
     <ClCompile Include="Item\IItem.cpp">
-      <Filter>ソース ファイル\GameSound\Item</Filter>
+      <Filter>ソース ファイル\Item</Filter>
     </ClCompile>
     <ClCompile Include="UI\Menu\EquipInventory.cpp">
       <Filter>ソース ファイル\UI\Menu</Filter>
@@ -289,7 +286,7 @@
       <Filter>ソース ファイル\UI\Menu</Filter>
     </ClCompile>
     <ClCompile Include="Item\TreasureChest.cpp">
-      <Filter>ソース ファイル\GameSound\Item</Filter>
+      <Filter>ソース ファイル\Item</Filter>
     </ClCompile>
     <ClCompile Include="Enemy\Maw.cpp">
       <Filter>ソース ファイル\Enemy</Filter>
@@ -314,6 +311,12 @@
     </ClCompile>
     <ClCompile Include="Scene\ClearScene.cpp">
       <Filter>ソース ファイル\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Player\PlayerSate\PlayerStun.cpp">
+      <Filter>ソース ファイル\Player\PlayerState</Filter>
+    </ClCompile>
+    <ClCompile Include="Player\PlayerGetter.cpp">
+      <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -360,28 +363,28 @@
       <Filter>ソース ファイル\Scene</Filter>
     </ClInclude>
     <ClInclude Include="Player\PlayerSate\PlayerWalk.h">
-      <Filter>ソース ファイル\Player\PlayerSate</Filter>
+      <Filter>ソース ファイル\Player\PlayerState</Filter>
     </ClInclude>
     <ClInclude Include="Player\PlayerSate\PlayerRun.h">
-      <Filter>ソース ファイル\Player\PlayerSate</Filter>
+      <Filter>ソース ファイル\Player\PlayerState</Filter>
     </ClInclude>
     <ClInclude Include="Player\PlayerSate\PlayerStand.h">
-      <Filter>ソース ファイル\Player\PlayerSate</Filter>
+      <Filter>ソース ファイル\Player\PlayerState</Filter>
     </ClInclude>
     <ClInclude Include="Player\PlayerSate\PlayerStateMachine.h">
-      <Filter>ソース ファイル\Player\PlayerSate</Filter>
+      <Filter>ソース ファイル\Player\PlayerState</Filter>
     </ClInclude>
     <ClInclude Include="Player\PlayerSate\PlayerState.h">
-      <Filter>ソース ファイル\Player\PlayerSate</Filter>
+      <Filter>ソース ファイル\Player\PlayerState</Filter>
     </ClInclude>
     <ClInclude Include="Player\PlayerSate\PlayerAttack.h">
-      <Filter>ソース ファイル\Player\PlayerSate</Filter>
+      <Filter>ソース ファイル\Player\PlayerState</Filter>
     </ClInclude>
     <ClInclude Include="Player\PlayerSate\PlayerDied.h">
-      <Filter>ソース ファイル\Player\PlayerSate</Filter>
+      <Filter>ソース ファイル\Player\PlayerState</Filter>
     </ClInclude>
     <ClInclude Include="Player\PlayerSate\PlayerDamage.h">
-      <Filter>ソース ファイル\Player\PlayerSate</Filter>
+      <Filter>ソース ファイル\Player\PlayerState</Filter>
     </ClInclude>
     <ClInclude Include="Enemy\EnemyState\EnemyAttack.h">
       <Filter>ソース ファイル\Enemy\EnemyState</Filter>
@@ -438,22 +441,22 @@
       <Filter>ソース ファイル\Map</Filter>
     </ClInclude>
     <ClInclude Include="Player\PlayerSate\PlayerJump.h">
-      <Filter>ソース ファイル\Player\PlayerSate</Filter>
+      <Filter>ソース ファイル\Player\PlayerState</Filter>
     </ClInclude>
     <ClInclude Include="Player\PlayerSate\PlayerAvoidance.h">
-      <Filter>ソース ファイル\Player\PlayerSate</Filter>
+      <Filter>ソース ファイル\Player\PlayerState</Filter>
     </ClInclude>
     <ClInclude Include="Player\PlayerArrow.h">
       <Filter>ソース ファイル\Player</Filter>
     </ClInclude>
     <ClInclude Include="Player\PlayerSate\PlayerArrowAttack.h">
-      <Filter>ソース ファイル\Player\PlayerSate</Filter>
+      <Filter>ソース ファイル\Player\PlayerState</Filter>
     </ClInclude>
     <ClInclude Include="UI\LevelUp\LevelUp.h">
       <Filter>ソース ファイル\UI\LevelUp</Filter>
     </ClInclude>
     <ClInclude Include="Player\PlayerSate\PlayerWireMove.h">
-      <Filter>ソース ファイル\Player\PlayerSate</Filter>
+      <Filter>ソース ファイル\Player\PlayerState</Filter>
     </ClInclude>
     <ClInclude Include="Player\PlayerSate\PlayerWireMove.h">
       <Filter>ソース ファイル\Player</Filter>
@@ -476,17 +479,14 @@
     <ClInclude Include="Camera\ArrowGameCamera.h">
       <Filter>ソース ファイル\Camera</Filter>
     </ClInclude>
-    <ClInclude Include="Enemy\EnemyMove.h">
-      <Filter>ソース ファイル\Enemy</Filter>
-    </ClInclude>
     <ClInclude Include="Player\PlayerSate\PlayerStateCommon.h">
-      <Filter>ソース ファイル\Player\PlayerSate</Filter>
+      <Filter>ソース ファイル\Player\PlayerState</Filter>
     </ClInclude>
     <ClInclude Include="Player\Weapon.h">
       <Filter>ソース ファイル\Player</Filter>
     </ClInclude>
     <ClInclude Include="Player\PlayerSate\PlayerArrowShoot.h">
-      <Filter>ソース ファイル\Player\PlayerSate</Filter>
+      <Filter>ソース ファイル\Player\PlayerState</Filter>
     </ClInclude>
     <ClInclude Include="Scene\TitleScene.h">
       <Filter>ソース ファイル\Scene</Filter>
@@ -507,13 +507,13 @@
       <Filter>ソース ファイル\GameSound</Filter>
     </ClInclude>
     <ClInclude Include="Item\IItem.h">
-      <Filter>ソース ファイル\GameSound\Item</Filter>
+      <Filter>ソース ファイル\Item</Filter>
     </ClInclude>
     <ClInclude Include="Item\Money.h">
-      <Filter>ソース ファイル\GameSound\Item</Filter>
+      <Filter>ソース ファイル\Item</Filter>
     </ClInclude>
     <ClInclude Include="Item\RecoveryItem.h">
-      <Filter>ソース ファイル\GameSound\Item</Filter>
+      <Filter>ソース ファイル\Item</Filter>
     </ClInclude>
     <ClInclude Include="UI\Menu\EquipInventory.h">
       <Filter>ソース ファイル\UI\Menu</Filter>
@@ -522,7 +522,7 @@
       <Filter>ソース ファイル\UI\Menu</Filter>
     </ClInclude>
     <ClInclude Include="Item\TreasureChest.h">
-      <Filter>ソース ファイル\GameSound\Item</Filter>
+      <Filter>ソース ファイル\Item</Filter>
     </ClInclude>
     <ClInclude Include="Enemy\Maw.h">
       <Filter>ソース ファイル\Enemy</Filter>
@@ -547,6 +547,12 @@
     </ClInclude>
     <ClInclude Include="Scene\ClearScene.h">
       <Filter>ソース ファイル\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Player\PlayerSate\PlayerStun.h">
+      <Filter>ソース ファイル\Player\PlayerState</Filter>
+    </ClInclude>
+    <ClInclude Include="Player\PlayerGetter.h">
+      <Filter>ソース ファイル\Player</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

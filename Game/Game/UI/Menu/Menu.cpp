@@ -289,8 +289,5 @@ void CMenu::AfterDraw()
 				m_number[i][j]->Draw();
 			}
 		}
-
 	}
-
-
 }

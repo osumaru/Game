@@ -163,7 +163,6 @@
     <ClCompile Include="Camera\ArrowGameCamera.cpp" />
     <ClCompile Include="Camera\GameCamera.cpp" />
     <ClCompile Include="Enemy\EnemyGroup.cpp" />
-    <ClCompile Include="Enemy\EnemyMove.cpp" />
     <ClCompile Include="Enemy\EnemySearch.cpp" />
     <ClCompile Include="Enemy\EnemyState\EnemyAttack.cpp" />
     <ClCompile Include="Enemy\EnemyState\EnemyChase.cpp" />
@@ -191,6 +190,8 @@
     <ClCompile Include="NPC\INpcState.cpp" />
     <ClCompile Include="NPC\NpcManager.cpp" />
     <ClCompile Include="NPC\ShopNPC.cpp" />
+    <ClCompile Include="Player\PlayerGetter.cpp" />
+    <ClCompile Include="Player\PlayerSate\PlayerStun.cpp" />
     <ClCompile Include="Player\WireAction.cpp" />
     <ClCompile Include="Scene\ClearScene.cpp" />
     <ClCompile Include="UI\BossHp\BossHp.cpp" />
@@ -241,7 +242,6 @@
     <ClInclude Include="Camera\ArrowGameCamera.h" />
     <ClInclude Include="Camera\GameCamera.h" />
     <ClInclude Include="Enemy\EnemyGroup.h" />
-    <ClInclude Include="Enemy\EnemyMove.h" />
     <ClInclude Include="Enemy\EnemySearch.h" />
     <ClInclude Include="Enemy\EnemyState\EnemyAttack.h" />
     <ClInclude Include="Enemy\EnemyState\EnemyChase.h" />
@@ -272,6 +272,8 @@
     <ClInclude Include="NPC\INpcState.h" />
     <ClInclude Include="NPC\NpcManager.h" />
     <ClInclude Include="NPC\ShopNPC.h" />
+    <ClInclude Include="Player\PlayerGetter.h" />
+    <ClInclude Include="Player\PlayerSate\PlayerStun.h" />
     <ClInclude Include="Player\WireAction.h" />
     <ClInclude Include="Scene\ClearScene.h" />
     <ClInclude Include="UI\BossHp\BossHp.h" />
