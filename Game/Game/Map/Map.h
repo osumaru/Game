@@ -61,7 +61,7 @@ public:
 	void MapChipErase(std::list<MapChip*>::iterator iterator);
 
 	//エネミーのリストを取得
-	std::list<IEnemy*> GetEnemyList()
+	std::list<IEnemy*>& GetEnemyList()
 	{
 		return m_enemyList;
 	}
