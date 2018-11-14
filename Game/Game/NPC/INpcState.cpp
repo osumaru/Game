@@ -64,7 +64,7 @@ void INpcState::ShopUpdate()
 		}
 		else if (Pad().IsTriggerButton(enButtonX))
 		{
-			Transaction(m_price[m_lineupSelectPos.Y][m_lineupSelectPos.X]);
+			Transaction(m_items[m_lineupSelectPos.Y][m_lineupSelectPos.X].Itemprice);
 		}
 
 		else if (Pad().IsTriggerButton(enButtonUp) && m_lineupSelectPos.Y != 0)
@@ -88,6 +88,7 @@ void INpcState::ShopUpdate()
 			m_slectItemTexPos.x += SHOPLINEUP_POSITION_OFFSET.x;
 		}
 		m_selectItemSprite.SetPosition(m_slectItemTexPos);
+		m_Itemfont.SetString(m_items[m_lineupSelectPos.Y][m_lineupSelectPos.X].ItemName);
 		break;
 	}
 

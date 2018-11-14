@@ -8,6 +8,7 @@ public:
 	void Init(const CVector3 position, const CQuaternion rotation);
 	void Update();
 	void Draw();
+	void AfterDraw();
 private:
 };
 
