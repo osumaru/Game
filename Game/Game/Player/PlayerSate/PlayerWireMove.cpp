@@ -7,7 +7,7 @@
 
 void CPlayerWireMove::Init()
 {
-	m_pPlayer->PlayAnimation(enPlayerAnimationWireMove, 0.25f);
+	m_pPlayerGetter->GetAnimation().Play(enPlayerAnimationWireMove, 0.25f);
 	m_movePosition = m_pPlayer->GetWireAction().GetWirePosition();
 	m_accel = 0.0f;
 	m_moveSpeed = 0.0f;
@@ -41,8 +41,8 @@ void CPlayerWireMove::Update()
 	}
 	if (length > range) {
 		//–Ú•W‚Æ‚Ì‹——£‚ª—£‚ê‚Ä‚¢‚ê‚ÎˆÚ“®æ‚Éi‚Ş
-		GetPlayer().SetMoveSpeed(toMovePos);
-		m_pPlayer->GetCharacterController().Execute(GameTime().GetDeltaFrameTime());
+		m_pPlayerGetter->SetMoveSpeed(toMovePos);
+		m_pPlayerGetter->GetCharacterController().Execute(GameTime().GetDeltaFrameTime());
 	}
 	else {
 		isMoveEnd = true;
@@ -51,8 +51,8 @@ void CPlayerWireMove::Update()
 	if (isMoveEnd) {
 		//ˆÚ“®‚ªI‚í‚Á‚½
 		GetPlayer().GetWireAction().SetIsWireMove(false);
-		GetPlayer().GetPlayerStateMachine().SetState(CPlayerState::enPlayerStateStand);
-		std::list<IEnemy*>& enemyList = GetSceneGame().GetMap()->GetEnemyList();
+		GetPlayer().GetStateMachine().SetState(CPlayerState::enPlayerStateStand);
+		std::list<IEnemy*> enemyList = GetSceneGame().GetMap()->GetEnemyList();
 		switch(m_pPlayer->GetWireAction().GetState())
 		{
 		case CWireAction::enStateEnemy:
@@ -65,14 +65,14 @@ void CPlayerWireMove::Update()
 		case CWireAction::enStateMap:
 			if (toMovePos.y > 0.0f)
 			{
-				m_pPlayer->SetMoveSpeed(toMovePos);
-				m_pPlayer->GetPlayerStateMachine().SetState(CPlayerState::enPlayerStateJump);
+				m_pPlayerGetter->SetMoveSpeed(toMovePos);
+				m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateJump);
 			}
 			else
 			{
-				m_pPlayer->SetPosition(m_movePosition);
-				m_pPlayer->GetPlayerStateMachine().SetState(CPlayerState::enPlayerStateStand);
-				m_pPlayer->PlayAnimation(enPlayerAnimationLanding);
+				m_pPlayerGetter->SetPosition(m_movePosition);
+				m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateStand);
+				m_pPlayerGetter->GetAnimation().Play(enPlayerAnimationLanding);
 			}
 			break;
 		}

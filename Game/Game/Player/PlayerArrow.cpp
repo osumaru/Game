@@ -26,7 +26,7 @@ bool CPlayerArrow::Start()
 
 void CPlayerArrow::Update()
 {
-	if (GetPlayer().GetPlayerStateMachine().GetState() == CPlayerState::EnPlayerState::enPlayerStateArrowAttack && !m_isMove)
+	if (GetPlayer().GetStateMachine().GetState() == CPlayerState::EnPlayerState::enPlayerStateArrowAttack && !m_isMove)
 	{
 		m_arrowPosition =  GetPlayer().GetWeapon().GetPosition();
 		//ƒJƒƒ‰‚Ì‘O•ûŒü‚ğæ“¾

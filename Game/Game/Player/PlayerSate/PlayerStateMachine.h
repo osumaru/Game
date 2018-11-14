@@ -12,8 +12,9 @@
 #include "PlayerAvoidance.h"
 #include "PlayerArrowShoot.h"
 #include "PlayerWireMove.h"
-
+#include "PlayerStun.h"
 class CPlayer;
+class CPlayerGetter;
 
 class CPlayerStateMachine
 {
@@ -32,19 +33,20 @@ public:
 		return m_state;
 	}
 
-	void SetPlayer(CPlayer* player)
+	void SetPlayer(CPlayer* player, CPlayerGetter* playerGetter)
 	{
-		m_playerStand.SetPlayer(player);
-		m_playerWalk.SetPlayer(player);
-		m_playerRun.SetPlayer(player);
-		m_playerAttack.SetPlayer(player);
-		m_playerDamege.SetPlayer(player);
-		m_playerDied.SetPlayer(player);
-		m_playerJump.SetPlayer(player);
-		m_playerAvoidance.SetPlayer(player);
-		m_playerArrowAtack.SetPlayer(player);
-		m_playerArrowShoot.SetPlayer(player);
-		m_playerWireMove.SetPlayer(player);
+		m_playerStand.SetPlayer(player, playerGetter);
+		m_playerWalk.SetPlayer(player, playerGetter);
+		m_playerRun.SetPlayer(player, playerGetter);
+		m_playerAttack.SetPlayer(player, playerGetter);
+		m_playerDamage.SetPlayer(player, playerGetter);
+		m_playerDied.SetPlayer(player, playerGetter);
+		m_playerJump.SetPlayer(player, playerGetter);
+		m_playerAvoidance.SetPlayer(player, playerGetter);
+		m_playerArrowAtack.SetPlayer(player, playerGetter);
+		m_playerArrowShoot.SetPlayer(player, playerGetter);
+		m_playerWireMove.SetPlayer(player, playerGetter);
+		m_playerStun.SetPlayer(player, playerGetter);
 	}
 
 private:
@@ -55,12 +57,13 @@ private:
 	CPlayerWalk						m_playerWalk;			//歩行モーション
 	CPlayerRun						m_playerRun;			//走りモーション
 	CPlayerAttack					m_playerAttack;			//攻撃モーション
-	CPlayerDamage					m_playerDamege;			//ダメージモーション
+	CPlayerDamage					m_playerDamage;			//ダメージモーション
 	CPlayerDied						m_playerDied;			//死亡モーション
 	CPlayerJump						m_playerJump;			//ジャンプモーション
 	CPlayerAvoidance				m_playerAvoidance;		//回避モーション
 	CPlayerArrowAttack				m_playerArrowAtack;		//弓での攻撃モーション
 	CPlayerArrowShoot				m_playerArrowShoot;		//弓を放つモーション
 	CPlayerWireMove					m_playerWireMove;		//ワイヤーモーション
+	CPlayerStun						m_playerStun;			//スタン状態
 };
 

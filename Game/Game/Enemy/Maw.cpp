@@ -204,7 +204,7 @@ void CMaw::WeekPointUpdate()
 	float angle = toEnemyDir.Dot(CameraForward);
 
 	//カメラの視界に入ったら
-	if (angle > 0.0f && !m_weekPoint->IsActive())
+	if (angle > 0.0f)
 	{
 		m_weekPoint->SetIsActive(true);
 	}
@@ -446,7 +446,7 @@ void CMaw::HandAttack(float DamageLength)
 	float PlayerDamageLength = distance.Length();
 	if (PlayerDamageLength < PlayerDamageLengthMax) {
 		//プレイヤーがダメージを受けた
-		GetPlayer().GetDamage(m_status.Strength);
+		GetPlayer().SetDamage(m_status.Strength);
 	}
 	
 }

@@ -8,9 +8,9 @@ void CPlayerArrowAttack::Init()
 {
 	//‹|‚Ì¶¬
 	m_pPlayer->InitArrow();
-	m_pPlayer->PlayAnimation(enPlayerAnimationArrowAttack, 0.5f);
-	m_pPlayer->SetIsAttack(true);
-	m_pPlayer->SetMoveSpeed(CVector3::Zero);
+	m_pPlayerGetter->GetAnimation().Play(enPlayerAnimationArrowAttack, 0.5f);
+	m_pPlayerGetter->SetIsAttack(true);
+	m_pPlayerGetter->SetMoveSpeed(CVector3::Zero);
 	//‹|—p‚ÌŽ‹“_‚É•ÏX
 }
 
@@ -25,13 +25,13 @@ void CPlayerArrowAttack::Update()
 		m_isCharge = false;
 	}
 
-	if (!GetPlayer().GetAnimation().IsPlay())
+	if (!m_pPlayerGetter->GetAnimation().IsPlay())
 	{
 
 		if (!m_isCharge)
 		{
 
-			m_pPlayer->GetPlayerStateMachine().SetState(CPlayerState::enPlayerStateArrowShoot);
+			m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateArrowShoot);
 		}
 		
 	}

@@ -18,13 +18,13 @@ CPlayerAttack::CPlayerAttack()
 void CPlayerAttack::Init()
 {
 
-	m_pPlayer->SetMoveSpeed(CVector3::Zero);
+	m_pPlayerGetter->SetMoveSpeed(CVector3::Zero);
 	m_attackCount = 0;
 	m_isContinuationAttack = false;
 	m_animetionFrame = 0.0f;
-	m_pPlayer->PlayAnimation(m_attackAnimation[m_attackCount], 0.2f);	
-	m_pPlayer->SetMoveSpeed(CVector3::Zero);
-	m_pBoneMat = &GetPlayer().GetPlayerSkin().FindBoneWorldMatrix(L"Hips");
+	m_pPlayerGetter->GetAnimation().Play(m_attackAnimation[m_attackCount], 0.2f);	
+	m_pPlayerGetter->SetMoveSpeed(CVector3::Zero);
+	m_pBoneMat = &GetPlayer().GetSkinmodel().FindBoneWorldMatrix(L"Hips");
 	CVector3 bonePos = { m_pBoneMat->m[3][0], m_pBoneMat->m[3][1], m_pBoneMat->m[3][2] };
 	m_manipVec = m_pPlayer->GetPosition() - bonePos;
 	m_preBonePos = bonePos;
@@ -35,7 +35,7 @@ void CPlayerAttack::Update()
 	m_animetionFrame += GameTime().GetDeltaFrameTime();
 	if (m_animetionFrame > 0.3f)
 	{
-		m_pPlayer->SetIsAttack(true);
+		m_pPlayerGetter->SetIsAttack(true);
 	}
 	//攻撃中に攻撃の入力がされた場合は連撃に移行する
 	if (Pad().IsTriggerButton(enButtonRightTrigger) && !m_isContinuationAttack && m_attackCount < MAX_ATTACK_NUM - 1)
@@ -48,7 +48,7 @@ void CPlayerAttack::Update()
 	EnemyAttack();
 
 	//攻撃アニメーションが終わった時の処理
-	if (!m_pPlayer->GetAnimation().IsPlay())
+	if (!m_pPlayerGetter->GetAnimation().IsPlay())
 	{
 		//エネミーのリストを取得
 		for (const auto& enemys : GetSceneManager().GetGameScene().GetMap()->GetEnemyList())
@@ -60,27 +60,26 @@ void CPlayerAttack::Update()
 		{
 			m_isContinuationAttack = false;
 			m_animetionFrame = 0.0f;
-			m_pPlayer->PlayAnimation(m_attackAnimation[m_attackCount], 0.2f);
+			m_pPlayerGetter->GetAnimation().Play(m_attackAnimation[m_attackCount], 0.2f);
 		}
 		else
 		{
-			m_pPlayer->SetIsAttack(false);
+			m_pPlayerGetter->SetIsAttack(false);
 			CVector3 position;
 			position = m_preBonePos;
 			position += m_manipVec;
-			position.y = m_pPlayer->GetCharacterController().GetPosition().y;
-			m_pPlayer->SetPosition(position);
+			position.y = m_pPlayerGetter->GetCharacterController().GetPosition().y;
+			m_pPlayerGetter->SetPosition(position);
 
-			m_pPlayer->SetInterval(false);
-			m_pPlayer->PlayAnimation(enPlayerAnimationAttackCombine);
+			m_pPlayerGetter->GetAnimation().Play(enPlayerAnimationAttackCombine1);
 			if (Pad().GetLeftStickX() != 0 || Pad().GetLeftStickY() != 0)
 			{
 				//走りアニメーション
-				m_pPlayer->GetPlayerStateMachine().SetState(CPlayerState::enPlayerStateRun);
+				m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateRun);
 			}
 			else
 			{
-				m_pPlayer->GetPlayerStateMachine().SetState(CPlayerState::enPlayerStateStand);
+				m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateStand);
 
 			}
 		}
@@ -99,7 +98,7 @@ void CPlayerAttack::Move()
 	//前のフレームとの座標と今の座標を引いて移動量を計算
 	CVector3 moveSpeed = bonePos - m_preBonePos;
 	moveSpeed.y = 0.0f;
-	CCharacterController& characon = m_pPlayer->GetCharacterController();
+	CCharacterController& characon = m_pPlayerGetter->GetCharacterController();
 	float gravity = characon.GetGravity();
 	characon.SetGravity(-0.3f);
 	//高さをプレイヤ―の座標でそろえる
@@ -113,16 +112,16 @@ void CPlayerAttack::Move()
 		CVector3 movePos = characon.GetPosition() - bonePos;
 		movePos.y = 0.0f;
 		CVector3 playerFront;
-		playerFront.x = m_pPlayer->GetWorldMatrix().m[2][0];
-		playerFront.y = m_pPlayer->GetWorldMatrix().m[2][1];
-		playerFront.z = m_pPlayer->GetWorldMatrix().m[2][2];
+		playerFront.x = m_pPlayer->GetSkinmodel().GetWorldMatrix().m[2][0];
+		playerFront.y = m_pPlayer->GetSkinmodel().GetWorldMatrix().m[2][1];
+		playerFront.z = m_pPlayer->GetSkinmodel().GetWorldMatrix().m[2][2];
 		if (playerFront.Dot(movePos) < 0.0f)
 		{
 			playerPos += movePos;
 		}
 	}
 	playerPos.y = characon.GetPosition().y;
-	m_pPlayer->SetPosition(playerPos);
+	m_pPlayerGetter->SetPosition(playerPos);
 	characon.SetMoveSpeed(CVector3::Zero);
 	characon.SetGravity(gravity);
 	m_preBonePos = bonePos;
