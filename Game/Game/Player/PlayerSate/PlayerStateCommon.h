@@ -8,10 +8,12 @@ enum EnPlayerAnimation
 	enPlayerAnimationRun,			//走りアニメーション
 	enPlayerAnimationRunJump,		//走りジャンプ
 	enPlayerAnimationJump,			//ジャンプアニメーション
-	enPlayerAnimationAttack,		//攻撃アニメーション
+	enPlayerAnimationAttack1,		//攻撃アニメーション
 	enPlayerAnimationAttack2,		//連撃アニメーション
 	enPlayerAnimationAttack3,		//連撃アニメーション
-	enPlayerAnimationAttackCombine,		//連撃アニメーション
+	enPlayerAnimationAttackCombine1,		//連撃の後の合成用アニメーション
+	enPlayerAnimationAttackCombine2,		//連撃の後の合成用アニメーション
+	enPlayerAnimationAttackCombine3,		//連撃の後の合成用アニメーション
 	enPlayerAnimationDamage,		//ダメージアニメーション
 	enPlayerAnimationAvoidance,		//回避アニメーション
 	enPlayerAnimationAvoidanceCombine,	//回避の後の合成用ポーズのアニメーション
