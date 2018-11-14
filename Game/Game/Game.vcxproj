@@ -190,6 +190,8 @@
     <ClCompile Include="NPC\INpcState.cpp" />
     <ClCompile Include="NPC\NpcManager.cpp" />
     <ClCompile Include="NPC\ShopNPC.cpp" />
+    <ClCompile Include="Player\PlayerGetter.cpp" />
+    <ClCompile Include="Player\PlayerSate\PlayerStun.cpp" />
     <ClCompile Include="Player\WireAction.cpp" />
     <ClCompile Include="Scene\ClearScene.cpp" />
     <ClCompile Include="UI\BossHp\BossHp.cpp" />
@@ -270,6 +272,8 @@
     <ClInclude Include="NPC\INpcState.h" />
     <ClInclude Include="NPC\NpcManager.h" />
     <ClInclude Include="NPC\ShopNPC.h" />
+    <ClInclude Include="Player\PlayerGetter.h" />
+    <ClInclude Include="Player\PlayerSate\PlayerStun.h" />
     <ClInclude Include="Player\WireAction.h" />
     <ClInclude Include="Scene\ClearScene.h" />
     <ClInclude Include="UI\BossHp\BossHp.h" />

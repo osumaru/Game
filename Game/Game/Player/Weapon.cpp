@@ -10,7 +10,7 @@ void CWeapon::Init(CPlayer* player)
 	m_weaponskin[1].Load(L"Assets/modelData/LargeSword.cmo", NULL);
 	m_weaponskin[2].Load(L"Assets/modelData/LongBow.cmo", NULL);
 	m_weaponskin[3].Load(L"Assets/modelData/TwinSword.cmo", NULL);
-	m_boneMat = &m_pPlayer->GetPlayerSkin().FindBoneWorldMatrix(L"LeftShoulder");
+	m_boneMat = &m_pPlayer->GetSkinmodel().FindBoneWorldMatrix(L"LeftShoulder");
 	m_position[enArrow] = {0.0f, 0.0f, -10.0f};
 	m_rotation[enArrow] = CQuaternion::Identity;
 	CQuaternion multi;
@@ -94,13 +94,13 @@ void CWeapon::Update()
 	if (m_pPlayer->GetIsAttack())
 	{
 
-		m_boneMat = &m_pPlayer->GetPlayerSkin().FindBoneWorldMatrix(L"RightHand");
+		m_boneMat = &m_pPlayer->GetSkinmodel().FindBoneWorldMatrix(L"RightHand");
 		position = m_attackPosition[m_weaponState];
 		rotation = m_attackRotation[m_weaponState];
 	}
 	else
 	{
-		m_boneMat = &m_pPlayer->GetPlayerSkin().FindBoneWorldMatrix(L"LeftShoulder");
+		m_boneMat = &m_pPlayer->GetSkinmodel().FindBoneWorldMatrix(L"LeftShoulder");
 		position = m_position[m_weaponState];
 		rotation = m_rotation[m_weaponState];
 	}

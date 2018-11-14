@@ -46,13 +46,17 @@ void CPlayerStateMachine::SetState(CPlayerState::EnPlayerState nextState)
 		m_currentState = &m_playerArrowShoot;
 		break;
 	case CPlayerState::enPlayerStateDamage:
-		m_currentState = &m_playerDamege;			//ダメージステートに遷移
+		m_currentState = &m_playerDamage;			//ダメージステートに遷移
 		break;
 	case CPlayerState::enPlayerStateDied:
 		m_currentState = &m_playerDied;				//死亡ステートに遷移
 		break;
 	case CPlayerState::enPlayerStateWireMove:
 		m_currentState = &m_playerWireMove;			//ワイヤーステートに遷移
+		break;
+	case CPlayerState::enPlayerStateStun:
+		m_currentState = &m_playerStun;			//ワイヤーステートに遷移
+		break;
 	}
 
 	m_currentState->Init();

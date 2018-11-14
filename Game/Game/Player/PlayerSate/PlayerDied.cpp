@@ -5,14 +5,14 @@
 
 void CPlayerDied::Init()
 {
-	m_pPlayer->PlayAnimation(enPlayerAnimationDete, 0.2f);
+	m_pPlayerGetter->GetAnimation().Play(enPlayerAnimationDete, 0.2f);
 }
 
 void CPlayerDied::Update()
 {
-	if (!m_pPlayer->GetAnimation().IsPlay())
+	if (!m_pPlayerGetter->GetAnimation().IsPlay())
 	{
-		m_pPlayer->SetIsDeid(true);
+		m_pPlayerGetter->SetIsDied(true);
 
 	}
 
