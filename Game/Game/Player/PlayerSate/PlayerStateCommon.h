@@ -39,6 +39,7 @@ public:
 		enPlayerStateJump,				//ジャンプステート
 		enPlayerStateAttack,			//攻撃ステート
 		enPlayerStateDamage,			//ダメージステート
+		enPlayerStateStun,				//スタンステート
 		enPlayerStateAvoidance,			//回避ステート
 		enPlayerStateDied,				//死亡ステート
 		enPlayerStateWireMove,			//ワイヤーステート

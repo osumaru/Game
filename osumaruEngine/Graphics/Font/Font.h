@@ -27,7 +27,9 @@ public:
 		{
 			return;
 		}
-		m_displayString = str;
+		//ヌル文字分で+1
+		m_displayString = std::make_unique<wchar_t[]>(wcslen(str) + 1);
+		wcscpy(m_displayString.get(), str);
 	}
 
 	//サイズを設定
@@ -49,7 +51,7 @@ private:
 	CVector2		m_size = CVector2::One;				//サイズ
 	CVector4		m_color = CVector4::White;			//カラー
 	CVector2		m_position = CVector2::Zero;		//座標
-	const wchar_t* m_displayString = nullptr;			//表示用の文字列
+	std::unique_ptr<wchar_t[]> m_displayString;			//表示用の文字列
 	std::unique_ptr<SpriteFont>	m_spriteFont;
 	std::unique_ptr<SpriteBatch> m_spriteBatch;
 };

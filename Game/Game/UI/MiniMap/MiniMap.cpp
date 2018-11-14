@@ -94,7 +94,7 @@ void CMiniMap::Update()
 	//プレイヤーアイコンの処理
 	{
 		//プレイヤーのワールド行列からキャラクターの向きを取得
-		CMatrix playerWorldMatrix = GetPlayer().GetWorldMatrix();
+		CMatrix playerWorldMatrix = GetPlayer().GetSkinmodel().GetWorldMatrix();
 		CVector3 playerForward;
 		playerForward.x = playerWorldMatrix.m[2][0];
 		playerForward.y = 0.0f;

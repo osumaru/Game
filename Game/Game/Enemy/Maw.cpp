@@ -446,7 +446,7 @@ void CMaw::HandAttack(float DamageLength)
 	float PlayerDamageLength = distance.Length();
 	if (PlayerDamageLength < PlayerDamageLengthMax) {
 		//プレイヤーがダメージを受けた
-		GetPlayer().GetDamage(m_status.Strength);
+		GetPlayer().SetDamage(m_status.Strength);
 	}
 	
 }
