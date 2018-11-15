@@ -365,7 +365,7 @@ void CPlayer::UseItem(int number)
 
 void CPlayer::ChangeEquip(int number)
 {
-	if (!m_equipList.empty())
+	if (m_equipList.empty())
 	{
 		//‘•”õƒAƒCƒeƒ€‚ª‚È‚¢
 		return;
