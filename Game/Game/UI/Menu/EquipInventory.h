@@ -62,6 +62,7 @@ private:
 	CTexture							m_pointerTexture;
 	CSprite								m_equip[m_equipLimit];			//装備アイコン
 	std::list<CWeapon::SWeaponStatus>	m_equipList;					//装備リスト
+	std::list<IItem*>					m_itemEquipList;
 	CVector2							m_basePos = CVector2::Zero;		//初期座標
 	CVector2							m_size = CVector2::Zero;		//初期サイズ
 	int									m_width = 0;					//インベントリの幅

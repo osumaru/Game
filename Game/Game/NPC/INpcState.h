@@ -7,6 +7,10 @@ public:
 	virtual void Init(const CVector3 position, const CQuaternion rotation) = 0;
 	virtual void Update() = 0;
 	virtual void Draw() = 0;
+	//バイナリーデータの読み込み
+	void LoadFile(const wchar_t* filePath);
+	//バイナリーデータの追加
+	void AddFile(const wchar_t* filePath);
 	
 	const CVector3 GetPosition()
 	{
@@ -19,6 +23,7 @@ public:
 	}
 	//店に共通するアップデートの処理を行う関数
 	void ShopUpdate();
+
 	//商品の取引を行う関数
 	//引数		商品の値段
 	//戻り値	取引が成立したかどうか　成立ならtrue不成立ならfalse
@@ -34,11 +39,22 @@ protected:
 		enShopLineup,
 		enShopNum,
 	};
-	struct SLineupPos
+	struct ItemState
 	{
-		int X = 0;
-		int Y = 0;
+		wchar_t     ItemName[40];			//商品の名前
+		int			ItemID = 0;				//商品の番号
+		int			Itemprice;				//アイテムの値段
 	};
+
+	struct ShopItem
+	{
+		wchar_t     ItemName[40];			//商品の名前
+		int			ItemID = 0;				//商品の番号
+		int			Itemprice;				//アイテムの値段
+		CSprite		ItemSprite;				//アイテムのスプライト
+		CTexture	ItemTexture;			//アイテムのテクスチャ
+	};
+
 	CSkinModel			m_skinModel;						//スキンモデル
 	CVector3			m_position = CVector3::Zero;		//ポジション
 	CVector3			m_scale = CVector3::One;			//スケール
@@ -50,11 +66,9 @@ protected:
 	EShopState			m_shopState = enShopNone;			//店の状態
 	EShopState			m_selectShop = enShopNone;			//選択中の状態
 
-	static const int	Y_ELEMENT = 3;						//行の要素数
-	static const int	X_ELEMENT = 5;						//列の要素数
-	SLineupPos			m_lineupSelectPos;					//選んでるアイテムの要素
-	CSprite				m_shopLineup[Y_ELEMENT][X_ELEMENT];					//商品のスプライト
-	CTexture			m_shopLineuoTexture;								//商品のテクスチャ
+	static const int	ITEM_ELEMENT = 5;										//行の要素数
+	int					m_lineupSelectNumber = 0;							//選んでるアイテムの要素
+	ShopItem			m_items[ITEM_ELEMENT];									//商品の情報
 	CVector2			m_shopLineupPosition = { -200.0f,200.0f };
 	CVector2			m_shopLineupTexSize = { 100.0f,100.0f };
 	const CVector2		SHOPLINEUP_POSITION_OFFSET = { 105.0f,105.0f };
@@ -75,11 +89,15 @@ protected:
 	CVector2			m_shopSelectPenPosition = { 350.0f,-195.0f };
 	CVector2			m_shopSelectPenSize = { 50.0f,50.0f };
 
-	int					m_price[Y_ELEMENT][X_ELEMENT];						//商品の値段を格納している配列
-
-	bool			m_isShoplineupDraw = false;			//ショップ画面を描画するかの判定
-	bool			m_isSelectDraw = false;				//セレクト画面を描画するかの判定
-
-	const float			SHOP_DRAW_LENGTH = 3.5f;		//ショップの影響を受ける長さ
+	bool				m_isShoplineupDraw = false;							//ショップ画面を描画するかの判定
+	bool				m_isSelectDraw = false;								//セレクト画面を描画するかの判定
+	const float			SHOP_DRAW_LENGTH = 3.5f;							//ショップの影響を受ける長さ
+	wchar_t				m_filePath[256];
+	ItemState			m_itemState;
+	std::list<ItemState*>		m_itemStateList;
+	bool				m_isTransaction = false;							//取引を行うかの判定
+	CFont				m_Itemfont[ITEM_ELEMENT];
+	
+	
 };
 
