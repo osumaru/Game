@@ -38,6 +38,7 @@ void CEnemyDeath::Update()
 		treasureChest3->Init(m_enemy->GetPosition());
 		/////////////////////////////
 		m_enemy->StateMachineRelease();
+		m_enemy->EnemyListErase();
 		Delete(m_enemy);
 	}
 }

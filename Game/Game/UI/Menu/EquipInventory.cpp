@@ -213,7 +213,7 @@ void CEquipInventory::Equip()
 {
 	//装備の数を取得
 	size_t equipNum = m_equipList.size();
-	if (m_pointerNum >= equipNum && !Pad().IsTriggerButton(enButtonA)) {
+	if (m_pointerNum >= equipNum || !Pad().IsTriggerButton(enButtonA)) {
 		return;
 	}
 	//カーソルで選んでいる装備をつける
@@ -270,39 +270,60 @@ void CEquipInventory::Equip()
 
 void CEquipInventory::CalucStatus()
 {
-	//装備の数を取得
-	size_t equipNum = m_equipList.size();
-	if (m_equipList.empty() && m_pointerNum >= equipNum) {
+	if (m_equipList.empty()) {
+		//装備を何も持っていない
 		return;
 	}
 
-	//装備変更した場合のステータスを計算する
+	//プレイヤーのステータスを取得
 	SplayerStatus playerStatus = GetPlayer().GetStatus();
-	std::list<CWeapon::SWeaponStatus>::iterator it;
-	it = m_equipList.begin();
-	for (int i = 0; i < m_pointerNum; i++)
-	{
-		it++;
-	}
-	wchar_t font[256];
-	for (int i = 0; i < enStatus_Num; i++)
-	{
-		int statusNum = 0;
-		switch (i)
+	//装備の数を取得
+	size_t equipNum = m_equipList.size();
+	CWeapon::SWeaponStatus weaponStatus;
+	if (m_pointerNum < equipNum) {
+		//所持している装備を選んでいる場合はその装備のステータスを取得
+		std::list<CWeapon::SWeaponStatus>::iterator it;
+		it = m_equipList.begin();
+		for (int i = 0; i < m_pointerNum; i++)
 		{
-		case enStatus_Hp:
-			statusNum = playerStatus.MaxHealth;
-			swprintf(font, L"最大HP : %d", statusNum);
-			break;
-		case enStatus_Attack:
-			statusNum = (*it).attack + playerStatus.Strength;
-			swprintf(font, L"攻撃力 : %d", statusNum);
-			break;
-		case enStatus_Defense:
-			statusNum = (*it).diffence + playerStatus.Defense;
-			swprintf(font, L"防御力 : %d", statusNum);
-			break;
+			it++;
 		}
-		m_statusFont[1][i].SetString(font);
+		weaponStatus = (*it);
+	}
+
+	CWeapon::SWeaponStatus equipStatus;
+	if (weaponStatus.weaponNum != CWeapon::EnPlayerWeapon::enInvalid)
+	{
+		//現在の装備のステータスを取得
+		equipStatus = GetPlayer().GetWeaponStatus(weaponStatus.weaponNum);
+	}
+
+	//装備変更した場合のステータスを計算する
+	wchar_t font[256];
+	for (int j = 0; j < 2; j++) {
+		if (j == 1)
+		{
+			equipStatus = weaponStatus;
+		}
+		for (int i = 0; i < enStatus_Num; i++)
+		{
+			int statusNum = 0;
+			switch (i)
+			{
+			case enStatus_Hp:
+				statusNum = playerStatus.MaxHealth;
+				swprintf(font, L"最大HP : %d", statusNum);
+				break;
+			case enStatus_Attack:
+				statusNum = equipStatus.attack + playerStatus.Strength;
+				swprintf(font, L"攻撃力 : %d", statusNum);
+				break;
+			case enStatus_Defense:
+				statusNum = equipStatus.diffence + playerStatus.Defense;
+				swprintf(font, L"防御力 : %d", statusNum);
+				break;
+			}
+			m_statusFont[j][i].SetString(font);
+		}
 	}
 }

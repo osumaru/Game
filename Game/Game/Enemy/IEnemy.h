@@ -49,6 +49,7 @@ public:
 	//自身をエネミーリストから削除
 	void EnemyListErase();
 
+	//自身のイテレータを設定
 	void SetIterater(std::list<IEnemy*>::iterator iterater)
 	{
 		m_iterater = iterater;
