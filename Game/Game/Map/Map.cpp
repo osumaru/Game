@@ -102,6 +102,7 @@ void Map::Init(int stageNum)
 			break;
 		case enMapTagWeaponShop:
 			m_shopNpcManager->InitShop(mInfo.m_position, mInfo.m_rotation, EShop::enWeaponShop);
+			break;
 		case enMapTagBreakBrock:
 			mapChip = New<CBreakMapObject>(0);
 			m_collider = true;
