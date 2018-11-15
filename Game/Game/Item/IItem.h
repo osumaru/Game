@@ -23,7 +23,7 @@ public:
 	virtual void Draw() {};
 
 	//アイテムを使う
-	virtual void Use() {};
+	virtual bool Use() { return false; }
 
 	enum EnInventoryItemType {
 		Recovery,	//回復

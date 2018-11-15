@@ -22,7 +22,7 @@ public:
 	void Draw() override;
 
 	//アイテムを使う
-	void Use() override;
+	bool Use() override;
 
 	//ポップさせる
 	//position	座標
