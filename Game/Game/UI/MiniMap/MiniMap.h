@@ -31,6 +31,6 @@ private:
 	CTexture								m_playerIconTexture;
 	std::vector<std::unique_ptr<CSprite>>	m_enemyIcon;			//エネミーアイコン
 	CTexture								m_enemyIconTexture;
-	std::list<IEnemy*>						m_enemyList;			//エネミーリスト
+	std::list<IEnemy*>*						m_enemyList;			//エネミーリスト
 	CVector2								m_mapCenterPos;			//ミニマップの中心座標
 };

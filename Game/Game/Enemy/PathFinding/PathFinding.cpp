@@ -99,7 +99,8 @@ void CPathFinding::FindRoot(std::vector<CVector3>& root, CVector3 startPos, CVec
 			if (node == NULL) {
 				continue;
 			}
-			int cost = processNode->moveCost + 1;
+			CVector3 distance = processNode->position - node->position;
+			float cost = processNode->moveCost + distance.Length();
 			bool needsUpdate = (node->moveCost < 0) || (node->moveCost > cost);
 			if (needsUpdate) {
 				//更新の必要あり

@@ -38,7 +38,7 @@ void CEnemyDamage::Update()
 {
 	CVector3 moveSpeed = m_enemy->GetMoveSpeed();
 	CVector3 knockBack = moveSpeed;
-	knockBack *= GameTime().GetDeltaFrameTime();
+	knockBack *= GameTime().GetDeltaFrameTime() * 2.0f;
 	moveSpeed -= knockBack;
 	m_enemy->SetMoveSpeed(moveSpeed);
 

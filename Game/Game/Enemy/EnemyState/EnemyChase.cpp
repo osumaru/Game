@@ -45,31 +45,31 @@ void CEnemyChase::Move(float length)
 	CVector3 playerPos = GetPlayer().GetPosition();
 	CVector3 enemyPos = m_enemy->GetPosition();
 	CVector3 toPlayerDir = playerPos - enemyPos;
-	if (length > 3.0f) {
-		//Œo˜H’Tõ‚·‚é
-		m_interval++;
-		if (m_interval % 5 == 0) {
-			std::vector<CVector3> root;
-			CVector3 startPos = enemyPos;
-			CVector3 targetPos = playerPos;
-			g_pathFinding.FindRoot(root, startPos, targetPos);
-			if (!root.empty()) {
-				CVector3 rootPos = { root[0].x, 0.0f, root[0].y };
-				CVector3 pos = enemyPos;
-				pos.y = 0.0f;
-				rootPos -= pos;
-				rootPos.Normalize();
-				moveSpeed.x = rootPos.x * 2.0f;
-				moveSpeed.z = rootPos.z * 2.0f;
-			}
-		}
-	}
-	else {
+	//if (length > 3.0f) {
+	//	//Œo˜H’Tõ‚·‚é
+	//	m_interval++;
+	//	if (m_interval % 5 == 0) {
+	//		std::vector<CVector3> root;
+	//		CVector3 startPos = enemyPos;
+	//		CVector3 targetPos = playerPos;
+	//		g_pathFinding.FindRoot(root, startPos, targetPos);
+	//		if (!root.empty()) {
+	//			CVector3 rootPos = { root[0].x, 0.0f, root[0].y };
+	//			CVector3 pos = enemyPos;
+	//			pos.y = 0.0f;
+	//			rootPos -= pos;
+	//			rootPos.Normalize();
+	//			moveSpeed.x = rootPos.x * 2.0f;
+	//			moveSpeed.z = rootPos.z * 2.0f;
+	//		}
+	//	}
+	//}
+	//else {
 		//ƒvƒŒƒCƒ„[‚ğ’Ç‚¢‚©‚¯‚é
 		toPlayerDir.Normalize();
 		toPlayerDir *= speed;
 		moveSpeed.x = toPlayerDir.x;
 		moveSpeed.z = toPlayerDir.z;
-	}
+	//}
 	m_enemy->SetMoveSpeed(moveSpeed);
 }

@@ -30,7 +30,7 @@ public:
 
 	//初期化
 	//position	座標
-	virtual void Init(CVector3 position) = 0;
+	virtual void Init(CVector3 position) {};
 
 	//更新
 	virtual void Update() = 0;
@@ -45,6 +45,14 @@ public:
 	//degree	角度(デグリー)
 	//position	扇上の範囲にいるか調べたい座標
 	bool CalucFanShape(float degree, const CVector3& position);
+
+	//自身をエネミーリストから削除
+	void EnemyListErase();
+
+	void SetIterater(std::list<IEnemy*>::iterator iterater)
+	{
+		m_iterater = iterater;
+	}
 
 	//敵の座標を取得
 	const CVector3& GetPosition() const
@@ -191,19 +199,20 @@ public:
 	}
 
 protected:
-	CSkinModel				m_skinModel;			//スキンモデル
-	CAnimation				m_animation;			//アニメーション
-	CEnemyStateMachine		m_enemyStateMachine;	//ステートマシン
-	CEnemyTurn				m_enemyTurn;			//向きを回転
-	CEnemySearch			m_enemySearch;			//プレイヤーを探索
-	CEnemyGroup*			m_enemyGroup;			//エネミーグループ
-	CVector3				m_position;				//座標
-	CQuaternion				m_rotation;				//回転
-	CCharacterController	m_characterController;	//キャラクターコントローラー
-	SEnemyStatus			m_status;				//ステータス
-	bool					m_isAttackHit = false;	//攻撃が当たったか
-	bool					m_isFind = false;		//プレイヤーを発見したか
-	bool					m_isDamage = false;		//ダメージを受けたか
-	bool					m_isDamagePossible = true;//ダメージを受けられるか
-	bool					m_isWireHit = false;	//ワイヤーが当たったか
+	CSkinModel					 m_skinModel;				//スキンモデル
+	CAnimation					 m_animation;				//アニメーション
+	CEnemyStateMachine			 m_enemyStateMachine;		//ステートマシン
+	CEnemyTurn					 m_enemyTurn;				//向きを回転
+	CEnemySearch				 m_enemySearch;				//プレイヤーを探索
+	CEnemyGroup*				 m_enemyGroup;				//エネミーグループ
+	CVector3					 m_position;				//座標
+	CQuaternion					 m_rotation;				//回転
+	CCharacterController		 m_characterController;		//キャラクターコントローラー
+	SEnemyStatus			     m_status;					//ステータス
+	std::list<IEnemy*>::iterator m_iterater;				//自身のイテレータ
+	bool						 m_isAttackHit = false;		//攻撃が当たったか
+	bool						 m_isFind = false;			//プレイヤーを発見したか
+	bool						 m_isDamage = false;		//ダメージを受けたか
+	bool						 m_isDamagePossible = true;	//ダメージを受けられるか
+	bool						 m_isWireHit = false;		//ワイヤーが当たったか
 };
