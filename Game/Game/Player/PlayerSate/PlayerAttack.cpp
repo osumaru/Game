@@ -10,9 +10,12 @@
 
 CPlayerAttack::CPlayerAttack()
 {
-	m_attackAnimation[0] = enPlayerAnimationAttack;
+	m_attackAnimation[0] = enPlayerAnimationAttack1;
 	m_attackAnimation[1] = enPlayerAnimationAttack2;
 	m_attackAnimation[2] = enPlayerAnimationAttack3;
+	m_combineAnimation[0] = enPlayerAnimationAttackCombine1;
+	m_combineAnimation[1] = enPlayerAnimationAttackCombine2;
+	m_combineAnimation[2] = enPlayerAnimationAttackCombine3;
 }
 
 void CPlayerAttack::Init()
@@ -33,7 +36,7 @@ void CPlayerAttack::Init()
 void CPlayerAttack::Update()
 {
 	m_animetionFrame += GameTime().GetDeltaFrameTime();
-	if (m_animetionFrame > 0.3f)
+	if (m_animetionFrame > 0.0f)
 	{
 		m_pPlayerGetter->SetIsAttack(true);
 	}
@@ -71,7 +74,7 @@ void CPlayerAttack::Update()
 			position.y = m_pPlayerGetter->GetCharacterController().GetPosition().y;
 			m_pPlayerGetter->SetPosition(position);
 
-			m_pPlayerGetter->GetAnimation().Play(enPlayerAnimationAttackCombine);
+			m_pPlayerGetter->GetAnimation().Play(m_combineAnimation[m_attackCount]);
 			if (Pad().GetLeftStickX() != 0 || Pad().GetLeftStickY() != 0)
 			{
 				//走りアニメーション

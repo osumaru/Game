@@ -30,8 +30,8 @@ void CMiniMap::Init()
 	m_playerIcon.SetSize({ 15.0f,15.0f });
 	//エネミーアイコンを初期化
 	m_enemyIconTexture.Load(L"Assets/sprite/enemy_Icon.png");
-	m_enemyList = GetSceneManager().GetGameScene().GetMap()->GetEnemyList();
-	for (int i = 0; i < m_enemyList.size(); i++) {
+	m_enemyList = &GetSceneManager().GetGameScene().GetMap()->GetEnemyList();
+	for (int i = 0; i < m_enemyList->size(); i++) {
 		m_enemyIcon.emplace_back(std::make_unique<CSprite>());
 		m_enemyIcon[i]->Init(&m_enemyIconTexture);
 		m_enemyIcon[i]->SetPosition(m_mapCenterPos);
@@ -59,9 +59,9 @@ void CMiniMap::Update()
 
 	//敵アイコンの処理
 	{
-		m_enemyList = GetSceneManager().GetGameScene().GetMap()->GetEnemyList();
+		m_enemyList = &GetSceneManager().GetGameScene().GetMap()->GetEnemyList();
 		int idx = 0;
-		for (auto& enemy : m_enemyList)
+		for (auto& enemy : *m_enemyList)
 		{
 			CVector3 toCameraXZ = cameraPos - enemy->GetPosition();
 			toCameraXZ.y = 0.0f;
@@ -125,7 +125,7 @@ void CMiniMap::Update()
 void CMiniMap::AfterDraw()
 {
 	m_miniMap.Draw();
-	for (int i = 0; i < m_enemyList.size(); i++) {
+	for (int i = 0; i < m_enemyList->size(); i++) {
 		m_enemyIcon[i]->Draw();
 	}
 	m_playerIcon.Draw();

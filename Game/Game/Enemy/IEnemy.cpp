@@ -1,5 +1,8 @@
 #include "stdafx.h"
 #include "IEnemy.h"
+#include "../Scene/SceneManager.h"
+#include "../Scene/GameScene.h"
+#include "../Map/Map.h"
 
 IEnemy::IEnemy() :
 	m_enemyStateMachine(this),
@@ -42,4 +45,11 @@ bool IEnemy::CalucFanShape(float degree, const CVector3& position)
 		return true;
 	}
 	return false;
+}
+
+void IEnemy::EnemyListErase()
+{
+	//エネミーが死亡していたらリストから削除
+	std::list<IEnemy*>& enemyList = GetSceneGame().GetMap()->GetEnemyList();
+	enemyList.erase(m_iterater);
 }

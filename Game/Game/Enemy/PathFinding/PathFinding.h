@@ -12,7 +12,7 @@ struct SNode {
 	std::vector<SNode*>		linkNode;	//隣接ノード。NULLであれば隣接ノードなし。
 	SNode*		parentNode;					//親のノード
 	CVector3	position;					//ノードの座標
-	int			moveCost;					//移動コスト
+	float			moveCost;					//移動コスト
 	bool		isDone;						//調査済みフラグ
 };
 

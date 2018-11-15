@@ -85,10 +85,20 @@ void CRecoveryItem::Draw()
 	m_skinModel.Draw(GetGameCamera().GetViewMatrix(), GetGameCamera().GetProjectionMatrix());
 }
 
-void CRecoveryItem::Use()
+bool CRecoveryItem::Use()
 {
-	GetPlayer().RecoveryHP(m_recoveryValue);
-	Delete(this);
+	SplayerStatus playerStatus = GetPlayer().GetStatus();
+	int playerHP = playerStatus.Health;
+	int playerHPMax = playerStatus.MaxHealth;
+	//プレイヤーのHPと最大HPを比較する
+	if (playerHP < playerHPMax)
+	{
+		//プレイヤーのHPを回復させる
+		GetPlayer().RecoveryHP(m_recoveryValue);
+		Delete(this);
+		return true;
+	}
+	return false;
 }
 
 void CRecoveryItem::Pop(CVector3 position)

@@ -17,23 +17,12 @@
 std::vector<std::vector<SMapChipInfo>> mapChipInfo = 
 {
 	{
+	//#include "Boss.h"
 	//#include "Test.h"
-	#include "Test2.h"
+	//#include "ShopTest.h"
+	//#include "Location2.h"
+	#include "Test.h"
 	}
-//	{
-//#include "Location2.h"
-
-//	},
-//	{
-//#include "Location3.h"
-//	},
-
-//	{
-//#include "Location4.h"
-//	},
-//	{
-//#include "Location5.h"
-//	}
 };
 
 Map::Map() :
@@ -58,6 +47,7 @@ void Map::Init(int stageNum)
 		MapChip* mapChip = nullptr;
 		CEnemyGroup* enemyGroup = nullptr;
 		IEnemy* enemy = nullptr;
+		std::list<IEnemy*>::iterator it;
 
 		switch (mInfo.m_tag)
 		{
@@ -74,23 +64,15 @@ void Map::Init(int stageNum)
 			break;
 		case enMapTagZombie:
 			enemy = New<CZombie>(1);
-			enemy->Init(mInfo.m_position);
-			m_enemyList.push_back(enemy);
 			break;
 		case enMapTagNinja:
 			enemy = New<CNinja>(1);
-			enemy->Init(mInfo.m_position);
-			m_enemyList.push_back(enemy);
 			break;
 		case enMapTagSamurai:
 			enemy = New<CSamurai>(1);
-			enemy->Init(mInfo.m_position);
-			m_enemyList.push_back(enemy);
 			break;
 		case enMapTagWarrok:
 			enemy = New<CWarrok>(1);
-			enemy->Init(mInfo.m_position);
-			m_enemyList.push_back(enemy);
 			break;
 		case enMapTagEnemyGroup:
 			enemyGroup = New<CEnemyGroup>(1);
@@ -115,6 +97,14 @@ void Map::Init(int stageNum)
 			mapChip = New<StaticMapObject>(0);
 			m_collider = true;
 			break;
+		}
+		if (enemy != nullptr)
+		{
+			enemy->Init(mInfo.m_position);
+			m_enemyList.push_back(enemy);
+			it = m_enemyList.end();
+			it--;
+			enemy->SetIterater(it);
 		}
 		if (mapChip != nullptr)
 		{
@@ -156,18 +146,6 @@ void Map::Init(int stageNum)
 
 void Map::Update()
 {
-	//エネミーが死亡していたらリストから削除
-	std::list<IEnemy*>::iterator it;
-	it = m_enemyList.begin();
-	while (it != m_enemyList.end()) {
-		if ((*it)->IsDelete()) {
-			//死亡している
-			it = m_enemyList.erase(it);
-		}
-		else {
-			it++;
-		}
-	}
 }
 
 

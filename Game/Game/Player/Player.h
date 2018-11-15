@@ -205,6 +205,15 @@ public:
 		return m_PlayerStateMachine;
 	}
 
+	/*
+	武器のステータスを取得
+	weaponNum	武器の種類
+	*/
+	CWeapon::SWeaponStatus GetWeaponStatus(CWeapon::EnPlayerWeapon weaponNum)
+	{
+		return m_equipWeapon[weaponNum];
+	}
+
 	friend class CPlayerGetter;
 private:
 
