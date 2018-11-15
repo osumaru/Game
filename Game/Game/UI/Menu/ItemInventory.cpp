@@ -89,13 +89,12 @@ void CItemInventory::PointerMove()
 {
 	int number = m_pointerNum;
 	CVector2 position = m_pointer.GetPosition();
-	//float offset = m_size.x / 2.0f;
 	if (Pad().IsTriggerButton(enButtonRight))
 	{
 		//右にカーソルを動かす
 		position.x += m_size.x;
 		number++;
-		if (position.x > m_basePos.x + m_size.x * m_width/*(m_width - 1) + offset*/)
+		if (position.x > m_basePos.x + m_size.x * m_width)
 		{
 			//右端だった場合はそのまま
 			position.x = m_basePos.x + m_size.x * (m_width - 1);
@@ -111,7 +110,7 @@ void CItemInventory::PointerMove()
 		//左にカーソルを動かす
 		position.x -= m_size.x;
 		number--;
-		if (position.x < m_basePos.x - m_size.x/*offset*/)
+		if (position.x < m_basePos.x - m_size.x)
 		{
 			//左端だった場合はそのまま
 			position.x = m_basePos.x;
@@ -127,7 +126,7 @@ void CItemInventory::PointerMove()
 		//上にカーソルを動かす
 		position.y += m_size.y;
 		number -= m_width;
-		if (position.y > m_basePos.y + m_size.y/*offset*/)
+		if (position.y > m_basePos.y + m_size.y)
 		{
 			//上端だった場合はそのまま
 			position.y = m_basePos.y;
@@ -143,7 +142,7 @@ void CItemInventory::PointerMove()
 		//下にカーソルを動かす
 		position.y -= m_size.y;
 		number += m_width;
-		if (position.y < m_basePos.y - m_size.y * m_height/*(m_height - 1) - offset*/)
+		if (position.y < m_basePos.y - m_size.y * m_height)
 		{
 			//下端だった場合はそのまま
 			position.y = m_basePos.y - m_size.y * (m_height - 1);
