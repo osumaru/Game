@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "WeaponShop.h"
 #include "../../Camera/GameCamera.h"
+#include "../../Player/Weapon.h"
+#include "../../Player/Player.h"
 
 
 CWeaponShop::CWeaponShop()
@@ -48,38 +50,57 @@ void CWeaponShop::Init(const CVector3 position, const CQuaternion rotation)
 		m_selectItemSprite.SetPosition(m_slectItemTexPos);
 		m_selectItemSprite.SetSize(m_selectItemTexSize);
 
-
+		m_equipItem.Start();
 
 
 		wchar_t filePath[256];
-		for (int y_num = 0; y_num < Y_ELEMENT;y_num++)
+		for (int num = 0; num < ITEM_ELEMENT;num++)
 		{
-			for (int x_num = 0; x_num < X_ELEMENT;x_num++)
-			{
-
-				m_items[y_num][x_num].ItemID = Random().GetRandInt() % 4 + 1;
-
-				swprintf(filePath, L"Assets/sprite/ShopUI/WeaponShop/Weapon_%d.png", m_items[y_num][x_num].ItemID);
-				m_items[y_num][x_num].ItemTexture.Load(filePath);
-				m_items[y_num][x_num].ItemSprite.Init(&m_items[y_num][x_num].ItemTexture);
-				m_items[y_num][x_num].ItemSprite.SetSize(m_shopLineupTexSize);
-				m_items[y_num][x_num].ItemSprite.SetPosition(m_shopLineupPosition);
-				m_items[y_num][x_num].Itemprice = Random().GetRandInt() % 300 + 100;
-				swprintf(m_items[y_num][x_num].ItemName, L"鉄の剣　　　    %dG", m_items[y_num][x_num].Itemprice);
-				m_shopLineupPosition.x += SHOPLINEUP_POSITION_OFFSET.x;
-
-			}
-			m_shopLineupPosition.x -= SHOPLINEUP_POSITION_OFFSET.x * X_ELEMENT;
+			swprintf(m_items[num].ItemName,m_equipItem.GetItemStatus(num).ItemName);
+			m_items[num].ItemID = m_equipItem.GetItemStatus(num).ItemID;
+			swprintf(filePath, L"Assets/sprite/Item/Equip/Equip_%d.png", m_items[num].ItemID);
+			m_items[num].Itemprice = m_equipItem.GetItemStatus(num).Itemprice;
+			m_items[num].ItemTexture.Load(filePath);
+			m_items[num].ItemSprite.Init(&m_items[num].ItemTexture);
+			m_items[num].ItemSprite.SetSize(m_shopLineupTexSize);
+			m_items[num].ItemSprite.SetPosition(m_shopLineupPosition);
+			swprintf(m_filePath, m_items[num].ItemName);
+			m_Itemfont[num].Init(m_filePath);
+			m_Itemfont[num].SetPosition({ m_shopLineupPosition.x + SHOPLINEUP_POSITION_OFFSET.x, m_shopLineupPosition.y });
 			m_shopLineupPosition.y -= SHOPLINEUP_POSITION_OFFSET.y;
 		}
-		swprintf(m_filePath, L"青のポーション    100G");
-		m_Itemfont.Init(m_filePath);
 	}
+	
 }
 
 void CWeaponShop::Update()
 {
 	ShopUpdate();
+	if (!m_isTransaction) { return; };
+	if (GetPlayer().BuyMoney(m_equipItem.GetItemStatus_ItemId(m_lineupSelectNumber + 1).Itemprice))
+	{
+		CWeapon::SWeaponStatus weapons;
+		weapons.weaponNum = CWeapon::EnPlayerWeapon::enSword;
+		switch (m_equipItem.GetItemStatus_ItemId(m_lineupSelectNumber + 1).ItemEffectPlayerStatus)
+		{
+		case CEquipItem::EnIemEffectPlayerStatus::Strength:
+			weapons.attack = m_equipItem.GetItemStatus_ItemId(m_lineupSelectNumber + 1).ItemEffect;
+			break;
+		case CEquipItem::EnIemEffectPlayerStatus::Defense:
+			weapons.diffence = m_equipItem.GetItemStatus_ItemId(m_lineupSelectNumber + 1).ItemEffect;
+			break;
+		case CEquipItem::EnIemEffectPlayerStatus::Health:
+
+			break;
+		}
+		GetPlayer().AddEquipList(weapons);
+		CSoundSource* se = New<CSoundSource>(0);
+		se->Init("Assets/sound/Shop/BuySe.wav");
+		se->SetVolume(1.0f);
+		se->Play(false);
+		
+	}
+	m_isTransaction = false;
 }
 
 void CWeaponShop::Draw()
@@ -101,14 +122,10 @@ void CWeaponShop::AfterDraw()
 	if (!m_isShoplineupDraw) { return; }
 	m_backSprite.Draw();
 	m_selectItemSprite.Draw();
-	for (int y_num = 0; y_num < Y_ELEMENT;y_num++)
+	for (int num = 0; num < ITEM_ELEMENT;num++)
 	{
-		for (int x_num = 0; x_num < X_ELEMENT;x_num++)
-		{
-			m_items[y_num][x_num].ItemSprite.Draw();;
-
-		}
-
+		m_items[num].ItemSprite.Draw();;
+		m_Itemfont[num].Draw();
 	}
-	m_Itemfont.Draw();
+	
 }

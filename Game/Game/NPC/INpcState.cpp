@@ -66,31 +66,22 @@ void INpcState::ShopUpdate()
 		}
 		else if (Pad().IsTriggerButton(enButtonX))
 		{
-			Transaction(m_items[m_lineupSelectPos.Y][m_lineupSelectPos.X].Itemprice);
+			//éÊà¯ÇçsÇ§
+			m_isTransaction = true;
 		}
 
-		else if (Pad().IsTriggerButton(enButtonUp) && m_lineupSelectPos.Y != 0)
+		else if (Pad().IsTriggerButton(enButtonUp) && m_lineupSelectNumber != 0)
 		{
-			m_lineupSelectPos.Y--;
+			m_lineupSelectNumber--;
 			m_slectItemTexPos.y += SHOPLINEUP_POSITION_OFFSET.y;
 		}
-		else if (Pad().IsTriggerButton(enButtonDown) && m_lineupSelectPos.Y != Y_ELEMENT - 1)
+		else if (Pad().IsTriggerButton(enButtonDown) && m_lineupSelectNumber != ITEM_ELEMENT - 1)
 		{
-			m_lineupSelectPos.Y++;
+			m_lineupSelectNumber++;
 			m_slectItemTexPos.y -= SHOPLINEUP_POSITION_OFFSET.y;
 		}
-		else if (Pad().IsTriggerButton(enButtonLeft) && m_lineupSelectPos.X != 0)
-		{
-			m_lineupSelectPos.X--;
-			m_slectItemTexPos.x -= SHOPLINEUP_POSITION_OFFSET.x;
-		}
-		else if (Pad().IsTriggerButton(enButtonRight) && m_lineupSelectPos.X != X_ELEMENT - 1)
-		{
-			m_lineupSelectPos.X++;
-			m_slectItemTexPos.x += SHOPLINEUP_POSITION_OFFSET.x;
-		}
-		m_selectItemSprite.SetPosition(m_slectItemTexPos);
-		m_Itemfont.SetString(m_items[m_lineupSelectPos.Y][m_lineupSelectPos.X].ItemName);
+		m_selectItemSprite.SetPosition(m_slectItemTexPos); 
+
 		break;
 	}
 

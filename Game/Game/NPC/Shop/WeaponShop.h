@@ -1,5 +1,6 @@
 #pragma once
 #include "../INpcState.h"
+#include "../../Item/CEquipItem.h"
 class CWeaponShop : public INpcState
 {
 public:
@@ -10,5 +11,6 @@ public:
 	void Draw();
 	void AfterDraw();
 private:
+	CEquipItem			m_equipItem;
 };
 

@@ -53,28 +53,21 @@ void CItemShop::Init(const CVector3 position, const CQuaternion rotation)
 		
 
 		wchar_t filePath[256];
-		for (int y_num = 0; y_num < Y_ELEMENT;y_num++)
+		/*for (int num = 0; num < ITEM_ELEMENT;num++)
 		{
-			for (int x_num = 0; x_num < X_ELEMENT;x_num++)
-			{
-				
-				m_items[y_num][x_num].ItemID = Random().GetRandInt() % 3 + 1;
+			wscanf(m_items[num].ItemName, m_equipItem.GetItemStatus(num).ItemName);
+			m_items[num].ItemID = m_equipItem.GetItemStatus(num).ItemID;
+			swprintf(filePath, L"Assets/sprite/Item/Equip/Equip_%d.png", m_items[num].ItemID);
+			m_items[num].ItemTexture.Load(filePath);
+			m_items[num].ItemSprite.Init(&m_items[num].ItemTexture);
+			m_items[num].ItemSprite.SetSize(m_shopLineupTexSize);
+			m_items[num].ItemSprite.SetPosition(m_shopLineupPosition);
 
-				swprintf(filePath, L"Assets/sprite/ShopUI/Potion/Item_%d.png", m_items[y_num][x_num].ItemID);
-				m_items[y_num][x_num].ItemTexture.Load(filePath);
-				m_items[y_num][x_num].ItemSprite.Init(&m_items[y_num][x_num].ItemTexture);
-				m_items[y_num][x_num].ItemSprite.SetSize(m_shopLineupTexSize);
-				m_items[y_num][x_num].ItemSprite.SetPosition(m_shopLineupPosition);
-				m_items[y_num][x_num].Itemprice = Random().GetRandInt() % 300 + 100;
-				swprintf(m_items[y_num][x_num].ItemName, L"ポーション    %dG", m_items[y_num][x_num].Itemprice);
-				m_shopLineupPosition.x += SHOPLINEUP_POSITION_OFFSET.x;
-				
-			}
-			m_shopLineupPosition.x -= SHOPLINEUP_POSITION_OFFSET.x * X_ELEMENT;
+			swprintf(m_filePath, m_items[num].ItemName);
+			m_Itemfont[num].Init(m_filePath);
+			m_Itemfont[num].SetPosition({ m_shopLineupPosition.x + SHOPLINEUP_POSITION_OFFSET.x, m_shopLineupPosition.y });
 			m_shopLineupPosition.y -= SHOPLINEUP_POSITION_OFFSET.y;
-		}
-		swprintf(m_filePath, L"青のポーション    100G");
-		m_Itemfont.Init(m_filePath);
+		}*/
 	}
 }
 
@@ -103,14 +96,13 @@ void CItemShop::AfterDraw()
 	if (!m_isShoplineupDraw) { return; }
 	m_backSprite.Draw();
 	m_selectItemSprite.Draw();
-	for (int y_num = 0; y_num < Y_ELEMENT;y_num++)
+	for (int y_num = 0; y_num < ITEM_ELEMENT;y_num++)
 	{
-		for (int x_num = 0; x_num < X_ELEMENT;x_num++)
-		{
-			m_items[y_num][x_num].ItemSprite.Draw();;
+		
+		m_items[y_num].ItemSprite.Draw();;
 			
-		}
+	
 		
 	}
-	m_Itemfont.Draw();
+
 }

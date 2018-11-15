@@ -39,11 +39,6 @@ protected:
 		enShopLineup,
 		enShopNum,
 	};
-	struct SLineupPos
-	{
-		int X = 0;
-		int Y = 0;
-	};
 	struct ItemState
 	{
 		wchar_t     ItemName[40];			//商品の名前
@@ -71,10 +66,9 @@ protected:
 	EShopState			m_shopState = enShopNone;			//店の状態
 	EShopState			m_selectShop = enShopNone;			//選択中の状態
 
-	static const int	Y_ELEMENT = 3;										//行の要素数
-	static const int	X_ELEMENT = 5;										//列の要素数
-	SLineupPos			m_lineupSelectPos;									//選んでるアイテムの要素
-	ShopItem			m_items[Y_ELEMENT][X_ELEMENT];						//商品の情報
+	static const int	ITEM_ELEMENT = 5;										//行の要素数
+	int					m_lineupSelectNumber = 0;							//選んでるアイテムの要素
+	ShopItem			m_items[ITEM_ELEMENT];									//商品の情報
 	CVector2			m_shopLineupPosition = { -200.0f,200.0f };
 	CVector2			m_shopLineupTexSize = { 100.0f,100.0f };
 	const CVector2		SHOPLINEUP_POSITION_OFFSET = { 105.0f,105.0f };
@@ -95,14 +89,15 @@ protected:
 	CVector2			m_shopSelectPenPosition = { 350.0f,-195.0f };
 	CVector2			m_shopSelectPenSize = { 50.0f,50.0f };
 
-	int					m_price[Y_ELEMENT][X_ELEMENT];						//商品の値段を格納している配列
 	bool				m_isShoplineupDraw = false;							//ショップ画面を描画するかの判定
 	bool				m_isSelectDraw = false;								//セレクト画面を描画するかの判定
 	const float			SHOP_DRAW_LENGTH = 3.5f;							//ショップの影響を受ける長さ
-	CFont				m_Itemfont;
 	wchar_t				m_filePath[256];
 	ItemState			m_itemState;
 	std::list<ItemState*>		m_itemStateList;
+	bool				m_isTransaction = false;							//取引を行うかの判定
+	CFont				m_Itemfont[ITEM_ELEMENT];
+	
 	
 };
 
