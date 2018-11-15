@@ -13,7 +13,6 @@ IEnemy::IEnemy() :
 
 IEnemy::~IEnemy()
 {
-	EnemyListErase();
 }
 
 void IEnemy::BeforeDead()
