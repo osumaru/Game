@@ -2,6 +2,8 @@
 #include "INpcState.h"
 #include "../Player/Player.h"
 #include "../Item/RecoveryItem.h"
+#include "../Player/Weapon.h"
+
 
 
 INpcState::INpcState()
@@ -93,6 +95,24 @@ void INpcState::ShopUpdate()
 	}
 
 	m_skinModel.Update(m_position, m_rotation, m_scale, true);
+}
+void INpcState::LoadFile(const wchar_t* filePath)
+{
+	std::fstream	file;
+	file.open(filePath, std::ios::binary | std::ios::in);
+	file.read((char*)&m_itemState, sizeof(ItemState));
+	int num = file.tellg();
+	file.close();
+}
+void INpcState::AddFile(const wchar_t* filePath)
+{
+	std::fstream	file;
+	swprintf(m_itemState.ItemName, L"osakanasan");
+	m_itemState.ItemID = 1;
+	m_itemState.Itemprice = 100;
+	file.open(filePath, std::ios::binary | std::ios::out );
+	file.write((char*)&m_itemState, sizeof(m_itemState));
+	file.close();
 }
 
 bool INpcState::Transaction(const int gold)

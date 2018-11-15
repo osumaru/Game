@@ -7,6 +7,10 @@ public:
 	virtual void Init(const CVector3 position, const CQuaternion rotation) = 0;
 	virtual void Update() = 0;
 	virtual void Draw() = 0;
+	//バイナリーデータの読み込み
+	void LoadFile(const wchar_t* filePath);
+	//バイナリーデータの追加
+	void AddFile(const wchar_t* filePath);
 	
 	const CVector3 GetPosition()
 	{
@@ -40,10 +44,17 @@ protected:
 		int X = 0;
 		int Y = 0;
 	};
+	struct ItemState
+	{
+		wchar_t     ItemName[40];			//商品の名前
+		int			ItemID = 0;				//商品の番号
+		int			Itemprice;				//アイテムの値段
+	};
+
 	struct ShopItem
 	{
+		wchar_t     ItemName[40];			//商品の名前
 		int			ItemID = 0;				//商品の番号
-		wchar_t     ItemName[256];			//商品の名前
 		int			Itemprice;				//アイテムの値段
 		CSprite		ItemSprite;				//アイテムのスプライト
 		CTexture	ItemTexture;			//アイテムのテクスチャ
@@ -90,6 +101,8 @@ protected:
 	const float			SHOP_DRAW_LENGTH = 3.5f;							//ショップの影響を受ける長さ
 	CFont				m_Itemfont;
 	wchar_t				m_filePath[256];
+	ItemState			m_itemState;
+	std::list<ItemState*>		m_itemStateList;
 	
 };
 

@@ -10,7 +10,7 @@ public:
 	{
 		enSword,			//•ĞèŒ•
 		enLongSword,		//—¼èŒ•
-		enArrow,				//‹|–î
+		enArrow,			//‹|–î
 		enTwinSword,		//“ñ“
 		enWeaponNum,
 		enInvalid			//‰½‚à‚È‚¢

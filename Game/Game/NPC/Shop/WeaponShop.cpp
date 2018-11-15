@@ -13,6 +13,8 @@ CWeaponShop::~CWeaponShop()
 }
 void CWeaponShop::Init(const CVector3 position, const CQuaternion rotation)
 {
+	//AddFile(L"Assets/sprite/shopData");
+	//LoadFile(L"Assets/sprite/shopData");
 	m_position = position;
 	m_rotation = rotation;
 	m_skinModel.Load(L"Assets/modelData/U2.cmo", NULL);
