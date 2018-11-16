@@ -24,7 +24,7 @@ std::vector<std::vector<SMapChipInfo>> mapChipInfo =
 	//#include "Test.h"
 	}
 };
-
+	
 Map::Map() :
 	m_mapChip()
 {

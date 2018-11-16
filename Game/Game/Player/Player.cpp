@@ -344,16 +344,20 @@ void CPlayer::Rotation()
 
 void CPlayer::UseItem(int number)
 {
-	if (!m_itemList.empty())
+	if (m_itemList.empty())
 	{
-		//選んだアイテムを使う
-		std::list<IItem*>::iterator it;
-		it = m_itemList.begin();
-		for (int i = 0; i < number; i++)
-		{
-			it++;
-		}
-		(*it)->Use();
+		//アイテムがない
+		return;
+	}
+	//選んだアイテムを使う
+	std::list<IItem*>::iterator it;
+	it = m_itemList.begin();
+	for (int i = 0; i < number; i++)
+	{
+		it++;
+	}
+	bool isUse = (*it)->Use();
+	if (isUse) {
 		//使ったアイテムをリストから削除する
 		m_itemList.erase(it);
 	}
@@ -361,29 +365,31 @@ void CPlayer::UseItem(int number)
 
 void CPlayer::ChangeEquip(int number)
 {
-	if (!m_equipList.empty())
+	if (m_equipList.empty())
 	{
-		//選んだ装備と現在の装備を交換する
-		std::list<CWeapon::SWeaponStatus>::iterator it;
-		it = m_equipList.begin();
-		for (int i = 0; i < number; i++)
-		{
-			it++;
-		}
-		int weaponNumber = (*it).weaponNum;
-		if (m_equipWeapon[weaponNumber].weaponNum == CWeapon::enInvalid)
-		{
-			//何も装備していない
-			m_equipWeapon[weaponNumber] = (*it);
-			m_equipList.erase(it);
-		}
-		else
-		{
-			//装備を交換する
-			CWeapon::SWeaponStatus equipWeapon = m_equipWeapon[weaponNumber];
-			m_equipWeapon[weaponNumber] = (*it);
-			(*it) = equipWeapon;
-		}
+		//装備アイテムがない
+		return;
+	}
+	//選んだ装備と現在の装備を交換する
+	std::list<CWeapon::SWeaponStatus>::iterator it;
+	it = m_equipList.begin();
+	for (int i = 0; i < number; i++)
+	{
+		it++;
+	}
+	int weaponNumber = (*it).weaponNum;
+	if (m_equipWeapon[weaponNumber].weaponNum == CWeapon::enInvalid)
+	{
+		//何も装備していない
+		m_equipWeapon[weaponNumber] = (*it);
+		m_equipList.erase(it);
+	}
+	else
+	{
+		//装備を交換する
+		CWeapon::SWeaponStatus equipWeapon = m_equipWeapon[weaponNumber];
+		m_equipWeapon[weaponNumber] = (*it);
+		(*it) = equipWeapon;
 	}
 }
 

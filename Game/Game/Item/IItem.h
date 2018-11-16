@@ -23,7 +23,7 @@ public:
 	virtual void Draw() {};
 
 	//アイテムを使う
-	virtual void Use() {};
+	virtual bool Use() { return false; }
 
 	//属性
 	enum EnInventoryItemType {

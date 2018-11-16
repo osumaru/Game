@@ -28,6 +28,12 @@ public:
 	//描画
 	void AfterDraw() override;
 
+	//カーソル移動
+	void PointerMove();
+
+	//アイテムを使用する
+	void UseItem();
+
 	//アイテム所持上限を取得
 	static int GetItemLimit()
 	{
