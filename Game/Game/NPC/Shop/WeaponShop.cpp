@@ -76,10 +76,38 @@ void CWeaponShop::Init(const CVector3 position, const CQuaternion rotation)
 	}
 	
 }
+void CWeaponShop::LineupChange()
+{
+	wchar_t filePath[256];
+	for (int num = 0; num < ITEM_ELEMENT;num++)
+	{
+		int RandomID = Random().GetRandInt() % 10;
+		m_items[num].ItemStatus = m_equipItem.GetItemStatus(RandomID);
+		swprintf(filePath, L"Assets/sprite/Item/Equip/Equip_%d.png", (int)m_items[num].ItemStatus.WeaponType);
+		m_items[num].ItemTexture.Load(filePath);
+		m_items[num].ItemSprite.Init(&m_items[num].ItemTexture);
+		m_items[num].ItemSprite.SetSize(m_shopLineupTexSize);
+		m_items[num].ItemSprite.SetPosition(m_shopLineupPosition);
+		m_shopLineupPosition.y -= SHOPLINEUP_POSITION_OFFSET.y;
+		swprintf(m_filePath, m_items[num].ItemStatus.ItemName);
+		m_itemNameFont[num].Init(m_filePath);
+		m_itemNameFont[num].SetPosition({ m_fontPosition.x + FONT_POSITION_OFFSET.x, m_fontPosition.y });
+		swprintf(m_filePath, L"     %dG", m_items[num].ItemStatus.Itemprice);
+		m_itemPriceFont[num].Init(m_filePath);
+		m_itemPriceFont[num].SetPosition({ m_fontPosition.x + FONT_POSITION_OFFSET.x * 2, m_fontPosition.y });
+		m_fontPosition.y -= FONT_POSITION_OFFSET.y;
+	}
+}
 
 void CWeaponShop::Update()
 {
 	ShopUpdate();
+	/*m_changeUpTime += GameTime().GetDeltaFrameTime();
+	if (m_changeUpTime >= 20.0)
+	{
+		LineupChange();
+		m_changeUpTime = 0.0f;
+	}*/
 	if (!m_isTransaction) { return; };
 	if (GetPlayer().BuyMoney(m_items[m_lineupSelectNumber + 1].ItemStatus.Itemprice))
 	{
