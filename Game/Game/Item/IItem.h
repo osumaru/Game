@@ -41,6 +41,15 @@ public:
 		Health,			//体力
 		None,			//効果なし
 	};
+	//装備の情報アイテムの場合はNoWeapon
+	enum EnWeaponType
+	{
+		enSword,			//片手剣
+		enLongSword,		//両手剣
+		enArrow,			//弓矢
+		enTwinSword,		//二刀
+		enNoWeapon,			//武器ではない
+	};
 
 	struct SItemStatus
 	{
@@ -50,6 +59,7 @@ public:
 		int						ItemEffect = 0;			//効果値
 		EnIemEffectPlayerStatus	ItemEffectPlayerStatus = EnIemEffectPlayerStatus::None;
 		EnInventoryItemType		ItemType = Invald;		//そのアイテムが回復系なのか装備するものなのかを判別する
+		EnWeaponType			WeaponType = enNoWeapon;
 	};
 
 	//アイテムの種類を取得

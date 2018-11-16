@@ -56,18 +56,21 @@ void CItemShop::Init(const CVector3 position, const CQuaternion rotation)
 		wchar_t filePath[256];
 		for (int num = 0; num < ITEM_ELEMENT;num++)
 		{
-			swprintf(m_items[num].ItemName, m_quickItem.GetItemStatus(num).ItemName);
-			m_items[num].ItemID = m_quickItem.GetItemStatus(num).ItemID;
-			swprintf(filePath, L"Assets/sprite/Item/Quick/Item_%d.png", m_items[num].ItemID);
-			m_items[num].Itemprice = m_quickItem.GetItemStatus(num).Itemprice;
+			int RandomID = Random().GetRandInt() % 9 + 1;
+			m_items[num].ItemStatus = m_quickItem.GetItemStatus(RandomID);
+			swprintf(filePath, L"Assets/sprite/Item/Quick/Item_%d.png", m_items[num].ItemStatus.ItemID);
 			m_items[num].ItemTexture.Load(filePath);
 			m_items[num].ItemSprite.Init(&m_items[num].ItemTexture);
 			m_items[num].ItemSprite.SetSize(m_shopLineupTexSize);
 			m_items[num].ItemSprite.SetPosition(m_shopLineupPosition);
-			swprintf(m_filePath, m_items[num].ItemName);
-			m_Itemfont[num].Init(m_filePath);
-			m_Itemfont[num].SetPosition({ m_shopLineupPosition.x + SHOPLINEUP_POSITION_OFFSET.x, m_shopLineupPosition.y });
 			m_shopLineupPosition.y -= SHOPLINEUP_POSITION_OFFSET.y;
+			swprintf(m_filePath, m_items[num].ItemStatus.ItemName);
+			m_itemNameFont[num].Init(m_filePath);
+			m_itemNameFont[num].SetPosition({ m_fontPosition.x + FONT_POSITION_OFFSET.x, m_fontPosition.y });
+			swprintf(m_filePath, L"     %dG", m_items[num].ItemStatus.Itemprice);
+			m_itemPriceFont[num].Init(m_filePath);
+			m_itemPriceFont[num].SetPosition({ m_fontPosition.x + FONT_POSITION_OFFSET.x * 2, m_fontPosition.y });
+			m_fontPosition.y -= FONT_POSITION_OFFSET.y;
 		}
 	}
 }
@@ -76,7 +79,7 @@ void CItemShop::Update()
 {
 	ShopUpdate();
 	if (!m_isTransaction) { return; };
-	if (GetPlayer().BuyMoney(m_quickItem.GetItemStatus_ItemId(101).Itemprice))
+	if (GetPlayer().BuyMoney(m_items[m_lineupSelectNumber + 101].ItemStatus.Itemprice))
 	{
 		IItem* item = new CRecoveryItem;
 		item->Start();
@@ -113,8 +116,8 @@ void CItemShop::AfterDraw()
 	m_selectItemSprite.Draw();
 	for (int num = 0; num < ITEM_ELEMENT;num++)
 	{
-		m_items[num].ItemSprite.Draw();;
-		m_Itemfont[num].Draw();
+		m_items[num].ItemSprite.Draw();
+		
 	}
 
 }

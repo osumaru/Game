@@ -70,13 +70,17 @@ private:
 	CFont								m_statusFont[enFont_StatusNum][enStatus_Num];	//現在の装備と装備変更時のステータス表示
 	CSprite								m_backGround;									//背景
 	CTexture							m_backGroundTexture;
+	CSprite								m_statusWindow;									//ステータスウィンドウ
+	CTexture							m_statusWindowTexture;							
+	CSprite								m_right;										//右矢印
+	CTexture							m_rightTexture;
 	CSprite								m_pointer;										//カーソル
 	CTexture							m_pointerTexture;
 	CSprite								m_equip[m_equipLimit];							//装備アイコン
 	std::list<CWeapon::SWeaponStatus>	m_equipList;									//装備リスト
 	std::list<IItem*>					m_itemEquipList;
 	CVector2							m_basePos = CVector2::Zero;						//初期座標
-	CVector2							m_size = CVector2::Zero;						//初期サイズ
+	CVector2							m_baseSize = CVector2::Zero;					//初期サイズ
 	int									m_width = 0;									//インベントリの幅
 	int									m_height = 0;									//インベントリの高さ
 	int									m_pointerNum = 0;								//カーソルで選んでいるアイテムの番号
