@@ -10,7 +10,9 @@ public:
 	void Update();
 	void Draw();
 	void AfterDraw();
+	void LineupChange();
 private:
 	CEquipItem			m_equipItem;
+	float				m_changeUpTime = 0.0f;
 };
 
