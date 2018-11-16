@@ -344,6 +344,7 @@ void CMaw::Search()
 	}
 	else
 	{
+		
 		//Œ©‚Â‚¯‚ê‚È‚©‚Á‚½‚ç’T‚·
 		CQuaternion addRot;
 		const float RotSpeed = 0.01f;
