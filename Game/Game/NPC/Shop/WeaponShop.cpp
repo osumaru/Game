@@ -68,7 +68,7 @@ void CWeaponShop::Init(const CVector3 position, const CQuaternion rotation)
 			swprintf(m_filePath, m_items[num].ItemStatus.ItemName);
 			m_itemNameFont[num].Init(m_filePath);
 			m_itemNameFont[num].SetPosition({ m_fontPosition.x + FONT_POSITION_OFFSET.x, m_fontPosition.y});
-			swprintf(m_filePath,L"     %dG", m_items[num].ItemStatus.Itemprice);
+			swprintf(m_filePath,L"      %dG", m_items[num].ItemStatus.Itemprice);
 			m_itemPriceFont[num].Init(m_filePath);
 			m_itemPriceFont[num].SetPosition({ m_fontPosition.x + FONT_POSITION_OFFSET.x * 2, m_fontPosition.y });
 			m_fontPosition.y -= FONT_POSITION_OFFSET.y;
