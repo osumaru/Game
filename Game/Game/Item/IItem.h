@@ -48,8 +48,7 @@ public:
 		int						ItemID = 0;				//商品の番号
 		int						Itemprice = 0;			//アイテムの値段
 		int						ItemEffect = 0;			//効果値
-		EnIemEffectPlayerStatus	ItemEffectPlayerStatus = EnIemEffectPlayerStatus::None
-;
+		EnIemEffectPlayerStatus	ItemEffectPlayerStatus = EnIemEffectPlayerStatus::None;
 		EnInventoryItemType		ItemType = Invald;		//そのアイテムが回復系なのか装備するものなのかを判別する
 	};
 

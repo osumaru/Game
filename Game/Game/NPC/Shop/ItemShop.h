@@ -1,5 +1,6 @@
 #pragma once
 #include "../INpcState.h"
+#include "../../Item/QuickItem.h"
 class CItemShop :public INpcState
 {
 public:
@@ -10,7 +11,7 @@ public:
 	void Draw();
 	void AfterDraw();
 private:
-	
+	CQuickItem		m_quickItem;
 
 };
 

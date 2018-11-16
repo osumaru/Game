@@ -321,6 +321,9 @@
     <ClCompile Include="Item\CEquipItem.cpp">
       <Filter>ソース ファイル\Item</Filter>
     </ClCompile>
+    <ClCompile Include="Item\QuickItem.cpp">
+      <Filter>ソース ファイル\Item</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -558,6 +561,9 @@
       <Filter>ソース ファイル\Player</Filter>
     </ClInclude>
     <ClInclude Include="Item\CEquipItem.h">
+      <Filter>ソース ファイル\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Item\QuickItem.h">
       <Filter>ソース ファイル\Item</Filter>
     </ClInclude>
   </ItemGroup>
