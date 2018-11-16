@@ -114,7 +114,7 @@ void CPlayer::Init(CVector3 position)
 		m_status.NextExp = ((m_status.OldExp * 1.1f + 0.5) + (m_status.Level * 12)) / 2 + 0.5;		//次のレベルアップに必要な経験値
 		m_status.ExperiencePoint = 0;					//経験値
 		m_status.AccumulationExp += m_status.OldExp;	//累積経験値
-		m_status.Gold = 400;							//所持金
+		m_status.Gold = 4000;							//所持金
 	}
 	m_playerGetter.SetPlayer(this);
 	m_PlayerStateMachine.SetPlayer(this, &m_playerGetter);
@@ -365,7 +365,7 @@ void CPlayer::UseItem(int number)
 
 void CPlayer::ChangeEquip(int number)
 {
-	if (!m_equipList.empty())
+	if (m_equipList.empty())
 	{
 		//装備アイテムがない
 		return;

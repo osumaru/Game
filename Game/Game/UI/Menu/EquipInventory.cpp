@@ -26,57 +26,13 @@ void CEquipInventory::Init(CMenu * menu)
 	m_equipList = GetPlayer().GetEquipList();
 	m_width = 5;
 	m_height = 1;
-	if (!m_equipList.empty()) {
-		//リストにアイテムがある
-		int idx = 0;
-		for (auto& equip : m_equipList)
-		{
-			//アイテムの種類を取得
-			CWeapon::EnPlayerWeapon weaponNum = equip.weaponNum;
-			if (weaponNum == CWeapon::enSword)
-			{
-				//剣
-				CTexture* itemTexure = TextureResource().LoadTexture(L"Assets/sprite/sword.png");
-				m_equip[idx].Init(itemTexure);
-			}
-			else if (weaponNum == CWeapon::enLongSword)
-			{
-				//大剣
-				CTexture* itemTexure = TextureResource().LoadTexture(L"Assets/sprite/largeSword.png");
-				m_equip[idx].Init(itemTexure);
-			}
-			else if (weaponNum == CWeapon::enArrow)
-			{
-				//弓
-				CTexture* itemTexure = TextureResource().LoadTexture(L"Assets/sprite/bow.png");
-				m_equip[idx].Init(itemTexure);
-			}
-			else if (weaponNum == CWeapon::enTwinSword)
-			{
-				//双剣
-				CTexture* itemTexure = TextureResource().LoadTexture(L"Assets/sprite/twinSword.png");
-				m_equip[idx].Init(itemTexure);
-			}
-			//座標とサイズを決める
-			CVector2 position = m_basePos;
-			position.x += m_size.x * (idx % m_width);
-			position.y -= m_size.y * (idx / m_width);
-			if (idx != 0 && idx % m_width == 0)
-			{
-				//インベントリの幅を超えたら行を下げる
-				m_height++;
-			}
-			m_equip[idx].SetPosition(position);
-			m_equip[idx].SetSize(m_size);
-			idx++;
-		}
-	}
-
+	//装備リストを整理する
+	EquipListReset(true);
 	//ステータス表示を初期化
 	SplayerStatus playerStatus = GetPlayer().GetStatus();
 	CVector2 fontPos = { m_basePos.x + m_size.x * m_width, m_basePos.y + m_size.y };
 	wchar_t font[256];
-	for (int j = 0; j < 2; j++)
+	for (int j = 0; j < enFont_StatusNum; j++)
 	{
 		for (int i = 0; i < enStatus_Num; i++)
 		{
@@ -129,10 +85,64 @@ void CEquipInventory::AfterDraw()
 		m_equip[i].Draw();
 	}
 	m_pointer.Draw();
-	for (int j = 0; j < 2; j++) {
+	for (int j = 0; j < enFont_StatusNum; j++) {
 		for (int i = 0; i < enStatus_Num; i++) {
 			m_statusFont[j][i].Draw();
 		}
+	}
+}
+
+void CEquipInventory::EquipListReset(bool isInit)
+{
+	if (m_equipList.empty()) 
+	{
+		//装備が何もない
+		return;
+	}
+	int idx = 0;
+	for (auto& equip : m_equipList)
+	{
+		//装備の種類を取得
+		CWeapon::EnPlayerWeapon weaponNum = equip.weaponNum;
+		CTexture* equipTexture = nullptr;
+		if (weaponNum == CWeapon::enSword)
+		{
+			//剣
+			equipTexture = TextureResource().LoadTexture(L"Assets/sprite/sword.png");
+		}
+		else if (weaponNum == CWeapon::enLongSword)
+		{
+			//大剣
+			equipTexture = TextureResource().LoadTexture(L"Assets/sprite/largeSword.png");
+		}
+		else if (weaponNum == CWeapon::enArrow)
+		{
+			//弓
+			equipTexture = TextureResource().LoadTexture(L"Assets/sprite/bow.png");
+		}
+		else if (weaponNum == CWeapon::enTwinSword)
+		{
+			//双剣
+			equipTexture = TextureResource().LoadTexture(L"Assets/sprite/twinSword.png");
+		}
+		if (isInit) {
+			m_equip[idx].Init(equipTexture);
+		}
+		else {
+			m_equip[idx].SetTexture(equipTexture);
+		}
+		//座標とサイズを決める
+		CVector2 position = m_basePos;
+		position.x += m_size.x * (idx % m_width);
+		position.y -= m_size.y * (idx / m_width);
+		if (idx != 0 && idx % m_width == 0)
+		{
+			//インベントリの幅を超えたら行を下げる
+			m_height++;
+		}
+		m_equip[idx].SetPosition(position);
+		m_equip[idx].SetSize(m_size);
+		idx++;
 	}
 }
 
@@ -140,13 +150,12 @@ void CEquipInventory::PointerMove()
 {
 	CVector2 position = m_pointer.GetPosition();
 	int number = m_pointerNum;
-	float offset = m_size.x / 2.0f;
 	if (Pad().IsTriggerButton(enButtonRight))
 	{
 		//右にカーソルを動かす
 		position.x += m_size.x;
 		number++;
-		if (position.x > m_basePos.x + m_size.x * (m_width - 1) + offset)
+		if (position.x >= m_basePos.x + m_size.x * m_width)
 		{
 			//右端だった場合はそのまま
 			position.x = m_basePos.x + m_size.x * (m_width - 1);
@@ -162,7 +171,7 @@ void CEquipInventory::PointerMove()
 		//左にカーソルを動かす
 		position.x -= m_size.x;
 		number--;
-		if (position.x < m_basePos.x - offset)
+		if (position.x <= m_basePos.x - m_size.x)
 		{
 			//左端だった場合はそのまま
 			position.x = m_basePos.x;
@@ -178,7 +187,7 @@ void CEquipInventory::PointerMove()
 		//上にカーソルを動かす
 		position.y += m_size.y;
 		number -= m_width;
-		if (position.y > m_basePos.y + offset)
+		if (position.y >= m_basePos.y + m_size.y)
 		{
 			//上端だった場合はそのまま
 			position.y = m_basePos.y;
@@ -194,7 +203,7 @@ void CEquipInventory::PointerMove()
 		//下にカーソルを動かす
 		position.y -= m_size.y;
 		number += m_width;
-		if (position.y < m_basePos.y - m_size.y * (m_height - 1) - offset)
+		if (position.y <= m_basePos.y - m_size.y * m_height)
 		{
 			//下端だった場合はそのまま
 			position.y = m_basePos.y - m_size.y * (m_height - 1);
@@ -221,60 +230,12 @@ void CEquipInventory::Equip()
 	m_equipList = GetPlayer().GetEquipList();
 	m_width = 5;
 	m_height = 1;
-	if (!m_equipList.empty()) {
-		//リストにアイテムがある
-		int idx = 0;
-		for (auto& equip : m_equipList)
-		{
-			//アイテムの種類を取得
-			CWeapon::EnPlayerWeapon weaponNum = equip.weaponNum;
-			if (weaponNum == CWeapon::enSword)
-			{
-				//剣
-				CTexture* itemTexure = TextureResource().LoadTexture(L"Assets/sprite/sword.png");
-				m_equip[idx].SetTexture(itemTexure);
-			}
-			else if (weaponNum == CWeapon::enLongSword)
-			{
-				//大剣
-				CTexture* itemTexure = TextureResource().LoadTexture(L"Assets/sprite/largeSword.png");
-				m_equip[idx].SetTexture(itemTexure);
-			}
-			else if (weaponNum == CWeapon::enArrow)
-			{
-				//弓
-				CTexture* itemTexure = TextureResource().LoadTexture(L"Assets/sprite/bow.png");
-				m_equip[idx].SetTexture(itemTexure);
-			}
-			else if (weaponNum == CWeapon::enTwinSword)
-			{
-				//双剣
-				CTexture* itemTexure = TextureResource().LoadTexture(L"Assets/sprite/twinSword.png");
-				m_equip[idx].SetTexture(itemTexure);
-			}
-			//座標とサイズを決める
-			CVector2 position = m_basePos;
-			position.x += m_size.x * (idx % m_width);
-			position.y -= m_size.y * (idx / m_width);
-			if (idx != 0 && idx % m_width == 0)
-			{
-				//インベントリの幅を超えたら行を下げる
-				m_height++;
-			}
-			m_equip[idx].SetPosition(position);
-			m_equip[idx].SetSize(m_size);
-			idx++;
-		}
-	}
+	//装備リストを整理する
+	EquipListReset(false);
 }
 
 void CEquipInventory::CalucStatus()
 {
-	if (m_equipList.empty()) {
-		//装備を何も持っていない
-		return;
-	}
-
 	//プレイヤーのステータスを取得
 	SplayerStatus playerStatus = GetPlayer().GetStatus();
 	//装備の数を取得
@@ -300,8 +261,8 @@ void CEquipInventory::CalucStatus()
 
 	//装備変更した場合のステータスを計算する
 	wchar_t font[256];
-	for (int j = 0; j < 2; j++) {
-		if (j == 1)
+	for (int j = 0; j < enFont_StatusNum; j++) {
+		if (j == enFont_ChangeStatus)
 		{
 			equipStatus = weaponStatus;
 		}
