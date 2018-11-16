@@ -84,6 +84,14 @@ void INpcState::ShopUpdate()
 
 		break;
 	}
+	
+	if (len >= SHOP_DRAW_LENGTH)
+	{
+		m_shopState = enShopNone;
+		m_selectShop = enShopBuy;
+		m_isSelectDraw = false;
+		m_isShoplineupDraw = false;
+	}
 
 	m_skinModel.Update(m_position, m_rotation, m_scale, true);
 }

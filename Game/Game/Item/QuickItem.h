@@ -1,10 +1,10 @@
 #pragma once
 #include "IItem.h"
-class CEquipItem:public IItem
+class CQuickItem : public IItem
 {
 public:
-	CEquipItem();
-	~CEquipItem();
+	CQuickItem();
+	~CQuickItem();
 	bool Start();
 	void Update();
 	SItemStatus GetItemStatus(const int num)
@@ -15,17 +15,17 @@ public:
 	//à¯êî	ÉAÉCÉeÉÄÇÃID
 	SItemStatus GetItemStatus_ItemId(const int ItemID)
 	{
-		for (auto equiplist : m_equipItemStatusList)
+		for (auto quicklist : m_quickItemStatusList)
 		{
-			if (equiplist.ItemID == ItemID)
+			if (quicklist.ItemID == ItemID)
 			{
-				return equiplist;
+				return quicklist;
 			}
 		}
 	}
 private:
-	static const int			MAX_ITEM_NUMBER = 9;
-	std::list<SItemStatus>		m_equipItemStatusList;
-	SItemStatus					ItemStatus[MAX_ITEM_NUMBER];
+	static const int			MAX_QUICK_ITEM_LIST = 6;
+	std::list<SItemStatus>		m_quickItemStatusList;
+	SItemStatus					ItemStatus[MAX_QUICK_ITEM_LIST];
 };
 

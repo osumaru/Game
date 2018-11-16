@@ -194,6 +194,7 @@
     <ClCompile Include="Player\PlayerGetter.cpp" />
     <ClCompile Include="Player\PlayerSate\PlayerStun.cpp" />
     <ClCompile Include="Player\WireAction.cpp" />
+    <ClCompile Include="Item\QuickItem.cpp" />
     <ClCompile Include="Scene\ClearScene.cpp" />
     <ClCompile Include="UI\BossHp\BossHp.cpp" />
     <ClCompile Include="UI\Fade\Fade.cpp" />
@@ -277,6 +278,7 @@
     <ClInclude Include="Player\PlayerGetter.h" />
     <ClInclude Include="Player\PlayerSate\PlayerStun.h" />
     <ClInclude Include="Player\WireAction.h" />
+    <ClInclude Include="Item\QuickItem.h" />
     <ClInclude Include="Scene\ClearScene.h" />
     <ClInclude Include="UI\BossHp\BossHp.h" />
     <ClInclude Include="UI\Fade\Fade.h" />

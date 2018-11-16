@@ -1,4 +1,5 @@
 #pragma once
+#include "../Item/IItem.h"
 class INpcState	:	public IGameObject
 {
 public:
@@ -48,11 +49,9 @@ protected:
 
 	struct ShopItem
 	{
-		wchar_t     ItemName[40];			//商品の名前
-		int			ItemID = 0;				//商品の番号
-		int			Itemprice;				//アイテムの値段
-		CSprite		ItemSprite;				//アイテムのスプライト
-		CTexture	ItemTexture;			//アイテムのテクスチャ
+		IItem::SItemStatus	ItemStatus;				//アイテムの情報
+		CSprite				ItemSprite;				//アイテムのスプライト
+		CTexture			ItemTexture;			//アイテムのテクスチャ
 	};
 
 	CSkinModel			m_skinModel;						//スキンモデル
@@ -69,14 +68,14 @@ protected:
 	static const int	ITEM_ELEMENT = 5;										//行の要素数
 	int					m_lineupSelectNumber = 0;							//選んでるアイテムの要素
 	ShopItem			m_items[ITEM_ELEMENT];									//商品の情報
-	CVector2			m_shopLineupPosition = { -200.0f,200.0f };
-	CVector2			m_shopLineupTexSize = { 100.0f,100.0f };
-	const CVector2		SHOPLINEUP_POSITION_OFFSET = { 105.0f,105.0f };
+	CVector2			m_shopLineupPosition = { -220.0f,200.0f };
+	CVector2			m_shopLineupTexSize = { 80.0f,80.0f };
+	const CVector2		SHOPLINEUP_POSITION_OFFSET = { 80.0f,85.0f };
 
 	CSprite				m_selectItemSprite;
 	CTexture			m_selectItemTexture;
-	CVector2			m_slectItemTexPos = { -200.0f,200.0f };
-	CVector2			m_selectItemTexSize = { 100.0f,100.0f };
+	CVector2			m_slectItemTexPos = { -220.0f,200.0f };
+	CVector2			m_selectItemTexSize = { 80.0f,80.0f };
 
 	static const int	SELECT_TEX_ELEMENT = 2;									//セレクト用のスプライトの要素数
 	const	CVector2	SELECT_POSITON_START = { 350.0f,-195.0f };				//セレクトテクスチャの初期座標
@@ -96,7 +95,10 @@ protected:
 	ItemState			m_itemState;
 	std::list<ItemState*>		m_itemStateList;
 	bool				m_isTransaction = false;							//取引を行うかの判定
-	CFont				m_Itemfont[ITEM_ELEMENT];
+	CFont				m_itemNameFont[ITEM_ELEMENT];
+	CFont				m_itemPriceFont[ITEM_ELEMENT];
+	CVector2			m_fontPosition{ -340.0f,215.0f };
+	CVector2			FONT_POSITION_OFFSET = { 190.0f,85.0f };
 	
 	
 };
