@@ -18,25 +18,13 @@ std::vector<std::vector<SMapChipInfo>> mapChipInfo =
 {
 	{
 	//#include "Boss.h"
-	#include "Test.h"
-	//#include "Boss.h"
+#include "Test.h"
+	//#include "ShopTest.h"
+	//#include "Location2.h"
+	//#include "Test.h"
 	}
-//	{
-//#include "Location2.h"
-
-//	},
-//	{
-//#include "Location3.h"
-//	},
-
-//	{
-//#include "Location4.h"
-//	},
-//	{
-//#include "Location5.h"
-//	}
 };
-
+	
 Map::Map() :
 	m_mapChip()
 {
@@ -96,6 +84,7 @@ void Map::Init(int stageNum)
 			break;
 		case enMapTagWeaponShop:
 			m_shopNpcManager->InitShop(mInfo.m_position, mInfo.m_rotation, EShop::enWeaponShop);
+			break;
 		case enMapTagBreakBrock:
 			mapChip = New<CBreakMapObject>(0);
 			m_collider = true;

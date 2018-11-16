@@ -2,6 +2,8 @@
 #include "INpcState.h"
 #include "../Player/Player.h"
 #include "../Item/RecoveryItem.h"
+#include "../Player/Weapon.h"
+
 
 
 INpcState::INpcState()
@@ -64,34 +66,52 @@ void INpcState::ShopUpdate()
 		}
 		else if (Pad().IsTriggerButton(enButtonX))
 		{
-			Transaction(m_price[m_lineupSelectPos.Y][m_lineupSelectPos.X]);
+			//Žæˆø‚ðs‚¤
+			m_isTransaction = true;
 		}
 
-		else if (Pad().IsTriggerButton(enButtonUp) && m_lineupSelectPos.Y != 0)
+		else if (Pad().IsTriggerButton(enButtonUp) && m_lineupSelectNumber != 0)
 		{
-			m_lineupSelectPos.Y--;
+			m_lineupSelectNumber--;
 			m_slectItemTexPos.y += SHOPLINEUP_POSITION_OFFSET.y;
 		}
-		else if (Pad().IsTriggerButton(enButtonDown) && m_lineupSelectPos.Y != Y_ELEMENT - 1)
+		else if (Pad().IsTriggerButton(enButtonDown) && m_lineupSelectNumber != ITEM_ELEMENT - 1)
 		{
-			m_lineupSelectPos.Y++;
+			m_lineupSelectNumber++;
 			m_slectItemTexPos.y -= SHOPLINEUP_POSITION_OFFSET.y;
 		}
-		else if (Pad().IsTriggerButton(enButtonLeft) && m_lineupSelectPos.X != 0)
-		{
-			m_lineupSelectPos.X--;
-			m_slectItemTexPos.x -= SHOPLINEUP_POSITION_OFFSET.x;
-		}
-		else if (Pad().IsTriggerButton(enButtonRight) && m_lineupSelectPos.X != X_ELEMENT - 1)
-		{
-			m_lineupSelectPos.X++;
-			m_slectItemTexPos.x += SHOPLINEUP_POSITION_OFFSET.x;
-		}
-		m_selectItemSprite.SetPosition(m_slectItemTexPos);
+		m_selectItemSprite.SetPosition(m_slectItemTexPos); 
+
 		break;
+	}
+	
+	if (len >= SHOP_DRAW_LENGTH)
+	{
+		m_shopState = enShopNone;
+		m_selectShop = enShopBuy;
+		m_isSelectDraw = false;
+		m_isShoplineupDraw = false;
 	}
 
 	m_skinModel.Update(m_position, m_rotation, m_scale, true);
+}
+void INpcState::LoadFile(const wchar_t* filePath)
+{
+	std::fstream	file;
+	file.open(filePath, std::ios::binary | std::ios::in);
+	file.read((char*)&m_itemState, sizeof(ItemState));
+	int num = file.tellg();
+	file.close();
+}
+void INpcState::AddFile(const wchar_t* filePath)
+{
+	std::fstream	file;
+	swprintf(m_itemState.ItemName, L"osakanasan");
+	m_itemState.ItemID = 1;
+	m_itemState.Itemprice = 100;
+	file.open(filePath, std::ios::binary | std::ios::out );
+	file.write((char*)&m_itemState, sizeof(m_itemState));
+	file.close();
 }
 
 bool INpcState::Transaction(const int gold)

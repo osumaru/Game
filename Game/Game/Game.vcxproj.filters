@@ -336,6 +336,12 @@
     <ClCompile Include="Player\PlayerSate\PlayerArrowShoot.cpp">
       <Filter>ソース ファイル\Player\PlayerState</Filter>
     </ClCompile>
+    <ClCompile Include="Item\CEquipItem.cpp">
+      <Filter>ソース ファイル\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Item\QuickItem.cpp">
+      <Filter>ソース ファイル\Item</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -569,6 +575,7 @@
     <ClInclude Include="Player\PlayerGetter.h">
       <Filter>ソース ファイル\Player</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="Player\Weapon\WeaponManager.h">
       <Filter>ソース ファイル\Player\Weapon</Filter>
     </ClInclude>
@@ -586,6 +593,13 @@
     </ClInclude>
     <ClInclude Include="Player\Weapon\LongSword.h">
       <Filter>ソース ファイル\Player\Weapon</Filter>
+=======
+    <ClInclude Include="Item\CEquipItem.h">
+      <Filter>ソース ファイル\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Item\QuickItem.h">
+      <Filter>ソース ファイル\Item</Filter>
+>>>>>>> a741df3f3328454c2ead3286e99a954d6a5db460
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

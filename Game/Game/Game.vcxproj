@@ -160,6 +160,7 @@
     </MeshContentTask>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Item\CEquipItem.cpp" />
     <ClCompile Include="Camera\ArrowGameCamera.cpp" />
     <ClCompile Include="Camera\GameCamera.cpp" />
     <ClCompile Include="Enemy\EnemyGroup.cpp" />
@@ -199,6 +200,7 @@
     <ClCompile Include="Player\Weapon\TwinSword.cpp" />
     <ClCompile Include="Player\Weapon\WeaponManager.cpp" />
     <ClCompile Include="Player\WireAction.cpp" />
+    <ClCompile Include="Item\QuickItem.cpp" />
     <ClCompile Include="Scene\ClearScene.cpp" />
     <ClCompile Include="UI\BossHp\BossHp.cpp" />
     <ClCompile Include="UI\Fade\Fade.cpp" />
@@ -244,6 +246,7 @@
     <ClCompile Include="UI\WeekPoint\WeekPoint.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Item\CEquipItem.h" />
     <ClInclude Include="Camera\ArrowGameCamera.h" />
     <ClInclude Include="Camera\GameCamera.h" />
     <ClInclude Include="Enemy\EnemyGroup.h" />
@@ -286,6 +289,7 @@
     <ClInclude Include="Player\Weapon\TwinSword.h" />
     <ClInclude Include="Player\Weapon\WeaponManager.h" />
     <ClInclude Include="Player\WireAction.h" />
+    <ClInclude Include="Item\QuickItem.h" />
     <ClInclude Include="Scene\ClearScene.h" />
     <ClInclude Include="UI\BossHp\BossHp.h" />
     <ClInclude Include="UI\Fade\Fade.h" />

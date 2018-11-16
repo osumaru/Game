@@ -64,7 +64,11 @@ void CEnemyAttack::Update()
 		}
 		else if (isRange && length < 1.2f) {
 			//UŒ‚”ÍˆÍ‚É‚Í‚¢‚Á‚Ä‚¢‚é
-			m_enemy->PlayAnimation(CEnemyState::enState_Attack);
+			m_timer += GameTime().GetDeltaFrameTime();
+			if (m_timer > 3.0f) {
+				m_timer = 0.0f;
+				m_enemy->PlayAnimation(CEnemyState::enState_Attack);
+			}
 		}
 		else {
 			m_esm->ChangeState(CEnemyState::enState_Chase);

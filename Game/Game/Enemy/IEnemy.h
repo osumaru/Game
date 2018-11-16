@@ -17,6 +17,7 @@ struct SEnemyStatus
 	int	Hp;					//体力
 	int MaxHp;				//最大体力
 	int Gold;				//所持金額
+	int Exp;				//経験値
 };
 
 class IEnemy : public IGameObject
@@ -49,6 +50,7 @@ public:
 	//自身をエネミーリストから削除
 	void EnemyListErase();
 
+	//自身のイテレータを設定
 	void SetIterater(std::list<IEnemy*>::iterator iterater)
 	{
 		m_iterater = iterater;

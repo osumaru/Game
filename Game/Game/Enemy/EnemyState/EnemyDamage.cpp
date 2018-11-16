@@ -40,7 +40,7 @@ void CEnemyDamage::Update()
 {
 	CVector3 moveSpeed = m_enemy->GetMoveSpeed();
 	CVector3 knockBack = moveSpeed;
-	knockBack *= GameTime().GetDeltaFrameTime() * 2.0f;
+	knockBack *= GameTime().GetDeltaFrameTime() * 3.0f;
 	moveSpeed -= knockBack;
 	//m_enemy->SetMoveSpeed(moveSpeed);
 
@@ -77,5 +77,6 @@ void CEnemyDamage::Release()
 	if (m_damageNumber != nullptr) {
 		debugNum--;
 		Delete(m_damageNumber);
+		m_damageNumber = nullptr;
 	}
 }
