@@ -11,6 +11,7 @@ void CEnemyDamage::Init()
 
 	m_damageNumber = New<CDamageNumber>(0);
 	m_damageNumber->Init(m_enemy);
+	debugNum++;
 
 	//ダメージを受けたフラグを戻す
 	m_enemy->SetIsDamage(false);
@@ -24,6 +25,7 @@ void CEnemyDamage::Init()
 	moveSpeed.x = m_knockBack.x;
 	moveSpeed.z = m_knockBack.z;
 	m_enemy->SetMoveSpeed(moveSpeed);
+	m_enemy->SetMoveSpeed(CVector3::Zero);
 }
 
 bool CEnemyDamage::Start()
@@ -40,7 +42,7 @@ void CEnemyDamage::Update()
 	CVector3 knockBack = moveSpeed;
 	knockBack *= GameTime().GetDeltaFrameTime() * 2.0f;
 	moveSpeed -= knockBack;
-	m_enemy->SetMoveSpeed(moveSpeed);
+	//m_enemy->SetMoveSpeed(moveSpeed);
 
 	//プレイヤーとの距離を計算する
 	CVector3 playerPos = GetPlayer().GetPosition();
@@ -73,6 +75,7 @@ void CEnemyDamage::Update()
 void CEnemyDamage::Release()
 {
 	if (m_damageNumber != nullptr) {
+		debugNum--;
 		Delete(m_damageNumber);
 	}
 }

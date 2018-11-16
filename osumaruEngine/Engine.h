@@ -217,6 +217,11 @@ public:
 		return m_depthState.GetCurrentDepthState();
 	}
 
+	EnAlphaBlendState GetCurrentAlphaBlendState()
+	{
+		return m_alphaBlend.GetCurrentBlendState();
+	}
+
 	//現在のラスタライザの設定を取得
 	EnRasterizerState GetCurrentRasterizerState()
 	{

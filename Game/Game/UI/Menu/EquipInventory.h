@@ -7,7 +7,7 @@
 class CMenu;
 class IItem;
 
-#include "../../Player/Weapon.h"
+#include "../../Player/Weapon/WeaponManager.h"
 
 class CEquipInventory : public IGameObject
 {
@@ -61,7 +61,7 @@ private:
 	CSprite								m_pointer;						//カーソル
 	CTexture							m_pointerTexture;
 	CSprite								m_equip[m_equipLimit];			//装備アイコン
-	std::list<CWeapon::SWeaponStatus>	m_equipList;					//装備リスト
+	std::list<CWeaponManager::SWeaponStatus>m_equipList;					//装備リスト
 	CVector2							m_basePos = CVector2::Zero;		//初期座標
 	CVector2							m_size = CVector2::Zero;		//初期サイズ
 	int									m_width = 0;					//インベントリの幅

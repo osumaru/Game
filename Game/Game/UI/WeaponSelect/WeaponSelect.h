@@ -1,4 +1,4 @@
-#include "../../Player/Weapon.h"
+#include "../../Player/Weapon/WeaponManager.h"
 /*
 *	武器選択のUIクラス
 */
@@ -22,8 +22,8 @@ public:
 
 
 private:
-	CSprite		m_weapon[CWeapon::enWeaponNum];			//武器
-	CTexture	m_weaponTexture[CWeapon::enWeaponNum];
+	CSprite		m_weapon[CWeaponManager::enWeaponNum];			//武器
+	CTexture	m_weaponTexture[CWeaponManager::enWeaponNum];
 	CSprite		m_crossKey;						//十字キー
 	CTexture	m_crossKeyTexture;
 	CSprite		m_LBButton;						//LBボタン
@@ -32,7 +32,7 @@ private:
 	CTexture	m_RBButtonTexture;
 	CVector2	crossKeyPos;					//十字キーの座標
 	CVector2	size;							//サイズ
-	int			weaponNumber = CWeapon::enSword;			//変更する武器の番号
-	int			weaponNumberOld = CWeapon::enSword;		//現在選択している武器の番号
-	bool		m_selectFlag[CWeapon::enWeaponNum];		//選択した武器フラグ
+	int			weaponNumber = CWeaponManager::enSword;			//変更する武器の番号
+	int			weaponNumberOld = CWeaponManager::enSword;		//現在選択している武器の番号
+	bool		m_selectFlag[CWeaponManager::enWeaponNum];		//選択した武器フラグ
 };

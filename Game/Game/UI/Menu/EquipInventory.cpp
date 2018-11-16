@@ -23,7 +23,7 @@ void CEquipInventory::Init(CMenu * menu)
 	m_pointer.SetPosition(m_basePos);
 	m_pointer.SetSize(m_size);
 	//装備リストを取得
-	m_equipList = GetPlayer().GetEquipList();
+	m_equipList = GetPlayer().GetWeaponManager().GetEquipList();
 	m_width = 5;
 	m_height = 1;
 	if (!m_equipList.empty()) {
@@ -32,26 +32,26 @@ void CEquipInventory::Init(CMenu * menu)
 		for (auto& equip : m_equipList)
 		{
 			//アイテムの種類を取得
-			CWeapon::EnPlayerWeapon weaponNum = equip.weaponNum;
-			if (weaponNum == CWeapon::enSword)
+			CWeaponManager::EnPlayerWeapon weaponNum = equip.weaponNum;
+			if (weaponNum == CWeaponManager::enSword)
 			{
 				//剣
 				CTexture* itemTexure = TextureResource().LoadTexture(L"Assets/sprite/sword.png");
 				m_equip[idx].Init(itemTexure);
 			}
-			else if (weaponNum == CWeapon::enLongSword)
+			else if (weaponNum == CWeaponManager::enLongSword)
 			{
 				//大剣
 				CTexture* itemTexure = TextureResource().LoadTexture(L"Assets/sprite/largeSword.png");
 				m_equip[idx].Init(itemTexure);
 			}
-			else if (weaponNum == CWeapon::enArrow)
+			else if (weaponNum == CWeaponManager::enArrow)
 			{
 				//弓
 				CTexture* itemTexure = TextureResource().LoadTexture(L"Assets/sprite/bow.png");
 				m_equip[idx].Init(itemTexure);
 			}
-			else if (weaponNum == CWeapon::enTwinSword)
+			else if (weaponNum == CWeaponManager::enTwinSword)
 			{
 				//双剣
 				CTexture* itemTexure = TextureResource().LoadTexture(L"Assets/sprite/twinSword.png");
@@ -217,8 +217,8 @@ void CEquipInventory::Equip()
 		return;
 	}
 	//カーソルで選んでいる装備をつける
-	GetPlayer().ChangeEquip(m_pointerNum);
-	m_equipList = GetPlayer().GetEquipList();
+	GetPlayer().GetWeaponManager().ChangeEquip(m_pointerNum);
+	m_equipList = GetPlayer().GetWeaponManager().GetEquipList();
 	m_width = 5;
 	m_height = 1;
 	if (!m_equipList.empty()) {
@@ -227,26 +227,26 @@ void CEquipInventory::Equip()
 		for (auto& equip : m_equipList)
 		{
 			//アイテムの種類を取得
-			CWeapon::EnPlayerWeapon weaponNum = equip.weaponNum;
-			if (weaponNum == CWeapon::enSword)
+			CWeaponManager::EnPlayerWeapon weaponNum = equip.weaponNum;
+			if (weaponNum == CWeaponManager::enSword)
 			{
 				//剣
 				CTexture* itemTexure = TextureResource().LoadTexture(L"Assets/sprite/sword.png");
 				m_equip[idx].SetTexture(itemTexure);
 			}
-			else if (weaponNum == CWeapon::enLongSword)
+			else if (weaponNum == CWeaponManager::enLongSword)
 			{
 				//大剣
 				CTexture* itemTexure = TextureResource().LoadTexture(L"Assets/sprite/largeSword.png");
 				m_equip[idx].SetTexture(itemTexure);
 			}
-			else if (weaponNum == CWeapon::enArrow)
+			else if (weaponNum == CWeaponManager::enArrow)
 			{
 				//弓
 				CTexture* itemTexure = TextureResource().LoadTexture(L"Assets/sprite/bow.png");
 				m_equip[idx].SetTexture(itemTexure);
 			}
-			else if (weaponNum == CWeapon::enTwinSword)
+			else if (weaponNum == CWeaponManager::enTwinSword)
 			{
 				//双剣
 				CTexture* itemTexure = TextureResource().LoadTexture(L"Assets/sprite/twinSword.png");
@@ -278,7 +278,7 @@ void CEquipInventory::CalucStatus()
 
 	//装備変更した場合のステータスを計算する
 	SplayerStatus playerStatus = GetPlayer().GetStatus();
-	std::list<CWeapon::SWeaponStatus>::iterator it;
+	std::list<CWeaponManager::SWeaponStatus>::iterator it;
 	it = m_equipList.begin();
 	for (int i = 0; i < m_pointerNum; i++)
 	{

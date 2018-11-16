@@ -37,4 +37,5 @@ private:
 	CDamageNumber*	m_damageNumber = nullptr;	//ダメージ表示
 	CVector3		m_knockBack;
 	const float		m_knockBackSpeed = 1.0f;
+	int debugNum = 0;
 };

@@ -43,11 +43,6 @@ void CPlayerGetter::SetIsDied(bool isDied)
 	m_pPlayer->m_isDied = isDied;
 }
 
-void CPlayerGetter::SetIsAttack(bool isAttack)
-{
-	m_pPlayer->m_isAttack = isAttack;
-}
-
 const CVector3& CPlayerGetter::GetMoveSpeed()
 {
 	return m_pPlayer->m_characterController.GetMoveSpeed();

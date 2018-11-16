@@ -1,6 +1,6 @@
 #pragma once
 #include "PlayerArrow.h"
-#include "Weapon.h"
+#include "Weapon/WeaponManager.h"
 #include "WireAction.h"
 
 class CPlayer;

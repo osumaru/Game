@@ -16,7 +16,6 @@ void CPlayerArrowShoot::Init()
 {
 	//‹|‚ð‘Å‚Âƒ‚[ƒVƒ‡ƒ“
 	m_pPlayerGetter->GetAnimation().Play(enPlayerAnimationArrowShoot, 0.5f);
-	m_pPlayerGetter->SetIsAttack(true);
 	m_isShoot = false;
 }
 
@@ -38,7 +37,7 @@ void CPlayerArrowShoot::Update()
 		else
 		{
 			m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateStand);
-			m_pPlayerGetter->SetIsAttack(false);
+			m_pPlayer->GetWeaponManager().SetIsAttack(false);
 
 		}
 	}

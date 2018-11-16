@@ -88,6 +88,9 @@
     <Filter Include="ソース ファイル\Item">
       <UniqueIdentifier>{fe491995-d611-4183-8285-c214638a84fe}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Player\Weapon">
+      <UniqueIdentifier>{47af4a4c-cb7b-4428-810f-ea585562bad1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -240,13 +243,7 @@
     <ClCompile Include="Camera\ArrowGameCamera.cpp">
       <Filter>ソース ファイル\Camera</Filter>
     </ClCompile>
-    <ClCompile Include="Player\Weapon.cpp">
-      <Filter>ソース ファイル\Player</Filter>
-    </ClCompile>
     <ClCompile Include="Player\PlayerSate\PlayerState.cpp">
-      <Filter>ソース ファイル\Player\PlayerState</Filter>
-    </ClCompile>
-    <ClCompile Include="Player\PlayerSate\PlayerArrowShoot.cpp">
       <Filter>ソース ファイル\Player\PlayerState</Filter>
     </ClCompile>
     <ClCompile Include="Player\PlayerSate\PlayerArrowShoot.cpp">
@@ -317,6 +314,27 @@
     </ClCompile>
     <ClCompile Include="Player\PlayerGetter.cpp">
       <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Player\Weapon\WeaponManager.cpp">
+      <Filter>ソース ファイル\Player\Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="Player\Weapon\IWeapon.cpp">
+      <Filter>ソース ファイル\Player\Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="Player\Weapon\TwinSword.cpp">
+      <Filter>ソース ファイル\Player\Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="Player\Weapon\Sword.cpp">
+      <Filter>ソース ファイル\Player\Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="Player\Weapon\Bow.cpp">
+      <Filter>ソース ファイル\Player\Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="Player\Weapon\LongSword.cpp">
+      <Filter>ソース ファイル\Player\Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="Player\PlayerSate\PlayerArrowShoot.cpp">
+      <Filter>ソース ファイル\Player\PlayerState</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -482,9 +500,6 @@
     <ClInclude Include="Player\PlayerSate\PlayerStateCommon.h">
       <Filter>ソース ファイル\Player\PlayerState</Filter>
     </ClInclude>
-    <ClInclude Include="Player\Weapon.h">
-      <Filter>ソース ファイル\Player</Filter>
-    </ClInclude>
     <ClInclude Include="Player\PlayerSate\PlayerArrowShoot.h">
       <Filter>ソース ファイル\Player\PlayerState</Filter>
     </ClInclude>
@@ -554,6 +569,24 @@
     <ClInclude Include="Player\PlayerGetter.h">
       <Filter>ソース ファイル\Player</Filter>
     </ClInclude>
+    <ClInclude Include="Player\Weapon\WeaponManager.h">
+      <Filter>ソース ファイル\Player\Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="Player\Weapon\IWeapon.h">
+      <Filter>ソース ファイル\Player\Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="Player\Weapon\Sword.h">
+      <Filter>ソース ファイル\Player\Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="Player\Weapon\TwinSword.h">
+      <Filter>ソース ファイル\Player\Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="Player\Weapon\Bow.h">
+      <Filter>ソース ファイル\Player\Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="Player\Weapon\LongSword.h">
+      <Filter>ソース ファイル\Player\Weapon</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="Assets\shader\sprite.fx">
@@ -609,9 +642,6 @@
     <MeshContentTask Include="Assets\modelData\Sword.fbx">
       <Filter>ソース ファイル\Assets</Filter>
     </MeshContentTask>
-    <MeshContentTask Include="Assets\modelData\testChamferBox.FBX">
-      <Filter>ソース ファイル\Assets</Filter>
-    </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\testRectangle.FBX">
       <Filter>ソース ファイル\Assets</Filter>
     </MeshContentTask>
@@ -661,24 +691,6 @@
       <Filter>ソース ファイル\Assets</Filter>
     </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\Zombi.FBX">
-      <Filter>ソース ファイル\Assets</Filter>
-    </MeshContentTask>
-    <MeshContentTask Include="Assets\modelData\TestBox1.FBX">
-      <Filter>ソース ファイル\Assets</Filter>
-    </MeshContentTask>
-    <MeshContentTask Include="Assets\modelData\TestBox2.FBX">
-      <Filter>ソース ファイル\Assets</Filter>
-    </MeshContentTask>
-    <MeshContentTask Include="Assets\modelData\TestBox3.FBX">
-      <Filter>ソース ファイル\Assets</Filter>
-    </MeshContentTask>
-    <MeshContentTask Include="Assets\modelData\TestBox4.FBX">
-      <Filter>ソース ファイル\Assets</Filter>
-    </MeshContentTask>
-    <MeshContentTask Include="Assets\modelData\TestBox5.FBX">
-      <Filter>ソース ファイル\Assets</Filter>
-    </MeshContentTask>
-    <MeshContentTask Include="Assets\modelData\TestGround.FBX">
       <Filter>ソース ファイル\Assets</Filter>
     </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\Maw.fbx">
