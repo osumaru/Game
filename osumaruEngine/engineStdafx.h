@@ -3,13 +3,7 @@
 int MakeHash(const wchar_t* str);
 int MakeHash(const char* str);
 
-
-//#include "Random\Random.h"
-//#include "Graphics/Texture.h"
-//#include "Graphics/Primitive.h"
-//#include "Graphics/RenderTarget.h"
-
-//#include "BulletCollision/CollisionDispatch/btGhostObject.h"
+static const int PRIORITY_PARTICLE = 10;
 
 #include <d3d11.h>
 #include <d3d11shader.h>
