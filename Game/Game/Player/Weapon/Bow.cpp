@@ -81,7 +81,7 @@ void CBow::AfterDraw()
 
 void CBow::ArrowCreate()
 {
-	CPlayerArrow* arrow = New<CPlayerArrow>(0);
+	CPlayerArrow* arrow = New<CPlayerArrow>(PRIORITY_ARROW);
 	m_arrowList.push_back(arrow);
 }
 

@@ -34,7 +34,7 @@ public:
 	{
 		if (!m_gameCamera)
 		{
-			m_gameCamera = New<CGameCamera>(1);
+			m_gameCamera = New<CGameCamera>(PRIORITY_CAMERA);
 		}
 	}
 

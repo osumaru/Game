@@ -78,7 +78,7 @@ void CMenu::Update()
 	case enItems:			//インベントリの確認
 		if (Pad().IsTriggerButton(enButtonA)) 
 		{
-			m_itemInventory = New<CItemInventory>(0);
+			m_itemInventory = New<CItemInventory>(PRIORITY_UI);
 			m_itemInventory->Init(this);
 		}
 		StatusConversion();
@@ -87,7 +87,7 @@ void CMenu::Update()
 	case enWeapons:			//装備の確認
 		if (Pad().IsTriggerButton(enButtonA))
 		{
-			m_equipInventory = New<CEquipInventory>(0);
+			m_equipInventory = New<CEquipInventory>(PRIORITY_UI);
 			m_equipInventory->Init(this);
 		}
 		break;

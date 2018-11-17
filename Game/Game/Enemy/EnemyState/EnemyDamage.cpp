@@ -9,7 +9,7 @@ void CEnemyDamage::Init()
 	//ダメージアニメーションを再生
 	m_enemy->PlayAnimation(CEnemyState::enState_Damage);
 
-	m_damageNumber = New<CDamageNumber>(0);
+	m_damageNumber = New<CDamageNumber>(PRIORITY_UI);
 	m_damageNumber->Init(m_enemy);
 	debugNum++;
 

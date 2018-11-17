@@ -40,7 +40,7 @@ public:
 	{
 		if (!m_player)
 		{
-			m_player = New<CPlayer>(1);
+			m_player = New<CPlayer>(PRIORITY_PLAYER);
 		}
 	}
 

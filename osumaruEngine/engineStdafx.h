@@ -3,6 +3,7 @@
 int MakeHash(const wchar_t* str);
 int MakeHash(const char* str);
 
+
 //#include "Random\Random.h"
 //#include "Graphics/Texture.h"
 //#include "Graphics/Primitive.h"

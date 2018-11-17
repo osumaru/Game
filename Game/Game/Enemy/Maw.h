@@ -84,7 +84,7 @@ public:
 	{
 		if (!m_maw)
 		{
-			m_maw = New<CMaw>(1);
+			m_maw = New<CMaw>(PRIORITY_ENEMY);
 		}
 	}
 

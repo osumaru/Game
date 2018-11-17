@@ -49,15 +49,15 @@ void CSceneManager::Update()
 		{
 			//タイトルシーンへの遷移
 		case EnSceneState::enTitleScene:
-			m_titleScene = New<CTitleScene>(0);
+			m_titleScene = New<CTitleScene>(PRIORITY_SCENE);
 			break;
 			//ゲームシーンへの遷移
 		case EnSceneState::enGameScene:
-			m_gameScene = New<CGameScene>(0);
+			m_gameScene = New<CGameScene>(PRIORITY_SCENE);
 			break;
 			//クリアシーンへの遷移
 		case EnSceneState::enClearScene:
-			m_clearScene = New<CClearScene>(0);
+			m_clearScene = New<CClearScene>(PRIORITY_SCENE);
 			break;
 			//リザルトシーンへの遷移
 		case EnSceneState::enLoadScene:

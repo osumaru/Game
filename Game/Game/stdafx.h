@@ -1,6 +1,15 @@
 #pragma once
 
-#pragma once
+static const int PRIORITY_PLAYER = 1;
+static const int PRIORITY_NPC = 0;
+static const int PRIORITY_ENEMY = 1;
+static const int PRIORITY_MAPCHIP = 1;
+static const int PRIORITY_UI = 0;
+static const int PRIORITY_CAMERA = 0;
+static const int PRIORITY_ITEM = 0;
+static const int PRIORITY_ARROW = 0;
+static const int PRIORITY_SCENE = 0;
+
 
 #include "../../osumaruEngine/engineStdafx.h"
 #include "../../osumaruEngine/GameObject/GameObject.h"
@@ -36,8 +45,3 @@
 #include <iostream>
 #include <stdio.h>
 #include <algorithm>
-
-const int PLAYER_PRIORITY = 1;
-const int STAGE_GIMMICK_PRIORITY = 0;
-const int CAMERA_PRIORITY = 2;
-const int LAST_PRIORITY = 3;
