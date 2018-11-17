@@ -23,5 +23,5 @@ public:
 	//描画
 	void Draw() override;
 private:
-	CWeaponManager::SWeaponStatus m_weaponStatus;	//武器のステータス
+	SWeaponStatus m_weaponStatus;	//武器のステータス
 };

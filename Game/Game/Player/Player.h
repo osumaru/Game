@@ -95,12 +95,6 @@ public:
 		return m_isDamege;
 	}
 
-	//攻撃中かを取得
-	//bool GetIsAttack() const
-	//{
-	//	return m_isAttack;
-	//}
-
 	//ステータスの計算処理を行う関数
 	void StatusCalculation();
 

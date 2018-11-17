@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "WeaponShop.h"
 #include "../../Camera/GameCamera.h"
-#include "../../Player/Weapon.h"
 #include "../../Player/Player.h"
 
 
@@ -111,9 +110,9 @@ void CWeaponShop::Update()
 	if (!m_isTransaction) { return; };
 	if (GetPlayer().BuyMoney(m_items[m_lineupSelectNumber + 1].ItemStatus.Itemprice))
 	{
-		CWeapon::SWeaponStatus weapons;
+		SWeaponStatus weapons;
 
-		weapons.weaponNum = (CWeapon::EnPlayerWeapon)m_items[m_lineupSelectNumber].ItemStatus.WeaponType;
+		weapons.weaponNum = (EnPlayerWeapon)m_items[m_lineupSelectNumber].ItemStatus.WeaponType;
 		switch (m_items[m_lineupSelectNumber].ItemStatus.ItemEffectPlayerStatus)
 		{
 		case CEquipItem::EnIemEffectPlayerStatus::Strength:
@@ -126,7 +125,7 @@ void CWeaponShop::Update()
 
 			break;
 		}
-		GetPlayer().AddEquipList(weapons);
+		GetPlayer().GetWeaponManager().AddEquipList(weapons);
 		CSoundSource* se = New<CSoundSource>(0);
 		se->Init("Assets/sound/Shop/BuySe.wav");
 		se->SetVolume(1.0f);

@@ -76,21 +76,11 @@ private:
 	CTexture							m_rightTexture;
 	CSprite								m_pointer;										//カーソル
 	CTexture							m_pointerTexture;
-<<<<<<< HEAD
 	CSprite								m_equip[m_equipLimit];			//装備アイコン
-	std::list<CWeaponManager::SWeaponStatus>m_equipList;					//装備リスト
+	std::list<SWeaponStatus>			m_equipList;					//装備リスト
 	CVector2							m_basePos = CVector2::Zero;		//初期座標
-	CVector2							m_size = CVector2::Zero;		//初期サイズ
+	CVector2							m_baseSize = CVector2::Zero;		//初期サイズ
 	int									m_width = 0;					//インベントリの幅
 	int									m_height = 0;					//インベントリの高さ
 	int									m_pointerNum = 0;				//カーソルで選んでいるアイテムの番号
-=======
-	CSprite								m_equip[m_equipLimit];							//装備アイコン
-	std::list<CWeapon::SWeaponStatus>	m_equipList;									//装備リスト
-	CVector2							m_basePos = CVector2::Zero;						//初期座標
-	CVector2							m_baseSize = CVector2::Zero;					//初期サイズ
-	int									m_width = 0;									//インベントリの幅
-	int									m_height = 0;									//インベントリの高さ
-	int									m_pointerNum = 0;								//カーソルで選んでいるアイテムの番号
->>>>>>> a741df3f3328454c2ead3286e99a954d6a5db460
 };

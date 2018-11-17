@@ -11,31 +11,31 @@ void CTreasureChest::Init(CVector3 position)
 
 	//武器のステータスをランダムで決める
 	int weaponNumber = Random().GetRandSInt();
-	weaponNumber %= CWeaponManager::enWeaponNum;
+	weaponNumber %= enWeaponNum;
 	int weaponAttack = Random().GetRandSInt();
 	weaponAttack %= 100;
-	if (weaponNumber == CWeaponManager::EnPlayerWeapon::enSword)
+	if (weaponNumber == EnPlayerWeapon::enWeaponSword)
 	{
 		//剣
-		m_weaponStatus.weaponNum = CWeaponManager::EnPlayerWeapon::enSword;
+		m_weaponStatus.weaponNum = EnPlayerWeapon::enWeaponSword;
 		weaponAttack += 50;
 	}
-	else if (weaponNumber == CWeaponManager::EnPlayerWeapon::enLongSword)
+	else if (weaponNumber == EnPlayerWeapon::enWeaponLongSword)
 	{
 		//大剣
-		m_weaponStatus.weaponNum = CWeaponManager::EnPlayerWeapon::enLongSword;
+		m_weaponStatus.weaponNum = EnPlayerWeapon::enWeaponLongSword;
 		weaponAttack += 70;
 	}
-	else if (weaponNumber == CWeaponManager::EnPlayerWeapon::enArrow)
+	else if (weaponNumber == EnPlayerWeapon::enWeaponArrow)
 	{
 		//弓
-		m_weaponStatus.weaponNum = CWeaponManager::EnPlayerWeapon::enArrow;
+		m_weaponStatus.weaponNum = EnPlayerWeapon::enWeaponArrow;
 		weaponAttack += 20;
 	}
-	else if (weaponNumber == CWeaponManager::EnPlayerWeapon::enTwinSword)
+	else if (weaponNumber == EnPlayerWeapon::enWeaponTwinSword)
 	{
 		//双剣
-		m_weaponStatus.weaponNum = CWeaponManager::EnPlayerWeapon::enTwinSword;
+		m_weaponStatus.weaponNum = EnPlayerWeapon::enWeaponTwinSword;
 		weaponAttack += 30;
 	}
 	m_weaponStatus.attack = weaponAttack;

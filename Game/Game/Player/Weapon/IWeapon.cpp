@@ -36,7 +36,7 @@ void IWeapon::Updater()
 		rotation = m_rotation;
 	}
 	position.Mul(*boneMat);
-	m_worldPos = position;
+	m_attackCheckPos = position;
 	CMatrix rotMat = *boneMat;
 	((CVector3*)rotMat.m[0])->Div(((CVector3*)rotMat.m[0])->Length());
 	((CVector3*)rotMat.m[1])->Div(((CVector3*)rotMat.m[1])->Length());
@@ -53,18 +53,9 @@ void IWeapon::Updater()
 
 void IWeapon::Drawer()
 {
-	EnDepthStencilState depthState = Engine().GetCurrentDepthStencilState();
-	EnAlphaBlendState alphaState = Engine().GetCurrentAlphaBlendState();
-
 	Draw();
 	const CCamera& camera = GetGameCamera().GetCamera();
-	Engine().SetDepthStencilState(enDepthStencilState3D);
-	Engine().SetAlphaBlendState(enAlphaBlendStateNone);
 	m_skinModel.Draw(camera.GetViewMatrix(), camera.GetProjectionMatrix());
-
-	Engine().SetDepthStencilState(depthState);
-	Engine().SetAlphaBlendState(alphaState);
-
 }
 
 void IWeapon::AfterDrawer()
@@ -73,13 +64,13 @@ void IWeapon::AfterDrawer()
 }
 
 
-void IWeapon::EnemyAttacker()
+void IWeapon::EnemyAttack()
 {
 	if (!m_pPlayer->GetWeaponManager().GetIsAttackCheck())
 	{
 		return;
 	}
-	EnemyAttack();
+	EnemyAttackPositionDecide();
 	//エネミーのリストを取得
 	for (const auto& enemys : GetSceneManager().GetGameScene().GetMap()->GetEnemyList())
 	{
@@ -88,7 +79,7 @@ void IWeapon::EnemyAttacker()
 
 			CVector3 EnemyVec = enemys->GetPosition();
 			EnemyVec.y += 1.3f;
-			EnemyVec.Subtract(m_worldPos);
+			EnemyVec.Subtract(m_attackCheckPos);
 			float len = EnemyVec.Length();
 
 			if (fabs(len) < 2.0f)
@@ -115,7 +106,7 @@ void IWeapon::EnemyAttacker()
 			const float BossWeekLenge = 50.0f;
 			//ボスの弱点の座標取得
 			CVector3 EnemyVec = GetMaw().GetWeekPosition();
-			EnemyVec -= m_worldPos;
+			EnemyVec -= m_attackCheckPos;
 			float len = EnemyVec.Length();
 
 			if (fabs(len) < BossWeekLenge)
@@ -131,7 +122,7 @@ void IWeapon::EnemyAttacker()
 			//ボスの座標取得
 			CVector3 EnemyVec = GetMaw().GetPosition();
 			EnemyVec.y += BossHeight;
-			EnemyVec -= m_worldPos;
+			EnemyVec -= m_attackCheckPos;
 			float len = EnemyVec.Length();
 
 			if (fabs(len) < BossLenge)

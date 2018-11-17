@@ -7,7 +7,7 @@
 void CPlayerArrowAttack::Init()
 {
 	//ã|ÇÃê∂ê¨
-	dynamic_cast<CBow*>(m_pPlayer->GetWeaponManager().GetWeapon(CWeaponManager::enArrow))->ArrowCreate();
+	dynamic_cast<CBow*>(m_pPlayer->GetWeaponManager().GetWeapon(enWeaponArrow))->ArrowCreate();
 	m_pPlayerGetter->GetAnimation().Play(enPlayerAnimationArrowAttack, 0.5f);
 	m_pPlayer->GetWeaponManager().SetIsAttack(true);
 	m_pPlayerGetter->SetMoveSpeed(CVector3::Zero);

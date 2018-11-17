@@ -7,7 +7,7 @@ public:
 
 	void Init()override;
 
-	void EnemyAttack()override;
+	void EnemyAttackPositionDecide()override;
 	
 private:
 

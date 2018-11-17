@@ -11,22 +11,21 @@
 
 void CWeaponManager::Init(CPlayer* player)
 {
-	m_pPlayer = player;
 	for (int i = 0; i < enWeaponNum; i++)
 	{
 		std::unique_ptr<IWeapon> ptr;
 		switch (i)
 		{
-		case enLongSword:
+		case enWeaponLongSword:
 			ptr = std::make_unique<CLongSword>();
 			break;
-		case enTwinSword:
+		case enWeaponTwinSword:
 			ptr = std::make_unique<CTwinSword>();
 			break;
-		case enArrow:
+		case enWeaponArrow:
 			ptr = std::make_unique<CBow>();
 			break;
-		case enSword:
+		case enWeaponSword:
 			ptr = std::make_unique<CSword>();
 			break;
 		}
@@ -42,19 +41,19 @@ void CWeaponManager::Update()
 {
 	if (Pad().IsTriggerButton(enButtonUp))
 	{
-		m_weaponState = enSword;
+		m_weaponState = enWeaponSword;
 	}
 	else if (Pad().IsTriggerButton(enButtonDown))
 	{
-		m_weaponState = enArrow;
+		m_weaponState = enWeaponArrow;
 	}
 	else if (Pad().IsTriggerButton(enButtonLeft))
 	{
-		m_weaponState = enTwinSword;
+		m_weaponState = enWeaponTwinSword;
 	}
 	else if (Pad().IsTriggerButton(enButtonRight))
 	{
-		m_weaponState = enLongSword;
+		m_weaponState = enWeaponLongSword;
 	}
 	m_weapons[m_weaponState]->Updater();
 
@@ -72,17 +71,17 @@ void CWeaponManager::ChangeEquip(int number)
 			it++;
 		}
 		int weaponNumber = (*it).weaponNum;
-		if (m_equipWeapon[weaponNumber].weaponNum == enInvalid)
+		if (m_weapons[weaponNumber]->GetWeaponStatus().weaponNum == enInvalid)
 		{
 			//‰½‚à‘•”õ‚µ‚Ä‚¢‚È‚¢
-			m_equipWeapon[weaponNumber] = (*it);
+			m_weapons[weaponNumber]->SetWeaponStatus(*it);
 			m_equipList.erase(it);
 		}
 		else
 		{
 			//‘•”õ‚ðŒðŠ·‚·‚é
-			SWeaponStatus equipWeapon = m_equipWeapon[weaponNumber];
-			m_equipWeapon[weaponNumber] = (*it);
+			SWeaponStatus equipWeapon = m_weapons[weaponNumber]->GetWeaponStatus();
+			m_weapons[weaponNumber]->SetWeaponStatus(*it);
 			(*it) = equipWeapon;
 		}
 	}
@@ -104,5 +103,5 @@ void CWeaponManager::Draw()
 
 void CWeaponManager::AfterDraw()
 {
-	m_weapons[m_weaponState]->Drawer();
+	m_weapons[m_weaponState]->AfterDrawer();
 }

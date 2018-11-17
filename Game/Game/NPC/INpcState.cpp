@@ -2,7 +2,6 @@
 #include "INpcState.h"
 #include "../Player/Player.h"
 #include "../Item/RecoveryItem.h"
-#include "../Player/Weapon.h"
 
 
 

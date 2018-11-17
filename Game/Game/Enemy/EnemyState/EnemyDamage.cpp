@@ -25,7 +25,6 @@ void CEnemyDamage::Init()
 	moveSpeed.x = m_knockBack.x;
 	moveSpeed.z = m_knockBack.z;
 	m_enemy->SetMoveSpeed(moveSpeed);
-	m_enemy->SetMoveSpeed(CVector3::Zero);
 }
 
 bool CEnemyDamage::Start()
@@ -42,7 +41,7 @@ void CEnemyDamage::Update()
 	CVector3 knockBack = moveSpeed;
 	knockBack *= GameTime().GetDeltaFrameTime() * 3.0f;
 	moveSpeed -= knockBack;
-	//m_enemy->SetMoveSpeed(moveSpeed);
+	m_enemy->SetMoveSpeed(moveSpeed);
 
 	//プレイヤーとの距離を計算する
 	CVector3 playerPos = GetPlayer().GetPosition();

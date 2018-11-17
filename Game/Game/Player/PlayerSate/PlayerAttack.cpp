@@ -43,7 +43,7 @@ void CPlayerAttack::Update()
 	}
 
 	Move();
-	m_pPlayer->GetWeaponManager().GetWeapon(m_pPlayer->GetWeaponManager().GetCurrentState())->EnemyAttacker();
+	m_pPlayer->GetWeaponManager().GetWeapon(m_pPlayer->GetWeaponManager().GetCurrentState())->EnemyAttack();
 
 	//攻撃アニメーションが終わった時の処理
 	if (!m_pPlayerGetter->GetAnimation().IsPlay())

@@ -72,6 +72,7 @@ void CBow::Update()
 
 void CBow::AfterDraw()
 {
+	//ƒJƒƒ‰‚ğØ‚è‘Ö‚¦‚Ä‚é‚Í•`‰æ‚·‚é
 	if (m_isZoom)
 	{
 		m_tag.Draw();

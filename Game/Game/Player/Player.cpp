@@ -36,7 +36,9 @@ void CPlayer::OnInvokeAnimationEvent(//ƒAƒjƒ[ƒVƒ‡ƒ“ƒCƒxƒ“ƒg‚ªŒÄ‚Î‚ê‚é‚²‚Æ‚ÉŒÄ‚
 		*/
 	}
 
-	if (wcscmp(animClipName, L"Assets/modelData/PlayerCombo4.tka") == 0)
+	if (!wcscmp(animClipName, L"Assets/modelData/PlayerCombo4.tka") ||
+		!wcscmp(animClipName, L"Assets/modelData/PlayerCombo5.tka") || 
+		!wcscmp(animClipName, L"Assets/modelData/PlayerCombo6.tka"))
 	{
 		m_weaponManager.SetIsAttackCheck(!m_weaponManager.GetIsAttackCheck());
 	}
@@ -72,6 +74,7 @@ void CPlayer::Init(CVector3 position)
 									{ L"Assets/modelData/PlayerCombo4Combine.tka" },		//˜AŒ‚ƒAƒjƒ[ƒVƒ‡ƒ“
 									{ L"Assets/modelData/PlayerCombo5Combine.tka" },		//˜AŒ‚ƒAƒjƒ[ƒVƒ‡ƒ“
 									{ L"Assets/modelData/PlayerAttackCombine.tka" },		//˜AŒ‚ƒAƒjƒ[ƒVƒ‡ƒ“
+									{ L"Assets/modelData/PlayerStun.tka" },			//ƒXƒ^ƒ“ƒAƒjƒ[ƒVƒ‡ƒ“
 									{ L"Assets/modelData/PlayerDamage.tka" },			//ƒ_ƒ[ƒWƒAƒjƒ[ƒVƒ‡ƒ“
 									{ L"Assets/modelData/PlayerRoll.tka" }	,		//‰ñ”ğƒAƒNƒVƒ‡ƒ“
 									{ L"Assets/modelData/PlayerRollCombine.tka" }	,		//‰ñ”ğƒAƒNƒVƒ‡ƒ“
@@ -135,7 +138,7 @@ void CPlayer::Update()
 
 	if (Pad().IsPressButton(enButtonX))
 	{
-		m_status.Health = 5;
+		m_status.Health = 0;
 	}
 
 	CMatrix viewMat;
@@ -245,7 +248,7 @@ void CPlayer::Rotation()
 	}
 	m_rotation.SetRotation(CVector3::AxisY, rad);
 
-	if (m_weaponManager.GetCurrentState() == CWeaponManager::enArrow && m_weaponManager.GetIsAttack())
+	if (m_weaponManager.GetCurrentState() == enWeaponArrow && m_weaponManager.GetIsAttack())
 	{
 		CQuaternion rotXZ, rotY;
 		CVector3 cameraFlont = GetGameCamera().GetCamera().GetFlont();
@@ -320,36 +323,6 @@ void CPlayer::UseItem(int number)
 	if (isUse) {
 		//g‚Á‚½ƒAƒCƒeƒ€‚ğƒŠƒXƒg‚©‚çíœ‚·‚é
 		m_itemList.erase(it);
-	}
-}
-
-void CPlayer::ChangeEquip(int number)
-{
-	if (m_equipList.empty())
-	{
-		//‘•”õƒAƒCƒeƒ€‚ª‚È‚¢
-		return;
-	}
-	//‘I‚ñ‚¾‘•”õ‚ÆŒ»İ‚Ì‘•”õ‚ğŒğŠ·‚·‚é
-	std::list<CWeapon::SWeaponStatus>::iterator it;
-	it = m_equipList.begin();
-	for (int i = 0; i < number; i++)
-	{
-		it++;
-	}
-	int weaponNumber = (*it).weaponNum;
-	if (m_equipWeapon[weaponNumber].weaponNum == CWeapon::enInvalid)
-	{
-		//‰½‚à‘•”õ‚µ‚Ä‚¢‚È‚¢
-		m_equipWeapon[weaponNumber] = (*it);
-		m_equipList.erase(it);
-	}
-	else
-	{
-		//‘•”õ‚ğŒğŠ·‚·‚é
-		CWeapon::SWeaponStatus equipWeapon = m_equipWeapon[weaponNumber];
-		m_equipWeapon[weaponNumber] = (*it);
-		(*it) = equipWeapon;
 	}
 }
 
