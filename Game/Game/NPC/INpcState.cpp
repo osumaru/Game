@@ -24,7 +24,7 @@ void INpcState::ShopUpdate()
 	case enShopNone:
 		if (len < SHOP_DRAW_LENGTH)
 		{
-			if (Pad().IsTriggerButton(enButtonX))
+			if (Pad().IsTriggerButton(enButtonA))
 			{
 
 				m_shopState = enShopOpen;
@@ -35,10 +35,11 @@ void INpcState::ShopUpdate()
 		}
 		break;
 	case enShopOpen:
-		if (Pad().IsTriggerButton(enButtonX))
+		if (Pad().IsTriggerButton(enButtonA))
 		{
 			m_shopState = m_selectShop;
 			if (m_shopState == enShopBuy) { m_isShoplineupDraw = true; }
+			else { GetPlayer().SetIsActiveUpdate(true); }
 			m_isSelectDraw = false;
 			m_shopSelectPenPosition = SELECT_POSITON_START;
 			m_shopSelectPen.SetPosition(m_shopSelectPenPosition);
@@ -60,12 +61,13 @@ void INpcState::ShopUpdate()
 
 		break;
 	case enShopBuy:
-		if (Pad().IsTriggerButton(enButtonA))
+		if (Pad().IsTriggerButton(enButtonB))
 		{
 			m_shopState = enShopNone;
 			m_isShoplineupDraw = false;
+			GetPlayer().SetIsActiveUpdate(true);
 		}
-		else if (Pad().IsTriggerButton(enButtonX))
+		else if (Pad().IsTriggerButton(enButtonA))
 		{
 			//Žæˆø‚ðs‚¤
 			m_isTransaction = true;
@@ -85,16 +87,8 @@ void INpcState::ShopUpdate()
 
 		break;
 	}
-	
-	if (len >= SHOP_DRAW_LENGTH)
-	{
-		m_shopState = enShopNone;
-		m_selectShop = enShopBuy;
-		m_isSelectDraw = false;
-		m_isShoplineupDraw = false;
-	}
 
-	m_skinModel.Update(m_position, m_rotation, m_scale, true);
+	m_skinModel.Update(m_position, m_rotation, m_scale, false);
 }
 void INpcState::LoadFile(const wchar_t* filePath)
 {
