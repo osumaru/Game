@@ -3,12 +3,12 @@
 
 struct SShaderResource
 {
-	ID3D11DeviceChild*				m_pShader;			//シェーダー
-	ID3D11InputLayout*				m_pInputLayout;		//頂点レイアウト
-	ID3DBlob*						m_blob;				//シェーダーのバッファ
-	char*							entryFuncName;		//関数名(リロード時に使う)
-	char*							fileName;			//ファイル名(リロード時に使う)
-	CShader::EnShaderType			shaderType;			//シェーダーの種類(リロード時に使う)
+	Microsoft::WRL::ComPtr<ID3D11DeviceChild>		m_pShader;			//シェーダー
+	Microsoft::WRL::ComPtr<ID3D11InputLayout>		m_pInputLayout;		//頂点レイアウト
+	Microsoft::WRL::ComPtr<ID3DBlob>				m_blob;				//シェーダーのバッファ
+	char*											entryFuncName;		//関数名(リロード時に使う)
+	char*											fileName;			//ファイル名(リロード時に使う)
+	CShader::EnShaderType							shaderType;			//シェーダーの種類(リロード時に使う)
 };
 
 struct SShaderData
@@ -51,7 +51,7 @@ public:
 private:
 
 	//頂点レイアウトを作る関数
-	void CreateInputLayout(ID3DBlob* blob, ID3D11InputLayout** inputLayout);
+	void CreateInputLayout(Microsoft::WRL::ComPtr<ID3DBlob> blob, ID3D11InputLayout** inputLayout);
 private:
 
 	std::map<int, SShaderData>		m_shaderData;			//シェーダーのデータ

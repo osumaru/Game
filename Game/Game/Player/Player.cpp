@@ -138,7 +138,38 @@ void CPlayer::Update()
 
 	if (Pad().IsPressButton(enButtonX))
 	{
-		m_status.Health = 0;
+		const int hoge = 1;
+		CAnimation* anim = new CAnimation[hoge];
+		for(int i = 0;i < hoge;i++)
+		{
+			wchar_t* animClip[enPlayerAnimationNum] = {
+							{ L"Assets/modelData/PlayerStand.tka"},				//待機アニメーション	
+							{ L"Assets/modelData/PlayerWalkStay.tka" },			//歩行アニメーション
+							{ L"Assets/modelData/PlayerDash60fpsEvent.tka" },		//走りアニメーション
+							{ L"Assets/modelData/PlayerRunJump.tka" },			//走りジャンプアニメーション
+							{ L"Assets/modelData/PlayerJump2.tka" },				//ジャンプアニメーション
+							{ L"Assets/modelData/PlayerCombo4.tka" },			//攻撃アニメーション
+							{ L"Assets/modelData/PlayerCombo5.tka" },		//連撃アニメーション
+							{ L"Assets/modelData/PlayerCombo6.tka" },		//連撃アニメーション
+							{ L"Assets/modelData/PlayerCombo4Combine.tka" },		//連撃アニメーション
+							{ L"Assets/modelData/PlayerCombo5Combine.tka" },		//連撃アニメーション
+							{ L"Assets/modelData/PlayerAttackCombine.tka" },		//連撃アニメーション
+							{ L"Assets/modelData/PlayerStun.tka" },			//スタンアニメーション
+							{ L"Assets/modelData/PlayerDamage.tka" },			//ダメージアニメーション
+							{ L"Assets/modelData/PlayerRoll.tka" }	,		//回避アクション
+							{ L"Assets/modelData/PlayerRollCombine.tka" }	,		//回避アクション
+							{ L"Assets/modelData/PlayerDeath.tka" },			//死亡アニメーション
+							{ L"Assets/modelData/PlayerWireMove.tka" },				//ワイヤー移動アニメーション
+							{ L"Assets/modelData/PlayerArrowAttack.tka" },		//弓の攻撃アニメーション
+							{ L"Assets/modelData/PlayerArrowAttackEvent.tka" },
+							{ L"Assets/modelData/PlayerLeageSwordAttack.tka" },	//大剣の攻撃アニメーション
+							{ L"Assets/modelData/PlayerTwinSwordAttack.tka" },	//二刀流の攻撃アニメーション
+							{ L"Assets/modelData/PlayerLanding.tka" }
+			};
+
+			anim[i].Init(animClip, enPlayerAnimationNum);
+		}
+		delete[] anim;
 	}
 
 	CMatrix viewMat;
@@ -167,8 +198,8 @@ void CPlayer::Update()
 void CPlayer::Draw()
 {
 	//m_characterController.Draw();
-	m_skinmodel.Draw(GetGameCamera().GetViewMatrix(), GetGameCamera().GetProjectionMatrix());
 	m_weaponManager.Draw();
+	m_skinmodel.Draw(GetGameCamera().GetViewMatrix(), GetGameCamera().GetProjectionMatrix());
 }
 
 void CPlayer::AfterDraw()

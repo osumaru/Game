@@ -13,14 +13,14 @@ class CRasterizerState : Uncopyable
 public:
 
 	//初期化
-	void Init(ID3D11Device* device);
+	void Init(Microsoft::WRL::ComPtr<ID3D11Device> device);
 
 	/*
 	ラスタライザの設定を変更
 	deviceContext		グラフィックデバイス
 	rasterizerState		ラスタライザの設定
 	*/
-	void SetRasterizerState(ID3D11DeviceContext* deviceContext, EnRasterizerState rasterizerState)
+	void SetRasterizerState(Microsoft::WRL::ComPtr<ID3D11DeviceContext> deviceContext, EnRasterizerState rasterizerState)
 	{
 		m_currentState = rasterizerState;
 		deviceContext->RSSetState(m_rasterizerState[m_currentState]);

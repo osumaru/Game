@@ -14,26 +14,17 @@ CTexture::CTexture() :
 
 CTexture::~CTexture()
 {
-	if (m_pTexture != nullptr)
-	{
-		//m_pTexture->Release();
-		m_pTexture = nullptr;
-	}
-	if (m_pShaderResource != nullptr)
-	{
-		m_pShaderResource->Release();
-		m_pTexture = nullptr;
-	}
 }
 
 void CTexture::Load(const wchar_t* filepath)
 {
 	HRESULT hr;
-	hr = CreateWICTextureFromFile(GetDevice(), filepath, &m_pTexture, &m_pShaderResource);
+	hr = CreateWICTextureFromFile(GetDevice(), filepath, m_pTexture.GetAddressOf(), m_pShaderResource.GetAddressOf());
 }
 
 void CTexture::Create(int width, int height, EnTextureType textureType, DXGI_FORMAT format)
 {
+
 	m_width = width;
 	m_height = height;
 	UINT bindFlags = 0;
@@ -60,7 +51,7 @@ void CTexture::Create(int width, int height, EnTextureType textureType, DXGI_FOR
 	tDesc.SampleDesc.Count = 1;
 	tDesc.SampleDesc.Quality = 0;
 	tDesc.Usage = D3D11_USAGE_DEFAULT;
-	HRESULT hr = GetDevice()->CreateTexture2D(&tDesc, NULL, (ID3D11Texture2D**)&m_pTexture);
-	hr = GetDevice()->CreateShaderResourceView(m_pTexture, nullptr, &m_pShaderResource);
-	hr = GetDevice()->CreateUnorderedAccessView(m_pTexture, nullptr, &m_pUnorderedAccess);
+	HRESULT hr = GetDevice()->CreateTexture2D(&tDesc, NULL, m_pTexture2D.GetAddressOf() );
+	hr = GetDevice()->CreateShaderResourceView(m_pTexture2D.Get(), nullptr, m_pShaderResource.GetAddressOf());
+	hr = GetDevice()->CreateUnorderedAccessView(m_pTexture2D.Get(), nullptr, m_pUnorderedAccess.GetAddressOf());
 }

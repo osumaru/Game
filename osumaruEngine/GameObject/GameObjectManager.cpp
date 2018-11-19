@@ -9,6 +9,20 @@ void CGameObjectManager::Init()
 	m_objectVector.resize(PRIORITY_MAX);
 }
 
+CGameObjectManager::~CGameObjectManager()
+{
+	for (GameObjectList& objList : m_objectVector)
+	{
+		for (SGameObjectData& object : objList)
+		{
+			if (object.isNew)
+			{
+				delete object.gameObject;
+			}
+		}
+	}
+}
+
 void CGameObjectManager::Execute(CDeferred& deferred, CPostEffect& postEffect)
 {
 	//èâä˙âª

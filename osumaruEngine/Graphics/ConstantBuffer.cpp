@@ -9,11 +9,6 @@ CConstantBuffer::CConstantBuffer() :
 
 CConstantBuffer::~CConstantBuffer()
 {
-	if (m_buffer != nullptr)
-	{
-		m_buffer->Release();
-		m_buffer = nullptr;
-	}
 }
 
 void CConstantBuffer::Create(int bufferSize, const void* initData)
@@ -26,18 +21,20 @@ void CConstantBuffer::Create(int bufferSize, const void* initData)
 	desc.MiscFlags = 0;
 	D3D11_SUBRESOURCE_DATA resource;
 	resource.pSysMem = initData;
+	HRESULT hr;
 	if (initData != nullptr)
 	{
-		GetDevice()->CreateBuffer(&desc, &resource, &m_buffer);
+		hr = GetDevice()->CreateBuffer(&desc, &resource, m_buffer.GetAddressOf());
 	}
 	else
 	{
-		GetDevice()->CreateBuffer(&desc, nullptr, &m_buffer);
+		hr = GetDevice()->CreateBuffer(&desc, nullptr, m_buffer.GetAddressOf());
 	}
+	
 }
 
 void CConstantBuffer::Update(void* updateData)
 {
 
-	GetDeviceContext()->UpdateSubresource(m_buffer, 0, NULL, updateData, 0, 0);
+	GetDeviceContext()->UpdateSubresource(m_buffer.Get(), 0, NULL, updateData, 0, 0);
 }

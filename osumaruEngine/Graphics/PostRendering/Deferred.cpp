@@ -74,10 +74,10 @@ void CDeferred::Start()
 	ID3D11RenderTargetView* mainViews[enRenderTargetNum];
 	for (int i = 0; i < enRenderTargetNum;i++)
 	{
-		mainViews[i] = m_renderTarget[i].GetRenderTarget();
+		mainViews[i] = m_renderTarget[i].GetRenderTarget().Get();
 	};
-	GetDeviceContext()->ClearDepthStencilView(Engine().GetPostEffect().GetDepthStencil(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
-	GetDeviceContext()->OMSetRenderTargets(enRenderTargetNum, mainViews, Engine().GetPostEffect().GetDepthStencil());
+	GetDeviceContext()->ClearDepthStencilView(Engine().GetPostEffect().GetDepthStencil().Get(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
+	GetDeviceContext()->OMSetRenderTargets(enRenderTargetNum, mainViews, Engine().GetPostEffect().GetDepthStencil().Get());
 	Engine().SetAlphaBlendState(enAlphaBlendStateNone);
 	Engine().SetDepthStencilState(enDepthStencilState3D);
 	Engine().SetRasterizerState(enRasterizerState3D);
@@ -96,9 +96,9 @@ void CDeferred::Start()
 			pColor = color;
 			break;
 		}
-		GetDeviceContext()->ClearRenderTargetView(m_renderTarget[i].GetRenderTarget(), pColor);
+		GetDeviceContext()->ClearRenderTargetView(m_renderTarget[i].GetRenderTarget().Get(), pColor);
 	}
-	GetDeviceContext()->ClearDepthStencilView(m_renderTarget[0].GetDepthStencil(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
+	GetDeviceContext()->ClearDepthStencilView(m_renderTarget[0].GetDepthStencil().Get(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
 
 }
 
@@ -107,48 +107,43 @@ void CDeferred::Draw()
 {
 	{
 		float color[4] = { 0.0f, 0.0f, 1.0f, 0.0f };
-		ID3D11RenderTargetView* backBuffer[] = { MainRenderTarget().GetRenderTarget() };
-		GetDeviceContext()->OMSetRenderTargets(1, backBuffer, MainRenderTarget().GetDepthStencil());
+		ID3D11RenderTargetView* backBuffer[] = { MainRenderTarget().GetRenderTarget().Get() };
+		GetDeviceContext()->OMSetRenderTargets(1, backBuffer, MainRenderTarget().GetDepthStencil().Get());
 
 		GetDeviceContext()->ClearRenderTargetView(backBuffer[0], color);
-		GetDeviceContext()->ClearDepthStencilView(MainRenderTarget().GetDepthStencil(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
+		GetDeviceContext()->ClearDepthStencilView(MainRenderTarget().GetDepthStencil().Get(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
 		ID3D11ShaderResourceView* srviews[enRenderTargetNum + 1];
 		for (int i = 0; i < enRenderTargetNum; i++)
 		{
-			srviews[i] = m_renderTarget[i].GetRenderTargetTexture().GetShaderResource();
+			srviews[i] = m_renderTarget[i].GetRenderTargetTexture().GetShaderResource().Get();
 		};
-		srviews[enRenderTargetNum] = Engine().GetShadowMap().GetRenderTarget().GetRenderTargetTexture().GetShaderResource();
+		srviews[enRenderTargetNum] = Engine().GetShadowMap().GetRenderTarget().GetRenderTargetTexture().GetShaderResource().Get();
 		CLight light = Light();
 		m_lightCB.Update(&Light());
 		Engine().GetShadowMap().SetConstantBuffer();
-		ID3D11Buffer* buffer;
 		if (m_camera != nullptr)
 		{
 			CMatrix gameCameraMat;
 			gameCameraMat.Mul(m_camera->GetViewMatrix(), m_camera->GetProjectionMatrix());
 			//gameCameraMat.Inverse();
 			m_gameCameraCB.Update(&gameCameraMat);
-			buffer = m_gameCameraCB.GetBody();
-			GetDeviceContext()->PSSetConstantBuffers(1, 1, &buffer);
+			GetDeviceContext()->PSSetConstantBuffers(1, 1, m_gameCameraCB.GetBody().GetAddressOf());
 		}
-		buffer = m_lightCB.GetBody();
-		GetDeviceContext()->PSSetConstantBuffers(0, 1, &buffer);
-		buffer = m_materialCB.GetBody();
-		GetDeviceContext()->PSSetConstantBuffers(3, 1, &buffer);
-		buffer = m_frameSizeCB.GetBody();
-		GetDeviceContext()->PSSetConstantBuffers(4, 1, &buffer);
+		GetDeviceContext()->PSSetConstantBuffers(0, 1, m_lightCB.GetBody().GetAddressOf());
+		GetDeviceContext()->PSSetConstantBuffers(3, 1, m_materialCB.GetBody().GetAddressOf());
+		GetDeviceContext()->PSSetConstantBuffers(4, 1, m_frameSizeCB.GetBody().GetAddressOf());
 		GetDeviceContext()->PSSetShaderResources(0, enRenderTargetNum + 1, srviews);
-		GetDeviceContext()->VSSetShader((ID3D11VertexShader*)m_vertexShader.GetBody(), nullptr, 0);
-		GetDeviceContext()->PSSetShader((ID3D11PixelShader*)m_pixelShader.GetBody(), nullptr, 0);
+		GetDeviceContext()->VSSetShader((ID3D11VertexShader*)m_vertexShader.GetBody().Get(), nullptr, 0);
+		GetDeviceContext()->PSSetShader((ID3D11PixelShader*)m_pixelShader.GetBody().Get(), nullptr, 0);
 		ID3D11SamplerState* samplers[] = { m_pAnisotropicSampler };
 		GetDeviceContext()->PSSetSamplers(1, 1, samplers);
-		ID3D11Buffer* vertexBuffers[] = { m_primitive.GetVertexBuffer() };
+		ID3D11Buffer* vertexBuffers[] = { m_primitive.GetVertexBuffer().Get() };
 		UINT strides[] = { m_primitive.GetVertexStride() };
 		UINT offset = 0;
 		GetDeviceContext()->IASetVertexBuffers(0, 1, vertexBuffers, strides, &offset);
 		GetDeviceContext()->IASetPrimitiveTopology(m_primitive.GetPrimitiveType());
-		GetDeviceContext()->IASetIndexBuffer(m_primitive.GetIndexBuffer(), m_primitive.GetIndexFormat(), 0);
-		GetDeviceContext()->IASetInputLayout(m_vertexShader.GetInputlayOut());
+		GetDeviceContext()->IASetIndexBuffer(m_primitive.GetIndexBuffer().Get(), m_primitive.GetIndexFormat(), 0);
+		GetDeviceContext()->IASetInputLayout(m_vertexShader.GetInputlayOut().Get());
 		GetDeviceContext()->DrawIndexed(m_primitive.GetIndexNum(), 0, 0);
 	}
 	{

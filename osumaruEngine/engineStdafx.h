@@ -4,6 +4,7 @@ int MakeHash(const wchar_t* str);
 int MakeHash(const char* str);
 
 static const int PRIORITY_PARTICLE = 10;
+static const int PRIORITY_SKY = 10;
 
 #include <d3d11.h>
 #include <d3d11shader.h>
@@ -27,6 +28,9 @@ static const int PRIORITY_PARTICLE = 10;
 #include <string.h>
 
 #pragma comment ( lib, "winmm.lib" )
+//#include <wrl.h>
+//#include <wrl/client.h>
+
 #include "DirectXTK/Inc/CommonStates.h"
 #include "DirectXTK\Inc\Effects.h"
 #include "DirectXTK/Inc/Model.h"
@@ -35,6 +39,7 @@ static const int PRIORITY_PARTICLE = 10;
 #include "DirectXTK/Inc/DDSTextureLoader.h"
 #include "DirectXTK/Inc/SpriteFont.h"
 #include "DirectXTK/Inc/SpriteBatch.h"
+
 
 #include "../osumaruEngine/bulletPhysics/src/btBulletDynamicsCommon.h"
 
@@ -50,4 +55,7 @@ static const int PRIORITY_PARTICLE = 10;
 #include "Sound/SoundEngine.h"
 #include "Graphics/ConstantBuffer.h"
 #include "Graphics/Shader.h"
+
+
 using namespace DirectX;
+using namespace Microsoft::WRL;

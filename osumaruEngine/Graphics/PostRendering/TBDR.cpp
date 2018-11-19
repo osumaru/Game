@@ -10,9 +10,8 @@ void CTBDR::Init()
 
 void CTBDR::Draw()
 {
-	GetDeviceContext()->CSSetShader((ID3D11ComputeShader*)m_cs.GetBody(), nullptr, 0);
-	ID3D11Buffer* cb[] = {m_cb.GetBody()};
-	GetDeviceContext()->CSSetConstantBuffers(0, 1, cb);
+	GetDeviceContext()->CSSetShader((ID3D11ComputeShader*)m_cs.GetBody().Get(), nullptr, 0);
+	GetDeviceContext()->CSSetConstantBuffers(0, 1, &m_cb.GetBody());
 	//GetDeviceContext()->CSSetShaderResources();
 	//GetDeviceContext()->Dispatch();
 

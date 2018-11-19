@@ -31,26 +31,26 @@ public:
 	void CreateDepthStencilBuffer(int width, int height);
 
 	//レンダリングターゲットの取得
-	ID3D11RenderTargetView* GetRenderTarget() const
+	Microsoft::WRL::ComPtr<ID3D11RenderTargetView> GetRenderTarget()
 	{
 		return m_pRenderTarget;
 	}
 
 	//デプスステンシルバッファの取得
-	ID3D11DepthStencilView* GetDepthStencil() const
+	Microsoft::WRL::ComPtr<ID3D11DepthStencilView> GetDepthStencil()
 	{
 		return m_pDepthStencil;
 	}
 
 	//レンダリングターゲット用のテクスチャの取得
-	ID3D11Texture2D* GetRenderTargetTexture() const
+	Microsoft::WRL::ComPtr<ID3D11Texture2D> GetRenderTargetTexture2D()
 	{
 		return m_pD3DRenderTargetTexture;
 	}
 
 
 	//デプスステンシルテクスチャ
-	ID3D11Texture2D* GetDepthStencilTexture() const
+	Microsoft::WRL::ComPtr<ID3D11Texture2D>& GetDepthStencilTexture2D()
 	{
 		return m_pD3DDepthStencilTexture;
 	}
@@ -67,12 +67,12 @@ public:
 		return *m_pDepthStencilTexture;
 	}
 private:
-	ID3D11DepthStencilView*					m_pDepthStencil;		//デプスステンシルビュー
-	ID3D11RenderTargetView*					m_pRenderTarget;		//レンダリングターゲット
-	ID3D11Texture2D*						m_pD3DRenderTargetTexture;	//レンダリングターゲット用のテクスチャ
-	ID3D11Texture2D*						m_pD3DDepthStencilTexture;	//デプスステンシル用のテクスチャ
-	int										m_width;				//レンダリングターゲットの幅
-	int										m_height;				//レンダリングターゲットの高さ
-	std::unique_ptr<CTexture>				m_pRenderTargetTexture;	//レンダリングターゲット用のテクスチャ
-	std::unique_ptr<CTexture>				m_pDepthStencilTexture;
+	Microsoft::WRL::ComPtr<ID3D11DepthStencilView>			m_pDepthStencil;			//デプスステンシルビュー
+	Microsoft::WRL::ComPtr<ID3D11RenderTargetView>			m_pRenderTarget;			//レンダリングターゲット
+	Microsoft::WRL::ComPtr<ID3D11Texture2D>					m_pD3DRenderTargetTexture;	//レンダリングターゲット用のテクスチャ
+	Microsoft::WRL::ComPtr<ID3D11Texture2D>					m_pD3DDepthStencilTexture;	//デプスステンシル用のテクスチャ
+	int														m_width;					//レンダリングターゲットの幅
+	int														m_height;					//レンダリングターゲットの高さ
+	std::unique_ptr<CTexture>								m_pRenderTargetTexture;		//レンダリングターゲット用のテクスチャ
+	std::unique_ptr<CTexture>								m_pDepthStencilTexture;
 };

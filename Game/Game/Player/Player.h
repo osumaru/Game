@@ -57,7 +57,7 @@ public:
 	//プレイヤーの描画関数
 	void Draw()override;
 
-	void AfterDraw();
+	void AfterDraw()override;
 
 	//プレイヤーの座標を取得する関数
 	const CVector3& GetPosition() const
