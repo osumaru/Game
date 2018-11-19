@@ -5,6 +5,11 @@
 
 CBow::~CBow()
 {
+
+}
+
+void CBow::Release()
+{
 	for (auto& arrow : m_arrowList)
 	{
 		Delete(arrow);

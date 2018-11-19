@@ -8,6 +8,7 @@
 #include "../UI/Menu/ItemInventory.h"
 #include "../UI/Menu/EquipInventory.h"
 #include "../Enemy/Maw.h"
+#include "Weapon/Bow.h"
 
 CPlayer *CPlayer::m_player = NULL;
 
@@ -42,6 +43,11 @@ void CPlayer::OnInvokeAnimationEvent(//ƒAƒjƒ[ƒVƒ‡ƒ“ƒCƒxƒ“ƒg‚ªŒÄ‚Î‚ê‚é‚²‚Æ‚ÉŒÄ‚
 	{
 		m_weaponManager.SetIsAttackCheck(!m_weaponManager.GetIsAttackCheck());
 	}
+}
+
+void CPlayer::BeforeDead()
+{
+	((CBow*)m_weaponManager.GetWeapon(enWeaponArrow))->Release();
 }
 
 
@@ -124,6 +130,8 @@ void CPlayer::Init(CVector3 position)
 	m_wireAction.Init(this);
 }
 
+
+
 void CPlayer::Update()
 {
 	m_position = m_characterController.GetPosition();
@@ -138,38 +146,7 @@ void CPlayer::Update()
 
 	if (Pad().IsPressButton(enButtonX))
 	{
-		const int hoge = 1;
-		CAnimation* anim = new CAnimation[hoge];
-		for(int i = 0;i < hoge;i++)
-		{
-			wchar_t* animClip[enPlayerAnimationNum] = {
-							{ L"Assets/modelData/PlayerStand.tka"},				//‘Ò‹@ƒAƒjƒ[ƒVƒ‡ƒ“	
-							{ L"Assets/modelData/PlayerWalkStay.tka" },			//•àsƒAƒjƒ[ƒVƒ‡ƒ“
-							{ L"Assets/modelData/PlayerDash60fpsEvent.tka" },		//‘–‚èƒAƒjƒ[ƒVƒ‡ƒ“
-							{ L"Assets/modelData/PlayerRunJump.tka" },			//‘–‚èƒWƒƒƒ“ƒvƒAƒjƒ[ƒVƒ‡ƒ“
-							{ L"Assets/modelData/PlayerJump2.tka" },				//ƒWƒƒƒ“ƒvƒAƒjƒ[ƒVƒ‡ƒ“
-							{ L"Assets/modelData/PlayerCombo4.tka" },			//UŒ‚ƒAƒjƒ[ƒVƒ‡ƒ“
-							{ L"Assets/modelData/PlayerCombo5.tka" },		//˜AŒ‚ƒAƒjƒ[ƒVƒ‡ƒ“
-							{ L"Assets/modelData/PlayerCombo6.tka" },		//˜AŒ‚ƒAƒjƒ[ƒVƒ‡ƒ“
-							{ L"Assets/modelData/PlayerCombo4Combine.tka" },		//˜AŒ‚ƒAƒjƒ[ƒVƒ‡ƒ“
-							{ L"Assets/modelData/PlayerCombo5Combine.tka" },		//˜AŒ‚ƒAƒjƒ[ƒVƒ‡ƒ“
-							{ L"Assets/modelData/PlayerAttackCombine.tka" },		//˜AŒ‚ƒAƒjƒ[ƒVƒ‡ƒ“
-							{ L"Assets/modelData/PlayerStun.tka" },			//ƒXƒ^ƒ“ƒAƒjƒ[ƒVƒ‡ƒ“
-							{ L"Assets/modelData/PlayerDamage.tka" },			//ƒ_ƒ[ƒWƒAƒjƒ[ƒVƒ‡ƒ“
-							{ L"Assets/modelData/PlayerRoll.tka" }	,		//‰ñ”ðƒAƒNƒVƒ‡ƒ“
-							{ L"Assets/modelData/PlayerRollCombine.tka" }	,		//‰ñ”ðƒAƒNƒVƒ‡ƒ“
-							{ L"Assets/modelData/PlayerDeath.tka" },			//Ž€–SƒAƒjƒ[ƒVƒ‡ƒ“
-							{ L"Assets/modelData/PlayerWireMove.tka" },				//ƒƒCƒ„[ˆÚ“®ƒAƒjƒ[ƒVƒ‡ƒ“
-							{ L"Assets/modelData/PlayerArrowAttack.tka" },		//‹|‚ÌUŒ‚ƒAƒjƒ[ƒVƒ‡ƒ“
-							{ L"Assets/modelData/PlayerArrowAttackEvent.tka" },
-							{ L"Assets/modelData/PlayerLeageSwordAttack.tka" },	//‘åŒ•‚ÌUŒ‚ƒAƒjƒ[ƒVƒ‡ƒ“
-							{ L"Assets/modelData/PlayerTwinSwordAttack.tka" },	//“ñ“—¬‚ÌUŒ‚ƒAƒjƒ[ƒVƒ‡ƒ“
-							{ L"Assets/modelData/PlayerLanding.tka" }
-			};
-
-			anim[i].Init(animClip, enPlayerAnimationNum);
-		}
-		delete[] anim;
+		m_status.Health = 5;
 	}
 
 	CMatrix viewMat;
