@@ -24,7 +24,7 @@ void CNinja::Init(CVector3 position)
 		L"Assets/modelData/ninjaWalk.tka",
 		L"Assets/modelData/ninjaDash.tka",
 		L"Assets/modelData/ninjaAttack.tka",
-		L"Assets/modelData/ninjaDamage.tka",
+		L"Assets/modelData/ninjaDamageSmall.tka",
 		L"Assets/modelData/ninjaDeath.tka"
 	};
 	m_animation.Init(animClip, CEnemyState::enState_Num);

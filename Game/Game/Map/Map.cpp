@@ -18,7 +18,7 @@ std::vector<std::vector<SMapChipInfo>> mapChipInfo =
 {
 	{
 	//#include "Boss.h"
-	#include "Test.h"
+#include "Test.h"
 	//#include "ShopTest.h"
 	//#include "Location2.h"
 	//#include "Test.h"
@@ -40,7 +40,7 @@ void Map::Init(int stageNum)
 	std::map<int, std::vector<SMapChipInfo>> instancingData;
 
 	//std::vector<CEnemyGroup*> enemyGroupList;
-	m_shopNpcManager = New<CNpcManager>(0);
+	m_shopNpcManager = New<CNpcManager>(PRIORITY_NPC);
 
 	for (SMapChipInfo& mInfo : mapChipInfo[stageNum])
 	{
@@ -52,7 +52,7 @@ void Map::Init(int stageNum)
 		switch (mInfo.m_tag)
 		{
 		case enMapTagMapChip:
-			mapChip = New<MapChip>(STAGE_GIMMICK_PRIORITY);
+			mapChip = New<MapChip>(PRIORITY_MAPCHIP);
 			break;
 		case enMapTagPlayer:
 			GetPlayer().Create();
@@ -63,19 +63,19 @@ void Map::Init(int stageNum)
 			GetMaw().Init(mInfo.m_position);
 			break;
 		case enMapTagZombie:
-			enemy = New<CZombie>(1);
+			enemy = New<CZombie>(PRIORITY_ENEMY);
 			break;
 		case enMapTagNinja:
-			enemy = New<CNinja>(1);
+			enemy = New<CNinja>(PRIORITY_ENEMY);
 			break;
 		case enMapTagSamurai:
-			enemy = New<CSamurai>(1);
+			enemy = New<CSamurai>(PRIORITY_ENEMY);
 			break;
 		case enMapTagWarrok:
-			enemy = New<CWarrok>(1);
+			enemy = New<CWarrok>(PRIORITY_ENEMY);
 			break;
 		case enMapTagEnemyGroup:
-			enemyGroup = New<CEnemyGroup>(1);
+			enemyGroup = New<CEnemyGroup>(PRIORITY_ENEMY);
 			enemyGroup->Init(mInfo.m_position);
 			m_enemyGroupList.push_back(enemyGroup);
 			break;
@@ -86,15 +86,15 @@ void Map::Init(int stageNum)
 			m_shopNpcManager->InitShop(mInfo.m_position, mInfo.m_rotation, EShop::enWeaponShop);
 			break;
 		case enMapTagBreakBrock:
-			mapChip = New<CBreakMapObject>(0);
+			mapChip = New<CBreakMapObject>(PRIORITY_MAPCHIP);
 			m_collider = true;
 			break;
 		case enMapTagTerrain:
-			mapChip = New<StaticMapObject>(0);
+			mapChip = New<StaticMapObject>(PRIORITY_MAPCHIP);
 			m_collider = false;
 			break;
 		default:
-			mapChip = New<StaticMapObject>(0);
+			mapChip = New<StaticMapObject>(PRIORITY_MAPCHIP);
 			m_collider = true;
 			break;
 		}

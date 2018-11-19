@@ -24,7 +24,7 @@ void CZombie::Init(CVector3 position)
 		L"Assets/modelData/zombiWalk.tka",
 		L"Assets/modelData/zombiDash.tka",
 		L"Assets/modelData/zombiAttack.tka",
-		L"Assets/modelData/zombiDamage.tka",
+		L"Assets/modelData/zombiDamageSmall.tka",
 		L"Assets/modelData/zombiDeath.tka"
 	};
 	m_animation.Init(animClip, CEnemyState::enState_Num);

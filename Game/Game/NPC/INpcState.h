@@ -4,7 +4,7 @@ class INpcState	:	public IGameObject
 {
 public:
 	INpcState();
-	~INpcState();
+	virtual ~INpcState();
 	virtual void Init(const CVector3 position, const CQuaternion rotation) = 0;
 	virtual void Update() = 0;
 	virtual void Draw() = 0;
@@ -61,7 +61,7 @@ protected:
 	CSprite				m_backSprite;
 	CTexture			m_backTexture;
 
-	CSoundSource		m_shop_bgm;							//“X‚ÌBGM
+	//CSoundSource		m_shop_bgm;							//“X‚ÌBGM
 	EShopState			m_shopState = enShopNone;			//“X‚Ìó‘Ô
 	EShopState			m_selectShop = enShopNone;			//‘I‘ğ’†‚Ìó‘Ô
 

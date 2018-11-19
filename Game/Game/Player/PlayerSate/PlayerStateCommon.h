@@ -14,6 +14,7 @@ enum EnPlayerAnimation
 	enPlayerAnimationAttackCombine1,		//連撃の後の合成用アニメーション
 	enPlayerAnimationAttackCombine2,		//連撃の後の合成用アニメーション
 	enPlayerAnimationAttackCombine3,		//連撃の後の合成用アニメーション
+	enPlayerAnimationStun,			//スタン用のアニメーション
 	enPlayerAnimationDamage,		//ダメージアニメーション
 	enPlayerAnimationAvoidance,		//回避アニメーション
 	enPlayerAnimationAvoidanceCombine,	//回避の後の合成用ポーズのアニメーション

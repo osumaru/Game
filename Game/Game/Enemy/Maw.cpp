@@ -51,10 +51,10 @@ void CMaw::OnInvokeAnimationEvent(
 //初期化
 void CMaw::Init(CVector3 position)
 {
-	m_bossHp = New<CBossHp>(0);
+	m_bossHp = New<CBossHp>(PRIORITY_UI);
 	m_bossHp->Init();
 
-	m_weekPoint = New<CWeekPoint>(0);
+	m_weekPoint = New<CWeekPoint>(PRIORITY_UI);
 	m_weekPoint->Init();
 	//ステータスを設定
 	m_status.Strength = 10;
@@ -344,6 +344,7 @@ void CMaw::Search()
 	}
 	else
 	{
+		
 		//見つけれなかったら探す
 		CQuaternion addRot;
 		const float RotSpeed = 0.01f;

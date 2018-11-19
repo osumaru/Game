@@ -24,4 +24,6 @@ public:
 
 	//XV
 	void Update() override;
+private:
+	float m_timer = 0.0f;
 };

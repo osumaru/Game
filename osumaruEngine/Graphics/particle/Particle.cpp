@@ -116,4 +116,5 @@ void CParticle::AfterDraw()
 	ID3D11ShaderResourceView* views[] = { m_pTexture->GetShaderResource(), Engine().GetShaderResource(enRenderTargetDepth) };
 	GetDeviceContext()->PSSetShaderResources(0, 2, views);
 	GetDeviceContext()->DrawIndexed(m_primitive.GetIndexNum(), 0, 0);
+
 }

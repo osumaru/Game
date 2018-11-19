@@ -26,9 +26,10 @@ bool CPlayerArrow::Start()
 
 void CPlayerArrow::Update()
 {
+	bool deleteFlg = false;
 	if (GetPlayer().GetStateMachine().GetState() == CPlayerState::EnPlayerState::enPlayerStateArrowAttack && !m_isMove)
 	{
-		m_arrowPosition =  GetPlayer().GetWeapon().GetPosition();
+		m_arrowPosition =  *((CVector3*)GetPlayer().GetSkinmodel().FindBoneWorldMatrix(L"LeftHand").m[3]);
 		//ƒJƒƒ‰‚Ì‘O•ûŒü‚ğæ“¾
 		CVector3 weaponFlont = GetGameCamera().GetCamera().GetFlont();
 		weaponFlont.Normalize();
@@ -75,6 +76,7 @@ void CPlayerArrow::Update()
 				if (fabs(len) < HIT_LENGTH)
 				{
 					enemys->SetIsDamage(true);
+					deleteFlg = true;
 				}
 
 			}
@@ -99,6 +101,7 @@ void CPlayerArrow::Update()
 					if (fabs(len) < BossWeekLenge)
 					{
 						GetMaw().SetIsDamage(true);
+						deleteFlg = true;
 						//return;
 					}
 				}
@@ -115,6 +118,7 @@ void CPlayerArrow::Update()
 					if (fabs(len) < BossLenge)
 					{
 						GetMaw().SetIsDamage(true);
+						deleteFlg = true;
 						//return;
 					}
 				}
@@ -125,9 +129,14 @@ void CPlayerArrow::Update()
 	
 	if (m_lifeTime >= ARROW_LIFE)
 	{
+		deleteFlg = true;
+	}
+	if(deleteFlg)
+	{
 		Delete(this);
 		return;
 	}
+
 	m_arrowskin.Update(m_arrowPosition, m_arrowRot, m_scale);
 }
 

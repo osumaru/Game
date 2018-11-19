@@ -25,7 +25,7 @@ void CItemInventory::Init(CMenu* menu)
 	//アイテムリストを取得
 	m_itemList = GetPlayer().GetItemList();
 	m_width = 5;
-	m_height = 1;
+	m_height = 3;
 	if (!m_itemList.empty()) {
 		//リストにアイテムがある
 		int idx = 0;
@@ -42,11 +42,6 @@ void CItemInventory::Init(CMenu* menu)
 			CVector2 position = m_basePos;
 			position.x += m_size.x * (idx % m_width);
 			position.y -= m_size.y * (idx / m_width);
-			if (idx != 0 && idx % m_width == 0)
-			{
-				//インベントリの幅を超えたら行を下げる
-				m_height++;
-			}
 			m_item[idx].SetPosition(position);
 			m_item[idx].SetSize(m_size);
 			idx++;
@@ -94,7 +89,7 @@ void CItemInventory::PointerMove()
 		//右にカーソルを動かす
 		position.x += m_size.x;
 		number++;
-		if (position.x > m_basePos.x + m_size.x * m_width)
+		if (position.x >= m_basePos.x + m_size.x * m_width)
 		{
 			//右端だった場合はそのまま
 			position.x = m_basePos.x + m_size.x * (m_width - 1);
@@ -110,7 +105,7 @@ void CItemInventory::PointerMove()
 		//左にカーソルを動かす
 		position.x -= m_size.x;
 		number--;
-		if (position.x < m_basePos.x - m_size.x)
+		if (position.x <= m_basePos.x - m_size.x)
 		{
 			//左端だった場合はそのまま
 			position.x = m_basePos.x;
@@ -126,7 +121,7 @@ void CItemInventory::PointerMove()
 		//上にカーソルを動かす
 		position.y += m_size.y;
 		number -= m_width;
-		if (position.y > m_basePos.y + m_size.y)
+		if (position.y >= m_basePos.y + m_size.y)
 		{
 			//上端だった場合はそのまま
 			position.y = m_basePos.y;
@@ -142,7 +137,7 @@ void CItemInventory::PointerMove()
 		//下にカーソルを動かす
 		position.y -= m_size.y;
 		number += m_width;
-		if (position.y < m_basePos.y - m_size.y * m_height)
+		if (position.y <= m_basePos.y - m_size.y * m_height)
 		{
 			//下端だった場合はそのまま
 			position.y = m_basePos.y - m_size.y * (m_height - 1);
@@ -169,8 +164,6 @@ void CItemInventory::UseItem()
 	GetPlayer().UseItem(m_pointerNum);
 	//空いたスペースを詰める
 	m_itemList = GetPlayer().GetItemList();
-	m_width = 5;
-	m_height = 1;
 	if (!m_itemList.empty()) {
 		//リストにアイテムがある
 		int idx = 0;
@@ -180,11 +173,6 @@ void CItemInventory::UseItem()
 			CVector2 position = m_basePos;
 			position.x += m_size.x * (idx % m_width);
 			position.y -= m_size.y * (idx / m_width);
-			if (idx != 0 && idx % m_width == 0)
-			{
-				//インベントリの幅を超えたら行を下げる
-				m_height++;
-			}
 			m_item[idx].SetPosition(position);
 			m_item[idx].SetSize(m_size);
 			idx++;
