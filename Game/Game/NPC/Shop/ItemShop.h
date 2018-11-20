@@ -1,7 +1,7 @@
 #pragma once
-#include "../INpcState.h"
+#include"../IShop.h"
 #include "../../Item/QuickItem.h"
-class CItemShop :public INpcState
+class CItemShop :public IShop
 {
 public:
 	CItemShop();

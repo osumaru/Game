@@ -1,20 +1,22 @@
 #include "stdafx.h"
-#include "INpcState.h"
+#include "IShop.h"
 #include "../Player/Player.h"
+#include "../GameSound/GameSound.h"
+#include "../Scene/SceneManager.h"
 #include "../Item/RecoveryItem.h"
 
 
 
-INpcState::INpcState()
+IShop::IShop()
 {
 }
 
 
-INpcState::~INpcState()
+IShop::~IShop()
 {
 }
 
-void INpcState::ShopUpdate()
+void IShop::ShopUpdate()
 {
 	CVector3 playervec = GetPlayer().GetPosition() - m_position;
 	float len = playervec.Length();
@@ -22,6 +24,7 @@ void INpcState::ShopUpdate()
 	switch (m_shopState)
 	{
 	case enShopNone:
+		//プレイヤーとショップとの距離が一定以内でAボタンが押されたら店を開く
 		if (len < SHOP_DRAW_LENGTH)
 		{
 			if (Pad().IsTriggerButton(enButtonA))
@@ -31,6 +34,10 @@ void INpcState::ShopUpdate()
 				m_selectShop = enShopBuy;
 				m_isSelectDraw = true;
 				GetPlayer().SetIsActiveUpdate(false);
+				//店用の音楽をかける
+				GetSceneGame().GetGameSound()->SetIsShop(true);
+				
+				
 			}
 		}
 		break;
@@ -39,7 +46,11 @@ void INpcState::ShopUpdate()
 		{
 			m_shopState = m_selectShop;
 			if (m_shopState == enShopBuy) { m_isShoplineupDraw = true; }
-			else { GetPlayer().SetIsActiveUpdate(true); }
+			else 
+			{ 
+				GetPlayer().SetIsActiveUpdate(true); 
+				GetSceneGame().GetGameSound()->SetIsShop(false);
+			}
 			m_isSelectDraw = false;
 			m_shopSelectPenPosition = SELECT_POSITON_START;
 			m_shopSelectPen.SetPosition(m_shopSelectPenPosition);
@@ -66,6 +77,7 @@ void INpcState::ShopUpdate()
 			m_shopState = enShopNone;
 			m_isShoplineupDraw = false;
 			GetPlayer().SetIsActiveUpdate(true);
+			GetSceneGame().GetGameSound()->SetIsShop(false);
 		}
 		else if (Pad().IsTriggerButton(enButtonA))
 		{
@@ -90,26 +102,24 @@ void INpcState::ShopUpdate()
 
 	m_skinModel.Update(m_position, m_rotation, m_scale, false);
 }
-void INpcState::LoadFile(const wchar_t* filePath)
+void IShop::LoadFile(const wchar_t* filePath)
 {
 	std::fstream	file;
 	file.open(filePath, std::ios::binary | std::ios::in);
-	file.read((char*)&m_itemState, sizeof(ItemState));
 	int num = file.tellg();
 	file.close();
 }
-void INpcState::AddFile(const wchar_t* filePath)
+void IShop::AddFile(const wchar_t* filePath)
 {
-	std::fstream	file;
-	swprintf(m_itemState.ItemName, L"osakanasan");
+	/*std::fstream	file;
 	m_itemState.ItemID = 1;
 	m_itemState.Itemprice = 100;
 	file.open(filePath, std::ios::binary | std::ios::out );
 	file.write((char*)&m_itemState, sizeof(m_itemState));
-	file.close();
+	file.close();*/
 }
 
-bool INpcState::Transaction(const int gold)
+bool IShop::Transaction(const int gold)
 {
 	//お金が足りていれば購入することができる
 	if (GetPlayer().BuyMoney(gold))

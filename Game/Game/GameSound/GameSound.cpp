@@ -14,7 +14,6 @@ CGameSound::~CGameSound()
 
 bool CGameSound::Start()
 {
-	//m_backSound[0].Init()
 	m_backSound[enTownBgm].Init("Assets/sound/BackSound/TownBgm.wav");
 	m_backSound[enTownBgm].SetVolume(MASTER_VOLUME);
 	m_backSound[enShopBgm].Init("Assets/sound/BackSound//ShopBgm.wav");

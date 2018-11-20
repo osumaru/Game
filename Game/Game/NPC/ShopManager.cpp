@@ -1,27 +1,27 @@
 #include "stdafx.h"
-#include "NpcManager.h"
+#include "ShopManager.h"
 
 
-CNpcManager::CNpcManager()
+CShopManager::CShopManager()
 {
 }
 
 
-CNpcManager::~CNpcManager()
+CShopManager::~CShopManager()
 {
 	
 }
 
-void CNpcManager::DeleteList()
+void CShopManager::DeleteList()
 {
-	for (INpcState* shopNpc : m_npclist)
+	for (IShop* shopNpc : m_npclist)
 	{
 		Delete(shopNpc);
 	}
 	m_npclist.clear();
 }
 
-void CNpcManager::InitShop(const CVector3 position, const CQuaternion rotation, const EShop shopnum)
+void CShopManager::InitShop(const CVector3 position, const CQuaternion rotation, const EShop shopnum)
 {
 	switch (shopnum)
 	{
@@ -42,7 +42,7 @@ void CNpcManager::InitShop(const CVector3 position, const CQuaternion rotation, 
 	}
 }
 
-void CNpcManager::Update()
+void CShopManager::Update()
 {
 	
 }

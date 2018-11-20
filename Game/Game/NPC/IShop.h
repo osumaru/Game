@@ -1,10 +1,10 @@
 #pragma once
 #include "../Item/IItem.h"
-class INpcState	:	public IGameObject
+class IShop	:	public IGameObject
 {
 public:
-	INpcState();
-	virtual ~INpcState();
+	IShop();
+	virtual ~IShop();
 	virtual void Init(const CVector3 position, const CQuaternion rotation) = 0;
 	virtual void Update() = 0;
 	virtual void Draw() = 0;
@@ -40,13 +40,6 @@ protected:
 		enShopLineup,
 		enShopNum,
 	};
-	struct ItemState
-	{
-		wchar_t     ItemName[40];			//商品の名前
-		int			ItemID = 0;				//商品の番号
-		int			Itemprice;				//アイテムの値段
-	};
-
 	struct ShopItem
 	{
 		IItem::SItemStatus	ItemStatus;				//アイテムの情報
@@ -60,8 +53,6 @@ protected:
 	CQuaternion			m_rotation = CQuaternion::Identity;	//回転
 	CSprite				m_backSprite;
 	CTexture			m_backTexture;
-
-	//CSoundSource		m_shop_bgm;							//店のBGM
 	EShopState			m_shopState = enShopNone;			//店の状態
 	EShopState			m_selectShop = enShopNone;			//選択中の状態
 
@@ -88,17 +79,15 @@ protected:
 	CVector2			m_shopSelectPenPosition = { 350.0f,-195.0f };
 	CVector2			m_shopSelectPenSize = { 50.0f,50.0f };
 
-	bool				m_isShoplineupDraw = false;							//ショップ画面を描画するかの判定
-	bool				m_isSelectDraw = false;								//セレクト画面を描画するかの判定
-	const float			SHOP_DRAW_LENGTH = 3.5f;							//ショップの影響を受ける長さ
-	wchar_t				m_filePath[256];
-	ItemState			m_itemState;
-	std::list<ItemState*>		m_itemStateList;
-	bool				m_isTransaction = false;							//取引を行うかの判定
-	CFont				m_itemNameFont[ITEM_ELEMENT];
-	CFont				m_itemPriceFont[ITEM_ELEMENT];
-	CVector2			m_fontPosition{ -340.0f,215.0f };
-	CVector2			FONT_POSITION_OFFSET = { 190.0f,85.0f };
+	bool					m_isShoplineupDraw = false;							//ショップ画面を描画するかの判定
+	bool					m_isSelectDraw = false;								//セレクト画面を描画するかの判定
+	const float				SHOP_DRAW_LENGTH = 3.5f;							//ショップの影響を受ける長さ
+	wchar_t					m_filePath[256];
+	bool					m_isTransaction = false;							//取引を行うかの判定
+	CFont					m_itemNameFont[ITEM_ELEMENT];
+	CFont					m_itemPriceFont[ITEM_ELEMENT];
+	CVector2				m_fontPosition{ -340.0f,215.0f };
+	CVector2				FONT_POSITION_OFFSET = { 190.0f,85.0f };
 	
 	
 };

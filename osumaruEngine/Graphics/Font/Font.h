@@ -49,7 +49,7 @@ public:
 	
 private:
 	CVector2		m_size = CVector2::One;				//サイズ
-	CVector4		m_color = CVector4::White;			//カラー
+	CVector4		m_color = CVector4::Black;			//カラー
 	CVector2		m_position = CVector2::Zero;		//座標
 	std::unique_ptr<wchar_t[]> m_displayString;			//表示用の文字列
 	std::unique_ptr<SpriteFont>	m_spriteFont;
