@@ -11,12 +11,12 @@ void CEnemyDamage::Init()
 
 	m_damageNumber = New<CDamageNumber>(PRIORITY_UI);
 	m_damageNumber->Init(m_enemy);
-	debugNum++;
 
 	//ダメージを受けたフラグを戻す
 	m_enemy->SetIsDamage(false);
 
 	m_friction = 0.5f;
+	m_debugDamageCount++;
 }
 
 bool CEnemyDamage::Start()
@@ -56,7 +56,12 @@ void CEnemyDamage::Update()
 	}
 	else if (!m_enemy->IsPlayAnimation()) {
 		//アニメーションが終了している
-		if (isRange  && length < 2.0f) {
+		if (m_debugDamageCount >= 2) {
+			m_debugDamageCount = 0;
+			//スタンする攻撃を受けた
+			m_esm->ChangeState(CEnemyState::enState_Stan);
+		}
+		else if (isRange  && length < 2.0f) {
 			//近ければ攻撃
 			m_esm->ChangeState(CEnemyState::enState_Attack);
 		}
@@ -74,7 +79,6 @@ void CEnemyDamage::Update()
 void CEnemyDamage::Release()
 {
 	if (m_damageNumber != nullptr) {
-		debugNum--;
 		Delete(m_damageNumber);
 		m_damageNumber = nullptr;
 	}

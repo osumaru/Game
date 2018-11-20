@@ -5,12 +5,19 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagPlayer, //タグ
 },
-//zombi
+////zombi
+//{
+//	L"zombi",
+//	CVector3(2.38f, 0.00f, -22.28f),             //平行移動
+//	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
+//	enMapTagZombie, //タグ
+//},
+//ninja
 {
-	L"zombi",
+	L"ninja",
 	CVector3(2.38f, 0.00f, -22.28f),             //平行移動
-	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
-	enMapTagZombie, //タグ
+	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f),  //回転
+	enMapTagNinja, //タグ
 },
 //Sphere
 {

@@ -37,4 +37,5 @@ private:
 	CDamageNumber*	m_damageNumber = nullptr;	//ダメージ表示
 	const float		m_knockBackSpeed = 3.0f;	//ノックバックスピード
 	float			m_friction = 0.5f;			//摩擦
+	int				m_debugDamageCount = 0;
 };
