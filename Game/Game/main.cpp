@@ -19,7 +19,7 @@ int WINAPI wWinMain(
 	//フェードインの開始
 	//GetSceneManager().GetFade()->FadeIn();
 	//ゲームシーンへ遷移
-	GetSceneManager().ChangeScene(GetSceneManager().enGameScene);
+	//GetSceneManager().ChangeScene(GetSceneManager().enTitleScene);
 	GetSceneManager().GetInstance().Update();
 	Engine().GameLoop();
 

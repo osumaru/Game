@@ -5,7 +5,7 @@ void CSceneManager::Init()
 {
 	m_fade = new CFade;
 	Add(m_fade, 15);
-
+	m_nextSceneState = enTitleScene;
 	//SceneManagerƒNƒ‰ƒX‚ğAdd
 	Add(this, 0);
 	m_isFadeOut = true;

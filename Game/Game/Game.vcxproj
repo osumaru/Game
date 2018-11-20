@@ -182,6 +182,7 @@
     <ClCompile Include="Enemy\Warrok.cpp" />
     <ClCompile Include="Enemy\Zombie.cpp" />
     <ClCompile Include="GameSound\GameSound.cpp" />
+    <ClCompile Include="UI\Fade\LoadScene.cpp" />
     <ClCompile Include="NPC\Shop\ItemShop.cpp" />
     <ClCompile Include="Item\IItem.cpp" />
     <ClCompile Include="Item\Money.cpp" />
@@ -270,6 +271,7 @@
     <ClInclude Include="Enemy\Warrok.h" />
     <ClInclude Include="Enemy\Zombie.h" />
     <ClInclude Include="GameSound\GameSound.h" />
+    <ClInclude Include="UI\Fade\LoadScene.h" />
     <ClInclude Include="NPC\Shop\ItemShop.h" />
     <ClInclude Include="Item\IItem.h" />
     <ClInclude Include="Item\Money.h" />
