@@ -138,9 +138,9 @@ void CWeaponShop::AfterDraw()
 {
 	if (!m_isSelectDraw && !m_isShoplineupDraw) { return; }
 
-	for (int num = 0;num < SELECT_TEX_ELEMENT;num++)
+	for (auto &SelectTex :m_shopSelect)
 	{
-		m_shopSelect[num].Draw();
+		SelectTex.Draw();
 
 	}
 	m_shopSelectPen.Draw();
@@ -148,9 +148,9 @@ void CWeaponShop::AfterDraw()
 	if (!m_isShoplineupDraw) { return; }
 	m_backSprite.Draw();
 	m_selectItemSprite.Draw();
-	for (int num = 0; num < ITEM_ELEMENT;num++)
+	for (auto &item:m_items)
 	{
-		m_items[num].ItemSprite.Draw();
+		item.ItemSprite.Draw();
 		
 	}
 	for (int num = 0; num < ITEM_ELEMENT;num++)
