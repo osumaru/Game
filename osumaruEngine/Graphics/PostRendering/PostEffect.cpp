@@ -5,7 +5,7 @@ CPostEffect::~CPostEffect()
 {
 }
 
-void CPostEffect::Init(IDXGISwapChain* swapChain)
+void CPostEffect::Init(Microsoft::WRL::ComPtr<IDXGISwapChain> swapChain)
 {
 	m_vertexShader.Load("Assets/shader/postEffect.fx", "VSMain", CShader::enVS);
 	m_pixelShader.Load("Assets/shader/postEffect.fx", "PSMain", CShader::enPS);
@@ -29,24 +29,24 @@ void CPostEffect::Init(IDXGISwapChain* swapChain)
 void CPostEffect::Draw()
 {
 	float color[4] = { 0.0f, 0.0f, 1.0f, 1.0f };
-	GetDeviceContext()->OMSetRenderTargets(1, &m_pBackRenderTargetView, m_pBackDepthStencilView);
-	GetDeviceContext()->ClearRenderTargetView(m_pBackRenderTargetView, color);
-	GetDeviceContext()->ClearDepthStencilView(m_pBackDepthStencilView, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
+	GetDeviceContext()->OMSetRenderTargets(1, m_pBackRenderTargetView.GetAddressOf(), m_pBackDepthStencilView.Get());
+	GetDeviceContext()->ClearRenderTargetView(m_pBackRenderTargetView.Get(), color);
+	GetDeviceContext()->ClearDepthStencilView(m_pBackDepthStencilView.Get(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
 	Engine().SetAlphaBlendState(enAlphaBlendStateNone);
 	Engine().SetDepthStencilState(enDepthStencilState2D);
 	Engine().SetRasterizerState(enRasterizerState2D);
 	ID3D11ShaderResourceView* srviews[] = {
-		MainRenderTarget().GetRenderTargetTexture().GetShaderResource() };
+		MainRenderTarget().GetRenderTargetTexture().GetShaderResource().Get() };
 	GetDeviceContext()->PSSetShaderResources(0, 1, srviews);
-	GetDeviceContext()->VSSetShader((ID3D11VertexShader*)m_vertexShader.GetBody(), nullptr, 0);
-	GetDeviceContext()->PSSetShader((ID3D11PixelShader*)m_pixelShader.GetBody(), nullptr, 0);
-	ID3D11Buffer* vertexBuffers[] = { m_primitive.GetVertexBuffer() };
+	GetDeviceContext()->VSSetShader((ID3D11VertexShader*)m_vertexShader.GetBody().Get(), nullptr, 0);
+	GetDeviceContext()->PSSetShader((ID3D11PixelShader*)m_pixelShader.GetBody().Get(), nullptr, 0);
+	ID3D11Buffer* vertexBuffers[] = { m_primitive.GetVertexBuffer().Get() };
 	UINT strides[] = { m_primitive.GetVertexStride() };
 	UINT offset = 0;
 	GetDeviceContext()->IASetVertexBuffers(0, 1, vertexBuffers, strides, &offset);
 	GetDeviceContext()->IASetPrimitiveTopology(m_primitive.GetPrimitiveType());
-	GetDeviceContext()->IASetIndexBuffer(m_primitive.GetIndexBuffer(), m_primitive.GetIndexFormat(), 0);
-	GetDeviceContext()->IASetInputLayout(m_vertexShader.GetInputlayOut());
+	GetDeviceContext()->IASetIndexBuffer(m_primitive.GetIndexBuffer().Get(), m_primitive.GetIndexFormat(), 0);
+	GetDeviceContext()->IASetInputLayout(m_vertexShader.GetInputlayOut().Get());
 	GetDeviceContext()->DrawIndexed(m_primitive.GetIndexNum(), 0, 0);
 	Engine().SetAlphaBlendState(enAlphaBlendStateAdd);
 	Engine().SetDepthStencilState(enDepthStencilState3D);

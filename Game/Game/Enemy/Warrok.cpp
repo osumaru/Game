@@ -24,7 +24,7 @@ void CWarrok::Init(CVector3 position)
 		L"Assets/modelData/warrokWalk.tka",
 		L"Assets/modelData/warrokDash.tka",
 		L"Assets/modelData/warrokAttack.tka",
-		L"Assets/modelData/warrokDamage.tka",
+		L"Assets/modelData/warrokDamageSmall.tka",
 		L"Assets/modelData/warrokDeath.tka"
 	};
 	m_animation.Init(animClip, CEnemyState::enState_Num);

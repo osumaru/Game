@@ -28,7 +28,7 @@ public:
 	テクスチャを設定
 	texture	テクスチャのSRV
 	*/
-	void SetTexture(ID3D11ShaderResourceView* texture)
+	void SetTexture(Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> texture)
 	{
 		textureResource = texture;
 	}
@@ -39,13 +39,13 @@ public:
 	}
 
 protected:
-	ID3D11ShaderResourceView*		textureResource;	//テクスチャのSRV
-	CConstantBuffer					constantBuffer;		//定数バッファ
-	CShader							vsShader;			//頂点シェーダー
-	CShader							psShader;			//ピクセルシェーダー
-	CShader							shadowVsShader;			//頂点シェーダー
-	CShader							shadowPsShader;			//ピクセルシェーダー
-	bool							isShadow = false;
+	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView>		textureResource;	//テクスチャのSRV
+	CConstantBuffer											constantBuffer;		//定数バッファ
+	CShader													vsShader;			//頂点シェーダー
+	CShader													psShader;			//ピクセルシェーダー
+	CShader													shadowVsShader;			//頂点シェーダー
+	CShader													shadowPsShader;			//ピクセルシェーダー
+	bool													isShadow = false;
 };
 
 //スキン有りモデルのエフェクト

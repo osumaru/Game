@@ -49,13 +49,8 @@ public:
 	//自分のインスタンスを取得
 	static CEngine& GetEngine()
 	{
-		static CEngine engine;
-		return engine;
-	}
-	//リリース
-	void Release()
-	{
-
+		static CEngine instance;
+		return instance;
 	}
 
 	//フレームバッファの横幅を取得
@@ -105,15 +100,15 @@ public:
 
 	ID3D11Device* GetDevice()
 	{
-		return m_pD3DDevice;
+		return m_pD3DDevice.Get();
 	}
 	
 	ID3D11DeviceContext* GetDeviceContext()
 	{
-		return m_pDeviceContext;
+		return m_pDeviceContext.Get();
 	}
 
-	ID3D11ShaderResourceView* GetShaderResource(EnRenderTarget numRenderTarget)
+	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView>& GetShaderResource(EnRenderTarget numRenderTarget)
 	{
 		return  m_deferred.GetShaderResource(numRenderTarget);
 	}
@@ -122,19 +117,19 @@ public:
 	template<class T, class... TArgs>
 	T* New(int priority, TArgs... args)
 	{
-		return m_objectManager.New<T, TArgs...>(priority, args...);
+		return m_objectManager->New<T, TArgs...>(priority, args...);
 	}
 
 	//インスタンスの削除
 	void Delete(IGameObject* deleteObject)
 	{
-		m_objectManager.Delete(deleteObject);
+		m_objectManager->Delete(deleteObject);
 	}
 
 	//インスタンスをオブジェクトマネージャーに登録
 	void Add(IGameObject* object, int priority)
 	{
-		m_objectManager.Add(object, priority);
+		m_objectManager->Add(object, priority);
 	}
 	CLight& Light()
 	{
@@ -154,13 +149,13 @@ public:
 	//すべてのオブジェクトをアクティブ化
 	void AllActive()
 	{
-		m_objectManager.AllActive();
+		m_objectManager->AllActive();
 	}
 
 	//すべてのオブジェクトを非アクティブ化
 	void AllInactive()
 	{
-		m_objectManager.AllInactive();
+		m_objectManager->AllInactive();
 	}
 
 	//ポストエフェクトを取得
@@ -217,6 +212,11 @@ public:
 		return m_depthState.GetCurrentDepthState();
 	}
 
+	EnAlphaBlendState GetCurrentAlphaBlendState()
+	{
+		return m_alphaBlend.GetCurrentBlendState();
+	}
+
 	//現在のラスタライザの設定を取得
 	EnRasterizerState GetCurrentRasterizerState()
 	{
@@ -229,34 +229,34 @@ public:
 	}
 
 private:
-	static const int						MAIN_RENDER_TARGET_NUM = 2;
-	CGameObjectManager						m_objectManager;			//オブジェクトマネージャー
-	WNDCLASSEX								m_wc;						//ウィンドウクラス
-	ID3D11Device*							m_pD3DDevice;
-	int										m_frameBufferWidth;
-	int										m_frameBufferHeight;
-	IDXGISwapChain*							m_pSwapChain;
-	D3D_FEATURE_LEVEL						m_featureLevel;
-	ID3D11DeviceContext*					m_pDeviceContext;
-	CRenderTarget							m_mainRenderTarget[MAIN_RENDER_TARGET_NUM];
-	int										m_currentRenderTargetNum = 0;
-	D3D_DRIVER_TYPE							m_driverType;
-	HWND									m_hwnd;
-	std::unique_ptr<CPhysicsWorld>			m_physicsWorld;				//物理ワールド
-	std::unique_ptr<CSoundEngine>			m_soundEngine;				//サウンドエンジン]
-	std::unique_ptr<CPad>					m_pad;
-	CTextureResource						m_textureResource;
-	CSkinmodelResource						m_skinmodelResource;
-	CShaderResource							m_shaderResource;
-	CLight									m_light;
-	CDeferred								m_deferred;
-	CPostEffect								m_postEffect;
-	CAlphaBlendState						m_alphaBlend;
-	CRasterizerState						m_rasterizerState;
-	CDepthStencilState						m_depthState;
-	CShadowMap								m_shadowMap;
-	CViewPortState							m_viewPortState;
-	CPointLightManager						m_pointLightManager;
+	static const int							MAIN_RENDER_TARGET_NUM = 2;
+	CGameObjectManager*							m_objectManager;			//オブジェクトマネージャー
+	WNDCLASSEX									m_wc;						//ウィンドウクラス
+	Microsoft::WRL::ComPtr<ID3D11Device>		m_pD3DDevice;
+	int											m_frameBufferWidth;
+	int											m_frameBufferHeight;
+	Microsoft::WRL::ComPtr<IDXGISwapChain>		m_pSwapChain;
+	D3D_FEATURE_LEVEL							m_featureLevel;
+	Microsoft::WRL::ComPtr<ID3D11DeviceContext>	m_pDeviceContext;
+	CRenderTarget								m_mainRenderTarget[MAIN_RENDER_TARGET_NUM];
+	int											m_currentRenderTargetNum = 0;
+	D3D_DRIVER_TYPE								m_driverType;
+	HWND										m_hwnd;
+	CPhysicsWorld*								m_physicsWorld;				//物理ワールド
+	CSoundEngine*								m_soundEngine;				//サウンドエンジン]
+	std::unique_ptr<CPad>						m_pad;
+	CTextureResource							m_textureResource;
+	CSkinmodelResource							m_skinmodelResource;
+	CShaderResource								m_shaderResource;
+	CLight										m_light;
+	CDeferred									m_deferred;
+	CPostEffect									m_postEffect;
+	CAlphaBlendState							m_alphaBlend;
+	CRasterizerState							m_rasterizerState;
+	CDepthStencilState							m_depthState;
+	CShadowMap									m_shadowMap;
+	CViewPortState								m_viewPortState;
+	CPointLightManager							m_pointLightManager;
 };
 
 //エンジンクラスのインスタンスを取得。

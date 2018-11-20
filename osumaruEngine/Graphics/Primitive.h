@@ -38,13 +38,13 @@ public:
 	void Create(void* vertexBuffer, int vertexStride,int vertexNum, void* indexBuffer, int indexNum, EnFormatIndex formatIndex, EnPrimitiveType primitiveType);
 
 	//頂点バッファを取得
-	ID3D11Buffer* GetVertexBuffer() const
+	Microsoft::WRL::ComPtr<ID3D11Buffer>& GetVertexBuffer()
 	{
 		return m_vertexBuffer;
 	}
 
 	//インデックスバッファを取得
-	ID3D11Buffer* GetIndexBuffer() const
+	Microsoft::WRL::ComPtr<ID3D11Buffer>& GetIndexBuffer()
 	{
 		return m_indexBuffer;
 	}
@@ -73,10 +73,10 @@ public:
 		return m_indexFormat;
 	}
 private:
-	ID3D11Buffer*					m_vertexBuffer = nullptr;									//頂点バッファ	
-	ID3D11Buffer*					m_indexBuffer = nullptr;									//インデックスバッファ
-	DXGI_FORMAT						m_indexFormat = DXGI_FORMAT_R16_UINT;						//インデックスバッファのフォーマット
-	int								m_stride = 0;												//頂点バッファのストライド
-	int								m_indexNum = 0;												//インデックス数
-	D3D11_PRIMITIVE_TOPOLOGY		m_primitiveType = D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP;	//プリミティブタイプ
+	Microsoft::WRL::ComPtr<ID3D11Buffer>			m_vertexBuffer = nullptr;									//頂点バッファ	
+	Microsoft::WRL::ComPtr<ID3D11Buffer>			m_indexBuffer = nullptr;									//インデックスバッファ
+	DXGI_FORMAT										m_indexFormat = DXGI_FORMAT_R16_UINT;						//インデックスバッファのフォーマット
+	int												m_stride = 0;												//頂点バッファのストライド
+	int												m_indexNum = 0;												//インデックス数
+	D3D11_PRIMITIVE_TOPOLOGY						m_primitiveType = D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP;	//プリミティブタイプ
 };

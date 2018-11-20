@@ -44,7 +44,7 @@ public:
 	シェーダーリソースビューを取得
 	numRenderTarget	レンダリングターゲットの番号
 	*/
-	ID3D11ShaderResourceView* GetShaderResource(EnRenderTarget numRenderTarget)
+	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView>& GetShaderResource(EnRenderTarget numRenderTarget)
 	{
 		return m_renderTarget[numRenderTarget].GetRenderTargetTexture().GetShaderResource();
 	}

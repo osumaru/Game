@@ -5,7 +5,7 @@
 #pragma once
 
 #include "IItem.h"
-#include "../Player/Weapon.h"
+#include "../Player/Weapon/WeaponManager.h"
 
 class CTreasureChest : public IItem
 {
@@ -23,5 +23,5 @@ public:
 	//描画
 	void Draw() override;
 private:
-	CWeapon::SWeaponStatus m_weaponStatus;	//武器のステータス
+	SWeaponStatus m_weaponStatus;	//武器のステータス
 };

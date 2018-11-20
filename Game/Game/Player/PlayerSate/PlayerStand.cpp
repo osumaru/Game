@@ -3,8 +3,8 @@
 #include "PlayerState.h"
 #include "../Player.h"
 #include "../../UI/WeaponSelect/WeaponSelect.h"
-#include"../../Scene/SceneManager.h"
-#include "../Weapon.h"
+#include "../../Scene/SceneManager.h"
+#include "../Weapon/WeaponManager.h"
 
 void CPlayerStand::Init()
 {
@@ -36,7 +36,7 @@ void CPlayerStand::Update()
 	//UŒ‚‚ð‚µ‚½Žž‚Ìˆ—
 	else if (Pad().IsTriggerButton(enButtonRightTrigger))
 	{
-		if (m_pPlayer->GetWeapon().GetCurrentState() == CWeapon::enArrow)
+		if (m_pPlayer->GetWeaponManager().GetCurrentState() == enWeaponArrow)
 		{
 			m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateArrowAttack);
 		}

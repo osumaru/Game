@@ -1,7 +1,7 @@
 #pragma once
-#include "../INpcState.h"
+#include "ItemShop.h"
 #include "../../Item/CEquipItem.h"
-class CWeaponShop : public INpcState
+class CWeaponShop : public IShop
 {
 public:
 	CWeaponShop();

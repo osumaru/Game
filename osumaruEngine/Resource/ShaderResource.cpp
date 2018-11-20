@@ -3,7 +3,16 @@
 
 CShaderResource::~CShaderResource()
 {
-	m_shaders.clear();
+	for (auto& it : m_shaderResource)
+	{
+		delete[] it.second.fileName;
+		delete[] it.second.entryFuncName;
+	}
+	for (auto& it : m_shaderData)
+	{
+		delete[] it.second.fileName;
+		delete[] it.second.data;
+	}
 }
 
 SShaderData CShaderResource::ReadFile(const char* filePath)
@@ -25,7 +34,7 @@ SShaderData CShaderResource::ReadFile(const char* filePath)
 		SShaderData ret;
 		ret.data = data;
 		ret.filepos = filepos;
-		ret.fileName = new char[strlen(filePath)];
+		ret.fileName = new char[strlen(filePath) + 1];
 		strcpy(ret.fileName, filePath);
 		m_shaderData.insert({ hash, ret });
 		return ret;
@@ -64,7 +73,7 @@ SShaderResource CShaderResource::Load(const char* filePath, const char* entryFun
 		shaderResource.m_pShader = nullptr;
 		ID3DBlob* errorBlob;
 		HRESULT hr = D3DCompile(shaderData.data, shaderData.filepos, nullptr,
-			nullptr, nullptr, entryFuncName, shaderTypeName[shaderType], shaderCompilerOption, 0, &shaderResource.m_blob, &errorBlob);
+			nullptr, nullptr, entryFuncName, shaderTypeName[shaderType], shaderCompilerOption, 0, shaderResource.m_blob.GetAddressOf(), &errorBlob);
 
 		if (FAILED(hr))
 		{
@@ -80,19 +89,19 @@ SShaderResource CShaderResource::Load(const char* filePath, const char* entryFun
 		switch (shaderType)
 		{
 		case CShader::enVS:
-			hr = GetDevice()->CreateVertexShader(shaderResource.m_blob->GetBufferPointer(), shaderResource.m_blob->GetBufferSize(), NULL, (ID3D11VertexShader**)&shaderResource.m_pShader);
-			CreateInputLayout(shaderResource.m_blob, &shaderResource.m_pInputLayout);
+			hr = GetDevice()->CreateVertexShader(shaderResource.m_blob->GetBufferPointer(), shaderResource.m_blob->GetBufferSize(), NULL, (ID3D11VertexShader**)shaderResource.m_pShader.GetAddressOf());
+			CreateInputLayout(shaderResource.m_blob.Get(), shaderResource.m_pInputLayout.GetAddressOf());
 			break;
 		case CShader::enPS:
-			hr = GetDevice()->CreatePixelShader(shaderResource.m_blob->GetBufferPointer(), shaderResource.m_blob->GetBufferSize(), NULL, (ID3D11PixelShader**)&shaderResource.m_pShader);
+			hr = GetDevice()->CreatePixelShader(shaderResource.m_blob->GetBufferPointer(), shaderResource.m_blob->GetBufferSize(), NULL, (ID3D11PixelShader**)shaderResource.m_pShader.GetAddressOf());
 			break;
 		case CShader::enCS:
-			hr = GetDevice()->CreateComputeShader(shaderResource.m_blob->GetBufferPointer(), shaderResource.m_blob->GetBufferSize(), NULL, (ID3D11ComputeShader**)&shaderResource.m_pShader);
+			hr = GetDevice()->CreateComputeShader(shaderResource.m_blob->GetBufferPointer(), shaderResource.m_blob->GetBufferSize(), NULL, (ID3D11ComputeShader**)shaderResource.m_pShader.GetAddressOf());
 			break;
 		}
-		shaderResource.entryFuncName = new char[strlen(entryFuncName)];
+		shaderResource.entryFuncName = new char[strlen(entryFuncName) + 1];
 		strcpy(shaderResource.entryFuncName, entryFuncName);
-		shaderResource.fileName= new char[strlen(filePath)];
+		shaderResource.fileName= new char[strlen(filePath) + 1];
 		strcpy(shaderResource.fileName, filePath);
 		shaderResource.shaderType = shaderType;
 		m_shaderResource.insert({ hash, shaderResource });
@@ -136,21 +145,21 @@ void CShaderResource::ReLoad()
 			"ps_5_0",
 			"cs_5_0"
 		};
-		if (map.second.m_blob != nullptr)
-		{
-			map.second.m_blob->Release();
-			map.second.m_blob = nullptr;
-		}
-		if (map.second.m_pInputLayout != nullptr)
-		{
-			map.second.m_pInputLayout->Release();
-			map.second.m_pInputLayout = nullptr;
-		}
-		if (map.second.m_pShader != nullptr)
-		{
-			map.second.m_pShader->Release();
-			map.second.m_pShader = nullptr;
-		}
+		//if (map.second.m_blob != nullptr)
+		//{
+		//	map.second.m_blob->Release();
+		//	map.second.m_blob = nullptr;
+		//}
+		//if (map.second.m_pInputLayout != nullptr)
+		//{
+		//	map.second.m_pInputLayout->Release();
+		//	map.second.m_pInputLayout = nullptr;
+		//}
+		//if (map.second.m_pShader != nullptr)
+		//{
+		//	map.second.m_pShader->Release();
+		//	map.second.m_pShader = nullptr;
+		//}
 		ID3DBlob* errorBlob;
 		HRESULT hr = D3DCompile(shaderData.data, shaderData.filepos, nullptr,
 			nullptr, nullptr, map.second.entryFuncName, shaderTypeName[map.second.shaderType], shaderCompilerOption, 0, &map.second.m_blob, &errorBlob);
@@ -168,14 +177,14 @@ void CShaderResource::ReLoad()
 		switch (map.second.shaderType)
 		{
 		case CShader::enVS:
-			GetDevice()->CreateVertexShader(map.second.m_blob->GetBufferPointer(), map.second.m_blob->GetBufferSize(), NULL, (ID3D11VertexShader**)&map.second.m_pShader);
+			GetDevice()->CreateVertexShader(map.second.m_blob->GetBufferPointer(), map.second.m_blob->GetBufferSize(), NULL, (ID3D11VertexShader**)map.second.m_pShader.GetAddressOf());
 			CreateInputLayout(map.second.m_blob, &map.second.m_pInputLayout);
 			break;
 		case CShader::enPS:
-			GetDevice()->CreatePixelShader(map.second.m_blob->GetBufferPointer(), map.second.m_blob->GetBufferSize(), NULL, (ID3D11PixelShader**)&map.second.m_pShader);
+			GetDevice()->CreatePixelShader(map.second.m_blob->GetBufferPointer(), map.second.m_blob->GetBufferSize(), NULL, (ID3D11PixelShader**)map.second.m_pShader.GetAddressOf());
 			break;
 		case CShader::enCS:
-			GetDevice()->CreateComputeShader(map.second.m_blob->GetBufferPointer(), map.second.m_blob->GetBufferSize(), NULL, (ID3D11ComputeShader**)&map.second.m_pShader);
+			GetDevice()->CreateComputeShader(map.second.m_blob->GetBufferPointer(), map.second.m_blob->GetBufferSize(), NULL, (ID3D11ComputeShader**)map.second.m_pShader.GetAddressOf());
 			break;
 		}
 	}
@@ -186,7 +195,7 @@ void CShaderResource::ReLoad()
 	}
 }
 
-void CShaderResource::CreateInputLayout(ID3DBlob * blob, ID3D11InputLayout** inputLayout)
+void CShaderResource::CreateInputLayout(Microsoft::WRL::ComPtr<ID3DBlob> blob, ID3D11InputLayout** inputLayout)
 {
 	//頂点シェーダーのデータから頂点レイアウトの情報を読み込む
 	ID3D11ShaderReflection* shaderReflection;

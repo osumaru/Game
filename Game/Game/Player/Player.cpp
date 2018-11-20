@@ -8,6 +8,7 @@
 #include "../UI/Menu/ItemInventory.h"
 #include "../UI/Menu/EquipInventory.h"
 #include "../Enemy/Maw.h"
+#include "Weapon/Bow.h"
 
 CPlayer *CPlayer::m_player = NULL;
 
@@ -19,13 +20,13 @@ void CPlayer::OnInvokeAnimationEvent(//ƒAƒjƒ[ƒVƒ‡ƒ“ƒCƒxƒ“ƒg‚ªŒÄ‚Î‚ê‚é‚²‚Æ‚ÉŒÄ‚
 
 	if (wcscmp(animClipName, L"Assets/modelData/PlayerDash60fpsEvent.tka") == 0)
 	{//ƒCƒxƒ“ƒg–¼‚Åˆ—‚ğ•Ï‚¦‚éH
-		const float footVolume = 1.0f;
+		const float footVolume = 0.1f;
 		CSoundSource* footSound = New<CSoundSource>(0);
 		footSound->Init("Assets/sound/Jump.wav");
 		footSound->Play(false);
 		footSound->SetVolume(footVolume);
-
 	}
+
 
 	if (wcscmp(animClipName, L"Assets/modelData/PlayerThrustAttack.tka") == 0)
 	{//‚½‚Ô‚ñŒÄ‚Î‚ê‚½
@@ -35,6 +36,18 @@ void CPlayer::OnInvokeAnimationEvent(//ƒAƒjƒ[ƒVƒ‡ƒ“ƒCƒxƒ“ƒg‚ªŒÄ‚Î‚ê‚é‚²‚Æ‚ÉŒÄ‚
 		soundSource->Play(false);
 		*/
 	}
+
+	if (!wcscmp(animClipName, L"Assets/modelData/PlayerCombo4.tka") ||
+		!wcscmp(animClipName, L"Assets/modelData/PlayerCombo5.tka") || 
+		!wcscmp(animClipName, L"Assets/modelData/PlayerCombo6.tka"))
+	{
+		m_weaponManager.SetIsAttackCheck(!m_weaponManager.GetIsAttackCheck());
+	}
+}
+
+void CPlayer::BeforeDead()
+{
+	((CBow*)m_weaponManager.GetWeapon(enWeaponArrow))->Release();
 }
 
 
@@ -45,22 +58,13 @@ void CPlayer::Init(CVector3 position)
 	m_skinmodel.LoadNormalmap(L"Assets/modelData/Player_normal.png");
 
 	m_position = position;
+	m_skinmodel.Update(m_position, CQuaternion::Identity, CVector3::One);
 	m_characterController.Init(0.3f, 1.0f, m_position);
 	m_characterController.SetGravity(-30.0f);
 	//ƒ‰ƒCƒg‚Ìİ’è
 	Light().SetAmbientLight({ 0.5f,0.5f,0.5f,1.0f });
 	Light().SetDiffuseLight(0, { 1.0f,1.0f,1.0f,1.0f });
 	Light().SetDiffuseLightDir(0, { 0.0f, -1.0f, 1.0f, 1.0f });
-
-
-	//ƒT[ƒNƒ‹‚Ì“Ç‚İ‚İ
-	{
-		m_arrowtexture.Load(L"Assets/sprite/arrowTag.png");
-		m_arrowtag.Init(&m_arrowtexture);
-		m_arrowtag.SetPosition({ 0.0f,0.0f });
-		m_arrowtag.SetSize({ 50.0f,50.0f });
-		m_arrowtag.SetAlpha(0.7f);
-	}
 
 	//ƒAƒjƒ[ƒVƒ‡ƒ“‚Ì‰Šú‰»
 	{
@@ -76,6 +80,7 @@ void CPlayer::Init(CVector3 position)
 									{ L"Assets/modelData/PlayerCombo4Combine.tka" },		//˜AŒ‚ƒAƒjƒ[ƒVƒ‡ƒ“
 									{ L"Assets/modelData/PlayerCombo5Combine.tka" },		//˜AŒ‚ƒAƒjƒ[ƒVƒ‡ƒ“
 									{ L"Assets/modelData/PlayerAttackCombine.tka" },		//˜AŒ‚ƒAƒjƒ[ƒVƒ‡ƒ“
+									{ L"Assets/modelData/PlayerStun.tka" },			//ƒXƒ^ƒ“ƒAƒjƒ[ƒVƒ‡ƒ“
 									{ L"Assets/modelData/PlayerDamage.tka" },			//ƒ_ƒ[ƒWƒAƒjƒ[ƒVƒ‡ƒ“
 									{ L"Assets/modelData/PlayerRoll.tka" }	,		//‰ñ”ğƒAƒNƒVƒ‡ƒ“
 									{ L"Assets/modelData/PlayerRollCombine.tka" }	,		//‰ñ”ğƒAƒNƒVƒ‡ƒ“
@@ -121,9 +126,11 @@ void CPlayer::Init(CVector3 position)
 	m_PlayerStateMachine.Init();
 	//Add(this, 1);
 	m_skinmodel.SetIsShadowCaster(true);
-	m_weapon.Init(this);
+	m_weaponManager.Init(this);
 	m_wireAction.Init(this);
 }
+
+
 
 void CPlayer::Update()
 {
@@ -135,38 +142,11 @@ void CPlayer::Update()
 
 	StatusCalculation();	//ƒXƒe[ƒ^ƒX‚Ìˆ—
 
-	std::list<CPlayerArrow*>::iterator it;
-	it = m_arrowList.begin();
-	it = m_arrowList.begin();
-	while (it != m_arrowList.end())
-	{
-		if ((*it)->IsDelete())
-		{
-			//€–S‚µ‚Ä‚¢‚½‚çƒŠƒXƒg‚©‚çíœ
-			CPlayerArrow* enemy = *it;
-			it = m_arrowList.erase(it);
-		}
-		else
-		{
-			it++;
-		}
-	}
+
 
 	if (Pad().IsPressButton(enButtonX))
 	{
 		m_status.Health = 5;
-	}
-
-	if (Pad().GetLeftTrigger())
-	{
-		GetGameCamera().SetCmareaState(GetGameCamera().enArrow);
-		m_isZoom = true;
-	}
-
-	else
-	{
-		GetGameCamera().SetCmareaState(GetGameCamera().enNormal);
-		m_isZoom = false;
 	}
 
 	CMatrix viewMat;
@@ -188,29 +168,20 @@ void CPlayer::Update()
 	m_animation.Update(GameTime().GetDeltaFrameTime());
 	//ƒXƒLƒ“ƒ‚ƒfƒ‹‚ÌXV
 	m_skinmodel.Update(m_position, m_rotation, { 1.0f, 1.0f, 1.0f }, true);
-	m_weapon.Update();
+	m_weaponManager.Update();
 }
 
 //•`‰æˆ—
 void CPlayer::Draw()
 {
-	m_weapon.Draw();
 	//m_characterController.Draw();
+	m_weaponManager.Draw();
 	m_skinmodel.Draw(GetGameCamera().GetViewMatrix(), GetGameCamera().GetProjectionMatrix());
 }
 
 void CPlayer::AfterDraw()
 {
-	if (m_isZoom)
-	{
-		m_arrowtag.Draw();
-	}
-}
-
-void CPlayer::InitArrow()
-{
-	CPlayerArrow*	Arrow = New<CPlayerArrow>(0);
-	m_arrowList.push_back(Arrow);
+	m_weaponManager.AfterDraw();
 }
 
 void CPlayer::StatusCalculation()
@@ -285,7 +256,7 @@ void CPlayer::Rotation()
 	}
 	m_rotation.SetRotation(CVector3::AxisY, rad);
 
-	if (m_weapon.GetCurrentState() == CWeapon::enArrow && m_isAttack)
+	if (m_weaponManager.GetCurrentState() == enWeaponArrow && m_weaponManager.GetIsAttack())
 	{
 		CQuaternion rotXZ, rotY;
 		CVector3 cameraFlont = GetGameCamera().GetCamera().GetFlont();
@@ -363,50 +334,11 @@ void CPlayer::UseItem(int number)
 	}
 }
 
-void CPlayer::ChangeEquip(int number)
-{
-	if (m_equipList.empty())
-	{
-		//‘•”õƒAƒCƒeƒ€‚ª‚È‚¢
-		return;
-	}
-	//‘I‚ñ‚¾‘•”õ‚ÆŒ»İ‚Ì‘•”õ‚ğŒğŠ·‚·‚é
-	std::list<CWeapon::SWeaponStatus>::iterator it;
-	it = m_equipList.begin();
-	for (int i = 0; i < number; i++)
-	{
-		it++;
-	}
-	int weaponNumber = (*it).weaponNum;
-	if (m_equipWeapon[weaponNumber].weaponNum == CWeapon::enInvalid)
-	{
-		//‰½‚à‘•”õ‚µ‚Ä‚¢‚È‚¢
-		m_equipWeapon[weaponNumber] = (*it);
-		m_equipList.erase(it);
-	}
-	else
-	{
-		//‘•”õ‚ğŒğŠ·‚·‚é
-		CWeapon::SWeaponStatus equipWeapon = m_equipWeapon[weaponNumber];
-		m_equipWeapon[weaponNumber] = (*it);
-		(*it) = equipWeapon;
-	}
-}
-
 void CPlayer::AddItemList(IItem * item)
 {
 	if (m_itemList.size() < CItemInventory::GetItemLimit())
 	{
 		//ŠãŒÀ‚ğ’´‚¦‚Ä‚¢‚È‚¯‚ê‚ÎƒAƒCƒeƒ€ƒŠƒXƒg‚É’Ç‰Á
 		m_itemList.push_back(item);
-	}
-}
-
-void CPlayer::AddEquipList(CWeapon::SWeaponStatus item)
-{
-	if (m_equipList.size() < CEquipInventory::GetEquipLimit())
-	{
-		//ŠãŒÀ‚ğ’´‚¦‚Ä‚¢‚È‚¯‚ê‚Î‘•”õƒŠƒXƒg‚É’Ç‰Á
-		m_equipList.push_back(item);
 	}
 }

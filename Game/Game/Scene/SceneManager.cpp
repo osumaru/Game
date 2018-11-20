@@ -5,11 +5,21 @@ void CSceneManager::Init()
 {
 	m_fade = new CFade;
 	Add(m_fade, 15);
-
+	m_nextSceneState = enTitleScene;
 	//SceneManagerクラスをAdd
 	Add(this, 0);
 	m_isFadeOut = true;
 }
+
+CSceneManager::~CSceneManager()
+{
+	if (m_fade != nullptr)
+	{
+		delete m_fade;
+	}
+}
+
+
 
 void CSceneManager::Update()
 {
@@ -49,15 +59,15 @@ void CSceneManager::Update()
 		{
 			//タイトルシーンへの遷移
 		case EnSceneState::enTitleScene:
-			m_titleScene = New<CTitleScene>(0);
+			m_titleScene = New<CTitleScene>(PRIORITY_SCENE);
 			break;
 			//ゲームシーンへの遷移
 		case EnSceneState::enGameScene:
-			m_gameScene = New<CGameScene>(0);
+			m_gameScene = New<CGameScene>(PRIORITY_SCENE);
 			break;
 			//クリアシーンへの遷移
 		case EnSceneState::enClearScene:
-			m_clearScene = New<CClearScene>(0);
+			m_clearScene = New<CClearScene>(PRIORITY_SCENE);
 			break;
 			//リザルトシーンへの遷移
 		case EnSceneState::enLoadScene:

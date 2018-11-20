@@ -16,12 +16,12 @@ public:
 	初期化関数
 	swapChain		バックバッファ取得用のスワップチェインインスタンス
 	*/
-	void Init(IDXGISwapChain* swapChain);
+	void Init(Microsoft::WRL::ComPtr<IDXGISwapChain> swapChain);
 
 	//描画関数
 	void Draw();
 
-	ID3D11DepthStencilView* GetDepthStencil()
+	Microsoft::WRL::ComPtr<ID3D11DepthStencilView> GetDepthStencil()
 	{
 		return m_pBackDepthStencilView;
 	}
@@ -29,8 +29,8 @@ public:
 private:
 	CPrimitive								m_primitive;			//プリミティブ
 	CShader									m_vertexShader;			//頂点シェーダー
-	CShader									m_pixelShader;			//ピクセルシェーダー
-	CRenderTarget							m_backBuffer;			//バックバッファ
-	ID3D11RenderTargetView*					m_pBackRenderTargetView = nullptr;//バックバッファのRTV
-	ID3D11DepthStencilView*					m_pBackDepthStencilView = nullptr;//バックバッファのDSV
+	CShader														m_pixelShader;			//ピクセルシェーダー
+	CRenderTarget													m_backBuffer;			//バックバッファ
+	Microsoft::WRL::ComPtr<ID3D11RenderTargetView>					m_pBackRenderTargetView = nullptr;//バックバッファのRTV
+	Microsoft::WRL::ComPtr<ID3D11DepthStencilView>					m_pBackDepthStencilView = nullptr;//バックバッファのDSV
 };

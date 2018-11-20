@@ -5,7 +5,7 @@
 std::shared_ptr<DirectX::IEffect> __cdecl CSkinModelEffectFactory::CreateEffect(_In_ const IEffectFactory::EffectInfo& info, _In_opt_ ID3D11DeviceContext* deviceContext)
 {
 	std::shared_ptr<ISkinModelEffect> effect;
-	ID3D11ShaderResourceView* view;
+	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> view;
 	//スキン有りのモデルとスキン無しのモデルでエフェクトを分ける
 	if (info.enableSkinning)
 	{
@@ -20,7 +20,7 @@ std::shared_ptr<DirectX::IEffect> __cdecl CSkinModelEffectFactory::CreateEffect(
 	{
 		wchar_t filePath[256];
 		swprintf(filePath, L"Assets/modelData/%s", info.diffuseTexture);
-		CreateTexture(filePath, GetDeviceContext(), &view);
+		CreateTexture(filePath, GetDeviceContext(), view.ReleaseAndGetAddressOf());
 		effect->SetTexture(view);
 	}
 	return effect;

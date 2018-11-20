@@ -17,6 +17,7 @@ public:
 		enClearScene,	//クリア
 		enSceneNum		//シーンの数
 	};
+	~CSceneManager();
 
 	//初期化
 	void Init();

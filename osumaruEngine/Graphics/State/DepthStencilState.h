@@ -15,14 +15,14 @@ public:
 	~CDepthStencilState();
 
 	//初期化
-	void Init(ID3D11Device* device);
+	void Init(Microsoft::WRL::ComPtr<ID3D11Device> device);
 
 	/*
 	深度設定を変更
 	deviceContext		グラフィックデバイス
 	depthStencilState	深度設定
 	*/
-	void SetDepthStencilState(ID3D11DeviceContext* deviceContext, EnDepthStencilState depthStencilState)
+	void SetDepthStencilState(Microsoft::WRL::ComPtr<ID3D11DeviceContext> deviceContext, EnDepthStencilState depthStencilState)
 	{
 		m_currentState = depthStencilState;
 		deviceContext->OMSetDepthStencilState(m_depthStencilState[m_currentState], 0);

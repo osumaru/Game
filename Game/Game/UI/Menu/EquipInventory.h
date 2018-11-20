@@ -7,7 +7,7 @@
 class CMenu;
 class IItem;
 
-#include "../../Player/Weapon.h"
+#include "../../Player/Weapon/WeaponManager.h"
 
 class CEquipInventory : public IGameObject
 {
@@ -76,11 +76,11 @@ private:
 	CTexture							m_rightTexture;
 	CSprite								m_pointer;										//カーソル
 	CTexture							m_pointerTexture;
-	CSprite								m_equip[m_equipLimit];							//装備アイコン
-	std::list<CWeapon::SWeaponStatus>	m_equipList;									//装備リスト
-	CVector2							m_basePos = CVector2::Zero;						//初期座標
-	CVector2							m_baseSize = CVector2::Zero;					//初期サイズ
-	int									m_width = 0;									//インベントリの幅
-	int									m_height = 0;									//インベントリの高さ
-	int									m_pointerNum = 0;								//カーソルで選んでいるアイテムの番号
+	CSprite								m_equip[m_equipLimit];			//装備アイコン
+	std::list<SWeaponStatus>			m_equipList;					//装備リスト
+	CVector2							m_basePos = CVector2::Zero;		//初期座標
+	CVector2							m_baseSize = CVector2::Zero;		//初期サイズ
+	int									m_width = 0;					//インベントリの幅
+	int									m_height = 0;					//インベントリの高さ
+	int									m_pointerNum = 0;				//カーソルで選んでいるアイテムの番号
 };

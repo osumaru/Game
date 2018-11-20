@@ -13,7 +13,7 @@ CDepthStencilState::~CDepthStencilState()
 	}
 }
 
-void CDepthStencilState::Init(ID3D11Device* device)
+void CDepthStencilState::Init(Microsoft::WRL::ComPtr<ID3D11Device> device)
 {
 
 	D3D11_DEPTH_STENCIL_DESC depthDesc;

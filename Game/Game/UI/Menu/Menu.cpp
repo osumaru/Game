@@ -46,7 +46,6 @@ void CMenu::Init()
 	{
 		for (int j = 0; j < NUMBER_COLUMN; j++)
 		{
-			m_numberTexture[i][j] = new CTexture;
 			m_number[i][j] = new CSprite;
 			m_numberTexture[i][j] = TextureResource().LoadTexture(L"Assets/sprite/number/number0.png");
 			m_number[i][j]->Init(m_numberTexture[i][j]);
@@ -78,7 +77,7 @@ void CMenu::Update()
 	case enItems:			//インベントリの確認
 		if (Pad().IsTriggerButton(enButtonA)) 
 		{
-			m_itemInventory = New<CItemInventory>(0);
+			m_itemInventory = New<CItemInventory>(PRIORITY_UI);
 			m_itemInventory->Init(this);
 		}
 		StatusConversion();
@@ -87,7 +86,7 @@ void CMenu::Update()
 	case enWeapons:			//装備の確認
 		if (Pad().IsTriggerButton(enButtonA))
 		{
-			m_equipInventory = New<CEquipInventory>(0);
+			m_equipInventory = New<CEquipInventory>(PRIORITY_UI);
 			m_equipInventory->Init(this);
 		}
 		break;

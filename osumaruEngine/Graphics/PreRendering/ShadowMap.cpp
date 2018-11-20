@@ -18,19 +18,18 @@ void CShadowMap::SetConstantBuffer()
 	CMatrix lightViewProj;
 	lightViewProj.Mul(m_viewMatrix, m_projectionMatrix);
 	m_CB.Update(&lightViewProj);
-	ID3D11Buffer* buffer = m_CB.GetBody();
-	GetDeviceContext()->PSSetConstantBuffers(2, 1, &buffer);
-	GetDeviceContext()->VSSetConstantBuffers(2, 1, &buffer);
+	GetDeviceContext()->PSSetConstantBuffers(2, 1, m_CB.GetBody().GetAddressOf());
+	GetDeviceContext()->VSSetConstantBuffers(2, 1, m_CB.GetBody().GetAddressOf());
 }
 
 void CShadowMap::Draw()
 {
 
-	ID3D11RenderTargetView* rtv[] = { m_renderTarget.GetRenderTarget() };
-	Engine().GetDeviceContext()->OMSetRenderTargets(1, rtv, m_renderTarget.GetDepthStencil());
+	ID3D11RenderTargetView* rtv[] = { m_renderTarget.GetRenderTarget().Get() };
+	Engine().GetDeviceContext()->OMSetRenderTargets(1, rtv, m_renderTarget.GetDepthStencil().Get());
 	float color[] = { 1.0f, 1.0f, 1.0f, 1.0f };
-	Engine().GetDeviceContext()->ClearRenderTargetView(m_renderTarget.GetRenderTarget(), color);
-	Engine().GetDeviceContext()->ClearDepthStencilView(m_renderTarget.GetDepthStencil(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
+	Engine().GetDeviceContext()->ClearRenderTargetView(m_renderTarget.GetRenderTarget().Get(), color);
+	Engine().GetDeviceContext()->ClearDepthStencilView(m_renderTarget.GetDepthStencil().Get(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
 	Engine().SetAlphaBlendState(enAlphaBlendStateNone);
 	Engine().SetDepthStencilState(enDepthStencilState3D);
 	CMatrix viewMat = m_viewMatrix;

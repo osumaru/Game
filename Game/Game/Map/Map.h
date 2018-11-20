@@ -4,7 +4,7 @@ class BreakMapObject;
 class IEnemy;
 class Player;
 class CEnemyGroup;
-class CNpcManager;
+class CShopManager;
 //マップチップのタグ
 enum EnMapChipTag
 {
@@ -71,6 +71,5 @@ private:
 	std::list<IEnemy*>			m_enemyList;			//エネミーリスト
 	std::vector<CEnemyGroup*>	m_enemyGroupList;		//エネミーグループのベクター
 	bool						m_collider = false;		//AABBを作成するかどうか
-	//std::list<CShopNPC*>		m_npcList;				//NPCのリスト
-	CNpcManager*				m_shopNpcManager;
+	CShopManager*				m_shopNpcManager;
 };

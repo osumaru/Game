@@ -3,12 +3,8 @@
 int MakeHash(const wchar_t* str);
 int MakeHash(const char* str);
 
-//#include "Random\Random.h"
-//#include "Graphics/Texture.h"
-//#include "Graphics/Primitive.h"
-//#include "Graphics/RenderTarget.h"
-
-//#include "BulletCollision/CollisionDispatch/btGhostObject.h"
+static const int PRIORITY_PARTICLE = 10;
+static const int PRIORITY_SKY = 10;
 
 #include <d3d11.h>
 #include <d3d11shader.h>
@@ -32,6 +28,9 @@ int MakeHash(const char* str);
 #include <string.h>
 
 #pragma comment ( lib, "winmm.lib" )
+//#include <wrl.h>
+//#include <wrl/client.h>
+
 #include "DirectXTK/Inc/CommonStates.h"
 #include "DirectXTK\Inc\Effects.h"
 #include "DirectXTK/Inc/Model.h"
@@ -40,6 +39,7 @@ int MakeHash(const char* str);
 #include "DirectXTK/Inc/DDSTextureLoader.h"
 #include "DirectXTK/Inc/SpriteFont.h"
 #include "DirectXTK/Inc/SpriteBatch.h"
+
 
 #include "../osumaruEngine/bulletPhysics/src/btBulletDynamicsCommon.h"
 
@@ -55,4 +55,7 @@ int MakeHash(const char* str);
 #include "Sound/SoundEngine.h"
 #include "Graphics/ConstantBuffer.h"
 #include "Graphics/Shader.h"
+
+
 using namespace DirectX;
+using namespace Microsoft::WRL;

@@ -57,29 +57,26 @@ void CRigidBodyDraw::Draw(CMatrix viewMatrix, CMatrix projectionMatrix)
 		return;
 	}
 	//頂点バッファを更新
-	ID3D11Buffer* vertexBuffer = m_primitive.GetVertexBuffer();
 	D3D11_MAPPED_SUBRESOURCE subresource;
-	Engine().GetDeviceContext()->UpdateSubresource(vertexBuffer, 0, NULL, &m_vertexBuffer[0], 0, 0);
+	Engine().GetDeviceContext()->UpdateSubresource(m_primitive.GetVertexBuffer().Get(), 0, NULL, &m_vertexBuffer[0], 0, 0);
 	//インデックスバッファを更新
-	ID3D11Buffer* indexBuffer = m_primitive.GetIndexBuffer();
-	Engine().GetDeviceContext()->UpdateSubresource(indexBuffer, 0, NULL, &m_indexBuffer[0], 0, 0);
+	Engine().GetDeviceContext()->UpdateSubresource(m_primitive.GetIndexBuffer().Get(), 0, NULL, &m_indexBuffer[0], 0, 0);
 
 	CMatrix mat;
 	mat.Mul(viewMatrix, projectionMatrix);
 	m_cb.Update(&mat);
 
 	//描画
-	ID3D11Buffer* buffer = m_cb.GetBody();
-	GetDeviceContext()->VSSetConstantBuffers(0, 1, &buffer);
-	GetDeviceContext()->VSSetShader((ID3D11VertexShader*)m_vs.GetBody(), nullptr, 0);
-	GetDeviceContext()->PSSetShader((ID3D11PixelShader*)m_ps.GetBody(), nullptr, 0);
-	ID3D11Buffer* vertexBuffers[] = { m_primitive.GetVertexBuffer() };
+	GetDeviceContext()->VSSetConstantBuffers(0, 1, m_cb.GetBody().GetAddressOf());
+	GetDeviceContext()->VSSetShader((ID3D11VertexShader*)m_vs.GetBody().Get(), nullptr, 0);
+	GetDeviceContext()->PSSetShader((ID3D11PixelShader*)m_ps.GetBody().Get(), nullptr, 0);
+	ID3D11Buffer* vertexBuffers[] = { m_primitive.GetVertexBuffer().Get() };
 	UINT strides[] = { m_primitive.GetVertexStride() };
 	UINT offset = 0;
 	GetDeviceContext()->IASetVertexBuffers(0, 1, vertexBuffers, strides, &offset);
 	GetDeviceContext()->IASetPrimitiveTopology(m_primitive.GetPrimitiveType());
-	GetDeviceContext()->IASetIndexBuffer(m_primitive.GetIndexBuffer(), m_primitive.GetIndexFormat(), 0);
-	GetDeviceContext()->IASetInputLayout(m_vs.GetInputlayOut());
+	GetDeviceContext()->IASetIndexBuffer(m_primitive.GetIndexBuffer().Get(), m_primitive.GetIndexFormat(), 0);
+	GetDeviceContext()->IASetInputLayout(m_vs.GetInputlayOut().Get());
 	GetDeviceContext()->DrawIndexed(m_primitive.GetIndexNum(), 0, 0);
 	Reset();
 }

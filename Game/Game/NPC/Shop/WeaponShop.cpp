@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "WeaponShop.h"
 #include "../../Camera/GameCamera.h"
-#include "../../Player/Weapon.h"
 #include "../../Player/Player.h"
 
 
@@ -102,18 +101,12 @@ void CWeaponShop::LineupChange()
 void CWeaponShop::Update()
 {
 	ShopUpdate();
-	/*m_changeUpTime += GameTime().GetDeltaFrameTime();
-	if (m_changeUpTime >= 20.0)
-	{
-		LineupChange();
-		m_changeUpTime = 0.0f;
-	}*/
 	if (!m_isTransaction) { return; };
 	if (GetPlayer().BuyMoney(m_items[m_lineupSelectNumber + 1].ItemStatus.Itemprice))
 	{
-		CWeapon::SWeaponStatus weapons;
+		SWeaponStatus weapons;
 
-		weapons.weaponNum = (CWeapon::EnPlayerWeapon)m_items[m_lineupSelectNumber].ItemStatus.WeaponType;
+		weapons.weaponNum = (EnPlayerWeapon)m_items[m_lineupSelectNumber].ItemStatus.WeaponType;
 		switch (m_items[m_lineupSelectNumber].ItemStatus.ItemEffectPlayerStatus)
 		{
 		case CEquipItem::EnIemEffectPlayerStatus::Strength:
@@ -126,7 +119,7 @@ void CWeaponShop::Update()
 
 			break;
 		}
-		GetPlayer().AddEquipList(weapons);
+		GetPlayer().GetWeaponManager().AddEquipList(weapons);
 		CSoundSource* se = New<CSoundSource>(0);
 		se->Init("Assets/sound/Shop/BuySe.wav");
 		se->SetVolume(1.0f);
@@ -145,9 +138,9 @@ void CWeaponShop::AfterDraw()
 {
 	if (!m_isSelectDraw && !m_isShoplineupDraw) { return; }
 
-	for (int num = 0;num < SELECT_TEX_ELEMENT;num++)
+	for (auto &SelectTex :m_shopSelect)
 	{
-		m_shopSelect[num].Draw();
+		SelectTex.Draw();
 
 	}
 	m_shopSelectPen.Draw();
@@ -155,9 +148,9 @@ void CWeaponShop::AfterDraw()
 	if (!m_isShoplineupDraw) { return; }
 	m_backSprite.Draw();
 	m_selectItemSprite.Draw();
-	for (int num = 0; num < ITEM_ELEMENT;num++)
+	for (auto &item:m_items)
 	{
-		m_items[num].ItemSprite.Draw();
+		item.ItemSprite.Draw();
 		
 	}
 	for (int num = 0; num < ITEM_ELEMENT;num++)

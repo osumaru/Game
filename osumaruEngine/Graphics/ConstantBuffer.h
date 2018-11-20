@@ -24,11 +24,12 @@ public:
 	void Update(void* updateData);
 
 	//バッファを取得
-	ID3D11Buffer* GetBody()
+	Microsoft::WRL::ComPtr<ID3D11Buffer>& GetBody()
 	{
 		return m_buffer;
 	}
+
 private:
-	ID3D11Buffer*					m_buffer;//バッファ
+	Microsoft::WRL::ComPtr<ID3D11Buffer>				m_buffer;//バッファ
 };
 
