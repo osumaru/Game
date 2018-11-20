@@ -54,7 +54,7 @@ void IShop::ShopUpdate()
 			m_isSelectDraw = false;
 			m_shopSelectPenPosition = SELECT_POSITON_START;
 			m_shopSelectPen.SetPosition(m_shopSelectPenPosition);
-			GetPlayer().SetIsActiveUpdate(true);
+
 		}
 
 		else if (Pad().IsTriggerButton(enButtonDown) && m_selectShop != enShopNone)
