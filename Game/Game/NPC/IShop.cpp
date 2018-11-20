@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "INpcState.h"
+#include "IShop.h"
 #include "../Player/Player.h"
 #include "../GameSound/GameSound.h"
 #include "../Scene/SceneManager.h"
@@ -7,16 +7,16 @@
 
 
 
-INpcState::INpcState()
+IShop::IShop()
 {
 }
 
 
-INpcState::~INpcState()
+IShop::~IShop()
 {
 }
 
-void INpcState::ShopUpdate()
+void IShop::ShopUpdate()
 {
 	CVector3 playervec = GetPlayer().GetPosition() - m_position;
 	float len = playervec.Length();
@@ -102,14 +102,14 @@ void INpcState::ShopUpdate()
 
 	m_skinModel.Update(m_position, m_rotation, m_scale, false);
 }
-void INpcState::LoadFile(const wchar_t* filePath)
+void IShop::LoadFile(const wchar_t* filePath)
 {
 	std::fstream	file;
 	file.open(filePath, std::ios::binary | std::ios::in);
 	int num = file.tellg();
 	file.close();
 }
-void INpcState::AddFile(const wchar_t* filePath)
+void IShop::AddFile(const wchar_t* filePath)
 {
 	/*std::fstream	file;
 	m_itemState.ItemID = 1;
@@ -119,7 +119,7 @@ void INpcState::AddFile(const wchar_t* filePath)
 	file.close();*/
 }
 
-bool INpcState::Transaction(const int gold)
+bool IShop::Transaction(const int gold)
 {
 	//Ç®ã‡Ç™ë´ÇËÇƒÇ¢ÇÍÇŒçwì¸Ç∑ÇÈÇ±Ç∆Ç™Ç≈Ç´ÇÈ
 	if (GetPlayer().BuyMoney(gold))

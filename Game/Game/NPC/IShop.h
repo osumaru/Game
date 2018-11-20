@@ -1,10 +1,10 @@
 #pragma once
 #include "../Item/IItem.h"
-class INpcState	:	public IGameObject
+class IShop	:	public IGameObject
 {
 public:
-	INpcState();
-	virtual ~INpcState();
+	IShop();
+	virtual ~IShop();
 	virtual void Init(const CVector3 position, const CQuaternion rotation) = 0;
 	virtual void Update() = 0;
 	virtual void Draw() = 0;

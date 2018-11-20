@@ -252,15 +252,6 @@
     <ClCompile Include="UI\Fade\Fade.cpp">
       <Filter>ソース ファイル\UI\Fade</Filter>
     </ClCompile>
-    <ClCompile Include="NPC\NpcManager.cpp">
-      <Filter>ソース ファイル\NPC</Filter>
-    </ClCompile>
-    <ClCompile Include="NPC\INpcState.cpp">
-      <Filter>ソース ファイル\NPC</Filter>
-    </ClCompile>
-    <ClCompile Include="NPC\ShopNPC.cpp">
-      <Filter>ソース ファイル\NPC</Filter>
-    </ClCompile>
     <ClCompile Include="GameSound\GameSound.cpp">
       <Filter>ソース ファイル\GameSound</Filter>
     </ClCompile>
@@ -341,6 +332,12 @@
     </ClCompile>
     <ClCompile Include="Player\PlayerSate\PlayerArrowShoot.cpp">
       <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="NPC\IShop.cpp">
+      <Filter>ソース ファイル\NPC</Filter>
+    </ClCompile>
+    <ClCompile Include="NPC\ShopManager.cpp">
+      <Filter>ソース ファイル\NPC</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -515,15 +512,6 @@
     <ClInclude Include="UI\Fade\Fade.h">
       <Filter>ソース ファイル\UI\Fade</Filter>
     </ClInclude>
-    <ClInclude Include="NPC\NpcManager.h">
-      <Filter>ソース ファイル\NPC</Filter>
-    </ClInclude>
-    <ClInclude Include="NPC\INpcState.h">
-      <Filter>ソース ファイル\NPC</Filter>
-    </ClInclude>
-    <ClInclude Include="NPC\ShopNPC.h">
-      <Filter>ソース ファイル\NPC</Filter>
-    </ClInclude>
     <ClInclude Include="GameSound\GameSound.h">
       <Filter>ソース ファイル\GameSound</Filter>
     </ClInclude>
@@ -601,6 +589,12 @@
     </ClInclude>
     <ClInclude Include="Player\Weapon\WeaponCommon.h">
       <Filter>ソース ファイル\Player\Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="NPC\IShop.h">
+      <Filter>ソース ファイル\NPC</Filter>
+    </ClInclude>
+    <ClInclude Include="NPC\ShopManager.h">
+      <Filter>ソース ファイル\NPC</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

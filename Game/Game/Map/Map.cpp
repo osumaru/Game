@@ -12,7 +12,8 @@
 #include "../Enemy/Maw.h"
 #include "../Enemy/EnemyGroup.h"
 #include "../Enemy/PathFinding/PathFinding.h"
-#include "../NPC/NpcManager.h"
+#include"../NPC/ShopManager.h"
+
 
 std::vector<std::vector<SMapChipInfo>> mapChipInfo = 
 {
@@ -40,7 +41,7 @@ void Map::Init(int stageNum)
 	std::map<int, std::vector<SMapChipInfo>> instancingData;
 
 	//std::vector<CEnemyGroup*> enemyGroupList;
-	m_shopNpcManager = New<CNpcManager>(PRIORITY_NPC);
+	m_shopNpcManager = New<CShopManager>(PRIORITY_NPC);
 
 	for (SMapChipInfo& mInfo : mapChipInfo[stageNum])
 	{

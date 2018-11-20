@@ -188,9 +188,8 @@
     <ClCompile Include="Item\RecoveryItem.cpp" />
     <ClCompile Include="Item\TreasureChest.cpp" />
     <ClCompile Include="Map\MapChip\BreakMapObject.cpp" />
-    <ClCompile Include="NPC\INpcState.cpp" />
-    <ClCompile Include="NPC\NpcManager.cpp" />
-    <ClCompile Include="NPC\ShopNPC.cpp" />
+    <ClCompile Include="NPC\IShop.cpp" />
+    <ClCompile Include="NPC\ShopManager.cpp" />
     <ClCompile Include="Player\PlayerGetter.cpp" />
     <ClCompile Include="Player\PlayerSate\PlayerStun.cpp" />
     <ClCompile Include="Player\Weapon\Bow.cpp" />
@@ -277,9 +276,8 @@
     <ClInclude Include="Item\RecoveryItem.h" />
     <ClInclude Include="Item\TreasureChest.h" />
     <ClInclude Include="Map\MapChip\BreakMapObject.h" />
-    <ClInclude Include="NPC\INpcState.h" />
-    <ClInclude Include="NPC\NpcManager.h" />
-    <ClInclude Include="NPC\ShopNPC.h" />
+    <ClInclude Include="NPC\IShop.h" />
+    <ClInclude Include="NPC\ShopManager.h" />
     <ClInclude Include="Player\PlayerGetter.h" />
     <ClInclude Include="Player\PlayerSate\PlayerStun.h" />
     <ClInclude Include="Player\Weapon\Bow.h" />

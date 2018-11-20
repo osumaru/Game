@@ -8,11 +8,11 @@ enum EShop
 	enWeaponShop,
 	enWalkNpc,
 };
-class CNpcManager:public IGameObject
+class CShopManager:public IGameObject
 {
 public:
-	CNpcManager();
-	~CNpcManager();
+	CShopManager();
+	~CShopManager();
 	void InitShop(const CVector3 position, const CQuaternion rotation, const EShop shopnum);
 	void Update();
 	void DeleteList();
@@ -26,7 +26,7 @@ private:
 		enShopLineup,	
 		enShopNum,
 	};
-	std::list<INpcState*>		m_npclist;
+	std::list<IShop*>		m_npclist;
 
 };
 
