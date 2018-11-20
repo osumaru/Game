@@ -101,19 +101,18 @@ void CParticle::AfterDraw()
 	worldViewProjMat.Mul(worldViewProjMat, m_camera->GetViewMatrix());
 	worldViewProjMat.Mul(worldViewProjMat, m_camera->GetProjectionMatrix());
 	m_cb.Update(&worldViewProjMat);
-	GetDeviceContext()->VSSetShader((ID3D11VertexShader*)m_vs.GetBody(), nullptr, 0);
-	GetDeviceContext()->PSSetShader((ID3D11PixelShader*)m_ps.GetBody(), nullptr, 0);
-	ID3D11Buffer* vertexBuffers[] = { m_primitive.GetVertexBuffer() };
+	GetDeviceContext()->VSSetShader((ID3D11VertexShader*)m_vs.GetBody().Get(), nullptr, 0);
+	GetDeviceContext()->PSSetShader((ID3D11PixelShader*)m_ps.GetBody().Get(), nullptr, 0);
+	ID3D11Buffer* vertexBuffers[] = { m_primitive.GetVertexBuffer().Get() };
 	UINT strides[] = { m_primitive.GetVertexStride() };
 	UINT offset = 0;
 	GetDeviceContext()->IASetVertexBuffers(0, 1, vertexBuffers, strides, &offset);
 	GetDeviceContext()->IASetPrimitiveTopology(m_primitive.GetPrimitiveType());
-	GetDeviceContext()->IASetIndexBuffer(m_primitive.GetIndexBuffer(), m_primitive.GetIndexFormat(), 0);
-	GetDeviceContext()->IASetInputLayout(m_vs.GetInputlayOut());
-	ID3D11Buffer* buffer = m_cb.GetBody();
-	GetDeviceContext()->VSSetConstantBuffers(0, 1, &buffer);
-	GetDeviceContext()->PSSetConstantBuffers(0, 1, &buffer);
-	ID3D11ShaderResourceView* views[] = { m_pTexture->GetShaderResource(), Engine().GetShaderResource(enRenderTargetDepth) };
+	GetDeviceContext()->IASetIndexBuffer(m_primitive.GetIndexBuffer().Get(), m_primitive.GetIndexFormat(), 0);
+	GetDeviceContext()->IASetInputLayout(m_vs.GetInputlayOut().Get());
+	GetDeviceContext()->VSSetConstantBuffers(0, 1, &m_cb.GetBody());
+	GetDeviceContext()->PSSetConstantBuffers(0, 1, &m_cb.GetBody());
+	ID3D11ShaderResourceView* views[] = { m_pTexture->GetShaderResource().Get(), Engine().GetShaderResource(enRenderTargetDepth).Get() };
 	GetDeviceContext()->PSSetShaderResources(0, 2, views);
 	GetDeviceContext()->DrawIndexed(m_primitive.GetIndexNum(), 0, 0);
 

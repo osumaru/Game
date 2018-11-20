@@ -2,7 +2,7 @@
 #include "RasterizerState.h"
 
 
-void CRasterizerState::Init(ID3D11Device* device)
+void CRasterizerState::Init(Microsoft::WRL::ComPtr<ID3D11Device> device)
 {
 	D3D11_RASTERIZER_DESC rasterizerDesc;
 	ZeroMemory(&rasterizerDesc, sizeof(D3D11_RASTERIZER_DESC));

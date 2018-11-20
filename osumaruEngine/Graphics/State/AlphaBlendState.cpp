@@ -12,7 +12,7 @@ CAlphaBlendState::~CAlphaBlendState()
 	}
 }
 
-void CAlphaBlendState::Init(ID3D11Device* device)
+void CAlphaBlendState::Init(Microsoft::WRL::ComPtr<ID3D11Device> device)
 {
 	D3D11_BLEND_DESC blendDesc;
 	blendDesc.AlphaToCoverageEnable = false;

@@ -21,7 +21,10 @@ int WINAPI wWinMain(
 	//ƒQ[ƒ€ƒV[ƒ“‚Ö‘JˆÚ
 	GetSceneManager().ChangeScene(GetSceneManager().enGameScene);
 	GetSceneManager().GetInstance().Update();
-
 	Engine().GameLoop();
+
+#ifdef _DEBUG
+	_CrtSetDbgFlag(_CRTDBG_LEAK_CHECK_DF | _CRTDBG_ALLOC_MEM_DF);
+#endif // DEBUG
 	return 0;
 }

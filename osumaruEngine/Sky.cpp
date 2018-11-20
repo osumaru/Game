@@ -6,7 +6,7 @@ void CSky::Init(const CCamera* camera)
 {
 	m_skinModel.Load(L"Assets/modelData/Skyball_WithCap.cmo");
 	m_camera = camera;
-	Add(this, 10);
+	Add(this, PRIORITY_SKY);
 	m_skinModel.Update(CVector3::Zero, CQuaternion::Identity, CVector3::One);
 }
 

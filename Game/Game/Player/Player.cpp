@@ -8,6 +8,7 @@
 #include "../UI/Menu/ItemInventory.h"
 #include "../UI/Menu/EquipInventory.h"
 #include "../Enemy/Maw.h"
+#include "Weapon/Bow.h"
 
 CPlayer *CPlayer::m_player = NULL;
 
@@ -42,6 +43,11 @@ void CPlayer::OnInvokeAnimationEvent(//ƒAƒjƒ[ƒVƒ‡ƒ“ƒCƒxƒ“ƒg‚ªŒÄ‚Î‚ê‚é‚²‚Æ‚ÉŒÄ‚
 	{
 		m_weaponManager.SetIsAttackCheck(!m_weaponManager.GetIsAttackCheck());
 	}
+}
+
+void CPlayer::BeforeDead()
+{
+	((CBow*)m_weaponManager.GetWeapon(enWeaponArrow))->Release();
 }
 
 
@@ -124,6 +130,8 @@ void CPlayer::Init(CVector3 position)
 	m_wireAction.Init(this);
 }
 
+
+
 void CPlayer::Update()
 {
 	m_position = m_characterController.GetPosition();
@@ -138,7 +146,7 @@ void CPlayer::Update()
 
 	if (Pad().IsPressButton(enButtonX))
 	{
-		m_status.Health = 0;
+		m_status.Health = 5;
 	}
 
 	CMatrix viewMat;
@@ -167,8 +175,8 @@ void CPlayer::Update()
 void CPlayer::Draw()
 {
 	//m_characterController.Draw();
-	m_skinmodel.Draw(GetGameCamera().GetViewMatrix(), GetGameCamera().GetProjectionMatrix());
 	m_weaponManager.Draw();
+	m_skinmodel.Draw(GetGameCamera().GetViewMatrix(), GetGameCamera().GetProjectionMatrix());
 }
 
 void CPlayer::AfterDraw()

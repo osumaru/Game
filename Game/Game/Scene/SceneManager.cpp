@@ -11,6 +11,16 @@ void CSceneManager::Init()
 	m_isFadeOut = true;
 }
 
+CSceneManager::~CSceneManager()
+{
+	if (m_fade != nullptr)
+	{
+		delete m_fade;
+	}
+}
+
+
+
 void CSceneManager::Update()
 {
 	//フェードが呼ばれかつ実行が終わっていたら

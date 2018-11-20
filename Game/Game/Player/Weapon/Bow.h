@@ -18,6 +18,8 @@ public:
 	//矢を作る関数
 	void ArrowCreate();
 
+	void Release();
+
 	/*
 	矢をリストから削除する関数
 	it	矢のイテレーター

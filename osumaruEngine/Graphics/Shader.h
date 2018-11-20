@@ -28,13 +28,13 @@ public:
 	void Load(const char* filepath, const char* entryFuncName, EnShaderType shaderType);
 
 	//シェーダーを取得
-	ID3D11DeviceChild* GetBody()const
+	Microsoft::WRL::ComPtr<ID3D11DeviceChild>& GetBody()
 	{
 		return m_pShader;
 	}
 
 	//頂点レイアウトを取得
-	ID3D11InputLayout* GetInputlayOut() const
+	Microsoft::WRL::ComPtr<ID3D11InputLayout>& GetInputlayOut()
 	{
 		return m_pInputLayout;
 	}
@@ -58,9 +58,9 @@ public:
 		m_isErase = false;
 	}
 private:
-	ID3D11DeviceChild*				m_pShader;			//シェーダー
-	ID3D11InputLayout*				m_pInputLayout;		//頂点レイアウト
-	ID3DBlob*						m_blob;				//シェーダーデータ
+	Microsoft::WRL::ComPtr<ID3D11DeviceChild>		m_pShader;			//シェーダー
+	Microsoft::WRL::ComPtr<ID3D11InputLayout>		m_pInputLayout;		//頂点レイアウト
+	Microsoft::WRL::ComPtr<ID3DBlob>				m_blob;				//シェーダーデータ
 	const char*						m_filePath;
 	const char*						m_entryFuncName;
 	EnShaderType					m_shaderType;

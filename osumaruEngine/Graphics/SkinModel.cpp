@@ -97,16 +97,16 @@ void CSkinModel::Draw(const CMatrix& view, const CMatrix& projection, bool isSha
 	m_materialCB.Update(&materialCB);
 	m_lightCB.Update(&m_light);
 	Engine().GetShadowMap().SetConstantBuffer();
-	ID3D11Buffer* cbBuffer = constantBuffer.GetBody();
-	GetDeviceContext()->VSSetConstantBuffers(0, 1, &cbBuffer);
-	GetDeviceContext()->PSSetConstantBuffers(0, 1, &cbBuffer);
+	Microsoft::WRL::ComPtr<ID3D11Buffer> cbBuffer = constantBuffer.GetBody();
+	GetDeviceContext()->VSSetConstantBuffers(0, 1, cbBuffer.GetAddressOf());
+	GetDeviceContext()->PSSetConstantBuffers(0, 1, cbBuffer.GetAddressOf());
 	cbBuffer = m_lightCB.GetBody();
-	GetDeviceContext()->PSSetConstantBuffers(1, 1, &cbBuffer);
+	GetDeviceContext()->PSSetConstantBuffers(1, 1, cbBuffer.GetAddressOf());
 	cbBuffer = m_materialCB.GetBody();
-	GetDeviceContext()->PSSetConstantBuffers(3, 1, &cbBuffer);
+	GetDeviceContext()->PSSetConstantBuffers(3, 1, cbBuffer.GetAddressOf());
 	if (m_pNormalTexture != nullptr)
 	{
-		ID3D11ShaderResourceView* srv = m_pNormalTexture->GetShaderResource();
+		ID3D11ShaderResourceView* srv = m_pNormalTexture->GetShaderResource().Get();
 		GetDeviceContext()->PSSetShaderResources(11, 1, &srv);
 	}
 

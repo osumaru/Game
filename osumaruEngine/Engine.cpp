@@ -34,7 +34,6 @@ LRESULT WINAPI MsgProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 	switch (msg)
 	{
 	case WM_DESTROY:
-		Engine().Release();
 		PostQuitMessage(0);
 		return 0;
 	}
@@ -53,7 +52,9 @@ CEngine::CEngine() :
 
 CEngine::~CEngine()
 {
-	Release();
+	delete m_objectManager;
+	delete m_physicsWorld;
+	delete m_soundEngine;
 }
 
 void CEngine::InitD3D(HINSTANCE& hInst)
@@ -75,8 +76,8 @@ void CEngine::InitD3D(HINSTANCE& hInst)
 		WS_OVERLAPPEDWINDOW, 0, 0, m_frameBufferWidth, m_frameBufferHeight,
 		NULL, NULL, m_wc.hInstance, NULL);
 
-
-	m_objectManager.Init();
+	m_objectManager = new CGameObjectManager;
+	m_objectManager->Init();
 	// show the window
 	ShowWindow(m_hwnd, SW_SHOWDEFAULT);
 	UpdateWindow(m_hwnd);
@@ -127,9 +128,9 @@ void CEngine::InitD3D(HINSTANCE& hInst)
 	// ビューポート設定
 	m_viewPortState.Init();
 	m_viewPortState.SetViewPort(m_pDeviceContext, enViewPortGame);
-	m_physicsWorld = std::make_unique<CPhysicsWorld>();
+	m_physicsWorld = new CPhysicsWorld;
 	m_physicsWorld->Init();
-	m_soundEngine = std::make_unique<CSoundEngine>();
+	m_soundEngine = new CSoundEngine;
 	m_soundEngine->Init();
 	m_pad = std::make_unique<CPad>();
 	for (int i = 0; i < MAIN_RENDER_TARGET_NUM; i++)
@@ -170,7 +171,7 @@ void CEngine::GameLoop()
 			{
 				m_shaderResource.ReLoad();
 			}
-			m_objectManager.Execute(m_deferred, m_postEffect);
+			m_objectManager->Execute(m_deferred, m_postEffect);
 			m_pSwapChain->Present(0, 0);
 			m_physicsWorld->Update();
 			m_soundEngine->Update();

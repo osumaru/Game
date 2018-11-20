@@ -28,18 +28,24 @@ public:
 	void Create(int width, int height, EnTextureType textureType, DXGI_FORMAT format);
 
 	//テクスチャを取得
-	ID3D11Texture2D* GetTexture() const
+	Microsoft::WRL::ComPtr<ID3D11Resource> GetTexture()
 	{
-		return (ID3D11Texture2D*)m_pTexture;
+		return m_pTexture;
+	}
+
+	//テクスチャを取得
+	Microsoft::WRL::ComPtr<ID3D11Texture2D> GetTexture2D()
+	{
+		return m_pTexture2D;
 	}
 
 	//シェーダーリソースビューを取得
-	ID3D11ShaderResourceView* GetShaderResource() const
+	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView>& GetShaderResource()
 	{
 		return m_pShaderResource;
 	}
 
-	ID3D11UnorderedAccessView* GetUnorderedAccessView()
+	Microsoft::WRL::ComPtr<ID3D11UnorderedAccessView>& GetUnorderedAccessView()
 	{
 		return m_pUnorderedAccess;
 	}
@@ -57,9 +63,10 @@ public:
 	}
 
 private:
-	int								m_width;			//テクスチャの横幅									
-	int								m_height;			//テクスチャの縦幅
-	ID3D11Resource*					m_pTexture;			//テクスチャ
-	ID3D11ShaderResourceView*		m_pShaderResource;	//SRV
-	ID3D11UnorderedAccessView*		m_pUnorderedAccess;	//UAV
+	int														m_width;			//テクスチャの横幅									
+	int														m_height;			//テクスチャの縦幅
+	Microsoft::WRL::ComPtr<ID3D11Resource>					m_pTexture;			//テクスチャ
+	Microsoft::WRL::ComPtr<ID3D11Texture2D>					m_pTexture2D;			//テクスチャ
+	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView>		m_pShaderResource;	//SRV
+	Microsoft::WRL::ComPtr<ID3D11UnorderedAccessView>		m_pUnorderedAccess;	//UAV
 };

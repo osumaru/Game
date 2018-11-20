@@ -46,7 +46,6 @@ void CMenu::Init()
 	{
 		for (int j = 0; j < NUMBER_COLUMN; j++)
 		{
-			m_numberTexture[i][j] = new CTexture;
 			m_number[i][j] = new CSprite;
 			m_numberTexture[i][j] = TextureResource().LoadTexture(L"Assets/sprite/number/number0.png");
 			m_number[i][j]->Init(m_numberTexture[i][j]);

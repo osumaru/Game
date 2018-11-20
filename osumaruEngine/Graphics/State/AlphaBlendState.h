@@ -17,7 +17,7 @@ public:
 	~CAlphaBlendState();
 
 	//初期化
-	void Init(ID3D11Device* device);
+	void Init(Microsoft::WRL::ComPtr<ID3D11Device> device);
 
 
 	/*
@@ -25,7 +25,7 @@ public:
 	deviceContext		グラフィックデバイス
 	enBlendState		アルファブレンドの設定
 	*/
-	void SetBlendState(ID3D11DeviceContext* deviceContext, EnAlphaBlendState enBlendState)
+	void SetBlendState(Microsoft::WRL::ComPtr<ID3D11DeviceContext> deviceContext, EnAlphaBlendState enBlendState)
 	{
 		m_currentState = enBlendState;
 		deviceContext->OMSetBlendState(m_blendState[m_currentState], NULL, 0xffffffff);
