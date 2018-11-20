@@ -4,6 +4,7 @@
 #include "../../Item/RecoveryItem.h"
 #include "../../Item/Money.h"
 #include "../../Item/TreasureChest.h"
+#include "../../Player/Player.h"
 
 bool CEnemyDeath::Start()
 {
@@ -15,6 +16,9 @@ bool CEnemyDeath::Start()
 	moveSpeed.x = speed.x;
 	moveSpeed.z = speed.z;
 	m_enemy->SetMoveSpeed(moveSpeed);
+
+	//プレイヤーが経験値獲得
+	GetPlayer().ExpUP(m_enemy->GetStatus().Exp);
 
 	return true;
 }
