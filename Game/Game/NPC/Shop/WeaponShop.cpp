@@ -101,12 +101,6 @@ void CWeaponShop::LineupChange()
 void CWeaponShop::Update()
 {
 	ShopUpdate();
-	/*m_changeUpTime += GameTime().GetDeltaFrameTime();
-	if (m_changeUpTime >= 20.0)
-	{
-		LineupChange();
-		m_changeUpTime = 0.0f;
-	}*/
 	if (!m_isTransaction) { return; };
 	if (GetPlayer().BuyMoney(m_items[m_lineupSelectNumber + 1].ItemStatus.Itemprice))
 	{
