@@ -21,12 +21,13 @@ public:
 	/*
 	メッシュデータの取得
 	*/
-	const std::vector<SPoligonInfo>& GetMeshData() const
+	const std::vector<SPoligonInfo>* GetMeshData() const
 	{
 		return m_meshData;
 	}
 
 
+	static const int AREA_NUM = 32;
 private:
-	std::vector<SPoligonInfo> m_meshData;		//メッシュデータ
+	std::vector<SPoligonInfo> m_meshData[AREA_NUM * AREA_NUM + AREA_NUM];		//メッシュデータ
 };

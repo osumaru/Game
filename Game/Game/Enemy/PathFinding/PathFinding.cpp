@@ -13,35 +13,38 @@ CPathFinding::~CPathFinding()
 
 void CPathFinding::BuildNodes()
 {
-	const std::vector<CNavigationMesh::SPoligonInfo>& naviMesh = m_naviMesh.GetMeshData();
-	m_nodes.resize(naviMesh.size());
-	//メッシュデータからノードリンクを作成
-	for (int i = 0; i < naviMesh.size(); i++)
+	const std::vector<CNavigationMesh::SPoligonInfo>* naviMesh = m_naviMesh.GetMeshData();
+	for(int i = 0;i < CNavigationMesh::AREA_NUM;i++)
 	{
-		for (int j = 0; j < naviMesh.size(); j++)
+		m_nodes[i].resize(naviMesh[i].size());
+		//メッシュデータからノードリンクを作成
+		for (int j = 0; j < naviMesh[i].size(); j++)
 		{
-			//3つの頂点を調査して同じ頂点が2つ以上ある場合隣接するポリゴンなのでノードをリンクさせる
-			int indexCount = 0;
-			for (int parentVertexIndex = 0; parentVertexIndex < 3; parentVertexIndex++)
+			for (int k = 0; k < naviMesh[i].size(); k++)
 			{
-				for (int childVertexIndex = 0; childVertexIndex < 3; childVertexIndex++)
+				//3つの頂点を調査して同じ頂点が2つ以上ある場合隣接するポリゴンなのでノードをリンクさせる
+				int indexCount = 0;
+				for (int parentVertexIndex = 0; parentVertexIndex < 3; parentVertexIndex++)
 				{
-					if (naviMesh[i].vertexPos[parentVertexIndex].x == naviMesh[j].vertexPos[childVertexIndex].x &&
-						naviMesh[i].vertexPos[parentVertexIndex].y == naviMesh[j].vertexPos[childVertexIndex].y &&
-						naviMesh[i].vertexPos[parentVertexIndex].z == naviMesh[j].vertexPos[childVertexIndex].z)
+					for (int childVertexIndex = 0; childVertexIndex < 3; childVertexIndex++)
 					{
-						indexCount++;
+						if (naviMesh[i][j].vertexPos[parentVertexIndex].x == naviMesh[i][k].vertexPos[childVertexIndex].x &&
+							naviMesh[i][j].vertexPos[parentVertexIndex].y == naviMesh[i][k].vertexPos[childVertexIndex].y &&
+							naviMesh[i][j].vertexPos[parentVertexIndex].z == naviMesh[i][k].vertexPos[childVertexIndex].z)
+						{
+							indexCount++;
+						}
 					}
 				}
-			}
-			if (2 <= indexCount && i != j)
-			{
-				m_nodes[i].linkNode.push_back(&m_nodes[j]);
-			}
+				if (2 <= indexCount && i != j)
+				{
+					m_nodes[i][j].linkNode.push_back(&m_nodes[i][k]);
+				}
 
+			}
+			m_nodes[i][j].position = naviMesh[i][j].position;
+			m_nodes[i][j].moveCost = 0;
 		}
-		m_nodes[i].position = naviMesh[i].position;
-		m_nodes[i].moveCost = 0;
 	}
 }
 
@@ -49,31 +52,39 @@ void CPathFinding::FindRoot(std::vector<CVector3>& root, CVector3 startPos, CVec
 {
 	root.clear();
 	//初期化
-	for (auto& node : m_nodes)
+	for(int i = 0;i < CNavigationMesh::AREA_NUM;i++)
 	{
-		node.moveCost = -1;
-		node.isDone = false;
-		node.parentNode = NULL;
+		for (auto& node : m_nodes[i])
+		{
+			node.moveCost = -1;
+			node.isDone = false;
+			node.parentNode = NULL;
 
+		}
 	}
 	//開始ノードを取得する
 	int startIndex = 0;
+	int startAreaNum = 0;
 	float minLength = FLT_MAX;
-	for (int i = 0; i < m_nodes.size(); i++) {
-		CVector3 distance = m_nodes[i].position - startPos;
-		float length = distance.Length();
-		if (length < minLength) {
-			minLength = length;
-			startIndex = i;
+	for(int i = 0;i < CNavigationMesh::AREA_NUM;i++)
+	{
+		for (int j = 0; j < m_nodes[i].size(); j++) {
+			CVector3 distance = m_nodes[i][j].position - startPos;
+			float length = distance.Length();
+			if (length < minLength) {
+				minLength = length;
+				startIndex = j;
+				startAreaNum = i;
+			}
 		}
 	}
-	SNode* startNode = &m_nodes[startIndex];
+	SNode* startNode = &m_nodes[startAreaNum][startIndex];
 	startNode->moveCost = 0;
 	while (true) {
 		SNode* processNode = NULL;
 		//全ノードに対して確認/アップデートを行う
-		for (int i = 0; i < m_nodes.size(); i++) {
-			SNode* node = &m_nodes[i];
+		for (int i = 0; i < m_nodes[startAreaNum].size(); i++) {
+			SNode* node = &m_nodes[startAreaNum][i];
 			if (node->isDone || node->moveCost < 0) {
 				continue;
 			}
@@ -112,15 +123,15 @@ void CPathFinding::FindRoot(std::vector<CVector3>& root, CVector3 startPos, CVec
 	//ルートを作る
 	int targetIndex = 0;
 	minLength = FLT_MAX;
-	for (int i = 0; i < m_nodes.size(); i++) {
-		CVector3 distance = m_nodes[i].position - targetPos;
+	for (int i = 0; i < m_nodes[startAreaNum].size(); i++) {
+		CVector3 distance = m_nodes[startAreaNum][i].position - targetPos;
 		float length = distance.Length();
 		if (length < minLength) {
 			minLength = length;
 			targetIndex= i;
 		}
 	}
-	SNode* node = &m_nodes[targetIndex];
+	SNode* node = &m_nodes[startAreaNum][targetIndex];
 
 	while (node != startNode) {
 		root.push_back(node->position);

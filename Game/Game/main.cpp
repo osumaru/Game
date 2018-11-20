@@ -22,7 +22,8 @@ int WINAPI wWinMain(
 	GetSceneManager().ChangeScene(GetSceneManager().enGameScene);
 	GetSceneManager().GetInstance().Update();
 	Engine().GameLoop();
-
+	Delete(&GetSceneManager());
+	Delete(&Sky());
 #ifdef _DEBUG
 	_CrtSetDbgFlag(_CRTDBG_LEAK_CHECK_DF | _CRTDBG_ALLOC_MEM_DF);
 #endif // DEBUG

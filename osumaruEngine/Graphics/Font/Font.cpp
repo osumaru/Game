@@ -15,10 +15,6 @@ void CFont::Draw()
 	pos.x += FrameBufferWidth() / 2.0f;
 	pos.y += FrameBufferHeight() / 2.0f;
 	m_spriteBatch->Begin();
-	m_color.x = 0.0f;
-	m_color.y = 0.0f;
-	m_color.z = 0.0f;
 	m_spriteFont->DrawString(m_spriteBatch.get(), m_displayString.get(), pos, m_color, 0.0f, g_XMZero, m_size);
 	m_spriteBatch->End();
-
 }

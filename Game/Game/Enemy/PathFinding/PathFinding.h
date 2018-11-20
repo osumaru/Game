@@ -33,7 +33,7 @@ public:
 		m_naviMesh.Init(model);
 	}
 private:
-	std::vector<SNode>		m_nodes;	//ノードの配列
+	std::vector<SNode>		m_nodes[CNavigationMesh::AREA_NUM];	//ノードの配列
 	const float m_gridSize = 3.0f;
 	CNavigationMesh	m_naviMesh;
 };

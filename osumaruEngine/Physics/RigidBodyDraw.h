@@ -65,7 +65,7 @@ public:
 	}
 
 private:
-	static const int VERTEX_NUM = 10000;
+	static const int VERTEX_NUM = 100000;
 	SRigidBodyVSLayout m_vertexBuffer[VERTEX_NUM];
 	DWORD m_indexBuffer[VERTEX_NUM];
 	CPrimitive		m_primitive;			//プリミティブ

@@ -52,7 +52,7 @@ private:
 
 	const short int		NUMBER_LINE = 7;			//行の要素数
 	const short int		NUMBER_COLUMN = 4;			//列の要素数
-	CSprite	*			m_number[7][4];				//プレイヤーのステータスのスプライト(数字)
+	CSprite				m_number[7][4];				//プレイヤーのステータスのスプライト(数字)
 	CTexture*			m_numberTexture[7][4];		//プレイヤーのステータスのテクスチャ(数字)
 
 	CVector2			m_numberPos = { 500.0,220.0f };//CVector2::Zero;

@@ -25,6 +25,8 @@ public:
 	//更新
 	void Update();
 
+	void BeforeDead()override;
+
 	//シーン変化
 	//scene		遷移したいシーン
 	void ChangeScene(EnSceneState scene);
