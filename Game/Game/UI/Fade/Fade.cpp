@@ -20,10 +20,8 @@ bool CFade::Start()
 	m_fadeSprite.SetSize(m_textureSize);
 	m_fadeSprite.SetAlpha(m_texturerAlpha);
 	m_loadScene.Start();
-	//Add(&m_loadScene, 1);
 	return true;
 }
-
 void CFade::Update()
 {
 	if (m_isExecute)

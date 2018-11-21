@@ -55,11 +55,11 @@ void CNormalGameCamera::Update()
 		CVector3 cameraDir = m_cameraVec;
 		cameraDir.Normalize();
 
-		if (cameraDir.y < -0.6f)
+		if (cameraDir.y < -0.8f)
 		{
 			m_cameraVec = cameraVecOld;
 		}
-		else if (cameraDir.y > 0.8f)
+		else if (cameraDir.y > 0.9f)
 		{
 			m_cameraVec = cameraVecOld;
 
