@@ -19,9 +19,9 @@ bool CFade::Start()
 	m_fadeSprite.SetPosition(m_texturePosition);
 	m_fadeSprite.SetSize(m_textureSize);
 	m_fadeSprite.SetAlpha(m_texturerAlpha);
+	m_loadScene.Start();
 	return true;
 }
-
 void CFade::Update()
 {
 	if (m_isExecute)
@@ -40,6 +40,7 @@ void CFade::Update()
 				m_isExecute = false;
 				m_fadeTime = 0;
 				m_texturerAlpha = 0;
+				m_loadScene.IsDraw(true);
 			}
 
 			break;
@@ -56,6 +57,8 @@ void CFade::Update()
 				m_isExecute = false;
 				m_fadeTime = 0;
 				m_texturerAlpha = 1.0f;
+				m_loadScene.IsDraw(false);
+				
 			}
 			break;
 		}
@@ -67,6 +70,7 @@ void CFade::AfterDraw()
 	//é¿çséûà»äOÇÕï`âÊÇµÇ»Ç¢
 	//if (!m_isExecute){return;}
 	m_fadeSprite.Draw();
+	m_loadScene.AfterDraw();
 }
 
 void CFade::FadeOut()

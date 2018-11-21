@@ -14,17 +14,8 @@ CPrimitive::CPrimitive() :
 
 CPrimitive::~CPrimitive()
 {
-	if (m_vertexBuffer != nullptr)
-	{
-		m_vertexBuffer->Release();
-		m_vertexBuffer = nullptr;
-	}
-	if (m_indexBuffer != nullptr)
-	{
-		m_indexBuffer->Release();
-		m_indexBuffer != nullptr;
-	}
 }
+
 
 void CPrimitive::Create(void* vertexBuffer, int vertexStride, int vertexNum, void* indexBuffer, int indexNum, EnFormatIndex formatIndex, EnPrimitiveType primitiveType)
 {
@@ -66,7 +57,7 @@ void CPrimitive::Create(void* vertexBuffer, int vertexStride, int vertexNum, voi
 	bufferDesc.CPUAccessFlags = 0;
 	bufferDesc.StructureByteStride = vertexStride;
 	subresourceData.pSysMem = vertexBuffer;
-	HRESULT hr = GetDevice()->CreateBuffer(&bufferDesc, &subresourceData, &m_vertexBuffer);
+	HRESULT hr = GetDevice()->CreateBuffer(&bufferDesc, &subresourceData, m_vertexBuffer.GetAddressOf());
 
 	//インデックスバッファを作る
 	D3D11_BUFFER_DESC bufferIndexDesc;
@@ -78,6 +69,6 @@ void CPrimitive::Create(void* vertexBuffer, int vertexStride, int vertexNum, voi
 	bufferIndexDesc.CPUAccessFlags = 0;
 	bufferIndexDesc.StructureByteStride = size;
 	subresourceIndexData.pSysMem = indexBuffer;
-	hr = GetDevice()->CreateBuffer(&bufferIndexDesc, &subresourceIndexData, &m_indexBuffer);
+	hr = GetDevice()->CreateBuffer(&bufferIndexDesc, &subresourceIndexData, m_indexBuffer.GetAddressOf());
 	m_stride = vertexStride;
 }

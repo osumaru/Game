@@ -19,9 +19,12 @@ int WINAPI wWinMain(
 	//フェードインの開始
 	//GetSceneManager().GetFade()->FadeIn();
 	//ゲームシーンへ遷移
-	GetSceneManager().ChangeScene(GetSceneManager().enGameScene);
+	//GetSceneManager().ChangeScene(GetSceneManager().enTitleScene);
 	GetSceneManager().GetInstance().Update();
-
 	Engine().GameLoop();
+
+#ifdef _DEBUG
+	_CrtSetDbgFlag(_CRTDBG_LEAK_CHECK_DF | _CRTDBG_ALLOC_MEM_DF);
+#endif // DEBUG
 	return 0;
 }

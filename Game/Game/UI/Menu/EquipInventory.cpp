@@ -3,6 +3,7 @@
 #include "Menu.h"
 #include "../../Player/Player.h"
 #include "../../Item/IItem.h"
+#include "../../Player/Weapon/WeaponManager.h"
 
 CEquipInventory::CEquipInventory(){}
 
@@ -20,18 +21,23 @@ void CEquipInventory::Init(CMenu * menu)
 	//インベントリの背景を初期化
 	m_backGroundTexture.Load(L"Assets/sprite/MenuUI/Back_Menu.png");
 	m_backGround.Init(&m_backGroundTexture);
-	m_statusWindowTexture.Load(L"Assets/sprite/statusWindow.png");
-	m_statusWindow.Init(&m_statusWindowTexture);
-	m_statusWindow.SetSize({ 320.0f, 450.0f });
-	m_statusWindow.SetAlpha(0.3f);
+	for (int i = 0; i < enFont_StatusNum; i++) 
+	{
+		CTexture* windowTexture = TextureResource().LoadTexture(L"Assets/sprite/statusWindow.png");
+		m_statusWindow[i].Init(windowTexture);
+		m_statusWindow[i].SetSize({ 320.0f, 450.0f });
+		m_statusWindow[i].SetAlpha(0.3f);
+	}
 	m_rightTexture.Load(L"Assets/sprite/right.png");
 	m_right.Init(&m_rightTexture);
-	m_right.SetSize(m_baseSize);
+	m_right.SetSize({ 80.0f, 80.0f });
 	//カーソルを初期化
 	m_pointerTexture.Load(L"Assets/sprite/Pointer.png");
 	m_pointer.Init(&m_pointerTexture);
 	m_pointer.SetPosition(m_basePos);
 	m_pointer.SetSize(m_baseSize);
+	m_width = 5;
+	m_height = 3;
 	//装備リストを整理する
 	EquipListReset(true);
 	//ステータス表示を初期化
@@ -56,7 +62,7 @@ void CEquipInventory::Init(CMenu * menu)
 			}
 			m_statusFont[j][i].Init(font);
 			m_statusFont[j][i].SetPosition({
-					fontPos.x + (m_right.GetSize().x + m_statusWindow.GetSize().x) * j,
+					fontPos.x + (m_right.GetSize().x + m_statusWindow[enFont_CurrentStatus].GetSize().x) * j,
 					fontPos.y - m_baseSize.y * i
 			});
 			CVector2 fontSize = { 0.7f, 0.7f };
@@ -64,12 +70,14 @@ void CEquipInventory::Init(CMenu * menu)
 		}
 	}
 	CVector2 statusWindowPos = { m_basePos.x + m_baseSize.x * m_width, m_basePos.y };
-	statusWindowPos.x += m_statusWindow.GetSize().x / 2.0f - 30.0f;
+	statusWindowPos.x += m_statusWindow[enFont_CurrentStatus].GetSize().x / 2.0f - 30.0f;
 	statusWindowPos.y -= m_baseSize.y;
-	m_statusWindow.SetPosition(statusWindowPos);
+	m_statusWindow[enFont_CurrentStatus].SetPosition(statusWindowPos);
 	CVector2 rightPos = statusWindowPos;
-	rightPos.x += m_statusWindow.GetSize().x / 2.0f + m_right.GetSize().x / 2.0f;
+	rightPos.x += m_statusWindow[enFont_CurrentStatus].GetSize().x / 2.0f + m_right.GetSize().x / 2.0f;
 	m_right.SetPosition(rightPos);
+	rightPos.x += m_statusWindow[enFont_ChangeStatus].GetSize().x / 2.0f + m_right.GetSize().x / 2.0f;
+	m_statusWindow[enFont_ChangeStatus].SetPosition(rightPos);
 }
 
 bool CEquipInventory::Start()
@@ -89,7 +97,8 @@ void CEquipInventory::Update()
 	//ステータス計算
 	CalucStatus();
 
-	if (Pad().IsTriggerButton(enButtonB)) {
+	if (Pad().IsTriggerButton(enButtonB)) 
+	{
 		//メニューに戻る
 		m_menu->SetIsActive(true);
 		Delete(this);
@@ -99,14 +108,20 @@ void CEquipInventory::Update()
 void CEquipInventory::AfterDraw()
 {
 	m_backGround.Draw();
-	for (int i = 0; i < m_equipList.size(); i++) {
+	for (int i = 0; i < m_equipList.size(); i++) 
+	{
 		m_equip[i].Draw();
 	}
 	m_pointer.Draw();
-	m_statusWindow.Draw();
+	for (int i = 0; i < enFont_StatusNum; i++) 
+	{
+		m_statusWindow[i].Draw();
+	}
 	m_right.Draw();
-	for (int j = 0; j < enFont_StatusNum; j++) {
-		for (int i = 0; i < enStatus_Num; i++) {
+	for (int j = 0; j < enFont_StatusNum; j++) 
+	{
+		for (int i = 0; i < enStatus_Num; i++) 
+		{
 			m_statusFont[j][i].Draw();
 		}
 	}
@@ -114,7 +129,7 @@ void CEquipInventory::AfterDraw()
 
 void CEquipInventory::EquipListReset(bool isInit)
 {
-	m_equipList = GetPlayer().GetEquipList();
+	m_equipList = GetPlayer().GetWeaponManager().GetEquipList();
 	if (m_equipList.empty()) 
 	{
 		//装備が何もない
@@ -124,24 +139,24 @@ void CEquipInventory::EquipListReset(bool isInit)
 	for (auto& equip : m_equipList)
 	{
 		//装備の種類を取得
-		CWeapon::EnPlayerWeapon weaponNum = equip.weaponNum;
+		EnPlayerWeapon weaponNum = equip.weaponNum;
 		CTexture* equipTexture = nullptr;
-		if (weaponNum == CWeapon::enSword)
+		if (weaponNum == enWeaponSword)
 		{
 			//剣
 			equipTexture = TextureResource().LoadTexture(L"Assets/sprite/sword.png");
 		}
-		else if (weaponNum == CWeapon::enLongSword)
+		else if (weaponNum == enWeaponLongSword)
 		{
 			//大剣
 			equipTexture = TextureResource().LoadTexture(L"Assets/sprite/largeSword.png");
 		}
-		else if (weaponNum == CWeapon::enArrow)
+		else if (weaponNum == enWeaponArrow)
 		{
 			//弓
 			equipTexture = TextureResource().LoadTexture(L"Assets/sprite/bow.png");
 		}
-		else if (weaponNum == CWeapon::enTwinSword)
+		else if (weaponNum == enWeaponTwinSword)
 		{
 			//双剣
 			equipTexture = TextureResource().LoadTexture(L"Assets/sprite/twinSword.png");
@@ -244,7 +259,7 @@ void CEquipInventory::Equip()
 		return;
 	}
 	//カーソルで選んでいる装備をつける
-	GetPlayer().ChangeEquip(m_pointerNum);
+	GetPlayer().GetWeaponManager().ChangeEquip(m_pointerNum);
 	//装備リストを整理する
 	EquipListReset(false);
 }
@@ -255,10 +270,10 @@ void CEquipInventory::CalucStatus()
 	SplayerStatus playerStatus = GetPlayer().GetStatus();
 	//装備の数を取得
 	size_t equipNum = m_equipList.size();
-	CWeapon::SWeaponStatus weaponStatus;
+	SWeaponStatus weaponStatus;
 	if (m_pointerNum < equipNum) {
 		//所持している装備を選んでいる場合はその装備のステータスを取得
-		std::list<CWeapon::SWeaponStatus>::iterator it;
+		std::list<SWeaponStatus>::iterator it;
 		it = m_equipList.begin();
 		for (int i = 0; i < m_pointerNum; i++)
 		{
@@ -267,39 +282,45 @@ void CEquipInventory::CalucStatus()
 		weaponStatus = (*it);
 	}
 
-	CWeapon::SWeaponStatus equipStatus;
-	if (weaponStatus.weaponNum != CWeapon::EnPlayerWeapon::enInvalid)
+	std::list<SWeaponStatus>::iterator it;
+	it = m_equipList.begin();
+	for (int i = 0; i < m_pointerNum; i++)
 	{
-		//現在の装備のステータスを取得
-		equipStatus = GetPlayer().GetWeaponStatus(weaponStatus.weaponNum);
-	}
-
-	//装備変更した場合のステータスを計算する
-	wchar_t font[256];
-	for (int j = 0; j < enFont_StatusNum; j++) {
-		if (j == enFont_ChangeStatus)
+		SWeaponStatus equipStatus;
+		if (weaponStatus.weaponNum != EnPlayerWeapon::enInvalid)
 		{
-			equipStatus = weaponStatus;
+			//現在の装備のステータスを取得
+			equipStatus = GetPlayer().GetWeaponManager().GetWeaponStatus(weaponStatus.weaponNum);
 		}
-		for (int i = 0; i < enStatus_Num; i++)
+
+		//装備変更した場合のステータスを計算する
+		wchar_t font[256];
+		for (int j = 0; j < enFont_StatusNum; j++) 
 		{
-			int statusNum = 0;
-			switch (i)
+			if (j == enFont_ChangeStatus)
 			{
-			case enStatus_Hp:
-				statusNum = playerStatus.MaxHealth;
-				swprintf(font, L"最大HP : %d", statusNum);
-				break;
-			case enStatus_Attack:
-				statusNum = equipStatus.attack + playerStatus.Strength;
-				swprintf(font, L"攻撃力 : %d", statusNum);
-				break;
-			case enStatus_Defense:
-				statusNum = equipStatus.diffence + playerStatus.Defense;
-				swprintf(font, L"防御力 : %d", statusNum);
-				break;
+				equipStatus = weaponStatus;
 			}
-			m_statusFont[j][i].SetString(font);
+			for (int i = 0; i < enStatus_Num; i++)
+			{
+				int statusNum = 0;
+				switch (i)
+				{
+				case enStatus_Hp:
+					statusNum = playerStatus.MaxHealth;
+					swprintf(font, L"最大HP : %d", statusNum);
+					break;
+				case enStatus_Attack:
+					statusNum = equipStatus.attack + playerStatus.Strength;
+					swprintf(font, L"攻撃力 : %d", statusNum);
+					break;
+				case enStatus_Defense:
+					statusNum = equipStatus.diffence + playerStatus.Defense;
+					swprintf(font, L"防御力 : %d", statusNum);
+					break;
+				}
+				m_statusFont[j][i].SetString(font);
+			}
 		}
 	}
 }

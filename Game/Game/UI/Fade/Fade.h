@@ -1,4 +1,5 @@
 #pragma once
+#include "LoadScene.h"
 class CFade : public IGameObject
 {
 public:
@@ -14,7 +15,6 @@ public:
 	{
 		return m_isExecute;
 	}
-
 private:
 	enum EnFadeState
 	{
@@ -32,7 +32,7 @@ private:
 	bool            m_isExecute = false;					//実行中かどうか
 	EnFadeState		m_fadeState = enFadeOut;
 	const float		FADE_OUT_TIME = 2.0f;					//フェイドアウトするまでの時間
-	const float		FADE_IN_TIME = 2.0f;					//フェイドインするまでの時間
-
+	const float		FADE_IN_TIME = 0.5f;					//フェイドインするまでの時間
+	CLoadScene		m_loadScene;
 };
 

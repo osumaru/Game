@@ -9,21 +9,14 @@ void CEnemyDamage::Init()
 	//ダメージアニメーションを再生
 	m_enemy->PlayAnimation(CEnemyState::enState_Damage);
 
-	m_damageNumber = New<CDamageNumber>(0);
+	m_damageNumber = New<CDamageNumber>(PRIORITY_UI);
 	m_damageNumber->Init(m_enemy);
 
 	//ダメージを受けたフラグを戻す
 	m_enemy->SetIsDamage(false);
 
-	//ノックバックさせる
-	CVector3 moveSpeed = m_enemy->GetMoveSpeed();
-	m_knockBack = m_enemy->GetPosition() - GetPlayer().GetPosition();
-	m_knockBack.y = 0.0f;
-	m_knockBack.Normalize();
-	m_knockBack *= m_knockBackSpeed;
-	moveSpeed.x = m_knockBack.x;
-	moveSpeed.z = m_knockBack.z;
-	m_enemy->SetMoveSpeed(moveSpeed);
+	m_friction = 0.5f;
+	m_debugDamageCount++;
 }
 
 bool CEnemyDamage::Start()
@@ -36,10 +29,18 @@ bool CEnemyDamage::Start()
 
 void CEnemyDamage::Update()
 {
+	//ノックバックさせる
 	CVector3 moveSpeed = m_enemy->GetMoveSpeed();
-	CVector3 knockBack = moveSpeed;
-	knockBack *= GameTime().GetDeltaFrameTime() * 3.0f;
-	moveSpeed -= knockBack;
+	CVector3 knockBack = m_enemy->GetPosition() - GetPlayer().GetPosition();
+	knockBack.y = 0.0f;
+	knockBack.Normalize();
+	if (m_friction >= m_knockBackSpeed) {
+		m_friction = m_knockBackSpeed;
+	}
+	knockBack *= m_knockBackSpeed - m_friction;
+	m_friction += m_friction;
+	moveSpeed.x = knockBack.x;
+	moveSpeed.z = knockBack.z;
 	m_enemy->SetMoveSpeed(moveSpeed);
 
 	//プレイヤーとの距離を計算する
@@ -55,7 +56,12 @@ void CEnemyDamage::Update()
 	}
 	else if (!m_enemy->IsPlayAnimation()) {
 		//アニメーションが終了している
-		if (isRange  && length < 2.0f) {
+		if (m_debugDamageCount >= 2) {
+			m_debugDamageCount = 0;
+			//スタンする攻撃を受けた
+			m_esm->ChangeState(CEnemyState::enState_Stan);
+		}
+		else if (isRange  && length < 2.0f) {
 			//近ければ攻撃
 			m_esm->ChangeState(CEnemyState::enState_Attack);
 		}
@@ -74,5 +80,6 @@ void CEnemyDamage::Release()
 {
 	if (m_damageNumber != nullptr) {
 		Delete(m_damageNumber);
+		m_damageNumber = nullptr;
 	}
 }

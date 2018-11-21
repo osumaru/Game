@@ -2,7 +2,7 @@
 #include "PlayerSate/PlayerStateMachine.h"
 #include "PlayerSate/PlayerState.h"
 #include "PlayerArrow.h"
-#include "Weapon.h"
+#include "Weapon/WeaponManager.h"
 #include "PlayerSate/PlayerStateCommon.h"
 #include "WireAction.h"
 #include "PlayerGetter.h"
@@ -40,7 +40,7 @@ public:
 	{
 		if (!m_player)
 		{
-			m_player = New<CPlayer>(1);
+			m_player = New<CPlayer>(PRIORITY_PLAYER);
 		}
 	}
 
@@ -57,7 +57,9 @@ public:
 	//プレイヤーの描画関数
 	void Draw()override;
 
-	void AfterDraw();
+	void AfterDraw()override;
+
+	void BeforeDead()override;
 
 	//プレイヤーの座標を取得する関数
 	const CVector3& GetPosition() const
@@ -72,9 +74,9 @@ public:
 	}
 
 	//武器を管理するクラスを取得
-	const CWeapon& GetWeapon() const
+	CWeaponManager& GetWeaponManager()
 	{
-		return m_weapon;
+		return m_weaponManager;
 	}
 
 	//プレイヤーのスキンモデルの情報を取得
@@ -95,12 +97,6 @@ public:
 		return m_isDamege;
 	}
 
-	//攻撃中かを取得
-	bool GetIsAttack() const
-	{
-		return m_isAttack;
-	}
-
 	//ステータスの計算処理を行う関数
 	void StatusCalculation();
 
@@ -108,6 +104,7 @@ public:
 	引数で倒した敵の経験値量を入れる*/
 	void ExpUP(const int expup)
 	{
+		if (expup <= 0) { return; }
 		m_status.ExperiencePoint += expup;
 		m_status.AccumulationExp += expup;
 	}
@@ -147,29 +144,15 @@ public:
 	//item		アイテムリストに追加するアイテム
 	void AddItemList(IItem* item);
 
-	//所持装備リストに追加
-	//item		装備リストに追加するアイテム
-	void AddEquipList(CWeapon::SWeaponStatus item);
-
 	//所持アイテムリストを取得
 	std::list<IItem*> GetItemList()
 	{
 		return m_itemList;
 	}
 
-	//所持装備リストを取得
-	std::list<CWeapon::SWeaponStatus> GetEquipList()
-	{
-		return m_equipList;
-	}
-
 	//所持アイテムを使う
 	//number		アイテムの番号
 	void UseItem(int number);
-
-	//装備の変更
-	//number		変更したい装備の番号
-	void ChangeEquip(int number);
 
 	//買い物をした時の計算を行う
 	bool BuyMoney(const int buy)
@@ -178,9 +161,6 @@ public:
 		m_status.Gold -= buy;
 		return true;
 	}
-
-	//弓を生成する関数
-	void InitArrow();
 
 	//ステータスが変化したかを取得
 	const bool GetIsStatusConversion()
@@ -199,19 +179,11 @@ public:
 	{
 		return m_wireAction;
 	}
+
 	//ステートマシンを取得。
 	CPlayerStateMachine& GetStateMachine()
 	{
 		return m_PlayerStateMachine;
-	}
-
-	/*
-	武器のステータスを取得
-	weaponNum	武器の種類
-	*/
-	CWeapon::SWeaponStatus GetWeaponStatus(CWeapon::EnPlayerWeapon weaponNum)
-	{
-		return m_equipWeapon[weaponNum];
 	}
 
 	friend class CPlayerGetter;
@@ -231,22 +203,15 @@ private:
 	CCharacterController				m_characterController;					//キャラクターコントローラー
 	CAnimation							m_animation;							//アニメーション
 	SplayerStatus						m_status;								//プレイヤーのステータス
-	CWeapon								m_weapon;								//武器
+	CWeaponManager						m_weaponManager;						//武器
 	CPlayerStateMachine					m_PlayerStateMachine;					//プレイヤーのアニメーションの遷移を行うステートマシーン
 	bool								m_isDamege = false;						//ダメージを受けてるかのフラグ
-	bool								m_isAttack = false;						//攻撃中かの判定
+	//bool								m_isAttack = false;						//攻撃中かの判定
 	bool								m_isDied = false;						//死んでいるかの判定
 	bool								m_isStatusConversion = false;			//ステータスが変化したかを判定する
 	bool								m_isInvinsible = false;					//無敵かのフラグ
 
-	std::list<CPlayerArrow*>			m_arrowList;							//弓矢のリスト
-	CSprite								m_arrowtag;								//サークルのスプライト
-	CTexture							m_arrowtexture;
-	bool								m_isZoom;								//弓用の視点に切り替えるかの判定をする変数
-
 	std::list<IItem*>					m_itemList;								//所持アイテムのリスト
-	std::list<CWeapon::SWeaponStatus>	m_equipList;							//所持装備のリスト
-	CWeapon::SWeaponStatus				m_equipWeapon[CWeapon::enWeaponNum];	//装備中の武器
 	CWireAction							m_wireAction;							//ワイヤーの飛ぶかどうかの判定をしたりするところ
 };
 

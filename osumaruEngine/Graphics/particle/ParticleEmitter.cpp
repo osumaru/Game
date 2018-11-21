@@ -45,7 +45,7 @@ void CParticleEmitter::Update()
 		m_intervalTime = 0.0f;
 		for (int i = 0; i < m_particleNum; i++)
 		{
-			CParticle* particle = New<CParticle>(10);
+			CParticle* particle = New<CParticle>(PRIORITY_PARTICLE);
 			particle->Init(m_info, m_pCamera);
 		}
 	}

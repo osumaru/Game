@@ -14,6 +14,7 @@ const int PRIORITY_MAX = 16;
 class CGameObjectManager : Uncopyable
 {
 public:
+	~CGameObjectManager();
 
 	//èâä˙âªä÷êî
 	void Init();
@@ -37,14 +38,7 @@ public:
 			return nullptr;
 		}
 		T* newObject = new T(args...);
-		if (priority == 1)
-		{
-			m_objectVector[priority].push_back({ newObject, true });
-		}
-		else
-		{
-			m_objectVector[priority].push_back({ newObject, true });
-		}
+		m_objectVector[priority].push_back({ newObject, true });
 		return newObject;
 	}
 

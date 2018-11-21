@@ -24,22 +24,17 @@ void CPlayerAttack::Init()
 	m_pPlayerGetter->SetMoveSpeed(CVector3::Zero);
 	m_attackCount = 0;
 	m_isContinuationAttack = false;
-	m_animetionFrame = 0.0f;
 	m_pPlayerGetter->GetAnimation().Play(m_attackAnimation[m_attackCount], 0.2f);	
 	m_pPlayerGetter->SetMoveSpeed(CVector3::Zero);
 	m_pBoneMat = &GetPlayer().GetSkinmodel().FindBoneWorldMatrix(L"Hips");
 	CVector3 bonePos = { m_pBoneMat->m[3][0], m_pBoneMat->m[3][1], m_pBoneMat->m[3][2] };
 	m_manipVec = m_pPlayer->GetPosition() - bonePos;
 	m_preBonePos = bonePos;
+	m_pPlayer->GetWeaponManager().SetIsAttack(true);
 }
 
 void CPlayerAttack::Update()
 {
-	m_animetionFrame += GameTime().GetDeltaFrameTime();
-	if (m_animetionFrame > 0.0f)
-	{
-		m_pPlayerGetter->SetIsAttack(true);
-	}
 	//攻撃中に攻撃の入力がされた場合は連撃に移行する
 	if (Pad().IsTriggerButton(enButtonRightTrigger) && !m_isContinuationAttack && m_attackCount < MAX_ATTACK_NUM - 1)
 	{
@@ -48,7 +43,7 @@ void CPlayerAttack::Update()
 	}
 
 	Move();
-	EnemyAttack();
+	m_pPlayer->GetWeaponManager().GetWeapon(m_pPlayer->GetWeaponManager().GetCurrentState())->EnemyAttack();
 
 	//攻撃アニメーションが終わった時の処理
 	if (!m_pPlayerGetter->GetAnimation().IsPlay())
@@ -62,12 +57,11 @@ void CPlayerAttack::Update()
 		if (m_isContinuationAttack)
 		{
 			m_isContinuationAttack = false;
-			m_animetionFrame = 0.0f;
 			m_pPlayerGetter->GetAnimation().Play(m_attackAnimation[m_attackCount], 0.2f);
 		}
 		else
 		{
-			m_pPlayerGetter->SetIsAttack(false);
+			m_pPlayer->GetWeaponManager().SetIsAttack(false);
 			CVector3 position;
 			position = m_preBonePos;
 			position += m_manipVec;
@@ -130,68 +124,3 @@ void CPlayerAttack::Move()
 	m_preBonePos = bonePos;
 }
 
-
-void CPlayerAttack::EnemyAttack()
-{
-	if (!m_pPlayer->GetIsAttack()) 
-	{ 
-		return; 
-	}
-
-	//エネミーのリストを取得
-	for (const auto& enemys : GetSceneManager().GetGameScene().GetMap()->GetEnemyList())
-	{
-		if (enemys->IsDamagePossible()) {
-
-			CVector3 EnemyVec = enemys->GetPosition();
-			EnemyVec.y += 1.3f;
-			EnemyVec -= m_pPlayer->GetWeapon().GetPosition();
-			float len = EnemyVec.Length();
-
-			if (fabs(len) < 2.0f)
-			{
-				enemys->SetIsDamage(true);
-				enemys->SetIsDamagePossible(false);
-			}
-
-		}
-	}
-
-	//ボスが作られていなかったら
-	if (&GetMaw() == NULL){return;}
-	//if (!GetMaw().GetIsBattle()) { return; }
-	//ボスがダメージを受けていなかったら
-	if (!GetMaw().GetIsDamage()) {
-		//ダウンしていなかったら
-		if (!GetMaw().GetIsDown())
-		{
-			const float BossWeekLenge = 20.0f;
-			//ボスの弱点の座標取得
-			CVector3 EnemyVec = GetMaw().GetPosition();
-			EnemyVec -= m_pPlayer->GetWeapon().GetPosition();
-			float len = EnemyVec.Length();
-
-			if (fabs(len) < BossWeekLenge)
-			{
-				GetMaw().SetIsDamage(true);
-				return;
-			}
-		}
-		else
-		{
-			const float BossHeight = 10.0f;
-			const float BossLenge = 12.0f;
-			//ボスの座標取得
-			CVector3 EnemyVec = GetMaw().GetPosition();
-			EnemyVec.y += BossHeight;
-			EnemyVec -= m_pPlayer->GetWeapon().GetPosition();
-			float len = EnemyVec.Length();
-
-			if (fabs(len) < BossLenge)
-			{
-				GetMaw().SetIsDamage(true);
-				return;
-			}
-		}
-	}
-}

@@ -14,6 +14,9 @@ public:
 		enState_Damage,	//ダメージ
 		enState_Death,	//死亡
 		enState_Num,	//状態の数
+		/////////////
+		enState_Stan,	//スタン
+		/////////////
 		enState_Invald,	//何もない
 	};
 };

@@ -10,6 +10,7 @@
 #include "EnemyAttack.h"
 #include "EnemyDamage.h"
 #include "EnemyDeath.h"
+#include "EnemyStan.h"
 #include "IEnemyState.h"
 #include "EnemyState.h"
 
@@ -26,7 +27,8 @@ public:
 		m_enemyChase(enemy, this),
 		m_enemyAttack(enemy, this),
 		m_enemyDamage(enemy, this),
-		m_enemyDeath(enemy, this)
+		m_enemyDeath(enemy, this),
+		m_enemyStan(enemy, this)
 	{
 	}
 
@@ -63,5 +65,6 @@ private:
 	CEnemyAttack			m_enemyAttack;							//攻撃
 	CEnemyDamage			m_enemyDamage;							//ダメージ
 	CEnemyDeath				m_enemyDeath;							//死亡
+	CEnemyStan				m_enemyStan;							//スタン
 	CEnemyGroup*			m_enemyGroup = nullptr;					//エネミーグループ
 };

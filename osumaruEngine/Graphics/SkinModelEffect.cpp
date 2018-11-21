@@ -15,17 +15,17 @@ void __cdecl ISkinModelEffect::Apply(_In_ ID3D11DeviceContext* deviceContext)
 	//シェーダーを適用
 	if (textureResource != nullptr)
 	{
-		deviceContext->PSSetShaderResources(10, 1, &textureResource);
+		deviceContext->PSSetShaderResources(10, 1, textureResource.GetAddressOf());
 	}
 	if (isShadow)
 	{
-		deviceContext->PSSetShader((ID3D11PixelShader*)shadowPsShader.GetBody(), nullptr, 0);
-		deviceContext->VSSetShader((ID3D11VertexShader*)shadowVsShader.GetBody(), nullptr, 0);
+		deviceContext->PSSetShader((ID3D11PixelShader*)shadowPsShader.GetBody().Get(), nullptr, 0);
+		deviceContext->VSSetShader((ID3D11VertexShader*)shadowVsShader.GetBody().Get(), nullptr, 0);
 	}
 	else
 	{
-		deviceContext->PSSetShader((ID3D11PixelShader*)psShader.GetBody(), nullptr, 0);
-		deviceContext->VSSetShader((ID3D11VertexShader*)vsShader.GetBody(), nullptr, 0);
+		deviceContext->PSSetShader((ID3D11PixelShader*)psShader.GetBody().Get(), nullptr, 0);
+		deviceContext->VSSetShader((ID3D11VertexShader*)vsShader.GetBody().Get(), nullptr, 0);
 	}
 }
 

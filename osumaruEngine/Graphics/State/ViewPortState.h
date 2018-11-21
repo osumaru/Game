@@ -18,7 +18,7 @@ public:
 	deviceContext		グラフィックデバイス
 	viewPortNum			ビューポート設定
 	*/
-	void SetViewPort(ID3D11DeviceContext* deviceContext, EnViewPortState viewPortNum)
+	void SetViewPort(Microsoft::WRL::ComPtr<ID3D11DeviceContext> deviceContext, EnViewPortState viewPortNum)
 	{
 		m_currentState = viewPortNum;
 		deviceContext->RSSetViewports(1, &m_viewPort[m_currentState]);

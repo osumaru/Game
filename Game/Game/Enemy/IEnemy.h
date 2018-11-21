@@ -17,6 +17,7 @@ struct SEnemyStatus
 	int	Hp;					//‘Ì—Í
 	int MaxHp;				//Å‘å‘Ì—Í
 	int Gold;				//Š‹àŠz
+	int Exp;				//ŒoŒ±’l
 };
 
 class IEnemy : public IGameObject
