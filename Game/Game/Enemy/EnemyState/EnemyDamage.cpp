@@ -16,7 +16,7 @@ void CEnemyDamage::Init()
 	m_enemy->SetIsDamage(false);
 
 	m_friction = 0.5f;
-	m_debugDamageCount++;
+	//m_debugDamageCount++;
 }
 
 bool CEnemyDamage::Start()
@@ -50,18 +50,18 @@ void CEnemyDamage::Update()
 	//扇状の範囲にいるかどうか判定
 	bool isRange = m_enemy->CalucFanShape(20.0f, playerPos);
 
-	if (m_enemy->GetStatus().Hp <= 0) {
+	if (m_enemy->GetStatus().hp <= 0) {
 		//HPが無くなれば死亡
 		m_esm->ChangeState(CEnemyState::enState_Death);
 	}
 	else if (!m_enemy->IsPlayAnimation()) {
 		//アニメーションが終了している
-		if (m_debugDamageCount >= 2) {
-			m_debugDamageCount = 0;
-			//スタンする攻撃を受けた
-			m_esm->ChangeState(CEnemyState::enState_Stan);
-		}
-		else if (isRange  && length < 2.0f) {
+		//if (m_debugDamageCount >= 2) {
+		//	m_debugDamageCount = 0;
+		//	//スタンする攻撃を受けた
+		//	m_esm->ChangeState(CEnemyState::enState_Stan);
+		//}
+		if (isRange  && length < 2.0f) {
 			//近ければ攻撃
 			m_esm->ChangeState(CEnemyState::enState_Attack);
 		}

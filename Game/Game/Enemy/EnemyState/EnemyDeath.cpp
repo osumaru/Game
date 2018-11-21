@@ -18,7 +18,7 @@ bool CEnemyDeath::Start()
 	m_enemy->SetMoveSpeed(moveSpeed);
 
 	//プレイヤーが経験値獲得
-	GetPlayer().ExpUP(m_enemy->GetStatus().Exp);
+	GetPlayer().ExpUP(m_enemy->GetStatus().exp);
 
 	return true;
 }
@@ -28,10 +28,11 @@ void CEnemyDeath::Update()
 	//死亡アニメーションが終わったら回復アイテムとお金を出す
 	if (!m_enemy->IsPlayAnimation()) {
 		CRecoveryItem* recoveryItem = New<CRecoveryItem>(PRIORITY_ITEM);
+		recoveryItem->Init();
 		recoveryItem->Pop(m_enemy->GetPosition());
 		CMoney* money = New<CMoney>(PRIORITY_ITEM);
+		money->Init(m_enemy->GetStatus().gold);
 		money->Pop(m_enemy->GetPosition());
-		money->SetGold(m_enemy->GetStatus().Gold);
 		CTreasureChest* treasureChest = New<CTreasureChest>(PRIORITY_ITEM);
 		treasureChest->Init(m_enemy->GetPosition());
 		m_enemy->StateMachineRelease();

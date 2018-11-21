@@ -24,6 +24,16 @@ public:
 	//アイテムを使う
 	virtual bool Use() { return false; }
 
+	//ランダム地点にポップさせる
+	//distance	ランダム地点までの距離
+	//upSpeed	ポップさせる上方向の速度
+	virtual void RamdomPop(float distance, float upSpeed);
+
+	//アイテムを拾うことができるか
+	//isPopEnd	ポップし終わっているか
+	//length	アイテムを拾える距離
+	virtual bool PickUp(bool isPopEnd, float length);
+
 	//属性
 	enum EnInventoryItemType {
 		Recovery,	//回復
@@ -76,7 +86,6 @@ protected:
 	CVector3				m_popPosition;				//アイテムがポップする座標
 	CVector3				m_moveSpeed;				//移動速度
 	const float				m_speed = 4.0f;				//速度
+	const float				m_deadTime = 30.0f;			//アイテムが消滅するまでの時間
 	float					m_timer = 0.0f;				//タイマー
-	const float				m_itemDeadTime = 30.0f;		//アイテムが消滅するまでの時間
-	bool					m_popEnd = false;			//ポップし終わったか
 };

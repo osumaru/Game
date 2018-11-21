@@ -88,7 +88,7 @@
     <Filter Include="ソース ファイル\Player\Weapon">
       <UniqueIdentifier>{47af4a4c-cb7b-4428-810f-ea585562bad1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\Map\Item">
+    <Filter Include="ソース ファイル\Item">
       <UniqueIdentifier>{fe491995-d611-4183-8285-c214638a84fe}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -256,13 +256,13 @@
       <Filter>ソース ファイル\GameSound</Filter>
     </ClCompile>
     <ClCompile Include="Item\Money.cpp">
-      <Filter>ソース ファイル\Map\Item</Filter>
+      <Filter>ソース ファイル\Item</Filter>
     </ClCompile>
     <ClCompile Include="Item\RecoveryItem.cpp">
-      <Filter>ソース ファイル\Map\Item</Filter>
+      <Filter>ソース ファイル\Item</Filter>
     </ClCompile>
     <ClCompile Include="Item\IItem.cpp">
-      <Filter>ソース ファイル\Map\Item</Filter>
+      <Filter>ソース ファイル\Item</Filter>
     </ClCompile>
     <ClCompile Include="UI\Menu\EquipInventory.cpp">
       <Filter>ソース ファイル\UI\Menu</Filter>
@@ -271,7 +271,7 @@
       <Filter>ソース ファイル\UI\Menu</Filter>
     </ClCompile>
     <ClCompile Include="Item\TreasureChest.cpp">
-      <Filter>ソース ファイル\Map\Item</Filter>
+      <Filter>ソース ファイル\Item</Filter>
     </ClCompile>
     <ClCompile Include="Enemy\Maw.cpp">
       <Filter>ソース ファイル\Enemy</Filter>
@@ -325,10 +325,10 @@
       <Filter>ソース ファイル\Player\PlayerState</Filter>
     </ClCompile>
     <ClCompile Include="Item\CEquipItem.cpp">
-      <Filter>ソース ファイル\Map\Item</Filter>
+      <Filter>ソース ファイル\Item</Filter>
     </ClCompile>
     <ClCompile Include="Item\QuickItem.cpp">
-      <Filter>ソース ファイル\Map\Item</Filter>
+      <Filter>ソース ファイル\Item</Filter>
     </ClCompile>
     <ClCompile Include="Player\PlayerSate\PlayerArrowShoot.cpp">
       <Filter>ソース ファイル</Filter>
@@ -522,13 +522,13 @@
       <Filter>ソース ファイル\GameSound</Filter>
     </ClInclude>
     <ClInclude Include="Item\IItem.h">
-      <Filter>ソース ファイル\Map\Item</Filter>
+      <Filter>ソース ファイル\Item</Filter>
     </ClInclude>
     <ClInclude Include="Item\Money.h">
-      <Filter>ソース ファイル\Map\Item</Filter>
+      <Filter>ソース ファイル\Item</Filter>
     </ClInclude>
     <ClInclude Include="Item\RecoveryItem.h">
-      <Filter>ソース ファイル\Map\Item</Filter>
+      <Filter>ソース ファイル\Item</Filter>
     </ClInclude>
     <ClInclude Include="UI\Menu\EquipInventory.h">
       <Filter>ソース ファイル\UI\Menu</Filter>
@@ -537,7 +537,7 @@
       <Filter>ソース ファイル\UI\Menu</Filter>
     </ClInclude>
     <ClInclude Include="Item\TreasureChest.h">
-      <Filter>ソース ファイル\Map\Item</Filter>
+      <Filter>ソース ファイル\Item</Filter>
     </ClInclude>
     <ClInclude Include="Enemy\Maw.h">
       <Filter>ソース ファイル\Enemy</Filter>
@@ -588,10 +588,10 @@
       <Filter>ソース ファイル\Player\Weapon</Filter>
     </ClInclude>
     <ClInclude Include="Item\CEquipItem.h">
-      <Filter>ソース ファイル\Map\Item</Filter>
+      <Filter>ソース ファイル\Item</Filter>
     </ClInclude>
     <ClInclude Include="Item\QuickItem.h">
-      <Filter>ソース ファイル\Map\Item</Filter>
+      <Filter>ソース ファイル\Item</Filter>
     </ClInclude>
     <ClInclude Include="Player\Weapon\WeaponCommon.h">
       <Filter>ソース ファイル\Player\Weapon</Filter>
