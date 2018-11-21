@@ -165,9 +165,9 @@ void CPlayerAttack::EnemyAttack()
 		//ダウンしていなかったら
 		if (!GetMaw().GetIsDown())
 		{
-			const float BossWeekLenge = 50.0f;
+			const float BossWeekLenge = 20.0f;
 			//ボスの弱点の座標取得
-			CVector3 EnemyVec = GetMaw().GetWeekPosition();
+			CVector3 EnemyVec = GetMaw().GetPosition();
 			EnemyVec -= m_pPlayer->GetWeapon().GetPosition();
 			float len = EnemyVec.Length();
 

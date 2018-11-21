@@ -345,6 +345,8 @@
     <MeshContentTask Include="Assets\modelData\Maw.fbx" />
     <MeshContentTask Include="Assets\modelData\Money.fbx" />
     <MeshContentTask Include="Assets\modelData\Ninja.FBX" />
+    <MeshContentTask Include="Assets\modelData\NYApartmentA.fbx" />
+    <MeshContentTask Include="Assets\modelData\NYBuilding_A.fbx" />
     <MeshContentTask Include="Assets\modelData\Player.fbx" />
     <MeshContentTask Include="Assets\modelData\Samurai.FBX" />
     <MeshContentTask Include="Assets\modelData\Skyball_WithCap.FBX" />
