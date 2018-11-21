@@ -342,6 +342,9 @@
     <ClCompile Include="UI\Fade\LoadScene.cpp">
       <Filter>ソース ファイル\UI\Fade</Filter>
     </ClCompile>
+    <ClCompile Include="Enemy\EnemyState\EnemyStan.cpp">
+      <Filter>ソース ファイル\Enemy\EnemyState</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -601,6 +604,9 @@
     </ClInclude>
     <ClInclude Include="UI\Fade\LoadScene.h">
       <Filter>ソース ファイル\UI\Fade</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy\EnemyState\EnemyStan.h">
+      <Filter>ソース ファイル\Enemy\EnemyState</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -13,7 +13,7 @@ private:
 	CVector3	m_oldVec;
 	const CMatrix*	m_pPlayerBoneMat;		//注視点とするプレイヤーのボーンの行列
 	const float TARGET_OFFSET_Y = 2.0f;	//ターゲットのＹ方向に対する補正値
-	const float CAMERA_SPEED = 10.0f;  //カメラの回転速度
+	const float CAMERA_SPEED = 2.0f;  //カメラの回転速度
 
 };
 

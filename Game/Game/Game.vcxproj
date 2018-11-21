@@ -160,6 +160,7 @@
     </MeshContentTask>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Enemy\EnemyState\EnemyStan.cpp" />
     <ClCompile Include="Item\CEquipItem.cpp" />
     <ClCompile Include="Camera\ArrowGameCamera.cpp" />
     <ClCompile Include="Camera\GameCamera.cpp" />
@@ -246,6 +247,7 @@
     <ClCompile Include="UI\WeekPoint\WeekPoint.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Enemy\EnemyState\EnemyStan.h" />
     <ClInclude Include="Item\CEquipItem.h" />
     <ClInclude Include="Camera\ArrowGameCamera.h" />
     <ClInclude Include="Camera\GameCamera.h" />
