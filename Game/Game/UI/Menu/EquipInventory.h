@@ -66,12 +66,11 @@ private:
 	};
 
 	static const int					m_equipLimit = 15;								//装備所持上限
-	CMenu*								m_menu = nullptr;
+	CMenu*								m_menu = nullptr;								//メニュー
 	CFont								m_statusFont[enFont_StatusNum][enStatus_Num];	//現在の装備と装備変更時のステータス表示
 	CSprite								m_backGround;									//背景
 	CTexture							m_backGroundTexture;
 	CSprite								m_statusWindow[enFont_StatusNum];				//ステータスウィンドウ
-	//CTexture							m_statusWindowTexture;							
 	CSprite								m_right;										//右矢印
 	CTexture							m_rightTexture;
 	CSprite								m_pointer;										//カーソル

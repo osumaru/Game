@@ -27,14 +27,14 @@ void CShopManager::InitShop(const CVector3 position, const CQuaternion rotation,
 	{
 	case enItemShop:
 	{
-		CItemShop* itemshop = New<CItemShop>(PRIORITY_NPC);
+		CItemShop* itemshop = New<CItemShop>(PRIORITY_SHOP);
 		itemshop->Init(position, rotation);
 		m_npclist.push_back(itemshop);
 		break;
 	}
 	case enWeaponShop:
 	{
-		CWeaponShop* weaponshop = New<CWeaponShop>(PRIORITY_NPC);
+		CWeaponShop* weaponshop = New<CWeaponShop>(PRIORITY_SHOP);
 		weaponshop->Init(position, rotation);
 		m_npclist.push_back(weaponshop);
 		break;

@@ -36,11 +36,12 @@ void CZombie::Init(CVector3 position)
 	Add(&m_enemySearch, 0);
 
 	//ステータスを設定
-	m_status.Strength = 10;
-	m_status.Defense = 0;
-	m_status.Hp = 50;
-	m_status.MaxHp = m_status.Hp;
-	m_status.Gold = 100;
+	m_status.strength = 10;
+	m_status.defense = 0;
+	m_status.hp = 50;
+	m_status.maxHp = m_status.hp;
+	m_status.gold = 100;
+	m_status.exp = 10;
 }
 
 bool CZombie::Start()
