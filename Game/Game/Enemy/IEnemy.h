@@ -12,12 +12,12 @@ class CEnemyGroup;
 
 struct SEnemyStatus
 {
-	int Strength;			//攻撃力
-	int Defense;			//防御力
-	int	Hp;					//体力
-	int MaxHp;				//最大体力
-	int Gold;				//所持金額
-	int Exp;				//経験値
+	int strength;	//攻撃力
+	int defense;	//防御力
+	int	hp;			//体力
+	int maxHp;		//最大体力
+	int gold;		//所持金額
+	int exp;		//経験値
 };
 
 class IEnemy : public IGameObject
@@ -136,7 +136,7 @@ public:
 	//damage	ダメージ
 	void HpDamage(int damage)
 	{
-		m_status.Hp -= damage;
+		m_status.hp -= damage;
 	}
 
 	//所属するグループを設定

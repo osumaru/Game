@@ -22,6 +22,20 @@ public:
 
 	//描画
 	void Draw() override;
+
+	//武器のステータスを決める
+	void DesideWeaponStatus();
+
 private:
+	//武器の基本攻撃力
+	const struct SBasicWeaponStatus 
+	{
+		int basicAttack = 100;		//基本攻撃力
+		int swordAttack = 50;		//剣の攻撃力
+		int longSwordAttack = 70;	//大剣の攻撃力
+		int arrowAttack = 20;		//弓の攻撃力
+		int twinSwordAttack = 30;	//双剣の攻撃力
+	};
+
 	SWeaponStatus m_weaponStatus;	//武器のステータス
 };
