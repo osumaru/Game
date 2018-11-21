@@ -3,7 +3,6 @@
 */
 
 #pragma once
-
 class IItem : public IGameObject
 {
 public:

@@ -29,7 +29,7 @@ void IShop::ShopUpdate()
 		{
 			if (Pad().IsTriggerButton(enButtonA))
 			{
-
+				
 				m_shopState = enShopOpen;
 				m_selectShop = enShopBuy;
 				m_isSelectDraw = true;

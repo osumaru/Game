@@ -41,7 +41,7 @@ void Map::Init(int stageNum)
 	std::map<int, std::vector<SMapChipInfo>> instancingData;
 
 	//std::vector<CEnemyGroup*> enemyGroupList;
-	m_shopNpcManager = New<CShopManager>(PRIORITY_NPC);
+	m_shopNpcManager = New<CShopManager>(PRIORITY_SHOP);
 
 	for (SMapChipInfo& mInfo : mapChipInfo[stageNum])
 	{
