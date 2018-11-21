@@ -24,11 +24,15 @@ bool CLoadScene::Start()
 
 void CLoadScene::Update()
 {
-
+	CVector4 col = CVector4::White;
+	col.x = CRandom::GetInstance().GetRandDouble();
+	m_font.SetColor(col);
 }
 
 void CLoadScene::AfterDraw()
 {
 	if (!m_isDraw) { return; }
+	Sleep(50);
+	Update();
 	m_font.Draw();
 }
