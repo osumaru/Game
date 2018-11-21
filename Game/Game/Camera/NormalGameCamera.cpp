@@ -18,6 +18,7 @@ void CNormalGameCamera::Start(const CVector3 pos, const CVector3 tag)
 	m_pPlayerBoneMat = &GetPlayer().GetSkinmodel().FindBoneWorldMatrix(L"Spine2");
 	m_cameraPosition = pos;
 	m_targetPosition = tag;
+	m_cameraCollisionSolver.Init(0.2f);
 }
 
 void CNormalGameCamera::Update()
@@ -93,4 +94,10 @@ void CNormalGameCamera::Update()
 	m_cameraPosition = pos;
 	m_targetPosition = target;
 	
+	//ÉJÉÅÉâÇÃìñÇΩÇËîªíË
+	CVector3 newPos;
+	if (m_cameraCollisionSolver.Execute(newPos, GetGameCamera().GetSpringCamera().GetTarPosition(), GetGameCamera().GetSpringCamera().GetTarTarget()))
+	{
+		GetGameCamera().SetCameraPosition(newPos, target);
+	}
 }
