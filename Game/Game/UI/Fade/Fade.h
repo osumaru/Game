@@ -15,7 +15,6 @@ public:
 	{
 		return m_isExecute;
 	}
-
 private:
 	enum EnFadeState
 	{

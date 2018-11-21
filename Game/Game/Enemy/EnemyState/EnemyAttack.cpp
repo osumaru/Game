@@ -39,7 +39,7 @@ void CEnemyAttack::Update()
 			float length = distance.Length();
 			if (length < 1.5f) {
 				//プレイヤーがダメージを受けた
-				GetPlayer().SetDamage(m_enemy->GetStatus().Strength);
+				//GetPlayer().SetDamage(m_enemy->GetStatus().Strength);
 			}
 		}
 	}
