@@ -104,6 +104,7 @@ public:
 	ˆø”‚Å“|‚µ‚½“G‚ÌŒoŒ±’l—Ê‚ğ“ü‚ê‚é*/
 	void ExpUP(const int expup)
 	{
+		if (expup <= 0) { return; }
 		m_status.ExperiencePoint += expup;
 		m_status.AccumulationExp += expup;
 	}
