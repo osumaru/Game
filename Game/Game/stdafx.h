@@ -1,7 +1,7 @@
 #pragma once
 
 static const int PRIORITY_PLAYER = 1;
-static const int PRIORITY_NPC = 0;
+static const int PRIORITY_SHOP = 0;
 static const int PRIORITY_ENEMY = 1;
 static const int PRIORITY_MAPCHIP = 1;
 static const int PRIORITY_UI = 0;

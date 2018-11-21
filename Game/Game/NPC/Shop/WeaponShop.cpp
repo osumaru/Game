@@ -3,7 +3,6 @@
 #include "../../Camera/GameCamera.h"
 #include "../../Player/Player.h"
 
-
 CWeaponShop::CWeaponShop()
 {
 }
@@ -56,7 +55,7 @@ void CWeaponShop::Init(const CVector3 position, const CQuaternion rotation)
 		//¤•iî•ñ‚Ì‰Šú‰»
 		for (int num = 0; num < ITEM_ELEMENT;num++)
 		{
-			int RandomID = Random().GetRandInt() % 10;
+			int RandomID = DEFAULT_WEAPON[num];//Random().GetRandInt() % 10;
 			m_items[num].ItemStatus = m_equipItem.GetItemStatus(RandomID);
 			swprintf(filePath, L"Assets/sprite/Item/Equip/Equip_%d.png", (int)m_items[num].ItemStatus.WeaponType);
 			m_items[num].ItemTexture.Load(filePath);
@@ -80,7 +79,7 @@ void CWeaponShop::LineupChange()
 	wchar_t filePath[256];
 	for (int num = 0; num < ITEM_ELEMENT;num++)
 	{
-		int RandomID = Random().GetRandInt() % 10;
+		int RandomID = PICUP_WEAPON[num];
 		m_items[num].ItemStatus = m_equipItem.GetItemStatus(RandomID);
 		swprintf(filePath, L"Assets/sprite/Item/Equip/Equip_%d.png", (int)m_items[num].ItemStatus.WeaponType);
 		m_items[num].ItemTexture.Load(filePath);

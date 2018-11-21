@@ -735,5 +735,8 @@
     <MeshContentTask Include="Assets\modelData\Arrow.fbx">
       <Filter>ソース ファイル\Assets</Filter>
     </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\TownGround.FBX">
+      <Filter>ソース ファイル\Assets</Filter>
+    </MeshContentTask>
   </ItemGroup>
 </Project>
