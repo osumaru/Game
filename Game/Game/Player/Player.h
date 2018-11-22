@@ -190,7 +190,7 @@ public:
 private:
 
 	//プレイヤーの回転をする関数
-	void Rotation();
+	void Rotation(const CVector3& stickDir);
 
 	//アニメーションイベントが起きた時に呼ばれる処理。
 	void OnInvokeAnimationEvent(const wchar_t* animClipName, const wchar_t* eventName);

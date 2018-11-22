@@ -34,6 +34,12 @@ public:
 	*/
 	void SetPosition(const CVector3& pos);
 
+	//プレイヤーのクォータニオンを取得
+	const CQuaternion& GetRotation();
+
+	//プレイヤーのクォータニオンを設定
+	void SetRotation(const CQuaternion& rotation);
+
 	/*
 	プレイヤーの移動速度の設定
 	*/
@@ -52,6 +58,11 @@ public:
 	//プレイヤーのスピードを取得する
 	const CVector3& GetMoveSpeed();
 
+	void SetStickDir(const CVector3& stickDir);
+
+	const CVector3& GetStickDir();
+
 private:
 	CPlayer*	m_pPlayer = nullptr;
+	CVector3	m_stickDir;
 };

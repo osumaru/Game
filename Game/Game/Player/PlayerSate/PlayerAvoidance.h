@@ -12,6 +12,9 @@ public:
 
 	//移動処理
 	void Move();
+
+	//回転
+	void Rotation();
 private:
 	const CMatrix* m_pBoneMat;	//ボーンの行列のポインタ
 	CVector3 m_manipVec;		//ボーンの座標からプレイヤーの座標までのベクトル

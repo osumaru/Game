@@ -2,10 +2,11 @@
 #include "PlayerAvoidance.h"
 #include "../Player.h"
 
-
+#include "../../Camera/GameCamera.h"
 
 void CPlayerAvoidance::Init()
 {
+	Rotation();
 	m_pPlayerGetter->GetAnimation().Play(enPlayerAnimationAvoidance, 0.1f);
 	m_pPlayerGetter->SetMoveSpeed(CVector3::Zero);
 	m_pBoneMat = &GetPlayer().GetSkinmodel().FindBoneWorldMatrix(L"Hips");
@@ -69,4 +70,54 @@ void CPlayerAvoidance::Move()
 	characon.SetMoveSpeed(CVector3::Zero);
 	characon.SetGravity(gravity);
 	m_preBonePos = bonePos;
+}
+
+void CPlayerAvoidance::Rotation()
+{
+	//回避したい方向のスティック入力をする
+	CVector3 stickDir = m_pPlayerGetter->GetStickDir();
+	if (stickDir.x == 0.0f && stickDir.z == 0.0f) {
+		//そのまま前に回避する
+		return;
+	}
+	//カメラのビュー行列の逆行列を作成
+	CMatrix viewMatrixInv = GetGameCamera().GetViewMatrix();
+	viewMatrixInv.Inverse();
+	//カメラ空間のX方向とZ方向を計算
+	CVector3 cameraVecX = { viewMatrixInv.m[0][0], 0.0f, viewMatrixInv.m[0][2] };
+	cameraVecX.Normalize();
+	CVector3 cameraVecZ = { viewMatrixInv.m[2][0], 0.0f, viewMatrixInv.m[2][2] };
+	cameraVecZ.Normalize();
+	//プレイヤーの前方向を計算
+	CMatrix playerWorldMatrix = m_pPlayer->GetSkinmodel().GetWorldMatrix();
+	CVector3 playerForward;
+	playerForward.x = playerWorldMatrix.m[2][0];
+	playerForward.y = playerWorldMatrix.m[2][1];
+	playerForward.z = playerWorldMatrix.m[2][2];
+	playerForward.Normalize();
+	//カメラ空間でのスティック入力方向を計算
+	CVector3 cameraStickDir;
+	cameraStickDir.x = cameraVecX.x * stickDir.x + cameraVecZ.x * stickDir.z;
+	cameraStickDir.z = cameraVecX.z * stickDir.x + cameraVecZ.z * stickDir.z;
+	cameraStickDir.Normalize();
+	//スティックの方向とプレイヤーの前方向で回転角度を計算
+	float angle = cameraStickDir.Dot(playerForward);
+	if (angle > 1.0f) {
+		angle = 1.0f;
+	}
+	else if (angle < -1.0f) {
+		angle = -1.0f;
+	}
+	angle = acosf(angle);
+	CVector3 Cross = cameraStickDir;
+	Cross.Cross(playerForward);
+	if (Cross.y > 0.0f) {
+		angle *= -1.0f;
+	}
+	//プレイヤーを回転させる
+	CQuaternion playerRotation = m_pPlayerGetter->GetRotation();
+	CQuaternion rotation;
+	rotation.SetRotation(CVector3::AxisY, angle);
+	playerRotation.Multiply(rotation);
+	m_pPlayerGetter->SetRotation(playerRotation);
 }

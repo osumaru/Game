@@ -64,8 +64,8 @@ void CPlayerStand::Update()
 	//移動の入力があるなら歩きアニメーションに遷移
 	else if (Pad().GetLeftStickX() != 0 || Pad().GetLeftStickY() != 0)
 	{
-		GetPlayer().GetStateMachine().SetState(CPlayerState::enPlayerStateWalk);
-
+		//GetPlayer().GetStateMachine().SetState(CPlayerState::enPlayerStateWalk);
+		GetPlayer().GetStateMachine().SetState(CPlayerState::enPlayerStateRun);
 	}
 	
 }
