@@ -51,7 +51,7 @@ private:
 	const float			UI_OFFSET_Y = 150.0f;
 	static const int	NUMBER_LINE = 7;			//行の要素数
 	static const int	NUMBER_COLUMN = 4;			//列の要素数
-	CSprite	*			m_number[NUMBER_LINE][NUMBER_COLUMN];				//プレイヤーのステータスのスプライト(数字)
+	CSprite				m_number[NUMBER_LINE][NUMBER_COLUMN];				//プレイヤーのステータスのスプライト(数字)
 	CTexture*			m_numberTexture[NUMBER_LINE][NUMBER_COLUMN];		//プレイヤーのステータスのテクスチャ(数字)
 
 	CVector2			m_numberPos = { 500.0,220.0f };//CVector2::Zero;
