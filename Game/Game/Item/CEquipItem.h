@@ -24,7 +24,7 @@ public:
 		}
 	}
 private:
-	static const int			MAX_ITEM_NUMBER = 10;
+	static const int			MAX_ITEM_NUMBER = 70;
 	std::list<SItemStatus>		m_equipItemStatusList;
 	SItemStatus					ItemStatus[MAX_ITEM_NUMBER];
 };

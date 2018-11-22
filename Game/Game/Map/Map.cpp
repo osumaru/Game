@@ -19,9 +19,9 @@ std::vector<std::vector<SMapChipInfo>> mapChipInfo =
 {
 	{
 	//#include "Boss.h"
+	#include "Test.h"
 	//#include "ShopTest.h"
 	//#include "Location2.h"
-	#include "Test.h"
 	}
 };
 	
@@ -40,7 +40,7 @@ void Map::Init(int stageNum)
 	std::map<int, std::vector<SMapChipInfo>> instancingData;
 
 	//std::vector<CEnemyGroup*> enemyGroupList;
-	m_shopNpcManager = New<CShopManager>(PRIORITY_SHOP);
+	m_shopManager = New<CShopManager>(PRIORITY_SHOP);
 
 	for (SMapChipInfo& mInfo : mapChipInfo[stageNum])
 	{
@@ -80,10 +80,10 @@ void Map::Init(int stageNum)
 			m_enemyGroupList.push_back(enemyGroup);
 			break;
 		case enMapTagItemShop:
-			m_shopNpcManager->InitShop(mInfo.m_position, mInfo.m_rotation, EShop::enItemShop);
+			m_shopManager->InitShop(mInfo.m_position, mInfo.m_rotation, EShop::enItemShop);
 			break;
 		case enMapTagWeaponShop:
-			m_shopNpcManager->InitShop(mInfo.m_position, mInfo.m_rotation, EShop::enWeaponShop);
+			m_shopManager->InitShop(mInfo.m_position, mInfo.m_rotation, EShop::enWeaponShop);
 			break;
 		case enMapTagBreakBrock:
 			mapChip = New<CBreakMapObject>(PRIORITY_MAPCHIP);
@@ -170,8 +170,8 @@ void Map::BeforeDead()
 	m_mapChip.clear();
 
 	//NPCの消去
-	m_shopNpcManager->DeleteList();
-	Delete(m_shopNpcManager);
+	m_shopManager->DeleteList();
+	Delete(m_shopManager);
 
 	//エネミーグループの消去
 	for (CEnemyGroup* enemygroup : m_enemyGroupList)
