@@ -160,6 +160,7 @@
     </MeshContentTask>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Camera\CameraCollisionSolver.cpp" />
     <ClCompile Include="Enemy\EnemyState\EnemyStan.cpp" />
     <ClCompile Include="Item\CEquipItem.cpp" />
     <ClCompile Include="Camera\ArrowGameCamera.cpp" />
@@ -247,6 +248,7 @@
     <ClCompile Include="UI\WeekPoint\WeekPoint.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Camera\CameraCollisionSolver.h" />
     <ClInclude Include="Enemy\EnemyState\EnemyStan.h" />
     <ClInclude Include="Item\CEquipItem.h" />
     <ClInclude Include="Camera\ArrowGameCamera.h" />
@@ -365,6 +367,7 @@
     <MeshContentTask Include="Assets\modelData\testChamferBox.FBX" />
     <MeshContentTask Include="Assets\modelData\testRectangle.FBX" />
     <MeshContentTask Include="Assets\modelData\Toge.FBX" />
+    <MeshContentTask Include="Assets\modelData\TownGround.FBX" />
     <MeshContentTask Include="Assets\modelData\TownHouse.fbx" />
     <MeshContentTask Include="Assets\modelData\TownHouse1.fbx" />
     <MeshContentTask Include="Assets\modelData\TwinSword.fbx" />

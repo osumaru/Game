@@ -64,9 +64,10 @@ public:
 	//第一引数　カメラの座標　第二引数　ターゲットの座標
 	void SetCameraPosition(const CVector3 pos,const CVector3 tag)
 	{
-
-		m_springCamera.SetTarPosition(pos);
-		m_springCamera.SetTarTarget(tag);
+		m_camera.SetPosition(pos);
+		m_camera.SetTarget(tag);
+		//m_springCamera.SetTarPosition(pos);
+		//m_springCamera.SetTarTarget(tag);
 	}
 
 	//ビュー行列を取得

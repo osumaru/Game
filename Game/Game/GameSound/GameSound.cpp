@@ -17,7 +17,7 @@ bool CGameSound::Start()
 	m_backSound[enTownBgm].Init("Assets/sound/BackSound/TownBgm.wav");
 	m_backSound[enTownBgm].SetVolume(MASTER_VOLUME);
 	m_backSound[enShopBgm].Init("Assets/sound/BackSound//ShopBgm.wav");
-	m_backSound[enShopBgm].SetVolume(MASTER_VOLUME);
+	m_backSound[enShopBgm].SetVolume(SHOP_MASTER_VOLUME);
 	m_backSound[enWorldBgm].Init("Assets/sound/BackSound//FieldBgm.wav");
 	m_backSound[enWorldBgm].SetVolume(MASTER_VOLUME);
 	m_backSound[enWorldBgm].Play(true,true);
@@ -54,9 +54,9 @@ void CGameSound::Update()
 		if (!m_isShop)
 		{
 			m_backSound[enShopBgm].Stop();
-			m_soundState = enTownBgm;
-			m_backSound[enTownBgm].Play(true, false);
-			m_backSound[enTownBgm].SetVolume(MASTER_VOLUME);
+			m_soundState = enWorldBgm;
+			m_backSound[enWorldBgm].Play(true, false);
+			m_backSound[enWorldBgm].SetVolume(MASTER_VOLUME);
 		}
 		break;
 	}

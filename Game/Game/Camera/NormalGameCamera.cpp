@@ -18,6 +18,7 @@ void CNormalGameCamera::Start(const CVector3 pos, const CVector3 tag)
 	m_pPlayerBoneMat = &GetPlayer().GetSkinmodel().FindBoneWorldMatrix(L"Spine2");
 	m_cameraPosition = pos;
 	m_targetPosition = tag;
+	m_cameraCollisionSolver.Init(0.2f);
 }
 
 void CNormalGameCamera::Update()
@@ -66,12 +67,12 @@ void CNormalGameCamera::Update()
 
 	}
 
-	CVector3 toCameraXZ;
-	toCameraXZ = m_cameraVec;
-	float height = toCameraXZ.y;
-	toCameraXZ.y = 0.0f;
-	float toCameraLen = toCameraXZ.Length();
-	toCameraXZ.Normalize();
+	//CVector3 toCameraXZ;
+	//toCameraXZ = m_cameraVec;
+	//float height = toCameraXZ.y;
+	//toCameraXZ.y = 0.0f;
+	//float toCameraLen = toCameraXZ.Length();
+	//toCameraXZ.Normalize();
 	//注視点の設定
 	CVector3 target;
 	target.x = m_pPlayerBoneMat->m[3][0];
@@ -79,18 +80,24 @@ void CNormalGameCamera::Update()
 	target.z = m_pPlayerBoneMat->m[3][2];
 	//target.y += TARGET_OFFSET_Y;
 
-	CVector3	toNewCameraPos = m_cameraPosition - target;
-	toNewCameraPos.y = 0.0f;
-	toNewCameraPos.Normalize();
+	//CVector3	toNewCameraPos = m_cameraPosition - target;
+	//toNewCameraPos.y = 0.0f;
+	//toNewCameraPos.Normalize();
 	//float weight = 0.75f;  //このウェイトの値は0.0～1.0の値をとる。1.0に近づくほど追尾が強くなる。
-	toNewCameraPos = toNewCameraPos /** weight*/ + toCameraXZ /** (1.0f - weight)*/;
-	toNewCameraPos.Normalize();
-	toNewCameraPos *= toCameraLen;
-	toNewCameraPos.y = height;              //高さを戻す。
+	//toNewCameraPos = toNewCameraPos * weight + toCameraXZ * (1.0f - weight);
+	//toNewCameraPos.Normalize();
+	//toNewCameraPos *= toCameraLen;
+	//toNewCameraPos.y = height;              //高さを戻す。
 
-	CVector3 pos = target + toNewCameraPos;  //これで新しい視点が決定。
+	CVector3 pos = target + m_cameraVec/*toNewCameraPos*/;  //これで新しい視点が決定。
 	GetGameCamera().SetCameraPosition(pos, target);
 	m_cameraPosition = pos;
 	m_targetPosition = target;
 	
+	////カメラの当たり判定
+	//CVector3 newPos;
+	//if (m_cameraCollisionSolver.Execute(newPos, GetGameCamera().GetSpringCamera().GetTarPosition(), GetGameCamera().GetSpringCamera().GetTarTarget()))
+	//{
+	//	GetGameCamera().SetCameraPosition(newPos, target);
+	//}
 }

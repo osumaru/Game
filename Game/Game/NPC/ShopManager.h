@@ -16,7 +16,10 @@ public:
 	void InitShop(const CVector3 position, const CQuaternion rotation, const EShop shopnum);
 	void Update();
 	void DeleteList();
-
+	std::list<IShop*>& Getlist()
+	{
+		return m_npclist;
+	}
 private:
 	enum EShopState
 	{

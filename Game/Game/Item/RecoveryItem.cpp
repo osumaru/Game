@@ -10,69 +10,38 @@ void CRecoveryItem::Init()
 
 bool CRecoveryItem::Start()
 {
-	//ランダムに移動先を決定
-	float randomPositionX = (float)Random().GetRandDouble();
-	float randomPositionZ = (float)Random().GetRandDouble();
-	//0.0～6.0の値に変換
-	randomPositionX *= 6.0f;
-	randomPositionZ *= 6.0f;
-	//-3.0～3.0の値に変換
-	randomPositionX -= 3.0f;
-	randomPositionZ -= 3.0f;
-	//移動先のベクトルを計算
-	CVector3 toRandomPosition;
-	toRandomPosition.x = randomPositionX;
-	toRandomPosition.y = 0.0f;
-	toRandomPosition.z = randomPositionZ;
-
-	//移動速度を計算
-	toRandomPosition.Normalize();
-	toRandomPosition *= m_speed;
-	toRandomPosition.y = m_speed * 1.5f;
-	m_characterController.SetMoveSpeed(toRandomPosition);
-
 	return true;
 }
 
 void CRecoveryItem::Update()
 {
-	if (GetPlayer().GetIsDied() || m_timer > m_itemDeadTime)
+	if (GetPlayer().GetIsDied() || m_timer > m_deadTime)
 	{
 		//プレイヤーが死亡した又は一定時間で削除
 		Delete(this);
 		return;
 	}
+	m_timer += GameTime().GetDeltaFrameTime();
 
 	//移動速度を取得
-	CVector3 moveSpeed = m_characterController.GetMoveSpeed();
-
-	//地面に接地したら止める
-	if (!m_popEnd && m_characterController.IsOnGround()) {
-		moveSpeed.x = 0.0f;
-		moveSpeed.z = 0.0f;
-		m_popEnd = true;
+	m_moveSpeed = m_characterController.GetMoveSpeed();
+	//地面に接地しているか判定
+	bool isPopEnd = m_characterController.IsOnGround();
+	if (isPopEnd) {
+		//ポップし終わっている
+		m_moveSpeed.x = 0.0f;
+		m_moveSpeed.z = 0.0f;
 	}
 
-	//キャラクターコントローラーに移動速度を設定
-	m_characterController.SetMoveSpeed(moveSpeed);
-
-	m_timer += GameTime().GetDeltaFrameTime();
-	//プレイヤーとの距離を計算
-	CVector3 toPlayer =  GetPlayer().GetPosition() - m_position;
-	float length = toPlayer.Length();
-	if (m_popEnd && length < 5.0f) {
-		m_moveSpeed = m_characterController.GetMoveSpeed();
-		CVector3 toPlayerNormalize = toPlayer;
-		toPlayerNormalize.Normalize();
-		m_moveSpeed += toPlayerNormalize * m_timer;
-		m_characterController.SetMoveSpeed(m_moveSpeed);
-		if (length < 2.0f) {
-			//近ければ獲得
-			GetPlayer().AddItemList(this);
-			SetIsActive(false);
-		}
+	//拾うことができるか判定
+	bool isPickUp = PickUp(isPopEnd, 0.8f);
+	if (isPickUp) {
+		//拾うことができる
+		GetPlayer().AddItemList(this);
+		SetIsActive(false);
 	}
 
+	m_characterController.SetMoveSpeed(m_moveSpeed);
 	m_characterController.SetPosition(m_position);
 	m_characterController.Execute(GameTime().GetDeltaFrameTime());
 	m_position = m_characterController.GetPosition();
@@ -103,9 +72,13 @@ bool CRecoveryItem::Use()
 
 void CRecoveryItem::Pop(CVector3 position)
 {
+	//モデルの初期化
 	m_skinModel.Load(L"Assets/modelData/heart.cmo");
 	m_position = position;
 	m_characterController.Init(0.2f, 0.2f, m_position);
 	m_characterController.SetUserIndex(EnCollisionAttr::enCollisionAttr_Item);
-	m_itemType = Recovery;
+	float distance = 3.0f;
+	float popUpSpeed = 6.0f;
+	//ランダム地点にポップさせる
+	RamdomPop(distance, popUpSpeed);
 }

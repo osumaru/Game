@@ -1,4 +1,7 @@
 #pragma once
+
+#include "CameraCollisionSolver.h"
+
 class CNormalGameCamera	
 {
 public:
@@ -14,6 +17,7 @@ private:
 	const CMatrix*	m_pPlayerBoneMat;		//注視点とするプレイヤーのボーンの行列
 	const float TARGET_OFFSET_Y = 2.0f;	//ターゲットのＹ方向に対する補正値
 	const float CAMERA_SPEED = 2.0f;  //カメラの回転速度
+	CCameraCollisionSolver m_cameraCollisionSolver;
 
 };
 

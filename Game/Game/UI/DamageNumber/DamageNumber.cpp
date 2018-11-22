@@ -83,7 +83,7 @@ void CDamageNumber::DamageCalculation()
 {
 	//ダメージ計算
 	int playerStrength = GetPlayer().GetStatus().Strength;
-	int enemyDefence = m_enemy->GetStatus().Defense;
+	int enemyDefence = m_enemy->GetStatus().defense;
 	int damage = playerStrength - enemyDefence;
 	if (damage < 0)
 	{
