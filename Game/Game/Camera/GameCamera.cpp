@@ -51,8 +51,8 @@ void CGameCamera::Update()
 
 		break;
 	}
-	m_springCamera.Update();
-	m_camera.SetPosition(m_springCamera.GetPosition());
-	m_camera.SetTarget(m_springCamera.GetTarget());
+	//m_springCamera.Update();
+	//m_camera.SetPosition(m_springCamera.GetPosition());
+	//m_camera.SetTarget(m_springCamera.GetTarget());
 	m_camera.Update();
 }
