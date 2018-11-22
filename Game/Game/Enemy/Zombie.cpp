@@ -18,7 +18,7 @@ void CZombie::Init(CVector3 position)
 	m_skinModel.LoadNormalmap(L"Assets/modelData/Zombi_normal.png");
 	m_position = position;
 	m_characterController.Init(0.5f, 0.9f, position);
-	m_characterController.SetGravity(-90.0f);
+	m_characterController.SetGravity(-9.0f);
 	wchar_t* animClip[CEnemyState::enState_Num] = { 
 		L"Assets/modelData/zombiStand.tka",
 		L"Assets/modelData/zombiWalk.tka",

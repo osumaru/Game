@@ -5,6 +5,7 @@ class CSkinModel;
 class CNavigationMesh : Uncopyable
 {
 public:
+	static const int AREA_NUM = 64;
 	//メッシュ情報
 	struct SPoligonInfo
 	{
@@ -17,17 +18,18 @@ public:
 	model	メッシュデータとして利用するモデルのデータ
 	*/
 	void Init(CSkinModel* model);
+
+	typedef std::vector<SPoligonInfo>(*VectorArray)[AREA_NUM];
 	
 	/*
 	メッシュデータの取得
 	*/
-	const std::vector<SPoligonInfo>* GetMeshData() const
+	VectorArray GetMeshData()
 	{
 		return m_meshData;
 	}
 
 
-	static const int AREA_NUM = 32;
 private:
-	std::vector<SPoligonInfo> m_meshData[AREA_NUM * AREA_NUM + AREA_NUM];		//メッシュデータ
+	std::vector<SPoligonInfo> m_meshData[AREA_NUM][AREA_NUM];		//メッシュデータ
 };

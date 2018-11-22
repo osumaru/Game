@@ -30,6 +30,7 @@ static const int PRIORITY_SCENE = 0;
 #include "../../osumaruEngine/Physics/Collider/SphereCollider.h"
 #include "../../osumaruEngine/Physics/Collider/ICollider.h"
 #include "../../osumaruEngine/Physics/CharacterController.h"
+#include "../../osumaruEngine/Physics/RigidBodyDraw.h"
 #include "../../osumaruEngine/Physics/CollisionAttr.h"
 #include "../../osumaruEngine/Input/Pad.h"
 #include "../../osumaruEngine/Sound/SoundEngine.h"

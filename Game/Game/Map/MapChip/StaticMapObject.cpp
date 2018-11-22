@@ -30,11 +30,26 @@ void StaticMapObject::Init(const CVector3& position, const CQuaternion& rotation
 	m_skinModel.Update(m_position, m_rotation, m_scale);
 	//メッシュコライダーからAABBを作成
 	isCollider = collider;
+
 	if (!collider)
 	{
-		m_meshCollider.reset(new CMeshCollider);
-		m_meshCollider->CreateCollider(&m_skinModel);
-		rInfo.collider = m_meshCollider.get();
+		//m_meshCollider.reset(new CMeshCollider);
+		//m_meshCollider->CreateCollider(&m_skinModel);
+		//rInfo.collider = m_meshCollider.get();
+
+		CMatrix rotMat;
+		rotMat.MakeRotationFromQuaternion(multi);
+		CMeshCollider mesh;
+		mesh.CreateCollider(&m_skinModel);
+		CVector3 boxsize = (mesh.GetAabbMax() - mesh.GetAabbMin()) / 2.0f;
+		boxsize.y += 1.0f;
+		CVector3 pos = (mesh.GetAabbMax() + mesh.GetAabbMin()) / 2.0f;
+		pos.y -= 1.0f;
+		pos.Mul(rotMat);
+		rInfo.pos = pos + m_position;
+		m_boxCollider.reset(new CBoxCollider);
+		m_boxCollider->Create({ boxsize.x,boxsize.y,boxsize.z });
+		rInfo.collider = m_boxCollider.get();
 		g_pathFinding.Init(&m_skinModel);
 	}
 	else
@@ -71,5 +86,5 @@ void StaticMapObject::Update()
 void StaticMapObject::Draw()
 {
 	MapChip::Draw();
-	m_rigidBody->Draw();
+	//m_rigidBody->Draw();
 }
