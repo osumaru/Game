@@ -48,11 +48,10 @@ void CMenu::Init()
 	{
 		for (int j = 0; j < NUMBER_COLUMN; j++)
 		{
-			m_number[i][j] = new CSprite;
 			m_numberTexture[i][j] = TextureResource().LoadTexture(L"Assets/sprite/number/number0.png");
-			m_number[i][j]->Init(m_numberTexture[i][j]);
-			m_number[i][j]->SetPosition({ m_numberPos});
-			m_number[i][j]->SetSize({ 65.0f,65.0f });
+			m_number[i][j].Init(m_numberTexture[i][j]);
+			m_number[i][j].SetPosition({ m_numberPos});
+			m_number[i][j].SetSize({ 65.0f,65.0f });
 			m_numberPos.x += 30.0;
 		}
 		if(i==4)
@@ -217,15 +216,15 @@ void CMenu::StatusMath()
 			{
 				if (Box == 0)
 				{
-					m_number[i][0]->SetIsDraw(false);
+					m_number[i][0].SetIsDraw(false);
 				}
 				else
 				{
 
 					m_numberTexture[i][0] = m_numberTexture[i][0] = TextureResource().LoadTexture(filePath);
-					m_number[i][0]->SetTexture(m_numberTexture[i][0]);
+					m_number[i][0].SetTexture(m_numberTexture[i][0]);
 					m_PlayerStatus[i] %= 1000;
-					m_number[i][0]->SetIsDraw(true);
+					m_number[i][0].SetIsDraw(true);
 				}
 
 			}
@@ -234,17 +233,17 @@ void CMenu::StatusMath()
 			Box = m_PlayerStatus[i] / 100;
 			swprintf(filePath, L"Assets/sprite/number/number%d.png",Box );
 			{
-				if (Box == 0 && !m_number[i][0]->IsDraw())
+				if (Box == 0 && !m_number[i][0].IsDraw())
 				{
-					m_number[i][1]->SetIsDraw(false);
+					m_number[i][1].SetIsDraw(false);
 				}
 				else
 				{
 
 					m_numberTexture[i][1] = m_numberTexture[i][1] = TextureResource().LoadTexture(filePath);
-					m_number[i][1]->SetTexture(m_numberTexture[i][1]);
+					m_number[i][1].SetTexture(m_numberTexture[i][1]);
 					m_PlayerStatus[i] %= 100;
-					m_number[i][1]->SetIsDraw(true);
+					m_number[i][1].SetIsDraw(true);
 				}
 			}
 
@@ -252,17 +251,17 @@ void CMenu::StatusMath()
 			Box = m_PlayerStatus[i] / 10;
 			swprintf(filePath, L"Assets/sprite/number/number%d.png", Box);
 			{
-				if (Box == 0 && !m_number[i][1]->IsDraw())
+				if (Box == 0 && !m_number[i][1].IsDraw())
 				{
-					m_number[i][2]->SetIsDraw(false);
+					m_number[i][2].SetIsDraw(false);
 				}
 				else
 				{
 
 					m_numberTexture[i][2] = m_numberTexture[i][2] = TextureResource().LoadTexture(filePath);
-					m_number[i][2]->SetTexture(m_numberTexture[i][2]);
+					m_number[i][2].SetTexture(m_numberTexture[i][2]);
 					m_PlayerStatus[i] %= 10;
-					m_number[i][2]->SetIsDraw(true);
+					m_number[i][2].SetIsDraw(true);
 				}
 
 			}
@@ -271,7 +270,7 @@ void CMenu::StatusMath()
 			swprintf(filePath, L"Assets/sprite/number/number%d.png", m_PlayerStatus[i]);
 			m_numberTexture[i][3] = m_numberTexture[i][3] = TextureResource().LoadTexture(filePath);
 			m_numberTexture[i][3]->Load(filePath);
-			m_number[i][3]->SetTexture(m_numberTexture[i][3]);
+			m_number[i][3].SetTexture(m_numberTexture[i][3]);
 
 	
 	}
@@ -292,7 +291,7 @@ void CMenu::AfterDraw()
 			for (int j = 0; j < NUMBER_COLUMN; j++)
 			{
 
-				m_number[i][j]->Draw();
+				m_number[i][j].Draw();
 			}
 		}
 	}

@@ -321,9 +321,6 @@
     <ClCompile Include="Player\Weapon\LongSword.cpp">
       <Filter>ソース ファイル\Player\Weapon</Filter>
     </ClCompile>
-    <ClCompile Include="Player\PlayerSate\PlayerArrowShoot.cpp">
-      <Filter>ソース ファイル\Player\PlayerState</Filter>
-    </ClCompile>
     <ClCompile Include="Item\CEquipItem.cpp">
       <Filter>ソース ファイル\Item</Filter>
     </ClCompile>
@@ -344,6 +341,9 @@
     </ClCompile>
     <ClCompile Include="Enemy\EnemyState\EnemyStan.cpp">
       <Filter>ソース ファイル\Enemy\EnemyState</Filter>
+    </ClCompile>
+    <ClCompile Include="Player\PlayerSate\PlayerArrowShoot.cpp">
+      <Filter>ソース ファイル\Player\PlayerState</Filter>
     </ClCompile>
     <ClCompile Include="Camera\CameraCollisionSolver.cpp">
       <Filter>ソース ファイル\Camera</Filter>
@@ -675,21 +675,6 @@
     <MeshContentTask Include="Assets\modelData\testChamferBox.FBX">
       <Filter>ソース ファイル\Assets</Filter>
     </MeshContentTask>
-    <MeshContentTask Include="Assets\modelData\TestBox5.FBX">
-      <Filter>ソース ファイル\Assets</Filter>
-    </MeshContentTask>
-    <MeshContentTask Include="Assets\modelData\TestBox4.FBX">
-      <Filter>ソース ファイル\Assets</Filter>
-    </MeshContentTask>
-    <MeshContentTask Include="Assets\modelData\TestBox3.FBX">
-      <Filter>ソース ファイル\Assets</Filter>
-    </MeshContentTask>
-    <MeshContentTask Include="Assets\modelData\TestBox2.FBX">
-      <Filter>ソース ファイル\Assets</Filter>
-    </MeshContentTask>
-    <MeshContentTask Include="Assets\modelData\TestBox1.FBX">
-      <Filter>ソース ファイル\Assets</Filter>
-    </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\Sword.fbx">
       <Filter>ソース ファイル\Assets</Filter>
     </MeshContentTask>
@@ -714,12 +699,6 @@
     <MeshContentTask Include="Assets\modelData\Maw.fbx">
       <Filter>ソース ファイル\Assets</Filter>
     </MeshContentTask>
-    <MeshContentTask Include="Assets\modelData\map3.FBX">
-      <Filter>ソース ファイル\Assets</Filter>
-    </MeshContentTask>
-    <MeshContentTask Include="Assets\modelData\map2.FBX">
-      <Filter>ソース ファイル\Assets</Filter>
-    </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\LongBow.FBX">
       <Filter>ソース ファイル\Assets</Filter>
     </MeshContentTask>
@@ -742,6 +721,9 @@
       <Filter>ソース ファイル\Assets</Filter>
     </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\NYApartmentA.fbx">
+      <Filter>ソース ファイル\Assets</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\Map4.FBX">
       <Filter>ソース ファイル\Assets</Filter>
     </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\TownGround.FBX">

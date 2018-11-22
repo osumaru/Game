@@ -87,8 +87,6 @@ public:
 		}
 	}
 
-
-private:
 	//オブジェクトをリストから消去する関数
 	void DeleteExecute();
 

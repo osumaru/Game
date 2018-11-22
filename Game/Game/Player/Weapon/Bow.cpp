@@ -63,7 +63,7 @@ void CBow::Update()
 		}
 	}
 
-	if (Pad().GetLeftTrigger())
+	if (!m_pPlayer->GetWireAction().IsWireMove() && Pad().GetLeftTrigger())
 	{
 		GetGameCamera().SetCmareaState(GetGameCamera().enArrow);
 		m_isZoom = true;

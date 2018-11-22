@@ -6,6 +6,10 @@ void CNavigationMesh::Init(CSkinModel* skinModel)
 	std::vector<CVector3> vertexBufferVector;
 	std::vector<unsigned int> indexBufferVector;
 	DirectX::Model* model = skinModel->GetBody();
+	CVector3 aabbMax = {FLT_MIN, FLT_MIN, FLT_MIN};
+	CVector3 aabbMin = { FLT_MAX, FLT_MAX, FLT_MAX };
+	CMatrix mat = skinModel->GetWorldMatrix();
+	CVector3 transManip = { mat.m[3][0], mat.m[3][1], mat.m[3][2] };
 	//メッシュをなめる
 	for (auto& mesh : model->meshes)
 	{
@@ -26,6 +30,9 @@ void CNavigationMesh::Init(CSkinModel* skinModel)
 			for (int i = 0; i < vertexCount; i++)
 			{
 				CVector3 vertexPos = *((CVector3*)pData);
+				vertexPos += transManip;
+				aabbMax.Max(vertexPos);
+				aabbMin.Min(vertexPos);
 				vertexBufferVector.push_back(vertexPos);
 				pData += meshPart->vertexStride;
 			}
@@ -69,6 +76,7 @@ void CNavigationMesh::Init(CSkinModel* skinModel)
 			}
 		}
 	}
+	CVector3 aabb = aabbMax - aabbMin;
 
 	//頂点情報を使ってメッシュデータの作成
 	for (int i = 0; i < indexBufferVector.size(); i += 3)
@@ -79,6 +87,10 @@ void CNavigationMesh::Init(CSkinModel* skinModel)
 		poligonPos += vertexBufferVector[indexBufferVector[i + 1]]; 
 		poligonPos += vertexBufferVector[indexBufferVector[i + 2]];
 		poligonPos.Div(3.0f);
-		m_meshData.push_back({ poligonPos,  vertexBufferVector[indexBufferVector[i + 0]], vertexBufferVector[indexBufferVector[i + 1]], vertexBufferVector[indexBufferVector[i + 2]] });
+		//aabbのxzで割りどのエリアに属するポリゴンか決める
+		CVector3 localPos = poligonPos - aabbMin;
+		localPos.x = localPos.x / aabb.x * AREA_NUM;
+		localPos.z = localPos.z / aabb.z * AREA_NUM;
+		m_meshData[(int)localPos.x][(int)localPos.z].push_back({ poligonPos,  vertexBufferVector[indexBufferVector[i + 0]], vertexBufferVector[indexBufferVector[i + 1]], vertexBufferVector[indexBufferVector[i + 2]] });
 	}
 }

@@ -5,15 +5,22 @@
 #pragma once
 
 #include "MapData.h"
-
+enum EnNodeState
+{
+	enNodeStateOpen,
+	enNodeStateClose,
+	enNodeStateNone,
+};
 
 #define LINK_NODE_MAX 4		//隣接ノードの最大数
 struct SNode {
 	std::vector<SNode*>		linkNode;	//隣接ノード。NULLであれば隣接ノードなし。
 	SNode*		parentNode;					//親のノード
 	CVector3	position;					//ノードの座標
-	float			moveCost;					//移動コスト
+	float		moveCost;					//移動コスト
 	bool		isDone;						//調査済みフラグ
+
+	EnNodeState	nodeState;
 };
 
 class CPathFinding {
@@ -32,10 +39,11 @@ public:
 	{
 		m_naviMesh.Init(model);
 	}
+
 private:
-	std::vector<SNode>		m_nodes;	//ノードの配列
-	const float m_gridSize = 3.0f;
-	CNavigationMesh	m_naviMesh;
+	std::vector<SNode>		m_nodes[CNavigationMesh::AREA_NUM][CNavigationMesh::AREA_NUM];	//ノードの配列の2次元配列(エリア毎に分けてノードのリンク処理を軽くしているため2次元配列
+	CNavigationMesh			m_naviMesh;
+	std::list<SNode*>		m_openList;
 };
 
 extern CPathFinding g_pathFinding;

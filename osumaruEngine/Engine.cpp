@@ -52,6 +52,12 @@ CEngine::CEngine() :
 
 CEngine::~CEngine()
 {
+	//インスタンスの消せてないやつがいるので適当に複数回インスタンス削除をする(複数回するのは親のデストラクタで子の解放関数を読んでいる事があるから
+	for(int i = 0;i < 5;i++)
+	{
+		m_objectManager->DeleteExecute();
+	}
+
 	delete m_objectManager;
 	delete m_physicsWorld;
 	delete m_soundEngine;

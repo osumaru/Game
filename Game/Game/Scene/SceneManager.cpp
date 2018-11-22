@@ -3,9 +3,8 @@
 
 void CSceneManager::Init()
 {
-	m_fade = new CFade;
-	Add(m_fade, 15);
-	m_nextSceneState = enTitleScene;
+	m_fade = New<CFade>(PRIORITY_MAX - 1);
+	m_nextSceneState = enGameScene;
 	//SceneManagerƒNƒ‰ƒX‚ðAdd
 	Add(this, 0);
 	m_isFadeOut = true;
@@ -13,13 +12,29 @@ void CSceneManager::Init()
 
 CSceneManager::~CSceneManager()
 {
-	if (m_fade != nullptr)
-	{
-		delete m_fade;
-	}
+
 }
 
+void CSceneManager::BeforeDead()
+{
+	if (m_fade != nullptr)
+	{
+		Delete(m_fade);
+	}
+	if (m_gameScene != nullptr)
+	{
+		Delete(m_gameScene);
+	}
+	if (m_titleScene != nullptr)
+	{
+		Delete(m_titleScene);
+	}
+	if (m_clearScene != nullptr)
+	{
+		Delete(m_clearScene);
+	}
 
+}
 
 void CSceneManager::Update()
 {

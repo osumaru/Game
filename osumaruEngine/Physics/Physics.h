@@ -90,4 +90,9 @@ public:
 		m_pDynamicWorld->debugDrawObject(worldTrans, colShape, { 0.0f, 0.0f, 0.0f });
 #endif
 	}
+
+	CRigidBodyDraw& GetRigidBodyDraw()
+	{
+		return *m_pRigidBodyDraw;
+	}
 };
