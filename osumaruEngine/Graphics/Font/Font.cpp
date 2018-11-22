@@ -17,5 +17,4 @@ void CFont::Draw()
 	m_spriteBatch->Begin();
 	m_spriteFont->DrawString(m_spriteBatch.get(), m_displayString.get(), pos, m_color, 0.0f, g_XMZero, m_size);
 	m_spriteBatch->End();
-
 }
