@@ -4,6 +4,8 @@
 #include "../../Map/Map.h"
 #include "../../Scene/SceneManager.h"
 #include "../../Enemy/IEnemy.h"
+#include "../../NPC/IShop.h"
+#include "../../NPC/ShopManager.h"
 #include "ItemInventory.h"
 #include "EquipInventory.h"
 
@@ -152,11 +154,16 @@ void CMenu::KeyInputMenu()
 
 		}
 		std::list<IEnemy*> enemyList = GetSceneManager().GetGameScene().GetMap()->GetEnemyList();
+		
 		//敵のアクティブ設定
 		for (auto& enemy : enemyList)
 		{
 			enemy->SetIsActive(!m_draw);
 
+		}
+		for (auto& shop : GetSceneManager().GetGameScene().GetMap()->GetShop()->Getlist())
+		{
+			shop->SetIsActive(!m_draw);
 		}
 		//プレイヤーの動きの設定
 		GetPlayer().SetIsActive(!m_draw);

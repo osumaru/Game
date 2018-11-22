@@ -23,7 +23,8 @@ private:
 	CSoundSource		m_backSound[4];
 	EnSoundState		m_soundState = enWorldBgm;
 	const float			MENU_SOUND_VOLUME = 0.5f;
-	const float			MASTER_VOLUME = 0.3f;
+	const float			MASTER_VOLUME = 0.3f;			//BGM‚Ì‰¹—Ê
+	const float			SHOP_MASTER_VOLUME = 0.1f;		//ƒVƒ‡ƒbƒv‚ÌBGM‚Ì‰¹—Ê
 	bool				m_isMenu;					
 	bool				m_isShop = false;
 	bool				m_isTown;
