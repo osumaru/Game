@@ -142,7 +142,10 @@ void CPlayer::Update()
 
 	StatusCalculation();	//ステータスの処理
 
-
+	float stickX = Pad().GetLeftStickX();
+	float stickZ = Pad().GetLeftStickY();
+	CVector3 stickDir = { stickX, 0.0f, stickZ };
+	m_playerGetter.SetStickDir(stickDir);
 
 	if (Pad().IsPressButton(enButtonX))
 	{
@@ -161,8 +164,8 @@ void CPlayer::Update()
 	Engine().GetShadowMap().SetViewMatrix(viewMat);
 	Engine().GetShadowMap().SetProjectionMatrix(projMat);
 	m_wireAction.Update();
+	Rotation(m_characterController.GetMoveSpeed());
 	m_PlayerStateMachine.Update();
-	Rotation();
 	m_position = m_characterController.GetPosition();
 	//アニメーションの更新
 	m_animation.Update(GameTime().GetDeltaFrameTime());
@@ -226,10 +229,10 @@ void CPlayer::StatusCalculation()
 
 }
 
-void CPlayer::Rotation()
+void CPlayer::Rotation(const CVector3& stickDir)
 {
 
-	CVector3 moveSpeed = m_characterController.GetMoveSpeed();
+	CVector3 moveSpeed = stickDir;
 	CVector3 playerFront = CVector3::Front;
 	if (moveSpeed.x == 0.0f && moveSpeed.z == 0.0f)
 	{

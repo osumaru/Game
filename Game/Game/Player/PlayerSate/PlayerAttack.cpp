@@ -31,6 +31,7 @@ void CPlayerAttack::Init()
 	m_manipVec = m_pPlayer->GetPosition() - bonePos;
 	m_preBonePos = bonePos;
 	m_pPlayer->GetWeaponManager().SetIsAttack(true);
+	m_isPreDodge = false;
 }
 
 void CPlayerAttack::Update()
@@ -44,6 +45,10 @@ void CPlayerAttack::Update()
 
 	Move();
 	m_pPlayer->GetWeaponManager().GetWeapon(m_pPlayer->GetWeaponManager().GetCurrentState())->EnemyAttack();
+
+	if (Pad().IsTriggerButton(enButtonB)) {
+		m_isPreDodge = true;
+	}
 
 	//攻撃アニメーションが終わった時の処理
 	if (!m_pPlayerGetter->GetAnimation().IsPlay())
@@ -69,7 +74,11 @@ void CPlayerAttack::Update()
 			m_pPlayerGetter->SetPosition(position);
 
 			m_pPlayerGetter->GetAnimation().Play(m_combineAnimation[m_attackCount]);
-			if (Pad().GetLeftStickX() != 0 || Pad().GetLeftStickY() != 0)
+			if (m_isPreDodge)
+			{
+				m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateAvoidance);
+			}
+			else if (Pad().GetLeftStickX() != 0 || Pad().GetLeftStickY() != 0)
 			{
 				//走りアニメーション
 				m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateRun);

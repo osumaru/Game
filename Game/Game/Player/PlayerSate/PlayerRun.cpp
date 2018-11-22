@@ -45,7 +45,7 @@ void CPlayerRun::Update()
 		}
 	}
 	//‘–‚è’†‚É‰ñ”ð‚µ‚½Žž‚Ìˆ—
-	else if (Pad().IsTriggerButton(enButtonB))
+	else if ((Pad().GetLeftStickX() != 0.0f || Pad().GetLeftStickY() != 0.0f) && Pad().IsTriggerButton(enButtonB))
 	{
 		m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateAvoidance);
 	}

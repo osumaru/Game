@@ -39,21 +39,23 @@ void CWeaponManager::Init(CPlayer* player)
 
 void CWeaponManager::Update()
 {
-	if (Pad().IsTriggerButton(enButtonUp))
-	{
-		m_weaponState = enWeaponSword;
-	}
-	else if (Pad().IsTriggerButton(enButtonDown))
-	{
-		m_weaponState = enWeaponArrow;
-	}
-	else if (Pad().IsTriggerButton(enButtonLeft))
-	{
-		m_weaponState = enWeaponTwinSword;
-	}
-	else if (Pad().IsTriggerButton(enButtonRight))
-	{
-		m_weaponState = enWeaponLongSword;
+	if (!m_isAttack) {
+		if (Pad().IsTriggerButton(enButtonUp))
+		{
+			m_weaponState = enWeaponSword;
+		}
+		else if (Pad().IsTriggerButton(enButtonDown))
+		{
+			m_weaponState = enWeaponArrow;
+		}
+		else if (Pad().IsTriggerButton(enButtonLeft))
+		{
+			m_weaponState = enWeaponTwinSword;
+		}
+		else if (Pad().IsTriggerButton(enButtonRight))
+		{
+			m_weaponState = enWeaponLongSword;
+		}
 	}
 	m_weapons[m_weaponState]->Updater();
 
