@@ -345,6 +345,9 @@
     <ClCompile Include="Enemy\EnemyState\EnemyStan.cpp">
       <Filter>ソース ファイル\Enemy\EnemyState</Filter>
     </ClCompile>
+    <ClCompile Include="Camera\CameraCollisionSolver.cpp">
+      <Filter>ソース ファイル\Camera</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -607,6 +610,9 @@
     </ClInclude>
     <ClInclude Include="Enemy\EnemyState\EnemyStan.h">
       <Filter>ソース ファイル\Enemy\EnemyState</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera\CameraCollisionSolver.h">
+      <Filter>ソース ファイル\Camera</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
