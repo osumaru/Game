@@ -116,7 +116,8 @@ void CMaw::Init(CVector3 position)
 	//最初の行動を選択
 	m_actionPattern = EnMawActionPattern::enActionPatternIdle;
 
-	//m_weekPoint->SetIsActive(true);
+	m_weekPoint->SetIsActive(false);
+	m_bossHp->SetIsActive(false);
 }
 
 //更新
@@ -155,13 +156,6 @@ void CMaw::Update()
 
 	//弱点描画の更新
 	WeekPointUpdate();
-
-	//ダウンさせるかつ死亡状態じゃなかったら
-	//if (m_isDown&&m_actionPattern != EnMawActionPattern::enActionPatternDeath)
-	//{
-	//	//ダウン状態へ
-	//	m_actionPattern = EnMawActionPattern::enActionPatternDown;
-	//}
 
 	
 	//弱点の頭のボーンを取得
@@ -204,14 +198,18 @@ void CMaw::WeekPointUpdate()
 	float angle = toEnemyDir.Dot(CameraForward);
 
 	//カメラの視界に入ったら
-	if (angle > 0.0f)
+	if (angle > 0.0f&&length<40.0f)
 	{
 		m_weekPoint->SetIsActive(true);
+		
 	}
 	else
 	{
 		m_weekPoint->SetIsActive(false);
 	}
+
+
+
 }
 
 //行動の選択
@@ -274,7 +272,7 @@ void CMaw::Down()
 
 	//アニメーション再生
 	Anim(EnMawState::enState_Down);
-
+	m_bossHp->SetIsActive(true);
 	//ダウン中の攻撃をくらった時の処理
 	//ここでHPバーを表示する？
 	if (m_isDamage)
@@ -303,6 +301,7 @@ void CMaw::Down()
 		m_downTime = 0.0f;
 		m_isDown = false;
 		m_weekPoint->SetIsActive(true);
+		m_bossHp->SetIsActive(false);
 	}
 }
 

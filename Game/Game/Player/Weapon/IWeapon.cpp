@@ -103,7 +103,7 @@ void IWeapon::EnemyAttack()
 		//ダウンしていなかったら
 		if (!GetMaw().GetIsDown())
 		{
-			const float BossWeekLenge = 50.0f;
+			const float BossWeekLenge = 150.0f;
 			//ボスの弱点の座標取得
 			CVector3 EnemyVec = GetMaw().GetWeekPosition();
 			EnemyVec -= m_attackCheckPos;
