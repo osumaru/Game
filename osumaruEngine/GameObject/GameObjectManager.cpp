@@ -24,6 +24,15 @@ void CGameObjectManager::Execute(CDeferred& deferred, CPostEffect& postEffect)
 			object.gameObject->Starter();
 		}
 	}
+
+	//‰Šú‰»
+	for (GameObjectList& objList : m_objectVector)
+	{
+		for (SGameObjectData& object : objList)
+		{
+			object.gameObject->AsyncStarter();
+		}
+	}
 	//XV
 	for (GameObjectList& objList : m_objectVector)
 	{
