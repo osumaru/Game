@@ -57,6 +57,9 @@ void CPlayerStateMachine::SetState(CPlayerState::EnPlayerState nextState)
 	case CPlayerState::enPlayerStateStun:
 		m_currentState = &m_playerStun;			//ワイヤーステートに遷移
 		break;
+	case CPlayerState::enPlayerStateWireAttack:
+		m_currentState = &m_playerWireAttack;	//ワイヤー攻撃ステートに遷移
+		break;
 	}
 
 	m_currentState->Init();

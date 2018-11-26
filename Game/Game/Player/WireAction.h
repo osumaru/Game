@@ -70,5 +70,5 @@ private:
 	static const int				WIRE_POS_LIST_NUM = 10;
 	SWireInfo						m_wirePositionList[WIRE_POS_LIST_NUM];							//ワイヤー移動先の座標
 	std::vector<const CVector3*>	m_posWireFly;							//飛ぶ先の地点リスト
-	EnWireState						m_state = enStateMap;					//ワイヤーの状態
+	EnWireState						m_state = enStateEnemy/*enStateMap*/;					//ワイヤーの状態
 };
