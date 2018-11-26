@@ -26,13 +26,6 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagPlayer, //タグ
 },
-//map3
-{
-	L"map3",
-	CVector3(0.00f, -12.72f, 0.00f),             //平行移動
-	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
-	enMapTagTerrain, //タグ
-},
 //Warrok
 {
 	L"Warrok",
@@ -114,13 +107,6 @@
 {
 	L"NYBuilding_A",
 	CVector3(5.32f, 7.47f, 68.34f),             //平行移動
-	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
-	enMapTagUntagged, //タグ
-},
-//TownGround
-{
-	L"TownGround",
-	CVector3(-26.51f, 8.27f, 105.60f),             //平行移動
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagUntagged, //タグ
 },
@@ -260,35 +246,42 @@
 //Brock
 {
 	L"Brock",
-	CVector3(-108.23f, 21.77f, -32.20f),             //平行移動
+	CVector3(-65.53f, 18.18f, -30.50f),             //平行移動
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagBreakBrock, //タグ
 },
 //Brock
 {
 	L"Brock",
-	CVector3(-65.53f, 22.92f, -30.50f),             //平行移動
+	CVector3(-85.73f, 16.93f, -51.30f),             //平行移動
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagBreakBrock, //タグ
 },
 //Brock
 {
 	L"Brock",
-	CVector3(-85.73f, 21.67f, -51.30f),             //平行移動
+	CVector3(-108.23f, 17.03f, -32.20f),             //平行移動
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagBreakBrock, //タグ
 },
 //Brock
 {
 	L"Brock",
-	CVector3(-85.73f, 22.81f, -11.00f),             //平行移動
+	CVector3(-85.73f, 18.07f, -11.00f),             //平行移動
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagBreakBrock, //タグ
 },
 //Maw
 {
 	L"Maw",
-	CVector3(-87.53f, 17.77f, -33.40f),             //平行移動
+	CVector3(-87.53f, 7.67f, -33.40f),             //平行移動
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagMaw, //タグ
+},
+//Map4
+{
+	L"Map4",
+	CVector3(0.00f, 8.27f, 0.00f),             //平行移動
+	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
+	enMapTagUntagged, //タグ
 },
