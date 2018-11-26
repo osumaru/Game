@@ -14,6 +14,7 @@ CMaw *CMaw::m_maw = NULL;
 
 CMaw::CMaw()
 {
+	this->SetIsActive(false);
 }
 
 CMaw::~CMaw()
@@ -115,7 +116,7 @@ void CMaw::Init(CVector3 position)
 	m_weekPosition.Normalize();
 	//Å‰‚Ìs“®‚ð‘I‘ð
 	m_actionPattern = EnMawActionPattern::enActionPatternIdle;
-
+	this->SetIsActive(true);
 	//m_weekPoint->SetIsActive(true);
 }
 

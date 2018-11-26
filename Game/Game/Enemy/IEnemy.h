@@ -39,6 +39,13 @@ public:
 	//•`‰æ
 	virtual void Draw() {};
 
+	void AddObject()
+	{
+		Add(&m_enemyStateMachine, 0);
+		Add(&m_enemyTurn, 0);
+		Add(&m_enemySearch, 0);
+	}
+
 	//€‚Ê‘O‚ÉŒÄ‚Î‚ê‚éŠÖ”A‰ğ•úˆ—‚È‚Ç‚Ég‚¤
 	void BeforeDead()override;
 

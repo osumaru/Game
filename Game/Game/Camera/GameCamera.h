@@ -22,6 +22,9 @@ public:
 	
 	//更新
 	void Update();
+	
+	//カメラ必要なプレイヤーの情報の初期化`
+	void CameraSetPlayer();
 
 	//ゲームカメラのインスタンスを取得
 	static CGameCamera& GetInstance()

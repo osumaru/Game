@@ -11,6 +11,7 @@ MapChip::MapChip():
 	m_isActive(true),
 	m_worldMatrix(CMatrix::Identity)
 {
+	this->SetIsActive(false);
 }
 
 MapChip::~MapChip()
@@ -59,6 +60,7 @@ void MapChip::Init(const CVector3& position, const CQuaternion& rotation, const 
 	////基本的に動かさないのでワールド行列を最初の一回だけ更新しておく。
 	//m_skinModel.Update(m_position, m_rotation, m_scale);
 	//m_skinModel.SetShadowCompesationFlg(true);
+	this->SetIsActive(true);
 }
 
 void MapChip::SetIterator(Map* map, std::list<MapChip*>::iterator iterator)
@@ -85,6 +87,7 @@ void MapChip::Update()
 
 void MapChip::Draw()
 {
+	if (&GetGameCamera() == nullptr) { return; }
 	//const Camera& camera = GetGameScene().GetCamera();
 	m_skinModel.Draw(GetGameCamera().GetViewMatrix(), GetGameCamera().GetProjectionMatrix());
 }

@@ -27,4 +27,5 @@ public:
 
 	//•`‰æ
 	void Draw();
+
 };

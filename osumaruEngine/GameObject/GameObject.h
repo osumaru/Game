@@ -14,6 +14,9 @@ public:
 	//初期化関数
 	virtual bool Start() { return true; }
 
+	//非同期の初期化関数
+	virtual bool AsyncStart(){ return true; }
+
 	//更新関数
 	virtual void Update() = 0;
 
@@ -77,6 +80,15 @@ public:
 	friend class CGameObjectManager;
 private:
 
+	//AsyncStartを呼ぶ関数
+	void AsyncStarter()
+	{
+		if (!m_isAsyncStart && !m_isDelete)
+		{
+			m_isAsyncStart = AsyncStart();
+		}
+	}
+
 	//Start関数を呼ぶ関数
 	void Starter()
 	{
@@ -88,7 +100,7 @@ private:
 	//Update関数を呼ぶ関数
 	void Updater()
 	{
-		if (m_isStart && m_isActiveUpdate && !m_isDelete)
+		if (m_isStart && m_isAsyncStart && m_isActiveUpdate && !m_isDelete)
 		{
 			Update();
 		}
@@ -96,7 +108,7 @@ private:
 	//Draw関数を呼ぶ関数
 	void Drawer()
 	{
-		if (m_isStart && m_isActiveDraw && !m_isDelete)
+		if (m_isStart && m_isAsyncStart && m_isActiveDraw && !m_isDelete)
 		{
 			Draw();
 		}
@@ -105,7 +117,7 @@ private:
 	//AfterDrawerを呼ぶ関数
 	void AfterDrawer()
 	{
-		if (m_isStart && m_isActiveDraw && !m_isDelete)
+		if (m_isStart && m_isAsyncStart && m_isActiveDraw && !m_isDelete)
 		{
 			AfterDraw();
 		}
@@ -117,12 +129,14 @@ private:
 	{
 		m_isStart = false;
 		m_isDelete = false;
+		m_isAsyncStart = false;
 		m_isActiveUpdate = true;
 		m_isActiveDraw = true;
 	}
 private:
 	bool m_isDelete;			//インスタンスを消す時に建てるフラグ
 	bool m_isStart;				//初期化してるかのフラグ
+	bool m_isAsyncStart;		//非同期の初期化をしてるかのフラグ
 	bool m_isActiveUpdate;		//描画がアクティブかどうかのフラグ
 	bool m_isActiveDraw;		//描画がアクティブかどうかのフラグ
 };
