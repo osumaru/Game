@@ -147,10 +147,10 @@ void CPlayer::Update()
 	CVector3 stickDir = { stickX, 0.0f, stickZ };
 	m_playerGetter.SetStickDir(stickDir);
 
-	if (Pad().IsPressButton(enButtonX))
-	{
-		m_status.Health = 5;
-	}
+	//if (Pad().IsPressButton(enButtonX))
+	//{
+	//	m_status.Health = 5;
+	//}
 
 	CMatrix viewMat;
 	CVector3 cameraPos = m_position;

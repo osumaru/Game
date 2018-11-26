@@ -168,7 +168,7 @@ void CMenu::KeyInputMenu()
 		GetPlayer().SetIsActive(!m_draw);
 	}
 
-	if (Pad().IsTriggerButton(enButtonSelect))
+	if (Pad().IsTriggerButton(enButtonSelect) || Pad().IsTriggerButton(enButtonB))
 	{
 		//プレイヤーのステータスを格納
 		PlayerStatusInput();
