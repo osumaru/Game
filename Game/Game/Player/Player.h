@@ -26,6 +26,7 @@ class CPlayer : public IGameObject
 {
 
 public:
+	CPlayer() { SetIsActive(false); }
 	//ƒvƒŒƒCƒ„[‚Ì‰Šú‰»
 	void Init(CVector3 position);
 

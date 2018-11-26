@@ -140,6 +140,7 @@ void Map::Init(int stageNum)
 		}
 		enemy->SetEnemyGroup(group);
 		group->Add(enemy);
+		enemy->AddObject();
 	}
 	g_pathFinding.BuildNodes();
 }
