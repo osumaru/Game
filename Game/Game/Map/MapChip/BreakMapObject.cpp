@@ -61,9 +61,10 @@ void CBreakMapObject::Update()
 	float fallinSpeed = 0.02f;	//落ちる速度
 	float breakMaxLength = 12.0f;//最大破壊距離
 
+	if (&GetMaw() == nullptr) { return; }
 	//攻撃していたら
-	//if (GetMaw().GetIsAttack())
-	//{
+	if (GetMaw().GetIsAttack())
+	{
 		//左手のボーンの座標を取得
 		CMatrix BossLeftHandMat = GetMaw().GetBoneMatrix(L"RightHand");
 		CVector3 BossLeftHandPos;
@@ -80,7 +81,7 @@ void CBreakMapObject::Update()
 			this->MapChipDelete();
 			//m_isBreak = true;
 		}
-	//}
+	}
 
 	//下に落としていく処理
 	//if (m_isBreak) 
