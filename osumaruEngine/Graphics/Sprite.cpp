@@ -17,7 +17,6 @@ CSprite::CSprite() :
 	m_isDraw(true),
 	m_depthValue(0.0f)
 {
-
 }
 CSprite::~CSprite()
 {

@@ -8,7 +8,7 @@ StaticMapObject::StaticMapObject() :
 	m_rigidBody(),
 	m_boxCollider()
 {
-
+	this->SetIsActive(false);
 }
 
 StaticMapObject::~StaticMapObject()
@@ -75,6 +75,7 @@ void StaticMapObject::Init(const CVector3& position, const CQuaternion& rotation
 	m_rigidBody->Create(rInfo);
 	//m_skinModel.SetShaderTechnique(enShaderTechniqueDithering);
 	GetPlayer().GetWireAction().Add(m_skinModel);
+	this->SetIsActive(true);
 }
 
 

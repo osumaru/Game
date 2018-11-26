@@ -53,6 +53,7 @@ void CPlayer::BeforeDead()
 
 void CPlayer::Init(CVector3 position)
 {
+	Sleep(10000);
 	//プレイヤーのスキンンモデルのロード
 	m_skinmodel.Load(L"Assets/modelData/Player.cmo", &m_animation);
 	m_skinmodel.LoadNormalmap(L"Assets/modelData/Player_normal.png");
@@ -128,6 +129,8 @@ void CPlayer::Init(CVector3 position)
 	m_skinmodel.SetIsShadowCaster(true);
 	m_weaponManager.Init(this);
 	m_wireAction.Init(this);
+	SetIsActive(true);
+	GetGameCamera().CameraSetPlayer();
 }
 
 
@@ -147,10 +150,10 @@ void CPlayer::Update()
 	CVector3 stickDir = { stickX, 0.0f, stickZ };
 	m_playerGetter.SetStickDir(stickDir);
 
-	if (Pad().IsPressButton(enButtonX))
-	{
-		m_status.Health = 5;
-	}
+	//if (Pad().IsPressButton(enButtonX))
+	//{
+	//	m_status.Health = 5;
+	//}
 
 	CMatrix viewMat;
 	CVector3 cameraPos = m_position;

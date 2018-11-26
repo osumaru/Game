@@ -25,15 +25,23 @@ void CGameCamera::Init()
 	Engine().GetDeferred().SetCamera(&m_camera);
 	Sky().Init(&m_camera);
 	CVector3 cameraDir = m_camera.GetTarget() - m_camera.GetPosition();
-	CVector3 cameraPos = GetPlayer().GetPosition() + cameraDir;
+	CVector3 cameraPos = CVector3::Zero;//GetPlayer().GetPosition() + cameraDir;
 	m_springCamera.SetPosition(cameraPos);
-	m_springCamera.SetTarget(GetPlayer().GetPosition());
+	m_springCamera.SetTarget(CVector3::Zero/*GetPlayer().GetPosition()*/);
 
+}
+
+void CGameCamera::CameraSetPlayer()
+{
+	CVector3 cameraDir = m_camera.GetTarget() - m_camera.GetPosition();
+	CVector3 cameraPos = GetPlayer().GetPosition() + cameraDir;
+	m_springCamera.SetTarget(GetPlayer().GetPosition());
 }
 
 void CGameCamera::Update()
 {
-	if (GetPlayer == nullptr) { return; }
+	if (&GetPlayer() == nullptr) { return; }
+	if(GetPlayer().IsActive() == false) { return; }
 	switch (m_cameraState)
 	{
 	case EnCameraState::enNormal:

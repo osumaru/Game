@@ -14,6 +14,7 @@ CMaw *CMaw::m_maw = NULL;
 
 CMaw::CMaw()
 {
+	this->SetIsActive(false);
 }
 
 CMaw::~CMaw()
@@ -118,6 +119,7 @@ void CMaw::Init(CVector3 position)
 
 	m_weekPoint->SetIsActive(false);
 	m_bossHp->SetIsActive(false);
+
 }
 
 //XV

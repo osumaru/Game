@@ -32,7 +32,7 @@ void CPlayerRun::Update()
 		m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateDamage);
 	}
 	//‘–‚Á‚Ä‚¢‚é‚Æ‚«‚ÉUŒ‚‚µ‚½Žž‚Ìˆ—
-	else if (Pad().IsTriggerButton(enButtonRightTrigger))
+	else if (Pad().IsTriggerButton(enButtonX))
 	{
 		if(m_pPlayer->GetWeaponManager().GetCurrentState() == enWeaponArrow)
 		{
@@ -40,12 +40,11 @@ void CPlayerRun::Update()
 		}
 		else
 		{
-
 			m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateAttack);
 		}
 	}
 	//‘–‚è’†‚É‰ñ”ð‚µ‚½Žž‚Ìˆ—
-	else if ((Pad().GetLeftStickX() != 0.0f || Pad().GetLeftStickY() != 0.0f) && Pad().IsTriggerButton(enButtonB))
+	else if (Pad().IsTriggerButton(enButtonB))
 	{
 		m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateAvoidance);
 	}
@@ -54,7 +53,6 @@ void CPlayerRun::Update()
 	{
 		m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateRunJump);
 	}
-
 	else if (fabs(m_pPlayerGetter->GetMoveSpeed().Length()) == 0.0f)
 	{
 		m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateStand);

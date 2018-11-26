@@ -24,6 +24,7 @@ void CEnemySearch::Update()
 	}
 	else {
 		//所属するグループのリストを取得
+		if (&m_enemy->GetEnemyGroup()->GetGroupList() == NULL) { return; }
 		std::list<IEnemy*> groupList = m_enemy->GetEnemyGroup()->GetGroupList();
 		std::list<float> lengthList;
 

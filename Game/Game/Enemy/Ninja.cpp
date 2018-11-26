@@ -5,6 +5,7 @@
 
 CNinja::CNinja()
 {
+	this->SetIsActive(false);
 }
 
 CNinja::~CNinja()
@@ -31,9 +32,9 @@ void CNinja::Init(CVector3 position)
 	m_animation.SetLoopFlg(CEnemyState::enState_Idle, true);
 	m_animation.SetLoopFlg(CEnemyState::enState_Walk, true);
 	m_animation.SetLoopFlg(CEnemyState::enState_Chase, true);
-	Add(&m_enemyStateMachine, 0);
-	Add(&m_enemyTurn, 0);
-	Add(&m_enemySearch, 0);
+	//Add(&m_enemyStateMachine, 0);
+	//Add(&m_enemyTurn, 0);
+	//Add(&m_enemySearch, 0);
 
 	//ステータスを設定
 	m_status.strength = 10;
@@ -42,6 +43,7 @@ void CNinja::Init(CVector3 position)
 	m_status.maxHp = m_status.hp;
 	m_status.gold = 100;
 	m_status.exp = 10;
+	this->SetIsActive(true);
 }
 
 bool CNinja::Start()

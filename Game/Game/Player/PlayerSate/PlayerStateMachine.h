@@ -13,6 +13,8 @@
 #include "PlayerArrowShoot.h"
 #include "PlayerWireMove.h"
 #include "PlayerStun.h"
+#include "PlayerWireAttack.h"
+
 class CPlayer;
 class CPlayerGetter;
 
@@ -47,6 +49,7 @@ public:
 		m_playerArrowShoot.SetPlayer(player, playerGetter);
 		m_playerWireMove.SetPlayer(player, playerGetter);
 		m_playerStun.SetPlayer(player, playerGetter);
+		m_playerWireAttack.SetPlayer(player, playerGetter);
 	}
 
 private:
@@ -65,5 +68,6 @@ private:
 	CPlayerArrowShoot				m_playerArrowShoot;		//弓を放つモーション
 	CPlayerWireMove					m_playerWireMove;		//ワイヤーモーション
 	CPlayerStun						m_playerStun;			//スタン状態
+	CPlayerWireAttack				m_playerWireAttack;		//ワイヤー攻撃モーション
 };
 

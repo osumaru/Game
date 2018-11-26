@@ -25,7 +25,10 @@ bool CLoadScene::Start()
 void CLoadScene::Update()
 {
 	CVector4 col = CVector4::White;
+	Sleep(100);
 	col.x = CRandom::GetInstance().GetRandDouble();
+	col.y = CRandom::GetInstance().GetRandDouble();
+	col.z = CRandom::GetInstance().GetRandDouble();
 	m_font.SetColor(col);
 }
 

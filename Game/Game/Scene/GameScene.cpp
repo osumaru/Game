@@ -11,6 +11,7 @@
 #include "../UI/Result/Result.h"
 #include "../UI/LevelUp/LevelUp.h"
 #include "../GameSound/GameSound.h"
+#include <thread>
 
 CGameScene::CGameScene()
 {
@@ -37,9 +38,15 @@ void CGameScene::BeforeDead()
 
 bool CGameScene::Start()
 {
+	//カメラを生成
+	GetGameCamera().Create();
+	GetGameCamera().Init();
+
 	//フェードの実行が終わったらtrueを返す
 	if (!GetSceneManager().GetFade()->IsExecute())
 	{
+		std::thread ThreadA([&] {
+
 		//マップの初期化
 		m_map = New<Map>(0);
 		m_map->Init(0);
@@ -48,9 +55,6 @@ bool CGameScene::Start()
 		m_miniMap = New<CMiniMap>(PRIORITY_UI);
 		m_miniMap->Init();
 
-		//カメラを生成
-		GetGameCamera().Create();
-		GetGameCamera().Init();
 
 		//UIの初期化
 		{
@@ -73,9 +77,11 @@ bool CGameScene::Start()
 		}
 		//フェードインの開始
 		GetSceneManager().GetFade()->FadeIn();
-		return true;
+
+		});
+		ThreadA.detach();
 	}
-	return false;
+	return true;
 
 }
 

@@ -45,6 +45,6 @@ public:
 	}
 
 private:
-	std::list<IEnemy*> m_enemyGroupList;	//グループのリスト
+	std::list<IEnemy*> m_enemyGroupList ;	//グループのリスト
 	CVector3 m_position;					//座標
 };
