@@ -153,7 +153,7 @@ void CPlayer::Update()
 
 	//if (Pad().IsPressButton(enButtonX))
 	//{
-	//	m_status.Health = 5;
+	//	m_status.Health = 0;
 	//}
 
 	CMatrix viewMat;
@@ -236,6 +236,9 @@ void CPlayer::StatusCalculation()
 
 void CPlayer::Rotation(const CVector3& stickDir)
 {
+	if (m_isDamege) {
+		return;
+	}
 
 	CVector3 moveSpeed = stickDir;
 	CVector3 playerFront = CVector3::Front;

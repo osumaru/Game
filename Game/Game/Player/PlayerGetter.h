@@ -58,11 +58,18 @@ public:
 	//プレイヤーのスピードを取得する
 	const CVector3& GetMoveSpeed();
 
+	//スティックの入力方向を設定
 	void SetStickDir(const CVector3& stickDir);
 
+	//スティックの入力方向を取得
 	const CVector3& GetStickDir();
+
+	void SetDamageEnemyPos(const CVector3& position);
+
+	const CVector3& GetDamageEnemyPos();
 
 private:
 	CPlayer*	m_pPlayer = nullptr;
 	CVector3	m_stickDir;
+	CVector3	m_damageEnemyPos;
 };

@@ -234,6 +234,9 @@
     <ClCompile Include="Enemy\PathFinding\PathFinding.cpp">
       <Filter>ソース ファイル\Enemy\PathFinding</Filter>
     </ClCompile>
+    <ClCompile Include="Enemy\PathFinding\RootPoint.cpp">
+      <Filter>ソース ファイル\Enemy\PathFinding</Filter>
+    </ClCompile>
     <ClCompile Include="Camera\NormalGameCamera.cpp">
       <Filter>ソース ファイル\Camera</Filter>
     </ClCompile>
@@ -297,6 +300,9 @@
     <ClCompile Include="Player\PlayerSate\PlayerStun.cpp">
       <Filter>ソース ファイル\Player\PlayerState</Filter>
     </ClCompile>
+    <ClCompile Include="Player\PlayerGetter.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
     <ClCompile Include="Player\Weapon\WeaponManager.cpp">
       <Filter>ソース ファイル\Player\Weapon</Filter>
     </ClCompile>
@@ -347,12 +353,6 @@
     </ClCompile>
     <ClCompile Include="Player\PlayerSate\PlayerWireAttack.cpp">
       <Filter>ソース ファイル\Player\PlayerState</Filter>
-    </ClCompile>
-    <ClCompile Include="Map\MapChip\ObstacleMapObject.cpp">
-      <Filter>ソース ファイル\Map\MapChip</Filter>
-    </ClCompile>
-    <ClCompile Include="Player\PlayerGetter.cpp">
-      <Filter>ソース ファイル\Player</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -503,6 +503,9 @@
     <ClInclude Include="Enemy\PathFinding\PathFinding.h">
       <Filter>ソース ファイル\Enemy\PathFinding</Filter>
     </ClInclude>
+    <ClInclude Include="Enemy\PathFinding\RootPoint.h">
+      <Filter>ソース ファイル\Enemy\PathFinding</Filter>
+    </ClInclude>
     <ClInclude Include="Enemy\PathFinding\MapData.h">
       <Filter>ソース ファイル\Enemy\PathFinding</Filter>
     </ClInclude>
@@ -623,9 +626,6 @@
     <ClInclude Include="Player\PlayerSate\PlayerWireAttack.h">
       <Filter>ソース ファイル\Player\PlayerState</Filter>
     </ClInclude>
-    <ClInclude Include="Map\MapChip\ObstacleMapObject.h">
-      <Filter>ソース ファイル\Map\MapChip</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="Assets\shader\sprite.fx">
@@ -744,7 +744,13 @@
     <MeshContentTask Include="Assets\modelData\NYBuilding_A.fbx">
       <Filter>ソース ファイル\Assets</Filter>
     </MeshContentTask>
-    <MeshContentTask Include="Assets\modelData\map5.FBX">
+    <MeshContentTask Include="Assets\modelData\Shopgirl.fbx">
+      <Filter>ソース ファイル\Assets</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\Chest.FBX">
+      <Filter>ソース ファイル\Assets</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\Npc.fbx">
       <Filter>ソース ファイル\Assets</Filter>
     </MeshContentTask>
   </ItemGroup>

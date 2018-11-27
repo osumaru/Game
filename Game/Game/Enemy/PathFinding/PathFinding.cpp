@@ -119,6 +119,7 @@ void CPathFinding::FindRoot(std::vector<CVector3>& root, CVector3 startPos, CVec
 			}
 		}
 	}
+	if (startNode == nullptr) { return; }
 	startNode->moveCost = 0.0f;
 	SNode* currentNode = startNode;
 	//ƒ‹[ƒg‚ğì‚é
