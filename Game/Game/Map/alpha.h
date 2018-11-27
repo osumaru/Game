@@ -1,4 +1,11 @@
-﻿//Sphere
+﻿//Map4
+{
+L"Map4",
+CVector3(0.00f, 8.00f, 0.00f),             //平行移動
+CQuaternion(0.00f, 0.00f, 0.00f, 1.00f),  //回転
+enMapTagTerrain, //タグ
+},
+//Sphere
 {
 	L"Sphere",
 	CVector3(-6.29f, 8.14f, 66.51f),             //平行移動
@@ -278,10 +285,4 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagMaw, //タグ
 },
-//Map4
-{
-	L"Map4",
-	CVector3(0.00f, 8.27f, 0.00f),             //平行移動
-	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
-	enMapTagUntagged, //タグ
-},
+
