@@ -37,7 +37,7 @@ void CPlayerAttack::Init()
 void CPlayerAttack::Update()
 {
 	//UŒ‚’†‚ÉUŒ‚‚Ì“ü—Í‚ª‚³‚ê‚½ê‡‚Í˜AŒ‚‚ÉˆÚs‚·‚é
-	if (Pad().IsTriggerButton(enButtonRightTrigger) && !m_isContinuationAttack && m_attackCount < MAX_ATTACK_NUM - 1)
+	if (Pad().IsTriggerButton(enButtonX) && !m_isContinuationAttack && m_attackCount < MAX_ATTACK_NUM - 1)
 	{
 		m_isContinuationAttack = true;
 		m_attackCount++;

@@ -234,6 +234,9 @@ void CPlayer::StatusCalculation()
 
 void CPlayer::Rotation(const CVector3& stickDir)
 {
+	if (m_isDamege) {
+		return;
+	}
 
 	CVector3 moveSpeed = stickDir;
 	CVector3 playerFront = CVector3::Front;

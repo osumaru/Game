@@ -16,7 +16,7 @@ void CEnemyTurn::Update()
 	//ˆÚ“®‘¬“x‚ðŽæ“¾
 	CVector3 moveSpeed = m_enemy->GetMoveSpeed();
 	moveSpeed.y = 0.0f;
-	if (moveSpeed.LengthSq() < 0.01f || !m_enemy->IsDamagePossible()) {
+	if (moveSpeed.LengthSq() < 0.01f) {
 		//ˆÚ“®‚µ‚Ä‚¢‚È‚¢‚ÆŠp“x‚ÌŒvŽZ‚ª‚Å‚«‚È‚¢‚Ì‚Å•Ô‚·
 		return;
 	}
@@ -39,6 +39,10 @@ void CEnemyTurn::Update()
 	}
 	else {
 		addAngle = diff;
+	}
+
+	if (!m_enemy->IsDamagePossible()) {
+		addAngle *= -1.0f;
 	}
 
 	CQuaternion addRot;
