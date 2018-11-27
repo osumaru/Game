@@ -1,5 +1,6 @@
 #pragma once
 #include "WeaponCommon.h"
+#include "WeaponTraceDraw.h"
 
 class CPlayer;
 //武器の基底クラス
@@ -38,7 +39,19 @@ public:
 	void EnemyAttack();
 
 	//当たり判定を取るための武器の座標を決めるための関数
-	virtual void EnemyAttackPositionDecide(){}
+	virtual SWeaponEnemyAttackInfo EnemyAttackPositionDecide()
+	{
+		return { false, CVector3::Zero };
+	}
+
+	//武器の軌跡を描画する座標や描画するかを決める関数
+	virtual SWeaponTraceDrawInfo WeaponTraceDraw()
+	{
+		return { false, CVector3::Zero, CVector3::Zero };
+	}
+
+	//武器の軌跡を描画する
+	void WeaponTraceDrawer();
 
 
 	//武器のステータスを取得
@@ -61,8 +74,6 @@ protected:
 	CVector3					m_attackPosition;			//攻撃時の座標
 	CQuaternion					m_rotation;					//通常時の回転
 	CQuaternion					m_attackRotation;			//攻撃時の回転
-	CVector3					m_attackCheckPos;			//当たり判定用の座標
 	CSkinModel					m_skinModel;				//武器のスキンモデル
 	SWeaponStatus				m_weaponStatus;				//装備中の武器ノステータス
-	
 };

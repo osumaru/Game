@@ -7,8 +7,11 @@ public:
 
 	void Init()override;
 
-	void EnemyAttackPositionDecide()override;
-	
-private:
+	void Update()override;
 
+	SWeaponEnemyAttackInfo EnemyAttackPositionDecide()override;
+
+	SWeaponTraceDrawInfo WeaponTraceDraw()override;
+
+private:
 };

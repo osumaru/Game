@@ -184,6 +184,7 @@
     <ClCompile Include="Enemy\Warrok.cpp" />
     <ClCompile Include="Enemy\Zombie.cpp" />
     <ClCompile Include="GameSound\GameSound.cpp" />
+    <ClCompile Include="Player\Weapon\WeaponTraceDraw.cpp" />
     <ClCompile Include="Player\PlayerSate\PlayerWireAttack.cpp" />
     <ClCompile Include="UI\Fade\LoadScene.cpp" />
     <ClCompile Include="NPC\Shop\ItemShop.cpp" />
@@ -276,6 +277,7 @@
     <ClInclude Include="Enemy\Warrok.h" />
     <ClInclude Include="Enemy\Zombie.h" />
     <ClInclude Include="GameSound\GameSound.h" />
+    <ClInclude Include="Player\Weapon\WeaponTraceDraw.h" />
     <ClInclude Include="Player\PlayerSate\PlayerWireAttack.h" />
     <ClInclude Include="UI\Fade\LoadScene.h" />
     <ClInclude Include="NPC\Shop\ItemShop.h" />
@@ -353,6 +355,7 @@
     <MeshContentTask Include="Assets\modelData\Arrow.fbx" />
     <MeshContentTask Include="Assets\modelData\Barrel.FBX" />
     <MeshContentTask Include="Assets\modelData\Brock.FBX" />
+    <MeshContentTask Include="Assets\modelData\Chest.FBX" />
     <MeshContentTask Include="Assets\modelData\Heart.fbx" />
     <MeshContentTask Include="Assets\modelData\House.FBX" />
     <MeshContentTask Include="Assets\modelData\LargeSword.fbx" />
@@ -361,8 +364,12 @@
     <MeshContentTask Include="Assets\modelData\Maw.fbx" />
     <MeshContentTask Include="Assets\modelData\Money.fbx" />
     <MeshContentTask Include="Assets\modelData\Ninja.FBX" />
+    <MeshContentTask Include="Assets\modelData\Npc.fbx" />
+    <MeshContentTask Include="Assets\modelData\NYApartmentA.fbx" />
+    <MeshContentTask Include="Assets\modelData\NYBuilding_A.fbx" />
     <MeshContentTask Include="Assets\modelData\Player.fbx" />
     <MeshContentTask Include="Assets\modelData\Samurai.FBX" />
+    <MeshContentTask Include="Assets\modelData\Shopgirl.fbx" />
     <MeshContentTask Include="Assets\modelData\Skyball_WithCap.FBX" />
     <MeshContentTask Include="Assets\modelData\Skyball_WithoutCap.FBX" />
     <MeshContentTask Include="Assets\modelData\Sword.fbx" />

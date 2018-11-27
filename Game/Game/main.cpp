@@ -1,7 +1,4 @@
 #include "stdafx.h"
-//#include "../../Game/Game/Camera/GameCamera.h"
-//#include "Player\Player.h"
-//#include "Scene\GameScene.h"
 #include "Scene/SceneManager.h"
 
 using namespace std;
@@ -16,11 +13,8 @@ int WINAPI wWinMain(
 	Engine().InitD3D(hInst);
 	//初期化フェードなどの
 	GetSceneManager().Init();
-	//フェードインの開始
-	//GetSceneManager().GetFade()->FadeIn();
-	//ゲームシーンへ遷移
-	//GetSceneManager().ChangeScene(GetSceneManager().enTitleScene);
 	GetSceneManager().GetInstance().Update();
+
 	Engine().GameLoop();
 	Delete(&GetSceneManager());
 	Delete(&Sky());

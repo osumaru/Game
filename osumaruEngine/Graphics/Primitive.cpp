@@ -48,6 +48,7 @@ void CPrimitive::Create(void* vertexBuffer, int vertexStride, int vertexNum, voi
 	}
 	//頂点バッファを作る
 	m_indexNum = indexNum;
+	m_vertexNum = vertexNum;
 	D3D11_BUFFER_DESC bufferDesc;
 	D3D11_SUBRESOURCE_DATA subresourceData;
 	bufferDesc.ByteWidth = vertexStride * vertexNum;
@@ -71,4 +72,11 @@ void CPrimitive::Create(void* vertexBuffer, int vertexStride, int vertexNum, voi
 	subresourceIndexData.pSysMem = indexBuffer;
 	hr = GetDevice()->CreateBuffer(&bufferIndexDesc, &subresourceIndexData, m_indexBuffer.GetAddressOf());
 	m_stride = vertexStride;
+}
+
+void CPrimitive::Update(void* vertexBuffer, void* indexBuffer)
+{
+	Engine().GetDeviceContext()->UpdateSubresource(m_vertexBuffer.Get(), 0, NULL, vertexBuffer, 0, 0);
+	Engine().GetDeviceContext()->UpdateSubresource(m_indexBuffer.Get(), 0, NULL, indexBuffer, 0, 0);
+	
 }

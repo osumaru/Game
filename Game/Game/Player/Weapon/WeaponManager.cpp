@@ -33,7 +33,7 @@ void CWeaponManager::Init(CPlayer* player)
 		m_weapons[i]->Init(player);
 
  	}
-	
+	m_weaponTrace.Init();
 }
 
 
@@ -100,10 +100,15 @@ void CWeaponManager::AddEquipList(SWeaponStatus& item)
 
 void CWeaponManager::Draw()
 {
+
 	m_weapons[m_weaponState]->Drawer();
 }
 
 void CWeaponManager::AfterDraw()
 {
+	if (m_isAttack)
+	{
+		//m_weaponTrace.Draw();
+	}
 	m_weapons[m_weaponState]->AfterDrawer();
 }

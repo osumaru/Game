@@ -31,6 +31,7 @@ void CPlayerAttack::Init()
 	m_manipVec = m_pPlayer->GetPosition() - bonePos;
 	m_preBonePos = bonePos;
 	m_pPlayer->GetWeaponManager().SetIsAttack(true);
+	m_pPlayer->GetWeaponManager().WeaponTraceDrawReset();
 	m_isPreDodge = false;
 }
 
@@ -63,6 +64,7 @@ void CPlayerAttack::Update()
 		{
 			m_isContinuationAttack = false;
 			m_pPlayerGetter->GetAnimation().Play(m_attackAnimation[m_attackCount], 0.2f);
+			m_pPlayer->GetWeaponManager().WeaponTraceDrawReset();
 		}
 		else
 		{
@@ -132,3 +134,4 @@ void CPlayerAttack::Move()
 	characon.SetGravity(gravity);
 	m_preBonePos = bonePos;
 }
+
