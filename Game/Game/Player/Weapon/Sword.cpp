@@ -22,7 +22,11 @@ void CSword::Init()
 	m_skinModel.Load(L"Assets/modelData/Sword.cmo", NULL);
 }
 
-void CSword::EnemyAttackPositionDecide()
+void CSword::Update()
+{
+}
+
+SWeaponEnemyAttackInfo CSword::EnemyAttackPositionDecide()
 {
 	const CMatrix& mat = *m_attackBoneMat;
 	CVector3 pos;
@@ -36,5 +40,18 @@ void CSword::EnemyAttackPositionDecide()
 	manip.Normalize();
 	manip.Scale(0.3f);
 	pos += manip;
-	m_attackCheckPos = pos;
+	return { true, pos };
+}
+
+SWeaponTraceDrawInfo CSword::WeaponTraceDraw()
+{
+	CVector3 position = *(CVector3*)m_attackBoneMat->m[3];
+	CVector3 manip = *(CVector3*)m_attackBoneMat->m[2];
+	manip.Normalize();
+	CVector3 manip2 = manip;
+	manip.Scale(0.2f);
+	manip2.Scale(1.0f);
+	CVector3 position2 = position + manip;
+	CVector3 position3 = position + manip2;
+	return { true, position2, position3 };
 }
