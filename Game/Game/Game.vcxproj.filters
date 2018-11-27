@@ -348,6 +348,9 @@
     <ClCompile Include="Camera\CameraCollisionSolver.cpp">
       <Filter>ソース ファイル\Camera</Filter>
     </ClCompile>
+    <ClCompile Include="Player\Weapon\WeaponTraceDraw.cpp">
+      <Filter>ソース ファイル\Player\Weapon</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -613,6 +616,9 @@
     </ClInclude>
     <ClInclude Include="Camera\CameraCollisionSolver.h">
       <Filter>ソース ファイル\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Player\Weapon\WeaponTraceDraw.h">
+      <Filter>ソース ファイル\Player\Weapon</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

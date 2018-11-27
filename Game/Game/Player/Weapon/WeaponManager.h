@@ -67,6 +67,12 @@ public:
 		m_isAttack = isAttack;
 	}
 
+	//武器の軌跡をリセットする
+	void WeaponTraceDrawReset()
+	{
+		m_weaponTrace.Start();
+	}
+
 	//当たり判定を取っているかのフラグを取得。
 	bool GetIsAttackCheck()
 	{
@@ -79,10 +85,16 @@ public:
 		m_isAttackCheck = isAttack;
 	}
 
+	CWeaponTraceDraw& GetWeaponTraceDraw()
+	{
+		return m_weaponTrace;
+	}
+
 private:
 	EnPlayerWeapon				m_weaponState = enWeaponSword;				//現在使ってる武器
 	std::list<SWeaponStatus>	m_equipList;								//所持装備のリスト
 	std::unique_ptr<IWeapon>	m_weapons[enWeaponNum];						//武器
 	bool						m_isAttack = false;							//攻撃中かのフラグ
 	bool						m_isAttackCheck = false;					//当たり判定を取っているかのフラグ
+	CWeaponTraceDraw			m_weaponTrace;								//武器の軌跡を描画するためのクラス
 };

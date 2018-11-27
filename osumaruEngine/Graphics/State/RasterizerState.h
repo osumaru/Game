@@ -4,6 +4,7 @@ enum EnRasterizerState
 {
 	enRasterizerState3D,
 	enRasterizerState2D,
+	enRasterizerStateBoth,
 	enRasterizerStateNum,
 
 };

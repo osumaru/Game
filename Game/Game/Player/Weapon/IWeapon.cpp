@@ -19,7 +19,7 @@ void IWeapon::Init(CPlayer* player)
 void IWeapon::Updater()
 {
 	Update();
-
+	WeaponTraceDrawer();
 	CVector3 position;
 	CQuaternion rotation;
 	const CMatrix* boneMat;
@@ -36,7 +36,6 @@ void IWeapon::Updater()
 		rotation = m_rotation;
 	}
 	position.Mul(*boneMat);
-	m_attackCheckPos = position;
 	CMatrix rotMat = *boneMat;
 	((CVector3*)rotMat.m[0])->Div(((CVector3*)rotMat.m[0])->Length());
 	((CVector3*)rotMat.m[1])->Div(((CVector3*)rotMat.m[1])->Length());
@@ -49,6 +48,22 @@ void IWeapon::Updater()
 	multi.Multiply(rotation);
 	rotation = multi;
 	m_skinModel.Update(position, rotation, CVector3::One);
+}
+
+void IWeapon::WeaponTraceDrawer()
+{
+	CWeaponTraceDraw& weaponTrace = m_pPlayer->GetWeaponManager().GetWeaponTraceDraw();
+	if (m_pPlayer->GetWeaponManager().GetIsAttack())
+	{
+		SWeaponTraceDrawInfo info = WeaponTraceDraw();
+		if (info.isDraw)
+		{
+			weaponTrace.Add(info.rootPos, info.pointPos);
+		}
+	}
+	else
+	{
+	}
 }
 
 void IWeapon::Drawer()
@@ -70,7 +85,12 @@ void IWeapon::EnemyAttack()
 	{
 		return;
 	}
-	EnemyAttackPositionDecide();
+	SWeaponEnemyAttackInfo info = EnemyAttackPositionDecide();
+	if (!info.isAttack)
+	{
+		return;
+	}
+
 	//エネミーのリストを取得
 	for (const auto& enemys : GetSceneManager().GetGameScene().GetMap()->GetEnemyList())
 	{
@@ -79,7 +99,7 @@ void IWeapon::EnemyAttack()
 
 			CVector3 EnemyVec = enemys->GetPosition();
 			EnemyVec.y += 1.3f;
-			EnemyVec.Subtract(m_attackCheckPos);
+			EnemyVec.Subtract(info.attackPos);
 			float len = EnemyVec.Length();
 
 			if (fabs(len) < 2.0f)
@@ -106,7 +126,7 @@ void IWeapon::EnemyAttack()
 			const float BossWeekLenge = 50.0f;
 			//ボスの弱点の座標取得
 			CVector3 EnemyVec = GetMaw().GetWeekPosition();
-			EnemyVec -= m_attackCheckPos;
+			EnemyVec -= info.attackPos;
 			float len = EnemyVec.Length();
 
 			if (fabs(len) < BossWeekLenge)
@@ -122,7 +142,7 @@ void IWeapon::EnemyAttack()
 			//ボスの座標取得
 			CVector3 EnemyVec = GetMaw().GetPosition();
 			EnemyVec.y += BossHeight;
-			EnemyVec -= m_attackCheckPos;
+			EnemyVec -= info.attackPos;
 			float len = EnemyVec.Length();
 
 			if (fabs(len) < BossLenge)
