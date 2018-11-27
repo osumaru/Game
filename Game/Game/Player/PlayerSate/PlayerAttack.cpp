@@ -134,3 +134,4 @@ void CPlayerAttack::Move()
 	characon.SetGravity(gravity);
 	m_preBonePos = bonePos;
 }
+

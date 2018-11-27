@@ -34,7 +34,7 @@ void CPlayerStand::Update()
 		m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateDamage);
 	}
 	//UŒ‚‚ð‚µ‚½Žž‚Ìˆ—
-	else if (Pad().IsTriggerButton(enButtonRightTrigger))
+	else if (Pad().IsTriggerButton(enButtonX))
 	{
 		if (m_pPlayer->GetWeaponManager().GetCurrentState() == enWeaponArrow)
 		{
@@ -44,14 +44,11 @@ void CPlayerStand::Update()
 		{
 			m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateAttack);
 		}
-		
 	}
-	
 	else if (Pad().IsTriggerButton(enButtonA))
 	{
 		GetPlayer().GetStateMachine().SetState(CPlayerState::enPlayerStateJump);
 	}
-
 	else if (Pad().IsTriggerButton(enButtonB))
 	{
 		GetPlayer().GetStateMachine().SetState(CPlayerState::enPlayerStateAvoidance);

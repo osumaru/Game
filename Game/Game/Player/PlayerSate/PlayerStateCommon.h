@@ -46,6 +46,7 @@ public:
 		enPlayerStateAvoidance,			//回避ステート
 		enPlayerStateDied,				//死亡ステート
 		enPlayerStateWireMove,			//ワイヤーステート
+		enPlayerStateWireAttack,		//ワイヤー攻撃ステート
 		enPlayerStateArrowAttack,		//弓のステート
 		enPlayerStateArrowShoot,		//弓を放つステート
 		enPlayerStateLongSwordAttack,	//大剣の攻撃ステート

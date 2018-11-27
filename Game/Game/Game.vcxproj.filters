@@ -351,6 +351,9 @@
     <ClCompile Include="Player\Weapon\WeaponTraceDraw.cpp">
       <Filter>ソース ファイル\Player\Weapon</Filter>
     </ClCompile>
+    <ClCompile Include="Player\PlayerSate\PlayerWireAttack.cpp">
+      <Filter>ソース ファイル\Player\PlayerState</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -620,6 +623,9 @@
     <ClInclude Include="Player\Weapon\WeaponTraceDraw.h">
       <Filter>ソース ファイル\Player\Weapon</Filter>
     </ClInclude>
+    <ClInclude Include="Player\PlayerSate\PlayerWireAttack.h">
+      <Filter>ソース ファイル\Player\PlayerState</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="Assets\shader\sprite.fx">
@@ -726,10 +732,16 @@
     <MeshContentTask Include="Assets\modelData\Arrow.fbx">
       <Filter>ソース ファイル\Assets</Filter>
     </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\NYApartmentA.fbx">
+      <Filter>ソース ファイル\Assets</Filter>
+    </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\Map4.FBX">
       <Filter>ソース ファイル\Assets</Filter>
     </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\TownGround.FBX">
+      <Filter>ソース ファイル\Assets</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\NYBuilding_A.fbx">
       <Filter>ソース ファイル\Assets</Filter>
     </MeshContentTask>
   </ItemGroup>

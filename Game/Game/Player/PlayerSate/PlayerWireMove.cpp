@@ -51,14 +51,18 @@ void CPlayerWireMove::Update()
 	if (isMoveEnd) {
 		//移動が終わった
 		GetPlayer().GetWireAction().SetIsWireMove(false);
-		GetPlayer().GetStateMachine().SetState(CPlayerState::enPlayerStateStand);
 		std::list<IEnemy*> enemyList = GetSceneGame().GetMap()->GetEnemyList();
 		switch(m_pPlayer->GetWireAction().GetState())
 		{
 		case CWireAction::enStateEnemy:
+			GetPlayer().GetStateMachine().SetState(CPlayerState::enPlayerStateWireAttack);
 			//移動し終わったら敵のフラグを戻してやる
 			for (auto& enemy : enemyList)
 			{
+				if (enemy->IsWireHit()) {
+					//ワイヤーが当たっていたらダメージ
+					enemy->SetIsDamage(true);
+				}
 				enemy->SetIsWireHit(false);
 			}
 			break;
