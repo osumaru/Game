@@ -20,6 +20,7 @@ static const int PRIORITY_SCENE = 0;
 #include "../../osumaruEngine/Graphics/SkinModel.h"
 #include "../../osumaruEngine/Graphics/Skelton.h"
 #include "../../osumaruEngine/Graphics/Animation.h"
+#include "../../osumaruEngine/Graphics/PostRendering/Deferred.h"
 #include "../../osumaruEngine/Camera/Camera.h"
 #include "../../osumaruEngine/Camera/SpringCamera.h"
 #include "../../osumaruEngine/Physics/Physics.h"

@@ -34,6 +34,7 @@ public:
 	}
 
 private:
+
 	CVector3											m_aabbMax;					//AABBの最大値
 	CVector3											m_aabbMin;					//AABBの最小値
 	std::vector<DWORD>									m_indexBuffer;				//インデックスバッファ
