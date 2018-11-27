@@ -63,6 +63,7 @@ public:
 	struct SItemStatus
 	{
 		wchar_t					ItemName[40];			//アイテムの名前
+		wchar_t					ItemText[100];			//武器の説明
 		int						ItemID = 0;				//商品の番号
 		int						Itemprice = 0;			//アイテムの値段
 		int						ItemEffect = 0;			//効果値
