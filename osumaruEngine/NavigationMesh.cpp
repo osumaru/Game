@@ -1,14 +1,16 @@
 #include "NavigationMesh.h"
 #include "Graphics/SkinModel.h"
+#include "Physics/Physics.h"
+#include "Physics/RigidBodyDraw.h"
 
-void CNavigationMesh::Init(CSkinModel* skinModel)
+void CNavigationMesh::Init()
 {
 	std::vector<CVector3> vertexBufferVector;
 	std::vector<unsigned int> indexBufferVector;
-	DirectX::Model* model = skinModel->GetBody();
+	DirectX::Model* model = m_pModel->GetBody();
 	CVector3 aabbMax = {FLT_MIN, FLT_MIN, FLT_MIN};
 	CVector3 aabbMin = { FLT_MAX, FLT_MAX, FLT_MAX };
-	CMatrix mat = skinModel->GetWorldMatrix();
+	CMatrix mat = m_pModel->GetWorldMatrix();
 	CVector3 transManip = { mat.m[3][0], mat.m[3][1], mat.m[3][2] };
 	//メッシュをなめる
 	for (auto& mesh : model->meshes)
@@ -82,15 +84,76 @@ void CNavigationMesh::Init(CSkinModel* skinModel)
 	for (int i = 0; i < indexBufferVector.size(); i += 3)
 	{
 		CVector3 poligonPos = CVector3::Zero;
-
-		poligonPos += vertexBufferVector[indexBufferVector[i + 0]];
-		poligonPos += vertexBufferVector[indexBufferVector[i + 1]]; 
-		poligonPos += vertexBufferVector[indexBufferVector[i + 2]];
+		bool isContinue = false;
+		for (int j = 0; j < 3; j++)
+		{
+			CVector3 vertexPos = vertexBufferVector[indexBufferVector[i + j]];
+			for (auto& obs : m_obstacleObjects)
+			{
+				CVector3 aabbMin = obs.aabbMin + obs.center;
+				CVector3 aabbMax = obs.aabbMax + obs.center;
+				if (aabbMin.x <= vertexPos.x && vertexPos.x <= aabbMax.x &&
+					aabbMin.z <= vertexPos.z && vertexPos.z <= aabbMax.z)
+				{
+					isContinue = true;
+					break;
+				}
+			}
+			if (isContinue)
+			{
+				break;
+			}
+			poligonPos += vertexPos;
+		}
+		if (isContinue)
+		{
+			continue;
+		}
 		poligonPos.Div(3.0f);
 		//aabbのxzで割りどのエリアに属するポリゴンか決める
 		CVector3 localPos = poligonPos - aabbMin;
 		localPos.x = localPos.x / aabb.x * AREA_NUM;
 		localPos.z = localPos.z / aabb.z * AREA_NUM;
 		m_meshData[(int)localPos.x][(int)localPos.z].push_back({ poligonPos,  vertexBufferVector[indexBufferVector[i + 0]], vertexBufferVector[indexBufferVector[i + 1]], vertexBufferVector[indexBufferVector[i + 2]] });
+	}
+}
+
+
+void CNavigationMesh::Draw()
+{
+	for (int i = 0; i < AREA_NUM; i++)
+	{
+		for (int j = 0; j < AREA_NUM; j++)
+		{
+			for (auto& mesh : m_meshData[i][j])
+			{
+
+				btVector3 v1;
+				v1.setX(mesh.vertexPos[0].x);
+				v1.setY(mesh.vertexPos[0].y);
+				v1.setZ(mesh.vertexPos[0].z);
+				btVector3 v2;
+				v2.setX(mesh.vertexPos[1].x);
+				v2.setY(mesh.vertexPos[1].y);
+				v2.setZ(mesh.vertexPos[1].z);
+				PhysicsWorld().GetRigidBodyDraw().drawLine(v1, v2, btVector3(0.0f, 0.0f, 0.0f));
+
+				v1.setX(mesh.vertexPos[1].x);
+				v1.setY(mesh.vertexPos[1].y);
+				v1.setZ(mesh.vertexPos[1].z);
+				v2.setX(mesh.vertexPos[2].x);
+				v2.setY(mesh.vertexPos[2].y);
+				v2.setZ(mesh.vertexPos[2].z);
+				PhysicsWorld().GetRigidBodyDraw().drawLine(v1, v2, btVector3(0.0f, 0.0f, 0.0f));
+
+				v1.setX(mesh.vertexPos[0].x);
+				v1.setY(mesh.vertexPos[0].y);
+				v1.setZ(mesh.vertexPos[0].z);
+				v2.setX(mesh.vertexPos[2].x);
+				v2.setY(mesh.vertexPos[2].y);
+				v2.setZ(mesh.vertexPos[2].z);
+				PhysicsWorld().GetRigidBodyDraw().drawLine(v1, v2, btVector3(0.0f, 0.0f, 0.0f));
+			}
+		}
 	}
 }

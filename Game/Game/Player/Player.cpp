@@ -9,6 +9,8 @@
 #include "../UI/Menu/EquipInventory.h"
 #include "../Enemy/Maw.h"
 #include "Weapon/Bow.h"
+#include "../Enemy/PathFinding/PathFinding.h"
+
 
 CPlayer *CPlayer::m_player = NULL;
 
@@ -125,7 +127,6 @@ void CPlayer::Init(CVector3 position)
 	m_playerGetter.SetPlayer(this);
 	m_PlayerStateMachine.SetPlayer(this, &m_playerGetter);
 	m_PlayerStateMachine.Init();
-	//Add(this, 1);
 	m_skinmodel.SetIsShadowCaster(true);
 	m_weaponManager.Init(this);
 	m_wireAction.Init(this);
@@ -180,6 +181,7 @@ void CPlayer::Update()
 //ï`âÊèàóù
 void CPlayer::Draw()
 {
+	//g_pathFinding.GetNavigationMesh().Draw();
 	//m_characterController.Draw();
 	m_weaponManager.Draw();
 	m_skinmodel.Draw(GetGameCamera().GetViewMatrix(), GetGameCamera().GetProjectionMatrix());

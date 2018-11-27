@@ -50,7 +50,7 @@ void StaticMapObject::Init(const CVector3& position, const CQuaternion& rotation
 		m_boxCollider.reset(new CBoxCollider);
 		m_boxCollider->Create({ boxsize.x,boxsize.y,boxsize.z });
 		rInfo.collider = m_boxCollider.get();
-		g_pathFinding.Init(&m_skinModel);
+		g_pathFinding.GetNavigationMesh().SetSkinModel(&m_skinModel);
 	}
 	else
 	{
@@ -87,5 +87,8 @@ void StaticMapObject::Update()
 void StaticMapObject::Draw()
 {
 	MapChip::Draw();
-	//m_rigidBody->Draw();
+	if (!isCollider)
+	{
+		m_rigidBody->Draw();
+	}
 }

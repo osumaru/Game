@@ -13,6 +13,7 @@ CPathFinding::~CPathFinding()
 
 void CPathFinding::BuildNodes()
 {
+	m_naviMesh.Init();
 	CNavigationMesh::VectorArray naviMesh = m_naviMesh.GetMeshData();
 
 	//vectorのサイズをノードの数分だけ確保する
