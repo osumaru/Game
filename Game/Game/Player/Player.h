@@ -187,6 +187,12 @@ public:
 		return m_PlayerStateMachine;
 	}
 
+	//ダメージを与えたエネミーの座標を設定
+	void SetDamageEnemyPos(const CVector3& position)
+	{
+		m_playerGetter.SetDamageEnemyPos(position);
+	}
+
 	friend class CPlayerGetter;
 private:
 

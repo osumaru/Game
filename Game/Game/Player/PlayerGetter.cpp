@@ -67,3 +67,13 @@ const CVector3& CPlayerGetter::GetStickDir()
 {
 	return m_stickDir;
 }
+
+void CPlayerGetter::SetDamageEnemyPos(const CVector3& position)
+{
+	m_damageEnemyPos = position;
+}
+
+const CVector3& CPlayerGetter::GetDamageEnemyPos()
+{
+	return m_damageEnemyPos;
+}

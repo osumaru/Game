@@ -68,6 +68,10 @@ void CPlayerJump::Update()
 			}
 		}
 	}
+	else if (m_pPlayer->GetIsDamage())
+	{
+		m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateDamage);
+	}
 	else if (m_pPlayer->GetWireAction().IsWireMove())
 	{
 		//ƒƒCƒ„[ˆÚ“®‚Å‚«‚é‚È‚ç‘JˆÚ
