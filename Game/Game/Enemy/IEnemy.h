@@ -101,6 +101,13 @@ public:
 		m_characterController.SetMoveSpeed(moveSpeed);
 	}
 
+	//剛体を削除
+	void RemovedRegidBody()
+	{
+		m_isRemovedRigidBody = true;
+		m_characterController.RemovedRigidBody();
+	}
+
 	//アニメーションを再生
 	//animNum	アニメーション番号
 	void PlayAnimation(int animNum)
@@ -224,4 +231,5 @@ protected:
 	bool						 m_isDamage = false;		//ダメージを受けたか
 	bool						 m_isDamagePossible = true;	//ダメージを受けられるか
 	bool						 m_isWireHit = false;		//ワイヤーが当たったか
+	bool						 m_isRemovedRigidBody = false;
 };

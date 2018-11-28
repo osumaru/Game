@@ -20,7 +20,7 @@ void CSamurai::Init(CVector3 position)
 	m_position = position;
 	m_characterController.Init(0.5f, 0.9f, position);
 	m_characterController.SetGravity(-9.0f);
-	wchar_t* animClip[CEnemyState::enState_Num] = {
+	wchar_t* animClip[CEnemyState::enAnimation_Num] = {
 		L"Assets/modelData/samuraiStand.tka",
 		L"Assets/modelData/samuraiWalk.tka",
 		L"Assets/modelData/samuraiDash.tka",
@@ -28,10 +28,10 @@ void CSamurai::Init(CVector3 position)
 		L"Assets/modelData/samuraiDamage.tka",
 		L"Assets/modelData/samuraiDeath.tka"
 	};
-	m_animation.Init(animClip, CEnemyState::enState_Num);
-	m_animation.SetLoopFlg(CEnemyState::enState_Idle, true);
-	m_animation.SetLoopFlg(CEnemyState::enState_Walk, true);
-	m_animation.SetLoopFlg(CEnemyState::enState_Chase, true);
+	m_animation.Init(animClip, CEnemyState::enAnimation_Num);
+	m_animation.SetLoopFlg(CEnemyState::enAnimation_Idle, true);
+	m_animation.SetLoopFlg(CEnemyState::enAnimation_Walk, true);
+	m_animation.SetLoopFlg(CEnemyState::enAnimation_Chase, true);
 	//Add(&m_enemyStateMachine, 0);
 	//Add(&m_enemyTurn, 0);
 	//Add(&m_enemySearch, 0);
@@ -58,9 +58,12 @@ void CSamurai::Update()
 	if (!m_isWireHit) {
 		m_animation.Update(GameTime().GetDeltaFrameTime());
 	}
-	m_characterController.SetPosition(m_position);
-	m_characterController.Execute(GameTime().GetDeltaFrameTime());
-	m_position = m_characterController.GetPosition();
+
+	if (!m_isRemovedRigidBody) {
+		m_characterController.SetPosition(m_position);
+		m_characterController.Execute(GameTime().GetDeltaFrameTime());
+		m_position = m_characterController.GetPosition();
+	}
 
 	m_skinModel.Update(m_position, m_rotation, { 1.0f, 1.0f, 1.0f }, true);
 }

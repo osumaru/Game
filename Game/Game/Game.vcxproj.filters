@@ -354,6 +354,9 @@
     <ClCompile Include="Player\PlayerSate\PlayerWireAttack.cpp">
       <Filter>ソース ファイル\Player\PlayerState</Filter>
     </ClCompile>
+    <ClCompile Include="Enemy\EnemyState\EnemyAttackWait.cpp">
+      <Filter>ソース ファイル\Enemy\EnemyState</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -625,6 +628,9 @@
     </ClInclude>
     <ClInclude Include="Player\PlayerSate\PlayerWireAttack.h">
       <Filter>ソース ファイル\Player\PlayerState</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy\EnemyState\EnemyAttackWait.h">
+      <Filter>ソース ファイル\Enemy\EnemyState</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

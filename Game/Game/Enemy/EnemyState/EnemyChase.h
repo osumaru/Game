@@ -26,8 +26,11 @@ public:
 	//更新
 	void Update() override;
 
+	//移動
 	void Move(float length);
 
 private:
-	int	m_interval = 0;	//インターバル
+	std::vector<CVector3> m_root;				//ルートの座標を保存しているリスト
+	std::vector<CVector3>::iterator m_iterater;	//イテレータ
+	int	m_interval = 0;							//インターバル
 };

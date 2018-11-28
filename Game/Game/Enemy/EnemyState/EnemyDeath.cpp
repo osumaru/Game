@@ -9,8 +9,9 @@
 bool CEnemyDeath::Start()
 {
 	//死亡アニメーションを再生
-	m_enemy->PlayAnimation(CEnemyState::enState_Death);
+	m_enemy->PlayAnimation(CEnemyState::enAnimation_Death);
 
+	//移動しない
 	CVector3 moveSpeed = m_enemy->GetMoveSpeed();
 	CVector3 speed = CVector3::Zero;
 	moveSpeed.x = speed.x;
@@ -19,6 +20,9 @@ bool CEnemyDeath::Start()
 
 	//プレイヤーが経験値獲得
 	GetPlayer().ExpUP(m_enemy->GetStatus().exp);
+
+	//エネミーの剛体を削除
+	m_enemy->RemovedRegidBody();
 
 	return true;
 }
