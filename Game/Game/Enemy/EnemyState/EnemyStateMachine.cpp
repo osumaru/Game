@@ -16,6 +16,7 @@ bool CEnemyStateMachine::Start()
 		m_enemyDamage.SetEnemyGroup(m_enemyGroup);
 		m_enemyStan.SetEnemyGroup(m_enemyGroup);
 		m_enemyDeath.SetEnemyGroup(m_enemyGroup);
+		m_enemyAttackWait.SetEnemyGroup(m_enemyGroup);
 	}
 
 	ChangeState(CEnemyState::enState_Idle);
@@ -58,6 +59,9 @@ void CEnemyStateMachine::ChangeState(CEnemyState::EnState nextState)
 		break;
 	case CEnemyState::enState_Death:
 		m_currentState = &m_enemyDeath;
+		break;
+	case CEnemyState::enState_AttackWait:
+		m_currentState = &m_enemyAttackWait;
 		break;
 	}
 

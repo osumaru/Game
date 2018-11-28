@@ -7,8 +7,9 @@
 void CEnemyDamage::Init()
 {
 	//ダメージアニメーションを再生
-	m_enemy->PlayAnimation(CEnemyState::enState_Damage);
+	m_enemy->PlayAnimation(CEnemyState::enAnimation_Damage);
 
+	//ダメージ数値を初期化
 	m_damageNumber = New<CDamageNumber>(PRIORITY_UI);
 	m_damageNumber->Init(m_enemy);
 
@@ -47,8 +48,8 @@ void CEnemyDamage::Update()
 	CVector3 playerPos = GetPlayer().GetPosition();
 	CVector3 toPlayerPos = playerPos - m_enemy->GetPosition();
 	float length = toPlayerPos.Length();
-	//扇状の範囲にいるかどうか判定
-	bool isRange = m_enemy->CalucFanShape(20.0f, playerPos);
+	//攻撃範囲にいるかどうか判定
+	bool isRange = m_enemy->CalucFanShape(10.0f, playerPos);
 
 	if (m_enemy->GetStatus().hp <= 0) {
 		//HPが無くなれば死亡
@@ -61,7 +62,7 @@ void CEnemyDamage::Update()
 		//	//スタンする攻撃を受けた
 		//	m_esm->ChangeState(CEnemyState::enState_Stan);
 		//}
-		if (isRange  && length < 2.0f) {
+		if (isRange && length < 1.2f) {
 			//近ければ攻撃
 			m_esm->ChangeState(CEnemyState::enState_Attack);
 		}

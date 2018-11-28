@@ -32,7 +32,7 @@ void CEnemyTurn::Update()
 		diff = (CMath::PI2 - a_diff) * (a_diff / -diff);
 		a_diff = fabsf(diff);
 	}
-	float rotSpeed = 8.0f * GameTime().GetDeltaFrameTime();
+	float rotSpeed = 10.0f * GameTime().GetDeltaFrameTime();
 	float addAngle = 0.0f;
 	if (a_diff > rotSpeed) {
 		addAngle = (diff / a_diff) * rotSpeed;

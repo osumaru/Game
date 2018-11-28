@@ -7,7 +7,7 @@
 bool CEnemyChase::Start()
 {
 	//歩きアニメーションを再生
-	m_enemy->PlayAnimation(CEnemyState::enState_Chase);
+	m_enemy->PlayAnimation(CEnemyState::enAnimation_Chase);
 
 	return true;
 }
@@ -21,20 +21,20 @@ void CEnemyChase::Update()
 
 	Move(length);
 
-	//扇状の範囲に入っているか
-	bool isRange = m_enemy->CalucFanShape(20.0f, playerPos);
+	//攻撃範囲にいるか
+	bool isRange = m_enemy->CalucFanShape(10.0f, playerPos);
 
 	if (m_enemy->IsDamage()){
 		//ダメージを受けた
 		m_esm->ChangeState(CEnemyState::enState_Damage);
 	}
 	if (isRange && length < 1.2f) {
-		//プレイヤーと距離が近い且つ攻撃範囲にいる
+		//プレイヤーと距離が近い且つ攻撃範囲に入っている
 		m_esm->ChangeState(CEnemyState::enState_Attack);
 	}
 	if (!m_enemy->IsFind()) {
 		//プレイヤーが離れたら戻っていく
-		m_esm->ChangeState(CEnemyState::enState_Walk);
+		m_esm->ChangeState(CEnemyState::enState_Idle);
 	}
 }
 
@@ -45,32 +45,46 @@ void CEnemyChase::Move(float length)
 	CVector3 playerPos = GetPlayer().GetPosition();
 	CVector3 enemyPos = m_enemy->GetPosition();
 	CVector3 toPlayerDir = playerPos - enemyPos;
-	//if (length > 3.0f) 
+	if (length > 3.0f) 
 	{
 		//経路探索する
 		m_interval++;
 		if (m_interval % 5 == 0) {
-			std::vector<CVector3> root;
 			CVector3 startPos = enemyPos;
 			CVector3 targetPos = playerPos;
-			g_pathFinding.FindRoot(root, startPos, targetPos);
-			if (!root.empty()) {
-				CVector3 rootPos = { root[0].x, 0.0f, root[0].y };
-				CVector3 pos = enemyPos;
-				pos.y = 0.0f;
-				rootPos -= pos;
-				rootPos.Normalize();
-				moveSpeed.x = rootPos.x * 2.0f;
-				moveSpeed.z = rootPos.z * 2.0f;
+			g_pathFinding.FindRoot(m_root, startPos, targetPos);
+
+			if (m_root.empty()) {
+				return;
 			}
+			CVector3 rootPos;
+			m_iterater = m_root.begin();
+			while(m_iterater != m_root.end()) {
+				m_iterater->CopyTo(rootPos);
+				CVector3 rootDir = rootPos - m_root[0];
+				if (rootDir.LengthSq() < FLT_EPSILON)
+				{
+					m_iterater++;
+				}
+				else 
+				{
+					break;
+				}
+			}
+			CVector3 pos = enemyPos;
+			pos.y = 0.0f;
+			rootPos -= pos;
+			rootPos.Normalize();
+			moveSpeed.x = rootPos.x * 5.0f;
+			moveSpeed.z = rootPos.z * 5.0f;
 		}
 	}
-	//else {
-	//	//プレイヤーを追いかける
-	//	toPlayerDir.Normalize();
-	//	toPlayerDir *= speed;
-	//	moveSpeed.x = toPlayerDir.x;
-	//	moveSpeed.z = toPlayerDir.z;
-	//}
+	else {
+		//プレイヤーを追いかける
+		toPlayerDir.Normalize();
+		toPlayerDir *= speed;
+		moveSpeed.x = toPlayerDir.x;
+		moveSpeed.z = toPlayerDir.z;
+	}
 	m_enemy->SetMoveSpeed(moveSpeed);
 }

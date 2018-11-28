@@ -5,15 +5,13 @@
 bool CEnemyIdle::Start()
 {
 	//待機アニメーションを再生
-	m_enemy->PlayAnimation(CEnemyState::enState_Idle);
+	m_enemy->PlayAnimation(CEnemyState::enAnimation_Idle);
 
 	//タイマーを初期化
 	m_timer = 0.0f;
 
-	CVector3 moveSpeed = m_enemy->GetMoveSpeed();
-	CVector3 speed = CVector3::Zero;
-	moveSpeed.x = speed.x;
-	moveSpeed.z = speed.z;
+	//移動しない
+	CVector3 moveSpeed = CVector3::Zero;
 	m_enemy->SetMoveSpeed(moveSpeed);
 
 	return true;

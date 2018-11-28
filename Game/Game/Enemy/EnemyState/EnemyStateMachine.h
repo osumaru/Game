@@ -11,6 +11,7 @@
 #include "EnemyDamage.h"
 #include "EnemyDeath.h"
 #include "EnemyStan.h"
+#include "EnemyAttackWait.h"
 #include "IEnemyState.h"
 #include "EnemyState.h"
 
@@ -28,7 +29,8 @@ public:
 		m_enemyAttack(enemy, this),
 		m_enemyDamage(enemy, this),
 		m_enemyDeath(enemy, this),
-		m_enemyStan(enemy, this)
+		m_enemyStan(enemy, this),
+		m_enemyAttackWait(enemy, this)
 	{
 	}
 
@@ -39,7 +41,7 @@ public:
 	bool Start() override;
 
 	//更新
-	void Update() 
+	void Update() override
 	{
 	}
 
@@ -66,5 +68,6 @@ private:
 	CEnemyDamage			m_enemyDamage;							//ダメージ
 	CEnemyDeath				m_enemyDeath;							//死亡
 	CEnemyStan				m_enemyStan;							//スタン
+	CEnemyAttackWait		m_enemyAttackWait;						//攻撃後の待ち
 	CEnemyGroup*			m_enemyGroup = nullptr;					//エネミーグループ
 };
