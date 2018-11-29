@@ -5,9 +5,10 @@
 
 void CTreasureChest::Init(CVector3 position)
 {
-	m_skinModel.Load(L"Assets/modelData/heart.cmo");
+	m_skinModel.Load(L"Assets/modelData/Chest.cmo");
 	m_position = position;
-	m_characterController.Init(0.2f, 0.2f, m_position);
+	m_position.y += 5.0f;
+	m_characterController.Init(0.6f, 0.4f, m_position);
 	//武器のステータスを決める
 	DesideWeaponStatus();
 }

@@ -79,8 +79,8 @@ void CEnemyDamage::Update()
 
 void CEnemyDamage::Release()
 {
-	if (m_damageNumber != nullptr) {
-		Delete(m_damageNumber);
-		m_damageNumber = nullptr;
-	}
+	//if (m_damageNumber != nullptr) {
+	//	Delete(m_damageNumber);
+	//	m_damageNumber = nullptr;
+	//}
 }

@@ -18,8 +18,11 @@ void CPlayerDamage::Init()
 		moveSpeed.x = m_airDamageVec.x;
 		moveSpeed.z = m_airDamageVec.z;
 		m_pPlayerGetter->SetMoveSpeed(m_airDamageVec);
+		m_pPlayerGetter->GetAnimation().Play(enPlayerAnimationDamageAir, 0.1f);
 	}
-	m_pPlayerGetter->GetAnimation().Play(enPlayerAnimationDamage, 0.1f);
+	else {
+		m_pPlayerGetter->GetAnimation().Play(enPlayerAnimationDamage, 0.1f);
+	}
 }
 
 void CPlayerDamage::Update()
