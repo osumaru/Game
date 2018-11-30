@@ -9,6 +9,7 @@
 
 IShop::IShop()
 {
+	
 }
 
 
@@ -18,6 +19,7 @@ IShop::~IShop()
 
 void IShop::ShopUpdate()
 {
+	if (&GetPlayer() == nullptr) { return; }
 	CVector3 playervec = GetPlayer().GetPosition() - m_position;
 	float len = playervec.Length();
 

@@ -2,9 +2,12 @@
 #include "WeaponShop.h"
 #include "../../Camera/GameCamera.h"
 #include "../../Player/Player.h"
+#include "../../UI/Fade/LoadScene.h"
+#include "../../Scene/SceneManager.h"
 
 CWeaponShop::CWeaponShop()
 {
+	SetIsActive(false);
 }
 
 
@@ -48,7 +51,7 @@ void CWeaponShop::Init(const CVector3 position, const CQuaternion rotation)
 		m_selectItemSprite.SetPosition(m_slectItemTexPos);
 		m_selectItemSprite.SetSize(m_selectItemTexSize);
 
-		m_equipItem.Start();
+		m_equipItem = GetSceneManager().GetFade()->GetLoadScene()->GetEquipItemData();
 
 
 		wchar_t filePath[256];
@@ -56,7 +59,7 @@ void CWeaponShop::Init(const CVector3 position, const CQuaternion rotation)
 		for (int num = 0; num < ITEM_ELEMENT;num++)
 		{
 			int RandomID = DEFAULT_WEAPON[num];//Random().GetRandInt() % 10;
-			m_items[num].ItemStatus = m_equipItem.GetItemStatus(RandomID);
+			m_items[num].ItemStatus = m_equipItem->GetItemStatus(RandomID);
 			swprintf(filePath, L"Assets/sprite/Item/Equip/Equip_%d.png", (int)m_items[num].ItemStatus.WeaponType);
 			m_items[num].ItemTexture.Load(filePath);
 			m_items[num].ItemSprite.Init(&m_items[num].ItemTexture);
@@ -72,7 +75,7 @@ void CWeaponShop::Init(const CVector3 position, const CQuaternion rotation)
 			m_fontPosition.y -= FONT_POSITION_OFFSET.y;
 		}
 	}
-	
+	SetIsActive(true);
 }
 void CWeaponShop::LineupChange()
 {
@@ -80,7 +83,7 @@ void CWeaponShop::LineupChange()
 	for (int num = 0; num < ITEM_ELEMENT;num++)
 	{
 		int RandomID = PICUP_WEAPON[num];
-		m_items[num].ItemStatus = m_equipItem.GetItemStatus(RandomID);
+		m_items[num].ItemStatus = m_equipItem->GetItemStatus(RandomID);
 		swprintf(filePath, L"Assets/sprite/Item/Equip/Equip_%d.png", (int)m_items[num].ItemStatus.WeaponType);
 		m_items[num].ItemTexture.Load(filePath);
 		m_items[num].ItemSprite.Init(&m_items[num].ItemTexture);

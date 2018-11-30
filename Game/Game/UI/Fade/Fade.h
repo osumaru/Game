@@ -15,6 +15,10 @@ public:
 	{
 		return m_isExecute;
 	}
+	CLoadScene* GetLoadScene()
+	{
+		return &m_loadScene;
+	}
 private:
 	enum EnFadeState
 	{
