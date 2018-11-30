@@ -5,7 +5,7 @@
 #include "../../Item/IItem.h"
 #include "../../Player/Weapon/WeaponManager.h"
 
-static std::list<SWeaponStatus> m_equipList; //‘•”õƒŠƒXƒg
+std::list<SWeaponStatus> CEquipInventory::m_equipList;
 
 CEquipInventory::CEquipInventory(){}
 

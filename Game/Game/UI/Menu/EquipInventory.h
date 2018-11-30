@@ -80,6 +80,7 @@ private:
 	CSprite								m_pointer;										//カーソル
 	CTexture							m_pointerTexture;
 	CSprite								m_equip[m_equipLimit];							//装備アイコン
+	static std::list<SWeaponStatus>		m_equipList;									//装備リスト
 	CSprite								m_equipWeapon[enWeaponNum];						//装備武器アイコン
 	CSprite								m_equipFrame[enWeaponNum];						//装備武器アイコンの枠
 	CVector2							m_basePos = CVector2::Zero;						//初期座標
