@@ -81,12 +81,15 @@ void CPlayer::Init(CVector3 position)
 									{ L"Assets/modelData/PlayerCombo4Combine.tka" },		//連撃アニメーション
 									{ L"Assets/modelData/PlayerCombo5Combine.tka" },		//連撃アニメーション
 									{ L"Assets/modelData/PlayerAttackCombine.tka" },		//連撃アニメーション
+									{ L"Assets/modelData/PlayerJumpAttack.tka"},		//ジャンプ攻撃アニメーション
 									{ L"Assets/modelData/PlayerStun.tka" },			//スタンアニメーション
 									{ L"Assets/modelData/PlayerDamage.tka" },			//ダメージアニメーション
+									{ L"Assets/modelData/PlayerJumpDamage.tka"},		//ダメージ(空中)アニメーション
 									{ L"Assets/modelData/PlayerRoll.tka" }	,		//回避アクション
 									{ L"Assets/modelData/PlayerRollCombine.tka" }	,		//回避アクション
 									{ L"Assets/modelData/PlayerDeath.tka" },			//死亡アニメーション
 									{ L"Assets/modelData/PlayerWireMove.tka" },				//ワイヤー移動アニメーション
+									{ L"Assets/modelData/PlayerJumpTackle.tka"},			//ワイヤー攻撃アニメーション
 									{ L"Assets/modelData/PlayerArrowAttack.tka" },		//弓の攻撃アニメーション
 									{ L"Assets/modelData/PlayerArrowAttackEvent.tka" },
 									{ L"Assets/modelData/PlayerLeageSwordAttack.tka" },	//大剣の攻撃アニメーション
@@ -154,6 +157,11 @@ void CPlayer::Update()
 	//{
 	//	m_status.Health = 0;
 	//}
+
+	if (Pad().IsTriggerButton(enButtonB))
+	{
+		m_isDamege = true;
+	}
 
 	CMatrix viewMat;
 	CVector3 cameraPos = m_position;

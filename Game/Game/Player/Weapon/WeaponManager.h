@@ -55,6 +55,15 @@ public:
 		return m_weapons[weaponNum].get();
 	}
 
+
+	/*
+	Œ»İ‘•”õ‚µ‚Ä‚¢‚é•Ší‚ğæ“¾
+	*/
+	IWeapon* GetWeapon()
+	{
+		return m_weapons[m_weaponState].get();
+	}
+
 	//UŒ‚‚µ‚Ä‚¢‚é‚©‚Ìƒtƒ‰ƒO‚ğæ“¾
 	bool GetIsAttack()
 	{
