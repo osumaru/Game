@@ -3,6 +3,7 @@
 */
 
 #pragma once
+#include "../Player/Weapon/WeaponCommon.h"
 class IItem : public IGameObject
 {
 public:
@@ -50,26 +51,25 @@ public:
 		Health,			//体力
 		None,			//効果なし
 	};
-	//装備の情報アイテムの場合はNoWeapon
-	enum EnWeaponType
+	//アイテムのクオリティー
+	enum EnItemQuality
 	{
-		enSword,			//片手剣
-		enLongSword,		//両手剣
-		enArrow,			//弓矢
-		enTwinSword,		//二刀
-		enNoWeapon,			//武器ではない
+		enNormal,
+		enRare,
+		enLegend,
 	};
 
 	struct SItemStatus
 	{
-		wchar_t					ItemName[40];			//アイテムの名前
-		wchar_t					ItemText[100];			//武器の説明
-		int						ItemID = 0;				//商品の番号
-		int						Itemprice = 0;			//アイテムの値段
-		int						ItemEffect = 0;			//効果値
+		wchar_t					ItemName[40];							//アイテムの名前
+		wchar_t					ItemText[100];							//武器の説明
+		int						ItemID = 0;								//商品の番号
+		int						Itemprice = 0;							//アイテムの値段
+		int						ItemEffect = 0;							//効果値
+		EnItemQuality			ItemQuality = EnItemQuality::enNormal;	//アイテムのクオリティー
 		EnIemEffectPlayerStatus	ItemEffectPlayerStatus = EnIemEffectPlayerStatus::None;
-		EnInventoryItemType		ItemType = Invald;		//そのアイテムが回復系なのか装備するものなのかを判別する
-		EnWeaponType			WeaponType = enNoWeapon;
+		EnInventoryItemType		ItemType = Invald;						//そのアイテムが回復系なのか装備するものなのかを判別する
+		EnPlayerWeapon			WeaponType = EnPlayerWeapon::enInvalid;	//装備の種類
 	};
 
 	//アイテムの種類を取得
