@@ -2,6 +2,7 @@
 #include "TreasureChest.h"
 #include "../Player/Player.h"
 #include"../../Game/Camera/GameCamera.h"
+#include "../UI/Menu/EquipInventory.h"
 
 void CTreasureChest::Init(CVector3 position)
 {
@@ -40,7 +41,7 @@ void CTreasureChest::Update()
 	bool isPickUp = PickUp(isPopEnd, 2.0f);
 	if (isPickUp && Pad().IsTriggerButton(enButtonA)) {
 		//èEÇ§Ç±Ç∆Ç™Ç≈Ç´ÇÈ
-		GetPlayer().GetWeaponManager().AddEquipList(m_weaponStatus);
+		CEquipInventory::AddEquipList(m_weaponStatus);
 		Delete(this);
 	}
 

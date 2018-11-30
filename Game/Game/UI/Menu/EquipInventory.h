@@ -44,11 +44,15 @@ public:
 	//ステータス計算
 	void CalucStatus();
 
-	//装備所持上限を取得
-	static int GetEquipLimit()
-	{
-		return m_equipLimit;
-	}
+	//アイテムを捨てる
+	void Erase();
+
+	//所持装備リストに追加
+	//weaponStatus		リストに追加する装備のステータス
+	static void AddEquipList(SWeaponStatus& weaponStatus);
+
+	//装備リストをクリアする
+	void ClearEquipList();
 
 private:
 	//ステータスの数
@@ -76,7 +80,8 @@ private:
 	CSprite								m_pointer;										//カーソル
 	CTexture							m_pointerTexture;
 	CSprite								m_equip[m_equipLimit];							//装備アイコン
-	std::list<SWeaponStatus>			m_equipList;									//装備リスト
+	CSprite								m_equipWeapon[enWeaponNum];						//装備武器アイコン
+	CSprite								m_equipFrame[enWeaponNum];						//装備武器アイコンの枠
 	CVector2							m_basePos = CVector2::Zero;						//初期座標
 	CVector2							m_baseSize = CVector2::Zero;					//初期サイズ
 	int									m_width = 0;									//インベントリの幅

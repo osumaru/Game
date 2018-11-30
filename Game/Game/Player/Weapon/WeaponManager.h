@@ -23,20 +23,6 @@ public:
 		return m_weaponState;
 	}
 
-	//所持装備リストに追加
-	//item		装備リストに追加するアイテム
-	void AddEquipList(SWeaponStatus& item);
-
-	//装備の変更
-	//number		変更したい装備の番号
-	void ChangeEquip(int number);
-
-	//所持装備リストを取得
-	std::list<SWeaponStatus>& GetEquipList()
-	{
-		return m_equipList;
-	}
-
 	/*
 	武器のステータスを取得
 	weaponNum	武器の種類
