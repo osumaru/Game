@@ -108,7 +108,7 @@ void CPlayerAttack::Move()
 	moveSpeed.y = 0.0f;
 	CCharacterController& characon = m_pPlayerGetter->GetCharacterController();
 	float gravity = characon.GetGravity();
-	characon.SetGravity(-0.3f);
+	characon.SetGravity(-0.1f);
 	//高さをプレイヤ―の座標でそろえる
 	m_preBonePos.y = playerPos.y;
 	characon.SetMoveSpeed(moveSpeed);

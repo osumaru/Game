@@ -169,10 +169,12 @@ void CPlayer::Update()
 	Engine().GetShadowMap().SetProjectionMatrix(projMat);
 	m_wireAction.Update();
 	Rotation(m_characterController.GetMoveSpeed());
+	m_animation.Update(GameTime().GetDeltaFrameTime());
+	m_skinmodel.Update(m_position, m_rotation, { 1.0f, 1.0f, 1.0f }, true);
 	m_PlayerStateMachine.Update();
+	m_animation.Update(0.0f);
 	m_position = m_characterController.GetPosition();
 	//アニメーションの更新
-	m_animation.Update(GameTime().GetDeltaFrameTime());
 	//スキンモデルの更新
 	m_skinmodel.Update(m_position, m_rotation, { 1.0f, 1.0f, 1.0f }, true);
 	m_weaponManager.Update();

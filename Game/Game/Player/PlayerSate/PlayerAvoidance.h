@@ -18,6 +18,7 @@ public:
 private:
 	const CMatrix* m_pBoneMat;	//ボーンの行列のポインタ
 	CVector3 m_manipVec;		//ボーンの座標からプレイヤーの座標までのベクトル
-	CVector3 m_preBonePos;		//前のフレームのボーンの座標
+	CVector3 m_preBonePos;		//前のフレームのボーンの座標z
+	float	m_fallSpeed = 0.0f;
 };
 
