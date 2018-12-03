@@ -12,7 +12,7 @@ public:
 	void AfterDraw();
 	void LineupChange();
 private:
-	CEquipItem			m_equipItem;
+	CEquipItem*			m_equipItem;
 	float				m_changeUpTime = 0.0f;
 	const int			DEFAULT_WEAPON[5] = { 0,1,2,10,11 };
 	const int			PICUP_WEAPON[5] = { 5,6,12,13,14 };

@@ -26,6 +26,7 @@ void CMenu::BeforeDead()
 	}
 	if (m_equipInventory != nullptr)
 	{
+		m_equipInventory->ClearEquipList();
 		Delete(m_equipInventory);
 	}
 }

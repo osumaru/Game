@@ -3,6 +3,8 @@
 #include "../../Player/Player.h"
 #include "../../Camera/GameCamera.h"
 #include "../../Item/RecoveryItem.h"
+#include "../../UI/Fade/LoadScene.h"
+
 
 
 CItemShop::CItemShop()

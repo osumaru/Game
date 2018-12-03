@@ -29,6 +29,12 @@ public:
 		m_number[m_num].SetPosition(pos);
 	}
 
+	//À•W‚ğæ“¾
+	CVector2 GetPosition()
+	{
+		return m_number[m_num].GetPosition();
+	}
+
 	//Z’l‚ğİ’è
 	//depth		Z’l
 	void SetDepthValue(float depth)
