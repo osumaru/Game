@@ -26,7 +26,6 @@ void CMenu::BeforeDead()
 	}
 	if (m_equipInventory != nullptr)
 	{
-		m_equipInventory->ClearEquipList();
 		Delete(m_equipInventory);
 	}
 }
@@ -169,7 +168,7 @@ void CMenu::KeyInputMenu()
 		GetPlayer().SetIsActive(!m_draw);
 	}
 
-	if (Pad().IsTriggerButton(enButtonSelect) || Pad().IsTriggerButton(enButtonB))
+	if (Pad().IsTriggerButton(enButtonSelect))
 	{
 		//プレイヤーのステータスを格納
 		PlayerStatusInput();

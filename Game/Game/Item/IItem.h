@@ -89,4 +89,5 @@ protected:
 	const float				m_speed = 4.0f;				//速度
 	const float				m_deadTime = 30.0f;			//アイテムが消滅するまでの時間
 	float					m_timer = 0.0f;				//タイマー
+	wchar_t					m_itemName[40];
 };
