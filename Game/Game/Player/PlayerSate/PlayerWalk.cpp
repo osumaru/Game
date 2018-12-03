@@ -34,7 +34,7 @@ void CPlayerWalk::Update()
 		m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateStand);
 	}
 
-	else if (Pad().IsTriggerButton(enButtonA))
+	else if (m_pPlayer->GetIsStateCondition(CPlayerState::enPlayerStateJump))
 	{
 		m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateJump);
 	}

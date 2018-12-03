@@ -12,7 +12,7 @@ public:
 	//XV
 	void Update()override;
 
-	const bool IsCharge()
+	const bool IsCharge() const
 	{
 		return	m_isCharge;
 	}

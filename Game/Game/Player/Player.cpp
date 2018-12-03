@@ -244,6 +244,8 @@ void CPlayer::StatusCalculation()
 
 }
 
+
+
 void CPlayer::Rotation(const CVector3& stickDir)
 {
 	if (m_isDamege) {
@@ -331,5 +333,45 @@ void CPlayer::Rotation(const CVector3& stickDir)
 		m_rotation = CQuaternion::Identity;
 		m_rotation.Multiply(multiY);
 		m_rotation.Multiply(multiX);
+	}
+}
+
+bool CPlayer::GetIsStateCondition(CPlayerState::EnPlayerState state)
+{
+	switch (state)
+	{
+	case CPlayerState::enPlayerStateRun://左スティックの入力があったか
+		return Pad().GetLeftStickX() != 0 || Pad().GetLeftStickY() != 0;
+
+	case CPlayerState::enPlayerStateArrowAttack://xボタンを押して装備している武器が弓だったか
+		return Pad().IsTriggerButton(enButtonX) && m_weaponManager.GetCurrentState() == enWeaponArrow;
+
+	case CPlayerState::enPlayerStateArrowShoot:
+		return dynamic_cast<CPlayerArrowAttack*>(m_PlayerStateMachine.GetState(CPlayerState::enPlayerStateArrowAttack))->IsCharge();
+
+	case CPlayerState::enPlayerStateAttack://xボタンを押して装備している武器が弓じゃなかったか
+		return Pad().IsTriggerButton(enButtonX) && m_weaponManager.GetCurrentState() != enWeaponArrow;
+
+	case CPlayerState::enPlayerStateAvoidance://bボタンを押しているか
+		return Pad().IsTriggerButton(enButtonB);
+
+	case CPlayerState::enPlayerStateDamage://ダメージフラグが立っているか
+		return m_isDamege;
+
+	case CPlayerState::enPlayerStateDied://HPが0以下か
+		return m_status.Health <= 0;
+
+	case CPlayerState::enPlayerStateJump://Aボタンを押しているか
+		return Pad().IsTriggerButton(enButtonA);
+
+	case CPlayerState::enPlayerStateRunJump://Aボタンを押しているか
+		return Pad().IsTriggerButton(enButtonA);
+
+	case CPlayerState::enPlayerStateWireMove://ワイヤーで移動するフラグが立っているか
+		return m_wireAction.IsWireMove();
+
+	case CPlayerState::enPlayerStateStand://移動量が0か
+		return m_characterController.GetMoveSpeed().Length() == 0.0f;
+
 	}
 }

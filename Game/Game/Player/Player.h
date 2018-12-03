@@ -179,6 +179,14 @@ public:
 		m_playerGetter.SetDamageEnemyPos(position);
 	}
 
+	/*
+	その状態へ遷移するための条件を満たしているかのフラグを返す関数
+	state	プレイヤーのステート
+	ret		状態
+	*/
+	bool GetIsStateCondition(CPlayerState::EnPlayerState state);
+
+
 	friend class CPlayerGetter;
 private:
 

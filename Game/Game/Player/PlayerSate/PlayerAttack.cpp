@@ -47,7 +47,7 @@ void CPlayerAttack::Update()
 	Move();
 	m_pPlayer->GetWeaponManager().GetWeapon(m_pPlayer->GetWeaponManager().GetCurrentState())->EnemyAttack();
 
-	if (Pad().IsTriggerButton(enButtonB)) {
+	if (m_pPlayer->GetIsStateCondition(CPlayerState::enPlayerStateAvoidance)) {
 		m_isPreDodge = true;
 	}
 
@@ -80,7 +80,7 @@ void CPlayerAttack::Update()
 			{
 				m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateAvoidance);
 			}
-			else if (Pad().GetLeftStickX() != 0 || Pad().GetLeftStickY() != 0)
+			else if (m_pPlayer->GetIsStateCondition(CPlayerState::enPlayerStateRun))
 			{
 				//走りアニメーション
 				m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateRun);

@@ -28,7 +28,7 @@ void CPlayerArrowAttack::Update()
 	if (!m_pPlayerGetter->GetAnimation().IsPlay())
 	{
 
-		if (!m_isCharge)
+		if (m_pPlayer->GetIsStateCondition(CPlayerState::enPlayerStateArrowShoot))
 		{
 
 			m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateArrowShoot);
