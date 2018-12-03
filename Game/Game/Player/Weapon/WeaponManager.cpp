@@ -58,44 +58,6 @@ void CWeaponManager::Update()
 		}
 	}
 	m_weapons[m_weaponState]->Updater();
-
-}
-
-void CWeaponManager::ChangeEquip(int number)
-{
-	if (!m_equipList.empty())
-	{
-		//‘I‚ñ‚¾‘•”õ‚ÆŒ»İ‚Ì‘•”õ‚ğŒğŠ·‚·‚é
-		std::list<SWeaponStatus>::iterator it;
-		it = m_equipList.begin();
-		for (int i = 0; i < number; i++)
-		{
-			it++;
-		}
-		int weaponNumber = (*it).weaponNum;
-		if (m_weapons[weaponNumber]->GetWeaponStatus().weaponNum == enInvalid)
-		{
-			//‰½‚à‘•”õ‚µ‚Ä‚¢‚È‚¢
-			m_weapons[weaponNumber]->SetWeaponStatus(*it);
-			m_equipList.erase(it);
-		}
-		else
-		{
-			//‘•”õ‚ğŒğŠ·‚·‚é
-			SWeaponStatus equipWeapon = m_weapons[weaponNumber]->GetWeaponStatus();
-			m_weapons[weaponNumber]->SetWeaponStatus(*it);
-			(*it) = equipWeapon;
-		}
-	}
-}
-
-void CWeaponManager::AddEquipList(SWeaponStatus& item)
-{
-	if (m_equipList.size() < CEquipInventory::GetEquipLimit())
-	{
-		//ŠãŒÀ‚ğ’´‚¦‚Ä‚¢‚È‚¯‚ê‚Î‘•”õƒŠƒXƒg‚É’Ç‰Á
-		m_equipList.push_back(item);
-	}
 }
 
 void CWeaponManager::Draw()

@@ -3,7 +3,7 @@
 
 void CPlayerWireAttack::Init()
 {
-	m_pPlayerGetter->GetAnimation().Play(enPlayerAnimationAttack1, 0.2f);
+	m_pPlayerGetter->GetAnimation().Play(enPlayerAnimationWireAttack, 0.2f);
 }
 
 void CPlayerWireAttack::Update()

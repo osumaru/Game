@@ -23,6 +23,11 @@ void CEnemyAttackWait::Update()
 	CVector3 playerPos = GetPlayer().GetPosition();
 	CVector3 distance = m_enemy->GetPosition() - playerPos;
 	float length = distance.Length();
+	if (m_enemy->IsDamage())
+	{
+		//ƒ_ƒ[ƒW‚ðŽó‚¯‚½
+		m_esm->ChangeState(CEnemyState::enState_Damage);
+	}
 	if (length < 1.2f) 
 	{
 		bool isRange = m_enemy->CalucFanShape(10.0f, playerPos);

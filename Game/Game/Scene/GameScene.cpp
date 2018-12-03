@@ -81,8 +81,9 @@ bool CGameScene::Start()
 		//});
 		//ThreadA.detach();
 		return true;
+
 	}
-	return false;
+	//return false;
 
 }
 

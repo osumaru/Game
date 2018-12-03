@@ -30,9 +30,6 @@ public:
 
 	//更新
 	void Update() override;
-
-	//解放
-	void Release() override;
 private:
 	CDamageNumber*	m_damageNumber = nullptr;	//ダメージ表示
 	const float		m_knockBackSpeed = 3.0f;	//ノックバックスピード

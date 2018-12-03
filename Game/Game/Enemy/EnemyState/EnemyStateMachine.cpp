@@ -32,7 +32,6 @@ void CEnemyStateMachine::ChangeState(CEnemyState::EnState nextState)
 
 	//現在のステートをゲームオブジェクトから削除
 	if (m_currentState != nullptr) {
-		m_currentState->Release();
 		Delete(m_currentState);
 	}
 
@@ -71,7 +70,6 @@ void CEnemyStateMachine::ChangeState(CEnemyState::EnState nextState)
 
 void CEnemyStateMachine::Release()
 {
-	m_currentState->Release();
 	Delete(m_currentState);
 	Delete(this);
 }

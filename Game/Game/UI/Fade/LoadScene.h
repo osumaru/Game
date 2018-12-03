@@ -14,6 +14,10 @@ public:
 	{
 		m_isDraw = setdraw;
 	}
+	CEquipItem* GetEquipItemData()
+	{
+		return &m_equipItem;
+	}
 private:
 	CFont			m_font[2];									//フォント
 	CVector2		m_fontNamePosition = { -350.0f,250.0f };	//名前の初期座標

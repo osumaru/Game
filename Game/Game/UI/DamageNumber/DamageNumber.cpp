@@ -3,6 +3,7 @@
 #include "../../Enemy/IEnemy.h"
 #include "../../Player/Player.h"
 #include "../../Camera/GameCamera.h"
+#include "../../Player/Weapon/WeaponManager.h"
 
 void CDamageNumber::Init(IEnemy* enemy)
 {
@@ -16,13 +17,13 @@ void CDamageNumber::Init(IEnemy* enemy)
 	}
 
 	m_enemy = enemy;
+
+	//ダメージ計算
+	DamageCalculation();
 }
 
 bool CDamageNumber::Start()
 {
-	//ダメージ計算
-	DamageCalculation();
-
 	CMatrix leftShoulderMatrix = m_enemy->GetBoneWorldMatrix(L"LeftShoulder");
 	m_damagePos.x = leftShoulderMatrix.m[3][0];
 	m_damagePos.y = leftShoulderMatrix.m[3][1];
@@ -49,7 +50,7 @@ void CDamageNumber::Update()
 	for (int i = 0; i < EnDigit::enDigit_Num; i++)
 	{
 		m_number[i].SetPosition(screenPosition);
-		screenPosition.x -= m_numSize.x * (i + 1);
+		screenPosition.x = m_number[0].GetPosition().x - m_numSize.x * (i + 1);
 	}
 
 	m_timer += GameTime().GetDeltaFrameTime();
@@ -61,7 +62,8 @@ void CDamageNumber::Update()
 		if (alpha < 0.0f)
 		{
 			//透明になった
-			SetIsActive(false);
+			//SetIsActive(false);
+			Delete(this);
 			return;
 		}
 		for (int i = 0; i < EnDigit::enDigit_Num; i++)
@@ -82,7 +84,8 @@ void CDamageNumber::AfterDraw()
 void CDamageNumber::DamageCalculation()
 {
 	//ダメージ計算
-	int playerStrength = GetPlayer().GetStatus().Strength;
+	SWeaponStatus weaponStatus = GetPlayer().GetWeaponManager().GetWeapon()->GetWeaponStatus();
+	int playerStrength = GetPlayer().GetStatus().Strength + weaponStatus.attack;
 	int enemyDefence = m_enemy->GetStatus().defense;
 	int damage = playerStrength - enemyDefence;
 	if (damage < 0)
