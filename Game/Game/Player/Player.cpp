@@ -329,33 +329,3 @@ void CPlayer::Rotation(const CVector3& stickDir)
 		m_rotation.Multiply(multiX);
 	}
 }
-
-void CPlayer::UseItem(int number)
-{
-	if (m_itemList.empty())
-	{
-		//アイテムがない
-		return;
-	}
-	//選んだアイテムを使う
-	std::list<IItem*>::iterator it;
-	it = m_itemList.begin();
-	for (int i = 0; i < number; i++)
-	{
-		it++;
-	}
-	bool isUse = (*it)->Use();
-	if (isUse) {
-		//使ったアイテムをリストから削除する
-		m_itemList.erase(it);
-	}
-}
-
-void CPlayer::AddItemList(IItem * item)
-{
-	if (m_itemList.size() < CItemInventory::GetItemLimit())
-	{
-		//所持上限を超えていなければアイテムリストに追加
-		m_itemList.push_back(item);
-	}
-}

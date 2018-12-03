@@ -4,7 +4,7 @@
 #include "../GameSound/GameSound.h"
 #include "../Scene/SceneManager.h"
 #include "../Item/RecoveryItem.h"
-
+#include "../UI/Menu/ItemInventory.h"
 
 
 IShop::IShop()
@@ -128,7 +128,7 @@ bool IShop::Transaction(const int gold)
 	{
 		CRecoveryItem* item = new CRecoveryItem;
 		item->Init();
-		GetPlayer().AddItemList(item);
+		CItemInventory::AddItemList(item);
 		CSoundSource* se = New<CSoundSource>(0);
 		se->Init("Assets/sound/Shop/BuySe.wav");
 		se->SetVolume(1.0f);
