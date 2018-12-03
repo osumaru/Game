@@ -4,7 +4,7 @@
 #include "../../Camera/GameCamera.h"
 #include "../../Item/RecoveryItem.h"
 #include "../../UI/Fade/LoadScene.h"
-
+#include "../../UI/Menu/ItemInventory.h"
 
 
 CItemShop::CItemShop()
@@ -85,7 +85,7 @@ void CItemShop::Update()
 	{
 		IItem* item = new CRecoveryItem;
 		item->Start();
-		GetPlayer().AddItemList(item);
+		CItemInventory::AddItemList(item);
 		CSoundSource* se = New<CSoundSource>(0);
 		se->Init("Assets/sound/Shop/BuySe.wav");
 		se->SetVolume(1.0f);

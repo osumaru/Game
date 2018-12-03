@@ -4,6 +4,8 @@
 #include "../../Player/Player.h"
 #include "../../Item/IItem.h"
 
+std::list<IItem*> CItemInventory::m_itemList;
+
 CItemInventory::CItemInventory(){}
 
 CItemInventory::~CItemInventory(){}
@@ -23,7 +25,6 @@ void CItemInventory::Init(CMenu* menu)
 	m_pointer.SetPosition(m_basePos);
 	m_pointer.SetSize(m_size);
 	//アイテムリストを取得
-	m_itemList = GetPlayer().GetItemList();
 	m_width = 5;
 	m_height = 3;
 	if (!m_itemList.empty()) {
@@ -61,10 +62,14 @@ void CItemInventory::Update()
 	//カーソル移動
 	PointerMove();
 
-	//アイテムを使用する
-	UseItem();
+	if (Pad().IsTriggerButton(enButtonA)) 
+	{
+		//アイテムを使用する
+		UseItem();
+	}
 
-	if (Pad().IsTriggerButton(enButtonB)) {
+	if (Pad().IsTriggerButton(enButtonB))
+	{
 		//メニューに戻る
 		m_menu->SetIsActive(true);
 		Delete(this);
@@ -156,26 +161,40 @@ void CItemInventory::UseItem()
 {
 	//アイテムの数を取得
 	size_t itemNum = m_itemList.size();
-	if (m_pointerNum >= itemNum || !Pad().IsTriggerButton(enButtonA))
+	if (m_pointerNum >= itemNum || m_itemList.empty())
 	{
 		return;
 	}
-	//カーソルで選んでいるアイテムを使う
-	GetPlayer().UseItem(m_pointerNum);
-	//空いたスペースを詰める
-	m_itemList = GetPlayer().GetItemList();
-	if (!m_itemList.empty()) {
-		//リストにアイテムがある
-		int idx = 0;
-		for (auto& item : m_itemList)
-		{
-			//座標とサイズを決める
-			CVector2 position = m_basePos;
-			position.x += m_size.x * (idx % m_width);
-			position.y -= m_size.y * (idx / m_width);
-			m_item[idx].SetPosition(position);
-			m_item[idx].SetSize(m_size);
-			idx++;
-		}
+	//選んだアイテムを使う
+	std::list<IItem*>::iterator it;
+	it = m_itemList.begin();
+	for (int i = 0; i < m_pointerNum; i++)
+	{
+		it++;
+	}
+	bool isUse = (*it)->Use();
+	if (isUse) {
+		//使ったアイテムをリストから削除する
+		m_itemList.erase(it);
+	}
+	int idx = 0;
+	for (auto& item : m_itemList)
+	{
+		//座標とサイズを決める
+		CVector2 position = m_basePos;
+		position.x += m_size.x * (idx % m_width);
+		position.y -= m_size.y * (idx / m_width);
+		m_item[idx].SetPosition(position);
+		m_item[idx].SetSize(m_size);
+		idx++;
+	}
+}
+
+void CItemInventory::AddItemList(IItem * item)
+{
+	if (m_itemList.size() < m_itemLimit)
+	{
+		//所持上限を超えていなければアイテムリストに追加
+		m_itemList.push_back(item);
 	}
 }

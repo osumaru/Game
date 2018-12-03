@@ -50,10 +50,6 @@ public:
 	//所持装備リストに追加
 	//weaponStatus		リストに追加する装備のステータス
 	static void AddEquipList(SWeaponStatus& weaponStatus);
-
-	//装備リストをクリアする
-	void ClearEquipList();
-
 private:
 	//ステータスの数
 	enum EnStatusNum {
@@ -70,19 +66,23 @@ private:
 	};
 
 	static const int					m_equipLimit = 15;								//装備所持上限
+	static std::list<SWeaponStatus>		m_equipList;									//装備リスト
 	CMenu*								m_menu = nullptr;								//メニュー
 	CFont								m_statusFont[enFont_StatusNum][enStatus_Num];	//現在の装備と装備変更時のステータス表示
-	CSprite								m_backGround;									//背景
-	CTexture							m_backGroundTexture;
+	CSprite								m_background;									//背景
 	CSprite								m_statusWindow[enFont_StatusNum];				//ステータスウィンドウ
 	CSprite								m_right;										//右矢印
-	CTexture							m_rightTexture;
 	CSprite								m_pointer;										//カーソル
-	CTexture							m_pointerTexture;
 	CSprite								m_equip[m_equipLimit];							//装備アイコン
-	static std::list<SWeaponStatus>		m_equipList;									//装備リスト
 	CSprite								m_equipWeapon[enWeaponNum];						//装備武器アイコン
 	CSprite								m_equipFrame[enWeaponNum];						//装備武器アイコンの枠
+	CSprite								m_buttonBackground;								//ボタン背景
+	CSprite								m_buttonA;										//Aボタン
+	CSprite								m_buttonB;										//Bボタン
+	CSprite								m_buttonY;										//Yボタン
+	CFont								m_buttonAFont;									//Aボタンフォント
+	CFont								m_buttonBFont;									//Bボタンフォント
+	CFont								m_buttonYFont;									//Yボタンフォント
 	CVector2							m_basePos = CVector2::Zero;						//初期座標
 	CVector2							m_baseSize = CVector2::Zero;					//初期サイズ
 	int									m_width = 0;									//インベントリの幅

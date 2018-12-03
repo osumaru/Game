@@ -141,20 +141,6 @@ public:
 		}
 	}
 
-	//所持アイテムリストに追加
-	//item		アイテムリストに追加するアイテム
-	void AddItemList(IItem* item);
-
-	//所持アイテムリストを取得
-	std::list<IItem*> GetItemList()
-	{
-		return m_itemList;
-	}
-
-	//所持アイテムを使う
-	//number		アイテムの番号
-	void UseItem(int number);
-
 	//買い物をした時の計算を行う
 	bool BuyMoney(const int buy)
 	{
@@ -217,8 +203,6 @@ private:
 	bool								m_isDied = false;						//死んでいるかの判定
 	bool								m_isStatusConversion = false;			//ステータスが変化したかを判定する
 	bool								m_isInvinsible = false;					//無敵かのフラグ
-
-	std::list<IItem*>					m_itemList;								//所持アイテムのリスト
 	CWireAction							m_wireAction;							//ワイヤーの飛ぶかどうかの判定をしたりするところ
 };
 
