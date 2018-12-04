@@ -356,6 +356,7 @@
     </ClCompile>
     <ClCompile Include="Map\MapChip\ObstacleMapObject.cpp">
       <Filter>ソース ファイル</Filter>
+      <Filter>ソース ファイル\Map\MapChip</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -631,15 +632,13 @@
     </ClInclude>
     <ClInclude Include="Map\MapChip\ObstacleMapObject.h">
       <Filter>ヘッダー ファイル</Filter>
+      <Filter>ソース ファイル\Map\MapChip</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="Assets\shader\sprite.fx">
       <Filter>ソース ファイル</Filter>
     </CustomBuild>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Assets\modelData\UnityChan.max" />
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\Zombi.FBX">
@@ -661,12 +660,6 @@
       <Filter>ソース ファイル\Assets</Filter>
     </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\Warrok.fbx">
-      <Filter>ソース ファイル\Assets</Filter>
-    </MeshContentTask>
-    <MeshContentTask Include="Assets\modelData\Unitychan3.FBX">
-      <Filter>ソース ファイル\Assets</Filter>
-    </MeshContentTask>
-    <MeshContentTask Include="Assets\modelData\Unitychan2.fbx">
       <Filter>ソース ファイル\Assets</Filter>
     </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\umi.FBX">
