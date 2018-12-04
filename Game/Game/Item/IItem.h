@@ -22,9 +22,6 @@ public:
 	//描画
 	virtual void Draw() {};
 
-	//アイテムを使う
-	virtual bool Use() { return false; }
-
 	//ランダム地点にポップさせる
 	//distance	ランダム地点までの距離
 	//upSpeed	ポップさせる上方向の速度
@@ -72,14 +69,8 @@ public:
 		EnPlayerWeapon			WeaponType = EnPlayerWeapon::enInvalid;	//装備の種類
 	};
 
-	//アイテムの種類を取得
-	EnInventoryItemType GetItemType()
-	{
-		return m_itemType;
-	}
 
 protected:
-	EnInventoryItemType		m_itemType = Invald;		//インベントリのアイテムの種類
 	CSkinModel				m_skinModel;				//スキンモデル
 	CVector3				m_position;					//座標
 	CQuaternion				m_rotation;					//回転
@@ -89,5 +80,4 @@ protected:
 	const float				m_speed = 4.0f;				//速度
 	const float				m_deadTime = 30.0f;			//アイテムが消滅するまでの時間
 	float					m_timer = 0.0f;				//タイマー
-	wchar_t					m_itemName[40];
 };
