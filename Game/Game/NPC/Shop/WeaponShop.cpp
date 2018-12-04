@@ -2,6 +2,7 @@
 #include "WeaponShop.h"
 #include "../../Camera/GameCamera.h"
 #include "../../Player/Player.h"
+#include "../../UI/Menu/EquipInventory.h"
 #include "../../UI/Fade/LoadScene.h"
 #include "../../Scene/SceneManager.h"
 
@@ -121,7 +122,7 @@ void CWeaponShop::Update()
 
 			break;
 		}
-		GetPlayer().GetWeaponManager().AddEquipList(weapons);
+		CEquipInventory::AddEquipList(weapons);
 		CSoundSource* se = New<CSoundSource>(0);
 		se->Init("Assets/sound/Shop/BuySe.wav");
 		se->SetVolume(1.0f);

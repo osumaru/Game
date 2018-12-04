@@ -39,7 +39,9 @@ float4 PSMain(VS_OUTPUT In) : SV_TARGET
 	uv += 1.0f;
 	uv *= 0.5f;
 	uv.y = 1.0f - uv.y;
-	
-	clip(depthTexture.Sample(Sampler, uv).x - In.worldPos.z);
+	float4 depthColor = depthTexture.Sample(Sampler, uv);
+	depthColor = mul(mvp, depthColor);
+	float depth = depthColor.z /  depthColor.w;
+	clip(depth - In.worldPos.z);
 	return color;
 }

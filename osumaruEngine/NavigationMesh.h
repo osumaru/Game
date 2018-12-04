@@ -17,7 +17,7 @@ public:
 	初期化
 	model	メッシュデータとして利用するモデルのデータ
 	*/
-	void Init(CSkinModel* model);
+	void Init();
 
 	typedef std::vector<SPoligonInfo>(*VectorArray)[AREA_NUM];
 	
@@ -29,7 +29,26 @@ public:
 		return m_meshData;
 	}
 
+	void SetSkinModel(CSkinModel* model)
+	{
+		m_pModel = model;
+	}
 
+	struct SObstacleInfo
+	{
+		CVector3 aabbMin;
+		CVector3 center;
+		CVector3 aabbMax;
+	};
+
+	void AddObstacleObject(SObstacleInfo& info)
+	{
+		m_obstacleObjects.push_back(info);
+	}
+
+	void Draw();
 private:
-	std::vector<SPoligonInfo> m_meshData[AREA_NUM][AREA_NUM];		//メッシュデータ
+	std::vector<SPoligonInfo>	m_meshData[AREA_NUM][AREA_NUM];		//メッシュデータ
+	CSkinModel*					m_pModel;
+	std::list<SObstacleInfo>	m_obstacleObjects;
 };

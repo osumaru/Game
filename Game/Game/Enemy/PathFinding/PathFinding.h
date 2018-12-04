@@ -35,10 +35,12 @@ public:
 	//targetNumber	ゴールのポイントの番号
 	void FindRoot(std::vector<CVector3>& root, CVector3 stratPos, CVector3 targetPos);
 
-	void Init(CSkinModel* model)
+	CNavigationMesh& GetNavigationMesh()
 	{
-		m_naviMesh.Init(model);
+		return m_naviMesh;
 	}
+
+
 
 private:
 	std::vector<SNode>		m_nodes[CNavigationMesh::AREA_NUM][CNavigationMesh::AREA_NUM];	//ノードの配列の2次元配列(エリア毎に分けてノードのリンク処理を軽くしているため2次元配列

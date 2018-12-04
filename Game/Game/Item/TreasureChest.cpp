@@ -2,12 +2,12 @@
 #include "TreasureChest.h"
 #include "../Player/Player.h"
 #include"../../Game/Camera/GameCamera.h"
+#include "../UI/Menu/EquipInventory.h"
 
 void CTreasureChest::Init(CVector3 position)
 {
 	m_skinModel.Load(L"Assets/modelData/Chest.cmo");
 	m_position = position;
-	m_position.y += 5.0f;
 	m_characterController.Init(0.6f, 0.4f, m_position);
 	//武器のステータスを決める
 	DesideWeaponStatus();
@@ -40,7 +40,7 @@ void CTreasureChest::Update()
 	bool isPickUp = PickUp(isPopEnd, 2.0f);
 	if (isPickUp && Pad().IsTriggerButton(enButtonA)) {
 		//拾うことができる
-		GetPlayer().GetWeaponManager().AddEquipList(m_weaponStatus);
+		CEquipInventory::AddEquipList(m_weaponStatus);
 		Delete(this);
 	}
 

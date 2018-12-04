@@ -42,7 +42,7 @@ public:
 		return m_rareEquipItemList.at(num);
 	}
 	//レアアイテムのIDの入ったリストの大きさ
-	const int GetNormalEquipItemListSize()
+	const int GetRareEquipItemListSize()
 	{
 		return m_rareEquipItemList.size();
 	}

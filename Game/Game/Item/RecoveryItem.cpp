@@ -2,6 +2,7 @@
 #include "RecoveryItem.h"
 #include"../../Game/Camera/GameCamera.h"
 #include "../Player/Player.h"
+#include "../UI/Menu/ItemInventory.h"
 
 void CRecoveryItem::Init()
 {
@@ -37,7 +38,7 @@ void CRecoveryItem::Update()
 	bool isPickUp = PickUp(isPopEnd, 0.8f);
 	if (isPickUp) {
 		//èEÇ§Ç±Ç∆Ç™Ç≈Ç´ÇÈ
-		GetPlayer().AddItemList(this);
+		CItemInventory::AddItemList(this);
 		SetIsActive(false);
 	}
 

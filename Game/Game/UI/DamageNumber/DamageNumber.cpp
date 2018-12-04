@@ -50,7 +50,7 @@ void CDamageNumber::Update()
 	for (int i = 0; i < EnDigit::enDigit_Num; i++)
 	{
 		m_number[i].SetPosition(screenPosition);
-		screenPosition.x -= m_numSize.x * (i + 1);
+		screenPosition.x = m_number[0].GetPosition().x - m_numSize.x * (i + 1);
 	}
 
 	m_timer += GameTime().GetDeltaFrameTime();

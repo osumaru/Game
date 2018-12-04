@@ -58,7 +58,7 @@ void CPlayerJump::Update()
 		if (!m_pPlayerGetter->GetAnimation().IsPlay())
 		{
 			//着地時移動していればランステートに、動いていなければスタンドステートに
-			if (Pad().GetLeftStickX() != 0 || Pad().GetLeftStickY() != 0)
+			if (m_pPlayer->GetIsStateCondition(CPlayerState::enPlayerStateRun))
 			{
 				m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateRun);
 			}
@@ -68,11 +68,11 @@ void CPlayerJump::Update()
 			}
 		}
 	}
-	else if (m_pPlayer->GetIsDamage())
+	else if (m_pPlayer->GetIsStateCondition(CPlayerState::enPlayerStateDamage))
 	{
 		m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateDamage);
 	}
-	else if (m_pPlayer->GetWireAction().IsWireMove())
+	else if (m_pPlayer->GetIsStateCondition(CPlayerState::enPlayerStateWireMove))
 	{
 		//ワイヤー移動できるなら遷移
 		m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateWireMove);

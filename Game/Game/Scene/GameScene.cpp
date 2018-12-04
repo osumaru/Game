@@ -83,7 +83,7 @@ bool CGameScene::Start()
 		return true;
 
 	}
-	return false;
+	//return false;
 
 }
 

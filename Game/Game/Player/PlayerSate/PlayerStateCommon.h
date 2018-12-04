@@ -54,5 +54,6 @@ public:
 		enPlayerStateArrowShoot,		//弓を放つステート
 		enPlayerStateLongSwordAttack,	//大剣の攻撃ステート
 		enPlayerStateTwinSwordAttack,	//二刀流の攻撃ステート
+		enPlayerStateNum,				//ステートの数
 	};
 };

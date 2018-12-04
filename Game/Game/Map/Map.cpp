@@ -3,6 +3,7 @@
 #include "MapChip/MapChip.h"
 #include "MapChip\BreakMapObject.h"
 #include "MapChip\StaticMapObject.h"
+#include "MapChip/ObstacleMapObject.h"
 #include "../Player/Player.h"
 #include "../Enemy/IEnemy.h"
 #include "../Enemy/Zombie.h"
@@ -94,6 +95,9 @@ void Map::Init(int stageNum)
 			mapChip = New<StaticMapObject>(PRIORITY_MAPCHIP);
 			m_collider = false;
 			break;
+		case enMapTagObstacle:
+			mapChip = New<CObstacleMapObject>(PRIORITY_MAPCHIP);
+			break;
 		default:
 			mapChip = New<StaticMapObject>(PRIORITY_MAPCHIP);
 			m_collider = true;
@@ -142,6 +146,7 @@ void Map::Init(int stageNum)
 		group->Add(enemy);
 		enemy->AddObject();
 	}
+	
 	g_pathFinding.BuildNodes();
 }
 

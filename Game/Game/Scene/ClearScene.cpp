@@ -35,7 +35,7 @@ void CClearScene::Update()
 	if (Pad().IsTriggerButton(enButtonStart) || GetAsyncKeyState('V'))
 	{
 		//ƒQ[ƒ€ƒV[ƒ“‚Ö‘JˆÚ
-		GetSceneManager().ChangeScene(GetSceneManager().enGameScene);
+		GetSceneManager().ChangeScene(GetSceneManager().enTitleScene);
 
 	}
 }

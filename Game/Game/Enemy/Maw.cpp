@@ -119,7 +119,7 @@ void CMaw::Init(CVector3 position)
 
 	m_weekPoint->SetIsActive(false);
 	m_bossHp->SetIsActive(false);
-
+	SetIsActive(true);
 }
 
 //XV

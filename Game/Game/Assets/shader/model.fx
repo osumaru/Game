@@ -50,7 +50,6 @@ struct VS_OUTPUT
 	float3 binormal : BINORMAL;
 	float2 uv : TEXCOORD0;
 	float4 worldPos : TEXCOORD1;
-	float4 shadowPos : TEXCOORD2;
 };
 
 struct VS_SHADOW_OUTPUT
@@ -78,7 +77,6 @@ VS_OUTPUT VSMain(VS_INPUT In)
 	VS_OUTPUT Out;
 	Out.pos = mul(mvp, In.pos);
 	Out.worldPos = Out.pos;
-	Out.shadowPos = mul(lightViewProj, Out.pos);
 	Out.pos = mul(viewProj, Out.pos);
 	Out.normal = mul(mvp, In.normal);
 	Out.normal = normalize(Out.normal);
@@ -101,7 +99,6 @@ VS_OUTPUT VSSkinMain(VS_SKIN_INPUT In)
 	}
 	Out.pos = mul(pos, In.pos);
 	Out.worldPos = Out.pos;
-	Out.shadowPos = mul(lightViewProj, Out.pos);
 	Out.pos = mul(viewProj, Out.pos);
 	Out.normal = mul(pos, In.normal);
 	Out.normal = normalize(Out.normal);
