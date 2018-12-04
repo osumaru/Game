@@ -58,4 +58,3 @@ static const int PRIORITY_SKY = 10;
 
 
 using namespace DirectX;
-using namespace Microsoft::WRL;

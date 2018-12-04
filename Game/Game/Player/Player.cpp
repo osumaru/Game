@@ -9,6 +9,8 @@
 #include "../UI/Menu/EquipInventory.h"
 #include "../Enemy/Maw.h"
 #include "Weapon/Bow.h"
+#include "../Enemy/PathFinding/PathFinding.h"
+
 
 CPlayer *CPlayer::m_player = NULL;
 
@@ -128,7 +130,6 @@ void CPlayer::Init(CVector3 position)
 	m_playerGetter.SetPlayer(this);
 	m_PlayerStateMachine.SetPlayer(this, &m_playerGetter);
 	m_PlayerStateMachine.Init();
-	//Add(this, 1);
 	m_skinmodel.SetIsShadowCaster(true);
 	m_weaponManager.Init(this);
 	m_wireAction.Init(this);
@@ -176,10 +177,12 @@ void CPlayer::Update()
 	Engine().GetShadowMap().SetProjectionMatrix(projMat);
 	m_wireAction.Update();
 	Rotation(m_characterController.GetMoveSpeed());
+	m_animation.Update(GameTime().GetDeltaFrameTime());
+	m_skinmodel.Update(m_position, m_rotation, { 1.0f, 1.0f, 1.0f }, true);
 	m_PlayerStateMachine.Update();
+	m_animation.Update(0.0f);
 	m_position = m_characterController.GetPosition();
 	//アニメーションの更新
-	m_animation.Update(GameTime().GetDeltaFrameTime());
 	//スキンモデルの更新
 	m_skinmodel.Update(m_position, m_rotation, { 1.0f, 1.0f, 1.0f }, true);
 	m_weaponManager.Update();
@@ -188,6 +191,7 @@ void CPlayer::Update()
 //描画処理
 void CPlayer::Draw()
 {
+	//g_pathFinding.GetNavigationMesh().Draw();
 	//m_characterController.Draw();
 	m_weaponManager.Draw();
 	m_skinmodel.Draw(GetGameCamera().GetViewMatrix(), GetGameCamera().GetProjectionMatrix());
@@ -239,6 +243,8 @@ void CPlayer::StatusCalculation()
 
 
 }
+
+
 
 void CPlayer::Rotation(const CVector3& stickDir)
 {
@@ -327,5 +333,45 @@ void CPlayer::Rotation(const CVector3& stickDir)
 		m_rotation = CQuaternion::Identity;
 		m_rotation.Multiply(multiY);
 		m_rotation.Multiply(multiX);
+	}
+}
+
+bool CPlayer::GetIsStateCondition(CPlayerState::EnPlayerState state)
+{
+	switch (state)
+	{
+	case CPlayerState::enPlayerStateRun://左スティックの入力があったか
+		return Pad().GetLeftStickX() != 0 || Pad().GetLeftStickY() != 0;
+
+	case CPlayerState::enPlayerStateArrowAttack://xボタンを押して装備している武器が弓だったか
+		return Pad().IsTriggerButton(enButtonX) && m_weaponManager.GetCurrentState() == enWeaponArrow;
+
+	case CPlayerState::enPlayerStateArrowShoot:
+		return dynamic_cast<CPlayerArrowAttack*>(m_PlayerStateMachine.GetState(CPlayerState::enPlayerStateArrowAttack))->IsCharge();
+
+	case CPlayerState::enPlayerStateAttack://xボタンを押して装備している武器が弓じゃなかったか
+		return Pad().IsTriggerButton(enButtonX) && m_weaponManager.GetCurrentState() != enWeaponArrow;
+
+	case CPlayerState::enPlayerStateAvoidance://bボタンを押しているか
+		return Pad().IsTriggerButton(enButtonB);
+
+	case CPlayerState::enPlayerStateDamage://ダメージフラグが立っているか
+		return m_isDamege;
+
+	case CPlayerState::enPlayerStateDied://HPが0以下か
+		return m_status.Health <= 0;
+
+	case CPlayerState::enPlayerStateJump://Aボタンを押しているか
+		return Pad().IsTriggerButton(enButtonA);
+
+	case CPlayerState::enPlayerStateRunJump://Aボタンを押しているか
+		return Pad().IsTriggerButton(enButtonA);
+
+	case CPlayerState::enPlayerStateWireMove://ワイヤーで移動するフラグが立っているか
+		return m_wireAction.IsWireMove();
+
+	case CPlayerState::enPlayerStateStand://移動量が0か
+		return m_characterController.GetMoveSpeed().Length() == 0.0f;
+
 	}
 }

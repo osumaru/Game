@@ -70,7 +70,7 @@ void CWeaponManager::AfterDraw()
 {
 	if (m_isAttack)
 	{
-		//m_weaponTrace.Draw();
+		m_weaponTrace.Draw();
 	}
 	m_weapons[m_weaponState]->AfterDrawer();
 }

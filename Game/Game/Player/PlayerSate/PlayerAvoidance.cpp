@@ -42,30 +42,38 @@ void CPlayerAvoidance::Move()
 
 	//前のフレームとの座標と今の座標を引いて移動量を計算
 	CVector3 moveSpeed = bonePos - m_preBonePos;
-	moveSpeed.y = 0.0f;
+	moveSpeed.Scale(3.0f);
+	moveSpeed.y = m_fallSpeed;
 	CCharacterController& characon = m_pPlayerGetter->GetCharacterController();
 	float gravity = characon.GetGravity();
-	characon.SetGravity(-0.1f);
+	characon.SetGravity(-0.04f);
 	//高さをプレイヤ―の座標でそろえる
 	m_preBonePos.y = playerPos.y;
 	characon.SetMoveSpeed(moveSpeed);
 	characon.SetPosition(m_preBonePos);
 	characon.Execute(1.0f);
 	//何かに当たっていればプレイヤーの座標を動かしてアニメーションの移動量を打ち消す
-	if (characon.GetWallCollisionObject() != nullptr)
+	//if (characon.GetWallCollisionObject() != nullptr)
 	{
 		CVector3 movePos = characon.GetPosition() - bonePos;
 		movePos.y = 0.0f;
-		//CVector3 playerFront;
-		//playerFront.x = m_pPlayer->GetWorldMatrix().m[2][0];
-		//playerFront.y = m_pPlayer->GetWorldMatrix().m[2][1];
-		//playerFront.z = m_pPlayer->GetWorldMatrix().m[2][2];
-		//if (playerFront.Dot(movePos) < 0.0f)
-		//{
+		moveSpeed.y = 0.0f;
+		CVector3 playerFront;
+		playerFront.x = m_pPlayer->GetSkinmodel().GetWorldMatrix().m[2][0];
+		playerFront.y = m_pPlayer->GetSkinmodel().GetWorldMatrix().m[2][1];
+		playerFront.z = m_pPlayer->GetSkinmodel().GetWorldMatrix().m[2][2];
+		if (moveSpeed.Dot(movePos) < 0.0f)
+		{
 			playerPos += movePos;
-		//}
+		}
+		else
+		{
+			movePos.x += 10.0f;
+			//playerPos += movePos;
+		}
 	}
 	playerPos.y = characon.GetPosition().y;
+	m_fallSpeed = characon.GetMoveSpeed().y;
 	m_pPlayerGetter->SetPosition(playerPos);
 	characon.SetMoveSpeed(CVector3::Zero);
 	characon.SetGravity(gravity);

@@ -53,5 +53,4 @@ private:
 	CVector2		m_position = CVector2::Zero;		//À•W
 	std::unique_ptr<wchar_t[]> m_displayString;			//•\¦—p‚Ì•¶š—ñ
 	std::unique_ptr<SpriteFont>	m_spriteFont;
-	std::unique_ptr<SpriteBatch> m_spriteBatch;
 };

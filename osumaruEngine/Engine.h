@@ -228,6 +228,11 @@ public:
 		return m_pointLightManager;
 	}
 
+	DirectX::SpriteBatch* GetSpriteBatch()
+	{
+		return m_spriteBatch.get();
+	}
+
 private:
 	static const int							MAIN_RENDER_TARGET_NUM = 2;
 	CGameObjectManager*							m_objectManager;			//オブジェクトマネージャー
@@ -257,6 +262,7 @@ private:
 	CShadowMap									m_shadowMap;
 	CViewPortState								m_viewPortState;
 	CPointLightManager							m_pointLightManager;
+	std::unique_ptr<DirectX::SpriteBatch>		m_spriteBatch;
 };
 
 //エンジンクラスのインスタンスを取得。

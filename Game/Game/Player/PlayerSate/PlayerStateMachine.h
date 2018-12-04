@@ -52,10 +52,24 @@ public:
 		m_playerWireAttack.SetPlayer(player, playerGetter);
 	}
 
+	//現在のステートを取得
+	IPlayerState* GetCurrentState()
+	{
+		return m_currentState;
+	}
+
+	//指定したステートを取得
+	IPlayerState* GetState(CPlayerState::EnPlayerState state)
+	{
+		return m_pStates[state];
+	}
+
+
 private:
 	CPlayerState::EnPlayerState		m_state = (CPlayerState::EnPlayerState)-1;				//プレイヤーのアニメーションの状態
 	
 	IPlayerState*					m_currentState = nullptr;
+	IPlayerState*					m_pStates[CPlayerState::enPlayerStateNum];
 	CPlayerStand					m_playerStand;			//待機モーション
 	CPlayerWalk						m_playerWalk;			//歩行モーション
 	CPlayerRun						m_playerRun;			//走りモーション

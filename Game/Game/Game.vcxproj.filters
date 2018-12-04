@@ -226,18 +226,12 @@
       <Filter>ソース ファイル\UI\LevelUp</Filter>
     </ClCompile>
     <ClCompile Include="Player\PlayerSate\PlayerWireMove.cpp">
-      <Filter>ソース ファイル\Player\PlayerState</Filter>
-    </ClCompile>
-    <ClCompile Include="Player\PlayerSate\PlayerWireMove.cpp">
       <Filter>ソース ファイル\Player</Filter>
     </ClCompile>
     <ClCompile Include="Player\PlayerSate\PlayerWireMove.cpp">
       <Filter>ソース ファイル\Player\PlayerSate</Filter>
     </ClCompile>
     <ClCompile Include="Enemy\PathFinding\PathFinding.cpp">
-      <Filter>ソース ファイル\Enemy\PathFinding</Filter>
-    </ClCompile>
-    <ClCompile Include="Enemy\PathFinding\RootPoint.cpp">
       <Filter>ソース ファイル\Enemy\PathFinding</Filter>
     </ClCompile>
     <ClCompile Include="Camera\NormalGameCamera.cpp">
@@ -303,9 +297,6 @@
     <ClCompile Include="Player\PlayerSate\PlayerStun.cpp">
       <Filter>ソース ファイル\Player\PlayerState</Filter>
     </ClCompile>
-    <ClCompile Include="Player\PlayerGetter.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="Player\Weapon\WeaponManager.cpp">
       <Filter>ソース ファイル\Player\Weapon</Filter>
     </ClCompile>
@@ -362,6 +353,16 @@
     </ClCompile>
     <ClCompile Include="Item\InventoryItem\InventoryRecoveryItem.cpp">
       <Filter>ソース ファイル\Item\InventoryItem</Filter>
+    </ClCompile>
+    <ClCompile Include="Map\MapChip\ObstacleMapObject.cpp">
+      <Filter>ソース ファイル</Filter>
+      <Filter>ソース ファイル\Map\MapChip</Filter>
+    </ClCompile>
+    <ClCompile Include="Player\PlayerGetter.cpp">
+      <Filter>ソース ファイル\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Player\PlayerSate\PlayerWireMove.cpp">
+      <Filter>ソース ファイル\Player\PlayerState</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -501,18 +502,12 @@
       <Filter>ソース ファイル\UI\LevelUp</Filter>
     </ClInclude>
     <ClInclude Include="Player\PlayerSate\PlayerWireMove.h">
-      <Filter>ソース ファイル\Player\PlayerState</Filter>
-    </ClInclude>
-    <ClInclude Include="Player\PlayerSate\PlayerWireMove.h">
       <Filter>ソース ファイル\Player</Filter>
     </ClInclude>
     <ClInclude Include="Player\PlayerSate\PlayerWireMove.h">
       <Filter>ソース ファイル\Player\PlayerSate</Filter>
     </ClInclude>
     <ClInclude Include="Enemy\PathFinding\PathFinding.h">
-      <Filter>ソース ファイル\Enemy\PathFinding</Filter>
-    </ClInclude>
-    <ClInclude Include="Enemy\PathFinding\RootPoint.h">
       <Filter>ソース ファイル\Enemy\PathFinding</Filter>
     </ClInclude>
     <ClInclude Include="Enemy\PathFinding\MapData.h">
@@ -652,6 +647,13 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\modelData\UnityChan.max" />
+    <ClInclude Include="Map\MapChip\ObstacleMapObject.h">
+      <Filter>ヘッダー ファイル</Filter>
+      <Filter>ソース ファイル\Map\MapChip</Filter>
+    </ClInclude>
+    <ClInclude Include="Player\PlayerSate\PlayerWireMove.h">
+      <Filter>ソース ファイル\Player\PlayerState</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\Zombi.FBX">
@@ -673,12 +675,6 @@
       <Filter>ソース ファイル\Assets</Filter>
     </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\Warrok.fbx">
-      <Filter>ソース ファイル\Assets</Filter>
-    </MeshContentTask>
-    <MeshContentTask Include="Assets\modelData\Unitychan3.FBX">
-      <Filter>ソース ファイル\Assets</Filter>
-    </MeshContentTask>
-    <MeshContentTask Include="Assets\modelData\Unitychan2.fbx">
       <Filter>ソース ファイル\Assets</Filter>
     </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\umi.FBX">

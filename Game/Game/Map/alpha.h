@@ -59,133 +59,133 @@ enMapTagTerrain, //タグ
 	L"Yasikia",
 	CVector3(-7.42f, 7.55f, 25.04f),             //平行移動
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
-	enMapTagUntagged, //タグ
+	enMapTagObstacle, //タグ
 },
 //Yasikib
 {
 	L"Yasikib",
 	CVector3(-16.26f, 7.55f, 21.72f),             //平行移動
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
-	enMapTagUntagged, //タグ
+	enMapTagObstacle, //タグ
 },
 //Yasikic
 {
 	L"Yasikic",
 	CVector3(-26.20f, 7.55f, 21.72f),             //平行移動
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
-	enMapTagUntagged, //タグ
+	enMapTagObstacle, //タグ
 },
 //TownHouse1
 {
 	L"TownHouse1",
 	CVector3(-50.13f, 8.77f, 143.20f),             //平行移動
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
-	enMapTagUntagged, //タグ
+	enMapTagObstacle, //タグ
 },
 //TownHouse
 {
 	L"TownHouse",
 	CVector3(-35.73f, 9.37f, 77.10f),             //平行移動
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
-	enMapTagUntagged, //タグ
+	enMapTagObstacle, //タグ
 },
 //Toge
 {
 	L"Toge",
 	CVector3(15.57f, 4.47f, 22.10f),             //平行移動
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
-	enMapTagUntagged, //タグ
+	enMapTagObstacle, //タグ
 },
 //Toge
 {
 	L"Toge",
 	CVector3(15.57f, 4.47f, 31.40f),             //平行移動
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
-	enMapTagUntagged, //タグ
+	enMapTagObstacle, //タグ
 },
 //Toge
 {
 	L"Toge",
 	CVector3(15.57f, 4.47f, 41.00f),             //平行移動
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
-	enMapTagUntagged, //タグ
+	enMapTagObstacle, //タグ
 },
 //NYBuilding_A
 {
 	L"NYBuilding_A",
 	CVector3(5.32f, 7.47f, 68.34f),             //平行移動
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
-	enMapTagUntagged, //タグ
+	enMapTagObstacle, //タグ
 },
 //TownHouse1
 {
 	L"TownHouse1",
 	CVector3(-17.23f, 8.77f, 125.40f),             //平行移動
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
-	enMapTagUntagged, //タグ
+	enMapTagObstacle, //タグ
 },
 //Yasikia
 {
 	L"Yasikia",
 	CVector3(-30.63f, 6.97f, 35.70f),             //平行移動
 	CQuaternion(0.00f, 1.00f, 0.00f, 0.00f ),  //回転
-	enMapTagUntagged, //タグ
+	enMapTagObstacle, //タグ
 },
 //Yasikib
 {
 	L"Yasikib",
 	CVector3(-39.47f, 6.97f, 35.70f),             //平行移動
 	CQuaternion(0.00f, 1.00f, 0.00f, 0.00f ),  //回転
-	enMapTagUntagged, //タグ
+	enMapTagObstacle, //タグ
 },
 //Yasikic
 {
 	L"Yasikic",
 	CVector3(-49.41f, 6.97f, 35.70f),             //平行移動
 	CQuaternion(0.00f, 1.00f, 0.00f, 0.00f ),  //回転
-	enMapTagUntagged, //タグ
+	enMapTagObstacle, //タグ
 },
 //Yasikia
 {
 	L"Yasikia",
 	CVector3(12.77f, 8.77f, -2.80f),             //平行移動
 	CQuaternion(0.00f, 1.00f, 0.00f, 0.00f ),  //回転
-	enMapTagUntagged, //タグ
+	enMapTagObstacle, //タグ
 },
 //Yasikib
 {
 	L"Yasikib",
 	CVector3(3.93f, 8.77f, -2.80f),             //平行移動
 	CQuaternion(0.00f, 1.00f, 0.00f, 0.00f ),  //回転
-	enMapTagUntagged, //タグ
+	enMapTagObstacle, //タグ
 },
 //Yasikic
 {
 	L"Yasikic",
 	CVector3(-6.01f, 8.77f, -2.80f),             //平行移動
 	CQuaternion(0.00f, 1.00f, 0.00f, 0.00f ),  //回転
-	enMapTagUntagged, //タグ
+	enMapTagObstacle, //タグ
 },
 //NYApartmentA
 {
 	L"NYApartmentA",
 	CVector3(-38.53f, 7.73f, 99.90f),             //平行移動
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
-	enMapTagUntagged, //タグ
+	enMapTagObstacle, //タグ
 },
 //NYApartmentA
 {
 	L"NYApartmentA",
 	CVector3(-26.93f, 7.73f, 145.10f),             //平行移動
 	CQuaternion(0.00f, 1.00f, 0.00f, 0.00f ),  //回転
-	enMapTagUntagged, //タグ
+	enMapTagObstacle, //タグ
 },
 //NYApartmentA
 {
 	L"NYApartmentA",
 	CVector3(12.49f, 7.73f, 85.57f),             //平行移動
 	CQuaternion(0.00f, -0.71f, 0.00f, 0.71f ),  //回転
-	enMapTagUntagged, //タグ
+	enMapTagObstacle, //タグ
 },
 //ninja
 {

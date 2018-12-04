@@ -21,6 +21,7 @@ enum EnMapChipTag
 	enMapTagTerrain,		//地形用のタグ
 	enMapTagItemShop,		//アイテムショップ用のタグ
 	enMapTagWeaponShop,
+	enMapTagObstacle,
 	enMapTagNum,
 };
 

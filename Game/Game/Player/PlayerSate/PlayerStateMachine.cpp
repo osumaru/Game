@@ -5,6 +5,20 @@
 void CPlayerStateMachine::Init()
 {
 	SetState(CPlayerState::enPlayerStateStand);
+	m_pStates[CPlayerState::enPlayerStateStand] = &m_playerStand;	
+	m_pStates[CPlayerState::enPlayerStateWalk] = &m_playerWalk;
+	m_pStates[CPlayerState::enPlayerStateRun] = &m_playerRun;
+	m_pStates[CPlayerState::enPlayerStateAvoidance] = &m_playerAvoidance;
+	m_pStates[CPlayerState::enPlayerStateJump] = &m_playerJump;
+	m_pStates[CPlayerState::enPlayerStateRunJump] = &m_playerJump;
+	m_pStates[CPlayerState::enPlayerStateAttack] = &m_playerAttack;
+	m_pStates[CPlayerState::enPlayerStateArrowAttack] = &m_playerArrowShoot;
+	m_pStates[CPlayerState::enPlayerStateArrowShoot] = &m_playerArrowShoot;
+	m_pStates[CPlayerState::enPlayerStateDamage] = &m_playerDamage;
+	m_pStates[CPlayerState::enPlayerStateDied] = &m_playerDied;
+	m_pStates[CPlayerState::enPlayerStateWireMove] = &m_playerWireMove;
+	m_pStates[CPlayerState::enPlayerStateStun] = &m_playerStun;
+	m_pStates[CPlayerState::enPlayerStateWireAttack] = &m_playerWireAttack;
 }
 
 

@@ -27,42 +27,40 @@ void CPlayerStand::Update()
 		return;
 	}
 	//Ž€–S‚µ‚½ê‡‚Ìˆ—
-	if (m_pPlayer->GetStatus().Health <= 0)
+	if (m_pPlayer->GetIsStateCondition(CPlayerState::enPlayerStateDied))
 	{
 		m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateDied);
 	}
 	//ƒ_ƒ[ƒW‚ðŽó‚¯‚½ê‡‚Ìˆ—
-	else if (m_pPlayer->GetIsDamage())
+	else if (m_pPlayer->GetIsStateCondition(CPlayerState::enPlayerStateDamage))
 	{
 		m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateDamage);
 	}
 	//UŒ‚‚ð‚µ‚½Žž‚Ìˆ—
-	else if (Pad().IsTriggerButton(enButtonX))
+	else if (m_pPlayer->GetIsStateCondition(CPlayerState::enPlayerStateArrowAttack))
 	{
-		if (m_pPlayer->GetWeaponManager().GetCurrentState() == enWeaponArrow)
-		{
-			m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateArrowAttack);
-		}
-		else
-		{
-			m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateAttack);
-		}
+		m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateArrowAttack);
 	}
-	else if (Pad().IsTriggerButton(enButtonA))
+	//UŒ‚‚ð‚µ‚½Žž‚Ìˆ—
+	else if (m_pPlayer->GetIsStateCondition(CPlayerState::enPlayerStateAttack))
+	{
+		m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateAttack);
+	}
+	else if (m_pPlayer->GetIsStateCondition(CPlayerState::enPlayerStateJump))
 	{
 		GetPlayer().GetStateMachine().SetState(CPlayerState::enPlayerStateJump);
 	}
-	else if (Pad().IsTriggerButton(enButtonB))
+	else if (m_pPlayer->GetIsStateCondition(CPlayerState::enPlayerStateAvoidance))
 	{
 		GetPlayer().GetStateMachine().SetState(CPlayerState::enPlayerStateAvoidance);
 	}
-	else if (GetPlayer().GetWireAction().IsWireMove()) 
+	else if (m_pPlayer->GetIsStateCondition(CPlayerState::enPlayerStateWireMove)) 
 	{
 		//ƒƒCƒ„[ˆÚ“®‚Å‚«‚é‚È‚ç‘JˆÚ
 		GetPlayer().GetStateMachine().SetState(CPlayerState::enPlayerStateWireMove);
 	}
 	//ˆÚ“®‚Ì“ü—Í‚ª‚ ‚é‚È‚ç•à‚«ƒAƒjƒ[ƒVƒ‡ƒ“‚É‘JˆÚ
-	else if (Pad().GetLeftStickX() != 0 || Pad().GetLeftStickY() != 0)
+	else if (m_pPlayer->GetIsStateCondition(CPlayerState::enPlayerStateRun))
 	{
 		//GetPlayer().GetStateMachine().SetState(CPlayerState::enPlayerStateWalk);
 		GetPlayer().GetStateMachine().SetState(CPlayerState::enPlayerStateRun);

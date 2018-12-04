@@ -8,6 +8,10 @@ public:
 	~CPlayerArrowShoot();
 	void Init();
 	void Update();
+	bool IsShoot()
+	{
+		return m_isShoot;
+	}
 private:
 	bool	m_isShoot = false;
 };

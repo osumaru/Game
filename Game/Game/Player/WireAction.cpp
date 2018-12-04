@@ -35,7 +35,21 @@ void CWireAction::Update()
 {
 	int wireListCount = 0;
 	//ƒƒCƒ„[‚Ìˆ—
-	if (Pad().IsTriggerButton(enButtonY) && !m_isWireMove)
+	bool isWireAction = false;
+	if (!m_isWireMove)
+	{
+		if (Pad().IsTriggerButton(enButtonY))
+		{
+			m_state = enStateEnemy;
+			isWireAction = true;
+		}
+		else if (Pad().IsTriggerButton(enButtonRightTrigger))
+		{
+			m_state = enStateMap;
+			isWireAction = true;
+		}
+	}
+	if (isWireAction)
 	{
 		float minLength = FLT_MAX;
 		std::list<IEnemy*> enemyList = GetSceneManager().GetGameScene().GetMap()->GetEnemyList();
