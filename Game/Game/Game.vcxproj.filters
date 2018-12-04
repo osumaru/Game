@@ -223,9 +223,6 @@
       <Filter>ソース ファイル\UI\LevelUp</Filter>
     </ClCompile>
     <ClCompile Include="Player\PlayerSate\PlayerWireMove.cpp">
-      <Filter>ソース ファイル\Player\PlayerState</Filter>
-    </ClCompile>
-    <ClCompile Include="Player\PlayerSate\PlayerWireMove.cpp">
       <Filter>ソース ファイル\Player</Filter>
     </ClCompile>
     <ClCompile Include="Player\PlayerSate\PlayerWireMove.cpp">
@@ -297,9 +294,6 @@
     <ClCompile Include="Player\PlayerSate\PlayerStun.cpp">
       <Filter>ソース ファイル\Player\PlayerState</Filter>
     </ClCompile>
-    <ClCompile Include="Player\PlayerGetter.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="Player\Weapon\WeaponManager.cpp">
       <Filter>ソース ファイル\Player\Weapon</Filter>
     </ClCompile>
@@ -357,6 +351,12 @@
     <ClCompile Include="Map\MapChip\ObstacleMapObject.cpp">
       <Filter>ソース ファイル</Filter>
       <Filter>ソース ファイル\Map\MapChip</Filter>
+    </ClCompile>
+    <ClCompile Include="Player\PlayerGetter.cpp">
+      <Filter>ソース ファイル\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Player\PlayerSate\PlayerWireMove.cpp">
+      <Filter>ソース ファイル\Player\PlayerState</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -496,9 +496,6 @@
       <Filter>ソース ファイル\UI\LevelUp</Filter>
     </ClInclude>
     <ClInclude Include="Player\PlayerSate\PlayerWireMove.h">
-      <Filter>ソース ファイル\Player\PlayerState</Filter>
-    </ClInclude>
-    <ClInclude Include="Player\PlayerSate\PlayerWireMove.h">
       <Filter>ソース ファイル\Player</Filter>
     </ClInclude>
     <ClInclude Include="Player\PlayerSate\PlayerWireMove.h">
@@ -634,11 +631,9 @@
       <Filter>ヘッダー ファイル</Filter>
       <Filter>ソース ファイル\Map\MapChip</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <CustomBuild Include="Assets\shader\sprite.fx">
-      <Filter>ソース ファイル</Filter>
-    </CustomBuild>
+    <ClInclude Include="Player\PlayerSate\PlayerWireMove.h">
+      <Filter>ソース ファイル\Player\PlayerState</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\Zombi.FBX">
