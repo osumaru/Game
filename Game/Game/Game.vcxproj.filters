@@ -234,9 +234,6 @@
     <ClCompile Include="Enemy\PathFinding\PathFinding.cpp">
       <Filter>ソース ファイル\Enemy\PathFinding</Filter>
     </ClCompile>
-    <ClCompile Include="Enemy\PathFinding\RootPoint.cpp">
-      <Filter>ソース ファイル\Enemy\PathFinding</Filter>
-    </ClCompile>
     <ClCompile Include="Camera\NormalGameCamera.cpp">
       <Filter>ソース ファイル\Camera</Filter>
     </ClCompile>
@@ -356,6 +353,9 @@
     </ClCompile>
     <ClCompile Include="Enemy\EnemyState\EnemyAttackWait.cpp">
       <Filter>ソース ファイル\Enemy\EnemyState</Filter>
+    </ClCompile>
+    <ClCompile Include="Map\MapChip\ObstacleMapObject.cpp">
+      <Filter>ソース ファイル\Map\MapChip</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -506,9 +506,6 @@
     <ClInclude Include="Enemy\PathFinding\PathFinding.h">
       <Filter>ソース ファイル\Enemy\PathFinding</Filter>
     </ClInclude>
-    <ClInclude Include="Enemy\PathFinding\RootPoint.h">
-      <Filter>ソース ファイル\Enemy\PathFinding</Filter>
-    </ClInclude>
     <ClInclude Include="Enemy\PathFinding\MapData.h">
       <Filter>ソース ファイル\Enemy\PathFinding</Filter>
     </ClInclude>
@@ -631,6 +628,9 @@
     </ClInclude>
     <ClInclude Include="Enemy\EnemyState\EnemyAttackWait.h">
       <Filter>ソース ファイル\Enemy\EnemyState</Filter>
+    </ClInclude>
+    <ClInclude Include="Map\MapChip\ObstacleMapObject.h">
+      <Filter>ソース ファイル\Map\MapChip</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -762,5 +762,6 @@
     <MeshContentTask Include="Assets\modelData\map3.FBX">
       <Filter>ソース ファイル\Assets</Filter>
     </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\map5.FBX" />
   </ItemGroup>
 </Project>
