@@ -2,7 +2,8 @@
 #include "ItemShop.h"
 #include "../../Player/Player.h"
 #include "../../Camera/GameCamera.h"
-#include "../../Item/RecoveryItem.h"
+#include "../../Item/InventoryItem/IInventoryItem.h"
+#include "../../Item/InventoryItem/InventoryRecoveryItem.h"
 #include "../../UI/Fade/LoadScene.h"
 #include "../../UI/Menu/ItemInventory.h"
 
@@ -83,8 +84,8 @@ void CItemShop::Update()
 	if (!m_isTransaction) { return; };
 	if (GetPlayer().BuyMoney(m_items[m_lineupSelectNumber + 101].ItemStatus.Itemprice))
 	{
-		IItem* item = new CRecoveryItem;
-		item->Start();
+		IInventoryItem* item = new CInventoryRecoveryItem;
+		item->Init();
 		CItemInventory::AddItemList(item);
 		CSoundSource* se = New<CSoundSource>(0);
 		se->Init("Assets/sound/Shop/BuySe.wav");

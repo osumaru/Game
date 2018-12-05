@@ -184,6 +184,7 @@
     <ClCompile Include="Enemy\Warrok.cpp" />
     <ClCompile Include="Enemy\Zombie.cpp" />
     <ClCompile Include="GameSound\GameSound.cpp" />
+    <ClCompile Include="Item\InventoryItem\InventoryRecoveryItem.cpp" />
     <ClCompile Include="Map\MapChip\ObstacleMapObject.cpp" />
     <ClCompile Include="Player\Weapon\WeaponTraceDraw.cpp" />
     <ClCompile Include="Player\PlayerSate\PlayerWireAttack.cpp" />
@@ -278,6 +279,8 @@
     <ClInclude Include="Enemy\Warrok.h" />
     <ClInclude Include="Enemy\Zombie.h" />
     <ClInclude Include="GameSound\GameSound.h" />
+    <ClInclude Include="Item\InventoryItem\IInventoryItem.h" />
+    <ClInclude Include="Item\InventoryItem\InventoryRecoveryItem.h" />
     <ClInclude Include="Map\MapChip\ObstacleMapObject.h" />
     <ClInclude Include="Player\Weapon\WeaponTraceDraw.h" />
     <ClInclude Include="Player\PlayerSate\PlayerWireAttack.h" />

@@ -21,13 +21,7 @@ public:
 	//描画
 	void Draw() override;
 
-	//アイテムを使う
-	bool Use() override;
-
 	//ポップさせる
 	//position	座標
 	void Pop(CVector3 position);
-
-private:
-	int m_recoveryValue = 30;	//回復値
 };

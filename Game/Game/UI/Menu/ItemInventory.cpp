@@ -2,9 +2,9 @@
 #include "ItemInventory.h"
 #include "Menu.h"
 #include "../../Player/Player.h"
-#include "../../Item/IItem.h"
+#include "../../Item/InventoryItem/IInventoryItem.h"
 
-std::list<IItem*> CItemInventory::m_itemList;
+std::list<IInventoryItem*> CItemInventory::m_itemList;
 
 CItemInventory::CItemInventory(){}
 
@@ -13,38 +13,42 @@ CItemInventory::~CItemInventory(){}
 void CItemInventory::Init(CMenu* menu)
 {
 	m_menu = menu;
+	//インベントリの幅と高さを初期化
+	m_width = 5;
+	m_height = 3;
 	//座標とサイズを初期化
 	m_basePos = { -560.0f, 180.0f };
 	m_size = { 150.0f, 150.0f };
 	//インベントリの背景を初期化
-	m_backGroundTexture.Load(L"Assets/sprite/MenuUI/Back_Menu.png");
-	m_backGround.Init(&m_backGroundTexture);
+	CTexture* texture = TextureResource().LoadTexture(L"Assets/sprite/MenuUI/Back_Menu.png");
+	m_backGround.Init(texture);
 	//カーソルを初期化
-	m_pointerTexture.Load(L"Assets/sprite/Pointer.png");
-	m_pointer.Init(&m_pointerTexture);
+	texture = TextureResource().LoadTexture(L"Assets/sprite/Pointer.png");
+	m_pointer.Init(texture);
 	m_pointer.SetPosition(m_basePos);
 	m_pointer.SetSize(m_size);
-	//アイテムリストを取得
-	m_width = 5;
-	m_height = 3;
+	//インベントリの枠を初期化
+	texture = TextureResource().LoadTexture(L"Assets/sprite/EquipFrame.png");
+	for (int i = 0; i < m_itemLimit; i++)
+	{
+		m_itemFrame[i].Init(texture);
+		m_itemFrame[i].SetSize(m_size);
+		CVector2 position = m_basePos;
+		position.x += m_size.x * (i % m_width);
+		position.y -= m_size.y * (i / m_width);
+		m_itemFrame[i].SetPosition(position);
+	}
 	if (!m_itemList.empty()) {
 		//リストにアイテムがある
 		int idx = 0;
 		for (auto& item : m_itemList)
 		{
-			//アイテムの種類を取得
-			IItem::EnInventoryItemType itemType = item->GetItemType();
-			if (itemType == IItem::Recovery) {		//回復アイテムだった場合
-				//回復アイテムの初期化
-				CTexture* itemTexure = TextureResource().LoadTexture(L"Assets/sprite/ShopUI/Potion/RedPotion.png");
-				m_item[idx].Init(itemTexure);
-			}
 			//座標とサイズを決める
 			CVector2 position = m_basePos;
 			position.x += m_size.x * (idx % m_width);
 			position.y -= m_size.y * (idx / m_width);
-			m_item[idx].SetPosition(position);
-			m_item[idx].SetSize(m_size);
+			item->GetSprite()->SetPosition(position);
+			item->GetSprite()->SetSize(m_size);
 			idx++;
 		}
 	}
@@ -79,8 +83,13 @@ void CItemInventory::Update()
 void CItemInventory::AfterDraw()
 {
 	m_backGround.Draw();
-	for (int i = 0; i < m_itemList.size(); i++) {
-		m_item[i].Draw();
+	for (int i = 0; i < m_itemLimit; i++)
+	{
+		m_itemFrame[i].Draw();
+	}
+	for (auto& item : m_itemList)
+	{
+		item->Draw();
 	}
 	m_pointer.Draw();
 }
@@ -166,7 +175,7 @@ void CItemInventory::UseItem()
 		return;
 	}
 	//選んだアイテムを使う
-	std::list<IItem*>::iterator it;
+	std::list<IInventoryItem*>::iterator it;
 	it = m_itemList.begin();
 	for (int i = 0; i < m_pointerNum; i++)
 	{
@@ -184,13 +193,13 @@ void CItemInventory::UseItem()
 		CVector2 position = m_basePos;
 		position.x += m_size.x * (idx % m_width);
 		position.y -= m_size.y * (idx / m_width);
-		m_item[idx].SetPosition(position);
-		m_item[idx].SetSize(m_size);
+		item->GetSprite()->SetPosition(position);
+		item->GetSprite()->SetSize(m_size);
 		idx++;
 	}
 }
 
-void CItemInventory::AddItemList(IItem * item)
+void CItemInventory::AddItemList(IInventoryItem* item)
 {
 	if (m_itemList.size() < m_itemLimit)
 	{

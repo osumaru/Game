@@ -3,10 +3,12 @@
 #include"../../Game/Camera/GameCamera.h"
 #include "../Player/Player.h"
 #include "../UI/Menu/ItemInventory.h"
+#include "InventoryItem/IInventoryItem.h"
+#include "InventoryItem/InventoryRecoveryItem.h"
 
 void CRecoveryItem::Init()
 {
-	m_itemType = Recovery;
+	//m_itemType = Recovery;
 }
 
 bool CRecoveryItem::Start()
@@ -38,8 +40,10 @@ void CRecoveryItem::Update()
 	bool isPickUp = PickUp(isPopEnd, 0.8f);
 	if (isPickUp) {
 		//拾うことができる
-		CItemInventory::AddItemList(this);
-		SetIsActive(false);
+		IInventoryItem* item = new CInventoryRecoveryItem();
+		item->Init();
+		CItemInventory::AddItemList(item);
+		Delete(this);
 	}
 
 	m_characterController.SetMoveSpeed(m_moveSpeed);
@@ -53,22 +57,6 @@ void CRecoveryItem::Update()
 void CRecoveryItem::Draw()
 {
 	m_skinModel.Draw(GetGameCamera().GetViewMatrix(), GetGameCamera().GetProjectionMatrix());
-}
-
-bool CRecoveryItem::Use()
-{
-	SplayerStatus playerStatus = GetPlayer().GetStatus();
-	int playerHP = playerStatus.Health;
-	int playerHPMax = playerStatus.MaxHealth;
-	//プレイヤーのHPと最大HPを比較する
-	if (playerHP < playerHPMax)
-	{
-		//プレイヤーのHPを回復させる
-		GetPlayer().RecoveryHP(m_recoveryValue);
-		Delete(this);
-		return true;
-	}
-	return false;
 }
 
 void CRecoveryItem::Pop(CVector3 position)

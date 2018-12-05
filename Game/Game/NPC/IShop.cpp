@@ -3,7 +3,8 @@
 #include "../Player/Player.h"
 #include "../GameSound/GameSound.h"
 #include "../Scene/SceneManager.h"
-#include "../Item/RecoveryItem.h"
+#include "../Item/InventoryItem/IInventoryItem.h"
+#include "../Item/InventoryItem/InventoryRecoveryItem.h"
 #include "../UI/Menu/ItemInventory.h"
 
 
@@ -126,7 +127,7 @@ bool IShop::Transaction(const int gold)
 	//‚¨‹à‚ª‘«‚è‚Ä‚¢‚ê‚Îw“ü‚·‚é‚±‚Æ‚ª‚Å‚«‚é
 	if (GetPlayer().BuyMoney(gold))
 	{
-		CRecoveryItem* item = new CRecoveryItem;
+		IInventoryItem* item = new CInventoryRecoveryItem;
 		item->Init();
 		CItemInventory::AddItemList(item);
 		CSoundSource* se = New<CSoundSource>(0);
