@@ -45,7 +45,7 @@ bool CGameScene::Start()
 	//フェードの実行が終わったらtrueを返す
 	if (!GetSceneManager().GetFade()->IsExecute())
 	{
-		//std::thread ThreadA([&] {
+		std::thread ThreadA([&] {
 
 		//マップの初期化
 		m_map = New<Map>(0);
@@ -78,8 +78,8 @@ bool CGameScene::Start()
 		//フェードインの開始
 		GetSceneManager().GetFade()->FadeIn();
 
-		//});
-		//ThreadA.detach();
+		});
+		ThreadA.detach();
 		return true;
 
 	}
