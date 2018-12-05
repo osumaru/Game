@@ -51,4 +51,5 @@ void CPostEffect::Draw()
 	Engine().SetAlphaBlendState(enAlphaBlendStateAdd);
 	Engine().SetDepthStencilState(enDepthStencilState3D);
 	Engine().SetRasterizerState(enRasterizerState2D);
+	GetDeviceContext()->OMSetRenderTargets(1, m_pBackRenderTargetView.GetAddressOf(), MainRenderTarget().GetDepthStencil().Get());
 }

@@ -76,8 +76,8 @@ void CDeferred::Start()
 	{
 		mainViews[i] = m_renderTarget[i].GetRenderTarget().Get();
 	};
-	GetDeviceContext()->ClearDepthStencilView(Engine().GetPostEffect().GetDepthStencil().Get(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
-	GetDeviceContext()->OMSetRenderTargets(enRenderTargetNum, mainViews, Engine().GetPostEffect().GetDepthStencil().Get());
+	GetDeviceContext()->ClearDepthStencilView(MainRenderTarget().GetDepthStencil().Get(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
+	GetDeviceContext()->OMSetRenderTargets(enRenderTargetNum, mainViews, MainRenderTarget().GetDepthStencil().Get());
 	Engine().SetAlphaBlendState(enAlphaBlendStateNone);
 	Engine().SetDepthStencilState(enDepthStencilState3D);
 	Engine().SetRasterizerState(enRasterizerState3D);
@@ -108,10 +108,10 @@ void CDeferred::Draw()
 	{
 		float color[4] = { 0.0f, 0.0f, 1.0f, 0.0f };
 		ID3D11RenderTargetView* backBuffer[] = { MainRenderTarget().GetRenderTarget().Get() };
-		GetDeviceContext()->OMSetRenderTargets(1, backBuffer, MainRenderTarget().GetDepthStencil().Get());
+		GetDeviceContext()->OMSetRenderTargets(1, backBuffer, m_renderTarget[0].GetDepthStencil().Get());
 
 		GetDeviceContext()->ClearRenderTargetView(backBuffer[0], color);
-		GetDeviceContext()->ClearDepthStencilView(MainRenderTarget().GetDepthStencil().Get(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
+		GetDeviceContext()->ClearDepthStencilView(m_renderTarget[0].GetDepthStencil().Get(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
 		ID3D11ShaderResourceView* srviews[enRenderTargetNum + 1];
 		for (int i = 0; i < enRenderTargetNum; i++)
 		{

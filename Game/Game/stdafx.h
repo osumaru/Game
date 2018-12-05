@@ -43,6 +43,8 @@ static const int PRIORITY_SCENE = 0;
 #include "../../osumaruEngine/Physics/RayTest.h"
 #include "../../osumaruEngine/Sky.h"
 #include "../../osumaruEngine/NavigationMesh.h"
+#include "../../osumaruEngine/Effect/Effect.h"
+
 #include <fstream>
 #include <iostream>
 #include <stdio.h>
