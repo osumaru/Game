@@ -89,6 +89,6 @@ void StaticMapObject::Draw()
 	MapChip::Draw();
 	if (!isCollider)
 	{
-		m_rigidBody->Draw();
+		//m_rigidBody->Draw();
 	}
 }

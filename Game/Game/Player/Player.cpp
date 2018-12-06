@@ -22,11 +22,11 @@ void CPlayer::OnInvokeAnimationEvent(//ƒAƒjƒ[ƒVƒ‡ƒ“ƒCƒxƒ“ƒg‚ªŒÄ‚Î‚ê‚é‚²‚Æ‚ÉŒÄ‚
 
 	if (wcscmp(animClipName, L"Assets/modelData/PlayerDash60fpsEvent.tka") == 0)
 	{//ƒCƒxƒ“ƒg–¼‚Åˆ—‚ğ•Ï‚¦‚éH
-		const float footVolume = 0.1f;
+		/*const float footVolume = 0.1f;
 		CSoundSource* footSound = New<CSoundSource>(0);
 		footSound->Init("Assets/sound/Jump.wav");
 		footSound->Play(false);
-		footSound->SetVolume(footVolume);
+		footSound->SetVolume(footVolume);*/
 	}
 
 
@@ -348,7 +348,7 @@ bool CPlayer::GetIsStateCondition(CPlayerState::EnPlayerState state)
 		return Pad().IsTriggerButton(enButtonX) && m_weaponManager.GetCurrentState() == enWeaponArrow;
 
 	case CPlayerState::enPlayerStateArrowShoot:
-		return dynamic_cast<CPlayerArrowAttack*>(m_PlayerStateMachine.GetState(CPlayerState::enPlayerStateArrowAttack))->IsCharge();
+		return !dynamic_cast<CPlayerArrowAttack*>(m_PlayerStateMachine.GetState(CPlayerState::enPlayerStateArrowAttack))->IsCharge();
 
 	case CPlayerState::enPlayerStateAttack://xƒ{ƒ^ƒ“‚ğ‰Ÿ‚µ‚Ä‘•”õ‚µ‚Ä‚¢‚é•Ší‚ª‹|‚¶‚á‚È‚©‚Á‚½‚©
 		return Pad().IsTriggerButton(enButtonX) && m_weaponManager.GetCurrentState() != enWeaponArrow;

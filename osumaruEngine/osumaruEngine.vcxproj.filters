@@ -61,6 +61,9 @@
     <Filter Include="ソース ファイル\Graphics\Font">
       <UniqueIdentifier>{85b73a04-1e2d-4ed2-8c3c-e218cd2a361c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Graphics\Effect">
+      <UniqueIdentifier>{dd060883-f363-4351-882a-5f4707928afc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="engineStdafx.cpp">
@@ -236,6 +239,9 @@
     </ClCompile>
     <ClCompile Include="NavigationMesh.cpp">
       <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Effect\Effect.cpp">
+      <Filter>ソース ファイル\Graphics\Effect</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -421,6 +427,9 @@
     </ClInclude>
     <ClInclude Include="NavigationMesh.h">
       <Filter>ソース ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Effect\Effect.h">
+      <Filter>ソース ファイル\Graphics\Effect</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

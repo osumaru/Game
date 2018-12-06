@@ -80,3 +80,16 @@ void CPrimitive::Update(void* vertexBuffer, void* indexBuffer)
 	Engine().GetDeviceContext()->UpdateSubresource(m_indexBuffer.Get(), 0, NULL, indexBuffer, 0, 0);
 	
 }
+
+void CPrimitive::Draw(ID3D11DeviceContext* deviceContext)
+{
+
+	ID3D11Buffer* vertexBuffers[] = { m_vertexBuffer.Get() };
+	UINT strides[] = { m_vertexStride };
+	UINT offset = 0;
+	deviceContext->IASetVertexBuffers(0, 1, vertexBuffers, strides, &offset);
+	deviceContext->IASetPrimitiveTopology(m_primitiveType);
+	deviceContext->IASetIndexBuffer(m_indexBuffer.Get(), m_indexFormat, 0);
+
+	deviceContext->DrawIndexed(m_indexNum, 0, 0);
+}
