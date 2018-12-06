@@ -3,6 +3,7 @@
 #include "../Player/Player.h"
 #include"../../Game/Camera/GameCamera.h"
 #include "../UI/Menu/EquipInventory.h"
+#include "../Scene/SceneManager.h"
 
 void CTreasureChest::Init(CVector3 position)
 {
@@ -66,6 +67,13 @@ void CTreasureChest::DesideWeaponStatus()
 	weaponNumber %= enWeaponNum;
 	int weaponAttack = Random().GetRandSInt();
 	weaponAttack %= basicWeaponStatus.basicAttack;
+	//アイテムのデータを取得
+	/*
+	CEquipItem* nItem = GetSceneManager().GetFade()->GetLoadScene()->GetEquipItemData();
+	int num = nItem->GetNormalEquipItemList(Random().GetRandSInt() % nItem->GetNormalEquipItemListSize()) ;
+	weaponNumber = nItem->GetItemStatus_ItemId(num).WeaponType;
+	weaponAttack = nItem->GetItemStatus_ItemId(num).ItemEffect;
+	*/
 	if (weaponNumber == EnPlayerWeapon::enWeaponSword)
 	{
 		//剣
