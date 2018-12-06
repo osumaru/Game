@@ -113,7 +113,7 @@ void CMaw::Init(CVector3 position)
 	m_weekPosition.x = WeekMat.m[3][0];
 	m_weekPosition.y = WeekMat.m[3][1];
 	m_weekPosition.z = WeekMat.m[3][2];
-	m_weekPosition.Normalize();
+	//m_weekPosition.Normalize();
 	//最初の行動を選択
 	m_actionPattern = EnMawActionPattern::enActionPatternIdle;
 
@@ -165,7 +165,6 @@ void CMaw::Update()
 	m_weekPosition.x = WeekMat.m[3][0];
 	m_weekPosition.y = WeekMat.m[3][1];
 	m_weekPosition.z = WeekMat.m[3][2];
-	m_weekPosition.Normalize();
 	
 	//ダメージ間隔が0以上だったら
 	if (m_damageInterval >= 0.0f&&!m_isDeath)
