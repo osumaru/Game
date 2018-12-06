@@ -2,7 +2,7 @@
 #include "GameObjectManager.h"
 #include "../Engine.h"
 #include "../Physics/Physics.h"
-
+#include  "../Input/Pad.h"
 
 void CGameObjectManager::Init()
 {
@@ -16,37 +16,53 @@ CGameObjectManager::~CGameObjectManager()
 
 void CGameObjectManager::Execute(CDeferred& deferred, CPostEffect& postEffect)
 {
-	//初期化
-	for (GameObjectList& objList : m_objectVector)
+	static bool isFlg = false;
+	static bool isBreak = false;
+	if (Pad().IsTriggerButton(enButtonLStickPush))
 	{
-		for (SGameObjectData& object : objList)
-		{
-			object.gameObject->Starter();
-		}
+		isBreak = !isBreak;
 	}
+	if (Pad().IsTriggerButton(enButtonUp) && isBreak)
+	{
+		isFlg = true;
+	}
+	if (!isBreak || isFlg)
+	{
 
-	//初期化
-	for (GameObjectList& objList : m_objectVector)
-	{
-		for (SGameObjectData& object : objList)
+		//初期化
+		for (GameObjectList& objList : m_objectVector)
 		{
-			object.gameObject->AsyncStarter();
+			for (SGameObjectData& object : objList)
+			{
+				object.gameObject->Starter();
+			}
+		}
+
+		//初期化
+		for (GameObjectList& objList : m_objectVector)
+		{
+			for (SGameObjectData& object : objList)
+			{
+				object.gameObject->AsyncStarter();
+			}
+		}
+		//更新
+		for (GameObjectList& objList : m_objectVector)
+		{
+			for (SGameObjectData& object : objList)
+			{
+				object.gameObject->Updater();
+			}
 		}
 	}
-	//更新
-	for (GameObjectList& objList : m_objectVector)
-	{
-		for (SGameObjectData& object : objList)
-		{
-			object.gameObject->Updater();
-		}
-	}
+	isFlg = false;
 	Engine().GetShadowMap().Draw();
 	//
 
 	Engine().SetAlphaBlendState(enAlphaBlendStateNone);
 	Engine().SetDepthStencilState(enDepthStencilState3D);
 	deferred.Start();
+
 	for (GameObjectList& objList : m_objectVector)
 	{
 		for (SGameObjectData& object : objList)
