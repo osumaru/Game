@@ -6,7 +6,7 @@
 #include "../../Scene/GameScene.h"
 #include "../../Map/Map.h"
 #include "../../Enemy/Maw.h"
-
+#include "../../Enemy/EnemyGroup.h"
 
 void IWeapon::Init(CPlayer* player)
 {
@@ -91,23 +91,30 @@ void IWeapon::EnemyAttack()
 		return;
 	}
 
-	//エネミーのリストを取得
-	for (const auto& enemys : GetSceneManager().GetGameScene().GetMap()->GetEnemyList())
+	//エネミーグループのリストを取得
+	std::list<CEnemyGroup*> enemyGroup = GetSceneManager().GetGameScene().GetMap()->GetEnemyGroupList();
+	for (const auto& group : enemyGroup)
 	{
-		if (enemys->IsDamagePossible())
+		CVector3 enemyGroupPos = group->GetPosition();
+		CVector3 distance = enemyGroupPos - info.attackPos;
+		float length = distance.Length();
+		if (length < 50.0f)
 		{
-
-			CVector3 EnemyVec = enemys->GetPosition();
-			EnemyVec.y += 1.3f;
-			EnemyVec.Subtract(info.attackPos);
-			float len = EnemyVec.Length();
-
-			if (fabs(len) < 2.0f)
+			for (const auto& enemy : group->GetGroupList()) 
 			{
-				enemys->SetIsDamage(true);
-				enemys->SetIsDamagePossible(false);
-			}
+				if (enemy->IsDamagePossible())
+				{
+					CVector3 EnemyVec = enemy->GetSpinePos();
+					EnemyVec.Subtract(info.attackPos);
+					float len = EnemyVec.Length();
 
+					if (fabs(len) < 2.0f)
+					{
+						enemy->SetIsDamage(true);
+						enemy->SetIsDamagePossible(false);
+					}
+				}
+			}
 		}
 	}
 

@@ -7,7 +7,8 @@
 
 void CPlayerWireMove::Init()
 {
-	m_pPlayerGetter->GetAnimation().Play(enPlayerAnimationWireMove, 0.25f);
+	m_pPlayerGetter->GetAnimation().Play(enPlayerAnimationWireThrow, 0.25f);
+	//m_pPlayerGetter->GetAnimation().Play(enPlayerAnimationWireMove, 0.25f);
 	m_movePosition = m_pPlayer->GetWireAction().GetWirePosition();
 	m_accel = 0.0f;
 	m_moveSpeed = 0.0f;
@@ -15,6 +16,18 @@ void CPlayerWireMove::Init()
 
 void CPlayerWireMove::Update()
 {
+
+	//if (!m_pPlayerGetter->GetAnimation().IsPlay())
+	//{
+	//	m_isWireThrow = false;
+	//	m_pPlayerGetter->GetAnimation().Play(enPlayerAnimationWireMove, 0.25f);
+	//}
+
+	//if (m_isWireThrow)
+	//{
+	//	return;
+	//}
+
 	bool isMoveEnd = false;
 	CVector3 playerPos = GetPlayer().GetPosition();
 	CVector3 toMovePos = m_movePosition - playerPos;

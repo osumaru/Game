@@ -45,6 +45,7 @@ private:
 	CSprite								m_backGround;					//背景
 	CSprite								m_pointer;						//カーソル
 	CSprite								m_itemFrame[m_itemLimit];		//インベントリの枠
+	CFont								m_itemName;						//アイテムの名前
 	CVector2							m_basePos = CVector2::Zero;		//初期座標
 	CVector2							m_size = CVector2::Zero;		//初期サイズ
 	int									m_width = 0;					//インベントリの幅

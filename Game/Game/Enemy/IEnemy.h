@@ -57,6 +57,9 @@ public:
 	//自身をエネミーリストから削除
 	void EnemyListErase();
 
+	//当たり判定用の腰の座標を更新
+	void UpdateSpinePos();
+
 	//自身のイテレータを設定
 	void SetIterater(std::list<IEnemy*>::iterator iterater)
 	{
@@ -125,6 +128,12 @@ public:
 	const CMatrix& GetWorldMatrix() const
 	{
 		return m_skinModel.GetWorldMatrix();
+	}
+
+	//当たり判定用の腰のワールド行列を取得
+	const CVector3& GetSpinePos() const
+	{
+		return m_spinePos;
 	}
 
 	//エネミーのボーンのワールド行列を取得
@@ -215,21 +224,23 @@ public:
 	}
 
 protected:
-	CSkinModel					 m_skinModel;				//スキンモデル
-	CAnimation					 m_animation;				//アニメーション
-	CEnemyStateMachine			 m_enemyStateMachine;		//ステートマシン
-	CEnemyTurn					 m_enemyTurn;				//向きを回転
-	CEnemySearch				 m_enemySearch;				//プレイヤーを探索
-	CEnemyGroup*				 m_enemyGroup;				//エネミーグループ
-	CVector3					 m_position;				//座標
-	CQuaternion					 m_rotation;				//回転
-	CCharacterController		 m_characterController;		//キャラクターコントローラー
-	SEnemyStatus			     m_status;					//ステータス
-	std::list<IEnemy*>::iterator m_iterater;				//自身のイテレータ
-	bool						 m_isAttackHit = false;		//攻撃が当たったか
-	bool						 m_isFind = false;			//プレイヤーを発見したか
-	bool						 m_isDamage = false;		//ダメージを受けたか
-	bool						 m_isDamagePossible = true;	//ダメージを受けられるか
-	bool						 m_isWireHit = false;		//ワイヤーが当たったか
-	bool						 m_isRemovedRigidBody = false;
+	CSkinModel						m_skinModel;					//スキンモデル
+	CAnimation						m_animation;					//アニメーション
+	CEnemyStateMachine				m_enemyStateMachine;			//ステートマシン
+	CEnemyTurn						m_enemyTurn;					//向きを回転
+	CEnemySearch					m_enemySearch;					//プレイヤーを探索
+	CEnemyGroup*					m_enemyGroup;					//エネミーグループ
+	CVector3						m_position;						//座標
+	CQuaternion						m_rotation;						//回転
+	CCharacterController			m_characterController;			//キャラクターコントローラー
+	SEnemyStatus					m_status;						//ステータス
+	std::list<IEnemy*>::iterator	m_iterater;						//自身のイテレータ
+	const CMatrix*					m_spineMatrix;					//当たり判定用の腰のワールド行列
+	CVector3						m_spinePos;						//当たり判定用の腰の座標
+	bool							m_isAttackHit = false;			//攻撃が当たったか
+	bool							m_isFind = false;				//プレイヤーを発見したか
+	bool							m_isDamage = false;				//ダメージを受けたか
+	bool							m_isDamagePossible = true;		//ダメージを受けられるか
+	bool							m_isWireHit = false;			//ワイヤーが当たったか
+	bool							m_isRemovedRigidBody = false;	//剛体が削除されたか
 };

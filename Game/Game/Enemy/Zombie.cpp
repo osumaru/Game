@@ -44,6 +44,8 @@ void CZombie::Init(CVector3 position)
 	m_status.gold = 100;
 	m_status.exp = 10;
 	this->SetIsActive(true);
+
+	m_spineMatrix = &GetBoneWorldMatrix(L"Spine");
 }
 
 bool CZombie::Start()
@@ -55,6 +57,8 @@ bool CZombie::Start()
 
 void CZombie::Update()
 {
+	UpdateSpinePos();
+
 	if (!m_isWireHit) {
 		m_animation.Update(GameTime().GetDeltaFrameTime());
 	}

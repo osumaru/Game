@@ -28,7 +28,7 @@ void CItemInventory::Init(CMenu* menu)
 	m_pointer.SetPosition(m_basePos);
 	m_pointer.SetSize(m_size);
 	//インベントリの枠を初期化
-	texture = TextureResource().LoadTexture(L"Assets/sprite/EquipFrame.png");
+	texture = TextureResource().LoadTexture(L"Assets/sprite/Frame.png");
 	for (int i = 0; i < m_itemLimit; i++)
 	{
 		m_itemFrame[i].Init(texture);
@@ -52,6 +52,9 @@ void CItemInventory::Init(CMenu* menu)
 			idx++;
 		}
 	}
+	m_itemName.Init(L"");
+	m_itemName.SetSize({ 0.7f,0.7f });
+	m_itemName.SetPosition({ 320.0f, 180.0f });
 }
 
 bool CItemInventory::Start()
@@ -65,6 +68,20 @@ void CItemInventory::Update()
 {
 	//カーソル移動
 	PointerMove();
+
+	if (m_pointerNum < m_itemList.size() && !m_itemList.empty())
+	{
+		std::list<IInventoryItem*>::iterator it;
+		it = m_itemList.begin();
+		for (int i = 0; i < m_pointerNum; i++)
+		{
+			it++;
+		}
+		m_itemName.SetString((*it)->GetItemName());
+	}
+	else {
+		m_itemName.SetString(L"");
+	}
 
 	if (Pad().IsTriggerButton(enButtonA)) 
 	{
@@ -92,6 +109,7 @@ void CItemInventory::AfterDraw()
 		item->Draw();
 	}
 	m_pointer.Draw();
+	m_itemName.Draw();
 }
 
 void CItemInventory::PointerMove()

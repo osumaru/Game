@@ -53,3 +53,10 @@ void IEnemy::EnemyListErase()
 	std::list<IEnemy*>& enemyList = GetSceneGame().GetMap()->GetEnemyList();
 	enemyList.erase(m_iterater);
 }
+
+void IEnemy::UpdateSpinePos()
+{
+	m_spinePos.x = m_spineMatrix->m[3][0];
+	m_spinePos.y = m_spineMatrix->m[3][1];
+	m_spinePos.z = m_spineMatrix->m[3][2];
+}

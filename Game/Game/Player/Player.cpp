@@ -90,6 +90,7 @@ void CPlayer::Init(CVector3 position)
 									{ L"Assets/modelData/PlayerRoll.tka" }	,		//回避アクション
 									{ L"Assets/modelData/PlayerRollCombine.tka" }	,		//回避アクション
 									{ L"Assets/modelData/PlayerDeath.tka" },			//死亡アニメーション
+									{ L"Assets/modelData/PlayerWireThrow.tka"},			//ワイヤーを投げるアニメーション
 									{ L"Assets/modelData/PlayerWireMove.tka" },				//ワイヤー移動アニメーション
 									{ L"Assets/modelData/PlayerJumpTackle.tka"},			//ワイヤー攻撃アニメーション
 									{ L"Assets/modelData/PlayerArrowAttack.tka" },		//弓の攻撃アニメーション

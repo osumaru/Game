@@ -21,6 +21,7 @@ enum EnPlayerAnimation
 	enPlayerAnimationAvoidance,		//回避アニメーション
 	enPlayerAnimationAvoidanceCombine,	//回避の後の合成用ポーズのアニメーション
 	enPlayerAnimationDete,			//死亡アニメーション
+	enPlayerAnimationWireThrow,		//ワイヤーを投げるアニメーション
 	enPlayerAnimationWireMove,		//ワイヤー移動アニメーション
 	enPlayerAnimationWireAttack,	//ワイヤー攻撃アニメーション
 	enPlayerAnimationArrowAttack,	//弓のアニメーション

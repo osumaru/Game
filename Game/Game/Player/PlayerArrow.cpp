@@ -68,8 +68,9 @@ void CPlayerArrow::Update()
 		{
 			if (!enemys->IsDamage()) {
 
-				CVector3 EnemyVec = enemys->GetPosition();
-				EnemyVec.y += OFFSET_Y;
+				//CVector3 EnemyVec = enemys->GetPosition();
+				//EnemyVec.y += OFFSET_Y;
+				CVector3 EnemyVec = enemys->GetSpinePos();
 				EnemyVec.Subtract(m_arrowPosition);
 				float len = EnemyVec.Length();
 
