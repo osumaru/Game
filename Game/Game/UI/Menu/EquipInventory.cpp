@@ -97,7 +97,7 @@ void CEquipInventory::Init(CMenu * menu)
 			m_equipWeapon[i].SetIsDraw(false);
 		}
 		//装備武器アイコンの枠の初期化
-		texture = TextureResource().LoadTexture(L"Assets/sprite/EquipFrame.png");
+		texture = TextureResource().LoadTexture(L"Assets/sprite/Frame.png");
 		m_equipFrame[i].Init(texture);
 		m_equipFrame[i].SetSize({ 70.0f,70.0f });
 		m_equipFrame[i].SetPosition(m_equipWeapon[i].GetPosition());
@@ -107,7 +107,8 @@ void CEquipInventory::Init(CMenu * menu)
 	//ステータス表示を初期化
 	SplayerStatus playerStatus = GetPlayer().GetStatus();
 	CVector2 fontPos = { m_basePos.x + m_baseSize.x * m_width, m_basePos.y };
-	wchar_t font[256];
+	wchar_t fontMoji[256];
+	wchar_t fontNum[256];
 	for (int j = 0; j < enFont_StatusNum; j++)
 	{
 		for (int i = 0; i < enStatus_Num; i++)
@@ -115,22 +116,32 @@ void CEquipInventory::Init(CMenu * menu)
 			switch (i)
 			{
 			case enStatus_Hp:
-				swprintf(font, L"最大HP : %d", playerStatus.MaxHealth);
+				swprintf(fontMoji, L"最大HP : ");
+				swprintf(fontNum, L"%d", playerStatus.MaxHealth);
 				break;
 			case enStatus_Attack:
-				swprintf(font, L"攻撃力 : %d", playerStatus.Strength);
+				swprintf(fontMoji, L"攻撃力 : ");
+				swprintf(fontNum, L"%d", playerStatus.Strength);
 				break;
 			case enStatus_Defense:
-				swprintf(font, L"防御力 : %d", playerStatus.Defense);
+				swprintf(fontMoji, L"防御力 : ");
+				swprintf(fontNum, L"%d", playerStatus.Defense);
 				break;
 			}
-			m_statusFont[j][i].Init(font);
+			m_statusFont[j][i].Init(fontMoji);
 			m_statusFont[j][i].SetPosition({
-					fontPos.x + (m_right.GetSize().x + m_statusWindow[enFont_CurrentStatus].GetSize().x) * j,
-					fontPos.y - m_baseSize.y * i
+				fontPos.x + (m_right.GetSize().x + m_statusWindow[enFont_CurrentStatus].GetSize().x) * j,
+				fontPos.y - m_baseSize.y * i
 			});
 			CVector2 fontSize = { 0.7f, 0.7f };
 			m_statusFont[j][i].SetSize(fontSize);
+
+			m_statusFontNum[j][i].Init(fontNum);
+			m_statusFontNum[j][i].SetPosition({
+				fontPos.x + (m_right.GetSize().x + m_statusWindow[enFont_CurrentStatus].GetSize().x) * j + 130.0f,
+				fontPos.y - m_baseSize.y * i
+			});
+			m_statusFontNum[j][i].SetSize(fontSize);
 		}
 	}
 }
@@ -196,6 +207,7 @@ void CEquipInventory::AfterDraw()
 		for (int i = 0; i < enStatus_Num; i++)
 		{
 			m_statusFont[j][i].Draw();
+			m_statusFontNum[j][i].Draw();
 		}
 	}
 	m_buttonAFont.Draw();
@@ -368,7 +380,7 @@ void CEquipInventory::CalucStatus()
 	SplayerStatus playerStatus = GetPlayer().GetStatus();
 	//装備の数を取得
 	size_t equipNum = m_equipList.size();
-	SWeaponStatus weaponStatus;
+	SWeaponStatus equipStatus[enFont_StatusNum];
 	if (m_pointerNum < equipNum) {
 		//所持している装備を選んでいる場合はその装備のステータスを取得
 		std::list<SWeaponStatus>::iterator it;
@@ -377,46 +389,74 @@ void CEquipInventory::CalucStatus()
 		{
 			it++;
 		}
-		weaponStatus = (*it);
+		equipStatus[enFont_ChangeStatus] = (*it);
 	}
 
-	std::list<SWeaponStatus>::iterator it;
-	it = m_equipList.begin();
-	SWeaponStatus equipStatus;
-	if (weaponStatus.weaponNum != EnPlayerWeapon::enInvalid)
+	if (equipStatus[enFont_ChangeStatus].weaponNum != EnPlayerWeapon::enInvalid)
 	{
 		//現在の装備のステータスを取得
-		equipStatus = GetPlayer().GetWeaponManager().GetWeaponStatus(weaponStatus.weaponNum);
+		equipStatus[enFont_CurrentStatus] = GetPlayer().GetWeaponManager().GetWeaponStatus(equipStatus[enFont_ChangeStatus].weaponNum);
 	}
 
 	//装備変更した場合のステータスを計算する
-	wchar_t font[256];
+	wchar_t fontMoji[256];
+	wchar_t fontNum[256];
+	int status = 0;
 	for (int j = 0; j < enFont_StatusNum; j++) 
 	{
-		if (j == enFont_ChangeStatus)
-		{
-			equipStatus = weaponStatus;
-		}
 		for (int i = 0; i < enStatus_Num; i++)
 		{
-			int statusNum = 0;
 			switch (i)
 			{
 			case enStatus_Hp:
-				statusNum = playerStatus.MaxHealth;
-				swprintf(font, L"最大HP : %d", statusNum);
+				status = playerStatus.MaxHealth;
+				swprintf(fontMoji, L"最大HP : ");
 				break;
 			case enStatus_Attack:
-				statusNum = equipStatus.attack + playerStatus.Strength;
-				swprintf(font, L"攻撃力 : %d", statusNum);
+				status = equipStatus[j].attack + playerStatus.Strength;
+				swprintf(fontMoji, L"攻撃力 : ");
 				break;
 			case enStatus_Defense:
-				statusNum = equipStatus.diffence + playerStatus.Defense;
-				swprintf(font, L"防御力 : %d", statusNum);
+				status = equipStatus[j].diffence + playerStatus.Defense;
+				swprintf(fontMoji, L"防御力 : ");
 				break;
 			}
-			m_statusFont[j][i].SetString(font);
+			swprintf(fontNum, L"%d", status);
+			//ステータスの文字と数値を設定
+			m_statusFont[j][i].SetString(fontMoji);
+			m_statusFontNum[j][i].SetString(fontNum);
 		}
+	}
+
+	//ステータスが変化している場合はフォントの色を変える
+	//高ければ赤色、低ければ青色
+	for (int i = 0; i < enStatus_Num; i++)
+	{
+		CVector4 color = CVector4::Black;
+		switch (i)
+		{
+		case enStatus_Attack:
+			if (equipStatus[enFont_CurrentStatus].attack < equipStatus[enFont_ChangeStatus].attack)
+			{
+				color = CVector4::Red;
+			}
+			else if (equipStatus[enFont_CurrentStatus].attack > equipStatus[enFont_ChangeStatus].attack)
+			{
+				color = CVector4::Blue;
+			}
+			break;
+		case enStatus_Defense:
+			if (equipStatus[enFont_CurrentStatus].diffence < equipStatus[enFont_ChangeStatus].diffence)
+			{
+				color = CVector4::Red;
+			}
+			else if (equipStatus[enFont_CurrentStatus].diffence > equipStatus[enFont_ChangeStatus].diffence)
+			{
+				color = CVector4::Blue;
+			}
+			break;
+		}
+		m_statusFontNum[enFont_ChangeStatus][i].SetColor(color);
 	}
 }
 

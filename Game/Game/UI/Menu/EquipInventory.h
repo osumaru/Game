@@ -68,7 +68,8 @@ private:
 	static const int					m_equipLimit = 15;								//装備所持上限
 	static std::list<SWeaponStatus>		m_equipList;									//装備リスト
 	CMenu*								m_menu = nullptr;								//メニュー
-	CFont								m_statusFont[enFont_StatusNum][enStatus_Num];	//現在の装備と装備変更時のステータス表示
+	CFont								m_statusFont[enFont_StatusNum][enStatus_Num];	//現在の装備と装備変更時のステータス文字
+	CFont								m_statusFontNum[enFont_StatusNum][enStatus_Num];//現在の装備と装備変更時のステータス数値
 	CSprite								m_background;									//背景
 	CSprite								m_statusWindow[enFont_StatusNum];				//ステータスウィンドウ
 	CSprite								m_right;										//右矢印

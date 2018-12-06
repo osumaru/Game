@@ -22,11 +22,11 @@ void CPlayer::OnInvokeAnimationEvent(//ƒAƒjƒ[ƒVƒ‡ƒ“ƒCƒxƒ“ƒg‚ªŒÄ‚Î‚ê‚é‚²‚Æ‚ÉŒÄ‚
 
 	if (wcscmp(animClipName, L"Assets/modelData/PlayerDash60fpsEvent.tka") == 0)
 	{//ƒCƒxƒ“ƒg–¼‚Åˆ—‚ğ•Ï‚¦‚éH
-		/*const float footVolume = 0.1f;
+		const float footVolume = 0.1f;
 		CSoundSource* footSound = New<CSoundSource>(0);
-		footSound->Init("Assets/sound/Jump.wav");
+		footSound->Init("Assets/sound/SystemSound/Run.wav");
 		footSound->Play(false);
-		footSound->SetVolume(footVolume);*/
+		footSound->SetVolume(footVolume);
 	}
 
 
@@ -90,6 +90,7 @@ void CPlayer::Init(CVector3 position)
 									{ L"Assets/modelData/PlayerRoll.tka" }	,		//‰ñ”ğƒAƒNƒVƒ‡ƒ“
 									{ L"Assets/modelData/PlayerRollCombine.tka" }	,		//‰ñ”ğƒAƒNƒVƒ‡ƒ“
 									{ L"Assets/modelData/PlayerDeath.tka" },			//€–SƒAƒjƒ[ƒVƒ‡ƒ“
+									{ L"Assets/modelData/PlayerWireThrow.tka"},			//ƒƒCƒ„[‚ğ“Š‚°‚éƒAƒjƒ[ƒVƒ‡ƒ“
 									{ L"Assets/modelData/PlayerWireMove.tka" },				//ƒƒCƒ„[ˆÚ“®ƒAƒjƒ[ƒVƒ‡ƒ“
 									{ L"Assets/modelData/PlayerJumpTackle.tka"},			//ƒƒCƒ„[UŒ‚ƒAƒjƒ[ƒVƒ‡ƒ“
 									{ L"Assets/modelData/PlayerArrowAttack.tka" },		//‹|‚ÌUŒ‚ƒAƒjƒ[ƒVƒ‡ƒ“

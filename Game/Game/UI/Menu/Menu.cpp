@@ -11,6 +11,7 @@
 
 CMenu::CMenu()
 {
+	SetIsActive(false);
 }
 
 
@@ -32,6 +33,7 @@ void CMenu::BeforeDead()
 
 void CMenu::Init()
 {
+	m_menuSoundEffect.Init("Assets/sound/SystemSound/MenuOpen.wav", false);
 	m_Texture.Load(L"Assets/sprite/MenuUI/Menu.png");
 	m_menu.Init(&m_Texture);
 	m_menu.SetPosition({ -1.0f, -1.0f });
@@ -43,30 +45,27 @@ void CMenu::Init()
 	m_selectPosition = SELECT_TEX_POS;
 	m_selectSprite.SetPosition(m_selectPosition);
 	m_selectSprite.SetSize(m_selectScale);
-
+	wchar_t filePath[256];
 	for (int i = 0; i < NUMBER_LINE; i++)
 	{
-		for (int j = 0; j < NUMBER_COLUMN; j++)
-		{
-			m_numberTexture[i][j] = TextureResource().LoadTexture(L"Assets/sprite/number/number0.png");
-			m_number[i][j].Init(m_numberTexture[i][j]);
-			m_number[i][j].SetPosition({ m_numberPos});
-			m_number[i][j].SetSize({ 65.0f,65.0f });
-			m_numberPos.x += 30.0;
-		}
+		
+		swprintf(filePath, L"0");
+		m_numberFont[i].Init(filePath);
+		m_numberFont[i].SetPosition(m_numberPos);
 		if(i==4)
 		{ 
-			m_numberPos.y -= 43.0f;
+			m_numberPos.y -= 45.0f;
 		}
-		m_numberPos.x = 500.0f;
-		m_numberPos.y -= 57.0f;
+		m_numberPos.y -= 55.0f;
 	}
+	
+	SetIsActive(true);
 }
 
 
 void CMenu::Update()
 {
-	if (GetPlayer().GetIsDied()) { return; }
+	if (&GetPlayer() == nullptr || GetPlayer().GetIsDied()) { return; }
 
 	KeyInputMenu();
 	switch (m_menuState)
@@ -134,6 +133,7 @@ void CMenu::KeyInputMenu()
 	//セレクトボタンが押された時の処理
 	if (Pad().IsTriggerButton(enButtonSelect))
 	{
+		PlayerStatusInput();
 		StatusMath();
 		if (m_draw)
 		{
@@ -149,6 +149,7 @@ void CMenu::KeyInputMenu()
 			m_draw = true;
 			m_menuState = enMiniMap;
 			m_stateNum = enMiniMap;
+			m_menuSoundEffect.Play(false,true);
 			
 
 		}
@@ -207,72 +208,10 @@ void CMenu::StatusMath()
 
 	for (int i = 0; i < NUMBER_LINE; i++)
 	{
-		
-			
 			wchar_t filePath[256];
-			//1000の位
-			int Box = m_PlayerStatus[i] / 1000;
-			swprintf(filePath, L"Assets/sprite/number/number%d.png", Box);
-			{
-				if (Box == 0)
-				{
-					m_number[i][0].SetIsDraw(false);
-				}
-				else
-				{
-
-					m_numberTexture[i][0] = m_numberTexture[i][0] = TextureResource().LoadTexture(filePath);
-					m_number[i][0].SetTexture(m_numberTexture[i][0]);
-					m_PlayerStatus[i] %= 1000;
-					m_number[i][0].SetIsDraw(true);
-				}
-
-			}
-
-			//100の位
-			Box = m_PlayerStatus[i] / 100;
-			swprintf(filePath, L"Assets/sprite/number/number%d.png",Box );
-			{
-				if (Box == 0 && !m_number[i][0].IsDraw())
-				{
-					m_number[i][1].SetIsDraw(false);
-				}
-				else
-				{
-
-					m_numberTexture[i][1] = m_numberTexture[i][1] = TextureResource().LoadTexture(filePath);
-					m_number[i][1].SetTexture(m_numberTexture[i][1]);
-					m_PlayerStatus[i] %= 100;
-					m_number[i][1].SetIsDraw(true);
-				}
-			}
-
-			//10の位
-			Box = m_PlayerStatus[i] / 10;
-			swprintf(filePath, L"Assets/sprite/number/number%d.png", Box);
-			{
-				if (Box == 0 && !m_number[i][1].IsDraw())
-				{
-					m_number[i][2].SetIsDraw(false);
-				}
-				else
-				{
-
-					m_numberTexture[i][2] = m_numberTexture[i][2] = TextureResource().LoadTexture(filePath);
-					m_number[i][2].SetTexture(m_numberTexture[i][2]);
-					m_PlayerStatus[i] %= 10;
-					m_number[i][2].SetIsDraw(true);
-				}
-
-			}
-
-			//1の位
-			swprintf(filePath, L"Assets/sprite/number/number%d.png", m_PlayerStatus[i]);
-			m_numberTexture[i][3] = m_numberTexture[i][3] = TextureResource().LoadTexture(filePath);
-			m_numberTexture[i][3]->Load(filePath);
-			m_number[i][3].SetTexture(m_numberTexture[i][3]);
-
-	
+			int Box = m_PlayerStatus[i];
+			swprintf(filePath, L"%d", Box);
+			m_numberFont[i].SetString(filePath);
 	}
 
 
@@ -286,13 +225,9 @@ void CMenu::AfterDraw()
 	{
 		m_menu.Draw();
 		m_selectSprite.Draw();
-		for (int i = 0; i < NUMBER_LINE; i++)
+		for (auto& fonts : m_numberFont)
 		{
-			for (int j = 0; j < NUMBER_COLUMN; j++)
-			{
-
-				m_number[i][j].Draw();
-			}
+			fonts.Draw();
 		}
 	}
 }

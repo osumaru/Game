@@ -14,6 +14,13 @@ bool CEnemyAttackWait::Start()
 void CEnemyAttackWait::Update()
 {
 	m_timer += GameTime().GetDeltaFrameTime();
+
+	if (m_enemy->IsDamage())
+	{
+		//ダメージを受けた
+		m_esm->ChangeState(CEnemyState::enState_Damage);
+	}
+
 	if (m_timer <= 3.0f)
 	{
 		//しばらく何もしない
@@ -23,11 +30,6 @@ void CEnemyAttackWait::Update()
 	CVector3 playerPos = GetPlayer().GetPosition();
 	CVector3 distance = m_enemy->GetPosition() - playerPos;
 	float length = distance.Length();
-	if (m_enemy->IsDamage())
-	{
-		//ダメージを受けた
-		m_esm->ChangeState(CEnemyState::enState_Damage);
-	}
 	if (length < 1.2f) 
 	{
 		bool isRange = m_enemy->CalucFanShape(10.0f, playerPos);

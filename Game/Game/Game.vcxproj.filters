@@ -364,6 +364,9 @@
     <ClCompile Include="Player\PlayerSate\PlayerWireMove.cpp">
       <Filter>ソース ファイル\Player\PlayerState</Filter>
     </ClCompile>
+    <ClCompile Include="GameSound\GameSoundEffect.cpp">
+      <Filter>ソース ファイル\GameSound</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -639,14 +642,11 @@
     <ClInclude Include="Item\InventoryItem\InventoryRecoveryItem.h">
       <Filter>ソース ファイル\Item\InventoryItem</Filter>
     </ClInclude>
+    <ClInclude Include="GameSound\GameSoundEffect.h">
+      <Filter>ソース ファイル\GameSound</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="Assets\shader\sprite.fx">
-      <Filter>ソース ファイル</Filter>
-    </CustomBuild>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Assets\modelData\UnityChan.max" />
     <ClInclude Include="Map\MapChip\ObstacleMapObject.h">
       <Filter>ヘッダー ファイル</Filter>
       <Filter>ソース ファイル\Map\MapChip</Filter>

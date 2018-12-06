@@ -66,6 +66,13 @@ public:
 	{
 		return m_enemyList;
 	}
+
+	//エネミーグループのリストを取得
+	std::list<CEnemyGroup*>& GetEnemyGroupList()
+	{
+		return m_enemyGroupList;
+	}
+
 	CShopManager* GetShop()
 	{
 		return m_shopManager;
@@ -74,7 +81,7 @@ public:
 private:
 	std::list<MapChip*>			m_mapChip;				//マップチップ
 	std::list<IEnemy*>			m_enemyList;			//エネミーリスト
-	std::vector<CEnemyGroup*>	m_enemyGroupList;		//エネミーグループのベクター
+	std::list<CEnemyGroup*>		m_enemyGroupList;		//エネミーグループのリスト
 	bool						m_collider = false;		//AABBを作成するかどうか
 	CShopManager*				m_shopManager;
 };
