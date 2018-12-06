@@ -119,16 +119,18 @@ void CSprite::Draw()
 	m_cb.Update(&cb);
 	GetDeviceContext()->VSSetShader((ID3D11VertexShader*)m_vertexShader.GetBody().Get(), nullptr, 0);
 	GetDeviceContext()->PSSetShader((ID3D11PixelShader*)m_pixelShader.GetBody().Get(), nullptr, 0);
+	GetDeviceContext()->IASetInputLayout(m_vertexShader.GetInputlayOut().Get());
+	GetDeviceContext()->VSSetConstantBuffers(0, 1, m_cb.GetBody().GetAddressOf());
+	GetDeviceContext()->PSSetConstantBuffers(0, 1, m_cb.GetBody().GetAddressOf());
+	ID3D11ShaderResourceView* views[] = {m_pTexture->GetShaderResource().Get()};
+	GetDeviceContext()->PSSetShaderResources(0, 1, views);
 	ID3D11Buffer* vertexBuffers[] = { m_primitive.GetVertexBuffer().Get() };
 	UINT strides[] = { m_primitive.GetVertexStride() };
 	UINT offset = 0;
 	GetDeviceContext()->IASetVertexBuffers(0, 1, vertexBuffers, strides, &offset);
 	GetDeviceContext()->IASetPrimitiveTopology(m_primitive.GetPrimitiveType());
 	GetDeviceContext()->IASetIndexBuffer(m_primitive.GetIndexBuffer().Get(), m_primitive.GetIndexFormat(), 0);
-	GetDeviceContext()->IASetInputLayout(m_vertexShader.GetInputlayOut().Get());
-	GetDeviceContext()->VSSetConstantBuffers(0, 1, m_cb.GetBody().GetAddressOf());
-	GetDeviceContext()->PSSetConstantBuffers(0, 1, m_cb.GetBody().GetAddressOf());
-	ID3D11ShaderResourceView* views[] = {m_pTexture->GetShaderResource().Get()};
-	GetDeviceContext()->PSSetShaderResources(0, 1, views);
+
 	GetDeviceContext()->DrawIndexed(m_primitive.GetIndexNum(), 0, 0);
+	//m_primitive.Draw(GetDeviceContext());
 }

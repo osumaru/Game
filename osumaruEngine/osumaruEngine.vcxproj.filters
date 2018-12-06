@@ -64,6 +64,9 @@
     <Filter Include="ソース ファイル\Graphics\Effect">
       <UniqueIdentifier>{dd060883-f363-4351-882a-5f4707928afc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Graphics\NewFilter1">
+      <UniqueIdentifier>{f32c6b62-117f-46b4-9ecf-ee5629f126f8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="engineStdafx.cpp">

@@ -68,7 +68,7 @@ void CWeaponManager::Draw()
 
 void CWeaponManager::AfterDraw()
 {
-	if (m_isAttack)
+	if (m_isAttack && m_isTraceDraw)
 	{
 		m_weaponTrace.Draw();
 	}

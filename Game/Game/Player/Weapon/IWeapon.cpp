@@ -56,6 +56,7 @@ void IWeapon::WeaponTraceDrawer()
 	if (m_pPlayer->GetWeaponManager().GetIsAttack())
 	{
 		SWeaponTraceDrawInfo info = WeaponTraceDraw();
+		m_pPlayer->GetWeaponManager().SetIsTraceDraw(info.isDraw);
 		if (info.isDraw)
 		{
 			weaponTrace.Add(info.rootPos, info.pointPos);
