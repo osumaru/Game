@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "Scene/SceneManager.h"
-
+#include <time.h>
 using namespace std;
 int WINAPI wWinMain(
 	HINSTANCE hInst,
@@ -14,7 +14,7 @@ int WINAPI wWinMain(
 	//初期化フェードなどの
 	GetSceneManager().Init();
 	GetSceneManager().GetInstance().Update();
-
+	Random().Init((unsigned int)time(NULL));
 	Engine().GameLoop();
 	Delete(&GetSceneManager());
 	Delete(&Sky());
