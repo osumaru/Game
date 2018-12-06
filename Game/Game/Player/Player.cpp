@@ -347,7 +347,7 @@ bool CPlayer::GetIsStateCondition(CPlayerState::EnPlayerState state)
 		return Pad().IsTriggerButton(enButtonX) && m_weaponManager.GetCurrentState() == enWeaponArrow;
 
 	case CPlayerState::enPlayerStateArrowShoot:
-		return dynamic_cast<CPlayerArrowAttack*>(m_PlayerStateMachine.GetState(CPlayerState::enPlayerStateArrowAttack))->IsCharge();
+		return !dynamic_cast<CPlayerArrowAttack*>(m_PlayerStateMachine.GetState(CPlayerState::enPlayerStateArrowAttack))->IsCharge();
 
 	case CPlayerState::enPlayerStateAttack://xƒ{ƒ^ƒ“‚ğ‰Ÿ‚µ‚Ä‘•”õ‚µ‚Ä‚¢‚é•Ší‚ª‹|‚¶‚á‚È‚©‚Á‚½‚©
 		return Pad().IsTriggerButton(enButtonX) && m_weaponManager.GetCurrentState() != enWeaponArrow;

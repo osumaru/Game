@@ -40,6 +40,8 @@ static const int PRIORITY_SKY = 10;
 #include "DirectXTK/Inc/SpriteFont.h"
 #include "DirectXTK/Inc/SpriteBatch.h"
 
+#include "Effekseer/Effekseer.h"
+#include "EffekseerRendererDX11/EffekseerRendererDX11.h"
 
 #include "../osumaruEngine/bulletPhysics/src/btBulletDynamicsCommon.h"
 

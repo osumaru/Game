@@ -120,7 +120,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalDependencies>d3d11.lib;d3dx11.lib;d3dx11d.lib;d3dcompiler.lib;DirectXTK.lib;XInput.lib;x3daudio.lib;xaudio2.lib;dxguid.lib;%(AdditionalDependencies);LinearMath_Debug.lib;BulletSoftBody_Debug.lib;BulletDynamics_Debug.lib;BulletCollision_Debug.lib</AdditionalDependencies>
+      <AdditionalDependencies>d3d11.lib;d3dx11.lib;d3dx11d.lib;d3dcompiler.lib;DirectXTK.lib;XInput.lib;x3daudio.lib;xaudio2.lib;dxguid.lib;EffekseerRendererDX11.Debug.lib;Effekseer.Debug.lib;%(AdditionalDependencies);LinearMath_Debug.lib;BulletSoftBody_Debug.lib;BulletDynamics_Debug.lib;BulletCollision_Debug.lib</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -159,12 +159,13 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalDependencies>d3d11.lib;d3dx11.lib;d3dx11d.lib;d3dcompiler.lib;DirectXTK.lib;XInput.lib;x3daudio.lib;xaudio2.lib;dxguid.lib;%(AdditionalDependencies);LinearMath.lib;BulletSoftBody.lib;BulletDynamics.lib;BulletCollision.lib</AdditionalDependencies>
+      <AdditionalDependencies>d3d11.lib;d3dx11.lib;d3dx11d.lib;d3dcompiler.lib;DirectXTK.lib;XInput.lib;x3daudio.lib;xaudio2.lib;dxguid.lib;EffekseerRendererDX11.Release.lib;Effekseer.Release.lib;%(AdditionalDependencies);LinearMath.lib;BulletSoftBody.lib;BulletDynamics.lib;BulletCollision.lib</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Camera\Camera.cpp" />
     <ClCompile Include="Camera\SpringCamera.cpp" />
+    <ClCompile Include="Effect\Effect.cpp" />
     <ClCompile Include="Engine.cpp" />
     <ClCompile Include="engineStdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -229,6 +230,7 @@
   <ItemGroup>
     <ClInclude Include="Camera\Camera.h" />
     <ClInclude Include="Camera\SpringCamera.h" />
+    <ClInclude Include="Effect\Effect.h" />
     <ClInclude Include="Engine.h" />
     <ClInclude Include="engineStdafx.h" />
     <ClInclude Include="GameObject\GameObject.h" />
