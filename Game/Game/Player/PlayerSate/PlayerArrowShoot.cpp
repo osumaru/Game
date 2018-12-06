@@ -21,7 +21,7 @@ void CPlayerArrowShoot::Init()
 
 void CPlayerArrowShoot::Update()
 {
-	if (Pad().GetRightTrigger())
+	if (m_pPlayer->GetIsStateCondition(CPlayerState::enPlayerStateArrowAttack))
 	{
 		m_isShoot = true;
 	}

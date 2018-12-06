@@ -45,7 +45,7 @@ public:
 		m_playerDied.SetPlayer(player, playerGetter);
 		m_playerJump.SetPlayer(player, playerGetter);
 		m_playerAvoidance.SetPlayer(player, playerGetter);
-		m_playerArrowAtack.SetPlayer(player, playerGetter);
+		m_playerArrowAttack.SetPlayer(player, playerGetter);
 		m_playerArrowShoot.SetPlayer(player, playerGetter);
 		m_playerWireMove.SetPlayer(player, playerGetter);
 		m_playerStun.SetPlayer(player, playerGetter);
@@ -78,7 +78,7 @@ private:
 	CPlayerDied						m_playerDied;			//死亡モーション
 	CPlayerJump						m_playerJump;			//ジャンプモーション
 	CPlayerAvoidance				m_playerAvoidance;		//回避モーション
-	CPlayerArrowAttack				m_playerArrowAtack;		//弓での攻撃モーション
+	CPlayerArrowAttack				m_playerArrowAttack;	//弓での攻撃モーション
 	CPlayerArrowShoot				m_playerArrowShoot;		//弓を放つモーション
 	CPlayerWireMove					m_playerWireMove;		//ワイヤーモーション
 	CPlayerStun						m_playerStun;			//スタン状態

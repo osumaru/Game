@@ -12,7 +12,7 @@ void CPlayerStateMachine::Init()
 	m_pStates[CPlayerState::enPlayerStateJump] = &m_playerJump;
 	m_pStates[CPlayerState::enPlayerStateRunJump] = &m_playerJump;
 	m_pStates[CPlayerState::enPlayerStateAttack] = &m_playerAttack;
-	m_pStates[CPlayerState::enPlayerStateArrowAttack] = &m_playerArrowShoot;
+	m_pStates[CPlayerState::enPlayerStateArrowAttack] = &m_playerArrowAttack;
 	m_pStates[CPlayerState::enPlayerStateArrowShoot] = &m_playerArrowShoot;
 	m_pStates[CPlayerState::enPlayerStateDamage] = &m_playerDamage;
 	m_pStates[CPlayerState::enPlayerStateDied] = &m_playerDied;
@@ -54,7 +54,7 @@ void CPlayerStateMachine::SetState(CPlayerState::EnPlayerState nextState)
 		m_currentState = &m_playerAttack;			//UŒ‚ƒXƒe[ƒg‚É‘JˆÚ
 		break;
 	case CPlayerState::enPlayerStateArrowAttack:	//‹|‚ÌUŒ‚ƒXƒe[ƒg‚É‘JˆÚ
-		m_currentState = &m_playerArrowAtack;
+		m_currentState = &m_playerArrowAttack;
 		break;
 	case CPlayerState::enPlayerStateArrowShoot:		//‹|‚ÌUŒ‚ƒXƒe[ƒg‚É‘JˆÚ
 		m_currentState = &m_playerArrowShoot;
