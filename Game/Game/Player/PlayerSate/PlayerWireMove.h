@@ -25,5 +25,8 @@ private:
 	const float m_speed = 40.0f;	//ˆÚ“®‘¬“x
 	float		m_accel = 0.0f;
 	float		m_moveSpeed = 0.0f;
-	bool		m_isWireThrow = true;
+	bool		m_isWireThrow = true;	//ƒƒCƒ„[‚ğ“Š‚°‚Ä‚¢‚é‚©
+	const CMatrix*	m_playerHandMatrix;
+	CVector3	m_playerHandPos = CVector3::Zero;
+	float		m_wireSpeed = 1.0f;
 };

@@ -63,7 +63,7 @@ void CNinja::Update()
 		m_animation.Update(GameTime().GetDeltaFrameTime() * 2.0f);
 	}
 
-	if (!m_isRemovedRigidBody) {
+	if (!m_isRemovedRigidBody && !m_isWireHit) {
 		m_characterController.SetPosition(m_position);
 		m_characterController.Execute(GameTime().GetDeltaFrameTime());
 		m_position = m_characterController.GetPosition();

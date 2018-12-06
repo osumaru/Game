@@ -2,6 +2,7 @@
 #include "PlayerArrow.h"
 #include "Weapon/WeaponManager.h"
 #include "WireAction.h"
+#include "WireDraw.h"
 
 class CPlayer;
 /*
@@ -67,6 +68,8 @@ public:
 	void SetDamageEnemyPos(const CVector3& position);
 
 	const CVector3& GetDamageEnemyPos();
+
+	CWireDraw& GetWireDraw();
 
 private:
 	CPlayer*	m_pPlayer = nullptr;
