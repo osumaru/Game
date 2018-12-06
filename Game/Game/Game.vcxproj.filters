@@ -367,6 +367,9 @@
     <ClCompile Include="GameSound\GameSoundEffect.cpp">
       <Filter>ソース ファイル\GameSound</Filter>
     </ClCompile>
+    <ClCompile Include="Player\WireDraw.cpp">
+      <Filter>ソース ファイル\Player</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -644,6 +647,9 @@
     </ClInclude>
     <ClInclude Include="GameSound\GameSoundEffect.h">
       <Filter>ソース ファイル\GameSound</Filter>
+    </ClInclude>
+    <ClInclude Include="Player\WireDraw.h">
+      <Filter>ソース ファイル\Player</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

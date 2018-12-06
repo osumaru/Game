@@ -85,6 +85,11 @@ public:
 		return m_weaponTrace;
 	}
 
+	void SetIsTraceDraw(bool isTraceDraw)
+	{
+		m_isTraceDraw = isTraceDraw;
+	}
+
 private:
 	EnPlayerWeapon				m_weaponState = enWeaponSword;				//現在使ってる武器
 	std::list<SWeaponStatus>	m_equipList;								//所持装備のリスト
@@ -92,4 +97,5 @@ private:
 	bool						m_isAttack = false;							//攻撃中かのフラグ
 	bool						m_isAttackCheck = false;					//当たり判定を取っているかのフラグ
 	CWeaponTraceDraw			m_weaponTrace;								//武器の軌跡を描画するためのクラス
+	bool						m_isTraceDraw = false;
 };
