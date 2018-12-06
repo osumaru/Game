@@ -74,6 +74,9 @@ public:
 	{
 		return m_indexFormat;
 	}
+
+	//描画
+	void Draw(ID3D11DeviceContext* deviceContext);
 private:
 	Microsoft::WRL::ComPtr<ID3D11Buffer>			m_vertexBuffer = nullptr;									//頂点バッファ	
 	Microsoft::WRL::ComPtr<ID3D11Buffer>			m_indexBuffer = nullptr;									//インデックスバッファ
