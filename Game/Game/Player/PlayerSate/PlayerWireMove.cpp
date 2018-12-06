@@ -11,6 +11,7 @@ void CPlayerWireMove::Init()
 	m_movePosition = m_pPlayer->GetWireAction().GetWirePosition();
 	m_accel = 0.0f;
 	m_moveSpeed = 0.0f;
+	m_wireSpeed = 1.0f;
 	m_isWireThrow = true;
 	m_playerHandMatrix = &m_pPlayer->GetSkinmodel().FindBoneWorldMatrix(L"LeftHand");
 	m_playerHandPos.x = m_playerHandMatrix->m[3][0];
