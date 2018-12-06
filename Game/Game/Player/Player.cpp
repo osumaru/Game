@@ -160,10 +160,10 @@ void CPlayer::Update()
 	//	m_status.Health = 0;
 	//}
 
-	if (Pad().IsTriggerButton(enButtonB))
-	{
-		m_isDamege = true;
-	}
+	//if (Pad().IsTriggerButton(enButtonB))
+	//{
+	//	m_isDamege = true;
+	//}
 
 	CMatrix viewMat;
 	CVector3 cameraPos = m_position;
@@ -292,7 +292,9 @@ void CPlayer::Rotation(const CVector3& stickDir)
 	}
 	else if (m_wireAction.IsWireMove())
 	{
-		CVector3 moveSpeed = m_characterController.GetMoveSpeed();
+		CVector3 wireDir = m_wireAction.GetWirePosition() - m_position;
+		wireDir.Normalize();
+		CVector3 moveSpeed = wireDir/*m_characterController.GetMoveSpeed()*/;
 		CVector3 moveSpeedXZ = moveSpeed;
 		moveSpeedXZ.y = 0.0f;
 		moveSpeed.Normalize();

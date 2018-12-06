@@ -12,21 +12,23 @@ void CPlayerWireMove::Init()
 	m_movePosition = m_pPlayer->GetWireAction().GetWirePosition();
 	m_accel = 0.0f;
 	m_moveSpeed = 0.0f;
+	m_isWireThrow = true;
 }
 
 void CPlayerWireMove::Update()
 {
 
-	//if (!m_pPlayerGetter->GetAnimation().IsPlay())
-	//{
-	//	m_isWireThrow = false;
-	//	m_pPlayerGetter->GetAnimation().Play(enPlayerAnimationWireMove, 0.25f);
-	//}
+	if (m_pPlayerGetter->GetAnimation().GetCurrentAnimationNum() == enPlayerAnimationWireThrow
+		&& !m_pPlayerGetter->GetAnimation().IsPlay())
+	{
+		m_isWireThrow = false;
+		m_pPlayerGetter->GetAnimation().Play(enPlayerAnimationWireMove, 0.25f);
+	}
 
-	//if (m_isWireThrow)
-	//{
-	//	return;
-	//}
+	if (m_isWireThrow)
+	{
+		return;
+	}
 
 	bool isMoveEnd = false;
 	CVector3 playerPos = GetPlayer().GetPosition();
