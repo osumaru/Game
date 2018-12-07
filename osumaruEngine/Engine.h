@@ -16,6 +16,8 @@
 #include "Graphics/PreRendering/ShadowMap.h"
 #include "Graphics/State/ViewPortState.h"
 #include "Graphics/PointLightManager.h"
+#include "Effect/EffectEngine.h"
+#include "Resource/EffectResource.h"
 
 //エンジンクラス
 class CEffectManager;
@@ -233,6 +235,16 @@ public:
 		return m_spriteBatch.get();
 	}
 
+	CEffectEngine& GetEffectEngine()
+	{
+		return m_effectEngine;
+	}
+
+	CEffectResource& GetEffectResource()
+	{
+		return m_effectResource;
+	}
+
 private:
 	static const int							MAIN_RENDER_TARGET_NUM = 2;
 	CGameObjectManager*							m_objectManager;			//オブジェクトマネージャー
@@ -253,6 +265,7 @@ private:
 	CTextureResource							m_textureResource;
 	CSkinmodelResource							m_skinmodelResource;
 	CShaderResource								m_shaderResource;
+	CEffectResource								m_effectResource;
 	CLight										m_light;
 	CDeferred									m_deferred;
 	CPostEffect									m_postEffect;
@@ -263,6 +276,7 @@ private:
 	CViewPortState								m_viewPortState;
 	CPointLightManager							m_pointLightManager;
 	std::unique_ptr<DirectX::SpriteBatch>		m_spriteBatch;
+	CEffectEngine								m_effectEngine;
 };
 
 //エンジンクラスのインスタンスを取得。
