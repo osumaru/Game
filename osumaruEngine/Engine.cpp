@@ -155,6 +155,7 @@ void CEngine::InitD3D(HINSTANCE& hInst)
 	m_shadowMap.Init();
 	m_pointLightManager.Init();
 	m_spriteBatch = std::make_unique<DirectX::SpriteBatch>(m_pDeviceContext.Get());
+	m_effectEngine.Init();
 }
 
 void CEngine::GameLoop()
@@ -182,6 +183,7 @@ void CEngine::GameLoop()
 			m_pSwapChain->Present(0, 0);
 			m_physicsWorld->Update();
 			m_soundEngine->Update();
+			m_effectEngine.Update();
 			m_pad->Update();
 			sw.Stop();
 			float limitTime = 1.0f / 60.0f;

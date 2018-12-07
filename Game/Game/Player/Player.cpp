@@ -55,7 +55,7 @@ void CPlayer::BeforeDead()
 
 void CPlayer::Init(CVector3 position)
 {
-	Sleep(10000);
+	//Sleep(10000);
 	//プレイヤーのスキンンモデルのロード
 	m_skinmodel.Load(L"Assets/modelData/Player.cmo", &m_animation);
 	m_skinmodel.LoadNormalmap(L"Assets/modelData/Player_normal.png");
@@ -72,28 +72,28 @@ void CPlayer::Init(CVector3 position)
 	//アニメーションの初期化
 	{
 		wchar_t* animClip[enPlayerAnimationNum] = {
-									{ L"Assets/modelData/PlayerStand.tka"},				//待機アニメーション	
-									{ L"Assets/modelData/PlayerWalkStay.tka" },			//歩行アニメーション
+									{ L"Assets/modelData/PlayerStand.tka"},					//待機アニメーション	
+									{ L"Assets/modelData/PlayerWalkStay.tka" },				//歩行アニメーション
 									{ L"Assets/modelData/PlayerDash60fpsEvent.tka" },		//走りアニメーション
-									{ L"Assets/modelData/PlayerRunJump.tka" },			//走りジャンプアニメーション
+									{ L"Assets/modelData/PlayerRunJump.tka" },				//走りジャンプアニメーション
 									{ L"Assets/modelData/PlayerJump2.tka" },				//ジャンプアニメーション
-									{ L"Assets/modelData/PlayerCombo4.tka" },			//攻撃アニメーション
-									{ L"Assets/modelData/PlayerCombo5.tka" },		//連撃アニメーション
-									{ L"Assets/modelData/PlayerCombo6.tka" },		//連撃アニメーション
-									{ L"Assets/modelData/PlayerCombo4Combine.tka" },		//連撃アニメーション
-									{ L"Assets/modelData/PlayerCombo5Combine.tka" },		//連撃アニメーション
-									{ L"Assets/modelData/PlayerAttackCombine.tka" },		//連撃アニメーション
-									{ L"Assets/modelData/PlayerJumpAttack.tka"},		//ジャンプ攻撃アニメーション
-									{ L"Assets/modelData/PlayerStun.tka" },			//スタンアニメーション
-									{ L"Assets/modelData/PlayerDamage.tka" },			//ダメージアニメーション
-									{ L"Assets/modelData/PlayerJumpDamage.tka"},		//ダメージ(空中)アニメーション
-									{ L"Assets/modelData/PlayerRoll.tka" }	,		//回避アクション
+									{ L"Assets/modelData/PlayerTwinAttackFirst.tka" },		//攻撃アニメーション
+									{ L"Assets/modelData/PlayerTwinAttackSecand.tka" },		//連撃アニメーション
+									{ L"Assets/modelData/PlayerTwinAttackThird.tka" },		//連撃アニメーション
+									{ L"Assets/modelData/PlayerTwinAttackFirstEnd.tka" },	//連撃アニメーション
+									{ L"Assets/modelData/PlayerTwinAttackSecandEnd.tka" },	//連撃アニメーション
+									{ L"Assets/modelData/PlayerTwinAttackThirdEnd.tka" },	//連撃アニメーション
+									{ L"Assets/modelData/PlayerJumpAttack.tka"},			//ジャンプ攻撃アニメーション
+									{ L"Assets/modelData/PlayerStun.tka" },					//スタンアニメーション
+									{ L"Assets/modelData/PlayerDamage.tka" },				//ダメージアニメーション
+									{ L"Assets/modelData/PlayerJumpDamage.tka"},			//ダメージ(空中)アニメーション
+									{ L"Assets/modelData/PlayerRoll.tka" }	,				//回避アクション
 									{ L"Assets/modelData/PlayerRollCombine.tka" }	,		//回避アクション
-									{ L"Assets/modelData/PlayerDeath.tka" },			//死亡アニメーション
-									{ L"Assets/modelData/PlayerWireThrow.tka"},			//ワイヤーを投げるアニメーション
+									{ L"Assets/modelData/PlayerDeath.tka" },				//死亡アニメーション
+									{ L"Assets/modelData/PlayerWireThrow.tka"},				//ワイヤーを投げるアニメーション
 									{ L"Assets/modelData/PlayerWireMove.tka" },				//ワイヤー移動アニメーション
 									{ L"Assets/modelData/PlayerJumpTackle.tka"},			//ワイヤー攻撃アニメーション
-									{ L"Assets/modelData/PlayerArrowAttack.tka" },		//弓の攻撃アニメーション
+									{ L"Assets/modelData/PlayerArrowAttack.tka" },			//弓の攻撃アニメーション
 									{ L"Assets/modelData/PlayerArrowAttackEvent.tka" },
 									{ L"Assets/modelData/PlayerLeageSwordAttack.tka" },	//大剣の攻撃アニメーション
 									{ L"Assets/modelData/PlayerTwinSwordAttack.tka" },	//二刀流の攻撃アニメーション
@@ -202,7 +202,8 @@ void CPlayer::Draw()
 void CPlayer::AfterDraw()
 {
 	m_weaponManager.AfterDraw();
-	if (m_wireAction.IsWireMove()) {
+	if (m_wireAction.IsWireMove()) 
+	{
 		m_wireDraw.Draw();
 	}
 }
