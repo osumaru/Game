@@ -136,6 +136,7 @@ void CPlayer::Init(CVector3 position)
 	m_wireAction.Init(this);
 	SetIsActive(true);
 	GetGameCamera().CameraSetPlayer();
+	m_wireDraw.Init(CVector3::Zero, CVector3::Zero, CVector3::Zero);
 }
 
 
@@ -160,10 +161,10 @@ void CPlayer::Update()
 	//	m_status.Health = 0;
 	//}
 
-	if (Pad().IsTriggerButton(enButtonB))
-	{
-		m_isDamege = true;
-	}
+	//if (Pad().IsTriggerButton(enButtonB))
+	//{
+	//	m_isDamege = true;
+	//}
 
 	CMatrix viewMat;
 	CVector3 cameraPos = m_position;
@@ -201,6 +202,9 @@ void CPlayer::Draw()
 void CPlayer::AfterDraw()
 {
 	m_weaponManager.AfterDraw();
+	if (m_wireAction.IsWireMove()) {
+		m_wireDraw.Draw();
+	}
 }
 
 void CPlayer::StatusCalculation()
@@ -292,7 +296,7 @@ void CPlayer::Rotation(const CVector3& stickDir)
 	}
 	else if (m_wireAction.IsWireMove())
 	{
-		CVector3 moveSpeed = m_characterController.GetMoveSpeed();
+		CVector3 moveSpeed = m_wireAction.GetWirePosition() - m_position;
 		CVector3 moveSpeedXZ = moveSpeed;
 		moveSpeedXZ.y = 0.0f;
 		moveSpeed.Normalize();

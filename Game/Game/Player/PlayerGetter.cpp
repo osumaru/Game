@@ -77,3 +77,8 @@ const CVector3& CPlayerGetter::GetDamageEnemyPos()
 {
 	return m_damageEnemyPos;
 }
+
+CWireDraw & CPlayerGetter::GetWireDraw()
+{
+	return m_pPlayer->m_wireDraw;
+}

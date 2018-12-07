@@ -8,25 +8,48 @@
 void CPlayerWireMove::Init()
 {
 	m_pPlayerGetter->GetAnimation().Play(enPlayerAnimationWireThrow, 0.25f);
-	//m_pPlayerGetter->GetAnimation().Play(enPlayerAnimationWireMove, 0.25f);
 	m_movePosition = m_pPlayer->GetWireAction().GetWirePosition();
 	m_accel = 0.0f;
 	m_moveSpeed = 0.0f;
+	m_isWireThrow = true;
+	m_playerHandMatrix = &m_pPlayer->GetSkinmodel().FindBoneWorldMatrix(L"LeftHand");
+	m_playerHandPos.x = m_playerHandMatrix->m[3][0];
+	m_playerHandPos.y = m_playerHandMatrix->m[3][1];
+	m_playerHandPos.z = m_playerHandMatrix->m[3][2];
+	m_pPlayerGetter->GetWireDraw().SetStartPosition(m_playerHandPos);
+	CVector3 wireDir = m_movePosition - m_playerHandPos;
+	wireDir.Normalize();
+	wireDir *= m_wireSpeed;
+	m_wireSpeed += m_wireSpeed;
+	CVector3 wireEndPos = m_playerHandPos + wireDir;
+	m_pPlayerGetter->GetWireDraw().SetEndPosition(wireEndPos);
 }
 
 void CPlayerWireMove::Update()
 {
+	m_playerHandPos.x = m_playerHandMatrix->m[3][0];
+	m_playerHandPos.y = m_playerHandMatrix->m[3][1];
+	m_playerHandPos.z = m_playerHandMatrix->m[3][2];
+	m_pPlayerGetter->GetWireDraw().SetStartPosition(m_playerHandPos);
+	CVector3 wireDir = m_movePosition - m_playerHandPos;
+	wireDir.Normalize();
+	wireDir *= m_wireSpeed;
+	m_wireSpeed += m_wireSpeed;
+	CVector3 wireEndPos = m_playerHandPos + wireDir;
+	m_pPlayerGetter->GetWireDraw().SetEndPosition(wireEndPos);
+	m_pPlayerGetter->GetWireDraw().Update();
 
-	//if (!m_pPlayerGetter->GetAnimation().IsPlay())
-	//{
-	//	m_isWireThrow = false;
-	//	m_pPlayerGetter->GetAnimation().Play(enPlayerAnimationWireMove, 0.25f);
-	//}
+	if (m_pPlayerGetter->GetAnimation().GetCurrentAnimationNum() == enPlayerAnimationWireThrow
+		&& !m_pPlayerGetter->GetAnimation().IsPlay())
+	{
+		m_isWireThrow = false;
+		m_pPlayerGetter->GetAnimation().Play(enPlayerAnimationWireMove, 0.25f);
+	}
 
-	//if (m_isWireThrow)
-	//{
-	//	return;
-	//}
+	if (m_isWireThrow)
+	{
+		return;
+	}
 
 	bool isMoveEnd = false;
 	CVector3 playerPos = GetPlayer().GetPosition();

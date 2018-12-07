@@ -237,7 +237,6 @@ protected:
 	std::list<IEnemy*>::iterator	m_iterater;						//自身のイテレータ
 	const CMatrix*					m_spineMatrix;					//当たり判定用の腰のワールド行列
 	CVector3						m_spinePos;						//当たり判定用の腰の座標
-	bool							m_isAttackHit = false;			//攻撃が当たったか
 	bool							m_isFind = false;				//プレイヤーを発見したか
 	bool							m_isDamage = false;				//ダメージを受けたか
 	bool							m_isDamagePossible = true;		//ダメージを受けられるか

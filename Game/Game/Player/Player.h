@@ -6,6 +6,8 @@
 #include "PlayerSate/PlayerStateCommon.h"
 #include "WireAction.h"
 #include "PlayerGetter.h"
+#include "WireDraw.h"
+
 class IItem;
 
 struct SplayerStatus
@@ -212,6 +214,7 @@ private:
 	bool								m_isStatusConversion = false;			//ステータスが変化したかを判定する
 	bool								m_isInvinsible = false;					//無敵かのフラグ
 	CWireAction							m_wireAction;							//ワイヤーの飛ぶかどうかの判定をしたりするところ
+	CWireDraw							m_wireDraw;
 };
 
 static CPlayer& GetPlayer()
