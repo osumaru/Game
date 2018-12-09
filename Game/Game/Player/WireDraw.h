@@ -34,17 +34,19 @@ public:
 		m_color = color;
 	}
 
+	//頂点バッファ
 	struct SVSLayout
 	{
 		CVector4 pos;
 		CVector3 color;
 	};
 private:
-	CVector3 m_endPos;
-	CVector3 m_startPos;
-	CVector3 m_color;
-	CPrimitive	m_primitive;
-	CShader	m_ps;
-	CShader m_vs;
-	CConstantBuffer m_cb;
+	static const int VERTEX_NUM = 2;
+	CVector3		m_startPos;		//始点の座標
+	CVector3		m_endPos;		//終点の座標
+	CVector3		m_color;		//色(x,y,z) = (r,g,b)
+	CPrimitive		m_primitive;	//プリミティブ
+	CShader			m_ps;			//ピクセルシェーダー
+	CShader			m_vs;			//頂点シェーダー
+	CConstantBuffer m_cb;			//定数バッファ
 };

@@ -24,6 +24,7 @@ private:
 	EnPlayerAnimation			m_attackAnimation[MAX_ATTACK_NUM];	//攻撃のアニメーション番号
 	EnPlayerAnimation			m_combineAnimation[MAX_ATTACK_NUM];	//攻撃の後の合成用のアニメーション番号
 	bool						m_isPreDodge = false;				//回避の先行入力用フラグ
+	bool						m_stanAttack[MAX_ATTACK_NUM];
 
 	const CMatrix* m_pBoneMat;	//ボーンの行列のポインタ
 	CVector3 m_manipVec;		//ボーンの座標からプレイヤーの座標までのベクトル

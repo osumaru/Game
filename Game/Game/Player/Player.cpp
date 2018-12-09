@@ -55,7 +55,7 @@ void CPlayer::BeforeDead()
 
 void CPlayer::Init(CVector3 position)
 {
-	Sleep(10000);
+	//Sleep(10000);
 	//プレイヤーのスキンンモデルのロード
 	m_skinmodel.Load(L"Assets/modelData/Player.cmo", &m_animation);
 	m_skinmodel.LoadNormalmap(L"Assets/modelData/Player_normal.png");
@@ -202,7 +202,8 @@ void CPlayer::Draw()
 void CPlayer::AfterDraw()
 {
 	m_weaponManager.AfterDraw();
-	if (m_wireAction.IsWireMove()) {
+	if (m_wireAction.IsWireMove()) 
+	{
 		m_wireDraw.Draw();
 	}
 }

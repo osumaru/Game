@@ -1,5 +1,6 @@
 #include "EnemyStan.h"
 #include "../IEnemy.h"
+#include "../../UI/DamageNumber/DamageNumber.h"
 
 bool CEnemyStan::Start()
 {
@@ -10,6 +11,9 @@ bool CEnemyStan::Start()
 	moveSpeed.z = 0.0f;
 	m_enemy->SetMoveSpeed(moveSpeed);
 
+	//ダメージを受けたフラグを戻す
+	m_enemy->SetIsDamage(false);
+
 	return true;
 }
 
@@ -17,6 +21,14 @@ void CEnemyStan::Update()
 {
 	m_timer += GameTime().GetDeltaFrameTime();
 
+	if (m_enemy->IsDamage())
+	{
+		//ダメージ数値を初期化
+		m_damageNumber = New<CDamageNumber>(PRIORITY_UI);
+		m_damageNumber->Init(m_enemy);
+		//ダメージを受けたフラグを戻す
+		m_enemy->SetIsDamage(false);
+	}
 	if (m_timer >= 3.0f) {
 		m_esm->ChangeState(CEnemyState::enState_Chase);
 	}

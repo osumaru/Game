@@ -5,6 +5,8 @@
 
 #include "IEnemyState.h"
 
+class CDamageNumber;
+
 class CEnemyStan : public IEnemyState
 {
 public:
@@ -21,5 +23,6 @@ public:
 
 	void Update() override;
 private:
+	CDamageNumber*	m_damageNumber = nullptr;	//ダメージ表示
 	float m_timer = 0.0f;	//タイマー
 };

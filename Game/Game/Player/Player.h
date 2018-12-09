@@ -181,6 +181,16 @@ public:
 		m_playerGetter.SetDamageEnemyPos(position);
 	}
 
+	bool GetStanAttack()
+	{
+		return m_isStanAttack;
+	}
+
+	void SetStanAttack(bool isStanAttack)
+	{
+		m_isStanAttack = isStanAttack;
+	}
+
 	/*
 	その状態へ遷移するための条件を満たしているかのフラグを返す関数
 	state	プレイヤーのステート
@@ -214,7 +224,8 @@ private:
 	bool								m_isStatusConversion = false;			//ステータスが変化したかを判定する
 	bool								m_isInvinsible = false;					//無敵かのフラグ
 	CWireAction							m_wireAction;							//ワイヤーの飛ぶかどうかの判定をしたりするところ
-	CWireDraw							m_wireDraw;
+	CWireDraw							m_wireDraw;								//ワイヤーを描画する
+	bool								m_isStanAttack = false;
 };
 
 static CPlayer& GetPlayer()

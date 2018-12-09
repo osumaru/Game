@@ -84,6 +84,5 @@ private:
 	int												m_stride = 0;												//頂点バッファのストライド
 	int												m_indexNum = 0;												//インデックス数
 	int												m_vertexNum = 0;
-	int												m_vertexStride = 0;
 	D3D11_PRIMITIVE_TOPOLOGY						m_primitiveType = D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP;	//プリミティブタイプ
 };

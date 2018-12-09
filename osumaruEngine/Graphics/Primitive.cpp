@@ -85,7 +85,7 @@ void CPrimitive::Draw(ID3D11DeviceContext* deviceContext)
 {
 
 	ID3D11Buffer* vertexBuffers[] = { m_vertexBuffer.Get() };
-	UINT strides[] = { m_vertexStride };
+	UINT strides[] = { m_stride };
 	UINT offset = 0;
 	deviceContext->IASetVertexBuffers(0, 1, vertexBuffers, strides, &offset);
 	deviceContext->IASetPrimitiveTopology(m_primitiveType);
