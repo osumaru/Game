@@ -1,7 +1,7 @@
 #pragma once
 #include "WeaponCommon.h"
 #include "WeaponTraceDraw.h"
-
+#include "..\PlayerSate\PlayerStateCommon.h"
 class CPlayer;
 //武器の基底クラス
 
@@ -66,6 +66,21 @@ public:
 		m_weaponStatus = weaponStatus;
 	}
 
+	EnPlayerAnimation& GetAttackAnimation()
+	{
+		return *m_attackAnimation;
+	}
+
+	EnPlayerAnimation& GetCombineAnimation()
+	{
+		return *m_combineAnimation;
+	}
+
+	bool& GetStanAttack()
+	{
+		return *m_stanAttack;
+	}
+
 protected:
 	CPlayer*					m_pPlayer = nullptr;		//プレイヤーのインスタンス
 	const CMatrix*				m_normalBoneMat = nullptr;	//プレイヤーのボーン行列
@@ -76,4 +91,12 @@ protected:
 	CQuaternion					m_attackRotation;			//攻撃時の回転
 	CSkinModel					m_skinModel;				//武器のスキンモデル
 	SWeaponStatus				m_weaponStatus;				//装備中の武器ノステータス
+
+	int							MAX_ATTACK_NUM = 3;					//最大連続攻撃回数
+	int							m_attackCount = 0;					//連続攻撃してる回数
+	bool						m_isContinuationAttack = false;		//連続攻撃してるかのフラグ
+	EnPlayerAnimation*			m_attackAnimation/*[MAX_ATTACK_NUM]*/;	//攻撃のアニメーション番号
+	EnPlayerAnimation*			m_combineAnimation/*[MAX_ATTACK_NUM]*/;	//攻撃の後の合成用のアニメーション番号
+	bool						m_isPreDodge = false;				//回避の先行入力用フラグ
+	bool*						m_stanAttack;/*[MAX_ATTACK_NUM];*/
 };

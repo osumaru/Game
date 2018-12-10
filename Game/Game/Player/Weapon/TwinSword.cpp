@@ -19,4 +19,17 @@ void CTwinSword::Init()
 	m_attackPosition = { -10.0f, 0.0f, 0.0f };
 
 	m_skinModel.Load(L"Assets/modelData/TwinSword.cmo", NULL);
+
+	m_attackAnimation = new EnPlayerAnimation[3];
+	m_attackAnimation[0] = enPlayerAnimationTwinAttack1;
+	m_attackAnimation[1] = enPlayerAnimationTwinAttack2;
+	m_attackAnimation[2] = enPlayerAnimationTwinAttack3;
+	m_combineAnimation = new EnPlayerAnimation[3];
+	m_combineAnimation[0] = enPlayerAnimationTwinAttackCombine1;
+	m_combineAnimation[1] = enPlayerAnimationTwinAttackCombine2;
+	m_combineAnimation[2] = enPlayerAnimationTwinAttackCombine3;
+	m_stanAttack = new bool[3];
+	m_stanAttack[0] = false;
+	m_stanAttack[1] = false;
+	m_stanAttack[2] = false;
 }

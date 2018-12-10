@@ -10,7 +10,7 @@
 
 CPlayerAttack::CPlayerAttack()
 {
-	m_attackAnimation[0] = enPlayerAnimationAttack1;
+	/*m_attackAnimation[0] = enPlayerAnimationAttack1;
 	m_attackAnimation[1] = enPlayerAnimationAttack2;
 	m_attackAnimation[2] = enPlayerAnimationAttack3;
 	m_combineAnimation[0] = enPlayerAnimationAttackCombine1;
@@ -18,11 +18,17 @@ CPlayerAttack::CPlayerAttack()
 	m_combineAnimation[2] = enPlayerAnimationAttackCombine3;
 	m_stanAttack[0] = false;
 	m_stanAttack[1] = false;
-	m_stanAttack[2] = true;
+	m_stanAttack[2] = true;*/
+	//m_attackAnimation[0] = GetPlayer().GetWeaponManager().GetWeapon()->GetAttackAnimation();
+	//m_combineAnimation[0] = GetPlayer().GetWeaponManager().GetWeapon()->GetCombineAnimation();
+	//m_stanAttack[0] = GetPlayer().GetWeaponManager().GetWeapon()->GetStanAttack();
 }
 
 void CPlayerAttack::Init()
 {
+	m_attackAnimation = &GetPlayer().GetWeaponManager().GetWeapon()->GetAttackAnimation();
+	m_combineAnimation = &GetPlayer().GetWeaponManager().GetWeapon()->GetCombineAnimation();
+	m_stanAttack = &GetPlayer().GetWeaponManager().GetWeapon()->GetStanAttack();
 
 	m_pPlayerGetter->SetMoveSpeed(CVector3::Zero);
 	m_attackCount = 0;
