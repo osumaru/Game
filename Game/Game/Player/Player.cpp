@@ -77,12 +77,12 @@ void CPlayer::Init(CVector3 position)
 									{ L"Assets/modelData/PlayerDash60fpsEvent.tka" },		//走りアニメーション
 									{ L"Assets/modelData/PlayerRunJump.tka" },				//走りジャンプアニメーション
 									{ L"Assets/modelData/PlayerJump2.tka" },				//ジャンプアニメーション
-									{ L"Assets/modelData/PlayerLeageAttackFirst.tka" },		//攻撃アニメーション
-									{ L"Assets/modelData/PlayerLeageAttackSecand.tka" },		//連撃アニメーション
-									{ L"Assets/modelData/PlayerLeageAttackThird.tka" },		//連撃アニメーション
-									{ L"Assets/modelData/PlayerLeageAttackFirstEnd.tka" },	//連撃アニメーション
-									{ L"Assets/modelData/PlayerLeageAttackSecandEnd.tka" },	//連撃アニメーション
-									{ L"Assets/modelData/PlayerLeageAttackThirdEnd.tka" },	//連撃アニメーション
+									{ L"Assets/modelData/PlayerCombo4.tka" },		//攻撃アニメーション
+									{ L"Assets/modelData/PlayerCombo5.tka" },		//連撃アニメーション
+									{ L"Assets/modelData/PlayerCombo6.tka" },		//連撃アニメーション
+									{ L"Assets/modelData/PlayerCombo4Combine.tka" },	//連撃アニメーション
+									{ L"Assets/modelData/PlayerCombo5Combine.tka" },	//連撃アニメーション
+									{ L"Assets/modelData/PlayerCombo6.tka" },	//連撃アニメーション
 									{ L"Assets/modelData/PlayerJumpAttack.tka"},			//ジャンプ攻撃アニメーション
 									{ L"Assets/modelData/PlayerStun.tka" },					//スタンアニメーション
 									{ L"Assets/modelData/PlayerDamage.tka" },				//ダメージアニメーション
@@ -90,7 +90,7 @@ void CPlayer::Init(CVector3 position)
 									{ L"Assets/modelData/PlayerRoll.tka" }	,				//回避アクション
 									{ L"Assets/modelData/PlayerRollCombine.tka" }	,		//回避アクション
 									{ L"Assets/modelData/PlayerDeath.tka" },				//死亡アニメーション
-									{ L"Assets/modelData/PlayerWireThrow.tka"},				//ワイヤーを投げるアニメーション
+									{ L"Assets/modelData/PlayerWireThrow2.tka"},				//ワイヤーを投げるアニメーション
 									{ L"Assets/modelData/PlayerWireMove.tka" },				//ワイヤー移動アニメーション
 									{ L"Assets/modelData/PlayerJumpTackle.tka"},			//ワイヤー攻撃アニメーション
 									{ L"Assets/modelData/PlayerArrowAttack.tka" },			//弓の攻撃アニメーション
