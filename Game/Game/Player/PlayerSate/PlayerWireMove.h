@@ -26,7 +26,7 @@ private:
 	float		m_accel = 0.0f;
 	float		m_moveSpeed = 0.0f;
 	bool		m_isWireThrow = true;	//ワイヤーを投げているか
-	const CMatrix*	m_playerHandMatrix;
-	CVector3	m_playerHandPos = CVector3::Zero;
-	float		m_wireSpeed = 1.0f;
+	const CMatrix*	m_playerHandMatrix;	//プレイヤーの手のワールド行列
+	CVector3	m_playerHandPos = CVector3::Zero; //プレイヤーの手の座標
+	float		m_wireSpeed = 1.0f;		//ワイヤーを投げるスピード
 };

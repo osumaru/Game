@@ -61,11 +61,11 @@
     <Filter Include="ソース ファイル\Graphics\Font">
       <UniqueIdentifier>{85b73a04-1e2d-4ed2-8c3c-e218cd2a361c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\Graphics\Effect">
-      <UniqueIdentifier>{dd060883-f363-4351-882a-5f4707928afc}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソース ファイル\Graphics\NewFilter1">
       <UniqueIdentifier>{f32c6b62-117f-46b4-9ecf-ee5629f126f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Graphics\Effect">
+      <UniqueIdentifier>{dd060883-f363-4351-882a-5f4707928afc}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -245,6 +245,12 @@
     </ClCompile>
     <ClCompile Include="Effect\Effect.cpp">
       <Filter>ソース ファイル\Graphics\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="Effect\EffectEngine.cpp">
+      <Filter>ソース ファイル\Graphics\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\EffectResource.cpp">
+      <Filter>ソース ファイル\Resource</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -433,6 +439,12 @@
     </ClInclude>
     <ClInclude Include="Effect\Effect.h">
       <Filter>ソース ファイル\Graphics\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="Effect\EffectEngine.h">
+      <Filter>ソース ファイル\Graphics\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\EffectResource.h">
+      <Filter>ソース ファイル\Resource</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

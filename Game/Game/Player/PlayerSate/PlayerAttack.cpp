@@ -16,6 +16,9 @@ CPlayerAttack::CPlayerAttack()
 	m_combineAnimation[0] = enPlayerAnimationAttackCombine1;
 	m_combineAnimation[1] = enPlayerAnimationAttackCombine2;
 	m_combineAnimation[2] = enPlayerAnimationAttackCombine3;
+	m_stanAttack[0] = false;
+	m_stanAttack[1] = false;
+	m_stanAttack[2] = true;
 }
 
 void CPlayerAttack::Init()
@@ -50,6 +53,8 @@ void CPlayerAttack::Update()
 	if (m_pPlayer->GetIsStateCondition(CPlayerState::enPlayerStateAvoidance)) {
 		m_isPreDodge = true;
 	}
+
+	m_pPlayer->SetStanAttack(m_stanAttack[m_attackCount]);
 
 	//攻撃アニメーションが終わった時の処理
 	if (!m_pPlayerGetter->GetAnimation().IsPlay())
