@@ -62,11 +62,11 @@ void CLoadScene::Update()
 	if (m_isTextChange)
 	{
 		//ñ≥å¿ÉãÅ[ÉvÇµÇΩÇÁÇ≤ÇﬂÇÒÇÀ
-		while(m_number == Random().GetRandInt() % 8 + 1);
+		while(m_number == Random().GetRandInt() % 20 + 1);
 		{
 
 		}
-		m_number = Random().GetRandInt() % 8 + 1;
+		m_number = Random().GetRandInt() % 30 + 1;
 		swprintf(m_text, m_equipItem.GetItemStatus_ItemId(m_number).ItemName);
 		m_font[0].Init(m_text);
 		

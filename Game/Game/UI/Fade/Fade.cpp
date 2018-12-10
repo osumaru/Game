@@ -47,6 +47,7 @@ void CFade::Update()
 
 		case enFadeIn:
 			m_fadeTime += GameTime().GetDeltaFrameTime();
+			m_loadScene.IsDraw(false);
 			if (m_fadeTime < FADE_IN_TIME)
 			{
 				m_texturerAlpha = max((1 - (m_fadeTime / FADE_IN_TIME)), 0.0f);
@@ -57,7 +58,7 @@ void CFade::Update()
 				m_isExecute = false;
 				m_fadeTime = 0;
 				m_texturerAlpha = 1.0f;
-				m_loadScene.IsDraw(false);
+				
 				
 			}
 			break;

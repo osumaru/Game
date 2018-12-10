@@ -14,6 +14,7 @@ public:
 	{
 		m_isDraw = setdraw;
 	}
+
 	CEquipItem* GetEquipItemData()
 	{
 		return &m_equipItem;

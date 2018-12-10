@@ -43,7 +43,7 @@ public:
 	}
 
 private:
-	static const int			MAX_ITEM_NUMBER = 70;
+	static const int			MAX_ITEM_NUMBER = 30;
 	std::list<SItemStatus>		m_equipItemStatusList;
 	SItemStatus					ItemStatus[MAX_ITEM_NUMBER];
 	std::vector<int>			m_normalEquipItemList;
