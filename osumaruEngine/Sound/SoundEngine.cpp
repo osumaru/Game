@@ -35,10 +35,10 @@ void CSoundEngine::Init()
 		throw;
 	}
 
-	//XAUDIO2_DEVICE_DETAILS details;
-	//m_xAudio->GetDeviceDetails(0, &details);
-	//m_channelNum = details.OutputFormat.Format.nChannels;
-	//X3DAudioInitialize(details.OutputFormat.dwChannelMask, X3DAUDIO_SPEED_OF_SOUND, m_3dAudioHandle);
+	XAUDIO2_VOICE_DETAILS details;
+	m_masteringVoice->GetVoiceDetails(&details);
+	m_channelNum = details.InputChannels;
+	X3DAudioInitialize(m_channelNum, X3DAUDIO_SPEED_OF_SOUND, m_3dAudioHandle);
 
 	m_3dListener.OrientTop = { 0.0f, 1.0f, 0.0f };
 	m_3dListener.OrientFront = { 0.0f, 0.0f, 1.0f };
