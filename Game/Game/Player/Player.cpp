@@ -39,7 +39,13 @@ void CPlayer::OnInvokeAnimationEvent(//ƒAƒjƒ[ƒVƒ‡ƒ“ƒCƒxƒ“ƒg‚ªŒÄ‚Î‚ê‚é‚²‚Æ‚ÉŒÄ‚
 		*/
 	}
 
-	if (!wcscmp(animClipName, L"Assets/modelData/PlayerCombo4.tka") ||
+	if (!wcscmp(animClipName, L"Assets/modelData/PlayerLeageAttackFirst.tka") ||
+		!wcscmp(animClipName, L"Assets/modelData/PlayerLeageAttackSecand.tka") ||
+		!wcscmp(animClipName, L"Assets/modelData/PlayerLeageAttackThird.tka") ||
+		!wcscmp(animClipName, L"Assets/modelData/PlayerTwinAttackFirst.tka") ||
+		!wcscmp(animClipName, L"Assets/modelData/PlayerTwinAttackSecand.tka") ||
+		!wcscmp(animClipName, L"Assets/modelData/PlayerTwinAttackThird.tka") ||
+		!wcscmp(animClipName, L"Assets/modelData/PlayerCombo4.tka") ||
 		!wcscmp(animClipName, L"Assets/modelData/PlayerCombo5.tka") || 
 		!wcscmp(animClipName, L"Assets/modelData/PlayerCombo6.tka"))
 	{
