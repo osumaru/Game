@@ -18,11 +18,11 @@ public:
 	void Move();
 
 private:
-	const int			MAX_ATTACK_NUM = 3;					//最大連続攻撃回数
+	int							m_maxAttackNum = 0;					//最大連続攻撃回数
 	int							m_attackCount = 0;					//連続攻撃してる回数
 	bool						m_isContinuationAttack = false;		//連続攻撃してるかのフラグ
-	EnPlayerAnimation*			m_attackAnimation;	//攻撃のアニメーション番号
-	EnPlayerAnimation*			m_combineAnimation;	//攻撃の後の合成用のアニメーション番号
+	EnPlayerAnimation*			m_attackAnimation;					//攻撃のアニメーション番号
+	EnPlayerAnimation*			m_combineAnimation;					//攻撃の後の合成用のアニメーション番号
 	bool						m_isPreDodge = false;				//回避の先行入力用フラグ
 	bool*						m_stanAttack;
 

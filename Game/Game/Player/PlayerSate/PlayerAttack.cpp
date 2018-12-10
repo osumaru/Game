@@ -10,18 +10,7 @@
 
 CPlayerAttack::CPlayerAttack()
 {
-	/*m_attackAnimation[0] = enPlayerAnimationAttack1;
-	m_attackAnimation[1] = enPlayerAnimationAttack2;
-	m_attackAnimation[2] = enPlayerAnimationAttack3;
-	m_combineAnimation[0] = enPlayerAnimationAttackCombine1;
-	m_combineAnimation[1] = enPlayerAnimationAttackCombine2;
-	m_combineAnimation[2] = enPlayerAnimationAttackCombine3;
-	m_stanAttack[0] = false;
-	m_stanAttack[1] = false;
-	m_stanAttack[2] = true;*/
-	//m_attackAnimation[0] = GetPlayer().GetWeaponManager().GetWeapon()->GetAttackAnimation();
-	//m_combineAnimation[0] = GetPlayer().GetWeaponManager().GetWeapon()->GetCombineAnimation();
-	//m_stanAttack[0] = GetPlayer().GetWeaponManager().GetWeapon()->GetStanAttack();
+
 }
 
 void CPlayerAttack::Init()
@@ -29,6 +18,7 @@ void CPlayerAttack::Init()
 	m_attackAnimation = &GetPlayer().GetWeaponManager().GetWeapon()->GetAttackAnimation();
 	m_combineAnimation = &GetPlayer().GetWeaponManager().GetWeapon()->GetCombineAnimation();
 	m_stanAttack = &GetPlayer().GetWeaponManager().GetWeapon()->GetStanAttack();
+	m_maxAttackNum = GetPlayer().GetWeaponManager().GetWeapon()->GetMaxAttackNum();
 
 	m_pPlayerGetter->SetMoveSpeed(CVector3::Zero);
 	m_attackCount = 0;
@@ -47,7 +37,7 @@ void CPlayerAttack::Init()
 void CPlayerAttack::Update()
 {
 	//UŒ‚’†‚ÉUŒ‚‚Ì“ü—Í‚ª‚³‚ê‚½ê‡‚Í˜AŒ‚‚ÉˆÚs‚·‚é
-	if (Pad().IsTriggerButton(enButtonX) && !m_isContinuationAttack && m_attackCount < MAX_ATTACK_NUM - 1)
+	if (Pad().IsTriggerButton(enButtonX) && !m_isContinuationAttack && m_attackCount < m_maxAttackNum/*MAX_ATTACK_NUM*/ - 1)
 	{
 		m_isContinuationAttack = true;
 		m_attackCount++;
