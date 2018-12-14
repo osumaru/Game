@@ -21,12 +21,14 @@ void CNinja::Init(CVector3 position)
 	m_characterController.Init(0.5f, 0.9f, position);
 	m_characterController.SetGravity(-9.0f);
 	wchar_t* animClip[CEnemyState::enAnimation_Num] = {
-		L"Assets/modelData/ninjaStand.tka",
-		L"Assets/modelData/ninjaWalk.tka",
-		L"Assets/modelData/ninjaDash.tka",
-		L"Assets/modelData/ninjaAttack.tka",
-		L"Assets/modelData/ninjaDamageSmall.tka",
-		L"Assets/modelData/ninjaDeath.tka"
+		L"Assets/modelData/NinjaStand.tka",
+		L"Assets/modelData/NinjaWalk.tka",
+		L"Assets/modelData/NinjaDash.tka",
+		L"Assets/modelData/NinjaAttack.tka",
+		L"Assets/modelData/NinjaDamageSmall.tka",
+		L"Assets/modelData/NinjaDown.tka",
+		L"Assets/modelData/NinjaUp.tka",
+		L"Assets/modelData/NinjaDeath.tka"
 	};
 	m_animation.Init(animClip, CEnemyState::enAnimation_Num);
 	m_animation.SetLoopFlg(CEnemyState::enAnimation_Idle, true);

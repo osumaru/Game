@@ -4,6 +4,8 @@
 
 bool CEnemyStan::Start()
 {
+	m_enemy->GetAnimation().Play(CEnemyState::enAnimation_Down, 0.3f);
+
 	m_timer = 0.0f;
 
 	CVector3 moveSpeed = m_enemy->GetMoveSpeed();

@@ -4,7 +4,7 @@
 
 bool CEnemyAttackWait::Start()
 {
-	m_enemy->PlayAnimation(CEnemyState::enState_Idle);
+	m_enemy->GetAnimation().Play(CEnemyState::enState_Idle, 0.3f);
 	//タイマーを初期化
 	m_timer = 0.0f;
 

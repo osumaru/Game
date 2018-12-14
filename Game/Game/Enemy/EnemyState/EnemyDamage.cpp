@@ -7,7 +7,7 @@
 void CEnemyDamage::Init()
 {
 	//ダメージアニメーションを再生
-	m_enemy->PlayAnimation(CEnemyState::enAnimation_Damage);
+	m_enemy->GetAnimation().Play(CEnemyState::enAnimation_Damage, 0.3f);
 
 	//ダメージ数値を初期化
 	m_damageNumber = New<CDamageNumber>(PRIORITY_UI);
@@ -61,7 +61,7 @@ void CEnemyDamage::Update()
 		//スタン状態になる
 		m_esm->ChangeState(CEnemyState::enState_Stan);
 	}
-	else if (!m_enemy->IsPlayAnimation()) {
+	else if (!m_enemy->GetAnimation().IsPlay()) {
 		//アニメーションが終了している
 		if (isRange && m_enemy->GetAttackLength()) {
 			//近ければ攻撃

@@ -7,7 +7,7 @@
 bool CEnemyChase::Start()
 {
 	//歩きアニメーションを再生
-	m_enemy->PlayAnimation(CEnemyState::enAnimation_Chase);
+	m_enemy->GetAnimation().Play(CEnemyState::enAnimation_Chase, 0.3f);
 
 	return true;
 }

@@ -114,18 +114,23 @@ public:
 		m_characterController.RemovedRigidBody();
 	}
 
-	//アニメーションを再生
-	//animNum	アニメーション番号
-	void PlayAnimation(int animNum)
+	CAnimation& GetAnimation()
 	{
-		m_animation.Play(animNum, 0.3f);
+		return m_animation;
 	}
 
-	//アニメーションを再生しているか
-	bool IsPlayAnimation() const
-	{
-		return m_animation.IsPlay();
-	}
+	////アニメーションを再生
+	////animNum	アニメーション番号
+	//void PlayAnimation(int animNum)
+	//{
+	//	m_animation.Play(animNum, 0.3f);
+	//}
+
+	////アニメーションを再生しているか
+	//bool IsPlayAnimation() const
+	//{
+	//	return m_animation.IsPlay();
+	//}
 
 	//ワールド行列を取得
 	const CMatrix& GetWorldMatrix() const

@@ -10,7 +10,7 @@ bool CEnemyAttack::Start()
 	m_enemy->SetMoveSpeed(moveSpeed);
 
 	//攻撃アニメーションを再生
-	m_enemy->PlayAnimation(CEnemyState::enAnimation_Attack);
+	m_enemy->GetAnimation().Play(CEnemyState::enAnimation_Attack, 0.3f);
 
 	m_enemy->Attack();
 
@@ -49,7 +49,7 @@ void CEnemyAttack::Update()
 		//ダメージを受けた
 		m_esm->ChangeState(CEnemyState::enState_Damage); 
 	}
-	if (!m_enemy->IsPlayAnimation()) {
+	if (!m_enemy->GetAnimation().IsPlay()/*!m_enemy->IsPlayAnimation()*/) {
 		//アニメーションが終了している
 		m_esm->ChangeState(CEnemyState::enState_AttackWait);
 	}

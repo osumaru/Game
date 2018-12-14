@@ -6,7 +6,7 @@
 bool CEnemyWalk::Start()
 {
 	//歩きアニメーションを再生
-	m_enemy->PlayAnimation(CEnemyState::enAnimation_Walk);
+	m_enemy->GetAnimation().Play(CEnemyState::enAnimation_Walk, 0.3f);
 
 	//ランダムに移動先を決定
 	float randomPositionX = (float)Random().GetRandDouble();

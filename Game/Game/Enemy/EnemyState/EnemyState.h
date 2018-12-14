@@ -25,6 +25,8 @@ public:
 		enAnimation_Chase,	//追従
 		enAnimation_Attack,	//攻撃
 		enAnimation_Damage,	//ダメージ
+		enAnimation_Down,	//ダウン
+		enAnimation_StandUp,//立ち上がる
 		enAnimation_Death,	//死亡
 		enAnimation_Num,	//状態の数
 	};

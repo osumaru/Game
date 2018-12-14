@@ -57,8 +57,11 @@ void CRock::Update()
 		|| m_characterController.GetWallCollisionObject() != nullptr)
 	{
 		//何かのオブジェクトに当たった
-		GetPlayer().SetDamageEnemyPos(m_position);
-		GetPlayer().SetDamage(true);
+		{
+			//プレイヤーに当たった
+			//GetPlayer().SetDamageEnemyPos(m_enemyPos);
+			//GetPlayer().SetDamage(true);
+		}
 		Delete(this);
 	}
 

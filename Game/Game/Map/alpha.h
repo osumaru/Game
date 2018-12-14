@@ -40,20 +40,20 @@ enMapTagTerrain, //タグ
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagWarrok, //タグ
 },
-//ninja
-{
-	L"ninja",
-	CVector3(-7.43f, 8.46f, 65.80f),             //平行移動
-	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
-	enMapTagNinja, //タグ
-},
-//zombi
-{
-	L"zombi",
-	CVector3(-36.80f, 9.30f, 5.60f),             //平行移動
-	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
-	enMapTagZombie, //タグ
-},
+////ninja
+//{
+//	L"ninja",
+//	CVector3(-7.43f, 8.46f, 65.80f),             //平行移動
+//	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
+//	enMapTagNinja, //タグ
+//},
+////zombi
+//{
+//	L"zombi",
+//	CVector3(-36.80f, 9.30f, 5.60f),             //平行移動
+//	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
+//	enMapTagZombie, //タグ
+//},
 //Yasikia
 {
 	L"Yasikia",
@@ -187,48 +187,48 @@ enMapTagTerrain, //タグ
 	CQuaternion(0.00f, -0.71f, 0.00f, 0.71f ),  //回転
 	enMapTagObstacle, //タグ
 },
-//ninja
-{
-	L"ninja",
-	CVector3(-8.25f, 8.46f, 70.10f),             //平行移動
-	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
-	enMapTagNinja, //タグ
-},
-//ninja
-{
-	L"ninja",
-	CVector3(-4.09f, 8.46f, 67.82f),             //平行移動
-	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
-	enMapTagNinja, //タグ
-},
-//Warrok
-{
-	L"Warrok",
-	CVector3(-1.88f, 9.06f, 8.71f),             //平行移動
-	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
-	enMapTagWarrok, //タグ
-},
-//Warrok
-{
-	L"Warrok",
-	CVector3(3.06f, 9.23f, 7.17f),             //平行移動
-	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
-	enMapTagWarrok, //タグ
-},
-//zombi
-{
-	L"zombi",
-	CVector3(-31.59f, 9.30f, 2.71f),             //平行移動
-	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
-	enMapTagZombie, //タグ
-},
-//zombi
-{
-	L"zombi",
-	CVector3(-36.76f, 9.30f, 0.58f),             //平行移動
-	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
-	enMapTagZombie, //タグ
-},
+////ninja
+//{
+//	L"ninja",
+//	CVector3(-8.25f, 8.46f, 70.10f),             //平行移動
+//	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
+//	enMapTagNinja, //タグ
+//},
+////ninja
+//{
+//	L"ninja",
+//	CVector3(-4.09f, 8.46f, 67.82f),             //平行移動
+//	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
+//	enMapTagNinja, //タグ
+//},
+////Warrok
+//{
+//	L"Warrok",
+//	CVector3(-1.88f, 9.06f, 8.71f),             //平行移動
+//	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
+//	enMapTagWarrok, //タグ
+//},
+////Warrok
+//{
+//	L"Warrok",
+//	CVector3(3.06f, 9.23f, 7.17f),             //平行移動
+//	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
+//	enMapTagWarrok, //タグ
+//},
+////zombi
+//{
+//	L"zombi",
+//	CVector3(-31.59f, 9.30f, 2.71f),             //平行移動
+//	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
+//	enMapTagZombie, //タグ
+//},
+////zombi
+//{
+//	L"zombi",
+//	CVector3(-36.76f, 9.30f, 0.58f),             //平行移動
+//	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
+//	enMapTagZombie, //タグ
+//},
 //Brock
 {
 	L"Brock",

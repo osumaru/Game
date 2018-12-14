@@ -21,12 +21,14 @@ void CZombie::Init(CVector3 position)
 	m_characterController.Init(0.5f, 0.9f, position);
 	m_characterController.SetGravity(-9.0f);
 	wchar_t* animClip[CEnemyState::enAnimation_Num] = {
-		L"Assets/modelData/zombiStand.tka",
-		L"Assets/modelData/zombiWalk.tka",
-		L"Assets/modelData/zombiDash.tka",
-		L"Assets/modelData/zombiAttack.tka",
-		L"Assets/modelData/zombiDamageSmall.tka",
-		L"Assets/modelData/zombiDeath.tka"
+		L"Assets/modelData/ZombiStand.tka",
+		L"Assets/modelData/ZombiWalk.tka",
+		L"Assets/modelData/ZombiDash.tka",
+		L"Assets/modelData/ZombiAttack.tka",
+		L"Assets/modelData/ZombiDamageSmall.tka",
+		L"Assets/modelData/ZombiDown.tka",
+		L"Assets/modelData/ZombiUp.tka",
+		L"Assets/modelData/ZombiDeath.tka"
 	};
 	m_animation.Init(animClip, CEnemyState::enAnimation_Num);
 	m_animation.SetLoopFlg(CEnemyState::enAnimation_Idle, true);
