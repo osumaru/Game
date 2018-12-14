@@ -10,9 +10,21 @@ public:
 
 	void Draw() override;
 
+	//エネミーとの当たり判定を取る関数　二つ目の剣用
+	//void EnemyAttack() override;
+
+	//void EnemyAttackTwin();
+
 	SWeaponEnemyAttackInfo EnemyAttackPositionDecide()override;
 
+	//SWeaponEnemyAttackInfo EnemyAttackPositionTwinDecide();
+
 	SWeaponTraceDrawInfo WeaponTraceDraw()override;
+
+	//二つ目の剣用
+	//SWeaponTraceDrawInfo WeaponTraceTwinDraw();
+
+	//void WeaponTraceTwinDrawer();
 private:
 	
 	const CMatrix*				m_normalTwinBoneMat = nullptr;	//プレイヤーのボーン行列
