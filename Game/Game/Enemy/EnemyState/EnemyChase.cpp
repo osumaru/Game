@@ -17,7 +17,22 @@ void CEnemyChase::Update()
 	//プレイヤーとの距離を計算
 	CVector3 playerPos = GetPlayer().GetPosition();
 	CVector3 toPlayerDir = playerPos - m_enemy->GetPosition();
+	toPlayerDir.y = 0.0f;
 	float length = toPlayerDir.Length();
+
+	if (m_enemy->GetAttackType() == IEnemy::enAttackType_Far) {
+		//遠距離攻撃ができるタイプだった
+		if (length < 4.0f)
+		{
+			//近距離攻撃をする
+			m_enemy->SetAttackLength(1.2f);
+		}
+		else
+		{
+			//遠距離攻撃をする
+			m_enemy->SetAttackLength(10.0f);
+		}
+	}
 
 	Move(length);
 
@@ -28,7 +43,7 @@ void CEnemyChase::Update()
 		//ダメージを受けた
 		m_esm->ChangeState(CEnemyState::enState_Damage);
 	}
-	if (isRange && length < 1.2f) {
+	if (isRange && length < m_enemy->GetAttackLength()) {
 		//プレイヤーと距離が近い且つ攻撃範囲に入っている
 		m_esm->ChangeState(CEnemyState::enState_Attack);
 	}

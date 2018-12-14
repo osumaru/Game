@@ -46,6 +46,7 @@ void CNinja::Init(CVector3 position)
 	this->SetIsActive(true);
 
 	m_spineMatrix = &GetBoneWorldMatrix(L"Spine");
+	m_attackLength = 1.2f;
 }
 
 bool CNinja::Start()

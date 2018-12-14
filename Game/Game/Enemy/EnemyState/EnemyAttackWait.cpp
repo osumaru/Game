@@ -29,8 +29,24 @@ void CEnemyAttackWait::Update()
 
 	CVector3 playerPos = GetPlayer().GetPosition();
 	CVector3 distance = m_enemy->GetPosition() - playerPos;
+	distance.y = 0.0f;
 	float length = distance.Length();
-	if (length < 1.2f) 
+
+	if (m_enemy->GetAttackType() == IEnemy::enAttackType_Far) {
+		//‰“‹——£UŒ‚‚ª‚Å‚«‚éƒ^ƒCƒv‚¾‚Á‚½
+		if (length < 4.0f)
+		{
+			//‹ß‹——£UŒ‚‚ğ‚·‚é
+			m_enemy->SetAttackLength(1.2f);
+		}
+		else
+		{
+			//‰“‹——£UŒ‚‚ğ‚·‚é
+			m_enemy->SetAttackLength(10.0f);
+		}
+	}
+
+	if (length < m_enemy->GetAttackLength()) 
 	{
 		bool isRange = m_enemy->CalucFanShape(10.0f, playerPos);
 		if (!isRange) {

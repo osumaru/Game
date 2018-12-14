@@ -63,7 +63,7 @@ void CEnemyDamage::Update()
 	}
 	else if (!m_enemy->IsPlayAnimation()) {
 		//アニメーションが終了している
-		if (isRange && length < 1.2f) {
+		if (isRange && m_enemy->GetAttackLength()) {
 			//近ければ攻撃
 			m_esm->ChangeState(CEnemyState::enState_Attack);
 		}

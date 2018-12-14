@@ -1,7 +1,8 @@
 #include "stdafx.h"
 #include "Warrok.h"
-#include "../Player/Player.h"
-#include "../Camera/GameCamera.h"
+#include "../../Player/Player.h"
+#include "../../Camera/GameCamera.h"
+#include "Rock.h"
 
 CWarrok::CWarrok()
 {
@@ -46,6 +47,8 @@ void CWarrok::Init(CVector3 position)
 	this->SetIsActive(true);
 
 	m_spineMatrix = &GetBoneWorldMatrix(L"Spine");
+	m_attackLength = 10.0f;
+	m_attackType = enAttackType_Far;
 }
 
 bool CWarrok::Start()
@@ -75,4 +78,16 @@ void CWarrok::Update()
 void CWarrok::Draw()
 {
 	m_skinModel.Draw(GetGameCamera().GetViewMatrix(), GetGameCamera().GetProjectionMatrix());
+}
+
+void CWarrok::Attack()
+{
+	CVector3 toPlayer = GetPlayer().GetPosition() - m_position;
+	toPlayer.y = 0.0f;
+	float length = toPlayer.Length();
+	if (length > 4.0f)
+	{
+		CRock* rock = New<CRock>(PRIORITY_ENEMY);
+		rock->Init(m_position);
+	}
 }

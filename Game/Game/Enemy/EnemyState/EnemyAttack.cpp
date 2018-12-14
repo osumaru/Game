@@ -12,6 +12,8 @@ bool CEnemyAttack::Start()
 	//攻撃アニメーションを再生
 	m_enemy->PlayAnimation(CEnemyState::enAnimation_Attack);
 
+	m_enemy->Attack();
+
 	return true;
 }
 

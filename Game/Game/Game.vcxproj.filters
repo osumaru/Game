@@ -94,6 +94,9 @@
     <Filter Include="ソース ファイル\Item\InventoryItem">
       <UniqueIdentifier>{e530ad3c-260e-4167-a908-1b78d33839e2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Enemy\Warrok">
+      <UniqueIdentifier>{1b767e61-0b37-43d6-97cb-d334c0663e8f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -199,9 +202,6 @@
       <Filter>ソース ファイル\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="Enemy\Samurai.cpp">
-      <Filter>ソース ファイル\Enemy</Filter>
-    </ClCompile>
-    <ClCompile Include="Enemy\Warrok.cpp">
       <Filter>ソース ファイル\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="Enemy\Zombie.cpp">
@@ -370,6 +370,12 @@
     <ClCompile Include="Player\WireDraw.cpp">
       <Filter>ソース ファイル\Player</Filter>
     </ClCompile>
+    <ClCompile Include="Enemy\Warrok\Rock.cpp">
+      <Filter>ソース ファイル\Enemy\Warrok</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy\Warrok\Warrok.cpp">
+      <Filter>ソース ファイル\Enemy\Warrok</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -481,9 +487,6 @@
       <Filter>ソース ファイル\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="Enemy\Samurai.h">
-      <Filter>ソース ファイル\Enemy</Filter>
-    </ClInclude>
-    <ClInclude Include="Enemy\Warrok.h">
       <Filter>ソース ファイル\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="Enemy\Zombie.h">
@@ -650,6 +653,12 @@
     </ClInclude>
     <ClInclude Include="Player\WireDraw.h">
       <Filter>ソース ファイル\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy\Warrok\Rock.h">
+      <Filter>ソース ファイル\Enemy\Warrok</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy\Warrok\Warrok.h">
+      <Filter>ソース ファイル\Enemy\Warrok</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
