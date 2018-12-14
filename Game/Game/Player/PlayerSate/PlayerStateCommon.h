@@ -14,6 +14,18 @@ enum EnPlayerAnimation
 	enPlayerAnimationAttackCombine1,		//連撃の後の合成用アニメーション
 	enPlayerAnimationAttackCombine2,		//連撃の後の合成用アニメーション
 	enPlayerAnimationAttackCombine3,		//連撃の後の合成用アニメーション
+	enPlayerAnimationLeageAttack1,		//攻撃アニメーション
+	enPlayerAnimationLeageAttack2,		//連撃アニメーション
+	enPlayerAnimationLeageAttack3,		//連撃アニメーション
+	enPlayerAnimationLeageAttackCombine1,		//連撃の後の合成用アニメーション
+	enPlayerAnimationLeageAttackCombine2,		//連撃の後の合成用アニメーション
+	enPlayerAnimationLeageAttackCombine3,		//連撃の後の合成用アニメーション
+	enPlayerAnimationTwinAttack1,		//攻撃アニメーション
+	enPlayerAnimationTwinAttack2,		//連撃アニメーション
+	enPlayerAnimationTwinAttack3,		//連撃アニメーション
+	enPlayerAnimationTwinAttackCombine1,		//連撃の後の合成用アニメーション
+	enPlayerAnimationTwinAttackCombine2,		//連撃の後の合成用アニメーション
+	enPlayerAnimationTwinAttackCombine3,		//連撃の後の合成用アニメーション
 	enPlayerAnimationAttackAir,		//攻撃(空中)アニメーション
 	enPlayerAnimationStun,			//スタン用のアニメーション
 	enPlayerAnimationDamage,		//ダメージアニメーション

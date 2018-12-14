@@ -57,7 +57,7 @@ void CFade::Update()
 				m_isExecute = false;
 				m_fadeTime = 0;
 				m_texturerAlpha = 1.0f;
-				m_loadScene.IsDraw(false);
+				
 				
 			}
 			break;
@@ -85,6 +85,7 @@ void CFade::FadeIn()
 	m_fadeTime = 0.0f;
 	m_isExecute = true;
 	m_fadeState = enFadeIn;
+	m_loadScene.IsDraw(false);
 }
 
 

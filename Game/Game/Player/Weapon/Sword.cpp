@@ -20,6 +20,19 @@ void CSword::Init()
 	m_attackPosition = { -10.0f, 0.0f, 0.0f };
 
 	m_skinModel.Load(L"Assets/modelData/Sword.cmo", NULL);
+
+	m_maxAttackNum = 3;
+	m_attackAnimation = new EnPlayerAnimation[m_maxAttackNum];
+	m_combineAnimation = new EnPlayerAnimation[m_maxAttackNum];
+	for (int i = 0; i < m_maxAttackNum; i++)
+	{
+		m_attackAnimation[i] = (EnPlayerAnimation)(enPlayerAnimationAttack1 + i);
+		m_combineAnimation[i] = (EnPlayerAnimation)(enPlayerAnimationAttackCombine1 + i);
+	}
+	m_stanAttack = new bool[m_maxAttackNum];
+	m_stanAttack[0] = false;
+	m_stanAttack[1] = false;
+	m_stanAttack[2] = false;
 }
 
 void CSword::Update()

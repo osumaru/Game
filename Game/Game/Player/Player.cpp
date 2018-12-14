@@ -39,7 +39,13 @@ void CPlayer::OnInvokeAnimationEvent(//ƒAƒjƒ[ƒVƒ‡ƒ“ƒCƒxƒ“ƒg‚ªŒÄ‚Î‚ê‚é‚²‚Æ‚ÉŒÄ‚
 		*/
 	}
 
-	if (!wcscmp(animClipName, L"Assets/modelData/PlayerCombo4.tka") ||
+	if (!wcscmp(animClipName, L"Assets/modelData/PlayerLeageAttackFirst.tka") ||
+		!wcscmp(animClipName, L"Assets/modelData/PlayerLeageAttackSecand.tka") ||
+		!wcscmp(animClipName, L"Assets/modelData/PlayerLeageAttackThird.tka") ||
+		!wcscmp(animClipName, L"Assets/modelData/PlayerTwinAttackFirst.tka") ||
+		!wcscmp(animClipName, L"Assets/modelData/PlayerTwinAttackSecand.tka") ||
+		!wcscmp(animClipName, L"Assets/modelData/PlayerTwinAttackThird.tka") ||
+		!wcscmp(animClipName, L"Assets/modelData/PlayerCombo4.tka") ||
 		!wcscmp(animClipName, L"Assets/modelData/PlayerCombo5.tka") || 
 		!wcscmp(animClipName, L"Assets/modelData/PlayerCombo6.tka"))
 	{
@@ -77,6 +83,18 @@ void CPlayer::Init(CVector3 position)
 									{ L"Assets/modelData/PlayerDash60fpsEvent.tka" },		//‘–‚èƒAƒjƒ[ƒVƒ‡ƒ“
 									{ L"Assets/modelData/PlayerRunJump.tka" },				//‘–‚èƒWƒƒƒ“ƒvƒAƒjƒ[ƒVƒ‡ƒ“
 									{ L"Assets/modelData/PlayerJump2.tka" },				//ƒWƒƒƒ“ƒvƒAƒjƒ[ƒVƒ‡ƒ“
+									{ L"Assets/modelData/PlayerCombo4.tka" },				//UŒ‚ƒAƒjƒ[ƒVƒ‡ƒ“
+									{ L"Assets/modelData/PlayerCombo5.tka" },				//˜AŒ‚ƒAƒjƒ[ƒVƒ‡ƒ“
+									{ L"Assets/modelData/PlayerCombo6.tka" },				//˜AŒ‚ƒAƒjƒ[ƒVƒ‡ƒ“
+									{ L"Assets/modelData/PlayerCombo4Combine.tka" },		//˜AŒ‚ƒAƒjƒ[ƒVƒ‡ƒ“
+									{ L"Assets/modelData/PlayerCombo5Combine.tka" },		//˜AŒ‚ƒAƒjƒ[ƒVƒ‡ƒ“
+									{ L"Assets/modelData/PlayerCombo6.tka" },				//˜AŒ‚ƒAƒjƒ[ƒVƒ‡ƒ“
+									{ L"Assets/modelData/PlayerLeageAttackFirst.tka" },		//UŒ‚ƒAƒjƒ[ƒVƒ‡ƒ“
+									{ L"Assets/modelData/PlayerLeageAttackSecand.tka" },	//˜AŒ‚ƒAƒjƒ[ƒVƒ‡ƒ“
+									{ L"Assets/modelData/PlayerLeageAttackThird.tka" },		//˜AŒ‚ƒAƒjƒ[ƒVƒ‡ƒ“
+									{ L"Assets/modelData/PlayerLeageAttackFirstEnd.tka" },	//˜AŒ‚ƒAƒjƒ[ƒVƒ‡ƒ“
+									{ L"Assets/modelData/PlayerLeageAttackSecandEnd.tka" },	//˜AŒ‚ƒAƒjƒ[ƒVƒ‡ƒ“
+									{ L"Assets/modelData/PlayerLeageAttackThirdEnd.tka" },	//˜AŒ‚ƒAƒjƒ[ƒVƒ‡ƒ“
 									{ L"Assets/modelData/PlayerTwinAttackFirst.tka" },		//UŒ‚ƒAƒjƒ[ƒVƒ‡ƒ“
 									{ L"Assets/modelData/PlayerTwinAttackSecand.tka" },		//˜AŒ‚ƒAƒjƒ[ƒVƒ‡ƒ“
 									{ L"Assets/modelData/PlayerTwinAttackThird.tka" },		//˜AŒ‚ƒAƒjƒ[ƒVƒ‡ƒ“
@@ -90,7 +108,7 @@ void CPlayer::Init(CVector3 position)
 									{ L"Assets/modelData/PlayerRoll.tka" }	,				//‰ñ”ğƒAƒNƒVƒ‡ƒ“
 									{ L"Assets/modelData/PlayerRollCombine.tka" }	,		//‰ñ”ğƒAƒNƒVƒ‡ƒ“
 									{ L"Assets/modelData/PlayerDeath.tka" },				//€–SƒAƒjƒ[ƒVƒ‡ƒ“
-									{ L"Assets/modelData/PlayerWireThrow.tka"},				//ƒƒCƒ„[‚ğ“Š‚°‚éƒAƒjƒ[ƒVƒ‡ƒ“
+									{ L"Assets/modelData/PlayerWireThrow2.tka"},				//ƒƒCƒ„[‚ğ“Š‚°‚éƒAƒjƒ[ƒVƒ‡ƒ“
 									{ L"Assets/modelData/PlayerWireMove.tka" },				//ƒƒCƒ„[ˆÚ“®ƒAƒjƒ[ƒVƒ‡ƒ“
 									{ L"Assets/modelData/PlayerJumpTackle.tka"},			//ƒƒCƒ„[UŒ‚ƒAƒjƒ[ƒVƒ‡ƒ“
 									{ L"Assets/modelData/PlayerArrowAttack.tka" },			//‹|‚ÌUŒ‚ƒAƒjƒ[ƒVƒ‡ƒ“
