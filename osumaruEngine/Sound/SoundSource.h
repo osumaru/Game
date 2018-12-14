@@ -53,6 +53,11 @@ public:
 	{
 		m_sourceVoice->SetVolume(volume, XAUDIO2_COMMIT_NOW);
 	}
+	//Ä¶’†‚©‚ğæ“¾
+	bool IsPlay()
+	{
+		return m_isPlaying;
+	}
 
 	
 
