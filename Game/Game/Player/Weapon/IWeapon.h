@@ -66,21 +66,25 @@ public:
 		m_weaponStatus = weaponStatus;
 	}
 
+	//攻撃モーションの先頭を取得
 	EnPlayerAnimation& GetAttackAnimation()
 	{
 		return *m_attackAnimation;
 	}
 
+	//攻撃終了モーションの先頭を取得
 	EnPlayerAnimation& GetCombineAnimation()
 	{
 		return *m_combineAnimation;
 	}
 
+	//スタン攻撃の先頭を取得
 	bool& GetStanAttack()
 	{
 		return *m_stanAttack;
 	}
 
+	//攻撃モーションの数を取得
 	int GetMaxAttackNum()
 	{
 		return m_maxAttackNum;
@@ -100,5 +104,5 @@ protected:
 	int							m_maxAttackNum = 0;					//最大連続攻撃回数
 	EnPlayerAnimation*			m_attackAnimation;					//攻撃のアニメーション番号
 	EnPlayerAnimation*			m_combineAnimation;					//攻撃の後の合成用のアニメーション番号
-	bool*						m_stanAttack;
+	bool*						m_stanAttack;						//スタン攻撃
 };

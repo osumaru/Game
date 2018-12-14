@@ -119,7 +119,7 @@ void IWeapon::EnemyAttack()
 		}
 	}
 
-	//ボスが作られていなかったら
+	//ボスが作られていたら
 	if (&GetMaw() != NULL)
 	{
 		//ボスがダメージを受けていなかったら

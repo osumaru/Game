@@ -1,8 +1,19 @@
 #include "TwinSword.h"
 #include "../Player.h"
+#include "../../Camera/GameCamera.h"
+#include "../../Enemy/IEnemy.h"
+#include "../../Scene/SceneManager.h"
+#include "../../Scene/GameScene.h"
+#include "../../Map/Map.h"
+#include "../../Enemy/Maw.h"
+#include "../../Enemy/EnemyGroup.h"
 
 void CTwinSword::Init()
 {
+	m_normalTwinBoneMat = &m_pPlayer->GetSkinmodel().FindBoneWorldMatrix(L"RightShoulder");
+	m_attackTwinBoneMat = &m_pPlayer->GetSkinmodel().FindBoneWorldMatrix(L"LeftHand");
+
+
 	m_position = { 0.0f, 0.0f, -10.0f };
 	m_rotation = CQuaternion::Identity;
 	CQuaternion multi;
@@ -18,7 +29,26 @@ void CTwinSword::Init()
 	m_attackRotation.Multiply(multi);
 	m_attackPosition = { -10.0f, 0.0f, 0.0f };
 
+
+	//二つ目の剣用
+	m_positionTwin = { 0.0f, 0.0f, -10.0f };
+	m_rotationTwin = CQuaternion::Identity;
+	CQuaternion multi2;
+	multi2.SetRotationDeg(CVector3::AxisX, 90.0f);
+	m_rotationTwin.Multiply(multi2);
+	multi2.SetRotationDeg(CVector3::AxisZ, 90.0f);
+	m_rotationTwin.Multiply(multi2);
+
+	m_attackTwinRotation = CQuaternion::Identity;
+	multi2.SetRotationDeg(CVector3::AxisX, 90.0f);
+	m_attackTwinRotation.Multiply(multi2);
+	multi2.SetRotationDeg(CVector3::AxisY, 90.0f);
+	m_attackTwinRotation.Multiply(multi2);
+	m_attackTwinPosition = { 10.0f, 0.0f, 0.0f };
+
+
 	m_skinModel.Load(L"Assets/modelData/TwinSword.cmo", NULL);
+	m_skinModelTwin.Load(L"Assets/modelData/TwinSword.cmo", NULL);
 
 	m_maxAttackNum = 3;
 	m_attackAnimation = new EnPlayerAnimation[m_maxAttackNum];
@@ -33,6 +63,48 @@ void CTwinSword::Init()
 	m_stanAttack[0] = false;
 	m_stanAttack[1] = false;
 	m_stanAttack[2] = false;
+}
+
+void CTwinSword::Update()
+{
+	//二つ目の剣用
+	//WeaponTraceTwinDrawer();
+
+	CVector3 position;
+	CQuaternion rotation;
+	const CMatrix* boneMat;
+	if (m_pPlayer->GetWeaponManager().GetIsAttack())
+	{
+		boneMat = m_attackTwinBoneMat;
+		position = m_attackTwinPosition;
+		rotation = m_attackTwinRotation;
+	}
+	else
+	{
+		boneMat = m_normalTwinBoneMat;
+		position = m_positionTwin;
+		rotation = m_rotationTwin;
+	}
+	position.Mul(*boneMat);
+	CMatrix rotMat = *boneMat;
+	((CVector3*)rotMat.m[0])->Div(((CVector3*)rotMat.m[0])->Length());
+	((CVector3*)rotMat.m[1])->Div(((CVector3*)rotMat.m[1])->Length());
+	((CVector3*)rotMat.m[2])->Div(((CVector3*)rotMat.m[2])->Length());
+	rotMat.m[3][0] = 0.0f;
+	rotMat.m[3][1] = 0.0f;
+	rotMat.m[3][2] = 0.0f;
+	CQuaternion multi;
+	multi.SetRotation(rotMat);
+	multi.Multiply(rotation);
+	rotation = multi;
+	m_skinModelTwin.Update(position, rotation, CVector3::One);
+}
+
+void CTwinSword::Draw()
+{
+	//二つ目の剣用
+	const CCamera& camera = GetGameCamera().GetCamera();
+	m_skinModelTwin.Draw(camera.GetViewMatrix(), camera.GetProjectionMatrix());
 }
 
 SWeaponEnemyAttackInfo CTwinSword::EnemyAttackPositionDecide()
@@ -52,6 +124,23 @@ SWeaponEnemyAttackInfo CTwinSword::EnemyAttackPositionDecide()
 	return { true, pos };
 }
 
+//SWeaponEnemyAttackInfo CTwinSword::EnemyAttackPositionTwinDecide()
+//{
+//	const CMatrix& mat = *m_attackTwinBoneMat;
+//	CVector3 pos;
+//	pos.x = mat.m[3][0];
+//	pos.y = mat.m[3][1];
+//	pos.z = mat.m[3][2];
+//	CVector3 manip;
+//	manip.x = mat.m[1][0];
+//	manip.x = mat.m[1][1];
+//	manip.x = mat.m[1][2];
+//	manip.Normalize();
+//	manip.Scale(0.3f);
+//	pos += manip;
+//	return { true, pos };
+//}
+
 SWeaponTraceDrawInfo CTwinSword::WeaponTraceDraw()
 {
 	CVector3 position = *(CVector3*)m_attackBoneMat->m[3];
@@ -64,3 +153,195 @@ SWeaponTraceDrawInfo CTwinSword::WeaponTraceDraw()
 	CVector3 position3 = position + manip2;
 	return { true, position2, position3 };
 }
+
+//SWeaponTraceDrawInfo CTwinSword::WeaponTraceTwinDraw()
+//{
+//	CVector3 position = *(CVector3*)m_attackTwinBoneMat->m[3];
+//	CVector3 manip = *(CVector3*)m_attackTwinBoneMat->m[2];
+//	manip.Normalize();
+//	CVector3 manip2 = manip;
+//	manip.Scale(0.2f);
+//	manip2.Scale(1.0f);
+//	CVector3 position2 = position + manip;
+//	CVector3 position3 = position + manip2;
+//	return { true, position2, position3 };
+//}
+
+//void CTwinSword::WeaponTraceTwinDrawer()
+//{
+//	CWeaponTraceDraw& weaponTrace = m_pPlayer->GetWeaponManager().GetWeaponTraceDraw();
+//	if (m_pPlayer->GetWeaponManager().GetIsAttack())
+//	{
+//		SWeaponTraceDrawInfo info = WeaponTraceTwinDraw();
+//		m_pPlayer->GetWeaponManager().SetIsTraceDraw(info.isDraw);
+//		if (info.isDraw)
+//		{
+//			weaponTrace.Add(info.rootPos, info.pointPos);
+//		}
+//	}
+//	else
+//	{
+//	}
+//}
+
+//void CTwinSword::EnemyAttack()
+//{
+//	EnemyAttackTwin();
+//	if (!m_pPlayer->GetWeaponManager().GetIsAttackCheck())
+//	{
+//		return;
+//	}
+//	SWeaponEnemyAttackInfo info = EnemyAttackPositionDecide();
+//	if (!info.isAttack)
+//	{
+//		return;
+//	}
+//
+//	//エネミーグループのリストを取得
+//	std::list<CEnemyGroup*> enemyGroup = GetSceneManager().GetGameScene().GetMap()->GetEnemyGroupList();
+//	for (const auto& group : enemyGroup)
+//	{
+//		CVector3 enemyGroupPos = group->GetPosition();
+//		CVector3 distance = enemyGroupPos - info.attackPos;
+//		float length = distance.Length();
+//		if (length < 50.0f)
+//		{
+//			for (const auto& enemy : group->GetGroupList())
+//			{
+//				if (enemy->IsDamagePossible())
+//				{
+//					CVector3 EnemyVec = enemy->GetSpinePos();
+//					EnemyVec.Subtract(info.attackPos);
+//					float len = EnemyVec.Length();
+//
+//					if (fabs(len) < 2.0f)
+//					{
+//						enemy->SetIsDamage(true);
+//						enemy->SetIsDamagePossible(false);
+//					}
+//				}
+//			}
+//		}
+//	}
+//
+//	//ボスが作られていたら
+//	if (&GetMaw() != NULL)
+//	{
+//		//ボスがダメージを受けていなかったら
+//		if (!GetMaw().GetIsDamage())
+//		{
+//			//ダウンしていなかったら
+//			if (!GetMaw().GetIsDown())
+//			{
+//				const float BossWeekLenge = 18.0f;
+//				//ボスの弱点の座標取得
+//				CVector3 EnemyVec = GetMaw().GetWeekPosition();
+//				EnemyVec -= info.attackPos;
+//				float len = EnemyVec.Length();
+//
+//				if (fabs(len) < BossWeekLenge)
+//				{
+//					GetMaw().SetIsDamage(true);
+//					return;
+//				}
+//			}
+//			else
+//			{
+//				const float BossHeight = 10.0f;
+//				const float BossLenge = 12.0f;
+//				//ボスの座標取得
+//				CVector3 EnemyVec = GetMaw().GetPosition();
+//				EnemyVec.y += BossHeight;
+//				EnemyVec -= info.attackPos;
+//				float len = EnemyVec.Length();
+//
+//				if (fabs(len) < BossLenge)
+//				{
+//					GetMaw().SetIsDamage(true);
+//					return;
+//				}
+//			}
+//		}
+//	}
+//
+//}
+//
+//void CTwinSword::EnemyAttackTwin()
+//{
+//	if (!m_pPlayer->GetWeaponManager().GetIsAttackCheck())
+//	{
+//		return;
+//	}
+//	SWeaponEnemyAttackInfo info = EnemyAttackPositionTwinDecide();
+//	if (!info.isAttack)
+//	{
+//		return;
+//	}
+//
+//	//エネミーグループのリストを取得
+//	std::list<CEnemyGroup*> enemyGroup = GetSceneManager().GetGameScene().GetMap()->GetEnemyGroupList();
+//	for (const auto& group : enemyGroup)
+//	{
+//		CVector3 enemyGroupPos = group->GetPosition();
+//		CVector3 distance = enemyGroupPos - info.attackPos;
+//		float length = distance.Length();
+//		if (length < 50.0f)
+//		{
+//			for (const auto& enemy : group->GetGroupList())
+//			{
+//				if (enemy->IsDamagePossible())
+//				{
+//					CVector3 EnemyVec = enemy->GetSpinePos();
+//					EnemyVec.Subtract(info.attackPos);
+//					float len = EnemyVec.Length();
+//
+//					if (fabs(len) < 2.0f)
+//					{
+//						enemy->SetIsDamage(true);
+//						enemy->SetIsDamagePossible(false);
+//					}
+//				}
+//			}
+//		}
+//	}
+//
+//	//ボスが作られていたら
+//	if (&GetMaw() != NULL)
+//	{
+//		//ボスがダメージを受けていなかったら
+//		if (!GetMaw().GetIsDamage())
+//		{
+//			//ダウンしていなかったら
+//			if (!GetMaw().GetIsDown())
+//			{
+//				const float BossWeekLenge = 18.0f;
+//				//ボスの弱点の座標取得
+//				CVector3 EnemyVec = GetMaw().GetWeekPosition();
+//				EnemyVec -= info.attackPos;
+//				float len = EnemyVec.Length();
+//
+//				if (fabs(len) < BossWeekLenge)
+//				{
+//					GetMaw().SetIsDamage(true);
+//					return;
+//				}
+//			}
+//			else
+//			{
+//				const float BossHeight = 10.0f;
+//				const float BossLenge = 12.0f;
+//				//ボスの座標取得
+//				CVector3 EnemyVec = GetMaw().GetPosition();
+//				EnemyVec.y += BossHeight;
+//				EnemyVec -= info.attackPos;
+//				float len = EnemyVec.Length();
+//
+//				if (fabs(len) < BossLenge)
+//				{
+//					GetMaw().SetIsDamage(true);
+//					return;
+//				}
+//			}
+//		}
+//	}
+//}
