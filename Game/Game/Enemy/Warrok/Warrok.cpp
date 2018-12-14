@@ -1,7 +1,8 @@
 #include "stdafx.h"
 #include "Warrok.h"
-#include "../Player/Player.h"
-#include "../Camera/GameCamera.h"
+#include "../../Player/Player.h"
+#include "../../Camera/GameCamera.h"
+#include "Rock.h"
 
 CWarrok::CWarrok()
 {
@@ -21,12 +22,14 @@ void CWarrok::Init(CVector3 position)
 	m_characterController.Init(0.5f, 0.9f, position);
 	m_characterController.SetGravity(-9.0f);
 	wchar_t* animClip[CEnemyState::enAnimation_Num] = {
-		L"Assets/modelData/warrokStand.tka",
-		L"Assets/modelData/warrokWalk.tka",
-		L"Assets/modelData/warrokDash.tka",
-		L"Assets/modelData/warrokAttack.tka",
-		L"Assets/modelData/warrokDamageSmall.tka",
-		L"Assets/modelData/warrokDeath.tka"
+		L"Assets/modelData/WarrokStand.tka",
+		L"Assets/modelData/WarrokWalk.tka",
+		L"Assets/modelData/WarrokDash.tka",
+		L"Assets/modelData/WarrokAttack.tka",
+		L"Assets/modelData/WarrokDamageSmall.tka",
+		L"Assets/modelData/WarrokDown.tka",
+		L"Assets/modelData/WarrokUp.tka",
+		L"Assets/modelData/WarrokDeath.tka"
 	};
 	m_animation.Init(animClip, CEnemyState::enAnimation_Num);
 	m_animation.SetLoopFlg(CEnemyState::enAnimation_Idle, true);
@@ -46,6 +49,8 @@ void CWarrok::Init(CVector3 position)
 	this->SetIsActive(true);
 
 	m_spineMatrix = &GetBoneWorldMatrix(L"Spine");
+	m_attackLength = 10.0f;
+	m_attackType = enAttackType_Far;
 }
 
 bool CWarrok::Start()
@@ -75,4 +80,16 @@ void CWarrok::Update()
 void CWarrok::Draw()
 {
 	m_skinModel.Draw(GetGameCamera().GetViewMatrix(), GetGameCamera().GetProjectionMatrix());
+}
+
+void CWarrok::Attack()
+{
+	CVector3 toPlayer = GetPlayer().GetPosition() - m_position;
+	toPlayer.y = 0.0f;
+	float length = toPlayer.Length();
+	if (length > 4.0f)
+	{
+		CRock* rock = New<CRock>(PRIORITY_ENEMY);
+		rock->Init(m_position);
+	}
 }

@@ -9,7 +9,7 @@
 bool CEnemyDeath::Start()
 {
 	//死亡アニメーションを再生
-	m_enemy->PlayAnimation(CEnemyState::enAnimation_Death);
+	m_enemy->GetAnimation().Play(CEnemyState::enAnimation_Death, 0.3f);
 
 	//移動しない
 	CVector3 moveSpeed = m_enemy->GetMoveSpeed();
@@ -29,8 +29,8 @@ bool CEnemyDeath::Start()
 
 void CEnemyDeath::Update()
 {
-	//死亡アニメーションが終わったら回復アイテムとお金を出す
-	if (!m_enemy->IsPlayAnimation()) {
+	//死亡アニメーションが終わったら回復アイテムとお金、宝箱を出す
+	if (!m_enemy->GetAnimation().IsPlay()) {
 		CRecoveryItem* recoveryItem = New<CRecoveryItem>(PRIORITY_ITEM);
 		recoveryItem->Init();
 		recoveryItem->Pop(m_enemy->GetPosition());

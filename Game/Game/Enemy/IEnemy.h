@@ -60,6 +60,9 @@ public:
 	//当たり判定用の腰の座標を更新
 	void UpdateSpinePos();
 
+	//敵の攻撃(敵の種類によって変わる)
+	virtual void Attack() {};
+
 	//自身のイテレータを設定
 	void SetIterater(std::list<IEnemy*>::iterator iterater)
 	{
@@ -111,17 +114,10 @@ public:
 		m_characterController.RemovedRigidBody();
 	}
 
-	//アニメーションを再生
-	//animNum	アニメーション番号
-	void PlayAnimation(int animNum)
+	//アニメーションを取得
+	CAnimation& GetAnimation()
 	{
-		m_animation.Play(animNum, 0.3f);
-	}
-
-	//アニメーションを再生しているか
-	bool IsPlayAnimation() const
-	{
-		return m_animation.IsPlay();
+		return m_animation;
 	}
 
 	//ワールド行列を取得
@@ -223,6 +219,31 @@ public:
 		m_isWireHit = isWireHit;
 	}
 
+	//攻撃できる距離を取得
+	float GetAttackLength()
+	{
+		return m_attackLength;
+	}
+
+	//攻撃できる距離を設定
+	void SetAttackLength(float attackLength)
+	{
+		m_attackLength = attackLength;
+	}
+
+	//攻撃タイプ
+	enum EnAttackType
+	{
+		enAttackType_Far,
+		enAttackType_Near,
+	};
+
+	//攻撃タイプを取得
+	EnAttackType GetAttackType()
+	{
+		return m_attackType;
+	}
+
 protected:
 	CSkinModel						m_skinModel;					//スキンモデル
 	CAnimation						m_animation;					//アニメーション
@@ -234,9 +255,11 @@ protected:
 	CQuaternion						m_rotation;						//回転
 	CCharacterController			m_characterController;			//キャラクターコントローラー
 	SEnemyStatus					m_status;						//ステータス
+	EnAttackType					m_attackType = enAttackType_Near; //攻撃タイプ
 	std::list<IEnemy*>::iterator	m_iterater;						//自身のイテレータ
 	const CMatrix*					m_spineMatrix;					//当たり判定用の腰のワールド行列
 	CVector3						m_spinePos;						//当たり判定用の腰の座標
+	float							m_attackLength = 1.2f;			//攻撃できる距離
 	bool							m_isFind = false;				//プレイヤーを発見したか
 	bool							m_isDamage = false;				//ダメージを受けたか
 	bool							m_isDamagePossible = true;		//ダメージを受けられるか

@@ -9,7 +9,7 @@
 #include "../Enemy/Zombie.h"
 #include "../Enemy/Ninja.h"
 #include "../Enemy/Samurai.h"
-#include "../Enemy/Warrok.h"
+#include "../Enemy/Warrok/Warrok.h"
 #include "../Enemy/Maw.h"
 #include "../Enemy/EnemyGroup.h"
 #include "../Enemy/PathFinding/PathFinding.h"

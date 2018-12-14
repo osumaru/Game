@@ -5,7 +5,7 @@
 bool CEnemyIdle::Start()
 {
 	//待機アニメーションを再生
-	m_enemy->PlayAnimation(CEnemyState::enAnimation_Idle);
+	m_enemy->GetAnimation().Play(CEnemyState::enAnimation_Idle, 0.3f);
 
 	//タイマーを初期化
 	m_timer = 0.0f;

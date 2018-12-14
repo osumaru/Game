@@ -21,12 +21,14 @@ void CSamurai::Init(CVector3 position)
 	m_characterController.Init(0.5f, 0.9f, position);
 	m_characterController.SetGravity(-9.0f);
 	wchar_t* animClip[CEnemyState::enAnimation_Num] = {
-		L"Assets/modelData/samuraiStand.tka",
-		L"Assets/modelData/samuraiWalk.tka",
-		L"Assets/modelData/samuraiDash.tka",
-		L"Assets/modelData/samuraiAttack.tka",
-		L"Assets/modelData/samuraiDamage.tka",
-		L"Assets/modelData/samuraiDeath.tka"
+		L"Assets/modelData/SamuraiStand.tka",
+		L"Assets/modelData/SamuraiWalk.tka",
+		L"Assets/modelData/SamuraiDash.tka",
+		L"Assets/modelData/SamuraiAttack.tka",
+		L"Assets/modelData/SamuraiDamage.tka",
+		L"Assets/modelData/SamuraiDown.tka",
+		L"Assets/modelData/SamuraiUp.tka",
+		L"Assets/modelData/SamuraiDeath.tka"
 	};
 	m_animation.Init(animClip, CEnemyState::enAnimation_Num);
 	m_animation.SetLoopFlg(CEnemyState::enAnimation_Idle, true);
@@ -46,6 +48,7 @@ void CSamurai::Init(CVector3 position)
 	this->SetIsActive(true);
 
 	m_spineMatrix = &GetBoneWorldMatrix(L"Spine");
+	m_attackLength = 1.2f;
 }
 
 bool CSamurai::Start()
