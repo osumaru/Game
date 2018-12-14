@@ -15,7 +15,7 @@ void CEnemyDamage::Init()
 
 	//ダメージを受けたフラグを戻す
 	m_enemy->SetIsDamage(false);
-
+	//摩擦の初期化
 	m_friction = 0.5f;
 	//スタンする攻撃であるか判定
 	m_wasStanAttack = GetPlayer().GetStanAttack();

@@ -29,7 +29,7 @@ bool CEnemyDeath::Start()
 
 void CEnemyDeath::Update()
 {
-	//死亡アニメーションが終わったら回復アイテムとお金を出す
+	//死亡アニメーションが終わったら回復アイテムとお金、宝箱を出す
 	if (!m_enemy->GetAnimation().IsPlay()) {
 		CRecoveryItem* recoveryItem = New<CRecoveryItem>(PRIORITY_ITEM);
 		recoveryItem->Init();
