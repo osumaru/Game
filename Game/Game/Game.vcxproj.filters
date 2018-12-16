@@ -67,14 +67,8 @@
     <Filter Include="ソース ファイル\UI\Fade">
       <UniqueIdentifier>{70b91111-2788-4727-b710-6469d3552a00}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\NPC">
-      <UniqueIdentifier>{a67babc6-6fe9-451a-9889-0df1ba6fc2ef}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソース ファイル\GameSound">
       <UniqueIdentifier>{3802cec0-1cc4-4811-9f46-0f4a30099628}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\NPC\Shop">
-      <UniqueIdentifier>{14c91c9c-7902-4237-ba30-1c31f4a768b1}</UniqueIdentifier>
     </Filter>
     <Filter Include="ソース ファイル\UI\BossHp">
       <UniqueIdentifier>{29508926-c18b-423f-afbf-7633ea7ef856}</UniqueIdentifier>
@@ -96,6 +90,12 @@
     </Filter>
     <Filter Include="ソース ファイル\Enemy\Warrok">
       <UniqueIdentifier>{1b767e61-0b37-43d6-97cb-d334c0663e8f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Player\NPC">
+      <UniqueIdentifier>{a67babc6-6fe9-451a-9889-0df1ba6fc2ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Player\NPC\Shop">
+      <UniqueIdentifier>{14c91c9c-7902-4237-ba30-1c31f4a768b1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -280,10 +280,10 @@
       <Filter>ソース ファイル\Map\MapChip</Filter>
     </ClCompile>
     <ClCompile Include="NPC\Shop\ItemShop.cpp">
-      <Filter>ソース ファイル\NPC\Shop</Filter>
+      <Filter>ソース ファイル\Player\NPC\Shop</Filter>
     </ClCompile>
     <ClCompile Include="NPC\Shop\WeaponShop.cpp">
-      <Filter>ソース ファイル\NPC\Shop</Filter>
+      <Filter>ソース ファイル\Player\NPC\Shop</Filter>
     </ClCompile>
     <ClCompile Include="UI\BossHp\BossHp.cpp">
       <Filter>ソース ファイル\UI\BossHp</Filter>
@@ -325,10 +325,10 @@
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="NPC\IShop.cpp">
-      <Filter>ソース ファイル\NPC</Filter>
+      <Filter>ソース ファイル\Player\NPC</Filter>
     </ClCompile>
     <ClCompile Include="NPC\ShopManager.cpp">
-      <Filter>ソース ファイル\NPC</Filter>
+      <Filter>ソース ファイル\Player\NPC</Filter>
     </ClCompile>
     <ClCompile Include="UI\Fade\LoadScene.cpp">
       <Filter>ソース ファイル\UI\Fade</Filter>
@@ -571,10 +571,10 @@
       <Filter>ソース ファイル\Map\MapChip</Filter>
     </ClInclude>
     <ClInclude Include="NPC\Shop\ItemShop.h">
-      <Filter>ソース ファイル\NPC\Shop</Filter>
+      <Filter>ソース ファイル\Player\NPC\Shop</Filter>
     </ClInclude>
     <ClInclude Include="NPC\Shop\WeaponShop.h">
-      <Filter>ソース ファイル\NPC\Shop</Filter>
+      <Filter>ソース ファイル\Player\NPC\Shop</Filter>
     </ClInclude>
     <ClInclude Include="UI\BossHp\BossHp.h">
       <Filter>ソース ファイル\UI\BossHp</Filter>
@@ -619,10 +619,10 @@
       <Filter>ソース ファイル\Player\Weapon</Filter>
     </ClInclude>
     <ClInclude Include="NPC\IShop.h">
-      <Filter>ソース ファイル\NPC</Filter>
+      <Filter>ソース ファイル\Player\NPC</Filter>
     </ClInclude>
     <ClInclude Include="NPC\ShopManager.h">
-      <Filter>ソース ファイル\NPC</Filter>
+      <Filter>ソース ファイル\Player\NPC</Filter>
     </ClInclude>
     <ClInclude Include="UI\Fade\LoadScene.h">
       <Filter>ソース ファイル\UI\Fade</Filter>
