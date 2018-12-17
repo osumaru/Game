@@ -15,7 +15,7 @@ bool CMoney::Start()
 
 void CMoney::Update()
 {
-	if (GetPlayer().GetIsDied() || m_timer > m_deadTime)
+	if (GetPlayer().GetIsDied() || (m_timer > m_deadTime && !m_isMove))
 	{
 		//ƒvƒŒƒCƒ„[‚ª€–S‚µ‚½–”‚Íˆê’èŠÔ‚Åíœ
 		Delete(this);
