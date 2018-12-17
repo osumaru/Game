@@ -66,7 +66,7 @@ void CLoadScene::Update()
 		{
 
 		}
-		m_number = Random().GetRandInt() % 30 + 1;
+		m_number = Random().GetRandInt() % 10 + 1;
 		swprintf(m_text, m_equipItem.GetItemStatus_ItemId(m_number).ItemName);
 		m_font[0].Init(m_text);
 		

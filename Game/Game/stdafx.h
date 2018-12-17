@@ -57,5 +57,5 @@ static const int PRIORITY_SCENE = 0;
 #include <memory>
 #include <cstdlib>
 #include <crtdbg.h> 
-#define new new( _NORMAL_BLOCK , __FILE__ , __LINE__ ) 
+//#define new new( _NORMAL_BLOCK , __FILE__ , __LINE__ ) 
 #endif  // _DEBUG

@@ -144,6 +144,9 @@ void CEquipInventory::Init(CMenu * menu)
 			m_statusFontNum[j][i].SetSize(fontSize);
 		}
 	}
+
+	m_equipSound[0].Init("Assets/sound/SystemSound/EquipOn.wav");
+	m_equipSound[1].Init("Assets/sound/SystemSound/EquipOff.wav");
 }
 
 bool CEquipInventory::Start()
@@ -372,6 +375,12 @@ void CEquipInventory::Equip()
 	}
 	//装備リストを整理する
 	EquipListReset(false);
+	//装備時の音を鳴らす処理
+	if (m_equipSound[0].IsPlay())
+	{
+		m_equipSound[0].Stop();
+	}
+	m_equipSound[0].Play(false, true);
 }
 
 void CEquipInventory::CalucStatus()
@@ -478,6 +487,12 @@ void CEquipInventory::Erase()
 	m_equipList.erase(it);
 	//装備リストを整理する
 	EquipListReset(false);
+	//装備を捨てるときの音を鳴らす処理
+	if (m_equipSound[1].IsPlay())
+	{
+		m_equipSound[1].Stop();
+	}
+	m_equipSound[1].Play(false, true);
 }
 
 void CEquipInventory::AddEquipList(SWeaponStatus& weaponStatus)
