@@ -88,7 +88,7 @@ void CPlayer::Init(CVector3 position)
 									{ L"Assets/modelData/PlayerCombo6.tka" },				//連撃アニメーション
 									{ L"Assets/modelData/PlayerCombo4Combine.tka" },		//連撃アニメーション
 									{ L"Assets/modelData/PlayerCombo5Combine.tka" },		//連撃アニメーション
-									{ L"Assets/modelData/PlayerAttackCombine.tka" },				//連撃アニメーション
+									{ L"Assets/modelData/PlayerCombo6Combine.tka" },		//連撃アニメーション
 									{ L"Assets/modelData/PlayerLeageAttackFirst.tka" },		//攻撃アニメーション
 									{ L"Assets/modelData/PlayerLeageAttackSecand.tka" },	//連撃アニメーション
 									{ L"Assets/modelData/PlayerLeageAttackThird.tka" },		//連撃アニメーション
@@ -206,6 +206,7 @@ void CPlayer::Update()
 	//スキンモデルの更新
 	m_skinmodel.Update(m_position, m_rotation, { 1.0f, 1.0f, 1.0f }, true);
 	m_weaponManager.Update();
+	
 }
 
 //描画処理

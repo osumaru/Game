@@ -181,11 +181,13 @@ public:
 		m_playerGetter.SetDamageEnemyPos(position);
 	}
 
+	//スタン攻撃かどうかを取得
 	bool GetStanAttack()
 	{
 		return m_isStanAttack;
 	}
 
+	//スタン攻撃であるかを設定
 	void SetStanAttack(bool isStanAttack)
 	{
 		m_isStanAttack = isStanAttack;

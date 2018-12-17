@@ -18,7 +18,7 @@ bool CRecoveryItem::Start()
 
 void CRecoveryItem::Update()
 {
-	if (GetPlayer().GetIsDied() || m_timer > m_deadTime)
+	if (GetPlayer().GetIsDied() || (m_timer > m_deadTime && !m_isMove))
 	{
 		//プレイヤーが死亡した又は一定時間で削除
 		Delete(this);
@@ -27,17 +27,36 @@ void CRecoveryItem::Update()
 	m_timer += GameTime().GetDeltaFrameTime();
 
 	//移動速度を取得
-	m_moveSpeed = m_characterController.GetMoveSpeed();
+	CVector3 moveSpeed = m_characterController.GetMoveSpeed();
 	//地面に接地しているか判定
-	bool isPopEnd = m_characterController.IsOnGround();
-	if (isPopEnd) {
-		//ポップし終わっている
-		m_moveSpeed.x = 0.0f;
-		m_moveSpeed.z = 0.0f;
+	if (!m_isPopEnd && m_characterController.IsOnGround())
+	{
+		m_isPopEnd = true;
+		moveSpeed.x = 0.0f;
+		moveSpeed.z = 0.0f;
+	}
+
+	if (m_isPopEnd && !m_isMove)
+	{
+		//プレイヤーとの距離を求める
+		CVector3 playerPos = GetPlayer().GetPosition();
+		CVector3 toPlayer = playerPos - m_position;
+		float length = toPlayer.Length();
+		//アイテムを獲得できる範囲にプレイヤーがいるか判定する
+		if (length < 5.0f)
+		{
+			m_isMove = true;
+		}
+	}
+
+	if (m_isMove)
+	{
+		//プレイヤーの方に移動する
+		moveSpeed = Move();
 	}
 
 	//拾うことができるか判定
-	bool isPickUp = PickUp(isPopEnd, 0.8f);
+	bool isPickUp = PickUp(m_isPopEnd, 0.8f);
 	if (isPickUp) {
 		//拾うことができる
 		IInventoryItem* item = new CInventoryRecoveryItem();
@@ -46,7 +65,7 @@ void CRecoveryItem::Update()
 		Delete(this);
 	}
 
-	m_characterController.SetMoveSpeed(m_moveSpeed);
+	m_characterController.SetMoveSpeed(moveSpeed);
 	m_characterController.SetPosition(m_position);
 	m_characterController.Execute(GameTime().GetDeltaFrameTime());
 	m_position = m_characterController.GetPosition();

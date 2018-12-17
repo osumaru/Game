@@ -103,28 +103,30 @@ float4 PSMain(VS_OUTPUT In) : SV_TARGET0
 	In.screenPos = depthTexture.Sample(Sampler, In.uv);
 	float4 shadowMapPos = depthTexture.Sample(Sampler, In.uv);
 	float4 worldPos = depthTexture.Sample(Sampler, In.uv);
-	//shadowMapPos = mul(gameViewProj, shadowMapPos);
-	//shadowMapPos /= shadowMapPos.w;
 	shadowMapPos = mul(lightViewProj, shadowMapPos);
 	shadowMapPos /= shadowMapPos.w;
 	shadowMapPos.xy += 1.0f;
 	shadowMapPos.xy /= 2.0f;
 	shadowMapPos.y = 1.0f - shadowMapPos.y;
+	int3 uv;
+	uv.xy = (int2)(shadowMapPos.xy * 1024);
+	uv.z = 0;
 	float depth = shadowMapPos.z;
-	float shadowDepth = shadowTexture.Sample(shadowSampler, shadowMapPos.xy).z;
+	float shadowDepth;
+	//shadowDepth = shadowTexture.Sample(shadowSampler, shadowMapPos.xy).z;
+	shadowDepth = shadowTexture.Load(uv, int2(0, 0)).x;
 	float shadowValue = 1.0f;
-	if (shadowDepth < depth - 0.02f)
+	if (shadowMapPos.x <= 1.0f && 0.0f <= shadowMapPos.x
+		&&	shadowMapPos.y <= 1.0f && 0.0f <= shadowMapPos.y)
 	{
-		if (shadowMapPos.x <= 1.0f && 0.0f <= shadowMapPos.x
-			&&	shadowMapPos.y <= 1.0f && 0.0f <= shadowMapPos.y)
-		{
-			int3 uv;
-			uv.z = 0;
-			uv.x = (int)(In.uv.x * 1280.0f);
-			uv.y = (int)(In.uv.y * 720.0f);
-			shadowValue *= 0;//1 - materialTexture.Load(uv, int2(0, 0)).x & isShadowReceiver;
-		}
+		int3 uv;
+		uv.z = 0;
+		uv.x = (int)(In.uv.x * 1280.0f);
+		uv.y = (int)(In.uv.y * 720.0f);
+		float d = depth - 0.01 - shadowDepth;
+		shadowValue *= step(depth, shadowDepth + 0.001f);// - materialTexture.Load(uv, int2(0, 0)).x & isShadowReceiver;
 	}
-	//color.xyz *= shadowValue;
+	color.xyz *= shadowValue;
 	return color;
 }
+
