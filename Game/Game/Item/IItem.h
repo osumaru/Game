@@ -32,6 +32,9 @@ public:
 	//length	アイテムを拾える距離
 	virtual bool PickUp(bool isPopEnd, float length);
 
+	//移動
+	virtual CVector3 Move();
+
 	//属性
 	enum EnInventoryItemType {
 		Recovery,	//回復
@@ -75,9 +78,11 @@ protected:
 	CVector3				m_position;					//座標
 	CQuaternion				m_rotation;					//回転
 	CCharacterController	m_characterController;		//キャラクターコントローラー
-	CVector3				m_popPosition;				//アイテムがポップする座標
-	CVector3				m_moveSpeed;				//移動速度
-	const float				m_speed = 4.0f;				//速度
+	//CVector3				m_popPosition;				//アイテムがポップする座標
+	//CVector3				m_moveSpeed;				//移動速度
+	//const float				m_speed = 4.0f;				//速度
 	const float				m_deadTime = 30.0f;			//アイテムが消滅するまでの時間
 	float					m_timer = 0.0f;				//タイマー
+	bool					m_isPopEnd = false;			//ポップし終わったか
+	bool					m_isMove = false;
 };

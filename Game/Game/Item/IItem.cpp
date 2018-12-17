@@ -12,11 +12,11 @@ IItem::~IItem()
 
 void IItem::RamdomPop(float distance, float upSpeed)
 {
+	CVector3 moveSpeed = CVector3::Zero;
 	if (distance <= 0.0f) {
 		//その場にポップさせる
-		m_moveSpeed = CVector3::Zero;
-		m_moveSpeed.y = upSpeed;
-		m_characterController.SetMoveSpeed(m_moveSpeed);
+		moveSpeed.y = upSpeed;
+		m_characterController.SetMoveSpeed(moveSpeed);
 		return;
 	}
 	//ランダムに移動先を決定
@@ -28,15 +28,16 @@ void IItem::RamdomPop(float distance, float upSpeed)
 	randomPositionX -= distance;
 	randomPositionZ -= distance;
 	//移動先のベクトルを計算
-	m_moveSpeed.x = randomPositionX;
-	m_moveSpeed.y = 0.0f;
-	m_moveSpeed.z = randomPositionZ;
+	moveSpeed.x = randomPositionX;
+	moveSpeed.y = 0.0f;
+	moveSpeed.z = randomPositionZ;
 
 	//移動速度を計算
-	m_moveSpeed.Normalize();
-	m_moveSpeed *= m_speed;
-	m_moveSpeed.y = upSpeed;
-	m_characterController.SetMoveSpeed(m_moveSpeed);
+	float speed = 4.0f;
+	moveSpeed.Normalize();
+	moveSpeed *= speed;
+	moveSpeed.y = upSpeed;
+	m_characterController.SetMoveSpeed(moveSpeed);
 }
 
 bool IItem::PickUp(bool isPopEnd, float length)
@@ -52,4 +53,14 @@ bool IItem::PickUp(bool isPopEnd, float length)
 		return true;
 	}
 	return false;
+}
+
+CVector3 IItem::Move()
+{
+	float speed = 4.0f;
+	CVector3 playerPos = GetPlayer().GetPosition();
+	CVector3 toPlayer = playerPos - m_position;
+	toPlayer.Normalize();
+	toPlayer *= speed;
+	return toPlayer;
 }
