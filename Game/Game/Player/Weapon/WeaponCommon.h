@@ -10,6 +10,16 @@ enum EnPlayerWeapon
 	enInvalid			//何もない
 };
 
+enum EnAttackWeapon
+{
+	enAttackWeaponLongSword,
+	enAttackWeaponSword,
+	enAttackWeaponRightSword,
+	enAttackWeaponLeftSword,
+	enAttackWeaponArrow,
+	enAttackWeaponNone,
+	enAttackWeaponNum
+};
 
 //武器のステータス
 struct SWeaponStatus

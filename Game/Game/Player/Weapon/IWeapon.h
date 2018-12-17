@@ -67,21 +67,21 @@ public:
 	}
 
 	//攻撃モーションの先頭を取得
-	EnPlayerAnimation& GetAttackAnimation()
+	EnPlayerAnimation* GetAttackAnimation()
 	{
-		return *m_attackAnimation;
+		return m_attackAnimation.get();
 	}
 
 	//攻撃終了モーションの先頭を取得
-	EnPlayerAnimation& GetCombineAnimation()
+	EnPlayerAnimation* GetCombineAnimation()
 	{
-		return *m_combineAnimation;
+		return m_combineAnimation.get();
 	}
 
 	//スタン攻撃の先頭を取得
-	bool& GetStanAttack()
+	bool* GetStanAttack()
 	{
-		return *m_stanAttack;
+		return m_stanAttack.get();
 	}
 
 	//攻撃モーションの数を取得
@@ -90,6 +90,11 @@ public:
 		return m_maxAttackNum;
 	}
 
+	//攻撃する武器を取得
+	EnAttackWeapon* GetAttackWeapon()
+	{
+		return m_attackWeapon.get();
+	}
 protected:
 	CPlayer*					m_pPlayer = nullptr;		//プレイヤーのインスタンス
 	const CMatrix*				m_normalBoneMat = nullptr;	//プレイヤーのボーン行列
@@ -101,8 +106,10 @@ protected:
 	CSkinModel					m_skinModel;				//武器のスキンモデル
 	SWeaponStatus				m_weaponStatus;				//装備中の武器ノステータス
 
+	int							m_weaponNum = 0;					//武器の数
 	int							m_maxAttackNum = 0;					//最大連続攻撃回数
-	EnPlayerAnimation*			m_attackAnimation;					//攻撃のアニメーション番号
-	EnPlayerAnimation*			m_combineAnimation;					//攻撃の後の合成用のアニメーション番号
-	bool*						m_stanAttack;						//スタン攻撃
+	std::unique_ptr<EnPlayerAnimation[]>		m_attackAnimation;				//攻撃のアニメーション番号
+	std::unique_ptr<EnPlayerAnimation[]>		m_combineAnimation;				//攻撃の後の合成用のアニメーション番号
+	std::unique_ptr<bool[]>						m_stanAttack;						//スタン攻撃
+	std::unique_ptr<EnAttackWeapon[]>			m_attackWeapon;						//攻撃する武器
 };

@@ -15,9 +15,9 @@ CPlayerAttack::CPlayerAttack()
 
 void CPlayerAttack::Init()
 {
-	m_attackAnimation = &GetPlayer().GetWeaponManager().GetWeapon()->GetAttackAnimation();
-	m_combineAnimation = &GetPlayer().GetWeaponManager().GetWeapon()->GetCombineAnimation();
-	m_stanAttack = &GetPlayer().GetWeaponManager().GetWeapon()->GetStanAttack();
+	m_attackAnimation = GetPlayer().GetWeaponManager().GetWeapon()->GetAttackAnimation();
+	m_combineAnimation = GetPlayer().GetWeaponManager().GetWeapon()->GetCombineAnimation();
+	m_stanAttack = GetPlayer().GetWeaponManager().GetWeapon()->GetStanAttack();
 	m_maxAttackNum = GetPlayer().GetWeaponManager().GetWeapon()->GetMaxAttackNum();
 
 	m_pPlayerGetter->SetMoveSpeed(CVector3::Zero);
@@ -59,6 +59,7 @@ void CPlayerAttack::Update()
 		for (const auto& enemys : GetSceneManager().GetGameScene().GetMap()->GetEnemyList())
 		{
 			enemys->SetIsDamagePossible(true);
+			enemys->SetAttackWeapon(EnAttackWeapon::enAttackWeaponNone);
 		}
 		//攻撃モーション中はダメージモーションをさせない
 		if (m_isContinuationAttack)

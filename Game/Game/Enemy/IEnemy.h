@@ -7,6 +7,7 @@
 #include "EnemyState/EnemyStateMachine.h"
 #include "EnemyTurn.h"
 #include "EnemySearch.h"
+#include "../Player/Weapon/WeaponCommon.h"
 
 class CEnemyGroup;
 
@@ -244,6 +245,18 @@ public:
 		return m_attackType;
 	}
 
+	//攻撃された武器を取得
+	EnAttackWeapon GetAttackWeapon()
+	{
+		return m_attackWeapon;
+	}
+
+	//攻撃された武器を設定
+	void SetAttackWeapon(EnAttackWeapon AttackWeapon)
+	{
+		m_attackWeapon=AttackWeapon;
+	}
+
 protected:
 	CSkinModel						m_skinModel;					//スキンモデル
 	CAnimation						m_animation;					//アニメーション
@@ -265,4 +278,5 @@ protected:
 	bool							m_isDamagePossible = true;		//ダメージを受けられるか
 	bool							m_isWireHit = false;			//ワイヤーが当たったか
 	bool							m_isRemovedRigidBody = false;	//剛体が削除されたか
+	EnAttackWeapon					m_attackWeapon=enAttackWeaponNone;	//攻撃する武器
 };
