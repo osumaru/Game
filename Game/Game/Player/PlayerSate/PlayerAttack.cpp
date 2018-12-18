@@ -6,7 +6,7 @@
 #include "../../Enemy/IEnemy.h"
 #include "../../Scene/SceneManager.h"
 #include "../../Enemy/Maw.h"
-
+#include "../../Camera/GameCamera.h"
 
 CPlayerAttack::CPlayerAttack()
 {
@@ -36,6 +36,7 @@ void CPlayerAttack::Init()
 
 void CPlayerAttack::Update()
 {
+
 	//UŒ‚’†‚ÉUŒ‚‚Ì“ü—Í‚ª‚³‚ê‚½ê‡‚Í˜AŒ‚‚ÉˆÚs‚·‚é
 	if (Pad().IsTriggerButton(enButtonX) && !m_isContinuationAttack && m_attackCount < m_maxAttackNum/*MAX_ATTACK_NUM*/ - 1)
 	{
@@ -67,6 +68,22 @@ void CPlayerAttack::Update()
 			m_isContinuationAttack = false;
 			m_pPlayerGetter->GetAnimation().Play(m_attackAnimation[m_attackCount], 0.2f);
 			m_pPlayer->GetWeaponManager().WeaponTraceDrawReset();
+
+			const CCamera& gameCamera = GetGameCamera().GetCamera();
+			CVector3 frontVec = gameCamera.GetTarget() - gameCamera.GetPosition();
+			frontVec.y = 0.0f;
+			frontVec.Normalize();
+			CVector3 rightVec;
+			rightVec.Cross(CVector3::AxisY, frontVec);
+			rightVec.Normalize();
+			CVector3 moveSpeed = m_pPlayerGetter->GetMoveSpeed();
+			moveSpeed.x = 0.0f;
+			moveSpeed.z = 0.0f;
+			const float speed = 8.0f;
+			moveSpeed += frontVec * Pad().GetLeftStickY() * speed;
+			moveSpeed += rightVec * Pad().GetLeftStickX() * speed;
+			m_pPlayerGetter->SetMoveSpeed(moveSpeed);
+			m_pPlayerGetter->GetCharacterController().Execute(GameTime().GetDeltaFrameTime());
 		}
 		else
 		{
