@@ -19,6 +19,9 @@ void CEnemyDamage::Init()
 	m_friction = 0.5f;
 	//スタンする攻撃であるか判定
 	m_wasStanAttack = GetPlayer().GetStanAttack();
+
+	//どの武器でダメージを食らったか
+	m_enemy->SetAttackWeapon(*GetPlayer().GetWeaponManager().GetWeapon()->GetAttackWeapon());
 }
 
 bool CEnemyDamage::Start()

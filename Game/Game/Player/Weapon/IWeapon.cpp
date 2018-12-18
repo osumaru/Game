@@ -11,6 +11,8 @@
 void IWeapon::Init(CPlayer* player)
 {
 	m_pPlayer = player;
+	m_attackWeapon = std::make_unique<EnAttackWeapon[]>(1);
+	m_attackWeapon[0] = EnAttackWeapon::enAttackWeaponSword;
 	m_normalBoneMat = &m_pPlayer->GetSkinmodel().FindBoneWorldMatrix(L"LeftShoulder");
 	m_attackBoneMat = &m_pPlayer->GetSkinmodel().FindBoneWorldMatrix(L"RightHand");
 	Init();
@@ -101,18 +103,22 @@ void IWeapon::EnemyAttack()
 		float length = distance.Length();
 		if (length < 50.0f)
 		{
-			for (const auto& enemy : group->GetGroupList()) 
+			for (const auto& enemy : group->GetGroupList())
 			{
-				if (enemy->IsDamagePossible())
+				for (int i = 0; i < m_weaponNum; i++)
 				{
-					CVector3 EnemyVec = enemy->GetSpinePos();
-					EnemyVec.Subtract(info.attackPos);
-					float len = EnemyVec.Length();
-
-					if (fabs(len) < 2.0f)
+					if (/*enemy->IsDamagePossible()&&*/enemy->GetAttackWeapon() != m_attackWeapon[i])
 					{
-						enemy->SetIsDamage(true);
-						enemy->SetIsDamagePossible(false);
+						CVector3 EnemyVec = enemy->GetSpinePos();
+						EnemyVec.Subtract(info.attackPos);
+						float len = EnemyVec.Length();
+
+						if (fabs(len) < 2.0f)
+						{
+							enemy->SetIsDamage(true);
+							enemy->SetIsDamagePossible(false);
+
+						}
 					}
 				}
 			}

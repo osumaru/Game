@@ -12,12 +12,14 @@ enum EnPlayerWeapon
 
 enum EnAttackWeapon
 {
-	enTwinSwordRight,
-	enTwinSwordLeft,
-	enNoDamage,
-
+	enAttackWeaponLongSword,
+	enAttackWeaponSword,
+	enAttackWeaponRightSword,
+	enAttackWeaponLeftSword,
+	enAttackWeaponArrow,
+	enAttackWeaponNone,
+	enAttackWeaponNum
 };
-
 
 //武器のステータス
 struct SWeaponStatus

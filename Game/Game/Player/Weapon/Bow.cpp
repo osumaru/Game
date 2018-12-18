@@ -41,7 +41,6 @@ void CBow::Init()
 	m_tag.SetPosition({ 0.0f,0.0f });
 	m_tag.SetSize({ 50.0f,50.0f });
 	m_tag.SetAlpha(0.7f);
-	
 }
 
 void CBow::Update()
