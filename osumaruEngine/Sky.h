@@ -26,6 +26,7 @@ public:
 private:
 	CSkinModel m_skinModel;
 	const CCamera* m_camera = nullptr;
+	CLight m_light;
 };
 
 static CSky& Sky()

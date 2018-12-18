@@ -3,6 +3,7 @@
 #include "Skelton.h"
 #include "Animation.h"
 #include "SkinModelEffect.h"
+#include "Light.h"
 
 CSkinModel::CSkinModel()
 {
@@ -21,11 +22,11 @@ void CSkinModel::Load(const wchar_t* filePath, CAnimation* animation)
 	SSkinModelCB cb;
 	cb.worldMat = CMatrix::Identity;
 	cb.viewProjMat = CMatrix::Identity;
-	cb.isNormalMap = m_isNormalMap;
 	constantBuffer.Create(sizeof(SSkinModelCB), &cb);
 	m_lightCB.Create(sizeof(CLight), &m_light);
-	int materialCB = 0;
-	m_materialCB.Create(sizeof(int), &materialCB);
+	ZeroMemory(&m_materialFlg, sizeof(SMaterialFlg));
+	m_materialFlg.isDiffuse = g_materialFlg.isDiffuse;
+	m_materialCB.Create(sizeof(SMaterialFlg), &m_materialFlg);
 	Engine().GetShadowMap().SetConstantBuffer();
 	//ファイル名の拡張子(cmo)を除きtksを追加しスケルトンのファイル名を作成
 	size_t pos = wcslen(filePath);
@@ -42,6 +43,8 @@ void CSkinModel::Load(const wchar_t* filePath, CAnimation* animation)
 		CSkinModelEffectFactory effectFactory(GetDevice());
 	}
 	m_skinModel = SkinmodelResource().Load(filePath, m_skelton.get());
+	m_light = Light();
+
 }
 
 void CSkinModel::Update(const CVector3& position, const CQuaternion& rotation, const CVector3& scale, bool isZup)
@@ -91,10 +94,8 @@ void CSkinModel::Draw(const CMatrix& view, const CMatrix& projection, bool isSha
 	viewProjMat.Mul(view, projection);
 	cb.viewProjMat = viewProjMat;
 	cb.worldMat = m_worldMatrixZUp;
-	cb.isNormalMap = m_isNormalMap;
 	constantBuffer.Update(&cb);
-	int materialCB = m_materialFlg.isShadowReceiver;
-	m_materialCB.Update(&materialCB);
+	m_materialCB.Update(&m_materialFlg);
 	m_lightCB.Update(&m_light);
 	Engine().GetShadowMap().SetConstantBuffer();
 	Microsoft::WRL::ComPtr<ID3D11Buffer> cbBuffer = constantBuffer.GetBody();
@@ -138,5 +139,5 @@ const CMatrix& CSkinModel::FindBoneWorldMatrix(const wchar_t* boneName) const
 void CSkinModel::LoadNormalmap(const wchar_t * filePath)
 {
 	m_pNormalTexture = TextureResource().LoadTexture(filePath);
-	m_isNormalMap = 1;
+	m_materialFlg.isNormalMap = g_materialFlg.isNormalMap;
 }

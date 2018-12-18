@@ -15,15 +15,18 @@ cbuffer shadowCB : register(b2)
 {
 	float4x4 lightViewProj;
 };
+
 cbuffer materialCB : register(b3)
 {
 	int isShadowReceiver;
 	int isNormalMapFlg;
+	int isDiffuseFlg;
 };
 
 
 cbuffer framesizeCB : register(b4)
 {
+	float4 gameCameraPos;
 	int frameBufferWidth;
 	int frameBufferHeight;
 };
@@ -71,13 +74,19 @@ float4 PSMain(VS_OUTPUT In) : SV_TARGET0
 {
 	float4 color = colorTexture.Sample(Sampler, In.uv);
 	float3 normal = normalTexture.Sample(Sampler, In.uv).xyz;
+	normal = normalize(normal);
 	float3 tangent = tangentTexture.Sample(Sampler, In.uv).xyz;
 	float3 binormal = cross(normal, tangent).xyz;
 	normal = normalize(normal);
 	tangent = normalize(tangent);
 	binormal = normalize(binormal);
-	float3 normalColor = normalMapTexture.Sample(Sampler, In.uv);
-	normalColor = normalize(normalColor);
+	float3 normalColor = normalMapTexture.Sample(Sampler, In.uv).xyz;
+	int3 materialUV;
+	materialUV.z = 0;
+	materialUV.x = (int)(In.uv.x * 1280.0f);
+	materialUV.y = (int)(In.uv.y * 720.0f);
+	int4 materialFlg = materialTexture.Load(materialUV, int2(0, 0));
+	
 	float4x4 mat = {
 		float4(tangent, 0.0f),
 		float4(binormal, 0.0f),
@@ -95,10 +104,11 @@ float4 PSMain(VS_OUTPUT In) : SV_TARGET0
 	float4 lig = float4(0.0f, 0.0f, 0.0f, 1.0f);
 	for (int i = 0; i < 4; i++)
 	{
-		lig.xyz += diffuseLight[i].xyz * max(-dot(normal, normalLight[i]), 0.0f) * max(-dot(normalColor, normalLight[i]), 0.0f);
+		lig.xyz += diffuseLight[i].xyz * max(-dot(normal, normalLight[i]), 0.0f) * step(1, !(materialFlg.x & isNormalMapFlg)) * step(1, (materialFlg.x & isDiffuseFlg));
+		lig.xyz	+= diffuseLight[i].xyz * max(-dot(normalColor, normalLight[i]), 0.0f) * step(1, (materialFlg.x & isNormalMapFlg)) * step(1, (materialFlg.x & isDiffuseFlg));
 	}
-	lig.xyz += ambientLight;
-	color *= lig;
+	lig.xyz += color.w;
+	color.xyz *= lig;
 	
 	In.screenPos = depthTexture.Sample(Sampler, In.uv);
 	float4 shadowMapPos = depthTexture.Sample(Sampler, In.uv);
@@ -124,8 +134,17 @@ float4 PSMain(VS_OUTPUT In) : SV_TARGET0
 		uv.x = (int)(In.uv.x * 1280.0f);
 		uv.y = (int)(In.uv.y * 720.0f);
 		float d = depth - 0.01 - shadowDepth;
-		shadowValue *= step(depth, shadowDepth + 0.001f);// - materialTexture.Load(uv, int2(0, 0)).x & isShadowReceiver;
+		shadowValue *= step(depth, shadowDepth + 0.001f);// - materialFlg.x & isShadowReceiver;
 	}
+	float3 lineSight = In.screenPos.xyz - gameCameraPos.xyz;
+	lineSight = normalize(lineSight);
+	lineSight = reflect(lineSight, normal);
+	lineSight = normalize(lineSight);
+	float speculaLight = dot(lineSight, -normalLight[0]);
+	speculaLight = pow(speculaLight, 5.0f);
+	
+	speculaLight = max(speculaLight, 0.0f);
+	//color.xyz += speculaLight;
 	color.xyz *= shadowValue;
 	return color;
 }
