@@ -397,6 +397,7 @@ bool CPlayer::GetIsStateCondition(CPlayerState::EnPlayerState state)
 
 	case CPlayerState::enPlayerStateStand://ˆÚ“®—Ê‚ª0‚©
 		return m_characterController.GetMoveSpeed().Length() == 0.0f;
-
+	case CPlayerState::enPlayerStateSky:
+		return !m_characterController.IsOnGround(); //’n–Ê‚É’…’n‚µ‚Ä‚¢‚é‚©‚Ç‚¤‚©
 	}
 }

@@ -29,6 +29,7 @@ void CPlayerAvoidance::Update()
 		m_pPlayerGetter->GetAnimation().Play(enPlayerAnimationAvoidanceCombine);
 		GetPlayer().GetStateMachine().SetState(CPlayerState::enPlayerStateStand);
 	}
+
 }
 
 void CPlayerAvoidance::Move()
@@ -46,7 +47,7 @@ void CPlayerAvoidance::Move()
 	moveSpeed.y = m_fallSpeed;
 	CCharacterController& characon = m_pPlayerGetter->GetCharacterController();
 	float gravity = characon.GetGravity();
-	characon.SetGravity(-0.04f);
+	characon.SetGravity(-0.0004f);
 	//高さをプレイヤ―の座標でそろえる
 	m_preBonePos.y = playerPos.y;
 	characon.SetMoveSpeed(moveSpeed);
