@@ -11,6 +11,9 @@ int WINAPI wWinMain(
 {
 	//Direct3Dを初期化
 	Engine().InitD3D(hInst);
+	Light().SetAmbientLight({ 0.5f,0.5f,0.5f,0.5f });
+	Light().SetDiffuseLight(0, { 0.5f,0.5f,0.5f,1.0f });
+	Light().SetDiffuseLightDir(0, { 0.0f, -1.0f, 1.0f, 1.0f });
 	//初期化フェードなどの
 	GetSceneManager().Init();
 	GetSceneManager().GetInstance().Update();

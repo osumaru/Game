@@ -31,10 +31,10 @@ void CDeferred::Init()
 	}
 	m_renderTarget[0].CreateDepthStencilBuffer(FrameBufferWidth(), FrameBufferHeight());
 
-	SFrameSizeCB frameSizeCB;
-	frameSizeCB.frameBufferWidth = FrameBufferWidth();
-	frameSizeCB.frameBufferHeight = FrameBufferHeight();
-	m_frameSizeCB.Create(sizeof(SFrameSizeCB), &frameSizeCB);
+	SDefferedCB defferedCB;
+	defferedCB.frameBufferWidth = FrameBufferWidth();
+	defferedCB.frameBufferHeight = FrameBufferHeight();
+	m_defferedCB.Create(sizeof(SDefferedCB), &defferedCB);
 	m_materialCB.Create(sizeof(SMaterialFlg), &g_materialFlg);
 	m_lightCB.Create(sizeof(CLight), &Light());
 	m_vertexShader.Load("Assets/shader/deferred.fx", "VSMain", CShader::enVS);
@@ -50,7 +50,7 @@ void CDeferred::Init()
 	m_pointLightCB.Create(sizeof(SPointLightCB), nullptr);
 	DWORD indexBufferLayout[4] = { 0, 2, 1, 3 };
 	m_primitive.Create(vertexBufferLayout, sizeof(SVSLayout), 4, indexBufferLayout, 4, CPrimitive::enIndex32, CPrimitive::enTypeTriangleStrip);
-	m_lightCB.Create(sizeof(CLight), &Light());
+
 	D3D11_SAMPLER_DESC desc;
 	ZeroMemory(&desc, sizeof(D3D11_SAMPLER_DESC));
 	desc.AddressU = D3D11_TEXTURE_ADDRESS_CLAMP;
@@ -129,9 +129,22 @@ void CDeferred::Draw()
 			m_gameCameraCB.Update(&gameCameraMat);
 			GetDeviceContext()->PSSetConstantBuffers(1, 1, m_gameCameraCB.GetBody().GetAddressOf());
 		}
+
+		SDefferedCB defferedCB;
+		defferedCB.frameBufferWidth = FrameBufferWidth();
+		defferedCB.frameBufferHeight = FrameBufferHeight();
+		if (m_camera != nullptr)
+		{
+			CVector3 cameraPosition = m_camera->GetPosition();
+			defferedCB.gameCameraPos.x = cameraPosition.x;
+			defferedCB.gameCameraPos.y = cameraPosition.y;
+			defferedCB.gameCameraPos.z = cameraPosition.z;
+			defferedCB.gameCameraPos.w = 1.0f;
+		}
+		m_defferedCB.Update(&defferedCB);
 		GetDeviceContext()->PSSetConstantBuffers(0, 1, m_lightCB.GetBody().GetAddressOf());
 		GetDeviceContext()->PSSetConstantBuffers(3, 1, m_materialCB.GetBody().GetAddressOf());
-		GetDeviceContext()->PSSetConstantBuffers(4, 1, m_frameSizeCB.GetBody().GetAddressOf());
+		GetDeviceContext()->PSSetConstantBuffers(4, 1, m_defferedCB.GetBody().GetAddressOf());
 		GetDeviceContext()->PSSetShaderResources(0, enRenderTargetNum + 1, srviews);
 
 		ID3D11SamplerState* samplers[] = { m_pAnisotropicSampler };

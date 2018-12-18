@@ -68,12 +68,9 @@ void CPlayer::Init(CVector3 position)
 
 	m_position = position;
 	m_skinmodel.Update(m_position, CQuaternion::Identity, CVector3::One);
+
 	m_characterController.Init(0.3f, 1.0f, m_position);
 	m_characterController.SetGravity(-30.0f);
-	//ライトの設定
-	Light().SetAmbientLight({ 0.5f,0.5f,0.5f,1.0f });
-	Light().SetDiffuseLight(0, { 1.0f,1.0f,1.0f,1.0f });
-	Light().SetDiffuseLightDir(0, { 0.0f, -1.0f, 1.0f, 1.0f });
 
 	//アニメーションの初期化
 	{

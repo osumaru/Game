@@ -14,7 +14,6 @@ public:
 	{
 		CMatrix worldMat;				//ワールド行列
 		CMatrix viewProjMat;			//ビュープロジェクション行列
-		int		isNormalMap;			//ノーマルマップがあるかのフラグ
 	};
 
 	//コンストラクタ
@@ -100,6 +99,13 @@ public:
 		m_isShadowCaster = isShadowCaster;
 	}
 
+	//ディフューズライトを当てるかの設定
+	void SetIsDiffuse(bool isDiffuse)
+	{
+		m_materialFlg.isDiffuse = g_materialFlg.isDiffuse * isDiffuse;
+	}
+	
+
 private:
 	std::unique_ptr<CSkelton>		m_skelton = nullptr;				//スケルトン
 	CConstantBuffer					constantBuffer;						//定数バッファ
@@ -111,8 +117,6 @@ private:
 	CMatrix							m_worldMatrix = CMatrix::Identity;	//ワールド行列
 	CTexture*						m_pNormalTexture = nullptr;
 	SMaterialFlg					m_materialFlg;
-	int								m_isNormalMap = 0;
 	bool							m_isShadowCaster = false;
-	int								m_isShadowReceiver = 0;
 
 };
