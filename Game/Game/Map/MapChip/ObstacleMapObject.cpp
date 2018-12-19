@@ -25,7 +25,6 @@ void CObstacleMapObject::Init(const CVector3& position, const CQuaternion& rotat
 	rInfo.pos = m_position;
 	rInfo.rot = m_rotation;
 	CQuaternion multi = CQuaternion::Identity;
-	//multi.SetRotationDeg(CVector3::AxisX, -90.0f);
 	rInfo.rot.Multiply(multi);
 	m_skinModel.Update(m_position, m_rotation, m_scale);
 
@@ -34,11 +33,12 @@ void CObstacleMapObject::Init(const CVector3& position, const CQuaternion& rotat
 	CMeshCollider mesh;
 	mesh.CreateCollider(&m_skinModel);
 	CVector3 boxsize = (mesh.GetAabbMax() - mesh.GetAabbMin()) / 2.0f;
-	boxsize.y += 1.0f;
+	boxsize.y += 2.0f;
 	CVector3 pos = (mesh.GetAabbMax() + mesh.GetAabbMin()) / 2.0f;
-	pos.y -= 1.0f;
-	pos.Mul(rotMat);
-	rInfo.pos = pos + m_position;
+	rInfo.pos = m_position;
+	rInfo.pos.x += pos.x;
+	rInfo.pos.z += pos.y; 
+	rInfo.pos.y += pos.z;
 	m_boxCollider.Create({ boxsize.x,boxsize.y,boxsize.z });
 	rInfo.collider = &m_boxCollider;
 
@@ -63,5 +63,5 @@ void CObstacleMapObject::Update()
 void CObstacleMapObject::Draw()
 {
 	MapChip::Draw();
-	//m_rigidBody.Draw();
+	m_rigidBody.Draw();
 }

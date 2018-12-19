@@ -27,6 +27,7 @@ CSoundSource::~CSoundSource()
 
 void CSoundSource::Init(char* filePath, bool is3DSound)
 {
+	return;
 	//WAVEファイルを読み込み
 	m_waveFile.Open(filePath);
 	//ソースボイスを作成
@@ -53,11 +54,13 @@ void CSoundSource::Init(char* filePath, bool is3DSound)
 
 void CSoundSource::Stop()
 {
+	return;
 	m_sourceVoice->Stop();
 }
 
 void CSoundSource::Update()
 {
+	return;
 	//再生してなければ更新不要
 	if (!m_isPlaying)
 	{
@@ -81,6 +84,7 @@ void CSoundSource::Update()
 
 void CSoundSource::Play(bool isLoop, bool isBegin)
 {
+	return;
 	m_isLoop = isLoop;
 	if (m_isPlaying && !isBegin)
 	{
