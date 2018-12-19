@@ -376,6 +376,9 @@
     <ClCompile Include="Enemy\Warrok\Warrok.cpp">
       <Filter>ソース ファイル\Enemy\Warrok</Filter>
     </ClCompile>
+    <ClCompile Include="Player\PlayerSate\PlayerSky.cpp">
+      <Filter>ソース ファイル\Player\PlayerState</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -659,6 +662,9 @@
     </ClInclude>
     <ClInclude Include="Enemy\Warrok\Warrok.h">
       <Filter>ソース ファイル\Enemy\Warrok</Filter>
+    </ClInclude>
+    <ClInclude Include="Player\PlayerSate\PlayerSky.h">
+      <Filter>ソース ファイル\Player\PlayerState</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

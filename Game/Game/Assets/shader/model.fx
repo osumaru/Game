@@ -2,7 +2,6 @@ cbuffer cb : register(b0)
 {
 	float4x4 mvp;	//ワールドビュープロジェクション行列
 	float4x4 viewProj;
-	int isNormalMap;
 };
 
 cbuffer lightCB : register(b1)
@@ -20,6 +19,8 @@ cbuffer shadowCB : register(b2)
 cbuffer materialCB : register(b3)
 {
 	int isShadowReceiver;
+	int isNormalMap;
+	int isDiffuse;
 };
 
 StructuredBuffer<float4x4> boneMatrix : register(t100);
@@ -132,13 +133,16 @@ VS_OUTPUT VSSkinMain(VS_SKIN_INPUT In)
 PS_OUTPUT PSMain(VS_OUTPUT In)
 {
 	PS_OUTPUT Out;
-	Out.color = float4(colorTexture.Sample(Sampler, In.uv).xyz, 1.0f);
+	Out.color = float4(colorTexture.Sample(Sampler, In.uv).xyz, ambientLight.w);
 	Out.normal = float4(In.normal, 1.0f);
 	Out.tangent = float4(In.tangent, 1.0f);
-	float3 normalColor = normalTexture.Sample(Sampler, In.uv) * isNormalMap + float3(0.0f, 0.0f, 1.0f) * (1 - isNormalMap);
+	float3 normalColor = normalTexture.Sample(Sampler, In.uv);// * isNormalMap + float3(0.0f, 0.0f, 1.0f) * (1 - isNormalMap);
 	Out.normalMap = float4(normalColor, 1.0f);
 	Out.depth = In.worldPos;//In.worldPos.z / In.worldPos.w;
-	Out.material.xyzw = isShadowReceiver;
+	Out.material.xyzw = 0;
+	Out.material.x |= isShadowReceiver;
+	Out.material.x |= isNormalMap;
+	Out.material.x |= isDiffuse;
 	return Out;
 }
 

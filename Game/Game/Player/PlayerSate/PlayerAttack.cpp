@@ -6,7 +6,7 @@
 #include "../../Enemy/IEnemy.h"
 #include "../../Scene/SceneManager.h"
 #include "../../Enemy/Maw.h"
-
+#include "../../Camera/GameCamera.h"
 
 CPlayerAttack::CPlayerAttack()
 {
@@ -15,9 +15,9 @@ CPlayerAttack::CPlayerAttack()
 
 void CPlayerAttack::Init()
 {
-	m_attackAnimation = &GetPlayer().GetWeaponManager().GetWeapon()->GetAttackAnimation();
-	m_combineAnimation = &GetPlayer().GetWeaponManager().GetWeapon()->GetCombineAnimation();
-	m_stanAttack = &GetPlayer().GetWeaponManager().GetWeapon()->GetStanAttack();
+	m_attackAnimation = GetPlayer().GetWeaponManager().GetWeapon()->GetAttackAnimation();
+	m_combineAnimation = GetPlayer().GetWeaponManager().GetWeapon()->GetCombineAnimation();
+	m_stanAttack = GetPlayer().GetWeaponManager().GetWeapon()->GetStanAttack();
 	m_maxAttackNum = GetPlayer().GetWeaponManager().GetWeapon()->GetMaxAttackNum();
 
 	m_pPlayerGetter->SetMoveSpeed(CVector3::Zero);
@@ -36,6 +36,7 @@ void CPlayerAttack::Init()
 
 void CPlayerAttack::Update()
 {
+
 	//攻撃中に攻撃の入力がされた場合は連撃に移行する
 	if (Pad().IsTriggerButton(enButtonX) && !m_isContinuationAttack && m_attackCount < m_maxAttackNum/*MAX_ATTACK_NUM*/ - 1)
 	{
@@ -59,6 +60,7 @@ void CPlayerAttack::Update()
 		for (const auto& enemys : GetSceneManager().GetGameScene().GetMap()->GetEnemyList())
 		{
 			enemys->SetIsDamagePossible(true);
+			enemys->SetAttackWeapon(EnAttackWeapon::enAttackWeaponNone);
 		}
 		//攻撃モーション中はダメージモーションをさせない
 		if (m_isContinuationAttack)
@@ -66,6 +68,22 @@ void CPlayerAttack::Update()
 			m_isContinuationAttack = false;
 			m_pPlayerGetter->GetAnimation().Play(m_attackAnimation[m_attackCount], 0.2f);
 			m_pPlayer->GetWeaponManager().WeaponTraceDrawReset();
+
+			const CCamera& gameCamera = GetGameCamera().GetCamera();
+			CVector3 frontVec = gameCamera.GetTarget() - gameCamera.GetPosition();
+			frontVec.y = 0.0f;
+			frontVec.Normalize();
+			CVector3 rightVec;
+			rightVec.Cross(CVector3::AxisY, frontVec);
+			rightVec.Normalize();
+			CVector3 moveSpeed = m_pPlayerGetter->GetMoveSpeed();
+			moveSpeed.x = 0.0f;
+			moveSpeed.z = 0.0f;
+			const float speed = 8.0f;
+			moveSpeed += frontVec * Pad().GetLeftStickY() * speed;
+			moveSpeed += rightVec * Pad().GetLeftStickX() * speed;
+			m_pPlayerGetter->SetMoveSpeed(moveSpeed);
+			m_pPlayerGetter->GetCharacterController().Execute(GameTime().GetDeltaFrameTime());
 		}
 		else
 		{

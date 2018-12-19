@@ -29,6 +29,7 @@ void CPlayerAvoidance::Update()
 		m_pPlayerGetter->GetAnimation().Play(enPlayerAnimationAvoidanceCombine);
 		GetPlayer().GetStateMachine().SetState(CPlayerState::enPlayerStateStand);
 	}
+
 }
 
 void CPlayerAvoidance::Move()

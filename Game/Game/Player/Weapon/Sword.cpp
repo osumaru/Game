@@ -22,14 +22,17 @@ void CSword::Init()
 	m_skinModel.Load(L"Assets/modelData/Sword.cmo", NULL);
 
 	m_maxAttackNum = 3;
-	m_attackAnimation = new EnPlayerAnimation[m_maxAttackNum];
-	m_combineAnimation = new EnPlayerAnimation[m_maxAttackNum];
+	m_weaponNum = 1;
+	m_attackWeapon = std::make_unique<EnAttackWeapon[]>(1);
+	m_attackAnimation = std::make_unique<EnPlayerAnimation[]>(m_maxAttackNum);
+	m_combineAnimation = std::make_unique<EnPlayerAnimation[]>(m_maxAttackNum);
 	for (int i = 0; i < m_maxAttackNum; i++)
 	{
 		m_attackAnimation[i] = (EnPlayerAnimation)(enPlayerAnimationAttack1 + i);
 		m_combineAnimation[i] = (EnPlayerAnimation)(enPlayerAnimationAttackCombine1 + i);
 	}
-	m_stanAttack = new bool[m_maxAttackNum];
+	m_attackWeapon[0] = EnAttackWeapon::enAttackWeaponSword;
+	m_stanAttack = std::make_unique<bool[]>(m_maxAttackNum);
 	m_stanAttack[0] = false;
 	m_stanAttack[1] = false;
 	m_stanAttack[2] = false;

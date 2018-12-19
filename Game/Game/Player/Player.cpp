@@ -68,12 +68,9 @@ void CPlayer::Init(CVector3 position)
 
 	m_position = position;
 	m_skinmodel.Update(m_position, CQuaternion::Identity, CVector3::One);
+
 	m_characterController.Init(0.3f, 1.0f, m_position);
 	m_characterController.SetGravity(-30.0f);
-	//ライトの設定
-	Light().SetAmbientLight({ 0.5f,0.5f,0.5f,1.0f });
-	Light().SetDiffuseLight(0, { 1.0f,1.0f,1.0f,1.0f });
-	Light().SetDiffuseLightDir(0, { 0.0f, -1.0f, 1.0f, 1.0f });
 
 	//アニメーションの初期化
 	{
@@ -88,7 +85,7 @@ void CPlayer::Init(CVector3 position)
 									{ L"Assets/modelData/PlayerCombo6.tka" },				//連撃アニメーション
 									{ L"Assets/modelData/PlayerCombo4Combine.tka" },		//連撃アニメーション
 									{ L"Assets/modelData/PlayerCombo5Combine.tka" },		//連撃アニメーション
-									{ L"Assets/modelData/PlayerCombo6Combine.tka" },				//連撃アニメーション
+									{ L"Assets/modelData/PlayerCombo6Combine.tka" },		//連撃アニメーション
 									{ L"Assets/modelData/PlayerLeageAttackFirst.tka" },		//攻撃アニメーション
 									{ L"Assets/modelData/PlayerLeageAttackSecand.tka" },	//連撃アニメーション
 									{ L"Assets/modelData/PlayerLeageAttackThird.tka" },		//連撃アニメーション
@@ -397,6 +394,7 @@ bool CPlayer::GetIsStateCondition(CPlayerState::EnPlayerState state)
 
 	case CPlayerState::enPlayerStateStand://移動量が0か
 		return m_characterController.GetMoveSpeed().Length() == 0.0f;
-
+	case CPlayerState::enPlayerStateSky:
+		return !m_characterController.IsOnGround(); //地面に着地しているかどうか
 	}
 }
