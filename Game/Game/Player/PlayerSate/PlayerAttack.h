@@ -17,6 +17,8 @@ public:
 
 	void Move();
 
+	void Rotation();
+
 private:
 	int							m_maxAttackNum = 0;					//Å‘å˜A‘±UŒ‚‰ñ”
 	int							m_attackCount = 0;					//˜A‘±UŒ‚‚µ‚Ä‚é‰ñ”
