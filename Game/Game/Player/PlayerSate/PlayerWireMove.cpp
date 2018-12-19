@@ -80,7 +80,7 @@ void CPlayerWireMove::Update()
 		range = 2.0f;
 		break;
 	case CWireAction::enStateMap:
-		range = 3.0f;
+		range = 1.0f;
 		break;
 	}
 	if (length > range) {
