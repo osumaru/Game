@@ -51,7 +51,6 @@ public:
 	//ƒ{ƒŠƒ…[ƒ€‚ğİ’è
 	void SetVolume(float volume)
 	{
-		return;
 		m_sourceVoice->SetVolume(volume, XAUDIO2_COMMIT_NOW);
 	}
 	//Ä¶’†‚©‚ğæ“¾
