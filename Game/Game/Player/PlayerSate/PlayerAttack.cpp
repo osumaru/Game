@@ -69,21 +69,7 @@ void CPlayerAttack::Update()
 			m_pPlayerGetter->GetAnimation().Play(m_attackAnimation[m_attackCount], 0.2f);
 			m_pPlayer->GetWeaponManager().WeaponTraceDrawReset();
 
-			const CCamera& gameCamera = GetGameCamera().GetCamera();
-			CVector3 frontVec = gameCamera.GetTarget() - gameCamera.GetPosition();
-			frontVec.y = 0.0f;
-			frontVec.Normalize();
-			CVector3 rightVec;
-			rightVec.Cross(CVector3::AxisY, frontVec);
-			rightVec.Normalize();
-			CVector3 moveSpeed = m_pPlayerGetter->GetMoveSpeed();
-			moveSpeed.x = 0.0f;
-			moveSpeed.z = 0.0f;
-			const float speed = 8.0f;
-			moveSpeed += frontVec * Pad().GetLeftStickY() * speed;
-			moveSpeed += rightVec * Pad().GetLeftStickX() * speed;
-			m_pPlayerGetter->SetMoveSpeed(moveSpeed);
-			m_pPlayerGetter->GetCharacterController().Execute(GameTime().GetDeltaFrameTime());
+			Rotation();
 		}
 		else
 		{
@@ -152,5 +138,76 @@ void CPlayerAttack::Move()
 	characon.SetMoveSpeed(CVector3::Zero);
 	characon.SetGravity(gravity);
 	m_preBonePos = bonePos;
+}
+
+void CPlayerAttack::Rotation()
+{
+	const CCamera& gameCamera = GetGameCamera().GetCamera();
+	CMatrix spineMat = m_pPlayer->GetSkinmodel().FindBoneWorldMatrix(L"Hips");
+	CVector3 spineVec;
+	spineVec.x = spineMat.m[3][0];
+	spineVec.y = spineMat.m[3][1];
+	spineVec.z = spineMat.m[3][2];
+	CVector3 frontVec = gameCamera.GetTarget() - gameCamera.GetPosition();
+	frontVec.y = 0.0f;
+	frontVec.Normalize();
+	CVector3 rightVec;
+	rightVec.Cross(CVector3::AxisY, frontVec);
+	rightVec.Normalize();
+	CVector3 moveSpeed = m_pPlayerGetter->GetMoveSpeed();
+	moveSpeed.x = 0.0f;
+	moveSpeed.z = 0.0f;
+	const float speed = 4.0f;
+	moveSpeed += frontVec * Pad().GetLeftStickY()*speed;
+	moveSpeed += rightVec * Pad().GetLeftStickX()*speed;
+	////moveSpeed.Normalize();
+	m_pPlayerGetter->SetMoveSpeed(moveSpeed);
+	//
+	////CVector3 moveSpeed = moveSpeed;//m_pPlayerGetter->GetMoveSpeed();
+	//CVector3 playerFront = frontVec;
+	//if (moveSpeed.x == 0.0f && moveSpeed.z == 0.0f)
+	//{
+	//	moveSpeed.x = m_pPlayer->GetSkinmodel().GetWorldMatrix().m[2][0];
+	//	moveSpeed.z = m_pPlayer->GetSkinmodel().GetWorldMatrix().m[2][2];
+	//}
+	//moveSpeed.y = 0.0f;
+	//moveSpeed.Normalize();
+	//float rad = moveSpeed.Dot(playerFront);
+	//if (1.0f <= rad)
+	//{
+	//	rad = 1.0f;
+	//}
+	//if (rad <= -1.0f)
+	//{
+	//	rad = -1.0f;
+	//}
+	//rad = acosf(rad);
+	//CVector3 judgeAxis;
+	//judgeAxis.Cross(moveSpeed, playerFront);
+	//if (0.0f < judgeAxis.y)
+	//{
+	//	rad = -rad;
+	//}
+
+	////m_pPlayerGetter->SetRotation(CVector3::AxisY, rad);
+	//CQuaternion rot;
+	//rot.SetRotation(CVector3::AxisY,rad);
+	////m_pPlayerGetter->SetRotation(rot);
+	//CMatrix rotMat;
+	//rotMat.MakeRotationFromQuaternion(rot);
+	////CMatrix spineMat=m_pPlayer->GetSkinmodel().FindBoneWorldMatrix(L"Hips");
+	////CVector3 spineVec;
+	//spineVec.x=spineMat.m[3][0];
+	//spineVec.y=spineMat.m[3][1];
+	//spineVec.z=spineMat.m[3][2];
+	//CVector3 animPos= spineVec- m_pPlayer->GetPosition();
+	//rotMat.Mul(animPos);
+	//animPos.Add(spineVec);
+
+	//m_pPlayerGetter->SetPosition(animPos);
+
+
+	m_pPlayerGetter->GetCharacterController().Execute(GameTime().GetDeltaFrameTime());
+
 }
 
