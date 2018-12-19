@@ -22,7 +22,7 @@ void CItemShop::Init(const CVector3 position, const CQuaternion rotation)
 	
 	m_position = position;
 	m_rotation = rotation;
-	m_skinModel.Load(L"Assets/modelData/U2.cmo", NULL);
+	m_skinModel.Load(L"Assets/modelData/Shopgirl.cmo", NULL);
 
 	//テクスチャ及びスプライト関係の初期化
 	{

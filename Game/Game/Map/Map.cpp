@@ -19,7 +19,7 @@
 std::vector<std::vector<SMapChipInfo>> mapChipInfo = 
 {
 	{
-	#include "alpha.h"
+	#include "alpha2.h"
 	//#include "Boss.h"
 	//#include "Test.h"
 	//#include "ShopTest.h"

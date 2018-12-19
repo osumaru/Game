@@ -49,15 +49,15 @@ public class tkTools : EditorWindow
                 outputTxt += string.Format("\tenMapTag{0}, //タグ\n", tr.gameObject.tag);
                 outputTxt += "},\n";
                 bool tagFlg = true;
-                foreach(string tag in tagList)
+                foreach (string tag in tagList)
                 {
-                    if(tag == tr.gameObject.tag)
+                    if (tag == tr.gameObject.tag)
                     {
                         tagFlg = false;
                         break;
                     }
                 }
-                if(tagFlg)
+                if (tagFlg)
                 {
                     tagList.Add(tr.gameObject.tag);
                 }
@@ -70,7 +70,7 @@ public class tkTools : EditorWindow
                 }
             }
             catch { }
-            
+
             //outputTxt = "enum EnMapTag\n{\n";
             //foreach(string tag in tagList)
             //{
@@ -112,13 +112,13 @@ public class tkTools : EditorWindow
                 //配置する。
                 //
                 locationObject = GameObject.Find("Location");
-                if(locationObject == null)
+                if (locationObject == null)
                 {
                     locationObject = new GameObject("Location");
                 }
-                
+
                 GameObject addObj = UnityEditor.PrefabUtility.InstantiatePrefab(selectLocObject) as GameObject;
-                
+
                 Vector3 scale = addObj.transform.localScale;
                 scale.x *= -1.0f;
                 addObj.transform.localScale = scale;
@@ -132,7 +132,7 @@ public class tkTools : EditorWindow
         EditorGUILayout.Separator();
         if (GUILayout.Button("選択しているオブジェクトをコピー"))
         {
-            if (Selection.activeGameObject )
+            if (Selection.activeGameObject)
             {
                 //選択中のオブジェクトがある。
                 MapChip mapChip = Selection.activeGameObject.GetComponent<MapChip>();
