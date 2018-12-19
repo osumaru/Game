@@ -81,7 +81,6 @@ void IWeapon::AfterDrawer()
 	AfterDraw();
 }
 
-
 void IWeapon::EnemyAttack()
 {
 	if (!m_pPlayer->GetWeaponManager().GetIsAttackCheck())
@@ -89,6 +88,7 @@ void IWeapon::EnemyAttack()
 		return;
 	}
 	SWeaponEnemyAttackInfo info = EnemyAttackPositionDecide();
+	
 	if (!info.isAttack)
 	{
 		return;
@@ -96,28 +96,27 @@ void IWeapon::EnemyAttack()
 
 	//エネミーグループのリストを取得
 	std::list<CEnemyGroup*> enemyGroup = GetSceneManager().GetGameScene().GetMap()->GetEnemyGroupList();
+
 	for (const auto& group : enemyGroup)
 	{
-		CVector3 enemyGroupPos = group->GetPosition();
-		CVector3 distance = enemyGroupPos - info.attackPos;
-		float length = distance.Length();
-		if (length < 50.0f)
+		for (int i = 0; i < m_weaponNum; i++)
 		{
-			for (const auto& enemy : group->GetGroupList())
+			CVector3 enemyGroupPos = group->GetPosition();
+			CVector3 distance = enemyGroupPos - info.attackPos[i];
+			float length = distance.Length();
+			if (length < 50.0f)
 			{
-				for (int i = 0; i < m_weaponNum; i++)
+				for (const auto& enemy : group->GetGroupList())
 				{
 					if (/*enemy->IsDamagePossible()&&*/enemy->GetAttackWeapon() != m_attackWeapon[i])
 					{
 						CVector3 EnemyVec = enemy->GetSpinePos();
-						EnemyVec.Subtract(info.attackPos);
+						EnemyVec.Subtract(info.attackPos[i]);
 						float len = EnemyVec.Length();
-
 						if (fabs(len) < 2.0f)
 						{
 							enemy->SetIsDamage(true);
 							enemy->SetIsDamagePossible(false);
-
 						}
 					}
 				}
@@ -131,37 +130,41 @@ void IWeapon::EnemyAttack()
 		//ボスがダメージを受けていなかったら
 		if (!GetMaw().GetIsDamage())
 		{
-			//ダウンしていなかったら
-			if (!GetMaw().GetIsDown())
+			for (int i = 0; i < m_weaponNum; i++)
 			{
-				const float BossWeekLenge = 18.0f;
-				//ボスの弱点の座標取得
-				CVector3 EnemyVec = GetMaw().GetWeekPosition();
-				EnemyVec -= info.attackPos;
-				float len = EnemyVec.Length();
-
-				if (fabs(len) < BossWeekLenge)
+				//ダウンしていなかったら
+				if (!GetMaw().GetIsDown())
 				{
-					GetMaw().SetIsDamage(true);
-					return;
+					const float BossWeekLenge = 18.0f;
+					//ボスの弱点の座標取得
+					CVector3 EnemyVec = GetMaw().GetWeekPosition();
+					EnemyVec -= info.attackPos[i];
+					float len = EnemyVec.Length();
+
+					if (fabs(len) < BossWeekLenge)
+					{
+						GetMaw().SetIsDamage(true);
+						return;
+					}
 				}
-			}
-			else
-			{
-				const float BossHeight = 10.0f;
-				const float BossLenge = 12.0f;
-				//ボスの座標取得
-				CVector3 EnemyVec = GetMaw().GetPosition();
-				EnemyVec.y += BossHeight;
-				EnemyVec -= info.attackPos;
-				float len = EnemyVec.Length();
-
-				if (fabs(len) < BossLenge)
+				else
 				{
-					GetMaw().SetIsDamage(true);
-					return;
+					const float BossHeight = 10.0f;
+					const float BossLenge = 12.0f;
+					//ボスの座標取得
+					CVector3 EnemyVec = GetMaw().GetPosition();
+					EnemyVec.y += BossHeight;
+					EnemyVec -= info.attackPos[i];
+					float len = EnemyVec.Length();
+
+					if (fabs(len) < BossLenge)
+					{
+						GetMaw().SetIsDamage(true);
+						return;
+					}
 				}
 			}
 		}
 	}
+
 }

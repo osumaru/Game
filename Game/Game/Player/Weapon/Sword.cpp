@@ -23,9 +23,6 @@ void CSword::Init()
 
 	m_maxAttackNum = 3;
 	m_weaponNum = 1;
-	/*m_attackWeapon = new EnAttackWeapon;
-	m_attackAnimation = new EnPlayerAnimation[m_maxAttackNum];
-	m_combineAnimation = new EnPlayerAnimation[m_maxAttackNum];*/
 	m_attackWeapon = std::make_unique<EnAttackWeapon[]>(1);
 	m_attackAnimation = std::make_unique<EnPlayerAnimation[]>(m_maxAttackNum);
 	m_combineAnimation = std::make_unique<EnPlayerAnimation[]>(m_maxAttackNum);

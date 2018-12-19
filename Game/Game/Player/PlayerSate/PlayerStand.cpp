@@ -65,7 +65,10 @@ void CPlayerStand::Update()
 		//GetPlayer().GetStateMachine().SetState(CPlayerState::enPlayerStateWalk);
 		GetPlayer().GetStateMachine().SetState(CPlayerState::enPlayerStateRun);
 	}
-	
+	else if (m_pPlayer->GetIsStateCondition(CPlayerState::enPlayerStateSky))
+	{
+		GetPlayer().GetStateMachine().SetState(CPlayerState::enPlayerStateSky);
+	}
 }
 void CPlayerStand::ChangeWepon()
 {

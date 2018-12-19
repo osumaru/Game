@@ -48,6 +48,7 @@ void CPlayerWireMove::Update()
 	if (m_pPlayerGetter->GetAnimation().GetCurrentAnimationNum() == enPlayerAnimationWireThrow
 		&& !m_pPlayerGetter->GetAnimation().IsPlay())
 	{
+		//ワイヤー移動するアニメーションに切り替え
 		m_isWireThrow = false;
 		m_pPlayerGetter->GetAnimation().Play(enPlayerAnimationWireMove, 0.25f);
 	}
@@ -110,8 +111,9 @@ void CPlayerWireMove::Update()
 			}
 			break;
 		case CWireAction::enStateMap:
-			if (toMovePos.y > 0.0f)
+			if (Pad().IsPressButton(enButtonRightTrigger))
 			{
+				toMovePos.y = 10.0f;
 				m_pPlayerGetter->SetMoveSpeed(toMovePos);
 				m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateJump);
 			}

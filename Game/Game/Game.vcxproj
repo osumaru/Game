@@ -188,6 +188,7 @@
     <ClCompile Include="GameSound\GameSound.cpp" />
     <ClCompile Include="Item\InventoryItem\InventoryRecoveryItem.cpp" />
     <ClCompile Include="Map\MapChip\ObstacleMapObject.cpp" />
+    <ClCompile Include="Player\PlayerSate\PlayerSky.cpp" />
     <ClCompile Include="Player\Weapon\WeaponTraceDraw.cpp" />
     <ClCompile Include="Player\PlayerSate\PlayerWireAttack.cpp" />
     <ClCompile Include="Player\WireDraw.cpp" />
@@ -287,6 +288,7 @@
     <ClInclude Include="Item\InventoryItem\IInventoryItem.h" />
     <ClInclude Include="Item\InventoryItem\InventoryRecoveryItem.h" />
     <ClInclude Include="Map\MapChip\ObstacleMapObject.h" />
+    <ClInclude Include="Player\PlayerSate\PlayerSky.h" />
     <ClInclude Include="Player\Weapon\WeaponTraceDraw.h" />
     <ClInclude Include="Player\PlayerSate\PlayerWireAttack.h" />
     <ClInclude Include="Player\WireDraw.h" />

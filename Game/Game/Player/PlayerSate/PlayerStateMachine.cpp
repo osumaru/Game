@@ -74,6 +74,8 @@ void CPlayerStateMachine::SetState(CPlayerState::EnPlayerState nextState)
 	case CPlayerState::enPlayerStateWireAttack:
 		m_currentState = &m_playerWireAttack;	//ワイヤー攻撃ステートに遷移
 		break;
+	case CPlayerState::enPlayerStateSky:		//空中にいるステートに遷移
+		m_currentState = &m_playerSky;
 	}
 
 	m_currentState->Init();

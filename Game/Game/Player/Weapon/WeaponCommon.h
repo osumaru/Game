@@ -6,7 +6,7 @@ enum EnPlayerWeapon
 	enWeaponLongSword,		//両手剣
 	enWeaponArrow,			//弓矢
 	enWeaponTwinSword,		//二刀
-	enWeaponNum,
+	enWeaponNum,			//武器の数
 	enInvalid			//何もない
 };
 
@@ -32,7 +32,7 @@ struct SWeaponStatus
 struct SWeaponEnemyAttackInfo
 {
 	bool		isAttack = false;	//攻撃モーション中攻撃の判定をするかのフラグ(遠距離の武器もあるため
-	CVector3	attackPos;			//当たり判定用の座標
+	CVector3	attackPos[2];		//当たり判定用の座標
 };
 
 struct SWeaponTraceDrawInfo

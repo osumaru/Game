@@ -41,7 +41,7 @@ public:
 	//“–‚½‚è”»’è‚ğæ‚é‚½‚ß‚Ì•Ší‚ÌÀ•W‚ğŒˆ‚ß‚é‚½‚ß‚ÌŠÖ”
 	virtual SWeaponEnemyAttackInfo EnemyAttackPositionDecide()
 	{
-		return { false, CVector3::Zero };
+		return { false, CVector3::Zero};
 	}
 
 	//•Ší‚Ì‹OÕ‚ğ•`‰æ‚·‚éÀ•W‚â•`‰æ‚·‚é‚©‚ğŒˆ‚ß‚éŠÖ”

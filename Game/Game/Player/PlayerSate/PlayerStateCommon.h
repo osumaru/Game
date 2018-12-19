@@ -40,7 +40,7 @@ enum EnPlayerAnimation
 	enPlayerAnimationArrowShoot,	//弓を放つアニメーション
 	enPlayerAnimationLongSwordAttack,//大剣の攻撃アニメーション
 	enPlayerAnimationTwinSwordAttack,//二刀流の攻撃アニメーション
-	enPlayerAnimationLanding,//着地アニメーション
+	enPlayerAnimationLanding,		//着地アニメーション
 	enPlayerAnimationNum			//アニメーションの数
 };
 
@@ -65,6 +65,7 @@ public:
 		enPlayerStateWireAttack,		//ワイヤー攻撃ステート
 		enPlayerStateArrowAttack,		//弓のステート
 		enPlayerStateArrowShoot,		//弓を放つステート
+		enPlayerStateSky,				//空中にいるステート
 		enPlayerStateNum,				//ステートの数
 	};
 };
