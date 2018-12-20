@@ -171,7 +171,7 @@ void CPlayerAttack::Rotation()
 	{
 		moveSpeed.x = m_pPlayer->GetSkinmodel().GetWorldMatrix().m[2][0];
 		moveSpeed.z = m_pPlayer->GetSkinmodel().GetWorldMatrix().m[2][2];
-		return;
+		//return;
 	}
 	moveSpeed.y = 0.0f;
 	moveSpeed.Normalize();
