@@ -202,9 +202,9 @@ void CPlayerAttack::Rotation()
 	rotMat.MakeRotationFromQuaternion(rot);
 	//CMatrix spineMat=m_pPlayer->GetSkinmodel().FindBoneWorldMatrix(L"Hips");
 	//CVector3 spineVec;
-	spineVec.x = spineMat.m[3][0];
-	spineVec.y = spineMat.m[3][1];
-	spineVec.z = spineMat.m[3][2];
+	//spineVec.x = spineMat.m[3][0];
+	//spineVec.y = spineMat.m[3][1];
+	//spineVec.z = spineMat.m[3][2];
 	CVector3 playerPos = m_pPlayer->GetPosition();
 	CVector3 animPos = playerPos- spineVec;
 	animPos.y =0.0f;

@@ -60,8 +60,8 @@ void CPlayerRun::Update()
 		//ƒƒCƒ„[ˆÚ“®‚Å‚«‚é‚È‚ç‘JˆÚ
 		m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateWireMove);
 	}
-	else if (m_pPlayer->GetIsStateCondition(CPlayerState::enPlayerStateSky))
+	/*else if (m_pPlayer->GetIsStateCondition(CPlayerState::enPlayerStateSky))
 	{
 		GetPlayer().GetStateMachine().SetState(CPlayerState::enPlayerStateSky);
-	}
+	}*/
 }
