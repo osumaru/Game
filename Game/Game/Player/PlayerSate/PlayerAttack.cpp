@@ -142,13 +142,16 @@ void CPlayerAttack::Move()
 
 void CPlayerAttack::Rotation()
 {
+	////移動をなくす
+	////腰のボーンの座標を中心にプレイヤーを回転させる
+
 	const CCamera& gameCamera = GetGameCamera().GetCamera();
 	CMatrix spineMat = m_pPlayer->GetSkinmodel().FindBoneWorldMatrix(L"Hips");
 	CVector3 spineVec;
 	spineVec.x = spineMat.m[3][0];
 	spineVec.y = spineMat.m[3][1];
 	spineVec.z = spineMat.m[3][2];
-	CVector3 frontVec = gameCamera.GetTarget() - gameCamera.GetPosition();
+	CVector3 frontVec = spineVec/*gameCamera.GetTarget()*/ - gameCamera.GetPosition();
 	frontVec.y = 0.0f;
 	frontVec.Normalize();
 	CVector3 rightVec;
@@ -157,57 +160,67 @@ void CPlayerAttack::Rotation()
 	CVector3 moveSpeed = m_pPlayerGetter->GetMoveSpeed();
 	moveSpeed.x = 0.0f;
 	moveSpeed.z = 0.0f;
-	const float speed = 4.0f;
+	const float speed = 1.0f;
 	moveSpeed += frontVec * Pad().GetLeftStickY()*speed;
 	moveSpeed += rightVec * Pad().GetLeftStickX()*speed;
-	////moveSpeed.Normalize();
-	m_pPlayerGetter->SetMoveSpeed(moveSpeed);
-	//
-	////CVector3 moveSpeed = moveSpeed;//m_pPlayerGetter->GetMoveSpeed();
-	//CVector3 playerFront = frontVec;
-	//if (moveSpeed.x == 0.0f && moveSpeed.z == 0.0f)
-	//{
-	//	moveSpeed.x = m_pPlayer->GetSkinmodel().GetWorldMatrix().m[2][0];
-	//	moveSpeed.z = m_pPlayer->GetSkinmodel().GetWorldMatrix().m[2][2];
-	//}
-	//moveSpeed.y = 0.0f;
-	//moveSpeed.Normalize();
-	//float rad = moveSpeed.Dot(playerFront);
-	//if (1.0f <= rad)
-	//{
-	//	rad = 1.0f;
-	//}
-	//if (rad <= -1.0f)
-	//{
-	//	rad = -1.0f;
-	//}
-	//rad = acosf(rad);
-	//CVector3 judgeAxis;
-	//judgeAxis.Cross(moveSpeed, playerFront);
-	//if (0.0f < judgeAxis.y)
-	//{
-	//	rad = -rad;
-	//}
 
-	////m_pPlayerGetter->SetRotation(CVector3::AxisY, rad);
-	//CQuaternion rot;
-	//rot.SetRotation(CVector3::AxisY,rad);
-	////m_pPlayerGetter->SetRotation(rot);
-	//CMatrix rotMat;
-	//rotMat.MakeRotationFromQuaternion(rot);
-	////CMatrix spineMat=m_pPlayer->GetSkinmodel().FindBoneWorldMatrix(L"Hips");
-	////CVector3 spineVec;
-	//spineVec.x=spineMat.m[3][0];
-	//spineVec.y=spineMat.m[3][1];
-	//spineVec.z=spineMat.m[3][2];
-	//CVector3 animPos= spineVec- m_pPlayer->GetPosition();
-	//rotMat.Mul(animPos);
-	//animPos.Add(spineVec);
+	//CVector3 moveSpeed = moveSpeed;//m_pPlayerGetter->GetMoveSpeed();
+	//m_pPlayerGetter->SetMoveSpeed(CVector3::Zero);
 
-	//m_pPlayerGetter->SetPosition(animPos);
+	//moveSpeed = m_pPlayerGetter->GetMoveSpeed();
+	CVector3 playerFront =CVector3::Front;
+	if (moveSpeed.x == 0.0f && moveSpeed.z == 0.0f)
+	{
+		moveSpeed.x = m_pPlayer->GetSkinmodel().GetWorldMatrix().m[2][0];
+		moveSpeed.z = m_pPlayer->GetSkinmodel().GetWorldMatrix().m[2][2];
+		return;
+	}
+	moveSpeed.y = 0.0f;
+	moveSpeed.Normalize();
+	float rad = moveSpeed.Dot(playerFront);
+	if (1.0f <= rad)
+	{
+		rad = 1.0f;
+	}
+	if (rad <= -1.0f)
+	{
+		rad = -1.0f;
+	}
+	rad = acosf(rad);
+	CVector3 judgeAxis;
+	judgeAxis.Cross(moveSpeed, playerFront);
+	if (0.0f < judgeAxis.y)
+	{
+		rad = -rad;
+	}
 
+	//m_pPlayerGetter->SetRotation(CVector3::AxisY, rad);
+	CQuaternion rot=CQuaternion::Identity;
+	rot.SetRotation(CVector3::AxisY, rad);
+	
+	CMatrix rotMat=CMatrix::Identity;
+	rotMat.MakeRotationFromQuaternion(rot);
+	//CMatrix spineMat=m_pPlayer->GetSkinmodel().FindBoneWorldMatrix(L"Hips");
+	//CVector3 spineVec;
+	spineVec.x = spineMat.m[3][0];
+	spineVec.y = spineMat.m[3][1];
+	spineVec.z = spineMat.m[3][2];
+	CVector3 playerPos = m_pPlayer->GetPosition();
+	CVector3 animPos = playerPos- spineVec;
+	animPos.y =0.0f;
+	rotMat.Mul(animPos);
+	animPos.Add(spineVec);
+	animPos.y = playerPos.y;
+	m_pPlayerGetter->SetRotation(rot);
+	m_pPlayerGetter->SetPosition(animPos);
+	
+	//m_pPlayer->GetSkinmodel().Update(animPos, rot, { 1.0f,1.0f,1.0f }, true);
+	//m_pPlayerGetter->SetMoveSpeed(CVector3::Zero);
+	//CVector3 prePos = m_pPlayer->GetPosition();
 
-	m_pPlayerGetter->GetCharacterController().Execute(GameTime().GetDeltaFrameTime());
+	//m_pPlayerGetter->GetCharacterController().Execute(GameTime().GetDeltaFrameTime());
+	//m_pPlayerGetter->SetPosition(prePos);
+	//m_pPlayerGetter->GetCharacterController().Execute(1.0f);
 
 }
 
