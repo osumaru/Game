@@ -19,8 +19,6 @@ void CPlayerWireMove::Init()
 	m_playerHandPos.y = m_playerHandMatrix->m[3][1];
 	m_playerHandPos.z = m_playerHandMatrix->m[3][2];
 	m_pPlayerGetter->GetWireDraw().SetStartPosition(m_playerHandPos);
-	m_gravityBackup = m_pPlayerGetter->GetCharacterController().GetGravity();
-	m_pPlayerGetter->GetCharacterController().SetGravity(0.0f);
 	//ワイヤーの終点を決める
 	CVector3 wireDir = m_movePosition - m_playerHandPos;
 	wireDir.Normalize();
@@ -95,16 +93,20 @@ void CPlayerWireMove::Update()
 
 	}
 	else {
+
+		float gravityBackup = m_pPlayerGetter->GetCharacterController().GetGravity();
+		m_pPlayerGetter->GetCharacterController().SetGravity(0.0f);
 		//目標との距離が離れていれば移動先に進む
 		m_pPlayerGetter->SetMoveSpeed(toMovePos);
 		m_pPlayerGetter->GetCharacterController().Execute(GameTime().GetDeltaFrameTime());
+		m_pPlayerGetter->GetCharacterController().SetGravity(gravityBackup);
+
 
 	}
 
 	if (isMoveEnd) {
 		//移動が終わった
 		GetPlayer().GetWireAction().SetIsWireMove(false);
-		m_pPlayerGetter->GetCharacterController().SetGravity(m_gravityBackup);
 		std::list<IEnemy*> enemyList = GetSceneGame().GetMap()->GetEnemyList();
 		switch(m_pPlayer->GetWireAction().GetState())
 		{
