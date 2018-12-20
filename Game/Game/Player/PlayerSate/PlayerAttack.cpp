@@ -142,16 +142,11 @@ void CPlayerAttack::Move()
 
 void CPlayerAttack::Rotation()
 {
-	////移動をなくす
-	////腰のボーンの座標を中心にプレイヤーを回転させる
+	//腰のボーンの座標を中心にプレイヤーを回転させる
 
+	//カメラからの移動方向
 	const CCamera& gameCamera = GetGameCamera().GetCamera();
-	CMatrix spineMat = m_pPlayer->GetSkinmodel().FindBoneWorldMatrix(L"Hips");
-	CVector3 spineVec;
-	spineVec.x = spineMat.m[3][0];
-	spineVec.y = spineMat.m[3][1];
-	spineVec.z = spineMat.m[3][2];
-	CVector3 frontVec = spineVec/*gameCamera.GetTarget()*/ - gameCamera.GetPosition();
+	CVector3 frontVec = gameCamera.GetTarget() - gameCamera.GetPosition();
 	frontVec.y = 0.0f;
 	frontVec.Normalize();
 	CVector3 rightVec;
@@ -164,10 +159,9 @@ void CPlayerAttack::Rotation()
 	moveSpeed += frontVec * Pad().GetLeftStickY()*speed;
 	moveSpeed += rightVec * Pad().GetLeftStickX()*speed;
 
-	CVector3 playerFront =frontVec;
-
 	CMatrix pMat = m_pPlayer->GetSkinmodel().GetWorldMatrix();
-
+	//プレイヤーの前方向
+	CVector3 playerFront;
 	playerFront.x = pMat.m[2][0];
 	playerFront.y = 0.0f;
 	playerFront.z = pMat.m[2][2];
@@ -177,7 +171,7 @@ void CPlayerAttack::Rotation()
 	{
 		moveSpeed.x = m_pPlayer->GetSkinmodel().GetWorldMatrix().m[2][0];
 		moveSpeed.z = m_pPlayer->GetSkinmodel().GetWorldMatrix().m[2][2];
-		return;
+		//return;
 	}
 	moveSpeed.y = 0.0f;
 	moveSpeed.Normalize();
@@ -204,15 +198,20 @@ void CPlayerAttack::Rotation()
 	CMatrix rotMat=CMatrix::Identity;
 	rotMat.MakeRotationFromQuaternion(rot);
 	CVector3 playerPos = m_pPlayer->GetPosition();
+	CMatrix spineMat = m_pPlayer->GetSkinmodel().FindBoneWorldMatrix(L"Hips");
+	CVector3 spineVec;
+	spineVec.x = spineMat.m[3][0];
+	spineVec.y = spineMat.m[3][1];
+	spineVec.z = spineMat.m[3][2];
 	CVector3 animPos = playerPos- spineVec;
 	animPos.y =0.0f;
 	rotMat.Mul(animPos);
 	animPos.Add(spineVec);
 	animPos.y = playerPos.y;
-	CQuaternion rr = m_pPlayerGetter->GetRotation();
-	rr.Multiply(rot);
-	m_pPlayerGetter->SetRotation(rr);
-
+	CQuaternion pRot = m_pPlayerGetter->GetRotation();
+	//腰を中心にしたクオータニオンとプレイヤーのやつの積
+	pRot.Multiply(rot);
+	m_pPlayerGetter->SetRotation(pRot);
 
 	m_pPlayerGetter->SetPosition(animPos);
 
