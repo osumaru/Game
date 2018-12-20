@@ -13,6 +13,12 @@ CWarrok::~CWarrok()
 {
 }
 
+void CWarrok::OnInvokeAnimationEvent(//アニメーションイベントが呼ばれるごとに呼び出される？
+	const wchar_t* animClipName,
+	const wchar_t* eventName)
+{
+}
+
 void CWarrok::Init(CVector3 position)
 {
 	//モデルを読み込む
@@ -51,6 +57,11 @@ void CWarrok::Init(CVector3 position)
 	m_spineMatrix = &GetBoneWorldMatrix(L"Spine");
 	m_attackLength = 10.0f;
 	m_attackType = enAttackType_Far;
+
+	m_animation.AddAnimationEvent([&](auto animClipname, auto eventName)
+	{
+		OnInvokeAnimationEvent(animClipname, eventName);
+	});
 }
 
 bool CWarrok::Start()

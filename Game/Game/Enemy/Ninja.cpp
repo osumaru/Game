@@ -12,6 +12,10 @@ CNinja::~CNinja()
 {
 }
 
+void CNinja::OnInvokeAnimationEvent(const wchar_t* animClipName, const wchar_t* eventName)
+{
+}
+
 void CNinja::Init(CVector3 position)
 {
 	//ÉÇÉfÉãÇì«Ç›çûÇﬁ
@@ -49,6 +53,11 @@ void CNinja::Init(CVector3 position)
 
 	m_spineMatrix = &GetBoneWorldMatrix(L"Spine");
 	m_attackLength = 1.2f;
+
+	m_animation.AddAnimationEvent([&](auto animClipname, auto eventName)
+	{
+		OnInvokeAnimationEvent(animClipname, eventName);
+	});
 }
 
 bool CNinja::Start()

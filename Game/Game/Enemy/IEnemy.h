@@ -40,6 +40,9 @@ public:
 	//描画
 	virtual void Draw() {};
 
+	//アニメーションイベント用の関数
+	virtual void OnInvokeAnimationEvent(const wchar_t* animClipName, const wchar_t* eventName){};
+
 	void AddObject()
 	{
 		Add(&m_enemyStateMachine, 0);
