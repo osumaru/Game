@@ -19,6 +19,8 @@ void CPlayerWireMove::Init()
 	m_playerHandPos.y = m_playerHandMatrix->m[3][1];
 	m_playerHandPos.z = m_playerHandMatrix->m[3][2];
 	m_pPlayerGetter->GetWireDraw().SetStartPosition(m_playerHandPos);
+	m_gravityBackup = m_pPlayerGetter->GetCharacterController().GetGravity();
+	m_pPlayerGetter->GetCharacterController().SetGravity(0.0f);
 	//ワイヤーの終点を決める
 	CVector3 wireDir = m_movePosition - m_playerHandPos;
 	wireDir.Normalize();
@@ -26,6 +28,7 @@ void CPlayerWireMove::Init()
 	m_wireSpeed += m_wireSpeed;
 	CVector3 wireEndPos = m_playerHandPos + wireDir;
 	m_pPlayerGetter->GetWireDraw().SetEndPosition(wireEndPos);
+	m_previousMoveSpeed = m_movePosition - m_pPlayer->GetPosition();
 }
 
 void CPlayerWireMove::Update()
@@ -62,7 +65,7 @@ void CPlayerWireMove::Update()
 	bool isMoveEnd = false;
 	CVector3 playerPos = GetPlayer().GetPosition();
 	CVector3 toMovePos = m_movePosition - playerPos;
-
+	float angle = toMovePos.Dot(m_previousMoveSpeed);
 	float length = toMovePos.Length();
 	toMovePos.Normalize();
 	m_accel += 0.3f;
@@ -83,18 +86,25 @@ void CPlayerWireMove::Update()
 		range = 1.0f;
 		break;
 	}
-	if (length > range) {
+	if (length < range || angle < 0.0f) {
+		isMoveEnd = true;
+		if (angle)
+		{
+			m_pPlayerGetter->SetPosition(m_movePosition);
+		}
+
+	}
+	else {
 		//目標との距離が離れていれば移動先に進む
 		m_pPlayerGetter->SetMoveSpeed(toMovePos);
 		m_pPlayerGetter->GetCharacterController().Execute(GameTime().GetDeltaFrameTime());
-	}
-	else {
-		isMoveEnd = true;
+
 	}
 
 	if (isMoveEnd) {
 		//移動が終わった
 		GetPlayer().GetWireAction().SetIsWireMove(false);
+		m_pPlayerGetter->GetCharacterController().SetGravity(m_gravityBackup);
 		std::list<IEnemy*> enemyList = GetSceneGame().GetMap()->GetEnemyList();
 		switch(m_pPlayer->GetWireAction().GetState())
 		{
@@ -113,8 +123,9 @@ void CPlayerWireMove::Update()
 		case CWireAction::enStateMap:
 			if (Pad().IsPressButton(enButtonRightTrigger))
 			{
-				toMovePos.y = 10.0f;
-				m_pPlayerGetter->SetMoveSpeed(toMovePos);
+
+				m_previousMoveSpeed.y = 10.0f;
+				m_pPlayerGetter->SetMoveSpeed(m_previousMoveSpeed);
 				m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateJump);
 			}
 			else
@@ -126,4 +137,6 @@ void CPlayerWireMove::Update()
 			break;
 		}
 	}
+
+	m_previousMoveSpeed = toMovePos;
 }

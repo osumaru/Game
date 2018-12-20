@@ -26,6 +26,7 @@ bool CEnemyWalk::Start()
 	//ˆÚ“®æ‚ÌÀ•W‚ð•Û‘¶
 	m_destination = m_enemy->GetEnemyGroup()->GetPosition() + toRandomPosition;
 
+	m_isMoveEnd = false;
 	return true;
 }
 

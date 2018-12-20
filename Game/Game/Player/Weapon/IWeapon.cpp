@@ -69,6 +69,13 @@ void IWeapon::WeaponTraceDrawer()
 	}
 }
 
+void IWeapon::WeaponTraceDrawStart()
+{
+	CWeaponTraceDraw& weaponTrace = m_pPlayer->GetWeaponManager().GetWeaponTraceDraw();
+	SWeaponTraceDrawInfo info = WeaponTraceDraw();
+	weaponTrace.Start(info.rootPos, info.pointPos);
+}
+
 void IWeapon::Drawer()
 {
 	Draw();

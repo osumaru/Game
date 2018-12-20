@@ -8,7 +8,7 @@ public:
 
 	void Add(const CVector3& swordRootPosition, const CVector3& swordPointPosition);
 
-	void Start();
+	void Start(const CVector3& swordRootPosition, const CVector3& swordPointPosition);
 
 	void Draw();
 
@@ -21,12 +21,11 @@ private:
 	}; 
 	CVector4						m_rootPos;
 	CVector4						m_pointPos;
-	DWORD							m_indexCount = 0;
-	int								m_vertexCount = 0;;
-	static const int				INDEX_BUFFER_NUM = 1500;
-	static const int				VERTEX_BUFFER_NUM = 1000;
-	DWORD							m_indexBuffer[INDEX_BUFFER_NUM];
-	SVSLayout						m_vertexBuffer[VERTEX_BUFFER_NUM];
+	static const int				VERTEX_STRIDE_NUM = 4;
+	static const int				INDEX_STRIDE_NUM = 6;
+	static const int				POLIGON_NUM = 12;
+	DWORD							m_indexBuffer[INDEX_STRIDE_NUM * POLIGON_NUM];
+	SVSLayout						m_vertexBuffer[VERTEX_STRIDE_NUM * POLIGON_NUM];
 	CTexture*						m_pTexture;			//テクスチャ
 	CShader							m_vertexShader;		//頂点シェーダー
 	CShader							m_pixelShader;		//ピクセルシェーダー

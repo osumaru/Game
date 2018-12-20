@@ -53,6 +53,10 @@ public:
 	//武器の軌跡を描画する
 	void WeaponTraceDrawer();
 
+	//武器の軌跡の描画を開始
+	void WeaponTraceDrawStart();
+
+
 
 	//武器のステータスを取得
 	SWeaponStatus& GetWeaponStatus()

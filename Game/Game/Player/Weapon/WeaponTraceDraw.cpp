@@ -9,52 +9,55 @@ void CWeaponTraceDraw::Init()
 	m_pixelShader.Load("Assets/shader/weapon.fx", "PSMain", CShader::enPS);
 	ZeroMemory(m_vertexBuffer, sizeof(m_vertexBuffer));
 	ZeroMemory(m_indexBuffer, sizeof(m_indexBuffer));
-	m_primitive.Create(m_vertexBuffer, sizeof(SVSLayout), VERTEX_BUFFER_NUM, m_indexBuffer, INDEX_BUFFER_NUM, CPrimitive::enIndex32, CPrimitive::enTypeTriangleList);
+	m_primitive.Create(m_vertexBuffer, sizeof(SVSLayout), VERTEX_STRIDE_NUM * POLIGON_NUM, m_indexBuffer, INDEX_STRIDE_NUM * POLIGON_NUM, CPrimitive::enIndex32, CPrimitive::enTypeTriangleList);
 	m_cb.Create(sizeof(CMatrix), &m_viewProj);
+	int indexCount = 0;
+	for (int i = 0; i < POLIGON_NUM; i++)
+	{
+		DWORD vertexCount = i * VERTEX_STRIDE_NUM;
+		DWORD index[INDEX_STRIDE_NUM] = { vertexCount, vertexCount + 1,  vertexCount + 2, vertexCount + 2,  vertexCount + 1,vertexCount + 3 };
+		for (int j = 0; j < INDEX_STRIDE_NUM; j++)
+		{
+			m_indexBuffer[INDEX_STRIDE_NUM * i + j] = index[j];
+		}
+		CVector2 uv[VERTEX_STRIDE_NUM] = { { 1.0f, 1.0f }, { 1.0f, 0.0f },  { 0.0f, 1.0f }, { 0.0f, 0.0f } };
+		for (int j = 0; j < VERTEX_STRIDE_NUM; j++)
+		{
+			m_vertexBuffer[VERTEX_STRIDE_NUM * i + j].uv = uv[j];
+		}
+	}
 
 }
 
-void CWeaponTraceDraw::Start()
+void CWeaponTraceDraw::Start(const CVector3& swordRootPosition, const CVector3& swordPointPosition)
 {
-	m_indexCount = 0;
-	m_vertexCount = 0;
-	ZeroMemory(m_vertexBuffer, sizeof(m_vertexBuffer));
-	ZeroMemory(m_indexBuffer, sizeof(m_indexBuffer));
+	CVector4 position[VERTEX_STRIDE_NUM] = { swordRootPosition, swordPointPosition, swordRootPosition, swordPointPosition };
+	for (int i = 0; i < POLIGON_NUM; i++)
+	{
+		for (int j = 0; j < VERTEX_STRIDE_NUM; j++)
+		{
+			m_vertexBuffer[i * VERTEX_STRIDE_NUM + j].position = position[j];
+		}
+	}
+	m_rootPos = swordRootPosition;
+	m_pointPos = swordPointPosition;
+
 }
 
 void CWeaponTraceDraw::Add(const CVector3& swordRootPosition, const CVector3& swordPointPosition)
 {
-	if (m_vertexCount == 0)
+	for (int i = 0; i < POLIGON_NUM - 1; i++)
 	{
-		const int VERTEX_NUM = 2;
-		CVector4 position[VERTEX_NUM] = { swordRootPosition, swordPointPosition };
-		CVector2 uv[VERTEX_NUM] = { { 0.0f, 0.0f }, { 0.0f, 1.0f } };
-		for (int i = 0; i < VERTEX_NUM; i++)
+		for(int j = 0;j < VERTEX_STRIDE_NUM;j++)
 		{
-			m_vertexBuffer[m_vertexCount].position = position[i];
-			m_vertexBuffer[m_vertexCount].uv = uv[i];
-			m_vertexCount++;
+			m_vertexBuffer[(i + 1) * VERTEX_STRIDE_NUM + j].position = m_vertexBuffer[i * VERTEX_STRIDE_NUM + j].position;
 		}
+
 	}
-	else
+	CVector4 position[VERTEX_STRIDE_NUM] = { swordRootPosition, swordPointPosition, m_rootPos, m_pointPos, };
+	for (int i = 0; i < VERTEX_STRIDE_NUM; i++)
 	{
-		const int VERTEX_NUM = 4;
-		DWORD index[VERTEX_NUM] = { m_vertexCount, m_vertexCount + 1,  m_vertexCount + 2, m_vertexCount + 3 };
-		CVector4 position[VERTEX_NUM] = { swordRootPosition, swordPointPosition, m_rootPos, m_pointPos, };
-		CVector2 uv[VERTEX_NUM] = { { 1.0f, 1.0f }, { 1.0f, 0.0f },  { 0.0f, 1.0f }, { 0.0f, 0.0f } };
-		m_indexBuffer[m_indexCount + 0] = index[0];
-		m_indexBuffer[m_indexCount + 1] = index[1];
-		m_indexBuffer[m_indexCount + 2] = index[2];
-		m_indexBuffer[m_indexCount + 3] = index[2];
-		m_indexBuffer[m_indexCount + 4] = index[1];
-		m_indexBuffer[m_indexCount + 5] = index[3];
-		m_indexCount += 6;
-		for (int i = 0; i < VERTEX_NUM; i++)
-		{
-			m_vertexBuffer[m_vertexCount].position = position[i];
-			m_vertexBuffer[m_vertexCount].uv = uv[i];
-			m_vertexCount++;
-		}
+		m_vertexBuffer[i].position = position[i];
 	}
 	m_rootPos = swordRootPosition;
 	m_pointPos = swordPointPosition;
