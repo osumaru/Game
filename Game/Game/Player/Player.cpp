@@ -189,7 +189,7 @@ void CPlayer::Update()
 	shadowCameraUp.Normalize();
 	viewMat.MakeLookAt(cameraPos, m_position, CVector3::AxisX);
 	CMatrix projMat;
-	projMat.MakeOrthoProjectionMatrix(5, 5, 1.0f, 100.0f);
+	projMat.MakeOrthoProjectionMatrix(5, 5, 1.0f, 1000.0f);
 	Engine().GetShadowMap().SetViewMatrix(viewMat);
 	Engine().GetShadowMap().SetProjectionMatrix(projMat);
 	m_wireAction.Update();
