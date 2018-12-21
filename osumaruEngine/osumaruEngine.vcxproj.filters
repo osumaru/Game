@@ -252,6 +252,9 @@
     <ClCompile Include="Resource\EffectResource.cpp">
       <Filter>ソース ファイル\Resource</Filter>
     </ClCompile>
+    <ClCompile Include="Physics\CollisionDetection.cpp">
+      <Filter>ソース ファイル\Physics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject\GameObject.h">
@@ -445,6 +448,9 @@
     </ClInclude>
     <ClInclude Include="Resource\EffectResource.h">
       <Filter>ソース ファイル\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="Physics\CollisionDetection.h">
+      <Filter>ソース ファイル\Physics</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
