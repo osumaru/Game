@@ -11,6 +11,9 @@ CZombie::CZombie()
 CZombie::~CZombie()
 {
 }
+void CZombie::OnInvokeAnimationEvent(const wchar_t* animClipName, const wchar_t* eventName)
+{
+}
 
 void CZombie::Init(CVector3 position)
 {
@@ -49,6 +52,10 @@ void CZombie::Init(CVector3 position)
 
 	m_spineMatrix = &GetBoneWorldMatrix(L"Spine");
 	m_attackLength = 1.2f;
+	m_animation.AddAnimationEvent([&](auto animClipname, auto eventName)
+	{
+		OnInvokeAnimationEvent(animClipname, eventName);
+	});
 }
 
 bool CZombie::Start()

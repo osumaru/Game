@@ -28,4 +28,6 @@ public:
 	//•`‰æ
 	void Draw();
 
+	void OnInvokeAnimationEvent(const wchar_t* animClipName, const wchar_t* eventName)override;
+
 };

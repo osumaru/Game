@@ -30,4 +30,6 @@ public:
 
 	//UŒ‚
 	void Attack() override;
+
+	void OnInvokeAnimationEvent(const wchar_t* animClipName, const wchar_t* eventName)override;
 };

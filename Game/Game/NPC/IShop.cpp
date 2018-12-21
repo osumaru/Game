@@ -102,8 +102,8 @@ void IShop::ShopUpdate()
 
 		break;
 	}
-
-	m_skinModel.Update(m_position, m_rotation, m_scale, false);
+	m_animation.Update(GameTime().GetDeltaFrameTime());
+	m_skinModel.Update(m_position, m_rotation, m_scale, true);
 }
 void IShop::LoadFile(const wchar_t* filePath)
 {

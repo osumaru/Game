@@ -22,7 +22,11 @@ void CItemShop::Init(const CVector3 position, const CQuaternion rotation)
 	
 	m_position = position;
 	m_rotation = rotation;
-	m_skinModel.Load(L"Assets/modelData/U2.cmo", NULL);
+	wchar_t* animClip[] = { L"Assets/modelData/ShopgirlStand.tka" };
+	m_animation.Init(animClip, 1);
+	m_animation.SetLoopFlg(0, true);
+	m_skinModel.Load(L"Assets/modelData/Shopgirl.cmo", &m_animation);
+	m_animation.Play(0);
 
 	//テクスチャ及びスプライト関係の初期化
 	{
@@ -59,7 +63,7 @@ void CItemShop::Init(const CVector3 position, const CQuaternion rotation)
 		wchar_t filePath[256];
 		for (int num = 0; num < ITEM_ELEMENT;num++)
 		{
-			int RandomID = Random().GetRandInt() % 9 + 1;
+			int RandomID = Random().GetRandInt() % 6;// 9 + 1;
 			m_items[num].ItemStatus = m_quickItem.GetItemStatus(RandomID);
 			swprintf(filePath, L"Assets/sprite/Item/Quick/Item_%d.png", m_items[num].ItemStatus.ItemID);
 			m_items[num].ItemTexture.Load(filePath);

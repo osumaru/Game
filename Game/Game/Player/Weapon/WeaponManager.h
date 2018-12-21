@@ -62,12 +62,6 @@ public:
 		m_isAttack = isAttack;
 	}
 
-	//武器の軌跡をリセットする
-	void WeaponTraceDrawReset()
-	{
-		m_weaponTrace.Start();
-	}
-
 	//当たり判定を取っているかのフラグを取得。
 	bool GetIsAttackCheck()
 	{

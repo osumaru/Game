@@ -130,6 +130,16 @@ public:
 	//剛体を描画
 	void Draw();
 
+	//何かに当たったかのフラグを返す
+	bool IsHit() const
+	{
+		if (m_wallHitObject != nullptr || m_groundHitObject != nullptr)
+		{
+			return true;
+		}
+		return false;
+	}
+
 private:
 	CVector3					m_position;				//座標
 	CVector3					m_moveSpeed;			//移動速度

@@ -207,6 +207,7 @@
     <ClCompile Include="Math\Matrix.cpp" />
     <ClCompile Include="Math\Vector.cpp" />
     <ClCompile Include="NavigationMesh.cpp" />
+    <ClCompile Include="Physics\CollisionDetection.cpp" />
     <ClCompile Include="Physics\CharacterController.cpp" />
     <ClCompile Include="Physics\Collider\BoxCollider.cpp" />
     <ClCompile Include="Physics\Collider\CapsuleCollider.cpp" />
@@ -271,6 +272,7 @@
     <ClInclude Include="Math\Matrix.h" />
     <ClInclude Include="Math\Vector.h" />
     <ClInclude Include="NavigationMesh.h" />
+    <ClInclude Include="Physics\CollisionDetection.h" />
     <ClInclude Include="Physics\CharacterController.h" />
     <ClInclude Include="Physics\Collider\BoxCollider.h" />
     <ClInclude Include="Physics\Collider\CapsuleCollider.h" />

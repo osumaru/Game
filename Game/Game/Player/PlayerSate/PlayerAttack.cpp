@@ -30,7 +30,7 @@ void CPlayerAttack::Init()
 	m_manipVec = m_pPlayer->GetPosition() - bonePos;
 	m_preBonePos = bonePos;
 	m_pPlayer->GetWeaponManager().SetIsAttack(true);
-	m_pPlayer->GetWeaponManager().WeaponTraceDrawReset();
+	m_pPlayer->GetWeaponManager().GetWeapon()->WeaponTraceDrawStart();
 	m_isPreDodge = false;
 }
 
@@ -67,23 +67,9 @@ void CPlayerAttack::Update()
 		{
 			m_isContinuationAttack = false;
 			m_pPlayerGetter->GetAnimation().Play(m_attackAnimation[m_attackCount], 0.2f);
-			m_pPlayer->GetWeaponManager().WeaponTraceDrawReset();
+			m_pPlayer->GetWeaponManager().GetWeapon()->WeaponTraceDrawStart();
 
-			const CCamera& gameCamera = GetGameCamera().GetCamera();
-			CVector3 frontVec = gameCamera.GetTarget() - gameCamera.GetPosition();
-			frontVec.y = 0.0f;
-			frontVec.Normalize();
-			CVector3 rightVec;
-			rightVec.Cross(CVector3::AxisY, frontVec);
-			rightVec.Normalize();
-			CVector3 moveSpeed = m_pPlayerGetter->GetMoveSpeed();
-			moveSpeed.x = 0.0f;
-			moveSpeed.z = 0.0f;
-			const float speed = 8.0f;
-			moveSpeed += frontVec * Pad().GetLeftStickY() * speed;
-			moveSpeed += rightVec * Pad().GetLeftStickX() * speed;
-			m_pPlayerGetter->SetMoveSpeed(moveSpeed);
-			m_pPlayerGetter->GetCharacterController().Execute(GameTime().GetDeltaFrameTime());
+			Rotation();
 		}
 		else
 		{
@@ -127,7 +113,7 @@ void CPlayerAttack::Move()
 	moveSpeed.y = 0.0f;
 	CCharacterController& characon = m_pPlayerGetter->GetCharacterController();
 	float gravity = characon.GetGravity();
-	characon.SetGravity(-0.1f);
+	characon.SetGravity(-0.04f);
 	//高さをプレイヤ―の座標でそろえる
 	m_preBonePos.y = playerPos.y;
 	characon.SetMoveSpeed(moveSpeed);
@@ -152,5 +138,82 @@ void CPlayerAttack::Move()
 	characon.SetMoveSpeed(CVector3::Zero);
 	characon.SetGravity(gravity);
 	m_preBonePos = bonePos;
+}
+
+void CPlayerAttack::Rotation()
+{
+	//腰のボーンの座標を中心にプレイヤーを回転させる
+
+	//カメラからの移動方向
+	const CCamera& gameCamera = GetGameCamera().GetCamera();
+	CVector3 frontVec = gameCamera.GetTarget() - gameCamera.GetPosition();
+	frontVec.y = 0.0f;
+	frontVec.Normalize();
+	CVector3 rightVec;
+	rightVec.Cross(CVector3::AxisY, frontVec);
+	rightVec.Normalize();
+	CVector3 moveSpeed = m_pPlayerGetter->GetMoveSpeed();
+	moveSpeed.x = 0.0f;
+	moveSpeed.z = 0.0f;
+	const float speed = 1.0f;
+	moveSpeed += frontVec * Pad().GetLeftStickY()*speed;
+	moveSpeed += rightVec * Pad().GetLeftStickX()*speed;
+
+	CMatrix pMat = m_pPlayer->GetSkinmodel().GetWorldMatrix();
+	//プレイヤーの前方向
+	CVector3 playerFront;
+	playerFront.x = pMat.m[2][0];
+	playerFront.y = 0.0f;
+	playerFront.z = pMat.m[2][2];
+	playerFront.Normalize();
+
+	if (moveSpeed.x == 0.0f && moveSpeed.z == 0.0f)
+	{
+		moveSpeed.x = m_pPlayer->GetSkinmodel().GetWorldMatrix().m[2][0];
+		moveSpeed.z = m_pPlayer->GetSkinmodel().GetWorldMatrix().m[2][2];
+		//return;
+	}
+	moveSpeed.y = 0.0f;
+	moveSpeed.Normalize();
+	float rad = moveSpeed.Dot(playerFront);
+	if (1.0f <= rad)
+	{
+		rad = 1.0f;
+	}
+	if (rad <= -1.0f)
+	{
+		rad = -1.0f;
+	}
+	rad = acosf(rad);
+	CVector3 judgeAxis;
+	judgeAxis.Cross(moveSpeed, playerFront);
+	if (0.0f < judgeAxis.y)
+	{
+		rad = -rad;
+	}
+
+	CQuaternion rot=CQuaternion::Identity;
+	rot.SetRotation(CVector3::AxisY, rad);
+	
+	CMatrix rotMat=CMatrix::Identity;
+	rotMat.MakeRotationFromQuaternion(rot);
+	CVector3 playerPos = m_pPlayer->GetPosition();
+	CMatrix spineMat = m_pPlayer->GetSkinmodel().FindBoneWorldMatrix(L"Hips");
+	CVector3 spineVec;
+	spineVec.x = spineMat.m[3][0];
+	spineVec.y = spineMat.m[3][1];
+	spineVec.z = spineMat.m[3][2];
+	CVector3 animPos = playerPos- spineVec;
+	animPos.y =0.0f;
+	rotMat.Mul(animPos);
+	animPos.Add(spineVec);
+	animPos.y = playerPos.y;
+	CQuaternion pRot = m_pPlayerGetter->GetRotation();
+	//腰を中心にしたクオータニオンとプレイヤーのやつの積
+	pRot.Multiply(rot);
+	m_pPlayerGetter->SetRotation(pRot);
+
+	m_pPlayerGetter->SetPosition(animPos);
+
 }
 

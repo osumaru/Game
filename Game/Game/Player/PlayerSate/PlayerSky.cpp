@@ -41,6 +41,16 @@ void CPlayerSky::Update()
 			{
 				m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateStand);
 			}
+			
 		}
+	}
+	else if (m_pPlayer->GetIsStateCondition(CPlayerState::enPlayerStateDamage))
+	{
+		m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateDamage);
+	}
+	else if (m_pPlayer->GetIsStateCondition(CPlayerState::enPlayerStateWireMove))
+	{
+		//ƒƒCƒ„[ˆÚ“®‚Å‚«‚é‚È‚ç‘JˆÚ
+		m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateWireMove);
 	}
 }

@@ -26,6 +26,7 @@ void CPlayerWireMove::Init()
 	m_wireSpeed += m_wireSpeed;
 	CVector3 wireEndPos = m_playerHandPos + wireDir;
 	m_pPlayerGetter->GetWireDraw().SetEndPosition(wireEndPos);
+	m_previousMoveSpeed = m_movePosition - m_pPlayer->GetPosition();
 }
 
 void CPlayerWireMove::Update()
@@ -48,6 +49,7 @@ void CPlayerWireMove::Update()
 	if (m_pPlayerGetter->GetAnimation().GetCurrentAnimationNum() == enPlayerAnimationWireThrow
 		&& !m_pPlayerGetter->GetAnimation().IsPlay())
 	{
+		//ワイヤー移動するアニメーションに切り替え
 		m_isWireThrow = false;
 		m_pPlayerGetter->GetAnimation().Play(enPlayerAnimationWireMove, 0.25f);
 	}
@@ -61,7 +63,7 @@ void CPlayerWireMove::Update()
 	bool isMoveEnd = false;
 	CVector3 playerPos = GetPlayer().GetPosition();
 	CVector3 toMovePos = m_movePosition - playerPos;
-
+	float angle = toMovePos.Dot(m_previousMoveSpeed);
 	float length = toMovePos.Length();
 	toMovePos.Normalize();
 	m_accel += 0.3f;
@@ -82,13 +84,24 @@ void CPlayerWireMove::Update()
 		range = 1.0f;
 		break;
 	}
-	if (length > range) {
+	if (length < range || angle < 0.0f) {
+		isMoveEnd = true;
+		if (angle)
+		{
+			m_pPlayerGetter->SetPosition(m_movePosition);
+		}
+
+	}
+	else {
+
+		float gravityBackup = m_pPlayerGetter->GetCharacterController().GetGravity();
+		m_pPlayerGetter->GetCharacterController().SetGravity(0.0f);
 		//目標との距離が離れていれば移動先に進む
 		m_pPlayerGetter->SetMoveSpeed(toMovePos);
 		m_pPlayerGetter->GetCharacterController().Execute(GameTime().GetDeltaFrameTime());
-	}
-	else {
-		isMoveEnd = true;
+		m_pPlayerGetter->GetCharacterController().SetGravity(gravityBackup);
+
+
 	}
 
 	if (isMoveEnd) {
@@ -110,9 +123,11 @@ void CPlayerWireMove::Update()
 			}
 			break;
 		case CWireAction::enStateMap:
-			if (toMovePos.y > 0.0f)
+			if (Pad().IsPressButton(enButtonRightTrigger))
 			{
-				m_pPlayerGetter->SetMoveSpeed(toMovePos);
+
+				m_previousMoveSpeed.y = 10.0f;
+				m_pPlayerGetter->SetMoveSpeed(m_previousMoveSpeed);
 				m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateJump);
 			}
 			else
@@ -124,4 +139,6 @@ void CPlayerWireMove::Update()
 			break;
 		}
 	}
+
+	m_previousMoveSpeed = toMovePos;
 }

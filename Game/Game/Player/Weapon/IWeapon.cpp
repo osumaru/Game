@@ -69,6 +69,13 @@ void IWeapon::WeaponTraceDrawer()
 	}
 }
 
+void IWeapon::WeaponTraceDrawStart()
+{
+	CWeaponTraceDraw& weaponTrace = m_pPlayer->GetWeaponManager().GetWeaponTraceDraw();
+	SWeaponTraceDrawInfo info = WeaponTraceDraw();
+	weaponTrace.Start(info.rootPos, info.pointPos);
+}
+
 void IWeapon::Drawer()
 {
 	Draw();
@@ -96,7 +103,6 @@ void IWeapon::EnemyAttack()
 
 	//エネミーグループのリストを取得
 	std::list<CEnemyGroup*> enemyGroup = GetSceneManager().GetGameScene().GetMap()->GetEnemyGroupList();
-
 	for (const auto& group : enemyGroup)
 	{
 		for (int i = 0; i < m_weaponNum; i++)
