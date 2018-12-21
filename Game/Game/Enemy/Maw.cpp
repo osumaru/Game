@@ -5,6 +5,7 @@
 #include "../UI/BossHp/BossHp.h"
 #include "../UI/WeekPoint/WeekPoint.h"
 #include "../Scene/SceneManager.h"
+#include"../GameSound/GameSound.h"
 
 CMaw *CMaw::m_maw = NULL;
 

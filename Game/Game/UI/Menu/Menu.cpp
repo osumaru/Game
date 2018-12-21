@@ -143,6 +143,11 @@ void CMenu::KeyInputMenu()
 			m_stateNum = enNoneMenu;
 			m_selectPosition = SELECT_TEX_POS;
 			m_selectSprite.SetPosition(m_selectPosition);
+			//âπÇè¡Ç∑èàóù
+			if (m_menuSoundEffect.IsPlay())
+			{
+				m_menuSoundEffect.Stop();
+			}
 		}
 		else
 		{
