@@ -33,11 +33,10 @@ void CObstacleMapObject::Init(const CVector3& position, const CQuaternion& rotat
 	CMeshCollider mesh;
 	mesh.CreateCollider(&m_skinModel);
 	CVector3 boxsize = (mesh.GetAabbMax() - mesh.GetAabbMin()) / 2.0f;
-	boxsize.y += 2.0f;
 	CVector3 pos = (mesh.GetAabbMax() + mesh.GetAabbMin()) / 2.0f;
 	rInfo.pos = m_position;
 	rInfo.pos.x += pos.x;
-	rInfo.pos.z += pos.y; 
+	rInfo.pos.z += -pos.y; 
 	rInfo.pos.y += pos.z;
 	m_boxCollider.Create({ boxsize.x,boxsize.y,boxsize.z });
 	rInfo.collider = &m_boxCollider;

@@ -551,6 +551,97 @@
 	CQuaternion(-0.71f, 0.00f, 0.00f, 0.71f ),  //回転
 	enMapTagObstacle, //タグ
 },
+//NYBuilding_A
+{
+	L"NYBuilding_A",
+	CVector3(15.70f, 0.00f, -69.40f),             //平行移動
+	CQuaternion(-0.71f, 0.00f, 0.00f, 0.71f ),  //回転
+	enMapTagObstacle, //タグ
+},
+//NYBuilding_A
+{
+	L"NYBuilding_A",
+	CVector3(-116.40f, 0.00f, -119.20f),             //平行移動
+	CQuaternion(-0.71f, 0.00f, 0.00f, 0.71f ),  //回転
+	enMapTagObstacle, //タグ
+},
+//NYBuilding_A
+{
+	L"NYBuilding_A",
+	CVector3(-197.70f, 0.00f, -95.70f),             //平行移動
+	CQuaternion(-0.71f, 0.00f, 0.00f, 0.71f ),  //回転
+	enMapTagObstacle, //タグ
+},
+//NYBuilding_A
+{
+	L"NYBuilding_A",
+	CVector3(-94.00f, 0.00f, -73.20f),             //平行移動
+	CQuaternion(-0.71f, 0.00f, 0.00f, 0.71f ),  //回転
+	enMapTagObstacle, //タグ
+},
+//NYBuilding_A
+{
+	L"NYBuilding_A",
+	CVector3(-47.20f, 0.00f, -0.20f),             //平行移動
+	CQuaternion(-0.71f, 0.00f, 0.00f, 0.71f ),  //回転
+	enMapTagObstacle, //タグ
+},
+//NYBuilding_A
+{
+	L"NYBuilding_A",
+	CVector3(-104.10f, 0.00f, 9.70f),             //平行移動
+	CQuaternion(-0.71f, 0.00f, 0.00f, 0.71f ),  //回転
+	enMapTagObstacle, //タグ
+},
+//NYBuilding_A
+{
+	L"NYBuilding_A",
+	CVector3(-52.30f, 0.00f, 94.40f),             //平行移動
+	CQuaternion(-0.71f, 0.00f, 0.00f, 0.71f ),  //回転
+	enMapTagObstacle, //タグ
+},
+//NYBuilding_A
+{
+	L"NYBuilding_A",
+	CVector3(143.70f, 0.00f, 41.30f),             //平行移動
+	CQuaternion(-0.71f, 0.00f, 0.00f, 0.71f ),  //回転
+	enMapTagObstacle, //タグ
+},
+//NYBuilding_A
+{
+	L"NYBuilding_A",
+	CVector3(-255.10f, 0.00f, 40.30f),             //平行移動
+	CQuaternion(-0.71f, 0.00f, 0.00f, 0.71f ),  //回転
+	enMapTagObstacle, //タグ
+},
+//NYBuilding_A
+{
+	L"NYBuilding_A",
+	CVector3(-131.40f, 0.00f, 107.30f),             //平行移動
+	CQuaternion(-0.71f, 0.00f, 0.00f, 0.71f ),  //回転
+	enMapTagObstacle, //タグ
+},
+//NYBuilding_A
+{
+	L"NYBuilding_A",
+	CVector3(-214.50f, 0.00f, 159.90f),             //平行移動
+	CQuaternion(-0.71f, 0.00f, 0.00f, 0.71f ),  //回転
+	enMapTagObstacle, //タグ
+},
+//NYBuilding_A
+{
+	L"NYBuilding_A",
+	CVector3(-137.70f, 0.00f, 171.20f),             //平行移動
+	CQuaternion(-0.71f, 0.00f, 0.00f, 0.71f ),  //回転
+	enMapTagObstacle, //タグ
+},
+//NYBuilding_A
+{
+	L"NYBuilding_A",
+	CVector3(-33.70f, 0.00f, 179.60f),             //平行移動
+	CQuaternion(-0.71f, 0.00f, 0.00f, 0.71f ),  //回転
+	enMapTagObstacle, //タグ
+},
 //ninja
 {
 	L"ninja",
