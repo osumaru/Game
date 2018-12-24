@@ -666,6 +666,9 @@
     <ClInclude Include="Player\PlayerSate\PlayerSky.h">
       <Filter>ソース ファイル\Player\PlayerState</Filter>
     </ClInclude>
+    <ClInclude Include="Item\InventoryItem\IInventoryEquip.h">
+      <Filter>ソース ファイル\Item\InventoryItem</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Map\MapChip\ObstacleMapObject.h">

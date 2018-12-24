@@ -59,7 +59,7 @@ void CItemShop::Init(const CVector3 position, const CQuaternion rotation)
 		wchar_t filePath[256];
 		for (int num = 0; num < ITEM_ELEMENT;num++)
 		{
-			int RandomID = Random().GetRandInt() % 9 + 1;
+			int RandomID = Random().GetRandInt() % 6;
 			m_items[num].ItemStatus = m_quickItem.GetItemStatus(RandomID);
 			swprintf(filePath, L"Assets/sprite/Item/Quick/Item_%d.png", m_items[num].ItemStatus.ItemID);
 			m_items[num].ItemTexture.Load(filePath);

@@ -17,6 +17,26 @@ void CWarrok::OnInvokeAnimationEvent(//ƒAƒjƒ[ƒVƒ‡ƒ“ƒCƒxƒ“ƒg‚ªŒÄ‚Î‚ê‚é‚²‚Æ‚ÉŒÄ‚
 	const wchar_t* animClipName,
 	const wchar_t* eventName)
 {
+	if (wcscmp(animClipName, L"Assets/modelData/WarrokAttack.tka") == 0) 
+	{
+		//ƒ{[ƒ“‚Ìƒ[ƒ‹ƒhs—ñ‚ğæ“¾
+		CMatrix boneMatrix = GetBoneWorldMatrix(L"LeftHand");
+		CVector3 bonePosition;
+		bonePosition.x = boneMatrix.m[3][0];
+		bonePosition.y = boneMatrix.m[3][1];
+		bonePosition.z = boneMatrix.m[3][2];
+		//“G‚ÌUŒ‚‚Æ‚Ì‹——£‚ğŒvZ
+		CVector3 playerPosition = GetPlayer().GetPosition();
+		playerPosition.y += 0.5f;
+		CVector3 distance = bonePosition - playerPosition;
+		float length = distance.Length();
+		if (length < 1.0f)
+		{
+			//ƒvƒŒƒCƒ„[‚ªƒ_ƒ[ƒW‚ğó‚¯‚½
+			GetPlayer().SetDamage(m_status.strength);
+			GetPlayer().SetDamageEnemyPos(m_position);
+		}
+	}
 }
 
 void CWarrok::Init(CVector3 position)
