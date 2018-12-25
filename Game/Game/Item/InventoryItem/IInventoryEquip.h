@@ -1,12 +1,15 @@
 #pragma once
 
-class IIventoryEquip 
+#include "../../Player/Weapon/WeaponCommon.h"
+
+class IInventoryEquip 
 {
+public:
 	//コンストラクタ
-	IIventoryEquip() {};
+	IInventoryEquip() {};
 
 	//デストラクタ
-	virtual ~IIventoryEquip() {};
+	virtual ~IInventoryEquip() {};
 
 	//初期化
 	virtual void Init() {};
@@ -26,7 +29,20 @@ class IIventoryEquip
 		return m_itemName;
 	}
 
+	//装備のステータスを設定
+	void SetEquipStatus(SWeaponStatus equipStatus)
+	{
+		m_equipStatus = equipStatus;
+	}
+
+	//装備のステータスを取得
+	SWeaponStatus GetEquipStatus()
+	{
+		return m_equipStatus;
+	}
+
 protected:
 	CSprite					m_itemSprite;			//アイテムのスプライト
 	wchar_t*				m_itemName;				//アイテムの名前
+	SWeaponStatus			m_equipStatus;			//装備のステータス
 };

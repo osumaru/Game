@@ -5,7 +5,8 @@
 #pragma once
 
 #include "IItem.h"
-#include "../Player/Weapon/WeaponManager.h"
+
+class IInventoryEquip;
 
 class CTreasureChest : public IItem
 {
@@ -37,5 +38,5 @@ private:
 		int twinSwordAttack = 30;	//双剣の攻撃力
 	};
 
-	SWeaponStatus m_weaponStatus;	//武器のステータス
+	IInventoryEquip* m_inventoryEquip = nullptr;	//インベントリに入れる装備
 };
