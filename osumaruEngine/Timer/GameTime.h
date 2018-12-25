@@ -29,11 +29,6 @@ public:
 		return m_frameDeltaTime;
 	}
 
-	//1ƒtƒŒ[ƒ€‚ÌŒo‰ßŠÔ‚ğæ“¾ 
-	void SetDeltaFrameTime(float time)
-	{
-		m_frameDeltaTime = 1.0f / 60.0f;// time;
-	}
 
 	void Update(CStopWatch& sw);
 
