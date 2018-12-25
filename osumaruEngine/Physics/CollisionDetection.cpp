@@ -92,4 +92,6 @@ void CCollisionDetection::Execute()
 	m_isHit = callBack.isHit;
 	m_collisionType = callBack.collisionType;
 	m_hitCollisionNormal = callBack.hitObjectNormal;
+
+	m_rigidBody.Draw();
 }

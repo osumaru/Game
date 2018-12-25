@@ -127,6 +127,12 @@ public:
 		m_rigidBody.SetUserIndex(userNum);
 	}
 
+	//補正値の設定
+	void SetRigidBodyManip(float RigidBodyManip)
+	{
+		m_rigidBodyManip = RigidBodyManip;
+	}
+
 	//剛体を描画
 	void Draw();
 
@@ -153,5 +159,5 @@ private:
 	const btCollisionObject*	m_groundHitObject;		//当たっている地面のオブジェクト
 	const btCollisionObject*	m_wallHitObject;		//当たっている壁のオブジェクト
 	CVector3					m_wallNormal;			//当たった壁の法線
-	const float					m_rigidBodyManip;		//補正値（今は使ってない
+	float						m_rigidBodyManip;		//補正値（今は使ってない
 };
