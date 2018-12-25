@@ -186,18 +186,7 @@ void CEngine::GameLoop()
 			m_effectEngine.Update();
 			m_pad->Update();
 			sw.Stop();
-			float limitTime = 1.0f / 60.0f;
-			if (sw.GetElapsedTime() < limitTime)
-			{
-				DWORD sleepTime = max(0.0, limitTime * 1000.0 - (DWORD)sw.GetElapsedTimeMill());
-				Sleep(sleepTime);
-				GameTime().SetDeltaFrameTime(limitTime);
-			}
-			else
-			{
-				GameTime().SetDeltaFrameTime((float)sw.GetElapsedTime());
-			}
-			//GameTime().Update(sw);
+			GameTime().Update(sw);
 		}
 	}
 
