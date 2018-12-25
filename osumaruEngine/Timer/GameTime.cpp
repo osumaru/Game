@@ -14,10 +14,11 @@ void CGameTime::Update(CStopWatch& sw)
 	}
 
 	m_frameDeltaTime = deltaTime;
-	if (0.0f < m_slowTime)
-	{
-		m_frameDeltaTime *= m_slowScale;
-		m_slowTime -= deltaTime;
-	}
+	//if (0.0f < m_slowTime || 0 < m_slowCount)
+	//{
+	//	m_frameDeltaTime *= m_slowScale;
+	//	m_slowTime -= deltaTime;
+	//	m_slowCount--;
+	//}
 	
 }
