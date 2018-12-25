@@ -285,6 +285,7 @@
     <ClInclude Include="Enemy\Samurai.h" />
     <ClInclude Include="Enemy\Zombie.h" />
     <ClInclude Include="GameSound\GameSound.h" />
+    <ClInclude Include="Item\InventoryItem\IInventoryEquip.h" />
     <ClInclude Include="Item\InventoryItem\IInventoryItem.h" />
     <ClInclude Include="Item\InventoryItem\InventoryRecoveryItem.h" />
     <ClInclude Include="Map\MapChip\ObstacleMapObject.h" />

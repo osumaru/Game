@@ -13,6 +13,26 @@ CZombie::~CZombie()
 }
 void CZombie::OnInvokeAnimationEvent(const wchar_t* animClipName, const wchar_t* eventName)
 {
+	if (wcscmp(animClipName, L"Assets/modelData/WarrokAttack.tka") == 0)
+	{
+		//ボーンのワールド行列を取得
+		CMatrix boneMatrix = GetBoneWorldMatrix(L"LeftHand");
+		CVector3 bonePosition;
+		bonePosition.x = boneMatrix.m[3][0];
+		bonePosition.y = boneMatrix.m[3][1];
+		bonePosition.z = boneMatrix.m[3][2];
+		//敵の攻撃との距離を計算
+		CVector3 playerPosition = GetPlayer().GetPosition();
+		playerPosition.y += 0.5f;
+		CVector3 distance = bonePosition - playerPosition;
+		float length = distance.Length();
+		if (length < 1.0f)
+		{
+			//プレイヤーがダメージを受けた
+			GetPlayer().SetDamage(m_status.strength);
+			GetPlayer().SetDamageEnemyPos(m_position);
+		}
+	}
 }
 
 void CZombie::Init(CVector3 position)

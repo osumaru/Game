@@ -100,6 +100,12 @@ public:
 		return m_isDamege;
 	}
 
+	//キャラコンを取得
+	const CCharacterController& GetCharacterController() const
+	{
+		return m_characterController;
+	}
+
 	//ステータスの計算処理を行う関数
 	void StatusCalculation();
 
