@@ -227,7 +227,9 @@ private:
 	bool								m_isInvinsible = false;					//無敵かのフラグ
 	CWireAction							m_wireAction;							//ワイヤーの飛ぶかどうかの判定をしたりするところ
 	CWireDraw							m_wireDraw;								//ワイヤーを描画する
-	bool								m_isStanAttack = false;
+	bool								m_isStanAttack = false;					//スタン攻撃
+	CCollisionDetection					m_groundCollision;						//地面用のコリジョン
+	CBoxCollider						m_boxCollider;							//ボックスコライダー
 };
 
 static CPlayer& GetPlayer()

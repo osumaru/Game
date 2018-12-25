@@ -11,7 +11,6 @@
 #include "Weapon/Bow.h"
 #include "../Enemy/PathFinding/PathFinding.h"
 
-
 CPlayer *CPlayer::m_player = NULL;
 
 void CPlayer::OnInvokeAnimationEvent(//アニメーションイベントが呼ばれるごとに呼び出される？
@@ -126,9 +125,7 @@ void CPlayer::Init(CVector3 position)
 		{
 			OnInvokeAnimationEvent(animClipname, eventName);
 		});
-
 	}
-
 
 	//プレイヤーのステータスの初期化
 	{
@@ -144,6 +141,12 @@ void CPlayer::Init(CVector3 position)
 		m_status.Gold = 4000;							//所持金
 	}
 	m_playerGetter.SetPlayer(this);
+
+	CVector3 boxSize = { 0.4f,0.6f,0.4f };
+	m_characterController.SetRigidBodyManip(100.0f);
+	m_boxCollider.Create({ boxSize.x,boxSize.y,boxSize.z });
+	m_groundCollision.Init(&m_boxCollider,m_position, CQuaternion::Identity);
+	m_groundCollision.Execute();
 	m_PlayerStateMachine.SetPlayer(this, &m_playerGetter);
 	m_PlayerStateMachine.Init();
 	m_skinmodel.SetIsShadowCaster(true);
@@ -152,9 +155,8 @@ void CPlayer::Init(CVector3 position)
 	SetIsActive(true);
 	GetGameCamera().CameraSetPlayer();
 	m_wireDraw.Init(CVector3::Zero, CVector3::Zero, CVector3::Zero);
+
 }
-
-
 
 void CPlayer::Update()
 {
@@ -181,6 +183,7 @@ void CPlayer::Update()
 	//	m_isDamege = true;
 	//}
 
+	
 	CMatrix viewMat;
 	CVector3 cameraPos = m_position;
 	cameraPos.y += 50.0f;
@@ -197,13 +200,19 @@ void CPlayer::Update()
 	m_animation.Update(GameTime().GetDeltaFrameTime());
 	m_skinmodel.Update(m_position, m_rotation, { 1.0f, 1.0f, 1.0f }, true);
 	m_PlayerStateMachine.Update();
+
 	m_animation.Update(0.0f);
 	m_position = m_characterController.GetPosition();
+
 	//アニメーションの更新
 	//スキンモデルの更新
 	m_skinmodel.Update(m_position, m_rotation, { 1.0f, 1.0f, 1.0f }, true);
 	m_weaponManager.Update();
-	
+	//補正値をを入れて剛体をずらす
+	m_characterController.SetRigidBodyManip(100.0f);
+	m_groundCollision.SetPosition(m_position);
+	m_groundCollision.Execute();
+
 }
 
 //描画処理
@@ -395,6 +404,7 @@ bool CPlayer::GetIsStateCondition(CPlayerState::EnPlayerState state)
 	case CPlayerState::enPlayerStateStand://移動量が0か
 		return m_characterController.GetMoveSpeed().Length() == 0.0f;
 	case CPlayerState::enPlayerStateSky:
-		return !m_characterController.IsOnGround(); //地面に着地しているかどうか
+		//return !m_characterController.IsOnGround();//地面に着地しているかどうか
+		return !m_groundCollision.IsHit();
 	}
 }
