@@ -71,6 +71,7 @@ void CPlayer::Init(CVector3 position)
 
 	m_characterController.Init(0.3f, 1.0f, m_position);
 	m_characterController.SetGravity(-30.0f);
+	m_characterController.SetUserIndex(enCollisionAttr_Player);
 
 	//アニメーションの初期化
 	{
