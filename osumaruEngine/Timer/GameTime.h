@@ -29,6 +29,12 @@ public:
 		return m_frameDeltaTime;
 	}
 
+	//1フレームの経過時間を取得 
+	void SetDeltaFrameTime(float time)
+	{
+		m_frameDeltaTime = 1.0f / 60.0f;// time;
+	}
+
 	void Update(CStopWatch& sw);
 
 	/*
@@ -42,9 +48,21 @@ public:
 		m_slowScale = slowScale;
 	}
 
+	/*
+時間をスローにする設定
+slowTime	スローになっているフレーム数
+slowScale	どのくらいスローにするかの倍率(1.0が等速
+*/
+	void SetSlow(int slowCount, float slowScale)
+	{
+		m_slowCount = slowCount;
+		m_slowScale = slowScale;
+	}
+
 private:
 	float		m_slowScale = 0.0f;		//どのぐらいスローにしているかの倍率(1.0が等速
 	float		m_slowTime = 0.0f;		//スローになっている間の時間
+	int			m_slowCount = 0;
 	float		m_frameDeltaTime;		//1フレームの経過時間
 };
 
