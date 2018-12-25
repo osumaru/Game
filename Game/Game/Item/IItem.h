@@ -78,9 +78,6 @@ protected:
 	CVector3				m_position;					//座標
 	CQuaternion				m_rotation;					//回転
 	CCharacterController	m_characterController;		//キャラクターコントローラー
-	//CVector3				m_popPosition;				//アイテムがポップする座標
-	//CVector3				m_moveSpeed;				//移動速度
-	//const float				m_speed = 4.0f;				//速度
 	const float				m_deadTime = 30.0f;			//アイテムが消滅するまでの時間
 	float					m_timer = 0.0f;				//タイマー
 	bool					m_isPopEnd = false;			//ポップし終わったか

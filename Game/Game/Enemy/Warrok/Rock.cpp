@@ -53,14 +53,19 @@ bool CRock::Start()
 
 void CRock::Update()
 {
-	if (m_characterController.GetGroundCollisionObject() != nullptr
-		|| m_characterController.GetWallCollisionObject() != nullptr)
+	if (m_characterController.GetGroundCollisionObject() != nullptr)
 	{
-		//何かのオブジェクトに当たった
+		//地面に当たった
+		Delete(this);
+	}
+	if (m_characterController.GetWallCollisionObject() != nullptr)
+	{
+		//壁に当たった
+		if(m_characterController.GetWallCollisionObject()->getUserIndex() == enCollisionAttr_Player)
 		{
 			//プレイヤーに当たった
-			//GetPlayer().SetDamageEnemyPos(m_enemyPos);
-			//GetPlayer().SetDamage(true);
+			GetPlayer().SetDamageEnemyPos(m_enemyPos);
+			GetPlayer().SetDamage(true);
 		}
 		Delete(this);
 	}
