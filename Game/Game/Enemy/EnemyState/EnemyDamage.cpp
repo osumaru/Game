@@ -21,7 +21,7 @@ void CEnemyDamage::Init()
 	m_wasStanAttack = GetPlayer().GetStanAttack();
 
 	//どの武器でダメージを食らったか
-	m_enemy->SetAttackWeapon(*GetPlayer().GetWeaponManager().GetWeapon()->GetAttackWeapon());
+	//m_enemy->SetAttackWeapon(*GetPlayer().GetWeaponManager().GetWeapon()->GetAttackWeapon());
 }
 
 bool CEnemyDamage::Start()
