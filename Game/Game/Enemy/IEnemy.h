@@ -205,13 +205,6 @@ public:
 		return m_isDamagePossible.get();
 	}
 
-	//ダメージを受けられるかのフラグを設定する
-	//void SetIsDamagePossible(bool isDamage)
-	//{
-	//	m_isDamagePossible=isDamage;
-	//	//m_isDamagePossible = isDamage;
-	//}
-
 	//ワイヤーが当たったか
 	bool IsWireHit() const
 	{
@@ -264,7 +257,7 @@ protected:
 	std::list<IEnemy*>::iterator	m_iterater;						//自身のイテレータ
 	const CMatrix*					m_spineMatrix;					//当たり判定用の腰のワールド行列
 	CVector3						m_spinePos;						//当たり判定用の腰の座標
-	int								m_maxPlayerHit = 2;				//最大攻撃ヒット数
+	const int						m_maxPlayerHit = 2;				//最大攻撃ヒット数
 	float							m_attackLength = 1.2f;			//攻撃できる距離
 	bool							m_isFind = false;				//プレイヤーを発見したか
 	bool							m_isDamage = false;				//ダメージを受けたか

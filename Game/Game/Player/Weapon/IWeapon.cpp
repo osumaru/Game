@@ -11,8 +11,6 @@
 void IWeapon::Init(CPlayer* player)
 {
 	m_pPlayer = player;
-	//m_attackWeapon = std::make_unique<EnAttackWeapon[]>(1);
-	//m_attackWeapon[0] = EnAttackWeapon::enAttackWeaponSword;
 	m_normalBoneMat = &m_pPlayer->GetSkinmodel().FindBoneWorldMatrix(L"LeftShoulder");
 	m_attackBoneMat = &m_pPlayer->GetSkinmodel().FindBoneWorldMatrix(L"RightHand");
 	Init();

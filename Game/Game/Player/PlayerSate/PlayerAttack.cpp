@@ -23,6 +23,7 @@ void CPlayerAttack::Init()
 	//エネミーのリストを取得
 	for (const auto& enemys : GetSceneManager().GetGameScene().GetMap()->GetEnemyList())
 	{
+		
 		bool* damagePossible = enemys->IsDamagePossible();
 		for (int i = 0; i < m_maxWeaponHitNum; i++)
 		{

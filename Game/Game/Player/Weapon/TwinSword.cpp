@@ -31,7 +31,7 @@ void CTwinSword::Init()
 
 
 	//“ñ‚Â–Ú‚ÌŒ•—p
-	m_positionTwin = { 0.0f, 0.0f, 10.0f };
+	m_positionTwin = { 0.0f, 0.0f, -10.0f };
 	m_rotationTwin = CQuaternion::Identity;
 	CQuaternion multi2;
 	multi2.SetRotationDeg(CVector3::AxisX, 90.0f);
@@ -133,11 +133,11 @@ SWeaponEnemyAttackInfo CTwinSword::EnemyAttackPositionDecide()
 	manip2.Scale(0.3f);
 	pos2 += manip2;
 
-	CVector3 poss[2];
-	poss[0] = pos;
-	poss[1] = pos2;
-	//poss[2] = pos2;
-	return { true, *poss };
+	SWeaponEnemyAttackInfo info;
+	info.isAttack = true;
+	info.attackPos[0] = pos;
+	info.attackPos[1] = pos2;
+	return {info};
 }
 
 SWeaponTraceDrawInfo CTwinSword::WeaponTraceDraw()

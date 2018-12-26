@@ -120,7 +120,6 @@ protected:
 	int							m_maxAttackNum = 0;					//最大連続攻撃回数
 	std::unique_ptr<EnPlayerAnimation[]>		m_attackAnimation;				//攻撃のアニメーション番号
 	std::unique_ptr<EnPlayerAnimation[]>		m_combineAnimation;				//攻撃の後の合成用のアニメーション番号
-	std::unique_ptr<bool[]>						m_stanAttack;						//スタン攻撃
-	//std::unique_ptr<EnAttackWeapon[]>			m_attackWeapon;						//攻撃する武器
-	std::unique_ptr<bool[]>						m_attackHitNum;						//武器ごとの攻撃回数
+	std::unique_ptr<bool[]>						m_stanAttack;					//スタン攻撃
+	std::unique_ptr<bool[]>						m_attackHitNum;					//武器ごとの攻撃回数
 };
