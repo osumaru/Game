@@ -23,7 +23,6 @@ void CPlayerAttack::Init()
 	//エネミーのリストを取得
 	for (const auto& enemys : GetSceneManager().GetGameScene().GetMap()->GetEnemyList())
 	{
-		
 		bool* damagePossible = enemys->IsDamagePossible();
 		for (int i = 0; i < m_maxWeaponHitNum; i++)
 		{
@@ -159,7 +158,6 @@ void CPlayerAttack::Move()
 void CPlayerAttack::Rotation()
 {
 	//腰のボーンの座標を中心にプレイヤーを回転させる
-
 	//カメラからの移動方向
 	const CCamera& gameCamera = GetGameCamera().GetCamera();
 	CVector3 frontVec = gameCamera.GetTarget() - gameCamera.GetPosition();
@@ -187,7 +185,6 @@ void CPlayerAttack::Rotation()
 	{
 		moveSpeed.x = m_pPlayer->GetSkinmodel().GetWorldMatrix().m[2][0];
 		moveSpeed.z = m_pPlayer->GetSkinmodel().GetWorldMatrix().m[2][2];
-		//return;
 	}
 	moveSpeed.y = 0.0f;
 	moveSpeed.Normalize();
@@ -210,7 +207,6 @@ void CPlayerAttack::Rotation()
 
 	CQuaternion rot=CQuaternion::Identity;
 	rot.SetRotation(CVector3::AxisY, rad);
-	
 	CMatrix rotMat=CMatrix::Identity;
 	rotMat.MakeRotationFromQuaternion(rot);
 	CVector3 playerPos = m_pPlayer->GetPosition();
@@ -228,8 +224,6 @@ void CPlayerAttack::Rotation()
 	//腰を中心にしたクオータニオンとプレイヤーのやつの積
 	pRot.Multiply(rot);
 	m_pPlayerGetter->SetRotation(pRot);
-
 	m_pPlayerGetter->SetPosition(animPos);
-
 }
 

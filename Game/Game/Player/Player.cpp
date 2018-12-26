@@ -144,7 +144,7 @@ void CPlayer::Init(CVector3 position)
 	m_playerGetter.SetPlayer(this);
 
 	CVector3 boxSize = { 0.4f,0.6f,0.4f };
-	m_characterController.SetRigidBodyManip(100.0f);
+	//m_characterController.SetRigidBodyManip(100.0f);
 	m_boxCollider.Create({ boxSize.x,boxSize.y,boxSize.z });
 	m_groundCollision.Init(&m_boxCollider,m_position, CQuaternion::Identity);
 	m_groundCollision.Execute();
@@ -210,7 +210,7 @@ void CPlayer::Update()
 	m_skinmodel.Update(m_position, m_rotation, { 1.0f, 1.0f, 1.0f }, true);
 	m_weaponManager.Update();
 	//•â³’l‚ğ‚ğ“ü‚ê‚Ä„‘Ì‚ğ‚¸‚ç‚·
-	m_characterController.SetRigidBodyManip(100.0f);
+	//m_characterController.SetRigidBodyManip(100.0f);
 	m_groundCollision.SetPosition(m_position);
 	m_groundCollision.Execute();
 
