@@ -17,7 +17,7 @@ void CRock::Init(CVector3 position)
 	m_targetPos.y = playerMatrix.m[3][1];
 	m_targetPos.z = playerMatrix.m[3][2];
 	//キャラクターコントローラーを初期化
-	m_characterController.Init(0.5f, 0.5f, m_position);
+	m_characterController.Init(1.0f, 1.0f, m_position);
 	m_characterController.SetGravity(-4.9f);
 }
 
@@ -53,15 +53,21 @@ bool CRock::Start()
 
 void CRock::Update()
 {
-	if (m_characterController.GetGroundCollisionObject() != nullptr
-		|| m_characterController.GetWallCollisionObject() != nullptr)
+	if (m_characterController.GetWallCollisionObject() != nullptr)
 	{
-		//何かのオブジェクトに当たった
-		{
-			//プレイヤーに当たった
-			//GetPlayer().SetDamageEnemyPos(m_enemyPos);
-			//GetPlayer().SetDamage(true);
-		}
+		////壁に当たった
+		//if(m_characterController.GetWallCollisionObject()->getUserIndex() == enCollisionAttr_Player)
+		//{
+		//	//プレイヤーに当たった
+		//	GetPlayer().SetDamageEnemyPos(m_enemyPos);
+		//	GetPlayer().SetDamage(true);
+		//}
+		Delete(this);
+	}
+
+	if (m_characterController.GetGroundCollisionObject() != nullptr)
+	{
+		//地面に当たった
 		Delete(this);
 	}
 

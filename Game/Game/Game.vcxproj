@@ -186,7 +186,11 @@
     <ClCompile Include="Enemy\Samurai.cpp" />
     <ClCompile Include="Enemy\Zombie.cpp" />
     <ClCompile Include="GameSound\GameSound.cpp" />
+    <ClCompile Include="Item\InventoryItem\InventoryBow.cpp" />
+    <ClCompile Include="Item\InventoryItem\InventoryLargeSword.cpp" />
     <ClCompile Include="Item\InventoryItem\InventoryRecoveryItem.cpp" />
+    <ClCompile Include="Item\InventoryItem\InventorySword.cpp" />
+    <ClCompile Include="Item\InventoryItem\InventoryTwinSword.cpp" />
     <ClCompile Include="Map\MapChip\ObstacleMapObject.cpp" />
     <ClCompile Include="Player\PlayerSate\PlayerSky.cpp" />
     <ClCompile Include="Player\Weapon\WeaponTraceDraw.cpp" />
@@ -287,7 +291,11 @@
     <ClInclude Include="GameSound\GameSound.h" />
     <ClInclude Include="Item\InventoryItem\IInventoryEquip.h" />
     <ClInclude Include="Item\InventoryItem\IInventoryItem.h" />
+    <ClInclude Include="Item\InventoryItem\InventoryBow.h" />
+    <ClInclude Include="Item\InventoryItem\InventoryLargeSword.h" />
     <ClInclude Include="Item\InventoryItem\InventoryRecoveryItem.h" />
+    <ClInclude Include="Item\InventoryItem\InventorySword.h" />
+    <ClInclude Include="Item\InventoryItem\InventoryTwinSword.h" />
     <ClInclude Include="Map\MapChip\ObstacleMapObject.h" />
     <ClInclude Include="Player\PlayerSate\PlayerSky.h" />
     <ClInclude Include="Player\Weapon\WeaponTraceDraw.h" />
