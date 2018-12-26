@@ -46,6 +46,26 @@ public:
 		m_position = pos;
 	}
 
+	const CVector3 GetRigidBodyPosition() const
+	{
+		return m_rigidBody.GetPosition();
+	}
+
+	const CQuaternion GetRigidBodyRotation() const
+	{
+		return m_rigidBody.GetRotation();
+	}
+
+	void SetRigidBodyPosition(const CVector3& position)
+	{
+		m_rigidBody.SetPosition(position);
+	}
+
+	void SetRigidBodyRotation(const CQuaternion& rotation)
+	{
+		m_rigidBody.SetRotation(rotation);
+	}
+
 	//移動速度を設定。
 	void SetMoveSpeed(const CVector3& moveSpeed)
 	{
@@ -127,12 +147,6 @@ public:
 		m_rigidBody.SetUserIndex(userNum);
 	}
 
-	//補正値の設定
-	void SetRigidBodyManip(float RigidBodyManip)
-	{
-		m_rigidBodyManip = RigidBodyManip;
-	}
-
 	//剛体を描画
 	void Draw();
 
@@ -159,5 +173,4 @@ private:
 	const btCollisionObject*	m_groundHitObject;		//当たっている地面のオブジェクト
 	const btCollisionObject*	m_wallHitObject;		//当たっている壁のオブジェクト
 	CVector3					m_wallNormal;			//当たった壁の法線
-	float						m_rigidBodyManip;		//補正値（今は使ってない
 };

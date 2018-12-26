@@ -73,7 +73,6 @@ struct SSweepResultCeiling : public btCollisionWorld::ConvexResultCallback
 	virtual btScalar	addSingleResult(btCollisionWorld::LocalConvexResult& convexResult, bool normalInWorldSpace)
 	{
 		if (convexResult.m_hitCollisionObject == me ||
-			convexResult.m_hitCollisionObject->getUserIndex() == enCollisionAttr_Character ||
 			convexResult.m_hitCollisionObject->getUserIndex() == enCollisionAttr_Detection ||
 			convexResult.m_hitCollisionObject->getUserIndex() == enCollisionAttr_Item)
 		{
@@ -127,9 +126,7 @@ struct SSweepResultWall : public btCollisionWorld::ConvexResultCallback
 													//衝突したときに呼ばれるコールバック関数
 	virtual btScalar	addSingleResult(btCollisionWorld::LocalConvexResult& convexResult, bool normalInWorldSpace)
 	{
-		if (convexResult.m_hitCollisionObject == me ||
-			convexResult.m_hitCollisionObject->getUserIndex() == enCollisionAttr_Detection ||
-			convexResult.m_hitCollisionObject->getUserIndex() == enCollisionAttr_Character)
+		if (convexResult.m_hitCollisionObject == me)
 		{
 			//自分に衝突した。or地面に衝突した。
 			return 0.0f;
@@ -189,8 +186,7 @@ CCharacterController::CCharacterController() :
 	m_gravity(-9.8f),
 	m_groundHitObject(nullptr),
 	m_wallHitObject(nullptr),
-	m_wallNormal(0.0f, 0.0f, 0.0f),
-	m_rigidBodyManip(0.0f)
+	m_wallNormal(0.0f, 0.0f, 0.0f)
 {
 }
 
@@ -214,10 +210,12 @@ void CCharacterController::Init(float radius, float height, const CVector3& posi
 	rbInfo.mass = 0.0f;
 	m_rigidBody.Create(rbInfo);
 	//剛体の位置を更新。
-	m_rigidBody.SetPosition(m_position);
+	CVector3 rigidPos = m_position;
+	rigidPos.y += m_radius + m_height * 0.5f;
+	m_rigidBody.SetPosition(rigidPos);
 	//@todo 未対応。 trans.setRotation(btQuaternion(rotation.x, rotation.y, rotation.z));
 	m_rigidBody.SetUserIndex(enCollisionAttr_Character);
-	m_rigidBody.SetCollisionFlags(btCollisionObject::CF_CHARACTER_OBJECT);
+	//m_rigidBody.SetCollisionFlags(btCollisionObject::CF_CHARACTER_OBJECT);
 }
 
 void CCharacterController::Execute(float deltaTime)
@@ -321,7 +319,7 @@ void CCharacterController::Execute(float deltaTime)
 			{
 				break;
 			}
-			if (callback.hitObject != nullptr && m_rigidBody.GetBody()->getUserIndex() == enCollisionAttr_Character)
+			if (callback.hitObject != nullptr && m_rigidBody.GetBody()->getUserIndex() == enCollisionAttr_Player)
 			{
 				const_cast<btCollisionObject*>(callback.hitObject)->setPlayerCollisionWallFlg(true);
 			}
@@ -389,9 +387,9 @@ void CCharacterController::Execute(float deltaTime)
 			//地面上にいない
 			m_isOnGround = false;
 		}
-		if (callback.hitObject != nullptr && m_rigidBody.GetBody()->getUserIndex() == enCollisionAttr_Character)
+		if (callback.hitObject != nullptr && m_rigidBody.GetBody()->getUserIndex() == enCollisionAttr_Player)
 		{
-			//const_cast<btCollisionObject*>(callback.hitObject)->setPlayerCollisionGroundFlg(true);
+			const_cast<btCollisionObject*>(callback.hitObject)->setPlayerCollisionGroundFlg(true);
 		}
 		m_groundHitObject = callback.hitObject;
 
@@ -441,13 +439,13 @@ void CCharacterController::Execute(float deltaTime)
 	}
 	//移動確定。
 	m_position = nextPosition;
-	m_position.y += m_rigidBodyManip;
 	const btRigidBody* btBody = m_rigidBody.GetBody();
 	//剛体を動かす。
 	btBody->setActivationState(DISABLE_DEACTIVATION);
 	//剛体の一を更新
-	m_rigidBody.SetPosition(m_position);
-	m_position.y -= m_rigidBodyManip;
+	CVector3 rigidPos = m_position;
+	rigidPos.y += m_radius + m_height * 0.5f;
+	m_rigidBody.SetPosition(rigidPos);
 	//@todo 未対応。 trans.setRotation(btQuaternion(rotation.x, rotation.y, rotation.z));
 }
 
@@ -499,6 +497,7 @@ void CCharacterController::StaticExecute()
 			m_position += hitNormal;
 		}
 	}
+	
 }
 
 void CCharacterController::RemovedRigidBody()
@@ -511,6 +510,5 @@ void CCharacterController::Draw()
 	btTransform transform = m_rigidBody.GetBody()->getWorldTransform();
 
 	btVector3& position = transform.getOrigin();
-	position.setY(position.y() + m_radius + m_height * 0.5f - m_rigidBodyManip);
 	PhysicsWorld().DebugDraw(transform, m_collider.GetBody());
 }

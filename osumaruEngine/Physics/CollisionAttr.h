@@ -12,6 +12,7 @@ enum EnCollisionAttr
 	enCollisionAttr_Detection,
 	enCollisionAttr_Item,
 	enCollisionAttr_MapChip,
+	enCollisionAttr_Rock,
 	enCollisionAttr_Player,
 	enCollisionAttr_User,		//以下にユーザー定義のコリジョン属性を設定する。
 };

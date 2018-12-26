@@ -48,13 +48,13 @@ void CPhysicsWorld::Update()
 
 void CPhysicsWorld::Draw()
 {
-#ifdef _DEBUG
+//#ifdef _DEBUG
 	if (m_pCamera != nullptr)
 	{
 		m_pRigidBodyDraw->Draw(m_pCamera->GetViewMatrix(), m_pCamera->GetProjectionMatrix());
 		m_pRigidBodyDraw->Reset();
 	}
-#endif
+//#endif
 }
 
 void CPhysicsWorld::AddRigidBody(btRigidBody* rb)
