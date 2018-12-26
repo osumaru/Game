@@ -41,7 +41,7 @@ public:
 	virtual void Draw() {};
 
 	//アニメーションイベント用の関数
-	virtual void OnInvokeAnimationEvent(const wchar_t* animClipName, const wchar_t* eventName){};
+	virtual void OnInvokeAnimationEvent(const wchar_t* animClipName, const wchar_t* eventName) {};
 
 	void AddObject()
 	{
@@ -200,16 +200,17 @@ public:
 	}
 
 	//ダメージを受けられるか
-	bool IsDamagePossible() const
+	bool* IsDamagePossible()
 	{
-		return m_isDamagePossible;
+		return m_isDamagePossible.get();
 	}
 
 	//ダメージを受けられるかのフラグを設定する
-	void SetIsDamagePossible(bool isDamage)
-	{
-		m_isDamagePossible = isDamage;
-	}
+	//void SetIsDamagePossible(bool isDamage)
+	//{
+	//	m_isDamagePossible=isDamage;
+	//	//m_isDamagePossible = isDamage;
+	//}
 
 	//ワイヤーが当たったか
 	bool IsWireHit() const
@@ -248,18 +249,6 @@ public:
 		return m_attackType;
 	}
 
-	//攻撃された武器を取得
-	EnAttackWeapon GetAttackWeapon()
-	{
-		return m_attackWeapon;
-	}
-
-	//攻撃された武器を設定
-	void SetAttackWeapon(EnAttackWeapon AttackWeapon)
-	{
-		m_attackWeapon=AttackWeapon;
-	}
-
 protected:
 	CSkinModel						m_skinModel;					//スキンモデル
 	CAnimation						m_animation;					//アニメーション
@@ -275,11 +264,11 @@ protected:
 	std::list<IEnemy*>::iterator	m_iterater;						//自身のイテレータ
 	const CMatrix*					m_spineMatrix;					//当たり判定用の腰のワールド行列
 	CVector3						m_spinePos;						//当たり判定用の腰の座標
+	int								m_maxPlayerHit = 2;				//最大攻撃ヒット数
 	float							m_attackLength = 1.2f;			//攻撃できる距離
 	bool							m_isFind = false;				//プレイヤーを発見したか
 	bool							m_isDamage = false;				//ダメージを受けたか
-	bool							m_isDamagePossible = true;		//ダメージを受けられるか
+	std::unique_ptr<bool[]>			m_isDamagePossible;				//ダメージを受けられるか
 	bool							m_isWireHit = false;			//ワイヤーが当たったか
 	bool							m_isRemovedRigidBody = false;	//剛体が削除されたか
-	EnAttackWeapon					m_attackWeapon=enAttackWeaponNone;	//攻撃する武器
 };

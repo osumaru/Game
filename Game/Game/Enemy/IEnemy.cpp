@@ -7,7 +7,8 @@
 IEnemy::IEnemy() :
 	m_enemyStateMachine(this),
 	m_enemyTurn(this),
-	m_enemySearch(this)
+	m_enemySearch(this),
+	m_isDamagePossible(std::make_unique<bool[]>(m_maxPlayerHit))
 {
 }
 
