@@ -68,7 +68,7 @@ void CPlayer::Init(CVector3 position)
 	m_position = position;
 	m_skinmodel.Update(m_position, CQuaternion::Identity, CVector3::One);
 
-	m_characterController.Init(0.3f, 1.0f, m_position);
+	m_characterController.Init(0.4f, 1.1f, m_position);
 	m_characterController.SetGravity(-30.0f);
 	m_characterController.SetUserIndex(enCollisionAttr_Player);
 
@@ -144,7 +144,6 @@ void CPlayer::Init(CVector3 position)
 	m_playerGetter.SetPlayer(this);
 
 	CVector3 boxSize = { 0.4f,0.6f,0.4f };
-	m_characterController.SetRigidBodyManip(100.0f);
 	m_boxCollider.Create({ boxSize.x,boxSize.y,boxSize.z });
 	m_groundCollision.Init(&m_boxCollider,m_position, CQuaternion::Identity);
 	m_groundCollision.Execute();
@@ -210,7 +209,6 @@ void CPlayer::Update()
 	m_skinmodel.Update(m_position, m_rotation, { 1.0f, 1.0f, 1.0f }, true);
 	m_weaponManager.Update();
 	//ï‚ê≥ílÇÇì¸ÇÍÇƒçÑëÃÇÇ∏ÇÁÇ∑
-	m_characterController.SetRigidBodyManip(100.0f);
 	m_groundCollision.SetPosition(m_position);
 	m_groundCollision.Execute();
 
@@ -220,7 +218,7 @@ void CPlayer::Update()
 void CPlayer::Draw()
 {
 	//g_pathFinding.GetNavigationMesh().Draw();
-	//m_characterController.Draw();
+	m_characterController.Draw();
 	m_weaponManager.Draw();
 	m_skinmodel.Draw(GetGameCamera().GetViewMatrix(), GetGameCamera().GetProjectionMatrix());
 }
