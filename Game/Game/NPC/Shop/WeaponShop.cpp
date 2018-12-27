@@ -5,6 +5,10 @@
 #include "../../UI/Menu/EquipInventory.h"
 #include "../../UI/Fade/LoadScene.h"
 #include "../../Scene/SceneManager.h"
+#include "../../Item/InventoryItem/InventorySword.h"
+#include "../../Item/InventoryItem/InventoryLargeSword.h"
+#include "../../Item/InventoryItem/InventoryBow.h"
+#include "../../Item/InventoryItem/InventoryTwinSword.h"
 
 CWeaponShop::CWeaponShop()
 {
@@ -126,7 +130,26 @@ void CWeaponShop::Update()
 
 			break;
 		}
-		CEquipInventory::AddEquipList(weapons);
+		//インベントリに入れる用の装備(スプライト)を作る
+		IInventoryEquip* inventoryEquip = nullptr;
+		switch (weapons.weaponNum)
+		{
+		case EnPlayerWeapon::enWeaponSword:			//剣
+			inventoryEquip = new CInventorySword;
+			break;
+		case EnPlayerWeapon::enWeaponLongSword:		//大剣
+			inventoryEquip = new CInventoryLargeSword;
+			break;
+		case EnPlayerWeapon::enWeaponArrow:			//弓
+			inventoryEquip = new CInventoryBow;
+			break;
+		case EnPlayerWeapon::enWeaponTwinSword:		//双剣
+			inventoryEquip = new CInventoryTwinSword;
+			break;
+		}
+		inventoryEquip->Init();
+		inventoryEquip->SetEquipStatus(weapons);
+		CEquipInventory::AddEquipList(inventoryEquip);
 		CSoundSource* se = New<CSoundSource>(0);
 		se->Init("Assets/sound/SystemSound/BuySe.wav");
 		se->SetVolume(1.0f);

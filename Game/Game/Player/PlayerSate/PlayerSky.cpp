@@ -5,6 +5,7 @@
 #include "../../Scene/SceneManager.h"
 #include "../Weapon/WeaponManager.h"
 
+
 CPlayerSky::CPlayerSky()
 {
 }
@@ -17,11 +18,10 @@ void CPlayerSky::Init()
 
 void CPlayerSky::Update()
 {
-	CVector3 moveSpeed = m_pPlayerGetter->GetMoveSpeed();
-	moveSpeed.y -= 1.0f;
-	m_pPlayerGetter->SetMoveSpeed(moveSpeed);
-	m_pPlayerGetter->GetCharacterController().Execute(GameTime().GetDeltaFrameTime());
 
+	m_pPlayerGetter->GetCharacterController().Execute(GameTime().GetDeltaFrameTime());
+	
+	//地面についていたら着地モーションを流す
 	if (m_pPlayerGetter->GetCharacterController().IsOnGround())
 	{
 		if (m_pPlayerGetter->GetAnimation().GetCurrentAnimationNum() != enPlayerAnimationLanding)
@@ -41,7 +41,6 @@ void CPlayerSky::Update()
 			{
 				m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateStand);
 			}
-			
 		}
 	}
 	else if (m_pPlayer->GetIsStateCondition(CPlayerState::enPlayerStateDamage))

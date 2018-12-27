@@ -100,6 +100,12 @@ public:
 		return m_isDamege;
 	}
 
+	//キャラコンを取得
+	const CCharacterController& GetCharacterController() const
+	{
+		return m_characterController;
+	}
+
 	//ステータスの計算処理を行う関数
 	void StatusCalculation();
 
@@ -227,7 +233,9 @@ private:
 	bool								m_isInvinsible = false;					//無敵かのフラグ
 	CWireAction							m_wireAction;							//ワイヤーの飛ぶかどうかの判定をしたりするところ
 	CWireDraw							m_wireDraw;								//ワイヤーを描画する
-	bool								m_isStanAttack = false;
+	bool								m_isStanAttack = false;					//スタン攻撃
+	CCollisionDetection					m_groundCollision;						//地面用のコリジョン
+	CBoxCollider						m_boxCollider;							//ボックスコライダー
 };
 
 static CPlayer& GetPlayer()

@@ -79,7 +79,6 @@ void CWireAction::Update()
 		case enStateMap:
 			const CCamera& gameCamera = GetGameCamera().GetCamera();
 			CVector3 frontVec = gameCamera.GetTarget() - gameCamera.GetPosition();
-			frontVec.y = 0.0f;
 			frontVec.Normalize();
 			CVector3 rightVec;
 			rightVec.Cross(CVector3::AxisY, frontVec);
@@ -88,26 +87,26 @@ void CWireAction::Update()
 			playerDir = frontVec * Pad().GetLeftStickY();
 			playerDir += rightVec * Pad().GetLeftStickX();
 			playerDir.Normalize();
-			float dt = 0.0f;
+			float score = 0.0f;
 			for (const CVector3* pos : m_posWireFly)
 			{
 				CVector3 distance =  *pos - m_pPlayer->GetPosition();
-				if (distance.Length() < 70.0f)
+				float len = distance.Length();
+				distance.Normalize();
+				float localScore = (100.0f - len) / 100.0f * 0.3f;
+				float dt = max(distance.Dot(playerDir), 0.0f);
+				localScore += dt * 0.7f;
+				if (score < localScore)
 				{
-					distance.y = 0.0f;
-					distance.Normalize();
-					if (dt < distance.Dot(playerDir))
+					for (int i = WIRE_POS_LIST_NUM - 2; 0 <= i; i--)
 					{
-						dt = distance.Dot(playerDir);
-						for (int i = WIRE_POS_LIST_NUM - 2; 0 <= i; i--)
-						{
-							m_wirePositionList[i + 1].wirePos = m_wirePositionList[i].wirePos;
-							m_wirePositionList[i + 1].value = m_wirePositionList[i].value;
-						}
-						m_wirePositionList[0].wirePos = *pos;
-						m_wirePositionList[0].value = dt;
-						wireListCount++;
+						m_wirePositionList[i + 1].wirePos = m_wirePositionList[i].wirePos;
+						m_wirePositionList[i + 1].value = m_wirePositionList[i].value;
 					}
+					m_wirePositionList[0].wirePos = *pos;
+					m_wirePositionList[0].value = dt;
+					wireListCount++;
+					score = localScore;
 				}
 			}
 			break;

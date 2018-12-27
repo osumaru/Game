@@ -19,6 +19,18 @@ void CPlayerAttack::Init()
 	m_combineAnimation = GetPlayer().GetWeaponManager().GetWeapon()->GetCombineAnimation();
 	m_stanAttack = GetPlayer().GetWeaponManager().GetWeapon()->GetStanAttack();
 	m_maxAttackNum = GetPlayer().GetWeaponManager().GetWeapon()->GetMaxAttackNum();
+	m_maxWeaponHitNum = GetPlayer().GetWeaponManager().GetWeapon()->GetMaxWeaponHitNum();
+	//エネミーのリストを取得
+	for (const auto& enemys : GetSceneManager().GetGameScene().GetMap()->GetEnemyList())
+	{
+		
+		bool* damagePossible = enemys->IsDamagePossible();
+		for (int i = 0; i < m_maxWeaponHitNum; i++)
+		{
+			damagePossible[0] = true;
+			damagePossible[1] = true;
+		}
+	}
 
 	m_pPlayerGetter->SetMoveSpeed(CVector3::Zero);
 	m_attackCount = 0;
@@ -59,8 +71,12 @@ void CPlayerAttack::Update()
 		//エネミーのリストを取得
 		for (const auto& enemys : GetSceneManager().GetGameScene().GetMap()->GetEnemyList())
 		{
-			enemys->SetIsDamagePossible(true);
-			enemys->SetAttackWeapon(EnAttackWeapon::enAttackWeaponNone);
+			bool* damagePossible = enemys->IsDamagePossible();
+			for (int i = 0; i < m_maxWeaponHitNum;i++)
+			{
+				damagePossible[0] = true;
+				damagePossible[1] = true;
+			}
 		}
 		//攻撃モーション中はダメージモーションをさせない
 		if (m_isContinuationAttack)

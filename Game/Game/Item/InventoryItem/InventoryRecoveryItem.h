@@ -12,9 +12,6 @@ public:
 	//‰Šú‰»
 	void Init() override;
 
-	//XV
-	void Update() {};
-
 	//•`‰æ
 	void Draw() override;
 

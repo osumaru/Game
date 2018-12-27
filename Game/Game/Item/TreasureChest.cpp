@@ -4,14 +4,17 @@
 #include"../../Game/Camera/GameCamera.h"
 #include "../UI/Menu/EquipInventory.h"
 #include "../Scene/SceneManager.h"
+#include "../Player/Weapon/WeaponCommon.h"
+#include "../Item/InventoryItem/InventorySword.h"
+#include "../Item/InventoryItem/InventoryLargeSword.h"
+#include "../Item/InventoryItem/InventoryBow.h"
+#include "../Item/InventoryItem/InventoryTwinSword.h"
 
 void CTreasureChest::Init(CVector3 position)
 {
 	m_skinModel.Load(L"Assets/modelData/Chest.cmo");
 	m_position = position;
 	m_characterController.Init(0.6f, 0.4f, m_position);
-	//武器のステータスを決める
-	DesideWeaponStatus();
 }
 
 bool CTreasureChest::Start()
@@ -39,9 +42,12 @@ void CTreasureChest::Update()
 	bool isPopEnd = m_characterController.IsOnGround();
 	//プレイヤーとの距離を計算
 	bool isPickUp = PickUp(isPopEnd, 2.0f);
+	//拾うことができるか
 	if (isPickUp && Pad().IsTriggerButton(enButtonA)) {
-		//拾うことができる
-		CEquipInventory::AddEquipList(m_weaponStatus);
+		//武器のステータスを決める
+		DesideWeaponStatus();
+		m_inventoryEquip->Init();
+		CEquipInventory::AddEquipList(m_inventoryEquip);
 		Delete(this);
 	}
 
@@ -61,6 +67,7 @@ void CTreasureChest::Draw()
 
 void CTreasureChest::DesideWeaponStatus()
 {
+	SWeaponStatus weaponStatus;
 	//武器のステータスをランダムで決める
 	SBasicWeaponStatus basicWeaponStatus;
 	int weaponNumber = Random().GetRandSInt();
@@ -77,26 +84,31 @@ void CTreasureChest::DesideWeaponStatus()
 	if (weaponNumber == EnPlayerWeapon::enWeaponSword)
 	{
 		//剣
-		m_weaponStatus.weaponNum = EnPlayerWeapon::enWeaponSword;
+		m_inventoryEquip = new CInventorySword;
+		weaponStatus.weaponNum = EnPlayerWeapon::enWeaponSword;
 		weaponAttack += basicWeaponStatus.swordAttack;
 	}
 	else if (weaponNumber == EnPlayerWeapon::enWeaponLongSword)
 	{
 		//大剣
-		m_weaponStatus.weaponNum = EnPlayerWeapon::enWeaponLongSword;
+		m_inventoryEquip = new CInventoryLargeSword;
+		weaponStatus.weaponNum = EnPlayerWeapon::enWeaponLongSword;
 		weaponAttack += basicWeaponStatus.longSwordAttack;
 	}
 	else if (weaponNumber == EnPlayerWeapon::enWeaponArrow)
 	{
 		//弓
-		m_weaponStatus.weaponNum = EnPlayerWeapon::enWeaponArrow;
+		m_inventoryEquip = new CInventoryBow;
+		weaponStatus.weaponNum = EnPlayerWeapon::enWeaponArrow;
 		weaponAttack += basicWeaponStatus.arrowAttack;
 	}
 	else if (weaponNumber == EnPlayerWeapon::enWeaponTwinSword)
 	{
 		//双剣
-		m_weaponStatus.weaponNum = EnPlayerWeapon::enWeaponTwinSword;
+		m_inventoryEquip = new CInventoryTwinSword;
+		weaponStatus.weaponNum = EnPlayerWeapon::enWeaponTwinSword;
 		weaponAttack += basicWeaponStatus.twinSwordAttack;
 	}
-	m_weaponStatus.attack = weaponAttack;
+	weaponStatus.attack = weaponAttack;
+	m_inventoryEquip->SetEquipStatus(weaponStatus);
 }

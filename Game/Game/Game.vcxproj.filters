@@ -379,6 +379,18 @@
     <ClCompile Include="Player\PlayerSate\PlayerSky.cpp">
       <Filter>ソース ファイル\Player\PlayerState</Filter>
     </ClCompile>
+    <ClCompile Include="Item\InventoryItem\InventorySword.cpp">
+      <Filter>ソース ファイル\Item\InventoryItem</Filter>
+    </ClCompile>
+    <ClCompile Include="Item\InventoryItem\InventoryLargeSword.cpp">
+      <Filter>ソース ファイル\Item\InventoryItem</Filter>
+    </ClCompile>
+    <ClCompile Include="Item\InventoryItem\InventoryBow.cpp">
+      <Filter>ソース ファイル\Item\InventoryItem</Filter>
+    </ClCompile>
+    <ClCompile Include="Item\InventoryItem\InventoryTwinSword.cpp">
+      <Filter>ソース ファイル\Item\InventoryItem</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -665,6 +677,21 @@
     </ClInclude>
     <ClInclude Include="Player\PlayerSate\PlayerSky.h">
       <Filter>ソース ファイル\Player\PlayerState</Filter>
+    </ClInclude>
+    <ClInclude Include="Item\InventoryItem\IInventoryEquip.h">
+      <Filter>ソース ファイル\Item\InventoryItem</Filter>
+    </ClInclude>
+    <ClInclude Include="Item\InventoryItem\InventorySword.h">
+      <Filter>ソース ファイル\Item\InventoryItem</Filter>
+    </ClInclude>
+    <ClInclude Include="Item\InventoryItem\InventoryLargeSword.h">
+      <Filter>ソース ファイル\Item\InventoryItem</Filter>
+    </ClInclude>
+    <ClInclude Include="Item\InventoryItem\InventoryBow.h">
+      <Filter>ソース ファイル\Item\InventoryItem</Filter>
+    </ClInclude>
+    <ClInclude Include="Item\InventoryItem\InventoryTwinSword.h">
+      <Filter>ソース ファイル\Item\InventoryItem</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

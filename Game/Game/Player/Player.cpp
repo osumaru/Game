@@ -11,7 +11,6 @@
 #include "Weapon/Bow.h"
 #include "../Enemy/PathFinding/PathFinding.h"
 
-
 CPlayer *CPlayer::m_player = NULL;
 
 void CPlayer::OnInvokeAnimationEvent(//ƒAƒjƒ[ƒVƒ‡ƒ“ƒCƒxƒ“ƒg‚ªŒÄ‚Î‚ê‚é‚²‚Æ‚ÉŒÄ‚Ño‚³‚ê‚éH
@@ -28,7 +27,6 @@ void CPlayer::OnInvokeAnimationEvent(//ƒAƒjƒ[ƒVƒ‡ƒ“ƒCƒxƒ“ƒg‚ªŒÄ‚Î‚ê‚é‚²‚Æ‚ÉŒÄ‚
 		footSound->Play(false);
 		footSound->SetVolume(footVolume);
 	}
-
 
 	if (wcscmp(animClipName, L"Assets/modelData/PlayerThrustAttack.tka") == 0)
 	{//‚½‚Ô‚ñŒÄ‚Î‚ê‚½
@@ -58,7 +56,6 @@ void CPlayer::BeforeDead()
 	((CBow*)m_weaponManager.GetWeapon(enWeaponArrow))->Release();
 }
 
-
 void CPlayer::Init(CVector3 position)
 {
 	//Sleep(10000);
@@ -69,8 +66,9 @@ void CPlayer::Init(CVector3 position)
 	m_position = position;
 	m_skinmodel.Update(m_position, CQuaternion::Identity, CVector3::One);
 
-	m_characterController.Init(0.3f, 1.0f, m_position);
+	m_characterController.Init(0.4f, 1.1f, m_position);
 	m_characterController.SetGravity(-30.0f);
+	m_characterController.SetUserIndex(enCollisionAttr_Player);
 
 	//ƒAƒjƒ[ƒVƒ‡ƒ“‚Ì‰Šú‰»
 	{
@@ -105,13 +103,13 @@ void CPlayer::Init(CVector3 position)
 									{ L"Assets/modelData/PlayerRoll.tka" }	,				//‰ñ”ğƒAƒNƒVƒ‡ƒ“
 									{ L"Assets/modelData/PlayerRollCombine.tka" }	,		//‰ñ”ğƒAƒNƒVƒ‡ƒ“
 									{ L"Assets/modelData/PlayerDeath.tka" },				//€–SƒAƒjƒ[ƒVƒ‡ƒ“
-									{ L"Assets/modelData/PlayerWireThrow2.tka"},				//ƒƒCƒ„[‚ğ“Š‚°‚éƒAƒjƒ[ƒVƒ‡ƒ“
+									{ L"Assets/modelData/PlayerWireThrow2.tka"},			//ƒƒCƒ„[‚ğ“Š‚°‚éƒAƒjƒ[ƒVƒ‡ƒ“
 									{ L"Assets/modelData/PlayerWireMove.tka" },				//ƒƒCƒ„[ˆÚ“®ƒAƒjƒ[ƒVƒ‡ƒ“
 									{ L"Assets/modelData/PlayerJumpTackle.tka"},			//ƒƒCƒ„[UŒ‚ƒAƒjƒ[ƒVƒ‡ƒ“
 									{ L"Assets/modelData/PlayerArrowAttack.tka" },			//‹|‚ÌUŒ‚ƒAƒjƒ[ƒVƒ‡ƒ“
 									{ L"Assets/modelData/PlayerArrowAttackEvent.tka" },
-									{ L"Assets/modelData/PlayerLeageSwordAttack.tka" },	//‘åŒ•‚ÌUŒ‚ƒAƒjƒ[ƒVƒ‡ƒ“
-									{ L"Assets/modelData/PlayerTwinSwordAttack.tka" },	//“ñ“—¬‚ÌUŒ‚ƒAƒjƒ[ƒVƒ‡ƒ“
+									{ L"Assets/modelData/PlayerLeageSwordAttack.tka" },		//‘åŒ•‚ÌUŒ‚ƒAƒjƒ[ƒVƒ‡ƒ“
+									{ L"Assets/modelData/PlayerTwinSwordAttack.tka" },		//“ñ“—¬‚ÌUŒ‚ƒAƒjƒ[ƒVƒ‡ƒ“
 									{ L"Assets/modelData/PlayerLanding.tka" }
 		};
 
@@ -126,24 +124,31 @@ void CPlayer::Init(CVector3 position)
 		{
 			OnInvokeAnimationEvent(animClipname, eventName);
 		});
-
 	}
-
 
 	//ƒvƒŒƒCƒ„[‚ÌƒXƒe[ƒ^ƒX‚Ì‰Šú‰»
 	{
-		m_status.Strength = 10;						//UŒ‚—Í
-		m_status.Defense = 3;						//–hŒä—Í
-		m_status.Health = 100;						//‘Ì—Í
+		m_status.Strength = 10;							//UŒ‚—Í
+		m_status.Defense = 3;							//–hŒä—Í
+		m_status.Health = 100;							//‘Ì—Í
 		m_status.MaxHealth = m_status.Health;			//ƒŒƒxƒ‹‚²‚Æ‚ÌÅ‘åHP
-		m_status.Level = 1;						//ƒŒƒxƒ‹
-		m_status.OldExp = 15;						//‚Ğ‚Æ‚Â‘O‚ÌƒŒƒxƒ‹‚É•K—v‚ÈŒoŒ±’l
-		m_status.NextExp = ((m_status.OldExp * 1.1f + 0.5) + (m_status.Level * 12)) / 2 + 0.5;		//Ÿ‚ÌƒŒƒxƒ‹ƒAƒbƒv‚É•K—v‚ÈŒoŒ±’l
+		m_status.Level = 1;								//ƒŒƒxƒ‹
+		m_status.OldExp = 15;							//‚Ğ‚Æ‚Â‘O‚ÌƒŒƒxƒ‹‚É•K—v‚ÈŒoŒ±’l
+		m_status.NextExp = ((m_status.OldExp * 1.1f + 0.5) + (m_status.Level * 12)) / 2 + 0.5;	//Ÿ‚ÌƒŒƒxƒ‹ƒAƒbƒv‚É•K—v‚ÈŒoŒ±’l
 		m_status.ExperiencePoint = 0;					//ŒoŒ±’l
 		m_status.AccumulationExp += m_status.OldExp;	//—İÏŒoŒ±’l
 		m_status.Gold = 4000;							//Š‹à
 	}
 	m_playerGetter.SetPlayer(this);
+
+	CVector3 boxSize = { 0.4f,0.6f,0.4f };
+	m_boxCollider.Create({ boxSize.x,boxSize.y,boxSize.z });
+	m_groundCollision.Init(&m_boxCollider,m_position, CQuaternion::Identity);
+	CVector3 manipVector = { 0.0f,0.0f,100.0f };
+	CVector3 oldRigidPos = m_characterController.GetPosition();
+	m_characterController.SetPosition(manipVector);
+	m_groundCollision.Execute();
+	m_characterController.SetPosition(oldRigidPos);
 	m_PlayerStateMachine.SetPlayer(this, &m_playerGetter);
 	m_PlayerStateMachine.Init();
 	m_skinmodel.SetIsShadowCaster(true);
@@ -152,9 +157,8 @@ void CPlayer::Init(CVector3 position)
 	SetIsActive(true);
 	GetGameCamera().CameraSetPlayer();
 	m_wireDraw.Init(CVector3::Zero, CVector3::Zero, CVector3::Zero);
+
 }
-
-
 
 void CPlayer::Update()
 {
@@ -197,20 +201,29 @@ void CPlayer::Update()
 	m_animation.Update(GameTime().GetDeltaFrameTime());
 	m_skinmodel.Update(m_position, m_rotation, { 1.0f, 1.0f, 1.0f }, true);
 	m_PlayerStateMachine.Update();
+
 	m_animation.Update(0.0f);
 	m_position = m_characterController.GetPosition();
+
 	//ƒAƒjƒ[ƒVƒ‡ƒ“‚ÌXV
 	//ƒXƒLƒ“ƒ‚ƒfƒ‹‚ÌXV
 	m_skinmodel.Update(m_position, m_rotation, { 1.0f, 1.0f, 1.0f }, true);
 	m_weaponManager.Update();
-	
+	//•â³’l‚ğ‚ğ“ü‚ê‚Ä„‘Ì‚ğ‚¸‚ç‚·
+	//m_characterController.SetRigidBodyManip(100.0f);
+	CVector3 manipVector = { 0.0f,0.0f,100.0f };
+	CVector3 oldRigidPos = m_characterController.GetPosition();
+	m_characterController.SetPosition(manipVector);
+	m_groundCollision.SetPosition(m_position);
+	m_groundCollision.Execute();
+	m_characterController.SetPosition(oldRigidPos);
 }
 
 //•`‰æˆ—
 void CPlayer::Draw()
 {
 	//g_pathFinding.GetNavigationMesh().Draw();
-	//m_characterController.Draw();
+	m_characterController.Draw();
 	m_weaponManager.Draw();
 	m_skinmodel.Draw(GetGameCamera().GetViewMatrix(), GetGameCamera().GetProjectionMatrix());
 }
@@ -395,6 +408,7 @@ bool CPlayer::GetIsStateCondition(CPlayerState::EnPlayerState state)
 	case CPlayerState::enPlayerStateStand://ˆÚ“®—Ê‚ª0‚©
 		return m_characterController.GetMoveSpeed().Length() == 0.0f;
 	case CPlayerState::enPlayerStateSky:
-		return !m_characterController.IsOnGround(); //’n–Ê‚É’…’n‚µ‚Ä‚¢‚é‚©‚Ç‚¤‚©
+		//return !m_characterController.IsOnGround();//’n–Ê‚É’…’n‚µ‚Ä‚¢‚é‚©‚Ç‚¤‚©
+		return !m_groundCollision.IsHit();
 	}
 }

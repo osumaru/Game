@@ -33,15 +33,15 @@ void CFade::Update()
 			if (m_fadeTime < FADE_OUT_TIME)
 			{
 				m_texturerAlpha = (min((m_fadeTime / FADE_OUT_TIME), 1.0f));
-				m_fadeSprite.SetAlpha(m_texturerAlpha);
 			}
 			else
 			{
 				m_isExecute = false;
 				m_fadeTime = 0;
-				m_texturerAlpha = 0;
+				m_texturerAlpha = 1.0f;
 				m_loadScene.IsDraw(true);
 			}
+			m_fadeSprite.SetAlpha(m_texturerAlpha);
 
 			break;
 
@@ -50,16 +50,14 @@ void CFade::Update()
 			if (m_fadeTime < FADE_IN_TIME)
 			{
 				m_texturerAlpha = max((1 - (m_fadeTime / FADE_IN_TIME)), 0.0f);
-				m_fadeSprite.SetAlpha(m_texturerAlpha);
 			}
 			else
 			{
 				m_isExecute = false;
-				m_fadeTime = 0;
-				m_texturerAlpha = 1.0f;
-				
-				
+				m_fadeTime = 0.0f;
+				m_texturerAlpha = 0.0f;
 			}
+			m_fadeSprite.SetAlpha(m_texturerAlpha);
 			break;
 		}
 	}

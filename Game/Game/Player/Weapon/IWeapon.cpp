@@ -11,8 +11,6 @@
 void IWeapon::Init(CPlayer* player)
 {
 	m_pPlayer = player;
-	m_attackWeapon = std::make_unique<EnAttackWeapon[]>(1);
-	m_attackWeapon[0] = EnAttackWeapon::enAttackWeaponSword;
 	m_normalBoneMat = &m_pPlayer->GetSkinmodel().FindBoneWorldMatrix(L"LeftShoulder");
 	m_attackBoneMat = &m_pPlayer->GetSkinmodel().FindBoneWorldMatrix(L"RightHand");
 	Init();
@@ -105,7 +103,7 @@ void IWeapon::EnemyAttack()
 	std::list<CEnemyGroup*> enemyGroup = GetSceneManager().GetGameScene().GetMap()->GetEnemyGroupList();
 	for (const auto& group : enemyGroup)
 	{
-		for (int i = 0; i < m_weaponNum; i++)
+		for (int i = 0; i < m_maxWeaponHitNum; i++)
 		{
 			CVector3 enemyGroupPos = group->GetPosition();
 			CVector3 distance = enemyGroupPos - info.attackPos[i];
@@ -114,7 +112,8 @@ void IWeapon::EnemyAttack()
 			{
 				for (const auto& enemy : group->GetGroupList())
 				{
-					if (/*enemy->IsDamagePossible()&&*/enemy->GetAttackWeapon() != m_attackWeapon[i])
+					bool* damagePossible = enemy->IsDamagePossible();
+					if(damagePossible[i])
 					{
 						CVector3 EnemyVec = enemy->GetSpinePos();
 						EnemyVec.Subtract(info.attackPos[i]);
@@ -122,7 +121,7 @@ void IWeapon::EnemyAttack()
 						if (fabs(len) < 2.0f)
 						{
 							enemy->SetIsDamage(true);
-							enemy->SetIsDamagePossible(false);
+							damagePossible[i] = false;
 						}
 					}
 				}
@@ -136,7 +135,7 @@ void IWeapon::EnemyAttack()
 		//ボスがダメージを受けていなかったら
 		if (!GetMaw().GetIsDamage())
 		{
-			for (int i = 0; i < m_weaponNum; i++)
+			for (int i = 0; i < m_maxWeaponHitNum; i++)
 			{
 				//ダウンしていなかったら
 				if (!GetMaw().GetIsDown())

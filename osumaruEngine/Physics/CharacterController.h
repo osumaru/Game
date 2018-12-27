@@ -37,13 +37,17 @@ public:
 	//座標を取得。
 	const CVector3& GetPosition() const
 	{
-		return m_position;
+		CVector3 rigidPos = m_rigidBody.GetPosition();
+		rigidPos.y -= m_radius + m_height * 0.5f;
+		return rigidPos;
 	}
 
 	//座標を設定。
 	void SetPosition(const CVector3& pos)
 	{
-		m_position = pos;
+		CVector3 rigidPos = pos;
+		rigidPos.y += m_radius + m_height * 0.5f;
+		m_rigidBody.SetPosition(rigidPos);
 	}
 
 	//移動速度を設定。
@@ -141,7 +145,7 @@ public:
 	}
 
 private:
-	CVector3					m_position;				//座標
+	//CVector3					m_position;				//座標
 	CVector3					m_moveSpeed;			//移動速度
 	bool						m_isJump;				//ジャンプしているか？
 	bool						m_isOnGround;			//地面に設置しているか？
@@ -153,5 +157,4 @@ private:
 	const btCollisionObject*	m_groundHitObject;		//当たっている地面のオブジェクト
 	const btCollisionObject*	m_wallHitObject;		//当たっている壁のオブジェクト
 	CVector3					m_wallNormal;			//当たった壁の法線
-	const float					m_rigidBodyManip;		//補正値（今は使ってない
 };
