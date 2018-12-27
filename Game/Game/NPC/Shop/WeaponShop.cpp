@@ -131,25 +131,26 @@ void CWeaponShop::Update()
 			break;
 		}
 		//インベントリに入れる用の装備(スプライト)を作る
-		IInventoryEquip* inventoryEquip = nullptr;
+		std::unique_ptr<IInventoryEquip> inventoryEquip;
 		switch (weapons.weaponNum)
 		{
 		case EnPlayerWeapon::enWeaponSword:			//剣
-			inventoryEquip = new CInventorySword;
+			inventoryEquip = std::make_unique<CInventorySword>();
 			break;
 		case EnPlayerWeapon::enWeaponLongSword:		//大剣
-			inventoryEquip = new CInventoryLargeSword;
+			inventoryEquip = std::make_unique<CInventoryLargeSword>();
 			break;
 		case EnPlayerWeapon::enWeaponArrow:			//弓
-			inventoryEquip = new CInventoryBow;
+			inventoryEquip = std::make_unique<CInventoryBow>();
 			break;
 		case EnPlayerWeapon::enWeaponTwinSword:		//双剣
-			inventoryEquip = new CInventoryTwinSword;
+			inventoryEquip = std::make_unique<CInventoryTwinSword>();
 			break;
 		}
 		inventoryEquip->Init();
 		inventoryEquip->SetEquipStatus(weapons);
-		CEquipInventory::AddEquipList(inventoryEquip);
+		CEquipInventory::AddEquipList(std::move(inventoryEquip));
+
 		CSoundSource* se = New<CSoundSource>(0);
 		se->Init("Assets/sound/Shop/BuySe.wav");
 		se->SetVolume(1.0f);

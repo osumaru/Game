@@ -61,6 +61,7 @@ CVector3 IItem::Move()
 	CVector3 playerPos = GetPlayer().GetPosition();
 	CVector3 toPlayer = playerPos - m_position;
 	toPlayer.Normalize();
-	toPlayer *= speed;
+	toPlayer *= speed + m_accele;
+	m_accele += 0.3f;
 	return toPlayer;
 }

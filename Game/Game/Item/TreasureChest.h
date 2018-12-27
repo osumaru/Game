@@ -5,8 +5,7 @@
 #pragma once
 
 #include "IItem.h"
-
-class IInventoryEquip;
+#include "InventoryItem/IInventoryEquip.h"
 
 class CTreasureChest : public IItem
 {
@@ -38,5 +37,5 @@ private:
 		int twinSwordAttack = 30;	//‘oŒ•‚ÌUŒ‚—Í
 	};
 
-	IInventoryEquip* m_inventoryEquip = nullptr;	//ƒCƒ“ƒxƒ“ƒgƒŠ‚É“ü‚ê‚é‘•”õ
+	std::unique_ptr<IInventoryEquip> m_inventoryEquip;
 };

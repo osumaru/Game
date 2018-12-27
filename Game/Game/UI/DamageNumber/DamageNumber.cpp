@@ -84,7 +84,7 @@ void CDamageNumber::AfterDraw()
 void CDamageNumber::DamageCalculation()
 {
 	//ダメージ計算
-	SWeaponStatus weaponStatus = GetPlayer().GetWeaponManager().GetWeapon()->GetWeaponStatus();
+	SWeaponStatus weaponStatus = GetPlayer().GetWeaponManager().GetEquipWeapon()->GetEquipStatus()/*GetWeapon()->GetWeaponStatus()*/;
 	int playerStrength = GetPlayer().GetStatus().Strength + weaponStatus.attack;
 	int enemyDefence = m_enemy->GetStatus().defense;
 	int damage = playerStrength - enemyDefence;
