@@ -408,7 +408,7 @@ bool CPlayer::GetIsStateCondition(CPlayerState::EnPlayerState state)
 	case CPlayerState::enPlayerStateStand://移動量が0か
 		return m_characterController.GetMoveSpeed().Length() == 0.0f;
 	case CPlayerState::enPlayerStateSky:
-		//return !m_characterController.IsOnGround();//地面に着地しているかどうか
+		//地面に着地しているかどうか
 		return !m_groundCollision.IsHit();
 	}
 }
