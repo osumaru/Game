@@ -23,13 +23,13 @@ public:
 
 private:
 	CSprite		m_weapon[enWeaponNum];			//武器
-	CTexture	m_weaponTexture[enWeaponNum];
+	CTexture*	m_weaponTexture[enWeaponNum];
 	CSprite		m_crossKey;						//十字キー
-	CTexture	m_crossKeyTexture;
+	CTexture*	m_crossKeyTexture;
 	CSprite		m_LBButton;						//LBボタン
-	CTexture	m_LBButtonTexture;
+	CTexture*	m_LBButtonTexture;
 	CSprite		m_RBButton;						//RBボタン
-	CTexture	m_RBButtonTexture;
+	CTexture*	m_RBButtonTexture;
 	CVector2	crossKeyPos;					//十字キーの座標
 	CVector2	size;							//サイズ
 	int			weaponNumber = enWeaponSword;			//変更する武器の番号

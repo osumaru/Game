@@ -15,8 +15,10 @@ public:
 	//更新
 	void Update()override;
 
+	//移動
 	void Move();
 
+	//回転
 	void Rotation();
 
 private:
@@ -28,8 +30,8 @@ private:
 	bool						m_isPreDodge = false;				//回避の先行入力用フラグ
 	bool*						m_stanAttack;						//スタン攻撃
 	int							m_maxWeaponHitNum;					//武器ごとの攻撃回数
-	const CMatrix* m_pBoneMat;	//ボーンの行列のポインタ
-	CVector3 m_manipVec;		//ボーンの座標からプレイヤーの座標までのベクトル
-	CVector3 m_preBonePos;		//前のフレームのボーンの座標
+	const CMatrix*				m_pBoneMat;							//ボーンの行列のポインタ
+	CVector3					m_manipVec;							//ボーンの座標からプレイヤーの座標までのベクトル
+	CVector3					m_preBonePos;						//前のフレームのボーンの座標
 };
 
