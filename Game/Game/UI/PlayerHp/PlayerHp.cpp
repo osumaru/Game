@@ -11,16 +11,16 @@ void CPlayerHp::Init()
 	m_playerMaxHp = (float)GetPlayer().GetStatus().Health;
 
 	//プレイヤーHPのロード
-	m_playerHpTexture.Load(L"Assets/sprite/hp2.png");
-	m_playerHpSprite.Init(&m_playerHpTexture);
+	m_playerHpTexture = TextureResource().LoadTexture(L"Assets/sprite/hp2.png");
+	m_playerHpSprite.Init(m_playerHpTexture);
 	m_playerHpSprite.SetCenterPosition({ m_playerHpCenterPos });
 	m_playerHpSprite.SetPosition({ m_playerHpPos });
 	m_playerHpSize.x = (float)(m_playerMaxHpSizeX*(GetPlayer().GetStatus().Health / m_playerMaxHp));
 	m_playerHpSprite.SetSize({ m_playerHpSize.x, m_playerHpSize.y});
 	
 	//プレイヤーHPバックグラウンドのロード
-	m_playerHpBackTexture.Load(L"Assets/sprite/hpBack.png");
-	m_playerHpBackSprite.Init(&m_playerHpBackTexture);
+	m_playerHpBackTexture = TextureResource().LoadTexture(L"Assets/sprite/hpBack.png");
+	m_playerHpBackSprite.Init(m_playerHpBackTexture);
 	m_playerHpBackSprite.SetCenterPosition({ m_playerHpBackCenterPos });
 	m_playerHpBackSprite.SetPosition({ m_playerHpBackPos });
 	m_playerHpBackSize.x = (float)(m_playerMaxHpSizeX*(GetPlayer().GetStatus().Health / m_playerMaxHp));

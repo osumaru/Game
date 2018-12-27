@@ -34,14 +34,14 @@ void CMenu::BeforeDead()
 void CMenu::Init()
 {
 	m_menuSoundEffect.Init("Assets/sound/SystemSound/MenuOpen.wav", false);
-	m_Texture.Load(L"Assets/sprite/MenuUI/Menu.png");
-	m_menu.Init(&m_Texture);
+	m_Texture = TextureResource().LoadTexture(L"Assets/sprite/MenuUI/Menu.png");
+	m_menu.Init(m_Texture);
 	m_menu.SetPosition({ -1.0f, -1.0f });
 	m_menu.SetSize({ 1290.0f,720.0f });
 
 	//羽ペンアイコン
-	m_selectTexture.Load(L"Assets/sprite/MenuUI/Select.png");
-	m_selectSprite.Init(&m_selectTexture);
+	m_selectTexture = TextureResource().LoadTexture(L"Assets/sprite/MenuUI/Select.png");
+	m_selectSprite.Init(m_selectTexture);
 	m_selectPosition = SELECT_TEX_POS;
 	m_selectSprite.SetPosition(m_selectPosition);
 	m_selectSprite.SetSize(m_selectScale);

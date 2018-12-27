@@ -26,11 +26,11 @@ public:
 
 private:
 	CSprite									m_miniMap;				//ミニマップ
-	CTexture								m_miniMapTexture;
+	CTexture*								m_miniMapTexture;
 	CSprite									m_playerIcon;			//プレイヤーアイコン
-	CTexture								m_playerIconTexture;
+	CTexture*								m_playerIconTexture;
 	std::vector<std::unique_ptr<CSprite>>	m_enemyIcon;			//エネミーアイコン
-	CTexture								m_enemyIconTexture;
+	CTexture*								m_enemyIconTexture;
 	std::list<IEnemy*>*						m_enemyList;			//エネミーリスト
 	CVector2								m_mapCenterPos;			//ミニマップの中心座標
 };

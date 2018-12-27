@@ -18,22 +18,22 @@ void CMiniMap::Init()
 {
 	m_mapCenterPos = { 540.0f,-260.0f };
 	//ミニマップを初期化
-	m_miniMapTexture.Load(L"Assets/sprite/miniMap.png");
-	m_miniMap.Init(&m_miniMapTexture);
+	m_miniMapTexture = TextureResource().LoadTexture(L"Assets/sprite/miniMap.png");
+	m_miniMap.Init(m_miniMapTexture);
 	m_miniMap.SetPosition(m_mapCenterPos);
 	m_miniMap.SetSize({ 180.0f,180.0f });
 	m_miniMap.SetAlpha(0.8f);
 	//プレイヤーアイコンを初期化
-	m_playerIconTexture.Load(L"Assets/sprite/player_Icon.png");
-	m_playerIcon.Init(&m_playerIconTexture);
+	m_playerIconTexture = TextureResource().LoadTexture(L"Assets/sprite/player_Icon.png");
+	m_playerIcon.Init(m_playerIconTexture);
 	m_playerIcon.SetPosition(m_mapCenterPos);
 	m_playerIcon.SetSize({ 15.0f,15.0f });
 	//エネミーアイコンを初期化
-	m_enemyIconTexture.Load(L"Assets/sprite/enemy_Icon.png");
+	m_enemyIconTexture = TextureResource().LoadTexture(L"Assets/sprite/enemy_Icon.png");
 	m_enemyList = &GetSceneManager().GetGameScene().GetMap()->GetEnemyList();
 	for (int i = 0; i < m_enemyList->size(); i++) {
 		m_enemyIcon.emplace_back(std::make_unique<CSprite>());
-		m_enemyIcon[i]->Init(&m_enemyIconTexture);
+		m_enemyIcon[i]->Init(m_enemyIconTexture);
 		m_enemyIcon[i]->SetPosition(m_mapCenterPos);
 		m_enemyIcon[i]->SetSize({ 10.0f,10.0f });
 		m_enemyIcon[i]->SetAlpha(0.8f);

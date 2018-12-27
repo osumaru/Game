@@ -77,6 +77,6 @@ public:
 
 private:
 	CSprite		m_number[EnNumber::enNumber_Num];			//スプライト
-	CTexture	m_numberTexture[EnNumber::enNumber_Num];	//テクスチャ
+	CTexture*	m_numberTexture[EnNumber::enNumber_Num];	//テクスチャ
 	int			m_num = 0;									//数値を保存する変数
 };

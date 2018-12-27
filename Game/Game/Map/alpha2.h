@@ -12,6 +12,13 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagPlayer, //タグ
 },
+//Map4
+{
+	L"Map4",
+	CVector3(0.00f, 0.00f, 0.00f),             //平行移動
+	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f),  //回転
+	enMapTagTerrain, //タグ
+},
 //ninja
 {
 	L"ninja",
@@ -54,13 +61,6 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagSamurai, //タグ
 },
-//Shopgirl
-{
-	L"Shopgirl",
-	CVector3(-125.50f, 0.00f, -144.60f),             //平行移動
-	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
-	enMapTagItemShop, //タグ
-},
 //samurai
 {
 	L"samurai",
@@ -88,13 +88,6 @@
 	CVector3(74.21f, 47.76f, 80.06f),             //平行移動
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagEnemyGroup, //タグ
-},
-//Shopgirl
-{
-	L"Shopgirl",
-	CVector3(-130.57f, 0.00f, -144.60f),             //平行移動
-	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
-	enMapTagWeaponShop, //タグ
 },
 //Warrok
 {
@@ -248,6 +241,188 @@
 	L"zombi",
 	CVector3(-3.20f, 0.00f, 175.60f),             //平行移動
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
+	enMapTagEnemyGroup, //タグ
+},
+//ninja
+{
+	L"ninja",
+	CVector3(-235.60f, 0.00f, 82.10f),             //平行移動
+	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f),  //回転
+	enMapTagNinja, //タグ
+},
+//ninja
+{
+	L"ninja",
+	CVector3(-235.10f, 0.00f, 66.60f),             //平行移動
+	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f),  //回転
+	enMapTagNinja, //タグ
+},
+//ninja
+{
+	L"ninja",
+	CVector3(-246.50f, 0.00f, 81.10f),             //平行移動
+	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f),  //回転
+	enMapTagNinja, //タグ
+},
+//ninja
+{
+	L"ninja",
+	CVector3(-245.90f, 0.00f, 68.80f),             //平行移動
+	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f),  //回転
+	enMapTagNinja, //タグ
+},
+//zombi
+{
+	L"zombi",
+	CVector3(5.87f, 90.35f, -207.49f),             //平行移動
+	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f),  //回転
+	enMapTagZombie, //タグ
+},
+//ninja
+{
+	L"ninja",
+	CVector3(-240.00f, 0.00f, 75.30f),             //平行移動
+	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f),  //回転
+	enMapTagEnemyGroup, //タグ
+},
+//samurai
+{
+	L"samurai",
+	CVector3(-194.00f, 0.00f, 149.20f),             //平行移動
+	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f),  //回転
+	enMapTagSamurai, //タグ
+},
+//samurai
+{
+	L"samurai",
+	CVector3(-183.30f, 0.00f, 165.10f),             //平行移動
+	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f),  //回転
+	enMapTagSamurai, //タグ
+},
+//samurai
+{
+	L"samurai",
+	CVector3(-175.10f, 0.00f, 155.50f),             //平行移動
+	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f),  //回転
+	enMapTagSamurai, //タグ
+},
+//samurai
+{
+	L"samurai",
+	CVector3(-182.30f, 0.00f, 144.90f),             //平行移動
+	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f),  //回転
+	enMapTagSamurai, //タグ
+},
+//samurai
+{
+	L"samurai",
+	CVector3(-184.40f, 0.00f, 155.40f),             //平行移動
+	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f),  //回転
+	enMapTagEnemyGroup, //タグ
+},
+//Warrok
+{
+	L"Warrok",
+	CVector3(59.50f, 0.00f, 157.00f),             //平行移動
+	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f),  //回転
+	enMapTagWarrok, //タグ
+},
+//Warrok
+{
+	L"Warrok",
+	CVector3(50.90f, 0.00f, 157.00f),             //平行移動
+	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f),  //回転
+	enMapTagWarrok, //タグ
+},
+//Warrok
+{
+	L"Warrok",
+	CVector3(51.30f, 0.00f, 149.00f),             //平行移動
+	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f),  //回転
+	enMapTagWarrok, //タグ
+},
+//zombi
+{
+	L"zombi",
+	CVector3(0.00f, 0.00f, 165.70f),             //平行移動
+	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f),  //回転
+	enMapTagZombie, //タグ
+},
+//Warrok
+{
+	L"Warrok",
+	CVector3(58.70f, 0.00f, 148.40f),             //平行移動
+	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f),  //回転
+	enMapTagWarrok, //タグ
+},
+//Warrok
+{
+	L"Warrok",
+	CVector3(54.00f, 0.00f, 153.90f),             //平行移動
+	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f),  //回転
+	enMapTagEnemyGroup, //タグ
+},
+//ninja
+{
+	L"ninja",
+	CVector3(43.70f, 0.00f, -40.00f),             //平行移動
+	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f),  //回転
+	enMapTagNinja, //タグ
+},
+//ninja
+{
+	L"ninja",
+	CVector3(51.20f, 0.00f, -38.10f),             //平行移動
+	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f),  //回転
+	enMapTagNinja, //タグ
+},
+//ninja
+{
+	L"ninja",
+	CVector3(45.90f, 0.00f, -44.60f),             //平行移動
+	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f),  //回転
+	enMapTagNinja, //タグ
+},
+//ninja
+{
+	L"ninja",
+	CVector3(53.90f, 0.00f, -43.60f),             //平行移動
+	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f),  //回転
+	enMapTagNinja, //タグ
+},
+//ninja
+{
+	L"ninja",
+	CVector3(49.60f, 0.00f, -41.00f),             //平行移動
+	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f),  //回転
+	enMapTagEnemyGroup, //タグ
+},
+//zombi
+{
+	L"zombi",
+	CVector3(-263.00f, 0.00f, -143.00f),             //平行移動
+	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f),  //回転
+	enMapTagZombie, //タグ
+},
+//zombi
+{
+	L"zombi",
+	CVector3(-270.80f, 0.00f, -154.70f),             //平行移動
+	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f),  //回転
+	enMapTagZombie, //タグ
+},
+//zombi
+{
+	L"zombi",
+	CVector3(-271.70f, 0.00f, -147.30f),             //平行移動
+	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f),  //回転
+	enMapTagZombie, //タグ
+},
+//zombi
+{
+	L"zombi",
+	CVector3(-265.80f, 0.00f, -149.40f),             //平行移動
+	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f),  //回転
 	enMapTagEnemyGroup, //タグ
 },
 //Building1
@@ -642,188 +817,6 @@
 	CQuaternion(-0.71f, 0.00f, 0.00f, 0.71f ),  //回転
 	enMapTagObstacle, //タグ
 },
-//ninja
-{
-	L"ninja",
-	CVector3(-235.60f, 0.00f, 82.10f),             //平行移動
-	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
-	enMapTagNinja, //タグ
-},
-//ninja
-{
-	L"ninja",
-	CVector3(-235.10f, 0.00f, 66.60f),             //平行移動
-	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
-	enMapTagNinja, //タグ
-},
-//ninja
-{
-	L"ninja",
-	CVector3(-246.50f, 0.00f, 81.10f),             //平行移動
-	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
-	enMapTagNinja, //タグ
-},
-//ninja
-{
-	L"ninja",
-	CVector3(-245.90f, 0.00f, 68.80f),             //平行移動
-	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
-	enMapTagNinja, //タグ
-},
-//zombi
-{
-	L"zombi",
-	CVector3(5.87f, 90.35f, -207.49f),             //平行移動
-	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
-	enMapTagZombie, //タグ
-},
-//ninja
-{
-	L"ninja",
-	CVector3(-240.00f, 0.00f, 75.30f),             //平行移動
-	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
-	enMapTagEnemyGroup, //タグ
-},
-//samurai
-{
-	L"samurai",
-	CVector3(-194.00f, 0.00f, 149.20f),             //平行移動
-	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
-	enMapTagSamurai, //タグ
-},
-//samurai
-{
-	L"samurai",
-	CVector3(-183.30f, 0.00f, 165.10f),             //平行移動
-	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
-	enMapTagSamurai, //タグ
-},
-//samurai
-{
-	L"samurai",
-	CVector3(-175.10f, 0.00f, 155.50f),             //平行移動
-	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
-	enMapTagSamurai, //タグ
-},
-//samurai
-{
-	L"samurai",
-	CVector3(-182.30f, 0.00f, 144.90f),             //平行移動
-	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
-	enMapTagSamurai, //タグ
-},
-//samurai
-{
-	L"samurai",
-	CVector3(-184.40f, 0.00f, 155.40f),             //平行移動
-	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
-	enMapTagEnemyGroup, //タグ
-},
-//Warrok
-{
-	L"Warrok",
-	CVector3(59.50f, 0.00f, 157.00f),             //平行移動
-	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
-	enMapTagWarrok, //タグ
-},
-//Warrok
-{
-	L"Warrok",
-	CVector3(50.90f, 0.00f, 157.00f),             //平行移動
-	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
-	enMapTagWarrok, //タグ
-},
-//Warrok
-{
-	L"Warrok",
-	CVector3(51.30f, 0.00f, 149.00f),             //平行移動
-	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
-	enMapTagWarrok, //タグ
-},
-//zombi
-{
-	L"zombi",
-	CVector3(0.00f, 0.00f, 165.70f),             //平行移動
-	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
-	enMapTagZombie, //タグ
-},
-//Warrok
-{
-	L"Warrok",
-	CVector3(58.70f, 0.00f, 148.40f),             //平行移動
-	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
-	enMapTagWarrok, //タグ
-},
-//Warrok
-{
-	L"Warrok",
-	CVector3(54.00f, 0.00f, 153.90f),             //平行移動
-	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
-	enMapTagEnemyGroup, //タグ
-},
-//ninja
-{
-	L"ninja",
-	CVector3(43.70f, 0.00f, -40.00f),             //平行移動
-	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
-	enMapTagNinja, //タグ
-},
-//ninja
-{
-	L"ninja",
-	CVector3(51.20f, 0.00f, -38.10f),             //平行移動
-	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
-	enMapTagNinja, //タグ
-},
-//ninja
-{
-	L"ninja",
-	CVector3(45.90f, 0.00f, -44.60f),             //平行移動
-	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
-	enMapTagNinja, //タグ
-},
-//ninja
-{
-	L"ninja",
-	CVector3(53.90f, 0.00f, -43.60f),             //平行移動
-	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
-	enMapTagNinja, //タグ
-},
-//ninja
-{
-	L"ninja",
-	CVector3(49.60f, 0.00f, -41.00f),             //平行移動
-	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
-	enMapTagEnemyGroup, //タグ
-},
-//zombi
-{
-	L"zombi",
-	CVector3(-263.00f, 0.00f, -143.00f),             //平行移動
-	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
-	enMapTagZombie, //タグ
-},
-//zombi
-{
-	L"zombi",
-	CVector3(-270.80f, 0.00f, -154.70f),             //平行移動
-	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
-	enMapTagZombie, //タグ
-},
-//zombi
-{
-	L"zombi",
-	CVector3(-271.70f, 0.00f, -147.30f),             //平行移動
-	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
-	enMapTagZombie, //タグ
-},
-//zombi
-{
-	L"zombi",
-	CVector3(-265.80f, 0.00f, -149.40f),             //平行移動
-	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
-	enMapTagEnemyGroup, //タグ
-},
 //Shopgirl
 {
 	L"Shopgirl",
@@ -864,5 +857,19 @@
 	L"Shopgirl",
 	CVector3(-183.00f, 0.00f, -27.20f),             //平行移動
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
+	enMapTagItemShop, //タグ
+},
+//Shopgirl
+{
+	L"Shopgirl",
+	CVector3(-130.57f, 0.00f, -144.60f),             //平行移動
+	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f),  //回転
+	enMapTagWeaponShop, //タグ
+},
+//Shopgirl
+{
+	L"Shopgirl",
+	CVector3(-125.50f, 0.00f, -144.60f),             //平行移動
+	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f),  //回転
 	enMapTagItemShop, //タグ
 },

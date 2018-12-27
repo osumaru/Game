@@ -49,8 +49,8 @@ protected:
 	struct ShopItem
 	{
 		IItem::SItemStatus	ItemStatus;				//アイテムの情報
-		CSprite				ItemSprite;				//アイテムのスプライト
-		CTexture			ItemTexture;			//アイテムのテクスチャ
+		CSprite			ItemSprite;				//アイテムのスプライト
+		CTexture*			ItemTexture;			//アイテムのテクスチャ
 	};
 
 	CSkinModel			m_skinModel;						//スキンモデル
@@ -59,7 +59,7 @@ protected:
 	CVector3			m_scale = CVector3::One;			//スケール
 	CQuaternion			m_rotation = CQuaternion::Identity;	//回転
 	CSprite				m_backSprite;
-	CTexture			m_backTexture;
+	CTexture*			m_backTexture;
 	EShopState			m_shopState = enShopNone;			//店の状態
 	EShopState			m_selectShop = enShopNone;			//選択中の状態
 
@@ -71,16 +71,16 @@ protected:
 	const CVector2		SHOPLINEUP_POSITION_OFFSET = { 80.0f,85.0f };
 
 	CSprite				m_selectItemSprite;
-	CTexture			m_selectItemTexture;
+	CTexture*			m_selectItemTexture;
 	CVector2			m_slectItemTexPos = { -220.0f,200.0f };
 	CVector2			m_selectItemTexSize = { 80.0f,80.0f };
 
 	static const int	SELECT_TEX_ELEMENT = 2;									//セレクト用のスプライトの要素数
 	const	CVector2	SELECT_POSITON_START = { 350.0f,-195.0f };				//セレクトテクスチャの初期座標
 	CSprite				m_shopSelect[SELECT_TEX_ELEMENT];						//セレクト用のスプライト
-	CTexture			m_shopSelectTexture[SELECT_TEX_ELEMENT];				//セレクト用のテクスチャ
+	CTexture*			m_shopSelectTexture[SELECT_TEX_ELEMENT];				//セレクト用のテクスチャ
 	CSprite				m_shopSelectPen;										//ペン用のスプライト
-	CTexture			m_shopSelectPenTexture;									//ペン用のテクスチャ
+	CTexture*			m_shopSelectPenTexture;									//ペン用のテクスチャ
 	CVector2			m_shopSelectPosition = {200.0f,-200.0f};
 	CVector2			m_shopSelectSize = {200.0f,50.0f};
 	CVector2			m_shopSelectPenPosition = { 350.0f,-195.0f };

@@ -27,7 +27,6 @@ void CSkinModel::Load(const wchar_t* filePath, CAnimation* animation)
 	ZeroMemory(&m_materialFlg, sizeof(SMaterialFlg));
 	m_materialFlg.isDiffuse = g_materialFlg.isDiffuse;
 	m_materialCB.Create(sizeof(SMaterialFlg), &m_materialFlg);
-	Engine().GetShadowMap().SetConstantBuffer();
 	//ファイル名の拡張子(cmo)を除きtksを追加しスケルトンのファイル名を作成
 	size_t pos = wcslen(filePath);
 	wchar_t skeltonName[256] = {0};
