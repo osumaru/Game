@@ -17,7 +17,7 @@ void CRock::Init(CVector3 position)
 	m_targetPos.y = playerMatrix.m[3][1];
 	m_targetPos.z = playerMatrix.m[3][2];
 	//キャラクターコントローラーを初期化
-	m_characterController.Init(1.0f, 1.0f, m_position);
+	m_characterController.Init(1.0f, 0.1f, m_position);
 	m_characterController.SetGravity(-4.9f);
 }
 
@@ -33,14 +33,6 @@ bool CRock::Start()
 	//ターゲットとの距離を求める
 	CVector3 distance = m_targetPos - m_position;
 	float length = distance.Length();
-	//if (distance.y > 0.0f) 
-	//{
-	//	//ターゲットが自身より上にいる
-	//	float lengthY = length * tan(angle);
-	//	m_targetPos.y += lengthY;
-	//	distance = m_targetPos - m_position;
-	//	length = distance.Length();
-	//}
 	//移動速度を設定
 	CVector3 moveSpeed;
 	moveSpeed.x = attackDir.x * length * cos(angle);
@@ -55,30 +47,45 @@ void CRock::Update()
 {
 	if (m_characterController.GetWallCollisionObject() != nullptr)
 	{
-		////壁に当たった
-		//if(m_characterController.GetWallCollisionObject()->getUserIndex() == enCollisionAttr_Player)
-		//{
-		//	//プレイヤーに当たった
-		//	GetPlayer().SetDamageEnemyPos(m_enemyPos);
-		//	GetPlayer().SetDamage(true);
-		//}
-		Delete(this);
+		//壁に当たった
+		if(m_characterController.GetWallCollisionObject()->getUserIndex() == enCollisionAttr_Player)
+		{
+			//プレイヤーに当たった
+			GetPlayer().SetDamage(10);
+			GetPlayer().SetDamageEnemyPos(m_enemyPos);
+			GetPlayer().SetDamage(true);
+		}
+		if (m_characterController.GetWallCollisionObject()->getUserIndex() != enCollisionAttr_Character)
+		{
+			Delete(this);
+		}
 	}
 
 	if (m_characterController.GetGroundCollisionObject() != nullptr)
 	{
+		if (m_characterController.GetGroundCollisionObject()->getUserIndex() == enCollisionAttr_Player)
+		{
+			//プレイヤーに当たった
+			GetPlayer().SetDamage(10);
+			GetPlayer().SetDamageEnemyPos(m_enemyPos);
+			GetPlayer().SetDamage(true);
+		}
 		//地面に当たった
 		Delete(this);
 	}
 
 	//座標を更新
+	m_characterController.SetPosition(m_position);
 	m_characterController.Execute(GameTime().GetDeltaFrameTime());
 	m_position = m_characterController.GetPosition();
-
-	m_skinModel.Update(m_position, m_rotation, { 1.0f, 1.0f, 1.0f }, true);
+	CVector3 modelPos = m_position;
+	float offset = 0.2f;
+	modelPos.y += offset;
+	m_skinModel.Update(modelPos, m_rotation, { 1.0f, 1.0f, 1.0f });
 }
 
 void CRock::Draw()
 {
+	m_characterController.Draw();
 	m_skinModel.Draw(GetGameCamera().GetViewMatrix(), GetGameCamera().GetProjectionMatrix());
 }
