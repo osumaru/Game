@@ -92,7 +92,7 @@ void CItemShop::Update()
 		item->Init();
 		CItemInventory::AddItemList(item);
 		CSoundSource* se = New<CSoundSource>(0);
-		se->Init("Assets/sound/Shop/BuySe.wav");
+		//se->Init("Assets/sound/Shop/BuySe.wav");
 		se->SetVolume(1.0f);
 		se->Play(false);
 		

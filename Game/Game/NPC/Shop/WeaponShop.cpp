@@ -151,7 +151,7 @@ void CWeaponShop::Update()
 		inventoryEquip->SetEquipStatus(weapons);
 		CEquipInventory::AddEquipList(inventoryEquip);
 		CSoundSource* se = New<CSoundSource>(0);
-		se->Init("Assets/sound/Shop/BuySe.wav");
+		se->Init("Assets/sound/SystemSound/BuySe.wav");
 		se->SetVolume(1.0f);
 		se->Play(false);
 		

@@ -66,6 +66,13 @@ void CMenu::Init()
 void CMenu::Update()
 {
 	if (&GetPlayer() == nullptr || GetPlayer().GetIsDied()) { return; }
+	for (auto& shop : GetSceneManager().GetGameScene().GetMap()->GetShop()->Getlist())
+	{
+		if (shop->GetShopState() != 0)
+		{
+			return;
+		}
+	}
 
 	KeyInputMenu();
 	switch (m_menuState)
@@ -143,6 +150,11 @@ void CMenu::KeyInputMenu()
 			m_stateNum = enNoneMenu;
 			m_selectPosition = SELECT_TEX_POS;
 			m_selectSprite.SetPosition(m_selectPosition);
+			//âπÇè¡Ç∑èàóù
+			if (m_menuSoundEffect.IsPlay())
+			{
+				m_menuSoundEffect.Stop();
+			}
 		}
 		else
 		{
