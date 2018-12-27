@@ -175,7 +175,6 @@ struct SSweepResultWall : public btCollisionWorld::ConvexResultCallback
 };
 
 CCharacterController::CCharacterController() :
-	m_position(0.0f, 0.0f, 0.0f),
 	m_moveSpeed(0.0f, 0.0f, 0.0f),
 	m_isJump(false),
 	m_isOnGround(true),
@@ -197,7 +196,7 @@ CCharacterController::~CCharacterController()
 
 void CCharacterController::Init(float radius, float height, const CVector3& position)
 {
-	m_position = position;
+
 	m_moveSpeed = {0.0f, 0.0f, 0.0f};
 	//コリジョン作成。
 	m_radius = radius;
@@ -210,7 +209,7 @@ void CCharacterController::Init(float radius, float height, const CVector3& posi
 	rbInfo.mass = 0.0f;
 	m_rigidBody.Create(rbInfo);
 	//剛体の位置を更新。
-	CVector3 rigidPos = m_position;
+	CVector3 rigidPos = position;
 	rigidPos.y += m_radius + m_height * 0.5f;
 	m_rigidBody.SetPosition(rigidPos);
 	//@todo 未対応。 trans.setRotation(btQuaternion(rotation.x, rotation.y, rotation.z));
@@ -221,11 +220,12 @@ void CCharacterController::Init(float radius, float height, const CVector3& posi
 void CCharacterController::Execute(float deltaTime)
 {
 	//StaticExecute();
+	CVector3 position = m_rigidBody.GetPosition();
 	CPhysicsWorld& physicsWorld = PhysicsWorld();
 	//速度に重力加速度を加える。
 	m_moveSpeed.y += m_gravity * deltaTime;
 	//次の移動先となる座標を計算する。
-	CVector3 nextPosition = m_position;
+	CVector3 nextPosition = position;
 	//速度からこのフレームでの移動量を求める。オイラー積分。
 	CVector3 addPos = m_moveSpeed;
 	addPos *= deltaTime;
@@ -243,7 +243,7 @@ void CCharacterController::Execute(float deltaTime)
 		{
 			//現在の座標から次の移動先へ向かうベクトルを求める。
 			CVector3  addPosXZ;
-			addPosXZ = nextPosition - m_position;
+			addPosXZ = nextPosition - position;
 			addPosXZ.y = 0.0f;
 			if (addPosXZ.Length() < FLT_EPSILON)
 			{
@@ -253,8 +253,7 @@ void CCharacterController::Execute(float deltaTime)
 				break;
 			}
 			//カプセルコライダーの中心座標　+ 0.2の座標をposTmpに求める。
-			CVector3 posTmp = m_position;
-			posTmp.y += m_height * 0.5f + m_radius + 0.2f;
+			CVector3 posTmp = position;
 			//レイを作成。
 			btTransform start, end;
 			start.setIdentity();
@@ -296,15 +295,15 @@ void CCharacterController::Execute(float deltaTime)
 				vOffset *= (fT0 + m_radius);//コライダーの半径分手動で戻している
 				nextPosition += vOffset;
 				CVector3 currentDir;
-				currentDir = nextPosition - m_position;
+				currentDir = nextPosition - position;
 				currentDir.y = 0.0f;
 				currentDir.Normalize();
 				if (currentDir.Dot(originalXZDir) < 0.0f)
 				{
 					//角に入った時のキャラクタの振動を防止するために、
 					//移動先が逆向き
-					nextPosition.x = m_position.x;
-					nextPosition.z = m_position.z;
+					nextPosition.x = position.x;
+					nextPosition.z = position.z;
 					break;
 				}
 			}
@@ -328,20 +327,20 @@ void CCharacterController::Execute(float deltaTime)
 		m_wallHitObject = wallCollisionObject;
 	}
 	//XZの移動は確定。
-	m_position.x = nextPosition.x;
-	m_position.z = nextPosition.z;
+	position.x = nextPosition.x;
+	position.z = nextPosition.z;
 
 	CVector3 addPosY;
-	addPosY = nextPosition - m_position;
+	addPosY = nextPosition - position;
 	//下方向を調べる。
 	{
-		m_position = nextPosition;	//移動の仮確定。
+		position = nextPosition;	//移動の仮確定。
 									//レイを作成する。
 		btTransform start, end;
 		start.setIdentity();
 		end.setIdentity();
 		//始点はカプセルコライダーの中心。
-		start.setOrigin(btVector3(m_position.x, m_position.y + m_height * 0.5f + m_radius, m_position.z));
+		start.setOrigin(btVector3(position.x, position.y, position.z));
 		//終点は地面上にいない場合は1m下を見る。
 		//地面上にいなくてジャンプで上昇中の場合は上昇量の0.01倍下を見る。
 		//地面上にいなくて降下中の場合はそのまま落下先を調べる。
@@ -380,7 +379,7 @@ void CCharacterController::Execute(float deltaTime)
 			m_moveSpeed.y = 0.0f;
 			m_isJump = false;
 			m_isOnGround = true;
-			nextPosition.y = callback.hitPos.y;
+			nextPosition.y = callback.hitPos.y + m_radius + m_height * 0.5f;
 		}
 		else
 		{
@@ -396,13 +395,13 @@ void CCharacterController::Execute(float deltaTime)
 	}
 	//上方向を調べる
 	{
-		m_position = nextPosition;	//移動の仮確定。
+		position = nextPosition;	//移動の仮確定。
 									//レイを作成する。
 		btTransform start, end;
 		start.setIdentity();
 		end.setIdentity();
 		//始点はカプセルコライダーの中心。
-		start.setOrigin(btVector3(m_position.x, m_position.y + m_height * 0.5f + m_radius, m_position.z));
+		start.setOrigin(btVector3(position.x, position.y, position.z));
 		//終点は地面上にいない場合は1m下を見る。
 		//地面上にいなくてジャンプで上昇中の場合は上昇量の0.01倍下を見る。
 		//地面上にいなくて降下中の場合はそのまま落下先を調べる。
@@ -434,18 +433,16 @@ void CCharacterController::Execute(float deltaTime)
 		{
 			//当たった。
 			m_moveSpeed.y = 0.0f;
-			nextPosition.y = callback.hitPos.y - (m_height + m_radius * 2.0f + 0.1f);
+			nextPosition.y = callback.hitPos.y - (m_radius + m_height * 0.5f);
 		}
 	}
 	//移動確定。
-	m_position = nextPosition;
+	position = nextPosition;
 	const btRigidBody* btBody = m_rigidBody.GetBody();
 	//剛体を動かす。
 	btBody->setActivationState(DISABLE_DEACTIVATION);
 	//剛体の一を更新
-	CVector3 rigidPos = m_position;
-	rigidPos.y += m_radius + m_height * 0.5f;
-	m_rigidBody.SetPosition(rigidPos);
+	m_rigidBody.SetPosition(position);
 	//@todo 未対応。 trans.setRotation(btQuaternion(rotation.x, rotation.y, rotation.z));
 }
 
@@ -461,19 +458,19 @@ void CCharacterController::StaticExecute()
 		{ 0.0f,			0.0f, rayLength },
 		{ 0.0f,			0.0f, -rayLength },
 	};
-
+	CVector3 position = m_rigidBody.GetPosition();
 	for (int i = 0; i < rayNum; i++)
 	{
 		btTransform start, end;
 		start.setIdentity();
 		end.setIdentity();
 		//レイの終点を現在を座標とし外側から現在の座標に向かってレイを飛ばす
-		CVector3 endPos = m_position;
+		CVector3 endPos = position;
 		end.setOrigin(btVector3(endPos.x, endPos.y + m_height * 0.5f + m_radius , endPos.z));
-		CVector3 startPos = m_position;
+		CVector3 startPos = endPos;
 		startPos += ray[i];
 		//高さが違うのでyの値だけ終点と同じものを使う
-		start.setOrigin(btVector3(startPos.x, end.getOrigin().y(), startPos.z));
+		start.setOrigin(btVector3(startPos.x, startPos.y, startPos.z));
 		SSweepResultWall callback;
 		callback.me = m_rigidBody.GetBody();
 		callback.startPos = startPos;
@@ -494,9 +491,10 @@ void CCharacterController::StaticExecute()
 			sinking.y = 0.0f;
 			float projection = hitNormal.Dot(sinking);
 			hitNormal *= (projection + m_radius);
-			m_position += hitNormal;
+			position += hitNormal;
 		}
 	}
+	m_rigidBody.SetPosition(position);
 	
 }
 
