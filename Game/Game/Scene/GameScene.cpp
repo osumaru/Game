@@ -41,12 +41,12 @@ bool CGameScene::Start()
 	//カメラを生成
 	GetGameCamera().Create();
 	GetGameCamera().Init();
+	m_gameSound = New<CGameSound>(0);
 
 	//フェードの実行が終わったらtrueを返す
 	if (!GetSceneManager().GetFade()->IsExecute())
 	{
 		//std::thread ThreadA([&] {
-
 		//マップの初期化
 		m_map = New<Map>(0);
 		m_map->Init(0);
@@ -73,7 +73,6 @@ bool CGameScene::Start()
 			m_result = New<CResult>(PRIORITY_UI);
 			m_result->Init();
 
-			m_gameSound = New<CGameSound>(0);
 		}
 		//フェードインの開始
 		GetSceneManager().GetFade()->FadeIn();

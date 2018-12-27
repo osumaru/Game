@@ -66,6 +66,13 @@ void CMenu::Init()
 void CMenu::Update()
 {
 	if (&GetPlayer() == nullptr || GetPlayer().GetIsDied()) { return; }
+	for (auto& shop : GetSceneManager().GetGameScene().GetMap()->GetShop()->Getlist())
+	{
+		if (shop->GetShopState() != 0)
+		{
+			return;
+		}
+	}
 
 	KeyInputMenu();
 	switch (m_menuState)
