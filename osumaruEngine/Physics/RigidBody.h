@@ -54,14 +54,38 @@ public:
 	}
 
 	//À•W‚ðÝ’è
-	void SetPosition(CVector3 position)
+	void SetPosition(const CVector3& position)
 	{
 		m_rigidBody->getOneBeforeWorldTransform().setOrigin(m_rigidBody->getWorldTransform().getOrigin());
 		m_rigidBody->getWorldTransform().setOrigin(btVector3(position.x, position.y, position.z));
 	}
 
+	//À•W‚ðŽæ“¾
+	CVector3 GetPosition() const
+	{
+		CVector3 position ;
+		btVector3 btPos = m_rigidBody->getWorldTransform().getOrigin();
+		position.x = btPos.x();
+		position.y = btPos.y();
+		position.z = btPos.z();
+		return position;
+	}
+
+
+	//À•W‚ðŽæ“¾
+	CQuaternion GetRotation() const
+	{
+		CQuaternion rotation;
+		btQuaternion btRot = m_rigidBody->getWorldTransform().getRotation();
+		rotation.x = btRot.x();
+		rotation.y = btRot.y();
+		rotation.z = btRot.z();
+		rotation.w = btRot.w();
+		return rotation;
+	}
+
 	//‰ñ“]‚ðÝ’è
-	void SetRotation(CQuaternion rotation)
+	void SetRotation(const CQuaternion& rotation)
 	{
 		m_rigidBody->getOneBeforeWorldTransform().setRotation(m_rigidBody->getWorldTransform().getRotation());
 		m_rigidBody->getWorldTransform().setRotation(btQuaternion(rotation.x, rotation.y, rotation.z, rotation.w));

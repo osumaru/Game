@@ -51,9 +51,7 @@ void CTwinSword::Init()
 	m_skinModelTwin.Load(L"Assets/modelData/TwinSword.cmo", NULL);
 
 	m_maxAttackNum = 3;
-	m_weaponNum = 2;
-	int AttackWeaponNum = 2;
-	m_attackWeapon = std::make_unique<EnAttackWeapon[]>(AttackWeaponNum);
+	m_maxWeaponHitNum = 2;
 	m_attackAnimation = std::make_unique<EnPlayerAnimation[]>(m_maxAttackNum);
 	m_combineAnimation = std::make_unique<EnPlayerAnimation[]>(m_maxAttackNum);
 	for (int i = 0; i < m_maxAttackNum; i++)
@@ -61,8 +59,6 @@ void CTwinSword::Init()
 		m_attackAnimation[i]=(EnPlayerAnimation)(enPlayerAnimationTwinAttack1+i);
 		m_combineAnimation[i]= (EnPlayerAnimation)(enPlayerAnimationTwinAttackCombine1 + i);
 	}
-	m_attackWeapon[0] = EnAttackWeapon::enAttackWeaponLeftSword;
-	m_attackWeapon[1] = EnAttackWeapon::enAttackWeaponRightSword;
 	m_stanAttack = std::make_unique<bool[]>(m_maxAttackNum);
 	m_stanAttack[0] = false;
 	m_stanAttack[1] = false;
@@ -123,7 +119,25 @@ SWeaponEnemyAttackInfo CTwinSword::EnemyAttackPositionDecide()
 	manip.Normalize();
 	manip.Scale(0.3f);
 	pos += manip;
-	return { true, pos };
+
+	const CMatrix& mat2 = *m_attackTwinBoneMat;
+	CVector3 pos2;
+	pos2.x = mat2.m[3][0];
+	pos2.y = mat2.m[3][1];
+	pos2.z = mat2.m[3][2];
+	CVector3 manip2;
+	manip2.x = mat2.m[1][0];
+	manip2.x = mat2.m[1][1];
+	manip2.x = mat2.m[1][2];
+	manip2.Normalize();
+	manip2.Scale(0.3f);
+	pos2 += manip2;
+
+	SWeaponEnemyAttackInfo info;
+	info.isAttack = true;
+	info.attackPos[0] = pos;
+	info.attackPos[1] = pos2;
+	return {info};
 }
 
 SWeaponTraceDrawInfo CTwinSword::WeaponTraceDraw()

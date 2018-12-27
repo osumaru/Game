@@ -14,11 +14,11 @@ CShopManager::~CShopManager()
 
 void CShopManager::DeleteList()
 {
-	for (IShop* shopNpc : m_npclist)
+	for (IShop* shopNpc : m_shoplist)
 	{
 		Delete(shopNpc);
 	}
-	m_npclist.clear();
+	m_shoplist.clear();
 }
 
 void CShopManager::InitShop(const CVector3 position, const CQuaternion rotation, const EShop shopnum)
@@ -29,14 +29,14 @@ void CShopManager::InitShop(const CVector3 position, const CQuaternion rotation,
 	{
 		CItemShop* itemshop = New<CItemShop>(PRIORITY_SHOP);
 		itemshop->Init(position, rotation);
-		m_npclist.push_back(itemshop);
+		m_shoplist.push_back(itemshop);
 		break;
 	}
 	case enWeaponShop:
 	{
 		CWeaponShop* weaponshop = New<CWeaponShop>(PRIORITY_SHOP);
 		weaponshop->Init(position, rotation);
-		m_npclist.push_back(weaponshop);
+		m_shoplist.push_back(weaponshop);
 		break;
 	}
 	}

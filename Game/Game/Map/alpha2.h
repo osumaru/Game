@@ -1,4 +1,11 @@
-﻿//Player
+﻿//Map4
+{
+	L"Map4",
+	CVector3(0.00f, 0.00f, 0.00f),             //平行移動
+	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f),  //回転
+	enMapTagTerrain, //タグ
+},
+//Player
 {
 	L"Player",
 	CVector3(0.00f, 0.00f, 0.00f),             //平行移動
@@ -11,13 +18,6 @@
 	CVector3(-154.76f, 0.00f, -200.38f),             //平行移動
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagNinja, //タグ
-},
-//Map4
-{
-	L"Map4",
-	CVector3(0.00f, 0.00f, 0.00f),             //平行移動
-	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
-	enMapTagTerrain, //タグ
 },
 //ninja
 {

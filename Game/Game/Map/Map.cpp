@@ -82,7 +82,7 @@ void Map::Init(int stageNum)
 			m_enemyGroupList.push_back(enemyGroup);
 			break;
 		case enMapTagItemShop:
-			m_shopManager->InitShop(mInfo.m_position, mInfo.m_rotation, EShop::enItemShop);
+			//m_shopManager->InitShop(mInfo.m_position, mInfo.m_rotation, EShop::enItemShop);
 			break;
 		case enMapTagWeaponShop:
 			m_shopManager->InitShop(mInfo.m_position, mInfo.m_rotation, EShop::enWeaponShop);

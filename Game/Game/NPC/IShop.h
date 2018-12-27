@@ -25,6 +25,12 @@ public:
 	//店に共通するアップデートの処理を行う関数
 	void ShopUpdate();
 
+	//ショップの状態を取得
+	const int GetShopState()
+	{
+		return m_shopState;
+	}
+
 	//商品の取引を行う関数
 	//引数		商品の値段
 	//戻り値	取引が成立したかどうか　成立ならtrue不成立ならfalse
@@ -33,9 +39,9 @@ public:
 protected:
 	enum EShopState
 	{
+		enShopNone,			//何も行っていないとき
 		enShopBuy,			//買い物を行うとき
 		enShopExecute,		//店を出るとき
-		enShopNone,			//何も行っていないとき
 		enShopOpen,			//店を開く
 		enShopLineup,
 		enShopNum,

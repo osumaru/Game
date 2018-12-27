@@ -18,7 +18,7 @@ public:
 	void DeleteList();
 	std::list<IShop*>& Getlist()
 	{
-		return m_npclist;
+		return m_shoplist;
 	}
 private:
 	enum EShopState
@@ -29,7 +29,7 @@ private:
 		enShopLineup,	
 		enShopNum,
 	};
-	std::list<IShop*>		m_npclist;
+	std::list<IShop*>		m_shoplist;
 
 };
 

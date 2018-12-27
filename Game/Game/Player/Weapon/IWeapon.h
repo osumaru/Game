@@ -56,8 +56,6 @@ public:
 	//武器の軌跡の描画を開始
 	void WeaponTraceDrawStart();
 
-
-
 	//武器のステータスを取得
 	SWeaponStatus& GetWeaponStatus()
 	{
@@ -94,11 +92,19 @@ public:
 		return m_maxAttackNum;
 	}
 
-	//攻撃する武器を取得
-	EnAttackWeapon* GetAttackWeapon()
+	//攻撃回数ごとのフラグの取得
+	/*bool* GetAttackWeaponHit()
 	{
-		return m_attackWeapon.get();
+		return m_attackHitNum.get();
 	}
+*/
+	//武器ごとの最大攻撃回数
+	int GetMaxWeaponHitNum()
+	{
+		return m_maxWeaponHitNum;
+	}
+
+
 protected:
 	CPlayer*					m_pPlayer = nullptr;		//プレイヤーのインスタンス
 	const CMatrix*				m_normalBoneMat = nullptr;	//プレイヤーのボーン行列
@@ -110,10 +116,10 @@ protected:
 	CSkinModel					m_skinModel;				//武器のスキンモデル
 	SWeaponStatus				m_weaponStatus;				//装備中の武器ノステータス
 
-	int							m_weaponNum = 0;					//武器の数
+	int							m_maxWeaponHitNum = 0;					//武器の数
 	int							m_maxAttackNum = 0;					//最大連続攻撃回数
 	std::unique_ptr<EnPlayerAnimation[]>		m_attackAnimation;				//攻撃のアニメーション番号
 	std::unique_ptr<EnPlayerAnimation[]>		m_combineAnimation;				//攻撃の後の合成用のアニメーション番号
-	std::unique_ptr<bool[]>						m_stanAttack;						//スタン攻撃
-	std::unique_ptr<EnAttackWeapon[]>			m_attackWeapon;						//攻撃する武器
+	std::unique_ptr<bool[]>						m_stanAttack;					//スタン攻撃
+	std::unique_ptr<bool[]>						m_attackHitNum;					//武器ごとの攻撃回数
 };

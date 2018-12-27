@@ -9,6 +9,13 @@ enMapTagTerrain, //タグ
 {
 	L"Sphere",
 	CVector3(-6.29f, 8.14f, 66.51f),             //平行移動
+	CQuaternion(0.00f, 0.00f, 0.00f, 0.00f),  //回転
+	enMapTagWeaponShop, //タグ
+},
+//Sphere
+{
+	L"Sphere",
+	CVector3(-6.29f, 8.14f, 66.51f),             //平行移動
 	CQuaternion(0.00f, 0.00f, 0.00f, 0.00f ),  //回転
 	enMapTagEnemyGroup, //タグ
 },
