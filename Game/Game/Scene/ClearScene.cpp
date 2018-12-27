@@ -19,8 +19,8 @@ bool CClearScene::Start()
 		const CVector2	clearPos = { -1.0f,-1.0f };		//タイトル座標
 		const CVector2	clearSize = { 1280.0f,7200.0f };	//タイトルサイズ
 
-		m_clearTexture.Load(L"Assets/sprite/TitleBack.png");
-		m_clear.Init(&m_clearTexture);
+		m_clearTexture = TextureResource().LoadTexture(L"Assets/sprite/TitleBack.png");
+		m_clear.Init(m_clearTexture);
 		m_clear.SetPosition(clearPos);
 		m_clear.SetSize(clearSize);
 		//フェードインの開始

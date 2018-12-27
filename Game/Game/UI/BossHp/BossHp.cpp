@@ -10,16 +10,16 @@ void CBossHp::Init()
 	m_bossMaxHp = (float)GetMaw().GetSmawStatus().Hp;
 
 	//HPのロード
-	m_bossHpTexture.Load(L"Assets/sprite/hp2.png");
-	m_bossHpSprite.Init(&m_bossHpTexture);
+	m_bossHpTexture = TextureResource().LoadTexture(L"Assets/sprite/hp2.png");
+	m_bossHpSprite.Init(m_bossHpTexture);
 	m_bossHpSprite.SetCenterPosition({ m_bossHpCenterPos });
 	m_bossHpSprite.SetPosition({ m_bossHpPos });
 	m_bossHpSize.x = (float)(m_bossMaxHpSizeX*(GetMaw().GetSmawStatus().Hp / m_bossMaxHp));
 	m_bossHpSprite.SetSize({ m_bossHpSize.x, m_bossHpSize.y });
 
 	//HPバックグラウンドのロード
-	m_bossHpBackTexture.Load(L"Assets/sprite/hpBack.png");
-	m_bossHpBackSprite.Init(&m_bossHpBackTexture);
+	m_bossHpBackTexture = TextureResource().LoadTexture(L"Assets/sprite/hpBack.png");
+	m_bossHpBackSprite.Init(m_bossHpBackTexture);
 	m_bossHpBackSprite.SetCenterPosition({ m_bossHpBackCenterPos });
 	m_bossHpBackSprite.SetPosition({ m_bossHpBackPos });
 	m_bossHpBackSize.x = (float)(m_bossMaxHpSizeX*(GetMaw().GetSmawStatus().Hp / m_bossMaxHp));

@@ -14,8 +14,8 @@ CFade::~CFade()
 
 bool CFade::Start()
 {
-	m_fadeTexture.Load(L"Assets/sprite/Fade.png");
-	m_fadeSprite.Init(&m_fadeTexture);
+	m_fadeTexture = TextureResource().LoadTexture(L"Assets/sprite/Fade.png");
+	m_fadeSprite.Init(m_fadeTexture);
 	m_fadeSprite.SetPosition(m_texturePosition);
 	m_fadeSprite.SetSize(m_textureSize);
 	m_fadeSprite.SetAlpha(m_texturerAlpha);

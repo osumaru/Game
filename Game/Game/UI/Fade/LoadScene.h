@@ -27,7 +27,7 @@ private:
 	int				m_number = 1;
 
 	CSprite			m_LoadSprite[2];
-	CTexture		m_loadTexture[2];
+	CTexture*		m_loadTexture[2];
 	wchar_t			m_text[256];
 	bool			m_isDraw = false;
 	float			m_alpha = 1.0f;
