@@ -20,7 +20,7 @@ public:
 
 private:
 	CSprite			m_title;					//Title画面のスプライト
-	CTexture		m_titleTexture;				//Title画面のテクスチャ
+	CTexture*		m_titleTexture;				//Title画面のテクスチャ
 
 
 };

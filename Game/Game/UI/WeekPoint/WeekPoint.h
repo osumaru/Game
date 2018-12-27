@@ -13,6 +13,6 @@ public:
 	void AfterDraw() override;
 private:
 	CSprite						m_weekSprite;		//弱点のスプライト
-	CTexture					m_weekTexture;		//弱点のテクスチャ
+	CTexture*					m_weekTexture;		//弱点のテクスチャ
 };
 

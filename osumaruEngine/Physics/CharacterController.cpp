@@ -214,7 +214,7 @@ void CCharacterController::Init(float radius, float height, const CVector3& posi
 	m_rigidBody.SetPosition(rigidPos);
 	//@todo ñ¢ëŒâûÅB trans.setRotation(btQuaternion(rotation.x, rotation.y, rotation.z));
 	m_rigidBody.SetUserIndex(enCollisionAttr_Character);
-	//m_rigidBody.SetCollisionFlags(btCollisionObject::CF_CHARACTER_OBJECT);
+	m_rigidBody.SetCollisionFlags(btCollisionObject::CF_CHARACTER_OBJECT);
 }
 
 void CCharacterController::Execute(float deltaTime)

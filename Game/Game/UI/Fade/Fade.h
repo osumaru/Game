@@ -27,7 +27,7 @@ private:
 	};
 
 	CSprite			m_fadeSprite;							//スプライト
-	CTexture		m_fadeTexture;							//テクスチャ
+	CTexture*		m_fadeTexture;							//テクスチャ
 	float			m_texturerAlpha = 0.0f;
 	CVector2		m_texturePosition = { 0.0f,0.0f };
 	CVector2		m_textureSize = { 1280,720 };

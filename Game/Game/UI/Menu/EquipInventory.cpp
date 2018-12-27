@@ -453,21 +453,21 @@ void CEquipInventory::CalucStatus()
 		case enStatus_Attack:
 			if (equipStatus[enFont_CurrentStatus].attack < equipStatus[enFont_ChangeStatus].attack)
 			{
-				color = CVector4::Red;
+				color = CVector4::Blue;
 			}
 			else if (equipStatus[enFont_CurrentStatus].attack > equipStatus[enFont_ChangeStatus].attack)
 			{
-				color = CVector4::Blue;
+				color = CVector4::Red;
 			}
 			break;
 		case enStatus_Defense:
 			if (equipStatus[enFont_CurrentStatus].diffence < equipStatus[enFont_ChangeStatus].diffence)
 			{
-				color = CVector4::Red;
+				color = CVector4::Blue;
 			}
 			else if (equipStatus[enFont_CurrentStatus].diffence > equipStatus[enFont_ChangeStatus].diffence)
 			{
-				color = CVector4::Blue;
+				color = CVector4::Red;
 			}
 			break;
 		}

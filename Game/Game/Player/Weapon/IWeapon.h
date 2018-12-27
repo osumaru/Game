@@ -92,12 +92,6 @@ public:
 		return m_maxAttackNum;
 	}
 
-	//攻撃回数ごとのフラグの取得
-	/*bool* GetAttackWeaponHit()
-	{
-		return m_attackHitNum.get();
-	}
-*/
 	//武器ごとの最大攻撃回数
 	int GetMaxWeaponHitNum()
 	{
@@ -106,20 +100,19 @@ public:
 
 
 protected:
-	CPlayer*					m_pPlayer = nullptr;		//プレイヤーのインスタンス
-	const CMatrix*				m_normalBoneMat = nullptr;	//プレイヤーのボーン行列
-	const CMatrix*				m_attackBoneMat = nullptr;	//プレイヤーのボーン行列
-	CVector3					m_position;					//通常時の座標
-	CVector3					m_attackPosition;			//攻撃時の座標
-	CQuaternion					m_rotation;					//通常時の回転
-	CQuaternion					m_attackRotation;			//攻撃時の回転
-	CSkinModel					m_skinModel;				//武器のスキンモデル
-	SWeaponStatus				m_weaponStatus;				//装備中の武器ノステータス
-
-	int							m_maxWeaponHitNum = 0;					//武器の数
-	int							m_maxAttackNum = 0;					//最大連続攻撃回数
-	std::unique_ptr<EnPlayerAnimation[]>		m_attackAnimation;				//攻撃のアニメーション番号
-	std::unique_ptr<EnPlayerAnimation[]>		m_combineAnimation;				//攻撃の後の合成用のアニメーション番号
-	std::unique_ptr<bool[]>						m_stanAttack;					//スタン攻撃
-	std::unique_ptr<bool[]>						m_attackHitNum;					//武器ごとの攻撃回数
+	CPlayer*								m_pPlayer = nullptr;		//プレイヤーのインスタンス
+	const CMatrix*							m_normalBoneMat = nullptr;	//プレイヤーのボーン行列
+	const CMatrix*							m_attackBoneMat = nullptr;	//プレイヤーのボーン行列
+	CVector3								m_position;					//通常時の座標
+	CVector3								m_attackPosition;			//攻撃時の座標
+	CQuaternion								m_rotation;					//通常時の回転
+	CQuaternion								m_attackRotation;			//攻撃時の回転
+	CSkinModel								m_skinModel;				//武器のスキンモデル
+	SWeaponStatus							m_weaponStatus;				//装備中の武器ノステータス
+	int										m_maxWeaponHitNum = 0;		//武器の数
+	int										m_maxAttackNum = 0;			//最大連続攻撃回数
+	std::unique_ptr<EnPlayerAnimation[]>	m_attackAnimation;			//攻撃のアニメーション番号
+	std::unique_ptr<EnPlayerAnimation[]>	m_combineAnimation;			//攻撃の後の合成用のアニメーション番号
+	std::unique_ptr<bool[]>					m_stanAttack;				//スタン攻撃
+	std::unique_ptr<bool[]>					m_attackHitNum;				//武器ごとの攻撃回数
 };

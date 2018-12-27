@@ -12,6 +12,4 @@ public:
 	SWeaponEnemyAttackInfo EnemyAttackPositionDecide()override;
 
 	SWeaponTraceDrawInfo WeaponTraceDraw()override;
-
-private:
 };

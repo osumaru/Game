@@ -36,8 +36,8 @@ void CBow::Init()
 	m_attackPosition = { 10.0f, 0.0f, 0.0f };
 	m_skinModel.Load(L"Assets/modelData/LongBow.cmo", NULL);
 
-	m_texture.Load(L"Assets/sprite/arrowTag.png");
-	m_tag.Init(&m_texture);
+	m_texture = TextureResource().LoadTexture(L"Assets/sprite/arrowTag.png");
+	m_tag.Init(m_texture);
 	m_tag.SetPosition({ 0.0f,0.0f });
 	m_tag.SetSize({ 50.0f,50.0f });
 	m_tag.SetAlpha(0.7f);

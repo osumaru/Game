@@ -16,8 +16,8 @@ CLevelUp::~CLevelUp()
 void CLevelUp::Init()
 {
 	//プレイヤーHPのロード
-	m_playerLevelUpTexture.Load(L"Assets/sprite/levelup.png");
-	m_playerLevelUpSprite.Init(&m_playerLevelUpTexture);
+	m_playerLevelUpTexture = TextureResource().LoadTexture(L"Assets/sprite/levelup.png");
+	m_playerLevelUpSprite.Init(m_playerLevelUpTexture);
 	m_playerLevelUpSprite.SetPosition({ m_playerLevelUpPos });
 	m_playerLevelUpSprite.SetSize({ m_playerLevelUpSize});
 	m_playerLevelUpSprite.SetAlpha(0.0f);

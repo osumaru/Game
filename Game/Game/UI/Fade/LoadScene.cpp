@@ -24,12 +24,12 @@ bool CLoadScene::Start()
 	m_font[0].SetPosition(m_fontNamePosition);
 	m_font[1].SetPosition(m_fontTextPosition);
 
-	m_loadTexture[0].Load(L"Assets/sprite/Back_Texture.png");
-	m_LoadSprite[0].Init(&m_loadTexture[0]);
+	m_loadTexture[0] = TextureResource().LoadTexture(L"Assets/sprite/Back_Texture.png");
+	m_LoadSprite[0].Init(m_loadTexture[0]);
 	m_LoadSprite[0].SetSize({ 950.0f,600.0f });
 
-	m_loadTexture[1].Load(L"Assets/sprite/Logo/Logo1.png");
-	m_LoadSprite[1].Init(&m_loadTexture[1]);
+	m_loadTexture[1] = TextureResource().LoadTexture(L"Assets/sprite/Logo/Logo1.png");
+	m_LoadSprite[1].Init(m_loadTexture[1]);
 	m_LoadSprite[1].SetSize({ 100.0f,100.0f });
 	m_LoadSprite[1].SetPosition({ 550.0f,-300.0f });
 	m_equipItem.Start();
