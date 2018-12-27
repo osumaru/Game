@@ -47,7 +47,7 @@ void CTreasureChest::Update()
 		//武器のステータスを決める
 		DesideWeaponStatus();
 		m_inventoryEquip->Init();
-		CEquipInventory::AddEquipList(m_inventoryEquip);
+		CEquipInventory::AddEquipList(std::move(m_inventoryEquip));
 		Delete(this);
 	}
 
@@ -84,28 +84,28 @@ void CTreasureChest::DesideWeaponStatus()
 	if (weaponNumber == EnPlayerWeapon::enWeaponSword)
 	{
 		//剣
-		m_inventoryEquip = new CInventorySword;
+		m_inventoryEquip = std::make_unique<CInventorySword>();
 		weaponStatus.weaponNum = EnPlayerWeapon::enWeaponSword;
 		weaponAttack += basicWeaponStatus.swordAttack;
 	}
 	else if (weaponNumber == EnPlayerWeapon::enWeaponLongSword)
 	{
 		//大剣
-		m_inventoryEquip = new CInventoryLargeSword;
+		m_inventoryEquip = std::make_unique<CInventoryLargeSword>();
 		weaponStatus.weaponNum = EnPlayerWeapon::enWeaponLongSword;
 		weaponAttack += basicWeaponStatus.longSwordAttack;
 	}
 	else if (weaponNumber == EnPlayerWeapon::enWeaponArrow)
 	{
 		//弓
-		m_inventoryEquip = new CInventoryBow;
+		m_inventoryEquip = std::make_unique<CInventoryBow>();
 		weaponStatus.weaponNum = EnPlayerWeapon::enWeaponArrow;
 		weaponAttack += basicWeaponStatus.arrowAttack;
 	}
 	else if (weaponNumber == EnPlayerWeapon::enWeaponTwinSword)
 	{
 		//双剣
-		m_inventoryEquip = new CInventoryTwinSword;
+		m_inventoryEquip = std::make_unique<CInventoryTwinSword>();
 		weaponStatus.weaponNum = EnPlayerWeapon::enWeaponTwinSword;
 		weaponAttack += basicWeaponStatus.twinSwordAttack;
 	}

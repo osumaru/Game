@@ -49,8 +49,8 @@ public:
 	void Erase();
 
 	//所持装備リストに追加
-	//equipStatus		リストに追加する装備のステータス
-	static void AddEquipList(IInventoryEquip* equipStatus);
+	//inventoryEquip		リストに追加する装備
+	static void AddEquipList(std::unique_ptr<IInventoryEquip> inventoryEquip);
 private:
 	//ステータスの数
 	enum EnStatusNum {
@@ -66,30 +66,30 @@ private:
 		enFont_StatusNum		//ステータスの数
 	};
 
-	static const int					m_equipLimit = 15;								//装備所持上限
-	static std::list<IInventoryEquip*>	m_equipList;									//装備リスト
-	CMenu*								m_menu = nullptr;								//メニュー
-	CSprite								m_background;									//背景
-	CSprite								m_statusWindow[enFont_StatusNum];				//ステータスウィンドウ
-	CSprite								m_right;										//右矢印
-	CSprite								m_pointer;										//カーソル
-	CSprite								m_frame[m_equipLimit];							//インベントリの枠
-	CSprite								m_equipWeapon[enWeaponNum];						//装備武器アイコン
-	CSprite								m_equipFrame[enWeaponNum];						//装備武器アイコンの枠
-	CSprite								m_buttonBackground;								//ボタン背景
-	CSprite								m_buttonA;										//Aボタン
-	CSprite								m_buttonB;										//Bボタン
-	CSprite								m_buttonY;										//Yボタン
-	CFont								m_equipName;									//装備の名前
-	CFont								m_statusFont[enFont_StatusNum][enStatus_Num];	//現在の装備と装備変更時のステータス文字
-	CFont								m_statusFontNum[enFont_StatusNum][enStatus_Num];//現在の装備と装備変更時のステータス数値
-	CFont								m_buttonAFont;									//Aボタンフォント
-	CFont								m_buttonBFont;									//Bボタンフォント
-	CFont								m_buttonYFont;									//Yボタンフォント
-	CVector2							m_basePos = CVector2::Zero;						//初期座標
-	CVector2							m_baseSize = CVector2::Zero;					//初期サイズ
-	int									m_width = 0;									//インベントリの幅
-	int									m_height = 0;									//インベントリの高さ
-	int									m_pointerNum = 0;								//カーソルで選んでいるアイテムの番号
-	CSoundSource						m_equipSound[2];
+	static const int m_equipLimit = 15;								//装備所持上限
+	static std::list<std::unique_ptr<IInventoryEquip>>	m_equipList;//装備リスト
+	CMenu*			 m_menu = nullptr;								//メニュー
+	CSprite			 m_background;									//背景
+	CSprite			 m_statusWindow[enFont_StatusNum];				//ステータスウィンドウ
+	CSprite			 m_right;										//右矢印
+	CSprite			 m_pointer;										//カーソル
+	CSprite			 m_frame[m_equipLimit];							//インベントリの枠
+	CSprite			 m_equipWeapon[enWeaponNum];					//装備武器アイコン
+	CSprite			 m_equipFrame[enWeaponNum];						//装備武器アイコンの枠
+	CSprite			 m_buttonBackground;							//ボタン背景
+	CSprite			 m_buttonA;										//Aボタン
+	CSprite			 m_buttonB;										//Bボタン
+	CSprite			 m_buttonY;										//Yボタン
+	CFont			 m_equipName[enFont_StatusNum];					//装備の名前
+	CFont			 m_statusFont[enFont_StatusNum][enStatus_Num];	//現在の装備と装備変更時のステータス文字
+	CFont			 m_statusFontNum[enFont_StatusNum][enStatus_Num];//現在の装備と装備変更時のステータス数値
+	CFont			 m_buttonAFont;									//Aボタンフォント
+	CFont			 m_buttonBFont;									//Bボタンフォント
+	CFont			 m_buttonYFont;									//Yボタンフォント
+	CVector2		 m_basePos = CVector2::Zero;					//初期座標
+	CVector2		 m_baseSize = CVector2::Zero;					//初期サイズ
+	int				 m_width = 0;									//インベントリの幅
+	int				 m_height = 0;									//インベントリの高さ
+	int				 m_pointerNum = 0;								//カーソルで選んでいるアイテムの番号
+	CSoundSource	 m_equipSound[2];
 };
