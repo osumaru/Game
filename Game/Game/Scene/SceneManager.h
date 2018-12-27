@@ -55,14 +55,20 @@ public:
 		return m_isFadeOut;
 	}
 
+	//シーン切り替えが行われたか
+	bool GetSceneChange()
+	{
+		return m_isSceneChange;
+	}
+
 private:
 	EnSceneState	m_preSceneState= enSceneNum;//シーンのステート（現在のシーンを入れておく用）
 	EnSceneState	m_nextSceneState = enSceneNum;//シーンのステート（次のシーンを入れておく用）
 	CGameScene*		m_gameScene=nullptr;			//ゲームシーン
 	CTitleScene*	m_titleScene = nullptr;			//タイトルシーン
 	CClearScene*	m_clearScene = nullptr;			//クリアシーン
-	CFade*			m_fade;					//フェイド
-
+	CFade*			m_fade;							//フェイド
+	bool			m_isSceneChange = false;		//シーン切り替え
 	bool			m_isFadeOut = false;		//フェードアウトしたかどうか
 };
 

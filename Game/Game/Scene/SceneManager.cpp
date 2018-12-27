@@ -91,6 +91,7 @@ void CSceneManager::Update()
 		default:
 			break;
 		}
+		m_isSceneChange = false;
 		//現在のシーンを開放用のステートへ
 		m_preSceneState = m_nextSceneState;
 	}
@@ -106,7 +107,7 @@ void CSceneManager::ChangeScene(EnSceneState scene)
 		m_isFadeOut = true;
 	}
 	
-
+	m_isSceneChange = true;
 	//変更するシーンを現在のシーンにする
 	m_nextSceneState = scene;
 }

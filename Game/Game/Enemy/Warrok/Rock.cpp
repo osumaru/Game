@@ -1,6 +1,7 @@
 #include "Rock.h"
 #include "../../Camera/GameCamera.h"
 #include "../../Player/Player.h"
+#include "../../Scene/SceneManager.h"
 
 void CRock::Init(CVector3 position)
 {
@@ -53,6 +54,10 @@ bool CRock::Start()
 
 void CRock::Update()
 {
+	if (GetSceneManager().GetSceneChange())
+	{
+		Delete(this);
+	}
 	if (m_characterController.GetWallCollisionObject() != nullptr)
 	{
 		////•Ç‚É“–‚½‚Á‚½

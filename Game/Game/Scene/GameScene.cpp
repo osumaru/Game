@@ -30,6 +30,7 @@ void CGameScene::BeforeDead()
 	Delete(m_playerHp);
 	Delete(m_weaponSelect);
 	GetGameCamera().Destroy();
+	Engine().GetEffectEngine().SetCamera(nullptr);
 	Delete(m_miniMap);
 	Delete(m_map);
 	Delete(m_gameSound);
