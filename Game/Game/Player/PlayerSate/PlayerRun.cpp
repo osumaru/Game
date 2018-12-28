@@ -6,10 +6,27 @@
 void CPlayerRun::Init()
 {
 	m_pPlayerGetter->GetAnimation().Play(enPlayerAnimationRun, 0.2f);
+
+	//タイマー初期化
+	m_timer = 0.0f;
+	m_isDash = false;
 }
 
 void CPlayerRun::Update()
 {
+	float speed = 8.0f;
+	m_timer += GameTime().GetDeltaFrameTime();
+	if (!m_isDash && m_timer >= 2.0f)
+	{
+		m_isDash = true;
+		//一定時間走るとダッシュする
+		m_pPlayerGetter->GetAnimation().Play(enPlayerAnimationDash, 0.2f);
+	}
+	if (m_isDash)
+	{
+		speed = 12.0f;
+	}
+
 	const CCamera& gameCamera = GetGameCamera().GetCamera();
 	CVector3 frontVec = gameCamera.GetTarget() - gameCamera.GetPosition();
 	frontVec.y = 0.0f;
@@ -20,7 +37,6 @@ void CPlayerRun::Update()
 	CVector3 moveSpeed = m_pPlayerGetter->GetMoveSpeed();
 	moveSpeed.x = 0.0f;
 	moveSpeed.z = 0.0f;
-	const float speed = 8.0f;
 	moveSpeed += frontVec * Pad().GetLeftStickY() * speed;
 	moveSpeed += rightVec * Pad().GetLeftStickX() * speed;
 	m_pPlayerGetter->SetMoveSpeed(moveSpeed);
