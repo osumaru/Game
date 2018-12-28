@@ -6,6 +6,7 @@ enum EnPlayerAnimation
 	enPlayerAnimationStand,			//待機アニメーション
 	enPlayerAnimationWalk,			//歩行アニメーション
 	enPlayerAnimationRun,			//走りアニメーション
+	enPlayerAnimationDash,			//ダッシュアニメーション
 	enPlayerAnimationRunJump,		//走りジャンプ
 	enPlayerAnimationJump,			//ジャンプアニメーション
 	enPlayerAnimationAttack1,		//攻撃アニメーション

@@ -88,6 +88,7 @@ void CPlayer::Init(CVector3 position)
 									{ L"Assets/modelData/PlayerStand.tka"},					//待機アニメーション	
 									{ L"Assets/modelData/PlayerWalkStay.tka" },				//歩行アニメーション
 									{ L"Assets/modelData/PlayerDash60fpsEvent.tka" },		//走りアニメーション
+									{ L"Assets/modelData/PlayerDash60fpsEvent.tka" },		//ダッシュアニメーション
 									{ L"Assets/modelData/PlayerRunJump.tka" },				//走りジャンプアニメーション
 									{ L"Assets/modelData/PlayerJump2.tka" },				//ジャンプアニメーション
 									{ L"Assets/modelData/PlayerCombo4.tka" },				//攻撃アニメーション
@@ -129,6 +130,7 @@ void CPlayer::Init(CVector3 position)
 		m_animation.SetLoopFlg(enPlayerAnimationStand, true);
 		m_animation.SetLoopFlg(enPlayerAnimationWalk, true);
 		m_animation.SetLoopFlg(enPlayerAnimationRun, true);
+		m_animation.SetLoopFlg(enPlayerAnimationDash, true);
 		m_animation.SetLoopFlg(enPlayerAnimationWireMove, true);
 
 		//アニメーションイベントリスナーの登録　呼び出される関数の登録？
