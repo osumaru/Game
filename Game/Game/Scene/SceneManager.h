@@ -61,6 +61,18 @@ public:
 		return m_isSceneChange;
 	}
 
+	//ゲーム開始時フラグ取得
+	bool GetIsStart()
+	{
+		return m_isStart;
+	}
+
+	//ゲーム開始時フラグ設定
+	void SetIsStart(bool IsStart)
+	{
+		m_isStart = IsStart;
+	}
+
 private:
 	EnSceneState	m_preSceneState= enSceneNum;//シーンのステート（現在のシーンを入れておく用）
 	EnSceneState	m_nextSceneState = enSceneNum;//シーンのステート（次のシーンを入れておく用）
@@ -69,7 +81,8 @@ private:
 	CClearScene*	m_clearScene = nullptr;			//クリアシーン
 	CFade*			m_fade;							//フェイド
 	bool			m_isSceneChange = false;		//シーン切り替え
-	bool			m_isFadeOut = false;		//フェードアウトしたかどうか
+	bool			m_isFadeOut = false;			//フェードアウトしたかどうか
+	bool			m_isStart=false;				//ゲーム開始時だけのフラグ
 };
 
 //シーンマネージャーのインスタンスを取得
