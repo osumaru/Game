@@ -387,6 +387,7 @@
     <MeshContentTask Include="Assets\modelData\Rock.FBX" />
     <MeshContentTask Include="Assets\modelData\Samurai.FBX" />
     <MeshContentTask Include="Assets\modelData\Shopgirl.fbx" />
+    <MeshContentTask Include="Assets\modelData\ShopModel\roten.FBX" />
     <MeshContentTask Include="Assets\modelData\Skyball_WithCap.FBX" />
     <MeshContentTask Include="Assets\modelData\Skyball_WithoutCap.FBX" />
     <MeshContentTask Include="Assets\modelData\Sword.fbx" />

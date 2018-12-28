@@ -327,7 +327,9 @@ void CPlayer::Rotation(const CVector3& stickDir)
 	{
 		rad = -rad;
 	}
-	m_rotation.SetRotation(CVector3::AxisY, rad);
+	CQuaternion addRot;
+	addRot.SetRotation(CVector3::AxisY, rad);
+	m_rotation.Slerp(0.3f , m_rotation, addRot);
 
 	if (m_weaponManager.GetCurrentState() == enWeaponArrow && m_weaponManager.GetIsAttack())
 	{
