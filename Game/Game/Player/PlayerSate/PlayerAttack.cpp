@@ -43,6 +43,7 @@ void CPlayerAttack::Init()
 	m_pPlayer->GetWeaponManager().SetIsAttack(true);
 	m_pPlayer->GetWeaponManager().GetWeapon()->WeaponTraceDrawStart();
 	m_isPreDodge = false;
+	m_addPos = CVector3::Zero;
 }
 
 void CPlayerAttack::Update()
@@ -63,6 +64,8 @@ void CPlayerAttack::Update()
 	}
 
 	m_pPlayer->SetStanAttack(m_stanAttack[m_attackCount]);
+
+	Lerp();
 
 	//攻撃アニメーションが終わった時の処理
 	if (!m_pPlayerGetter->GetAnimation().IsPlay())
@@ -223,7 +226,24 @@ void CPlayerAttack::Rotation()
 	CQuaternion pRot = m_pPlayerGetter->GetRotation();
 	//腰を中心にしたクオータニオンとプレイヤーのやつの積
 	pRot.Multiply(rot);
-	m_pPlayerGetter->SetRotation(pRot);
-	m_pPlayerGetter->SetPosition(animPos);
+	m_addRot = pRot;
+	m_addPos = animPos;
+}
+
+void CPlayerAttack::Lerp()
+{
+	if (m_addPos.LengthSq() < 0.01f)
+	{
+		//座標更新されていない
+		return;
+	}
+	//回転の線形補完
+	CQuaternion rotation = m_pPlayerGetter->GetRotation();
+	rotation.Slerp(0.3f, rotation, m_addRot);
+	m_pPlayerGetter->SetRotation(rotation);
+	//座標の線形補完
+	CVector3 position = m_pPlayer->GetPosition();
+	position.Lerp(0.3f, position, m_addPos);
+	m_pPlayerGetter->SetPosition(position);
 }
 

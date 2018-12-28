@@ -21,6 +21,9 @@ public:
 	//回転
 	void Rotation();
 
+	//線形補完
+	void Lerp();
+
 private:
 	int							m_maxAttackNum = 0;					//最大連続攻撃回数
 	int							m_attackCount = 0;					//連続攻撃してる回数
@@ -33,5 +36,7 @@ private:
 	const CMatrix*				m_pBoneMat;							//ボーンの行列のポインタ
 	CVector3					m_manipVec;							//ボーンの座標からプレイヤーの座標までのベクトル
 	CVector3					m_preBonePos;						//前のフレームのボーンの座標
+	CQuaternion					m_addRot;
+	CVector3					m_addPos;
 };
 
