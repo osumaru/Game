@@ -39,7 +39,7 @@ void CResult::AfterDraw()
 		if (!GetSceneManager().GetInstance().GetFadeOut())
 		{
 			//ƒV[ƒ“‘JˆÚ
-			GetSceneManager().ChangeScene(GetSceneManager().enTitleScene);
+			GetSceneManager().ChangeScene(GetSceneManager().enGameScene);
 		}
 	}
 	m_result.SetAlpha(m_alphaTime);
