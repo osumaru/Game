@@ -1,4 +1,5 @@
 #include "ShakeCamera.h"
+#include "../Timer/GameTime.h"
 
 void CShakeCamera::Init(const CVector3 & position, const CVector3 & target, const CVector3 & shakeDirection, float damping)
 {
@@ -18,6 +19,14 @@ void CShakeCamera::Update()
 	{
 		return;
 	}
+	if (0.0f < m_delayTime || 0 < m_delayCount)
+	{
+		m_delayCount--;
+		m_delayTime -= GameTime().m_frameDeltaTime;
+		return;
+	}
+
+
 	CVector3 shakeDir = m_shakeDirection;
 	shakeDir.Normalize();
 	CVector3 front = m_target - m_position;

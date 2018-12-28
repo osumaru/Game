@@ -64,6 +64,18 @@ public:
 	{
 		m_shakeDirection = shakeDirection;
 	}
+
+	//’x‰„ŠÔ‚ğİ’è
+	void SetDelayTime(float delayTime)
+	{
+		m_delayTime = delayTime;
+	}
+	//’x‰„‚µ‚Ä‚¢‚éƒtƒŒ[ƒ€”‚ğİ’è
+	void SetDelayCount(int delayCount)
+	{
+		m_delayCount = delayCount;
+	}
+
 private:
 	CVector3	m_position;			//ƒJƒƒ‰‚ÌÀ•W
 	CVector3	m_target;			//’‹“_‚ÌÀ•W
@@ -72,5 +84,6 @@ private:
 	CVector3	m_shakeDirection;	//—h‚ê•ûŒü
 	float		m_shakePower;		//—h‚ê‚é—Í
 	float		m_damping;			//—h‚ê‚ÌŒ¸Š—¦
-
+	float		m_delayTime = 0.0f;	//—h‚ê‚Ü‚Å‚Ì’x‰„ŠÔ
+	int			m_delayCount = 0;	//—h‚ê‚Ü‚Å‚Ì’x‰„‚·‚éƒtƒŒ[ƒ€”
 };
