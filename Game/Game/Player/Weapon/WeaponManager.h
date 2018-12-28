@@ -114,11 +114,10 @@ public:
 
 private:
 	EnPlayerWeapon				m_weaponState = enWeaponSword;				//現在使ってる武器
-	std::unique_ptr<IInventoryEquip> m_equipWeapon[enWeaponNum];			//装備中の武器
-	std::unique_ptr<IWeapon>	m_weapons[enWeaponNum];						//武器
+	static std::unique_ptr<IInventoryEquip> m_equipWeapon[enWeaponNum];		//装備中の武器
+	std::unique_ptr<IWeapon>			m_weapons[enWeaponNum];			//武器
 	bool						m_isAttack = false;							//攻撃中かのフラグ
 	bool						m_isAttackCheck = false;					//当たり判定を取っているかのフラグ
 	CWeaponTraceDraw			m_weaponTrace;								//武器の軌跡を描画するためのクラス
-	bool						m_isTraceDraw = false;
-	static SWeaponStatus		m_weaponStatus;
+	bool						m_isTraceDraw = false;						//武器の軌跡の描画
 };

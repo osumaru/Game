@@ -12,7 +12,6 @@
 #include "../Enemy/PathFinding/PathFinding.h"
 
 CPlayer *CPlayer::m_player = NULL;
-CWeaponManager CPlayer::m_weaponManager;
 SplayerStatus CPlayer::m_status = {
 	m_status.Strength = 10,							//攻撃力
 	m_status.Defense = 3,							//防御力
@@ -140,7 +139,7 @@ void CPlayer::Init(CVector3 position)
 	}
 
 	//プレイヤーのステータスの初期化
-	//{
+	{
 	m_status.Health = m_status.MaxHealth;
 	m_status.MaxHealth = m_status.MaxHealth;
 	//	m_status.Strength = 10;							//攻撃力
@@ -153,7 +152,7 @@ void CPlayer::Init(CVector3 position)
 	//	m_status.ExperiencePoint = 0;					//経験値
 	//	m_status.AccumulationExp += m_status.OldExp;	//累積経験値
 	//	m_status.Gold = 4000;							//所持金
-	//}
+	}
 	m_playerGetter.SetPlayer(this);
 
 	CVector3 boxSize = { 0.4f,0.6f,0.4f };

@@ -78,6 +78,8 @@ bool CGameScene::Start()
 		//フェードインの開始
 		GetSceneManager().GetFade()->FadeIn();
 
+		//ゲーム開始フラグの設定
+		GetSceneManager().SetIsStart(true);
 		//});
 		//ThreadA.detach();
 		return true;
