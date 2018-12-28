@@ -3,6 +3,7 @@
 #include "Skelton.h"
 #include "Animation.h"
 
+
 void CAnimationClip::Load(wchar_t * filePath)
 {
 	m_clipName = filePath;
@@ -10,56 +11,15 @@ void CAnimationClip::Load(wchar_t * filePath)
 	m_currentFrameNo = 0;
 	m_frameTime = 0.0f;
 	m_topBoneKeyFrameList = nullptr;
-	auto fp = _wfopen(filePath, L"rb");
 
-	//アニメーションクリップのヘッダーをロード。
-	SAnimClipHeader header;
-	fread(&header, sizeof(header), 1, fp);
+	const SAnimationClipInfo* info = AnimationResource().Load(filePath);
+	m_animationEvent = info->animationEvent;
+	m_animationEventNum = info->animationEventNum;
+	m_clipName = info->filePath;
+	m_keyFramePtrListArray = info->keyFramePtrListArray;
+	m_keyframes = info->keyframes;
 
-	if (header.numAnimationEvent > 0) {
-		m_animationEvent = std::make_unique<CAnimationEvent[]>(header.numAnimationEvent);
-		//アニメーションイベントがあるなら、イベント情報をロードする。
-		for (auto i = 0; i < header.numAnimationEvent; i++) {
-			SAnimationEvent animEvent;
-			fread(&animEvent, sizeof(animEvent), 1, fp);
-			//イベント名をロードする。
-			static char eventName[256];
-			static wchar_t wEventName[256];
-			fread(eventName, animEvent.eventNameLength + 1, 1, fp);
-			mbstowcs(wEventName, eventName, 255);
-			m_animationEvent[i].SetInvokeTime(animEvent.invokeTime);
-			m_animationEvent[i].SetEventName(wEventName);
-		}
-	}
-	m_animationEventNum = header.numAnimationEvent;
-
-	//中身をごそっとロード。
-	auto keyframes = std::make_unique<SKeyframeRow[]>(header.numKey);
-	fread(keyframes.get(), sizeof(SKeyframeRow), header.numKey, fp);
-	fclose(fp);
-	for (auto i = 0; i < header.numKey; i++) {
-		auto keyframe = std::make_unique<SKeyframe>();
-		keyframe->boneIndex = keyframes[i].boneIndex;
-		keyframe->transform = CMatrix::Identity;
-		keyframe->time = keyframes[i].time;
-		for (auto j = 0; j < 4; j++) {
-			keyframe->transform.m[j][0] = keyframes[i].transform[j].x;
-			keyframe->transform.m[j][1] = keyframes[i].transform[j].y;
-			keyframe->transform.m[j][2] = keyframes[i].transform[j].z;
-		}
-		m_keyframes.push_back(std::move(keyframe));
-	}
-
-	//ボーンインデックスごとのキーフレームの連結リストを作成する。
-	m_keyFramePtrListArray.resize(512);
-
-	for (auto& keyframe : m_keyframes) {
-		m_keyFramePtrListArray[keyframe->boneIndex].push_back(keyframe.get());
-		if (m_topBoneKeyFrameList == nullptr) {
-			m_topBoneKeyFrameList = &m_keyFramePtrListArray[keyframe->boneIndex];
-		}
-	}
-
+	m_topBoneKeyFrameList = &m_keyFramePtrListArray[m_keyframes[0]->boneIndex];
 	m_localMatrix.resize(m_keyFramePtrListArray.size());
 	m_freezeFlg.resize(m_keyFramePtrListArray.size());
 	for (int i = 0;i < m_localMatrix.size();i++)

@@ -164,6 +164,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Camera\Camera.cpp" />
+    <ClCompile Include="Camera\ShakeCamera.cpp" />
     <ClCompile Include="Camera\SpringCamera.cpp" />
     <ClCompile Include="Effect\Effect.cpp" />
     <ClCompile Include="Effect\EffectEngine.cpp" />
@@ -219,6 +220,7 @@
     <ClCompile Include="Physics\RigidBody.cpp" />
     <ClCompile Include="Physics\RigidBodyDraw.cpp" />
     <ClCompile Include="Random\Random.cpp" />
+    <ClCompile Include="Resource\AnimationRsource.cpp" />
     <ClCompile Include="Resource\EffectResource.cpp" />
     <ClCompile Include="Resource\ShaderResource.cpp" />
     <ClCompile Include="Resource\SkinmodelResource.cpp" />
@@ -232,6 +234,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera\Camera.h" />
+    <ClInclude Include="Camera\ShakeCamera.h" />
     <ClInclude Include="Camera\SpringCamera.h" />
     <ClInclude Include="Effect\Effect.h" />
     <ClInclude Include="Effect\EffectEngine.h" />
@@ -285,6 +288,7 @@
     <ClInclude Include="Physics\RigidBody.h" />
     <ClInclude Include="Physics\RigidBodyDraw.h" />
     <ClInclude Include="Random\Random.h" />
+    <ClInclude Include="Resource\AnimationResource.h" />
     <ClInclude Include="Resource\EffectResource.h" />
     <ClInclude Include="Resource\ShaderResource.h" />
     <ClInclude Include="Resource\SkinmodelResource.h" />
