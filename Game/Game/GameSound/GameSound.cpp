@@ -20,8 +20,8 @@ bool CGameSound::Start()
 	m_backSound[enShopBgm].SetVolume(SHOP_MASTER_VOLUME);
 	m_backSound[enWorldBgm].Init("Assets/sound/BackSound//FieldBgm.wav");
 	m_backSound[enWorldBgm].SetVolume(MASTER_VOLUME);
-	m_backSound[enBossBgm].Init("Assets/sound/BackSound//BossBgm.wav");
-	m_backSound[enBossBgm].SetVolume(MASTER_VOLUME);
+	//m_backSound[enBossBgm].Init("Assets/sound/BackSound//BossBgm.wav");
+	//m_backSound[enBossBgm].SetVolume(MASTER_VOLUME);
 	m_backSound[enWorldBgm].Play(true,true);
 	return true;
 }

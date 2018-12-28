@@ -18,7 +18,10 @@ void CPlayerSky::Init()
 
 void CPlayerSky::Update()
 {
-
+	if (m_pPlayerGetter->GetAnimation().GetCurrentAnimationNum() == enPlayerAnimationLanding)
+	{
+		m_pPlayerGetter->SetMoveSpeed(CVector3::Zero);
+	}
 	m_pPlayerGetter->GetCharacterController().Execute(GameTime().GetDeltaFrameTime());
 	
 	//地面についていたら着地モーションを流す

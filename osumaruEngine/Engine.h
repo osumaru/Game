@@ -6,6 +6,7 @@
 #include "Resource/TextureResource.h"
 #include "Resource/SkinmodelResource.h"
 #include "Resource/ShaderResource.h"
+#include "Resource/AnimationResource.h"
 #include "Graphics/Primitive.h"
 #include "Graphics/Light.h"
 #include "Graphics/ConstantBuffer.h"
@@ -245,6 +246,11 @@ public:
 		return m_effectResource;
 	}
 
+	CAnimationResource& GetAnimationResource()
+	{
+		return m_animationResource;
+	}
+
 private:
 	static const int							MAIN_RENDER_TARGET_NUM = 2;
 	CGameObjectManager*							m_objectManager;			//オブジェクトマネージャー
@@ -266,6 +272,7 @@ private:
 	CSkinmodelResource							m_skinmodelResource;
 	CShaderResource								m_shaderResource;
 	CEffectResource								m_effectResource;
+	CAnimationResource							m_animationResource;
 	CLight										m_light;
 	CDeferred									m_deferred;
 	CPostEffect									m_postEffect;
@@ -343,6 +350,11 @@ static CShaderResource& ShaderResource()
 	return Engine().ShaderResource();
 }
 
+static CAnimationResource& AnimationResource()
+{
+	return Engine().GetAnimationResource();
+}
+
 static int FrameBufferWidth()
 {
 	return Engine().GetFrameBufferWidth();
@@ -362,3 +374,4 @@ static CRenderTarget& MainRenderTarget()
 {
 	return Engine().GetMainRenderTarget();
 }
+

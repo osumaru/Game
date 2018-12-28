@@ -28,7 +28,7 @@ public:
 private:
 	std::list<CPlayerArrow*>			m_arrowList;							//弓矢のリスト
 	CSprite								m_tag;									//サークルのスプライト
-	CTexture							m_texture;								//サークルのテクスチャ
+	CTexture*							m_texture;								//サークルのテクスチャ
 	bool								m_isZoom;								//弓用の視点に切り替えるかの判定をする変数
 
 };

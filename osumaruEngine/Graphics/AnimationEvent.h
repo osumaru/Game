@@ -3,7 +3,7 @@
 /*
 アニメーションイベント
 */
-class CAnimationEvent : Uncopyable
+class CAnimationEvent
 {
 public:
 	CAnimationEvent() :

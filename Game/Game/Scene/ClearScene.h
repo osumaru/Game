@@ -19,6 +19,6 @@ public:
 
 private:
 	CSprite			m_clear;					//Clear画面のスプライト
-	CTexture		m_clearTexture;				//Clear画面のテクスチャ
+	CTexture*		m_clearTexture;				//Clear画面のテクスチャ
 };
 

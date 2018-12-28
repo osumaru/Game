@@ -13,14 +13,14 @@ public:
 
 private:
 	CSprite			m_bossHpSprite;							//ボスのHPスプライト
-	CTexture		m_bossHpTexture;						//ボスのHPテクスチャ
+	CTexture*		m_bossHpTexture;						//ボスのHPテクスチャ
 	const CVector2	m_bossHpPos = { 420.0f,270.0f };		//ボスのHP座標
 	CVector2		m_bossHpSize = { 300.0f,40.0f };		//ボスのHPサイズ
 	const CVector2	m_bossHpCenterPos = { 1.0f,1.0f };		//ボスのHP基点座標
 	float			m_hpSubtractSpeed = 1.0f;				//ボスのHPが減少する速度
 
 	CSprite			m_bossHpBackSprite;						//ボスのHPバックグラウンドスプライト
-	CTexture		m_bossHpBackTexture;					//ボスのHPバックグラウンドテクスチャ
+	CTexture*		m_bossHpBackTexture;					//ボスのHPバックグラウンドテクスチャ
 	const CVector2	m_bossHpBackPos = { 420.0f,270.0f };	//ボスのHPバックグラウンド座標
 	CVector2		m_bossHpBackSize = { 300.0f,40.0f };	//ボスのHPバックグラウンドサイズ
 	const CVector2	m_bossHpBackCenterPos = { 1.0f,1.0f };	//ボスのHPバックグラウンド基点座標

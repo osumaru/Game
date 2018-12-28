@@ -1,6 +1,7 @@
 #pragma once
 #include "IWeapon.h"
 #include "WeaponCommon.h"
+#include "../../Item/InventoryItem/IInventoryEquip.h"
 
 class CPlayer;
 //武器を管理するクラス
@@ -84,9 +85,36 @@ public:
 		m_isTraceDraw = isTraceDraw;
 	}
 
+	//装備中の武器を取得
+	//weaponNum		武器の種類
+	IInventoryEquip* GetEquipWeapon(EnPlayerWeapon weaponNum)
+	{
+		return m_equipWeapon[weaponNum].get();
+	}
+
+	//装備中の武器を取得
+	IInventoryEquip* GetEquipWeapon()
+	{
+		return m_equipWeapon[m_weaponState].get();
+	}
+
+	/////////削除するかも/////////
+	//装備する武器を設定
+	//equipWeapon	変更したい武器
+	//weaponNum		武器の種類
+	void SetEquipWeapon(std::unique_ptr<IInventoryEquip> equipWeapon, EnPlayerWeapon weaponNum)
+	{
+		m_equipWeapon[weaponNum] = std::move(equipWeapon);
+	}
+
+	//装備している武器を交換する
+	//equipWeapon	変更したい武器
+	//weaponNum		武器の種類
+	void ChangeEquipWeapon(std::unique_ptr<IInventoryEquip> equipWeapon, EnPlayerWeapon weaponNum);
+
 private:
 	EnPlayerWeapon				m_weaponState = enWeaponSword;				//現在使ってる武器
-	std::list<SWeaponStatus>	m_equipList;								//所持装備のリスト
+	std::unique_ptr<IInventoryEquip> m_equipWeapon[enWeaponNum];			//装備中の武器
 	std::unique_ptr<IWeapon>	m_weapons[enWeaponNum];						//武器
 	bool						m_isAttack = false;							//攻撃中かのフラグ
 	bool						m_isAttackCheck = false;					//当たり判定を取っているかのフラグ

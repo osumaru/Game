@@ -38,10 +38,10 @@ private:
 	};
 	CSoundSource		m_menuSoundEffect;		//メニューを開いた時の音`
 	CSprite				m_menu;					//メニュー画面のスプライト
-	CTexture			m_Texture;				//メニュー画面のテクスチャ
+	CTexture*			m_Texture;				//メニュー画面のテクスチャ
 
 	CSprite				m_selectSprite;						//メニュー画面の羽ペンアイコンのスプライト
-	CTexture			m_selectTexture;				//メニュー画面の羽ペンアイコンテクスチャ
+	CTexture*			m_selectTexture;				//メニュー画面の羽ペンアイコンテクスチャ
 	CVector2			m_selectPosition = CVector2::Zero;
 	CVector2			m_selectScale = { 70.0f,70.0f };
 	const CVector2		SELECT_TEX_POS = { -270.0f,320.0f };

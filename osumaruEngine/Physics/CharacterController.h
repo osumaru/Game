@@ -35,7 +35,7 @@ public:
 	void StaticExecute();
 
 	//À•W‚ğæ“¾B
-	const CVector3& GetPosition() const
+	const CVector3 GetPosition() const
 	{
 		CVector3 rigidPos = m_rigidBody.GetPosition();
 		rigidPos.y -= m_radius + m_height * 0.5f;

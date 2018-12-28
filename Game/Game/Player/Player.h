@@ -223,8 +223,8 @@ private:
 	CSkinModel							m_skinmodel;							//スキンモデル
 	CCharacterController				m_characterController;					//キャラクターコントローラー
 	CAnimation							m_animation;							//アニメーション
-	SplayerStatus						m_status;								//プレイヤーのステータス
-	CWeaponManager						m_weaponManager;						//武器
+	static SplayerStatus				m_status;								//プレイヤーのステータス
+	static CWeaponManager				m_weaponManager;						//武器
 	CPlayerStateMachine					m_PlayerStateMachine;					//プレイヤーのアニメーションの遷移を行うステートマシーン
 	bool								m_isDamege = false;						//ダメージを受けてるかのフラグ
 	//bool								m_isAttack = false;						//攻撃中かの判定

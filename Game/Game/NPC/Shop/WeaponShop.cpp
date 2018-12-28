@@ -33,16 +33,16 @@ void CWeaponShop::Init(const CVector3 position, const CQuaternion rotation)
 
 	//テクスチャ及びスプライト関係の初期化
 	{
-		m_backTexture.Load(L"Assets/sprite/ShopUI/LineUp.png");
-		m_backSprite.Init(&m_backTexture);
+		m_backTexture = TextureResource().LoadTexture(L"Assets/sprite/ShopUI/LineUp.png");
+		m_backSprite.Init(m_backTexture);
 		m_backSprite.SetPosition({ 0.0f,0.0f });
 		m_backSprite.SetSize({ 650.0f,700.0f });
 
 
-		m_shopSelectTexture[0].Load(L"Assets/sprite/ShopUI/Buy.png");
-		m_shopSelect[0].Init(&m_shopSelectTexture[0]);
-		m_shopSelectTexture[1].Load(L"Assets/sprite/ShopUI/Execute.png");
-		m_shopSelect[1].Init(&m_shopSelectTexture[1]);
+		m_shopSelectTexture[0] = TextureResource().LoadTexture(L"Assets/sprite/ShopUI/Buy.png");
+		m_shopSelect[0].Init(m_shopSelectTexture[0]);
+		m_shopSelectTexture[1] = TextureResource().LoadTexture(L"Assets/sprite/ShopUI/Execute.png");
+		m_shopSelect[1].Init(m_shopSelectTexture[1]);
 		for (int num = 0;num < SELECT_TEX_ELEMENT;num++)
 		{
 			m_shopSelect[num].SetPosition(m_shopSelectPosition);
@@ -50,13 +50,13 @@ void CWeaponShop::Init(const CVector3 position, const CQuaternion rotation)
 			m_shopSelectPosition.y -= 100.0f;
 		}
 
-		m_shopSelectPenTexture.Load(L"Assets/sprite/MenuUI/Select2.png");
-		m_shopSelectPen.Init(&m_shopSelectPenTexture);
+		m_shopSelectPenTexture = TextureResource().LoadTexture(L"Assets/sprite/MenuUI/Select2.png");
+		m_shopSelectPen.Init(m_shopSelectPenTexture);
 		m_shopSelectPen.SetPosition(m_shopSelectPenPosition);
 		m_shopSelectPen.SetSize(m_shopSelectPenSize);
 
-		m_selectItemTexture.Load(L"Assets/sprite/ShopUI/SelectItem.png");
-		m_selectItemSprite.Init(&m_selectItemTexture);
+		m_selectItemTexture = TextureResource().LoadTexture(L"Assets/sprite/ShopUI/SelectItem.png");
+		m_selectItemSprite.Init(m_selectItemTexture);
 		m_selectItemSprite.SetPosition(m_slectItemTexPos);
 		m_selectItemSprite.SetSize(m_selectItemTexSize);
 
@@ -70,8 +70,8 @@ void CWeaponShop::Init(const CVector3 position, const CQuaternion rotation)
 			int RandomID = DEFAULT_WEAPON[num];//Random().GetRandInt() % 10;
 			m_items[num].ItemStatus = m_equipItem->GetItemStatus(RandomID);
 			swprintf(filePath, L"Assets/sprite/Item/Equip/Equip_%d.png", (int)m_items[num].ItemStatus.WeaponType);
-			m_items[num].ItemTexture.Load(filePath);
-			m_items[num].ItemSprite.Init(&m_items[num].ItemTexture);
+			m_items[num].ItemTexture = TextureResource().LoadTexture(filePath);
+			m_items[num].ItemSprite.Init(m_items[num].ItemTexture);
 			m_items[num].ItemSprite.SetSize(m_shopLineupTexSize);
 			m_items[num].ItemSprite.SetPosition(m_shopLineupPosition);
 			m_shopLineupPosition.y -= SHOPLINEUP_POSITION_OFFSET.y;
@@ -94,8 +94,8 @@ void CWeaponShop::LineupChange()
 		int RandomID = PICUP_WEAPON[num];
 		m_items[num].ItemStatus = m_equipItem->GetItemStatus(RandomID);
 		swprintf(filePath, L"Assets/sprite/Item/Equip/Equip_%d.png", (int)m_items[num].ItemStatus.WeaponType);
-		m_items[num].ItemTexture.Load(filePath);
-		m_items[num].ItemSprite.Init(&m_items[num].ItemTexture);
+		m_items[num].ItemTexture = TextureResource().LoadTexture(filePath);
+		m_items[num].ItemSprite.Init(m_items[num].ItemTexture);
 		m_items[num].ItemSprite.SetSize(m_shopLineupTexSize);
 		m_items[num].ItemSprite.SetPosition(m_shopLineupPosition);
 		m_shopLineupPosition.y -= SHOPLINEUP_POSITION_OFFSET.y;
@@ -131,25 +131,26 @@ void CWeaponShop::Update()
 			break;
 		}
 		//インベントリに入れる用の装備(スプライト)を作る
-		IInventoryEquip* inventoryEquip = nullptr;
+		std::unique_ptr<IInventoryEquip> inventoryEquip;
 		switch (weapons.weaponNum)
 		{
 		case EnPlayerWeapon::enWeaponSword:			//剣
-			inventoryEquip = new CInventorySword;
+			inventoryEquip = std::make_unique<CInventorySword>();
 			break;
 		case EnPlayerWeapon::enWeaponLongSword:		//大剣
-			inventoryEquip = new CInventoryLargeSword;
+			inventoryEquip = std::make_unique<CInventoryLargeSword>();
 			break;
 		case EnPlayerWeapon::enWeaponArrow:			//弓
-			inventoryEquip = new CInventoryBow;
+			inventoryEquip = std::make_unique<CInventoryBow>();
 			break;
 		case EnPlayerWeapon::enWeaponTwinSword:		//双剣
-			inventoryEquip = new CInventoryTwinSword;
+			inventoryEquip = std::make_unique<CInventoryTwinSword>();
 			break;
 		}
 		inventoryEquip->Init();
 		inventoryEquip->SetEquipStatus(weapons);
-		CEquipInventory::AddEquipList(inventoryEquip);
+		CEquipInventory::AddEquipList(std::move(inventoryEquip));
+
 		CSoundSource* se = New<CSoundSource>(0);
 		se->Init("Assets/sound/SystemSound/BuySe.wav");
 		se->SetVolume(1.0f);

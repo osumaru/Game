@@ -14,8 +14,8 @@ CResult::~CResult()
 
 void CResult::Init()
 {
-	m_resultTexture.Load(L"Assets/sprite/YouDied.png");
-	m_result.Init(&m_resultTexture);
+	m_resultTexture = TextureResource().LoadTexture(L"Assets/sprite/YouDied.png");
+	m_result.Init(m_resultTexture);
 	m_result.SetPosition({ -1.0f, -1.0f });
 	m_result.SetSize({ 400.0f,200.0f });
 	m_result.SetAlpha(0.0f);
@@ -39,7 +39,7 @@ void CResult::AfterDraw()
 		if (!GetSceneManager().GetInstance().GetFadeOut())
 		{
 			//ƒV[ƒ“‘JˆÚ
-			GetSceneManager().ChangeScene(GetSceneManager().enTitleScene);
+			GetSceneManager().ChangeScene(GetSceneManager().enGameScene);
 		}
 	}
 	m_result.SetAlpha(m_alphaTime);
