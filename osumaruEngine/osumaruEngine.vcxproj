@@ -220,7 +220,7 @@
     <ClCompile Include="Physics\RigidBody.cpp" />
     <ClCompile Include="Physics\RigidBodyDraw.cpp" />
     <ClCompile Include="Random\Random.cpp" />
-    <ClCompile Include="Resource\AnimationRsource.cpp" />
+    <ClCompile Include="Resource\AnimationResource.cpp" />
     <ClCompile Include="Resource\EffectResource.cpp" />
     <ClCompile Include="Resource\ShaderResource.cpp" />
     <ClCompile Include="Resource\SkinmodelResource.cpp" />

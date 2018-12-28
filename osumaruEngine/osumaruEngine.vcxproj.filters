@@ -255,7 +255,7 @@
     <ClCompile Include="Camera\ShakeCamera.cpp">
       <Filter>ソース ファイル\Camera</Filter>
     </ClCompile>
-    <ClCompile Include="Resource\AnimationRsource.cpp">
+    <ClCompile Include="Resource\AnimationResource.cpp">
       <Filter>ソース ファイル\Resource</Filter>
     </ClCompile>
   </ItemGroup>

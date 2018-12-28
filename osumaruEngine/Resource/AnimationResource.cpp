@@ -1,6 +1,20 @@
 #include "AnimationResource.h"
 
 
+CAnimationResource::~CAnimationResource()
+{
+	for (auto& map : m_animationResource)
+	{
+		for (auto& keyframe : map.second->keyframes)
+		{
+			delete keyframe;
+		}
+		delete[] map.second->animationEvent;
+		delete map.second;
+	}
+
+}
+
 const SAnimationClipInfo* CAnimationResource::Load(const wchar_t* filePath)
 {
 	int hash = MakeHash(filePath);
