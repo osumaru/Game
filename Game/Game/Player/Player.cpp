@@ -190,10 +190,10 @@ void CPlayer::Update()
 	CVector3 stickDir = { stickX, 0.0f, stickZ };
 	m_playerGetter.SetStickDir(stickDir);
 
-	if (Pad().IsPressButton(enButtonX))
+	/*if (Pad().IsPressButton(enButtonX))
 	{
 		m_status.Health = 0;
-	}
+	}*/
 
 	//if (Pad().IsTriggerButton(enButtonB))
 	//{

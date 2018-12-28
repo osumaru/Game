@@ -120,4 +120,5 @@ private:
 	bool						m_isAttackCheck = false;					//当たり判定を取っているかのフラグ
 	CWeaponTraceDraw			m_weaponTrace;								//武器の軌跡を描画するためのクラス
 	bool						m_isTraceDraw = false;
+	static SWeaponStatus		m_weaponStatus;
 };
