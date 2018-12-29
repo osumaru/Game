@@ -226,7 +226,6 @@ void CPlayer::Update()
 	m_skinmodel.Update(m_position, m_rotation, { 1.0f, 1.0f, 1.0f }, true);
 	m_weaponManager.Update();
 	//•â³’l‚ğ‚ğ“ü‚ê‚Ä„‘Ì‚ğ‚¸‚ç‚·
-	//m_characterController.SetRigidBodyManip(100.0f);
 	CVector3 manipVector = { 0.0f,0.0f,100.0f };
 	CVector3 oldRigidPos = m_characterController.GetPosition();
 	m_characterController.SetPosition(manipVector);
