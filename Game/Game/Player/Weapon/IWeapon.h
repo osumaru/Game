@@ -100,6 +100,13 @@ public:
 
 
 protected:
+	struct SHitEffectParam
+	{
+		float slowTime = 0.0f;		//スローにする時間
+		float slowScale = 1.0f;		//どのくらいスローにするかの倍率
+		float shakePower = 0.0f;	//カメラ揺れの強さ
+	};
+
 	CPlayer*								m_pPlayer = nullptr;		//プレイヤーのインスタンス
 	const CMatrix*							m_normalBoneMat = nullptr;	//プレイヤーのボーン行列
 	const CMatrix*							m_attackBoneMat = nullptr;	//プレイヤーのボーン行列
@@ -111,6 +118,7 @@ protected:
 	SWeaponStatus							m_weaponStatus;				//装備中の武器ノステータス
 	int										m_maxWeaponHitNum = 0;		//武器の数
 	int										m_maxAttackNum = 0;			//最大連続攻撃回数
+	std::unique_ptr<SHitEffectParam[]>		m_hitEffectParam;			//攻撃が当たった時のエフェクトパラメータ
 	std::unique_ptr<EnPlayerAnimation[]>	m_attackAnimation;			//攻撃のアニメーション番号
 	std::unique_ptr<EnPlayerAnimation[]>	m_combineAnimation;			//攻撃の後の合成用のアニメーション番号
 	std::unique_ptr<bool[]>					m_stanAttack;				//スタン攻撃

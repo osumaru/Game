@@ -67,6 +67,8 @@ void CPlayerAttack::Update()
 
 	Lerp();
 
+	m_pPlayer->GetWeaponManager().SetAttackCount(m_attackCount);
+
 	//攻撃アニメーションが終わった時の処理
 	if (!m_pPlayerGetter->GetAnimation().IsPlay())
 	{
