@@ -106,7 +106,7 @@ public:
 private:
 	bool									m_isPlay = false;					//再生中か？
 	bool									m_isLoop = false;					//ループしてるか？
-	const wchar_t*								m_clipName = nullptr;				//アニメーションクリップの名前。
+	const wchar_t*							m_clipName = nullptr;				//アニメーションクリップの名前。
 	std::vector<SKeyframe*>					m_keyframes;						//キーフレーム。
 	std::vector<std::vector<SKeyframe*>>	m_keyFramePtrListArray;				//ボーン毎のキーフレームのリスト
 	std::vector<SKeyframe*>*				m_topBoneKeyFrameList = nullptr;	//一番最初のキーフレーム
@@ -116,4 +116,5 @@ private:
 	int										m_currentFrameNo = 0;				//現在のフレームナンバー
 	CAnimationEvent*						m_animationEvent = nullptr;			//アニメーションイベント。
 	int										m_animationEventNum = 0;			//アニメーションイベントの数
+	int										m_maxFrameNum = 0;					//最大キーフレーム数
 };

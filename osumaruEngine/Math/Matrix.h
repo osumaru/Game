@@ -69,6 +69,7 @@ public:
 			DirectX::XMVector3Transform(vOut, *this)
 		);
 	}
+
 	void Mul(CVector4& vOut) const
 	{
 		DirectX::XMStoreFloat4(
@@ -213,6 +214,13 @@ public:
 		);
 		mat = lm;
 	}
+	/*!
+	* @brief	線形補間。
+	*@details
+	* this = m0  * (1.0 - t) + m1 * t;
+	*/
+	void Lerp(float t, const CMatrix& m0, const CMatrix& m1);
+
 	/*!
 	*@brief	逆行列を計算。
 	*@param[in]	m	元になる行列。

@@ -100,6 +100,8 @@ void CTwinSword::Update()
 	multi.Multiply(rotation);
 	rotation = multi;
 	m_skinModelTwin.Update(position, rotation, CVector3::One);
+
+	WeaponTraceTwinDrawer();
 }
 
 void CTwinSword::Draw()
@@ -151,8 +153,38 @@ SWeaponTraceDrawInfo CTwinSword::WeaponTraceDraw()
 	manip.Normalize();
 	CVector3 manip2 = manip;
 	manip.Scale(0.2f);
-	manip2.Scale(1.0f);
+	manip2.Scale(0.7f);
 	CVector3 position2 = position + manip;
 	CVector3 position3 = position + manip2;
 	return { true, position2, position3 };
+}
+
+SWeaponTraceDrawInfo CTwinSword::WeaponTraceTwinDraw()
+{
+	CVector3 position = *(CVector3*)m_attackTwinBoneMat->m[3];
+	CVector3 manip = *(CVector3*)m_attackTwinBoneMat->m[2];
+	manip.Normalize();
+	CVector3 manip2 = manip;
+	manip.Scale(0.2f);
+	manip2.Scale(0.7f);
+	CVector3 position2 = position + manip;
+	CVector3 position3 = position + manip2;
+	return { true, position2, position3 };
+}
+
+void CTwinSword::WeaponTraceTwinDrawer()
+{
+	CWeaponTraceDraw& weaponTrace = m_pPlayer->GetWeaponManager().GetWeaponTraceDraw();
+	if (m_pPlayer->GetWeaponManager().GetIsAttack())
+	{
+		SWeaponTraceDrawInfo info = WeaponTraceTwinDraw();
+		m_pPlayer->GetWeaponManager().SetIsTraceDraw(info.isDraw);
+		if (info.isDraw)
+		{
+			weaponTrace.Add(info.rootPos, info.pointPos);
+		}
+	}
+	else
+	{
+	}
 }
