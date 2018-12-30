@@ -65,6 +65,7 @@ void IShop::ShopUpdate()
 			m_selectShop = enShopNone;
 			m_shopSelectPenPosition.y -= 100.0f;
 			m_shopSelectPen.SetPosition(m_shopSelectPenPosition);
+			GetPlayer().SetIsAction(false);
 		}
 		else if (Pad().IsTriggerButton(enButtonUp) && m_selectShop != enShopBuy)
 		{
@@ -80,6 +81,7 @@ void IShop::ShopUpdate()
 			m_shopState = enShopNone;
 			m_isShoplineupDraw = false;
 			GetPlayer().SetIsActiveUpdate(true);
+			GetPlayer().SetIsAction(false);
 			GetSceneGame().GetGameSound()->SetIsShop(false);
 		}
 		else if (Pad().IsTriggerButton(enButtonA))

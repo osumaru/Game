@@ -48,6 +48,7 @@ void CTreasureChest::Update()
 		DesideWeaponStatus();
 		m_inventoryEquip->Init();
 		CEquipInventory::AddEquipList(std::move(m_inventoryEquip));
+		GetPlayer().SetIsAction(false);
 		Delete(this);
 	}
 

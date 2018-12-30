@@ -199,6 +199,19 @@ public:
 		m_isStanAttack = isStanAttack;
 	}
 
+	//アクションをするかを取得
+	bool GetIsAction()
+	{
+		return m_isAction;
+	}
+
+	//アクションをするかを設定
+	//isAction		アクションをするか
+	void SetIsAction(bool isAction)
+	{
+		m_isAction = isAction;
+	}
+
 	/*
 	その状態へ遷移するための条件を満たしているかのフラグを返す関数
 	state	プレイヤーのステート
@@ -236,6 +249,7 @@ private:
 	bool								m_isStanAttack = false;					//スタン攻撃
 	CCollisionDetection					m_groundCollision;						//地面用のコリジョン
 	CBoxCollider						m_boxCollider;							//ボックスコライダー
+	bool								m_isAction = true;						//アクションをするかを判定する
 };
 
 static CPlayer& GetPlayer()
