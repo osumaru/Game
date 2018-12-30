@@ -53,7 +53,14 @@ void CPlayerWireMove::Update()
 		m_isWireThrow = false;
 		m_pPlayerGetter->GetAnimation().Play(enPlayerAnimationWireMove, 0.25f);
 	}
-
+	//ダメージを受けた場合の処理
+	if(m_pPlayer->GetIsStateCondition(CPlayerState::enPlayerStateDamage))
+	{
+		//移動が終わった
+		GetPlayer().GetWireAction().SetIsWireMove(false);
+		m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateDamage);
+		return;
+	}
 	if (m_isWireThrow)
 	{
 		//ワイヤーを投げるアニメーションをしている

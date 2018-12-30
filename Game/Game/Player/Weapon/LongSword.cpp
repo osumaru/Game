@@ -65,8 +65,8 @@ SWeaponTraceDrawInfo CLongSword::WeaponTraceDraw()
 	CVector3 manip = *(CVector3*)m_attackBoneMat->m[2];
 	manip.Normalize();
 	CVector3 manip2 = manip;
-	manip.Scale(0.2f);
-	manip2.Scale(1.0f);
+	manip.Scale(0.5f);
+	manip2.Scale(1.5f);
 	CVector3 position2 = position + manip;
 	CVector3 position3 = position + manip2;
 	return { true, position2, position3 };
