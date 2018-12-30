@@ -20,7 +20,8 @@ void CRock::Init(const CMatrix* handMatrix, CVector3 enemyPos)
 	m_targetPos.y = playerMatrix.m[3][1];
 	m_targetPos.z = playerMatrix.m[3][2];
 	//キャラクターコントローラーを初期化
-	m_characterController.Init(1.0f, 0.1f, m_position);
+	m_characterController.Init(0.1f, 0.1f, m_position);
+	//m_characterController.Init(1.0f, 0.1f, m_position);
 	m_characterController.SetGravity(-4.9f);
 }
 
