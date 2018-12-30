@@ -42,32 +42,45 @@ void CAnimationClip::Update(float deltaTime)
 	
 	if (m_isPlay)
 	{
-		m_frameTime += deltaTime;
-		if ((*m_topBoneKeyFrameList)[m_currentFrameNo]->time < m_frameTime)
+		float frameTime = (*m_topBoneKeyFrameList)[m_currentFrameNo]->time;
+  		float nowTime = (*m_topBoneKeyFrameList)[m_currentFrameNo]->time - m_frameTime;
+		if (0 < m_currentFrameNo)
 		{
-			int i = 0;
-			for (auto& keyframe : m_keyFramePtrListArray)
+			frameTime -= (*m_topBoneKeyFrameList)[m_currentFrameNo - 1]->time;
+		}
+		nowTime = frameTime - nowTime;
+		if (frameTime == 0.0f)
+		{
+			frameTime = 1.0f;
+		}
+		int i = 0;
+		int nextFrameNum = min(m_topBoneKeyFrameList->size() - 1, m_currentFrameNo + 1);
+		for (auto& keyframe : m_keyFramePtrListArray)
+		{
+			if (!keyframe.empty())
 			{
-				if (!keyframe.empty())
+				CMatrix localMatrix = m_localMatrix[i];
+				m_localMatrix[i].Lerp(max(0.0f, nowTime / frameTime), keyframe[m_currentFrameNo]->transform, keyframe[nextFrameNum]->transform);
+				if (m_freezeFlg[i].isFreezeX)
 				{
-					CMatrix localMatrix = m_localMatrix[i];
-					m_localMatrix[i] = keyframe[m_currentFrameNo]->transform;
-					if (m_freezeFlg[i].isFreezeX)
-					{
-						m_localMatrix[i].m[3][0] = localMatrix.m[3][0];
-					}
-					if (m_freezeFlg[i].isFreezeY)
-					{
-						m_localMatrix[i].m[3][1] = localMatrix.m[3][1];
-					}
-					if (m_freezeFlg[i].isFreezeZ)
-					{
-						m_localMatrix[i].m[3][2] = localMatrix.m[3][2];
-					}
+					m_localMatrix[i].m[3][0] = localMatrix.m[3][0];
 				}
-				i++;
+				if (m_freezeFlg[i].isFreezeY)
+				{
+					m_localMatrix[i].m[3][1] = localMatrix.m[3][1];
+				}
+				if (m_freezeFlg[i].isFreezeZ)
+				{
+					m_localMatrix[i].m[3][2] = localMatrix.m[3][2];
+				}
 			}
+			i++;
+		}
+		m_frameTime += deltaTime;
+		while ((*m_topBoneKeyFrameList)[m_currentFrameNo]->time < m_frameTime)
+		{
 			m_currentFrameNo++;
+
 			if (m_topBoneKeyFrameList->size() <= m_currentFrameNo)
 			{
 				m_isPlay = false;
@@ -77,8 +90,10 @@ void CAnimationClip::Update(float deltaTime)
 					freezeFlg.isFreezeY = false;
 					freezeFlg.isFreezeZ = false;
 				}
+				break;
 			}
 		}
+
 	}
 }
 
