@@ -112,6 +112,19 @@ public:
 	//weaponNum		•Ší‚Ìí—Ş
 	void ChangeEquipWeapon(std::unique_ptr<IInventoryEquip> equipWeapon, EnPlayerWeapon weaponNum);
 
+	//Œ»İ‚Ì•ŠíUŒ‚‚Ì‰ñ”‚ğæ“¾
+	int GetAttackCount()
+	{
+		return m_attackCount;
+	}
+
+	//Œ»İ‚Ì•ŠíUŒ‚‚Ì‰ñ”‚ğİ’è
+	//attackCount	Œ»İ‚Ì•ŠíUŒ‚‚Ì‰ñ”
+	void SetAttackCount(int attackCount)
+	{
+		m_attackCount = attackCount;
+	}
+
 private:
 	EnPlayerWeapon				m_weaponState = enWeaponSword;				//Œ»İg‚Á‚Ä‚é•Ší
 	static std::unique_ptr<IInventoryEquip> m_equipWeapon[enWeaponNum];		//‘•”õ’†‚Ì•Ší
@@ -120,4 +133,5 @@ private:
 	bool						m_isAttackCheck = false;					//“–‚½‚è”»’è‚ğæ‚Á‚Ä‚¢‚é‚©‚Ìƒtƒ‰ƒO
 	CWeaponTraceDraw			m_weaponTrace;								//•Ší‚Ì‹OÕ‚ğ•`‰æ‚·‚é‚½‚ß‚ÌƒNƒ‰ƒX
 	bool						m_isTraceDraw = false;						//•Ší‚Ì‹OÕ‚Ì•`‰æ
+	int							m_attackCount = 0;							//Œ»İ‚Ì•ŠíUŒ‚‚Ì‰ñ”
 };

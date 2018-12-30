@@ -88,7 +88,7 @@ void CPlayer::Init(CVector3 position)
 									{ L"Assets/modelData/PlayerStand.tka"},					//待機アニメーション	
 									{ L"Assets/modelData/PlayerWalkStay.tka" },				//歩行アニメーション
 									{ L"Assets/modelData/PlayerDash60fpsEvent.tka" },		//走りアニメーション
-									{ L"Assets/modelData/PlayerDash60fpsEvent.tka" },		//ダッシュアニメーション
+									{ L"Assets/modelData/PlayerDashDash.tka" },				//ダッシュアニメーション
 									{ L"Assets/modelData/PlayerRunJump.tka" },				//走りジャンプアニメーション
 									{ L"Assets/modelData/PlayerJump2.tka" },				//ジャンプアニメーション
 									{ L"Assets/modelData/PlayerCombo4.tka" },				//攻撃アニメーション
@@ -217,7 +217,7 @@ void CPlayer::Update()
 	m_animation.Update(GameTime().GetDeltaFrameTime());
 	m_skinmodel.Update(m_position, m_rotation, { 1.0f, 1.0f, 1.0f }, true);
 	m_PlayerStateMachine.Update();
-
+	m_isAction = true;
 	m_animation.Update(0.0f);
 	m_position = m_characterController.GetPosition();
 
@@ -405,7 +405,7 @@ bool CPlayer::GetIsStateCondition(CPlayerState::EnPlayerState state)
 		return Pad().IsTriggerButton(enButtonX) && m_weaponManager.GetCurrentState() != enWeaponArrow;
 
 	case CPlayerState::enPlayerStateAvoidance://bボタンを押しているか
-		return Pad().IsTriggerButton(enButtonB);
+		return m_isAction && Pad().IsTriggerButton(enButtonB);
 
 	case CPlayerState::enPlayerStateDamage://ダメージフラグが立っているか
 		return m_isDamege;
@@ -414,10 +414,10 @@ bool CPlayer::GetIsStateCondition(CPlayerState::EnPlayerState state)
 		return m_status.Health <= 0;
 
 	case CPlayerState::enPlayerStateJump://Aボタンを押しているか
-		return Pad().IsTriggerButton(enButtonA);
+		return m_isAction && Pad().IsTriggerButton(enButtonA);
 
 	case CPlayerState::enPlayerStateRunJump://Aボタンを押しているか
-		return Pad().IsTriggerButton(enButtonA);
+		return m_isAction && Pad().IsTriggerButton(enButtonA);
 
 	case CPlayerState::enPlayerStateWireMove://ワイヤーで移動するフラグが立っているか
 		return m_wireAction.IsWireMove();

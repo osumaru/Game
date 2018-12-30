@@ -6,6 +6,8 @@
 
 #include "Enemy/IEnemy.h"
 
+class CRock;
+
 class CWarrok : public IEnemy
 {
 public:
@@ -32,4 +34,10 @@ public:
 	void Attack() override;
 
 	void OnInvokeAnimationEvent(const wchar_t* animClipName, const wchar_t* eventName)override;
+
+private:
+	CRock* m_rock = nullptr;	//岩
+	//CVector3	m_handPos;	//岩を投げる用の手の座標
+	//const CMatrix*	m_leftHandMatrix = nullptr;	//岩を投げる用の手の行列
+	const CMatrix*	m_rightHandMatrix = nullptr;	//岩を投げる用の手の行列
 };

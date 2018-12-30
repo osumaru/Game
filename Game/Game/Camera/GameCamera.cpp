@@ -29,7 +29,7 @@ void CGameCamera::Init()
 	CVector3 cameraPos = CVector3::Zero;//GetPlayer().GetPosition() + cameraDir;
 	m_springCamera.SetPosition(cameraPos);
 	m_springCamera.SetTarget(CVector3::Zero/*GetPlayer().GetPosition()*/);
-
+	m_shakeCamera.Init(CVector3::Zero, CVector3::Zero, {1.0f, 1.0f, 0.0f}, 0.7f);
 }
 
 void CGameCamera::CameraSetPlayer()
@@ -63,5 +63,10 @@ void CGameCamera::Update()
 	//m_springCamera.Update();
 	//m_camera.SetPosition(m_springCamera.GetPosition());
 	//m_camera.SetTarget(m_springCamera.GetTarget());
+	m_shakeCamera.SetPosition(m_camera.GetPosition());
+	m_shakeCamera.SetTarget(m_camera.GetTarget());
+	m_shakeCamera.Update();
+	m_camera.SetPosition(m_shakeCamera.GetShakePosition());
+	m_camera.SetTarget(m_shakeCamera.GetShakeTarget());
 	m_camera.Update();
 }

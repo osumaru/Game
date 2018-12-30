@@ -67,6 +67,8 @@ void CPlayerAttack::Update()
 
 	Lerp();
 
+	m_pPlayer->GetWeaponManager().SetAttackCount(m_attackCount);
+
 	//攻撃アニメーションが終わった時の処理
 	if (!m_pPlayerGetter->GetAnimation().IsPlay())
 	{
@@ -83,9 +85,19 @@ void CPlayerAttack::Update()
 		//攻撃モーション中はダメージモーションをさせない
 		if (m_isContinuationAttack)
 		{
+			CVector3 position = m_pPlayer->GetPosition();
+			position = m_preBonePos;
+			position += m_manipVec;
+			position.y = m_pPlayerGetter->GetCharacterController().GetPosition().y;
+			m_pPlayerGetter->SetPosition(position);
+
 			m_isContinuationAttack = false;
-			m_pPlayerGetter->GetAnimation().Play(m_attackAnimation[m_attackCount], 0.2f);
+			m_pPlayerGetter->GetAnimation().Play(m_attackAnimation[m_attackCount]);
+			m_pPlayerGetter->GetAnimation().Update(0.0f);
 			m_pPlayer->GetWeaponManager().GetWeapon()->WeaponTraceDrawStart();
+			m_preBonePos.x = m_pBoneMat->m[3][0];
+			m_preBonePos.y = m_pBoneMat->m[3][1];
+			m_preBonePos.z = m_pBoneMat->m[3][2];
 
 			Rotation();
 		}
@@ -176,6 +188,7 @@ void CPlayerAttack::Rotation()
 	moveSpeed += frontVec * Pad().GetLeftStickY()*speed;
 	moveSpeed += rightVec * Pad().GetLeftStickX()*speed;
 
+
 	CMatrix pMat = m_pPlayer->GetSkinmodel().GetWorldMatrix();
 	//プレイヤーの前方向
 	CVector3 playerFront;
@@ -221,17 +234,17 @@ void CPlayerAttack::Rotation()
 	CVector3 animPos = playerPos- spineVec;
 	animPos.y =0.0f;
 	rotMat.Mul(animPos);
-	animPos.Add(spineVec);
-	animPos.y = playerPos.y;
+	animPos.Normalize();
 	CQuaternion pRot = m_pPlayerGetter->GetRotation();
 	//腰を中心にしたクオータニオンとプレイヤーのやつの積
 	pRot.Multiply(rot);
 	m_addRot = pRot;
-	m_addPos = animPos;
+	m_addPos = moveSpeed;
 }
 
 void CPlayerAttack::Lerp()
 {
+
 	if (m_addPos.LengthSq() < 0.01f)
 	{
 		//座標更新されていない
@@ -239,11 +252,40 @@ void CPlayerAttack::Lerp()
 	}
 	//回転の線形補完
 	CQuaternion rotation = m_pPlayerGetter->GetRotation();
+	float slerp = 0.3f;
 	rotation.Slerp(0.3f, rotation, m_addRot);
 	m_pPlayerGetter->SetRotation(rotation);
+	CMatrix rotMat;
+	rotMat.MakeRotationFromQuaternion(rotation);
 	//座標の線形補完
+	CVector3 distance;
+	CMatrix mat = m_pPlayer->GetSkinmodel().GetWorldMatrix();
+	distance.x = mat.m[2][0];
+	distance.y = 0.0f;
+	distance.z = mat.m[2][2];
+	distance.Normalize();
+	float rad = m_addPos.Dot(distance);
+	rad = max(-1.0f, min(1.0f, rad));
+	rad = acosf(rad);
+	CVector3 judgeAxis;
+	judgeAxis.Cross(m_addPos, distance);
+	if (0.0f < judgeAxis.y)
+	{
+		rad = -rad;
+	}
+	
+	CQuaternion multi;
+	multi.SetRotation(CVector3::AxisY, rad);
+	multi.Slerp(slerp, CQuaternion::Identity, multi);
+	rotMat.MakeRotationFromQuaternion(multi);
 	CVector3 position = m_pPlayer->GetPosition();
-	position.Lerp(0.3f, position, m_addPos);
+	CVector3 bonePos;
+	bonePos.x = m_pBoneMat->m[3][0];
+	bonePos.y = m_pBoneMat->m[3][1];
+	bonePos.z = m_pBoneMat->m[3][2];
+	CVector3 manip = position - bonePos;
+	rotMat.Mul(manip);
+	position = bonePos + manip;
 	m_pPlayerGetter->SetPosition(position);
 }
 
