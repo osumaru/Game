@@ -27,7 +27,15 @@ void CPlayerAvoidance::Update()
 		m_pPlayerGetter->SetPosition(position);
 		m_pPlayerGetter->SetIsInvincible(false);
 		m_pPlayerGetter->GetAnimation().Play(enPlayerAnimationAvoidanceCombine);
-		GetPlayer().GetStateMachine().SetState(CPlayerState::enPlayerStateStand);
+		m_pPlayerGetter->GetAnimation().Update(GameTime().GetDeltaFrameTime());
+		if (m_pPlayer->GetIsStateCondition(CPlayerState::enPlayerStateRun))
+		{
+			GetPlayer().GetStateMachine().SetState(CPlayerState::enPlayerStateRun);
+		}
+		else if (m_pPlayer->GetIsStateCondition(CPlayerState::enPlayerStateStand))
+		{
+			GetPlayer().GetStateMachine().SetState(CPlayerState::enPlayerStateStand);
+		}
 	}
 
 }
