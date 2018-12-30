@@ -9,10 +9,10 @@ bool CEnemyAttack::Start()
 	CVector3 moveSpeed = CVector3::Zero;
 	m_enemy->SetMoveSpeed(moveSpeed);
 
-	//攻撃アニメーションを再生
-	m_enemy->GetAnimation().Play(CEnemyState::enAnimation_Attack, 0.3f);
+	////攻撃アニメーションを再生
+	//m_enemy->GetAnimation().Play(CEnemyState::enAnimation_Attack, 0.3f);
 
-	//m_enemy->Attack();
+	m_enemy->Attack();
 
 	return true;
 }

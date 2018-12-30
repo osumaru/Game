@@ -88,7 +88,7 @@ void CPlayer::Init(CVector3 position)
 									{ L"Assets/modelData/PlayerStand.tka"},					//待機アニメーション	
 									{ L"Assets/modelData/PlayerWalkStay.tka" },				//歩行アニメーション
 									{ L"Assets/modelData/PlayerDash60fpsEvent.tka" },		//走りアニメーション
-									{ L"Assets/modelData/PlayerDash60fpsEvent.tka" },		//ダッシュアニメーション
+									{ L"Assets/modelData/PlayerDashDash.tka" },				//ダッシュアニメーション
 									{ L"Assets/modelData/PlayerRunJump.tka" },				//走りジャンプアニメーション
 									{ L"Assets/modelData/PlayerJump2.tka" },				//ジャンプアニメーション
 									{ L"Assets/modelData/PlayerCombo4.tka" },				//攻撃アニメーション
