@@ -23,8 +23,12 @@ void CSword::Init()
 
 	m_maxAttackNum = 3;
 	m_maxWeaponHitNum = 1;
+	m_hitEffectParam = std::make_unique<SHitEffectParam[]>(m_maxAttackNum);
 	m_attackAnimation = std::make_unique<EnPlayerAnimation[]>(m_maxAttackNum);
 	m_combineAnimation = std::make_unique<EnPlayerAnimation[]>(m_maxAttackNum);
+	m_hitEffectParam[0] = { 0.0f, 1.0f, 0.0f };
+	m_hitEffectParam[1] = { 0.0f, 1.0f, 0.0f };
+	m_hitEffectParam[2] = { 0.0f, 1.0f, 0.0f };
 	for (int i = 0; i < m_maxAttackNum; i++)
 	{
 		m_attackAnimation[i] = (EnPlayerAnimation)(enPlayerAnimationAttack1 + i);

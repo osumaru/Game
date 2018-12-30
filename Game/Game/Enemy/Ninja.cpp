@@ -14,7 +14,7 @@ CNinja::~CNinja()
 
 void CNinja::OnInvokeAnimationEvent(const wchar_t* animClipName, const wchar_t* eventName)
 {
-	if (wcscmp(animClipName, L"Assets/modelData/WarrokAttack.tka") == 0)
+	if (wcscmp(animClipName, L"Assets/modelData/NinjaAttack.tka") == 0)
 	{
 		//ボーンのワールド行列を取得
 		CMatrix boneMatrix = GetBoneWorldMatrix(L"Rightfoot");
@@ -107,4 +107,9 @@ void CNinja::Update()
 void CNinja::Draw()
 {
 	m_skinModel.Draw(GetGameCamera().GetViewMatrix(), GetGameCamera().GetProjectionMatrix());
+}
+
+void CNinja::Attack()
+{
+	m_animation.Play(CEnemyState::enAnimation_Attack, 0.3f);
 }

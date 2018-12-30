@@ -79,3 +79,8 @@ void CSamurai::Draw()
 {
 	m_skinModel.Draw(GetGameCamera().GetViewMatrix(), GetGameCamera().GetProjectionMatrix());
 }
+
+void CSamurai::Attack()
+{
+	m_animation.Play(CEnemyState::enAnimation_Attack, 0.3f);
+}

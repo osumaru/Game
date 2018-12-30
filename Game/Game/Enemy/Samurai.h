@@ -27,4 +27,7 @@ public:
 
 	//•`‰æ
 	void Draw();
+
+	//UŒ‚
+	void Attack();
 };
