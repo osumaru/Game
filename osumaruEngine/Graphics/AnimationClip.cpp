@@ -100,4 +100,13 @@ void CAnimationClip::Play()
 	m_isPlay = true;
 	m_currentFrameNo = 0;
 	m_frameTime = 0.0f;
+	int i = 0;
+	for (auto& keyframe : m_keyFramePtrListArray)
+	{
+		if (!keyframe.empty())
+		{
+			m_localMatrix[i] = keyframe[0]->transform;
+		}
+		i++;
+	}
 }
