@@ -33,7 +33,10 @@ void CSceneManager::BeforeDead()
 	{
 		Delete(m_clearScene);
 	}
-
+	if (m_bossScene != nullptr)
+	{
+		Delete(m_bossScene);
+	}
 }
 
 void CSceneManager::Update()
@@ -65,6 +68,11 @@ void CSceneManager::Update()
 		case EnSceneState::enLoadScene:
 			//ロード開放の処理をかく
 			break;
+			//ボスシーンの解放
+		case EnSceneState::enBossScene:
+			Delete(m_bossScene);
+			m_bossScene = nullptr;
+			break;
 		default:
 			break;
 		}
@@ -87,6 +95,10 @@ void CSceneManager::Update()
 			//リザルトシーンへの遷移
 		case EnSceneState::enLoadScene:
 			//ロード開放の処理をかく
+			break;
+			//ボスシーンへの遷移
+		case EnSceneState::enBossScene:
+			m_bossScene = New<CBossScene>(PRIORITY_SCENE);
 			break;
 		default:
 			break;

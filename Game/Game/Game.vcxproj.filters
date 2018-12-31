@@ -391,6 +391,9 @@
     <ClCompile Include="Item\InventoryItem\InventoryTwinSword.cpp">
       <Filter>ソース ファイル\Item\InventoryItem</Filter>
     </ClCompile>
+    <ClCompile Include="Scene\BossScene.cpp">
+      <Filter>ソース ファイル\Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -692,6 +695,9 @@
     </ClInclude>
     <ClInclude Include="Item\InventoryItem\InventoryTwinSword.h">
       <Filter>ソース ファイル\Item\InventoryItem</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\BossScene.h">
+      <Filter>ソース ファイル\Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
