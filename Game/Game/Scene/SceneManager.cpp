@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "SceneManager.h"
+#include "../Map/Map.h"
 
 void CSceneManager::Init()
 {
@@ -122,4 +123,19 @@ void CSceneManager::ChangeScene(EnSceneState scene)
 	m_isSceneChange = true;
 	//変更するシーンを現在のシーンにする
 	m_nextSceneState = scene;
+}
+
+Map* CSceneManager::GetMap()
+{
+	if (m_preSceneState == enGameScene)
+	{
+		//ゲームシーンのマップ情報
+		return m_gameScene->GetMap();
+	}
+	else if (m_preSceneState == enBossScene)
+	{
+		//ボスシーンのマップ情報
+		return m_bossScene->GetMap();
+	}
+	return nullptr;
 }

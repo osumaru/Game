@@ -13,13 +13,12 @@
 void CBossScene::BeforeDead()
 {
 	Delete(m_result);
-	//Delete(m_menu);
+	Delete(m_menu);
 	Delete(m_levelUp);
 	Delete(m_playerHp);
 	Delete(m_weaponSelect);
 	GetGameCamera().Destroy();
 	Engine().GetEffectEngine().SetCamera(nullptr);
-	//Delete(m_miniMap);
 	Delete(m_map);
 	Delete(m_gameSound);
 }
@@ -30,14 +29,13 @@ bool CBossScene::Start()
 	GetGameCamera().Create();
 	GetGameCamera().Init();
 
+	m_gameSound = New<CGameSound>(0);
+
 	if (!GetSceneManager().GetFade()->IsExecute())
 	{
 		//マップの初期化
 		m_map = New<Map>(0);
 		m_map->Init(1);
-		////ミニマップの初期化
-		//m_miniMap = New<CMiniMap>(PRIORITY_UI);
-		//m_miniMap->Init();
 		//武器選択のUIを初期化
 		m_weaponSelect = New<CWeaponSelect>(PRIORITY_UI);
 		m_weaponSelect->Init();
@@ -47,9 +45,9 @@ bool CBossScene::Start()
 		//レベルアップのUIを初期化
 		m_levelUp = New<CLevelUp>(PRIORITY_UI);
 		m_levelUp->Init();
-		////メニュー画面の初期化
-		//m_menu = New<CMenu>(PRIORITY_UI);
-		//m_menu->Init();
+		//メニュー画面の初期化
+		m_menu = New<CMenu>(PRIORITY_UI);
+		m_menu->Init();
 		//ゲームオーバーのUIの初期化
 		m_result = New<CResult>(PRIORITY_UI);
 		m_result->Init();

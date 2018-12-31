@@ -57,7 +57,7 @@ void CWireAction::Update()
 		switch (m_state)
 		{
 		case enStateEnemy:
-			enemyList = GetSceneManager().GetGameScene().GetMap()->GetEnemyList();
+			enemyList = GetSceneManager().GetMap()->GetEnemyList();
 			for (auto& enemy : enemyList)
 			{
 				CVector3 enemyPos = enemy->GetPosition();

@@ -51,7 +51,7 @@ bool IEnemy::CalucFanShape(float degree, const CVector3& position)
 void IEnemy::EnemyListErase()
 {
 	//エネミーが死亡していたらリストから削除
-	std::list<IEnemy*>& enemyList = GetSceneGame().GetMap()->GetEnemyList();
+	std::list<IEnemy*>& enemyList = GetSceneManager().GetMap()->GetEnemyList();
 	enemyList.erase(m_iterater);
 }
 
