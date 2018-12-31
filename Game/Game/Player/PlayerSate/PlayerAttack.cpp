@@ -62,6 +62,12 @@ void CPlayerAttack::Update()
 	if (m_pPlayer->GetIsStateCondition(CPlayerState::enPlayerStateAvoidance)) {
 		m_isPreDodge = true;
 	}
+	else if(m_pPlayer->GetIsStateCondition(CPlayerState::enPlayerStateSky))
+	{
+		m_pPlayer->GetWeaponManager().SetIsAttack(false);
+		GetPlayer().GetStateMachine().SetState(CPlayerState::enPlayerStateSky);
+		return;
+	}
 
 	m_pPlayer->SetStanAttack(m_stanAttack[m_attackCount]);
 
