@@ -63,13 +63,53 @@ SWeaponEnemyAttackInfo CSword::EnemyAttackPositionDecide()
 
 SWeaponTraceDrawInfo CSword::WeaponTraceDraw()
 {
+	//CVector3 zVec = *(CVector3*)m_skinModel.GetWorldMatrix().m[2];
+	CVector3 xVec= *(CVector3*)m_skinModel.GetWorldMatrix().m[1];
+	//CVector3 yVec = *(CVector3*)m_skinModel.GetWorldMatrix().m[4];
+	//zVec.Normalize();
+	xVec.Normalize();
+	//yVec.Normalize();
+	xVec.Scale(0.1f);
+	//CVector3 RightVec = *(CVector3*)m_attackBoneMat->m[1];
+	//CVector3 FrontVec= *(CVector3*)m_attackBoneMat->m[2];
+	//CVector3 UpVec=*(CVector3*)m_attackBoneMat->m[4];
+	//CVector3 DownVec= *(CVector3*)m_attackBoneMat->m[4];
+	//CMatrix mat;
+	//.MakeRotationAxis(*(CVector3*)m_attackBoneMat->m[3], 0.0f);
+	
+	//RightVec.Normalize();
+	//RightVec*=-1.0f;
+	//RightVec.Scale(1.0f);
+
+	//FrontVec.Normalize();
+	//FrontVec*=-1.0f;
+	//FrontVec.Scale(0.7f);
+
+	//UpVec.Normalize();
+	//UpVec *= -1.0f;
+	//UpVec.Scale(1.0f);
+
+	//DownVec.Normalize();
+	//DownVec *= -1.0f;
+	//DownVec.Scale(0.01f);
 	CVector3 position = *(CVector3*)m_attackBoneMat->m[3];
 	CVector3 manip = *(CVector3*)m_attackBoneMat->m[2];
 	manip.Normalize();
 	CVector3 manip2 = manip;
+	
 	manip.Scale(0.2f);
-	manip2.Scale(1.0f);
+	manip2.Scale(1.09f);
+
+
+	position.Add(xVec);
+	//position.Add(FrontVec);
+	//position.Add(RightVec);
+	//position.Add(UpVec);
+
+
 	CVector3 position2 = position + manip;
 	CVector3 position3 = position + manip2;
+
 	return { true, position2, position3 };
+
 }

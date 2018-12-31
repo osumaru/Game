@@ -71,7 +71,7 @@ void CTwinSword::Init()
 
 void CTwinSword::Update()
 {
-
+	//WeaponTraceTwinDrawer();
 	CVector3 position;
 	CQuaternion rotation;
 	const CMatrix* boneMat;
@@ -101,7 +101,7 @@ void CTwinSword::Update()
 	rotation = multi;
 	m_skinModelTwin.Update(position, rotation, CVector3::One);
 
-	WeaponTraceTwinDrawer();
+	
 }
 
 void CTwinSword::Draw()
@@ -148,12 +148,17 @@ SWeaponEnemyAttackInfo CTwinSword::EnemyAttackPositionDecide()
 
 SWeaponTraceDrawInfo CTwinSword::WeaponTraceDraw()
 {
+	CVector3 xVec = *(CVector3*)m_skinModel.GetWorldMatrix().m[2];
+	xVec.Normalize();
+	xVec *= -1.0f;
+	xVec.Scale(0.1f);
 	CVector3 position = *(CVector3*)m_attackBoneMat->m[3];
 	CVector3 manip = *(CVector3*)m_attackBoneMat->m[2];
 	manip.Normalize();
 	CVector3 manip2 = manip;
-	manip.Scale(0.2f);
-	manip2.Scale(0.7f);
+	manip.Scale(0.0f);
+	manip2.Scale(0.65f);
+	position.Add(xVec);
 	CVector3 position2 = position + manip;
 	CVector3 position3 = position + manip2;
 	return { true, position2, position3 };
@@ -187,4 +192,11 @@ void CTwinSword::WeaponTraceTwinDrawer()
 	else
 	{
 	}
+}
+
+void CTwinSword::WeaponTraceTwinDrawStart()
+{
+	CWeaponTraceDraw& weaponTrace = m_pPlayer->GetWeaponManager().GetWeaponTraceDraw();
+	SWeaponTraceDrawInfo info = WeaponTraceTwinDraw();
+	weaponTrace.Start(info.rootPos, info.pointPos);
 }

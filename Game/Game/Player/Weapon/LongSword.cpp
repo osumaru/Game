@@ -65,12 +65,18 @@ SWeaponEnemyAttackInfo CLongSword::EnemyAttackPositionDecide()
 
 SWeaponTraceDrawInfo CLongSword::WeaponTraceDraw()
 {
+	CVector3 xVec = *(CVector3*)m_skinModel.GetWorldMatrix().m[1];
+	xVec.Normalize();
+	xVec.Scale(0.1f);
+
 	CVector3 position = *(CVector3*)m_attackBoneMat->m[3];
 	CVector3 manip = *(CVector3*)m_attackBoneMat->m[2];
 	manip.Normalize();
 	CVector3 manip2 = manip;
-	manip.Scale(0.5f);
-	manip2.Scale(1.5f);
+	manip.Scale(0.25f);
+	manip2.Scale(1.4f);
+
+	position.Add(xVec);
 	CVector3 position2 = position + manip;
 	CVector3 position3 = position + manip2;
 	return { true, position2, position3 };

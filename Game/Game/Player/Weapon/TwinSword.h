@@ -19,6 +19,7 @@ public:
 	//武器の軌跡を描画する
 	void WeaponTraceTwinDrawer();
 
+	void WeaponTraceTwinDrawStart();
 private:
 	
 	const CMatrix*				m_normalTwinBoneMat = nullptr;	//プレイヤーのボーン行列
