@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "SceneManager.h"
+#include "../Map/Map.h"
 
 void CSceneManager::Init()
 {
@@ -33,7 +34,10 @@ void CSceneManager::BeforeDead()
 	{
 		Delete(m_clearScene);
 	}
-
+	if (m_bossScene != nullptr)
+	{
+		Delete(m_bossScene);
+	}
 }
 
 void CSceneManager::Update()
@@ -65,6 +69,11 @@ void CSceneManager::Update()
 		case EnSceneState::enLoadScene:
 			//ロード開放の処理をかく
 			break;
+			//ボスシーンの解放
+		case EnSceneState::enBossScene:
+			Delete(m_bossScene);
+			m_bossScene = nullptr;
+			break;
 		default:
 			break;
 		}
@@ -88,6 +97,10 @@ void CSceneManager::Update()
 		case EnSceneState::enLoadScene:
 			//ロード開放の処理をかく
 			break;
+			//ボスシーンへの遷移
+		case EnSceneState::enBossScene:
+			m_bossScene = New<CBossScene>(PRIORITY_SCENE);
+			break;
 		default:
 			break;
 		}
@@ -110,4 +123,19 @@ void CSceneManager::ChangeScene(EnSceneState scene)
 	m_isSceneChange = true;
 	//変更するシーンを現在のシーンにする
 	m_nextSceneState = scene;
+}
+
+Map* CSceneManager::GetMap()
+{
+	if (m_preSceneState == enGameScene)
+	{
+		//ゲームシーンのマップ情報
+		return m_gameScene->GetMap();
+	}
+	else if (m_preSceneState == enBossScene)
+	{
+		//ボスシーンのマップ情報
+		return m_bossScene->GetMap();
+	}
+	return nullptr;
 }

@@ -100,7 +100,7 @@ void IWeapon::EnemyAttack()
 	}
 
 	//エネミーグループのリストを取得
-	std::list<CEnemyGroup*> enemyGroup = GetSceneManager().GetGameScene().GetMap()->GetEnemyGroupList();
+	std::list<CEnemyGroup*> enemyGroup = GetSceneManager().GetMap()->GetEnemyGroupList();
 	for (const auto& group : enemyGroup)
 	{
 		for (int i = 0; i < m_maxWeaponHitNum; i++)

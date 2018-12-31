@@ -5,6 +5,7 @@
 #include "GameScene.h"
 #include "TitleScene.h"
 #include "ClearScene.h"
+#include "BossScene.h"
 #include "../UI/Fade/Fade.h"
 
 class CSceneManager:public IGameObject
@@ -15,6 +16,7 @@ public:
 		enGameScene,	//ゲーム
 		enLoadScene,	//ロード
 		enClearScene,	//クリア
+		enBossScene,	//ボス
 		enSceneNum		//シーンの数
 	};
 	~CSceneManager();
@@ -49,6 +51,9 @@ public:
 		return m_fade;
 	}
 
+	//マップの取得
+	Map* GetMap();
+
 	//フェードアウトが開始したか
 	bool GetFadeOut()
 	{
@@ -79,6 +84,7 @@ private:
 	CGameScene*		m_gameScene=nullptr;			//ゲームシーン
 	CTitleScene*	m_titleScene = nullptr;			//タイトルシーン
 	CClearScene*	m_clearScene = nullptr;			//クリアシーン
+	CBossScene*		m_bossScene = nullptr;			//ボスシーン
 	CFade*			m_fade;							//フェイド
 	bool			m_isSceneChange = false;		//シーン切り替え
 	bool			m_isFadeOut = false;			//フェードアウトしたかどうか

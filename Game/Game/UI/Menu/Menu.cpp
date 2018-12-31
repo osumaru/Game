@@ -66,7 +66,7 @@ void CMenu::Init()
 void CMenu::Update()
 {
 	if (&GetPlayer() == nullptr || GetPlayer().GetIsDied()) { return; }
-	for (auto& shop : GetSceneManager().GetGameScene().GetMap()->GetShop()->Getlist())
+	for (auto& shop : GetSceneManager().GetMap()->GetShop()->Getlist())
 	{
 		if (shop->GetShopState() != 0)
 		{
@@ -165,7 +165,7 @@ void CMenu::KeyInputMenu()
 			
 
 		}
-		std::list<IEnemy*> enemyList = GetSceneManager().GetGameScene().GetMap()->GetEnemyList();
+		std::list<IEnemy*> enemyList = GetSceneManager().GetMap()->GetEnemyList();
 		
 		//敵のアクティブ設定
 		for (auto& enemy : enemyList)
@@ -173,7 +173,7 @@ void CMenu::KeyInputMenu()
 			enemy->SetIsActive(!m_draw);
 
 		}
-		for (auto& shop : GetSceneManager().GetGameScene().GetMap()->GetShop()->Getlist())
+		for (auto& shop : GetSceneManager().GetMap()->GetShop()->Getlist())
 		{
 			shop->SetIsActive(!m_draw);
 		}

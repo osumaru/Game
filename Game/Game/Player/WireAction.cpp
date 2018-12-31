@@ -52,11 +52,12 @@ void CWireAction::Update()
 	if (isWireAction)
 	{
 		float minLength = FLT_MAX;
-		std::list<IEnemy*> enemyList = GetSceneManager().GetGameScene().GetMap()->GetEnemyList();
+		std::list<IEnemy*> enemyList;
 		//ƒƒCƒ„[‚ð”ò‚Î‚·æ‚ðŒˆ‚ß‚é
 		switch (m_state)
 		{
 		case enStateEnemy:
+			enemyList = GetSceneManager().GetMap()->GetEnemyList();
 			for (auto& enemy : enemyList)
 			{
 				CVector3 enemyPos = enemy->GetPosition();
