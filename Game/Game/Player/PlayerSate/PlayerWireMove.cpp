@@ -140,8 +140,8 @@ void CPlayerWireMove::Update()
 			else
 			{
 				m_pPlayerGetter->SetPosition(m_movePosition);
-				m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateStand);
-				m_pPlayerGetter->GetAnimation().Play(enPlayerAnimationLanding);
+				m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateSky);
+				m_pPlayerGetter->SetMoveSpeed(CVector3::Zero);
 			}
 			break;
 		}
