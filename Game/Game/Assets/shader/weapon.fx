@@ -8,13 +8,15 @@ struct VS_INPUT
 {
 	float4 pos : SV_POSITION;
 	float2 uv : TEXCOORD0;
+	float alpha : TEXCOORD1;
 };
 
 struct VS_OUTPUT
 {
 	float4 pos : SV_POSITION;
-	float4 worldPos : TEXCOORD1;
-	float2 uv : TEXCOORD0;
+	float4 worldPos : TEXCOORD0;
+	float2 uv : TEXCOORD1;
+	float alpha : TEXCOORD2;
 };
 
 Texture2D<float4> colorTexture : register(t0);
@@ -27,6 +29,7 @@ VS_OUTPUT VSMain(VS_INPUT In)
 	Out.pos = mul(mvp, In.pos);
 	Out.worldPos = Out.pos;
 	Out.uv = In.uv;
+	Out.alpha = In.alpha;
 	return Out;
 }
 
@@ -43,5 +46,7 @@ float4 PSMain(VS_OUTPUT In) : SV_TARGET
 	depthColor = mul(mvp, depthColor);
 	float depth = depthColor.z /  depthColor.w;
 	clip(depth - In.worldPos.z);
+	//color.xyz = 0.0f;
+	color.w *= In.alpha;
 	return color;
 }

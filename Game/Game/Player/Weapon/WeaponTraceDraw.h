@@ -18,12 +18,14 @@ private:
 	{
 		CVector4 position;
 		CVector2	uv;
+		float alpha;
 	}; 
+
 	CVector4						m_rootPos;
 	CVector4						m_pointPos;
 	static const int				VERTEX_STRIDE_NUM = 4;
 	static const int				INDEX_STRIDE_NUM = 6;
-	static const int				POLIGON_NUM = 12;
+	static const int				POLIGON_NUM = 5;
 	DWORD							m_indexBuffer[INDEX_STRIDE_NUM * POLIGON_NUM];
 	SVSLayout						m_vertexBuffer[VERTEX_STRIDE_NUM * POLIGON_NUM];
 	CTexture*						m_pTexture;			//テクスチャ

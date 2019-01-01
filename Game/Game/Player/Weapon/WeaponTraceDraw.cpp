@@ -12,8 +12,10 @@ void CWeaponTraceDraw::Init()
 	m_primitive.Create(m_vertexBuffer, sizeof(SVSLayout), VERTEX_STRIDE_NUM * POLIGON_NUM, m_indexBuffer, INDEX_STRIDE_NUM * POLIGON_NUM, CPrimitive::enIndex32, CPrimitive::enTypeTriangleList);
 	m_cb.Create(sizeof(CMatrix), &m_viewProj);
 	int indexCount = 0;
+
 	for (int i = 0; i < POLIGON_NUM; i++)
 	{
+		float alpha = (float)(POLIGON_NUM - i) / POLIGON_NUM;
 		DWORD vertexCount = i * VERTEX_STRIDE_NUM;
 		DWORD index[INDEX_STRIDE_NUM] = { vertexCount, vertexCount + 1,  vertexCount + 2, vertexCount + 2,  vertexCount + 1,vertexCount + 3 };
 		for (int j = 0; j < INDEX_STRIDE_NUM; j++)
@@ -24,6 +26,7 @@ void CWeaponTraceDraw::Init()
 		for (int j = 0; j < VERTEX_STRIDE_NUM; j++)
 		{
 			m_vertexBuffer[VERTEX_STRIDE_NUM * i + j].uv = uv[j];
+			m_vertexBuffer[VERTEX_STRIDE_NUM * i + j].alpha = alpha;
 		}
 	}
 
@@ -46,11 +49,11 @@ void CWeaponTraceDraw::Start(const CVector3& swordRootPosition, const CVector3& 
 
 void CWeaponTraceDraw::Add(const CVector3& swordRootPosition, const CVector3& swordPointPosition)
 {
-	for (int i = 0; i < POLIGON_NUM - 1; i++)
+	for (int i = POLIGON_NUM - 1; 0 < i; i--)
 	{
 		for(int j = 0;j < VERTEX_STRIDE_NUM;j++)
 		{
-			m_vertexBuffer[(i + 1) * VERTEX_STRIDE_NUM + j].position = m_vertexBuffer[i * VERTEX_STRIDE_NUM + j].position;
+			m_vertexBuffer[i * VERTEX_STRIDE_NUM + j].position = m_vertexBuffer[(i - 1) * VERTEX_STRIDE_NUM + j].position;
 		}
 
 	}
