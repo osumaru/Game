@@ -50,7 +50,12 @@ public:
 	bool IsPlay() const
 	{
 		return	m_animationClips[m_currentAnimationNum].IsPlay();
+	}
 
+	//補完しているかのフラグを取得
+	bool IsInterpolation() const
+	{
+		return m_isInterpolation;
 	}
 
 	//現在再生してるアニメーションの番号を取得

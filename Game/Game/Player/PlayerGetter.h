@@ -52,6 +52,11 @@ public:
 	void SetIsDied(bool isDied);
 
 	/*
+	スキンモデルのアップデート
+	*/
+	void SkinModelUpdate();
+
+	/*
 	攻撃してるかのフラグを設定
 	*/
 	void SetIsAttack(bool isAttack);

@@ -37,6 +37,6 @@ private:
 	CVector3					m_manipVec;							//ボーンの座標からプレイヤーの座標までのベクトル
 	CVector3					m_preBonePos;						//前のフレームのボーンの座標
 	CQuaternion					m_addRot;
-	CVector3					m_addPos;
+	CVector3					m_rotationDirectionVector;
 };
 

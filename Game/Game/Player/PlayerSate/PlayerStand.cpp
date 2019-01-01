@@ -15,14 +15,10 @@ void CPlayerStand::Init()
 
 void CPlayerStand::Update()
 {
-	if (m_pPlayerGetter->GetAnimation().GetCurrentAnimationNum() != enPlayerAnimationStand)
-	{
-		if (!m_pPlayerGetter->GetAnimation().IsPlay())
-		{
-			m_pPlayerGetter->GetAnimation().Play(enPlayerAnimationStand);
-		}
-		return;
-	}
+	//if (m_pPlayerGetter->GetAnimation().IsInterpolation())
+	//{
+	//	return;
+	//}
 	//Ž€–S‚µ‚½ê‡‚Ìˆ—
 	if (m_pPlayer->GetIsStateCondition(CPlayerState::enPlayerStateDied))
 	{
