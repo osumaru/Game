@@ -15,7 +15,7 @@ void CWeaponTraceDraw::Init()
 
 	for (int i = 0; i < POLIGON_NUM; i++)
 	{
-		float alpha = (float)(POLIGON_NUM - i) / POLIGON_NUM;
+		float alpha[] = { (float)(POLIGON_NUM - i) / POLIGON_NUM,  (float)(POLIGON_NUM - i - 1) / POLIGON_NUM };
 		DWORD vertexCount = i * VERTEX_STRIDE_NUM;
 		DWORD index[INDEX_STRIDE_NUM] = { vertexCount, vertexCount + 1,  vertexCount + 2, vertexCount + 2,  vertexCount + 1,vertexCount + 3 };
 		for (int j = 0; j < INDEX_STRIDE_NUM; j++)
@@ -23,10 +23,15 @@ void CWeaponTraceDraw::Init()
 			m_indexBuffer[INDEX_STRIDE_NUM * i + j] = index[j];
 		}
 		CVector2 uv[VERTEX_STRIDE_NUM] = { { 1.0f, 1.0f }, { 1.0f, 0.0f },  { 0.0f, 1.0f }, { 0.0f, 0.0f } };
+		int alphaIndex = 0;
 		for (int j = 0; j < VERTEX_STRIDE_NUM; j++)
 		{
+			if (VERTEX_STRIDE_NUM / 2 == j)
+			{
+				alphaIndex++;
+			}
 			m_vertexBuffer[VERTEX_STRIDE_NUM * i + j].uv = uv[j];
-			m_vertexBuffer[VERTEX_STRIDE_NUM * i + j].alpha = alpha;
+			m_vertexBuffer[VERTEX_STRIDE_NUM * i + j].alpha = alpha[alphaIndex];
 		}
 	}
 

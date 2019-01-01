@@ -46,7 +46,6 @@ float4 PSMain(VS_OUTPUT In) : SV_TARGET
 	depthColor = mul(mvp, depthColor);
 	float depth = depthColor.z /  depthColor.w;
 	clip(depth - In.worldPos.z);
-	//color.xyz = 0.0f;
 	color.w *= In.alpha;
 	return color;
 }
