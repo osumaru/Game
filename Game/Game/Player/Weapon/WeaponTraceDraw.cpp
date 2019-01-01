@@ -13,8 +13,10 @@ void CWeaponTraceDraw::Init()
 	m_cb.Create(sizeof(CMatrix), &m_viewProj);
 	int indexCount = 0;
 
+	//頂点バッファとインデックスバッファを初期化
 	for (int i = 0; i < POLIGON_NUM; i++)
 	{
+		//座標が被る箇所があるのでそれ用にアルファ値を2個用意
 		float alpha[] = { (float)(POLIGON_NUM - i) / POLIGON_NUM,  (float)(POLIGON_NUM - i - 1) / POLIGON_NUM };
 		DWORD vertexCount = i * VERTEX_STRIDE_NUM;
 		DWORD index[INDEX_STRIDE_NUM] = { vertexCount, vertexCount + 1,  vertexCount + 2, vertexCount + 2,  vertexCount + 1,vertexCount + 3 };
@@ -26,6 +28,7 @@ void CWeaponTraceDraw::Init()
 		int alphaIndex = 0;
 		for (int j = 0; j < VERTEX_STRIDE_NUM; j++)
 		{
+			//後半の被ってる部分だけアルファ値を変える
 			if (VERTEX_STRIDE_NUM / 2 == j)
 			{
 				alphaIndex++;
@@ -54,6 +57,7 @@ void CWeaponTraceDraw::Start(const CVector3& swordRootPosition, const CVector3& 
 
 void CWeaponTraceDraw::Add(const CVector3& swordRootPosition, const CVector3& swordPointPosition)
 {
+	//座標を板ポリ一個分ずらす
 	for (int i = POLIGON_NUM - 1; 0 < i; i--)
 	{
 		for(int j = 0;j < VERTEX_STRIDE_NUM;j++)
@@ -62,11 +66,13 @@ void CWeaponTraceDraw::Add(const CVector3& swordRootPosition, const CVector3& sw
 		}
 
 	}
+	//新しい座標を登録する
 	CVector4 position[VERTEX_STRIDE_NUM] = { swordRootPosition, swordPointPosition, m_rootPos, m_pointPos, };
 	for (int i = 0; i < VERTEX_STRIDE_NUM; i++)
 	{
 		m_vertexBuffer[i].position = position[i];
 	}
+	//座標2個を次でも使うために保存
 	m_rootPos = swordRootPosition;
 	m_pointPos = swordPointPosition;
 	m_primitive.Update(m_vertexBuffer, m_indexBuffer);
