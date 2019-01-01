@@ -214,7 +214,8 @@ void CPlayer::Update()
 	Engine().GetShadowMap().SetProjectionMatrix(projMat);
 	m_wireAction.Update();
 	Rotation(m_characterController.GetMoveSpeed());
-	m_animation.Update(GameTime().GetDeltaFrameTime());
+	//m_animation.Update(GameTime().GetDeltaFrameTime());
+	m_animation.Update(0.01f);
 	m_skinmodel.Update(m_position, m_rotation, { 1.0f, 1.0f, 1.0f }, true);
 	m_PlayerStateMachine.Update();
 	m_isAction = true;

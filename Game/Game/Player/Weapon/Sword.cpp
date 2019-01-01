@@ -76,6 +76,9 @@ SWeaponTraceDrawInfo CSword::WeaponTraceDraw()
 	CVector3 position2 = position + manip;
 	CVector3 position3 = position + manip2;
 
-	return { true, position2, position3 };
-
+	SWeaponTraceDrawInfo infoTrace;
+	infoTrace.isDraw = true;
+	infoTrace.pointPos[0] = position2;
+	infoTrace.rootPos[0] = position3;
+	return infoTrace;
 }

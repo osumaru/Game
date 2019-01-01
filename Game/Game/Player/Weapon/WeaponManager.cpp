@@ -46,7 +46,11 @@ void CWeaponManager::Init(CPlayer* player)
 
 			m_weapons[i] = std::move(ptr);
 			m_weapons[i]->Init(player);
-			m_weaponTrace.Init();
+			
+		}
+		for (int i = 0; i < 2; i++)
+		{
+			m_weaponTrace[i].Init();
 		}
 	}
 	else
@@ -89,7 +93,10 @@ void CWeaponManager::Init(CPlayer* player)
 			m_equipWeapon[i]->Init();
 			m_equipWeapon[i]->SetEquipStatus(weaponStatus);
 		}
-		m_weaponTrace.Init();
+		for (int i = 0; i < 2; i++)
+		{
+			m_weaponTrace[i].Init();
+		}
 	}
 }
 
@@ -127,7 +134,10 @@ void CWeaponManager::AfterDraw()
 {
 	if (m_isAttack && m_isTraceDraw)
 	{
-		m_weaponTrace.Draw();
+		for (int i = 0; i < GetWeapon()->GetMaxWeaponHitNum(); i++)
+		{
+			m_weaponTrace[i].Draw();
+		}
 	}
 	m_weapons[m_weaponState]->AfterDrawer();
 }
