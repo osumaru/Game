@@ -21,7 +21,7 @@ void CPlayerAttack::Init()
 	m_maxAttackNum = GetPlayer().GetWeaponManager().GetWeapon()->GetMaxAttackNum();
 	m_maxWeaponHitNum = GetPlayer().GetWeaponManager().GetWeapon()->GetMaxWeaponHitNum();
 	//エネミーのリストを取得
-	for (const auto& enemys : GetSceneManager().GetGameScene().GetMap()->GetEnemyList())
+	for (const auto& enemys : GetSceneManager().GetMap()->GetEnemyList())
 	{
 		bool* damagePossible = enemys->IsDamagePossible();
 		for (int i = 0; i < m_maxWeaponHitNum; i++)
@@ -62,6 +62,12 @@ void CPlayerAttack::Update()
 	if (m_pPlayer->GetIsStateCondition(CPlayerState::enPlayerStateAvoidance)) {
 		m_isPreDodge = true;
 	}
+	else if(m_pPlayer->GetIsStateCondition(CPlayerState::enPlayerStateSky))
+	{
+		m_pPlayer->GetWeaponManager().SetIsAttack(false);
+		GetPlayer().GetStateMachine().SetState(CPlayerState::enPlayerStateSky);
+		return;
+	}
 
 	m_pPlayer->SetStanAttack(m_stanAttack[m_attackCount]);
 
@@ -73,7 +79,7 @@ void CPlayerAttack::Update()
 	if (!m_pPlayerGetter->GetAnimation().IsPlay())
 	{
 		//エネミーのリストを取得
-		for (const auto& enemys : GetSceneManager().GetGameScene().GetMap()->GetEnemyList())
+		for (const auto& enemys : GetSceneManager().GetMap()->GetEnemyList())
 		{
 			bool* damagePossible = enemys->IsDamagePossible();
 			for (int i = 0; i < m_maxWeaponHitNum;i++)

@@ -26,13 +26,18 @@ public:
 
 	//死ぬ前に呼び出される
 	void BeforeDead() override;
+
+	//マップの取得
+	Map* GetMap()
+	{
+		return m_map;
+	}
 private:
 	Map*			m_map = nullptr;			//マップ
 	CWeaponSelect*	m_weaponSelect = nullptr;	//武器選択
-	//CMiniMap*		m_miniMap = nullptr;		//ミニマップ
 	CPlayerHp*		m_playerHp = nullptr;		//プレイヤーHP
 	CLevelUp*		m_levelUp = nullptr;		//レベルアップ表示
-	//CMenu*			m_menu = nullptr;			//メニュー
+	CMenu*			m_menu = nullptr;			//メニュー
 	CResult*		m_result = nullptr;			//リザルト
 	CGameSound*		m_gameSound = nullptr;		//ゲームサウンド
 };

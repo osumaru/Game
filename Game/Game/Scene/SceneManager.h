@@ -51,6 +51,9 @@ public:
 		return m_fade;
 	}
 
+	//マップの取得
+	Map* GetMap();
+
 	//フェードアウトが開始したか
 	bool GetFadeOut()
 	{

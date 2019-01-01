@@ -290,8 +290,6 @@ void CPlayer::StatusCalculation()
 
 		m_status.Health = m_status.MaxHealth;
 	}
-
-
 }
 
 
