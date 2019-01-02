@@ -78,7 +78,7 @@ SWeaponTraceDrawInfo CSword::WeaponTraceDraw()
 
 	SWeaponTraceDrawInfo infoTrace;
 	infoTrace.isDraw = true;
-	infoTrace.pointPos[0] = position2;
-	infoTrace.rootPos[0] = position3;
+	infoTrace.rootPos[0] = position2;
+	infoTrace.pointPos[0] = position3;
 	return infoTrace;
 }
