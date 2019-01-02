@@ -12,6 +12,7 @@ struct SSweepResultGround : public btCollisionWorld::ConvexResultCallback
 	CVector3 hitPos = { 0.0f, 0.0f, 0.0f };		//衝突点。
 	CVector3 startPos = { 0.0f, 0.0f, 0.0f };	//レイの始点。
 	CVector3 hitNormal = { 0.0f, 0.0f, 0.0f };	//衝突点の法線
+	const btCollisionObject* ignore = nullptr;
 	const btCollisionObject* hitObject = nullptr;
 	const btCollisionObject* me = nullptr;				//自分自身。自分自身との衝突を除外するためのメンバ。
 	float dist = FLT_MAX;							//衝突点までの距離。一番近い衝突点を求めるため。FLT_MAXは単精度の浮動小数点が取りうる最大の値。
@@ -19,6 +20,7 @@ struct SSweepResultGround : public btCollisionWorld::ConvexResultCallback
 	virtual btScalar	addSingleResult(btCollisionWorld::LocalConvexResult& convexResult, bool normalInWorldSpace)
 	{
 		if (convexResult.m_hitCollisionObject == me ||
+			convexResult.m_hitCollisionObject == ignore ||
 			convexResult.m_hitCollisionObject->getUserIndex() == enCollisionAttr_Character ||
 			convexResult.m_hitCollisionObject->getUserIndex() == enCollisionAttr_Detection ||
 			convexResult.m_hitCollisionObject->getUserIndex() == enCollisionAttr_Item)
@@ -66,6 +68,7 @@ struct SSweepResultCeiling : public btCollisionWorld::ConvexResultCallback
 	CVector3 hitPos = { 0.0f, 0.0f, 0.0f };		//衝突点。
 	CVector3 startPos = { 0.0f, 0.0f, 0.0f };	//レイの始点。
 	CVector3 hitNormal = { 0.0f, 0.0f, 0.0f };	//衝突点の法線
+	const btCollisionObject* ignore = nullptr;
 	const btCollisionObject* hitObject = nullptr;
 	const btCollisionObject* me = nullptr;				//自分自身。自分自身との衝突を除外するためのメンバ。
 	float dist = FLT_MAX;							//衝突点までの距離。一番近い衝突点を求めるため。FLT_MAXは単精度の浮動小数点が取りうる最大の値。
@@ -73,6 +76,7 @@ struct SSweepResultCeiling : public btCollisionWorld::ConvexResultCallback
 	virtual btScalar	addSingleResult(btCollisionWorld::LocalConvexResult& convexResult, bool normalInWorldSpace)
 	{
 		if (convexResult.m_hitCollisionObject == me ||
+			convexResult.m_hitCollisionObject == ignore ||
 			convexResult.m_hitCollisionObject->getUserIndex() == enCollisionAttr_Detection ||
 			convexResult.m_hitCollisionObject->getUserIndex() == enCollisionAttr_Item)
 		{
@@ -121,12 +125,14 @@ struct SSweepResultWall : public btCollisionWorld::ConvexResultCallback
 	float		distance = 0.0f;
 	float dist = FLT_MAX;							//衝突点までの距離。一番近い衝突点を求めるため。FLT_MAXは単精度の浮動小数点が取りうる最大の値。
 	CVector3	hitNormal = { 0.0f, 0.0f, 0.0f };	//衝突点の法線
+	const btCollisionObject* ignore = nullptr;
 	const btCollisionObject* me = NULL;					//自分自身。自分自身との衝突を除外するためのメンバ。
 	const btCollisionObject* hitObject = NULL;
 													//衝突したときに呼ばれるコールバック関数
 	virtual btScalar	addSingleResult(btCollisionWorld::LocalConvexResult& convexResult, bool normalInWorldSpace)
 	{
-		if (convexResult.m_hitCollisionObject == me)
+		if (convexResult.m_hitCollisionObject == me ||
+			convexResult.m_hitCollisionObject == ignore)
 		{
 			//自分に衝突した。or地面に衝突した。
 			return 0.0f;
@@ -182,6 +188,7 @@ CCharacterController::CCharacterController() :
 	m_radius(0.0f),
 	m_height(0.0f),
 	m_rigidBody(),
+	m_ignoreRigidBody(nullptr),
 	m_gravity(-9.8f),
 	m_groundHitObject(nullptr),
 	m_wallHitObject(nullptr),
@@ -265,6 +272,10 @@ void CCharacterController::Execute(float deltaTime)
 
 			SSweepResultWall callback;
 			callback.me = m_rigidBody.GetBody();
+			if (m_ignoreRigidBody != nullptr)
+			{
+				callback.ignore = m_ignoreRigidBody->GetBody();
+			}
 			callback.startPos = posTmp;
 			//衝突検出。
 			physicsWorld.ConvexSweepTest((const btConvexShape*)m_collider.GetBody(), start, end, callback);
@@ -367,6 +378,10 @@ void CCharacterController::Execute(float deltaTime)
 		end.setOrigin(btVector3(endPos.x, endPos.y, endPos.z));
 		SSweepResultGround callback;
 		callback.me = m_rigidBody.GetBody();
+		if (m_ignoreRigidBody != nullptr)
+		{
+			callback.ignore = m_ignoreRigidBody->GetBody();
+		}
 		callback.startPos.Set(start.getOrigin());
 		//衝突検出。
 		if (fabsf(addPosY.y) > FLT_EPSILON && (start.getOrigin().y() - end.getOrigin().y() != 0.0f))
