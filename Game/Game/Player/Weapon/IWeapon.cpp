@@ -52,14 +52,17 @@ void IWeapon::Updater()
 
 void IWeapon::WeaponTraceDrawer()
 {
-	CWeaponTraceDraw& weaponTrace = m_pPlayer->GetWeaponManager().GetWeaponTraceDraw();
+	CWeaponTraceDraw *weaponTrace = &m_pPlayer->GetWeaponManager().GetWeaponTraceDraw();
 	if (m_pPlayer->GetWeaponManager().GetIsAttack())
 	{
 		SWeaponTraceDrawInfo info = WeaponTraceDraw();
 		m_pPlayer->GetWeaponManager().SetIsTraceDraw(info.isDraw);
 		if (info.isDraw)
 		{
-			weaponTrace.Add(info.rootPos, info.pointPos);
+			for (int i = 0; i < m_maxWeaponHitNum; i++)
+			{
+				weaponTrace[i].Add(info.rootPos[i], info.pointPos[i]);
+			}
 		}
 	}
 	else
@@ -69,9 +72,12 @@ void IWeapon::WeaponTraceDrawer()
 
 void IWeapon::WeaponTraceDrawStart()
 {
-	CWeaponTraceDraw& weaponTrace = m_pPlayer->GetWeaponManager().GetWeaponTraceDraw();
+	CWeaponTraceDraw *weaponTrace=&m_pPlayer->GetWeaponManager().GetWeaponTraceDraw();
 	SWeaponTraceDrawInfo info = WeaponTraceDraw();
-	weaponTrace.Start(info.rootPos, info.pointPos);
+	for (int i = 0; i < m_maxWeaponHitNum; i++)
+	{
+		weaponTrace[i].Start(info.rootPos[i], info.pointPos[i]);
+	}
 }
 
 void IWeapon::Drawer()

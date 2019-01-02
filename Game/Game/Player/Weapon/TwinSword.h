@@ -14,11 +14,6 @@ public:
 
 	SWeaponTraceDrawInfo WeaponTraceDraw()override;
 
-	SWeaponTraceDrawInfo WeaponTraceTwinDraw();
-
-	//武器の軌跡を描画する
-	void WeaponTraceTwinDrawer();
-
 private:
 	
 	const CMatrix*				m_normalTwinBoneMat = nullptr;	//プレイヤーのボーン行列

@@ -43,7 +43,7 @@ void CPlayerAttack::Init()
 	m_pPlayer->GetWeaponManager().SetIsAttack(true);
 	m_pPlayer->GetWeaponManager().GetWeapon()->WeaponTraceDrawStart();
 	m_isPreDodge = false;
-	m_addPos = CVector3::Zero;
+	m_rotationDirectionVector = CVector3::Zero;
 }
 
 void CPlayerAttack::Update()
@@ -61,6 +61,12 @@ void CPlayerAttack::Update()
 
 	if (m_pPlayer->GetIsStateCondition(CPlayerState::enPlayerStateAvoidance)) {
 		m_isPreDodge = true;
+	}
+	else if(m_pPlayer->GetIsStateCondition(CPlayerState::enPlayerStateSky))
+	{
+		m_pPlayer->GetWeaponManager().SetIsAttack(false);
+		GetPlayer().GetStateMachine().SetState(CPlayerState::enPlayerStateSky);
+		return;
 	}
 
 	m_pPlayer->SetStanAttack(m_stanAttack[m_attackCount]);
@@ -225,27 +231,18 @@ void CPlayerAttack::Rotation()
 	rot.SetRotation(CVector3::AxisY, rad);
 	CMatrix rotMat=CMatrix::Identity;
 	rotMat.MakeRotationFromQuaternion(rot);
-	CVector3 playerPos = m_pPlayer->GetPosition();
-	CMatrix spineMat = m_pPlayer->GetSkinmodel().FindBoneWorldMatrix(L"Hips");
-	CVector3 spineVec;
-	spineVec.x = spineMat.m[3][0];
-	spineVec.y = spineMat.m[3][1];
-	spineVec.z = spineMat.m[3][2];
-	CVector3 animPos = playerPos- spineVec;
-	animPos.y =0.0f;
-	rotMat.Mul(animPos);
-	animPos.Normalize();
+
 	CQuaternion pRot = m_pPlayerGetter->GetRotation();
 	//腰を中心にしたクオータニオンとプレイヤーのやつの積
 	pRot.Multiply(rot);
 	m_addRot = pRot;
-	m_addPos = moveSpeed;
+	m_rotationDirectionVector = moveSpeed;
 }
 
 void CPlayerAttack::Lerp()
 {
 
-	if (m_addPos.LengthSq() < 0.01f)
+	if (m_rotationDirectionVector.LengthSq() < 0.01f)
 	{
 		//座標更新されていない
 		return;
@@ -253,22 +250,22 @@ void CPlayerAttack::Lerp()
 	//回転の線形補完
 	CQuaternion rotation = m_pPlayerGetter->GetRotation();
 	float slerp = 0.3f;
-	rotation.Slerp(0.3f, rotation, m_addRot);
+	rotation.Slerp(slerp, rotation, m_addRot);
 	m_pPlayerGetter->SetRotation(rotation);
 	CMatrix rotMat;
 	rotMat.MakeRotationFromQuaternion(rotation);
 	//座標の線形補完
-	CVector3 distance;
+	CVector3 playerFront;
 	CMatrix mat = m_pPlayer->GetSkinmodel().GetWorldMatrix();
-	distance.x = mat.m[2][0];
-	distance.y = 0.0f;
-	distance.z = mat.m[2][2];
-	distance.Normalize();
-	float rad = m_addPos.Dot(distance);
+	playerFront.x = mat.m[2][0];
+	playerFront.y = 0.0f;
+	playerFront.z = mat.m[2][2];
+	playerFront.Normalize();
+	float rad = m_rotationDirectionVector.Dot(playerFront);
 	rad = max(-1.0f, min(1.0f, rad));
 	rad = acosf(rad);
 	CVector3 judgeAxis;
-	judgeAxis.Cross(m_addPos, distance);
+	judgeAxis.Cross(m_rotationDirectionVector, playerFront);
 	if (0.0f < judgeAxis.y)
 	{
 		rad = -rad;

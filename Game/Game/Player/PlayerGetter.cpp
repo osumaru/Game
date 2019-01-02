@@ -82,3 +82,8 @@ CWireDraw & CPlayerGetter::GetWireDraw()
 {
 	return m_pPlayer->m_wireDraw;
 }
+
+void CPlayerGetter::SkinModelUpdate()
+{
+	m_pPlayer->m_skinmodel.Update(m_pPlayer->m_position, m_pPlayer->m_rotation, CVector3::One, true);
+}

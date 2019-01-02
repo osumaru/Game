@@ -71,7 +71,6 @@ void CTwinSword::Init()
 
 void CTwinSword::Update()
 {
-
 	CVector3 position;
 	CQuaternion rotation;
 	const CMatrix* boneMat;
@@ -101,7 +100,7 @@ void CTwinSword::Update()
 	rotation = multi;
 	m_skinModelTwin.Update(position, rotation, CVector3::One);
 
-	WeaponTraceTwinDrawer();
+	
 }
 
 void CTwinSword::Draw()
@@ -148,43 +147,39 @@ SWeaponEnemyAttackInfo CTwinSword::EnemyAttackPositionDecide()
 
 SWeaponTraceDrawInfo CTwinSword::WeaponTraceDraw()
 {
+	CVector3 xVec = *(CVector3*)m_skinModel.GetWorldMatrix().m[2];
+	xVec.Normalize();
+	xVec *= -1.0f;
+	xVec.Scale(0.1f);
 	CVector3 position = *(CVector3*)m_attackBoneMat->m[3];
 	CVector3 manip = *(CVector3*)m_attackBoneMat->m[2];
 	manip.Normalize();
 	CVector3 manip2 = manip;
-	manip.Scale(0.2f);
-	manip2.Scale(0.7f);
+	manip.Scale(0.0f);
+	manip2.Scale(0.65f);
+	position.Add(xVec);
 	CVector3 position2 = position + manip;
 	CVector3 position3 = position + manip2;
-	return { true, position2, position3 };
-}
 
-SWeaponTraceDrawInfo CTwinSword::WeaponTraceTwinDraw()
-{
-	CVector3 position = *(CVector3*)m_attackTwinBoneMat->m[3];
-	CVector3 manip = *(CVector3*)m_attackTwinBoneMat->m[2];
-	manip.Normalize();
-	CVector3 manip2 = manip;
-	manip.Scale(0.2f);
-	manip2.Scale(0.7f);
-	CVector3 position2 = position + manip;
-	CVector3 position3 = position + manip2;
-	return { true, position2, position3 };
-}
+	SWeaponTraceDrawInfo TraceInfo;
+	TraceInfo.rootPos[0] = position2;
+	TraceInfo.pointPos[0] = position3;
+	TraceInfo.isDraw = true;
 
-void CTwinSword::WeaponTraceTwinDrawer()
-{
-	CWeaponTraceDraw& weaponTrace = m_pPlayer->GetWeaponManager().GetWeaponTraceDraw();
-	if (m_pPlayer->GetWeaponManager().GetIsAttack())
-	{
-		SWeaponTraceDrawInfo info = WeaponTraceTwinDraw();
-		m_pPlayer->GetWeaponManager().SetIsTraceDraw(info.isDraw);
-		if (info.isDraw)
-		{
-			weaponTrace.Add(info.rootPos, info.pointPos);
-		}
-	}
-	else
-	{
-	}
+	xVec = *(CVector3*)m_skinModelTwin.GetWorldMatrix().m[2];
+	xVec.Normalize();
+	xVec.Scale(0.1f);
+	CVector3 positionTwin = *(CVector3*)m_attackTwinBoneMat->m[3];
+	CVector3 manipTwin = *(CVector3*)m_attackTwinBoneMat->m[2];
+	manipTwin.Normalize();
+	CVector3 manip2Twin = manipTwin;
+	manipTwin.Scale(0.0f);
+	manip2Twin.Scale(0.65f);
+	positionTwin.Add(xVec);
+	CVector3 position4 = positionTwin + manipTwin;
+	CVector3 position5 = positionTwin + manip2Twin;
+
+	TraceInfo.rootPos[1]=position4;
+	TraceInfo.pointPos[1]=position5;
+	return { TraceInfo };
 }
