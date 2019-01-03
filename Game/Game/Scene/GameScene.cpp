@@ -91,9 +91,9 @@ bool CGameScene::Start()
 
 void CGameScene::Update()
 {
-	//if (Pad().IsTriggerButton(enButtonRStickPush))
-	//{
-	//	GetSceneManager().ChangeScene(CSceneManager::enBossScene);
-	//}
+	if (Pad().IsTriggerButton(enButtonRStickPush))
+	{
+		GetSceneManager().ChangeScene(CSceneManager::enBossScene);
+	}
 }
 

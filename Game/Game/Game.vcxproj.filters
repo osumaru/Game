@@ -394,6 +394,9 @@
     <ClCompile Include="Scene\BossScene.cpp">
       <Filter>ソース ファイル\Scene</Filter>
     </ClCompile>
+    <ClCompile Include="Player\PlayerSate\PlayerDown.cpp">
+      <Filter>ソース ファイル\Player\PlayerState</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -698,6 +701,9 @@
     </ClInclude>
     <ClInclude Include="Scene\BossScene.h">
       <Filter>ソース ファイル\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Player\PlayerSate\PlayerDown.h">
+      <Filter>ソース ファイル\Player\PlayerState</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
