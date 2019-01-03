@@ -18,6 +18,7 @@ void CNormalGameCamera::Start(const CVector3 pos, const CVector3 tag)
 	m_cameraPosition = pos;
 	m_targetPosition = tag;
 	m_cameraCollisionSolver.Init(0.2f);
+	m_shakeCamera.Init(pos, tag, CVector3::Right, 0.8f);
 }
 
 void CNormalGameCamera::Update()
@@ -27,6 +28,8 @@ void CNormalGameCamera::Update()
 
 	//CVector3	oldCameraVec = GetGameCamera().GetSpringCamera().GetPosition() - GetGameCamera().GetSpringCamera().GetTarget();
 	m_cameraVec = m_cameraPosition - m_targetPosition;
+	//m_cameraVec.Normalize();
+	//m_cameraVec.Scale(2.0f);
 	//if (oldCameraVec.Length() < m_cameraVec.Length())
 	//{
 	//	float len = m_cameraVec.Length() / oldCameraVec.Length();
@@ -93,6 +96,21 @@ void CNormalGameCamera::Update()
 	GetGameCamera().SetCameraPosition(pos, target);
 	m_cameraPosition = pos;
 	m_targetPosition = target;
+
+	if (Pad().IsTriggerButton(enButtonLB))
+	{
+		GameTime().SetSlow(1.0f, 0.1f);
+	}
+	if (Pad().IsPressButton(enButtonRB))
+	{
+		m_shakeCamera.ShakeStart(1.0f);
+	}
+	m_shakeCamera.SetTarget(m_targetPosition);
+	m_shakeCamera.SetPosition(m_cameraPosition);
+	m_shakeCamera.Update();
+	m_cameraPosition = m_shakeCamera.GetShakePosition();
+	m_targetPosition = m_shakeCamera.GetShakeTarget();
+	GetGameCamera().SetCameraPosition(m_cameraPosition, m_targetPosition);
 	
 	////ƒJƒƒ‰‚Ì“–‚½‚è”»’è
 	//CVector3 newPos;

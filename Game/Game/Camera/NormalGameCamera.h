@@ -18,6 +18,6 @@ private:
 	const float TARGET_OFFSET_Y = 2.0f;	//ターゲットのＹ方向に対する補正値
 	const float CAMERA_SPEED = 2.0f;  //カメラの回転速度
 	CCameraCollisionSolver m_cameraCollisionSolver;
-
+	CShakeCamera m_shakeCamera;
 };
 
