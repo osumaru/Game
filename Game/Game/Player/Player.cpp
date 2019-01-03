@@ -198,10 +198,10 @@ void CPlayer::Update()
 		m_status.Health = 0;
 	}*/
 
-	if (Pad().IsTriggerButton(enButtonB))
+	/*if (Pad().IsTriggerButton(enButtonB))
 	{
 		m_isDamege = true;
-	}
+	}*/
 
 	CMatrix viewMat;
 	CVector3 cameraPos = m_position;
