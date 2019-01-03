@@ -162,8 +162,8 @@ SWeaponTraceDrawInfo CTwinSword::WeaponTraceDraw()
 	CVector3 position3 = position + manip2;
 
 	SWeaponTraceDrawInfo TraceInfo;
-	TraceInfo.pointPos[0] = position2;
-	TraceInfo.rootPos[0] = position3;
+	TraceInfo.rootPos[0] = position2;
+	TraceInfo.pointPos[0] = position3;
 	TraceInfo.isDraw = true;
 
 	xVec = *(CVector3*)m_skinModelTwin.GetWorldMatrix().m[2];
@@ -179,7 +179,7 @@ SWeaponTraceDrawInfo CTwinSword::WeaponTraceDraw()
 	CVector3 position4 = positionTwin + manipTwin;
 	CVector3 position5 = positionTwin + manip2Twin;
 
-	TraceInfo.pointPos[1]=position4;
-	TraceInfo.rootPos[1]=position5;
+	TraceInfo.rootPos[1]=position4;
+	TraceInfo.pointPos[1]=position5;
 	return { TraceInfo };
 }
