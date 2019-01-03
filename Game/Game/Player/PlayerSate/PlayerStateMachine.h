@@ -15,6 +15,7 @@
 #include "PlayerStun.h"
 #include "PlayerWireAttack.h"
 #include "PlayerSky.h"
+#include "PlayerDown.h"
 
 class CPlayer;
 class CPlayerGetter;
@@ -52,6 +53,7 @@ public:
 		m_playerStun.SetPlayer(player, playerGetter);
 		m_playerWireAttack.SetPlayer(player, playerGetter);
 		m_playerSky.SetPlayer(player, playerGetter);
+		m_playerDown.SetPlayer(player, playerGetter);
 	}
 
 	//現在のステートを取得
@@ -86,5 +88,6 @@ private:
 	CPlayerStun						m_playerStun;			//スタン状態
 	CPlayerWireAttack				m_playerWireAttack;		//ワイヤー攻撃モーション
 	CPlayerSky						m_playerSky;			//空中にいる状態
+	CPlayerDown						m_playerDown;			//ダウン状態
 };
 

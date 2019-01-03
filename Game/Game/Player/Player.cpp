@@ -123,7 +123,9 @@ void CPlayer::Init(CVector3 position)
 									{ L"Assets/modelData/PlayerArrowAttackEvent.tka" },
 									{ L"Assets/modelData/PlayerLeageSwordAttack.tka" },		//大剣の攻撃アニメーション
 									{ L"Assets/modelData/PlayerTwinSwordAttack.tka" },		//二刀流の攻撃アニメーション
-									{ L"Assets/modelData/PlayerLanding.tka" }
+									{ L"Assets/modelData/PlayerLanding.tka" },				//着地アニメーション
+									{ L"Assets/modelData/PlayerDown.tka" },					//ダウンアニメーション
+									{ L"Assets/modelData/PlayerUp.tka" }					//起き上がりアニメーション
 		};
 
 		m_animation.Init(animClip, enPlayerAnimationNum);
@@ -196,10 +198,10 @@ void CPlayer::Update()
 		m_status.Health = 0;
 	}*/
 
-	//if (Pad().IsTriggerButton(enButtonB))
-	//{
-	//	m_isDamege = true;
-	//}
+	if (Pad().IsTriggerButton(enButtonB))
+	{
+		m_isDamege = true;
+	}
 
 	CMatrix viewMat;
 	CVector3 cameraPos = m_position;
