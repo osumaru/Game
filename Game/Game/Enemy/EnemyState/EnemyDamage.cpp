@@ -16,10 +16,14 @@ void CEnemyDamage::Init()
 	//ダメージを受けたフラグを戻す
 	m_enemy->SetIsDamage(false);
 	//摩擦の初期化
-	m_friction = 0.5f;
+	m_friction = 0.0f;
+	m_deceleration = 0.0f;
 	//スタンする攻撃であるか判定
 	m_wasStanAttack = GetPlayer().GetStanAttack();
-
+	if (!m_wasStanAttack)
+	{
+		m_isNockBack = true;
+	}
 	//どの武器でダメージを食らったか
 	//m_enemy->SetAttackWeapon(*GetPlayer().GetWeaponManager().GetWeapon()->GetAttackWeapon());
 }
@@ -39,11 +43,13 @@ void CEnemyDamage::Update()
 	CVector3 knockBack = m_enemy->GetPosition() - GetPlayer().GetPosition();
 	knockBack.y = 0.0f;
 	knockBack.Normalize();
-	if (m_friction >= m_knockBackSpeed) {
-		m_friction = m_knockBackSpeed;
+	if (m_deceleration >= m_knockBackSpeed) {
+		m_deceleration = m_knockBackSpeed;
+		m_isNockBack = false;
 	}
-	knockBack *= m_knockBackSpeed - m_friction;
-	m_friction += m_friction;
+	knockBack *= m_knockBackSpeed - m_deceleration;
+	m_friction += 0.03f;
+	m_deceleration += m_friction;
 	moveSpeed.x = knockBack.x;
 	moveSpeed.z = knockBack.z;
 	m_enemy->SetMoveSpeed(moveSpeed);
@@ -65,14 +71,19 @@ void CEnemyDamage::Update()
 		m_esm->ChangeState(CEnemyState::enState_Stan);
 	}
 	else if (!m_enemy->GetAnimation().IsPlay()) {
-		//アニメーションが終了している
-		if (isRange && m_enemy->GetAttackLength()) {
-			//近ければ攻撃
-			m_esm->ChangeState(CEnemyState::enState_Attack);
-		}
-		else {
-			//プレイヤーを追いかける
-			m_esm->ChangeState(CEnemyState::enState_Chase);
+		if (!m_isNockBack)
+		{
+			//アニメーションが終了している
+			if (isRange && m_enemy->GetAttackLength())
+			{
+				//近ければ攻撃
+				m_esm->ChangeState(CEnemyState::enState_Attack);
+			}
+			else
+			{
+				//プレイヤーを追いかける
+				m_esm->ChangeState(CEnemyState::enState_Chase);
+			}
 		}
 	}
 	else if(m_enemy->IsDamage()) {

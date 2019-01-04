@@ -242,6 +242,12 @@ public:
 		return m_attackType;
 	}
 
+	//ステートマシンを取得
+	const CEnemyStateMachine& GetStateMachine() const
+	{
+		return m_enemyStateMachine;
+	}
+
 protected:
 	CSkinModel						m_skinModel;					//スキンモデル
 	CAnimation						m_animation;					//アニメーション
