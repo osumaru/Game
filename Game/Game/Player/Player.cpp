@@ -196,9 +196,9 @@ void CPlayer::Update()
 	/*if (Pad().IsPressButton(enButtonX))
 	{
 		m_status.Health = 0;
-	}*/
+	}
 
-	/*if (Pad().IsTriggerButton(enButtonB))
+	if (Pad().IsTriggerButton(enButtonB))
 	{
 		m_isDamege = true;
 	}*/
