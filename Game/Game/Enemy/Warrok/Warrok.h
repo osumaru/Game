@@ -37,7 +37,4 @@ public:
 
 private:
 	CRock* m_rock = nullptr;	//岩
-	//CVector3	m_handPos;	//岩を投げる用の手の座標
-	//const CMatrix*	m_leftHandMatrix = nullptr;	//岩を投げる用の手の行列
-	const CMatrix*	m_rightHandMatrix = nullptr;	//岩を投げる用の手の行列
 };

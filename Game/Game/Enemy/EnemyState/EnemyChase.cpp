@@ -39,7 +39,7 @@ void CEnemyChase::Update()
 	//UŒ‚”ÍˆÍ‚É‚¢‚é‚©
 	bool isRange = m_enemy->CalucFanShape(10.0f, playerPos);
 
-	if (m_enemy->IsDamage()){
+	if (m_enemy->GetIsDamage()){
 		//ƒ_ƒ[ƒW‚ðŽó‚¯‚½
 		m_esm->ChangeState(CEnemyState::enState_Damage);
 	}

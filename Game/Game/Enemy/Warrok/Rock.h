@@ -4,6 +4,8 @@
 
 #pragma once
 
+class IEnemy;
+
 class CRock : public IGameObject
 {
 public:
@@ -16,7 +18,7 @@ public:
 	//初期化
 	//handMatrix	手のワールド行列
 	//enemyPos		エネミーの座標
-	void Init(const CMatrix* handMatrix, CVector3 enemyPos);
+	void Init(IEnemy* enemy ,CVector3 enemyPos);
 
 	//更新される前に一度だけ呼ばれる
 	bool Start();
@@ -39,6 +41,7 @@ private:
 	CVector3				m_position;				//座標
 	CQuaternion				m_rotation;				//回転
 	CVector3				m_targetPos;			//ターゲットの座標
+	const IEnemy*			m_enemy;				//エネミー
 	CVector3				m_enemyPos;				//敵の座標
 	const CMatrix*			m_enemyHandMatrix;		//敵の手の行列
 	bool					m_isThrow = false;		//岩を投げるか

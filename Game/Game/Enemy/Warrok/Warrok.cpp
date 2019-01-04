@@ -81,7 +81,6 @@ void CWarrok::Init(CVector3 position)
 	m_status.exp = 10;
 	this->SetIsActive(true);
 
-	m_rightHandMatrix = &GetBoneWorldMatrix(L"LeftHand");
 	m_spineMatrix = &GetBoneWorldMatrix(L"Spine");
 	m_attackLength = 10.0f;
 	m_attackType = enAttackType_Far;
@@ -130,7 +129,7 @@ void CWarrok::Attack()
 	{
 		m_animation.Play(CEnemyState::enAnimationWarrok_throw, 0.3f);
 		m_rock = New<CRock>(PRIORITY_ENEMY);
-		m_rock->Init(m_rightHandMatrix, m_position);
+		m_rock->Init(this, m_position);
 	}
 	else 
 	{

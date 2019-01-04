@@ -95,5 +95,9 @@ void CGameScene::Update()
 	{
 		GetSceneManager().ChangeScene(CSceneManager::enBossScene);
 	}
+	else if (GetPlayer().GetIsDied())
+	{
+		GetSceneManager().ChangeScene(CSceneManager::enGameScene);
+	}
 }
 

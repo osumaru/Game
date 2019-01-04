@@ -65,11 +65,11 @@ void CGameCamera::Update()
 		break;
 	}
 
-	if (Pad().IsTriggerButton(enButtonRStickPush))
-	{
-		//エネミーをロックオンする
-		RockOnEnemy();
-	}
+	//if (Pad().IsTriggerButton(enButtonRStickPush))
+	//{
+	//	//エネミーをロックオンする
+	//	RockOnEnemy();
+	//}
 
 	//ロックオン中
 	if (m_isRockOn)

@@ -86,7 +86,7 @@ void CEnemyDamage::Update()
 			}
 		}
 	}
-	else if(m_enemy->IsDamage()) {
+	else if(m_enemy->GetIsDamage()) {
 		//もう一度ダメージを受けたら初期化
 		Init();
 	}

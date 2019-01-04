@@ -118,6 +118,12 @@ public:
 		m_characterController.RemovedRigidBody();
 	}
 
+	//キャラクターコントローラーを取得
+	const CCharacterController& GetCharacterController()
+	{
+		return m_characterController;
+	}
+
 	//アニメーションを取得
 	CAnimation& GetAnimation()
 	{
@@ -188,7 +194,7 @@ public:
 	}
 
 	//ダメージを受けたか
-	bool IsDamage() const
+	bool GetIsDamage() const
 	{
 		return m_isDamage;
 	}
