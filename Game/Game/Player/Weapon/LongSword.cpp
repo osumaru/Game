@@ -36,7 +36,7 @@ void CLongSword::Init()
 	}
 	m_stanAttack = std::make_unique<bool[]>(m_maxAttackNum);
 	m_stanAttack[0] = false;
-	m_stanAttack[1] = false;
+	m_stanAttack[1] = true;
 	m_stanAttack[2] = true;
 	
 }

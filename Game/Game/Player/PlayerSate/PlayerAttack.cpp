@@ -117,6 +117,8 @@ void CPlayerAttack::Update()
 			m_pPlayerGetter->SetPosition(position);
 
 			m_pPlayerGetter->GetAnimation().Play(m_combineAnimation[m_attackCount]);
+			m_pPlayerGetter->GetAnimation().Update(0.0f);
+			m_pPlayerGetter->SkinModelUpdate();
 			if (m_isPreDodge)
 			{
 				m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateAvoidance);
