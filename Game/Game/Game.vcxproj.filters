@@ -397,6 +397,9 @@
     <ClCompile Include="UI\Result\Retry.cpp">
       <Filter>ソース ファイル\UI\Result</Filter>
     </ClCompile>
+    <ClCompile Include="Player\PlayerSate\PlayerDown.cpp">
+      <Filter>ソース ファイル\Player\PlayerState</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -704,6 +707,9 @@
     </ClInclude>
     <ClInclude Include="UI\Result\Retry.h">
       <Filter>ソース ファイル\UI\Result</Filter>
+    </ClInclude>
+    <ClInclude Include="Player\PlayerSate\PlayerDown.h">
+      <Filter>ソース ファイル\Player\PlayerState</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

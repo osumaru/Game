@@ -19,9 +19,11 @@ void CPlayerDamage::Init()
 		moveSpeed.z = m_airDamageVec.z;
 		m_pPlayerGetter->SetMoveSpeed(m_airDamageVec);
 		m_pPlayerGetter->GetAnimation().Play(enPlayerAnimationDamageAir, 0.1f);
+		m_isSky = true;
 	}
 	else {
 		m_pPlayerGetter->GetAnimation().Play(enPlayerAnimationDamage, 0.1f);
+		m_isSky = false;
 	}
 }
 
@@ -34,8 +36,14 @@ void CPlayerDamage::Update()
 		moveSpeed.x = 0.0f;
 		moveSpeed.z = 0.0f;
 		m_pPlayerGetter->SetMoveSpeed(moveSpeed);
+		if (!m_pPlayerGetter->GetAnimation().IsPlay() && m_isSky)
+		{
+			m_pPlayerGetter->DamageStateReset();
+			m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateDown);
+		}
 	}
-	if (!m_pPlayerGetter->GetAnimation().IsPlay())
+	
+	if (!m_pPlayerGetter->GetAnimation().IsPlay()&&!m_isSky)
 	{
 		m_pPlayerGetter->DamageStateReset();
 		m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateStand);

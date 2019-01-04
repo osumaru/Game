@@ -11,6 +11,7 @@ public:
 private:
 	void Rotation();
 private:
-	CVector3 m_airDamageVec;
+	CVector3	m_airDamageVec;
+	bool		m_isSky = false;	//‹ó’†‚Åƒ_ƒ[ƒW‚ğó‚¯‚½‚©
 };
 

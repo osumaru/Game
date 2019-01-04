@@ -52,6 +52,7 @@ void CWarrok::Init(CVector3 position)
 	m_position = position;
 	m_characterController.Init(0.5f, 0.9f, position);
 	m_characterController.SetGravity(-9.0f);
+	
 	wchar_t* animClip[CEnemyState::enAnimationWarrok_Num] = {
 		L"Assets/modelData/WarrokStand.tka",
 		L"Assets/modelData/WarrokWalk.tka",

@@ -192,6 +192,7 @@
     <ClCompile Include="Item\InventoryItem\InventorySword.cpp" />
     <ClCompile Include="Item\InventoryItem\InventoryTwinSword.cpp" />
     <ClCompile Include="Map\MapChip\ObstacleMapObject.cpp" />
+    <ClCompile Include="Player\PlayerSate\PlayerDown.cpp" />
     <ClCompile Include="Player\PlayerSate\PlayerSky.cpp" />
     <ClCompile Include="Player\Weapon\WeaponTraceDraw.cpp" />
     <ClCompile Include="Player\PlayerSate\PlayerWireAttack.cpp" />
@@ -299,6 +300,7 @@
     <ClInclude Include="Item\InventoryItem\InventorySword.h" />
     <ClInclude Include="Item\InventoryItem\InventoryTwinSword.h" />
     <ClInclude Include="Map\MapChip\ObstacleMapObject.h" />
+    <ClInclude Include="Player\PlayerSate\PlayerDown.h" />
     <ClInclude Include="Player\PlayerSate\PlayerSky.h" />
     <ClInclude Include="Player\Weapon\WeaponTraceDraw.h" />
     <ClInclude Include="Player\PlayerSate\PlayerWireAttack.h" />

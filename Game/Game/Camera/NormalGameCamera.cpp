@@ -93,6 +93,7 @@ void CNormalGameCamera::Update()
 	GetGameCamera().SetCameraPosition(pos, target);
 	m_cameraPosition = pos;
 	m_targetPosition = target;
+
 	
 	////ƒJƒƒ‰‚Ì“–‚½‚è”»’è
 	//CVector3 newPos;
