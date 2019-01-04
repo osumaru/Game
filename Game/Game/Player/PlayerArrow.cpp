@@ -66,7 +66,7 @@ void CPlayerArrow::Update()
 		//“G‚Æ‚Ì“–‚½‚è”»’è‚ÌŒvŽZ
 		for (const auto& enemys :GetSceneManager().GetGameScene().GetMap()->GetEnemyList())
 		{
-			if (!enemys->IsDamage()) {
+			if (!enemys->GetIsDamage()) {
 
 				//CVector3 EnemyVec = enemys->GetPosition();
 				//EnemyVec.y += OFFSET_Y;

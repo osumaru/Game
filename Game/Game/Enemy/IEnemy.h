@@ -194,7 +194,7 @@ public:
 	}
 
 	//ƒ_ƒ[ƒW‚ğó‚¯‚½‚©
-	bool IsDamage() const
+	bool GetIsDamage() const
 	{
 		return m_isDamage;
 	}

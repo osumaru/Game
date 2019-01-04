@@ -24,6 +24,7 @@ void CRock::Init(IEnemy* enemy, CVector3 enemyPos)
 	m_characterController.Init(1.0f, 0.1f, m_position);
 	m_characterController.SetGravity(-4.9f);
 	m_characterController.SetIgnoreRigidBody(&enemy->GetCharacterController().GetBody());
+	m_enemy = enemy;
 }
 
 bool CRock::Start()
@@ -50,7 +51,8 @@ bool CRock::Start()
 
 void CRock::Update()
 {
-	if (GetSceneManager().GetSceneChange())
+	if (GetSceneManager().GetSceneChange() 
+		|| (!m_isThrow && m_enemy->GetIsDamage()))
 	{
 		Delete(this);
 	}

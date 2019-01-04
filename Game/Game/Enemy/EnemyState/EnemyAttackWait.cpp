@@ -15,7 +15,7 @@ void CEnemyAttackWait::Update()
 {
 	m_timer += GameTime().GetDeltaFrameTime();
 
-	if (m_enemy->IsDamage())
+	if (m_enemy->GetIsDamage())
 	{
 		//ƒ_ƒ[ƒW‚ðŽó‚¯‚½
 		m_esm->ChangeState(CEnemyState::enState_Damage);

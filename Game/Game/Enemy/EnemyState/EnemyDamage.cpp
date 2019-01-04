@@ -75,7 +75,7 @@ void CEnemyDamage::Update()
 			m_esm->ChangeState(CEnemyState::enState_Chase);
 		}
 	}
-	else if(m_enemy->IsDamage()) {
+	else if(m_enemy->GetIsDamage()) {
 		//もう一度ダメージを受けたら初期化
 		Init();
 	}

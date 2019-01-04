@@ -41,6 +41,7 @@ private:
 	CVector3				m_position;				//座標
 	CQuaternion				m_rotation;				//回転
 	CVector3				m_targetPos;			//ターゲットの座標
+	const IEnemy*			m_enemy;				//エネミー
 	CVector3				m_enemyPos;				//敵の座標
 	const CMatrix*			m_enemyHandMatrix;		//敵の手の行列
 	bool					m_isThrow = false;		//岩を投げるか
