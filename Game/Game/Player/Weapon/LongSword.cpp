@@ -26,9 +26,9 @@ void CLongSword::Init()
 	m_hitEffectParam = std::make_unique<SHitEffectParam[]>(m_maxAttackNum);
 	m_attackAnimation = std::make_unique<EnPlayerAnimation[]>(m_maxAttackNum);
 	m_combineAnimation =std::make_unique<EnPlayerAnimation[]>(m_maxAttackNum);
-	m_hitEffectParam[0] = { 0.2f, 1.0f, 1.0f };
-	m_hitEffectParam[1] = { 0.2f, 1.0f, 1.0f };
-	m_hitEffectParam[2] = { 0.2f, 1.0f, 1.0f };
+	m_hitEffectParam[0] = { 0.1f, 0.0f, 0.1f };
+	m_hitEffectParam[1] = { 0.1f, 0.0f, 0.1f };
+	m_hitEffectParam[2] = { 0.1f, 0.0f, 0.1f };
 	for (int i = 0; i < m_maxAttackNum; i++)
 	{
 		m_attackAnimation[i] = (EnPlayerAnimation)(enPlayerAnimationLeageAttack1 + i);

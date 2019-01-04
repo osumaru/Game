@@ -13,8 +13,16 @@ void CAnimationClip::Load(wchar_t * filePath)
 	m_topBoneKeyFrameList = nullptr;
 
 	const SAnimationClipInfo* info = AnimationResource().Load(filePath);
-	m_animationEvent = info->animationEvent;
 	m_animationEventNum = info->animationEventNum;
+	if (0 < m_animationEventNum)
+	{
+		m_animationEvent = std::make_unique<CAnimationEvent[]>(m_animationEventNum);
+	}
+	for (int i = 0; i < m_animationEventNum; i++)
+	{
+		m_animationEvent[i] = info->animationEvent[i];
+	}
+
 	m_clipName = info->filePath;
 	m_keyFramePtrListArray = info->keyFramePtrListArray;
 	m_keyframes = info->keyframes;
@@ -50,7 +58,7 @@ void CAnimationClip::Update(float deltaTime)
 		{
 			keyTime -= (*m_topBoneKeyFrameList)[m_currentFrameNo - 1]->time;
 		}
-
+		const float currentFrameNo = m_currentFrameNo;
 		nowTime = keyTime - nowTime;
 		//”ñ”‰ñ”ð
 		if (keyTime == 0.0f)
@@ -86,7 +94,7 @@ void CAnimationClip::Update(float deltaTime)
 		while ((*m_topBoneKeyFrameList)[m_currentFrameNo]->time < m_frameTime)
 		{
 			m_currentFrameNo++;
-
+			
 			if (m_topBoneKeyFrameList->size() <= m_currentFrameNo)
 			{
 				m_isPlay = false;
@@ -99,7 +107,6 @@ void CAnimationClip::Update(float deltaTime)
 				break;
 			}
 		}
-
 	}
 }
 

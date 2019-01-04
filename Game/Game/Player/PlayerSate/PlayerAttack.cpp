@@ -50,10 +50,9 @@ void CPlayerAttack::Update()
 {
 
 	//攻撃中に攻撃の入力がされた場合は連撃に移行する
-	if (Pad().IsTriggerButton(enButtonX) && !m_isContinuationAttack && m_attackCount < m_maxAttackNum/*MAX_ATTACK_NUM*/ - 1)
+	if (Pad().IsTriggerButton(enButtonX) && !m_isContinuationAttack && m_attackCount < m_maxAttackNum - 1)
 	{
 		m_isContinuationAttack = true;
-		m_attackCount++;
 	}
 
 	Move();
@@ -68,7 +67,6 @@ void CPlayerAttack::Update()
 		GetPlayer().GetStateMachine().SetState(CPlayerState::enPlayerStateSky);
 		return;
 	}
-
 	m_pPlayer->SetStanAttack(m_stanAttack[m_attackCount]);
 
 	Lerp();
@@ -91,6 +89,7 @@ void CPlayerAttack::Update()
 		//攻撃モーション中はダメージモーションをさせない
 		if (m_isContinuationAttack)
 		{
+			m_attackCount++;
 			CVector3 position = m_pPlayer->GetPosition();
 			position = m_preBonePos;
 			position += m_manipVec;
@@ -117,6 +116,8 @@ void CPlayerAttack::Update()
 			m_pPlayerGetter->SetPosition(position);
 
 			m_pPlayerGetter->GetAnimation().Play(m_combineAnimation[m_attackCount]);
+			m_pPlayerGetter->GetAnimation().Update(0.0f);
+			m_pPlayerGetter->SkinModelUpdate();
 			if (m_isPreDodge)
 			{
 				m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateAvoidance);

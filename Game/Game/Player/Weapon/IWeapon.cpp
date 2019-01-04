@@ -127,8 +127,9 @@ void IWeapon::EnemyAttack()
 						if (fabs(len) < 2.0f)
 						{
 							int attackNum = m_pPlayer->GetWeaponManager().GetAttackCount();
-							GameTime().SetSlow(m_hitEffectParam[attackNum].slowTime, m_hitEffectParam[attackNum].slowScale);
+							GameTime().SetSlowDelayTime(m_hitEffectParam[attackNum].slowTime, m_hitEffectParam[attackNum].slowScale, m_hitEffectParam[attackNum].slowDelayTime);
 							GetGameCamera().GetShakeCamera().ShakeStart(m_hitEffectParam[attackNum].shakePower);
+							GetGameCamera().GetShakeCamera().SetDelayTime(m_hitEffectParam[attackNum].shakeDelayTime);
 							enemy->SetIsDamage(true);
 							damagePossible[i] = false;
 						}

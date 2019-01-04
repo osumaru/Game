@@ -30,9 +30,18 @@ public:
 
 	//更新
 	void Update() override;
+
+	//ノックバック中かのフラグを取得
+	bool IsNockBack() const
+	{
+		return m_isNockBack;
+	}
 private:
 	CDamageNumber*	m_damageNumber = nullptr;	//ダメージ表示
-	const float		m_knockBackSpeed = 3.0f;	//ノックバックスピード
-	float			m_friction = 0.5f;			//摩擦
+	const float		m_knockBackSpeed = 5.0f;	//ノックバックスピード
+	float			m_deceleration = 0.0f;		//減速力
+	float			m_friction = 0.0f;			//摩擦力
 	bool			m_wasStanAttack = false;	//スタン攻撃を受けたか
+	bool			m_isNockBack = false;		//ノックバック中かのフラグ
+
 };

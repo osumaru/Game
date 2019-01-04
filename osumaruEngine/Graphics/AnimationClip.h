@@ -114,7 +114,7 @@ private:
 	std::vector<SBoneFreeze>				m_freezeFlg;						//ボーンの行列を保存するためのもの
 	float									m_frameTime = 0.0f;					//フレームを進めるためのタイマー
 	int										m_currentFrameNo = 0;				//現在のフレームナンバー
-	CAnimationEvent*						m_animationEvent = nullptr;			//アニメーションイベント。
+	std::unique_ptr<CAnimationEvent[]>		m_animationEvent = nullptr;			//アニメーションイベント。
 	int										m_animationEventNum = 0;			//アニメーションイベントの数
 	int										m_maxFrameNum = 0;					//最大キーフレーム数
 };

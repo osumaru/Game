@@ -8,6 +8,7 @@
 #include "../UI/Menu/Menu.h"
 #include "../UI/Result/Result.h"
 #include "../UI/LevelUp/LevelUp.h"
+#include "../UI/Result/Retry.h"
 #include "../GameSound/GameSound.h"
 
 void CBossScene::BeforeDead()
@@ -21,6 +22,7 @@ void CBossScene::BeforeDead()
 	Engine().GetEffectEngine().SetCamera(nullptr);
 	Delete(m_map);
 	Delete(m_gameSound);
+	Delete(m_retry);
 }
 
 bool CBossScene::Start()
@@ -51,6 +53,10 @@ bool CBossScene::Start()
 		//ゲームオーバーのUIの初期化
 		m_result = New<CResult>(PRIORITY_UI);
 		m_result->Init();
+
+		m_retry = New<CRetry>(PRIORITY_UI);
+		m_retry->Init();
+		m_retry->SetIsActive(false);
 	}
 
 	//フェードインの開始
@@ -61,4 +67,27 @@ bool CBossScene::Start()
 
 void CBossScene::Update()
 {
+	if (!GetPlayer().GetIsDied())
+	{
+		//プレイヤーが死んでいなければ何もしない
+		return;
+	}
+	//コンティニュー表示をアクティブにする
+	m_retry->SetIsActive(true);
+	//Aボタンを押したらシーン切り替え
+	if (Pad().IsTriggerButton(enButtonA))
+	{
+		//コンティニューを押した
+		if (m_retry->GetState() == CRetry::Continue)
+		{
+			//ボスシーンに遷移
+			GetSceneManager().ChangeScene(CSceneManager::enBossScene);
+		}
+		//やめるを押した
+		else 
+		{
+			//ゲームシーンに遷移
+			GetSceneManager().ChangeScene(CSceneManager::enGameScene);
+		}
+	}
 }

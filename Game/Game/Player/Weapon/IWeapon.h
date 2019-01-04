@@ -105,6 +105,8 @@ protected:
 		float slowTime = 0.0f;		//スローにする時間
 		float slowScale = 1.0f;		//どのくらいスローにするかの倍率
 		float shakePower = 0.0f;	//カメラ揺れの強さ
+		float slowDelayTime = 0.0f;	//スローにするまでの遅延時間
+		float shakeDelayTime = 0.0f;//揺れるまでの遅延時間
 	};
 
 	CPlayer*								m_pPlayer = nullptr;		//プレイヤーのインスタンス

@@ -24,7 +24,7 @@ bool CEnemyStan::Start()
 void CEnemyStan::Update()
 {
 	//ダメージを受けたか判定する
-	if (m_enemy->IsDamage())
+	if (m_enemy->GetIsDamage())
 	{
 		//ダメージ数値を初期化
 		m_damageNumber = New<CDamageNumber>(PRIORITY_UI);

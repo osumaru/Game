@@ -26,9 +26,11 @@ void CSword::Init()
 	m_hitEffectParam = std::make_unique<SHitEffectParam[]>(m_maxAttackNum);
 	m_attackAnimation = std::make_unique<EnPlayerAnimation[]>(m_maxAttackNum);
 	m_combineAnimation = std::make_unique<EnPlayerAnimation[]>(m_maxAttackNum);
-	m_hitEffectParam[0] = { 0.0f, 1.0f, 0.0f };
-	m_hitEffectParam[1] = { 0.0f, 1.0f, 0.0f };
-	m_hitEffectParam[2] = { 0.0f, 1.0f, 0.0f };
+	float delayTime = 0.05f;
+	m_hitEffectParam[0] = { 0.05f, 0.0f, 0.03f , delayTime, delayTime };
+	m_hitEffectParam[1] = { 0.05f, 0.0f, 0.03f , delayTime, delayTime };
+	delayTime = 0.1f;
+	m_hitEffectParam[2] = { 0.07f, 0.0f, 0.08f , delayTime, delayTime };
 	for (int i = 0; i < m_maxAttackNum; i++)
 	{
 		m_attackAnimation[i] = (EnPlayerAnimation)(enPlayerAnimationAttack1 + i);
@@ -37,7 +39,7 @@ void CSword::Init()
 	m_stanAttack = std::make_unique<bool[]>(m_maxAttackNum);
 	m_stanAttack[0] = false;
 	m_stanAttack[1] = false;
-	m_stanAttack[2] = false;
+	m_stanAttack[2] = true;
 }
 
 void CSword::Update()
