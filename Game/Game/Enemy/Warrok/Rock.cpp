@@ -2,27 +2,28 @@
 #include "../../Camera/GameCamera.h"
 #include "../../Player/Player.h"
 #include "../../Scene/SceneManager.h"
+#include "../IEnemy.h"
 
-void CRock::Init(const CMatrix* handMatrix, CVector3 enemyPos)
+void CRock::Init(IEnemy* enemy, CVector3 enemyPos)
 {
 	//モデルを初期化
 	m_skinModel.Load(L"Assets/modelData/Rock.cmo");
 	//攻撃した敵の座標を保存
 	m_enemyPos = enemyPos;
 	//座標を初期化
-	m_position.x = handMatrix->m[3][0];
-	m_position.y = handMatrix->m[3][1];
-	m_position.z = handMatrix->m[3][2];
-	m_enemyHandMatrix = handMatrix;
+	m_enemyHandMatrix = &enemy->GetBoneWorldMatrix(L"LeftHand");
+	m_position.x = m_enemyHandMatrix->m[3][0];
+	m_position.y = m_enemyHandMatrix->m[3][1];
+	m_position.z = m_enemyHandMatrix->m[3][2];
 	//ターゲットの座標(プレイヤーの腰)を設定
 	CMatrix playerMatrix = GetPlayer().GetSkinmodel().FindBoneWorldMatrix(L"Spine");
 	m_targetPos.x = playerMatrix.m[3][0];
 	m_targetPos.y = playerMatrix.m[3][1];
 	m_targetPos.z = playerMatrix.m[3][2];
 	//キャラクターコントローラーを初期化
-	m_characterController.Init(0.1f, 0.1f, m_position);
-	//m_characterController.Init(1.0f, 0.1f, m_position);
+	m_characterController.Init(1.0f, 0.1f, m_position);
 	m_characterController.SetGravity(-4.9f);
+	m_characterController.SetIgnoreRigidBody(&enemy->GetCharacterController().GetBody());
 }
 
 bool CRock::Start()

@@ -256,6 +256,7 @@
     <ClCompile Include="UI\MiniMap\MiniMap.cpp" />
     <ClCompile Include="UI\PlayerHp\PlayerHp.cpp" />
     <ClCompile Include="UI\Result\Result.cpp" />
+    <ClCompile Include="UI\Result\Retry.cpp" />
     <ClCompile Include="UI\WeaponSelect\WeaponSelect.cpp" />
     <ClCompile Include="NPC\Shop\WeaponShop.cpp" />
     <ClCompile Include="UI\WeekPoint\WeekPoint.cpp" />
@@ -359,6 +360,7 @@
     <ClInclude Include="UI\MiniMap\MiniMap.h" />
     <ClInclude Include="UI\PlayerHp\PlayerHp.h" />
     <ClInclude Include="UI\Result\Result.h" />
+    <ClInclude Include="UI\Result\Retry.h" />
     <ClInclude Include="UI\WeaponSelect\WeaponSelect.h" />
     <ClInclude Include="NPC\Shop\WeaponShop.h" />
     <ClInclude Include="UI\WeekPoint\WeekPoint.h" />

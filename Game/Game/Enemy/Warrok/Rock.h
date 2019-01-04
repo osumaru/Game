@@ -4,6 +4,8 @@
 
 #pragma once
 
+class IEnemy;
+
 class CRock : public IGameObject
 {
 public:
@@ -16,7 +18,7 @@ public:
 	//初期化
 	//handMatrix	手のワールド行列
 	//enemyPos		エネミーの座標
-	void Init(const CMatrix* handMatrix, CVector3 enemyPos);
+	void Init(IEnemy* enemy ,CVector3 enemyPos);
 
 	//更新される前に一度だけ呼ばれる
 	bool Start();
