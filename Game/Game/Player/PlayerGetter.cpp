@@ -31,6 +31,12 @@ void CPlayerGetter::DamageStateReset()
 void CPlayerGetter::SetPosition(const CVector3& pos)
 {
 	m_pPlayer->m_characterController.SetPosition(pos);
+	m_pPlayer->m_position = pos;
+}
+
+void CPlayerGetter::SetCharaconPos(const CVector3 & pos)
+{
+	m_pPlayer->m_characterController.SetPosition(pos);
 }
 
 const CQuaternion& CPlayerGetter::GetRotation()

@@ -23,6 +23,8 @@ void CPlayerSky::Update()
 		m_pPlayerGetter->SetMoveSpeed(CVector3::Zero);
 	}
 	m_pPlayerGetter->GetCharacterController().Execute(GameTime().GetDeltaFrameTime());
+
+	m_pPlayerGetter->SetPosition(m_pPlayerGetter->GetCharacterController().GetPosition());
 	
 	//地面についていたら着地モーションを流す
 	if (m_pPlayerGetter->GetCharacterController().IsOnGround())

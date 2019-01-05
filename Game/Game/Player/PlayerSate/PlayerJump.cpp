@@ -46,7 +46,7 @@ void CPlayerJump::Update()
 	}
 	m_pPlayerGetter->SetMoveSpeed(moveSpeed);
 	m_pPlayerGetter->GetCharacterController().Execute(GameTime().GetDeltaFrameTime());
-
+	m_pPlayerGetter->SetPosition(m_pPlayerGetter->GetCharacterController().GetPosition());
 	if (m_pPlayerGetter->GetCharacterController().IsOnGround())
 	{
 		if (m_pPlayerGetter->GetAnimation().GetCurrentAnimationNum() != enPlayerAnimationLanding)
