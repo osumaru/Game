@@ -75,7 +75,7 @@ void CArrowGameCamera::Update()
 	toNewCameraPos.Normalize();
 	m_cameraVec.Normalize();
 	cameraPos = target + m_cameraVec * 2;
-	GetGameCamera().SetCameraPosition(cameraPos, target);
+	//GetGameCamera().SetCameraPosition(cameraPos, target);
 	m_cameraPosition = cameraPos;
 	m_targetPosition = target;
 

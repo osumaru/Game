@@ -191,6 +191,7 @@
     <ClCompile Include="Item\InventoryItem\InventoryRecoveryItem.cpp" />
     <ClCompile Include="Item\InventoryItem\InventorySword.cpp" />
     <ClCompile Include="Item\InventoryItem\InventoryTwinSword.cpp" />
+    <ClCompile Include="Map\BossBuilding.cpp" />
     <ClCompile Include="Map\MapChip\ObstacleMapObject.cpp" />
     <ClCompile Include="Player\PlayerSate\PlayerDown.cpp" />
     <ClCompile Include="Player\PlayerSate\PlayerSky.cpp" />
@@ -299,6 +300,7 @@
     <ClInclude Include="Item\InventoryItem\InventoryRecoveryItem.h" />
     <ClInclude Include="Item\InventoryItem\InventorySword.h" />
     <ClInclude Include="Item\InventoryItem\InventoryTwinSword.h" />
+    <ClInclude Include="Map\BossBuilding.h" />
     <ClInclude Include="Map\MapChip\ObstacleMapObject.h" />
     <ClInclude Include="Player\PlayerSate\PlayerDown.h" />
     <ClInclude Include="Player\PlayerSate\PlayerSky.h" />
