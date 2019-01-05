@@ -28,6 +28,11 @@ void CPlayerGetter::DamageStateReset()
 	m_pPlayer->m_isDamege = false;
 }
 
+void CPlayerGetter::StanDamageStateReset()
+{
+	m_pPlayer->m_isStanDamage = false;
+}
+
 void CPlayerGetter::SetPosition(const CVector3& pos)
 {
 	m_pPlayer->m_characterController.SetPosition(pos);

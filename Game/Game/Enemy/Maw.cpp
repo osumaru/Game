@@ -482,8 +482,8 @@ bool CMaw::Anim(EnMawState animState)
 //手での攻撃
 void CMaw::HandAttack(float DamageLength)
 {
-	//プレイヤーがダメージを受けていなかったら
-	if (GetPlayer().GetIsDamage()) { return; }
+	//プレイヤーがダメージを受けていたら
+	if (GetPlayer().GetStanDamage()) { return; }
 
 	float PlayerDamageLengthMax=DamageLength;
 	//手のボーンのワールド行列を取得
@@ -499,7 +499,7 @@ void CMaw::HandAttack(float DamageLength)
 	float PlayerDamageLength = distance.Length();
 	if (PlayerDamageLength < PlayerDamageLengthMax) {
 		//プレイヤーがダメージを受けた
-		GetPlayer().SetDamage(m_status.Strength);
+		GetPlayer().SetStanDamage(m_status.Strength);
 	}
 	
 }
