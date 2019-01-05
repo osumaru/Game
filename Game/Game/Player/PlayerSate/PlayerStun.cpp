@@ -27,7 +27,7 @@ void CPlayerStun::Update()
 	else
 	{
 		m_timer += GameTime().GetDeltaFrameTime();
-		if(2.0f < m_timer)
+		if(1.7f < m_timer)
 		{
 			m_pPlayerGetter->StanDamageStateReset();
 			m_pPlayerGetter->SetIsInvincible(false);
