@@ -20,7 +20,7 @@ void CPlayerDown::Init()
 
 void CPlayerDown::Update()
 {
-	//m_pPlayerGetter->GetCharacterController().Execute(GameTime().GetDeltaFrameTime());
+	m_pPlayerGetter->GetCharacterController().Execute(GameTime().GetDeltaFrameTime());
 	////m_pPlayerGetter->SetMoveSpeed(CVector3::Zero);
 	//CVector3 moveSpeed = m_pPlayerGetter->GetMoveSpeed();
 	//moveSpeed.x = 0.0f;

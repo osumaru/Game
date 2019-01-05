@@ -22,6 +22,7 @@ enum EnMapChipTag
 	enMapTagItemShop,		//アイテムショップ用のタグ
 	enMapTagWeaponShop,
 	enMapTagObstacle,
+	enMapTagBossObj,
 	enMapTagNum,
 };
 

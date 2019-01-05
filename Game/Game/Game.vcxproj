@@ -397,6 +397,7 @@
     <MeshContentTask Include="Assets\modelData\Skyball_WithCap.FBX" />
     <MeshContentTask Include="Assets\modelData\Skyball_WithoutCap.FBX" />
     <MeshContentTask Include="Assets\modelData\Sword.fbx" />
+    <MeshContentTask Include="Assets\modelData\TestBox1.FBX" />
     <MeshContentTask Include="Assets\modelData\testChamferBox.FBX" />
     <MeshContentTask Include="Assets\modelData\testRectangle.FBX" />
     <MeshContentTask Include="Assets\modelData\Toge.FBX" />
