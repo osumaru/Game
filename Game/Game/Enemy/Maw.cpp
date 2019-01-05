@@ -68,7 +68,7 @@ void CMaw::Init(CVector3 position)
 	//キャラコンの設定
 	const float Height = 12.0f;
 	const float radius = 4.0f;
-	const float Gravity = -9.8f;
+	const float Gravity = -19.8f;
 
 	//ライトの設定
 	const CVector4 AmbientLight = { 0.5f,0.5f,0.5f,1.0f };
@@ -117,6 +117,9 @@ void CMaw::Init(CVector3 position)
 	//m_weekPosition.Normalize();
 	//最初の行動を選択
 	m_actionPattern = EnMawActionPattern::enActionPatternIdle;
+
+	//ボスの下にプレイヤーが入ってしまうためプレイヤーの剛体は無視させる？
+	m_characterController.SetIgnoreRigidBody(&GetPlayer().GetCharacterController().GetBody());
 
 	m_weekPoint->SetIsActive(false);
 	m_bossHp->SetIsActive(false);
@@ -179,7 +182,6 @@ void CMaw::Update()
 	m_characterController.Execute(GameTime().GetDeltaFrameTime());
 	//座標をキャラコンから取得
 	m_position=m_characterController.GetPosition();
-
 	//アニメーションの更新
 	m_animation.Update(GameTime().GetDeltaFrameTime());
 	//スキンモデルの更新
@@ -196,22 +198,17 @@ void CMaw::WeekPointUpdate()
 	float length = toEnemyDir.Length();
 	toEnemyDir.y = 0.0f;
 	toEnemyDir.Normalize();
-
 	float angle = toEnemyDir.Dot(CameraForward);
 
 	//カメラの視界に入ったら
 	if (angle > 0.0f&&length<40.0f)
 	{
 		m_weekPoint->SetIsActive(true);
-		
 	}
 	else
 	{
 		m_weekPoint->SetIsActive(false);
 	}
-
-
-
 }
 
 //行動の選択
@@ -253,17 +250,14 @@ void CMaw::Attack()
 void CMaw::SpecialAttack()
 {
 	const float PlayerDamageLengthMax = 7.5f;//プレイヤーにダメージを与える最大距離
-
 	//アニメーション再生
 	bool IsAnim = Anim(EnMawState::enState_SpecialAttack);
-
 	//攻撃が終わっていたら
 	if (!IsAnim)
 	{
 		//索敵ステートへ
 		m_actionPattern = EnMawActionPattern::enActionPatternSearch;
 	}
-
 	HandAttack(PlayerDamageLengthMax);
 }
 
@@ -312,7 +306,7 @@ void CMaw::Search()
 {
 	const float AttackDeg = 40.0f;			//攻撃範囲
 	const float SpecialAttackDeg = 30.0f;	//強つよ攻撃範囲
-	const float FindLength = 18.0f;			//発見距離
+	const float FindLength = 8.0f;			//発見距離
 
 	//アニメーション再生
 	Anim(EnMawState::enState_Walk);
@@ -336,26 +330,37 @@ void CMaw::Search()
 	//見つけて強攻撃範囲に入ったら
 	if (fabsf(angle) < CMath::DegToRad(SpecialAttackDeg) && length < FindLength)
 	{
+		//移動をやめる
+		m_characterController.SetMoveSpeed(CVector3::Zero);
 		m_actionPattern = EnMawActionPattern::enActionPatternSpecialAttack;
 	}
 	else if (fabsf(angle) < CMath::DegToRad(AttackDeg) && length < FindLength)
 	{
-		//見つけて攻撃範囲に入ったら	//見つけて攻撃範囲に入ったら
+		//移動をやめる
+		m_characterController.SetMoveSpeed(CVector3::Zero);
+		//見つけて攻撃範囲に入ったら
 		m_actionPattern = EnMawActionPattern::enActionPatternAttack;
 	}
 	else
 	{
-		
-		//見つけれなかったら探す
-		CQuaternion addRot;
-		const float RotSpeed = 0.01f;
-		//Y軸のクォータニオンを作成
-		addRot.SetRotation(CVector3::AxisY,RotSpeed);
+		float Speed = 2.5f;
+		CVector3 moveSpeed = m_characterController.GetMoveSpeed();
 
-		CQuaternion rot = m_rotation;
-		//クォータニオンを乗算
-		rot.Multiply(rot, addRot);
-		m_rotation = rot;
+		toPlayerDir *= Speed;
+		moveSpeed.x = toPlayerDir.x;
+		moveSpeed.z = toPlayerDir.z;
+		m_characterController.SetMoveSpeed(moveSpeed);
+		Rotation();
+		//見つけれなかったら探す
+		//CQuaternion addRot;
+		//const float RotSpeed = 0.01f;
+		////Y軸のクォータニオンを作成
+		//addRot.SetRotation(CVector3::AxisY,RotSpeed);
+
+		//CQuaternion rot = m_rotation;
+		////クォータニオンを乗算
+		//rot.Multiply(rot, addRot);
+		//m_rotation = rot;
 
 	}
 	//const float LengeAttackLength = 30.0f;		//遠距離攻撃距離
@@ -376,6 +381,52 @@ void CMaw::Search()
 	//{
 	//	//遠距離攻撃ステートへ
 	//}
+}
+
+//回転
+void CMaw::Rotation()
+{
+	CMatrix worldMatrix = m_maw->GetWorldMatrix();
+	CVector3 forwardXZ;
+	forwardXZ.x = worldMatrix.m[2][0];
+	forwardXZ.y = 0.0f;
+	forwardXZ.z = worldMatrix.m[2][2];
+	forwardXZ.Normalize();
+
+	//移動速度を取得
+	CVector3 moveSpeed = m_characterController.GetMoveSpeed();
+	moveSpeed.y = 0.0f;
+	if (moveSpeed.LengthSq() < 0.01f) {
+		//移動していないと角度の計算ができないので返す
+		return;
+	}
+
+	//角度の計算
+	float targetAngle = atan2f(moveSpeed.x, moveSpeed.z);
+	float currentAngle = atan2f(forwardXZ.x, forwardXZ.z);
+
+	float diff = targetAngle - currentAngle;
+	float a_diff = fabsf(diff);
+	if (a_diff > CMath::PI) {
+		//180°を超えているので、-180.0f～180.0fに変換する
+		diff = (CMath::PI2 - a_diff) * (a_diff / -diff);
+		a_diff = fabsf(diff);
+	}
+	float rotSpeed = 10.0f * GameTime().GetDeltaFrameTime();
+	float addAngle = 0.0f;
+	if (a_diff > rotSpeed) {
+		addAngle = (diff / a_diff) * rotSpeed;
+	}
+	else {
+		addAngle = diff;
+	}
+
+	CQuaternion addRot;
+	addRot.SetRotation(CVector3::AxisY, addAngle);
+
+	CQuaternion rot = m_rotation;
+	rot.Multiply(rot, addRot);
+	m_rotation = rot;
 }
 
 //待機状態
