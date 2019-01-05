@@ -180,7 +180,6 @@ void CPlayer::Init(CVector3 position)
 
 void CPlayer::Update()
 {
-	m_position = m_characterController.GetPosition();
 	if (m_isDied)
 	{
 		return;
@@ -221,7 +220,6 @@ void CPlayer::Update()
 	m_PlayerStateMachine.Update();
 	m_isAction = true;
 	m_animation.Update(0.0f);
-	m_position = m_characterController.GetPosition();
 
 	//アニメーションの更新
 	//スキンモデルの更新
