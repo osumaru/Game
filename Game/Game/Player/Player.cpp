@@ -192,15 +192,15 @@ void CPlayer::Update()
 	CVector3 stickDir = { stickX, 0.0f, stickZ };
 	m_playerGetter.SetStickDir(stickDir);
 
-	/*if (Pad().IsPressButton(enButtonX))
-	{
-		m_status.Health = 0;
-	}
+	//if (Pad().IsPressButton(enButtonX))
+	//{
+	//	m_status.Health = 0;
+	//}
 
-	if (Pad().IsTriggerButton(enButtonB))
-	{
-		m_isDamege = true;
-	}*/
+	//if (Pad().IsTriggerButton(enButtonB))
+	//{
+	//	m_isDamege = true;
+	//}
 
 	CMatrix viewMat;
 	CVector3 cameraPos = m_position;
@@ -231,6 +231,7 @@ void CPlayer::Update()
 	m_characterController.SetPosition(manipVector);
 	m_groundCollision.SetPosition(m_position);
 	m_groundCollision.Execute();
+	m_groundCollision.SetPosition(manipVector);
 	m_characterController.SetPosition(oldRigidPos);
 }
 

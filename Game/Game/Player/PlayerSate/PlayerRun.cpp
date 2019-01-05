@@ -48,6 +48,7 @@ void CPlayerRun::Update()
 	m_pPlayerGetter->SetMoveSpeed(moveSpeed);
 	m_pPlayerGetter->GetCharacterController().Execute(GameTime().GetDeltaFrameTime());
 
+	m_pPlayerGetter->SetPosition(m_pPlayerGetter->GetCharacterController().GetPosition());
 	//‘–‚è’†‚Éƒ_ƒ[ƒW‚ðŽó‚¯‚½ê‡
 	if (m_pPlayer->GetIsStateCondition(CPlayerState::enPlayerStateDamage))
 	{

@@ -38,8 +38,6 @@ void CPlayerAttack::Init()
 	m_pPlayerGetter->SetMoveSpeed(CVector3::Zero);
 	m_pBoneMat = &GetPlayer().GetSkinmodel().FindBoneWorldMatrix(L"Hips");
 	CVector3 bonePos = { m_pBoneMat->m[3][0], m_pBoneMat->m[3][1], m_pBoneMat->m[3][2] };
-	m_manipVec = m_pPlayer->GetPosition() - bonePos;
-	m_preBonePos = bonePos;
 	m_pPlayer->GetWeaponManager().SetIsAttack(true);
 	m_pPlayer->GetWeaponManager().GetWeapon()->WeaponTraceDrawStart();
 	m_isPreDodge = false;
@@ -86,13 +84,16 @@ void CPlayerAttack::Update()
 				damagePossible[1] = true;
 			}
 		}
+		CVector3 bonePos;
+		bonePos.x = m_pBoneMat->m[3][0];
+		bonePos.y = m_pBoneMat->m[3][1];
+		bonePos.z = m_pBoneMat->m[3][2];
 		//攻撃モーション中はダメージモーションをさせない
 		if (m_isContinuationAttack)
 		{
 			m_attackCount++;
 			CVector3 position = m_pPlayer->GetPosition();
-			position = m_preBonePos;
-			position += m_manipVec;
+			position = bonePos;
 			position.y = m_pPlayerGetter->GetCharacterController().GetPosition().y;
 			m_pPlayerGetter->SetPosition(position);
 
@@ -100,9 +101,6 @@ void CPlayerAttack::Update()
 			m_pPlayerGetter->GetAnimation().Play(m_attackAnimation[m_attackCount]);
 			m_pPlayerGetter->GetAnimation().Update(0.0f);
 			m_pPlayer->GetWeaponManager().GetWeapon()->WeaponTraceDrawStart();
-			m_preBonePos.x = m_pBoneMat->m[3][0];
-			m_preBonePos.y = m_pBoneMat->m[3][1];
-			m_preBonePos.z = m_pBoneMat->m[3][2];
 
 			Rotation();
 		}
@@ -110,9 +108,8 @@ void CPlayerAttack::Update()
 		{
 			m_pPlayer->GetWeaponManager().SetIsAttack(false);
 			CVector3 position;
-			position = m_preBonePos;
-			position += m_manipVec;
-			position.y = m_pPlayerGetter->GetCharacterController().GetPosition().y;
+			position = bonePos;
+			position.y = m_pPlayer->GetPosition().y;
 			m_pPlayerGetter->SetPosition(position);
 
 			m_pPlayerGetter->GetAnimation().Play(m_combineAnimation[m_attackCount]);
@@ -138,43 +135,30 @@ void CPlayerAttack::Update()
 
 void CPlayerAttack::Move()
 {
-	//プレイヤーの前のフレームのボーンの座標から今のボーンの座標をレイテストしてめり込んでいれば押し戻す
 	CVector3 playerPos = m_pPlayer->GetPosition();
 	CVector3 bonePos;
 	bonePos.x = m_pBoneMat->m[3][0];
 	bonePos.y = m_pBoneMat->m[3][1];
 	bonePos.z = m_pBoneMat->m[3][2];
 
-	//前のフレームとの座標と今の座標を引いて移動量を計算
-	CVector3 moveSpeed = bonePos - m_preBonePos;
-	moveSpeed.y = 0.0f;
+
 	CCharacterController& characon = m_pPlayerGetter->GetCharacterController();
-	float gravity = characon.GetGravity();
-	characon.SetGravity(-0.04f);
-	//高さをプレイヤ―の座標でそろえる
-	m_preBonePos.y = playerPos.y;
-	characon.SetMoveSpeed(moveSpeed);
-	characon.SetPosition(m_preBonePos);
-	characon.Execute(1.0f);
-	//何かに当たっていればプレイヤーの座標を動かしてアニメーションの移動量を打ち消す
-	if (characon.GetWallCollisionObject() != nullptr)
-	{
-		CVector3 movePos = characon.GetPosition() - bonePos;
-		movePos.y = 0.0f;
-		CVector3 playerFront;
-		playerFront.x = m_pPlayer->GetSkinmodel().GetWorldMatrix().m[2][0];
-		playerFront.y = m_pPlayer->GetSkinmodel().GetWorldMatrix().m[2][1];
-		playerFront.z = m_pPlayer->GetSkinmodel().GetWorldMatrix().m[2][2];
-		if (playerFront.Dot(movePos) < 0.0f)
-		{
-			playerPos += movePos;
-		}
-	}
-	playerPos.y = characon.GetPosition().y;
+	//剛体の座標を保存
+	CVector3 rigidPos = characon.GetPosition();
+	bonePos.y = characon.GetPosition().y;
+	characon.SetPosition(bonePos);
+	//プレイヤーののボーン座標からプレイヤーの座標までのベクトルを作成
+	CVector3 boneDistance = playerPos - bonePos;
+	characon.DynamicExecute();
+
+	rigidPos = characon.GetPosition();
+	//衝突解決した座標にさっき作成したベクトルを足す
+	playerPos = rigidPos + boneDistance;
+	//プレイヤーと剛体の座標を更新
 	m_pPlayerGetter->SetPosition(playerPos);
 	characon.SetMoveSpeed(CVector3::Zero);
-	characon.SetGravity(gravity);
-	m_preBonePos = bonePos;
+	//剛体の座標を戻す
+	characon.SetPosition(rigidPos);
 }
 
 void CPlayerAttack::Rotation()

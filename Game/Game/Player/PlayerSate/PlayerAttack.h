@@ -34,8 +34,6 @@ private:
 	bool*						m_stanAttack;						//スタン攻撃
 	int							m_maxWeaponHitNum;					//武器ごとの攻撃回数
 	const CMatrix*				m_pBoneMat;							//ボーンの行列のポインタ
-	CVector3					m_manipVec;							//ボーンの座標からプレイヤーの座標までのベクトル
-	CVector3					m_preBonePos;						//前のフレームのボーンの座標
 	CQuaternion					m_addRot;
 	CVector3					m_rotationDirectionVector;
 };
