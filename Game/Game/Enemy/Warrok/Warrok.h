@@ -6,6 +6,8 @@
 
 #include "Enemy/IEnemy.h"
 
+class CRock;
+
 class CWarrok : public IEnemy
 {
 public:
@@ -32,4 +34,7 @@ public:
 	void Attack() override;
 
 	void OnInvokeAnimationEvent(const wchar_t* animClipName, const wchar_t* eventName)override;
+
+private:
+	CRock* m_rock = nullptr;	//Šâ
 };

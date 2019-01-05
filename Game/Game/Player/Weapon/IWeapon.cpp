@@ -52,14 +52,17 @@ void IWeapon::Updater()
 
 void IWeapon::WeaponTraceDrawer()
 {
-	CWeaponTraceDraw& weaponTrace = m_pPlayer->GetWeaponManager().GetWeaponTraceDraw();
+	CWeaponTraceDraw *weaponTrace = &m_pPlayer->GetWeaponManager().GetWeaponTraceDraw();
 	if (m_pPlayer->GetWeaponManager().GetIsAttack())
 	{
 		SWeaponTraceDrawInfo info = WeaponTraceDraw();
 		m_pPlayer->GetWeaponManager().SetIsTraceDraw(info.isDraw);
 		if (info.isDraw)
 		{
-			weaponTrace.Add(info.rootPos, info.pointPos);
+			for (int i = 0; i < m_maxWeaponHitNum; i++)
+			{
+				weaponTrace[i].Add(info.rootPos[i], info.pointPos[i]);
+			}
 		}
 	}
 	else
@@ -69,9 +72,12 @@ void IWeapon::WeaponTraceDrawer()
 
 void IWeapon::WeaponTraceDrawStart()
 {
-	CWeaponTraceDraw& weaponTrace = m_pPlayer->GetWeaponManager().GetWeaponTraceDraw();
+	CWeaponTraceDraw *weaponTrace=&m_pPlayer->GetWeaponManager().GetWeaponTraceDraw();
 	SWeaponTraceDrawInfo info = WeaponTraceDraw();
-	weaponTrace.Start(info.rootPos, info.pointPos);
+	for (int i = 0; i < m_maxWeaponHitNum; i++)
+	{
+		weaponTrace[i].Start(info.rootPos[i], info.pointPos[i]);
+	}
 }
 
 void IWeapon::Drawer()
@@ -100,7 +106,7 @@ void IWeapon::EnemyAttack()
 	}
 
 	//エネミーグループのリストを取得
-	std::list<CEnemyGroup*> enemyGroup = GetSceneManager().GetGameScene().GetMap()->GetEnemyGroupList();
+	std::list<CEnemyGroup*> enemyGroup = GetSceneManager().GetMap()->GetEnemyGroupList();
 	for (const auto& group : enemyGroup)
 	{
 		for (int i = 0; i < m_maxWeaponHitNum; i++)
@@ -120,6 +126,10 @@ void IWeapon::EnemyAttack()
 						float len = EnemyVec.Length();
 						if (fabs(len) < 2.0f)
 						{
+							int attackNum = m_pPlayer->GetWeaponManager().GetAttackCount();
+							GameTime().SetSlowDelayTime(m_hitEffectParam[attackNum].slowTime, m_hitEffectParam[attackNum].slowScale, m_hitEffectParam[attackNum].slowDelayTime);
+							GetGameCamera().GetShakeCamera().ShakeStart(m_hitEffectParam[attackNum].shakePower);
+							GetGameCamera().GetShakeCamera().SetDelayTime(m_hitEffectParam[attackNum].shakeDelayTime);
 							enemy->SetIsDamage(true);
 							damagePossible[i] = false;
 						}

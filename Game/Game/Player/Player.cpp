@@ -12,7 +12,6 @@
 #include "../Enemy/PathFinding/PathFinding.h"
 
 CPlayer *CPlayer::m_player = NULL;
-CWeaponManager CPlayer::m_weaponManager;
 SplayerStatus CPlayer::m_status = {
 	m_status.Strength = 10,							//攻撃力
 	m_status.Defense = 3,							//防御力
@@ -89,6 +88,7 @@ void CPlayer::Init(CVector3 position)
 									{ L"Assets/modelData/PlayerStand.tka"},					//待機アニメーション	
 									{ L"Assets/modelData/PlayerWalkStay.tka" },				//歩行アニメーション
 									{ L"Assets/modelData/PlayerDash60fpsEvent.tka" },		//走りアニメーション
+									{ L"Assets/modelData/PlayerDashDash.tka" },				//ダッシュアニメーション
 									{ L"Assets/modelData/PlayerRunJump.tka" },				//走りジャンプアニメーション
 									{ L"Assets/modelData/PlayerJump2.tka" },				//ジャンプアニメーション
 									{ L"Assets/modelData/PlayerCombo4.tka" },				//攻撃アニメーション
@@ -123,13 +123,16 @@ void CPlayer::Init(CVector3 position)
 									{ L"Assets/modelData/PlayerArrowAttackEvent.tka" },
 									{ L"Assets/modelData/PlayerLeageSwordAttack.tka" },		//大剣の攻撃アニメーション
 									{ L"Assets/modelData/PlayerTwinSwordAttack.tka" },		//二刀流の攻撃アニメーション
-									{ L"Assets/modelData/PlayerLanding.tka" }
+									{ L"Assets/modelData/PlayerLanding.tka" },				//着地アニメーション
+									{ L"Assets/modelData/PlayerDown.tka" },					//ダウンアニメーション
+									{ L"Assets/modelData/PlayerUp.tka" }					//起き上がりアニメーション
 		};
 
 		m_animation.Init(animClip, enPlayerAnimationNum);
 		m_animation.SetLoopFlg(enPlayerAnimationStand, true);
 		m_animation.SetLoopFlg(enPlayerAnimationWalk, true);
 		m_animation.SetLoopFlg(enPlayerAnimationRun, true);
+		m_animation.SetLoopFlg(enPlayerAnimationDash, true);
 		m_animation.SetLoopFlg(enPlayerAnimationWireMove, true);
 
 		//アニメーションイベントリスナーの登録　呼び出される関数の登録？
@@ -140,7 +143,7 @@ void CPlayer::Init(CVector3 position)
 	}
 
 	//プレイヤーのステータスの初期化
-	//{
+	{
 	m_status.Health = m_status.MaxHealth;
 	m_status.MaxHealth = m_status.MaxHealth;
 	//	m_status.Strength = 10;							//攻撃力
@@ -153,7 +156,7 @@ void CPlayer::Init(CVector3 position)
 	//	m_status.ExperiencePoint = 0;					//経験値
 	//	m_status.AccumulationExp += m_status.OldExp;	//累積経験値
 	//	m_status.Gold = 4000;							//所持金
-	//}
+	}
 	m_playerGetter.SetPlayer(this);
 
 	CVector3 boxSize = { 0.4f,0.6f,0.4f };
@@ -190,15 +193,15 @@ void CPlayer::Update()
 	CVector3 stickDir = { stickX, 0.0f, stickZ };
 	m_playerGetter.SetStickDir(stickDir);
 
-	if (Pad().IsPressButton(enButtonX))
+	/*if (Pad().IsPressButton(enButtonX))
 	{
 		m_status.Health = 0;
 	}
 
-	//if (Pad().IsTriggerButton(enButtonB))
-	//{
-	//	m_isDamege = true;
-	//}
+	if (Pad().IsTriggerButton(enButtonB))
+	{
+		m_isDamege = true;
+	}*/
 
 	CMatrix viewMat;
 	CVector3 cameraPos = m_position;
@@ -216,7 +219,7 @@ void CPlayer::Update()
 	m_animation.Update(GameTime().GetDeltaFrameTime());
 	m_skinmodel.Update(m_position, m_rotation, { 1.0f, 1.0f, 1.0f }, true);
 	m_PlayerStateMachine.Update();
-
+	m_isAction = true;
 	m_animation.Update(0.0f);
 	m_position = m_characterController.GetPosition();
 
@@ -225,7 +228,6 @@ void CPlayer::Update()
 	m_skinmodel.Update(m_position, m_rotation, { 1.0f, 1.0f, 1.0f }, true);
 	m_weaponManager.Update();
 	//補正値をを入れて剛体をずらす
-	//m_characterController.SetRigidBodyManip(100.0f);
 	CVector3 manipVector = { 0.0f,0.0f,100.0f };
 	CVector3 oldRigidPos = m_characterController.GetPosition();
 	m_characterController.SetPosition(manipVector);
@@ -290,8 +292,6 @@ void CPlayer::StatusCalculation()
 
 		m_status.Health = m_status.MaxHealth;
 	}
-
-
 }
 
 
@@ -327,7 +327,9 @@ void CPlayer::Rotation(const CVector3& stickDir)
 	{
 		rad = -rad;
 	}
-	m_rotation.SetRotation(CVector3::AxisY, rad);
+	CQuaternion addRot;
+	addRot.SetRotation(CVector3::AxisY, rad);
+	m_rotation.Slerp(0.3f , m_rotation, addRot);
 
 	if (m_weaponManager.GetCurrentState() == enWeaponArrow && m_weaponManager.GetIsAttack())
 	{
@@ -403,7 +405,7 @@ bool CPlayer::GetIsStateCondition(CPlayerState::EnPlayerState state)
 		return Pad().IsTriggerButton(enButtonX) && m_weaponManager.GetCurrentState() != enWeaponArrow;
 
 	case CPlayerState::enPlayerStateAvoidance://bボタンを押しているか
-		return Pad().IsTriggerButton(enButtonB);
+		return m_isAction && Pad().IsTriggerButton(enButtonB);
 
 	case CPlayerState::enPlayerStateDamage://ダメージフラグが立っているか
 		return m_isDamege;
@@ -412,10 +414,10 @@ bool CPlayer::GetIsStateCondition(CPlayerState::EnPlayerState state)
 		return m_status.Health <= 0;
 
 	case CPlayerState::enPlayerStateJump://Aボタンを押しているか
-		return Pad().IsTriggerButton(enButtonA);
+		return m_isAction && Pad().IsTriggerButton(enButtonA);
 
 	case CPlayerState::enPlayerStateRunJump://Aボタンを押しているか
-		return Pad().IsTriggerButton(enButtonA);
+		return m_isAction && Pad().IsTriggerButton(enButtonA);
 
 	case CPlayerState::enPlayerStateWireMove://ワイヤーで移動するフラグが立っているか
 		return m_wireAction.IsWireMove();

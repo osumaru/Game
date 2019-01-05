@@ -37,6 +37,11 @@ void CWarrok::OnInvokeAnimationEvent(//ƒAƒjƒ[ƒVƒ‡ƒ“ƒCƒxƒ“ƒg‚ªŒÄ‚Î‚ê‚é‚²‚Æ‚ÉŒÄ‚
 			GetPlayer().SetDamageEnemyPos(m_position);
 		}
 	}
+
+	if (wcscmp(animClipName, L"Assets/modelData/WarrokRock.tka") == 0)
+	{
+		m_rock->SetIsThrow(true);
+	}
 }
 
 void CWarrok::Init(CVector3 position)
@@ -47,7 +52,8 @@ void CWarrok::Init(CVector3 position)
 	m_position = position;
 	m_characterController.Init(0.5f, 0.9f, position);
 	m_characterController.SetGravity(-9.0f);
-	wchar_t* animClip[CEnemyState::enAnimation_Num] = {
+	
+	wchar_t* animClip[CEnemyState::enAnimationWarrok_Num] = {
 		L"Assets/modelData/WarrokStand.tka",
 		L"Assets/modelData/WarrokWalk.tka",
 		L"Assets/modelData/WarrokDash.tka",
@@ -55,12 +61,13 @@ void CWarrok::Init(CVector3 position)
 		L"Assets/modelData/WarrokDamageSmall.tka",
 		L"Assets/modelData/WarrokDown.tka",
 		L"Assets/modelData/WarrokUp.tka",
-		L"Assets/modelData/WarrokDeath.tka"
+		L"Assets/modelData/WarrokDeath.tka",
+		L"Assets/modelData/WarrokRock.tka"
 	};
-	m_animation.Init(animClip, CEnemyState::enAnimation_Num);
-	m_animation.SetLoopFlg(CEnemyState::enAnimation_Idle, true);
-	m_animation.SetLoopFlg(CEnemyState::enAnimation_Walk, true);
-	m_animation.SetLoopFlg(CEnemyState::enAnimation_Chase, true);
+	m_animation.Init(animClip, CEnemyState::enAnimationWarrok_Num);
+	m_animation.SetLoopFlg(CEnemyState::enAnimationWarrok_Idle, true);
+	m_animation.SetLoopFlg(CEnemyState::enAnimationWarrok_Walk, true);
+	m_animation.SetLoopFlg(CEnemyState::enAnimationWarrok_Chase, true);
 	//Add(&m_enemyStateMachine, 0);
 	//Add(&m_enemyTurn, 0);
 	//Add(&m_enemySearch, 0);
@@ -120,7 +127,12 @@ void CWarrok::Attack()
 	float length = toPlayer.Length();
 	if (length > 4.0f)
 	{
-		CRock* rock = New<CRock>(PRIORITY_ENEMY);
-		rock->Init(m_position);
+		m_animation.Play(CEnemyState::enAnimationWarrok_throw, 0.3f);
+		m_rock = New<CRock>(PRIORITY_ENEMY);
+		m_rock->Init(this, m_position);
+	}
+	else 
+	{
+		m_animation.Play(CEnemyState::enAnimationWarrok_Attack, 0.3f);
 	}
 }

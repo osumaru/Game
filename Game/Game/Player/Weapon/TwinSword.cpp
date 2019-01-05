@@ -52,8 +52,12 @@ void CTwinSword::Init()
 
 	m_maxAttackNum = 3;
 	m_maxWeaponHitNum = 2;
+	m_hitEffectParam = std::make_unique<SHitEffectParam[]>(m_maxAttackNum);
 	m_attackAnimation = std::make_unique<EnPlayerAnimation[]>(m_maxAttackNum);
 	m_combineAnimation = std::make_unique<EnPlayerAnimation[]>(m_maxAttackNum);
+	m_hitEffectParam[0] = { 0.0f, 1.0f, 0.0f };
+	m_hitEffectParam[1] = { 0.0f, 1.0f, 0.0f };
+	m_hitEffectParam[2] = { 0.0f, 1.0f, 0.0f };
 	for (int i = 0; i < m_maxAttackNum; i++)
 	{
 		m_attackAnimation[i]=(EnPlayerAnimation)(enPlayerAnimationTwinAttack1+i);
@@ -67,7 +71,6 @@ void CTwinSword::Init()
 
 void CTwinSword::Update()
 {
-
 	CVector3 position;
 	CQuaternion rotation;
 	const CMatrix* boneMat;
@@ -96,6 +99,8 @@ void CTwinSword::Update()
 	multi.Multiply(rotation);
 	rotation = multi;
 	m_skinModelTwin.Update(position, rotation, CVector3::One);
+
+	
 }
 
 void CTwinSword::Draw()
@@ -142,13 +147,39 @@ SWeaponEnemyAttackInfo CTwinSword::EnemyAttackPositionDecide()
 
 SWeaponTraceDrawInfo CTwinSword::WeaponTraceDraw()
 {
+	CVector3 xVec = *(CVector3*)m_skinModel.GetWorldMatrix().m[2];
+	xVec.Normalize();
+	xVec *= -1.0f;
+	xVec.Scale(0.1f);
 	CVector3 position = *(CVector3*)m_attackBoneMat->m[3];
 	CVector3 manip = *(CVector3*)m_attackBoneMat->m[2];
 	manip.Normalize();
 	CVector3 manip2 = manip;
-	manip.Scale(0.2f);
-	manip2.Scale(1.0f);
+	manip.Scale(0.0f);
+	manip2.Scale(0.65f);
+	position.Add(xVec);
 	CVector3 position2 = position + manip;
 	CVector3 position3 = position + manip2;
-	return { true, position2, position3 };
+
+	SWeaponTraceDrawInfo TraceInfo;
+	TraceInfo.rootPos[0] = position2;
+	TraceInfo.pointPos[0] = position3;
+	TraceInfo.isDraw = true;
+
+	xVec = *(CVector3*)m_skinModelTwin.GetWorldMatrix().m[2];
+	xVec.Normalize();
+	xVec.Scale(0.1f);
+	CVector3 positionTwin = *(CVector3*)m_attackTwinBoneMat->m[3];
+	CVector3 manipTwin = *(CVector3*)m_attackTwinBoneMat->m[2];
+	manipTwin.Normalize();
+	CVector3 manip2Twin = manipTwin;
+	manipTwin.Scale(0.0f);
+	manip2Twin.Scale(0.65f);
+	positionTwin.Add(xVec);
+	CVector3 position4 = positionTwin + manipTwin;
+	CVector3 position5 = positionTwin + manip2Twin;
+
+	TraceInfo.rootPos[1]=position4;
+	TraceInfo.pointPos[1]=position5;
+	return { TraceInfo };
 }

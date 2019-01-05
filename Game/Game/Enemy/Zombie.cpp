@@ -11,9 +11,10 @@ CZombie::CZombie()
 CZombie::~CZombie()
 {
 }
+
 void CZombie::OnInvokeAnimationEvent(const wchar_t* animClipName, const wchar_t* eventName)
 {
-	if (wcscmp(animClipName, L"Assets/modelData/WarrokAttack.tka") == 0)
+	if (wcscmp(animClipName, L"Assets/modelData/ZombiAttack.tka") == 0)
 	{
 		//ボーンのワールド行列を取得
 		CMatrix boneMatrix = GetBoneWorldMatrix(L"LeftHand");
@@ -105,4 +106,9 @@ void CZombie::Update()
 void CZombie::Draw()
 {
 	m_skinModel.Draw(GetGameCamera().GetViewMatrix(), GetGameCamera().GetProjectionMatrix());
+}
+
+void CZombie::Attack()
+{
+	m_animation.Play(CEnemyState::enAnimation_Attack, 0.3f);
 }

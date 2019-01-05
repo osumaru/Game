@@ -23,6 +23,7 @@ static const int PRIORITY_SCENE = 0;
 #include "../../osumaruEngine/Graphics/PostRendering/Deferred.h"
 #include "../../osumaruEngine/Camera/Camera.h"
 #include "../../osumaruEngine/Camera/SpringCamera.h"
+#include "../../osumaruEngine/Camera/ShakeCamera.h"
 #include "../../osumaruEngine/Physics/Physics.h"
 #include "../../osumaruEngine/Physics/RigidBody.h"
 #include "../../osumaruEngine/Physics/Collider/CapsuleCollider.h"

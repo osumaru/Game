@@ -6,6 +6,8 @@
 #include "NormalGameCamera.h"
 #include "ArrowGameCamera.h"
 
+class IEnemy;
+
 class CGameCamera : public IGameObject
 {
 public:
@@ -63,6 +65,12 @@ public:
 		return m_springCamera;
 	}
 
+	//揺れカメラの取得
+	/*const */CShakeCamera& GetShakeCamera()
+	{
+		return m_shakeCamera;
+	}
+
 	//カメラのポジションを設定
 	//第一引数　カメラの座標　第二引数　ターゲットの座標
 	void SetCameraPosition(const CVector3 pos,const CVector3 tag)
@@ -100,6 +108,9 @@ public:
 		m_cameraState = cameraState;
 	}
 
+	//エネミーをロックオンする
+	void RockOnEnemy();
+
 private:
 	static CGameCamera* m_gameCamera;							//ゲームカメラ
 	CCamera				m_camera;								//カメラ
@@ -108,6 +119,9 @@ private:
 	CArrowGameCamera	m_arrowCamera;							//アローカメラ
 	CVector3			m_cameraVec;							//注視点からカメラへのベクトル
 	CSpringCamera		m_springCamera;							//バネカメラ
+	CShakeCamera		m_shakeCamera;							//揺れカメラ
+	IEnemy*				m_rockOnEnemy;							//ロックオンしているエネミー
+	bool				m_isRockOn = false;						//ロックオンしているか
 };
 
 static CGameCamera& GetGameCamera()

@@ -76,6 +76,10 @@ void CPlayerStateMachine::SetState(CPlayerState::EnPlayerState nextState)
 		break;
 	case CPlayerState::enPlayerStateSky:		//空中にいるステートに遷移
 		m_currentState = &m_playerSky;
+		break;
+	case CPlayerState::enPlayerStateDown:		//空中にいるステートに遷移
+		m_currentState = &m_playerDown;
+		break;
 	}
 
 	m_currentState->Init();

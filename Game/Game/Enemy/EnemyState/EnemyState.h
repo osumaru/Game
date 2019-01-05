@@ -30,4 +30,17 @@ public:
 		enAnimation_Death,	//死亡
 		enAnimation_Num,	//状態の数
 	};
+
+	enum EnAnimationStateWarrok {
+		enAnimationWarrok_Idle,		//待機
+		enAnimationWarrok_Walk,		//歩き
+		enAnimationWarrok_Chase,	//追従
+		enAnimationWarrok_Attack,	//攻撃
+		enAnimationWarrok_Damage,	//ダメージ
+		enAnimationWarrok_Down,		//ダウン
+		enAnimationWarrok_StandUp,	//立ち上がる
+		enAnimationWarrok_Death,	//死亡
+		enAnimationWarrok_throw,	//岩を投げる
+		enAnimationWarrok_Num,		//状態の数
+	};
 };

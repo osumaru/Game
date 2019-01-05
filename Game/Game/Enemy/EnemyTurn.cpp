@@ -16,7 +16,8 @@ void CEnemyTurn::Update()
 	//ˆÚ“®‘¬“x‚ðŽæ“¾
 	CVector3 moveSpeed = m_enemy->GetMoveSpeed();
 	moveSpeed.y = 0.0f;
-	if (moveSpeed.LengthSq() < 0.01f || !m_enemy->IsDamagePossible()) {
+	const CEnemyDamage* enemyDamage = dynamic_cast<const CEnemyDamage*>(m_enemy->GetStateMachine().GetState(CEnemyState::enState_Damage));
+	if (moveSpeed.LengthSq() < 0.01f || enemyDamage->IsNockBack()) {
 		//ˆÚ“®‚µ‚Ä‚¢‚È‚¢‚ÆŠp“x‚ÌŒvŽZ‚ª‚Å‚«‚È‚¢‚Ì‚Å•Ô‚·
 		return;
 	}

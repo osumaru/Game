@@ -41,6 +41,9 @@ void CBow::Init()
 	m_tag.SetPosition({ 0.0f,0.0f });
 	m_tag.SetSize({ 50.0f,50.0f });
 	m_tag.SetAlpha(0.7f);
+
+	m_hitEffectParam = std::make_unique<SHitEffectParam[]>(1);
+	m_hitEffectParam[0] = { 0.0f, 1.0f, 0.0f };
 }
 
 void CBow::Update()

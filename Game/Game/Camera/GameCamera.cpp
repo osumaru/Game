@@ -2,6 +2,10 @@
 #include "GameCamera.h"
 #include "../Player/Player.h"
 #include "../Player/PlayerSate/PlayerStateMachine.h"
+#include "../Enemy/IEnemy.h"
+#include "../Enemy/EnemyGroup.h"
+#include "../Scene/SceneManager.h"
+#include "../Map/Map.h"
 
 CGameCamera *CGameCamera::m_gameCamera = NULL;
 
@@ -29,7 +33,7 @@ void CGameCamera::Init()
 	CVector3 cameraPos = CVector3::Zero;//GetPlayer().GetPosition() + cameraDir;
 	m_springCamera.SetPosition(cameraPos);
 	m_springCamera.SetTarget(CVector3::Zero/*GetPlayer().GetPosition()*/);
-
+	m_shakeCamera.Init(CVector3::Zero, CVector3::Zero, {1.0f, 1.0f, 0.0f}, 0.7f);
 }
 
 void CGameCamera::CameraSetPlayer()
@@ -60,8 +64,87 @@ void CGameCamera::Update()
 
 		break;
 	}
+
+	//if (Pad().IsTriggerButton(enButtonRStickPush))
+	//{
+	//	//エネミーをロックオンする
+	//	RockOnEnemy();
+	//}
+
+	//ロックオン中
+	if (m_isRockOn)
+	{
+		//ロックオンしているエネミーが死亡したか
+		if (m_rockOnEnemy->GetStatus().hp <= 0)
+		{
+			//ロックオンを外す
+			m_isRockOn = false;
+		}
+		else 
+		{
+			//カメラの注視点を設定
+			m_camera.SetTarget(m_rockOnEnemy->GetPosition());
+			//カメラの座標を求める
+			CVector3 playerPos = GetPlayer().GetPosition();
+			CVector3 targetPos = m_camera.GetTarget();
+			CVector3 cameraPos = playerPos - targetPos;
+			cameraPos.Normalize();
+			cameraPos *= 2.0f;
+			cameraPos += playerPos;
+			cameraPos.y += 2.5f;
+			//カメラの座標を設定
+			m_camera.SetPosition(cameraPos);
+		}
+	}
+
 	//m_springCamera.Update();
 	//m_camera.SetPosition(m_springCamera.GetPosition());
 	//m_camera.SetTarget(m_springCamera.GetTarget());
+	m_shakeCamera.SetPosition(m_camera.GetPosition());
+	m_shakeCamera.SetTarget(m_camera.GetTarget());
+	m_shakeCamera.Update();
+	m_camera.SetPosition(m_shakeCamera.GetShakePosition());
+	m_camera.SetTarget(m_shakeCamera.GetShakeTarget());
 	m_camera.Update();
+}
+
+void CGameCamera::RockOnEnemy()
+{
+	if (m_isRockOn)
+	{
+		//ロックオンしてるから外す
+		m_isRockOn = false;
+		return;
+	}
+
+	float minLength = FLT_MAX;
+	//エネミーグループのリストを取得
+	std::list<CEnemyGroup*> enemyGroupList = GetSceneManager().GetMap()->GetEnemyGroupList();
+	for (CEnemyGroup* enemyGroup : enemyGroupList)
+	{
+		CVector3 enemyGroupPos = enemyGroup->GetPosition();
+		CVector3 playerPos = GetPlayer().GetPosition();
+		//エネミーグループとプレイヤーの距離を求める
+		CVector3 distance = playerPos - enemyGroupPos;
+		float length = distance.Length();
+		if (length < 30.0f)
+		{
+			//エネミーグループの中のエネミーリストを取得
+			std::list<IEnemy*> enemyList = enemyGroup->GetGroupList();
+			for (IEnemy* enemy : enemyList)
+			{
+				CVector3 enemyPos = enemy->GetPosition();
+				//エネミーとプレイヤーの距離を求める
+				distance = playerPos - enemyPos;
+				length = distance.Length();
+				if (length < minLength)
+				{
+					//ロックオンする
+					m_isRockOn = true;
+					minLength = length;
+					m_rockOnEnemy = enemy;
+				}
+			}
+		}
+	}
 }

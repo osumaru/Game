@@ -23,8 +23,14 @@ void CSword::Init()
 
 	m_maxAttackNum = 3;
 	m_maxWeaponHitNum = 1;
+	m_hitEffectParam = std::make_unique<SHitEffectParam[]>(m_maxAttackNum);
 	m_attackAnimation = std::make_unique<EnPlayerAnimation[]>(m_maxAttackNum);
 	m_combineAnimation = std::make_unique<EnPlayerAnimation[]>(m_maxAttackNum);
+	float delayTime = 0.05f;
+	m_hitEffectParam[0] = { 0.05f, 0.0f, 0.03f , delayTime, delayTime };
+	m_hitEffectParam[1] = { 0.05f, 0.0f, 0.03f , delayTime, delayTime };
+	delayTime = 0.1f;
+	m_hitEffectParam[2] = { 0.07f, 0.0f, 0.08f , delayTime, delayTime };
 	for (int i = 0; i < m_maxAttackNum; i++)
 	{
 		m_attackAnimation[i] = (EnPlayerAnimation)(enPlayerAnimationAttack1 + i);
@@ -33,7 +39,7 @@ void CSword::Init()
 	m_stanAttack = std::make_unique<bool[]>(m_maxAttackNum);
 	m_stanAttack[0] = false;
 	m_stanAttack[1] = false;
-	m_stanAttack[2] = false;
+	m_stanAttack[2] = true;
 }
 
 void CSword::Update()
@@ -59,13 +65,22 @@ SWeaponEnemyAttackInfo CSword::EnemyAttackPositionDecide()
 
 SWeaponTraceDrawInfo CSword::WeaponTraceDraw()
 {
+	CVector3 xVec= *(CVector3*)m_skinModel.GetWorldMatrix().m[1];
+	xVec.Normalize();
+	xVec.Scale(0.1f);
 	CVector3 position = *(CVector3*)m_attackBoneMat->m[3];
 	CVector3 manip = *(CVector3*)m_attackBoneMat->m[2];
 	manip.Normalize();
 	CVector3 manip2 = manip;
 	manip.Scale(0.2f);
-	manip2.Scale(1.0f);
+	manip2.Scale(1.09f);
+	position.Add(xVec);
 	CVector3 position2 = position + manip;
 	CVector3 position3 = position + manip2;
-	return { true, position2, position3 };
+
+	SWeaponTraceDrawInfo infoTrace;
+	infoTrace.isDraw = true;
+	infoTrace.rootPos[0] = position2;
+	infoTrace.pointPos[0] = position3;
+	return infoTrace;
 }

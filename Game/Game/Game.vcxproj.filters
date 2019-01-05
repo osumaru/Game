@@ -391,6 +391,15 @@
     <ClCompile Include="Item\InventoryItem\InventoryTwinSword.cpp">
       <Filter>ソース ファイル\Item\InventoryItem</Filter>
     </ClCompile>
+    <ClCompile Include="Scene\BossScene.cpp">
+      <Filter>ソース ファイル\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Result\Retry.cpp">
+      <Filter>ソース ファイル\UI\Result</Filter>
+    </ClCompile>
+    <ClCompile Include="Player\PlayerSate\PlayerDown.cpp">
+      <Filter>ソース ファイル\Player\PlayerState</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -693,6 +702,15 @@
     <ClInclude Include="Item\InventoryItem\InventoryTwinSword.h">
       <Filter>ソース ファイル\Item\InventoryItem</Filter>
     </ClInclude>
+    <ClInclude Include="Scene\BossScene.h">
+      <Filter>ソース ファイル\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Result\Retry.h">
+      <Filter>ソース ファイル\UI\Result</Filter>
+    </ClInclude>
+    <ClInclude Include="Player\PlayerSate\PlayerDown.h">
+      <Filter>ソース ファイル\Player\PlayerState</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Map\MapChip\ObstacleMapObject.h">
@@ -840,6 +858,9 @@
       <Filter>ソース ファイル\Assets</Filter>
     </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\ShopModel\House1.FBX">
+      <Filter>ソース ファイル\Assets</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\TestBox1.FBX">
       <Filter>ソース ファイル\Assets</Filter>
     </MeshContentTask>
   </ItemGroup>

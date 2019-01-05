@@ -24,10 +24,29 @@ void CPlayerAvoidance::Update()
 		CVector3 position;
 		position = m_preBonePos;
 		position += m_manipVec;
+		position.y = m_pPlayer->GetPosition().y;
 		m_pPlayerGetter->SetPosition(position);
 		m_pPlayerGetter->SetIsInvincible(false);
 		m_pPlayerGetter->GetAnimation().Play(enPlayerAnimationAvoidanceCombine);
-		GetPlayer().GetStateMachine().SetState(CPlayerState::enPlayerStateStand);
+		m_pPlayerGetter->GetAnimation().Update(GameTime().GetDeltaFrameTime());
+		m_pPlayerGetter->SkinModelUpdate();
+		if (m_pPlayer->GetIsStateCondition(CPlayerState::enPlayerStateAvoidance))
+		{
+			CVector3 stickDir = CVector3::Zero;
+			stickDir.x = Pad().GetLeftStickX();
+			stickDir.z = Pad().GetLeftStickY();
+			stickDir.Normalize();
+			m_pPlayerGetter->SetStickDir(stickDir);
+			Init();
+		}
+		else if (m_pPlayer->GetIsStateCondition(CPlayerState::enPlayerStateRun))
+		{
+			GetPlayer().GetStateMachine().SetState(CPlayerState::enPlayerStateRun);
+		}
+		else if (m_pPlayer->GetIsStateCondition(CPlayerState::enPlayerStateStand))
+		{
+			GetPlayer().GetStateMachine().SetState(CPlayerState::enPlayerStateStand);
+		}
 	}
 
 }
@@ -69,7 +88,7 @@ void CPlayerAvoidance::Move()
 		}
 		else
 		{
-			movePos.x += 10.0f;
+			//movePos.x += 10.0f;
 			//playerPos += movePos;
 		}
 	}

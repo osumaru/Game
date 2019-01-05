@@ -104,6 +104,18 @@ public:
 		return m_gravity;
 	}
 
+	//当たってほしくない剛体を登録
+	void SetIgnoreRigidBody(const CRigidBody* rigidBody)
+	{
+		m_ignoreRigidBody = rigidBody;
+	}
+
+	//剛体を取得
+	const CRigidBody& GetBody() const 
+	{
+		return m_rigidBody;
+	}
+
 	//剛体を削除。
 	void RemovedRigidBody();
 
@@ -153,6 +165,7 @@ private:
 	float						m_radius;				//半径
 	float						m_height;				//高さ
 	CRigidBody					m_rigidBody;			//剛体
+	const CRigidBody*			m_ignoreRigidBody;		//当たってほしくない剛体のインスタンス
 	float						m_gravity;				//重力
 	const btCollisionObject*	m_groundHitObject;		//当たっている地面のオブジェクト
 	const btCollisionObject*	m_wallHitObject;		//当たっている壁のオブジェクト

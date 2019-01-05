@@ -53,7 +53,14 @@ void CPlayerWireMove::Update()
 		m_isWireThrow = false;
 		m_pPlayerGetter->GetAnimation().Play(enPlayerAnimationWireMove, 0.25f);
 	}
-
+	//ダメージを受けた場合の処理
+	if(m_pPlayer->GetIsStateCondition(CPlayerState::enPlayerStateDamage))
+	{
+		//移動が終わった
+		GetPlayer().GetWireAction().SetIsWireMove(false);
+		m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateDamage);
+		return;
+	}
 	if (m_isWireThrow)
 	{
 		//ワイヤーを投げるアニメーションをしている
@@ -107,7 +114,7 @@ void CPlayerWireMove::Update()
 	if (isMoveEnd) {
 		//移動が終わった
 		GetPlayer().GetWireAction().SetIsWireMove(false);
-		std::list<IEnemy*> enemyList = GetSceneGame().GetMap()->GetEnemyList();
+		std::list<IEnemy*> enemyList = GetSceneManager().GetMap()->GetEnemyList();
 		switch(m_pPlayer->GetWireAction().GetState())
 		{
 		case CWireAction::enStateEnemy:
@@ -133,8 +140,8 @@ void CPlayerWireMove::Update()
 			else
 			{
 				m_pPlayerGetter->SetPosition(m_movePosition);
-				m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateStand);
-				m_pPlayerGetter->GetAnimation().Play(enPlayerAnimationLanding);
+				m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateSky);
+				m_pPlayerGetter->SetMoveSpeed(CVector3::Zero);
 			}
 			break;
 		}

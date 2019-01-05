@@ -21,7 +21,7 @@ void CPlayerAttack::Init()
 	m_maxAttackNum = GetPlayer().GetWeaponManager().GetWeapon()->GetMaxAttackNum();
 	m_maxWeaponHitNum = GetPlayer().GetWeaponManager().GetWeapon()->GetMaxWeaponHitNum();
 	//エネミーのリストを取得
-	for (const auto& enemys : GetSceneManager().GetGameScene().GetMap()->GetEnemyList())
+	for (const auto& enemys : GetSceneManager().GetMap()->GetEnemyList())
 	{
 		bool* damagePossible = enemys->IsDamagePossible();
 		for (int i = 0; i < m_maxWeaponHitNum; i++)
@@ -43,16 +43,16 @@ void CPlayerAttack::Init()
 	m_pPlayer->GetWeaponManager().SetIsAttack(true);
 	m_pPlayer->GetWeaponManager().GetWeapon()->WeaponTraceDrawStart();
 	m_isPreDodge = false;
+	m_rotationDirectionVector = CVector3::Zero;
 }
 
 void CPlayerAttack::Update()
 {
 
 	//攻撃中に攻撃の入力がされた場合は連撃に移行する
-	if (Pad().IsTriggerButton(enButtonX) && !m_isContinuationAttack && m_attackCount < m_maxAttackNum/*MAX_ATTACK_NUM*/ - 1)
+	if (Pad().IsTriggerButton(enButtonX) && !m_isContinuationAttack && m_attackCount < m_maxAttackNum - 1)
 	{
 		m_isContinuationAttack = true;
-		m_attackCount++;
 	}
 
 	Move();
@@ -61,14 +61,23 @@ void CPlayerAttack::Update()
 	if (m_pPlayer->GetIsStateCondition(CPlayerState::enPlayerStateAvoidance)) {
 		m_isPreDodge = true;
 	}
-
+	else if(m_pPlayer->GetIsStateCondition(CPlayerState::enPlayerStateSky))
+	{
+		m_pPlayer->GetWeaponManager().SetIsAttack(false);
+		GetPlayer().GetStateMachine().SetState(CPlayerState::enPlayerStateSky);
+		return;
+	}
 	m_pPlayer->SetStanAttack(m_stanAttack[m_attackCount]);
+
+	Lerp();
+
+	m_pPlayer->GetWeaponManager().SetAttackCount(m_attackCount);
 
 	//攻撃アニメーションが終わった時の処理
 	if (!m_pPlayerGetter->GetAnimation().IsPlay())
 	{
 		//エネミーのリストを取得
-		for (const auto& enemys : GetSceneManager().GetGameScene().GetMap()->GetEnemyList())
+		for (const auto& enemys : GetSceneManager().GetMap()->GetEnemyList())
 		{
 			bool* damagePossible = enemys->IsDamagePossible();
 			for (int i = 0; i < m_maxWeaponHitNum;i++)
@@ -80,9 +89,20 @@ void CPlayerAttack::Update()
 		//攻撃モーション中はダメージモーションをさせない
 		if (m_isContinuationAttack)
 		{
+			m_attackCount++;
+			CVector3 position = m_pPlayer->GetPosition();
+			position = m_preBonePos;
+			position += m_manipVec;
+			position.y = m_pPlayerGetter->GetCharacterController().GetPosition().y;
+			m_pPlayerGetter->SetPosition(position);
+
 			m_isContinuationAttack = false;
-			m_pPlayerGetter->GetAnimation().Play(m_attackAnimation[m_attackCount], 0.2f);
+			m_pPlayerGetter->GetAnimation().Play(m_attackAnimation[m_attackCount]);
+			m_pPlayerGetter->GetAnimation().Update(0.0f);
 			m_pPlayer->GetWeaponManager().GetWeapon()->WeaponTraceDrawStart();
+			m_preBonePos.x = m_pBoneMat->m[3][0];
+			m_preBonePos.y = m_pBoneMat->m[3][1];
+			m_preBonePos.z = m_pBoneMat->m[3][2];
 
 			Rotation();
 		}
@@ -96,6 +116,8 @@ void CPlayerAttack::Update()
 			m_pPlayerGetter->SetPosition(position);
 
 			m_pPlayerGetter->GetAnimation().Play(m_combineAnimation[m_attackCount]);
+			m_pPlayerGetter->GetAnimation().Update(0.0f);
+			m_pPlayerGetter->SkinModelUpdate();
 			if (m_isPreDodge)
 			{
 				m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateAvoidance);
@@ -173,6 +195,7 @@ void CPlayerAttack::Rotation()
 	moveSpeed += frontVec * Pad().GetLeftStickY()*speed;
 	moveSpeed += rightVec * Pad().GetLeftStickX()*speed;
 
+
 	CMatrix pMat = m_pPlayer->GetSkinmodel().GetWorldMatrix();
 	//プレイヤーの前方向
 	CVector3 playerFront;
@@ -209,21 +232,58 @@ void CPlayerAttack::Rotation()
 	rot.SetRotation(CVector3::AxisY, rad);
 	CMatrix rotMat=CMatrix::Identity;
 	rotMat.MakeRotationFromQuaternion(rot);
-	CVector3 playerPos = m_pPlayer->GetPosition();
-	CMatrix spineMat = m_pPlayer->GetSkinmodel().FindBoneWorldMatrix(L"Hips");
-	CVector3 spineVec;
-	spineVec.x = spineMat.m[3][0];
-	spineVec.y = spineMat.m[3][1];
-	spineVec.z = spineMat.m[3][2];
-	CVector3 animPos = playerPos- spineVec;
-	animPos.y =0.0f;
-	rotMat.Mul(animPos);
-	animPos.Add(spineVec);
-	animPos.y = playerPos.y;
+
 	CQuaternion pRot = m_pPlayerGetter->GetRotation();
 	//腰を中心にしたクオータニオンとプレイヤーのやつの積
 	pRot.Multiply(rot);
-	m_pPlayerGetter->SetRotation(pRot);
-	m_pPlayerGetter->SetPosition(animPos);
+	m_addRot = pRot;
+	m_rotationDirectionVector = moveSpeed;
+}
+
+void CPlayerAttack::Lerp()
+{
+
+	if (m_rotationDirectionVector.LengthSq() < 0.01f)
+	{
+		//座標更新されていない
+		return;
+	}
+	//回転の線形補完
+	CQuaternion rotation = m_pPlayerGetter->GetRotation();
+	float slerp = 0.3f;
+	rotation.Slerp(slerp, rotation, m_addRot);
+	m_pPlayerGetter->SetRotation(rotation);
+	CMatrix rotMat;
+	rotMat.MakeRotationFromQuaternion(rotation);
+	//座標の線形補完
+	CVector3 playerFront;
+	CMatrix mat = m_pPlayer->GetSkinmodel().GetWorldMatrix();
+	playerFront.x = mat.m[2][0];
+	playerFront.y = 0.0f;
+	playerFront.z = mat.m[2][2];
+	playerFront.Normalize();
+	float rad = m_rotationDirectionVector.Dot(playerFront);
+	rad = max(-1.0f, min(1.0f, rad));
+	rad = acosf(rad);
+	CVector3 judgeAxis;
+	judgeAxis.Cross(m_rotationDirectionVector, playerFront);
+	if (0.0f < judgeAxis.y)
+	{
+		rad = -rad;
+	}
+	
+	CQuaternion multi;
+	multi.SetRotation(CVector3::AxisY, rad);
+	multi.Slerp(slerp, CQuaternion::Identity, multi);
+	rotMat.MakeRotationFromQuaternion(multi);
+	CVector3 position = m_pPlayer->GetPosition();
+	CVector3 bonePos;
+	bonePos.x = m_pBoneMat->m[3][0];
+	bonePos.y = m_pBoneMat->m[3][1];
+	bonePos.z = m_pBoneMat->m[3][2];
+	CVector3 manip = position - bonePos;
+	rotMat.Mul(manip);
+	position = bonePos + manip;
+	m_pPlayerGetter->SetPosition(position);
 }
 

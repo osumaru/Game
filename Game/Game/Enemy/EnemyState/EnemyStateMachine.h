@@ -58,6 +58,37 @@ public:
 		m_enemyGroup = enemyGroup;
 	}
 
+	//ステートを取得
+	const IEnemyState* GetState(CEnemyState::EnState state) const
+	{
+		switch (state)
+		{
+		case CEnemyState::enState_Attack:
+			return &m_enemyAttack;
+
+		case CEnemyState::enState_AttackWait:
+			return &m_enemyAttackWait;
+
+		case CEnemyState::enState_Chase:
+			return &m_enemyChase;
+
+		case CEnemyState::enState_Damage:
+			return &m_enemyDamage;
+
+		case CEnemyState::enState_Death:
+			return &m_enemyDeath;
+
+		case CEnemyState::enState_Idle:
+			return &m_enemyIdle;
+
+		case CEnemyState::enState_Stan:
+			return &m_enemyStan;
+
+		case CEnemyState::enState_Walk:
+			return &m_enemyWalk;
+		}
+	}
+
 private:
 	CEnemyState::EnState	m_state = CEnemyState::enState_Invald;	//エネミーの状態
 	IEnemyState*			m_currentState = nullptr;				//現在の状態

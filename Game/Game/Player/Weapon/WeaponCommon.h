@@ -38,6 +38,6 @@ struct SWeaponEnemyAttackInfo
 struct SWeaponTraceDrawInfo
 {
 	bool		isDraw = false;				//•`‰æ‚·‚é‚©‚Ìƒtƒ‰ƒO
-	CVector3	rootPos = CVector3::Zero;	//•Ší‚Ìª‚Á‚±
-	CVector3	pointPos = CVector3::Zero;	//•Ší‚Ìæ‚Á‚¿‚å
+	CVector3	rootPos[2];					//•Ší‚Ìª‚Á‚±
+	CVector3	pointPos[2];				//•Ší‚Ìæ‚Á‚¿‚å
 };
