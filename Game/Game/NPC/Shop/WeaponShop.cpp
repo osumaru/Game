@@ -28,7 +28,7 @@ void CWeaponShop::Init(const CVector3 position, const CQuaternion rotation)
 	wchar_t* animClip[] = { L"Assets/modelData/ShopgirlStand.tka" };
 	//m_animation.Init(animClip, 1);
 	//m_animation.SetLoopFlg(0, true);
-	m_skinModel.Load(L"Assets/modelData/roten.cmo",NULL);
+	m_skinModel.Load(L"Assets/modelData/House1.cmo",NULL);
 	//m_animation.Play(0);
 
 	//テクスチャ及びスプライト関係の初期化
