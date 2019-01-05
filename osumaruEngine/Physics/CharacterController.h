@@ -32,7 +32,7 @@ public:
 	void Execute(float deltaTime);
 
 	//動いてるオブジェクトとのあたり判定をとる
-	void StaticExecute();
+	void DynamicExecute();
 
 	//座標を取得。
 	const CVector3 GetPosition() const
@@ -149,15 +149,9 @@ public:
 	//何かに当たったかのフラグを返す
 	bool IsHit() const
 	{
-		if (m_wallHitObject != nullptr || m_groundHitObject != nullptr)
-		{
-			return true;
-		}
-		return false;
+		return m_wallHitObject != nullptr || m_groundHitObject != nullptr;
 	}
-
 private:
-	//CVector3					m_position;				//座標
 	CVector3					m_moveSpeed;			//移動速度
 	bool						m_isJump;				//ジャンプしているか？
 	bool						m_isOnGround;			//地面に設置しているか？

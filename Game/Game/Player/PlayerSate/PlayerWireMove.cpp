@@ -108,6 +108,8 @@ void CPlayerWireMove::Update()
 		m_pPlayerGetter->GetCharacterController().Execute(GameTime().GetDeltaFrameTime());
 		m_pPlayerGetter->GetCharacterController().SetGravity(gravityBackup);
 
+		m_pPlayerGetter->SetPosition(m_pPlayerGetter->GetCharacterController().GetPosition());
+
 
 	}
 

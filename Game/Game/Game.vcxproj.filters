@@ -400,6 +400,9 @@
     <ClCompile Include="Player\PlayerSate\PlayerDown.cpp">
       <Filter>ソース ファイル\Player\PlayerState</Filter>
     </ClCompile>
+    <ClCompile Include="Map\BossBuilding.cpp">
+      <Filter>ソース ファイル\Map</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -710,6 +713,9 @@
     </ClInclude>
     <ClInclude Include="Player\PlayerSate\PlayerDown.h">
       <Filter>ソース ファイル\Player\PlayerState</Filter>
+    </ClInclude>
+    <ClInclude Include="Map\BossBuilding.h">
+      <Filter>ソース ファイル\Map</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

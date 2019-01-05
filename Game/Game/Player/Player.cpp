@@ -180,7 +180,6 @@ void CPlayer::Init(CVector3 position)
 
 void CPlayer::Update()
 {
-	m_position = m_characterController.GetPosition();
 	if (m_isDied)
 	{
 		return;
@@ -193,15 +192,15 @@ void CPlayer::Update()
 	CVector3 stickDir = { stickX, 0.0f, stickZ };
 	m_playerGetter.SetStickDir(stickDir);
 
-	/*if (Pad().IsPressButton(enButtonX))
-	{
-		m_status.Health = 0;
-	}
+	//if (Pad().IsPressButton(enButtonX))
+	//{
+	//	m_status.Health = 0;
+	//}
 
-	if (Pad().IsTriggerButton(enButtonB))
-	{
-		m_isDamege = true;
-	}*/
+	//if (Pad().IsTriggerButton(enButtonB))
+	//{
+	//	m_isDamege = true;
+	//}
 
 	CMatrix viewMat;
 	CVector3 cameraPos = m_position;
@@ -221,7 +220,6 @@ void CPlayer::Update()
 	m_PlayerStateMachine.Update();
 	m_isAction = true;
 	m_animation.Update(0.0f);
-	m_position = m_characterController.GetPosition();
 
 	//アニメーションの更新
 	//スキンモデルの更新
@@ -233,6 +231,7 @@ void CPlayer::Update()
 	m_characterController.SetPosition(manipVector);
 	m_groundCollision.SetPosition(m_position);
 	m_groundCollision.Execute();
+	m_groundCollision.SetPosition(manipVector);
 	m_characterController.SetPosition(oldRigidPos);
 }
 
@@ -329,7 +328,7 @@ void CPlayer::Rotation(const CVector3& stickDir)
 	}
 	CQuaternion addRot;
 	addRot.SetRotation(CVector3::AxisY, rad);
-	m_rotation.Slerp(0.3f , m_rotation, addRot);
+	m_rotation.Slerp(0.6f , m_rotation, addRot);
 
 	if (m_weaponManager.GetCurrentState() == enWeaponArrow && m_weaponManager.GetIsAttack())
 	{

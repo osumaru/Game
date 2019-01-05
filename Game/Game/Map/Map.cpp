@@ -14,7 +14,7 @@
 #include "../Enemy/EnemyGroup.h"
 #include "../Enemy/PathFinding/PathFinding.h"
 #include"../NPC/ShopManager.h"
-
+#include "../Map/BossBuilding.h"
 
 std::vector<std::vector<SMapChipInfo>> mapChipInfo = 
 {
@@ -54,6 +54,7 @@ void Map::Init(int stageNum)
 		CEnemyGroup* enemyGroup = nullptr;
 		IEnemy* enemy = nullptr;
 		std::list<IEnemy*>::iterator it;
+		CBossBuilding* bossBuilding = nullptr;
 
 		switch (mInfo.m_tag)
 		{
@@ -90,6 +91,10 @@ void Map::Init(int stageNum)
 			break;
 		case enMapTagWeaponShop:
 			m_shopManager->InitShop(mInfo.m_position, mInfo.m_rotation, EShop::enWeaponShop);
+			break;
+		case enMapTagBossObj:
+			bossBuilding = New<CBossBuilding>(PRIORITY_MAPCHIP);
+			bossBuilding->Init(mInfo.m_position);
 			break;
 		case enMapTagBreakBrock:
 			mapChip = New<CBreakMapObject>(PRIORITY_MAPCHIP);

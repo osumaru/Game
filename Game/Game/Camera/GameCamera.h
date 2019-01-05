@@ -24,6 +24,9 @@ public:
 	
 	//更新
 	void Update();
+
+	//回転
+	void Rotation();
 	
 	//カメラ必要なプレイヤーの情報の初期化`
 	void CameraSetPlayer();
@@ -66,19 +69,9 @@ public:
 	}
 
 	//揺れカメラの取得
-	/*const */CShakeCamera& GetShakeCamera()
+	CShakeCamera& GetShakeCamera()
 	{
 		return m_shakeCamera;
-	}
-
-	//カメラのポジションを設定
-	//第一引数　カメラの座標　第二引数　ターゲットの座標
-	void SetCameraPosition(const CVector3 pos,const CVector3 tag)
-	{
-		m_camera.SetPosition(pos);
-		m_camera.SetTarget(tag);
-		//m_springCamera.SetTarPosition(pos);
-		//m_springCamera.SetTarTarget(tag);
 	}
 
 	//ビュー行列を取得
@@ -93,34 +86,18 @@ public:
 		return m_camera.GetProjectionMatrix();
 	}
 
-	////バネカメラのプロジェクション行列の取得
-	//const CMatrix GetSpringProjectionMatrix()
-	//{
-	//	return m_springCamera.GetProjectionMatrix();
-	//}
-	////バネカメラのビュー行列の取得
-	//const CMatrix GetSpringViewMatrix()
-	//{
-	//	return m_springCamera.GetSpringViewMatrix();
-	//}
-	void SetCmareaState(EnCameraState cameraState)
-	{
-		m_cameraState = cameraState;
-	}
-
 	//エネミーをロックオンする
 	void RockOnEnemy();
 
 private:
 	static CGameCamera* m_gameCamera;							//ゲームカメラ
 	CCamera				m_camera;								//カメラ
-	EnCameraState		m_cameraState = EnCameraState::enNormal;//カメラステート
-	CNormalGameCamera	m_normalCamera;							//ノーマルカメラ
-	CArrowGameCamera	m_arrowCamera;							//アローカメラ
 	CVector3			m_cameraVec;							//注視点からカメラへのベクトル
 	CSpringCamera		m_springCamera;							//バネカメラ
 	CShakeCamera		m_shakeCamera;							//揺れカメラ
 	IEnemy*				m_rockOnEnemy;							//ロックオンしているエネミー
+	const CMatrix*		m_pPlayerBoneMat;						//注視点とするプレイヤーのボーンの行列
+	const float			CAMERA_SPEED = 4.0f;					//カメラの回転速度
 	bool				m_isRockOn = false;						//ロックオンしているか
 };
 

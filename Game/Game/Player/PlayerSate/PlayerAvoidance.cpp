@@ -8,11 +8,11 @@ void CPlayerAvoidance::Init()
 {
 	Rotation();
 	m_pPlayerGetter->GetAnimation().Play(enPlayerAnimationAvoidance, 0.1f);
+	m_pPlayerGetter->GetAnimation().Update(0.0f);
+	m_pPlayerGetter->SkinModelUpdate();
 	m_pPlayerGetter->SetMoveSpeed(CVector3::Zero);
 	m_pBoneMat = &GetPlayer().GetSkinmodel().FindBoneWorldMatrix(L"Hips");
 	CVector3 bonePos = { m_pBoneMat->m[3][0], m_pBoneMat->m[3][1], m_pBoneMat->m[3][2] };
-	m_manipVec = m_pPlayer->GetPosition() - bonePos;
-	m_preBonePos = bonePos;
 	m_pPlayerGetter->SetIsInvincible(true);
 }
 
@@ -21,11 +21,15 @@ void CPlayerAvoidance::Update()
 	Move();
 	if (!m_pPlayerGetter->GetAnimation().IsPlay())
 	{
+		CVector3 bonePos;
+		bonePos.x = m_pBoneMat->m[3][0];
+		bonePos.y = m_pBoneMat->m[3][1];
+		bonePos.z = m_pBoneMat->m[3][2];
 		CVector3 position;
-		position = m_preBonePos;
-		position += m_manipVec;
+		position = bonePos;
 		position.y = m_pPlayer->GetPosition().y;
 		m_pPlayerGetter->SetPosition(position);
+		m_pPlayerGetter->SetCharaconPos(position);
 		m_pPlayerGetter->SetIsInvincible(false);
 		m_pPlayerGetter->GetAnimation().Play(enPlayerAnimationAvoidanceCombine);
 		m_pPlayerGetter->GetAnimation().Update(GameTime().GetDeltaFrameTime());
@@ -53,51 +57,34 @@ void CPlayerAvoidance::Update()
 
 void CPlayerAvoidance::Move()
 {
-	//プレイヤーの前のフレームのボーンの座標から今のボーンの座標をレイテストしてめり込んでいれば押し戻す
 	CVector3 playerPos = m_pPlayer->GetPosition();
 	CVector3 bonePos;
 	bonePos.x = m_pBoneMat->m[3][0];
 	bonePos.y = m_pBoneMat->m[3][1];
 	bonePos.z = m_pBoneMat->m[3][2];
+	
 
-	//前のフレームとの座標と今の座標を引いて移動量を計算
-	CVector3 moveSpeed = bonePos - m_preBonePos;
-	moveSpeed.Scale(3.0f);
-	moveSpeed.y = m_fallSpeed;
 	CCharacterController& characon = m_pPlayerGetter->GetCharacterController();
-	float gravity = characon.GetGravity();
-	characon.SetGravity(-0.04f);
-	//高さをプレイヤ―の座標でそろえる
-	m_preBonePos.y = playerPos.y;
-	characon.SetMoveSpeed(moveSpeed);
-	characon.SetPosition(m_preBonePos);
-	characon.Execute(1.0f);
-	//何かに当たっていればプレイヤーの座標を動かしてアニメーションの移動量を打ち消す
-	//if (characon.GetWallCollisionObject() != nullptr)
-	{
-		CVector3 movePos = characon.GetPosition() - bonePos;
-		movePos.y = 0.0f;
-		moveSpeed.y = 0.0f;
-		CVector3 playerFront;
-		playerFront.x = m_pPlayer->GetSkinmodel().GetWorldMatrix().m[2][0];
-		playerFront.y = m_pPlayer->GetSkinmodel().GetWorldMatrix().m[2][1];
-		playerFront.z = m_pPlayer->GetSkinmodel().GetWorldMatrix().m[2][2];
-		if (moveSpeed.Dot(movePos) < 0.0f)
-		{
-			playerPos += movePos;
-		}
-		else
-		{
-			//movePos.x += 10.0f;
-			//playerPos += movePos;
-		}
-	}
-	playerPos.y = characon.GetPosition().y;
+	//剛体の座標を保存
+	CVector3 rigidPos = characon.GetPosition();
+	bonePos.y = characon.GetPosition().y;
+	characon.SetPosition(bonePos);
+	//プレイヤーののボーン座標からプレイヤーの座標までのベクトルを作成
+	CVector3 boneDistance = playerPos - bonePos;
+	characon.DynamicExecute();
+	characon.SetMoveSpeed({ 0.0f, m_fallSpeed, 0.0f });
+	characon.Execute(GameTime().GetDeltaFrameTime());
+	
+	rigidPos = characon.GetPosition();
+	//衝突解決した座標にさっき作成したベクトルを足す
+	playerPos = rigidPos + boneDistance;
+	//落下速度だけ保存
 	m_fallSpeed = characon.GetMoveSpeed().y;
+	//プレイヤーと剛体の座標を更新
 	m_pPlayerGetter->SetPosition(playerPos);
 	characon.SetMoveSpeed(CVector3::Zero);
-	characon.SetGravity(gravity);
-	m_preBonePos = bonePos;
+	//剛体の座標を戻す
+	characon.SetPosition(rigidPos);
 }
 
 void CPlayerAvoidance::Rotation()

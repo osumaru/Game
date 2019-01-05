@@ -173,7 +173,6 @@ public:
 	}
 	CVector3()
 	{
-		x = y = z = 0.0f;
 	}
 	/*!
 	* @brief	コンストラクタ。
@@ -403,7 +402,6 @@ public:
 	}
 	CVector4()
 	{
-		x = y = z = w = 0.0f;
 	}
 	/*!
 	*@brief	代入演算子。

@@ -37,6 +37,11 @@ public:
 	*/
 	void SetPosition(const CVector3& pos);
 
+	/*
+	プレイヤーの剛体の位置を設定
+	*/
+	void  SetCharaconPos(const CVector3& pos);
+
 	//プレイヤーのクォータニオンを取得
 	const CQuaternion& GetRotation();
 
