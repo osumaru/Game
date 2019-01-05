@@ -81,6 +81,7 @@ void CGameObjectManager::Execute(CDeferred& deferred, CPostEffect& postEffect)
 			object.gameObject->AfterDrawer();
 		}
 	}
+	GameTime().Draw();
 
 	//最後にオブジェクトを消去
 	DeleteExecute();

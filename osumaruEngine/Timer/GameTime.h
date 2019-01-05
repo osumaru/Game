@@ -1,6 +1,6 @@
 #pragma once
 #include "StopWatch.h"
-
+class CFont;
 class CGameTime
 {
 	//コンストラクタ
@@ -15,6 +15,8 @@ class CGameTime
 
 	}
 public:
+	void Init();
+	
 
 	//インスタンスを取得
 	static CGameTime& GetInstance()
@@ -102,6 +104,8 @@ public:
 		m_slowDelayCount = delayCount;
 	}
 
+	//FPSを表示
+	void Draw();
 private:
 	friend class CShakeCamera;
 	float		m_slowScale = 0.0f;		//どのぐらいスローにしているかの倍率(1.0が等速
@@ -111,7 +115,7 @@ private:
 	float		m_frameDeltaTime;		//1フレームの経過時間
 	float		m_slowDelayTime = 0.0f;	//スローにするまでの遅延時間
 	int			m_slowDelayCount = 0;	//スローにするまでのフレーム数
-
+	CFont*		m_font;					//FPS表示させるための文字
 };
 
 //ゲームタイマーを取得

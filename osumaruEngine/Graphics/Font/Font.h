@@ -4,6 +4,16 @@
 class CFont : Uncopyable
 {
 public:
+	CFont()
+	{
+
+	}
+
+	~CFont()
+	{
+
+	}
+
 	/*
 	‰Šú‰»ŠÖ”
 	str	•\¦‚·‚é•¶š—ñ
