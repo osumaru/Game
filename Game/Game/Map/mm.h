@@ -19,48 +19,48 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagBossObj, //タグ
 },
-//samurai
-{
-	L"samurai",
-	CVector3(0.00f, 0.00f, 6.42f),             //平行移動
-	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
-	enMapTagSamurai, //タグ
-},
-//ninja
-{
-	L"ninja",
-	CVector3(-6.66f, 0.00f, 0.00f),             //平行移動
-	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
-	enMapTagNinja, //タグ
-},
-//zombi
-{
-	L"zombi",
-	CVector3(6.41f, 0.00f, 0.00f),             //平行移動
-	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
-	enMapTagZombie, //タグ
-},
-//Warrok
-{
-	L"Warrok",
-	CVector3(0.00f, 0.00f, -9.07f),             //平行移動
-	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
-	enMapTagWarrok, //タグ
-},
-//Warrok
-{
-	L"Warrok",
-	CVector3(5.94f, 0.00f, 0.00f),             //平行移動
-	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
-	enMapTagWarrok, //タグ
-},
-//Warrok
-{
-	L"Warrok",
-	CVector3(5.94f, 0.00f, 5.00f),             //平行移動
-	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f),  //回転
-	enMapTagWarrok, //タグ
-},
+////samurai
+//{
+//	L"samurai",
+//	CVector3(0.00f, 0.00f, 6.42f),             //平行移動
+//	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
+//	enMapTagSamurai, //タグ
+//},
+////ninja
+//{
+//	L"ninja",
+//	CVector3(-6.66f, 0.00f, 0.00f),             //平行移動
+//	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
+//	enMapTagNinja, //タグ
+//},
+////zombi
+//{
+//	L"zombi",
+//	CVector3(6.41f, 0.00f, 0.00f),             //平行移動
+//	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
+//	enMapTagZombie, //タグ
+//},
+////Warrok
+//{
+//	L"Warrok",
+//	CVector3(0.00f, 0.00f, -9.07f),             //平行移動
+//	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
+//	enMapTagWarrok, //タグ
+//},
+////Warrok
+//{
+//	L"Warrok",
+//	CVector3(5.94f, 0.00f, 0.00f),             //平行移動
+//	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
+//	enMapTagWarrok, //タグ
+//},
+////Warrok
+//{
+//	L"Warrok",
+//	CVector3(5.94f, 0.00f, 5.00f),             //平行移動
+//	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f),  //回転
+//	enMapTagWarrok, //タグ
+//},
 //Sphere
 {
 	L"Sphere",

@@ -25,13 +25,13 @@ void CNormalGameCamera::Update()
 	float rStick_x = Pad().GetRightStickX();
 	float rStick_y = Pad().GetRightStickY();
 
-	//CVector3	oldCameraVec = GetGameCamera().GetSpringCamera().GetPosition() - GetGameCamera().GetSpringCamera().GetTarget();
+	CVector3	oldCameraVec = GetGameCamera().GetSpringCamera().GetPosition() - GetGameCamera().GetSpringCamera().GetTarget();
 	m_cameraVec = m_cameraPosition - m_targetPosition;
-	//if (oldCameraVec.Length() < m_cameraVec.Length())
-	//{
-	//	float len = m_cameraVec.Length() / oldCameraVec.Length();
-	//	m_cameraVec = oldCameraVec * len;
-	//}
+	if (oldCameraVec.Length() < m_cameraVec.Length())
+	{
+		float len = m_cameraVec.Length() / oldCameraVec.Length();
+		m_cameraVec = oldCameraVec * len;
+	}
 
 	if (fabsf(rStick_x) > 0.0f) {
 		//Y軸周りの回転
@@ -90,15 +90,15 @@ void CNormalGameCamera::Update()
 	//toNewCameraPos.y = height;              //高さを戻す。
 
 	CVector3 pos = target + m_cameraVec/*toNewCameraPos*/;  //これで新しい視点が決定。
-	GetGameCamera().SetCameraPosition(pos, target);
+	//GetGameCamera().SetCameraPosition(pos, target);
 	m_cameraPosition = pos;
 	m_targetPosition = target;
 
 	
-	////カメラの当たり判定
-	//CVector3 newPos;
-	//if (m_cameraCollisionSolver.Execute(newPos, GetGameCamera().GetSpringCamera().GetTarPosition(), GetGameCamera().GetSpringCamera().GetTarTarget()))
-	//{
-	//	GetGameCamera().SetCameraPosition(newPos, target);
-	//}
+	//カメラの当たり判定
+	CVector3 newPos;
+	if (m_cameraCollisionSolver.Execute(newPos, GetGameCamera().GetSpringCamera().GetTarPosition(), GetGameCamera().GetSpringCamera().GetTarTarget()))
+	{
+		//GetGameCamera().SetCameraPosition(newPos, target);
+	}
 }
