@@ -28,6 +28,9 @@ RWTexture2D<float4>  finalTexture : register(u3);
 [numthreads(TILE_WIDTH, TILE_WIDTH, 1)]
 void CSMain(uint3 groupID : SV_GroupID, uint3 groupThreadID : SV_GroupThreadID, uint3 dispatchThreadID : SV_DispatchThreadID)
 {
+	uint lightNum;
+	uint dummy;
+	pointLightList.GetDimensions(lightNum, dummy);
 	uint groupIndex = groupThreadID.y * TILE_WIDTH + groupThreadID.x;
 	if (groupIndex == 0)
 	{
@@ -48,7 +51,7 @@ void CSMain(uint3 groupID : SV_GroupID, uint3 groupThreadID : SV_GroupThreadID, 
 	{
 		frustumPlanes[i].xyz *= rcp(length(frustumPlanes[i].xyz));
 	}
-	for (uint i = groupIndex; i < LIGHT_NUM_MAX; i += TILE_WIDTH * TILE_WIDTH)
+	for (uint i = groupIndex; i < lightNum; i += TILE_WIDTH * TILE_WIDTH)
 	{
 		bool inFrustum = true;
 		for (uint j = 0; j < 4; j++)
@@ -63,6 +66,7 @@ void CSMain(uint3 groupID : SV_GroupID, uint3 groupThreadID : SV_GroupThreadID, 
 			sLightList[listIndex] = i;
 		}
 	}
+	
 	float4 viewPos = depthTexture[dispatchThreadID.xy];
 	viewPos = mul(viewMat, viewPos);
 	float3 normal = normalTexture[dispatchThreadID.xy];
