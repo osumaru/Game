@@ -30,6 +30,8 @@ public:
 	//ダメージ状態を解除する関数
 	void DamageStateReset();
 
+	//スタンダメージ状態を解除する関数
+	void StanDamageStateReset();
 	/*
 	プレイヤーの座標の設定
 	*/
