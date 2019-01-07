@@ -28,4 +28,5 @@ public:
 
 private:
 	float m_timer = 0.0f;	//タイマー
+	float m_speed = 2.0f;
 };
