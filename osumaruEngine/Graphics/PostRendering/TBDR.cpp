@@ -9,6 +9,10 @@ void CTBDR::Init()
 
 void CTBDR::Draw()
 {
+	if (!m_isActive)
+	{
+		return;
+	}
 	SPointLightCB plcb;
 	plcb.screenParam = { (float)FrameBufferWidth(), (float)FrameBufferHeight() };
 	plcb.projectionMat = CMatrix::Identity;
