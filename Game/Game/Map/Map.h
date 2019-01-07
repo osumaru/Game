@@ -23,6 +23,7 @@ enum EnMapChipTag
 	enMapTagWeaponShop,
 	enMapTagObstacle,
 	enMapTagBossObj,
+	enMapTagTitleEnemy,
 	enMapTagNum,
 };
 
