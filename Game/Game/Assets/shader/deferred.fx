@@ -8,7 +8,8 @@ cbuffer lightCB : register(b0)
 
 cbuffer shadowConB : register(b1)
 {
-	float4x4 gameViewProj;
+	float4x4 gameView;
+	float4x4 gameProj;
 };
 
 cbuffer shadowCB : register(b2)
@@ -21,6 +22,7 @@ cbuffer materialCB : register(b3)
 	int isShadowReceiver;
 	int isNormalMapFlg;
 	int isDiffuseFlg;
+	int isSpecularMap;
 };
 
 
@@ -109,10 +111,19 @@ float4 PSMain(VS_OUTPUT In) : SV_TARGET0
 	}
 	lig.xyz += color.w;
 	color.xyz *= lig;
+	float4 depthAndSpecular = depthTexture.Sample(Sampler, In.uv);
+	float4 shadowMapPos;
+	shadowMapPos.z = depthAndSpecular.x;
 	
-	In.screenPos = depthTexture.Sample(Sampler, In.uv);
-	float4 shadowMapPos = depthTexture.Sample(Sampler, In.uv);
-	float4 worldPos = depthTexture.Sample(Sampler, In.uv);
+	shadowMapPos.xy = In.uv;
+	shadowMapPos.y = 1.0f - shadowMapPos.y;
+	shadowMapPos.xy -= 0.5f;
+	shadowMapPos.xy *= 2.0f;
+	shadowMapPos.w = 1.0f;
+	shadowMapPos = mul(gameProj, shadowMapPos);
+	shadowMapPos = mul(gameView, shadowMapPos);
+	shadowMapPos /= shadowMapPos.w;
+	float3 worldPos = shadowMapPos.xyz;
 	shadowMapPos = mul(lightViewProj, shadowMapPos);
 	shadowMapPos /= shadowMapPos.w;
 	shadowMapPos.xy += 1.0f;
@@ -125,7 +136,7 @@ float4 PSMain(VS_OUTPUT In) : SV_TARGET0
 	float shadowDepth;
 	//shadowDepth = shadowTexture.Sample(shadowSampler, shadowMapPos.xy).z;
 	shadowDepth = shadowTexture.Load(uv, int2(0, 0)).x;
-	float shadowValue = 1.0f;
+	int shadowValue = 1;
 	if (shadowMapPos.x <= 1.0f && 0.0f <= shadowMapPos.x
 		&&	shadowMapPos.y <= 1.0f && 0.0f <= shadowMapPos.y)
 	{
@@ -134,18 +145,21 @@ float4 PSMain(VS_OUTPUT In) : SV_TARGET0
 		uv.x = (int)(In.uv.x * 1280.0f);
 		uv.y = (int)(In.uv.y * 720.0f);
 		float d = depth - 0.01 - shadowDepth;
-		shadowValue *= step(depth, shadowDepth + 0.001f);// - materialFlg.x & isShadowReceiver;
+		shadowValue *= step(depth, shadowDepth + 0.0001f);
 	}
-	float3 lineSight = In.screenPos.xyz - gameCameraPos.xyz;
-	lineSight = normalize(lineSight);
-	lineSight = reflect(lineSight, normal);
-	lineSight = normalize(lineSight);
-	float speculaLight = dot(lineSight, -normalLight[0]);
-	speculaLight = pow(speculaLight, 5.0f);
+	for(int i = 0;i < 4;i++)
+	{
+		float3 lineSight = worldPos - gameCameraPos.xyz;
+		lineSight = normalize(lineSight);
+		lineSight = reflect(lineSight, normal);
+		lineSight = normalize(lineSight);
+		float speculaLight = dot(lineSight, -normalLight[i]);
+		speculaLight = pow(speculaLight, 5.0f);
 	
-	speculaLight = max(speculaLight, 0.0f);
-	//color.xyz += speculaLight;
-	color.xyz *= shadowValue;
+		speculaLight = max(speculaLight, 0.0f);
+		color.xyz += speculaLight * (depthAndSpecular.y * step(1, (materialFlg.x & isSpecularMap)) + step(1, !(materialFlg.x & isSpecularMap))) * depthAndSpecular.z;
+	}
+	color.xyz *= min(1, step(1, !(materialFlg.x & isShadowReceiver)) + shadowValue);
 	return color;
 }
 

@@ -2,6 +2,7 @@ cbuffer cb : register(b0)
 {
 	float4x4 mvp;	//ワールドビュープロジェクション行列
 	float4x4 viewProj;
+	float specularPower;
 };
 
 cbuffer lightCB : register(b1)
@@ -21,6 +22,7 @@ cbuffer materialCB : register(b3)
 	int isShadowReceiver;
 	int isNormalMap;
 	int isDiffuse;
+	int isSpecularMap;
 };
 
 StructuredBuffer<float4x4> boneMatrix : register(t100);
@@ -76,12 +78,13 @@ struct PS_OUTPUT
 	float4	normalMap	: SV_TARGET1;
 	float4	normal		: SV_TARGET2;
 	float4	tangent		: SV_TARGET3;
-	float4	depth		: SV_TARGET4;
+	float4	depthAndSpecular	: SV_TARGET4;
 	int4	material	: SV_TARGET5;
 };
 
 Texture2D<float4> colorTexture : register(t10);
 Texture2D<float4> normalTexture : register(t11);
+Texture2D<float4> specularTexture : register(t12);
 sampler Sampler : register(s0);
 
 VS_OUTPUT VSMain(VS_INPUT In)
@@ -118,7 +121,6 @@ VS_OUTPUT VSSkinMain(VS_SKIN_INPUT In)
 	position.w = 1.0f;
 	Out.pos = mul(pos, position);
 	Out.worldPos = Out.pos;
-	Out.worldPos.x = (1.0f - weight);
 	Out.pos = mul(viewProj, Out.pos);
 	Out.normal = mul(pos, In.normal);
 	Out.normal = normalize(Out.normal);
@@ -138,11 +140,15 @@ PS_OUTPUT PSMain(VS_OUTPUT In)
 	Out.tangent = float4(In.tangent, 1.0f);
 	float3 normalColor = normalTexture.Sample(Sampler, In.uv);// * isNormalMap + float3(0.0f, 0.0f, 1.0f) * (1 - isNormalMap);
 	Out.normalMap = float4(normalColor, 1.0f);
-	Out.depth = In.worldPos;//In.worldPos.z / In.worldPos.w;
+	float4 worldPos = mul(viewProj, In.worldPos);
+	Out.depthAndSpecular.x = worldPos.z / worldPos.w;
+	Out.depthAndSpecular.y = length(specularTexture.Sample(Sampler, In.uv).xyz);
+	Out.depthAndSpecular.z = specularPower;
 	Out.material.xyzw = 0;
 	Out.material.x |= isShadowReceiver;
 	Out.material.x |= isNormalMap;
 	Out.material.x |= isDiffuse;
+	Out.material.x |= isSpecularMap;
 	return Out;
 }
 

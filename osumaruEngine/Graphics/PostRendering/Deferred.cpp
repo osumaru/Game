@@ -61,7 +61,7 @@ void CDeferred::Init()
 	GetDevice()->CreateSamplerState(&desc, &m_pAnisotropicSampler);
 	desc.Filter = D3D11_FILTER_MIN_MAG_MIP_LINEAR;
 	GetDevice()->CreateSamplerState(&desc, &m_pLinearSampler);
-	m_gameCameraCB.Create(sizeof(CMatrix), nullptr);
+	m_gameCameraCB.Create(sizeof(SGameCameraCB), nullptr);
 }
 
 void CDeferred::Start()
@@ -103,97 +103,54 @@ void CDeferred::Start()
 
 void CDeferred::Draw()
 {
+	float color[4] = { 0.0f, 0.0f, 1.0f, 0.0f };
+	ID3D11RenderTargetView* backBuffer[] = { MainRenderTarget().GetRenderTarget().Get() };
+	GetDeviceContext()->OMSetRenderTargets(1, backBuffer, m_renderTarget[0].GetDepthStencil().Get());
+
+	GetDeviceContext()->ClearRenderTargetView(backBuffer[0], color);
+	GetDeviceContext()->ClearDepthStencilView(m_renderTarget[0].GetDepthStencil().Get(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
+	ID3D11ShaderResourceView* srviews[enRenderTargetNum + 1];
+	for (int i = 0; i < enRenderTargetNum; i++)
 	{
-		float color[4] = { 0.0f, 0.0f, 1.0f, 0.0f };
-		ID3D11RenderTargetView* backBuffer[] = { MainRenderTarget().GetRenderTarget().Get() };
-		GetDeviceContext()->OMSetRenderTargets(1, backBuffer, m_renderTarget[0].GetDepthStencil().Get());
-
-		GetDeviceContext()->ClearRenderTargetView(backBuffer[0], color);
-		GetDeviceContext()->ClearDepthStencilView(m_renderTarget[0].GetDepthStencil().Get(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
-		ID3D11ShaderResourceView* srviews[enRenderTargetNum + 1];
-		for (int i = 0; i < enRenderTargetNum; i++)
-		{
-			srviews[i] = m_renderTarget[i].GetRenderTargetTexture().GetShaderResource().Get();
-		};
-		srviews[enRenderTargetNum] = Engine().GetShadowMap().GetRenderTarget().GetRenderTargetTexture().GetShaderResource().Get();
-		CLight light = Light();
-		m_lightCB.Update(&Light());
-		Engine().GetShadowMap().SetConstantBuffer();
-		if (m_camera != nullptr)
-		{
-			CMatrix gameCameraMat;
-			gameCameraMat.Mul(m_camera->GetViewMatrix(), m_camera->GetProjectionMatrix());
-			//gameCameraMat.Inverse();
-			m_gameCameraCB.Update(&gameCameraMat);
-			GetDeviceContext()->PSSetConstantBuffers(1, 1, m_gameCameraCB.GetBody().GetAddressOf());
-		}
-
-		SDefferedCB defferedCB;
-		defferedCB.frameBufferWidth = FrameBufferWidth();
-		defferedCB.frameBufferHeight = FrameBufferHeight();
-		if (m_camera != nullptr)
-		{
-			CVector3 cameraPosition = m_camera->GetPosition();
-			defferedCB.gameCameraPos.x = cameraPosition.x;
-			defferedCB.gameCameraPos.y = cameraPosition.y;
-			defferedCB.gameCameraPos.z = cameraPosition.z;
-			defferedCB.gameCameraPos.w = 1.0f;
-		}
-		m_defferedCB.Update(&defferedCB);
-		GetDeviceContext()->PSSetConstantBuffers(0, 1, m_lightCB.GetBody().GetAddressOf());
-		GetDeviceContext()->PSSetConstantBuffers(3, 1, m_materialCB.GetBody().GetAddressOf());
-		GetDeviceContext()->PSSetConstantBuffers(4, 1, m_defferedCB.GetBody().GetAddressOf());
-		GetDeviceContext()->PSSetShaderResources(0, enRenderTargetNum + 1, srviews);
-
-		ID3D11SamplerState* samplers[] = { m_pAnisotropicSampler };
-		GetDeviceContext()->PSSetSamplers(1, 1, samplers);
-
-		GetDeviceContext()->VSSetShader((ID3D11VertexShader*)m_vertexShader.GetBody().Get(), nullptr, 0);
-		GetDeviceContext()->PSSetShader((ID3D11PixelShader*)m_pixelShader.GetBody().Get(), nullptr, 0);
-		GetDeviceContext()->IASetInputLayout(m_vertexShader.GetInputlayOut().Get());
-		m_primitive.Draw(GetDeviceContext());
-	}
+		srviews[i] = m_renderTarget[i].GetRenderTargetTexture().GetShaderResource().Get();
+	};
+	srviews[enRenderTargetNum] = Engine().GetShadowMap().GetRenderTarget().GetRenderTargetTexture().GetShaderResource().Get();
+	CLight light = Light();
+	m_lightCB.Update(&Light());
+	Engine().GetShadowMap().SetConstantBuffer();
+	if (m_camera != nullptr)
 	{
-		//SPointLightCB plcb;
-		//plcb.screenParam = { (float)FrameBufferWidth(), (float)FrameBufferHeight() };
-		//plcb.projectionMat = CMatrix::Identity;
-		//plcb.viewMat = CMatrix::Identity;
-		//plcb.viewMatRotOnry = CMatrix::Identity;
-		//if (m_camera != nullptr)
-		//{
-		//	CMatrix viewMat = m_camera->GetViewMatrix();
-		//	plcb.viewMat = viewMat;
-		//	plcb.viewMatRotOnry = viewMat;
-		//	plcb.viewMatRotOnry.m[3][0] = 0.0f;
-		//	plcb.viewMatRotOnry.m[3][1] = 0.0f;
-		//	plcb.viewMatRotOnry.m[3][2] = 0.0f;
-		//	plcb.projectionMat = m_camera->GetProjectionMatrix();
-		//	Engine().GetPointLightManager().Draw(viewMat);
-		//}
-		//m_pointLightCB.Update(&plcb);
-		//GetDeviceContext()->CSSetShader((ID3D11ComputeShader*)m_cs.GetBody().Get(), nullptr, 0);
-		//ID3D11Buffer* cb[] = { m_pointLightCB.GetBody().Get() };
-		//ID3D11ShaderResourceView* mainSrv = { MainRenderTarget().GetRenderTargetTexture().GetShaderResource().Get()};
-		//Engine().SwitchingRenderTarget(); 
-		//ID3D11RenderTargetView* backBuffer[] = { MainRenderTarget().GetRenderTarget().Get() };
-		//GetDeviceContext()->OMSetRenderTargets(1, backBuffer, MainRenderTarget().GetDepthStencil().Get());
-		//float color[4] = { 0.0f, 0.0f, 1.0f, 0.0f };
-		//GetDeviceContext()->ClearRenderTargetView(MainRenderTarget().GetRenderTarget().Get(), color);
-		//GetDeviceContext()->ClearDepthStencilView(MainRenderTarget().GetDepthStencil().Get(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
-		//ID3D11ShaderResourceView* srviews[3] = {
-		//		mainSrv,
-		//		m_renderTarget[enRenderTargetDepth].GetRenderTargetTexture().GetShaderResource().Get(),
-		//		m_renderTarget[enRenderTargetNormal].GetRenderTargetTexture().GetShaderResource().Get()
-		//};
-		//GetDeviceContext()->CSSetConstantBuffers(0, 1, cb);
-		//GetDeviceContext()->CSSetShaderResources(0, 3, srviews);
-		//ID3D11UnorderedAccessView* uaviews[] = { MainRenderTarget().GetRenderTargetTexture().GetUnorderedAccessView().Get() };
-		//UINT initialCount = 0;
-		//GetDeviceContext()->CSSetUnorderedAccessViews(3, 1, uaviews, &initialCount);
-		//GetDeviceContext()->Dispatch(FrameBufferWidth() / 16, FrameBufferHeight() / 16, 1);
-		//uaviews[0] = nullptr;
-		//GetDeviceContext()->CSSetUnorderedAccessViews(3, 1, uaviews, &initialCount);
-
-
+		SGameCameraCB gameCameraMat;
+		gameCameraMat.viewMatrix = m_camera->GetViewMatrix();
+		gameCameraMat.viewMatrix.Inverse();
+		gameCameraMat.projMatrix = m_camera->GetProjectionMatrix();
+		gameCameraMat.projMatrix.Inverse();
+		m_gameCameraCB.Update(&gameCameraMat);
+		GetDeviceContext()->PSSetConstantBuffers(1, 1, m_gameCameraCB.GetBody().GetAddressOf());
 	}
+
+	SDefferedCB defferedCB;
+	defferedCB.frameBufferWidth = FrameBufferWidth();
+	defferedCB.frameBufferHeight = FrameBufferHeight();
+	if (m_camera != nullptr)
+	{
+		CVector3 cameraPosition = m_camera->GetPosition();
+		defferedCB.gameCameraPos.x = cameraPosition.x;
+		defferedCB.gameCameraPos.y = cameraPosition.y;
+		defferedCB.gameCameraPos.z = cameraPosition.z;
+		defferedCB.gameCameraPos.w = 1.0f;
+	}
+	m_defferedCB.Update(&defferedCB);
+	GetDeviceContext()->PSSetConstantBuffers(0, 1, m_lightCB.GetBody().GetAddressOf());
+	GetDeviceContext()->PSSetConstantBuffers(3, 1, m_materialCB.GetBody().GetAddressOf());
+	GetDeviceContext()->PSSetConstantBuffers(4, 1, m_defferedCB.GetBody().GetAddressOf());
+	GetDeviceContext()->PSSetShaderResources(0, enRenderTargetNum + 1, srviews);
+
+	ID3D11SamplerState* samplers[] = { m_pAnisotropicSampler };
+	GetDeviceContext()->PSSetSamplers(1, 1, samplers);
+
+	GetDeviceContext()->VSSetShader((ID3D11VertexShader*)m_vertexShader.GetBody().Get(), nullptr, 0);
+	GetDeviceContext()->PSSetShader((ID3D11PixelShader*)m_pixelShader.GetBody().Get(), nullptr, 0);
+	GetDeviceContext()->IASetInputLayout(m_vertexShader.GetInputlayOut().Get());
+	m_primitive.Draw(GetDeviceContext());
 }

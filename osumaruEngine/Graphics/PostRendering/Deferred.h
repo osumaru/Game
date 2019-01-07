@@ -62,6 +62,12 @@ private:
 		int frameBufferWidth;
 		int frameBufferHeight;
 	};
+
+	struct SGameCameraCB
+	{
+		CMatrix viewMatrix;
+		CMatrix projMatrix;
+	};
 	CRenderTarget							m_renderTarget[enRenderTargetNum];	//Gバッファー
 	CPrimitive								m_primitive;						//プリミティブ
 	CShader									m_vertexShader;						//頂点シェーダー

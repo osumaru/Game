@@ -66,9 +66,9 @@ void CMaw::Init(CVector3 position)
 	m_status.Gold = 100;
 
 	//キャラコンの設定
-	const float Height = 12.0f;
-	const float radius = 4.0f;
-	const float Gravity = -19.8f;
+	const float Height = 3.0f;
+	const float radius = 2.0f;
+	const float Gravity = -9.8f;
 
 	//ライトの設定
 	const CVector4 AmbientLight = { 0.5f,0.5f,0.5f,1.0f };
@@ -90,7 +90,7 @@ void CMaw::Init(CVector3 position)
 	//アニメーションの初期化
 	{
 		wchar_t* animClip[EnMawState::enState_Num] = {
-			{ L"Assets/modelData/MawStand.tka"},			//待機アニメーション	
+			{ L"Assets/modelData/MawStand.tka"},			//待機アニメーション
 			{ L"Assets/modelData/MawWalk.tka" },			//歩行アニメーション
 			{ L"Assets/modelData/MawAttack2.tka" },			//攻撃アニメーション
 			{ L"Assets/modelData/MawSpecialAttack2.tka" },	//攻撃アニメーション
@@ -114,7 +114,7 @@ void CMaw::Init(CVector3 position)
 	m_weekPosition.x = WeekMat.m[3][0];
 	m_weekPosition.y = WeekMat.m[3][1];
 	m_weekPosition.z = WeekMat.m[3][2];
-	//m_weekPosition.Normalize();
+
 	//最初の行動を選択
 	m_actionPattern = EnMawActionPattern::enActionPatternIdle;
 
@@ -232,7 +232,7 @@ void CMaw::WeekPointUpdate()
 //攻撃行動
 void CMaw::Attack()
 {
-	const float PlayerDamageLengthMax = 8.5f;//プレイヤーにダメージを与える最大距離
+	const float PlayerDamageLengthMax = 3.5f;//プレイヤーにダメージを与える最大距離
 
 	//アニメーション再生
 	bool IsAnim=Anim(EnMawState::enState_Attack);
@@ -249,7 +249,7 @@ void CMaw::Attack()
 //特殊攻撃
 void CMaw::SpecialAttack()
 {
-	const float PlayerDamageLengthMax = 7.5f;//プレイヤーにダメージを与える最大距離
+	const float PlayerDamageLengthMax = 2.5f;//プレイヤーにダメージを与える最大距離
 	//アニメーション再生
 	bool IsAnim = Anim(EnMawState::enState_SpecialAttack);
 	//攻撃が終わっていたら
@@ -305,8 +305,8 @@ void CMaw::Down()
 void CMaw::Search()
 {
 	const float AttackDeg = 40.0f;			//攻撃範囲
-	const float SpecialAttackDeg = 30.0f;	//強つよ攻撃範囲
-	const float FindLength = 8.0f;			//発見距離
+	const float SpecialAttackDeg = 15.0f;	//強つよ攻撃範囲
+	const float FindLength = 3.0f;			//発見距離
 
 	//アニメーション再生
 	Anim(EnMawState::enState_Walk);
@@ -412,7 +412,7 @@ void CMaw::Rotation()
 		diff = (CMath::PI2 - a_diff) * (a_diff / -diff);
 		a_diff = fabsf(diff);
 	}
-	float rotSpeed = 10.0f * GameTime().GetDeltaFrameTime();
+	float rotSpeed = 1.0f * GameTime().GetDeltaFrameTime();
 	float addAngle = 0.0f;
 	if (a_diff > rotSpeed) {
 		addAngle = (diff / a_diff) * rotSpeed;
