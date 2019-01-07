@@ -42,6 +42,7 @@ bool CGameScene::Start()
 	//カメラを生成
 	GetGameCamera().Create();
 	GetGameCamera().Init();
+	GetGameCamera().SetIsActiveUpdate(true);
 	m_gameSound = New<CGameSound>(0);
 
 	//フェードの実行が終わったらtrueを返す

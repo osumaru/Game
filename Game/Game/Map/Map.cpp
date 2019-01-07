@@ -15,6 +15,7 @@
 #include "../Enemy/PathFinding/PathFinding.h"
 #include"../NPC/ShopManager.h"
 #include "../Map/BossBuilding.h"
+#include "../Enemy/TitleEnemy.h"
 
 std::vector<std::vector<SMapChipInfo>> mapChipInfo = 
 {
@@ -28,6 +29,9 @@ std::vector<std::vector<SMapChipInfo>> mapChipInfo =
 	},
 	{
 	#include "bossTest.h"
+	},
+	{
+		#include "mm.h"
 	}
 };
 	
@@ -55,7 +59,7 @@ void Map::Init(int stageNum)
 		IEnemy* enemy = nullptr;
 		std::list<IEnemy*>::iterator it;
 		CBossBuilding* bossBuilding = nullptr;
-
+		CTitleEnemy* titleEnemy = nullptr;
 		switch (mInfo.m_tag)
 		{
 		case enMapTagMapChip:
@@ -203,8 +207,10 @@ void Map::BeforeDead()
 	}
 	m_enemyList.clear();
 
-	//プレイヤーの消去
-	GetPlayer().Destroy();
-
+	if (&GetPlayer() != nullptr) 
+	{
+		//プレイヤーの消去
+		GetPlayer().Destroy();
+	}
 
 }
