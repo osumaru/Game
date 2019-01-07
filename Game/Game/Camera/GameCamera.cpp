@@ -28,7 +28,6 @@ void CGameCamera::Init()
 	Engine().SetCamera(&m_camera);
 	//バネカメラの初期化
 	m_springCamera.Init(m_camera.GetTarget(), m_camera.GetPosition(), 1000.0f);
-	m_springCamera.SetDampingRate(0.7f);
 	m_springCamera.SetPosition(m_camera.GetPosition());
 	m_springCamera.SetTarget(m_camera.GetTarget());
 	//揺れカメラの初期化
@@ -45,15 +44,8 @@ void CGameCamera::Update()
 	if (&GetPlayer() == nullptr) { return; }
 	if(GetPlayer().IsActive() == false) { return; }
 
-	//回転させる
-	Rotation();
-	//注視点を設定する
-	CVector3 target;
-	target.x = m_pPlayerBoneMat->m[3][0];
-	target.y = m_pPlayerBoneMat->m[3][1];
-	target.z = m_pPlayerBoneMat->m[3][2];
-	//座標を設定する
-	CVector3 position = target + m_cameraVec;
+	CVector3 target = m_camera.GetTarget();
+	CVector3 position = m_camera.GetPosition();
 
 	//右スティック押し込みでロックオン
 	if (Pad().IsTriggerButton(enButtonRStickPush))
@@ -72,19 +64,40 @@ void CGameCamera::Update()
 		}
 		else 
 		{
-			//カメラの注視点を設定
+			//ターゲットの座標を注視点に設定
 			target = m_rockOnEnemy->GetPosition();
-			//カメラの座標を求める
+			target.y += 0.5f;
+			//ターゲートからカメラへのベクトルを求める
 			CVector3 playerPos = GetPlayer().GetPosition();
-			CVector3 targetPos = m_camera.GetTarget();
-			CVector3 cameraPos = playerPos - targetPos;
-			cameraPos.Normalize();
-			cameraPos *= 2.0f;
-			cameraPos += playerPos;
-			cameraPos.y += 2.5f;
-			//カメラの座標を設定
-			position = cameraPos;
+			CVector3 cameraVec = playerPos - target;
+			cameraVec.y = 0.0f;
+			//距離を求める
+			float length = cameraVec.Length();
+			//視点はプレイヤーから一定距離後ろにする
+			cameraVec.Normalize();
+			cameraVec *= 3.0f;
+			cameraVec += playerPos;
+			cameraVec.y = playerPos.y + 2.5f;
+			//ターゲットと近いからカメラの高さに補正をかける
+			if (length < 2.5f)
+			{
+				//高さは距離が近いほど高い
+				cameraVec.y += 2.5f - length;
+			}
+			//視点に設定
+			position = cameraVec;
 		}
+	}
+	else 
+	{
+		//回転させる
+		Rotation();
+		//注視点を設定する
+		target.x = m_pPlayerBoneMat->m[3][0];
+		target.y = m_pPlayerBoneMat->m[3][1];
+		target.z = m_pPlayerBoneMat->m[3][2];
+		//座標を設定する
+		position = target + m_cameraVec;
 	}
 
 	//バネカメラを更新する

@@ -11,14 +11,6 @@ class IEnemy;
 class CGameCamera : public IGameObject
 {
 public:
-
-	enum EnCameraState 
-	{
-		enNormal,
-		enArrow,
-		enFree,
-		enNum,
-	};
 	//‰Šú‰»
 	void Init();
 	
