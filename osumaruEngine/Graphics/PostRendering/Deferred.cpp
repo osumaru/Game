@@ -46,8 +46,6 @@ void CDeferred::Init()
 		{ { -1.0f, -1.0f, 0.0f, 1.0f } , { 0.0f, 1.0f } },
 		{ {  1.0f, -1.0f, 0.0f, 1.0f } , { 1.0f, 1.0f } },
 	};
-	m_cs.Load("Assets/shader/TBDR.fx", "CSMain", CShader::enCS);
-	m_pointLightCB.Create(sizeof(SPointLightCB), nullptr);
 	DWORD indexBufferLayout[4] = { 0, 2, 1, 3 };
 	m_primitive.Create(vertexBufferLayout, sizeof(SVSLayout), 4, indexBufferLayout, 4, CPrimitive::enIndex32, CPrimitive::enTypeTriangleStrip);
 
@@ -173,23 +171,23 @@ void CDeferred::Draw()
 		//	Engine().GetPointLightManager().Draw(viewMat);
 		//}
 		//m_pointLightCB.Update(&plcb);
-		//GetDeviceContext()->CSSetShader((ID3D11ComputeShader*)m_cs.GetBody(), nullptr, 0);
-		//ID3D11Buffer* cb[] = { m_pointLightCB.GetBody() };
-		//ID3D11ShaderResourceView* mainSrv = { MainRenderTarget().GetRenderTargetTexture().GetShaderResource()};
+		//GetDeviceContext()->CSSetShader((ID3D11ComputeShader*)m_cs.GetBody().Get(), nullptr, 0);
+		//ID3D11Buffer* cb[] = { m_pointLightCB.GetBody().Get() };
+		//ID3D11ShaderResourceView* mainSrv = { MainRenderTarget().GetRenderTargetTexture().GetShaderResource().Get()};
 		//Engine().SwitchingRenderTarget(); 
-		//ID3D11RenderTargetView* backBuffer[] = { MainRenderTarget().GetRenderTarget() };
-		//GetDeviceContext()->OMSetRenderTargets(1, backBuffer, MainRenderTarget().GetDepthStencil());
+		//ID3D11RenderTargetView* backBuffer[] = { MainRenderTarget().GetRenderTarget().Get() };
+		//GetDeviceContext()->OMSetRenderTargets(1, backBuffer, MainRenderTarget().GetDepthStencil().Get());
 		//float color[4] = { 0.0f, 0.0f, 1.0f, 0.0f };
-		//GetDeviceContext()->ClearRenderTargetView(MainRenderTarget().GetRenderTarget(), color);
-		//GetDeviceContext()->ClearDepthStencilView(MainRenderTarget().GetDepthStencil(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
+		//GetDeviceContext()->ClearRenderTargetView(MainRenderTarget().GetRenderTarget().Get(), color);
+		//GetDeviceContext()->ClearDepthStencilView(MainRenderTarget().GetDepthStencil().Get(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
 		//ID3D11ShaderResourceView* srviews[3] = {
 		//		mainSrv,
-		//		m_renderTarget[enRenderTargetDepth].GetRenderTargetTexture().GetShaderResource(),
-		//		m_renderTarget[enRenderTargetNormal].GetRenderTargetTexture().GetShaderResource()
+		//		m_renderTarget[enRenderTargetDepth].GetRenderTargetTexture().GetShaderResource().Get(),
+		//		m_renderTarget[enRenderTargetNormal].GetRenderTargetTexture().GetShaderResource().Get()
 		//};
 		//GetDeviceContext()->CSSetConstantBuffers(0, 1, cb);
 		//GetDeviceContext()->CSSetShaderResources(0, 3, srviews);
-		//ID3D11UnorderedAccessView* uaviews[] = { MainRenderTarget().GetRenderTargetTexture().GetUnorderedAccessView() };
+		//ID3D11UnorderedAccessView* uaviews[] = { MainRenderTarget().GetRenderTargetTexture().GetUnorderedAccessView().Get() };
 		//UINT initialCount = 0;
 		//GetDeviceContext()->CSSetUnorderedAccessViews(3, 1, uaviews, &initialCount);
 		//GetDeviceContext()->Dispatch(FrameBufferWidth() / 16, FrameBufferHeight() / 16, 1);

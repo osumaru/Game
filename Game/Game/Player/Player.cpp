@@ -192,10 +192,13 @@ void CPlayer::Update()
 	CVector3 stickDir = { stickX, 0.0f, stickZ };
 	m_playerGetter.SetStickDir(stickDir);
 
-	//if (Pad().IsPressButton(enButtonX))
-	//{
-	//	m_status.Health = 0;
-	//}
+	if (Pad().IsPressButton(enButtonRB))
+	{
+		float r = Random().GetRandDouble();
+		float g = Random().GetRandDouble();
+		float b = Random().GetRandDouble();
+		Engine().GetPointLightManager().AddPointLight(m_position, { r, g, b });
+	}
 
 	//if (Pad().IsTriggerButton(enButtonB))
 	//{

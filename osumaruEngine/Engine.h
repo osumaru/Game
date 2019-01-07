@@ -17,8 +17,10 @@
 #include "Graphics/PreRendering/ShadowMap.h"
 #include "Graphics/State/ViewPortState.h"
 #include "Graphics/PointLightManager.h"
+#include "Graphics/PostRendering/TBDR.h"
 #include "Effect/EffectEngine.h"
 #include "Resource/EffectResource.h"
+
 
 //エンジンクラス
 class CEffectManager;
@@ -251,6 +253,14 @@ public:
 		return m_animationResource;
 	}
 
+	CTBDR& GetTBDR()
+	{
+		return m_tbdr;
+	}
+
+	//エンジンの描画部分に使うカメラを設定
+	void SetCamera(const CCamera* camera);
+
 private:
 	static const int							MAIN_RENDER_TARGET_NUM = 2;
 	CGameObjectManager*							m_objectManager;			//オブジェクトマネージャー
@@ -284,6 +294,7 @@ private:
 	CPointLightManager							m_pointLightManager;
 	std::unique_ptr<DirectX::SpriteBatch>		m_spriteBatch;
 	CEffectEngine								m_effectEngine;
+	CTBDR										m_tbdr;
 };
 
 //エンジンクラスのインスタンスを取得。
