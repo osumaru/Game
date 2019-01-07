@@ -69,7 +69,7 @@ void CPlayerStateMachine::SetState(CPlayerState::EnPlayerState nextState)
 		m_currentState = &m_playerWireMove;			//ワイヤーステートに遷移
 		break;
 	case CPlayerState::enPlayerStateStun:
-		m_currentState = &m_playerStun;			//ワイヤーステートに遷移
+		m_currentState = &m_playerStun;			//ステートに遷移
 		break;
 	case CPlayerState::enPlayerStateWireAttack:
 		m_currentState = &m_playerWireAttack;	//ワイヤー攻撃ステートに遷移
@@ -77,7 +77,7 @@ void CPlayerStateMachine::SetState(CPlayerState::EnPlayerState nextState)
 	case CPlayerState::enPlayerStateSky:		//空中にいるステートに遷移
 		m_currentState = &m_playerSky;
 		break;
-	case CPlayerState::enPlayerStateDown:		//空中にいるステートに遷移
+	case CPlayerState::enPlayerStateDown:		//ステートに遷移
 		m_currentState = &m_playerDown;
 		break;
 	}

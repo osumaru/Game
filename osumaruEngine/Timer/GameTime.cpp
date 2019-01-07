@@ -1,6 +1,13 @@
 #include "engineStdafx.h"
 #include "GameTime.h"
+#include "../Graphics/Font/Font.h"
 
+void CGameTime::Init()
+{
+	m_font = new CFont;
+	m_font->Init(L"FPS");
+	m_font->SetPosition({ -630.0f, 350.0f });
+}
 
 void CGameTime::Update(CStopWatch& sw)
 {
@@ -32,4 +39,12 @@ void CGameTime::Update(CStopWatch& sw)
 		}
 	}
 	
+}
+
+void CGameTime::Draw()
+{
+	wchar_t fps[24];
+	swprintf(fps, L"FPS:%f", 1.0f / m_frameDeltaTime);
+	m_font->SetString(fps);
+	m_font->Draw();
 }

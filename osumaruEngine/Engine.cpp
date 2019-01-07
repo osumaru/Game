@@ -156,6 +156,7 @@ void CEngine::InitD3D(HINSTANCE& hInst)
 	m_pointLightManager.Init();
 	m_spriteBatch = std::make_unique<DirectX::SpriteBatch>(m_pDeviceContext.Get());
 	m_effectEngine.Init();
+	GameTime().Init();
 }
 
 void CEngine::GameLoop()

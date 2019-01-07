@@ -29,6 +29,10 @@ void CPlayerStand::Update()
 	{
 		m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateDamage);
 	}
+	else if (m_pPlayer->GetIsStateCondition(CPlayerState::enPlayerStateStun))
+	{
+		m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateStun);
+	}
 	//UŒ‚‚ð‚µ‚½Žž‚Ìˆ—
 	else if (m_pPlayer->GetIsStateCondition(CPlayerState::enPlayerStateArrowAttack))
 	{

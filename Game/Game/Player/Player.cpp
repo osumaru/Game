@@ -400,31 +400,35 @@ bool CPlayer::GetIsStateCondition(CPlayerState::EnPlayerState state)
 	case CPlayerState::enPlayerStateArrowShoot:
 		return !dynamic_cast<CPlayerArrowAttack*>(m_PlayerStateMachine.GetState(CPlayerState::enPlayerStateArrowAttack))->IsCharge();
 
-	case CPlayerState::enPlayerStateAttack://xボタンを押して装備している武器が弓じゃなかったか
+	case CPlayerState::enPlayerStateAttack:		//xボタンを押して装備している武器が弓じゃなかったか
 		return Pad().IsTriggerButton(enButtonX) && m_weaponManager.GetCurrentState() != enWeaponArrow;
 
-	case CPlayerState::enPlayerStateAvoidance://bボタンを押しているか
+	case CPlayerState::enPlayerStateAvoidance:	//bボタンを押しているか
 		return m_isAction && Pad().IsTriggerButton(enButtonB);
 
-	case CPlayerState::enPlayerStateDamage://ダメージフラグが立っているか
+	case CPlayerState::enPlayerStateDamage:		//ダメージフラグが立っているか
 		return m_isDamege;
 
-	case CPlayerState::enPlayerStateDied://HPが0以下か
+	case CPlayerState::enPlayerStateStun:		//スタンダメージを食らったか
+		return m_isStanDamage;					
+
+	case CPlayerState::enPlayerStateDied:		//HPが0以下か
 		return m_status.Health <= 0;
 
-	case CPlayerState::enPlayerStateJump://Aボタンを押しているか
+	case CPlayerState::enPlayerStateJump:		//Aボタンを押しているか
 		return m_isAction && Pad().IsTriggerButton(enButtonA);
 
-	case CPlayerState::enPlayerStateRunJump://Aボタンを押しているか
+	case CPlayerState::enPlayerStateRunJump:	//Aボタンを押しているか
 		return m_isAction && Pad().IsTriggerButton(enButtonA);
 
-	case CPlayerState::enPlayerStateWireMove://ワイヤーで移動するフラグが立っているか
+	case CPlayerState::enPlayerStateWireMove:	//ワイヤーで移動するフラグが立っているか
 		return m_wireAction.IsWireMove();
 
-	case CPlayerState::enPlayerStateStand://移動量が0か
+	case CPlayerState::enPlayerStateStand:		//移動量が0か
 		return m_characterController.GetMoveSpeed().Length() == 0.0f;
-	case CPlayerState::enPlayerStateSky:
-		//地面に着地しているかどうか
+
+	case CPlayerState::enPlayerStateSky:		//地面に着地しているかどうか
 		return !m_groundCollision.IsHit();
+
 	}
 }

@@ -199,6 +199,22 @@ public:
 		m_isStanAttack = isStanAttack;
 	}
 
+	//スタンダメージ取得
+	bool GetStanDamage()
+	{
+		return m_isStanDamage;
+	}
+
+	//スタンダメージ設定
+	void SetStanDamage(int StanDamageValue)
+	{
+		if (!m_isStanDamage && !m_isInvinsible)
+		{
+			m_status.Health -= StanDamageValue;
+			m_isStanDamage = true;
+		}
+	}
+
 	//アクションをするかを取得
 	bool GetIsAction()
 	{
@@ -247,6 +263,7 @@ private:
 	CWireAction							m_wireAction;							//ワイヤーの飛ぶかどうかの判定をしたりするところ
 	CWireDraw							m_wireDraw;								//ワイヤーを描画する
 	bool								m_isStanAttack = false;					//スタン攻撃
+	bool								m_isStanDamage = false;					//スタンダメージ
 	CCollisionDetection					m_groundCollision;						//地面用のコリジョン
 	CBoxCollider						m_boxCollider;							//ボックスコライダー
 	bool								m_isAction = true;						//アクションをするかを判定する
