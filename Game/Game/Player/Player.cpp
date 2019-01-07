@@ -170,11 +170,14 @@ void CPlayer::Init(CVector3 position)
 	m_PlayerStateMachine.SetPlayer(this, &m_playerGetter);
 	m_PlayerStateMachine.Init();
 	m_skinmodel.SetIsShadowCaster(true);
+	//m_skinmodel.SetIsShadowReceiver(true);
+	m_skinmodel.SetSpecularPower(0.1f);
 	m_weaponManager.Init(this);
 	m_wireAction.Init(this);
 	SetIsActive(true);
 	GetGameCamera().CameraSetPlayer();
 	m_wireDraw.Init(CVector3::Zero, CVector3::Zero, CVector3::Zero);
+	m_hipBoneMat = &m_skinmodel.FindBoneWorldMatrix(L"Hips");
 
 }
 
@@ -192,26 +195,23 @@ void CPlayer::Update()
 	CVector3 stickDir = { stickX, 0.0f, stickZ };
 	m_playerGetter.SetStickDir(stickDir);
 
-	if (Pad().IsPressButton(enButtonRB))
-	{
-		float r = Random().GetRandDouble();
-		float g = Random().GetRandDouble();
-		float b = Random().GetRandDouble();
-		Engine().GetPointLightManager().AddPointLight(m_position, { r, g, b });
-	}
-
 	//if (Pad().IsTriggerButton(enButtonB))
 	//{
 	//	m_isDamege = true;
 	//}
 
 	CMatrix viewMat;
-	CVector3 cameraPos = m_position;
-	cameraPos.y += 50.0f;
 	CVector3 shadowCameraUp = GetGameCamera().GetSpringCamera().GetTarget() - GetGameCamera().GetSpringCamera().GetPosition();
 	shadowCameraUp.y = 0.0f;
 	shadowCameraUp.Normalize();
-	viewMat.MakeLookAt(cameraPos, m_position, CVector3::AxisX);
+	CVector3 shadowPos;
+	shadowPos.x = m_hipBoneMat->m[3][0];
+	shadowPos.y = m_position.y;
+	shadowPos.z = m_hipBoneMat->m[3][2];
+
+	CVector3 cameraPos = shadowPos;
+	cameraPos.y += 50.0f;
+	viewMat.MakeLookAt(cameraPos, shadowPos, CVector3::AxisX);
 	CMatrix projMat;
 	projMat.MakeOrthoProjectionMatrix(5, 5, 1.0f, 1000.0f);
 	Engine().GetShadowMap().SetViewMatrix(viewMat);

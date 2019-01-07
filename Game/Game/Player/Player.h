@@ -267,6 +267,7 @@ private:
 	CCollisionDetection					m_groundCollision;						//地面用のコリジョン
 	CBoxCollider						m_boxCollider;							//ボックスコライダー
 	bool								m_isAction = true;						//アクションをするかを判定する
+	const CMatrix*						m_hipBoneMat;
 };
 
 static CPlayer& GetPlayer()
