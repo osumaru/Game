@@ -1,77 +1,77 @@
 ﻿//Warrok
 {
 	L"Warrok",
-	CVector3(-10.71f, 8.27f, 6.70f),             //平行移動
+	CVector3(2.71f, -2.00f, -3.70f),             //平行移動
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagTitleEnemy, //タグ
 },
 //Warrok
 {
 	L"Warrok",
-	CVector3(-15.93f, 8.27f, 6.70f),             //平行移動
+	CVector3(-3.93f, -2.00f, -3.70f),             //平行移動
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagTitleEnemy, //タグ
 },
 //Warrok
 {
 	L"Warrok",
-	CVector3(-7.23f, 8.27f, 6.70f),             //平行移動
+	CVector3(5.23f, -2.00f, -3.70f),             //平行移動
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagTitleEnemy, //タグ
 },
 //Warrok
 {
 	L"Warrok",
-	CVector3(-11.14f, 8.27f, 8.05f),             //平行移動
+	CVector3(1.14f, -2.00f, -5.05f),             //平行移動
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagTitleEnemy, //タグ
 },
 //Warrok
 {
 	L"Warrok",
-	CVector3(-14.90f, 8.27f, 8.05f),             //平行移動
+	CVector3(-2.90f, -2.00f, -5.05f),             //平行移動
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagTitleEnemy, //タグ
 },
 //ninja
 {
 	L"ninja",
-	CVector3(-8.63f, 8.27f, 6.70f),             //平行移動
+	CVector3(4.63f, -2.00f, -3.70f),             //平行移動
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagTitleEnemy, //タグ
 },
 //ninja
 {
 	L"ninja",
-	CVector3(-14.35f, 8.27f, 6.70f),             //平行移動
+	CVector3(-2.35f, -2.00f, -3.70f),             //平行移動
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagTitleEnemy, //タグ
 },
 //ninja
 {
 	L"ninja",
-	CVector3(-7.74f, 8.27f, 8.05f),             //平行移動
+	CVector3(5.74f, -2.00f, -5.05f),             //平行移動
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagTitleEnemy, //タグ
 },
 //samurai
 {
 	L"samurai",
-	CVector3(-12.81f, 8.27f, 6.70f),             //平行移動
+	CVector3(0.81f, -2.00f, -3.70f),             //平行移動
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagTitleEnemy, //タグ
 },
 //samurai
 {
 	L"samurai",
-	CVector3(-12.69f, 8.27f, 8.05f),             //平行移動
+	CVector3(0.69f, -2.00f, -5.05f),             //平行移動
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagTitleEnemy, //タグ
 },
 //samurai
 {
 	L"samurai",
-	CVector3(-8.89f, 8.27f, 8.05f),             //平行移動
+	CVector3(4.89f, -2.00f, -5.05f),             //平行移動
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagTitleEnemy, //タグ
 },
