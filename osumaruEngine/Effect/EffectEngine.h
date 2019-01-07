@@ -15,7 +15,7 @@ public:
 	void Draw();
 
 	//エフェクト描画用のカメラを設定
-	void SetCamera(CCamera* camera)
+	void SetCamera(const CCamera* camera)
 	{
 		m_pCamera = camera;
 	}
@@ -33,7 +33,7 @@ public:
 		return m_manager;
 	}
 private:
-	CCamera*						m_pCamera = nullptr;	//描画に使うカメラ
+	const CCamera*						m_pCamera = nullptr;	//描画に使うカメラ
 	Effekseer::Manager*				m_manager = nullptr;	//マネージャー
 	EffekseerRenderer::Renderer*	m_renderer = nullptr;	//レンダラー
 };

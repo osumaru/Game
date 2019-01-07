@@ -72,6 +72,7 @@ void CGameObjectManager::Execute(CDeferred& deferred, CPostEffect& postEffect)
 	}
 	PhysicsWorld().Draw();
 	deferred.Draw();
+	Engine().GetTBDR().Draw();
 	postEffect.Draw();
 	Engine().GetEffectEngine().Draw();
 	for (GameObjectList& objList : m_objectVector)

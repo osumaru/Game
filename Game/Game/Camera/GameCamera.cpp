@@ -24,12 +24,8 @@ void CGameCamera::Init()
 	//Add(this, 0);
 	//注視点からカメラへのベクトルを求める
 	m_cameraVec = m_camera.GetPosition() - m_camera.GetTarget();
-	//物理ワールドにカメラを設定
-	PhysicsWorld().SetCamera(&m_camera);
 	//エンジンにカメラを設定
-	Engine().GetDeferred().SetCamera(&m_camera);
-	Engine().GetEffectEngine().SetCamera(&m_camera);
-	Sky().Init(&m_camera);
+	Engine().SetCamera(&m_camera);
 	//バネカメラの初期化
 	m_springCamera.Init(m_camera.GetTarget(), m_camera.GetPosition(), 1000.0f);
 	m_springCamera.SetPosition(m_camera.GetPosition());
