@@ -21,16 +21,6 @@ void CEnemyIdle::Update()
 {
 	m_timer += GameTime().GetDeltaFrameTime();
 
-	//if (m_timer > 10.0f)
-	//{
-	//	m_speed *= -1.0f;
-	//	m_timer = 0.0f;
-	//}
-
-	//CVector3 moveSpeed = CVector3::Zero;
-	//moveSpeed.x = m_speed;
-	//m_enemy->SetMoveSpeed(moveSpeed);
-
 	if (m_enemy->GetIsDamage()) {
 		//ƒ_ƒ[ƒW‚ðŽó‚¯‚½
 		m_esm->ChangeState(CEnemyState::enState_Damage);
