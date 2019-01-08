@@ -29,8 +29,8 @@ void CAnimationClip::Load(wchar_t * filePath)
 
 	m_topBoneKeyFrameList = &m_keyFramePtrListArray[m_keyframes[0]->boneIndex];
 	m_localMatrix.resize(m_keyFramePtrListArray.size());
-	m_freezeFlg.resize(m_keyFramePtrListArray.size());
-	for (int i = 0;i < m_localMatrix.size();i++)
+	int keyFrameSize = m_localMatrix.size();
+	for (int i = 0;i < keyFrameSize;i++)
 	{
 		if (!m_keyFramePtrListArray[i].empty())
 		{
@@ -40,7 +40,6 @@ void CAnimationClip::Load(wchar_t * filePath)
 		{
 			m_localMatrix[i] = CMatrix::Identity;
 		}
-		m_freezeFlg[i] = { false, false, false };
 	}
 }
 
@@ -51,44 +50,25 @@ void CAnimationClip::Update(float deltaTime)
 	if (m_isPlay)
 	{
 		int i = 0;
-		int nextFrameNum = min(m_topBoneKeyFrameList->size() - 1, m_currentFrameNo + 1);
 
 		for (auto& keyframe : m_keyFramePtrListArray)
 		{
 			if (!keyframe.empty())
 			{
-				CMatrix localMatrix = m_localMatrix[i];
 				//ŽŸ‚ÌƒtƒŒ[ƒ€‚Ü‚ÅüŒ`•âŠÔ‚³‚¹‚é
 				m_localMatrix[i] = keyframe[m_currentFrameNo]->transform;
-				if (m_freezeFlg[i].isFreezeX)
-				{
-					m_localMatrix[i].m[3][0] = localMatrix.m[3][0];
-				}
-				if (m_freezeFlg[i].isFreezeY)
-				{
-					m_localMatrix[i].m[3][1] = localMatrix.m[3][1];
-				}
-				if (m_freezeFlg[i].isFreezeZ)
-				{
-					m_localMatrix[i].m[3][2] = localMatrix.m[3][2];
-				}
 			}
 			i++;
 		}
 		m_frameTime += deltaTime;
+		int keyFrameSize = m_topBoneKeyFrameList->size();
 		while ((*m_topBoneKeyFrameList)[m_currentFrameNo]->time < m_frameTime)
 		{
 			m_currentFrameNo++;
 			
-			if (m_topBoneKeyFrameList->size() <= m_currentFrameNo)
+			if (keyFrameSize <= m_currentFrameNo)
 			{
 				m_isPlay = false;
-				for (auto& freezeFlg : m_freezeFlg)
-				{
-					freezeFlg.isFreezeX = false;
-					freezeFlg.isFreezeY = false;
-					freezeFlg.isFreezeZ = false;
-				}
 				break;
 			}
 		}
