@@ -49,8 +49,8 @@ void CAnimation::Update(float deltaTime)
 		m_animationClips[m_currentAnimationNum].Play();
 	}
 
-	std::vector<CMatrix> localMatrix = m_animationClips[m_currentAnimationNum].GetLocalMatrix();
-	std::vector<CMatrix> localMatrix2 = m_animationClips[m_curCurrentAnimationNum].GetLocalMatrix();
+	const std::vector<CMatrix>& localMatrix = m_animationClips[m_currentAnimationNum].GetLocalMatrix();
+	const std::vector<CMatrix>& localMatrix2 = m_animationClips[m_curCurrentAnimationNum].GetLocalMatrix();
 
 	float progressTime = deltaTime;
 	//•âŠÔŽžŠÔ‚ðŒvŽZ

@@ -96,12 +96,6 @@ public:
 		}
 	}
 
-	void SetBoneFreezeFlg(int boneID, bool isFreezeX, bool isFreezeY, bool isFreezeZ)
-	{
-		m_freezeFlg[boneID].isFreezeX = isFreezeX;
-		m_freezeFlg[boneID].isFreezeY = isFreezeY;
-		m_freezeFlg[boneID].isFreezeZ = isFreezeZ;
-	}
 
 private:
 	bool									m_isPlay = false;					//再生中か？
@@ -111,7 +105,6 @@ private:
 	std::vector<std::vector<SKeyframe*>>	m_keyFramePtrListArray;				//ボーン毎のキーフレームのリスト
 	std::vector<SKeyframe*>*				m_topBoneKeyFrameList = nullptr;	//一番最初のキーフレーム
 	std::vector<CMatrix>					m_localMatrix;						//ボーンの行列を保存するためのもの
-	std::vector<SBoneFreeze>				m_freezeFlg;						//ボーンの行列を保存するためのもの
 	float									m_frameTime = 0.0f;					//フレームを進めるためのタイマー
 	int										m_currentFrameNo = 0;				//現在のフレームナンバー
 	std::unique_ptr<CAnimationEvent[]>		m_animationEvent = nullptr;			//アニメーションイベント。
