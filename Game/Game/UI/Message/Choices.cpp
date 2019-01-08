@@ -5,10 +5,10 @@ void CChoices::Init(wchar_t* select1, wchar_t* select2)
 	//選択肢の初期化
 	m_yes.Init(select1);
 	m_yes.SetPosition({ 0.0f, -150.0f});
-	m_yes.SetSize({ 250.0f, 250.0f });
+	m_yes.SetSize({ 0.7f,0.7f });
 	m_no.Init(select2);
 	m_no.SetPosition({ 0.0f, -250.0f});
-	m_no.SetSize({ 250.0f, 250.0f });
+	m_no.SetSize({ 0.7f,0.7f });
 	//スプライトの初期化
 	CTexture* texture = TextureResource().LoadTexture(L"Assets/sprite/cursor.png");
 	m_cursor.Init(texture);
@@ -33,6 +33,11 @@ void CChoices::Update()
 		m_state = No;
 		//カーソルの座標を変更
 		m_cursor.SetPosition({ -100.0f, -250.0f });
+	}
+
+	if (Pad().IsTriggerButton(enButtonA))
+	{
+		m_isSelect = true;
 	}
 }
 

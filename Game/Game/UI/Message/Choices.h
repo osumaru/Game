@@ -30,9 +30,16 @@ public:
 		return m_state;
 	}
 
+	//選択肢を選んだか
+	bool GetIsSelect()
+	{
+		return m_isSelect;
+	}
+
 private:
-	EnSelect		m_state = Yes;	//状態
-	CFont			m_yes;			//はい
-	CFont			m_no;			//いいえ
-	CSprite			m_cursor;		//カーソル
+	EnSelect		m_state = Yes;		//状態
+	CFont			m_yes;				//はい
+	CFont			m_no;				//いいえ
+	CSprite			m_cursor;			//カーソル
+	bool			m_isSelect = false;	//選択肢を選んだか
 };

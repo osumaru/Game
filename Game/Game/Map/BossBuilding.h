@@ -5,6 +5,7 @@
 #pragma once
 
 class CMessage;
+class CChoices;
 
 class CBossBuilding : public IGameObject
 {
@@ -20,7 +21,10 @@ public:
 	void Draw() override;
 private:
 	CMessage*	m_message = nullptr;
+	CChoices*	m_choices = nullptr;
 	CSkinModel	m_skinModel;	//ÉÇÉfÉã
 	CVector3	m_position;		//ç¿ïW
 	CQuaternion m_rotation;		//âÒì]
+	float		m_timer = 0.0f;
+	bool		m_isChoice = false;
 };

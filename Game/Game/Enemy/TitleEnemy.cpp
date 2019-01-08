@@ -1,5 +1,6 @@
 #include "TitleEnemy.h"
 #include "../Camera/GameCamera.h"
+#include "../Scene/SceneManager.h"
 
 void CTitleEnemy::Init(const wchar_t* modelName, CVector3 position)
 {
@@ -20,6 +21,11 @@ void CTitleEnemy::Init(const wchar_t* modelName, CVector3 position)
 
 void CTitleEnemy::Update()
 {
+	if (GetSceneManager().GetSceneChange())
+	{
+		Delete(this);
+		return;
+	}
 	//アニメーションの更新
 	m_animation.Update(GameTime().GetDeltaFrameTime());
 	//モデルの更新
