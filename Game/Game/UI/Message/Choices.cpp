@@ -1,29 +1,28 @@
-#include "Retry.h"
+#include "Choices.h"
 
-void CRetry::Init()
+void CChoices::Init(wchar_t* select1, wchar_t* select2)
 {
+	//選択肢の初期化
+	m_yes.Init(select1);
+	m_yes.SetPosition({ 0.0f, -150.0f});
+	m_yes.SetSize({ 250.0f, 250.0f });
+	m_no.Init(select2);
+	m_no.SetPosition({ 0.0f, -250.0f});
+	m_no.SetSize({ 250.0f, 250.0f });
 	//スプライトの初期化
-	CTexture* texture = TextureResource().LoadTexture(L"Assets/sprite/Continue.png");
-	m_continue.Init(texture);
-	m_continue.SetPosition({ 0.0f, -150.0f});
-	m_continue.SetSize({ 250.0f, 250.0f });
-	texture = TextureResource().LoadTexture(L"Assets/sprite/Quit.png");
-	m_quit.Init(texture);
-	m_quit.SetPosition({ 0.0f, -250.0f});
-	m_quit.SetSize({ 250.0f, 250.0f });
-	texture = TextureResource().LoadTexture(L"Assets/sprite/cursor.png");
+	CTexture* texture = TextureResource().LoadTexture(L"Assets/sprite/cursor.png");
 	m_cursor.Init(texture);
 	m_cursor.SetPosition({ -150.0f, -150.0f });
 	m_cursor.SetSize({ 250.0f, 250.0f });
 }
 
-void CRetry::Update()
+void CChoices::Update()
 {
 	//スティックを上に倒した、又は十字キーの上を押した
 	if (Pad().GetLeftStickY() > 0.0f || Pad().IsTriggerButton(enButtonUp))
 	{
 		//状態を変更
-		m_state = Continue;
+		m_state = Yes;
 		//カーソルの座標を変更
 		m_cursor.SetPosition({ -150.0f, -150.0f });
 	}
@@ -31,15 +30,15 @@ void CRetry::Update()
 	else if (Pad().GetLeftStickY() < 0.0f || Pad().IsTriggerButton(enButtonDown))
 	{
 		//状態を変更
-		m_state = Quit;
+		m_state = No;
 		//カーソルの座標を変更
 		m_cursor.SetPosition({ -100.0f, -250.0f });
 	}
 }
 
-void CRetry::AfterDraw()
+void CChoices::AfterDraw()
 {
-	m_continue.Draw();
-	m_quit.Draw();
+	m_yes.Draw();
+	m_no.Draw();
 	m_cursor.Draw();
 }

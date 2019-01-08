@@ -8,7 +8,7 @@
 #include "../UI/Menu/Menu.h"
 #include "../UI/Result/Result.h"
 #include "../UI/LevelUp/LevelUp.h"
-#include "../UI/Result/Retry.h"
+#include "../UI/Message/Choices.h"
 #include "../GameSound/GameSound.h"
 
 void CBossScene::BeforeDead()
@@ -22,7 +22,7 @@ void CBossScene::BeforeDead()
 	Engine().GetEffectEngine().SetCamera(nullptr);
 	Delete(m_map);
 	Delete(m_gameSound);
-	Delete(m_retry);
+	Delete(m_choices);
 }
 
 bool CBossScene::Start()
@@ -54,9 +54,9 @@ bool CBossScene::Start()
 		m_result = New<CResult>(PRIORITY_UI);
 		m_result->Init();
 
-		m_retry = New<CRetry>(PRIORITY_UI);
-		m_retry->Init();
-		m_retry->SetIsActive(false);
+		m_choices = New<CChoices>(PRIORITY_UI);
+		m_choices->Init(L"はい", L"いいえ");
+		m_choices->SetIsActive(false);
 	}
 
 	//フェードインの開始
@@ -73,12 +73,12 @@ void CBossScene::Update()
 		return;
 	}
 	//コンティニュー表示をアクティブにする
-	m_retry->SetIsActive(true);
+	m_choices->SetIsActive(true);
 	//Aボタンを押したらシーン切り替え
 	if (Pad().IsTriggerButton(enButtonA))
 	{
 		//コンティニューを押した
-		if (m_retry->GetState() == CRetry::Continue)
+		if (m_choices->GetState() == CChoices::Yes)
 		{
 			//ボスシーンに遷移
 			GetSceneManager().ChangeScene(CSceneManager::enBossScene);

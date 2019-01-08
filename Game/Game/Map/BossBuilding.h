@@ -4,6 +4,8 @@
 
 #pragma once
 
+class CMessage;
+
 class CBossBuilding : public IGameObject
 {
 public:
@@ -17,6 +19,7 @@ public:
 	//•`‰æ
 	void Draw() override;
 private:
+	CMessage*	m_message = nullptr;
 	CSkinModel	m_skinModel;	//ƒ‚ƒfƒ‹
 	CVector3	m_position;		//À•W
 	CQuaternion m_rotation;		//‰ñ“]
