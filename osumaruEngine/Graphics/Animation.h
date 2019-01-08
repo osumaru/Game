@@ -70,11 +70,6 @@ public:
 		m_animationEventListener.push_back(animEvent);
 	}
 
-	void SetBoneFreezeFlg(int boneID, bool isFreezeX, bool isFreezeY, bool isFreezeZ)
-	{
-		m_animationClips[m_currentAnimationNum].SetBoneFreezeFlg(boneID, isFreezeX, isFreezeY, isFreezeZ);
-	}
-
 	/*
 	アニメーションイベントの通知
 	clipName	アニメーションクリップの名前
