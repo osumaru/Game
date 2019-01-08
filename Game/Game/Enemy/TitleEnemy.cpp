@@ -3,11 +3,13 @@
 
 void CTitleEnemy::Init(const wchar_t* modelName, CVector3 position)
 {
+	//モデルのロード
 	wchar_t filePath[256];
 	swprintf(filePath, L"Assets/modelData/%s.cmo", modelName);
 	m_skinModel.Load(filePath, &m_animation);
+	//座標を設定
 	m_position = position;
-
+	//アニメーションのロード
 	wchar_t animFilePath[256];
 	swprintf(animFilePath, L"Assets/modelData/%sStand.tka", modelName);
 	wchar_t* animationClip[1];
@@ -18,7 +20,9 @@ void CTitleEnemy::Init(const wchar_t* modelName, CVector3 position)
 
 void CTitleEnemy::Update()
 {
+	//アニメーションの更新
 	m_animation.Update(GameTime().GetDeltaFrameTime());
+	//モデルの更新
 	m_skinModel.Update(m_position, m_rotation, { 1.0f,1.0f,1.0f }, true);
 }
 

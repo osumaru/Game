@@ -163,9 +163,7 @@ void Map::Init(int stageNum)
 		group->Add(enemy);
 		enemy->AddObject();
 	}
-	if (stageNum != 2) {
-		g_pathFinding.BuildNodes();
-	}
+	g_pathFinding.BuildNodes();
 }
 
 
