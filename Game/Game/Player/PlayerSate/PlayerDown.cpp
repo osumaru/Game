@@ -22,9 +22,14 @@ void CPlayerDown::Update()
 {
 	m_pPlayerGetter->GetCharacterController().Execute(GameTime().GetDeltaFrameTime());
 
-	if (!m_pPlayerGetter->GetAnimation().IsPlay()&& m_pPlayerGetter->GetAnimation().GetCurrentAnimationNum() == enPlayerAnimationUp)
+	if (!m_pPlayerGetter->GetAnimation().IsPlay()&& m_pPlayerGetter->GetAnimation().GetCurrentAnimationNum() == enPlayerAnimationUp
+		&& m_pPlayer->GetIsStateCondition(CPlayerState::enPlayerStateStand))
 	{
 		m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateStand);
+	}
+	else if (m_pPlayer->GetIsStateCondition(CPlayerState::enPlayerStateRun))
+	{
+		m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateRun);
 	}
 	else if (!m_pPlayerGetter->GetAnimation().IsPlay())
 	{
