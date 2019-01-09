@@ -433,5 +433,7 @@ bool CPlayer::GetIsStateCondition(CPlayerState::EnPlayerState state)
 	case CPlayerState::enPlayerStateSky:		//’n–Ê‚É’…’n‚µ‚Ä‚¢‚é‚©‚Ç‚¤‚©
 		return m_isAction && !m_groundCollision.IsHit();
 
+	case CPlayerState::enPlayerStateDown:
+		return !m_animation.IsPlay() && dynamic_cast<CPlayerDamage*>(m_PlayerStateMachine.GetState(CPlayerState::enPlayerStateDamage))->GetIsSky();
 	}
 }

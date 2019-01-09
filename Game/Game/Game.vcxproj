@@ -382,6 +382,12 @@
     <MeshContentTask Include="Assets\modelData\Building3.fbx" />
     <MeshContentTask Include="Assets\modelData\Building4.FBX" />
     <MeshContentTask Include="Assets\modelData\Building5.FBX" />
+    <MeshContentTask Include="Assets\modelData\Castle1.FBX" />
+    <MeshContentTask Include="Assets\modelData\Castle2.FBX" />
+    <MeshContentTask Include="Assets\modelData\Castle3.FBX" />
+    <MeshContentTask Include="Assets\modelData\Castle4.FBX" />
+    <MeshContentTask Include="Assets\modelData\Castle5.FBX" />
+    <MeshContentTask Include="Assets\modelData\CastleFloor.FBX" />
     <MeshContentTask Include="Assets\modelData\Chest.FBX" />
     <MeshContentTask Include="Assets\modelData\Heart.fbx" />
     <MeshContentTask Include="Assets\modelData\House.FBX" />

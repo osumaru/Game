@@ -20,7 +20,7 @@
 std::vector<std::vector<SMapChipInfo>> mapChipInfo = 
 {
 	{
-	#include "alpha2.h"
+	#include "BossStage.h"
 	//#include "Boss.h"
 	//#include "Test.h"
 	//#include "ShopTest.h"
@@ -163,7 +163,7 @@ void Map::Init(int stageNum)
 		group->Add(enemy);
 		enemy->AddObject();
 	}
-	g_pathFinding.BuildNodes();
+	//g_pathFinding.BuildNodes();
 }
 
 
