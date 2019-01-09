@@ -20,11 +20,11 @@ public:
 	//描画
 	void Draw() override;
 private:
-	CMessage*	m_message = nullptr;
-	CChoices*	m_choices = nullptr;
-	CSkinModel	m_skinModel;	//モデル
-	CVector3	m_position;		//座標
-	CQuaternion m_rotation;		//回転
-	float		m_timer = 0.0f;
-	bool		m_isChoice = false;
+	CMessage*	m_message = nullptr;	//メッセージ
+	CChoices*	m_choices = nullptr;	//選択肢
+	CSkinModel	m_skinModel;			//モデル
+	CVector3	m_position;				//座標
+	CQuaternion m_rotation;				//回転
+	float		m_timer = 0.0f;			//タイマー
+	bool		m_isChoice = false;		//選択しているか
 };

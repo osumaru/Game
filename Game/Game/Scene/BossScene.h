@@ -8,6 +8,7 @@ class CLevelUp;
 class CMenu;
 class CResult;
 class CGameSound;
+class CMessage;
 class CChoices;
 
 class CBossScene : public IGameObject
@@ -41,5 +42,6 @@ private:
 	CMenu*			m_menu = nullptr;			//メニュー
 	CResult*		m_result = nullptr;			//リザルト
 	CGameSound*		m_gameSound = nullptr;		//ゲームサウンド
+	CMessage*		m_message = nullptr;		//メッセージ表示
 	CChoices*		m_choices = nullptr;		//選択肢表示
 };

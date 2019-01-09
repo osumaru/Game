@@ -103,7 +103,8 @@ void CWeaponManager::Init(CPlayer* player)
 
 void CWeaponManager::Update()
 {
-	if (!m_isAttack) {
+	if (!m_isAttack && GetPlayer().GetIsAction()) 
+	{
 		if (Pad().IsTriggerButton(enButtonUp))
 		{
 			m_weaponState = enWeaponSword;

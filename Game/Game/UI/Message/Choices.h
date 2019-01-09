@@ -41,5 +41,6 @@ private:
 	CFont			m_yes;				//はい
 	CFont			m_no;				//いいえ
 	CSprite			m_cursor;			//カーソル
+	CSprite			m_window;			//ウィンドウ
 	bool			m_isSelect = false;	//選択肢を選んだか
 };

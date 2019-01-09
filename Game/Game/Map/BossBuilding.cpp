@@ -9,12 +9,6 @@ void CBossBuilding::Init(CVector3 position)
 {
 	m_skinModel.Load(L"Assets/modelData/TestBox1.cmo");
 	m_position = position;
-	m_message = New<CMessage>(PRIORITY_UI);
-	m_message->Init({ 500.0f,250.0f }, L"ボスに挑みますか？");
-	m_message->SetIsActive(false);
-	m_choices = New<CChoices>(PRIORITY_UI);
-	m_choices->Init(L"はい", L"いいえ");
-	m_choices->SetIsActive(false);
 }
 
 void CBossBuilding::Update()
@@ -37,8 +31,10 @@ void CBossBuilding::Update()
 	float length = distance.Length();
 	if (!m_isChoice && length < 2.0f && m_timer >= 3.0f)
 	{
-		m_message->SetIsActive(true);
-		m_choices->SetIsActive(true);
+		m_message = New<CMessage>(PRIORITY_UI);
+		m_message->Init({ 500.0f,250.0f }, L"bossTry");
+		m_choices = New<CChoices>(PRIORITY_UI);
+		m_choices->Init(L"はい", L"いいえ");
 		m_isChoice = true;
 		m_timer = 0.0f;
 	}
@@ -46,21 +42,20 @@ void CBossBuilding::Update()
 	if (m_isChoice)
 	{
 		GetPlayer().SetIsAction(false);
-	}
-
-	if (m_choices->GetIsSelect())
-	{
-		if (m_choices->GetState() == CChoices::Yes)
+		if (m_choices->GetIsSelect())
 		{
+			if (m_choices->GetState() == CChoices::Yes)
+			{
+				//ボスシーンに切り替える
+				GetSceneManager().ChangeScene(CSceneManager::enBossScene);
+			}
+			else
+			{
+				GetPlayer().SetIsAction(true);
+				m_isChoice = false;
+			}
 			Delete(m_message);
 			Delete(m_choices);
-			//ボスシーンに切り替える
-			GetSceneManager().ChangeScene(CSceneManager::enBossScene);
-		}
-		else
-		{
-			GetPlayer().SetIsAction(true);
-			m_isChoice = false;
 		}
 	}
 

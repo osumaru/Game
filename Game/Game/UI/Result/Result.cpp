@@ -34,6 +34,7 @@ void CResult::AfterDraw()
 	if (m_alphaTime >= 1.0f)
 	{
 		m_alphaTime = 1.0f;
+		m_isDraw = true;
 	}
 	m_result.SetAlpha(m_alphaTime);
 	m_result.Draw();

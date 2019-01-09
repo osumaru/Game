@@ -36,7 +36,7 @@ void CWireAction::Update()
 	int wireListCount = 0;
 	//ƒƒCƒ„[‚Ìˆ—
 	bool isWireAction = false;
-	if (!m_isWireMove)
+	if (!m_isWireMove && GetPlayer().GetIsAction())
 	{
 		if (Pad().IsTriggerButton(enButtonY))
 		{
