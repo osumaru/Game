@@ -54,6 +54,7 @@ protected:
 	};
 
 	CSkinModel			m_skinModel;						//スキンモデル
+	CSkinModel			m_skinmodelNpc;						//人のモデル
 	CAnimation			m_animation;
 	CVector3			m_position = CVector3::Zero;		//ポジション
 	CVector3			m_scale = CVector3::One;			//スケール
