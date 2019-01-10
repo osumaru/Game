@@ -119,7 +119,7 @@ public:
 	}
 
 	//キャラクターコントローラーを取得
-	const CCharacterController& GetCharacterController()
+	const CCharacterController& GetCharacterController() const
 	{
 		return m_characterController;
 	}

@@ -42,8 +42,10 @@ void CNinja::Init(CVector3 position)
 	m_skinModel.Load(L"Assets/modelData/Ninja.cmo", &m_animation);
 	m_skinModel.LoadNormalmap(L"Assets/modelData/Ninja_normal.png");
 	m_position = position;
-	m_characterController.Init(0.5f, 0.9f, position);
-	m_characterController.SetGravity(-9.0f);
+	//キャラクターコントローラーを初期化
+	m_characterController.Init(0.5f, 0.9f, m_position);
+	m_characterController.SetGravity(-9.8f);
+	//アニメーションの初期化
 	wchar_t* animClip[CEnemyState::enAnimation_Num] = {
 		L"Assets/modelData/NinjaStand.tka",
 		L"Assets/modelData/NinjaWalk.tka",
@@ -71,7 +73,9 @@ void CNinja::Init(CVector3 position)
 	m_status.exp = 10;
 	this->SetIsActive(true);
 
+	//腰のワールド行列を取得
 	m_spineMatrix = &GetBoneWorldMatrix(L"Spine");
+	//攻撃できる距離を設定
 	m_attackLength = 1.2f;
 
 	m_animation.AddAnimationEvent([&](auto animClipname, auto eventName)
@@ -89,18 +93,22 @@ bool CNinja::Start()
 
 void CNinja::Update()
 {
+	//当たり判定用の腰の座標を更新
 	UpdateSpinePos();
 
 	if (!m_isWireHit) {
+		//アニメーションの更新
 		m_animation.Update(GameTime().GetDeltaFrameTime() * 2.0f);
 	}
 
 	if (!m_isRemovedRigidBody && !m_isWireHit) {
+		//座標の更新
 		m_characterController.SetPosition(m_position);
 		m_characterController.Execute(GameTime().GetDeltaFrameTime());
 		m_position = m_characterController.GetPosition();
 	}
 
+	//モデルの更新
  	m_skinModel.Update(m_position, m_rotation, { 1.0f, 1.0f, 1.0f }, true);
 }
 

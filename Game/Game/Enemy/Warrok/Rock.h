@@ -29,6 +29,18 @@ public:
 	//•`‰æ
 	void Draw();
 
+	//À•W‚ğæ“¾
+	const CVector3& GetPosition() const
+	{
+		return m_position;
+	}
+
+	//ˆÚ“®‘¬“x‚ğİ’è
+	void SetMoveSpeed(const CVector3& moveSpeed)
+	{
+		m_characterController.SetMoveSpeed(moveSpeed);
+	}
+
 	//Šâ‚ğ“Š‚°‚é‚©‚ğİ’è
 	void SetIsThrow(bool isThrow)
 	{

@@ -19,6 +19,9 @@ public:
 
 	//回転
 	void Rotation();
+
+	//エネミーをロックオンする
+	void RockOnEnemy();
 	
 	//カメラ必要なプレイヤーの情報の初期化`
 	void CameraSetPlayer();
@@ -76,19 +79,18 @@ public:
 		return m_camera.GetProjectionMatrix();
 	}
 
-	//エネミーをロックオンする
-	void RockOnEnemy();
-
 private:
-	static CGameCamera* m_gameCamera;							//ゲームカメラ
-	CCamera				m_camera;								//カメラ
-	CVector3			m_cameraVec;							//注視点からカメラへのベクトル
-	CSpringCamera		m_springCamera;							//バネカメラ
-	CShakeCamera		m_shakeCamera;							//揺れカメラ
-	IEnemy*				m_rockOnEnemy;							//ロックオンしているエネミー
-	const CMatrix*		m_pPlayerBoneMat;						//注視点とするプレイヤーのボーンの行列
-	const float			CAMERA_SPEED = 4.0f;					//カメラの回転速度
-	bool				m_isRockOn = false;						//ロックオンしているか
+	static CGameCamera* m_gameCamera;			//ゲームカメラ
+	CCamera				m_camera;				//カメラ
+	CVector3			m_cameraVec;			//注視点からカメラへのベクトル
+	CSpringCamera		m_springCamera;			//バネカメラ
+	CShakeCamera		m_shakeCamera;			//揺れカメラ
+	IEnemy*				m_rockOnEnemy;			//ロックオンしているエネミー
+	const CMatrix*		m_pPlayerBoneMat;		//注視点とするプレイヤーのボーンの行列
+	const float			CAMERA_SPEED = 4.0f;	//カメラの回転速度
+	const float			m_cameraLength = 3.5f;	//注視点からカメラへの距離
+	const float			m_rockOnOffset = 2.5f;	//ロックオン時の高さ補正の限界値
+	bool				m_isRockOn = false;		//ロックオンしているか
 };
 
 static CGameCamera& GetGameCamera()

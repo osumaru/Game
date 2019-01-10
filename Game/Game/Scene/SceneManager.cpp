@@ -42,6 +42,10 @@ void CSceneManager::BeforeDead()
 
 void CSceneManager::Update()
 {
+	if (m_isSceneChange)
+	{
+		m_isSceneChange = false;
+	}
 	//フェードが呼ばれかつ実行が終わっていたら
 	if (m_isFadeOut && !m_fade->IsExecute())
 	{
@@ -104,7 +108,7 @@ void CSceneManager::Update()
 		default:
 			break;
 		}
-		m_isSceneChange = false;
+		m_isSceneChange = true;
 		//現在のシーンを開放用のステートへ
 		m_preSceneState = m_nextSceneState;
 	}
@@ -120,7 +124,6 @@ void CSceneManager::ChangeScene(EnSceneState scene)
 		m_isFadeOut = true;
 	}
 	
-	m_isSceneChange = true;
 	//変更するシーンを現在のシーンにする
 	m_nextSceneState = scene;
 }
