@@ -9,6 +9,8 @@ static const int PRIORITY_CAMERA = 2;
 static const int PRIORITY_ITEM = 0;
 static const int PRIORITY_ARROW = 0;
 static const int PRIORITY_SCENE = 0;
+static const int PRIORITY_GROUND = 2;
+static const int PRIORITY_BILLDING = 3;
 
 
 #include "../../osumaruEngine/engineStdafx.h"

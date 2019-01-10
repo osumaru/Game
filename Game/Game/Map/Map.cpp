@@ -102,7 +102,7 @@ void Map::Init(int stageNum)
 			titleEnemy->Init(mInfo.m_modelName, mInfo.m_position);
 			break;
 		case enMapTagBossObj:
-			bossBuilding = New<CBossBuilding>(PRIORITY_MAPCHIP);
+			bossBuilding = New<CBossBuilding>(PRIORITY_BILLDING);
 			bossBuilding->Init(mInfo.m_position);
 			break;
 		case enMapTagBreakBrock:
@@ -110,11 +110,11 @@ void Map::Init(int stageNum)
 			m_collider = true;
 			break;
 		case enMapTagTerrain:
-			mapChip = New<StaticMapObject>(PRIORITY_MAPCHIP);
+			mapChip = New<StaticMapObject>(PRIORITY_GROUND);
 			m_collider = false;
 			break;
 		case enMapTagObstacle:
-			mapChip = New<CObstacleMapObject>(PRIORITY_MAPCHIP);
+			mapChip = New<CObstacleMapObject>(PRIORITY_BILLDING);
 			break;
 		default:
 			mapChip = New<StaticMapObject>(PRIORITY_MAPCHIP);
