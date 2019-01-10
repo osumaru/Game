@@ -42,6 +42,7 @@ bool CGameScene::Start()
 	//カメラを生成
 	GetGameCamera().Create();
 	GetGameCamera().Init();
+	GetGameCamera().SetIsActiveUpdate(true);
 	m_gameSound = New<CGameSound>(0);
 
 	//フェードの実行が終わったらtrueを返す
@@ -91,11 +92,7 @@ bool CGameScene::Start()
 
 void CGameScene::Update()
 {
-	if (Pad().IsTriggerButton(enButtonRStickPush))
-	{
-		GetSceneManager().ChangeScene(CSceneManager::enBossScene);
-	}
-	else if (GetPlayer().GetIsDied())
+	if (GetPlayer().GetIsDied())
 	{
 		GetSceneManager().ChangeScene(CSceneManager::enGameScene);
 	}

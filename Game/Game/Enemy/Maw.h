@@ -49,6 +49,9 @@ public:
 	//行動の選択
 	//void ActionStateOrder();
 
+	//回転
+	void Rotation();
+
 	//弱点スプライト描画
 	void WeekPointUpdate();
 
@@ -154,6 +157,12 @@ public:
 	//enentName		アニメーションイベント名
 	void OnInvokeAnimationEvent(const wchar_t* animClipName, const wchar_t* eventName);
 
+	//ワールド行列の取得
+	const CMatrix& GetWorldMatrix() const
+	{
+		return m_skinModel.GetWorldMatrix();
+	}
+
 private:
 	//行動パターン
 	enum EnMawActionPattern
@@ -170,7 +179,7 @@ private:
 	static CMaw*			m_maw;										//ボス
 	CVector3				m_position;									//座標
 	CQuaternion				m_rotation = CQuaternion::Identity;			//回転
-	const CVector3			m_scale = { 10.0f,10.0f, 10.0f };			//拡大
+	CVector3				m_scale = { 3.0f,3.0f, 3.0f };				//拡大
 	CSkinModel				m_skinModel;								//スキンモデル
 	CCharacterController	m_characterController;						//キャラクターコントローラー
 	CAnimation				m_animation;								//アニメーション

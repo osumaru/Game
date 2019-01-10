@@ -8,6 +8,12 @@ public:
 	void Init()override;
 
 	void Update()override;
+
+	//空中のダメージフラグ取得
+	bool GetIsSky()
+	{
+		return m_isSky;
+	}
 private:
 	void Rotation();
 private:

@@ -7,6 +7,10 @@ void CNavigationMesh::Init()
 {
 	std::vector<CVector3> vertexBufferVector;
 	std::vector<unsigned int> indexBufferVector;
+	if (m_pModel == nullptr)
+	{
+		return;
+	}
 	DirectX::Model* model = m_pModel->GetBody();
 	CVector3 aabbMax = {FLT_MIN, FLT_MIN, FLT_MIN};
 	CVector3 aabbMin = { FLT_MAX, FLT_MAX, FLT_MAX };

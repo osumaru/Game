@@ -65,7 +65,7 @@ void CMenu::Init()
 
 void CMenu::Update()
 {
-	if (&GetPlayer() == nullptr || GetPlayer().GetIsDied()) { return; }
+	if (&GetPlayer() == nullptr || GetPlayer().GetIsDied() || !GetPlayer().GetIsAction()) { return; }
 	for (auto& shop : GetSceneManager().GetMap()->GetShop()->Getlist())
 	{
 		if (shop->GetShopState() != 0)

@@ -14,6 +14,7 @@ public:
 	{
 		CMatrix worldMat;				//ワールド行列
 		CMatrix viewProjMat;			//ビュープロジェクション行列
+		float specularPower;			//スペキュラライトの強さ
 	};
 
 	//コンストラクタ
@@ -81,6 +82,18 @@ public:
 
 	*/
 	void LoadNormalmap(const wchar_t* filePath);
+
+	/*
+	スペキュラマップの読み込み
+
+	*/
+	void LoadSpecularMap(const wchar_t* filePath);
+
+	//スペキュラライトの強さを設定
+	void SetSpecularPower(float specPower)
+	{
+		m_specularPower = specPower;
+	}
 	
 	/*
 	シャドウマップへ書き込むモデルとして登録
@@ -108,7 +121,7 @@ public:
 
 private:
 	std::unique_ptr<CSkelton>		m_skelton = nullptr;				//スケルトン
-	CConstantBuffer					constantBuffer;						//定数バッファ
+	CConstantBuffer					m_cb;						//定数バッファ
 	CConstantBuffer					m_lightCB;							//ライトのバッファ
 	CConstantBuffer					m_materialCB;
 	CLight							m_light;							//ライト
@@ -116,7 +129,9 @@ private:
 	CMatrix							m_worldMatrixZUp = CMatrix::Identity;	//ZUpのワールド行列
 	CMatrix							m_worldMatrix = CMatrix::Identity;	//ワールド行列
 	CTexture*						m_pNormalTexture = nullptr;
+	CTexture*						m_pSpecularTexture = nullptr;
 	SMaterialFlg					m_materialFlg;
 	bool							m_isShadowCaster = false;
+	float							m_specularPower = 0.0f;					//スペキュラライトの強さ
 
 };

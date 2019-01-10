@@ -120,8 +120,6 @@ struct SSweepResultWall : public btCollisionWorld::ConvexResultCallback
 	bool isHit = false;								//衝突フラグ。
 	CVector3 hitPos = { 0.0f, 0.0f, 0.0f };		//衝突点。
 	CVector3 startPos = { 0.0f, 0.0f, 0.0f };	//レイの始点。
-	CVector3 ray = { 0.0f, 0.0f, 0.0f };
-	bool		isRay = false;
 	float		distance = 0.0f;
 	float dist = FLT_MAX;							//衝突点までの距離。一番近い衝突点を求めるため。FLT_MAXは単精度の浮動小数点が取りうる最大の値。
 	CVector3	hitNormal = { 0.0f, 0.0f, 0.0f };	//衝突点の法線
@@ -148,18 +146,9 @@ struct SSweepResultWall : public btCollisionWorld::ConvexResultCallback
 		if (angle >= cPI * 0.3f ||		//地面の傾斜が54度以上なので壁とみなす。
 			convexResult.m_hitCollisionObject->getUserIndex() == enCollisionAttr_Character)//もしくはコリジョン属性がキャラクタなので壁とみなす。
 		{
-			ray.Normalize();
 			btVector3 btMoveSpeed = hitObject->getWorldTransform().getOrigin() - hitObject->getOneBeforeWorldTransform().getOrigin();
 			CVector3 moveSpeed = { btMoveSpeed.x(), btMoveSpeed.y(), btMoveSpeed.z() };
 			distance = moveSpeed.Length();
-			if (FLT_EPSILON <= distance)
-			{
-				moveSpeed.Normalize();
-				if (ray.Dot(moveSpeed) < 0.0f)
-				{
-					isRay = true;
-				}
-			}
 			isHit = true;
 			CVector3 hitPosTmp;
 			hitPosTmp.Set(convexResult.m_hitPointLocal);
@@ -168,6 +157,7 @@ struct SSweepResultWall : public btCollisionWorld::ConvexResultCallback
 			vDist = hitPosTmp - startPos;
 			vDist.y = 0.0f;
 			float distTmp = vDist.Length();
+
 			if (distTmp < dist)
 			{
 				//この衝突点の方が近いので、最近傍の衝突点を更新する。
@@ -461,10 +451,10 @@ void CCharacterController::Execute(float deltaTime)
 	//@todo 未対応。 trans.setRotation(btQuaternion(rotation.x, rotation.y, rotation.z));
 }
 
-void CCharacterController::StaticExecute()
+void CCharacterController::DynamicExecute()
 {
 	const int rayNum = 4;
-	const float rayLength = 1.0f;
+	const float rayLength = 0.7f;
 	//4方向のXZ平面にレイを飛ばす
 	CVector3 ray[rayNum] =
 	{
@@ -489,10 +479,10 @@ void CCharacterController::StaticExecute()
 		SSweepResultWall callback;
 		callback.me = m_rigidBody.GetBody();
 		callback.startPos = startPos;
-		callback.ray.Set(end.getOrigin() - start.getOrigin());
+		
 		PhysicsWorld().ConvexSweepTest((const btConvexShape*)m_collider.GetBody(), start, end, callback);
 		//もしレイが当たっていて、さらに押し戻す方向とオブジェクトの移動方向が一致している場合(引っ付き防止)
-		if(callback.isHit && callback.isRay /*&& fabs(rayLength - callback.dist) < m_radius + 0.1f*/)
+		if(callback.isHit)
 		{
 		
 			CVector3 hitNormal = callback.hitNormal;
@@ -507,6 +497,7 @@ void CCharacterController::StaticExecute()
 			float projection = hitNormal.Dot(sinking);
 			hitNormal *= (projection + m_radius);
 			position += hitNormal;
+			m_wallHitObject = callback.hitObject;
 		}
 	}
 	m_rigidBody.SetPosition(position);

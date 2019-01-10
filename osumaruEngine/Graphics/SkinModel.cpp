@@ -22,7 +22,7 @@ void CSkinModel::Load(const wchar_t* filePath, CAnimation* animation)
 	SSkinModelCB cb;
 	cb.worldMat = CMatrix::Identity;
 	cb.viewProjMat = CMatrix::Identity;
-	constantBuffer.Create(sizeof(SSkinModelCB), &cb);
+	m_cb.Create(sizeof(SSkinModelCB), &cb);
 	m_lightCB.Create(sizeof(CLight), &m_light);
 	ZeroMemory(&m_materialFlg, sizeof(SMaterialFlg));
 	m_materialFlg.isDiffuse = g_materialFlg.isDiffuse;
@@ -76,6 +76,8 @@ void CSkinModel::Update(const CVector3& position, const CQuaternion& rotation, c
 }
 
 
+
+
 void CSkinModel::ShadowMapEntry()
 {
 	if (m_isShadowCaster)
@@ -93,11 +95,12 @@ void CSkinModel::Draw(const CMatrix& view, const CMatrix& projection, bool isSha
 	viewProjMat.Mul(view, projection);
 	cb.viewProjMat = viewProjMat;
 	cb.worldMat = m_worldMatrixZUp;
-	constantBuffer.Update(&cb);
+	cb.specularPower = m_specularPower;
+	m_cb.Update(&cb);
 	m_materialCB.Update(&m_materialFlg);
 	m_lightCB.Update(&m_light);
 	Engine().GetShadowMap().SetConstantBuffer();
-	Microsoft::WRL::ComPtr<ID3D11Buffer> cbBuffer = constantBuffer.GetBody();
+	Microsoft::WRL::ComPtr<ID3D11Buffer> cbBuffer = m_cb.GetBody();
 	GetDeviceContext()->VSSetConstantBuffers(0, 1, cbBuffer.GetAddressOf());
 	GetDeviceContext()->PSSetConstantBuffers(0, 1, cbBuffer.GetAddressOf());
 	cbBuffer = m_lightCB.GetBody();
@@ -109,6 +112,11 @@ void CSkinModel::Draw(const CMatrix& view, const CMatrix& projection, bool isSha
 		ID3D11ShaderResourceView* srv = m_pNormalTexture->GetShaderResource().Get();
 		GetDeviceContext()->PSSetShaderResources(11, 1, &srv);
 	}
+	if (m_pSpecularTexture != nullptr)
+	{
+		ID3D11ShaderResourceView* srv = m_pSpecularTexture->GetShaderResource().Get();
+		GetDeviceContext()->PSSetShaderResources(12, 1, &srv);
+	}
 
 	if (m_skelton != nullptr)
 	{
@@ -117,7 +125,7 @@ void CSkinModel::Draw(const CMatrix& view, const CMatrix& projection, bool isSha
 	for (auto& modelMesh : m_skinModel->meshes)
 	{
 		for (auto& meshPart : modelMesh->meshParts)
-		{
+		{ 
 			((ISkinModelEffect*)(&*meshPart->effect))->SetIsShadow(isShadow);
 		}
 	}
@@ -139,4 +147,10 @@ void CSkinModel::LoadNormalmap(const wchar_t * filePath)
 {
 	m_pNormalTexture = TextureResource().LoadTexture(filePath);
 	m_materialFlg.isNormalMap = g_materialFlg.isNormalMap;
+}
+
+void CSkinModel::LoadSpecularMap(const wchar_t * filePath)
+{
+	m_pSpecularTexture = TextureResource().LoadTexture(filePath);
+	m_materialFlg.isSpecularmap = g_materialFlg.isSpecularmap;
 }

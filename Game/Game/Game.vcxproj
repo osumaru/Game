@@ -163,6 +163,7 @@
     <ClCompile Include="Camera\CameraCollisionSolver.cpp" />
     <ClCompile Include="Enemy\EnemyState\EnemyAttackWait.cpp" />
     <ClCompile Include="Enemy\EnemyState\EnemyStan.cpp" />
+    <ClCompile Include="Enemy\TitleEnemy.cpp" />
     <ClCompile Include="Enemy\Warrok\Rock.cpp" />
     <ClCompile Include="Enemy\Warrok\Warrok.cpp" />
     <ClCompile Include="GameSound\GameSoundEffect.cpp" />
@@ -191,6 +192,7 @@
     <ClCompile Include="Item\InventoryItem\InventoryRecoveryItem.cpp" />
     <ClCompile Include="Item\InventoryItem\InventorySword.cpp" />
     <ClCompile Include="Item\InventoryItem\InventoryTwinSword.cpp" />
+    <ClCompile Include="Map\BossBuilding.cpp" />
     <ClCompile Include="Map\MapChip\ObstacleMapObject.cpp" />
     <ClCompile Include="Player\PlayerSate\PlayerDown.cpp" />
     <ClCompile Include="Player\PlayerSate\PlayerSky.cpp" />
@@ -254,10 +256,11 @@
     <ClCompile Include="UI\Menu\EquipInventory.cpp" />
     <ClCompile Include="UI\Menu\ItemInventory.cpp" />
     <ClCompile Include="UI\Menu\Menu.cpp" />
+    <ClCompile Include="UI\Message\Choices.cpp" />
+    <ClCompile Include="UI\Message\Message.cpp" />
     <ClCompile Include="UI\MiniMap\MiniMap.cpp" />
     <ClCompile Include="UI\PlayerHp\PlayerHp.cpp" />
     <ClCompile Include="UI\Result\Result.cpp" />
-    <ClCompile Include="UI\Result\Retry.cpp" />
     <ClCompile Include="UI\WeaponSelect\WeaponSelect.cpp" />
     <ClCompile Include="NPC\Shop\WeaponShop.cpp" />
     <ClCompile Include="UI\WeekPoint\WeekPoint.cpp" />
@@ -266,6 +269,7 @@
     <ClInclude Include="Camera\CameraCollisionSolver.h" />
     <ClInclude Include="Enemy\EnemyState\EnemyAttackWait.h" />
     <ClInclude Include="Enemy\EnemyState\EnemyStan.h" />
+    <ClInclude Include="Enemy\TitleEnemy.h" />
     <ClInclude Include="Enemy\Warrok\Rock.h" />
     <ClInclude Include="Enemy\Warrok\Warrok.h" />
     <ClInclude Include="GameSound\GameSoundEffect.h" />
@@ -299,6 +303,7 @@
     <ClInclude Include="Item\InventoryItem\InventoryRecoveryItem.h" />
     <ClInclude Include="Item\InventoryItem\InventorySword.h" />
     <ClInclude Include="Item\InventoryItem\InventoryTwinSword.h" />
+    <ClInclude Include="Map\BossBuilding.h" />
     <ClInclude Include="Map\MapChip\ObstacleMapObject.h" />
     <ClInclude Include="Player\PlayerSate\PlayerDown.h" />
     <ClInclude Include="Player\PlayerSate\PlayerSky.h" />
@@ -359,10 +364,11 @@
     <ClInclude Include="UI\Menu\EquipInventory.h" />
     <ClInclude Include="UI\Menu\ItemInventory.h" />
     <ClInclude Include="UI\Menu\Menu.h" />
+    <ClInclude Include="UI\Message\Choices.h" />
+    <ClInclude Include="UI\Message\Message.h" />
     <ClInclude Include="UI\MiniMap\MiniMap.h" />
     <ClInclude Include="UI\PlayerHp\PlayerHp.h" />
     <ClInclude Include="UI\Result\Result.h" />
-    <ClInclude Include="UI\Result\Retry.h" />
     <ClInclude Include="UI\WeaponSelect\WeaponSelect.h" />
     <ClInclude Include="NPC\Shop\WeaponShop.h" />
     <ClInclude Include="UI\WeekPoint\WeekPoint.h" />
@@ -376,6 +382,12 @@
     <MeshContentTask Include="Assets\modelData\Building3.fbx" />
     <MeshContentTask Include="Assets\modelData\Building4.FBX" />
     <MeshContentTask Include="Assets\modelData\Building5.FBX" />
+    <MeshContentTask Include="Assets\modelData\Castle1.FBX" />
+    <MeshContentTask Include="Assets\modelData\Castle2.FBX" />
+    <MeshContentTask Include="Assets\modelData\Castle3.FBX" />
+    <MeshContentTask Include="Assets\modelData\Castle4.FBX" />
+    <MeshContentTask Include="Assets\modelData\Castle5.FBX" />
+    <MeshContentTask Include="Assets\modelData\CastleFloor.FBX" />
     <MeshContentTask Include="Assets\modelData\Chest.FBX" />
     <MeshContentTask Include="Assets\modelData\Heart.fbx" />
     <MeshContentTask Include="Assets\modelData\House.FBX" />

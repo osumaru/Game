@@ -28,6 +28,7 @@ void CPlayerWalk::Update()
 	m_pPlayerGetter->SetMoveSpeed(moveSpeed);
 
 	m_pPlayerGetter->GetCharacterController().Execute(GameTime().GetDeltaFrameTime());
+	m_pPlayerGetter->SetPosition(m_pPlayerGetter->GetCharacterController().GetPosition());
 	//移動の入力がなければ待機アニメーションに遷移
 	if (Pad().GetLeftStickX() == 0 && Pad().GetLeftStickY() == 0)
 	{

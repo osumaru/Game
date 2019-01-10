@@ -62,15 +62,12 @@ private:
 		int frameBufferWidth;
 		int frameBufferHeight;
 	};
-	struct SPointLightCB
+
+	struct SGameCameraCB
 	{
-		CMatrix viewMat;
-		CMatrix projectionMat;
-		CMatrix viewMatRotOnry;
-		CVector2 screenParam;
+		CMatrix viewMatrix;
+		CMatrix projMatrix;
 	};
-	CShader									m_cs;
-	CConstantBuffer							m_pointLightCB;
 	CRenderTarget							m_renderTarget[enRenderTargetNum];	//Gバッファー
 	CPrimitive								m_primitive;						//プリミティブ
 	CShader									m_vertexShader;						//頂点シェーダー

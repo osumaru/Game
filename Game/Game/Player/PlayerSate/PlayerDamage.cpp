@@ -36,7 +36,7 @@ void CPlayerDamage::Update()
 		moveSpeed.x = 0.0f;
 		moveSpeed.z = 0.0f;
 		m_pPlayerGetter->SetMoveSpeed(moveSpeed);
-		if (!m_pPlayerGetter->GetAnimation().IsPlay() && m_isSky)
+		if (m_pPlayer->GetIsStateCondition(CPlayerState::enPlayerStateDown))
 		{
 			m_pPlayerGetter->DamageStateReset();
 			m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateDown);

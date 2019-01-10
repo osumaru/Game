@@ -97,6 +97,9 @@
     <Filter Include="ソース ファイル\NPC\Shop">
       <UniqueIdentifier>{14c91c9c-7902-4237-ba30-1c31f4a768b1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\UI\Message">
+      <UniqueIdentifier>{c93ca995-b237-4131-a6d9-159a05ae9238}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -394,11 +397,20 @@
     <ClCompile Include="Scene\BossScene.cpp">
       <Filter>ソース ファイル\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="UI\Result\Retry.cpp">
-      <Filter>ソース ファイル\UI\Result</Filter>
-    </ClCompile>
     <ClCompile Include="Player\PlayerSate\PlayerDown.cpp">
       <Filter>ソース ファイル\Player\PlayerState</Filter>
+    </ClCompile>
+    <ClCompile Include="Map\BossBuilding.cpp">
+      <Filter>ソース ファイル\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy\TitleEnemy.cpp">
+      <Filter>ソース ファイル\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Message\Message.cpp">
+      <Filter>ソース ファイル\UI\Message</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Message\Choices.cpp">
+      <Filter>ソース ファイル\UI\Message</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -705,11 +717,20 @@
     <ClInclude Include="Scene\BossScene.h">
       <Filter>ソース ファイル\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="UI\Result\Retry.h">
-      <Filter>ソース ファイル\UI\Result</Filter>
-    </ClInclude>
     <ClInclude Include="Player\PlayerSate\PlayerDown.h">
       <Filter>ソース ファイル\Player\PlayerState</Filter>
+    </ClInclude>
+    <ClInclude Include="Map\BossBuilding.h">
+      <Filter>ソース ファイル\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy\TitleEnemy.h">
+      <Filter>ソース ファイル\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Message\Message.h">
+      <Filter>ソース ファイル\UI\Message</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Message\Choices.h">
+      <Filter>ソース ファイル\UI\Message</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -861,6 +882,24 @@
       <Filter>ソース ファイル\Assets</Filter>
     </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\TestBox1.FBX">
+      <Filter>ソース ファイル\Assets</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\Castle4.FBX">
+      <Filter>ソース ファイル\Assets</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\Castle5.FBX">
+      <Filter>ソース ファイル\Assets</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\Castle1.FBX">
+      <Filter>ソース ファイル\Assets</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\Castle2.FBX">
+      <Filter>ソース ファイル\Assets</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\Castle3.FBX">
+      <Filter>ソース ファイル\Assets</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\CastleFloor.FBX">
       <Filter>ソース ファイル\Assets</Filter>
     </MeshContentTask>
   </ItemGroup>

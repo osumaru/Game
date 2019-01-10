@@ -30,10 +30,17 @@ public:
 	//ダメージ状態を解除する関数
 	void DamageStateReset();
 
+	//スタンダメージ状態を解除する関数
+	void StanDamageStateReset();
 	/*
 	プレイヤーの座標の設定
 	*/
 	void SetPosition(const CVector3& pos);
+
+	/*
+	プレイヤーの剛体の位置を設定
+	*/
+	void  SetCharaconPos(const CVector3& pos);
 
 	//プレイヤーのクォータニオンを取得
 	const CQuaternion& GetRotation();

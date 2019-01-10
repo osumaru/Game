@@ -14,12 +14,13 @@
 #include "../Enemy/EnemyGroup.h"
 #include "../Enemy/PathFinding/PathFinding.h"
 #include"../NPC/ShopManager.h"
-
+#include "../Map/BossBuilding.h"
+#include "../Enemy/TitleEnemy.h"
 
 std::vector<std::vector<SMapChipInfo>> mapChipInfo = 
 {
 	{
-	#include "alpha2.h"
+	#include "BossStage.h"
 	//#include "Boss.h"
 	//#include "Test.h"
 	//#include "ShopTest.h"
@@ -28,6 +29,9 @@ std::vector<std::vector<SMapChipInfo>> mapChipInfo =
 	},
 	{
 	#include "bossTest.h"
+	},
+	{
+		#include "TitleMap.h"
 	}
 };
 	
@@ -54,7 +58,8 @@ void Map::Init(int stageNum)
 		CEnemyGroup* enemyGroup = nullptr;
 		IEnemy* enemy = nullptr;
 		std::list<IEnemy*>::iterator it;
-
+		CBossBuilding* bossBuilding = nullptr;
+		CTitleEnemy* titleEnemy = nullptr;
 		switch (mInfo.m_tag)
 		{
 		case enMapTagMapChip:
@@ -90,6 +95,14 @@ void Map::Init(int stageNum)
 			break;
 		case enMapTagWeaponShop:
 			m_shopManager->InitShop(mInfo.m_position, mInfo.m_rotation, EShop::enWeaponShop);
+			break;
+		case enMapTagTitleEnemy:
+			titleEnemy = New<CTitleEnemy>(PRIORITY_ENEMY);
+			titleEnemy->Init(mInfo.m_modelName, mInfo.m_position);
+			break;
+		case enMapTagBossObj:
+			bossBuilding = New<CBossBuilding>(PRIORITY_MAPCHIP);
+			bossBuilding->Init(mInfo.m_position);
 			break;
 		case enMapTagBreakBrock:
 			mapChip = New<CBreakMapObject>(PRIORITY_MAPCHIP);
@@ -150,8 +163,7 @@ void Map::Init(int stageNum)
 		group->Add(enemy);
 		enemy->AddObject();
 	}
-	
-	g_pathFinding.BuildNodes();
+	//g_pathFinding.BuildNodes();
 }
 
 
@@ -198,8 +210,10 @@ void Map::BeforeDead()
 	}
 	m_enemyList.clear();
 
-	//プレイヤーの消去
-	GetPlayer().Destroy();
-
+	if (&GetPlayer() != nullptr) 
+	{
+		//プレイヤーの消去
+		GetPlayer().Destroy();
+	}
 
 }

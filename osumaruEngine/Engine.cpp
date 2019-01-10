@@ -5,6 +5,7 @@
 #include "Timer/StopWatch.h"
 #include "Sound\SoundEngine.h"
 #include "Input\Pad.h"
+#include "Sky.h"
 
 int MakeHash(const wchar_t* str)
 {
@@ -156,8 +157,19 @@ void CEngine::InitD3D(HINSTANCE& hInst)
 	m_pointLightManager.Init();
 	m_spriteBatch = std::make_unique<DirectX::SpriteBatch>(m_pDeviceContext.Get());
 	m_effectEngine.Init();
+	GameTime().Init();
+	m_tbdr.Init();
+	Sky().Init(nullptr);
 }
 
+void CEngine::SetCamera(const CCamera* camera)
+{
+	m_tbdr.SetCamera(camera);
+	m_deferred.SetCamera(camera);
+	m_physicsWorld->SetCamera(camera);
+	m_effectEngine.SetCamera(camera);
+	Sky().SetCamera(camera);
+}
 void CEngine::GameLoop()
 {
 	//ÉQÅ[ÉÄÉãÅ[Év
