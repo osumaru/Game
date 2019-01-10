@@ -18,6 +18,7 @@ int WINAPI wWinMain(
 	GetSceneManager().Init();
 	GetSceneManager().GetInstance().Update();
 	Random().Init((unsigned int)time(NULL));
+	//Engine().GetTBDR().SetIsActive(false);
 	Engine().GameLoop();
 	Delete(&GetSceneManager());
 	Delete(&Sky());
