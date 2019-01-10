@@ -20,9 +20,6 @@ public:
 	//enemyPos		エネミーの座標
 	void Init(IEnemy* enemy ,CVector3 enemyPos);
 
-	//更新される前に一度だけ呼ばれる
-	bool Start();
-
 	//更新
 	void Update();
 

@@ -115,7 +115,7 @@ void CEquipInventory::Init(CMenu * menu)
 		m_equipFrame[i].SetPosition(m_equipWeapon[i].GetPosition());
 	}
 	//装備リストを整理する
-	EquipListReset(true);
+	EquipListReset();
 	//ステータス表示を初期化
 	SplayerStatus playerStatus = GetPlayer().GetStatus();
 	CVector2 fontPos = { m_basePos.x + m_baseSize.x * m_width, m_basePos.y };
@@ -248,7 +248,7 @@ void CEquipInventory::AfterDraw()
 	m_buttonYFont.Draw();
 }
 
-void CEquipInventory::EquipListReset(bool isInit)
+void CEquipInventory::EquipListReset()
 {
 	if (m_equipList.empty()) 
 	{
@@ -344,7 +344,8 @@ void CEquipInventory::Equip()
 {
 	//装備の数を取得
 	size_t equipNum = m_equipList.size();
-	if (m_pointerNum >= equipNum || m_equipList.empty()) {
+	if (m_pointerNum >= equipNum || m_equipList.empty()) 
+	{
 		//選んだ場所の装備がリストの中にない又はリストが空になっている
 		return;
 	}
@@ -373,7 +374,7 @@ void CEquipInventory::Equip()
 		m_equipList.erase(it);
 	}
 	//装備リストを整理する
-	EquipListReset(false);
+	EquipListReset();
 	//装備時の音を鳴らす処理
 	if (m_equipSound[0].IsPlay())
 	{
@@ -389,7 +390,8 @@ void CEquipInventory::CalucStatus()
 	//装備の数を取得
 	size_t equipNum = m_equipList.size();
 	SWeaponStatus equipStatus[enFont_StatusNum];
-	if (m_pointerNum < equipNum) {
+	if (m_pointerNum < equipNum) 
+	{
 		//所持している装備を選んでいる場合はその装備のステータスを取得
 		std::list<std::unique_ptr<IInventoryEquip>>::iterator it;
 		it = m_equipList.begin();
@@ -400,7 +402,8 @@ void CEquipInventory::CalucStatus()
 		equipStatus[enFont_ChangeStatus] = (*it)->GetEquipStatus();
 		m_equipName[enFont_ChangeStatus].SetString((*it)->GetItemName());
 	}
-	else {
+	else 
+	{
 		m_equipName[enFont_ChangeStatus].SetString(L"");
 		m_equipName[enFont_CurrentStatus].SetString(L"");
 	}
@@ -479,7 +482,8 @@ void CEquipInventory::Erase()
 {
 	//装備の数を取得
 	size_t equipNum = m_equipList.size();
-	if (m_pointerNum >= equipNum || m_equipList.empty()) {
+	if (m_pointerNum >= equipNum || m_equipList.empty()) 
+	{
 		//選んだ場所の装備がリストの中にない又はリストが空になっている
 		return;
 	}
@@ -492,7 +496,7 @@ void CEquipInventory::Erase()
 	}
 	m_equipList.erase(it);
 	//装備リストを整理する
-	EquipListReset(false);
+	EquipListReset();
 	//装備を捨てるときの音を鳴らす処理
 	if (m_equipSound[1].IsPlay())
 	{

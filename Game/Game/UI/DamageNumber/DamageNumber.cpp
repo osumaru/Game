@@ -62,7 +62,6 @@ void CDamageNumber::Update()
 		if (alpha < 0.0f)
 		{
 			//“§–¾‚É‚È‚Á‚½
-			//SetIsActive(false);
 			Delete(this);
 			return;
 		}

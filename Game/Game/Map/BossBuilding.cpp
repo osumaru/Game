@@ -7,7 +7,9 @@
 
 void CBossBuilding::Init(CVector3 position)
 {
+	//モデルの初期化
 	m_skinModel.Load(L"Assets/modelData/TestBox1.cmo");
+	//座標を設定
 	m_position = position;
 }
 
@@ -22,15 +24,17 @@ void CBossBuilding::Update()
 
 	if (!m_isChoice)
 	{
+		//選択中でないならタイマーを進める
 		m_timer += GameTime().GetDeltaFrameTime();
 	}
-
+	//プレイヤーの座標を取得
 	CVector3 playerPos = GetPlayer().GetPosition();
 	//プレイヤーとの距離を求める
 	CVector3 distance = playerPos - m_position;
 	float length = distance.Length();
 	if (!m_isChoice && length < 2.0f && m_timer >= 3.0f)
 	{
+		//メッセージと選択肢を表示する
 		m_message = New<CMessage>(PRIORITY_UI);
 		m_message->Init({ 500.0f,250.0f }, L"bossTry");
 		m_choices = New<CChoices>(PRIORITY_UI);
@@ -41,19 +45,25 @@ void CBossBuilding::Update()
 
 	if (m_isChoice)
 	{
+		//選択中ならプレイヤーは動かない
 		GetPlayer().SetIsAction(false);
+		//選択肢を選んだ
 		if (m_choices->GetIsSelect())
 		{
+			//はいを選んだ
 			if (m_choices->GetState() == CChoices::Yes)
 			{
 				//ボスシーンに切り替える
 				GetSceneManager().ChangeScene(CSceneManager::enBossScene);
 			}
+			//いいえを選んだ
 			else
 			{
+				//プレイヤーを動かせるようにする
 				GetPlayer().SetIsAction(true);
 				m_isChoice = false;
 			}
+			//メッセージと選択肢を消す
 			Delete(m_message);
 			Delete(m_choices);
 		}
