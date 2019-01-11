@@ -138,9 +138,9 @@ bool IShop::Transaction(const int gold)
 	//‚¨‹à‚ª‘«‚è‚Ä‚¢‚ê‚Îw“ü‚·‚é‚±‚Æ‚ª‚Å‚«‚é
 	if (GetPlayer().BuyMoney(gold))
 	{
-		IInventoryItem* item = new CInventoryRecoveryItem;
-		item->Init();
-		CItemInventory::AddItemList(item);
+		std::unique_ptr<IInventoryItem> inventoryItem = std::make_unique<CInventoryRecoveryItem>();
+		inventoryItem->Init();
+		CItemInventory::AddItemList(std::move(inventoryItem));
 		CSoundSource* se = New<CSoundSource>(0);
 		se->Init("Assets/sound/Shop/BuySe.wav");
 		se->SetVolume(1.0f);

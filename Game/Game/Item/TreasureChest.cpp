@@ -12,15 +12,20 @@
 
 void CTreasureChest::Init(CVector3 position)
 {
+	//モデルの初期化
 	m_skinModel.Load(L"Assets/modelData/Chest.cmo");
+	//座標を設定
 	m_position = position;
+	//キャラクターコントローラーを初期化
 	m_characterController.Init(0.6f, 0.4f, m_position);
 }
 
 bool CTreasureChest::Start()
 {
+	//ポップさせる距離と上方向のスピードを設定
 	float distance = 0.0f;
 	float popUpSpeed = 2.0f;
+	//ランダムにポップさせる
 	RamdomPop(distance, popUpSpeed);
 
 	return true;
@@ -46,7 +51,6 @@ void CTreasureChest::Update()
 	if (isPickUp && Pad().IsTriggerButton(enButtonA)) {
 		//武器のステータスを決める
 		DesideWeaponStatus();
-		m_inventoryEquip->Init();
 		CEquipInventory::AddEquipList(std::move(m_inventoryEquip));
 		GetPlayer().SetIsAction(false);
 		Delete(this);
@@ -112,4 +116,5 @@ void CTreasureChest::DesideWeaponStatus()
 	}
 	weaponStatus.attack = weaponAttack;
 	m_inventoryEquip->SetEquipStatus(weaponStatus);
+	m_inventoryEquip->Init();
 }

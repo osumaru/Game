@@ -75,14 +75,14 @@ void CGameCamera::Update()
 			float length = cameraVec.Length();
 			//視点はプレイヤーから一定距離後ろにする
 			cameraVec.Normalize();
-			cameraVec *= 3.0f;
+			cameraVec *= m_cameraLength;
 			cameraVec += playerPos;
-			cameraVec.y = playerPos.y + 2.5f;
+			cameraVec.y = playerPos.y + m_rockOnOffset;
 			//ターゲットと近いからカメラの高さに補正をかける
-			if (length < 2.5f)
+			if (length < m_rockOnOffset)
 			{
 				//高さは距離が近いほど高い
-				cameraVec.y += 2.5f - length;
+				cameraVec.y += m_rockOnOffset - length;
 			}
 			//視点に設定
 			position = cameraVec;
@@ -156,7 +156,7 @@ void CGameCamera::Rotation()
 		}
 	}
 	m_cameraVec.Normalize();
-	m_cameraVec.Scale(3.5f);
+	m_cameraVec.Scale(m_cameraLength);
 }
 
 void CGameCamera::RockOnEnemy()

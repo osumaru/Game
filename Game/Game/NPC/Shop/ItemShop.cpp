@@ -88,9 +88,9 @@ void CItemShop::Update()
 	if (!m_isTransaction) { return; };
 	if (GetPlayer().BuyMoney(m_items[m_lineupSelectNumber + 101].ItemStatus.Itemprice))
 	{
-		IInventoryItem* item = new CInventoryRecoveryItem;
-		item->Init();
-		CItemInventory::AddItemList(item);
+		std::unique_ptr<IInventoryItem> inventoryItem = std::make_unique<CInventoryRecoveryItem>();
+		inventoryItem->Init();
+		CItemInventory::AddItemList(std::move(inventoryItem));
 		CSoundSource* se = New<CSoundSource>(0);
 		//se->Init("Assets/sound/Shop/BuySe.wav");
 		se->SetVolume(1.0f);

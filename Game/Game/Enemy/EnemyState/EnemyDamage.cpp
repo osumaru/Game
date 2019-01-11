@@ -61,7 +61,8 @@ void CEnemyDamage::Update()
 	//攻撃範囲にいるかどうか判定
 	bool isRange = m_enemy->CalucFanShape(10.0f, playerPos);
 
-	if (m_enemy->GetStatus().hp <= 0) {
+	if (m_enemy->GetStatus().hp <= 0)
+	{
 		//HPが無くなれば死亡
 		m_esm->ChangeState(CEnemyState::enState_Death);
 	}
@@ -70,7 +71,8 @@ void CEnemyDamage::Update()
 		//スタン状態になる
 		m_esm->ChangeState(CEnemyState::enState_Stan);
 	}
-	else if (!m_enemy->GetAnimation().IsPlay()) {
+	else if (!m_enemy->GetAnimation().IsPlay()) 
+	{
 		if (!m_isNockBack)
 		{
 			//アニメーションが終了している
@@ -86,7 +88,8 @@ void CEnemyDamage::Update()
 			}
 		}
 	}
-	else if(m_enemy->GetIsDamage()) {
+	else if(m_enemy->GetIsDamage()) 
+	{
 		//もう一度ダメージを受けたら初期化
 		Init();
 	}

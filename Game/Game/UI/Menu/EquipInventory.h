@@ -32,9 +32,8 @@ public:
 	//描画
 	void AfterDraw() override;
 
-	//装備リストのテクスチャを整理する
-	//isInit	テクスチャを初期化するか
-	void EquipListReset(bool isInit);
+	//装備リストの整理する
+	void EquipListReset();
 
 	//カーソル移動
 	void PointerMove();

@@ -20,14 +20,23 @@ public:
 	//enemyPos		エネミーの座標
 	void Init(IEnemy* enemy ,CVector3 enemyPos);
 
-	//更新される前に一度だけ呼ばれる
-	bool Start();
-
 	//更新
 	void Update();
 
 	//描画
 	void Draw();
+
+	//座標を取得
+	const CVector3& GetPosition() const
+	{
+		return m_position;
+	}
+
+	//移動速度を設定
+	void SetMoveSpeed(const CVector3& moveSpeed)
+	{
+		m_characterController.SetMoveSpeed(moveSpeed);
+	}
 
 	//岩を投げるかを設定
 	void SetIsThrow(bool isThrow)

@@ -33,13 +33,35 @@ void CWarrok::OnInvokeAnimationEvent(//ƒAƒjƒ[ƒVƒ‡ƒ“ƒCƒxƒ“ƒg‚ªŒÄ‚Î‚ê‚é‚²‚Æ‚ÉŒÄ‚
 		if (length < 1.0f)
 		{
 			//ƒvƒŒƒCƒ„[‚ªƒ_ƒ[ƒW‚ğó‚¯‚½
-			GetPlayer().SetDamage(m_status.strength);
+			GetPlayer().SetStanDamage(m_status.strength);
 			GetPlayer().SetDamageEnemyPos(m_position);
 		}
 	}
 
 	if (wcscmp(animClipName, L"Assets/modelData/WarrokRock.tka") == 0)
 	{
+		//Šâ‚©‚çƒvƒŒƒCƒ„[‚Ö‚ÌƒxƒNƒgƒ‹‚ğ‹‚ß‚é
+		CVector3 distance = GetPlayer().GetPosition() - m_rock->GetPosition();
+		//XZ•½–Ê‚Å‚Ì‹——£‚ğ‹‚ß‚é
+		CVector3 distanceXZ = distance;
+		distanceXZ.y = 0.0f;
+		float lengthXZ = distanceXZ.Length();
+		//“Š‚°‚éŠp“x‚ğİ’è
+		float angle = CMath::PI / 6;
+		//“Š‚°‚é‚‚³‚ğ‹‚ß‚é
+		float height = tan(angle) * lengthXZ;
+		//“Š‚°‚é•ûŒü‚ğ‹‚ß‚é
+		CVector3 moveDir = distance;
+		moveDir.y += height;
+		float length = moveDir.Length();
+		moveDir.Normalize();
+		//ˆÚ“®‘¬“x‚ğİ’è
+		CVector3 moveSpeed;
+		moveSpeed.x = moveDir.x * length * cos(angle);
+		moveSpeed.y = moveDir.y * length * sin(angle);
+		moveSpeed.z = moveDir.z * length * cos(angle);
+		m_rock->SetMoveSpeed(moveSpeed);
+		//“Š‚°‚éƒtƒ‰ƒO‚ğ—§‚Ä‚é
 		m_rock->SetIsThrow(true);
 	}
 }
@@ -50,9 +72,10 @@ void CWarrok::Init(CVector3 position)
 	m_skinModel.Load(L"Assets/modelData/Warrok.cmo", &m_animation);
 	m_skinModel.LoadNormalmap(L"Assets/modelData/Warrok_normal.png");
 	m_position = position;
-	m_characterController.Init(0.5f, 0.9f, position);
-	m_characterController.SetGravity(-9.0f);
-	
+	//ƒLƒƒƒ‰ƒNƒ^[ƒRƒ“ƒgƒ[ƒ‰[‚ğ‰Šú‰»
+	m_characterController.Init(0.5f, 0.9f, m_position);
+	m_characterController.SetGravity(-9.8f);
+	//ƒAƒjƒ[ƒVƒ‡ƒ“‚Ì‰Šú‰»
 	wchar_t* animClip[CEnemyState::enAnimationWarrok_Num] = {
 		L"Assets/modelData/WarrokStand.tka",
 		L"Assets/modelData/WarrokWalk.tka",
@@ -80,9 +103,11 @@ void CWarrok::Init(CVector3 position)
 	m_status.gold = 100;
 	m_status.exp = 10;
 	this->SetIsActive(true);
-
+	//˜‚Ìƒ[ƒ‹ƒhs—ñ‚ğæ“¾
 	m_spineMatrix = &GetBoneWorldMatrix(L"Spine");
+	//UŒ‚‚Å‚«‚é‹——£‚ğİ’è
 	m_attackLength = 10.0f;
+	//UŒ‚ƒ^ƒCƒv‚ğİ’è
 	m_attackType = enAttackType_Far;
 
 	m_animation.AddAnimationEvent([&](auto animClipname, auto eventName)
@@ -100,18 +125,22 @@ bool CWarrok::Start()
 
 void CWarrok::Update()
 {
+	//“–‚½‚è”»’è—p‚Ì˜‚ÌÀ•W‚ğXV
 	UpdateSpinePos();
 
 	if (!m_isWireHit) {
+		//ƒAƒjƒ[ƒVƒ‡ƒ“‚ÌXV
 		m_animation.Update(GameTime().GetDeltaFrameTime());
 	}
 
 	if (!m_isRemovedRigidBody && !m_isWireHit) {
+		//À•W‚ÌXV
 		m_characterController.SetPosition(m_position);
 		m_characterController.Execute(GameTime().GetDeltaFrameTime());
 		m_position = m_characterController.GetPosition();
 	}
 
+	//ƒ‚ƒfƒ‹‚ÌXV
 	m_skinModel.Update(m_position, m_rotation, { 1.0f, 1.0f, 1.0f }, true);
 }
 
@@ -122,17 +151,20 @@ void CWarrok::Draw()
 
 void CWarrok::Attack()
 {
+	//XZ•½–Ê‚Å‚ÌƒvƒŒƒCƒ„[‚Æ‚Ì‹——£‚ğ‹‚ß‚é
 	CVector3 toPlayer = GetPlayer().GetPosition() - m_position;
 	toPlayer.y = 0.0f;
 	float length = toPlayer.Length();
 	if (length > 4.0f)
 	{
+		//Šâ‚ğ“Š‚°‚é
 		m_animation.Play(CEnemyState::enAnimationWarrok_throw, 0.3f);
 		m_rock = New<CRock>(PRIORITY_ENEMY);
 		m_rock->Init(this, m_position);
 	}
 	else 
 	{
+		//’ÊíUŒ‚
 		m_animation.Play(CEnemyState::enAnimationWarrok_Attack, 0.3f);
 	}
 }
