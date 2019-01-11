@@ -28,7 +28,7 @@ bool CEquipItem::Start()
 		ItemStatus[1].ItemEffect = 20;
 		ItemStatus[1].ItemQuality = EnItemQuality::enNormal;
 		swprintf(ItemStatus[2].ItemName, L"“S‚ÌŒ• ");
-		swprintf(ItemStatus[2].ItemText, L"	“S‚Åì‚ç‚ê‚½Œ•.•ºm‚â\n—b•º–`Œ¯Ò‚ªˆ¤—p‚µ‚Ä‚éB");
+		swprintf(ItemStatus[2].ItemText, L"“S‚Åì‚ç‚ê‚½Œ•.•ºm‚â\n—b•º–`Œ¯Ò‚ªˆ¤—p‚µ‚Ä‚é");
 		ItemStatus[2].Itemprice = 100;
 		ItemStatus[2].ItemEffect = 40;
 		ItemStatus[2].ItemQuality = EnItemQuality::enNormal;
