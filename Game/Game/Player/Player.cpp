@@ -175,6 +175,7 @@ void CPlayer::Init(CVector3 position)
 	m_weaponManager.Init(this);
 	m_wireAction.Init(this);
 	SetIsActive(true);
+	m_skinmodel.Update(m_position, m_rotation, { 1.0f, 1.0f, 1.0f }, true);
 	GetGameCamera().CameraSetPlayer();
 	m_wireDraw.Init(CVector3::Zero, CVector3::Zero, CVector3::Zero);
 	m_hipBoneMat = &m_skinmodel.FindBoneWorldMatrix(L"Hips");

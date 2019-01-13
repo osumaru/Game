@@ -17,7 +17,7 @@ void CNinja::OnInvokeAnimationEvent(const wchar_t* animClipName, const wchar_t* 
 	if (wcscmp(animClipName, L"Assets/modelData/NinjaAttack.tka") == 0)
 	{
 		//ボーンのワールド行列を取得
-		CMatrix boneMatrix = GetBoneWorldMatrix(L"Rightfoot");
+		CMatrix boneMatrix = GetBoneWorldMatrix(L"RightFoot");
 		CVector3 bonePosition;
 		bonePosition.x = boneMatrix.m[3][0];
 		bonePosition.y = boneMatrix.m[3][1];

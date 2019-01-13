@@ -86,10 +86,10 @@ private:
 	CSpringCamera		m_springCamera;			//バネカメラ
 	CShakeCamera		m_shakeCamera;			//揺れカメラ
 	IEnemy*				m_rockOnEnemy;			//ロックオンしているエネミー
-	const CMatrix*		m_pPlayerBoneMat;		//注視点とするプレイヤーのボーンの行列
-	const float			CAMERA_SPEED = 4.0f;	//カメラの回転速度
+	const float			CAMERA_SPEED = 6.0f;	//カメラの回転速度
 	const float			m_cameraLength = 3.5f;	//注視点からカメラへの距離
 	const float			m_rockOnOffset = 2.5f;	//ロックオン時の高さ補正の限界値
+	float				m_height = 0.0f;		//カメラの座標と注視点の高さ
 	bool				m_isRockOn = false;		//ロックオンしているか
 };
 
