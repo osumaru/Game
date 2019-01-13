@@ -30,7 +30,15 @@ void IShop::ShopUpdate()
 		//プレイヤーとショップとの距離が一定以内でAボタンが押されたら店を開く
 		if (len < SHOP_DRAW_LENGTH)
 		{
-			if (Pad().IsTriggerButton(enButtonA))
+			//店員の前方向取得
+			CVector3 flont = { m_skinmodelNpc.GetWorldMatrix().m[2][0],
+								m_skinmodelNpc.GetWorldMatrix().m[2][1],
+								m_skinmodelNpc.GetWorldMatrix().m[2][2] };
+			flont.Normalize();
+			playervec.Normalize();
+			float angle = flont.Dot(playervec);
+			angle = acos(angle);
+			if (Pad().IsTriggerButton(enButtonA) && fabsf(angle) < CMath::DegToRad(40.0f))
 			{
 				
 				m_shopState = enShopOpen;
