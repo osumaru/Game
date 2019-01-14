@@ -7,13 +7,13 @@
 
 void CDamageNumber::Init(IEnemy* enemy)
 {
-	m_numPos = { 0.0f,0.0f };
-	m_numSize = { 15.0f,25.0f };
+	CVector2 numPos = { 0.0f,0.0f };
+	CVector2 numSize = { 15.0f,25.0f };
 
 	//数字のスプライトを初期化
 	for (int i = 0; i < EnDigit::enDigit_Num; i++) {
-		m_numPos.x -= m_numSize.x * i;
-		m_number[i].Init(m_numPos, m_numSize);
+		numPos.x -= numSize.x * i;
+		m_number[i].Init(numPos, numSize);
 	}
 
 	m_enemy = enemy;
@@ -50,19 +50,19 @@ void CDamageNumber::Update()
 	for (int i = 0; i < EnDigit::enDigit_Num; i++)
 	{
 		m_number[i].SetPosition(screenPosition);
-		screenPosition.x = m_number[0].GetPosition().x - m_numSize.x * (i + 1);
+		screenPosition.x = m_number[0].GetPosition().x - m_number[i].GetSize().x * (i + 1);
 	}
 
 	m_timer += GameTime().GetDeltaFrameTime();
 
-	if (m_timer > m_drawTime) {
+	if (m_timer > m_drawTime) 
+	{
 		//描画する時間より長くなったら段々透明にしていく
 		m_alphaTime += GameTime().GetDeltaFrameTime();
 		float alpha = 1.0f - m_alphaTime;
 		if (alpha < 0.0f)
 		{
 			//透明になった
-			//SetIsActive(false);
 			Delete(this);
 			return;
 		}
@@ -96,23 +96,28 @@ void CDamageNumber::DamageCalculation()
 
 	//受けたダメージを取得
 	damage %= 1000;
-	if (damage / 100 > 0) {
+	if (damage / 100 > 0) 
+	{
 		//百の位を表示
 		m_number[EnDigit::enDigit_Hundred].SetIsDraw(true);
 		m_number[EnDigit::enDigit_Hundred].SetNumber(damage / 100);
 	}
-	else {
+	else 
+	{
 		m_number[EnDigit::enDigit_Hundred].SetIsDraw(false);
 	}
 	damage %= 100;
-	if (damage / 10 > 0) {
+	if (damage / 10 > 0) 
+	{
 		//十の位を表示
 		m_number[EnDigit::enDigit_Ten].SetIsDraw(true);
 		m_number[EnDigit::enDigit_Ten].SetNumber(damage / 10);
 	}
-	else {
+	else 
+	{
 		//百の位も０の場合は十の位は表示しない
-		if (m_number[EnDigit::enDigit_Hundred].GetIsDraw()) {
+		if (m_number[EnDigit::enDigit_Hundred].GetIsDraw()) 
+		{
 			m_number[EnDigit::enDigit_Ten].SetNumber(0);
 			m_number[EnDigit::enDigit_Ten].SetIsDraw(true);
 		}

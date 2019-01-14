@@ -12,14 +12,16 @@ CSamurai::~CSamurai()
 {
 }
 
-void CSamurai::Init(CVector3 position)
+void CSamurai::Init(const CVector3& position)
 {
 	//モデルを読み込む
 	m_skinModel.Load(L"Assets/modelData/Samurai.cmo", &m_animation);
 	m_skinModel.LoadNormalmap(L"Assets/modelData/Samurai_normal.png");
 	m_position = position;
-	m_characterController.Init(0.5f, 0.9f, position);
-	m_characterController.SetGravity(-9.0f);
+	//キャラクターコントローラーを初期化
+	m_characterController.Init(0.5f, 0.9f, m_position);
+	m_characterController.SetGravity(-9.8f);
+	//アニメーションの更新
 	wchar_t* animClip[CEnemyState::enAnimation_Num] = {
 		L"Assets/modelData/SamuraiStand.tka",
 		L"Assets/modelData/SamuraiWalk.tka",
@@ -46,8 +48,9 @@ void CSamurai::Init(CVector3 position)
 	m_status.gold = 100;
 	m_status.exp = 10;
 	this->SetIsActive(true);
-
+	//腰のワールド行列を取得
 	m_spineMatrix = &GetBoneWorldMatrix(L"Spine");
+	//攻撃できる距離を設定
 	m_attackLength = 1.2f;
 }
 
@@ -60,18 +63,33 @@ bool CSamurai::Start()
 
 void CSamurai::Update()
 {
-	UpdateSpinePos();
+	if (m_status.hp <= 0)
+	{
+		m_isDead = true;
+		//剛体を削除する
+		m_characterController.RemovedRigidBody();
+	}
 
-	if (!m_isWireHit) {
+	if (m_isAttack)
+	{
+		//攻撃中はプレイヤーとの当たり判定をとる
+	}
+
+	if (!m_isWireHit) 
+	{
+		//アニメーションの更新
 		m_animation.Update(GameTime().GetDeltaFrameTime());
 	}
 
-	if (!m_isRemovedRigidBody && !m_isWireHit) {
+	if (!m_isDead && !m_isWireHit) 
+	{
+		//座標の更新
 		m_characterController.SetPosition(m_position);
 		m_characterController.Execute(GameTime().GetDeltaFrameTime());
 		m_position = m_characterController.GetPosition();
 	}
 
+	//モデルの更新
 	m_skinModel.Update(m_position, m_rotation, { 1.0f, 1.0f, 1.0f }, true);
 }
 

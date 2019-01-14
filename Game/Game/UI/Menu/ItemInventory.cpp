@@ -4,7 +4,7 @@
 #include "../../Player/Player.h"
 #include "../../Item/InventoryItem/IInventoryItem.h"
 
-std::list<IInventoryItem*> CItemInventory::m_itemList;
+std::list<std::unique_ptr<IInventoryItem>> CItemInventory::m_itemList;
 
 CItemInventory::CItemInventory(){}
 
@@ -38,7 +38,8 @@ void CItemInventory::Init(CMenu* menu)
 		position.y -= m_size.y * (i / m_width);
 		m_itemFrame[i].SetPosition(position);
 	}
-	if (!m_itemList.empty()) {
+	if (!m_itemList.empty()) 
+	{
 		//リストにアイテムがある
 		int idx = 0;
 		for (auto& item : m_itemList)
@@ -69,9 +70,10 @@ void CItemInventory::Update()
 	//カーソル移動
 	PointerMove();
 
+	//アイテムの名前を設定する
 	if (m_pointerNum < m_itemList.size() && !m_itemList.empty())
 	{
-		std::list<IInventoryItem*>::iterator it;
+		std::list<std::unique_ptr<IInventoryItem>>::iterator it;
 		it = m_itemList.begin();
 		for (int i = 0; i < m_pointerNum; i++)
 		{
@@ -79,7 +81,8 @@ void CItemInventory::Update()
 		}
 		m_itemName.SetString((*it)->GetItemName());
 	}
-	else {
+	else 
+	{
 		m_itemName.SetString(L"");
 	}
 
@@ -193,14 +196,15 @@ void CItemInventory::UseItem()
 		return;
 	}
 	//選んだアイテムを使う
-	std::list<IInventoryItem*>::iterator it;
+	std::list<std::unique_ptr<IInventoryItem>>::iterator it;
 	it = m_itemList.begin();
 	for (int i = 0; i < m_pointerNum; i++)
 	{
 		it++;
 	}
 	bool isUse = (*it)->Use();
-	if (isUse) {
+	if (isUse) 
+	{
 		//使ったアイテムをリストから削除する
 		m_itemList.erase(it);
 	}
@@ -217,11 +221,11 @@ void CItemInventory::UseItem()
 	}
 }
 
-void CItemInventory::AddItemList(IInventoryItem* item)
+void CItemInventory::AddItemList(std::unique_ptr<IInventoryItem> item)
 {
 	if (m_itemList.size() < m_itemLimit)
 	{
 		//所持上限を超えていなければアイテムリストに追加
-		m_itemList.push_back(item);
+		m_itemList.push_back(std::move(item));
 	}
 }

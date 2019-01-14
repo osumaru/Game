@@ -54,6 +54,7 @@ protected:
 	};
 
 	CSkinModel			m_skinModel;						//スキンモデル
+	CSkinModel			m_skinmodelNpc;						//人のモデル
 	CAnimation			m_animation;
 	CVector3			m_position = CVector3::Zero;		//ポジション
 	CVector3			m_scale = CVector3::One;			//スケール
@@ -88,7 +89,7 @@ protected:
 
 	bool					m_isShoplineupDraw = false;							//ショップ画面を描画するかの判定
 	bool					m_isSelectDraw = false;								//セレクト画面を描画するかの判定
-	const float				SHOP_DRAW_LENGTH = 3.5f;							//ショップの影響を受ける長さ
+	const float				SHOP_DRAW_LENGTH = 4.5f;							//ショップの影響を受ける長さ
 	wchar_t					m_filePath[256];
 	bool					m_isTransaction = false;							//取引を行うかの判定
 	CFont					m_itemNameFont[ITEM_ELEMENT];

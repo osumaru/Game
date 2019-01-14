@@ -8,7 +8,7 @@ bool CEnemyAttack::Start()
 	//移動しない
 	CVector3 moveSpeed = CVector3::Zero;
 	m_enemy->SetMoveSpeed(moveSpeed);
-
+	//エネミーが攻撃する
 	m_enemy->Attack();
 
 	return true;

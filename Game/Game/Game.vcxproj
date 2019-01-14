@@ -256,10 +256,11 @@
     <ClCompile Include="UI\Menu\EquipInventory.cpp" />
     <ClCompile Include="UI\Menu\ItemInventory.cpp" />
     <ClCompile Include="UI\Menu\Menu.cpp" />
+    <ClCompile Include="UI\Message\Choices.cpp" />
+    <ClCompile Include="UI\Message\Message.cpp" />
     <ClCompile Include="UI\MiniMap\MiniMap.cpp" />
     <ClCompile Include="UI\PlayerHp\PlayerHp.cpp" />
     <ClCompile Include="UI\Result\Result.cpp" />
-    <ClCompile Include="UI\Result\Retry.cpp" />
     <ClCompile Include="UI\WeaponSelect\WeaponSelect.cpp" />
     <ClCompile Include="NPC\Shop\WeaponShop.cpp" />
     <ClCompile Include="UI\WeekPoint\WeekPoint.cpp" />
@@ -363,10 +364,11 @@
     <ClInclude Include="UI\Menu\EquipInventory.h" />
     <ClInclude Include="UI\Menu\ItemInventory.h" />
     <ClInclude Include="UI\Menu\Menu.h" />
+    <ClInclude Include="UI\Message\Choices.h" />
+    <ClInclude Include="UI\Message\Message.h" />
     <ClInclude Include="UI\MiniMap\MiniMap.h" />
     <ClInclude Include="UI\PlayerHp\PlayerHp.h" />
     <ClInclude Include="UI\Result\Result.h" />
-    <ClInclude Include="UI\Result\Retry.h" />
     <ClInclude Include="UI\WeaponSelect\WeaponSelect.h" />
     <ClInclude Include="NPC\Shop\WeaponShop.h" />
     <ClInclude Include="UI\WeekPoint\WeekPoint.h" />
@@ -405,6 +407,7 @@
     <MeshContentTask Include="Assets\modelData\Rock.FBX" />
     <MeshContentTask Include="Assets\modelData\Samurai.FBX" />
     <MeshContentTask Include="Assets\modelData\Shopgirl.fbx" />
+    <MeshContentTask Include="Assets\modelData\ShopModel\House1.FBX" />
     <MeshContentTask Include="Assets\modelData\ShopModel\roten.FBX" />
     <MeshContentTask Include="Assets\modelData\Skyball_WithCap.FBX" />
     <MeshContentTask Include="Assets\modelData\Skyball_WithoutCap.FBX" />

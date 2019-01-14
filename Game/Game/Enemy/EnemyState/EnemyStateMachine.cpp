@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "EnemyStateMachine.h"
+#include "../IEnemy.h"
 
 bool CEnemyStateMachine::Start()
 {
@@ -21,6 +22,14 @@ bool CEnemyStateMachine::Start()
 
 	ChangeState(CEnemyState::enState_Idle);
 	return true;
+}
+
+void CEnemyStateMachine::Update()
+{
+	if (m_enemyDeath.GetIsAnimationEnd())
+	{
+		Release();
+	}
 }
 
 void CEnemyStateMachine::ChangeState(CEnemyState::EnState nextState)

@@ -27,15 +27,5 @@ public:
 	void DesideWeaponStatus();
 
 private:
-	//•Ší‚ÌŠî–{UŒ‚—Í
-	const struct SBasicWeaponStatus 
-	{
-		int basicAttack = 100;		//Šî–{UŒ‚—Í
-		int swordAttack = 50;		//Œ•‚ÌUŒ‚—Í
-		int longSwordAttack = 70;	//‘åŒ•‚ÌUŒ‚—Í
-		int arrowAttack = 20;		//‹|‚ÌUŒ‚—Í
-		int twinSwordAttack = 30;	//‘oŒ•‚ÌUŒ‚—Í
-	};
-
-	std::unique_ptr<IInventoryEquip> m_inventoryEquip;
+	std::unique_ptr<IInventoryEquip> m_inventoryEquip;	//ƒCƒ“ƒxƒ“ƒgƒŠ‚É“ü‚ê‚é‘•”õ
 };

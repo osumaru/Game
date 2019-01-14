@@ -32,7 +32,7 @@ public:
 
 	//初期化
 	//position	座標
-	virtual void Init(CVector3 position) {};
+	virtual void Init(const CVector3& position) {};
 
 	//更新
 	virtual void Update() = 0;
@@ -60,9 +60,6 @@ public:
 
 	//自身をエネミーリストから削除
 	void EnemyListErase();
-
-	//当たり判定用の腰の座標を更新
-	void UpdateSpinePos();
 
 	//敵の攻撃(敵の種類によって変わる)
 	virtual void Attack() {};
@@ -111,15 +108,8 @@ public:
 		m_characterController.SetMoveSpeed(moveSpeed);
 	}
 
-	//剛体を削除
-	void RemovedRegidBody()
-	{
-		m_isRemovedRigidBody = true;
-		m_characterController.RemovedRigidBody();
-	}
-
 	//キャラクターコントローラーを取得
-	const CCharacterController& GetCharacterController()
+	const CCharacterController& GetCharacterController() const
 	{
 		return m_characterController;
 	}
@@ -137,9 +127,9 @@ public:
 	}
 
 	//当たり判定用の腰のワールド行列を取得
-	const CVector3& GetSpinePos() const
+	const CMatrix* GetWorldMatrixSpine() const
 	{
-		return m_spinePos;
+		return m_spineMatrix;
 	}
 
 	//エネミーのボーンのワールド行列を取得
@@ -147,12 +137,6 @@ public:
 	const CMatrix& GetBoneWorldMatrix(const wchar_t* boneName) const
 	{
 		return m_skinModel.FindBoneWorldMatrix(boneName);
-	}
-
-	//ステートマシンをゲームオブジェクトから解放
-	void StateMachineRelease()
-	{
-		m_enemyStateMachine.Release();
 	}
 
 	//ステータスを取得
@@ -254,6 +238,12 @@ public:
 		return m_enemyStateMachine;
 	}
 
+	//死亡したか
+	bool GetIsDead()
+	{
+		return m_isDead;
+	}
+
 protected:
 	CSkinModel						m_skinModel;					//スキンモデル
 	CAnimation						m_animation;					//アニメーション
@@ -268,12 +258,12 @@ protected:
 	EnAttackType					m_attackType = enAttackType_Near; //攻撃タイプ
 	std::list<IEnemy*>::iterator	m_iterater;						//自身のイテレータ
 	const CMatrix*					m_spineMatrix;					//当たり判定用の腰のワールド行列
-	CVector3						m_spinePos;						//当たり判定用の腰の座標
 	const int						m_maxPlayerHit = 2;				//最大攻撃ヒット数
 	float							m_attackLength = 1.2f;			//攻撃できる距離
 	bool							m_isFind = false;				//プレイヤーを発見したか
 	bool							m_isDamage = false;				//ダメージを受けたか
 	std::unique_ptr<bool[]>			m_isDamagePossible;				//ダメージを受けられるか
 	bool							m_isWireHit = false;			//ワイヤーが当たったか
-	bool							m_isRemovedRigidBody = false;	//剛体が削除されたか
+	bool							m_isAttack = false;				//攻撃しているか
+	bool							m_isDead = false;				//死亡したか
 };

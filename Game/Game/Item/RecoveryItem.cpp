@@ -3,12 +3,11 @@
 #include"../../Game/Camera/GameCamera.h"
 #include "../Player/Player.h"
 #include "../UI/Menu/ItemInventory.h"
-#include "InventoryItem/IInventoryItem.h"
+//#include "InventoryItem/IInventoryItem.h"
 #include "InventoryItem/InventoryRecoveryItem.h"
 
 void CRecoveryItem::Init()
 {
-	//m_itemType = Recovery;
 }
 
 bool CRecoveryItem::Start()
@@ -59,9 +58,9 @@ void CRecoveryItem::Update()
 	bool isPickUp = PickUp(m_isPopEnd, 0.8f);
 	if (isPickUp) {
 		//E‚¤‚±‚Æ‚ª‚Å‚«‚é
-		IInventoryItem* item = new CInventoryRecoveryItem();
-		item->Init();
-		CItemInventory::AddItemList(item);
+		std::unique_ptr<IInventoryItem> inventoryItem = std::make_unique<CInventoryRecoveryItem>();
+		inventoryItem->Init();
+		CItemInventory::AddItemList(std::move(inventoryItem));
 		Delete(this);
 	}
 

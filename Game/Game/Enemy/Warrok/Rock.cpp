@@ -27,28 +27,6 @@ void CRock::Init(IEnemy* enemy, CVector3 enemyPos)
 	m_enemy = enemy;
 }
 
-bool CRock::Start()
-{
-	//岩を投げる方向を求める
-	CVector3 attackPos = m_targetPos;
-	attackPos.y += 5.0f;
-	CVector3 attackDir = attackPos - m_position;
-	attackDir.Normalize();
-	//投げる角度を設定
-	float angle = CMath::PI / 6;
-	//ターゲットとの距離を求める
-	CVector3 distance = m_targetPos - m_position;
-	float length = distance.Length();
-	//移動速度を設定
-	CVector3 moveSpeed;
-	moveSpeed.x = attackDir.x * length * cos(angle);
-	moveSpeed.y = attackDir.y * length * sin(angle);
-	moveSpeed.z = attackDir.z * length * cos(angle);
-	m_characterController.SetMoveSpeed(moveSpeed);
-
-	return true;
-}
-
 void CRock::Update()
 {
 	if (GetSceneManager().GetSceneChange() 
@@ -61,7 +39,7 @@ void CRock::Update()
 		if(m_characterController.GetWallCollisionObject()->getUserIndex() == enCollisionAttr_Player)
 		{
 			//プレイヤーに当たった
-			GetPlayer().SetDamage(10);
+			GetPlayer().SetDamage(m_enemy->GetStatus().strength);
 			GetPlayer().SetDamageEnemyPos(m_enemyPos);
 			GetPlayer().SetDamage(true);
 		}
@@ -74,7 +52,7 @@ void CRock::Update()
 		if (m_characterController.GetGroundCollisionObject()->getUserIndex() == enCollisionAttr_Player)
 		{
 			//プレイヤーに当たった
-			GetPlayer().SetDamage(10);
+			GetPlayer().SetDamage(m_enemy->GetStatus().strength);
 			GetPlayer().SetDamageEnemyPos(m_enemyPos);
 			GetPlayer().SetDamage(true);
 		}

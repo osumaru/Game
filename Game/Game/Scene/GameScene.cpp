@@ -96,11 +96,5 @@ void CGameScene::Update()
 	{
 		GetSceneManager().ChangeScene(CSceneManager::enGameScene);
 	}
-	if (Pad().IsTriggerButton(enButtonLB))
-	{
-
-		GetSceneManager().ChangeScene(CSceneManager::enBossScene);
-	}
-
 }
 

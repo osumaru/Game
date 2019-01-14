@@ -44,7 +44,7 @@ void CEnemyChase::Update()
 		m_esm->ChangeState(CEnemyState::enState_Damage);
 	}
 	if (isRange && length < m_enemy->GetAttackLength()) {
-		//ƒvƒŒƒCƒ„[‚Æ‹——£‚ª‹ß‚¢ŠŽ‚ÂUŒ‚”ÍˆÍ‚É“ü‚Á‚Ä‚¢‚é
+		//UŒ‚”ÍˆÍ‚É“ü‚Á‚Ä‚¢‚é
 		m_esm->ChangeState(CEnemyState::enState_Attack);
 	}
 	if (!m_enemy->IsFind()) {

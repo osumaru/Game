@@ -13,17 +13,18 @@ void CGameCamera::Init()
 {
 	//カメラの初期化
 	m_camera.Init();
-	m_camera.SetFar(1000.0f);
+	m_camera.SetFar(200.0f);
 	m_camera.SetNear(1.0f);
 	m_camera.SetAspect((float)FrameBufferWidth() / (float)FrameBufferHeight());
 	m_camera.SetAngle(CMath::DegToRad(60.0f));
-	m_camera.SetPosition({ 0.0f, 0.0f, 3.5f });
+	m_camera.SetPosition({ 0.0f, 1.0f, -3.5f });
 	m_camera.SetTarget({ 0.0f, 0.0f, 0.0f });
 	m_camera.SetUp({ 0.0f, 1.0f, 0.0f });
 	m_camera.Update();
 	//Add(this, 0);
 	//注視点からカメラへのベクトルを求める
 	m_cameraVec = m_camera.GetPosition() - m_camera.GetTarget();
+	m_height = m_cameraVec.y;
 	//エンジンにカメラを設定
 	Engine().SetCamera(&m_camera);
 	//バネカメラの初期化
@@ -36,7 +37,11 @@ void CGameCamera::Init()
 
 void CGameCamera::CameraSetPlayer()
 {
-	m_pPlayerBoneMat = &GetPlayer().GetSkinmodel().FindBoneWorldMatrix(L"Spine2");
+	CVector3 target = GetPlayer().GetCharacterController().GetPosition();
+	target.y += 1.4f;
+	m_springCamera.SetTarget(target);
+	CVector3 position = target + m_cameraVec;
+	m_springCamera.SetPosition(position);
 }
 
 void CGameCamera::Update()
@@ -75,14 +80,14 @@ void CGameCamera::Update()
 			float length = cameraVec.Length();
 			//視点はプレイヤーから一定距離後ろにする
 			cameraVec.Normalize();
-			cameraVec *= 3.0f;
+			cameraVec *= m_cameraLength;
 			cameraVec += playerPos;
-			cameraVec.y = playerPos.y + 2.5f;
+			cameraVec.y = playerPos.y + m_rockOnOffset;
 			//ターゲットと近いからカメラの高さに補正をかける
-			if (length < 2.5f)
+			if (length < m_rockOnOffset)
 			{
 				//高さは距離が近いほど高い
-				cameraVec.y += 2.5f - length;
+				cameraVec.y += m_rockOnOffset - length;
 			}
 			//視点に設定
 			position = cameraVec;
@@ -93,11 +98,18 @@ void CGameCamera::Update()
 		//回転させる
 		Rotation();
 		//注視点を設定する
-		target.x = m_pPlayerBoneMat->m[3][0];
-		target.y = m_pPlayerBoneMat->m[3][1];
-		target.z = m_pPlayerBoneMat->m[3][2];
+		target = GetPlayer().GetCharacterController().GetPosition();
+		target.y += 1.4f;
 		//座標を設定する
 		position = target + m_cameraVec;
+	}
+
+	//カメラの座標と注視点が近ければ座標と注視点を更新しない
+	float currentHeight = m_camera.GetPosition().y - target.y;
+	if (m_cameraVec.y > 0.0f && currentHeight > 0.0f && fabsf(currentHeight) < m_height)
+	{
+		target.y = m_camera.GetTarget().y;
+		position.y = target.y + m_cameraVec.y;
 	}
 
 	//バネカメラを更新する
@@ -156,7 +168,8 @@ void CGameCamera::Rotation()
 		}
 	}
 	m_cameraVec.Normalize();
-	m_cameraVec.Scale(3.5f);
+	m_cameraVec.Scale(m_cameraLength);
+	m_height = m_cameraVec.y;
 }
 
 void CGameCamera::RockOnEnemy()

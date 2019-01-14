@@ -175,6 +175,7 @@ void CPlayer::Init(CVector3 position)
 	m_weaponManager.Init(this);
 	m_wireAction.Init(this);
 	SetIsActive(true);
+	m_skinmodel.Update(m_position, m_rotation, { 1.0f, 1.0f, 1.0f }, true);
 	GetGameCamera().CameraSetPlayer();
 	m_wireDraw.Init(CVector3::Zero, CVector3::Zero, CVector3::Zero);
 	m_hipBoneMat = &m_skinmodel.FindBoneWorldMatrix(L"Hips");
@@ -221,7 +222,6 @@ void CPlayer::Update()
 	m_animation.Update(GameTime().GetDeltaFrameTime());
 	m_skinmodel.Update(m_position, m_rotation, { 1.0f, 1.0f, 1.0f }, true);
 	m_PlayerStateMachine.Update();
-	m_isAction = true;
 	m_animation.Update(0.0f);
 
 	//アニメーションの更新
@@ -236,6 +236,7 @@ void CPlayer::Update()
 	m_groundCollision.Execute();
 	m_groundCollision.SetPosition(manipVector);
 	m_characterController.SetPosition(oldRigidPos);
+	m_isAction = true;
 }
 
 //描画処理
@@ -395,28 +396,28 @@ bool CPlayer::GetIsStateCondition(CPlayerState::EnPlayerState state)
 	switch (state)
 	{
 	case CPlayerState::enPlayerStateRun://左スティックの入力があったか
-		return Pad().GetLeftStickX() != 0 || Pad().GetLeftStickY() != 0;
+		return m_isAction && (Pad().GetLeftStickX() != 0 || Pad().GetLeftStickY() != 0);
 
 	case CPlayerState::enPlayerStateArrowAttack://xボタンを押して装備している武器が弓だったか
-		return Pad().IsTriggerButton(enButtonX) && m_weaponManager.GetCurrentState() == enWeaponArrow;
+		return m_isAction && Pad().IsTriggerButton(enButtonX) && m_weaponManager.GetCurrentState() == enWeaponArrow;
 
 	case CPlayerState::enPlayerStateArrowShoot:
 		return !dynamic_cast<CPlayerArrowAttack*>(m_PlayerStateMachine.GetState(CPlayerState::enPlayerStateArrowAttack))->IsCharge();
 
 	case CPlayerState::enPlayerStateAttack:		//xボタンを押して装備している武器が弓じゃなかったか
-		return Pad().IsTriggerButton(enButtonX) && m_weaponManager.GetCurrentState() != enWeaponArrow;
+		return m_isAction && Pad().IsTriggerButton(enButtonX) && m_weaponManager.GetCurrentState() != enWeaponArrow;
 
 	case CPlayerState::enPlayerStateAvoidance:	//bボタンを押しているか
 		return m_isAction && Pad().IsTriggerButton(enButtonB);
 
 	case CPlayerState::enPlayerStateDamage:		//ダメージフラグが立っているか
-		return m_isDamege;
+		return m_isAction && m_isDamege;
 
 	case CPlayerState::enPlayerStateStun:		//スタンダメージを食らったか
-		return m_isStanDamage;					
+		return m_isAction && m_isStanDamage;					
 
 	case CPlayerState::enPlayerStateDied:		//HPが0以下か
-		return m_status.Health <= 0;
+		return m_isAction && m_status.Health <= 0;
 
 	case CPlayerState::enPlayerStateJump:		//Aボタンを押しているか
 		return m_isAction && Pad().IsTriggerButton(enButtonA);
@@ -425,13 +426,13 @@ bool CPlayer::GetIsStateCondition(CPlayerState::EnPlayerState state)
 		return m_isAction && Pad().IsTriggerButton(enButtonA);
 
 	case CPlayerState::enPlayerStateWireMove:	//ワイヤーで移動するフラグが立っているか
-		return m_wireAction.IsWireMove();
+		return m_isAction && m_wireAction.IsWireMove();
 
 	case CPlayerState::enPlayerStateStand:		//移動量が0か
-		return m_characterController.GetMoveSpeed().Length() == 0.0f;
+		return !m_isAction || m_characterController.GetMoveSpeed().Length() == 0.0f;
 
 	case CPlayerState::enPlayerStateSky:		//地面に着地しているかどうか
-		return !m_groundCollision.IsHit();
+		return m_isAction && !m_groundCollision.IsHit();
 
 	case CPlayerState::enPlayerStateDown:
 		return !m_animation.IsPlay() && dynamic_cast<CPlayerDamage*>(m_PlayerStateMachine.GetState(CPlayerState::enPlayerStateDamage))->GetIsSky();

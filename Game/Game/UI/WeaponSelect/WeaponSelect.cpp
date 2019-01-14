@@ -89,34 +89,7 @@ void CWeaponSelect::AfterDraw()
 
 void CWeaponSelect::ChangeWeapon()
 {
-	//十字キーで武器を変更する
-	//if (Pad().IsTriggerButton(enButtonUp)) {
-	//	weaponNumber = enSword;
-	//}
-	//else if (Pad().IsTriggerButton(enButtonRight)) {
-	//	weaponNumber = enLongSword;
-	//}
-	//else if (Pad().IsTriggerButton(enButtonDown)) {
-	//	weaponNumber = enArrow;
-	//}
-	//else if (Pad().IsTriggerButton(enButtonLeft)) {
-	//	weaponNumber = enTwinSword;
-	//}
+	//プレイヤーが装備している武器の種類を取得
 	weaponNumber = GetPlayer().GetWeaponManager().GetCurrentState();
-	//邪魔なので止めてます
-	//RBボタンかLBボタンで武器を変更する
-	/*if (Pad().IsTriggerButton(enButtonRB)) {
-		weaponNumber++;
-		if (weaponNumber > enTwinSword) {
-			weaponNumber = enSword;
-		}
-	}
-	else if (Pad().IsTriggerButton(enButtonLB)) {
-		weaponNumber--;
-		if (weaponNumber < enSword){
-			weaponNumber = enTwinSword;
-		}
-	}
-	*/
 	m_selectFlag[weaponNumber] = true;
 }

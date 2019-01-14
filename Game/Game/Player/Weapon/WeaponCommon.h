@@ -29,6 +29,16 @@ struct SWeaponStatus
 	EnPlayerWeapon weaponNum = enInvalid;	//•Ší‚Ìí—Ş
 };
 
+//•Ší‚ÌŠî–{UŒ‚—Í
+const struct SBasicWeaponStatus 
+{
+	int basicAttack = 100;		//Šî–{UŒ‚—Í
+	int swordAttack = 50;		//Œ•‚ÌUŒ‚—Í
+	int longSwordAttack = 70;	//‘åŒ•‚ÌUŒ‚—Í
+	int arrowAttack = 20;		//‹|‚ÌUŒ‚—Í
+	int twinSwordAttack = 30;	//‘oŒ•‚ÌUŒ‚—Í
+};
+
 struct SWeaponEnemyAttackInfo
 {
 	bool		isAttack = false;	//UŒ‚ƒ‚[ƒVƒ‡ƒ“’†UŒ‚‚Ì”»’è‚ğ‚·‚é‚©‚Ìƒtƒ‰ƒO(‰“‹——£‚Ì•Ší‚à‚ ‚é‚½‚ß

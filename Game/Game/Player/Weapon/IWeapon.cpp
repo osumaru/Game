@@ -121,7 +121,11 @@ void IWeapon::EnemyAttack()
 					bool* damagePossible = enemy->IsDamagePossible();
 					if(damagePossible[i])
 					{
-						CVector3 EnemyVec = enemy->GetSpinePos();
+						const CMatrix* enemySpineMatrix = enemy->GetWorldMatrixSpine();
+						CVector3 EnemyVec;
+						EnemyVec.x = enemySpineMatrix->m[3][0];
+						EnemyVec.y = enemySpineMatrix->m[3][1];
+						EnemyVec.z = enemySpineMatrix->m[3][2];
 						EnemyVec.Subtract(info.attackPos[i]);
 						float len = EnemyVec.Length();
 						if (fabs(len) < 2.0f)
