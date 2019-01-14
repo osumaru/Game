@@ -374,6 +374,8 @@
     <ClInclude Include="UI\WeekPoint\WeekPoint.h" />
   </ItemGroup>
   <ItemGroup>
+    <MeshContentTask Include="..\..\tkTools\Assets\GameScene\object\CastleDoor.FBX" />
+    <MeshContentTask Include="..\..\tkTools\Assets\GameScene\object\CastleDoor2.FBX" />
     <MeshContentTask Include="Assets\modelData\Arrow.fbx" />
     <MeshContentTask Include="Assets\modelData\Barrel.FBX" />
     <MeshContentTask Include="Assets\modelData\Brock.FBX" />

@@ -11,7 +11,8 @@ CMaw *CMaw::m_maw = NULL;
 
 //ダメージアニメーションは入れないようにしてダウンのアニメーションだけにする？
 //攻撃モーションを複数入れたい
-//
+//ひるんでから一回しかダメージを受けない
+//移動中にひるましたら動いたままになる
 
 CMaw::CMaw()
 {
@@ -61,7 +62,7 @@ void CMaw::Init(CVector3 position)
 	//ステータスを設定
 	m_status.Strength = 10;
 	m_status.Defense = 0;
-	m_status.Hp = 50;
+	m_status.Hp = 100;
 	m_status.MaxHp = m_status.Hp;
 	m_status.Gold = 100;
 
@@ -235,10 +236,10 @@ void CMaw::Attack()
 	const float PlayerDamageLengthMax = 3.5f;//プレイヤーにダメージを与える最大距離
 
 	//アニメーション再生
-	bool IsAnim=Anim(EnMawState::enState_Attack);
+	bool IsAnimPlay=Anim(EnMawState::enState_Attack);
 	
 	//攻撃が終わっていたら
-	if (!IsAnim)
+	if (!IsAnimPlay)
 	{
 		//索敵ステートへ
 		m_actionPattern = EnMawActionPattern::enActionPatternSearch;
@@ -251,9 +252,9 @@ void CMaw::SpecialAttack()
 {
 	const float PlayerDamageLengthMax = 2.5f;//プレイヤーにダメージを与える最大距離
 	//アニメーション再生
-	bool IsAnim = Anim(EnMawState::enState_SpecialAttack);
+	bool IsAnimPlay = Anim(EnMawState::enState_SpecialAttack);
 	//攻撃が終わっていたら
-	if (!IsAnim)
+	if (!IsAnimPlay)
 	{
 		//索敵ステートへ
 		m_actionPattern = EnMawActionPattern::enActionPatternSearch;
@@ -264,32 +265,13 @@ void CMaw::SpecialAttack()
 //ダウン状態
 void CMaw::Down()
 {
-	const float MaxDownTime = 10.0f;		//最大ダウン時間
-
+	//const float MaxDownTime = 10.0f;		//最大ダウン時間
 	//アニメーション再生
-	Anim(EnMawState::enState_Down);
+	bool IsAnimPlay=Anim(EnMawState::enState_Down);
 	m_bossHp->SetIsActive(true);
-	//ダウン中の攻撃をくらった時の処理
-	//ここでHPバーを表示する？
-	if (m_isDamage)
-	{
-		//ダメージ計算
-		int playerStrength = GetPlayer().GetStatus().Strength;
-		int damage = playerStrength - m_status.Defense;
-		m_status.Hp -= damage;
-		m_isDamage = false;
-	}
-
-	//HPが0以下になったら
-	if (m_status.Hp <= 0)
-	{
-		//死亡ステートへ
-		m_actionPattern = EnMawActionPattern::enActionPatternDeath;
-	}
-	m_downTime += GameTime().GetDeltaFrameTime();
-
-	//最大ダウン時間を超えていたら
-	if (m_downTime > MaxDownTime)
+	//if (!IsAnimPlay)
+	//{
+	if (m_downTime > 6.0f)
 	{
 		//次の行動の選択
 		m_actionPattern = EnMawActionPattern::enActionPatternSearch;
@@ -297,8 +279,52 @@ void CMaw::Down()
 		m_downTime = 0.0f;
 		m_isDown = false;
 		m_weekPoint->SetIsActive(true);
-		m_bossHp->SetIsActive(false);
+		//m_bossHp->SetIsActive(false);
 	}
+	//else if (m_downTime > 1.0f)
+	//{
+		//ダウン中の攻撃をくらった時の処理
+		//ここでHPバーを表示する？
+		if (m_isDamage)
+		{
+			//ダメージ計算
+			int playerStrength = GetPlayer().GetStatus().Strength;
+			int damage = playerStrength - m_status.Defense;
+			m_status.Hp -= damage;
+			m_isDamage = false;
+
+			//次の行動の選択
+			m_actionPattern = EnMawActionPattern::enActionPatternSearch;
+			//ActionStateOrder();
+			m_downTime = 0.0f;
+			m_isDown = false;
+			m_weekPoint->SetIsActive(true);
+		//	m_bossHp->SetIsActive(false);
+
+			
+			//HPが0以下になったら
+			if (m_status.Hp <= 0)
+			{
+				//死亡ステートへ
+				m_actionPattern = EnMawActionPattern::enActionPatternDeath;
+			}
+		}
+	
+		m_downTime += GameTime().GetDeltaFrameTime();
+
+		//最大ダウン時間を超えていたら
+		//if (m_downTime > MaxDownTime)
+		//{
+			//次の行動の選択
+			//m_actionPattern = EnMawActionPattern::enActionPatternSearch;
+			////ActionStateOrder();
+			////m_downTime = 0.0f;
+			//m_isDown = false;
+			//m_weekPoint->SetIsActive(true);
+			//m_bossHp->SetIsActive(false);
+		//}
+	//}
+
 }
 
 //探す状態
@@ -507,12 +533,12 @@ void CMaw::HandAttack(float DamageLength)
 //ダメージ処理
 void CMaw::SetIsDamage(bool isDamage)
 {
-	//ダメージ間隔が0より大きかったら
+	//ダメージ間隔が0より大きかったら返す
 	if (m_damageInterval > 0.0f) { return; }
 	const float		MaxInterval = 5.0f;	//最大ダメージ間隔
 	const int		MaxDownCount = 0;	//最大ダウンカウント
 
-	m_isDamage = isDamage;
+	//m_isDamage = isDamage;
 
 	//ダウンしていなかったら
 	if (!m_isDown)
@@ -525,11 +551,20 @@ void CMaw::SetIsDamage(bool isDamage)
 	if (m_downCount > MaxDownCount)
 	{
 		//ダウンさせる
-		m_isDamage = isDamage;
+		m_isDamage = false;
+		//移動をやめる
+		m_characterController.SetMoveSpeed(CVector3::Zero);
+		
 		m_actionPattern = EnMawActionPattern::enActionPatternDown;
+
 		m_isDown = true;
 		m_weekPoint->SetIsActive(false);
 		m_downCount = 0;
+	}
+
+	if (m_downTime > 0.8f)
+	{
+		m_isDamage = true;
 	}
 	//ダメージ間隔を最大にする
 	m_damageInterval = MaxInterval;
