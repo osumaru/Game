@@ -890,5 +890,11 @@
     <MeshContentTask Include="Assets\modelData\CastleFloor.FBX">
       <Filter>ソース ファイル\Assets</Filter>
     </MeshContentTask>
+    <MeshContentTask Include="..\..\tkTools\Assets\GameScene\object\CastleDoor.FBX">
+      <Filter>ソース ファイル\Assets</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="..\..\tkTools\Assets\GameScene\object\CastleDoor2.FBX">
+      <Filter>ソース ファイル\Assets</Filter>
+    </MeshContentTask>
   </ItemGroup>
 </Project>

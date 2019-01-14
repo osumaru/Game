@@ -150,7 +150,7 @@ void IWeapon::EnemyAttack()
 				//ダウンしていなかったら
 				if (!GetMaw().GetIsDown())
 				{
-					const float BossWeekLenge = 18.0f;
+					const float BossWeekLenge = 8.0f;
 					//ボスの弱点の座標取得
 					CVector3 EnemyVec = GetMaw().GetWeekPosition();
 					EnemyVec -= info.attackPos[i];
@@ -164,8 +164,8 @@ void IWeapon::EnemyAttack()
 				}
 				else
 				{
-					const float BossHeight = 10.0f;
-					const float BossLenge = 12.0f;
+					const float BossHeight = 3.0f;
+					const float BossLenge = 7.0f;
 					//ボスの座標取得
 					CVector3 EnemyVec = GetMaw().GetPosition();
 					EnemyVec.y += BossHeight;
