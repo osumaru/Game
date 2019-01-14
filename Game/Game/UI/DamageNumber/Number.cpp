@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Number.h"
 
-void CNumber::Init(CVector2 numPos, CVector2 numSize)
+void CNumber::Init(const CVector2& numPos, const CVector2& numSize)
 {
 	for (int i = 0; i < EnNumber::enNumber_Num; i++) {
 		wchar_t filePath[256];

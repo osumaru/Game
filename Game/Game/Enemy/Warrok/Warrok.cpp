@@ -19,23 +19,7 @@ void CWarrok::OnInvokeAnimationEvent(//ƒAƒjƒ[ƒVƒ‡ƒ“ƒCƒxƒ“ƒg‚ªŒÄ‚Î‚ê‚é‚²‚Æ‚ÉŒÄ‚
 {
 	if (wcscmp(animClipName, L"Assets/modelData/WarrokAttack.tka") == 0) 
 	{
-		//ƒ{[ƒ“‚Ìƒ[ƒ‹ƒhs—ñ‚ğæ“¾
-		CMatrix boneMatrix = GetBoneWorldMatrix(L"LeftHand");
-		CVector3 bonePosition;
-		bonePosition.x = boneMatrix.m[3][0];
-		bonePosition.y = boneMatrix.m[3][1];
-		bonePosition.z = boneMatrix.m[3][2];
-		//“G‚ÌUŒ‚‚Æ‚Ì‹——£‚ğŒvZ
-		CVector3 playerPosition = GetPlayer().GetPosition();
-		playerPosition.y += 0.5f;
-		CVector3 distance = bonePosition - playerPosition;
-		float length = distance.Length();
-		if (length < 1.0f)
-		{
-			//ƒvƒŒƒCƒ„[‚ªƒ_ƒ[ƒW‚ğó‚¯‚½
-			GetPlayer().SetStanDamage(m_status.strength);
-			GetPlayer().SetDamageEnemyPos(m_position);
-		}
+		m_isAttack = !m_isAttack;
 	}
 
 	if (wcscmp(animClipName, L"Assets/modelData/WarrokRock.tka") == 0)
@@ -66,7 +50,7 @@ void CWarrok::OnInvokeAnimationEvent(//ƒAƒjƒ[ƒVƒ‡ƒ“ƒCƒxƒ“ƒg‚ªŒÄ‚Î‚ê‚é‚²‚Æ‚ÉŒÄ‚
 	}
 }
 
-void CWarrok::Init(CVector3 position)
+void CWarrok::Init(const CVector3& position)
 {
 	//ƒ‚ƒfƒ‹‚ğ“Ç‚İ‚Ş
 	m_skinModel.Load(L"Assets/modelData/Warrok.cmo", &m_animation);
@@ -125,15 +109,43 @@ bool CWarrok::Start()
 
 void CWarrok::Update()
 {
-	//“–‚½‚è”»’è—p‚Ì˜‚ÌÀ•W‚ğXV
-	UpdateSpinePos();
+	if (m_status.hp <= 0)
+	{
+		m_isDead = true;
+		//„‘Ì‚ğíœ‚·‚é
+		m_characterController.RemovedRigidBody();
+	}
 
-	if (!m_isWireHit) {
+	if (m_isAttack) 
+	{
+		//UŒ‚’†‚ÍƒvƒŒƒCƒ„[‚Æ‚Ì“–‚½‚è”»’è‚ğ‚Æ‚é
+		//ƒ{[ƒ“‚Ìƒ[ƒ‹ƒhs—ñ‚ğæ“¾
+		CMatrix boneMatrix = GetBoneWorldMatrix(L"LeftHand");
+		CVector3 bonePosition;
+		bonePosition.x = boneMatrix.m[3][0];
+		bonePosition.y = boneMatrix.m[3][1];
+		bonePosition.z = boneMatrix.m[3][2];
+		//“G‚ÌUŒ‚‚Æ‚Ì‹——£‚ğŒvZ
+		CVector3 playerPosition = GetPlayer().GetPosition();
+		playerPosition.y += 0.5f;
+		CVector3 distance = bonePosition - playerPosition;
+		float length = distance.Length();
+		if (length < 1.0f)
+		{
+			//ƒvƒŒƒCƒ„[‚ªƒ_ƒ[ƒW‚ğó‚¯‚½
+			GetPlayer().SetStanDamage(m_status.strength);
+			GetPlayer().SetDamageEnemyPos(m_position);
+		}
+	}
+
+	if (!m_isWireHit) 
+	{
 		//ƒAƒjƒ[ƒVƒ‡ƒ“‚ÌXV
 		m_animation.Update(GameTime().GetDeltaFrameTime());
 	}
 
-	if (!m_isRemovedRigidBody && !m_isWireHit) {
+	if (!m_isDead && !m_isWireHit)
+	{
 		//À•W‚ÌXV
 		m_characterController.SetPosition(m_position);
 		m_characterController.Execute(GameTime().GetDeltaFrameTime());

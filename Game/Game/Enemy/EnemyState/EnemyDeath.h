@@ -25,4 +25,13 @@ public:
 
 	//更新
 	void Update() override;
+
+	//アニメーションが終了したか
+	bool GetIsAnimationEnd()
+	{
+		return m_isAnimationEnd;
+	}
+
+private:
+	bool m_isAnimationEnd = false;	//アニメーションが終了したか
 };

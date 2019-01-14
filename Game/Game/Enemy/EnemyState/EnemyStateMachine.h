@@ -41,9 +41,7 @@ public:
 	bool Start() override;
 
 	//更新
-	void Update() override
-	{
-	}
+	void Update() override;
 
 	//ステートの切り替え
 	void ChangeState(CEnemyState::EnState nextState);

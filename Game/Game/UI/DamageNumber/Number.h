@@ -1,5 +1,5 @@
 /*
-*	数字クラス 
+*	数字のスプライトクラス 
 */
 
 #pragma once
@@ -10,7 +10,7 @@ public:
 	//初期化
 	//numPos  座標
 	//numSize サイズ
-	void Init(CVector2 numPos, CVector2 numSize);
+	void Init(const CVector2& numPos, const CVector2& numSize);
 
 	//描画
 	void Draw();
@@ -23,16 +23,29 @@ public:
 	}
 
 	//座標を設定
-	//pos	座標
-	void SetPosition(CVector2 pos)
+	//pos		座標
+	void SetPosition(const CVector2& pos)
 	{
 		m_number[m_num].SetPosition(pos);
 	}
 
 	//座標を取得
-	CVector2 GetPosition()
+	const CVector2& GetPosition() const
 	{
 		return m_number[m_num].GetPosition();
+	}
+
+	//サイズを設定
+	//size		サイズ
+	void SetSize(const CVector2& size)
+	{
+		m_number[m_num].SetSize(size);
+	}
+
+	//サイズを取得
+	const CVector2& GetSize() const
+	{
+		return m_number[m_num].GetSize();
 	}
 
 	//Z値を設定

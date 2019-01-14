@@ -12,7 +12,7 @@ CSamurai::~CSamurai()
 {
 }
 
-void CSamurai::Init(CVector3 position)
+void CSamurai::Init(const CVector3& position)
 {
 	//モデルを読み込む
 	m_skinModel.Load(L"Assets/modelData/Samurai.cmo", &m_animation);
@@ -63,15 +63,26 @@ bool CSamurai::Start()
 
 void CSamurai::Update()
 {
-	//当たり判定用の腰の座標を更新
-	UpdateSpinePos();
+	if (m_status.hp <= 0)
+	{
+		m_isDead = true;
+		//剛体を削除する
+		m_characterController.RemovedRigidBody();
+	}
 
-	if (!m_isWireHit) {
+	if (m_isAttack)
+	{
+		//攻撃中はプレイヤーとの当たり判定をとる
+	}
+
+	if (!m_isWireHit) 
+	{
 		//アニメーションの更新
 		m_animation.Update(GameTime().GetDeltaFrameTime());
 	}
 
-	if (!m_isRemovedRigidBody && !m_isWireHit) {
+	if (!m_isDead && !m_isWireHit) 
+	{
 		//座標の更新
 		m_characterController.SetPosition(m_position);
 		m_characterController.Execute(GameTime().GetDeltaFrameTime());

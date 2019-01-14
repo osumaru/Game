@@ -21,9 +21,6 @@ bool CEnemyDeath::Start()
 	//プレイヤーが経験値獲得
 	GetPlayer().ExpUP(m_enemy->GetStatus().exp);
 
-	//エネミーの剛体を削除
-	m_enemy->RemovedRegidBody();
-
 	return true;
 }
 
@@ -52,7 +49,6 @@ void CEnemyDeath::Update()
 			CTreasureChest* treasureChest = New<CTreasureChest>(PRIORITY_ITEM);
 			treasureChest->Init(m_enemy->GetPosition());
 		}
-		m_enemy->StateMachineRelease();
 		m_enemy->EnemyListErase();
 		Delete(m_enemy);
 	}

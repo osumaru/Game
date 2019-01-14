@@ -70,7 +70,11 @@ void CPlayerArrow::Update()
 
 				//CVector3 EnemyVec = enemys->GetPosition();
 				//EnemyVec.y += OFFSET_Y;
-				CVector3 EnemyVec = enemys->GetSpinePos();
+				const CMatrix* enemySpineMatrix = enemys->GetWorldMatrixSpine();
+				CVector3 EnemyVec;
+				EnemyVec.x = enemySpineMatrix->m[3][0];
+				EnemyVec.y = enemySpineMatrix->m[3][1];
+				EnemyVec.z = enemySpineMatrix->m[3][2];
 				EnemyVec.Subtract(m_arrowPosition);
 				float len = EnemyVec.Length();
 
