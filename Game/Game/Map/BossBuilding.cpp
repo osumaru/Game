@@ -8,7 +8,7 @@
 void CBossBuilding::Init(CVector3 position)
 {
 	//ƒ‚ƒfƒ‹‚Ì‰Šú‰»
-	m_skinModel.Load(L"Assets/modelData/TestBox1.cmo");
+	m_skinModel.Load(L"Assets/modelData/CastleDoor2.cmo");
 	//À•W‚ğİ’è
 	m_position = position;
 }
