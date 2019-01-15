@@ -51,9 +51,9 @@ void CParticle::Init(const SParticleEmittInfo& info, const CCamera* camera)
 		{ {-1.0f,	-1.0f,		1.0f,	1.0f},	{info.uv.x ,	info.uv.w} },
 	};
 	//インデックスバッファーを作成
-	WORD indexElements[6] = { 0, 2, 3, 0, 1, 2 };
+	WORD indexElements[4] = { 0, 3, 1, 2 };
 	//プリミティブを作成
-	m_primitive.Create(elements, sizeof(PVSLayout), 4, indexElements, 6, CPrimitive::enIndex16, CPrimitive::enTypeTriangleList);
+	m_primitive.Create(elements, sizeof(PVSLayout), 4, indexElements, 6, CPrimitive::enIndex16, CPrimitive::enTypeTriangleStrip);
 	m_worldMatrix = CMatrix::Identity;
 	m_rotation = CQuaternion::Identity;
 	m_cb.Create(sizeof(CMatrix), &m_worldMatrix);
