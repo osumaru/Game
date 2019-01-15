@@ -10,7 +10,9 @@ class CInventoryTwinSword : public IInventoryEquip
 {
 public:
 	//初期化
-	void Init(const wchar_t* itemName, const wchar_t* textureFileName) override;
+	//itemName			アイテムの名前
+	//textureFilePath	テクスチャのファイルパス
+	void Init(const wchar_t* itemName, const wchar_t* textureFilePath) override;
 
 	//描画
 	void Draw() override;
