@@ -71,6 +71,21 @@ void CPlayerAttack::Update()
 
 	m_pPlayer->GetWeaponManager().SetAttackCount(m_attackCount);
 
+	if (m_pPlayer->GetIsStateCondition(CPlayerState::enPlayerStateDamage))
+	{
+		CVector3 bonePos;
+		bonePos.x = m_pBoneMat->m[3][0];
+		bonePos.y = m_pBoneMat->m[3][1];
+		bonePos.z = m_pBoneMat->m[3][2];
+		CVector3 position = bonePos;
+		position.y = m_pPlayer->GetPosition().y;
+		m_pPlayerGetter->SetPosition(position);
+		m_pPlayer->GetWeaponManager().SetIsAttackCheck(false);
+		m_pPlayer->GetWeaponManager().SetIsAttack(false);
+		m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateDamage);
+		return;
+	}
+
 	//攻撃アニメーションが終わった時の処理
 	if (!m_pPlayerGetter->GetAnimation().IsPlay())
 	{
@@ -88,7 +103,7 @@ void CPlayerAttack::Update()
 		bonePos.x = m_pBoneMat->m[3][0];
 		bonePos.y = m_pBoneMat->m[3][1];
 		bonePos.z = m_pBoneMat->m[3][2];
-		//攻撃モーション中はダメージモーションをさせない
+		//連続攻撃していた
 		if (m_isContinuationAttack)
 		{
 			m_attackCount++;
