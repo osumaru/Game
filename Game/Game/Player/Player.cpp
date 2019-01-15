@@ -189,10 +189,10 @@ void CPlayer::Update()
 	CVector3 stickDir = { stickX, 0.0f, stickZ };
 	m_playerGetter.SetStickDir(stickDir);
 
-	if (Pad().IsTriggerButton(enButtonB))
-	{
-		m_isDamege = true;
-	}
+	//if (Pad().IsTriggerButton(enButtonB))
+	//{
+	//	m_isDamege = true;
+	//}
 
 	CMatrix viewMat;
 	CVector3 shadowCameraUp = GetGameCamera().GetSpringCamera().GetTarget() - GetGameCamera().GetSpringCamera().GetPosition();
