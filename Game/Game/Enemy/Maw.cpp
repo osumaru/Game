@@ -484,7 +484,7 @@ void CMaw::SetIsDamage(bool isDamage)
 	//ダメージ間隔が0より大きかったら返す
 	if (m_damageInterval > 0.0f) { return; }
 	const float		MaxInterval = 1.0f;	//最大ダメージ間隔
-	const int		MaxDownCount = 0;	//最大ダウンカウント
+	const int		MaxDownCount = 3;	//最大ダウンカウント
 	const float		DamageTime = 0.2f;	//ダメージを食らうようになる時間
 
 	//ダウンしていなかったら
