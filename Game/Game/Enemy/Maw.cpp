@@ -9,11 +9,6 @@
 
 CMaw *CMaw::m_maw = NULL;
 
-//ダメージアニメーションは入れないようにしてダウンのアニメーションだけにする？
-//攻撃モーションを複数入れたい
-//ひるんでから一回しかダメージを受けない
-//移動中にひるましたら動いたままになる
-
 CMaw::CMaw()
 {
 	this->SetIsActive(false);
@@ -30,24 +25,16 @@ void CMaw::OnInvokeAnimationEvent(
 	const wchar_t* eventName
 )
 {
-	//もう一度呼ばれる間攻撃判定をオンにしておく
-	if (wcscmp(animClipName, L"Assets/modelData/MawAttack.tka") == 0&&!m_isAttack) 
+	//攻撃判定を切り替える
+	if (wcscmp(animClipName, L"Assets/modelData/MawAttack.tka") == 0) 
 	{
-		m_isAttack = true;
-	}
-	else if((wcscmp(animClipName, L"Assets/modelData/MawAttack.tka") == 0 &&m_isAttack))
-	{
-		m_isAttack = false;
+		m_isAttack = !m_isAttack;
 	}
 
-	//もう一度呼ばれる間攻撃判定をオンにしておく
-	if (wcscmp(animClipName, L"Assets/modelData/MawSpecialAttack.tka") == 0 && !m_isAttack)
+	//攻撃判定を切り替える
+	if (wcscmp(animClipName, L"Assets/modelData/MawSpecialAttack.tka") == 0)
 	{
-		m_isAttack = true;
-	}
-	else if ((wcscmp(animClipName, L"Assets/modelData/MawSpecialAttack.tka") == 0 && m_isAttack))
-	{
-		m_isAttack = false;
+		m_isAttack = !m_isAttack;
 	}
 }
 
@@ -76,7 +63,7 @@ void CMaw::Init(CVector3 position)
 	const CVector4 DiffuseLight= { 1.0f,1.0f,1.0f,1.0f };
 	const CVector4 DiffuseLightDir= { 0.0f, -1.0f, 1.0f, 1.0f };
 
-	//プレイヤーのスキンンモデルのロード
+	//プレイヤーのスキンモデルのロード
 	m_skinModel.Load(L"Assets/modelData/Maw.cmo", &m_animation);
 	//m_skinModel.LoadNormalmap(L"Assets/modelData/MAW_normal.png");
 
@@ -93,8 +80,8 @@ void CMaw::Init(CVector3 position)
 		wchar_t* animClip[EnMawState::enState_Num] = {
 			{ L"Assets/modelData/MawStand.tka"},			//待機アニメーション
 			{ L"Assets/modelData/MawWalk.tka" },			//歩行アニメーション
-			{ L"Assets/modelData/MawAttack2.tka" },			//攻撃アニメーション
-			{ L"Assets/modelData/MawSpecialAttack2.tka" },	//攻撃アニメーション
+			{ L"Assets/modelData/MawAttack.tka" },			//攻撃アニメーション
+			{ L"Assets/modelData/MawSpecialAttack.tka" },	//攻撃アニメーション
 			{ L"Assets/modelData/MawDamage.tka" },			//ダメージアニメーション
 			{ L"Assets/modelData/MawDown.tka" },			//ダウンアニメーション
 			{ L"Assets/modelData/MawDeath.tka" },			//死亡アニメーション
@@ -103,12 +90,13 @@ void CMaw::Init(CVector3 position)
 		m_animation.Init(animClip, EnMawState::enState_Num);
 		m_animation.SetLoopFlg(EnMawState::enState_Idle, true);
 		m_animation.SetLoopFlg(EnMawState::enState_Walk, true);
-		//最初に流すアニメーションを歩きに設定
-		m_animation.Play(EnMawState::enState_Walk);
+
 		//アニメーションイベントリスナーの登録　呼び出される関数の登録
 		m_animation.AddAnimationEvent([&](auto animClipname, auto eventName) {
 			OnInvokeAnimationEvent(animClipname, eventName);
 		});
+		//最初に流すアニメーションを歩きに設定
+		m_animation.Play(EnMawState::enState_Walk);
 	}
 	//弱点の頭のボーンを取得
 	CMatrix WeekMat = m_skinModel.FindBoneWorldMatrix(L"Head");
@@ -134,42 +122,31 @@ void CMaw::Update()
 	switch (m_actionPattern)
 	{
 	case EnMawActionPattern::enActionPatternAttack:
-		//通常攻撃
-		Attack();
+		Attack();//通常攻撃
 		break;
 	case EnMawActionPattern::enActionPatternSpecialAttack:
-		//特殊攻撃
-		SpecialAttack();
+		SpecialAttack();//特殊攻撃
 		break;
 	case EnMawActionPattern::enActionPatternDown:
-		//ダウン状態
-		Down();
+		Down();//ダウン状態
+		break;
+	case EnMawActionPattern::enActionPatternDamage:
+		Damage();//ダメージ
 		break;
 	case EnMawActionPattern::enActionPatternSearch:
-		//プレイヤーを探す回転など
-		Search();
+		Search();//プレイヤーを探す回転など
 		break;
 	case EnMawActionPattern::enActionPatternIdle:
-		//待機状態
-		Idle();
+		Idle();//待機状態
 		break;
 	case EnMawActionPattern::enActionPatternDeath:
-		//死亡状態
-		Death();
+		Death();//死亡状態
 		break;
 	default:
 		break;
 	}
 
-	//弱点描画の更新
-	WeekPointUpdate();
-
-	
-	//弱点の頭のボーンを取得
-	CMatrix WeekMat=m_skinModel.FindBoneWorldMatrix(L"Head");
-	m_weekPosition.x = WeekMat.m[3][0];
-	m_weekPosition.y = WeekMat.m[3][1];
-	m_weekPosition.z = WeekMat.m[3][2];
+	WeekPointUpdate();//弱点の更新
 	
 	//ダメージ間隔が0以上だったら
 	if (m_damageInterval >= 0.0f&&!m_isDeath)
@@ -210,6 +187,12 @@ void CMaw::WeekPointUpdate()
 	{
 		m_weekPoint->SetIsActive(false);
 	}
+
+	//弱点の頭のボーンを取得
+	CMatrix WeekMat = m_skinModel.FindBoneWorldMatrix(L"Head");
+	m_weekPosition.x = WeekMat.m[3][0];
+	m_weekPosition.y = WeekMat.m[3][1];
+	m_weekPosition.z = WeekMat.m[3][2];
 }
 
 //行動の選択
@@ -233,19 +216,19 @@ void CMaw::WeekPointUpdate()
 //攻撃行動
 void CMaw::Attack()
 {
-	const float PlayerDamageLengthMax = 3.5f;//プレイヤーにダメージを与える最大距離
-
+	const float PlayerDamageLengthMax = 4.0f;//プレイヤーにダメージを与える最大距離
 	//アニメーション再生
 	bool IsAnimPlay=Anim(EnMawState::enState_Attack);
-	
 	//攻撃が終わっていたら
 	if (!IsAnimPlay)
 	{
 		//索敵ステートへ
 		m_actionPattern = EnMawActionPattern::enActionPatternSearch;
 	}
-
-	HandAttack(PlayerDamageLengthMax);
+	if (m_isAttack)
+	{
+		HandAttack(PlayerDamageLengthMax);
+	}
 }
 //特殊攻撃
 void CMaw::SpecialAttack()
@@ -259,72 +242,68 @@ void CMaw::SpecialAttack()
 		//索敵ステートへ
 		m_actionPattern = EnMawActionPattern::enActionPatternSearch;
 	}
-	HandAttack(PlayerDamageLengthMax);
+	if (m_isAttack)
+	{
+		HandAttack(PlayerDamageLengthMax);
+	}
 }
 
 //ダウン状態
 void CMaw::Down()
 {
-	//const float MaxDownTime = 10.0f;		//最大ダウン時間
+	const float MaxDownTime = 6.0f;	//最大ダウン時間
 	//アニメーション再生
-	bool IsAnimPlay=Anim(EnMawState::enState_Down);
+	Anim(EnMawState::enState_Down);
 	m_bossHp->SetIsActive(true);
-	//if (!IsAnimPlay)
-	//{
-	if (m_downTime > 6.0f)
+
+	//最大ダウン時間を超えていたら
+	if (m_downTime > MaxDownTime)
 	{
-		//次の行動の選択
-		m_actionPattern = EnMawActionPattern::enActionPatternSearch;
-		//ActionStateOrder();
 		m_downTime = 0.0f;
 		m_isDown = false;
 		m_weekPoint->SetIsActive(true);
 		//m_bossHp->SetIsActive(false);
+		//次の行動の選択
+		m_actionPattern = EnMawActionPattern::enActionPatternSearch;
 	}
-	//else if (m_downTime > 1.0f)
-	//{
-		//ダウン中の攻撃をくらった時の処理
-		//ここでHPバーを表示する？
-		if (m_isDamage)
-		{
-			//ダメージ計算
-			int playerStrength = GetPlayer().GetStatus().Strength;
-			int damage = playerStrength - m_status.Defense;
-			m_status.Hp -= damage;
-			m_isDamage = false;
+	//ダウン中の攻撃をくらった時の処理
+	//ここでHPバーを表示する？
+	if (m_isDamage)
+	{
+		//ダメージ計算
+		int playerStrength = GetPlayer().GetStatus().Strength;
+		int damage = playerStrength - m_status.Defense;
+		m_status.Hp -= damage;
+		m_isDamage = false;
 
-			//次の行動の選択
-			m_actionPattern = EnMawActionPattern::enActionPatternSearch;
-			//ActionStateOrder();
-			m_downTime = 0.0f;
-			m_isDown = false;
-			m_weekPoint->SetIsActive(true);
-		//	m_bossHp->SetIsActive(false);
-
+		m_downTime = 0.0f;
+		m_isDown = false;
+		m_weekPoint->SetIsActive(true);
+		//m_bossHp->SetIsActive(false);
+		//次の行動の選択
+		m_actionPattern = EnMawActionPattern::enActionPatternDamage;
 			
-			//HPが0以下になったら
-			if (m_status.Hp <= 0)
-			{
-				//死亡ステートへ
-				m_actionPattern = EnMawActionPattern::enActionPatternDeath;
-			}
+		//HPが0以下になったら
+		if (m_status.Hp <= 0)
+		{
+			//死亡ステートへ
+			m_actionPattern = EnMawActionPattern::enActionPatternDeath;
 		}
-	
-		m_downTime += GameTime().GetDeltaFrameTime();
+	}
+	m_downTime += GameTime().GetDeltaFrameTime();
+}
 
-		//最大ダウン時間を超えていたら
-		//if (m_downTime > MaxDownTime)
-		//{
-			//次の行動の選択
-			//m_actionPattern = EnMawActionPattern::enActionPatternSearch;
-			////ActionStateOrder();
-			////m_downTime = 0.0f;
-			//m_isDown = false;
-			//m_weekPoint->SetIsActive(true);
-			//m_bossHp->SetIsActive(false);
-		//}
-	//}
 
+void CMaw::Damage()
+{
+	//アニメーション再生
+	bool IsAnimPlay = Anim(EnMawState::enState_Damage);
+	//終わっていたら
+	if (!IsAnimPlay)
+	{
+		//索敵ステートへ
+		m_actionPattern = EnMawActionPattern::enActionPatternSearch;
+	}
 }
 
 //探す状態
@@ -371,42 +350,12 @@ void CMaw::Search()
 	{
 		float Speed = 2.5f;
 		CVector3 moveSpeed = m_characterController.GetMoveSpeed();
-
 		toPlayerDir *= Speed;
 		moveSpeed.x = toPlayerDir.x;
 		moveSpeed.z = toPlayerDir.z;
 		m_characterController.SetMoveSpeed(moveSpeed);
 		Rotation();
-		//見つけれなかったら探す
-		//CQuaternion addRot;
-		//const float RotSpeed = 0.01f;
-		////Y軸のクォータニオンを作成
-		//addRot.SetRotation(CVector3::AxisY,RotSpeed);
-
-		//CQuaternion rot = m_rotation;
-		////クォータニオンを乗算
-		//rot.Multiply(rot, addRot);
-		//m_rotation = rot;
-
 	}
-	//const float LengeAttackLength = 30.0f;		//遠距離攻撃距離
-	//const float StandLength = 75.0f;			//戦闘終了距離
-	////遠距離攻撃アニメーション
-	////Anim(EnMawState::enState_Idle);
-
-	//CVector3 toPlayerDir = GetPlayer().GetPosition() - m_position;
-	//float length = toPlayerDir.Length();
-
-	////プレイヤーが遠くに離れたら
-	//if (length > StandLength)
-	//{
-	//	//待機ステートへ
-	//	m_actionPattern = EnMawActionPattern::enActionPatternIdle;
-	//}
-	//else if (length > LengeAttackLength)
-	//{
-	//	//遠距離攻撃ステートへ
-	//}
 }
 
 //回転
@@ -449,7 +398,6 @@ void CMaw::Rotation()
 
 	CQuaternion addRot;
 	addRot.SetRotation(CVector3::AxisY, addAngle);
-
 	CQuaternion rot = m_rotation;
 	rot.Multiply(rot, addRot);
 	m_rotation = rot;
@@ -458,7 +406,7 @@ void CMaw::Rotation()
 //待機状態
 void CMaw::Idle()
 {
-	const float SearchLength = 70.0f;//範囲距離
+	const float SearchLength = 60.0f;//範囲距離
 	//アニメーション
 	Anim(EnMawState::enState_Idle);
 
@@ -478,8 +426,9 @@ void CMaw::Idle()
 void CMaw::Death()
 {
 	//死亡アニメーション
-	bool IsAnim = Anim(EnMawState::enState_Death);
-	if (!IsAnim)
+	bool IsAnimPlay = Anim(EnMawState::enState_Death);
+	//終わっていたら
+	if (!IsAnimPlay)
 	{
 		//クリアシーンへ遷移
 		GetSceneManager().ChangeScene(GetSceneManager().enClearScene);
@@ -524,10 +473,9 @@ void CMaw::HandAttack(float DamageLength)
 	CVector3 distance = BossLeftHandPos - playerPosition;
 	float PlayerDamageLength = distance.Length();
 	if (PlayerDamageLength < PlayerDamageLengthMax) {
-		//プレイヤーがダメージを受けた
+		//プレイヤーにスタンダメージを与える
 		GetPlayer().SetStanDamage(m_status.Strength);
 	}
-	
 }
 
 //ダメージ処理
@@ -535,10 +483,9 @@ void CMaw::SetIsDamage(bool isDamage)
 {
 	//ダメージ間隔が0より大きかったら返す
 	if (m_damageInterval > 0.0f) { return; }
-	const float		MaxInterval = 5.0f;	//最大ダメージ間隔
+	const float		MaxInterval = 1.0f;	//最大ダメージ間隔
 	const int		MaxDownCount = 0;	//最大ダウンカウント
-
-	//m_isDamage = isDamage;
+	const float		DamageTime = 0.2f;	//ダメージを食らうようになる時間
 
 	//ダウンしていなかったら
 	if (!m_isDown)
@@ -547,22 +494,20 @@ void CMaw::SetIsDamage(bool isDamage)
 		m_isDamage = false;
 	}
 
-	//ダウンカウントが最大ダウンカウントより大きかったら
+	//最大ダウンカウントより大きかったら
 	if (m_downCount > MaxDownCount)
 	{
-		//ダウンさせる
 		m_isDamage = false;
 		//移動をやめる
 		m_characterController.SetMoveSpeed(CVector3::Zero);
-		
+		//ダウンさせる
 		m_actionPattern = EnMawActionPattern::enActionPatternDown;
-
 		m_isDown = true;
 		m_weekPoint->SetIsActive(false);
 		m_downCount = 0;
 	}
 
-	if (m_downTime > 0.8f)
+	if (m_downTime > DamageTime)
 	{
 		m_isDamage = true;
 	}
