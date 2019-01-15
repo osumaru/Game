@@ -19,32 +19,14 @@ void CWarrok::OnInvokeAnimationEvent(//ƒAƒjƒ[ƒVƒ‡ƒ“ƒCƒxƒ“ƒg‚ªŒÄ‚Î‚ê‚é‚²‚Æ‚ÉŒÄ‚
 {
 	if (wcscmp(animClipName, L"Assets/modelData/WarrokAttack.tka") == 0) 
 	{
+		//UŒ‚ƒtƒ‰ƒO‚ðØ‚è‘Ö‚¦‚é
 		m_isAttack = !m_isAttack;
 	}
 
 	if (wcscmp(animClipName, L"Assets/modelData/WarrokRock.tka") == 0)
 	{
-		//Šâ‚©‚çƒvƒŒƒCƒ„[‚Ö‚ÌƒxƒNƒgƒ‹‚ð‹‚ß‚é
-		CVector3 distance = GetPlayer().GetPosition() - m_rock->GetPosition();
-		//XZ•½–Ê‚Å‚Ì‹——£‚ð‹‚ß‚é
-		CVector3 distanceXZ = distance;
-		distanceXZ.y = 0.0f;
-		float lengthXZ = distanceXZ.Length();
-		//“Š‚°‚éŠp“x‚ðÝ’è
-		float angle = CMath::PI / 6;
-		//“Š‚°‚é‚‚³‚ð‹‚ß‚é
-		float height = tan(angle) * lengthXZ;
-		//“Š‚°‚é•ûŒü‚ð‹‚ß‚é
-		CVector3 moveDir = distance;
-		moveDir.y += height;
-		float length = moveDir.Length();
-		moveDir.Normalize();
 		//ˆÚ“®‘¬“x‚ðÝ’è
-		CVector3 moveSpeed;
-		moveSpeed.x = moveDir.x * length * cos(angle);
-		moveSpeed.y = moveDir.y * length * sin(angle);
-		moveSpeed.z = moveDir.z * length * cos(angle);
-		m_rock->SetMoveSpeed(moveSpeed);
+		m_rock->SetMoveSpeed();
 		//“Š‚°‚éƒtƒ‰ƒO‚ð—§‚Ä‚é
 		m_rock->SetIsThrow(true);
 	}
@@ -138,6 +120,12 @@ void CWarrok::Update()
 		}
 	}
 
+	if (m_rock != nullptr && !m_rock->GetIsThrow())
+	{
+		//Šâ‚ð“Š‚°‚é‚Ü‚Å‚ÍƒvƒŒƒCƒ„[‚Ì•û‚ðŒü‚­
+		RockAttackRotation();
+	}
+
 	if (!m_isWireHit) 
 	{
 		//ƒAƒjƒ[ƒVƒ‡ƒ“‚ÌXV
@@ -179,4 +167,40 @@ void CWarrok::Attack()
 		//’ÊíUŒ‚
 		m_animation.Play(CEnemyState::enAnimationWarrok_Attack, 0.3f);
 	}
+}
+
+void CWarrok::RockAttackRotation()
+{
+	//UŒ‚‚·‚é•ûŒü‚ð‹‚ß‚é
+	CVector3 attackDir = GetPlayer().GetPosition() - m_position;
+	attackDir.Normalize();
+	//ƒGƒlƒ~[‚Ì‘O•ûŒü‚ðŽæ“¾
+	CMatrix worldMatrix = GetWorldMatrix();
+	CVector3 enemyFront;
+	enemyFront.x = worldMatrix.m[2][0];
+	enemyFront.y = worldMatrix.m[2][1];
+	enemyFront.z = worldMatrix.m[2][2];
+	enemyFront.Normalize();
+	//Šp“x‚ðŒvŽZ
+	float angle = attackDir.Dot(enemyFront);
+	if (angle > 1.0f)
+	{
+		angle = 1.0f;
+	}
+	else if (angle < -1.0f)
+	{
+		angle = -1.0f;
+	}
+	angle = acosf(angle);
+	//‰ñ“]‚·‚é•ûŒü‚ð‹‚ß‚é
+	CVector3 cross = attackDir;
+	cross.Cross(enemyFront);
+	if (cross.y > 0.0f)
+	{
+		angle *= -1.0f;
+	}
+	//‰ñ“]‚³‚¹‚é
+	CQuaternion addRotation;
+	addRotation.SetRotation(CVector3::AxisY, angle);
+	m_rotation.Multiply(addRotation);
 }

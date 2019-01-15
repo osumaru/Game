@@ -57,6 +57,7 @@ public:
 	}
 
 	//ステートを取得
+	//state		取得したいステート
 	const IEnemyState* GetState(CEnemyState::EnState state) const
 	{
 		switch (state)
@@ -85,6 +86,12 @@ public:
 		case CEnemyState::enState_Walk:
 			return &m_enemyWalk;
 		}
+	}
+
+	//現在のステートを取得
+	CEnemyState::EnState GetCurrentState() const
+	{
+		return m_state;
 	}
 
 private:
