@@ -1,9 +1,10 @@
 #include "InventoryBow.h"
 
-void CInventoryBow::Init()
+void CInventoryBow::Init(const wchar_t* itemName, const wchar_t* textureFileName)
 {
-	m_itemName = L"‹|";
-	CTexture* texture = TextureResource().LoadTexture(L"Assets/sprite/bow.png");
+	m_itemName = itemName;
+	m_textureFileName = textureFileName;
+	CTexture* texture = TextureResource().LoadTexture(textureFileName);
 	m_itemSprite.Init(texture);
 }
 

@@ -10,7 +10,7 @@ class CInventoryBow : public IInventoryEquip
 {
 public:
 	//‰Šú‰»
-	void Init() override;
+	void Init(const wchar_t* itemName, const wchar_t* textureFileName) override;
 
 	//•`‰æ
 	void Draw() override;

@@ -12,7 +12,7 @@ public:
 	virtual ~IInventoryEquip() {};
 
 	//初期化
-	virtual void Init() {};
+	virtual void Init(const wchar_t* itemName, const wchar_t* textureFileName) {};
 
 	//描画
 	virtual void Draw() {};
@@ -24,9 +24,15 @@ public:
 	}
 
 	//アイテムの名前を取得
-	wchar_t* GetItemName()
+	const wchar_t* GetItemName() const
 	{
 		return m_itemName;
+	}
+
+	//テクスチャファイルの名前を取得
+	const wchar_t* GetTextureFileName() const
+	{
+		return m_textureFileName;
 	}
 
 	//装備のステータスを設定
@@ -43,6 +49,7 @@ public:
 
 protected:
 	CSprite					m_itemSprite;			//アイテムのスプライト
-	wchar_t*				m_itemName;				//アイテムの名前
+	const wchar_t*			m_itemName;				//アイテムの名前
+	const wchar_t*			m_textureFileName;		//テクスチャファイルの名前
 	SWeaponStatus			m_equipStatus;			//装備のステータス
 };

@@ -1,9 +1,10 @@
 #include "InventoryLargeSword.h"
 
-void CInventoryLargeSword::Init()
+void CInventoryLargeSword::Init(const wchar_t* itemName, const wchar_t* textureFileName)
 {
-	m_itemName = L"‘åŒ•";
-	CTexture* texture = TextureResource().LoadTexture(L"Assets/sprite/largeSword.png");
+	m_itemName = itemName;
+	m_textureFileName = textureFileName;
+	CTexture* texture = TextureResource().LoadTexture(textureFileName);
 	m_itemSprite.Init(texture);
 }
 

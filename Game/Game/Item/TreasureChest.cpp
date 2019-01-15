@@ -86,6 +86,10 @@ void CTreasureChest::DesideWeaponStatus()
 	weaponNumber = nItem->GetItemStatus_ItemId(num).WeaponType;
 	weaponAttack = nItem->GetItemStatus_ItemId(num).ItemEffect;
 	*/
+	////アイテムの名前と読み込むテクスチャファイルの名前を設定する//////
+	wchar_t* itemName = L"ああああ";
+	wchar_t* textureFileName = L"Assets/sprite/item/Equip/Equip_2.png";
+	////////////////////////////////////////////////////////////////////
 	if (weaponNumber == EnPlayerWeapon::enWeaponSword)
 	{
 		//剣
@@ -116,5 +120,5 @@ void CTreasureChest::DesideWeaponStatus()
 	}
 	weaponStatus.attack = weaponAttack;
 	m_inventoryEquip->SetEquipStatus(weaponStatus);
-	m_inventoryEquip->Init();
+	m_inventoryEquip->Init(itemName, textureFileName);
 }
