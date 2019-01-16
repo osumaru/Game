@@ -51,9 +51,9 @@ void CParticle::Init(const SParticleEmittInfo& info, const CCamera* camera)
 		{ {-1.0f,	-1.0f,		1.0f,	1.0f},	{info.uv.x ,	info.uv.w} },
 	};
 	//インデックスバッファーを作成
-	WORD indexElements[6] = { 0, 3, 2, 0, 2, 1 };
+	WORD indexElements[4] = { 0, 3, 1, 2 };
 	//プリミティブを作成
-	m_primitive.Create(elements, sizeof(PVSLayout), 4, indexElements, 6, CPrimitive::enIndex16, CPrimitive::enTypeTriangleList);
+	m_primitive.Create(elements, sizeof(PVSLayout), 4, indexElements, 6, CPrimitive::enIndex16, CPrimitive::enTypeTriangleStrip);
 	m_worldMatrix = CMatrix::Identity;
 	m_rotation = CQuaternion::Identity;
 	m_cb.Create(sizeof(CMatrix), &m_worldMatrix);
@@ -110,8 +110,8 @@ void CParticle::AfterDraw()
 	GetDeviceContext()->IASetPrimitiveTopology(m_primitive.GetPrimitiveType());
 	GetDeviceContext()->IASetIndexBuffer(m_primitive.GetIndexBuffer().Get(), m_primitive.GetIndexFormat(), 0);
 	GetDeviceContext()->IASetInputLayout(m_vs.GetInputlayOut().Get());
-	GetDeviceContext()->VSSetConstantBuffers(0, 1, &m_cb.GetBody());
-	GetDeviceContext()->PSSetConstantBuffers(0, 1, &m_cb.GetBody());
+	GetDeviceContext()->VSSetConstantBuffers(0, 1, m_cb.GetBody().GetAddressOf());
+	GetDeviceContext()->PSSetConstantBuffers(0, 1, m_cb.GetBody().GetAddressOf());
 	ID3D11ShaderResourceView* views[] = { m_pTexture->GetShaderResource().Get(), Engine().GetShaderResource(enRenderTargetDepth).Get() };
 	GetDeviceContext()->PSSetShaderResources(0, 2, views);
 	GetDeviceContext()->DrawIndexed(m_primitive.GetIndexNum(), 0, 0);

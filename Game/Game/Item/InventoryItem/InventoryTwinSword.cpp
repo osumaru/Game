@@ -1,9 +1,10 @@
 #include "InventoryTwinSword.h"
 
-void CInventoryTwinSword::Init()
+void CInventoryTwinSword::Init(const wchar_t* itemName, const wchar_t* textureFilePath)
 {
-	m_itemName = L"‘oŒ•";
-	CTexture* texture = TextureResource().LoadTexture(L"Assets/sprite/twinSword.png");
+	m_itemName = itemName;
+	m_textureFilePath = textureFilePath;
+	CTexture* texture = TextureResource().LoadTexture(textureFilePath);
 	m_itemSprite.Init(texture);
 }
 

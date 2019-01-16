@@ -18,10 +18,10 @@ void CPlayerSky::Init()
 
 void CPlayerSky::Update()
 {
-	if (m_pPlayerGetter->GetAnimation().GetCurrentAnimationNum() == enPlayerAnimationLanding)
-	{
-		m_pPlayerGetter->SetMoveSpeed(CVector3::Zero);
-	}
+	//if (m_pPlayerGetter->GetAnimation().GetCurrentAnimationNum() == enPlayerAnimationLanding)
+	//{
+	//	m_pPlayerGetter->SetMoveSpeed(CVector3::Zero);
+	//}
 	m_pPlayerGetter->GetCharacterController().Execute(GameTime().GetDeltaFrameTime());
 
 	m_pPlayerGetter->SetPosition(m_pPlayerGetter->GetCharacterController().GetPosition());
@@ -57,4 +57,6 @@ void CPlayerSky::Update()
 		//ƒƒCƒ„[ˆÚ“®‚Å‚«‚é‚È‚ç‘JˆÚ
 		m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateWireMove);
 	}
+
+
 }

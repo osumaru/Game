@@ -12,6 +12,14 @@ CSamurai::~CSamurai()
 {
 }
 
+void CSamurai::OnInvokeAnimationEvent(const wchar_t * animClipName, const wchar_t * eventName)
+{
+	if (wcscmp(animClipName, L"Assets/modelData/SamuraiAttack.tka") == 0)
+	{
+		m_isAttack = !m_isAttack;
+	}
+}
+
 void CSamurai::Init(const CVector3& position)
 {
 	//モデルを読み込む
@@ -52,6 +60,10 @@ void CSamurai::Init(const CVector3& position)
 	m_spineMatrix = &GetBoneWorldMatrix(L"Spine");
 	//攻撃できる距離を設定
 	m_attackLength = 1.2f;
+	m_animation.AddAnimationEvent([&](auto animClipname, auto eventName)
+	{
+		OnInvokeAnimationEvent(animClipname, eventName);
+	});
 }
 
 bool CSamurai::Start()
@@ -73,6 +85,23 @@ void CSamurai::Update()
 	if (m_isAttack)
 	{
 		//攻撃中はプレイヤーとの当たり判定をとる
+		//ボーンのワールド行列を取得
+		CMatrix boneMatrix = GetBoneWorldMatrix(L"RightHand");
+		CVector3 bonePosition;
+		bonePosition.x = boneMatrix.m[3][0];
+		bonePosition.y = boneMatrix.m[3][1];
+		bonePosition.z = boneMatrix.m[3][2];
+		//敵の攻撃との距離を計算
+		CVector3 playerPosition = GetPlayer().GetPosition();
+		playerPosition.y += 0.5f;
+		CVector3 distance = bonePosition - playerPosition;
+		float length = distance.Length();
+		if (length < 1.2f)
+		{
+			//プレイヤーがダメージを受けた
+			GetPlayer().SetDamage(m_status.strength);
+			GetPlayer().SetDamageEnemyPos(m_position);
+		}
 	}
 
 	if (!m_isWireHit) 

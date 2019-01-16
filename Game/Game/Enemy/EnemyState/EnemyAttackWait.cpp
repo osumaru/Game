@@ -89,9 +89,9 @@ void CEnemyAttackWait::Rotation()
 	}
 	angle = acosf(angle);
 	//‰ñ“]•ûŒü‚ðŒˆ‚ß‚é
-	CVector3 Cross = toPlayer;
-	Cross.Cross(enemyForward);
-	if (Cross.y > 0.0f) {
+	CVector3 cross = toPlayer;
+	cross.Cross(enemyForward);
+	if (cross.y > 0.0f) {
 		angle *= -1.0f;
 	}
 	//™X‚É‰ñ“]‚³‚¹‚é‚½‚ß‚É•ªŠ„

@@ -40,15 +40,6 @@ void CPlayer::OnInvokeAnimationEvent(//ÉAÉjÉÅÅ[ÉVÉáÉìÉCÉxÉìÉgÇ™åƒÇŒÇÍÇÈÇ≤Ç∆Ç…åƒÇ
 		footSound->SetVolume(footVolume);
 	}
 
-	if (wcscmp(animClipName, L"Assets/modelData/PlayerThrustAttack.tka") == 0)
-	{//ÇΩÇ‘ÇÒåƒÇŒÇÍÇΩ
-		/*
-		auto soundSource = New<CSoundSource>(0);
-		soundSource->Init("sound/Footstep_00.wav");
-		soundSource->Play(false);
-		*/
-	}
-
 	if (!wcscmp(animClipName, L"Assets/modelData/PlayerLeageAttackFirst.tka") ||
 		!wcscmp(animClipName, L"Assets/modelData/PlayerLeageAttackSecand.tka") ||
 		!wcscmp(animClipName, L"Assets/modelData/PlayerLeageAttackThird.tka") ||
@@ -56,7 +47,7 @@ void CPlayer::OnInvokeAnimationEvent(//ÉAÉjÉÅÅ[ÉVÉáÉìÉCÉxÉìÉgÇ™åƒÇŒÇÍÇÈÇ≤Ç∆Ç…åƒÇ
 		!wcscmp(animClipName, L"Assets/modelData/PlayerTwinAttackSecand.tka") ||
 		!wcscmp(animClipName, L"Assets/modelData/PlayerTwinAttackThird.tka") ||
 		!wcscmp(animClipName, L"Assets/modelData/PlayerCombo4.tka") ||
-		!wcscmp(animClipName, L"Assets/modelData/PlayerCombo5.tka") || 
+		!wcscmp(animClipName, L"Assets/modelData/PlayerCombo5.tka") ||
 		!wcscmp(animClipName, L"Assets/modelData/PlayerCombo6.tka"))
 	{
 		m_weaponManager.SetIsAttackCheck(!m_weaponManager.GetIsAttackCheck());
@@ -159,6 +150,7 @@ void CPlayer::Init(CVector3 position)
 	}
 	m_playerGetter.SetPlayer(this);
 
+	//ínñ ÉRÉâÉCÉ_Å[ÇÃçÏê¨
 	CVector3 boxSize = { 0.4f,0.6f,0.4f };
 	m_boxCollider.Create({ boxSize.x,boxSize.y,boxSize.z });
 	m_groundCollision.Init(&m_boxCollider,m_position, CQuaternion::Identity);
@@ -167,6 +159,7 @@ void CPlayer::Init(CVector3 position)
 	m_characterController.SetPosition(manipVector);
 	m_groundCollision.Execute();
 	m_characterController.SetPosition(oldRigidPos);
+
 	m_PlayerStateMachine.SetPlayer(this, &m_playerGetter);
 	m_PlayerStateMachine.Init();
 	m_skinmodel.SetIsShadowCaster(true);
@@ -196,10 +189,10 @@ void CPlayer::Update()
 	CVector3 stickDir = { stickX, 0.0f, stickZ };
 	m_playerGetter.SetStickDir(stickDir);
 
-	if (Pad().IsTriggerButton(enButtonB))
-	{
-		m_isDamege = true;
-	}
+	//if (Pad().IsTriggerButton(enButtonB))
+	//{
+	//	m_isDamege = true;
+	//}
 
 	CMatrix viewMat;
 	CVector3 shadowCameraUp = GetGameCamera().GetSpringCamera().GetTarget() - GetGameCamera().GetSpringCamera().GetPosition();

@@ -64,6 +64,9 @@ public:
 	//ダウン状態
 	void Down();
 
+	//ダメージ
+	void Damage();
+
 	//プレイヤーを探す回転なども
 	void Search();
 
@@ -172,6 +175,7 @@ private:
 		enActionPatternIdle,			//待機
 		enActionPatternSearch,			//探す
 		enActionPatternDown,			//ダウン
+		enActionPatternDamage,			//ダメージ
 		enActionPatternDeath,			//死亡
 		enActionPatternNum,				//数
 	};

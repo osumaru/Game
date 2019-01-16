@@ -155,7 +155,7 @@ void Map::Init(int stageNum)
 			distance -= enemy->GetPosition();
 			CVector3 distance2 = enemyGroup->GetPosition();
 			distance2 -= enemy->GetPosition();
-			if (distance2.Length() <= distance.Length()) 
+			if (distance2.Length() <= distance.Length())
 			{
 				group = enemyGroup;
 			}

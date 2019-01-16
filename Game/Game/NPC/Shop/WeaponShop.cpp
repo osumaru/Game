@@ -142,6 +142,8 @@ void CWeaponShop::Update()
 	if (!m_isTransaction) { return; };
 	if (GetPlayer().BuyMoney(m_items[m_lineupSelectNumber + 1].ItemStatus.Itemprice))
 	{
+		wchar_t* itemName = L"‚ ‚ ‚ ‚ ";
+		wchar_t* textureFileName = L"Assets/sprite/item/Equip/Equip_2.png";
 		SWeaponStatus weapons;
 
 		weapons.weaponNum = (EnPlayerWeapon)m_items[m_lineupSelectNumber].ItemStatus.WeaponType;
@@ -175,7 +177,7 @@ void CWeaponShop::Update()
 			inventoryEquip = std::make_unique<CInventoryTwinSword>();
 			break;
 		}
-		inventoryEquip->Init();
+		inventoryEquip->Init(itemName, textureFileName);
 		inventoryEquip->SetEquipStatus(weapons);
 		CEquipInventory::AddEquipList(std::move(inventoryEquip));
 
