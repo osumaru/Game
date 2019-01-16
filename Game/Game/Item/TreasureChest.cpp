@@ -9,6 +9,7 @@
 #include "../Item/InventoryItem/InventoryLargeSword.h"
 #include "../Item/InventoryItem/InventoryBow.h"
 #include "../Item/InventoryItem/InventoryTwinSword.h"
+#include"GameItem/CEquipItem.h"
 
 void CTreasureChest::Init(CVector3 position)
 {
@@ -80,12 +81,21 @@ void CTreasureChest::DesideWeaponStatus()
 	int weaponAttack = Random().GetRandSInt();
 	weaponAttack %= basicWeaponStatus.basicAttack;
 	//アイテムのデータを取得
+
+	//武器情報の取得
 	/*
 	CEquipItem* nItem = GetSceneManager().GetFade()->GetLoadScene()->GetEquipItemData();
+	//↓これはレア度がNormalの武器からランダムで武器を取得するコード
 	int num = nItem->GetNormalEquipItemList(Random().GetRandSInt() % nItem->GetNormalEquipItemListSize()) ;
+	//武器のタイプの取得
 	weaponNumber = nItem->GetItemStatus_ItemId(num).WeaponType;
+	//武器の名前の取得
+	//nItem->GetItemStatus_ItemId().ItemName();
+	//武器のUI情報の取得(文字列)
+	//nItem->GetItemStatus().ItemSprite();
 	weaponAttack = nItem->GetItemStatus_ItemId(num).ItemEffect;
 	*/
+	
 	if (weaponNumber == EnPlayerWeapon::enWeaponSword)
 	{
 		//剣

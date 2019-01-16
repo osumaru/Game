@@ -18,62 +18,68 @@ bool CEquipItem::Start()
 	//片手剣の初期化
 	{
 		swprintf(ItemStatus[0].ItemName, L"ヒノキの剣");
-		swprintf(ItemStatus[0].ItemText,L"ヒノ木で作られた木剣.子供\nたちが好んで使っている。");
+		swprintf(ItemStatus[0].ItemText,L"ヒノ木で作られた木剣\n子供たちが好んで使っている");
 		ItemStatus[0].Itemprice = 10;
 		ItemStatus[0].ItemEffect = 10;
 		ItemStatus[0].ItemQuality = EnItemQuality::enNormal;
-		swprintf(ItemStatus[1].ItemName, L"銅の剣 ");
-		swprintf(ItemStatus[1].ItemText, L"	銅で作られた剣.護身用\nとして好んで使っている。");
+		swprintf(ItemStatus[1].ItemName, L"銅の剣");
+		swprintf(ItemStatus[1].ItemText, L"	銅で作られた剣\n護身用として使っている");
 		ItemStatus[1].Itemprice = 50;
 		ItemStatus[1].ItemEffect = 20;
 		ItemStatus[1].ItemQuality = EnItemQuality::enNormal;
-		swprintf(ItemStatus[2].ItemName, L"鉄の剣 ");
-		swprintf(ItemStatus[2].ItemText, L"鉄で作られた剣.兵士や\n傭兵冒険者が愛用してる");
+		swprintf(ItemStatus[2].ItemName, L"鉄の剣");
+		swprintf(ItemStatus[2].ItemText, L"鉄で作られた剣\n兵士が愛用してる");
 		ItemStatus[2].Itemprice = 100;
 		ItemStatus[2].ItemEffect = 40;
 		ItemStatus[2].ItemQuality = EnItemQuality::enNormal;
-		swprintf(ItemStatus[3].ItemName, L"鋼の剣 ");
-		swprintf(ItemStatus[3].ItemText, L"鋼で作られた剣.騎士や兵隊\n長など上位職の者が愛用\nしている。");
+		swprintf(ItemStatus[3].ItemName, L"鋼の剣");
+		swprintf(ItemStatus[3].ItemText, L"鋼で作られた剣\n騎士が愛用している");
 		ItemStatus[3].Itemprice = 250;
 		ItemStatus[3].ItemEffect = 60;
 		ItemStatus[3].ItemQuality = EnItemQuality::enRare;
 		swprintf(ItemStatus[4].ItemName, L"魔法の剣");
-		swprintf(ItemStatus[4].ItemText, L"魔力が込められた剣.一部の\n上流階級のみが所持して\nいる。");
+		swprintf(ItemStatus[4].ItemText, L"魔力が込められた剣\n上流階級のみが所持している");
 		ItemStatus[4].Itemprice = 3500;
 		ItemStatus[4].ItemEffect = 350;
 		ItemStatus[4].ItemQuality = EnItemQuality::enRare;
-		swprintf(ItemStatus[5].ItemName, L"ロングソード ");
-		swprintf(ItemStatus[5].ItemText, L"通常の片手剣より長い剣.馬上\nで敵を討つために作ら\nれた。");
+		swprintf(ItemStatus[5].ItemName, L"ロングソード");
+		swprintf(ItemStatus[5].ItemText, L"通常の片手剣より長い剣\n馬上で敵を討つために\n作られた");
 		ItemStatus[5].Itemprice = 1000;
 		ItemStatus[5].ItemEffect = 120;
 		ItemStatus[5].ItemQuality = EnItemQuality::enRare;
 		ItemStatus[5].ItemQuality = EnItemQuality::enRare;
 		swprintf(ItemStatus[6].ItemName, L"バイキングソード");
-		swprintf(ItemStatus[6].ItemText, L"ある民族が使用していた剣民族\nの中でも上流階級の者が\n愛用していた武器。");
+		swprintf(ItemStatus[6].ItemText, L"ある民族が使用していた剣");
 		ItemStatus[6].Itemprice = 1400;
 		ItemStatus[6].ItemEffect = 145;
 		ItemStatus[6].ItemQuality = EnItemQuality::enRare;
 		swprintf(ItemStatus[7].ItemName, L"古びた剣");
-		swprintf(ItemStatus[7].ItemText, L"さび付いた剣.かなりの年月が\n経っており武器としては\nほとんど意味をなさない。");
+		swprintf(ItemStatus[7].ItemText, L"さび付いた剣\nかなりの年月が経っており\n武器としては意味をなさない");
 		ItemStatus[7].Itemprice = 1000;
 		ItemStatus[7].ItemEffect = 5;
 		ItemStatus[7].ItemQuality = EnItemQuality::enRare;
 		swprintf(ItemStatus[8].ItemName, L"ショートソード");
-		swprintf(ItemStatus[8].ItemText, L"一般的な片手剣.主に歩兵が愛\n用している。");
+		swprintf(ItemStatus[8].ItemText, L"一般的な片手剣\n歩兵が愛用している");
 		ItemStatus[8].Itemprice = 200;
 		ItemStatus[8].ItemEffect = 55;
 		ItemStatus[8].ItemQuality = EnItemQuality::enRare;
 		swprintf(ItemStatus[9].ItemName, L"英雄の剣");
-		swprintf(ItemStatus[9].ItemText, L"国の英雄のみに贈られる剣.一振\nりで敵を屠ることのでき\nる強力な力を秘めている。");
+		swprintf(ItemStatus[9].ItemText, L"国の英雄のみに贈られる剣\n一振りで敵を屠る強力な\n力を秘めている");
 		ItemStatus[9].Itemprice = 9999;
 		ItemStatus[9].ItemEffect = 999;
 		ItemStatus[9].ItemQuality = EnItemQuality::enLegend;
 
 		for (int num = 0;num < 10 /*MAX_ITEM_NUMBER*/;num++)
 		{
+			//ID割り振り
 			ItemStatus[num].ItemID = num + 1;
+			//武器の種類の設定
 			ItemStatus[num].WeaponType = EnPlayerWeapon::enWeaponSword;
+			//インベントリに表示するスプライトの情報
+			swprintf(ItemStatus[num].ItemSprite, L"Assets/sprite/sword.png");
+			//影響を及ぼすステータス
 			ItemStatus[num].ItemEffectPlayerStatus = EnIemEffectPlayerStatus::Strength;
+			//装備のタイプの設定
 			ItemStatus[num].ItemType = EnInventoryItemType::Equip;
 			//ノーマルアイテムのIDの入ったリスト作成
 			if (ItemStatus[num].ItemQuality == EnItemQuality::enNormal)
@@ -97,7 +103,7 @@ bool CEquipItem::Start()
 	//両手の初期化
 	{
 		swprintf(ItemStatus[10].ItemName, L"グレートソード");
-		swprintf(ItemStatus[10].ItemText, L"巨大な大剣。力に任せ周\n囲の物を粉砕する恐ろし\nい力を秘めている。");
+		swprintf(ItemStatus[10].ItemText, L"巨大な大剣\n力に任せ周囲の物を粉砕する\n恐ろしい力を秘めている。");
 		ItemStatus[10].Itemprice = 100;
 		ItemStatus[10].ItemEffect = 85;
 		ItemStatus[10].ItemQuality = EnItemQuality::enNormal;
@@ -150,6 +156,8 @@ bool CEquipItem::Start()
 		{
 			ItemStatus[num].ItemID = num + 1;
 			ItemStatus[num].WeaponType = EnPlayerWeapon::enWeaponLongSword;
+			//インベントリに表示するスプライトの情報
+			swprintf(ItemStatus[num].ItemSprite, L"Assets/sprite/largeSword.png");
 			ItemStatus[num].ItemEffectPlayerStatus = EnIemEffectPlayerStatus::Strength;
 			ItemStatus[num].ItemType = EnInventoryItemType::Equip;
 			//ノーマルアイテムのIDの入ったリスト作成
@@ -226,6 +234,8 @@ bool CEquipItem::Start()
 		{
 			ItemStatus[num].ItemID = num + 1;
 			ItemStatus[num].WeaponType = EnPlayerWeapon::enWeaponArrow;
+			//インベントリに表示するスプライトの情報
+			swprintf(ItemStatus[num].ItemSprite, L"Assets/sprite/bow.png");
 			ItemStatus[num].ItemEffectPlayerStatus = EnIemEffectPlayerStatus::Strength;
 			ItemStatus[num].ItemType = EnInventoryItemType::Equip;
 			//ノーマルアイテムのIDの入ったリスト作成

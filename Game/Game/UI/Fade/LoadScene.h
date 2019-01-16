@@ -1,5 +1,5 @@
 #pragma once
-#include "../../Item/CEquipItem.h"
+#include "../../Item/GameItem/CEquipItem.h"
 class CLoadScene: public IGameObject
 {
 public:

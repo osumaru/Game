@@ -100,6 +100,9 @@
     <Filter Include="ソース ファイル\UI\Message">
       <UniqueIdentifier>{c93ca995-b237-4131-a6d9-159a05ae9238}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Item\GameItem">
+      <UniqueIdentifier>{df6e5a2d-7b05-4948-b61e-341da899ad0c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -318,12 +321,6 @@
     <ClCompile Include="Player\Weapon\LongSword.cpp">
       <Filter>ソース ファイル\Player\Weapon</Filter>
     </ClCompile>
-    <ClCompile Include="Item\CEquipItem.cpp">
-      <Filter>ソース ファイル\Item</Filter>
-    </ClCompile>
-    <ClCompile Include="Item\QuickItem.cpp">
-      <Filter>ソース ファイル\Item</Filter>
-    </ClCompile>
     <ClCompile Include="Player\PlayerSate\PlayerArrowShoot.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
@@ -411,6 +408,12 @@
     </ClCompile>
     <ClCompile Include="UI\Message\Choices.cpp">
       <Filter>ソース ファイル\UI\Message</Filter>
+    </ClCompile>
+    <ClCompile Include="Item\GameItem\CEquipItem.cpp">
+      <Filter>ソース ファイル\Item\GameItem</Filter>
+    </ClCompile>
+    <ClCompile Include="Item\GameItem\QuickItem.cpp">
+      <Filter>ソース ファイル\Item\GameItem</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -645,12 +648,6 @@
     <ClInclude Include="Player\Weapon\LongSword.h">
       <Filter>ソース ファイル\Player\Weapon</Filter>
     </ClInclude>
-    <ClInclude Include="Item\CEquipItem.h">
-      <Filter>ソース ファイル\Item</Filter>
-    </ClInclude>
-    <ClInclude Include="Item\QuickItem.h">
-      <Filter>ソース ファイル\Item</Filter>
-    </ClInclude>
     <ClInclude Include="Player\Weapon\WeaponCommon.h">
       <Filter>ソース ファイル\Player\Weapon</Filter>
     </ClInclude>
@@ -731,6 +728,15 @@
     </ClInclude>
     <ClInclude Include="UI\Message\Choices.h">
       <Filter>ソース ファイル\UI\Message</Filter>
+    </ClInclude>
+    <ClInclude Include="Item\GameItem\CEquipItem.h">
+      <Filter>ソース ファイル\Item\GameItem</Filter>
+    </ClInclude>
+    <ClInclude Include="Item\GameItem\ItemStatus.h">
+      <Filter>ソース ファイル\Item\GameItem</Filter>
+    </ClInclude>
+    <ClInclude Include="Item\GameItem\QuickItem.h">
+      <Filter>ソース ファイル\Item\GameItem</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -906,6 +912,9 @@
       <Filter>ソース ファイル\Assets</Filter>
     </MeshContentTask>
     <MeshContentTask Include="..\..\tkTools\Assets\GameScene\object\CastleDoor2.FBX">
+      <Filter>ソース ファイル\Assets</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\NYBuilding_B.fbx">
       <Filter>ソース ファイル\Assets</Filter>
     </MeshContentTask>
   </ItemGroup>
