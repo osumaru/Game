@@ -149,13 +149,14 @@ void CWeaponShop::Update()
 		weapons.weaponNum = (EnPlayerWeapon)m_items[m_lineupSelectNumber].ItemStatus.WeaponType;
 		switch (m_items[m_lineupSelectNumber].ItemStatus.ItemEffectPlayerStatus)
 		{
-		case CEquipItem::EnIemEffectPlayerStatus::Strength:
+			
+		case EnIemEffectPlayerStatus::Strength:
 			weapons.attack = m_items[m_lineupSelectNumber].ItemStatus.ItemEffect;
 			break;
-		case CEquipItem::EnIemEffectPlayerStatus::Defense:
+		case EnIemEffectPlayerStatus::Defense:
 			weapons.diffence = m_items[m_lineupSelectNumber].ItemStatus.ItemEffect;
 			break;
-		case CEquipItem::EnIemEffectPlayerStatus::Health:
+		case EnIemEffectPlayerStatus::Health:
 
 			break;
 		}

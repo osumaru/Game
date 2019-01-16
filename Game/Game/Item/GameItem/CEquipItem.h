@@ -1,6 +1,6 @@
 #pragma once
-#include "IItem.h"
-class CEquipItem:public IItem
+#include "ItemStatus.h"
+class CEquipItem 
 {
 public:
 	CEquipItem();

@@ -1,6 +1,6 @@
 #pragma once
 #include"../IShop.h"
-#include "../../Item/QuickItem.h"
+#include "../../Item/GameItem/QuickItem.h"
 class CItemShop :public IShop
 {
 public:

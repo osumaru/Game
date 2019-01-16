@@ -33,10 +33,10 @@ void StaticMapObject::Init(const CVector3& position, const CQuaternion& rotation
 
 	if (!collider)
 	{
-		//m_meshCollider.reset(new CMeshCollider);
-		//m_meshCollider->CreateCollider(&m_skinModel);
-		//rInfo.collider = m_meshCollider.get();
-
+		/*m_meshCollider.reset(new CMeshCollider);
+		m_meshCollider->CreateCollider(&m_skinModel);
+		rInfo.collider = m_meshCollider.get();
+		*/
 		CMatrix rotMat;
 		rotMat.MakeRotationFromQuaternion(multi);
 		CMeshCollider mesh;

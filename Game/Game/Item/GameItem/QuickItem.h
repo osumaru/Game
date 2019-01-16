@@ -1,6 +1,6 @@
 #pragma once
-#include "IItem.h"
-class CQuickItem : public IItem
+#include "ItemStatus.h"
+class CQuickItem 
 {
 public:
 	CQuickItem();

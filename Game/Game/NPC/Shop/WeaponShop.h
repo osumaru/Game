@@ -1,6 +1,6 @@
 #pragma once
 #include "ItemShop.h"
-#include "../../Item/CEquipItem.h"
+#include "../../Item/GameItem/CEquipItem.h"
 class CWeaponShop : public IShop
 {
 public:
