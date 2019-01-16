@@ -14,6 +14,8 @@ struct SParticleEmittInfo
 	float	emittIntervalTime;	//パーティクルが出るインターバルの時間
 	float	emitterLifeTime;	//エミッターの寿命
 	CVector3 emitterPosition;//エミッターの座標
+	CVector3 moveSpeed;			//パーティクルの移動速度
+	CVector3 randomMoveSpeed;	//パーティクルの移動速度のランダム幅
 	int particleNum;			//同時に出るパーティクルの数
 	bool isFirstTimeRandom;		//一番最初にパーティクル出すときだけ時間をずらすか
 };
