@@ -18,6 +18,7 @@ void CTreasureChest::Init(CVector3 position)
 	m_position = position;
 	//キャラクターコントローラーを初期化
 	m_characterController.Init(0.6f, 0.4f, m_position);
+	m_characterController.SetUserIndex(enCollisionAttr_Item);
 }
 
 bool CTreasureChest::Start()
