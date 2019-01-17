@@ -39,6 +39,7 @@ void CBossBuilding::Update()
 		m_message->Init({ 500.0f,250.0f }, L"bossTry");
 		m_choices = New<CChoices>(PRIORITY_UI);
 		m_choices->Init(L"はい", L"いいえ");
+		m_choices->SetIsActive(false);
 		m_isChoice = true;
 		m_timer = 0.0f;
 	}
@@ -47,6 +48,12 @@ void CBossBuilding::Update()
 	{
 		//選択中ならプレイヤーは動かない
 		GetPlayer().SetIsAction(false);
+		//メッセージを描画し終わった
+		if (m_message->GetIsDrawEnd())
+		{
+			//選択肢を表示する
+			m_choices->SetIsActive(true);
+		}
 		//選択肢を選んだ
 		if (m_choices->GetIsSelect())
 		{
@@ -69,7 +76,7 @@ void CBossBuilding::Update()
 		}
 	}
 
-	m_skinModel.Update(m_position, m_rotation, { 1.0f,1.0f,1.0f }, true);
+	m_skinModel.Update(m_position, m_rotation, { 1.0f,1.0f,1.0f });
 }
 
 void CBossBuilding::Draw()

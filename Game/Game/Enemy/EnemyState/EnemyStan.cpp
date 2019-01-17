@@ -60,4 +60,9 @@ void CEnemyStan::Update()
 		//—§‚¿ã‚ª‚Á‚½‚ç’ÇÕó‘Ô‚É‚·‚é
 		m_esm->ChangeState(CEnemyState::enState_Chase);
 	}
+	else if (m_enemy->GetIsDead())
+	{
+		//HP‚ª‚È‚¯‚ê‚ÎŽ€–S‚·‚é
+		m_esm->ChangeState(CEnemyState::enState_Death);
+	}
 }

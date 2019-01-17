@@ -13,7 +13,17 @@ public:
 
 	//描画
 	void AfterDraw() override;
+
+	//描画し終わったかを取得
+	bool GetIsDrawEnd()
+	{
+		return m_isDrawEnd;
+	}
+
 private:
-	CSprite m_window;	//ウィンドウ
-	CSprite	m_message;	//メッセージ
+	CSprite		m_window;				//ウィンドウ
+	CSprite		m_message;				//メッセージ
+	CVector2	m_windowSize;			//ウィンドウのサイズ
+	float		m_timer = 0.0f;			//タイマー
+	bool		m_isDrawEnd = false;	//描画し終わったか
 };

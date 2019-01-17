@@ -17,12 +17,6 @@ public:
 	//更新
 	void Update();
 
-	//回転
-	void Rotation();
-
-	//エネミーをロックオンする
-	void RockOnEnemy();
-	
 	//カメラ必要なプレイヤーの情報の初期化`
 	void CameraSetPlayer();
 
@@ -80,17 +74,34 @@ public:
 	}
 
 private:
+	//回転
+	//target	ターゲットの座標
+	//position	カメラの座標
+	void Rotation(CVector3& target, CVector3& position);
+
+	//ロックオンする対象を探す
+	void SearchTarget();
+
+	//ロックオンする
+	//target	ターゲットの座標
+	//position	カメラの座標
+	void LockOn(CVector3& target, CVector3& position);
+
+	//ロックオンを解除する
+	//target	ターゲットの座標
+	//position	カメラの座標
+	void LockOnCancel(CVector3& target, CVector3& position);
+
 	static CGameCamera* m_gameCamera;			//ゲームカメラ
 	CCamera				m_camera;				//カメラ
-	CVector3			m_cameraVec;			//注視点からカメラへのベクトル
 	CSpringCamera		m_springCamera;			//バネカメラ
 	CShakeCamera		m_shakeCamera;			//揺れカメラ
 	IEnemy*				m_rockOnEnemy;			//ロックオンしているエネミー
-	const float			CAMERA_SPEED = 10.0f;	//カメラの回転速度
-	const float			m_cameraLength = 3.5f;	//注視点からカメラへの距離
-	const float			m_rockOnOffset = 2.5f;	//ロックオン時の高さ補正の限界値
+	float				m_cameraLength = 0.0f;	//注視点からカメラへの距離
+	const float			LOCKON_OFFSET_Y = 2.5f;	//ロックオン時の高さ補正の限界値
+	const float			TARGET_OFFSET_Y = 1.4f; //カメラ通常時の高さ補正
 	float				m_height = 0.0f;		//カメラの座標と注視点の高さ
-	bool				m_isRockOn = false;		//ロックオンしているか
+	bool				m_isLockOn = false;		//ロックオンしているか
 };
 
 static CGameCamera& GetGameCamera()

@@ -80,7 +80,7 @@ protected:
 	CCharacterController	m_characterController;		//キャラクターコントローラー
 	const float				m_deadTime = 30.0f;			//アイテムが消滅するまでの時間
 	float					m_timer = 0.0f;				//タイマー
-	float					m_accele = 0.0f;
+	float					m_accele = 0.0f;			//加速度
 	bool					m_isPopEnd = false;			//ポップし終わったか
-	bool					m_isMove = false;
+	bool					m_isMove = false;			//移動しているか
 };
