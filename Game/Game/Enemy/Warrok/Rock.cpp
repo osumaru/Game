@@ -71,9 +71,9 @@ void CRock::Update()
 		//ƒvƒŒƒCƒ„[‚É“–‚½‚Á‚½
 		if (m_characterController.GetGroundCollisionObject()->getUserIndex() == enCollisionAttr_Player)
 		{
-			//GetPlayer().SetDamage(m_warrok->GetStatus().strength);
-			//GetPlayer().SetDamageEnemyPos(m_enemyPos);
-			//GetPlayer().SetDamage(true);
+			GetPlayer().SetDamage(m_warrok->GetStatus().strength);
+			GetPlayer().SetDamageEnemyPos(m_enemyPos);
+			GetPlayer().SetDamage(true);
 		}
 		m_isHit = true;
 		Delete(this);
