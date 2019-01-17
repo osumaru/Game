@@ -72,7 +72,7 @@ void CParticle::Init(const SParticleEmittInfo& info, const CCamera* camera)
 void CParticle::Update()
 {
 	m_speed += m_gravity * GameTime().GetDeltaFrameTime();
-	m_position += m_speed;
+	m_position += m_speed * GameTime().GetDeltaFrameTime();
 	m_lifeTimer -= GameTime().GetDeltaFrameTime();
 	if (m_lifeTimer < 0.0f)
 	{

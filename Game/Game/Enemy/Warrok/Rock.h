@@ -51,4 +51,6 @@ private:
 	CVector3				m_enemyPos;				//“G‚ÌÀ•W
 	const CMatrix*			m_enemyHandMatrix;		//“G‚Ìè‚Ìs—ñ
 	bool					m_isThrow = false;		//“Š‚°‚ç‚ê‚Ä‚¢‚é‚©
+	bool					m_isHit = false;		//‰½‚©‚É“–‚½‚Á‚½
+	SParticleEmittInfo		m_particleInfo;
 };
