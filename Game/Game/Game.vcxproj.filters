@@ -923,5 +923,8 @@
     <MeshContentTask Include="Assets\modelData\build\Gate.FBX">
       <Filter>ソース ファイル\Assets</Filter>
     </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\build\Castle_Wall2.FBX">
+      <Filter>ソース ファイル\Assets</Filter>
+    </MeshContentTask>
   </ItemGroup>
 </Project>
