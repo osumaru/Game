@@ -25,12 +25,28 @@ void CRock::Init(CWarrok* warrok, const CVector3& enemyPos)
 	m_characterController.SetGravity(-4.9f);
 	m_characterController.SetIgnoreRigidBody(&warrok->GetCharacterController().GetBody());
 	m_warrok = warrok;
+
+	//パーティクルの初期化
+	m_particleInfo.filePath = L"Assets/particle/rockEffect.png";
+	m_particleInfo.width = 0.5f;
+	m_particleInfo.height = 0.5f;
+	m_particleInfo.uv = { 0.0f,0.0f,1.0f,1.0f };
+	m_particleInfo.randomPosition = { 0.0f, 0.0f, 0.0f };
+	m_particleInfo.gravity = { 0.0f, -9.8f, 0.0f };
+	m_particleInfo.lifeTime = 3.0f;
+	m_particleInfo.emittIntervalTime = 2.0f;
+	m_particleInfo.emitterLifeTime = 1.0f;
+	m_particleInfo.emitterPosition = m_position;
+	m_particleInfo.moveSpeed = { 0.0f, 5.0f, 0.0f };
+	m_particleInfo.randomMoveSpeed = { 3.0f, 3.0f, 3.0f };
+	m_particleInfo.particleNum = 10;
+	m_particleInfo.isFirstTimeRandom = false;
 }
 
 void CRock::Update()
 {
 	if (GetSceneManager().GetSceneChange() 
-		|| (!m_isThrow && (m_warrok->GetStateMachine().GetCurrentState() != CEnemyState::enState_Attack && m_warrok->GetStateMachine().GetCurrentState() != CEnemyState::enState_AttackWait/*m_warrok->GetIsDamage()*/)))
+		|| (!m_isThrow && (m_warrok->GetStateMachine().GetCurrentState() != CEnemyState::enState_Attack && m_warrok->GetStateMachine().GetCurrentState() != CEnemyState::enState_AttackWait)))
 	{
 		Delete(this);
 	}
@@ -45,6 +61,7 @@ void CRock::Update()
 			GetPlayer().SetDamageEnemyPos(m_enemyPos);
 			GetPlayer().SetDamage(true);
 		}
+		m_isHit = true;
 		Delete(this);
 	}
 
@@ -54,11 +71,20 @@ void CRock::Update()
 		//プレイヤーに当たった
 		if (m_characterController.GetGroundCollisionObject()->getUserIndex() == enCollisionAttr_Player)
 		{
-			GetPlayer().SetDamage(m_warrok->GetStatus().strength);
-			GetPlayer().SetDamageEnemyPos(m_enemyPos);
-			GetPlayer().SetDamage(true);
+			//GetPlayer().SetDamage(m_warrok->GetStatus().strength);
+			//GetPlayer().SetDamageEnemyPos(m_enemyPos);
+			//GetPlayer().SetDamage(true);
 		}
+		m_isHit = true;
 		Delete(this);
+	}
+
+	if (m_isHit)
+	{
+		CParticleEmitter* particleEmitter = New<CParticleEmitter>(PRIORITY_UI);
+		particleEmitter->Init(m_particleInfo, &GetGameCamera().GetCamera());
+		particleEmitter->SetPosition(m_position);
+		m_isHit = false;
 	}
 
 	//座標を更新

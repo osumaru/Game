@@ -236,6 +236,4 @@ void CGameCamera::LockOnCancel(CVector3& target, CVector3& position)
 	//座標を決める
 	position = target + toCameraPos;
 	//バネカメラに設定する
-	m_springCamera.SetTarTarget(target);
-	m_springCamera.SetTarPosition(position);
 }

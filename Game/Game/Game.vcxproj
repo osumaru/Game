@@ -375,8 +375,6 @@
     <ClInclude Include="UI\WeekPoint\WeekPoint.h" />
   </ItemGroup>
   <ItemGroup>
-    <MeshContentTask Include="..\..\tkTools\Assets\GameScene\object\CastleDoor.FBX" />
-    <MeshContentTask Include="..\..\tkTools\Assets\GameScene\object\CastleDoor2.FBX" />
     <MeshContentTask Include="Assets\modelData\Arrow.fbx" />
     <MeshContentTask Include="Assets\modelData\Barrel.FBX" />
     <MeshContentTask Include="Assets\modelData\Brock.FBX" />
@@ -390,6 +388,8 @@
     <MeshContentTask Include="Assets\modelData\Castle3.FBX" />
     <MeshContentTask Include="Assets\modelData\Castle4.FBX" />
     <MeshContentTask Include="Assets\modelData\Castle5.FBX" />
+    <MeshContentTask Include="Assets\modelData\CastleDoor.FBX" />
+    <MeshContentTask Include="Assets\modelData\CastleDoor2.FBX" />
     <MeshContentTask Include="Assets\modelData\CastleFloor.FBX" />
     <MeshContentTask Include="Assets\modelData\Chest.FBX" />
     <MeshContentTask Include="Assets\modelData\Heart.fbx" />
@@ -404,7 +404,6 @@
     <MeshContentTask Include="Assets\modelData\Npc.fbx" />
     <MeshContentTask Include="Assets\modelData\NYApartmentA.fbx" />
     <MeshContentTask Include="Assets\modelData\NYBuilding_A.fbx" />
-    <MeshContentTask Include="Assets\modelData\NYBuilding_B.fbx" />
     <MeshContentTask Include="Assets\modelData\Player.fbx" />
     <MeshContentTask Include="Assets\modelData\Rock.FBX" />
     <MeshContentTask Include="Assets\modelData\Samurai.FBX" />
