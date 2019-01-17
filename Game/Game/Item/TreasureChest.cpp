@@ -82,22 +82,22 @@ void CTreasureChest::DesideWeaponStatus()
 	int weaponAttack = Random().GetRandSInt();
 	weaponAttack %= basicWeaponStatus.basicAttack;
 	////アイテムの名前と読み込むテクスチャファイルの名前を設定する//////
-	wchar_t* itemName = L"ああああ";
-	wchar_t* textureFileName = L"Assets/sprite/item/Equip/Equip_2.png";
+	wchar_t* itemName;
+	wchar_t* textureFileName;
 	////////////////////////////////////////////////////////////////////
 	//アイテムのデータを取得
 	//武器情報の取得
 	
-	//CEquipItem* nItem = GetSceneManager().GetFade()->GetLoadScene()->GetEquipItemData();
-	////↓これはレア度がNormalの武器からランダムで武器を取得するコード
-	//int num = nItem->GetNormalEquipItemList(Random().GetRandSInt() % nItem->GetNormalEquipItemListSize()) ;
-	////武器のタイプの取得
-	//weaponNumber = nItem->GetItemStatus_ItemId(num).WeaponType;
-	////武器の名前の取得
-	//itemName = nItem->GetItemStatus_ItemId(num).ItemName;
-	////武器のUI情報の取得(文字列)
-	//textureFileName = nItem->GetItemStatus(num).ItemSprite;
-	//weaponAttack = nItem->GetItemStatus_ItemId(num).ItemEffect;
+	CEquipItem* nItem = GetSceneManager().GetFade()->GetLoadScene()->GetEquipItemData();
+	//↓これはレア度がNormalの武器からランダムで武器を取得するコード
+	int num = nItem->GetNormalEquipItemList(Random().GetRandSInt() % nItem->GetNormalEquipItemListSize()) ;
+	//武器のタイプの取得
+	weaponNumber = nItem->GetItemStatus_ItemId(num).WeaponType;
+	//武器の名前の取得
+	itemName = nItem->GetItemStatus_ItemId(num).ItemName;
+	//武器のUI情報の取得(文字列)
+	textureFileName = nItem->GetItemStatus(num).ItemSprite;
+	weaponAttack = nItem->GetItemStatus_ItemId(num).ItemEffect;
 	
 	
 	if (weaponNumber == EnPlayerWeapon::enWeaponSword)
