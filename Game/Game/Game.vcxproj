@@ -384,6 +384,7 @@
     <MeshContentTask Include="Assets\modelData\Building4.FBX" />
     <MeshContentTask Include="Assets\modelData\Building5.FBX" />
     <MeshContentTask Include="Assets\modelData\build\Castle_Wall1.FBX" />
+    <MeshContentTask Include="Assets\modelData\build\Castle_Wall2.FBX" />
     <MeshContentTask Include="Assets\modelData\build\Gate.FBX" />
     <MeshContentTask Include="Assets\modelData\Castle1.FBX" />
     <MeshContentTask Include="Assets\modelData\Castle2.FBX" />

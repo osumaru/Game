@@ -18,12 +18,12 @@ bool CEquipItem::Start()
 	//片手剣の初期化
 	{
 		swprintf(ItemStatus[0].ItemName, L"ヒノキの剣");
-		swprintf(ItemStatus[0].ItemText,L"ヒノ木で作られた木剣\n子供たちが好んで使っている");
+		swprintf(ItemStatus[0].ItemText,L"ヒノキで作られた木剣\n子供たちが好んで使っている");
 		ItemStatus[0].Itemprice = 10;
 		ItemStatus[0].ItemEffect = 10;
 		ItemStatus[0].ItemQuality = EnItemQuality::enNormal;
 		swprintf(ItemStatus[1].ItemName, L"銅の剣");
-		swprintf(ItemStatus[1].ItemText, L"	銅で作られた剣\n護身用として使っている");
+		swprintf(ItemStatus[1].ItemText, L"銅で作られた剣\n護身用として使っている");
 		ItemStatus[1].Itemprice = 50;
 		ItemStatus[1].ItemEffect = 20;
 		ItemStatus[1].ItemQuality = EnItemQuality::enNormal;

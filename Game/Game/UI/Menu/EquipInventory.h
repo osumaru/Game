@@ -64,7 +64,6 @@ private:
 		enFont_ChangeStatus,	//変更したステータス
 		enFont_StatusNum		//ステータスの数
 	};
-
 	static const int m_equipLimit = 15;								//装備所持上限
 	static std::list<std::unique_ptr<IInventoryEquip>>	m_equipList;//装備リスト
 	CMenu*			 m_menu = nullptr;								//メニュー
