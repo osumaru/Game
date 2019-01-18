@@ -82,24 +82,13 @@ void CTreasureChest::DesideWeaponStatus()
 	int weaponAttack = Random().GetRandSInt();
 	weaponAttack %= basicWeaponStatus.basicAttack;
 	////アイテムの名前と読み込むテクスチャファイルの名前を設定する//////
-	wchar_t* itemName = L"ああああ";
-	wchar_t* textureFileName = L"Assets/sprite/item/Equip/Equip_2.png";
+	wchar_t* itemName;
+	wchar_t* textureFileName;
 	////////////////////////////////////////////////////////////////////
-	/*
-	調査報告。
-	EquipInventoryにあるm_equipListの情報が
-	EquipInventoryのInit時に書き変わってしまうバグがある。
-	wchar_t* itemName = L"ああああ";
-	wchar_t* textureFileName = L"Assets/sprite/item/Equip/Equip_2.png";
-	上の入れ方では書き変わらないが
-	weaponNumber = nItem->GetItemStatus_ItemId(num).WeaponType;
-	itemName = nItem->GetItemStatus_ItemId(num).ItemName;
-	では情報がなくなってしまった。
-	*/
 
 	//アイテムのデータを取得
 	//武器情報の取得
-	/*
+	
 	CEquipItem* nItem = GetSceneManager().GetFade()->GetLoadScene()->GetEquipItemData();
 	//↓これはレア度がNormalの武器からランダムで武器を取得するコード
 	int num = nItem->GetNormalEquipItemList(Random().GetRandSInt() % nItem->GetNormalEquipItemListSize()) ;
@@ -110,7 +99,7 @@ void CTreasureChest::DesideWeaponStatus()
 	//武器のUI情報の取得(文字列)
 	textureFileName = nItem->GetItemStatus(num).ItemSprite;
 	weaponAttack = nItem->GetItemStatus_ItemId(num).ItemEffect;
-	*/
+	
 	
 	if (weaponNumber == EnPlayerWeapon::enWeaponSword)
 	{
