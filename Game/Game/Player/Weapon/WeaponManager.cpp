@@ -60,6 +60,8 @@ void CWeaponManager::Init(CPlayer* player)
 			std::unique_ptr<IWeapon> ptr;
 			std::unique_ptr<IInventoryEquip> equipPtr;
 			SWeaponStatus weaponStatus;
+			wchar_t* itemName;
+			wchar_t* textureFileName;
 			switch (i)
 			{
 			case enWeaponLongSword:
@@ -67,30 +69,38 @@ void CWeaponManager::Init(CPlayer* player)
 				equipPtr = std::make_unique<CInventoryLargeSword>();
 				weaponStatus.attack = 20;
 				weaponStatus.weaponNum = EnPlayerWeapon::enWeaponLongSword;
+				itemName = L"ŽK‚Ñ‚½‘åŒ•";
+				textureFileName = L"Assets/sprite/item/Equip/Equip_2.png";
 				break;
 			case enWeaponTwinSword:
 				ptr = std::make_unique<CTwinSword>();
 				equipPtr = std::make_unique<CInventoryTwinSword>();
 				weaponStatus.attack = 5;
 				weaponStatus.weaponNum = EnPlayerWeapon::enWeaponTwinSword;
+				itemName = L"ŽK‚Ñ‚½‘oŒ•";
+				textureFileName = L"Assets/sprite/item/Equip/Equip_2.png";
 				break;
 			case enWeaponArrow:
 				ptr = std::make_unique<CBow>();
 				equipPtr = std::make_unique<CInventoryBow>();
 				weaponStatus.attack = 1;
 				weaponStatus.weaponNum = EnPlayerWeapon::enWeaponArrow;
+				itemName = L"ŽK‚Ñ‚½‹|";
+				textureFileName = L"Assets/sprite/item/Equip/Equip_2.png";
 				break;
 			case enWeaponSword:
 				ptr = std::make_unique<CSword>();
 				equipPtr = std::make_unique<CInventorySword>();
 				weaponStatus.attack = 10;
 				weaponStatus.weaponNum = EnPlayerWeapon::enWeaponSword;
+				itemName = L"ŽK‚Ñ‚½Œ•";
+				textureFileName = L"Assets/sprite/item/Equip/Equip_2.png";
 				break;
 			}
 			m_weapons[i] = std::move(ptr);
 			m_weapons[i]->Init(player);
 			m_equipWeapon[i] = std::move(equipPtr);
-			m_equipWeapon[i]->Init();
+			m_equipWeapon[i]->Init(itemName, textureFileName);
 			m_equipWeapon[i]->SetEquipStatus(weaponStatus);
 		}
 		for (int i = 0; i < 2; i++)

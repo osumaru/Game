@@ -167,7 +167,7 @@
     <ClCompile Include="Enemy\Warrok\Rock.cpp" />
     <ClCompile Include="Enemy\Warrok\Warrok.cpp" />
     <ClCompile Include="GameSound\GameSoundEffect.cpp" />
-    <ClCompile Include="Item\CEquipItem.cpp" />
+    <ClCompile Include="Item\GameItem\CEquipItem.cpp" />
     <ClCompile Include="Camera\ArrowGameCamera.cpp" />
     <ClCompile Include="Camera\GameCamera.cpp" />
     <ClCompile Include="Enemy\EnemyGroup.cpp" />
@@ -218,7 +218,7 @@
     <ClCompile Include="Player\Weapon\TwinSword.cpp" />
     <ClCompile Include="Player\Weapon\WeaponManager.cpp" />
     <ClCompile Include="Player\WireAction.cpp" />
-    <ClCompile Include="Item\QuickItem.cpp" />
+    <ClCompile Include="Item\GameItem\QuickItem.cpp" />
     <ClCompile Include="Scene\ClearScene.cpp" />
     <ClCompile Include="UI\BossHp\BossHp.cpp" />
     <ClCompile Include="UI\Fade\Fade.cpp" />
@@ -273,7 +273,8 @@
     <ClInclude Include="Enemy\Warrok\Rock.h" />
     <ClInclude Include="Enemy\Warrok\Warrok.h" />
     <ClInclude Include="GameSound\GameSoundEffect.h" />
-    <ClInclude Include="Item\CEquipItem.h" />
+    <ClInclude Include="Item\GameItem\ItemStatus.h" />
+    <ClInclude Include="Item\GameItem\CEquipItem.h" />
     <ClInclude Include="Camera\ArrowGameCamera.h" />
     <ClInclude Include="Camera\GameCamera.h" />
     <ClInclude Include="Enemy\EnemyGroup.h" />
@@ -330,7 +331,7 @@
     <ClInclude Include="Player\Weapon\WeaponCommon.h" />
     <ClInclude Include="Player\Weapon\WeaponManager.h" />
     <ClInclude Include="Player\WireAction.h" />
-    <ClInclude Include="Item\QuickItem.h" />
+    <ClInclude Include="Item\GameItem\QuickItem.h" />
     <ClInclude Include="Scene\ClearScene.h" />
     <ClInclude Include="UI\BossHp\BossHp.h" />
     <ClInclude Include="UI\Fade\Fade.h" />
@@ -374,8 +375,6 @@
     <ClInclude Include="UI\WeekPoint\WeekPoint.h" />
   </ItemGroup>
   <ItemGroup>
-    <MeshContentTask Include="..\..\tkTools\Assets\GameScene\object\CastleDoor.FBX" />
-    <MeshContentTask Include="..\..\tkTools\Assets\GameScene\object\CastleDoor2.FBX" />
     <MeshContentTask Include="Assets\modelData\Arrow.fbx" />
     <MeshContentTask Include="Assets\modelData\Barrel.FBX" />
     <MeshContentTask Include="Assets\modelData\Brock.FBX" />
@@ -384,11 +383,16 @@
     <MeshContentTask Include="Assets\modelData\Building3.fbx" />
     <MeshContentTask Include="Assets\modelData\Building4.FBX" />
     <MeshContentTask Include="Assets\modelData\Building5.FBX" />
+    <MeshContentTask Include="Assets\modelData\build\Castle_Wall1.FBX" />
+    <MeshContentTask Include="Assets\modelData\build\Castle_Wall2.FBX" />
+    <MeshContentTask Include="Assets\modelData\build\Gate.FBX" />
     <MeshContentTask Include="Assets\modelData\Castle1.FBX" />
     <MeshContentTask Include="Assets\modelData\Castle2.FBX" />
     <MeshContentTask Include="Assets\modelData\Castle3.FBX" />
     <MeshContentTask Include="Assets\modelData\Castle4.FBX" />
     <MeshContentTask Include="Assets\modelData\Castle5.FBX" />
+    <MeshContentTask Include="Assets\modelData\CastleDoor.FBX" />
+    <MeshContentTask Include="Assets\modelData\CastleDoor2.FBX" />
     <MeshContentTask Include="Assets\modelData\CastleFloor.FBX" />
     <MeshContentTask Include="Assets\modelData\Chest.FBX" />
     <MeshContentTask Include="Assets\modelData\Heart.fbx" />

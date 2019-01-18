@@ -84,19 +84,19 @@ void CEquipInventory::Init(CMenu * menu)
 	m_pointer.SetPosition(m_basePos);
 	m_pointer.SetSize(m_baseSize);
 	//装備武器のアイコンを初期化
-	texture = TextureResource().LoadTexture(L"Assets/sprite/sword.png");
+	texture = TextureResource().LoadTexture(GetPlayer().GetWeaponManager().GetEquipWeapon(enWeaponSword)->GetTextureFilePath());
 	m_equipWeapon[enWeaponSword].Init(texture);
 	m_equipWeapon[enWeaponSword].SetSize({ 65.0f,65.0f });
 	m_equipWeapon[enWeaponSword].SetPosition({ -360.0f, -120.0f });
-	texture = TextureResource().LoadTexture(L"Assets/sprite/largeSword.png");
+	texture = TextureResource().LoadTexture(GetPlayer().GetWeaponManager().GetEquipWeapon(enWeaponLongSword)->GetTextureFilePath());
 	m_equipWeapon[enWeaponLongSword].Init(texture);
 	m_equipWeapon[enWeaponLongSword].SetSize({ 65.0f,65.0f });
 	m_equipWeapon[enWeaponLongSword].SetPosition({ -290.0f, -190.0f });
-	texture = TextureResource().LoadTexture(L"Assets/sprite/bow.png");
+	texture = TextureResource().LoadTexture(GetPlayer().GetWeaponManager().GetEquipWeapon(enWeaponArrow)->GetTextureFilePath());
 	m_equipWeapon[enWeaponArrow].Init(texture);
 	m_equipWeapon[enWeaponArrow].SetSize({ 65.0f,65.0f });
 	m_equipWeapon[enWeaponArrow].SetPosition({ -360.0f, -260.0f });
-	texture = TextureResource().LoadTexture(L"Assets/sprite/twinSword.png");
+	texture = TextureResource().LoadTexture(GetPlayer().GetWeaponManager().GetEquipWeapon(enWeaponTwinSword)->GetTextureFilePath());
 	m_equipWeapon[enWeaponTwinSword].Init(texture);
 	m_equipWeapon[enWeaponTwinSword].SetSize({ 65.0f,65.0f });
 	m_equipWeapon[enWeaponTwinSword].SetPosition({ -430.0f, -190.0f });
@@ -160,13 +160,13 @@ void CEquipInventory::Init(CMenu * menu)
 	m_equipName[enFont_CurrentStatus].Init(L"");
 	m_equipName[enFont_CurrentStatus].SetSize({ 0.7f,0.7f });
 	m_equipName[enFont_CurrentStatus].SetPosition({ 
-		m_statusWindow[enFont_CurrentStatus].GetPosition().x - 30.0f,
+		m_statusWindow[enFont_CurrentStatus].GetPosition().x - 60.0f,
 		fontPos.y + m_baseSize.y - 30.0f
 	});
 	m_equipName[enFont_ChangeStatus].Init(L"");
 	m_equipName[enFont_ChangeStatus].SetSize({ 0.7f,0.7f });
 	m_equipName[enFont_ChangeStatus].SetPosition({
-		m_statusWindow[enFont_ChangeStatus].GetPosition().x - 30.0f,
+		m_statusWindow[enFont_ChangeStatus].GetPosition().x - 60.0f,
 		fontPos.y + m_baseSize.y - 30.0f
 	});
 
@@ -512,4 +512,5 @@ void CEquipInventory::AddEquipList(std::unique_ptr<IInventoryEquip> inventoryEqu
 		//所持上限を超えていなければ装備リストに追加
 		m_equipList.push_back(std::move(inventoryEquip));
 	}
+	
 }

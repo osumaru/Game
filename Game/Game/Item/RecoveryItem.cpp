@@ -3,7 +3,6 @@
 #include"../../Game/Camera/GameCamera.h"
 #include "../Player/Player.h"
 #include "../UI/Menu/ItemInventory.h"
-//#include "InventoryItem/IInventoryItem.h"
 #include "InventoryItem/InventoryRecoveryItem.h"
 
 void CRecoveryItem::Init()

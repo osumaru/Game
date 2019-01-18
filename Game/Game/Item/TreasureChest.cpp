@@ -9,6 +9,7 @@
 #include "../Item/InventoryItem/InventoryLargeSword.h"
 #include "../Item/InventoryItem/InventoryBow.h"
 #include "../Item/InventoryItem/InventoryTwinSword.h"
+#include"GameItem/CEquipItem.h"
 
 void CTreasureChest::Init(CVector3 position)
 {
@@ -18,6 +19,7 @@ void CTreasureChest::Init(CVector3 position)
 	m_position = position;
 	//キャラクターコントローラーを初期化
 	m_characterController.Init(0.6f, 0.4f, m_position);
+	m_characterController.SetUserIndex(enCollisionAttr_Item);
 }
 
 bool CTreasureChest::Start()
@@ -79,13 +81,26 @@ void CTreasureChest::DesideWeaponStatus()
 	weaponNumber %= enWeaponNum;
 	int weaponAttack = Random().GetRandSInt();
 	weaponAttack %= basicWeaponStatus.basicAttack;
+	////アイテムの名前と読み込むテクスチャファイルの名前を設定する//////
+	wchar_t* itemName;
+	wchar_t* textureFileName;
+	////////////////////////////////////////////////////////////////////
+
 	//アイテムのデータを取得
-	/*
+	//武器情報の取得
+	
 	CEquipItem* nItem = GetSceneManager().GetFade()->GetLoadScene()->GetEquipItemData();
+	//↓これはレア度がNormalの武器からランダムで武器を取得するコード
 	int num = nItem->GetNormalEquipItemList(Random().GetRandSInt() % nItem->GetNormalEquipItemListSize()) ;
+	//武器のタイプの取得
 	weaponNumber = nItem->GetItemStatus_ItemId(num).WeaponType;
+	//武器の名前の取得
+	itemName = nItem->GetItemStatus_ItemId(num).ItemName;
+	//武器のUI情報の取得(文字列)
+	textureFileName = nItem->GetItemStatus(num).ItemSprite;
 	weaponAttack = nItem->GetItemStatus_ItemId(num).ItemEffect;
-	*/
+	
+	
 	if (weaponNumber == EnPlayerWeapon::enWeaponSword)
 	{
 		//剣
@@ -116,5 +131,5 @@ void CTreasureChest::DesideWeaponStatus()
 	}
 	weaponStatus.attack = weaponAttack;
 	m_inventoryEquip->SetEquipStatus(weaponStatus);
-	m_inventoryEquip->Init();
+	m_inventoryEquip->Init(itemName, textureFileName);
 }

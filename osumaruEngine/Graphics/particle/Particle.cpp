@@ -40,6 +40,13 @@ void CParticle::Init(const SParticleEmittInfo& info, const CCamera* camera)
 	addPos.y *= (float)Random().GetRandDouble() * 2.0f - 1.0f;
 	addPos.z *= (float)Random().GetRandDouble() * 2.0f - 1.0f;
 	m_position += addPos;
+	m_speed = info.moveSpeed;
+	CVector3 addSpeed;
+	addSpeed = info.randomMoveSpeed;
+	addSpeed.x *= (float)Random().GetRandDouble() * 2.0f - 1.0f;
+	addSpeed.y *= (float)Random().GetRandDouble() * 2.0f - 1.0f;
+	addSpeed.z *= (float)Random().GetRandDouble() * 2.0f - 1.0f;
+	m_speed += addSpeed;
 	m_lifeTimer = info.lifeTime;
 	m_pTexture = TextureResource().LoadTexture(info.filePath);
 	//頂点バッファを作成
@@ -65,7 +72,7 @@ void CParticle::Init(const SParticleEmittInfo& info, const CCamera* camera)
 void CParticle::Update()
 {
 	m_speed += m_gravity * GameTime().GetDeltaFrameTime();
-	m_position += m_speed;
+	m_position += m_speed * GameTime().GetDeltaFrameTime();
 	m_lifeTimer -= GameTime().GetDeltaFrameTime();
 	if (m_lifeTimer < 0.0f)
 	{

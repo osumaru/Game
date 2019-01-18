@@ -33,11 +33,11 @@ void StaticMapObject::Init(const CVector3& position, const CQuaternion& rotation
 
 	if (!collider)
 	{
-		//m_meshCollider.reset(new CMeshCollider);
-		//m_meshCollider->CreateCollider(&m_skinModel);
-		//rInfo.collider = m_meshCollider.get();
-
-		CMatrix rotMat;
+		m_meshCollider.reset(new CMeshCollider);
+		m_meshCollider->CreateCollider(&m_skinModel);
+		rInfo.collider = m_meshCollider.get();
+		
+		/*CMatrix rotMat;
 		rotMat.MakeRotationFromQuaternion(multi);
 		CMeshCollider mesh;
 		mesh.CreateCollider(&m_skinModel);
@@ -50,7 +50,7 @@ void StaticMapObject::Init(const CVector3& position, const CQuaternion& rotation
 		m_boxCollider.reset(new CBoxCollider);
 		m_boxCollider->Create({ boxsize.x,boxsize.y,boxsize.z });
 		rInfo.collider = m_boxCollider.get();
-		g_pathFinding.GetNavigationMesh().SetSkinModel(&m_skinModel);
+		g_pathFinding.GetNavigationMesh().SetSkinModel(&m_skinModel);*/
 	}
 	else
 	{

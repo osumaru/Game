@@ -1,5 +1,5 @@
 #pragma once
-#include "../Item/IItem.h"
+#include "../Item/GameItem/ItemStatus.h"
 class IShop	:	public IGameObject
 {
 public:
@@ -48,9 +48,9 @@ protected:
 	};
 	struct ShopItem
 	{
-		IItem::SItemStatus	ItemStatus;				//アイテムの情報
+		SItemStatus		ItemStatus;				//アイテムの情報
 		CSprite			ItemSprite;				//アイテムのスプライト
-		CTexture*			ItemTexture;			//アイテムのテクスチャ
+		CTexture*		ItemTexture;			//アイテムのテクスチャ
 	};
 
 	CSkinModel			m_skinModel;						//スキンモデル

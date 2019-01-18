@@ -62,7 +62,7 @@ void CLoadScene::Update()
 	if (m_isTextChange)
 	{
 		//–³ŒÀƒ‹[ƒv‚µ‚½‚ç‚²‚ß‚ñ‚Ë
-		while(m_number == Random().GetRandInt() % 20 + 1);
+		while(m_number == Random().GetRandInt() % 10 + 1);
 		{
 
 		}

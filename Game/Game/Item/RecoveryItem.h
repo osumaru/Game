@@ -5,7 +5,6 @@
 #pragma once
 
 #include "IItem.h"
-#include "InventoryItem/IInventoryItem.h"
 
 class CRecoveryItem : public IItem
 {
