@@ -512,4 +512,5 @@ void CEquipInventory::AddEquipList(std::unique_ptr<IInventoryEquip> inventoryEqu
 		//ŠãŒÀ‚ğ’´‚¦‚Ä‚¢‚È‚¯‚ê‚Î‘•”õƒŠƒXƒg‚É’Ç‰Á
 		m_equipList.push_back(std::move(inventoryEquip));
 	}
+	
 }

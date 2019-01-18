@@ -96,7 +96,7 @@ void CPlayerArrow::Update()
 				//ダウンしていなかったら
 				if (!GetMaw().GetIsDown())
 				{
-					const float BossWeekLenge = 50.0f;
+					const float BossWeekLenge = 3.0f;
 					//ボスの弱点の座標取得
 					CVector3 EnemyVec = GetMaw().GetWeekPosition();
 					EnemyVec -= m_arrowPosition;
@@ -112,8 +112,8 @@ void CPlayerArrow::Update()
 				}
 				else
 				{
-					const float BossHeight = 10.0f;
-					const float BossLenge = 12.0f;
+					const float BossHeight = 3.0f;
+					const float BossLenge = 3.0f;
 					//ボスの座標取得
 					CVector3 EnemyVec = GetMaw().GetPosition();
 					EnemyVec.y += BossHeight;

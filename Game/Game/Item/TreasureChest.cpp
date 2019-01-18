@@ -85,6 +85,7 @@ void CTreasureChest::DesideWeaponStatus()
 	wchar_t* itemName;
 	wchar_t* textureFileName;
 	////////////////////////////////////////////////////////////////////
+
 	//アイテムのデータを取得
 	//武器情報の取得
 	

@@ -28,4 +28,5 @@ public:
 
 private:
 	std::unique_ptr<IInventoryEquip> m_inventoryEquip;	//ƒCƒ“ƒxƒ“ƒgƒŠ‚É“ü‚ê‚é‘•”õ
+
 };
