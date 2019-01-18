@@ -81,6 +81,7 @@ void CRock::Update()
 
 	if (m_isHit)
 	{
+		//何かに当たっていたらパーティクルを出す
 		CParticleEmitter* particleEmitter = New<CParticleEmitter>(PRIORITY_UI);
 		particleEmitter->Init(m_particleInfo, &GetGameCamera().GetCamera());
 		particleEmitter->SetPosition(m_position);

@@ -123,6 +123,7 @@ void CWireAction::Update()
 				m_wirePosition = m_wirePositionList[i].wirePos;
 				//レイを飛ばしてプレイヤーとの間に障害物がないならワイヤーを使う
 				m_isWireMove = true;
+				minLength = FLT_MAX;
 				switch (m_state)
 				{
 				case enStateEnemy:
@@ -131,11 +132,14 @@ void CWireAction::Update()
 						CVector3 enemyPos = enemy->GetPosition();
 						CVector3 toMovePos = m_wirePosition - enemyPos;
 						float length = toMovePos.Length();
-						if (length < 0.1f) {
-							//一番近い敵にワイヤーが当たったフラグを設定する
-							enemy->SetIsWireHit(true);
+						if (length < minLength) 
+						{
+							minLength = length;
+							m_hitEnemy = enemy;
 						}
 					}
+					//ワイヤーが当たったエネミーにフラグを設定する
+					m_hitEnemy->SetIsWireHit(true);
 					break;
 
 				case enStateMap:

@@ -61,7 +61,7 @@ void CEnemyDamage::Update()
 	//UŒ‚”ÍˆÍ‚É‚¢‚é‚©‚Ç‚¤‚©”»’è
 	bool isRange = m_enemy->CalucFanShape(10.0f, playerPos);
 
-	if (m_enemy->GetIsDead())
+	if (m_enemy->GetStatus().hp <= 0)
 	{
 		//HP‚ª–³‚­‚È‚ê‚ÎŽ€–S
 		m_esm->ChangeState(CEnemyState::enState_Death);

@@ -21,6 +21,8 @@ bool CEnemyDeath::Start()
 	//プレイヤーが経験値獲得
 	GetPlayer().ExpUP(m_enemy->GetStatus().exp);
 
+	m_enemy->SetIsDead(true);
+
 	return true;
 }
 
