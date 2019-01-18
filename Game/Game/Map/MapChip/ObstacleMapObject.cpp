@@ -24,12 +24,7 @@ void CObstacleMapObject::Init(const CVector3& position, const CQuaternion& rotat
 	rInfo.mass = 0.0f;
 	rInfo.pos = m_position;
 	rInfo.rot = m_rotation;
-	CQuaternion multi = CQuaternion::Identity;
-	rInfo.rot.Multiply(multi);
-	m_skinModel.Update(m_position, m_rotation, m_scale);
 
-	CMatrix rotMat;
-	rotMat.MakeRotationFromQuaternion(multi);
 	CMeshCollider mesh;
 	mesh.CreateCollider(&m_skinModel);
 	CVector3 boxsize = (mesh.GetAabbMax() - mesh.GetAabbMin()) / 2.0f;
@@ -41,13 +36,18 @@ void CObstacleMapObject::Init(const CVector3& position, const CQuaternion& rotat
 	m_boxCollider.Create({ boxsize.x,boxsize.y,boxsize.z });
 	rInfo.collider = &m_boxCollider;
 
+	m_skinModel.Update(m_position, m_rotation, m_scale);
+
 	//剛体を作成
 	m_rigidBody.Create(rInfo);
 	GetPlayer().GetWireAction().Add(m_skinModel);
 	this->SetIsActive(true);
 	CNavigationMesh::SObstacleInfo naviInfo;
-	naviInfo.aabbMax = mesh.GetAabbMax();
-	naviInfo.aabbMin = mesh.GetAabbMin();
+	//ナビゲーションメッシュでルートを弾くためのコライダーのAABBを求める
+	CVector3 aabbMax = mesh.GetAabbMax();
+	CVector3 aabbMin = mesh.GetAabbMin();
+	naviInfo.aabbMax = (aabbMax - aabbMin) * 0.5f;
+	naviInfo.aabbMin = (aabbMin - aabbMax) * 0.5f;
 	naviInfo.center = m_position;
 	g_pathFinding.GetNavigationMesh().AddObstacleObject(naviInfo);
 

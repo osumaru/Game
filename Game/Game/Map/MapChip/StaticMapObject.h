@@ -28,6 +28,12 @@ public:
 	//描画関数
 	void Draw()override;
 
+	//モデルを取得
+	const CSkinModel& GetSkinModel() const 
+	{
+		return m_skinModel;
+	}
+
 private:
 	std::unique_ptr<CRigidBody>			m_rigidBody;		//剛体
 	std::unique_ptr<CMeshCollider>		m_meshCollider;		//コライダー

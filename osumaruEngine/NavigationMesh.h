@@ -29,7 +29,7 @@ public:
 		return m_meshData;
 	}
 
-	void SetSkinModel(CSkinModel* model)
+	void SetSkinModel(const CSkinModel* model)
 	{
 		m_pModel = model;
 	}
@@ -49,6 +49,6 @@ public:
 	void Draw();
 private:
 	std::vector<SPoligonInfo>	m_meshData[AREA_NUM][AREA_NUM];		//メッシュデータ
-	CSkinModel*					m_pModel;
+	const CSkinModel*			m_pModel;
 	std::list<SObstacleInfo>	m_obstacleObjects;
 };

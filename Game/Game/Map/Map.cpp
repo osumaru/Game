@@ -111,6 +111,7 @@ void Map::Init(int stageNum)
 			break;
 		case enMapTagTerrain:
 			mapChip = New<StaticMapObject>(PRIORITY_GROUND);
+			g_pathFinding.GetNavigationMesh().SetSkinModel(&dynamic_cast<StaticMapObject*>(mapChip)->GetSkinModel());
 			m_collider = false;
 			break;
 		case enMapTagObstacle:
@@ -134,6 +135,7 @@ void Map::Init(int stageNum)
 			//マップチップを生成
 			mapChip->Init(mInfo.m_position, mInfo.m_rotation, mInfo.m_modelName,m_collider);
 			m_mapChip.push_back(mapChip);
+
 			//マップチップに自身のイテレーターとマップのインスタンスを渡す(削除の時に使う)
 			std::list<MapChip*>::iterator iterator = m_mapChip.end();
 			iterator--;
