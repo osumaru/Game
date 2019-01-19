@@ -43,4 +43,5 @@ private:
 	float			m_friction = 0.0f;			//摩擦力
 	bool			m_wasStanAttack = false;	//スタン攻撃を受けたか
 	bool			m_isNockBack = false;		//ノックバック中かのフラグ
+	CEffect			m_damageEffect;
 };

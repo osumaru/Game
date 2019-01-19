@@ -166,6 +166,8 @@ void Map::Init(int stageNum)
 		group->Add(enemy);
 		enemy->AddObject();
 	}
+
+	Add(&Sky(), PRIORITY_SKY);
 	g_pathFinding.BuildNodes();
 }
 
@@ -218,5 +220,6 @@ void Map::BeforeDead()
 		//ƒvƒŒƒCƒ„[‚ÌÁ‹
 		GetPlayer().Destroy();
 	}
+	Delete(&Sky());
 
 }

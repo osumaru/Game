@@ -168,11 +168,13 @@ void CPlayer::Init(CVector3 position)
 	m_weaponManager.Init(this);
 	m_wireAction.Init(this);
 	SetIsActive(true);
+	m_light = Light();
+	m_light.SetAmbientLight({ 1.0f, 1.0f, 1.0f, 1.0f });
+	m_skinmodel.SetLight(Light());
 	m_skinmodel.Update(m_position, m_rotation, { 1.0f, 1.0f, 1.0f }, true);
 	GetGameCamera().CameraSetPlayer();
 	m_wireDraw.Init(CVector3::Zero, CVector3::Zero, CVector3::Zero);
 	m_hipBoneMat = &m_skinmodel.FindBoneWorldMatrix(L"Hips");
-
 }
 
 void CPlayer::Update()
@@ -181,8 +183,8 @@ void CPlayer::Update()
 	{
 		return;
 	}
-
 	StatusCalculation();	//ステータスの処理
+	
 
 	float stickX = Pad().GetLeftStickX();
 	float stickZ = Pad().GetLeftStickY();
@@ -202,7 +204,6 @@ void CPlayer::Update()
 	shadowPos.x = m_hipBoneMat->m[3][0];
 	shadowPos.y = m_position.y;
 	shadowPos.z = m_hipBoneMat->m[3][2];
-
 	CVector3 cameraPos = shadowPos;
 	cameraPos.y += 50.0f;
 	viewMat.MakeLookAt(cameraPos, shadowPos, CVector3::AxisX);

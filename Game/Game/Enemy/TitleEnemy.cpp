@@ -8,6 +8,7 @@ void CTitleEnemy::Init(const wchar_t* modelName, CVector3 position)
 	wchar_t filePath[256];
 	swprintf(filePath, L"Assets/modelData/%s.cmo", modelName);
 	m_skinModel.Load(filePath, &m_animation);
+	m_skinModel.SetSpecularPower(0.03f);
 	//座標を設定
 	m_position = position;
 	//アニメーションのロード
