@@ -20,9 +20,12 @@ void CEffect::Update()
 	CMatrix worldMat;
 	CMatrix rotMat;
 	CMatrix transMat;
+	CMatrix scaleMat;
+	scaleMat.MakeScaling(m_scale);
 	rotMat.MakeRotationFromQuaternion(m_rotation);
 	transMat.MakeTranslation(m_position);
-	worldMat.Mul(rotMat, transMat);
+	worldMat.Mul(scaleMat, rotMat);
+	worldMat.Mul(worldMat, transMat);
 	Effekseer::Matrix43 mat;
 	for (int i = 0; i < 4; i++)
 	{

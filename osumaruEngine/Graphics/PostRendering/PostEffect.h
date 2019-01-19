@@ -1,4 +1,5 @@
 #pragma once
+#include "Bloom.h"
 
 class CPostEffect
 {
@@ -26,11 +27,17 @@ public:
 		return m_pBackDepthStencilView;
 	}
 
+	CBloom& GetBloom()
+	{
+		return m_bloom;
+	}
+
 private:
-	CPrimitive								m_primitive;			//プリミティブ
-	CShader									m_vertexShader;			//頂点シェーダー
-	CShader														m_pixelShader;			//ピクセルシェーダー
-	CRenderTarget													m_backBuffer;			//バックバッファ
-	Microsoft::WRL::ComPtr<ID3D11RenderTargetView>					m_pBackRenderTargetView = nullptr;//バックバッファのRTV
-	Microsoft::WRL::ComPtr<ID3D11DepthStencilView>					m_pBackDepthStencilView = nullptr;//バックバッファのDSV
+	CBloom											m_bloom;
+	CPrimitive										m_primitive;			//プリミティブ
+	CShader											m_vertexShader;			//頂点シェーダー
+	CShader											m_pixelShader;			//ピクセルシェーダー
+	CRenderTarget									m_backBuffer;			//バックバッファ
+	Microsoft::WRL::ComPtr<ID3D11RenderTargetView>	m_pBackRenderTargetView = nullptr;//バックバッファのRTV
+	Microsoft::WRL::ComPtr<ID3D11DepthStencilView>	m_pBackDepthStencilView = nullptr;//バックバッファのDSV
 };

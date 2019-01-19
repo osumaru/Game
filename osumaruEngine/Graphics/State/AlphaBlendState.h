@@ -13,9 +13,6 @@ class CAlphaBlendState : Uncopyable
 {
 public:
 
-	//デストラクタ
-	~CAlphaBlendState();
-
 	//初期化
 	void Init(Microsoft::WRL::ComPtr<ID3D11Device> device);
 
@@ -28,7 +25,7 @@ public:
 	void SetBlendState(Microsoft::WRL::ComPtr<ID3D11DeviceContext> deviceContext, EnAlphaBlendState enBlendState)
 	{
 		m_currentState = enBlendState;
-		deviceContext->OMSetBlendState(m_blendState[m_currentState], NULL, 0xffffffff);
+		deviceContext->OMSetBlendState(m_blendState[m_currentState].Get(), NULL, 0xffffffff);
 	}
 
 	//現在の設定を取得
@@ -38,6 +35,6 @@ public:
 	}
 
 private:
-	ID3D11BlendState*		m_blendState[enAlphaBlendStateNum] = {nullptr};		//アルファブレンドステート
+	Microsoft::WRL::ComPtr<ID3D11BlendState>		m_blendState[enAlphaBlendStateNum] = {nullptr};		//アルファブレンドステート
 	EnAlphaBlendState		m_currentState = enAlphaBlendStateAdd;				//現在の設定
 };

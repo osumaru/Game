@@ -154,9 +154,8 @@ float4 PSMain(VS_OUTPUT In) : SV_TARGET0
 		lineSight = reflect(lineSight, normal);
 		lineSight = normalize(lineSight);
 		float speculaLight = dot(lineSight, -normalLight[i]);
-		speculaLight = pow(speculaLight, 5.0f);
-	
 		speculaLight = max(speculaLight, 0.0f);
+		speculaLight = pow(speculaLight, 10.0f);
 		color.xyz += speculaLight * (depthAndSpecular.y * step(1, (materialFlg.x & isSpecularMap)) + step(1, !(materialFlg.x & isSpecularMap))) * depthAndSpecular.z;
 	}
 	color.xyz *= min(1, step(1, !(materialFlg.x & isShadowReceiver)) + shadowValue);

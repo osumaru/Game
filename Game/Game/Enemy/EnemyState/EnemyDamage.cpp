@@ -32,6 +32,14 @@ void CEnemyDamage::Init()
 	}
 	//どの武器でダメージを食らったか
 	//m_enemy->SetAttackWeapon(*GetPlayer().GetWeaponManager().GetWeapon()->GetAttackWeapon());
+	m_damageEffect.Init(L"Assets/Effect/DamageEffect.efk");
+	m_damageEffect.Play();
+	CVector3 effectPos = m_enemy->GetPosition();
+	effectPos.y += 1.0f;
+	m_damageEffect.SetPosition(effectPos);
+	const float SCALE = 0.1f;
+	m_damageEffect.SetScale({ SCALE, SCALE, SCALE });
+	m_damageEffect.Update();
 }
 
 bool CEnemyDamage::Start()
@@ -44,6 +52,7 @@ bool CEnemyDamage::Start()
 
 void CEnemyDamage::Update()
 {
+	m_enemy->Update();
 	//ノックバックさせる
 	CVector3 moveSpeed = m_enemy->GetMoveSpeed();
 	CVector3 knockBack = m_enemy->GetPosition() - GetPlayer().GetPosition();

@@ -24,10 +24,12 @@ void CPostEffect::Init(Microsoft::WRL::ComPtr<IDXGISwapChain> swapChain)
 	m_backBuffer.CreateDepthStencilBuffer(FrameBufferWidth(), FrameBufferHeight());
 	m_pBackRenderTargetView = m_backBuffer.GetRenderTarget();
 	m_pBackDepthStencilView = m_backBuffer.GetDepthStencil();
+	m_bloom.Init();
 }
 
 void CPostEffect::Draw()
 {
+	m_bloom.Draw();
 	float color[4] = { 0.0f, 0.0f, 1.0f, 1.0f };
 	GetDeviceContext()->OMSetRenderTargets(1, m_pBackRenderTargetView.GetAddressOf(), m_pBackDepthStencilView.Get());
 	GetDeviceContext()->ClearRenderTargetView(m_pBackRenderTargetView.Get(), color);
@@ -42,7 +44,7 @@ void CPostEffect::Draw()
 	GetDeviceContext()->PSSetShader((ID3D11PixelShader*)m_pixelShader.GetBody().Get(), nullptr, 0);
 	GetDeviceContext()->IASetInputLayout(m_vertexShader.GetInputlayOut().Get());
 	m_primitive.Draw(GetDeviceContext());
-	Engine().SetAlphaBlendState(enAlphaBlendStateAdd);
+	Engine().SetAlphaBlendState(enAlphaBlendStateTranslucent);
 	Engine().SetDepthStencilState(enDepthStencilState3D);
 	Engine().SetRasterizerState(enRasterizerState2D);
 	GetDeviceContext()->OMSetRenderTargets(1, m_pBackRenderTargetView.GetAddressOf(), MainRenderTarget().GetDepthStencil().Get());

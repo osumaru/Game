@@ -268,6 +268,7 @@ private:
 	CBoxCollider						m_boxCollider;							//ボックスコライダー
 	bool								m_isAction = true;						//アクションをするかを判定する
 	const CMatrix*						m_hipBoneMat;
+	CLight								m_light;
 };
 
 static CPlayer& GetPlayer()
