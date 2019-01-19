@@ -66,9 +66,10 @@ void CPlayerWireMove::Update()
 		m_moveSpeed = m_speed;
 	}
 	toMovePos *= m_moveSpeed;
+	m_previousMoveSpeed = toMovePos;
 	float range = 2.0f;
 
-	float angle = 0.0f;
+	float angle = 1.0f;
 	switch (m_pPlayer->GetWireAction().GetState())
 	{
 	case CWireAction::enStateEnemy:
