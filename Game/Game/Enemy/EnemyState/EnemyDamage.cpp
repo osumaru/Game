@@ -15,9 +15,15 @@ void CEnemyDamage::Init()
 
 	//ƒ_ƒ[ƒW‚ðŽó‚¯‚½ƒtƒ‰ƒO‚ð–ß‚·
 	m_enemy->SetIsDamage(false);
+
+	const CPlayerAttack* playerAttack = dynamic_cast<const CPlayerAttack*>(GetPlayer().GetStateMachine().GetState(CPlayerState::enPlayerStateAttack));
+	float attackCount = (float)playerAttack->GetAttackCount();
+	float maxAttackNum = (float)GetPlayer().GetWeaponManager().GetWeapon()->GetMaxAttackNum();
+
 	//–€ŽC‚Ì‰Šú‰»
-	m_friction = 0.0f;
+	m_friction = 0.03f;
 	m_deceleration = 0.0f;
+	m_knockBackScale = (attackCount + 1.0f) / maxAttackNum;
 	//ƒXƒ^ƒ“‚·‚éUŒ‚‚Å‚ ‚é‚©”»’è
 	m_wasStanAttack = GetPlayer().GetStanAttack();
 	if (!m_wasStanAttack)
@@ -52,11 +58,11 @@ void CEnemyDamage::Update()
 	CVector3 knockBack = m_enemy->GetPosition() - GetPlayer().GetPosition();
 	knockBack.y = 0.0f;
 	knockBack.Normalize();
-	if (m_deceleration >= m_knockBackSpeed) {
-		m_deceleration = m_knockBackSpeed;
+	if (m_deceleration >= m_knockBackSpeed * m_knockBackScale) {
+		m_deceleration = m_knockBackSpeed * m_knockBackScale;
 		m_isNockBack = false;
 	}
-	knockBack *= m_knockBackSpeed - m_deceleration;
+	knockBack *= m_knockBackSpeed * m_knockBackScale - m_deceleration;
 	m_friction += 0.03f;
 	m_deceleration += m_friction;
 	moveSpeed.x = knockBack.x;
@@ -70,7 +76,7 @@ void CEnemyDamage::Update()
 	//UŒ‚”ÍˆÍ‚É‚¢‚é‚©‚Ç‚¤‚©”»’è
 	bool isRange = m_enemy->CalucFanShape(10.0f, playerPos);
 
-	if (m_enemy->GetIsDead())
+	if (m_enemy->GetStatus().hp <= 0)
 	{
 		//HP‚ª–³‚­‚È‚ê‚ÎŽ€–S
 		m_esm->ChangeState(CEnemyState::enState_Death);

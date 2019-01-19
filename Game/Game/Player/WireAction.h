@@ -1,5 +1,7 @@
 #pragma once
 class CPlayer;
+class IEnemy;
+
 class CWireAction
 {
 public:
@@ -55,6 +57,12 @@ public:
 		return m_state;
 	}
 
+	//ワイヤーに当たったエネミーを取得
+	IEnemy* GetHitEnemy()
+	{
+		return m_hitEnemy;
+	}
+
 private:
 	struct SWireInfo
 	{
@@ -64,6 +72,7 @@ private:
 
 private:
 	const CPlayer*					m_pPlayer = nullptr;					//プレイヤーのインスタンス
+	IEnemy*							m_hitEnemy = nullptr;					//ワイヤーを当てたエネミー
 	bool							m_isWireMove = false;					//ワイヤー移動できるか
 	CRayTest						m_wireCollisionSolver;					//ワイヤー移動のコリジョン処理クラス
 	CVector3						m_wirePosition;
