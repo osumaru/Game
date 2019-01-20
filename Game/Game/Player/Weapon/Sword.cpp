@@ -20,7 +20,10 @@ void CSword::Init()
 	m_attackPosition = { -10.0f, 0.0f, 0.0f };
 
 	m_skinModel.Load(L"Assets/modelData/Sword.cmo", NULL);
+	m_skinModel.LoadSpecularMap(L"Assets/modelData/Sword_Metalic.tif");
+	m_skinModel.LoadNormalmap(L"Assets/modelData/Sword_normal.tif");
 
+	m_skinModel.SetSpecularPower(2.0f);
 	m_maxAttackNum = 3;
 	m_maxWeaponHitNum = 1;
 	m_hitEffectParam = std::make_unique<SHitEffectParam[]>(m_maxAttackNum);

@@ -49,6 +49,13 @@ void CTwinSword::Init()
 
 	m_skinModel.Load(L"Assets/modelData/TwinSword.cmo", NULL);
 	m_skinModelTwin.Load(L"Assets/modelData/TwinSword.cmo", NULL);
+	m_skinModel.LoadSpecularMap(L"Assets/modelData/TwinSword_metallic.tif");
+	m_skinModelTwin.LoadSpecularMap(L"Assets/modelData/TwinSword_metallic.tif");
+	m_skinModel.LoadNormalmap(L"Assets/modelData/TwinSword_normal.tif");
+	m_skinModelTwin.LoadNormalmap(L"Assets/modelData/TwinSword_normal.tif");
+	float speculaPower = 1.0f;
+	m_skinModel.SetSpecularPower(speculaPower);
+	m_skinModelTwin.SetSpecularPower(speculaPower);
 
 	m_maxAttackNum = 3;
 	m_maxWeaponHitNum = 2;
