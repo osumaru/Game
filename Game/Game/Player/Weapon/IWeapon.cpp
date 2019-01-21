@@ -118,6 +118,10 @@ void IWeapon::EnemyAttack()
 			{
 				for (const auto& enemy : group->GetGroupList())
 				{
+					if (enemy->GetIsDead())
+					{
+						continue;
+					}
 					bool* damagePossible = enemy->IsDamagePossible();
 					if(damagePossible[i])
 					{
