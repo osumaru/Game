@@ -31,6 +31,7 @@ void StaticMapObject::Init(const CVector3& position, const CQuaternion& rotation
 	//メッシュコライダーからAABBを作成
 	isCollider = collider;
 
+	//メッシュコライダー
 	if (!collider)
 	{
 		m_meshCollider.reset(new CMeshCollider);
@@ -52,10 +53,11 @@ void StaticMapObject::Init(const CVector3& position, const CQuaternion& rotation
 		rInfo.collider = m_boxCollider.get();
 		g_pathFinding.GetNavigationMesh().SetSkinModel(&m_skinModel);*/
 	}
+	//AABB
 	else
 	{
 		CMatrix rotMat;
-		rotMat.MakeRotationFromQuaternion(multi);
+		rotMat.MakeRotationFromQuaternion(m_rotation);
 		CMeshCollider mesh;
 		mesh.CreateCollider(&m_skinModel);
 		CVector3 boxsize = (mesh.GetAabbMax() - mesh.GetAabbMin()) / 2.0f;
@@ -73,8 +75,9 @@ void StaticMapObject::Init(const CVector3& position, const CQuaternion& rotation
 	//剛体を作成
 	m_rigidBody.reset(new CRigidBody);
 	m_rigidBody->Create(rInfo);
-	//m_skinModel.SetShaderTechnique(enShaderTechniqueDithering);
 	GetPlayer().GetWireAction().Add(m_skinModel);
+	//m_skinModel.SetShaderTechnique(enShaderTechniqueDithering);
+	m_skinModel.Update(m_position, m_rotation, m_scale);
 	this->SetIsActive(true);
 }
 
