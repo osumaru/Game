@@ -135,7 +135,9 @@ VS_OUTPUT VSSkinMain(VS_SKIN_INPUT In)
 PS_OUTPUT PSMain(VS_OUTPUT In)
 {
 	PS_OUTPUT Out;
-	Out.color = float4(colorTexture.Sample(Sampler, In.uv).xyz, ambientLight.w);
+	float4 albedoColor = colorTexture.Sample(Sampler, In.uv);
+	clip(albedoColor.w - 0.001f);
+	Out.color = float4(albedoColor.xyz, ambientLight.w);
 	Out.normal = float4(In.normal, 1.0f);
 	Out.tangent = float4(In.tangent, 1.0f);
 	float3 normalColor = normalTexture.Sample(Sampler, In.uv);// * isNormalMap + float3(0.0f, 0.0f, 1.0f) * (1 - isNormalMap);

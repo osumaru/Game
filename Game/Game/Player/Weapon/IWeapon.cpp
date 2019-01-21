@@ -11,7 +11,7 @@
 void IWeapon::Init(CPlayer* player)
 {
 	m_pPlayer = player;
-	m_normalBoneMat = &m_pPlayer->GetSkinmodel().FindBoneWorldMatrix(L"LeftShoulder");
+	m_normalBoneMat = &m_pPlayer->GetSkinmodel().FindBoneWorldMatrix(L"Spine");
 	m_attackBoneMat = &m_pPlayer->GetSkinmodel().FindBoneWorldMatrix(L"RightHand");
 	Init();
 }
