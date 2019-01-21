@@ -30,6 +30,8 @@ void CGameCamera::Init()
 	m_springCamera.SetTarget(m_camera.GetTarget());
 	//揺れカメラの初期化
 	m_shakeCamera.Init(CVector3::Zero, CVector3::Zero, {1.0f, 1.0f, 0.0f}, 0.7f);
+	//カメラの当たり判定を初期化
+	m_cameraCollisionSolver.Init(0.2f);
 }
 
 void CGameCamera::CameraSetPlayer()
@@ -90,6 +92,13 @@ void CGameCamera::Update()
 	//	position.y = target.y + m_cameraVec.y;
 	//}
 
+	//カメラの当たり判定
+	CVector3 newPos;
+	if (m_cameraCollisionSolver.Execute(newPos, position, target))
+	{
+		position = newPos;
+	}
+
 	//バネカメラを更新する
 	m_springCamera.SetTarTarget(target);
 	m_springCamera.SetTarPosition(position);
@@ -113,6 +122,7 @@ void CGameCamera::Rotation(CVector3& target, CVector3& position)
 	float rStick_y = Pad().GetRightStickY();
 	//注視点からカメラまでのベクトルを求める
 	CVector3 toCameraPos = position - target;
+	toCameraPos.Normalize();
 	const float	CAMERA_SPEED = 2.0f;
 	if (fabsf(rStick_x) > 0.0f) 
 	{
@@ -151,7 +161,7 @@ void CGameCamera::Rotation(CVector3& target, CVector3& position)
 	target = GetPlayer().GetCharacterController().GetPosition();
 	target.y += TARGET_OFFSET_Y;
 	//座標を設定する
-	position = target + toCameraPos;
+	position = target + toCameraPos * m_cameraLength;
 }
 
 void CGameCamera::SearchTarget()
@@ -227,7 +237,7 @@ void CGameCamera::LockOnCancel(CVector3& target, CVector3& position)
 	//ロックオンをやめる
 	m_isLockOn = false;
 	//現在の注視点からカメラへのベクトルを求める
-	CVector3 toCameraPos = m_springCamera.GetTarPosition() - m_springCamera.GetTarTarget();
+	CVector3 toCameraPos = position - target;
 	toCameraPos.Normalize();
 	toCameraPos *= m_cameraLength;
 	//注視点を決める

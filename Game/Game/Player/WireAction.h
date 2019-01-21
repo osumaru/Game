@@ -63,6 +63,12 @@ public:
 		return m_hitEnemy;
 	}
 
+	//ワイヤーを飛ばす先のY方向の補正値を取得
+	float GetOffsetY()
+	{
+		return WIRE_OFFSET_Y;
+	}
+
 private:
 	struct SWireInfo
 	{
@@ -80,4 +86,5 @@ private:
 	SWireInfo						m_wirePositionList[WIRE_POS_LIST_NUM];							//ワイヤー移動先の座標
 	std::vector<const CVector3*>	m_posWireFly;							//飛ぶ先の地点リスト
 	EnWireState						m_state = enStateEnemy/*enStateMap*/;					//ワイヤーの状態
+	float							WIRE_OFFSET_Y = 0.0f;					//ワイヤーを飛ばす先のY方向の補正値
 };

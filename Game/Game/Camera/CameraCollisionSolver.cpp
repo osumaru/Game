@@ -14,7 +14,10 @@ public:
 		normal.y = convexResult.m_hitNormalLocal.y();
 		normal.z = convexResult.m_hitNormalLocal.z();
 
-		if (convexResult.m_hitCollisionObject->getUserIndex() == enCollisionAttr_Character) {
+		if (convexResult.m_hitCollisionObject->getUserIndex() == enCollisionAttr_Character ||
+			convexResult.m_hitCollisionObject->getUserIndex() == enCollisionAttr_Player ||
+			convexResult.m_hitCollisionObject->getUserIndex() == enCollisionAttr_Item) 
+		{
 			return 1.0f;
 		}
 		return btCollisionWorld::ClosestConvexResultCallback::addSingleResult(convexResult, normalInWorldSpace);

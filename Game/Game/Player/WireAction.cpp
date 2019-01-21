@@ -127,6 +127,8 @@ void CWireAction::Update()
 				switch (m_state)
 				{
 				case enStateEnemy:
+					WIRE_OFFSET_Y = 1.0f;
+					m_wirePosition.y += WIRE_OFFSET_Y;
 					for (auto& enemy : enemyList)
 					{
 						CVector3 enemyPos = enemy->GetPosition();
