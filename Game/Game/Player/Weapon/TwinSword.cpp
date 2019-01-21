@@ -10,16 +10,18 @@
 
 void CTwinSword::Init()
 {
-	m_normalTwinBoneMat = &m_pPlayer->GetSkinmodel().FindBoneWorldMatrix(L"RightShoulder");
+	m_normalTwinBoneMat = &m_pPlayer->GetSkinmodel().FindBoneWorldMatrix(L"Spine");
 	m_attackTwinBoneMat = &m_pPlayer->GetSkinmodel().FindBoneWorldMatrix(L"LeftHand");
 
 
-	m_position = { 0.0f, 0.0f, -10.0f };
+	m_position = { 0.0f, 50.0f, -17.0f };
 	m_rotation = CQuaternion::Identity;
 	CQuaternion multi;
 	multi.SetRotationDeg(CVector3::AxisX, 90.0f);
 	m_rotation.Multiply(multi);
 	multi.SetRotationDeg(CVector3::AxisZ, 90.0f);
+	m_rotation.Multiply(multi); 
+	multi.SetRotationDeg(CVector3::AxisX, 70.0f);
 	m_rotation.Multiply(multi);
 
 	m_attackRotation = CQuaternion::Identity;
@@ -31,12 +33,14 @@ void CTwinSword::Init()
 
 
 	//“ñ‚Â–Ú‚ÌŒ•—p
-	m_positionTwin = { 0.0f, 0.0f, -10.0f };
+	m_positionTwin = { 10.0f, 47.0f, -17.0f };
 	m_rotationTwin = CQuaternion::Identity;
 	CQuaternion multi2;
 	multi2.SetRotationDeg(CVector3::AxisX, 90.0f);
 	m_rotationTwin.Multiply(multi2);
 	multi2.SetRotationDeg(CVector3::AxisZ, 90.0f);
+	m_rotationTwin.Multiply(multi2);
+	multi2.SetRotationDeg(CVector3::AxisX, 50.0f);
 	m_rotationTwin.Multiply(multi2);
 
 	m_attackTwinRotation = CQuaternion::Identity;

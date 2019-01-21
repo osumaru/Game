@@ -3,14 +3,14 @@
 
 void CSword::Init()
 {
-	m_position = { 0.0f, 0.0f, -10.0f };
+	m_position = { 10.0f, 50.0f, -17.0f };
 	CQuaternion multi;
 	m_rotation = CQuaternion::Identity;
 	multi.SetRotationDeg(CVector3::AxisX, 90.0f);
 	m_rotation.Multiply(multi);
 	multi.SetRotationDeg(CVector3::AxisZ, 90.0f);
 	m_rotation.Multiply(multi);
-	multi.SetRotationDeg(CVector3::AxisX, -20.0f);
+	multi.SetRotationDeg(CVector3::AxisX, -25.0f);
 	m_rotation.Multiply(multi);
 
 	m_attackRotation = CQuaternion::Identity;
