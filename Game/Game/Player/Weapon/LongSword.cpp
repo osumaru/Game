@@ -20,6 +20,10 @@ void CLongSword::Init()
 	m_attackPosition = { -10.0f, 0.0f, 0.0f };
 
 	m_skinModel.Load(L"Assets/modelData/LargeSword.cmo", NULL);
+	m_skinModel.LoadSpecularMap(L"Assets/modelData/LargeSword_metallic.tif");
+	m_skinModel.LoadNormalmap(L"Assets/modelData/LargeSword_normal.tif");
+	m_skinModel.SetSpecularPower(0.5f);
+
 
 	m_maxAttackNum = 3;
 	m_maxWeaponHitNum = 1;

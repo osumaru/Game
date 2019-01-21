@@ -23,6 +23,11 @@ public:
 	{
 		m_camera = camera;
 	}
+
+	void SetLight(const CLight& light)
+	{
+		m_skinModel.SetLight(light);
+	}
 private:
 	CSkinModel m_skinModel;
 	const CCamera* m_camera = nullptr;

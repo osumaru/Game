@@ -1,4 +1,11 @@
-﻿//Warrok
+﻿//Map4
+{
+	L"Map4",
+	CVector3(0.00f, 0.00f, 0.00f),             //平行移動
+	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f),  //回転
+	enMapTagMapChip, //タグ
+},
+//Warrok
 {
 	L"Warrok",
 	CVector3(-5.10f, 0.00f, 0.00f),             //平行移動

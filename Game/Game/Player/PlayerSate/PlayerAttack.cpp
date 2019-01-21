@@ -283,6 +283,8 @@ void CPlayerAttack::Lerp()
 	CVector3 manip = position - bonePos;
 	rotMat.Mul(manip);
 	position = bonePos + manip;
+	CVector3 rigidPos = m_pPlayerGetter->GetCharacterController().GetPosition();
 	m_pPlayerGetter->SetPosition(position);
+	m_pPlayerGetter->GetCharacterController().SetPosition(rigidPos);
 }
 

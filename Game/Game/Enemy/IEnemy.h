@@ -238,10 +238,16 @@ public:
 		return m_enemyStateMachine;
 	}
 
-	//€–S‚µ‚½‚©
+	//€–S‚µ‚½‚©‚ğæ“¾
 	bool GetIsDead()
 	{
 		return m_isDead;
+	}
+
+	//€–S‚µ‚½‚©‚ğİ’è
+	void SetIsDead(bool isDead)
+	{
+		m_isDead = isDead;
 	}
 
 protected:

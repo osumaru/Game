@@ -25,6 +25,23 @@ bool CTitleScene::Start()
 	//ゲーム音楽の初期化
 	m_gameSound = New<CGameSound>(0);
 
+	Light().SetAmbientLight({ 0.0f, 0.0f, 0.0f, 0.1f });
+	Sky().SetLight(Light());
+	Light().SetAmbientLight({ 0.0f, 0.0f, 0.0f, 0.0f });
+	const float diffuseLight[DIFFUSE_LIGHT_NUM] = { 0.05f, 0.05f, 0.0f, 0.0f };
+	CVector4 diffuseDir[DIFFUSE_LIGHT_NUM] =
+	{
+		{1.0f, -1.0f, 0.0f, 0.0f},
+		{1.0f, 0.0f, 1.0f, 0.0f},
+		{0.0f, 0.0f, 1.0f, 0.0f},
+		{0.0f, -1.0f, 0.0f, 0.0f}
+	};
+	
+	for (int i = 0; i < DIFFUSE_LIGHT_NUM; i++)
+	{
+		Light().SetDiffuseLight(i, {diffuseLight[i], diffuseLight[i], diffuseLight[i], 1.0f});
+		Light().SetDiffuseLightDir(i, diffuseDir[i]);
+	}
 	//フェードの実行が終わったらtrueを返す
 	if (!GetSceneManager().GetFade()->IsExecute())
 	{
@@ -46,6 +63,7 @@ bool CTitleScene::Start()
 		GetSceneManager().GetFade()->FadeIn();
 		return true;
 	}
+
 	return false;
 }
 
@@ -100,8 +118,11 @@ void CTitleScene::Update()
 
 void CTitleScene::AfterDraw()
 {
+	EnAlphaBlendState backupState = Engine().GetCurrentAlphaBlendState();
+	Engine().SetAlphaBlendState(enAlphaBlendStateTranslucent);
 	m_title.Draw();
 	m_start.Draw();
+	Engine().SetAlphaBlendState(backupState);
 }
 
 void CTitleScene::BeforeDead()

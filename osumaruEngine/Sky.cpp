@@ -8,8 +8,7 @@ void CSky::Init(const CCamera* camera)
 	m_skinModel.SetIsDiffuse(false);
 	m_camera = camera;
 	m_light.SetAmbientLight(CVector4::White);
-	m_skinModel.SetLight(m_light);
-	Add(this, PRIORITY_SKY);
+	m_skinModel.SetLight(Light());
 	m_skinModel.Update(CVector3::Zero, CQuaternion::Identity, CVector3::One);
 }
 

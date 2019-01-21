@@ -51,6 +51,7 @@ static const int PRIORITY_SKY = 10;
 #include "Math\Math.h"
 #include "Math/Matrix.h"
 #include "Math\Vector.h"
+#include "Graphics/State/SamplerState.h"
 #include "Engine.h"
 #include "GameObject/GameObject.h"
 #include "GameObject/GameObjectManager.h"
