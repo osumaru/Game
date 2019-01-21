@@ -33,7 +33,7 @@ public:
 
 	//‰Šú‰»
 	//position	À•W
-	virtual void Init(const CVector3& position) {};
+	virtual void Init(const CVector3& position, int level) {};
 
 	//XV
 	virtual void Update() = 0;

@@ -20,7 +20,7 @@ void CNinja::OnInvokeAnimationEvent(const wchar_t* animClipName, const wchar_t* 
 	}
 }
 
-void CNinja::Init(const CVector3& position)
+void CNinja::Init(const CVector3& position, int level)
 {
 	//モデルを読み込む
 	m_skinModel.Load(L"Assets/modelData/Ninja.cmo", &m_animation);
@@ -49,13 +49,13 @@ void CNinja::Init(const CVector3& position)
 	//Add(&m_enemySearch, 0);
 
 	//ステータスを設定
-	m_status.level = 1;
-	m_status.strength = 15 + m_status.level * 2;
-	m_status.defense = 10 + m_status.level * 2;
-	m_status.hp = 85 + m_status.level * 5;
+	m_status.level = level;
+	m_status.strength = 15 + level * 2;
+	m_status.defense = 10 + level * 2;
+	m_status.hp = 85 + level * 5;
 	m_status.maxHp = m_status.hp;
-	m_status.gold = 80 + m_status.level * 20;
-	m_status.exp = 7 + m_status.level * 3;
+	m_status.gold = 80 + level * 20;
+	m_status.exp = 7 + level * 3;
 
 	this->SetIsActive(true);
 

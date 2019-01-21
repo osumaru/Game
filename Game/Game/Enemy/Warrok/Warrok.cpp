@@ -32,7 +32,7 @@ void CWarrok::OnInvokeAnimationEvent(//ƒAƒjƒ[ƒVƒ‡ƒ“ƒCƒxƒ“ƒg‚ªŒÄ‚Î‚ê‚é‚²‚Æ‚ÉŒÄ‚
 	}
 }
 
-void CWarrok::Init(const CVector3& position)
+void CWarrok::Init(const CVector3& position, int level)
 {
 	//ƒ‚ƒfƒ‹‚ð“Ç‚Ýž‚Þ
 	m_skinModel.Load(L"Assets/modelData/Warrok.cmo", &m_animation);
@@ -62,13 +62,13 @@ void CWarrok::Init(const CVector3& position)
 	//Add(&m_enemySearch, 0);
 
 	//ƒXƒe[ƒ^ƒX‚ðÝ’è
-	m_status.level = 1;
-	m_status.strength = 30 + m_status.level * 2;
-	m_status.defense = 15 + m_status.level * 2;
-	m_status.hp = 100 + m_status.level * 5;
+	m_status.level = level;
+	m_status.strength = 30 + level * 2;
+	m_status.defense = 15 + level * 2;
+	m_status.hp = 100 + level * 5;
 	m_status.maxHp = m_status.hp;
-	m_status.gold = 100 + m_status.level * 20;
-	m_status.exp = 10 + m_status.level * 3;
+	m_status.gold = 100 + level * 20;
+	m_status.exp = 10 + level * 3;
 
 	this->SetIsActive(true);
 
