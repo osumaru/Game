@@ -60,6 +60,10 @@ void CWireAction::Update()
 			enemyList = GetSceneManager().GetMap()->GetEnemyList();
 			for (auto& enemy : enemyList)
 			{
+				if (enemy->GetIsDead())
+				{
+					continue;
+				}
 				CVector3 enemyPos = enemy->GetPosition();
 				CVector3 toEnemyPos = enemyPos - GetPlayer().GetPosition();
 				float length = toEnemyPos.Length();

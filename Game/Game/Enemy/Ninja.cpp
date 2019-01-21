@@ -49,12 +49,14 @@ void CNinja::Init(const CVector3& position)
 	//Add(&m_enemySearch, 0);
 
 	//ステータスを設定
-	m_status.strength = 10;
-	m_status.defense = 0;
-	m_status.hp = 50;
+	m_status.level = 1;
+	m_status.strength = 15 + m_status.level * 2;
+	m_status.defense = 10 + m_status.level * 2;
+	m_status.hp = 85 + m_status.level * 5;
 	m_status.maxHp = m_status.hp;
-	m_status.gold = 100;
-	m_status.exp = 10;
+	m_status.gold = 80 + m_status.level * 20;
+	m_status.exp = 7 + m_status.level * 3;
+
 	this->SetIsActive(true);
 
 	//腰のワールド行列を取得

@@ -31,6 +31,18 @@ void CEnemyStan::Update()
 		m_damageNumber->Init(m_enemy);
 		//ダメージを受けたフラグを戻す
 		m_enemy->SetIsDamage(false);
+		//ダメージエフェクトを初期化
+		m_damageEffect.Init(L"Assets/Effect/DamageEffect.efk");
+		m_damageEffect.Play();
+		const CMatrix* enemyMatrix = m_enemy->GetWorldMatrixSpine();
+		CVector3 effectPos;
+		effectPos.x = enemyMatrix->m[3][0];
+		effectPos.y = enemyMatrix->m[3][1];
+		effectPos.z = enemyMatrix->m[3][2];
+		m_damageEffect.SetPosition(effectPos);
+		const float SCALE = 0.1f;
+		m_damageEffect.SetScale({ SCALE, SCALE, SCALE });
+		m_damageEffect.Update();
 	}
 
 	if (!m_enemy->GetAnimation().IsPlay()
@@ -60,7 +72,7 @@ void CEnemyStan::Update()
 		//立ち上がったら追跡状態にする
 		m_esm->ChangeState(CEnemyState::enState_Chase);
 	}
-	else if (m_enemy->GetIsDead())
+	else if (m_enemy->GetStatus().hp <= 0)
 	{
 		//HPがなければ死亡する
 		m_esm->ChangeState(CEnemyState::enState_Death);

@@ -16,6 +16,7 @@ void CEnemyDamage::Init()
 	//ダメージを受けたフラグを戻す
 	m_enemy->SetIsDamage(false);
 
+	//プレイヤーの攻撃回数と最大攻撃回数を取得
 	const CPlayerAttack* playerAttack = dynamic_cast<const CPlayerAttack*>(GetPlayer().GetStateMachine().GetState(CPlayerState::enPlayerStateAttack));
 	float attackCount = (float)playerAttack->GetAttackCount();
 	float maxAttackNum = (float)GetPlayer().GetWeaponManager().GetWeapon()->GetMaxAttackNum();
@@ -23,7 +24,7 @@ void CEnemyDamage::Init()
 	//摩擦の初期化
 	m_friction = 0.03f;
 	m_deceleration = 0.0f;
-	m_knockBackScale = (attackCount + 1.0f) / maxAttackNum;
+	m_knockBackScale = (attackCount + 1.0f) / (maxAttackNum + 1.0f);
 	//スタンする攻撃であるか判定
 	m_wasStanAttack = GetPlayer().GetStanAttack();
 	if (!m_wasStanAttack)
@@ -52,7 +53,6 @@ bool CEnemyDamage::Start()
 
 void CEnemyDamage::Update()
 {
-	m_enemy->Update();
 	//ノックバックさせる
 	CVector3 moveSpeed = m_enemy->GetMoveSpeed();
 	CVector3 knockBack = m_enemy->GetPosition() - GetPlayer().GetPosition();

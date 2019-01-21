@@ -11,19 +11,20 @@
 
 class CEnemyGroup;
 
-struct SEnemyStatus
-{
-	int strength;	//攻撃力
-	int defense;	//防御力
-	int	hp;			//体力
-	int maxHp;		//最大体力
-	int gold;		//所持金額
-	int exp;		//経験値
-};
-
 class IEnemy : public IGameObject
 {
 public:
+	struct SEnemyStatus
+	{
+		int level;		//レベル
+		int strength;	//攻撃力
+		int defense;	//防御力
+		int	hp;			//体力
+		int maxHp;		//最大体力
+		int gold;		//所持金額
+		int exp;		//経験値
+	};
+
 	//コンストラクタ
 	IEnemy();
 

@@ -17,7 +17,6 @@
 #include "../Map/BossBuilding.h"
 #include "../Enemy/TitleEnemy.h"
 
-//テスト用にマップを作る場合はこれからTest_を前に着けるようにしてください
 std::vector<std::vector<SMapChipInfo>> mapChipInfo = 
 {
 	{
