@@ -30,6 +30,8 @@ void CPlayerDamage::Init()
 void CPlayerDamage::Update()
 {
 	m_pPlayerGetter->GetCharacterController().Execute(GameTime().GetDeltaFrameTime());
+
+	m_pPlayerGetter->SetPosition(m_pPlayerGetter->GetCharacterController().GetPosition());
 	if (m_pPlayerGetter->GetCharacterController().IsOnGround())
 	{
 		CVector3 moveSpeed = m_pPlayerGetter->GetMoveSpeed();
