@@ -33,6 +33,7 @@ struct SMapChipInfo
 	CVector3		m_position;
 	CQuaternion		m_rotation;
 	EnMapChipTag	m_tag;
+	int				m_level = 0;
 };
 
 //マップのオブジェクトを配置するクラス
