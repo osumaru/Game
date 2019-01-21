@@ -163,7 +163,6 @@ void IWeapon::EnemyAttack()
 					if (fabs(len) < BossWeekLenge)
 					{
 						GetMaw().SetIsDamage(true);
-						return;
 					}
 				}
 				else
@@ -179,7 +178,6 @@ void IWeapon::EnemyAttack()
 					if (fabs(len) < BossLenge)
 					{
 						GetMaw().SetIsDamage(true);
-						return;
 					}
 				}
 			}

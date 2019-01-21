@@ -58,10 +58,7 @@ void CMaw::Init(CVector3 position)
 	const float radius = 2.0f;
 	const float Gravity = -9.8f;
 
-	//ライトの設定
-	const CVector4 AmbientLight = { 0.5f,0.5f,0.5f,1.0f };
-	const CVector4 DiffuseLight= { 1.0f,1.0f,1.0f,1.0f };
-	const CVector4 DiffuseLightDir= { 0.0f, -1.0f, 1.0f, 1.0f };
+
 
 	//プレイヤーのスキンモデルのロード
 	m_skinModel.Load(L"Assets/modelData/Maw.cmo", &m_animation);
@@ -70,10 +67,6 @@ void CMaw::Init(CVector3 position)
 	m_position = position;
 	m_characterController.Init(radius,Height, m_position);
 	m_characterController.SetGravity(Gravity);
-	//ライトの設定
-	Light().SetAmbientLight(AmbientLight);
-	Light().SetDiffuseLight(0,DiffuseLight);
-	Light().SetDiffuseLightDir(0,DiffuseLightDir);
 
 	//アニメーションの初期化
 	{

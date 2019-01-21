@@ -258,6 +258,12 @@
     <ClCompile Include="Resource\AnimationResource.cpp">
       <Filter>ソース ファイル\Resource</Filter>
     </ClCompile>
+    <ClCompile Include="Graphics\PostRendering\SDSM.cpp">
+      <Filter>ソース ファイル\Graphics\PostRendering</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\PostRendering\Bloom.cpp">
+      <Filter>ソース ファイル\Graphics\PostRendering</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject\GameObject.h">
@@ -460,6 +466,12 @@
     </ClInclude>
     <ClInclude Include="Resource\AnimationResource.h">
       <Filter>ソース ファイル\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\PostRendering\SDSM.h">
+      <Filter>ソース ファイル\Graphics\PostRendering</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\PostRendering\Bloom.h">
+      <Filter>ソース ファイル\Graphics\PostRendering</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -3,6 +3,17 @@ enum EnViewPortState
 {
 	enViewPortShadow,	//シャドウマップ用のビューポート設定
 	enViewPortGame,		//ゲームシーン用のビューポート設定
+	enViewPortBloom00,
+	enViewPortBloom01,
+	enViewPortBloom10,
+	enViewPortBloom11,
+	enViewPortBloom20,
+	enViewPortBloom21,
+	enViewPortBloom30,
+	enViewPortBloom31,
+	enViewPortBloom40,
+	enViewPortBloom41,
+	enViewPortBloomCombine,
 	enViewPortNum
 };
 

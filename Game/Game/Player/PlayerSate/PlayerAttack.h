@@ -24,6 +24,12 @@ public:
 	//線形補完
 	void Lerp();
 
+	//連続攻撃している回数を取得
+	int GetAttackCount() const
+	{
+		return m_attackCount;
+	}
+
 private:
 	int							m_maxAttackNum = 0;					//最大連続攻撃回数
 	int							m_attackCount = 0;					//連続攻撃してる回数

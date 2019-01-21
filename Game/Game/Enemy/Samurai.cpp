@@ -75,9 +75,8 @@ bool CSamurai::Start()
 
 void CSamurai::Update()
 {
-	if (m_status.hp <= 0)
+	if (m_isDead)
 	{
-		m_isDead = true;
 		//„‘Ì‚ðíœ‚·‚é
 		m_characterController.RemovedRigidBody();
 	}

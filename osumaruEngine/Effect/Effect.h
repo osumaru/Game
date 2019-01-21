@@ -45,8 +45,14 @@ public:
 		m_rotation = rotation;
 	}
 
+	//拡大率を設定
+	void SetScale(const CVector3& scale)
+	{
+		m_scale = scale;
+	}
 
 private:
+	CVector3				m_scale = CVector3::One;
 	CVector3				m_position = CVector3::Zero;		//座標
 	CQuaternion				m_rotation = CQuaternion::Identity;	//回転
 	Effekseer::Effect*		m_effect = nullptr;					//エフェクト

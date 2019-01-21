@@ -20,6 +20,9 @@ public:
 	//更新
 	void Update()override;
 
+	//ワイヤー描画を更新
+	void UpdateWireDraw();
+
 private:
 	CVector3	m_movePosition;		//移動先の座標
 	const float m_speed = 40.0f;	//移動速度

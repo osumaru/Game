@@ -45,6 +45,23 @@ bool CGameScene::Start()
 	GetGameCamera().SetIsActiveUpdate(true);
 	m_gameSound = New<CGameSound>(0);
 
+	Light().SetAmbientLight({ 0.0f, 0.0f, 0.0f, 1.0f });
+	Sky().SetLight(Light());
+	Light().SetAmbientLight({ 0.0f, 0.0f, 0.0f, 0.3f });
+	const float diffuseLight[DIFFUSE_LIGHT_NUM] = { 0.4f, 0.1f, 0.1f, 0.1f };
+	CVector4 diffuseDir[DIFFUSE_LIGHT_NUM] =
+	{
+		{1.0f, -1.0f, 2.0f, 0.0f},
+		{1.0f, 0.0f, 1.0f, 0.0f},
+		{0.0f, -1.0f, 0.0f, 0.0f},
+		{-10.0f, 1.0f, 3.0f, 0.0f}
+	};
+
+	for (int i = 0; i < DIFFUSE_LIGHT_NUM; i++)
+	{
+		Light().SetDiffuseLight(i, { diffuseLight[i], diffuseLight[i], diffuseLight[i], 1.0f });
+		Light().SetDiffuseLightDir(i, diffuseDir[i]);
+	}
 	//フェードの実行が終わったらtrueを返す
 	if (!GetSceneManager().GetFade()->IsExecute())
 	{

@@ -13,38 +13,32 @@ void CPlayerWireMove::Init()
 	m_moveSpeed = 0.0f;
 	m_wireSpeed = 1.0f;
 	m_isWireThrow = true;
-	//ワイヤーの始点を決める
+	//プレイヤーの手のワールド行列を取得
 	m_playerHandMatrix = &m_pPlayer->GetSkinmodel().FindBoneWorldMatrix(L"LeftHand");
-	m_playerHandPos.x = m_playerHandMatrix->m[3][0];
-	m_playerHandPos.y = m_playerHandMatrix->m[3][1];
-	m_playerHandPos.z = m_playerHandMatrix->m[3][2];
-	m_pPlayerGetter->GetWireDraw().SetStartPosition(m_playerHandPos);
-	//ワイヤーの終点を決める
-	CVector3 wireDir = m_movePosition - m_playerHandPos;
-	wireDir.Normalize();
-	wireDir *= m_wireSpeed;
-	m_wireSpeed += m_wireSpeed;
-	CVector3 wireEndPos = m_playerHandPos + wireDir;
-	m_pPlayerGetter->GetWireDraw().SetEndPosition(wireEndPos);
-	m_previousMoveSpeed = m_movePosition - m_pPlayer->GetPosition();
+	//ワイヤー描画を更新
+	UpdateWireDraw();
 }
 
 void CPlayerWireMove::Update()
 {
-	//ワイヤーの始点を決める
-	m_playerHandPos.x = m_playerHandMatrix->m[3][0];
-	m_playerHandPos.y = m_playerHandMatrix->m[3][1];
-	m_playerHandPos.z = m_playerHandMatrix->m[3][2];
-	m_pPlayerGetter->GetWireDraw().SetStartPosition(m_playerHandPos);
-	//ワイヤーの終点を決める
-	CVector3 wireDir = m_movePosition - m_playerHandPos;
-	wireDir.Normalize();
-	wireDir *= m_wireSpeed;
-	m_wireSpeed += m_wireSpeed;
-	CVector3 wireEndPos = m_playerHandPos + wireDir;
-	m_pPlayerGetter->GetWireDraw().SetEndPosition(wireEndPos);
+	//ダメージを受けた場合の処理
+	if (m_pPlayer->GetIsStateCondition(CPlayerState::enPlayerStateDamage))
+	{
+		//移動が終わった
+		GetPlayer().GetWireAction().SetIsWireMove(false);
+		//ワイヤーをエネミーに当てている
+		if (GetPlayer().GetWireAction().GetHitEnemy() != nullptr)
+		{
+			//ワイヤーに当たったフラグを戻す
+			GetPlayer().GetWireAction().GetHitEnemy()->SetIsWireHit(false);
+		}
+		m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateDamage);
+		return;
+	}
+
 	//ワイヤー描画を更新
-	m_pPlayerGetter->GetWireDraw().Update();
+	UpdateWireDraw();
+
 	//ワイヤーを投げるアニメーションが終了したか判定
 	if (m_pPlayerGetter->GetAnimation().GetCurrentAnimationNum() == enPlayerAnimationWireThrow
 		&& !m_pPlayerGetter->GetAnimation().IsPlay())
@@ -52,14 +46,6 @@ void CPlayerWireMove::Update()
 		//ワイヤー移動するアニメーションに切り替え
 		m_isWireThrow = false;
 		m_pPlayerGetter->GetAnimation().Play(enPlayerAnimationWireMove, 0.25f);
-	}
-	//ダメージを受けた場合の処理
-	if(m_pPlayer->GetIsStateCondition(CPlayerState::enPlayerStateDamage))
-	{
-		//移動が終わった
-		GetPlayer().GetWireAction().SetIsWireMove(false);
-		m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateDamage);
-		return;
 	}
 	if (m_isWireThrow)
 	{
@@ -70,7 +56,7 @@ void CPlayerWireMove::Update()
 	bool isMoveEnd = false;
 	CVector3 playerPos = GetPlayer().GetPosition();
 	CVector3 toMovePos = m_movePosition - playerPos;
-	float angle = toMovePos.Dot(m_previousMoveSpeed);
+	CVector3 moveVec = toMovePos;
 	float length = toMovePos.Length();
 	toMovePos.Normalize();
 	m_accel += 0.3f;
@@ -80,8 +66,10 @@ void CPlayerWireMove::Update()
 		m_moveSpeed = m_speed;
 	}
 	toMovePos *= m_moveSpeed;
+	m_previousMoveSpeed = toMovePos;
 	float range = 2.0f;
 
+	float angle = 1.0f;
 	switch (m_pPlayer->GetWireAction().GetState())
 	{
 	case CWireAction::enStateEnemy:
@@ -89,6 +77,7 @@ void CPlayerWireMove::Update()
 		break;
 	case CWireAction::enStateMap:
 		range = 1.0f;
+		angle = moveVec.Dot(m_previousMoveSpeed);
 		break;
 	}
 	if (length < range || angle < 0.0f) {
@@ -100,36 +89,24 @@ void CPlayerWireMove::Update()
 
 	}
 	else {
-
-		float gravityBackup = m_pPlayerGetter->GetCharacterController().GetGravity();
-		m_pPlayerGetter->GetCharacterController().SetGravity(0.0f);
 		//目標との距離が離れていれば移動先に進む
 		m_pPlayerGetter->SetMoveSpeed(toMovePos);
 		m_pPlayerGetter->GetCharacterController().Execute(GameTime().GetDeltaFrameTime());
-		m_pPlayerGetter->GetCharacterController().SetGravity(gravityBackup);
-
 		m_pPlayerGetter->SetPosition(m_pPlayerGetter->GetCharacterController().GetPosition());
-
-
 	}
 
 	if (isMoveEnd) {
 		//移動が終わった
 		GetPlayer().GetWireAction().SetIsWireMove(false);
-		std::list<IEnemy*> enemyList = GetSceneManager().GetMap()->GetEnemyList();
+		IEnemy* enemy = GetPlayer().GetWireAction().GetHitEnemy();
 		switch(m_pPlayer->GetWireAction().GetState())
 		{
 		case CWireAction::enStateEnemy:
 			m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateWireAttack);
-			//移動し終わったら敵のフラグを戻してやる
-			for (auto& enemy : enemyList)
-			{
-				if (enemy->IsWireHit()) {
-					//ワイヤーが当たっていたらダメージ
-					enemy->SetIsDamage(true);
-				}
-				enemy->SetIsWireHit(false);
-			}
+			//エネミーにダメージフラグを立てる
+			enemy->SetIsDamage(true);
+			//エネミーのワイヤーに当たったフラグを戻す
+			enemy->SetIsWireHit(false);
 			break;
 		case CWireAction::enStateMap:
 			if (Pad().IsPressButton(enButtonRightTrigger))
@@ -150,4 +127,31 @@ void CPlayerWireMove::Update()
 	}
 
 	m_previousMoveSpeed = toMovePos;
+}
+
+void CPlayerWireMove::UpdateWireDraw()
+{
+	//ワイヤーの始点を決める
+	m_playerHandPos.x = m_playerHandMatrix->m[3][0];
+	m_playerHandPos.y = m_playerHandMatrix->m[3][1];
+	m_playerHandPos.z = m_playerHandMatrix->m[3][2];
+	m_pPlayerGetter->GetWireDraw().SetStartPosition(m_playerHandPos);
+	//ワイヤーの終点を決める
+	CVector3 wirePosition = m_movePosition;
+	wirePosition.y += 0.5f;
+	CVector3 currentWireDir = wirePosition - m_playerHandPos;
+	float length = currentWireDir.Length();
+	CVector3 wireDir = currentWireDir;
+	wireDir.Normalize();
+	wireDir *= m_wireSpeed;
+	m_wireSpeed += m_wireSpeed;
+	//ワイヤーの長さがターゲットまでの距離を超えているか
+	if (length < wireDir.Length())
+	{
+		wireDir = currentWireDir;
+	}
+	CVector3 wireEndPos = m_playerHandPos + wireDir;
+	m_pPlayerGetter->GetWireDraw().SetEndPosition(wireEndPos);
+	//ワイヤー描画を更新
+	m_pPlayerGetter->GetWireDraw().Update();
 }

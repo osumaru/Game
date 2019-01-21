@@ -15,9 +15,15 @@ void CEnemyDamage::Init()
 
 	//ダメージを受けたフラグを戻す
 	m_enemy->SetIsDamage(false);
+
+	const CPlayerAttack* playerAttack = dynamic_cast<const CPlayerAttack*>(GetPlayer().GetStateMachine().GetState(CPlayerState::enPlayerStateAttack));
+	float attackCount = (float)playerAttack->GetAttackCount();
+	float maxAttackNum = (float)GetPlayer().GetWeaponManager().GetWeapon()->GetMaxAttackNum();
+
 	//摩擦の初期化
-	m_friction = 0.0f;
+	m_friction = 0.03f;
 	m_deceleration = 0.0f;
+	m_knockBackScale = (attackCount + 1.0f) / maxAttackNum;
 	//スタンする攻撃であるか判定
 	m_wasStanAttack = GetPlayer().GetStanAttack();
 	if (!m_wasStanAttack)
@@ -26,6 +32,14 @@ void CEnemyDamage::Init()
 	}
 	//どの武器でダメージを食らったか
 	//m_enemy->SetAttackWeapon(*GetPlayer().GetWeaponManager().GetWeapon()->GetAttackWeapon());
+	m_damageEffect.Init(L"Assets/Effect/DamageEffect.efk");
+	m_damageEffect.Play();
+	CVector3 effectPos = m_enemy->GetPosition();
+	effectPos.y += 1.0f;
+	m_damageEffect.SetPosition(effectPos);
+	const float SCALE = 0.1f;
+	m_damageEffect.SetScale({ SCALE, SCALE, SCALE });
+	m_damageEffect.Update();
 }
 
 bool CEnemyDamage::Start()
@@ -38,16 +52,17 @@ bool CEnemyDamage::Start()
 
 void CEnemyDamage::Update()
 {
+	m_enemy->Update();
 	//ノックバックさせる
 	CVector3 moveSpeed = m_enemy->GetMoveSpeed();
 	CVector3 knockBack = m_enemy->GetPosition() - GetPlayer().GetPosition();
 	knockBack.y = 0.0f;
 	knockBack.Normalize();
-	if (m_deceleration >= m_knockBackSpeed) {
-		m_deceleration = m_knockBackSpeed;
+	if (m_deceleration >= m_knockBackSpeed * m_knockBackScale) {
+		m_deceleration = m_knockBackSpeed * m_knockBackScale;
 		m_isNockBack = false;
 	}
-	knockBack *= m_knockBackSpeed - m_deceleration;
+	knockBack *= m_knockBackSpeed * m_knockBackScale - m_deceleration;
 	m_friction += 0.03f;
 	m_deceleration += m_friction;
 	moveSpeed.x = knockBack.x;
@@ -61,7 +76,7 @@ void CEnemyDamage::Update()
 	//攻撃範囲にいるかどうか判定
 	bool isRange = m_enemy->CalucFanShape(10.0f, playerPos);
 
-	if (m_enemy->GetIsDead())
+	if (m_enemy->GetStatus().hp <= 0)
 	{
 		//HPが無くなれば死亡
 		m_esm->ChangeState(CEnemyState::enState_Death);

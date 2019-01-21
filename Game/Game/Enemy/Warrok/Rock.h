@@ -52,5 +52,5 @@ private:
 	const CMatrix*			m_enemyHandMatrix;		//敵の手の行列
 	bool					m_isThrow = false;		//投げられているか
 	bool					m_isHit = false;		//何かに当たった
-	SParticleEmittInfo		m_particleInfo;
+	SParticleEmittInfo		m_particleInfo;			//パーティクルの情報
 };
