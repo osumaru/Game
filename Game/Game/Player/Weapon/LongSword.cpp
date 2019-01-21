@@ -3,7 +3,7 @@
 
 void CLongSword::Init()
 {
-	m_position = { 0.0f, 0.0f, -10.0f };
+	m_position = { 10.0f, 60.0f, -17.0f };
 	CQuaternion multi;
 	m_rotation = CQuaternion::Identity;
 	multi.SetRotationDeg(CVector3::AxisX, 90.0f);

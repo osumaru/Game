@@ -19,17 +19,20 @@
 
 std::vector<std::vector<SMapChipInfo>> mapChipInfo = 
 {
+
 	{
-	//#include "BossStage.h"
-	//#include "Boss.h"
 	//本番用の世界のマップ
-	#include "WorldMap.h"
-	//#include "ShopTest.h"
-	//#include "mm.h"
+		#include "WorldMap.h"
+		//#include "ShopTest.h"
+		//#include "mm.h"
+		//#include "BossStage.h"
+		//#include "Boss.h"
 	},
+
 	{
-	#include "bossTest.h"
+		#include "bossTest.h"
 	},
+
 	{
 		#include "TitleMap.h"
 	}
