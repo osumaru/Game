@@ -857,15 +857,6 @@
     <MeshContentTask Include="Assets\modelData\Sword.fbx">
       <Filter>ソース ファイル\Assets</Filter>
     </MeshContentTask>
-    <MeshContentTask Include="Assets\modelData\TestBox1.FBX">
-      <Filter>ソース ファイル\Assets</Filter>
-    </MeshContentTask>
-    <MeshContentTask Include="Assets\modelData\testChamferBox.FBX">
-      <Filter>ソース ファイル\Assets</Filter>
-    </MeshContentTask>
-    <MeshContentTask Include="Assets\modelData\testRectangle.FBX">
-      <Filter>ソース ファイル\Assets</Filter>
-    </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\Toge.FBX">
       <Filter>ソース ファイル\Assets</Filter>
     </MeshContentTask>
@@ -924,6 +915,9 @@
       <Filter>ソース ファイル\Assets</Filter>
     </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\map2.FBX">
+      <Filter>ソース ファイル\Assets</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\tree\WorldMap1.FBX">
       <Filter>ソース ファイル\Assets</Filter>
     </MeshContentTask>
   </ItemGroup>

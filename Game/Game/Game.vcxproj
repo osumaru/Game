@@ -418,14 +418,12 @@
     <MeshContentTask Include="Assets\modelData\Skyball_WithCap.FBX" />
     <MeshContentTask Include="Assets\modelData\Skyball_WithoutCap.FBX" />
     <MeshContentTask Include="Assets\modelData\Sword.fbx" />
-    <MeshContentTask Include="Assets\modelData\TestBox1.FBX" />
-    <MeshContentTask Include="Assets\modelData\testChamferBox.FBX" />
-    <MeshContentTask Include="Assets\modelData\testRectangle.FBX" />
     <MeshContentTask Include="Assets\modelData\Toge.FBX" />
     <MeshContentTask Include="Assets\modelData\TownGround.FBX" />
     <MeshContentTask Include="Assets\modelData\TownHouse.fbx" />
     <MeshContentTask Include="Assets\modelData\TownHouse1.fbx" />
     <MeshContentTask Include="Assets\modelData\tree\tree1.FBX" />
+    <MeshContentTask Include="Assets\modelData\tree\WorldMap1.FBX" />
     <MeshContentTask Include="Assets\modelData\TwinSword.fbx" />
     <MeshContentTask Include="Assets\modelData\Warrok.fbx" />
     <MeshContentTask Include="Assets\modelData\Wave.FBX" />

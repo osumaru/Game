@@ -20,7 +20,8 @@ enum EnMapChipTag
 	enMapTagBreakBrock,
 	enMapTagTerrain,		//地形用のタグ
 	enMapTagItemShop,		//アイテムショップ用のタグ
-	enMapTagWeaponShop,
+	enMapTagWeaponShop,		//武器屋用のタグ
+	enMapTagSoundPoint,		//BGM用のタグ
 	enMapTagObstacle,
 	enMapTagBossObj,
 	enMapTagTitleEnemy,

@@ -1,5 +1,7 @@
 #include "stdafx.h"
 #include "Map.h"
+#include "../GameSound/GameSound.h"
+#include"../Scene/TitleScene.h"
 #include "MapChip/MapChip.h"
 #include "MapChip\BreakMapObject.h"
 #include "MapChip\StaticMapObject.h"
