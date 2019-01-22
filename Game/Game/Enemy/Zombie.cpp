@@ -20,7 +20,7 @@ void CZombie::OnInvokeAnimationEvent(const wchar_t* animClipName, const wchar_t*
 	}
 }
 
-void CZombie::Init(const CVector3& position)
+void CZombie::Init(const CVector3& position, int level)
 {
 	//モデルを読み込む
 	m_skinModel.Load(L"Assets/modelData/Zombi.cmo", &m_animation);
@@ -49,13 +49,16 @@ void CZombie::Init(const CVector3& position)
 	//Add(&m_enemySearch, 0);
 
 	//ステータスを設定
-	m_status.strength = 10;
-	m_status.defense = 0;
-	m_status.hp = 50;
+	m_status.level = level;
+	m_status.strength = 5 + level * 2;
+	m_status.defense = 0 + level * 2;
+	m_status.hp = 60 + level * 5;
 	m_status.maxHp = m_status.hp;
-	m_status.gold = 100;
-	m_status.exp = 10;
+	m_status.gold = 40 + level * 20;
+	m_status.exp = 1 + level * 3;
+
 	this->SetIsActive(true);
+
 	//腰のワールド行列を取得
 	m_spineMatrix = &GetBoneWorldMatrix(L"Spine");
 	//攻撃できる距離を設定

@@ -47,6 +47,7 @@ public class tkTools : EditorWindow
                 outputTxt += string.Format("\tCQuaternion({0:f}f, {1:f}f, {2:f}f, {3:f}f ),  //回転\n", rot.x, rot.y, rot.z, rot.w);
                 //GameObject mapChipObject = tr;
                 outputTxt += string.Format("\tenMapTag{0}, //タグ\n", tr.gameObject.tag);
+                outputTxt += string.Format("\t{0}, //エネミーのレベル\n", mapChip.level);
                 outputTxt += "},\n";
                 bool tagFlg = true;
                 foreach (string tag in tagList)

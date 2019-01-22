@@ -32,7 +32,7 @@ void CWarrok::OnInvokeAnimationEvent(//ƒAƒjƒ[ƒVƒ‡ƒ“ƒCƒxƒ“ƒg‚ªŒÄ‚Î‚ê‚é‚²‚Æ‚ÉŒÄ‚
 	}
 }
 
-void CWarrok::Init(const CVector3& position)
+void CWarrok::Init(const CVector3& position, int level)
 {
 	//ƒ‚ƒfƒ‹‚ğ“Ç‚İ‚Ş
 	m_skinModel.Load(L"Assets/modelData/Warrok.cmo", &m_animation);
@@ -62,13 +62,16 @@ void CWarrok::Init(const CVector3& position)
 	//Add(&m_enemySearch, 0);
 
 	//ƒXƒe[ƒ^ƒX‚ğİ’è
-	m_status.strength = 10;
-	m_status.defense = 0;
-	m_status.hp = 50;
+	m_status.level = level;
+	m_status.strength = 30 + level * 2;
+	m_status.defense = 15 + level * 2;
+	m_status.hp = 100 + level * 5;
 	m_status.maxHp = m_status.hp;
-	m_status.gold = 100;
-	m_status.exp = 10;
+	m_status.gold = 100 + level * 20;
+	m_status.exp = 10 + level * 3;
+
 	this->SetIsActive(true);
+
 	//˜‚Ìƒ[ƒ‹ƒhs—ñ‚ğæ“¾
 	m_spineMatrix = &GetBoneWorldMatrix(L"Spine");
 	//UŒ‚‚Å‚«‚é‹——£‚ğİ’è
@@ -117,12 +120,6 @@ void CWarrok::Update()
 			GetPlayer().SetStanDamage(m_status.strength);
 			GetPlayer().SetDamageEnemyPos(m_position);
 		}
-	}
-
-	if (m_rock != nullptr && !m_rock->GetIsThrow())
-	{
-		//Šâ‚ğ“Š‚°‚é‚Ü‚Å‚ÍƒvƒŒƒCƒ„[‚Ì•û‚ğŒü‚­
-		RockAttackRotation();
 	}
 
 	if (!m_isWireHit) 

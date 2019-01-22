@@ -74,6 +74,7 @@ void CPlayerWireMove::Update()
 
 	bool isMoveEnd = false;
 	CVector3 playerPos = GetPlayer().GetPosition();
+	playerPos.y += m_pPlayer->GetWireAction().GetOffsetY();
 	CVector3 toMovePos = m_movePosition - playerPos;
 	CVector3 moveVec = toMovePos;
 	float length = toMovePos.Length();
@@ -88,7 +89,7 @@ void CPlayerWireMove::Update()
 	m_previousMoveSpeed = toMovePos;
 	float range = 2.0f;
 
-	float angle = 1.0f;
+	float angle = 0.0f;
 	switch (m_pPlayer->GetWireAction().GetState())
 	{
 	case CWireAction::enStateEnemy:
@@ -159,9 +160,7 @@ void CPlayerWireMove::UpdateWireDraw()
 	m_playerHandPos.z = m_playerHandMatrix->m[3][2];
 	m_pPlayerGetter->GetWireDraw().SetStartPosition(m_playerHandPos);
 	//ワイヤーの終点を決める
-	CVector3 wirePosition = m_movePosition;
-	wirePosition.y += 0.5f;
-	CVector3 currentWireDir = wirePosition - m_playerHandPos;
+	CVector3 currentWireDir = m_movePosition - m_playerHandPos;
 	float length = currentWireDir.Length();
 	CVector3 wireDir = currentWireDir;
 	wireDir.Normalize();

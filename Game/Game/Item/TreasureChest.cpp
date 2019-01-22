@@ -75,30 +75,20 @@ void CTreasureChest::Draw()
 void CTreasureChest::DesideWeaponStatus()
 {
 	SWeaponStatus weaponStatus;
-	//武器のステータスをランダムで決める
-	SBasicWeaponStatus basicWeaponStatus;
-	int weaponNumber = Random().GetRandSInt();
-	weaponNumber %= enWeaponNum;
-	int weaponAttack = Random().GetRandSInt();
-	weaponAttack %= basicWeaponStatus.basicAttack;
-	////アイテムの名前と読み込むテクスチャファイルの名前を設定する//////
-	wchar_t* itemName;
-	wchar_t* textureFileName;
-	////////////////////////////////////////////////////////////////////
-
 	//アイテムのデータを取得
 	//武器情報の取得
-	
+	wchar_t* itemName;
+	wchar_t* textureFileName;
 	CEquipItem* nItem = GetSceneManager().GetFade()->GetLoadScene()->GetEquipItemData();
 	//↓これはレア度がNormalの武器からランダムで武器を取得するコード
-	int num = nItem->GetNormalEquipItemList(Random().GetRandSInt() % nItem->GetNormalEquipItemListSize()) ;
+	int num = nItem->GetNormalEquipItemList(Random().GetRandSInt() % nItem->GetNormalEquipItemListSize());
 	//武器のタイプの取得
-	weaponNumber = nItem->GetItemStatus_ItemId(num).WeaponType;
+	int weaponNumber = nItem->GetItemStatus_ItemId(num).WeaponType;
 	//武器の名前の取得
 	itemName = nItem->GetItemStatus_ItemId(num).ItemName;
 	//武器のUI情報の取得(文字列)
 	textureFileName = nItem->GetItemStatus(num).ItemSprite;
-	weaponAttack = nItem->GetItemStatus_ItemId(num).ItemEffect;
+	int weaponAttack = nItem->GetItemStatus_ItemId(num).ItemEffect;
 	
 	
 	if (weaponNumber == EnPlayerWeapon::enWeaponSword)
@@ -106,28 +96,24 @@ void CTreasureChest::DesideWeaponStatus()
 		//剣
 		m_inventoryEquip = std::make_unique<CInventorySword>();
 		weaponStatus.weaponNum = EnPlayerWeapon::enWeaponSword;
-		weaponAttack += basicWeaponStatus.swordAttack;
 	}
 	else if (weaponNumber == EnPlayerWeapon::enWeaponLongSword)
 	{
 		//大剣
 		m_inventoryEquip = std::make_unique<CInventoryLargeSword>();
 		weaponStatus.weaponNum = EnPlayerWeapon::enWeaponLongSword;
-		weaponAttack += basicWeaponStatus.longSwordAttack;
 	}
 	else if (weaponNumber == EnPlayerWeapon::enWeaponArrow)
 	{
 		//弓
 		m_inventoryEquip = std::make_unique<CInventoryBow>();
 		weaponStatus.weaponNum = EnPlayerWeapon::enWeaponArrow;
-		weaponAttack += basicWeaponStatus.arrowAttack;
 	}
 	else if (weaponNumber == EnPlayerWeapon::enWeaponTwinSword)
 	{
 		//双剣
 		m_inventoryEquip = std::make_unique<CInventoryTwinSword>();
 		weaponStatus.weaponNum = EnPlayerWeapon::enWeaponTwinSword;
-		weaponAttack += basicWeaponStatus.twinSwordAttack;
 	}
 	weaponStatus.attack = weaponAttack;
 	m_inventoryEquip->SetEquipStatus(weaponStatus);

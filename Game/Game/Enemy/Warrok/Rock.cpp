@@ -45,8 +45,9 @@ void CRock::Init(CWarrok* warrok, const CVector3& enemyPos)
 
 void CRock::Update()
 {
-	if (GetSceneManager().GetSceneChange() 
-		|| (!m_isThrow && (m_warrok->GetStateMachine().GetCurrentState() != CEnemyState::enState_Attack && m_warrok->GetStateMachine().GetCurrentState() != CEnemyState::enState_AttackWait)))
+	if (GetSceneManager().GetSceneChange() ||
+		GetPlayer().GetIsDied() ||
+		(!m_isThrow && (m_warrok->GetStateMachine().GetCurrentState() != CEnemyState::enState_Attack && m_warrok->GetStateMachine().GetCurrentState() != CEnemyState::enState_AttackWait)))
 	{
 		Delete(this);
 	}
@@ -100,6 +101,7 @@ void CRock::Update()
 		m_position.x = m_enemyHandMatrix->m[3][0];
 		m_position.y = m_enemyHandMatrix->m[3][1];
 		m_position.z = m_enemyHandMatrix->m[3][2];
+		m_warrok->RockAttackRotation();
 	}
 	m_skinModel.Update(m_position, m_rotation, { 1.0f, 1.0f, 1.0f });
 }

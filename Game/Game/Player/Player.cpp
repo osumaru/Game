@@ -30,9 +30,8 @@ void CPlayer::OnInvokeAnimationEvent(//ƒAƒjƒ[ƒVƒ‡ƒ“ƒCƒxƒ“ƒg‚ªŒÄ‚Î‚ê‚é‚²‚Æ‚ÉŒÄ‚
 	const wchar_t* eventName
 )
 {
-
-	if (wcscmp(animClipName, L"Assets/modelData/PlayerDash60fpsEvent.tka") == 0
-		|| wcscmp(animClipName, L"Assets/modelData/PlayerDashDash.tka") == 0)
+	if (wcscmp(animClipName, L"Assets/modelData/PlayerDash60fpsEvent.tka") == 0 ||
+		wcscmp(animClipName, L"Assets/modelData/PlayerDashDash.tka") == 0)
 	{//ƒCƒxƒ“ƒg–¼‚Åˆ—‚ğ•Ï‚¦‚éH
 		const float footVolume = 0.1f;
 		CSoundSource* footSound = New<CSoundSource>(0);

@@ -30,5 +30,6 @@ public:
 	void Update() override;
 private:
 	CDamageNumber*	m_damageNumber = nullptr;	//ダメージ表示
+	CEffect			m_damageEffect;				//ダメージエフェクト
 	float			m_timer = 0.0f;				//タイマー
 };

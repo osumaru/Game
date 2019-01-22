@@ -3,6 +3,7 @@ using System.Collections;
 
 public class MapChip : MonoBehaviour {
     public Quaternion invRot;
+    public int level = 0;
 	// Use this for initialization
     void Awake()
     {

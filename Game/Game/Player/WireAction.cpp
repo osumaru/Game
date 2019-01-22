@@ -60,6 +60,10 @@ void CWireAction::Update()
 			enemyList = GetSceneManager().GetMap()->GetEnemyList();
 			for (auto& enemy : enemyList)
 			{
+				if (enemy->GetIsDead())
+				{
+					continue;
+				}
 				CVector3 enemyPos = enemy->GetPosition();
 				CVector3 toEnemyPos = enemyPos - GetPlayer().GetPosition();
 				float length = toEnemyPos.Length();
@@ -127,6 +131,8 @@ void CWireAction::Update()
 				switch (m_state)
 				{
 				case enStateEnemy:
+					WIRE_OFFSET_Y = 1.0f;
+					m_wirePosition.y += WIRE_OFFSET_Y;
 					for (auto& enemy : enemyList)
 					{
 						CVector3 enemyPos = enemy->GetPosition();
