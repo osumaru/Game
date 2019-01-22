@@ -14,6 +14,34 @@ void IWeapon::Init(CPlayer* player)
 	m_normalBoneMat = &m_pPlayer->GetSkinmodel().FindBoneWorldMatrix(L"Spine");
 	m_attackBoneMat = &m_pPlayer->GetSkinmodel().FindBoneWorldMatrix(L"RightHand");
 	Init();
+
+	DirectX::Model* model = m_skinModel.GetBody();
+	//メッシュをなめる
+	for (auto& mesh : model->meshes)
+	{
+		for (auto& meshPart : mesh->meshParts)
+		{
+			ID3D11Buffer* vertexBuffer = meshPart->vertexBuffer.Get();
+			D3D11_BUFFER_DESC vertexDesc;
+			vertexBuffer->GetDesc(&vertexDesc);
+
+			//超点数を求める
+			int vertexCount = vertexDesc.ByteWidth / meshPart->vertexStride;
+
+			//頂点バッファを取得
+			D3D11_MAPPED_SUBRESOURCE subresource;
+			Engine().GetDeviceContext()->Map(vertexBuffer, 0, D3D11_MAP_WRITE_NO_OVERWRITE, 0, &subresource);
+			//頂点バッファから座標を取得して配列に積む
+			char* pData = (char*)subresource.pData;
+			for (int i = 0; i < vertexCount; i++)
+			{
+				CVector3 vertexPos = *((CVector3*)pData);
+				m_vertexBufferVector.push_back(vertexPos);
+				pData += meshPart->vertexStride;
+				m_vertexBufferCount++;
+			}
+		}
+	}
 }
 
 void IWeapon::Updater()

@@ -31,6 +31,13 @@ public:
 	//描画処理
 	void AfterDraw()override;
 
+	//座標を設定
+	//position	座標
+	void SetPosition(const CVector3& position)
+	{
+		m_position = position;
+	}
+
 private:
 	CVector2		m_size;			//サイズ
 	CTexture*		m_pTexture;		//テクスチャ

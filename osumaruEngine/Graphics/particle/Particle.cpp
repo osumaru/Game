@@ -73,7 +73,10 @@ void CParticle::Update()
 {
 	m_speed += m_gravity * GameTime().GetDeltaFrameTime();
 	m_position += m_speed * GameTime().GetDeltaFrameTime();
-	m_lifeTimer -= GameTime().GetDeltaFrameTime();
+	if (0.0f < m_lifeTimer)
+	{
+		m_lifeTimer -= GameTime().GetDeltaFrameTime();
+	}
 	if (m_lifeTimer < 0.0f)
 	{
 		Delete(this);
@@ -103,6 +106,8 @@ void CParticle::Update()
 
 void CParticle::AfterDraw()
 {
+	EnAlphaBlendState backup = Engine().GetCurrentAlphaBlendState();
+	Engine().SetAlphaBlendState(enAlphaBlendStateAdd);
 	CMatrix worldViewProjMat = m_worldMatrix;
 
 	worldViewProjMat.Mul(worldViewProjMat, m_camera->GetViewMatrix());
@@ -123,4 +128,5 @@ void CParticle::AfterDraw()
 	GetDeviceContext()->PSSetShaderResources(0, 2, views);
 	GetDeviceContext()->DrawIndexed(m_primitive.GetIndexNum(), 0, 0);
 
+	Engine().SetAlphaBlendState(backup);
 }

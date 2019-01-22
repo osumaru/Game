@@ -144,6 +144,7 @@ void CPlayerAttack::Update()
 				m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateStand);
 
 			}
+			m_pPlayer->GetWeaponManager().ParticleSetting();
 		}
 	}
 }
@@ -287,4 +288,3 @@ void CPlayerAttack::Lerp()
 	m_pPlayerGetter->SetPosition(position);
 	m_pPlayerGetter->GetCharacterController().SetPosition(rigidPos);
 }
-

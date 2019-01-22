@@ -18,6 +18,8 @@ public:
 
 	void AfterDraw();
 
+	void ParticleSetting();
+
 	//Œ»İg‚Á‚Ä‚¢‚é•Ší‚Ìí—Ş‚ğæ“¾
 	EnPlayerWeapon GetCurrentState() const
 	{
@@ -134,4 +136,8 @@ private:
 	CWeaponTraceDraw			m_weaponTrace[2];								//•Ší‚Ì‹OÕ‚ğ•`‰æ‚·‚é‚½‚ß‚ÌƒNƒ‰ƒX
 	bool						m_isTraceDraw = false;						//•Ší‚Ì‹OÕ‚Ì•`‰æ
 	int							m_attackCount = 0;							//Œ»İ‚Ì•ŠíUŒ‚‚Ì‰ñ”
+	std::list<CParticle*>		m_particleList;
+	float						m_particleTimer = 0.0f;
+	const float					PARTICLE_TIME = 1.0f;
+	bool						m_particleDraw = false;
 };
