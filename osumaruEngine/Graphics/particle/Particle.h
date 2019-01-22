@@ -28,6 +28,9 @@ public:
 	//更新関数
 	void Update()override;
 
+	//ワールド行列の更新
+	void UpdateWorldMatrix();
+
 	//描画処理
 	void AfterDraw()override;
 
@@ -38,19 +41,32 @@ public:
 		m_position = position;
 	}
 
+	//アルファ値を設定
+	void SetAlpha(float alpha)
+	{
+		m_alpha = alpha;
+	}
+
 private:
-	CVector2		m_size;			//サイズ
-	CTexture*		m_pTexture;		//テクスチャ
-	CPrimitive		m_primitive;	//プリミティブ
-	CMatrix			m_worldMatrix;	//ワールド行列
-	CQuaternion		m_rotation;		//回転
-	CShader			m_vs;			//頂点シェーダー
-	CShader			m_ps;			//ピクセルシェーダー
-	CConstantBuffer m_cb;
-	CVector3		m_position;		//座標
-	const CCamera*	m_camera;		//カメラ
-	float			m_lifeTimer;	//寿命
-	float			m_angle;		//回転量
-	CVector3		m_gravity;		//重力
-	CVector3		m_speed;		//速度
+	struct SParticleCB
+	{
+		CMatrix worldViewProj;		//ワールドビュープロジェクション行列
+		float alpha;				//アルファ値
+	};
+	CVector2			m_size;			//サイズ
+	CTexture*			m_pTexture;		//テクスチャ
+	CPrimitive			m_primitive;	//プリミティブ
+	CMatrix				m_worldMatrix;	//ワールド行列
+	CQuaternion			m_rotation;		//回転
+	CShader				m_vs;			//頂点シェーダー
+	CShader				m_ps;			//ピクセルシェーダー
+	CConstantBuffer		m_cb;
+	CVector3			m_position;		//座標
+	const CCamera*		m_camera;		//カメラ
+	float				m_lifeTimer;	//寿命
+	float				m_angle;		//回転量
+	CVector3			m_gravity;		//重力
+	CVector3			m_speed;		//速度
+	float				m_alpha = 1.0f;	//アルファ値
+	EnAlphaBlendState	m_alphaBlendState;	//アルファブレンドのステート
 };

@@ -194,7 +194,6 @@ void CPlayer::Update()
 		return;
 	}
 	StatusCalculation();	//ステータスの処理
-	
 
 	float stickX = Pad().GetLeftStickX();
 	float stickZ = Pad().GetLeftStickY();
