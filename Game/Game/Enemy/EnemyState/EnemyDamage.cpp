@@ -40,6 +40,13 @@ void CEnemyDamage::Init()
 	const float SCALE = 0.1f;
 	m_damageEffect.SetScale({ SCALE, SCALE, SCALE });
 	m_damageEffect.Update();
+
+	//É_ÉÅÅ[ÉWâπ
+	const float DamageVolume = 0.3f;
+	CSoundSource* DamageSound = New<CSoundSource>(0);
+	DamageSound->Init("Assets/sound/Battle/EnemyDamage.wav");
+	DamageSound->Play(false);
+	DamageSound->SetVolume(DamageVolume);
 }
 
 bool CEnemyDamage::Start()

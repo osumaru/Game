@@ -14,6 +14,11 @@ CPlayerArrowShoot::~CPlayerArrowShoot()
 
 void CPlayerArrowShoot::Init()
 {
+	const float ArrowVolume = 0.3f;
+	CSoundSource* ArrowSound = New<CSoundSource>(0);
+	ArrowSound->Init("Assets/sound/Battle/ArrowSound.wav");
+	ArrowSound->Play(false);
+	ArrowSound->SetVolume(ArrowVolume);
 	//‹|‚ð‘Å‚Âƒ‚[ƒVƒ‡ƒ“
 	m_pPlayerGetter->GetAnimation().Play(enPlayerAnimationArrowShoot, 0.5f);
 	m_isShoot = false;

@@ -6,6 +6,11 @@
 
 void CPlayerAvoidance::Init()
 {
+	const float RollVolume = 0.3f;
+	CSoundSource* RollSound = New<CSoundSource>(0);
+	RollSound->Init("Assets/sound/Battle/Roll.wav");
+	RollSound->Play(false);
+	RollSound->SetVolume(RollVolume);
 	Rotation();
 	m_pPlayerGetter->GetAnimation().Play(enPlayerAnimationAvoidance, 0.1f);
 	m_pPlayerGetter->GetAnimation().Update(0.0f);

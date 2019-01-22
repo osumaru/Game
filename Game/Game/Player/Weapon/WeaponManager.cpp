@@ -117,18 +117,38 @@ void CWeaponManager::Update()
 	{
 		if (Pad().IsTriggerButton(enButtonUp))
 		{
+			const float ChangeVolume = 0.3f;
+			CSoundSource* ChangeSound = New<CSoundSource>(0);
+			ChangeSound->Init("Assets/sound/SystemSound/EquipOff.wav");
+			ChangeSound->Play(false);
+			ChangeSound->SetVolume(ChangeVolume);
 			m_weaponState = enWeaponSword;
 		}
 		else if (Pad().IsTriggerButton(enButtonDown))
 		{
+			const float ChangeVolume = 0.3f;
+			CSoundSource* ChangeSound = New<CSoundSource>(0);
+			ChangeSound->Init("Assets/sound/SystemSound/EquipOff.wav");
+			ChangeSound->Play(false);
+			ChangeSound->SetVolume(ChangeVolume);
 			m_weaponState = enWeaponArrow;
 		}
 		else if (Pad().IsTriggerButton(enButtonLeft))
 		{
+			const float ChangeVolume = 0.3f;
+			CSoundSource* ChangeSound = New<CSoundSource>(0);
+			ChangeSound->Init("Assets/sound/SystemSound/EquipOff.wav");
+			ChangeSound->Play(false);
+			ChangeSound->SetVolume(ChangeVolume);
 			m_weaponState = enWeaponTwinSword;
 		}
 		else if (Pad().IsTriggerButton(enButtonRight))
 		{
+			const float ChangeVolume = 0.3f;
+			CSoundSource* ChangeSound = New<CSoundSource>(0);
+			ChangeSound->Init("Assets/sound/SystemSound/EquipOff.wav");
+			ChangeSound->Play(false);
+			ChangeSound->SetVolume(ChangeVolume);
 			m_weaponState = enWeaponLongSword;
 		}
 	}

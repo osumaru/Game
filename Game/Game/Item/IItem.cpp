@@ -50,6 +50,11 @@ bool IItem::PickUp(bool isPopEnd, float length)
 	CVector3 toPlayer = GetPlayer().GetPosition() - m_position;
 	float playerLength = toPlayer.Length();
 	if (playerLength < length) {
+		const float GetVolume = 0.3f;
+		CSoundSource* GetSound = New<CSoundSource>(0);
+		GetSound->Init("Assets/sound/Battle/ItemGet.wav");
+		GetSound->Play(false);
+		GetSound->SetVolume(GetVolume);
 		return true;
 	}
 	return false;

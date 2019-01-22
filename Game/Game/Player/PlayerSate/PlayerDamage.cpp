@@ -6,6 +6,11 @@
 
 void CPlayerDamage::Init()
 {
+	const float DamageVolume = 0.3f;
+	CSoundSource* DamageSound = New<CSoundSource>(0);
+	DamageSound->Init("Assets/sound/Battle/Damage.wav");
+	DamageSound->Play(false);
+	DamageSound->SetVolume(DamageVolume);
 	//UŒ‚‚ðŽó‚¯‚½•ûŒü‚É‰ñ“]‚³‚¹‚é
 	Rotation();
 	if (!m_pPlayerGetter->GetCharacterController().IsOnGround())

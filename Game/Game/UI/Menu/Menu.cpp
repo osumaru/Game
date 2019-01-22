@@ -4,6 +4,7 @@
 #include "../../Map/Map.h"
 #include "../../Scene/SceneManager.h"
 #include "../../Enemy/IEnemy.h"
+#include "../../Enemy/Maw.h"
 #include "../../NPC/IShop.h"
 #include "../../NPC/ShopManager.h"
 #include "ItemInventory.h"
@@ -177,6 +178,8 @@ void CMenu::KeyInputMenu()
 		{
 			shop->SetIsActive(!m_draw);
 		}
+		//ボスの動きの設定
+		GetMaw().SetIsActive(!m_draw);
 		//プレイヤーの動きの設定
 		GetPlayer().SetIsActive(!m_draw);
 	}

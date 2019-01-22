@@ -33,4 +33,5 @@ private:
 	CVector3	m_playerHandPos = CVector3::Zero; //プレイヤーの手の座標
 	float		m_wireSpeed = 1.0f;		//ワイヤーを投げるスピード
 	CVector3	m_previousMoveSpeed;	//前のフレームの移動速度
+	CSoundSource* m_windSound = nullptr;//風の音
 };

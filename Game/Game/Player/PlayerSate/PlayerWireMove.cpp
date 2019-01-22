@@ -17,6 +17,17 @@ void CPlayerWireMove::Init()
 	m_playerHandMatrix = &m_pPlayer->GetSkinmodel().FindBoneWorldMatrix(L"LeftHand");
 	//ワイヤー描画を更新
 	UpdateWireDraw();
+
+	const float WireAttackVolume = 0.3f;
+	CSoundSource* WireAttackSound = New<CSoundSource>(0);
+	WireAttackSound->Init("Assets/sound/Battle/WireThrow.wav");
+	WireAttackSound->Play(false);
+	WireAttackSound->SetVolume(WireAttackVolume);
+	const float WindVolume = 0.1f;
+	m_windSound = New<CSoundSource>(0);
+	m_windSound->Init("Assets/sound/Battle/magic-wind.wav");
+	//m_windSound->Play(true);
+	m_windSound->SetVolume(WindVolume);
 }
 
 void CPlayerWireMove::Update()
@@ -24,6 +35,13 @@ void CPlayerWireMove::Update()
 	//ダメージを受けた場合の処理
 	if (m_pPlayer->GetIsStateCondition(CPlayerState::enPlayerStateDamage))
 	{
+		//再生停止
+		m_windSound->Stop();
+		const float DamageVolume = 0.3f;
+		CSoundSource* DamageSound = New<CSoundSource>(0);
+		DamageSound->Init("Assets/sound/Battle/Damage.wav");
+		DamageSound->Play(false);
+		DamageSound->SetVolume(DamageVolume);
 		//移動が終わった
 		GetPlayer().GetWireAction().SetIsWireMove(false);
 		//ワイヤーをエネミーに当てている
@@ -43,6 +61,7 @@ void CPlayerWireMove::Update()
 	if (m_pPlayerGetter->GetAnimation().GetCurrentAnimationNum() == enPlayerAnimationWireThrow
 		&& !m_pPlayerGetter->GetAnimation().IsPlay())
 	{
+		m_windSound->Play(true);
 		//ワイヤー移動するアニメーションに切り替え
 		m_isWireThrow = false;
 		m_pPlayerGetter->GetAnimation().Play(enPlayerAnimationWireMove, 0.25f);
@@ -96,6 +115,9 @@ void CPlayerWireMove::Update()
 	}
 
 	if (isMoveEnd) {
+		//再生停止
+		m_windSound->Stop();
+
 		//移動が終わった
 		GetPlayer().GetWireAction().SetIsWireMove(false);
 		IEnemy* enemy = GetPlayer().GetWireAction().GetHitEnemy();
