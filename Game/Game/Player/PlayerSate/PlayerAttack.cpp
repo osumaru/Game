@@ -29,8 +29,12 @@ void CPlayerAttack::Init()
 			damagePossible[0] = true;
 			damagePossible[1] = true;
 		}
+		
 	}
-
+	if (&GetMaw())
+	{
+		GetMaw().SetIsDamagePossible(true);
+	}
 	m_pPlayerGetter->SetMoveSpeed(CVector3::Zero);
 	m_attackCount = 0;
 	m_isContinuationAttack = false;
@@ -99,6 +103,11 @@ void CPlayerAttack::Update()
 				damagePossible[1] = true;
 			}
 		}
+		if (&GetMaw())
+		{
+			GetMaw().SetIsDamagePossible(true);
+		}
+
 		CVector3 bonePos;
 		bonePos.x = m_pBoneMat->m[3][0];
 		bonePos.y = m_pBoneMat->m[3][1];

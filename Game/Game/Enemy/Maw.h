@@ -50,7 +50,7 @@ public:
 	//void ActionStateOrder();
 
 	//回転
-	void Rotation();
+	void Rotation(const CVector3& rotVec);
 
 	//弱点スプライト描画
 	void WeekPointUpdate();
@@ -166,6 +166,16 @@ public:
 		return m_skinModel.GetWorldMatrix();
 	}
 
+	void SetIsDamagePossible(bool isDamagePossible)
+	{
+		m_isDamagePossible = isDamagePossible;
+	}
+
+	bool IsDamagePossible()
+	{
+		return m_isDamagePossible;
+	}
+
 private:
 	//行動パターン
 	enum EnMawActionPattern
@@ -193,15 +203,17 @@ private:
 
 	int						m_downCount = 0;							//何回攻撃を受けたか
 	float					m_downTime=0.0f;							//ダウンしている時間
-	float					m_damageInterval = 0.0f;					//ダメージ間隔
 
 	bool					m_isAttack = false;							//攻撃判定
 	bool					m_isStand = false;							//待機判定
 	bool					m_isDamage = false;							//ダメージ判定
+	bool					m_isDamagePossible = false;					//ダメージ判定できるか
 	bool					m_isDown = false;							//ダウン判定
 	bool					m_isDeath = false;							//死亡判定
 	bool					m_isBattle = false;							//発見判定
-
+	bool					m_isHoge = false;
+	bool					m_isSpecialAttackRot = true;
+	float					m_waitTime = 0.0f;
 	CBossHp*		m_bossHp = nullptr;			//ボスHP
 	CWeekPoint*		m_weekPoint = nullptr;		//ボスの弱点スプライト
 };
