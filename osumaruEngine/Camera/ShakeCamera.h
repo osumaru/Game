@@ -76,6 +76,18 @@ public:
 		m_delayCount = delayCount;
 	}
 
+	//減衰率を設定
+	void SetDamping(float damping)
+	{
+		m_damping = damping;
+	}
+
+	//減衰率を取得
+	float GetDamping() const
+	{
+		return m_damping;
+	}
+
 private:
 	CVector3	m_position;			//カメラの座標
 	CVector3	m_target;			//注視点の座標

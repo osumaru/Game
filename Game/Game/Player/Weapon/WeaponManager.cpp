@@ -55,6 +55,7 @@ void CWeaponManager::Init(CPlayer* player)
 	}
 	else
 	{
+		int maxVertexBufferCount = 0;
 		for (int i = 0; i < enWeaponNum; i++)
 		{
 			std::unique_ptr<IWeapon> ptr;
@@ -102,10 +103,37 @@ void CWeaponManager::Init(CPlayer* player)
 			m_equipWeapon[i] = std::move(equipPtr);
 			m_equipWeapon[i]->Init(itemName, textureFileName);
 			m_equipWeapon[i]->SetEquipStatus(weaponStatus);
+			int vertexBufferCount = m_weapons[i]->GetVertexBufferCount();
+			if (maxVertexBufferCount < vertexBufferCount)
+			{
+				maxVertexBufferCount = vertexBufferCount;
+			}
 		}
 		for (int i = 0; i < 2; i++)
 		{
 			m_weaponTrace[i].Init();
+		}
+		SParticleEmittInfo particleInfo;
+		particleInfo.filePath = L"Assets/particle/weaponLight.png";
+		particleInfo.width = 0.1f;
+		particleInfo.height = 0.1f;
+		particleInfo.uv = { 0.0f,0.0f,1.0f,1.0f };
+		particleInfo.randomPosition = { 0.0f, 0.0f, 0.0f };
+		particleInfo.gravity = { 0.0f, 0.0f, 0.0f };
+		particleInfo.lifeTime = 0.0f;
+		particleInfo.emittIntervalTime = 2.0f;
+		particleInfo.emitterLifeTime = 1.0f;
+		particleInfo.emitterPosition = { 0.0f,0.0f,0.0f };
+		particleInfo.moveSpeed = { 0.0f, 0.0f, 0.0f };
+		particleInfo.randomMoveSpeed = { 0.0f, 0.0f, 0.0f };
+		particleInfo.particleNum = 1;
+		particleInfo.isFirstTimeRandom = false;
+		for (int i = 0; i < maxVertexBufferCount; i++)
+		{
+			CParticle* particle = New<CParticle>(PRIORITY_UI);
+			particle->Init(particleInfo, &GetGameCamera().GetCamera());
+			particle->SetIsActive(false);
+			m_particleList.push_back(particle);
 		}
 	}
 }
@@ -152,6 +180,20 @@ void CWeaponManager::Update()
 			m_weaponState = enWeaponLongSword;
 		}
 	}
+
+	if (m_particleDraw)
+	{
+		m_particleTimer += GameTime().GetDeltaFrameTime();
+		if (m_particleTimer > PARTICLE_TIME)
+		{
+			for (auto& particle : m_particleList)
+			{
+				particle->SetIsActive(false);
+			}
+			m_particleDraw = false;
+		}
+	}
+
 	m_weapons[m_weaponState]->Updater();
 }
 
@@ -171,6 +213,27 @@ void CWeaponManager::AfterDraw()
 		}
 	}
 	m_weapons[m_weaponState]->AfterDrawer();
+}
+
+void CWeaponManager::ParticleSetting()
+{
+	m_particleTimer = 0.0f;
+	m_particleDraw = true;
+	const std::vector<CVector3> vertexBufferList = m_weapons[m_weaponState]->GetVertexBufferList();
+	std::vector<CVector3>::const_iterator it = vertexBufferList.begin();
+	const CMatrix worldMatrix = m_weapons[m_weaponState]->GetSkinModel().GetWorldMatrix();
+	for (auto& particle : m_particleList)
+	{
+		if (it == vertexBufferList.end())
+		{
+			return;
+		}
+		CVector3 position = *it;
+		position.Mul(worldMatrix);
+		particle->SetPosition(position);
+		particle->SetIsActive(true);
+		it++;
+	}
 }
 
 void CWeaponManager::ChangeEquipWeapon(std::unique_ptr<IInventoryEquip> equipWeapon, EnPlayerWeapon weaponNum)
