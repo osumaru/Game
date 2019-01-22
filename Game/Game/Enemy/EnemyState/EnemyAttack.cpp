@@ -10,7 +10,13 @@ bool CEnemyAttack::Start()
 	m_enemy->SetMoveSpeed(moveSpeed);
 	//エネミーが攻撃する
 	m_enemy->Attack();
-
+	
+	//攻撃音
+	const float AttackVolume = 0.3f;
+	CSoundSource* AttackSound = New<CSoundSource>(0);
+	AttackSound->Init("Assets/sound/Battle/WarrokEnemyAttackSE.wav");
+	AttackSound->Play(false);
+	AttackSound->SetVolume(AttackVolume);
 	return true;
 }
 

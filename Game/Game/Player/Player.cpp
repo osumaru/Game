@@ -7,7 +7,7 @@
 #include "../Item/IItem.h"
 #include "../UI/Menu/ItemInventory.h"
 #include "../UI/Menu/EquipInventory.h"
-#include "../Enemy/Maw.h"
+//#include "../Enemy/Maw.h"
 #include "Weapon/Bow.h"
 #include "../Enemy/PathFinding/PathFinding.h"
 
@@ -30,7 +30,6 @@ void CPlayer::OnInvokeAnimationEvent(//ƒAƒjƒ[ƒVƒ‡ƒ“ƒCƒxƒ“ƒg‚ªŒÄ‚Î‚ê‚é‚²‚Æ‚ÉŒÄ‚
 	const wchar_t* eventName
 )
 {
-
 	if (wcscmp(animClipName, L"Assets/modelData/PlayerDash60fpsEvent.tka") == 0 ||
 		wcscmp(animClipName, L"Assets/modelData/PlayerDashDash.tka") == 0)
 	{//ƒCƒxƒ“ƒg–¼‚Åˆ—‚ğ•Ï‚¦‚éH
@@ -52,6 +51,16 @@ void CPlayer::OnInvokeAnimationEvent(//ƒAƒjƒ[ƒVƒ‡ƒ“ƒCƒxƒ“ƒg‚ªŒÄ‚Î‚ê‚é‚²‚Æ‚ÉŒÄ‚
 		!wcscmp(animClipName, L"Assets/modelData/PlayerCombo6.tka"))
 	{
 		m_weaponManager.SetIsAttackCheck(!m_weaponManager.GetIsAttackCheck());
+
+		//UŒ‚‰¹‚ÌÄ¶
+		if (m_weaponManager.GetIsAttackCheck())
+		{
+			const float AttackVolume = 0.3f;
+			CSoundSource* AttackSound = New<CSoundSource>(0);
+			AttackSound->Init("Assets/sound/Battle/SwordSE.wav");
+			AttackSound->Play(false);
+			AttackSound->SetVolume(AttackVolume);
+		}
 	}
 }
 
@@ -192,10 +201,10 @@ void CPlayer::Update()
 	CVector3 stickDir = { stickX, 0.0f, stickZ };
 	m_playerGetter.SetStickDir(stickDir);
 
-	//if (Pad().IsTriggerButton(enButtonB))
-	//{
-	//	m_isDamege = true;
-	//}
+	if (Pad().IsTriggerButton(enButtonB))
+	{
+		m_isDamege = true;
+	}
 
 	CMatrix viewMat;
 	CVector3 shadowCameraUp = GetGameCamera().GetSpringCamera().GetTarget() - GetGameCamera().GetSpringCamera().GetPosition();
@@ -394,7 +403,7 @@ bool CPlayer::GetIsStateCondition(CPlayerState::EnPlayerState state)
 		return m_isAction && (Pad().GetLeftStickX() != 0 || Pad().GetLeftStickY() != 0);
 
 	case CPlayerState::enPlayerStateArrowAttack://xƒ{ƒ^ƒ“‚ğ‰Ÿ‚µ‚Ä‘•”õ‚µ‚Ä‚¢‚é•Ší‚ª‹|‚¾‚Á‚½‚©
-		return m_isAction && Pad().IsTriggerButton(enButtonX) && m_weaponManager.GetCurrentState() == enWeaponArrow;
+		return m_isAction && Pad().IsTriggerButton(enButtonRB) && m_weaponManager.GetCurrentState() == enWeaponArrow;
 
 	case CPlayerState::enPlayerStateArrowShoot:
 		return !dynamic_cast<CPlayerArrowAttack*>(m_PlayerStateMachine.GetState(CPlayerState::enPlayerStateArrowAttack))->IsCharge();

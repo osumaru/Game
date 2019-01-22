@@ -14,6 +14,34 @@ void IWeapon::Init(CPlayer* player)
 	m_normalBoneMat = &m_pPlayer->GetSkinmodel().FindBoneWorldMatrix(L"Spine");
 	m_attackBoneMat = &m_pPlayer->GetSkinmodel().FindBoneWorldMatrix(L"RightHand");
 	Init();
+
+	DirectX::Model* model = m_skinModel.GetBody();
+	//メッシュをなめる
+	for (auto& mesh : model->meshes)
+	{
+		for (auto& meshPart : mesh->meshParts)
+		{
+			ID3D11Buffer* vertexBuffer = meshPart->vertexBuffer.Get();
+			D3D11_BUFFER_DESC vertexDesc;
+			vertexBuffer->GetDesc(&vertexDesc);
+
+			//超点数を求める
+			int vertexCount = vertexDesc.ByteWidth / meshPart->vertexStride;
+
+			//頂点バッファを取得
+			D3D11_MAPPED_SUBRESOURCE subresource;
+			Engine().GetDeviceContext()->Map(vertexBuffer, 0, D3D11_MAP_WRITE_NO_OVERWRITE, 0, &subresource);
+			//頂点バッファから座標を取得して配列に積む
+			char* pData = (char*)subresource.pData;
+			for (int i = 0; i < vertexCount; i++)
+			{
+				CVector3 vertexPos = *((CVector3*)pData);
+				m_vertexBufferVector.push_back(vertexPos);
+				pData += meshPart->vertexStride;
+				m_vertexBufferCount++;
+			}
+		}
+	}
 }
 
 void IWeapon::Updater()
@@ -118,6 +146,10 @@ void IWeapon::EnemyAttack()
 			{
 				for (const auto& enemy : group->GetGroupList())
 				{
+					if (enemy->GetIsDead())
+					{
+						continue;
+					}
 					bool* damagePossible = enemy->IsDamagePossible();
 					if(damagePossible[i])
 					{
@@ -147,27 +179,28 @@ void IWeapon::EnemyAttack()
 	if (&GetMaw() != NULL)
 	{
 		//ボスがダメージを受けていなかったら
-		if (!GetMaw().GetIsDamage())
+		//if (!GetMaw().GetIsDamage())
 		{
 			for (int i = 0; i < m_maxWeaponHitNum; i++)
 			{
 				//ダウンしていなかったら
-				if (!GetMaw().GetIsDown())
+				if (GetMaw().GetIsDown())
 				{
-					const float BossWeekLenge = 0.3f;
+					const float BossWeekLenge = 10.3f;
 					//ボスの弱点の座標取得
 					CVector3 EnemyVec = GetMaw().GetWeekPosition();
 					EnemyVec -= info.attackPos[i];
 					float len = EnemyVec.Length();
 
-					if (fabs(len) < BossWeekLenge)
+					if (fabs(len) < BossWeekLenge && GetMaw().IsDamagePossible())
 					{
 						GetMaw().SetIsDamage(true);
+						GetMaw().SetIsDamagePossible(false);
 					}
 				}
 				else
 				{
-					const float BossHeight = 3.0f;
+					const float BossHeight = 1.0f;
 					const float BossLenge = 3.0f;
 					//ボスの座標取得
 					CVector3 EnemyVec = GetMaw().GetPosition();
@@ -175,9 +208,10 @@ void IWeapon::EnemyAttack()
 					EnemyVec -= info.attackPos[i];
 					float len = EnemyVec.Length();
 
-					if (fabs(len) < BossLenge)
+					if (fabs(len) < BossLenge && GetMaw().IsDamagePossible())
 					{
 						GetMaw().SetIsDamage(true);
+						GetMaw().SetIsDamagePossible(false);
 					}
 				}
 			}

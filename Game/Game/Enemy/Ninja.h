@@ -17,19 +17,19 @@ public:
 
 	//初期化
 	//position	座標
-	void Init(const CVector3& position) override;
+	void Init(const CVector3& position, int level) override;
 
 	//更新される前に一度だけ呼ばれる
-	bool Start();
+	bool Start() override;
 
 	//更新
-	void Update();
+	void Update() override;
 
 	//描画
-	void Draw();
+	void Draw() override;
 
 	//攻撃
-	void Attack();
+	void Attack() override;
 
 	void OnInvokeAnimationEvent(const wchar_t* animClipName, const wchar_t* eventName)override;
 

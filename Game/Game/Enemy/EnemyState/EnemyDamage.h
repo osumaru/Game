@@ -38,11 +38,11 @@ public:
 	}
 private:
 	CDamageNumber*	m_damageNumber = nullptr;	//ダメージ表示
-	const float		m_knockBackSpeed = 5.0f;	//ノックバックスピード
+	CEffect			m_damageEffect;				//ダメージエフェクト
+	const float		m_knockBackSpeed = 4.0f;	//ノックバックスピード
 	float			m_deceleration = 0.0f;		//減速力
 	float			m_friction = 0.0f;			//摩擦力
 	float			m_knockBackScale = 1.0f;	//ノックバックスピードの倍率
 	bool			m_wasStanAttack = false;	//スタン攻撃を受けたか
 	bool			m_isNockBack = false;		//ノックバック中かのフラグ
-	CEffect			m_damageEffect;
 };

@@ -31,6 +31,11 @@ void CPlayerSky::Update()
 	{
 		if (m_pPlayerGetter->GetAnimation().GetCurrentAnimationNum() != enPlayerAnimationLanding)
 		{
+			const float landingVolume = 0.3f;
+			CSoundSource* landingSound = New<CSoundSource>(0);
+			landingSound->Init("Assets/sound/Battle/Groundlanding.wav");
+			landingSound->Play(false);
+			landingSound->SetVolume(landingVolume);
 			m_pPlayerGetter->SetMoveSpeed(CVector3::Zero);
 
 			m_pPlayerGetter->GetAnimation().Play(enPlayerAnimationLanding);

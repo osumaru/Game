@@ -98,6 +98,20 @@ public:
 		return m_maxWeaponHitNum;
 	}
 
+	const CSkinModel& GetSkinModel() const
+	{
+		return m_skinModel;
+	}
+
+	const std::vector<CVector3>& GetVertexBufferList() const
+	{
+		return m_vertexBufferVector;
+	}
+
+	int GetVertexBufferCount()
+	{
+		return m_vertexBufferCount;
+	}
 
 protected:
 	struct SHitEffectParam
@@ -125,4 +139,6 @@ protected:
 	std::unique_ptr<EnPlayerAnimation[]>	m_combineAnimation;			//攻撃の後の合成用のアニメーション番号
 	std::unique_ptr<bool[]>					m_stanAttack;				//スタン攻撃
 	std::unique_ptr<bool[]>					m_attackHitNum;				//武器ごとの攻撃回数
+	std::vector<CVector3>					m_vertexBufferVector;
+	int										m_vertexBufferCount = 0;
 };

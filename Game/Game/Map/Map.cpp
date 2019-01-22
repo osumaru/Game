@@ -19,10 +19,11 @@
 #include "../Map/BossBuilding.h"
 #include "../Enemy/TitleEnemy.h"
 
-//テスト用にマップを作る場合はこれからTest_を前に着けるようにしてください
 std::vector<std::vector<SMapChipInfo>> mapChipInfo = 
 {
-
+	{
+		#include "bossTest.h"
+	},
 	{
 	//本番用の世界のマップ
 		#include "WorldMap.h"
@@ -30,10 +31,6 @@ std::vector<std::vector<SMapChipInfo>> mapChipInfo =
 		//#include "mm.h"
 		//#include "BossStage.h"
 		//#include "Boss.h"
-	},
-
-	{
-		#include "bossTest.h"
 	},
 
 	{
@@ -55,7 +52,6 @@ void Map::Init(int stageNum)
 {
 	std::map<int, std::vector<SMapChipInfo>> instancingData;
 
-	//std::vector<CEnemyGroup*> enemyGroupList;
 	m_shopManager = New<CShopManager>(PRIORITY_SHOP);
 
 	for (SMapChipInfo& mInfo : mapChipInfo[stageNum])
@@ -133,7 +129,7 @@ void Map::Init(int stageNum)
 		}
 		if (enemy != nullptr)
 		{
-			enemy->Init(mInfo.m_position);
+			enemy->Init(mInfo.m_position, mInfo.m_level);
 			m_enemyList.push_back(enemy);
 			it = m_enemyList.end();
 			it--;

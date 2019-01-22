@@ -82,6 +82,7 @@ void CMoney::Pop(CVector3 position)
 	m_position = position;
 	m_characterController.Init(0.2f, 0.2f, m_position);
 	m_characterController.SetUserIndex(EnCollisionAttr::enCollisionAttr_Item);
+	m_characterController.SetIgnoreRigidBody(&GetPlayer().GetCharacterController().GetBody());
 	float distance = 3.0f;
 	float popUpSpeed = 6.0f;
 	//ランダム地点にポップさせる
