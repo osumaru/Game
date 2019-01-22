@@ -376,7 +376,6 @@
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\Arrow.fbx" />
-    <MeshContentTask Include="Assets\modelData\Barrel.FBX" />
     <MeshContentTask Include="Assets\modelData\Brock.FBX" />
     <MeshContentTask Include="Assets\modelData\Building1.FBX" />
     <MeshContentTask Include="Assets\modelData\Building2.fbx" />
@@ -400,13 +399,11 @@
     <MeshContentTask Include="Assets\modelData\House.FBX" />
     <MeshContentTask Include="Assets\modelData\LargeSword.fbx" />
     <MeshContentTask Include="Assets\modelData\LongBow.FBX" />
-    <MeshContentTask Include="Assets\modelData\map2.FBX" />
     <MeshContentTask Include="Assets\modelData\map3.FBX" />
     <MeshContentTask Include="Assets\modelData\Map4.FBX" />
     <MeshContentTask Include="Assets\modelData\Maw.fbx" />
     <MeshContentTask Include="Assets\modelData\Money.fbx" />
     <MeshContentTask Include="Assets\modelData\Ninja.FBX" />
-    <MeshContentTask Include="Assets\modelData\Npc.fbx" />
     <MeshContentTask Include="Assets\modelData\NYApartmentA.fbx" />
     <MeshContentTask Include="Assets\modelData\NYBuilding_A.fbx" />
     <MeshContentTask Include="Assets\modelData\Player.fbx" />
@@ -422,7 +419,12 @@
     <MeshContentTask Include="Assets\modelData\TownGround.FBX" />
     <MeshContentTask Include="Assets\modelData\TownHouse.fbx" />
     <MeshContentTask Include="Assets\modelData\TownHouse1.fbx" />
+    <MeshContentTask Include="Assets\modelData\tree\Stone1.FBX" />
+    <MeshContentTask Include="Assets\modelData\tree\Stone2.FBX" />
+    <MeshContentTask Include="Assets\modelData\tree\Stone3.FBX" />
     <MeshContentTask Include="Assets\modelData\tree\tree1.FBX" />
+    <MeshContentTask Include="Assets\modelData\tree\Tree2.FBX" />
+    <MeshContentTask Include="Assets\modelData\tree\Tree3.FBX" />
     <MeshContentTask Include="Assets\modelData\tree\WorldMap1.FBX" />
     <MeshContentTask Include="Assets\modelData\TwinSword.fbx" />
     <MeshContentTask Include="Assets\modelData\Warrok.fbx" />

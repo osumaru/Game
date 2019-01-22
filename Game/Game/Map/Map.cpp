@@ -102,6 +102,10 @@ void Map::Init(int stageNum)
 		case enMapTagWeaponShop:
 			m_shopManager->InitShop(mInfo.m_position, mInfo.m_rotation, EShop::enWeaponShop);
 			break;
+		case enMapTagTree:
+			mapChip = New<StaticMapObject>(PRIORITY_MAPCHIP);
+			m_isTree = true;
+			break;
 		case enMapTagTitleEnemy:
 			titleEnemy = New<CTitleEnemy>(PRIORITY_ENEMY);
 			titleEnemy->Init(mInfo.m_modelName, mInfo.m_position);
@@ -138,13 +142,15 @@ void Map::Init(int stageNum)
 		if (mapChip != nullptr)
 		{
 			//マップチップを生成
-			mapChip->Init(mInfo.m_position, mInfo.m_rotation, mInfo.m_modelName,m_collider);
+			mapChip->Init(mInfo.m_position, mInfo.m_rotation, mInfo.m_modelName,m_isTree,m_collider);
 			m_mapChip.push_back(mapChip);
 
 			//マップチップに自身のイテレーターとマップのインスタンスを渡す(削除の時に使う)
 			std::list<MapChip*>::iterator iterator = m_mapChip.end();
 			iterator--;
 			mapChip->SetIterator(this, iterator);
+			m_isTree = false;
+			m_collider = false;
 		}
 	}
 

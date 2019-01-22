@@ -22,6 +22,7 @@ enum EnMapChipTag
 	enMapTagItemShop,		//アイテムショップ用のタグ
 	enMapTagWeaponShop,		//武器屋用のタグ
 	enMapTagSoundPoint,		//BGM用のタグ
+	enMapTagTree,			//木のモデルに着けるタグ
 	enMapTagObstacle,
 	enMapTagBossObj,
 	enMapTagTitleEnemy,
@@ -87,5 +88,6 @@ private:
 	std::list<IEnemy*>			m_enemyList;			//エネミーリスト
 	std::list<CEnemyGroup*>		m_enemyGroupList;		//エネミーグループのリスト
 	bool						m_collider = false;		//AABBを作成するかどうか
+	bool						m_isTree = false;	//木用のコライダーの設定をするためのフラグ		
 	CShopManager*				m_shopManager;
 };
