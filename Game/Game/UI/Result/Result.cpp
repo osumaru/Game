@@ -26,7 +26,7 @@ void CResult::Update()
 
 
 }
-void CResult::AfterDraw()
+void CResult::PostAfterDraw()
 {
 	//ƒvƒŒƒCƒ„[‚ª¶‚«‚Ä‚¢‚é‚©‚Ì”»’è
 	if (!GetPlayer().GetIsDied()) { return; }

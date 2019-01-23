@@ -100,7 +100,7 @@ void CItemInventory::Update()
 	}
 }
 
-void CItemInventory::AfterDraw()
+void CItemInventory::PostAfterDraw()
 {
 	m_backGround.Draw();
 	for (int i = 0; i < m_itemLimit; i++)

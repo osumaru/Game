@@ -62,7 +62,7 @@ void CBossHp::Update()
 	}
 }
 
-void CBossHp::AfterDraw()
+void CBossHp::PostAfterDraw()
 {
 	m_bossHpBackSprite.Draw();
 	m_bossHpSprite.Draw();

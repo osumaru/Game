@@ -107,7 +107,7 @@ void CItemShop::Draw()
 	m_skinModel.Draw(GetGameCamera().GetViewMatrix(), GetGameCamera().GetProjectionMatrix());
 	
 }
-void CItemShop::AfterDraw()
+void CItemShop::PostAfterDraw()
 {
 	if(!m_isSelectDraw && !m_isShoplineupDraw) { return; }
 

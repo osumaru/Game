@@ -15,7 +15,7 @@ public:
 
 	void BeforeDead()override;
 
-	void AfterDraw();
+	void PostAfterDraw();
 	//ステータスを計算する関数
 	void StatusMath();			
 	//スレイヤーのステータスの入力を行う関数

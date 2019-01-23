@@ -9,7 +9,7 @@ public:
 	void Init(const CVector3 position, const CQuaternion rotation);
 	void Update();
 	void Draw();
-	void AfterDraw();
+	void PostAfterDraw();
 	void LineupChange();
 private:
 	std::unique_ptr<CRigidBody>			m_rigidBody;		//çÑëÃ

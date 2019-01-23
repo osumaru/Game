@@ -233,7 +233,7 @@ void CMenu::StatusMath()
 }
 
 //ƒƒjƒ…[‰æ–Ê‚Ì•`‰æˆ—
-void CMenu::AfterDraw()
+void CMenu::PostAfterDraw()
 {
 	if (GetPlayer().GetIsDied()) { return; }
 	if (m_draw)

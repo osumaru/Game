@@ -12,7 +12,7 @@ public:
 	void Update() override;
 
 	//•`‰æ
-	void AfterDraw() override;
+	void PostAfterDraw() override;
 
 	//•`‰æ‚µI‚í‚Á‚½‚©‚ğæ“¾
 	bool GetIsDrawEnd()

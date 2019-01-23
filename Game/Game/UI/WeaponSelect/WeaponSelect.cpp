@@ -76,7 +76,7 @@ void CWeaponSelect::Update()
 	}
 }
 
-void CWeaponSelect::AfterDraw()
+void CWeaponSelect::PostAfterDraw()
 {
 	m_weapon[enWeaponSword].Draw();
 	m_weapon[enWeaponLongSword].Draw();

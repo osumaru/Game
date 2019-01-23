@@ -10,7 +10,7 @@ public:
 	//描画
 	void Draw() override;
 
-	void AfterDraw() override;
+	void PostAfterDraw() override;
 private:
 	CSprite						m_weekSprite;		//弱点のスプライト
 	CTexture*					m_weekTexture;		//弱点のテクスチャ
