@@ -78,7 +78,7 @@ void CGameCamera::Update()
 	{
 		//ロックオンしているエネミーを切り替える
 		ChangeTarget();
-		//エネミーをロックオンする
+		//ロックオンする
 		LockOn(target, position);
 	}
 	else
@@ -178,6 +178,10 @@ void CGameCamera::SearchTarget()
 	float minLength = FLT_MAX;
 	//エネミーグループのリストを取得
 	std::list<CEnemyGroup*> enemyGroupList = GetSceneManager().GetMap()->GetEnemyGroupList();
+	if (enemyGroupList.empty())
+	{
+		return;
+	}
 	for (CEnemyGroup* enemyGroup : enemyGroupList)
 	{
 		CVector3 enemyGroupPos = enemyGroup->GetPosition();
@@ -218,15 +222,26 @@ void CGameCamera::SearchTarget()
 void CGameCamera::ChangeTarget()
 {
 	float rStick_x = Pad().GetRightStickX();
-	//ロックオン対象のエネミーグループのリストを取得
-	std::list<SEnemyGroupData> enemyGroup = m_lockOnEnemy->GetEnemyGroup()->GetGroupList();
-	if (m_lockOnState != enLockOn_Enemy && rStick_x == 0.0f && enemyGroup.empty())
+	//右スティックを入力したか
+	if (rStick_x == 0.0f)
 	{
+		//右スティックを入力していない
+		return;
+	}
+	//ロックオン対象がボスであるか
+	if (m_lockOnState == enLockOn_Boss)
+	{
+		//ターゲットを切り替える
+		SearchTarget();
 		return;
 	}
 
-	//現在ロックオンしているエネミーの番号を保存
-	int preLockOnEnemyNumber = m_lockOnEnemyNumber;
+	//ロックオン対象のエネミーグループのリストを取得
+	std::list<SEnemyGroupData> enemyGroup = m_lockOnEnemy->GetEnemyGroup()->GetGroupList();
+	if (m_lockOnState != enLockOn_Enemy && enemyGroup.empty())
+	{
+		return;
+	}
 	//右にスティックを倒すとプラス
 	if (rStick_x > 0.0f)
 	{

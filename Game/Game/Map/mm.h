@@ -75,20 +75,20 @@
 //	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f),  //回転
 //	enMapTagWarrok, //タグ
 //},
-//Sphere
-{
-	L"Sphere",
-	CVector3(-3.77f, 1.81f, -5.03f),             //平行移動
-	CQuaternion(0.00f, 0.00f, 0.00f, 0.00f ),  //回転
-	enMapTagEnemyGroup, //タグ
-},
-//Sphere
-{
-	L"Sphere",
-	CVector3(0.54f, 1.81f, -10.69f),             //平行移動
-	CQuaternion(0.00f, 0.00f, 0.00f, 0.00f ),  //回転
-	enMapTagEnemyGroup, //タグ
-},
+////Sphere
+//{
+//	L"Sphere",
+//	CVector3(-3.77f, 1.81f, -5.03f),             //平行移動
+//	CQuaternion(0.00f, 0.00f, 0.00f, 0.00f ),  //回転
+//	enMapTagEnemyGroup, //タグ
+//},
+////Sphere
+//{
+//	L"Sphere",
+//	CVector3(0.54f, 1.81f, -10.69f),             //平行移動
+//	CQuaternion(0.00f, 0.00f, 0.00f, 0.00f ),  //回転
+//	enMapTagEnemyGroup, //タグ
+//},
 //Sphere
 {
 	L"Sphere",
@@ -96,17 +96,17 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 0.00f ),  //回転
 	enMapTagEnemyGroup, //タグ
 },
-//Sphere
-{
-	L"Sphere",
-	CVector3(0.88f, 1.81f, -0.04f),             //平行移動
-	CQuaternion(0.00f, 0.00f, 0.00f, 0.00f ),  //回転
-	enMapTagEnemyGroup, //タグ
-},
-////Maw
+////Sphere
 //{
-//	L"Maw",
-//	CVector3(-0.13f, 0.00f, 10.24f),             //平行移動
-//	CQuaternion(0.00f, 1.00f, 0.00f, -0.08f),  //回転
-//	enMapTagMaw, //タグ
+//	L"Sphere",
+//	CVector3(0.88f, 1.81f, -0.04f),             //平行移動
+//	CQuaternion(0.00f, 0.00f, 0.00f, 0.00f ),  //回転
+//	enMapTagEnemyGroup, //タグ
 //},
+//Maw
+{
+	L"Maw",
+	CVector3(-0.13f, 0.00f, 10.24f),             //平行移動
+	CQuaternion(0.00f, 1.00f, 0.00f, -0.08f),  //回転
+	enMapTagMaw, //タグ
+},
