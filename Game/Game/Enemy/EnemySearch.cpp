@@ -6,7 +6,7 @@
 
 void CEnemySearch::Update()
 {
-	std::list<IEnemy*> groupList = m_enemy->GetEnemyGroup()->GetGroupList();
+	std::list<SEnemyGroupData> groupList = m_enemy->GetEnemyGroup()->GetGroupList();
 
 	//プレイヤーとの距離を計算
 	CVector3 playerPos = GetPlayer().GetPosition();
@@ -20,9 +20,9 @@ void CEnemySearch::Update()
 		//プレイヤーを見つけた
 		isFind = true;
 	}
-	for (auto& enemy : groupList)
+	for (auto& enemyData : groupList)
 	{
 		//グループ全員に通知
-		enemy->SetIsFind(isFind);
+		enemyData.enemy->SetIsFind(isFind);
 	}
 }

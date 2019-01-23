@@ -82,6 +82,9 @@ private:
 	//ロックオンする対象を探す
 	void SearchTarget();
 
+	//ロックオン対象を切り替える
+	void ChangeTarget();
+
 	//ロックオンする
 	//target	ターゲットの座標
 	//position	カメラの座標
@@ -106,11 +109,12 @@ private:
 	CShakeCamera			m_shakeCamera;				//揺れカメラ
 	CCameraCollisionSolver	m_cameraCollisionSolver;	//カメラの当たり判定
 	EnLockOnState			m_lockOnState = enLockOn_None;	//何をロックオンしているか
-	IEnemy*					m_rockOnEnemy = nullptr;	//ロックオンしているエネミー
+	IEnemy*					m_lockOnEnemy = nullptr;	//ロックオンしているエネミー
 	float					m_cameraLength = 0.0f;		//注視点からカメラへの距離
 	const float				LOCKON_OFFSET_Y = 2.5f;		//ロックオン時の高さ補正の限界値
 	const float				TARGET_OFFSET_Y = 1.4f;		//カメラ通常時の高さ補正
 	float					m_height = 0.0f;			//カメラの座標と注視点の高さ
+	int						m_lockOnEnemyNumber = 0;	//ロックオンしているエネミー番号
 	bool					m_isLockOn = false;			//ロックオンしているか
 };
 

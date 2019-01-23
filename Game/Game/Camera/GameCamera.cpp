@@ -76,6 +76,8 @@ void CGameCamera::Update()
 	//ロックオン中
 	if (m_isLockOn)
 	{
+		//ロックオンしているエネミーを切り替える
+		ChangeTarget();
 		//エネミーをロックオンする
 		LockOn(target, position);
 	}
@@ -188,14 +190,14 @@ void CGameCamera::SearchTarget()
 		if (length < LOCKON_LENGTH)
 		{
 			//エネミーグループの中のエネミーリストを取得
-			std::list<IEnemy*> enemyList = enemyGroup->GetGroupList();
-			for (IEnemy* enemy : enemyList)
+			std::list<SEnemyGroupData> enemyList = enemyGroup->GetGroupList();
+			for (SEnemyGroupData& enemyData : enemyList)
 			{
-				if (enemy->GetIsDead())
+				if (enemyData.enemy->GetIsDead())
 				{
 					continue;
 				}
-				CVector3 enemyPos = enemy->GetPosition();
+				CVector3 enemyPos = enemyData.enemy->GetPosition();
 				//エネミーとプレイヤーの距離を求める
 				distance = playerPos - enemyPos;
 				length = distance.Length();
@@ -204,10 +206,55 @@ void CGameCamera::SearchTarget()
 					//一番近いエネミーをロックオンする
 					m_isLockOn = true;
 					minLength = length;
-					m_rockOnEnemy = enemy;
+					m_lockOnEnemy = enemyData.enemy;
+					m_lockOnEnemyNumber = enemyData.groupNumber;
 					m_lockOnState = enLockOn_Enemy;
 				}
 			}
+		}
+	}
+}
+
+void CGameCamera::ChangeTarget()
+{
+	float rStick_x = Pad().GetRightStickX();
+	//ロックオン対象のエネミーグループのリストを取得
+	std::list<SEnemyGroupData> enemyGroup = m_lockOnEnemy->GetEnemyGroup()->GetGroupList();
+	if (m_lockOnState != enLockOn_Enemy && rStick_x == 0.0f && enemyGroup.empty())
+	{
+		return;
+	}
+
+	//現在ロックオンしているエネミーの番号を保存
+	int preLockOnEnemyNumber = m_lockOnEnemyNumber;
+	//右にスティックを倒すとプラス
+	if (rStick_x > 0.0f)
+	{
+		m_lockOnEnemyNumber++;
+		//グループの数より大きければ最初の番号にする
+		if (m_lockOnEnemyNumber > m_lockOnEnemy->GetEnemyGroup()->GetGroupNum())
+		{
+			m_lockOnEnemyNumber = 1;
+		}
+	}
+	//左にスティックを倒すとマイナス
+	else if (rStick_x < 0.0f)
+	{
+		m_lockOnEnemyNumber--;
+		//番号が一番小さければ最後の番号にする
+		if (m_lockOnEnemyNumber < 1)
+		{
+			m_lockOnEnemyNumber = m_lockOnEnemy->GetEnemyGroup()->GetGroupNum();
+		}
+	}
+
+	for (auto& enemyData : enemyGroup)
+	{
+		//同じ番号の敵をロックオン対象とする
+		if (enemyData.groupNumber == m_lockOnEnemyNumber)
+		{
+			m_lockOnEnemy = enemyData.enemy;
+			break;
 		}
 	}
 }
@@ -229,13 +276,13 @@ void CGameCamera::LockOn(CVector3& target, CVector3& position)
 	else
 	{
 		//ロックオンしているエネミーが死亡したか
-		if (m_rockOnEnemy->GetIsDead())
+		if (m_lockOnEnemy->GetIsDead())
 		{
 			//ロックオンを外す
 			LockOnCancel(target, position);
 			return;
 		}
-		targetPosition = m_rockOnEnemy->GetPosition();
+		targetPosition = m_lockOnEnemy->GetPosition();
 		targetPosition.y += 0.5f;
 	}
 
