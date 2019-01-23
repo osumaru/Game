@@ -115,8 +115,8 @@ void CWeaponManager::Init(CPlayer* player)
 		}
 		SParticleEmittInfo particleInfo;
 		particleInfo.filePath = L"Assets/particle/weaponLight.png";
-		particleInfo.width = 0.1f;
-		particleInfo.height = 0.1f;
+		particleInfo.width = 0.15f;
+		particleInfo.height = 0.15f;
 		particleInfo.uv = { 0.0f,0.0f,1.0f,1.0f };
 		particleInfo.randomPosition = { 0.0f, 0.0f, 0.0f };
 		particleInfo.gravity = { 0.0f, 0.0f, 0.0f };
@@ -124,7 +124,7 @@ void CWeaponManager::Init(CPlayer* player)
 		particleInfo.emittIntervalTime = 2.0f;
 		particleInfo.emitterLifeTime = 1.0f;
 		particleInfo.emitterPosition = { 0.0f,0.0f,0.0f };
-		particleInfo.moveSpeed = { 0.0f, 0.0f, 0.0f };
+		particleInfo.moveSpeed = { 0.0f, 0.1f, 0.0f };
 		particleInfo.randomMoveSpeed = { 0.0f, 0.0f, 0.0f };
 		particleInfo.particleNum = 1;
 		particleInfo.isFirstTimeRandom = false;
@@ -134,7 +134,7 @@ void CWeaponManager::Init(CPlayer* player)
 			CParticle* particle = New<CParticle>(PRIORITY_UI);
 			particle->Init(particleInfo, &GetGameCamera().GetCamera());
 			particle->SetIsActive(false);
-			particle->SetAlpha(0.2f);
+			particle->SetAlpha(PARTICLE_ALPHA);
 			m_particleList.push_back(particle);
 
 		}
@@ -195,6 +195,16 @@ void CWeaponManager::Update()
 			}
 			m_particleDraw = false;
 		}
+		else
+		{
+			for (auto& particle : m_particleList)
+			{
+				if (particle->IsActive())
+				{
+					particle->SetAlpha(PARTICLE_ALPHA * (1.0f - m_particleTimer / PARTICLE_TIME));
+				}
+			}
+		}
 	}
 
 	m_weapons[m_weaponState]->Updater();
@@ -233,6 +243,7 @@ void CWeaponManager::ParticleSetting()
 		}
 		CVector3 position = *it;
 		position.Mul(worldMatrix);
+		particle->SetAlpha(PARTICLE_ALPHA);
 		particle->SetPosition(position);
 		particle->SetIsActive(true);
 		particle->UpdateWorldMatrix();

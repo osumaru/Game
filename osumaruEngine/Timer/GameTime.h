@@ -106,6 +106,21 @@ public:
 
 	//FPSを表示
 	void Draw();
+
+	//スローから戻す時のフェード時間を設定
+	void SetFadeOutTime(float fadeOutTime)
+	{
+		m_fadeOutTime = fadeOutTime;
+		m_fadeOutTimeMax = fadeOutTime;
+	}
+
+	//通常時からスローに入る時のフェード時間を設定
+	void SetFadeInTime(float fadeInTime)
+	{
+		m_fadeInTime = fadeInTime;
+		m_fadeInTimeMax = fadeInTime;
+	}
+
 private:
 	friend class CShakeCamera;
 	float		m_slowScale = 0.0f;		//どのぐらいスローにしているかの倍率(1.0が等速
@@ -115,6 +130,10 @@ private:
 	float		m_frameDeltaTime;		//1フレームの経過時間
 	float		m_slowDelayTime = 0.0f;	//スローにするまでの遅延時間
 	int			m_slowDelayCount = 0;	//スローにするまでのフレーム数
+	float		m_fadeInTime = 0.0f;	//普通の時間からスローになるまでフェードさせる間の時間
+	float		m_fadeInTimeMax = 0.0f;
+	float		m_fadeOutTime = 0.0f;	//スローから普通の時間になるまでフェードさせる間の時間
+	float		m_fadeOutTimeMax = 0.0f;	//スローから普通の時間になるまでフェードさせる間の時間
 	CFont*		m_font;					//FPS表示させるための文字
 };
 
