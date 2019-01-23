@@ -63,7 +63,7 @@ void CFade::Update()
 	}
 }
 
-void CFade::AfterDraw()
+void CFade::PostAfterDraw()
 {
 	//ÀsˆÈŠO‚Í•`‰æ‚µ‚È‚¢
 	//if (!m_isExecute){return;}
