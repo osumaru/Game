@@ -1,5 +1,5 @@
 #pragma once
-class CGameSound: public IGameObject
+class CGameSound : public IGameObject
 {
 public:
 	CGameSound();
@@ -15,10 +15,15 @@ public:
 		m_3dSoundPosition = pos;
 		m_backSound[enBossBgm].SetPosition(m_3dSoundPosition);
 	}
+	void SetWorldBgmSound()
+	{
+		m_soundState = enWorldBgm;
+	}
 
 private:
 	enum EnSoundState
 	{
+		enTitleBgm,			//タイトルのBGM
 		enWorldBgm,			//ワールドマップ移動中のBGM
 		enTownBgm,			//町に入った時のBGM
 		enBattleBgm,		//戦闘中のBGM

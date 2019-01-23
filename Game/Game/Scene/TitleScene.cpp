@@ -110,6 +110,7 @@ void CTitleScene::Update()
 		{
 			return;
 		}
+		m_gameSound->SetWorldBgmSound();
 		const float StartVolume = 0.3f;
 		CSoundSource* StartSound = New<CSoundSource>(0);
 		StartSound->Init("Assets/sound/SystemSound/StartSE.wav");
