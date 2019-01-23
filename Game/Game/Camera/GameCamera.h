@@ -82,6 +82,9 @@ private:
 	//ロックオンする対象を探す
 	void SearchTarget();
 
+	//ロックオン対象を切り替える
+	void ChangeTarget();
+
 	//ロックオンする
 	//target	ターゲットの座標
 	//position	カメラの座標
@@ -92,17 +95,27 @@ private:
 	//position	カメラの座標
 	void LockOnCancel(CVector3& target, CVector3& position);
 
-	static CGameCamera*		m_gameCamera;			//ゲームカメラ
-	CCamera					m_camera;				//カメラ
-	CSpringCamera			m_springCamera;			//バネカメラ
-	CShakeCamera			m_shakeCamera;			//揺れカメラ
-	CCameraCollisionSolver	m_cameraCollisionSolver;//カメラの当たり判定
-	IEnemy*					m_rockOnEnemy = nullptr;//ロックオンしているエネミー
-	float					m_cameraLength = 0.0f;	//注視点からカメラへの距離
-	const float				LOCKON_OFFSET_Y = 2.5f;	//ロックオン時の高さ補正の限界値
-	const float				TARGET_OFFSET_Y = 1.4f; //カメラ通常時の高さ補正
-	float					m_height = 0.0f;		//カメラの座標と注視点の高さ
-	bool					m_isLockOn = false;		//ロックオンしているか
+private:
+	enum EnLockOnState
+	{
+		enLockOn_None,	//何もない
+		enLockOn_Enemy,	//エネミー
+		enLockOn_Boss	//ボス
+	};
+
+	static CGameCamera*		m_gameCamera;				//ゲームカメラ
+	CCamera					m_camera;					//カメラ
+	CSpringCamera			m_springCamera;				//バネカメラ
+	CShakeCamera			m_shakeCamera;				//揺れカメラ
+	CCameraCollisionSolver	m_cameraCollisionSolver;	//カメラの当たり判定
+	EnLockOnState			m_lockOnState = enLockOn_None;	//何をロックオンしているか
+	IEnemy*					m_lockOnEnemy = nullptr;	//ロックオンしているエネミー
+	float					m_cameraLength = 0.0f;		//注視点からカメラへの距離
+	const float				LOCKON_OFFSET_Y = 2.5f;		//ロックオン時の高さ補正の限界値
+	const float				TARGET_OFFSET_Y = 1.4f;		//カメラ通常時の高さ補正
+	float					m_height = 0.0f;			//カメラの座標と注視点の高さ
+	int						m_lockOnEnemyNumber = 0;	//ロックオンしているエネミー番号
+	bool					m_isLockOn = false;			//ロックオンしているか
 };
 
 static CGameCamera& GetGameCamera()

@@ -20,7 +20,7 @@
 std::vector<std::vector<SMapChipInfo>> mapChipInfo = 
 {
 	{
-	//本番用の世界のマップ
+		//本番用の世界のマップ
 		#include "WorldMap.h"
 		//#include "ShopTest.h"
 		//#include "mm.h"
