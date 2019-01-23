@@ -13,7 +13,7 @@ void CPlayerWireMove::Init()
 {
 	m_pPlayerGetter->GetAnimation().Play(enPlayerAnimationWireThrow, 0.25f);
 	m_movePosition = m_pPlayer->GetWireAction().GetWirePosition();
-	m_accel = 0.0f;
+	m_accel = 0.3f;
 	m_moveSpeed = 0.0f;
 	m_wireSpeed = 1.0f;
 	m_isWireThrow = true;
