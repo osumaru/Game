@@ -3,6 +3,7 @@ enum EnDepthStencilState
 {
 	enDepthStencilState2D,		//2D用
 	enDepthStencilState3D,		//3D用
+	enDepthStencilParticle,		//パーティクル用のステート(深度書き込みはしないが深度テストはする
 	enDepthStencilStateNum,
 };
 

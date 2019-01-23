@@ -61,12 +61,14 @@ void CParticle::Init(const SParticleEmittInfo& info, const CCamera* camera)
 	WORD indexElements[4] = { 0, 3, 1, 2 };
 	//プリミティブを作成
 	m_primitive.Create(elements, sizeof(PVSLayout), 4, indexElements, 6, CPrimitive::enIndex16, CPrimitive::enTypeTriangleStrip);
-	m_worldMatrix = CMatrix::Identity;
+
 	m_rotation = CQuaternion::Identity;
-	m_cb.Create(sizeof(CMatrix), &m_worldMatrix);
+	m_cb.Create(sizeof(SParticleCB), nullptr);
 
 	m_size.x = info.width;
 	m_size.y = info.height;
+	m_alphaBlendState = info.alphaBlendState;
+
 }
 
 void CParticle::Update()
@@ -84,6 +86,12 @@ void CParticle::Update()
 	CQuaternion multi;
 	multi.SetRotation(CVector3::AxisY, m_angle);
 	m_rotation.Multiply(multi);
+	UpdateWorldMatrix();
+}
+
+void CParticle::UpdateWorldMatrix()
+{
+
 	CMatrix cameraRotMat;
 	cameraRotMat = m_camera->GetViewMatrix();
 	cameraRotMat.Inverse();
@@ -92,7 +100,7 @@ void CParticle::Update()
 	cameraRotMat.m[3][2] = 0.0f;
 	cameraRotMat.m[3][3] = 1.0f;
 	CMatrix scaleMat;
-	scaleMat.MakeScaling({ m_size.x, m_size.y, 1.0f });
+	scaleMat.MakeScaling({ m_size.x, m_size.y, 0.0f });
 	CMatrix rotationMat;
 	rotationMat.MakeRotationFromQuaternion(m_rotation);
 	CMatrix transMat;
@@ -106,13 +114,18 @@ void CParticle::Update()
 
 void CParticle::AfterDraw()
 {
-	EnAlphaBlendState backup = Engine().GetCurrentAlphaBlendState();
-	Engine().SetAlphaBlendState(enAlphaBlendStateAdd);
-	CMatrix worldViewProjMat = m_worldMatrix;
+	EnAlphaBlendState backupBlend = Engine().GetCurrentAlphaBlendState();
+	Engine().SetAlphaBlendState(m_alphaBlendState);
+	EnDepthStencilState backupDepth = Engine().GetCurrentDepthStencilState();
+	Engine().SetDepthStencilState(enDepthStencilParticle);
 
-	worldViewProjMat.Mul(worldViewProjMat, m_camera->GetViewMatrix());
-	worldViewProjMat.Mul(worldViewProjMat, m_camera->GetProjectionMatrix());
-	m_cb.Update(&worldViewProjMat);
+	SParticleCB particleCB;
+	particleCB.worldViewProj = m_worldMatrix;
+
+	particleCB.worldViewProj.Mul(particleCB.worldViewProj, m_camera->GetViewMatrix());
+	particleCB.worldViewProj.Mul(particleCB.worldViewProj, m_camera->GetProjectionMatrix());
+	particleCB.alpha = m_alpha;
+	m_cb.Update(&particleCB);
 	GetDeviceContext()->VSSetShader((ID3D11VertexShader*)m_vs.GetBody().Get(), nullptr, 0);
 	GetDeviceContext()->PSSetShader((ID3D11PixelShader*)m_ps.GetBody().Get(), nullptr, 0);
 	ID3D11Buffer* vertexBuffers[] = { m_primitive.GetVertexBuffer().Get() };
@@ -128,5 +141,6 @@ void CParticle::AfterDraw()
 	GetDeviceContext()->PSSetShaderResources(0, 2, views);
 	GetDeviceContext()->DrawIndexed(m_primitive.GetIndexNum(), 0, 0);
 
-	Engine().SetAlphaBlendState(backup);
+	Engine().SetAlphaBlendState(backupBlend);
+	Engine().SetDepthStencilState(backupDepth);
 }

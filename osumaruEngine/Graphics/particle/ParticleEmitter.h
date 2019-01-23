@@ -18,6 +18,7 @@ struct SParticleEmittInfo
 	CVector3 randomMoveSpeed;	//パーティクルの移動速度のランダム幅
 	int particleNum;			//同時に出るパーティクルの数
 	bool isFirstTimeRandom;		//一番最初にパーティクル出すときだけ時間をずらすか
+	EnAlphaBlendState alphaBlendState;//アルファブレンドのステート
 };
 
 //パーティクルエミッター

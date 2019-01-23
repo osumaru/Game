@@ -25,7 +25,6 @@ public:
 	//ゲームのオブジェクトを消去する関数
 	void Delete(IGameObject* deleteObject);
 
-
 	/*
 	オブジェクトを生成する。
 	priority	オブジェクトの優先度

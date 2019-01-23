@@ -153,4 +153,7 @@ void CDeferred::Draw()
 	GetDeviceContext()->PSSetShader((ID3D11PixelShader*)m_pixelShader.GetBody().Get(), nullptr, 0);
 	GetDeviceContext()->IASetInputLayout(m_vertexShader.GetInputlayOut().Get());
 	m_primitive.Draw(GetDeviceContext());
+
+	GetDeviceContext()->OMSetRenderTargets(1, backBuffer, MainRenderTarget().GetDepthStencil().Get());
+	
 }

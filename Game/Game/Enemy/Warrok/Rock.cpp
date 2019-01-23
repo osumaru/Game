@@ -41,6 +41,7 @@ void CRock::Init(CWarrok* warrok, const CVector3& enemyPos)
 	m_particleInfo.randomMoveSpeed = { 3.0f, 3.0f, 3.0f };
 	m_particleInfo.particleNum = 10;
 	m_particleInfo.isFirstTimeRandom = false;
+	m_particleInfo.alphaBlendState = enAlphaBlendStateTranslucent;
 }
 
 void CRock::Update()

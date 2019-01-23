@@ -23,6 +23,8 @@ void CDepthStencilState::Init(Microsoft::WRL::ComPtr<ID3D11Device> device)
 	depthDesc.DepthEnable = true;
 	depthDesc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ALL;
 	device->CreateDepthStencilState(&depthDesc, &m_depthStencilState[enDepthStencilState3D]);
+	depthDesc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ZERO;
+	device->CreateDepthStencilState(&depthDesc, &m_depthStencilState[enDepthStencilParticle]);
 	depthDesc.DepthEnable = false; 
 	device->CreateDepthStencilState(&depthDesc, &m_depthStencilState[enDepthStencilState2D]);
 }
