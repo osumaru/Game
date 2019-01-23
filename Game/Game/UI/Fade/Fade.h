@@ -7,7 +7,7 @@ public:
 	~CFade();
 	bool Start();
 	void Update();
-	void AfterDraw();
+	void PostAfterDraw();
 	void FadeOut(); //フェイドアウトを行うためにを呼び出すための関数
 	void FadeIn();	//フェイドインを行うために呼び出される関数
 	//実行中かどうかを返す
