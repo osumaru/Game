@@ -82,6 +82,15 @@ void CPlayerArrow::Update()
 				{
 					enemys->SetIsDamage(true);
 					deleteFlg = true;
+					m_effect.Init(L"Assets/Effect/DamageEffect.efk");
+					m_effect.Play();
+					CVector3 effectPos = m_arrowPosition;
+					effectPos.y += 1.0f;
+					m_effect.SetPosition(effectPos);
+					const float SCALE = 0.1f;
+					m_effect.SetScale({ SCALE, SCALE, SCALE });
+					m_effect.Update();
+					break;
 				}
 
 			}
@@ -107,7 +116,14 @@ void CPlayerArrow::Update()
 					{
 						GetMaw().SetIsDamage(true);
 						deleteFlg = true;
-						//return;
+						m_effect.Init(L"Assets/Effect/DamageEffect.efk");
+						m_effect.Play();
+						CVector3 effectPos = m_arrowPosition;
+						effectPos.y += 1.0f;
+						m_effect.SetPosition(effectPos);
+						const float SCALE = 0.1f;
+						m_effect.SetScale({ SCALE, SCALE, SCALE });
+						m_effect.Update();
 					}
 				}
 				else
@@ -124,7 +140,14 @@ void CPlayerArrow::Update()
 					{
 						GetMaw().SetIsDamage(true);
 						deleteFlg = true;
-						//return;
+						m_effect.Init(L"Assets/Effect/DamageEffect.efk");
+						m_effect.Play();
+						CVector3 effectPos = m_arrowPosition;
+						effectPos.y += 1.0f;
+						m_effect.SetPosition(effectPos);
+						const float SCALE = 0.1f;
+						m_effect.SetScale({ SCALE, SCALE, SCALE });
+						m_effect.Update();
 					}
 				}
 			}

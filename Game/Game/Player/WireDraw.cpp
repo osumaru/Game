@@ -18,6 +18,7 @@ void CWireDraw::Init(const CVector3& startPos, const CVector3& endPos, const CVe
 	m_ps.Load("Assets/shader/rigidBodyDraw.fx", "PSMain", CShader::enPS);
 	CMatrix mat = CMatrix::Identity;
 	m_cb.Create(sizeof(CMatrix), &mat);
+	m_color = color;
 }
 
 void CWireDraw::Update()
