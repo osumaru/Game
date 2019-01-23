@@ -103,10 +103,10 @@
 //	CQuaternion(0.00f, 0.00f, 0.00f, 0.00f ),  //回転
 //	enMapTagEnemyGroup, //タグ
 //},
-//Maw
-{
-	L"Maw",
-	CVector3(-0.13f, 0.00f, 10.24f),             //平行移動
-	CQuaternion(0.00f, 1.00f, 0.00f, -0.08f),  //回転
-	enMapTagMaw, //タグ
-},
+////Maw
+//{
+//	L"Maw",
+//	CVector3(-0.13f, 0.00f, 10.24f),             //平行移動
+//	CQuaternion(0.00f, 1.00f, 0.00f, -0.08f),  //回転
+//	enMapTagMaw, //タグ
+//},

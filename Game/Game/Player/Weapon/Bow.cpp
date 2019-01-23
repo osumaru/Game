@@ -65,6 +65,16 @@ void CBow::Update()
 		}
 	}
 
+	if (m_remainNum <= 0)
+	{
+		m_timer += GameTime().GetDeltaFrameTime();
+		if (m_timer >= RECOVERY_TIME)
+		{
+			m_remainNum = ARROW_LIMIT_NUM;
+			m_timer = 0.0f;
+		}
+	}
+
 	if (!m_pPlayer->GetWireAction().IsWireMove() && Pad().GetLeftTrigger())
 	{
 		//GetGameCamera().SetCmareaState(GetGameCamera().enArrow);
@@ -88,8 +98,13 @@ void CBow::AfterDraw()
 
 void CBow::ArrowCreate()
 {
+	if (m_remainNum <= 0) 
+	{
+		return;
+	}
 	CPlayerArrow* arrow = New<CPlayerArrow>(PRIORITY_ARROW);
 	m_arrowList.push_back(arrow);
+	m_remainNum--;
 }
 
 
