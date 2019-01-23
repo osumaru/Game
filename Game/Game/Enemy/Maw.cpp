@@ -111,10 +111,6 @@ void CMaw::Init(CVector3 position)
 //更新
 void CMaw::Update()
 {
-	if (Pad().IsTriggerButton(enButtonLB))
-	{
-		m_actionPattern = enActionPatternDown;
-	}
 	//行動パターンの選択
 	switch (m_actionPattern)
 	{
@@ -147,6 +143,12 @@ void CMaw::Update()
 	{
 		m_status.Hp -= 10;
 		m_isDamage = false;
+		//HPが0以下になったら
+		if (m_status.Hp <= 0)
+		{
+			//死亡ステートへ
+			m_actionPattern = EnMawActionPattern::enActionPatternDeath;
+		}
 	}
 
 	WeekPointUpdate();//弱点の更新
@@ -268,7 +270,7 @@ void CMaw::SpecialAttack()
 //ダウン状態
 void CMaw::Down()
 {
-
+	m_characterController.SetMoveSpeed(CVector3::Zero);
 	const float MaxDownTime = 3.0f;	//最大ダウン時間
 	//アニメーション再生
 	Anim(EnMawState::enState_Down);
@@ -285,7 +287,8 @@ void CMaw::Down()
 	//ここでHPバーを表示する？
 	if (m_isDamage)
 	{
-		GameTime().SetSlowDelayTime(0.4f, 0.1f, 0.1f);
+		GameTime().SetFadeOutTime(0.5f);
+		GameTime().SetSlowDelayTime(0.3f, 0.1f, 0.06f);
 		//ダメージ計算
 		int playerStrength = GetPlayer().GetStatus().Strength;
 		int damage = playerStrength - m_status.Defense;

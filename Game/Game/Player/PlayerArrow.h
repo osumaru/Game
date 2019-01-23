@@ -14,6 +14,7 @@ public:
 		return m_arrowPosition;
 	}
 private:
+	CEffect			m_effect;
 	CSkinModel		m_arrowskin;
 	CVector3		m_arrowPosition;
 	CQuaternion		m_arrowRot;

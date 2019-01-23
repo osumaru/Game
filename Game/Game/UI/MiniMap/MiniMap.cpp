@@ -122,7 +122,7 @@ void CMiniMap::Update()
 	}
 }
 
-void CMiniMap::AfterDraw()
+void CMiniMap::PostAfterDraw()
 {
 	m_miniMap.Draw();
 	for (int i = 0; i < m_enemyList->size(); i++) {

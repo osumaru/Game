@@ -73,7 +73,7 @@ void CDamageNumber::Update()
 	}
 }
 
-void CDamageNumber::AfterDraw()
+void CDamageNumber::PostAfterDraw()
 {
 	for (int i = 0; i < EnDigit::enDigit_Num; i++)
 	{

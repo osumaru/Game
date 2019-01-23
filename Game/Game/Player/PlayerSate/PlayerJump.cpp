@@ -5,6 +5,11 @@
 
 void CPlayerJump::Init()
 {
+	const float JumpVolume = 0.3f;
+	CSoundSource* JumpSound = New<CSoundSource>(0);
+	JumpSound->Init("Assets/sound/Battle/landing.wav");
+	JumpSound->Play(false);
+	JumpSound->SetVolume(JumpVolume);
 	CVector3 moveSpeed = m_pPlayerGetter->GetMoveSpeed();
 	moveSpeed.y += 20.0f;
 	m_pPlayerGetter->SetMoveSpeed(moveSpeed);
@@ -51,6 +56,11 @@ void CPlayerJump::Update()
 	{
 		if (m_pPlayerGetter->GetAnimation().GetCurrentAnimationNum() != enPlayerAnimationLanding)
 		{
+			const float landingVolume = 0.3f;
+			CSoundSource* landingSound = New<CSoundSource>(0);
+			landingSound->Init("Assets/sound/Battle/Groundlanding.wav");
+			landingSound->Play(false);
+			landingSound->SetVolume(landingVolume);
 			m_pPlayerGetter->SetMoveSpeed(CVector3::Zero);
 
 			m_pPlayerGetter->GetAnimation().Play(enPlayerAnimationLanding);

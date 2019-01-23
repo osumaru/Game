@@ -110,6 +110,11 @@ void CTitleScene::Update()
 		{
 			return;
 		}
+		const float StartVolume = 0.3f;
+		CSoundSource* StartSound = New<CSoundSource>(0);
+		StartSound->Init("Assets/sound/SystemSound/StartSE.wav");
+		StartSound->Play(false);
+		StartSound->SetVolume(StartVolume);
 		//ƒQ[ƒ€ƒV[ƒ“‚Ö‘JˆÚ
 		GetSceneManager().ChangeScene(GetSceneManager().enGameScene);
 		

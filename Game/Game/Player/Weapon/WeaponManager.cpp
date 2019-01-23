@@ -128,12 +128,15 @@ void CWeaponManager::Init(CPlayer* player)
 		particleInfo.randomMoveSpeed = { 0.0f, 0.0f, 0.0f };
 		particleInfo.particleNum = 1;
 		particleInfo.isFirstTimeRandom = false;
+		particleInfo.alphaBlendState = enAlphaBlendStateAdd;
 		for (int i = 0; i < maxVertexBufferCount; i++)
 		{
 			CParticle* particle = New<CParticle>(PRIORITY_UI);
 			particle->Init(particleInfo, &GetGameCamera().GetCamera());
 			particle->SetIsActive(false);
+			particle->SetAlpha(0.2f);
 			m_particleList.push_back(particle);
+
 		}
 	}
 }
@@ -145,18 +148,38 @@ void CWeaponManager::Update()
 	{
 		if (Pad().IsTriggerButton(enButtonUp))
 		{
+			const float ChangeVolume = 0.3f;
+			CSoundSource* ChangeSound = New<CSoundSource>(0);
+			ChangeSound->Init("Assets/sound/SystemSound/EquipOff.wav");
+			ChangeSound->Play(false);
+			ChangeSound->SetVolume(ChangeVolume);
 			m_weaponState = enWeaponSword;
 		}
 		else if (Pad().IsTriggerButton(enButtonDown))
 		{
+			const float ChangeVolume = 0.3f;
+			CSoundSource* ChangeSound = New<CSoundSource>(0);
+			ChangeSound->Init("Assets/sound/SystemSound/EquipOff.wav");
+			ChangeSound->Play(false);
+			ChangeSound->SetVolume(ChangeVolume);
 			m_weaponState = enWeaponArrow;
 		}
 		else if (Pad().IsTriggerButton(enButtonLeft))
 		{
+			const float ChangeVolume = 0.3f;
+			CSoundSource* ChangeSound = New<CSoundSource>(0);
+			ChangeSound->Init("Assets/sound/SystemSound/EquipOff.wav");
+			ChangeSound->Play(false);
+			ChangeSound->SetVolume(ChangeVolume);
 			m_weaponState = enWeaponTwinSword;
 		}
 		else if (Pad().IsTriggerButton(enButtonRight))
 		{
+			const float ChangeVolume = 0.3f;
+			CSoundSource* ChangeSound = New<CSoundSource>(0);
+			ChangeSound->Init("Assets/sound/SystemSound/EquipOff.wav");
+			ChangeSound->Play(false);
+			ChangeSound->SetVolume(ChangeVolume);
 			m_weaponState = enWeaponLongSword;
 		}
 	}
@@ -187,7 +210,7 @@ void CWeaponManager::AfterDraw()
 {
 	if (m_isAttack && m_isTraceDraw)
 	{
-		for (int i = 0; i < GetWeapon()->GetMaxWeaponHitNum(); i++)
+		for (int i = 0; i < GetWeapon()->GetMaxWeaponHitNum();i++)
 		{
 			m_weaponTrace[i].Draw();
 		}
@@ -212,6 +235,7 @@ void CWeaponManager::ParticleSetting()
 		position.Mul(worldMatrix);
 		particle->SetPosition(position);
 		particle->SetIsActive(true);
+		particle->UpdateWorldMatrix();
 		it++;
 	}
 }

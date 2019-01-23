@@ -51,7 +51,7 @@ void CChoices::Update()
 	}
 }
 
-void CChoices::AfterDraw()
+void CChoices::PostAfterDraw()
 {
 	m_window.Draw();
 	m_cursor.Draw();

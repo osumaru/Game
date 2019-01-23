@@ -21,7 +21,7 @@ public:
 	void Update() override;
 
 	//描画
-	void AfterDraw() override;
+	void PostAfterDraw() override;
 
 	//ダメージ計算
 	void DamageCalculation();

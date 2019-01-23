@@ -42,6 +42,7 @@ void IWeapon::Init(CPlayer* player)
 			}
 		}
 	}
+	m_hitEffect.Init(L"Assets/Effect/DamageEffect.efk");
 }
 
 void IWeapon::Updater()
@@ -158,6 +159,7 @@ void IWeapon::EnemyAttack()
 						EnemyVec.x = enemySpineMatrix->m[3][0];
 						EnemyVec.y = enemySpineMatrix->m[3][1];
 						EnemyVec.z = enemySpineMatrix->m[3][2];
+						CVector3 effectPos = (info.attackPos[i] + EnemyVec) * 0.5f;
 						EnemyVec.Subtract(info.attackPos[i]);
 						float len = EnemyVec.Length();
 						if (fabs(len) < 2.0f)
@@ -168,6 +170,11 @@ void IWeapon::EnemyAttack()
 							GetGameCamera().GetShakeCamera().SetDelayTime(m_hitEffectParam[attackNum].shakeDelayTime);
 							enemyData.enemy->SetIsDamage(true);
 							damagePossible[i] = false;
+							m_hitEffect.Play();
+							m_hitEffect.SetPosition(effectPos);
+							const float SCALE = 0.1f;
+							m_hitEffect.SetScale({ SCALE, SCALE, SCALE });
+							m_hitEffect.Update();
 						}
 					}
 				}

@@ -23,8 +23,11 @@ public:
 	//描画関数
 	virtual void Draw() {};
 
-	//Drawを呼び終わった後にもう一度呼ぶ関数。アルファブレンドしたいスプライトやポストエフェクトを切ってスプライトを描画したいときに使う。
+	//Drawを呼び終わった後にもう一度呼ぶ関数。ポストエフェクトがかかるスプライトなどを描画したいときに使う
 	virtual void AfterDraw() {};
+
+	//Drawを呼び終わった後にもう一度呼ぶ関数。ポストエフェクトを切ってスプライトを描画したいときに使う。
+	virtual void PostAfterDraw() {};
 
 	//死ぬ前に一回だけ呼ばれる関数
 	virtual void BeforeDead() {};
@@ -120,6 +123,15 @@ private:
 		if (m_isStart && m_isAsyncStart && m_isActiveDraw && !m_isDelete)
 		{
 			AfterDraw();
+		}
+	}
+
+	//PostAfterDrawerを呼ぶ関数
+	void PostAfterDrawer()
+	{
+		if (m_isStart && m_isAsyncStart && m_isActiveDraw && !m_isDelete)
+		{
+			PostAfterDraw();
 		}
 	}
 

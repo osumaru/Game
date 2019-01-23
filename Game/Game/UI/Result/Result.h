@@ -7,7 +7,7 @@ public:
 	void Init();
 	void Update();
 	void Draw();
-	void AfterDraw();
+	void PostAfterDraw();
 
 	//•`‰æ‚³‚ê‚½‚©
 	bool GetDraw()
