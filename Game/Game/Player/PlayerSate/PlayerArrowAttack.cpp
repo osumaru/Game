@@ -12,6 +12,7 @@ void CPlayerArrowAttack::Init()
 	m_pPlayer->GetWeaponManager().SetIsAttack(true);
 	m_pPlayerGetter->SetMoveSpeed(CVector3::Zero);
 	//‹|—p‚Ì‹“_‚É•ÏX
+	GetGameCamera().SetIsArrowZoom(true);
 }
 
 void CPlayerArrowAttack::Update()

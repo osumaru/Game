@@ -42,12 +42,12 @@ void CGameCamera::CameraSetPlayer()
 	target.y += TARGET_OFFSET_Y;
 	m_springCamera.SetTarTarget(target);
 	//座標を設定する
-	CVector3 toCameraPos = { 0.0f, 0.0f, -3.5f };
-	CVector3 position = target + toCameraPos;
+	m_toCameraPos = { 0.0f, 0.0f, -3.5f };
+	CVector3 position = target + m_toCameraPos;
 	m_springCamera.SetTarPosition(position);
 	m_springCamera.Update();
 	//注視点からカメラまでの距離を求める
-	m_cameraLength = toCameraPos.Length();
+	m_cameraLength = m_toCameraPos.Length();
 }
 
 void CGameCamera::Update()
@@ -69,7 +69,7 @@ void CGameCamera::Update()
 		else 
 		{
 			//ロックオンを解除する
-			LockOnCancel(target, position);
+			LockOnCancel();
 		}
 	}
 
@@ -79,12 +79,58 @@ void CGameCamera::Update()
 		//ロックオンしているエネミーを切り替える
 		ChangeTarget();
 		//ロックオンする
-		LockOn(target, position);
+		LockOn(target);
+
+		//プレイヤーの座標を取得
+		CVector3 playerPos = GetPlayer().GetCharacterController().GetPosition();
+		playerPos.y += LOCKON_OFFSET_Y;
+		//座標はプレイヤーの座標にカメラへのベクトルを足す
+		position = playerPos + m_toCameraPos;
 	}
 	else
 	{
-		//回転させる
-		Rotation(target, position);
+		//弓を装備中でRBボタンを押しているか
+		if (m_isArrowZoom)
+		{
+			//カメラへのベクトルを回転させる
+			Rotation();
+			//カメラの向いている方向を求める
+			CVector3 cameraFront = m_toCameraPos * -1.0f;
+			cameraFront.Normalize();
+			//注視点はプレイヤーからカメラの向いている方向に一定距離離れた場所
+			CVector3 addVec = cameraFront;
+			addVec *= 5.0f;
+			CVector3 playerPos = GetPlayer().GetCharacterController().GetPosition();
+			target = playerPos + addVec;
+			target.y += TARGET_OFFSET_Y;
+			//上方向を求める
+			CVector3 axisY = CVector3::AxisY;
+			axisY.Normalize();
+			//右方向を求める
+			CVector3 rightVec = cameraFront * -1.0f;
+			rightVec.Cross(axisY);
+			//後方向を求める
+			CVector3 backVec = cameraFront * -1.0f;
+			backVec *= 1.5f;
+			//座標はプレイヤーの後ろから少し右にずれた場所
+			position = playerPos + rightVec + backVec;
+			position.y += TARGET_OFFSET_Y;
+			//注視点の当たり判定
+			CVector3 newPos;
+			if (m_cameraCollisionSolver.Execute(newPos, target, position))
+			{
+				target = newPos;
+			}
+		}
+		else
+		{
+			//カメラへのベクトルを回転させる
+			Rotation();
+			//注視点と座標を設定
+			target = GetPlayer().GetCharacterController().GetPosition();
+			target.y += TARGET_OFFSET_Y;
+			position = target + m_toCameraPos;
+		}
 	}
 
 	////カメラの座標と注視点が近ければ座標と注視点を更新しない
@@ -118,53 +164,45 @@ void CGameCamera::Update()
 	m_camera.Update();
 }
 
-void CGameCamera::Rotation(CVector3& target, CVector3& position)
+void CGameCamera::Rotation()
 {
 	//スティックの入力量を取得
 	float rStick_x = Pad().GetRightStickX();
 	float rStick_y = Pad().GetRightStickY();
-	//注視点からカメラまでのベクトルを求める
-	CVector3 toCameraPos = position - target;
-	toCameraPos.Normalize();
-	const float	CAMERA_SPEED = 2.0f;
+	//カメラの回転スピード
+	const float	ROT_SPEED = 2.0f;
 	if (fabsf(rStick_x) > 0.0f) 
 	{
 		//Y軸周りの回転
 		CMatrix matrix;
-		matrix.MakeRotationY(rStick_x * CAMERA_SPEED * GameTime().GetDeltaFrameTime());
-		matrix.Mul(toCameraPos);
+		matrix.MakeRotationY(rStick_x * ROT_SPEED * GameTime().GetDeltaFrameTime());
+		matrix.Mul(m_toCameraPos);
 	}
 	if (fabsf(rStick_y) > 0.0f)
 	{
 		//X軸周りの回転
 		CVector3 rotAxis;
-		rotAxis.Cross(CVector3::Up, toCameraPos);
+		rotAxis.Cross(CVector3::Up, m_toCameraPos);
 		rotAxis.Normalize();
 		CMatrix matrix;
-		matrix.MakeRotationAxis(rotAxis, rStick_y * CAMERA_SPEED * GameTime().GetDeltaFrameTime());
+		matrix.MakeRotationAxis(rotAxis, rStick_y * ROT_SPEED * GameTime().GetDeltaFrameTime());
 		//1フレーム前のカメラベクトル
-		CVector3 cameraVecOld = toCameraPos;
+		CVector3 cameraVecOld = m_toCameraPos;
 		//カメラから注視点までのベクトルを回転させる
-		matrix.Mul(toCameraPos);
-		CVector3 cameraDir = toCameraPos;
+		matrix.Mul(m_toCameraPos);
+		CVector3 cameraDir = m_toCameraPos;
 		cameraDir.Normalize();
 		if (cameraDir.y < -0.8f)
 		{
 			//カメラが下を向きすぎた
-			toCameraPos = cameraVecOld;
+			m_toCameraPos = cameraVecOld;
 		}
 		else if (cameraDir.y > 0.9f)
 		{
 			//カメラが上を向きすぎた
-			toCameraPos = cameraVecOld;
+			m_toCameraPos = cameraVecOld;
 		}
 	}
-
-	//注視点を設定する
-	target = GetPlayer().GetCharacterController().GetPosition();
-	target.y += TARGET_OFFSET_Y;
-	//座標を設定する
-	position = target + toCameraPos * m_cameraLength;
 }
 
 void CGameCamera::SearchTarget()
@@ -274,19 +312,18 @@ void CGameCamera::ChangeTarget()
 	}
 }
 
-void CGameCamera::LockOn(CVector3& target, CVector3& position)
+void CGameCamera::LockOn(CVector3& target)
 {
-	CVector3 targetPosition;
 	if (m_lockOnState == enLockOn_Boss)
 	{
 		if (GetMaw().GetSmawStatus().Hp <= 0)
 		{
 			//ロックオンを外す
-			LockOnCancel(target, position);
+			LockOnCancel();
 			return;
 		}
-		targetPosition = GetMaw().GetPosition();
-		targetPosition.y += 3.0f;
+		target = GetMaw().GetPosition();
+		target.y += 3.0f;
 	}
 	else
 	{
@@ -294,48 +331,34 @@ void CGameCamera::LockOn(CVector3& target, CVector3& position)
 		if (m_lockOnEnemy->GetIsDead())
 		{
 			//ロックオンを外す
-			LockOnCancel(target, position);
+			LockOnCancel();
 			return;
 		}
-		targetPosition = m_lockOnEnemy->GetPosition();
-		targetPosition.y += 0.5f;
+		target = m_lockOnEnemy->GetPosition();
+		target.y += 0.5f;
 	}
 
-	//ターゲットの座標を注視点に設定
-	target = targetPosition;
 	//ターゲートからカメラへのベクトルを求める
 	CVector3 playerPos = GetPlayer().GetCharacterController().GetPosition();
 	CVector3 cameraVec = playerPos - target;
 	cameraVec.y = 0.0f;
 	//距離を求める
 	float length = cameraVec.Length();
-	//視点はプレイヤーから一定距離後ろにする
-	cameraVec.Normalize();
-	cameraVec *= m_cameraLength;
-	cameraVec += playerPos;
-	cameraVec.y = playerPos.y + LOCKON_OFFSET_Y;
 	//ターゲットと近いからカメラの高さに補正をかける
 	if (m_lockOnState == enLockOn_Enemy && length < LOCKON_OFFSET_Y)
 	{
 		//高さは距離が近いほど高い
 		cameraVec.y += LOCKON_OFFSET_Y - length;
 	}
-	//視点に設定
-	position = cameraVec;
+	//視点はプレイヤーから一定距離後ろにする
+	cameraVec.Normalize();
+	cameraVec *= m_cameraLength;
+	m_toCameraPos = cameraVec;
 }
 
-void CGameCamera::LockOnCancel(CVector3& target, CVector3& position)
+void CGameCamera::LockOnCancel()
 {
 	//ロックオンをやめる
 	m_isLockOn = false;
 	m_lockOnState = enLockOn_None;
-	//現在の注視点からカメラへのベクトルを求める
-	CVector3 toCameraPos = position - target;
-	toCameraPos.Normalize();
-	toCameraPos *= m_cameraLength;
-	//注視点を決める
-	target = GetPlayer().GetCharacterController().GetPosition();
-	target.y += TARGET_OFFSET_Y;
-	//座標を決める
-	position = target + toCameraPos;
 }
