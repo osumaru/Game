@@ -42,6 +42,7 @@ void IWeapon::Init(CPlayer* player)
 			}
 		}
 	}
+	m_hitEffect.Init(L"Assets/Effect/DamageEffect.efk");
 }
 
 void IWeapon::Updater()
@@ -144,20 +145,21 @@ void IWeapon::EnemyAttack()
 			float length = distance.Length();
 			if (length < 50.0f)
 			{
-				for (const auto& enemy : group->GetGroupList())
+				for (const auto& enemyData : group->GetGroupList())
 				{
-					if (enemy->GetIsDead())
+					if (enemyData.enemy->GetIsDead())
 					{
 						continue;
 					}
-					bool* damagePossible = enemy->IsDamagePossible();
+					bool* damagePossible = enemyData.enemy->IsDamagePossible();
 					if(damagePossible[i])
 					{
-						const CMatrix* enemySpineMatrix = enemy->GetWorldMatrixSpine();
+						const CMatrix* enemySpineMatrix = enemyData.enemy->GetWorldMatrixSpine();
 						CVector3 EnemyVec;
 						EnemyVec.x = enemySpineMatrix->m[3][0];
 						EnemyVec.y = enemySpineMatrix->m[3][1];
 						EnemyVec.z = enemySpineMatrix->m[3][2];
+						CVector3 effectPos = (info.attackPos[i] + EnemyVec) * 0.5f;
 						EnemyVec.Subtract(info.attackPos[i]);
 						float len = EnemyVec.Length();
 						if (fabs(len) < 2.0f)
@@ -166,8 +168,13 @@ void IWeapon::EnemyAttack()
 							GameTime().SetSlowDelayTime(m_hitEffectParam[attackNum].slowTime, m_hitEffectParam[attackNum].slowScale, m_hitEffectParam[attackNum].slowDelayTime);
 							GetGameCamera().GetShakeCamera().ShakeStart(m_hitEffectParam[attackNum].shakePower);
 							GetGameCamera().GetShakeCamera().SetDelayTime(m_hitEffectParam[attackNum].shakeDelayTime);
-							enemy->SetIsDamage(true);
+							enemyData.enemy->SetIsDamage(true);
 							damagePossible[i] = false;
+							m_hitEffect.Play();
+							m_hitEffect.SetPosition(effectPos);
+							const float SCALE = 0.1f;
+							m_hitEffect.SetScale({ SCALE, SCALE, SCALE });
+							m_hitEffect.Update();
 						}
 					}
 				}

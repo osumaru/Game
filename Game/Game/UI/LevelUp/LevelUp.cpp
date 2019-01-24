@@ -40,7 +40,7 @@ void CLevelUp::Update()
 	
 }
 
-void CLevelUp::AfterDraw()
+void CLevelUp::PostAfterDraw()
 {
 	if (m_playerLevelUpAlpha <= 0.0f)
 	{

@@ -128,6 +128,7 @@ public:
 	}
 
 private:
+	const float					PARTICLE_ALPHA = 0.2f;
 	EnPlayerWeapon				m_weaponState = enWeaponSword;				//Œ»İg‚Á‚Ä‚é•Ší
 	static std::unique_ptr<IInventoryEquip> m_equipWeapon[enWeaponNum];		//‘•”õ’†‚Ì•Ší
 	std::unique_ptr<IWeapon>	m_weapons[enWeaponNum];						//•Ší

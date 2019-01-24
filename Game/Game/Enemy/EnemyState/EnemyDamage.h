@@ -38,7 +38,6 @@ public:
 	}
 private:
 	CDamageNumber*	m_damageNumber = nullptr;	//ダメージ表示
-	CEffect			m_damageEffect;				//ダメージエフェクト
 	const float		m_knockBackSpeed = 4.0f;	//ノックバックスピード
 	float			m_deceleration = 0.0f;		//減速力
 	float			m_friction = 0.0f;			//摩擦力

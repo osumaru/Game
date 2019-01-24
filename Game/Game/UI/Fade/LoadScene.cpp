@@ -82,7 +82,7 @@ void CLoadScene::Update()
 	}
 }
 
-void CLoadScene::AfterDraw()
+void CLoadScene::PostAfterDraw()
 {
 	if (!m_isDraw) { return; }
 	Sleep(50);

@@ -196,7 +196,7 @@ void CWeaponShop::Draw()
 	m_skinmodelNpc.Draw(GetGameCamera().GetViewMatrix(), GetGameCamera().GetProjectionMatrix());
 }
 
-void CWeaponShop::AfterDraw()
+void CWeaponShop::PostAfterDraw()
 {
 	if (!m_isSelectDraw && !m_isShoplineupDraw) { return; }
 

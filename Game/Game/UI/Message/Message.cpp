@@ -55,7 +55,7 @@ void CMessage::Update()
 	}
 }
 
-void CMessage::AfterDraw()
+void CMessage::PostAfterDraw()
 {
 	m_window.Draw();
 	m_message.Draw();

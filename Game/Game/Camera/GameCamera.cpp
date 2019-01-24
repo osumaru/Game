@@ -4,6 +4,7 @@
 #include "../Player/PlayerSate/PlayerStateMachine.h"
 #include "../Enemy/IEnemy.h"
 #include "../Enemy/EnemyGroup.h"
+#include "../Enemy/Maw.h"
 #include "../Scene/SceneManager.h"
 #include "../Map/Map.h"
 
@@ -13,7 +14,7 @@ void CGameCamera::Init()
 {
 	//カメラの初期化
 	m_camera.Init();
-	m_camera.SetFar(200.0f);
+	m_camera.SetFar(1000.0f);
 	m_camera.SetNear(1.0f);
 	m_camera.SetAspect((float)FrameBufferWidth() / (float)FrameBufferHeight());
 	m_camera.SetAngle(CMath::DegToRad(60.0f));
@@ -75,7 +76,9 @@ void CGameCamera::Update()
 	//ロックオン中
 	if (m_isLockOn)
 	{
-		//エネミーをロックオンする
+		//ロックオンしているエネミーを切り替える
+		ChangeTarget();
+		//ロックオンする
 		LockOn(target, position);
 	}
 	else
@@ -166,9 +169,19 @@ void CGameCamera::Rotation(CVector3& target, CVector3& position)
 
 void CGameCamera::SearchTarget()
 {
+	if (&GetMaw().GetInstance() != nullptr && m_lockOnState != enLockOn_Boss)
+	{
+		m_lockOnState = enLockOn_Boss;
+		m_isLockOn = true;
+		return;
+	}
 	float minLength = FLT_MAX;
 	//エネミーグループのリストを取得
 	std::list<CEnemyGroup*> enemyGroupList = GetSceneManager().GetMap()->GetEnemyGroupList();
+	if (enemyGroupList.empty())
+	{
+		return;
+	}
 	for (CEnemyGroup* enemyGroup : enemyGroupList)
 	{
 		CVector3 enemyGroupPos = enemyGroup->GetPosition();
@@ -176,13 +189,19 @@ void CGameCamera::SearchTarget()
 		//エネミーグループとプレイヤーの距離を求める
 		CVector3 distance = playerPos - enemyGroupPos;
 		float length = distance.Length();
-		if (length < 30.0f)
+		//ロックオンできる距離を設定
+		const float	LOCKON_LENGTH = 30.0f;	
+		if (length < LOCKON_LENGTH)
 		{
 			//エネミーグループの中のエネミーリストを取得
-			std::list<IEnemy*> enemyList = enemyGroup->GetGroupList();
-			for (IEnemy* enemy : enemyList)
+			std::list<SEnemyGroupData> enemyList = enemyGroup->GetGroupList();
+			for (SEnemyGroupData& enemyData : enemyList)
 			{
-				CVector3 enemyPos = enemy->GetPosition();
+				if (enemyData.enemy->GetIsDead())
+				{
+					continue;
+				}
+				CVector3 enemyPos = enemyData.enemy->GetPosition();
 				//エネミーとプレイヤーの距離を求める
 				distance = playerPos - enemyPos;
 				length = distance.Length();
@@ -191,28 +210,101 @@ void CGameCamera::SearchTarget()
 					//一番近いエネミーをロックオンする
 					m_isLockOn = true;
 					minLength = length;
-					m_rockOnEnemy = enemy;
+					m_lockOnEnemy = enemyData.enemy;
+					m_lockOnEnemyNumber = enemyData.groupNumber;
+					m_lockOnState = enLockOn_Enemy;
 				}
 			}
 		}
 	}
 }
 
-void CGameCamera::LockOn(CVector3& target, CVector3& position)
+void CGameCamera::ChangeTarget()
 {
-	//ロックオンしているエネミーが死亡したか
-	if (m_rockOnEnemy->GetIsDead())
+	float rStick_x = Pad().GetRightStickX();
+	//右スティックを入力したか
+	if (rStick_x == 0.0f)
 	{
-		//ロックオンを外す
-		LockOnCancel(target, position);
+		//右スティックを入力していない
+		return;
+	}
+	//ロックオン対象がボスであるか
+	if (m_lockOnState == enLockOn_Boss)
+	{
+		//ターゲットを切り替える
+		SearchTarget();
 		return;
 	}
 
+	//ロックオン対象のエネミーグループのリストを取得
+	std::list<SEnemyGroupData> enemyGroup = m_lockOnEnemy->GetEnemyGroup()->GetGroupList();
+	if (m_lockOnState != enLockOn_Enemy && enemyGroup.empty())
+	{
+		return;
+	}
+	//右にスティックを倒すとプラス
+	if (rStick_x > 0.0f)
+	{
+		m_lockOnEnemyNumber++;
+		//グループの数より大きければ最初の番号にする
+		if (m_lockOnEnemyNumber > m_lockOnEnemy->GetEnemyGroup()->GetGroupNum())
+		{
+			m_lockOnEnemyNumber = 1;
+		}
+	}
+	//左にスティックを倒すとマイナス
+	else if (rStick_x < 0.0f)
+	{
+		m_lockOnEnemyNumber--;
+		//番号が一番小さければ最後の番号にする
+		if (m_lockOnEnemyNumber < 1)
+		{
+			m_lockOnEnemyNumber = m_lockOnEnemy->GetEnemyGroup()->GetGroupNum();
+		}
+	}
+
+	for (auto& enemyData : enemyGroup)
+	{
+		//同じ番号の敵をロックオン対象とする
+		if (enemyData.groupNumber == m_lockOnEnemyNumber)
+		{
+			m_lockOnEnemy = enemyData.enemy;
+			break;
+		}
+	}
+}
+
+void CGameCamera::LockOn(CVector3& target, CVector3& position)
+{
+	CVector3 targetPosition;
+	if (m_lockOnState == enLockOn_Boss)
+	{
+		if (GetMaw().GetSmawStatus().Hp <= 0)
+		{
+			//ロックオンを外す
+			LockOnCancel(target, position);
+			return;
+		}
+		targetPosition = GetMaw().GetPosition();
+		targetPosition.y += 3.0f;
+	}
+	else
+	{
+		//ロックオンしているエネミーが死亡したか
+		if (m_lockOnEnemy->GetIsDead())
+		{
+			//ロックオンを外す
+			LockOnCancel(target, position);
+			return;
+		}
+		targetPosition = m_lockOnEnemy->GetPosition();
+		targetPosition.y += 0.5f;
+	}
+
 	//ターゲットの座標を注視点に設定
-	target = m_rockOnEnemy->GetPosition();
-	target.y += 0.5f;
+	target = targetPosition;
 	//ターゲートからカメラへのベクトルを求める
-	CVector3 playerPos = GetPlayer().GetPosition();
+	CVector3 playerPos = GetPlayer().GetCharacterController().GetPosition();
 	CVector3 cameraVec = playerPos - target;
 	cameraVec.y = 0.0f;
 	//距離を求める
@@ -223,7 +315,7 @@ void CGameCamera::LockOn(CVector3& target, CVector3& position)
 	cameraVec += playerPos;
 	cameraVec.y = playerPos.y + LOCKON_OFFSET_Y;
 	//ターゲットと近いからカメラの高さに補正をかける
-	if (length < LOCKON_OFFSET_Y)
+	if (m_lockOnState == enLockOn_Enemy && length < LOCKON_OFFSET_Y)
 	{
 		//高さは距離が近いほど高い
 		cameraVec.y += LOCKON_OFFSET_Y - length;
@@ -236,6 +328,7 @@ void CGameCamera::LockOnCancel(CVector3& target, CVector3& position)
 {
 	//ロックオンをやめる
 	m_isLockOn = false;
+	m_lockOnState = enLockOn_None;
 	//現在の注視点からカメラへのベクトルを求める
 	CVector3 toCameraPos = position - target;
 	toCameraPos.Normalize();
@@ -245,5 +338,4 @@ void CGameCamera::LockOnCancel(CVector3& target, CVector3& position)
 	target.y += TARGET_OFFSET_Y;
 	//座標を決める
 	position = target + toCameraPos;
-	//バネカメラに設定する
 }

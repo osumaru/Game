@@ -33,9 +33,26 @@ void CGameTime::Update(CStopWatch& sw)
 	{
 		if (0.0f < m_slowTime || 0 < m_slowCount)
 		{
-			m_gameDeltaTime *= m_slowScale;
-			m_slowTime -= deltaTime;
-			m_slowCount--;
+
+			if (0.0f < m_fadeInTime)
+			{
+				m_gameDeltaTime *= m_slowScale * (1.0f - (m_fadeInTime / m_fadeInTimeMax)) + 1.0f * (m_fadeInTime / m_fadeInTimeMax);
+				m_fadeInTime -= deltaTime;
+			}
+			else
+			{
+				m_gameDeltaTime *= m_slowScale;
+				m_slowTime -= deltaTime;
+				m_slowCount--;
+			}
+		}
+		else
+		{
+			if (0.0f < m_fadeOutTime)
+			{
+				m_gameDeltaTime *= m_slowScale * (m_fadeOutTime / m_fadeOutTimeMax) + 1.0f * (1.0f - (m_fadeOutTime / m_fadeOutTimeMax));
+				m_fadeOutTime -= deltaTime;
+			}
 		}
 	}
 	

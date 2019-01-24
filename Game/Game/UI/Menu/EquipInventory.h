@@ -30,7 +30,7 @@ public:
 	void Update() override;
 
 	//•`‰æ
-	void AfterDraw() override;
+	void PostAfterDraw() override;
 
 	//‘•”õƒŠƒXƒg‚Ì®—‚·‚é
 	void EquipListReset();

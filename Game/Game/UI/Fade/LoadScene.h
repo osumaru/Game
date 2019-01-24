@@ -7,7 +7,7 @@ public:
 	~CLoadScene();
 	bool Start();
 	void Update();
-	void AfterDraw();
+	void PostAfterDraw();
 	void ColorUP();
 	void ColorDown();
 	void IsDraw(const bool setdraw)

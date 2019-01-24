@@ -139,7 +139,7 @@ void CMenu::KeyInputMenu()
 	}
 
 	//セレクトボタンが押された時の処理
-	if (Pad().IsTriggerButton(enButtonSelect))
+	if (Pad().IsTriggerButton(enButtonSelect) || Pad().IsTriggerButton(enButtonB) && m_draw)
 	{
 		PlayerStatusInput();
 		StatusMath();
@@ -179,7 +179,10 @@ void CMenu::KeyInputMenu()
 			shop->SetIsActive(!m_draw);
 		}
 		//ボスの動きの設定
-		GetMaw().SetIsActive(!m_draw);
+		if (&GetMaw())
+		{
+			GetMaw().SetIsActive(!m_draw);
+		}
 		//プレイヤーの動きの設定
 		GetPlayer().SetIsActive(!m_draw);
 	}
@@ -233,7 +236,7 @@ void CMenu::StatusMath()
 }
 
 //メニュー画面の描画処理
-void CMenu::AfterDraw()
+void CMenu::PostAfterDraw()
 {
 	if (GetPlayer().GetIsDied()) { return; }
 	if (m_draw)

@@ -4,12 +4,16 @@
 #include "../../Scene/SceneManager.h"
 #include "../../Map/Map.h"
 #include "../../Enemy/IEnemy.h"
+CPlayerWireMove::CPlayerWireMove()
+{
+	m_hitEffect.Init(L"Assets/Effect/DamageEffect.efk");
+}
 
 void CPlayerWireMove::Init()
 {
 	m_pPlayerGetter->GetAnimation().Play(enPlayerAnimationWireThrow, 0.25f);
 	m_movePosition = m_pPlayer->GetWireAction().GetWirePosition();
-	m_accel = 0.0f;
+	m_accel = 0.3f;
 	m_moveSpeed = 0.0f;
 	m_wireSpeed = 1.0f;
 	m_isWireThrow = true;
@@ -79,7 +83,7 @@ void CPlayerWireMove::Update()
 	CVector3 moveVec = toMovePos;
 	float length = toMovePos.Length();
 	toMovePos.Normalize();
-	m_accel += 0.3f;
+	m_accel += 0.0f;
 	m_moveSpeed += m_accel;
 	if (m_speed < m_moveSpeed)
 	{
@@ -122,12 +126,17 @@ void CPlayerWireMove::Update()
 		//移動が終わった
 		GetPlayer().GetWireAction().SetIsWireMove(false);
 		IEnemy* enemy = GetPlayer().GetWireAction().GetHitEnemy();
+		const float SCALE = 0.1f;
 		switch(m_pPlayer->GetWireAction().GetState())
 		{
 		case CWireAction::enStateEnemy:
 			m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateWireAttack);
 			//エネミーにダメージフラグを立てる
 			enemy->SetIsDamage(true);
+			m_hitEffect.Play();
+			m_hitEffect.SetPosition(enemy->GetPosition());
+			m_hitEffect.SetScale({ SCALE, SCALE, SCALE });
+			m_hitEffect.Update();
 			//エネミーのワイヤーに当たったフラグを戻す
 			enemy->SetIsWireHit(false);
 			break;

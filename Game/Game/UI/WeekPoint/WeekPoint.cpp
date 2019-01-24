@@ -48,7 +48,7 @@ void CWeekPoint::Draw()
 	//m_weekSprite.Draw();
 }
 
-void CWeekPoint::AfterDraw()
+void CWeekPoint::PostAfterDraw()
 {
 	//Engine().SetAlphaBlendState(enAlphaBlendStateAdd);
 	m_weekSprite.Draw();

@@ -208,7 +208,7 @@ void CEquipInventory::Update()
 	}
 }
 
-void CEquipInventory::AfterDraw()
+void CEquipInventory::PostAfterDraw()
 {
 	m_background.Draw();
 	for (int i = 0; i < m_equipLimit; i++)

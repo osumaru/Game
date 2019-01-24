@@ -10,7 +10,7 @@ class CPlayerWireMove : public IPlayerState
 {
 public:
 	//コンストラクタ
-	CPlayerWireMove() {}
+	CPlayerWireMove();
 
 	//デストラクタ
 	~CPlayerWireMove() {}
@@ -24,6 +24,7 @@ public:
 	void UpdateWireDraw();
 
 private:
+	CEffect		m_hitEffect;
 	CVector3	m_movePosition;		//移動先の座標
 	const float m_speed = 40.0f;	//移動速度
 	float		m_accel = 0.0f;

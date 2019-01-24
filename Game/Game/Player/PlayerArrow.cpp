@@ -30,8 +30,12 @@ void CPlayerArrow::Update()
 	if (GetPlayer().GetStateMachine().GetState() == CPlayerState::EnPlayerState::enPlayerStateArrowAttack && !m_isMove)
 	{
 		m_arrowPosition =  *((CVector3*)GetPlayer().GetSkinmodel().FindBoneWorldMatrix(L"LeftHand").m[3]);
-		//カメラの前方向を取得
-		CVector3 weaponFlont = GetGameCamera().GetCamera().GetFlont();
+		//プレイヤーの前方向を取得
+		const CMatrix& playerWorldMat = GetPlayer().GetSkinmodel().GetWorldMatrix();
+		CVector3 weaponFlont;
+		weaponFlont.x = playerWorldMat.m[2][0];
+		weaponFlont.y = playerWorldMat.m[2][1];
+		weaponFlont.z = playerWorldMat.m[2][2];
 		weaponFlont.Normalize();
 		m_moveSpeed = weaponFlont * MOVE_POWRE;
 		CQuaternion rotY;
@@ -82,6 +86,15 @@ void CPlayerArrow::Update()
 				{
 					enemys->SetIsDamage(true);
 					deleteFlg = true;
+					m_effect.Init(L"Assets/Effect/DamageEffect.efk");
+					m_effect.Play();
+					CVector3 effectPos = m_arrowPosition;
+					effectPos.y += 1.0f;
+					m_effect.SetPosition(effectPos);
+					const float SCALE = 0.1f;
+					m_effect.SetScale({ SCALE, SCALE, SCALE });
+					m_effect.Update();
+					break;
 				}
 
 			}
@@ -107,7 +120,14 @@ void CPlayerArrow::Update()
 					{
 						GetMaw().SetIsDamage(true);
 						deleteFlg = true;
-						//return;
+						m_effect.Init(L"Assets/Effect/DamageEffect.efk");
+						m_effect.Play();
+						CVector3 effectPos = m_arrowPosition;
+						effectPos.y += 1.0f;
+						m_effect.SetPosition(effectPos);
+						const float SCALE = 0.1f;
+						m_effect.SetScale({ SCALE, SCALE, SCALE });
+						m_effect.Update();
 					}
 				}
 				else
@@ -124,7 +144,14 @@ void CPlayerArrow::Update()
 					{
 						GetMaw().SetIsDamage(true);
 						deleteFlg = true;
-						//return;
+						m_effect.Init(L"Assets/Effect/DamageEffect.efk");
+						m_effect.Play();
+						CVector3 effectPos = m_arrowPosition;
+						effectPos.y += 1.0f;
+						m_effect.SetPosition(effectPos);
+						const float SCALE = 0.1f;
+						m_effect.SetScale({ SCALE, SCALE, SCALE });
+						m_effect.Update();
 					}
 				}
 			}

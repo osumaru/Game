@@ -141,4 +141,5 @@ protected:
 	std::unique_ptr<bool[]>					m_attackHitNum;				//•Ší‚²‚Æ‚ÌUŒ‚‰ñ”
 	std::vector<CVector3>					m_vertexBufferVector;
 	int										m_vertexBufferCount = 0;
+	CEffect									m_hitEffect;
 };

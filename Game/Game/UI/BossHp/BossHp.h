@@ -9,7 +9,7 @@ public:
 	void Update();
 
 	//描画
-	void AfterDraw();
+	void PostAfterDraw();
 
 private:
 	CSprite			m_bossHpSprite;							//ボスのHPスプライト

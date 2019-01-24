@@ -80,8 +80,11 @@ void CWeaponTraceDraw::Add(const CVector3& swordRootPosition, const CVector3& sw
 
 void CWeaponTraceDraw::Draw()
 {
+
 	EnRasterizerState backupRasterizer = Engine().GetCurrentRasterizerState();
+	EnAlphaBlendState backupBlendState = Engine().GetCurrentAlphaBlendState();
 	Engine().SetRasterizerState(enRasterizerStateBoth);
+	Engine().SetAlphaBlendState(enAlphaBlendStateAdd);
 	m_primitive.Update(m_vertexBuffer, m_indexBuffer);
 	m_viewProj.Mul(GetGameCamera().GetViewMatrix(), GetGameCamera().GetProjectionMatrix());
 	m_cb.Update(&m_viewProj);
@@ -101,4 +104,5 @@ void CWeaponTraceDraw::Draw()
 	GetDeviceContext()->PSSetShaderResources(0, 2, views);
 	GetDeviceContext()->DrawIndexed(m_primitive.GetIndexNum(), 0, 0);
 	Engine().SetRasterizerState(backupRasterizer);
+	Engine().SetAlphaBlendState(backupBlendState);
 }
