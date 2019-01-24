@@ -96,7 +96,6 @@ public:
 		}
 	}
 
-
 private:
 	bool									m_isPlay = false;					//再生中か？
 	bool									m_isLoop = false;					//ループしてるか？

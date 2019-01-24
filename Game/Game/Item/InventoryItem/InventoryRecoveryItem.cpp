@@ -23,7 +23,6 @@ bool CInventoryRecoveryItem::Use()
 	{
 		//ƒvƒŒƒCƒ„[‚ÌHP‚ğ‰ñ•œ‚³‚¹‚é
 		GetPlayer().RecoveryHP(m_recoveryValue);
-		delete this;
 		return true;
 	}
 	return false;

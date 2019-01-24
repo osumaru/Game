@@ -23,6 +23,7 @@ public:
 	*/
 	void Update(float deltaTime);
 
+
 	/*
 	アニメーション再生関数
 	animationNum	再生するアニメーションの番号
@@ -82,7 +83,32 @@ public:
 			animEvent(clipName, eventName);
 		}
 	}
+
+	/*
+	アニメーションブレンドをさせたいボーンを追加
+	boneName		アニメーションブレンドさせたい骨の名前
+	animationNum	アニメーションの番号
+	*/
+	void AddBlendAnimation(const wchar_t* boneName, int animationNum);
+
 private:
+	//ボーンの行列を更新
+	void UpdateBoneMatrix(int boneID, const std::vector<CMatrix>& localMat1, const std::vector<CMatrix>& localMat2);
+
+	//ブレンドアニメーションするための情報を追加
+	void AddBlendAnimationInfo(int boneID, int animationNum, int count);
+
+
+	//アニメーションブレンドに使う情報
+	struct SAnimationBlendInfo
+	{
+		int animationNum;	//再生するアニメーション
+		int boneID;			//アニメーションを切り替える骨のID
+	};
+
+private:
+	int									m_rootBoneID;
+	std::vector<SAnimationBlendInfo>	m_animationBlend;
 	std::unique_ptr<CAnimationClip[]>	m_animationClips = nullptr;		//アニメーションクリップの配列
 	int									m_currentAnimationNum = 0;		//今再生しているアニメーションの番号
 	int									m_curCurrentAnimationNum = 0;	//ひとつ前に再生していたアニメーションの番号
