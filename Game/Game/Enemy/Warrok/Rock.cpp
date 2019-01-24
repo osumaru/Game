@@ -62,7 +62,6 @@ void CRock::Update()
 		{
 			GetPlayer().SetDamage(m_warrok->GetStatus().strength);
 			GetPlayer().SetDamageEnemyPos(m_enemyPos);
-			GetPlayer().SetDamage(true);
 		}
 		m_isHit = true;
 		Delete(this);
@@ -76,7 +75,6 @@ void CRock::Update()
 		{
 			GetPlayer().SetDamage(m_warrok->GetStatus().strength);
 			GetPlayer().SetDamageEnemyPos(m_enemyPos);
-			GetPlayer().SetDamage(true);
 		}
 		m_isHit = true;
 		Delete(this);
