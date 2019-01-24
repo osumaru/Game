@@ -7,8 +7,9 @@
 #include "ClearScene.h"
 #include "BossScene.h"
 #include "../UI/Fade/Fade.h"
+#include "../GameSound/GameSound.h"
 
-class CSceneManager:public IGameObject
+class CSceneManager :public IGameObject
 {
 public:
 	enum EnSceneState {
@@ -77,6 +78,10 @@ public:
 	{
 		m_isStart = IsStart;
 	}
+	CGameSound* GetGameSound()
+	{
+		return m_gameSound;
+	}
 
 private:
 	EnSceneState	m_preSceneState= enSceneNum;//シーンのステート（現在のシーンを入れておく用）
@@ -86,6 +91,7 @@ private:
 	CClearScene*	m_clearScene = nullptr;			//クリアシーン
 	CBossScene*		m_bossScene = nullptr;			//ボスシーン
 	CFade*			m_fade;							//フェイド
+	CGameSound*		m_gameSound = nullptr;	//ゲームサウンド
 	bool			m_isSceneChange = false;		//シーン切り替え
 	bool			m_isFadeOut = false;			//フェードアウトしたかどうか
 	bool			m_isStart=false;				//ゲーム開始時だけのフラグ
