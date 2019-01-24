@@ -51,11 +51,44 @@ void CPlayer::OnInvokeAnimationEvent(//ƒAƒjƒ[ƒVƒ‡ƒ“ƒCƒxƒ“ƒg‚ªŒÄ‚Î‚ê‚é‚²‚Æ‚ÉŒÄ‚
 		!wcscmp(animClipName, L"Assets/modelData/PlayerCombo6.tka"))
 	{
 		m_weaponManager.SetIsAttackCheck(!m_weaponManager.GetIsAttackCheck());
+	}
 
+	if (!wcscmp(animClipName, L"Assets/modelData/PlayerTwinAttackFirst.tka") ||
+		!wcscmp(animClipName, L"Assets/modelData/PlayerTwinAttackSecand.tka") ||
+		!wcscmp(animClipName, L"Assets/modelData/PlayerTwinAttackThird.tka"))
+	{
 		//UŒ‚‰¹‚ÌÄ¶
 		if (m_weaponManager.GetIsAttackCheck())
 		{
-			const float AttackVolume = 0.3f;
+			const float AttackVolume = 0.1f;
+			CSoundSource* AttackSound = New<CSoundSource>(0);
+			AttackSound->Init("Assets/sound/Battle/TwinSwordSE.wav");
+			AttackSound->Play(false);
+			AttackSound->SetVolume(AttackVolume);
+		}
+	}
+	else if (!wcscmp(animClipName, L"Assets/modelData/PlayerLeageAttackFirst.tka") ||
+		!wcscmp(animClipName, L"Assets/modelData/PlayerLeageAttackSecand.tka") ||
+		!wcscmp(animClipName, L"Assets/modelData/PlayerLeageAttackThird.tka"))
+	{
+		//UŒ‚‰¹‚ÌÄ¶
+		if (m_weaponManager.GetIsAttackCheck())
+		{
+			const float AttackVolume = 0.1f;
+			CSoundSource* AttackSound = New<CSoundSource>(0);
+			AttackSound->Init("Assets/sound/Battle/LeageSwordSE.wav");
+			AttackSound->Play(false);
+			AttackSound->SetVolume(AttackVolume);
+		}
+	}
+	else if (!wcscmp(animClipName, L"Assets/modelData/PlayerCombo4.tka") ||
+		!wcscmp(animClipName, L"Assets/modelData/PlayerCombo5.tka") ||
+		!wcscmp(animClipName, L"Assets/modelData/PlayerCombo6.tka"))
+	{
+		//UŒ‚‰¹‚ÌÄ¶
+		if (m_weaponManager.GetIsAttackCheck())
+		{
+			const float AttackVolume = 0.1f;
 			CSoundSource* AttackSound = New<CSoundSource>(0);
 			AttackSound->Init("Assets/sound/Battle/SwordSE.wav");
 			AttackSound->Play(false);
@@ -200,10 +233,10 @@ void CPlayer::Update()
 	CVector3 stickDir = { stickX, 0.0f, stickZ };
 	m_playerGetter.SetStickDir(stickDir);
 
-	if (Pad().IsTriggerButton(enButtonB))
+	/*if (Pad().IsTriggerButton(enButtonB))
 	{
 		m_isDamege = true;
-	}
+	}*/
 
 	CMatrix viewMat;
 	CVector3 shadowCameraUp = GetGameCamera().GetSpringCamera().GetTarget() - GetGameCamera().GetSpringCamera().GetPosition();

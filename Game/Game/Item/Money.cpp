@@ -55,6 +55,11 @@ void CMoney::Update()
 	//E‚¤‚±‚Æ‚ª‚Å‚«‚é‚©”»’è
 	bool isPickUp = PickUp(m_isPopEnd, 0.8f);
 	if (isPickUp) {
+		const float GetVolume = 0.3f;
+		CSoundSource* GetSound = New<CSoundSource>(0);
+		GetSound->Init("Assets/sound/Battle/ItemGet.wav");
+		GetSound->Play(false);
+		GetSound->SetVolume(GetVolume);
 		//E‚¤‚±‚Æ‚ª‚Å‚«‚é
 		GetPlayer().GainGold(m_gold);
 		Delete(this);
