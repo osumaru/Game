@@ -6,6 +6,7 @@ void CSceneManager::Init()
 {
 	m_fade = New<CFade>(PRIORITY_MAX - 1);
 	m_nextSceneState = enTitleScene;
+	m_gameSound = New<CGameSound>(0);
 	//SceneManagerƒNƒ‰ƒX‚ğAdd
 	Add(this, 0);
 	m_isFadeOut = true;

@@ -46,7 +46,8 @@ void IShop::ShopUpdate()
 				m_isSelectDraw = true;
 				GetPlayer().SetIsActiveUpdate(false);
 				//“X—p‚Ì‰¹Šy‚ð‚©‚¯‚é
-				GetSceneGame().GetGameSound()->SetIsShop(true);
+				//GetSceneGame().GetGameSound()->SetIsShop(true);
+				GetSceneManager().GetGameSound()->SetGameSound(CGameSound::enShopBgm);
 				
 				
 			}
@@ -60,7 +61,8 @@ void IShop::ShopUpdate()
 			else 
 			{ 
 				GetPlayer().SetIsActiveUpdate(true); 
-				GetSceneGame().GetGameSound()->SetIsShop(false);
+				//GetSceneGame().GetGameSound()->SetIsShop(false);
+				GetSceneManager().GetGameSound()->SetGameSound(CGameSound::enWorldBgm);
 			}
 			m_isSelectDraw = false;
 			m_shopSelectPenPosition = SELECT_POSITON_START;
@@ -90,7 +92,8 @@ void IShop::ShopUpdate()
 			m_isShoplineupDraw = false;
 			GetPlayer().SetIsActiveUpdate(true);
 			GetPlayer().SetIsAction(false);
-			GetSceneGame().GetGameSound()->SetIsShop(false);
+			//GetSceneGame().GetGameSound()->SetIsShop(false);
+			GetSceneManager().GetGameSound()->SetGameSound(CGameSound::enWorldBgm);
 		}
 		else if (Pad().IsTriggerButton(enButtonA))
 		{

@@ -20,7 +20,7 @@ public:
 	modelName	読み込むモデルの名前
 	anim		アニメーション付きのモデルの場合アニメーションを入れる入れ物
 	*/
-	virtual void Init(const CVector3& position, const CQuaternion& rotation, const wchar_t* modelName, const bool collider, CAnimation* anim = nullptr);
+	virtual void Init(const CVector3& position, const CQuaternion& rotation, const wchar_t* modelName, const bool istree, const bool collider, CAnimation* anim = nullptr);
 
 	//初期化関数
 	virtual bool Start()override;

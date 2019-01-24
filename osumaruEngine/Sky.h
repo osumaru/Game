@@ -28,10 +28,16 @@ public:
 	{
 		m_skinModel.SetLight(light);
 	}
+
+	void SetPosition(const CVector3& position)
+	{
+		m_position = position;
+	}
 private:
 	CSkinModel m_skinModel;
 	const CCamera* m_camera = nullptr;
 	CLight m_light;
+	CVector3 m_position = CVector3::Zero;
 };
 
 static CSky& Sky()

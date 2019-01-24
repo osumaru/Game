@@ -30,8 +30,12 @@ void CPlayerArrow::Update()
 	if (GetPlayer().GetStateMachine().GetState() == CPlayerState::EnPlayerState::enPlayerStateArrowAttack && !m_isMove)
 	{
 		m_arrowPosition =  *((CVector3*)GetPlayer().GetSkinmodel().FindBoneWorldMatrix(L"LeftHand").m[3]);
-		//カメラの前方向を取得
-		CVector3 weaponFlont = GetGameCamera().GetCamera().GetFlont();
+		//プレイヤーの前方向を取得
+		const CMatrix& playerWorldMat = GetPlayer().GetSkinmodel().GetWorldMatrix();
+		CVector3 weaponFlont;
+		weaponFlont.x = playerWorldMat.m[2][0];
+		weaponFlont.y = playerWorldMat.m[2][1];
+		weaponFlont.z = playerWorldMat.m[2][2];
 		weaponFlont.Normalize();
 		m_moveSpeed = weaponFlont * MOVE_POWRE;
 		CQuaternion rotY;
