@@ -38,7 +38,7 @@ private:
 	CTexture*							m_texture;								//サークルのテクスチャ
 	bool								m_isZoom;								//弓用の視点に切り替えるかの判定をする変数
 	float								m_timer = 0.0f;					//タイマー
-	float								RECOVERY_TIME = 10.0f;			//弾が回復する時間
-	int									ARROW_LIMIT_NUM = 5;			//弾数の限界
+	const float							RECOVERY_TIME = 10.0f;			//弾が回復する時間
+	const int							ARROW_LIMIT_NUM = 5;			//弾数の限界
 	int									m_remainNum = ARROW_LIMIT_NUM;	//残弾数
 };

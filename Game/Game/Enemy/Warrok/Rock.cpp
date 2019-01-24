@@ -23,6 +23,7 @@ void CRock::Init(CWarrok* warrok, const CVector3& enemyPos)
 	//キャラクターコントローラーを初期化
 	m_characterController.Init(1.0f, 0.1f, m_position);
 	m_characterController.SetGravity(-4.9f);
+	m_characterController.SetUserIndex(enCollisionAttr_Rock);
 	m_characterController.SetIgnoreRigidBody(&warrok->GetCharacterController().GetBody());
 	m_warrok = warrok;
 
@@ -61,7 +62,6 @@ void CRock::Update()
 		{
 			GetPlayer().SetDamage(m_warrok->GetStatus().strength);
 			GetPlayer().SetDamageEnemyPos(m_enemyPos);
-			GetPlayer().SetDamage(true);
 		}
 		m_isHit = true;
 		Delete(this);
@@ -75,7 +75,6 @@ void CRock::Update()
 		{
 			GetPlayer().SetDamage(m_warrok->GetStatus().strength);
 			GetPlayer().SetDamageEnemyPos(m_enemyPos);
-			GetPlayer().SetDamage(true);
 		}
 		m_isHit = true;
 		Delete(this);

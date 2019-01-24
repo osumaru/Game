@@ -73,11 +73,22 @@ public:
 		return m_camera.GetProjectionMatrix();
 	}
 
+	//弓装備中にズームしているかを取得
+	bool GetIsArrowZoom()
+	{
+		return m_isArrowZoom;
+	}
+
+	//弓装備中にズームしているかを設定
+	//isArrowZoom	弓装備中にズームしているか
+	void SetIsArrowZoom(bool isArrowZoom)
+	{
+		m_isArrowZoom = isArrowZoom;
+	}
+
 private:
-	//回転
-	//target	ターゲットの座標
-	//position	カメラの座標
-	void Rotation(CVector3& target, CVector3& position);
+	//カメラへのベクトルを回転する
+	void Rotation();
 
 	//ロックオンする対象を探す
 	void SearchTarget();
@@ -87,13 +98,10 @@ private:
 
 	//ロックオンする
 	//target	ターゲットの座標
-	//position	カメラの座標
-	void LockOn(CVector3& target, CVector3& position);
+	void LockOn(CVector3& target);
 
 	//ロックオンを解除する
-	//target	ターゲットの座標
-	//position	カメラの座標
-	void LockOnCancel(CVector3& target, CVector3& position);
+	void LockOnCancel();
 
 private:
 	enum EnLockOnState
@@ -110,12 +118,14 @@ private:
 	CCameraCollisionSolver	m_cameraCollisionSolver;	//カメラの当たり判定
 	EnLockOnState			m_lockOnState = enLockOn_None;	//何をロックオンしているか
 	IEnemy*					m_lockOnEnemy = nullptr;	//ロックオンしているエネミー
+	CVector3				m_toCameraPos;				//カメラへのベクトル
 	float					m_cameraLength = 0.0f;		//注視点からカメラへの距離
 	const float				LOCKON_OFFSET_Y = 2.5f;		//ロックオン時の高さ補正の限界値
 	const float				TARGET_OFFSET_Y = 1.4f;		//カメラ通常時の高さ補正
-	float					m_height = 0.0f;			//カメラの座標と注視点の高さ
+	//float					m_height = 0.0f;			//カメラの座標と注視点の高さ
 	int						m_lockOnEnemyNumber = 0;	//ロックオンしているエネミー番号
 	bool					m_isLockOn = false;			//ロックオンしているか
+	bool					m_isArrowZoom = false;		//弓装備中にズームしているか
 };
 
 static CGameCamera& GetGameCamera()

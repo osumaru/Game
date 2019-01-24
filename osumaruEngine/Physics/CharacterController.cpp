@@ -23,7 +23,8 @@ struct SSweepResultGround : public btCollisionWorld::ConvexResultCallback
 			convexResult.m_hitCollisionObject == ignore ||
 			convexResult.m_hitCollisionObject->getUserIndex() == enCollisionAttr_Character ||
 			convexResult.m_hitCollisionObject->getUserIndex() == enCollisionAttr_Detection ||
-			convexResult.m_hitCollisionObject->getUserIndex() == enCollisionAttr_Item)
+			convexResult.m_hitCollisionObject->getUserIndex() == enCollisionAttr_Item ||
+			convexResult.m_hitCollisionObject->getUserIndex() == enCollisionAttr_Rock)
 		{
 			//自分に衝突した。orキャラクタ属性のコリジョンと衝突した。
 			return 0.0f;
