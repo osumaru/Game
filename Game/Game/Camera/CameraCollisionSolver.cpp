@@ -16,7 +16,8 @@ public:
 
 		if (convexResult.m_hitCollisionObject->getUserIndex() == enCollisionAttr_Character ||
 			convexResult.m_hitCollisionObject->getUserIndex() == enCollisionAttr_Player ||
-			convexResult.m_hitCollisionObject->getUserIndex() == enCollisionAttr_Item) 
+			convexResult.m_hitCollisionObject->getUserIndex() == enCollisionAttr_Item ||
+			convexResult.m_hitCollisionObject->getUserIndex() == enCollisionAttr_Rock) 
 		{
 			return 1.0f;
 		}
