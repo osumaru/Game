@@ -15,12 +15,12 @@ StaticMapObject::~StaticMapObject()
 {
 }
 
-void StaticMapObject::Init(const CVector3& position, const CQuaternion& rotation, const wchar_t* modelName, const bool collider, CAnimation* anim)
+void StaticMapObject::Init(const CVector3& position, const CQuaternion& rotation, const wchar_t* modelName, const bool istree, const bool collider, CAnimation* anim)
 {
-	MapChip::Init(position, rotation, modelName,collider);
+	MapChip::Init(position, rotation, modelName,istree,collider);
 
 	SRigidBodyInfo rInfo;
-
+	m_isTree = istree;
 	rInfo.mass = 0.0f;
 	rInfo.pos = m_position;
 	rInfo.rot = m_rotation;
@@ -31,8 +31,22 @@ void StaticMapObject::Init(const CVector3& position, const CQuaternion& rotation
 	//メッシュコライダーからAABBを作成
 	isCollider = collider;
 
+	if (m_isTree)
+	{
+		CMatrix rotMat;
+		rotMat.MakeRotationFromQuaternion(m_rotation);
+		CMeshCollider mesh;
+		mesh.CreateCollider(&m_skinModel);
+		CVector3 boxsize = (mesh.GetAabbMax() - mesh.GetAabbMin()) / 2.0f;
+		CVector3 pos = (mesh.GetAabbMax() + mesh.GetAabbMin()) / 2.0f;
+		//pos.Mul(rotMat);
+		rInfo.pos.y = pos.y + m_position.y;
+		m_boxCollider.reset(new CBoxCollider);
+		m_boxCollider->Create({ 1.0f,boxsize.y,1.0f });
+		rInfo.collider = m_boxCollider.get();
+	}
 	//メッシュコライダー
-	if (!collider)
+	else if (!collider)
 	{
 		m_meshCollider.reset(new CMeshCollider);
 		m_meshCollider->CreateCollider(&m_skinModel);
@@ -90,8 +104,8 @@ void StaticMapObject::Update()
 void StaticMapObject::Draw()
 {
 	MapChip::Draw();
-	if (!isCollider)
+	if (isCollider || m_isTree)
 	{
-		//m_rigidBody->Draw();
+		m_rigidBody->Draw();
 	}
 }

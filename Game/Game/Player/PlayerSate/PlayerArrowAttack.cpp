@@ -17,7 +17,7 @@ void CPlayerArrowAttack::Init()
 
 void CPlayerArrowAttack::Update()
 {
-	if (Pad().IsPressButton(enButtonRightTrigger))
+	if (Pad().IsPressButton(enButtonRB))
 	{
 		m_isCharge = true;
 	}

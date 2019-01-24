@@ -23,7 +23,7 @@ bool CTitleScene::Start()
 	GetGameCamera().SetIsActiveUpdate(false);
 
 	//ƒQ[ƒ€‰¹Šy‚Ì‰Šú‰»
-	m_gameSound = New<CGameSound>(0);
+	GetSceneManager().GetGameSound()->SetGameSound(CGameSound::enTitleBgm);
 
 	Light().SetAmbientLight({ 0.0f, 0.0f, 0.0f, 0.1f });
 	Sky().SetLight(Light());
@@ -133,5 +133,5 @@ void CTitleScene::AfterDraw()
 void CTitleScene::BeforeDead()
 {
 	Delete(m_map);
-	Delete(m_gameSound);
+	//Delete(m_gameSound);
 }

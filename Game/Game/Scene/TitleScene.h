@@ -26,7 +26,6 @@ public:
 	void BeforeDead() override;
 private:
 	Map*		m_map = nullptr;		//マップ
-	CGameSound*	m_gameSound = nullptr;	//ゲームサウンド
 	CSprite		m_title;				//タイトル
 	CSprite		m_start;				//スタート
 	float		m_timer = 0.0f;			//タイマー

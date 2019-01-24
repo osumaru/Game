@@ -20,7 +20,7 @@ public:
 	collider	コライダーの設定　falseならメッシュ	trueならボックス
 	anim		アニメーション付きのモデルの場合アニメーションを入れる入れ物
 	*/
-	void Init(const CVector3& position, const CQuaternion& rotation, const wchar_t* modelName,const bool collider, CAnimation* anim = nullptr)override;
+	void Init(const CVector3& position, const CQuaternion& rotation, const wchar_t* modelName, const bool istree, const bool collider, CAnimation* anim = nullptr)override;
 
 	//更新関数
 	void Update()override;
@@ -38,6 +38,8 @@ private:
 	std::unique_ptr<CRigidBody>			m_rigidBody;		//剛体
 	std::unique_ptr<CMeshCollider>		m_meshCollider;		//コライダー
 	std::unique_ptr<CBoxCollider>		m_boxCollider;		//コライダー
+	std::unique_ptr<CCapsuleCollider>	m_capsuleCollider;
 	bool								isCollider;
+	bool								m_isTree = false;	//木用のコライダーの設定をするためのフラグ		
 
 };

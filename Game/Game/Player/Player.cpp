@@ -199,12 +199,6 @@ void CPlayer::Update()
 	float stickZ = Pad().GetLeftStickY();
 	CVector3 stickDir = { stickX, 0.0f, stickZ };
 	m_playerGetter.SetStickDir(stickDir);
-
-	if (Pad().IsTriggerButton(enButtonB))
-	{
-		m_isDamege = true;
-	}
-
 	CMatrix viewMat;
 	CVector3 shadowCameraUp = GetGameCamera().GetSpringCamera().GetTarget() - GetGameCamera().GetSpringCamera().GetPosition();
 	shadowCameraUp.y = 0.0f;
@@ -240,6 +234,7 @@ void CPlayer::Update()
 	m_groundCollision.SetPosition(manipVector);
 	m_characterController.SetPosition(oldRigidPos);
 	m_isAction = true;
+	Sky().SetPosition(m_position);
 }
 
 //ï`âÊèàóù
@@ -339,13 +334,56 @@ void CPlayer::Rotation(const CVector3& stickDir)
 
 	if (m_weaponManager.GetCurrentState() == enWeaponArrow && m_weaponManager.GetIsAttack())
 	{
-		CQuaternion rotXZ, rotY;
-		CVector3 cameraFlont = GetGameCamera().GetCamera().GetFlont();
-		cameraFlont.Normalize();
-		rotXZ.SetRotation(CVector3::AxisY, atan2f(cameraFlont.x, cameraFlont.z));
-		rotY.SetRotation(CVector3::AxisX, atanf(-cameraFlont.y));
-		rotXZ.Multiply(rotY);
-		m_rotation = rotXZ;
+		m_rotation = CQuaternion::Identity;
+		const CMatrix& worldMat = m_skinmodel.GetWorldMatrix();
+		CVector3 playerFront;
+		playerFront.x = worldMat.m[2][0];
+		playerFront.y = worldMat.m[2][1];
+		playerFront.z = worldMat.m[2][2];
+		playerFront.Normalize();
+		CVector3 playerFrontXZ = playerFront;
+		playerFrontXZ.y = 0.0f;
+		playerFrontXZ.Normalize();
+
+		CVector3 crossJudge;
+		CQuaternion multi;
+		const float ROTATION_SPEED = 1.0f;
+		float rad;
+		float angle;
+		rad = playerFront.Dot(playerFrontXZ);
+		rad = max(-1.0f, min(1.0f, rad));
+		rad = acos(rad);
+
+		CQuaternion multiX = CQuaternion::Identity;
+		crossJudge.Cross(playerFront, playerFrontXZ);
+		crossJudge.Cross(crossJudge, playerFrontXZ);
+		if (crossJudge.y < 0.0f)
+		{
+			rad = -rad;
+		}
+		multi.SetRotation(CVector3::AxisX, rad);
+		multiX.Multiply(multi);
+		angle = Pad().GetLeftStickY() * ROTATION_SPEED;
+		angle = -CMath::DegToRad(angle);
+		multi.SetRotation(CVector3::AxisX, angle);
+		multiX.Multiply(multi);
+		rad = playerFrontXZ.Dot(CVector3::Front);
+		rad = max(-1.0f, min(1.0f, rad));
+		rad = acos(rad);
+		crossJudge.Cross(CVector3::Front, playerFrontXZ);
+		if (crossJudge.y < 0.0f)
+		{
+			rad = -rad;
+		}
+		CQuaternion multiY;
+		multi.SetRotation(CVector3::AxisY, rad);
+		multiY.Multiply(multi);
+		angle = Pad().GetLeftStickX() * ROTATION_SPEED;
+		angle = CMath::DegToRad(angle);
+		multi.SetRotation(CVector3::AxisY, angle);
+		multiY.Multiply(multi);
+		m_rotation.Multiply(multiY);
+		m_rotation.Multiply(multiX);
 	}
 	else if (m_wireAction.IsWireMove())
 	{
@@ -355,14 +393,7 @@ void CPlayer::Rotation(const CVector3& stickDir)
 		moveSpeed.Normalize();
 		moveSpeedXZ.Normalize();
 		rad = moveSpeedXZ.Dot(CVector3::Front);
-		if (1.0f <= rad)
-		{
-			rad = 1.0f;
-		}
-		if (rad <= -1.0f)
-		{
-			rad = -1.0f;
-		}
+		rad = max(-1.0f, min(1.0f, rad));
 		rad = acosf(rad);
 		CVector3 judgeAxis;
 		judgeAxis.Cross(moveSpeedXZ, CVector3::Front);
@@ -373,14 +404,7 @@ void CPlayer::Rotation(const CVector3& stickDir)
 		CQuaternion multiY;
 		multiY.SetRotation(CVector3::AxisY, rad);
 		rad = moveSpeed.Dot(moveSpeedXZ);
-		if (1.0f <= rad)
-		{
-			rad = 1.0f;
-		}
-		if (rad <= -1.0f)
-		{
-			rad = -1.0f;
-		}
+		rad = max(-1.0f, min(1.0f, rad));
 		rad = acosf(rad);
 		if (moveSpeed.y > 0.0f)
 		{

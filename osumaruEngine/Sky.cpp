@@ -14,7 +14,7 @@ void CSky::Init(const CCamera* camera)
 
 void CSky::Update()
 {
-	m_skinModel.Update(CVector3::Zero, CQuaternion::Identity, CVector3::One);
+	m_skinModel.Update(m_position, CQuaternion::Identity, CVector3::One);
 }
 
 void CSky::Draw()
