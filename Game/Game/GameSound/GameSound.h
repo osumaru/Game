@@ -1,7 +1,20 @@
 #pragma once
+
+
 class CGameSound : public IGameObject
 {
 public:
+	enum EnSoundState
+	{
+		enTitleBgm,			//タイトルのBGM
+		enWorldBgm,			//ワールドマップ移動中のBGM
+		enTownBgm,			//町に入った時のBGM
+		enBattleBgm,		//戦闘中のBGM
+		enShopBgm,			//お店のBGM
+		enBossBgm,			//ボス戦のBGM
+		enBgmNum			//BGMの数
+	};
+
 	CGameSound();
 	~CGameSound();
 	bool Start();
@@ -15,24 +28,17 @@ public:
 		m_3dSoundPosition = pos;
 		m_backSound[enBossBgm].SetPosition(m_3dSoundPosition);
 	}
-	void SetWorldBgmSound()
+	//音楽の切り替えを行う関数
+	void SetGameSound(EnSoundState BgmName)
 	{
-		m_soundState = enWorldBgm;
+		m_backSound[m_soundState].Stop();
+		m_soundState = BgmName;
+		m_backSound[m_soundState].Play(true, true);
 	}
 
 private:
-	enum EnSoundState
-	{
-		enTitleBgm,			//タイトルのBGM
-		enWorldBgm,			//ワールドマップ移動中のBGM
-		enTownBgm,			//町に入った時のBGM
-		enBattleBgm,		//戦闘中のBGM
-		enShopBgm,			//お店のBGM
-		enBossBgm,			//ボス戦のBGM
-		enBgmNum			//BGMの数
-	};
 	CSoundSource		m_backSound[5];
-	EnSoundState		m_soundState = enWorldBgm;
+    EnSoundState		m_soundState = enWorldBgm;
 	const float			MENU_SOUND_VOLUME = 0.5f;
 	const float			MASTER_VOLUME = 0.3f;			//BGMの音量
 	const float			SHOP_MASTER_VOLUME = 0.1f;		//ショップのBGMの音量

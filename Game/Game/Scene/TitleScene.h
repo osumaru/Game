@@ -24,14 +24,8 @@ public:
 
 	//死ぬ前に呼びだされる
 	void BeforeDead() override;
-
-	CGameSound* GetGameSound()
-	{
-		return m_gameSound;
-	}
 private:
 	Map*		m_map = nullptr;		//マップ
-	CGameSound*	m_gameSound = nullptr;	//ゲームサウンド
 	CSprite		m_title;				//タイトル
 	CSprite		m_start;				//スタート
 	float		m_timer = 0.0f;			//タイマー

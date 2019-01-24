@@ -426,6 +426,7 @@
     <MeshContentTask Include="Assets\modelData\tree\Tree2.FBX" />
     <MeshContentTask Include="Assets\modelData\tree\Tree3.FBX" />
     <MeshContentTask Include="Assets\modelData\tree\WorldMap1.FBX" />
+    <MeshContentTask Include="Assets\modelData\tree\WorldMap2.FBX" />
     <MeshContentTask Include="Assets\modelData\TwinSword.fbx" />
     <MeshContentTask Include="Assets\modelData\Warrok.fbx" />
     <MeshContentTask Include="Assets\modelData\Wave.FBX" />

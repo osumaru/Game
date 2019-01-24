@@ -33,7 +33,6 @@ void CGameScene::BeforeDead()
 	Engine().GetEffectEngine().SetCamera(nullptr);
 	Delete(m_miniMap);
 	Delete(m_map);
-	Delete(m_gameSound);
 
 }
 
@@ -43,7 +42,7 @@ bool CGameScene::Start()
 	GetGameCamera().Create();
 	GetGameCamera().Init();
 	GetGameCamera().SetIsActiveUpdate(true);
-	m_gameSound = New<CGameSound>(0);
+	
 
 	Light().SetAmbientLight({ 0.0f, 0.0f, 0.0f, 1.0f });
 	Sky().SetLight(Light());
@@ -100,6 +99,7 @@ bool CGameScene::Start()
 		GetSceneManager().SetIsStart(true);
 		//});
 		//ThreadA.detach();
+		GetSceneManager().GetGameSound()->SetGameSound(CGameSound::enWorldBgm);
 		return true;
 
 	}
