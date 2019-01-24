@@ -115,6 +115,11 @@ public:
 		return m_characterController;
 	}
 
+	CCharacterController& GetCharacterController()
+	{
+		return m_characterController;
+	}
+
 	//アニメーションを取得
 	CAnimation& GetAnimation()
 	{

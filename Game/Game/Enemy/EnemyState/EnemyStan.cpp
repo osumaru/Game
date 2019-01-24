@@ -55,16 +55,23 @@ void CEnemyStan::Update()
 	if (m_timer > 3.0f)
 	{
 		//移動しているので座標を更新
-		CMatrix spineMatrix = m_enemy->GetBoneWorldMatrix(L"Spine");
+		const CMatrix* spineMatrix = m_enemy->GetWorldMatrixSpine();
 		CVector3 position;
-		position.x = spineMatrix.m[3][0];
-		position.y = spineMatrix.m[3][1];
-		position.z = spineMatrix.m[3][2];
+		position.x = spineMatrix->m[3][0];
+		position.y = spineMatrix->m[3][1];
+		position.z = spineMatrix->m[3][2];
 		m_enemy->SetPosition(position);
 		//タイマーが一定値を超えたら立ち上がる
 		m_enemy->GetAnimation().Play(CEnemyState::enAnimation_StandUp);
 		m_timer = 0.0f;
 	}
+
+	const CMatrix* spineMatrix = m_enemy->GetWorldMatrixSpine();
+	CVector3 position;
+	position.x = spineMatrix->m[3][0];
+	position.y = spineMatrix->m[3][1];
+	position.z = spineMatrix->m[3][2];
+	m_enemy->GetCharacterController().SetPosition(position);
 
 	if (!m_enemy->GetAnimation().IsPlay()
 		&& m_enemy->GetAnimation().GetCurrentAnimationNum() == CEnemyState::enAnimation_StandUp) 
