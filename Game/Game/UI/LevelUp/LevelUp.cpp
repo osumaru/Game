@@ -29,6 +29,12 @@ void CLevelUp::Update()
 	//ƒŒƒxƒ‹‚ª•Ï‚í‚Á‚½‚ç
 	if (GetPlayer().GetStatus().Level != m_playerLevelValue)
 	{
+		const float LevelUpVolume = 0.3f;
+		CSoundSource* LevelUpSound = New<CSoundSource>(0);
+		LevelUpSound->Init("Assets/sound/Battle/heal.wav");
+		LevelUpSound->Play(false);
+		LevelUpSound->SetVolume(LevelUpVolume);
+
 		m_playerLevelValue = GetPlayer().GetStatus().Level;
 		m_playerLevelUpAlpha = 1.0f;
 		m_playerLevelUpSprite.SetAlpha(m_playerLevelUpAlpha);

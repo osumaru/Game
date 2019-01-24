@@ -160,7 +160,7 @@ void CWeaponManager::Update()
 		}
 		else if (Pad().IsTriggerButton(enButtonDown))
 		{
-			const float ChangeVolume = 0.3f;
+			const float ChangeVolume = 0.1f;
 			CSoundSource* ChangeSound = New<CSoundSource>(0);
 			ChangeSound->Init("Assets/sound/SystemSound/EquipOff.wav");
 			ChangeSound->Play(false);
@@ -169,7 +169,7 @@ void CWeaponManager::Update()
 		}
 		else if (Pad().IsTriggerButton(enButtonLeft))
 		{
-			const float ChangeVolume = 0.3f;
+			const float ChangeVolume = 0.1f;
 			CSoundSource* ChangeSound = New<CSoundSource>(0);
 			ChangeSound->Init("Assets/sound/SystemSound/EquipOff.wav");
 			ChangeSound->Play(false);
@@ -178,7 +178,7 @@ void CWeaponManager::Update()
 		}
 		else if (Pad().IsTriggerButton(enButtonRight))
 		{
-			const float ChangeVolume = 0.3f;
+			const float ChangeVolume = 0.1f;
 			CSoundSource* ChangeSound = New<CSoundSource>(0);
 			ChangeSound->Init("Assets/sound/SystemSound/EquipOff.wav");
 			ChangeSound->Play(false);
