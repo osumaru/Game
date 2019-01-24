@@ -145,7 +145,7 @@ void CMenu::KeyInputMenu()
 		StatusMath();
 		if (m_draw)
 		{
-
+			GetPlayer().SetIsAction(false);
 			m_draw = false;
 			m_menuState = enNoneMenu;
 			m_stateNum = enNoneMenu;
@@ -185,6 +185,7 @@ void CMenu::KeyInputMenu()
 		}
 		//ƒvƒŒƒCƒ„[‚Ì“®‚«‚Ìİ’è
 		GetPlayer().SetIsActive(!m_draw);
+
 	}
 
 	if (Pad().IsTriggerButton(enButtonSelect))
