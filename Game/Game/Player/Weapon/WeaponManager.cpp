@@ -112,12 +112,21 @@ void CWeaponManager::Init(CPlayer* player)
 
 	for (int i = 0; i < enWeaponNum; i++) 
 	{
+		//武器の頂点バッファの数を取得
 		int vertexBufferCount = m_weapons[i]->GetVertexBufferCount();
+		//双剣の場合
+		if (i == enWeaponTwinSword)
+		{
+			//2つ目のモデルの頂点バッファの数を追加
+			vertexBufferCount += dynamic_cast<CTwinSword*>(GetWeapon(enWeaponTwinSword))->GetTwinVertexBufferCount();
+		}
+		//全ての武器の中で一番多い頂点バッファの数を求める
 		if (maxVertexBufferCount < vertexBufferCount)
 		{
 			maxVertexBufferCount = vertexBufferCount;
 		}
 	}
+	//パーティクルの初期化
 	SParticleEmittInfo particleInfo;
 	particleInfo.filePath = L"Assets/particle/weaponLight.png";
 	particleInfo.width = 0.15f;
@@ -233,16 +242,21 @@ void CWeaponManager::AfterDraw()
 
 void CWeaponManager::ParticleSetting()
 {
+	//タイマーを初期化
 	m_particleTimer = 0.0f;
+	//パーティクル描画フラグを立てる
 	m_particleDraw = true;
+	//武器の頂点バッファの座標を格納しているリストを取得
 	const std::vector<CVector3> vertexBufferList = m_weapons[m_weaponState]->GetVertexBufferList();
 	std::vector<CVector3>::const_iterator it = vertexBufferList.begin();
+	//武器モデルのワールド行列を取得
 	const CMatrix worldMatrix = m_weapons[m_weaponState]->GetSkinModel().GetWorldMatrix();
 	for (auto& particle : m_particleList)
 	{
+		//頂点バッファの数だけパーティクルを更新したか
 		if (it == vertexBufferList.end())
 		{
-			return;
+			break;
 		}
 		CVector3 position = *it;
 		position.Mul(worldMatrix);
@@ -251,6 +265,38 @@ void CWeaponManager::ParticleSetting()
 		particle->SetIsActive(true);
 		particle->UpdateWorldMatrix();
 		it++;
+	}
+	//双剣の場合は２つ目のモデルの分も行う
+	if (m_weaponState == enWeaponTwinSword)
+	{
+		const CTwinSword* twinSword = dynamic_cast<const CTwinSword*>(GetWeapon(enWeaponTwinSword));
+		//武器の頂点バッファの座標を格納しているリストを取得
+		const std::vector<CVector3> twinVertexBufferList = twinSword->GetTwinVertexBufferList();
+		std::vector<CVector3>::const_iterator it = twinVertexBufferList.begin();
+		//武器モデルのワールド行列を取得
+		const CMatrix worldMatrix = twinSword->GetSkinModel().GetWorldMatrix();
+		int count = 0;
+		for (auto& particle : m_particleList)
+		{
+			//頂点バッファの数だけパーティクルを更新したか
+			if (it == twinVertexBufferList.end())
+			{
+				break;
+			}
+			//1つ目のモデルの分は何もしない
+			if (count < vertexBufferList.size())
+			{
+				count++;
+				continue;
+			}
+			CVector3 position = *it;
+			position.Mul(worldMatrix);
+			particle->SetAlpha(PARTICLE_ALPHA);
+			particle->SetPosition(position);
+			particle->SetIsActive(true);
+			particle->UpdateWorldMatrix();
+			it++;
+		}
 	}
 }
 

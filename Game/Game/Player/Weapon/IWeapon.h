@@ -98,16 +98,19 @@ public:
 		return m_maxWeaponHitNum;
 	}
 
+	//スキンモデルを取得
 	const CSkinModel& GetSkinModel() const
 	{
 		return m_skinModel;
 	}
 
+	//頂点バッファの座標を格納しているリスト
 	const std::vector<CVector3>& GetVertexBufferList() const
 	{
 		return m_vertexBufferVector;
 	}
 
+	//頂点バッファの数
 	int GetVertexBufferCount()
 	{
 		return m_vertexBufferCount;
@@ -139,7 +142,7 @@ protected:
 	std::unique_ptr<EnPlayerAnimation[]>	m_combineAnimation;			//攻撃の後の合成用のアニメーション番号
 	std::unique_ptr<bool[]>					m_stanAttack;				//スタン攻撃
 	std::unique_ptr<bool[]>					m_attackHitNum;				//武器ごとの攻撃回数
-	std::vector<CVector3>					m_vertexBufferVector;
-	int										m_vertexBufferCount = 0;
+	std::vector<CVector3>					m_vertexBufferVector;		//頂点バッファの座標を格納しているリスト
+	int										m_vertexBufferCount = 0;	//頂点バッファの数
 	CEffect									m_hitEffect;
 };

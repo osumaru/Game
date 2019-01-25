@@ -137,8 +137,8 @@ private:
 	CWeaponTraceDraw			m_weaponTrace[2];								//武器の軌跡を描画するためのクラス
 	bool						m_isTraceDraw = false;						//武器の軌跡の描画
 	int							m_attackCount = 0;							//現在の武器攻撃の回数
-	std::list<CParticle*>		m_particleList;
-	float						m_particleTimer = 0.0f;
-	const float					PARTICLE_TIME = 1.0f;
-	bool						m_particleDraw = false;
+	std::list<CParticle*>		m_particleList;								//パーティクルのリスト
+	float						m_particleTimer = 0.0f;						//パーティクル用のタイマー
+	const float					PARTICLE_TIME = 1.0f;						//パーティクルを描画する時間
+	bool						m_particleDraw = false;						//パーティクルを描画するフラグ
 };
