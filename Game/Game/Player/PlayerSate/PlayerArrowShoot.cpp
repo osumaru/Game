@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "PlayerArrowShoot.h"
 #include "../Player.h"
-
+#include "../../Camera/GameCamera.h"
 
 CPlayerArrowShoot::CPlayerArrowShoot()
 {
@@ -43,7 +43,7 @@ void CPlayerArrowShoot::Update()
 		{
 			m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateStand);
 			m_pPlayer->GetWeaponManager().SetIsAttack(false);
-
+			GetGameCamera().SetIsArrowZoom(false);
 		}
 	}
 

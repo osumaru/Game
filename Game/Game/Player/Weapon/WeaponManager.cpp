@@ -18,6 +18,7 @@ std::unique_ptr<IInventoryEquip> CWeaponManager::m_equipWeapon[enWeaponNum];
 
 void CWeaponManager::Init(CPlayer* player)
 {
+	int maxVertexBufferCount = 0;
 	if (GetSceneManager().GetIsStart())
 	{
 		//–ˆ‰ñ‰Šú‰»‚·‚é•Ï”
@@ -55,7 +56,6 @@ void CWeaponManager::Init(CPlayer* player)
 	}
 	else
 	{
-		int maxVertexBufferCount = 0;
 		for (int i = 0; i < enWeaponNum; i++)
 		{
 			std::unique_ptr<IWeapon> ptr;
@@ -103,41 +103,44 @@ void CWeaponManager::Init(CPlayer* player)
 			m_equipWeapon[i] = std::move(equipPtr);
 			m_equipWeapon[i]->Init(itemName, textureFileName);
 			m_equipWeapon[i]->SetEquipStatus(weaponStatus);
-			int vertexBufferCount = m_weapons[i]->GetVertexBufferCount();
-			if (maxVertexBufferCount < vertexBufferCount)
-			{
-				maxVertexBufferCount = vertexBufferCount;
-			}
 		}
 		for (int i = 0; i < 2; i++)
 		{
 			m_weaponTrace[i].Init();
 		}
-		SParticleEmittInfo particleInfo;
-		particleInfo.filePath = L"Assets/particle/weaponLight.png";
-		particleInfo.width = 0.15f;
-		particleInfo.height = 0.15f;
-		particleInfo.uv = { 0.0f,0.0f,1.0f,1.0f };
-		particleInfo.randomPosition = { 0.0f, 0.0f, 0.0f };
-		particleInfo.gravity = { 0.0f, 0.0f, 0.0f };
-		particleInfo.lifeTime = 0.0f;
-		particleInfo.emittIntervalTime = 2.0f;
-		particleInfo.emitterLifeTime = 1.0f;
-		particleInfo.emitterPosition = { 0.0f,0.0f,0.0f };
-		particleInfo.moveSpeed = { 0.0f, 0.1f, 0.0f };
-		particleInfo.randomMoveSpeed = { 0.0f, 0.0f, 0.0f };
-		particleInfo.particleNum = 1;
-		particleInfo.isFirstTimeRandom = false;
-		particleInfo.alphaBlendState = enAlphaBlendStateAdd;
-		for (int i = 0; i < maxVertexBufferCount; i++)
-		{
-			CParticle* particle = New<CParticle>(PRIORITY_UI);
-			particle->Init(particleInfo, &GetGameCamera().GetCamera());
-			particle->SetIsActive(false);
-			particle->SetAlpha(PARTICLE_ALPHA);
-			m_particleList.push_back(particle);
+	}
 
+	for (int i = 0; i < enWeaponNum; i++) 
+	{
+		int vertexBufferCount = m_weapons[i]->GetVertexBufferCount();
+		if (maxVertexBufferCount < vertexBufferCount)
+		{
+			maxVertexBufferCount = vertexBufferCount;
 		}
+	}
+	SParticleEmittInfo particleInfo;
+	particleInfo.filePath = L"Assets/particle/weaponLight.png";
+	particleInfo.width = 0.15f;
+	particleInfo.height = 0.15f;
+	particleInfo.uv = { 0.0f,0.0f,1.0f,1.0f };
+	particleInfo.randomPosition = { 0.0f, 0.0f, 0.0f };
+	particleInfo.gravity = { 0.0f, 0.0f, 0.0f };
+	particleInfo.lifeTime = 0.0f;
+	particleInfo.emittIntervalTime = 2.0f;
+	particleInfo.emitterLifeTime = 1.0f;
+	particleInfo.emitterPosition = { 0.0f,0.0f,0.0f };
+	particleInfo.moveSpeed = { 0.0f, 0.1f, 0.0f };
+	particleInfo.randomMoveSpeed = { 0.0f, 0.0f, 0.0f };
+	particleInfo.particleNum = 1;
+	particleInfo.isFirstTimeRandom = false;
+	particleInfo.alphaBlendState = enAlphaBlendStateAdd;
+	for (int i = 0; i < maxVertexBufferCount; i++)
+	{
+		CParticle* particle = New<CParticle>(PRIORITY_UI);
+		particle->Init(particleInfo, &GetGameCamera().GetCamera());
+		particle->SetIsActive(false);
+		particle->SetAlpha(PARTICLE_ALPHA);
+		m_particleList.push_back(particle);
 	}
 }
 

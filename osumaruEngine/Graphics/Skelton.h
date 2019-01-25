@@ -162,6 +162,7 @@ public:
 	*/
 	void Update(const CMatrix& mat);
 
+
 	//•`‰æ
 	void Render();
 
@@ -187,6 +188,16 @@ public:
 		}
 		return nullptr;
 	}
+
+	/*
+	œ‚ğæ“¾‚·‚é
+	idx	œ‚Ì”Ô†
+	*/
+	const CBone* GetBone(int idx) const
+	{
+		return m_bones[idx].get();
+	}
+
 private:
 
 	/*

@@ -55,11 +55,11 @@ void CAnimationClip::Update(float deltaTime)
 		{
 			if (!keyframe.empty())
 			{
-				//ŽŸ‚ÌƒtƒŒ[ƒ€‚Ü‚ÅüŒ`•âŠÔ‚³‚¹‚é
 				m_localMatrix[i] = keyframe[m_currentFrameNo]->transform;
 			}
 			i++;
 		}
+
 		m_frameTime += deltaTime;
 		int keyFrameSize = m_topBoneKeyFrameList->size();
 		while ((*m_topBoneKeyFrameList)[m_currentFrameNo]->time < m_frameTime)
