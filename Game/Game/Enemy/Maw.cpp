@@ -34,7 +34,11 @@ void CMaw::OnInvokeAnimationEvent(
 	//攻撃判定を切り替える
 	if (wcscmp(animClipName, L"Assets/modelData/MawSpecialAttack.tka") == 0)
 	{
-		m_isHoge = m_isAttack;
+		
+		if (m_isAttack)
+		{
+			SpecialAttackEnd();
+		}
 		m_isAttack = !m_isAttack;
 	}
 }
@@ -186,6 +190,7 @@ void CMaw::WeekPointUpdate()
 	{
 		m_weekPoint->SetIsActive(false);
 	}
+
 	//弱点の頭のボーンを取得
 	CMatrix WeekMat = m_skinModel.FindBoneWorldMatrix(L"Head");
 	m_weekPosition.x = WeekMat.m[3][0];
@@ -237,25 +242,15 @@ void CMaw::SpecialAttack()
 	//アニメーション再生
 	bool IsAnimPlay = Anim(EnMawState::enState_SpecialAttack);
 
-
-
 	if (m_isAttack)
 	{
 		HandAttack(PlayerDamageLengthMax);
 		m_isSpecialAttackRot = false;
 	}
-
 	if(m_isSpecialAttackRot)
 	{
 		CVector3 playerVec = GetPlayer().GetPosition() - m_position;
 		Rotation(playerVec);
-	}
-	if (m_isHoge)
-	{
-		CShakeCamera& shakeCamera = GetGameCamera().GetShakeCamera();
-		shakeCamera.SetDamping(0.7f);
-		shakeCamera.ShakeStart(0.7f);
-		m_isHoge = false;
 	}
 	//攻撃が終わっていたら
 	if (!IsAnimPlay)
@@ -267,6 +262,12 @@ void CMaw::SpecialAttack()
 	}
 }
 
+void CMaw::SpecialAttackEnd()
+{
+	CShakeCamera& shakeCamera = GetGameCamera().GetShakeCamera();
+	shakeCamera.SetDamping(0.7f);
+	shakeCamera.ShakeStart(0.7f);
+}
 //ダウン状態
 void CMaw::Down()
 {
