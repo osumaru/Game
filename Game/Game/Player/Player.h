@@ -235,7 +235,10 @@ public:
 	*/
 	bool GetIsStateCondition(CPlayerState::EnPlayerState state);
 
-
+	int GetSpineBoneID() const
+	{
+		return m_spineBoneID;
+	}
 	friend class CPlayerGetter;
 private:
 
@@ -267,8 +270,9 @@ private:
 	CCollisionDetection					m_groundCollision;						//地面用のコリジョン
 	CBoxCollider						m_boxCollider;							//ボックスコライダー
 	bool								m_isAction = true;						//アクションをするかを判定する
-	const CMatrix*						m_hipBoneMat;
+	const CMatrix*						m_hipBoneMat;							//腰のボーン行列のポインタ
 	CLight								m_light;
+	int									m_spineBoneID;							//腰の骨のID
 };
 
 static CPlayer& GetPlayer()

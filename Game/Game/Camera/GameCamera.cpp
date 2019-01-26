@@ -107,7 +107,7 @@ void CGameCamera::Update()
 			CVector3 axisY = CVector3::AxisY;
 			axisY.Normalize();
 			//‰E•ûŒü‚ğ‹‚ß‚é
-			CVector3 rightVec = cameraFront * -1.0f;
+			CVector3 rightVec = cameraFront * 1.0f;
 			rightVec.Cross(axisY);
 			//Œã•ûŒü‚ğ‹‚ß‚é
 			CVector3 backVec = cameraFront * -1.0f;
