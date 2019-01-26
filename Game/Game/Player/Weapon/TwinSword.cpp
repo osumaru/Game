@@ -113,7 +113,7 @@ void CTwinSword::Update()
 	CVector3 position;
 	CQuaternion rotation;
 	const CMatrix* boneMat;
-	if (m_pPlayer->GetWeaponManager().GetIsAttack())
+	if (m_pPlayer->GetWeaponManager().GetIsAttack() || m_pPlayer->GetWeaponManager().GetDrawingWeapon())
 	{
 		boneMat = m_attackTwinBoneMat;
 		position = m_attackTwinPosition;

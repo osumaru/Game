@@ -219,6 +219,19 @@ void CWeaponManager::Update()
 		}
 	}
 
+	//武器を出し続けるか
+	if (m_drawingWeapon && !m_isAttack)
+	{
+		m_drawingWeaponTimer += GameTime().GetDeltaFrameTime();
+		if (m_drawingWeaponTimer > DRAWING_WEAPON_TIME)
+		{
+			//パーティクルを出す
+			ParticleSetting();
+			m_drawingWeapon = false;
+			m_drawingWeaponTimer = 0.0f;
+		}
+	}
+
 	m_weapons[m_weaponState]->Updater();
 }
 

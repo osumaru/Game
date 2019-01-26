@@ -127,6 +127,20 @@ public:
 		m_attackCount = attackCount;
 	}
 
+	//武器を出し続けるかを取得
+	bool GetDrawingWeapon()
+	{
+		return m_drawingWeapon;
+	}
+
+	//武器を出し続けるかを設定
+	//drawingWeapon		武器を出し続けるか
+	void SetDrawingWeapon(bool drawingWeapon)
+	{
+		m_drawingWeaponTimer = 0.0f;
+		m_drawingWeapon = drawingWeapon;
+	}
+
 private:
 	const float					PARTICLE_ALPHA = 0.2f;
 	EnPlayerWeapon				m_weaponState = enWeaponSword;				//現在使ってる武器
@@ -141,4 +155,7 @@ private:
 	float						m_particleTimer = 0.0f;						//パーティクル用のタイマー
 	const float					PARTICLE_TIME = 1.0f;						//パーティクルを描画する時間
 	bool						m_particleDraw = false;						//パーティクルを描画するフラグ
+	bool						m_drawingWeapon = false;					//武器を出し続けるか
+	float						m_drawingWeaponTimer = 0.0f;				//武器を出している間のタイマー
+	const float					DRAWING_WEAPON_TIME = 3.0f;					//武器を出している時間
 };

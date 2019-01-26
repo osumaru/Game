@@ -52,7 +52,7 @@ void IWeapon::Updater()
 	CVector3 position;
 	CQuaternion rotation;
 	const CMatrix* boneMat;
-	if (m_pPlayer->GetWeaponManager().GetIsAttack())
+	if (m_pPlayer->GetWeaponManager().GetIsAttack() || m_pPlayer->GetWeaponManager().GetDrawingWeapon())
 	{
 		boneMat = m_attackBoneMat;
 		position = m_attackPosition;
