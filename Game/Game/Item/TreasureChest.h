@@ -28,5 +28,5 @@ public:
 
 private:
 	std::unique_ptr<IInventoryEquip> m_inventoryEquip;	//インベントリに入れる装備
-
+	bool m_itemDrawCount = false;	//アイテムを拾うUIを出すカウントをすでにしているか
 };

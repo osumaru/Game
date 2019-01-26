@@ -10,6 +10,7 @@
 #include "../UI/Menu/Menu.h"
 #include "../UI/Result/Result.h"
 #include "../UI/LevelUp/LevelUp.h"
+#include "../UI/GetItem/GetItem.h"
 #include "../GameSound/GameSound.h"
 #include <thread>
 
@@ -91,6 +92,8 @@ bool CGameScene::Start()
 			m_result = New<CResult>(PRIORITY_UI);
 			m_result->Init();
 
+			m_getItem = New<CGetItem>(PRIORITY_UI);
+			m_getItem->Init();
 		}
 		//フェードインの開始
 		GetSceneManager().GetFade()->FadeIn();

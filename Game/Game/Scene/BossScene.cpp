@@ -2,7 +2,6 @@
 #include "SceneManager.h"
 #include "Map/Map.h"
 #include "../../Game/Camera/GameCamera.h"
-#include "../UI/MiniMap/MiniMap.h"
 #include "../UI/WeaponSelect/WeaponSelect.h"
 #include "../UI/PlayerHp/PlayerHp.h"
 #include "../UI/Menu/Menu.h"
@@ -79,7 +78,8 @@ void CBossScene::Update()
 		return;
 	}
 
-	if (m_result->GetDraw()) {
+	if (m_result->GetDraw()) 
+	{
 		//コンティニュー表示をアクティブにする
 		m_choices->SetIsActive(true);
 		m_message->SetIsActive(true);

@@ -3,6 +3,7 @@
 #include "../Player/Player.h"
 #include"../../Game/Camera/GameCamera.h"
 #include "../UI/Menu/EquipInventory.h"
+#include "../UI/GetItem/GetItem.h"
 #include "../Scene/SceneManager.h"
 #include "../Player/Weapon/WeaponCommon.h"
 #include "../Item/InventoryItem/InventorySword.h"
@@ -50,17 +51,36 @@ void CTreasureChest::Update()
 	//プレイヤーとの距離を計算
 	bool isPickUp = PickUp(isPopEnd, 2.0f);
 	//拾うことができるか
-	if (isPickUp && Pad().IsTriggerButton(enButtonA)) {
-		const float GetVolume = 0.3f;
-		CSoundSource* GetSound = New<CSoundSource>(0);
-		GetSound->Init("Assets/sound/Battle/TresureSE.wav");
-		GetSound->Play(false);
-		GetSound->SetVolume(GetVolume);
-		//武器のステータスを決める
-		DesideWeaponStatus();
-		CEquipInventory::AddEquipList(std::move(m_inventoryEquip));
-		GetPlayer().SetIsAction(false);
-		Delete(this);
+	if (isPickUp) 
+	{
+		if (!m_itemDrawCount) 
+		{
+			GetSceneManager().GetGameScene().GetGetItem()->AddDrawCount();
+			m_itemDrawCount = true;
+		}
+		if (Pad().IsTriggerButton(enButtonA))
+		{
+			const float GetVolume = 0.3f;
+			CSoundSource* GetSound = New<CSoundSource>(0);
+			GetSound->Init("Assets/sound/Battle/TresureSE.wav");
+			GetSound->Play(false);
+			GetSound->SetVolume(GetVolume);
+			//武器のステータスを決める
+			DesideWeaponStatus();
+			CEquipInventory::AddEquipList(std::move(m_inventoryEquip));
+			GetSceneManager().GetGameScene().GetGetItem()->SubtractDrawCount();
+			m_itemDrawCount = false;
+			GetPlayer().SetIsAction(false);
+			Delete(this);
+		}
+	}
+	else 
+	{
+		if (m_itemDrawCount)
+		{
+			GetSceneManager().GetGameScene().GetGetItem()->SubtractDrawCount();
+			m_itemDrawCount = false;
+		}
 	}
 
 	//キャラクターコントローラーに移動速度を設定

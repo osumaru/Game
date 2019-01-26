@@ -2,7 +2,6 @@
 
 class Map;
 class CWeaponSelect;
-class CMiniMap;
 class CPlayerHp;
 class CLevelUp;
 class CMenu;

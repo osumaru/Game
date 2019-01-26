@@ -252,6 +252,7 @@
     </ClCompile>
     <ClCompile Include="UI\DamageNumber\DamageNumber.cpp" />
     <ClCompile Include="UI\DamageNumber\Number.cpp" />
+    <ClCompile Include="UI\GetItem\GetItem.cpp" />
     <ClCompile Include="UI\LevelUp\LevelUp.cpp" />
     <ClCompile Include="UI\Menu\EquipInventory.cpp" />
     <ClCompile Include="UI\Menu\ItemInventory.cpp" />
@@ -361,6 +362,7 @@
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="UI\DamageNumber\DamageNumber.h" />
     <ClInclude Include="UI\DamageNumber\Number.h" />
+    <ClInclude Include="UI\GetItem\GetItem.h" />
     <ClInclude Include="UI\LevelUp\LevelUp.h" />
     <ClInclude Include="UI\Menu\EquipInventory.h" />
     <ClInclude Include="UI\Menu\ItemInventory.h" />
