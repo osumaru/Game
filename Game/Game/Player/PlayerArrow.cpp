@@ -30,13 +30,14 @@ void CPlayerArrow::Update()
 	if (GetPlayer().GetStateMachine().GetState() == CPlayerState::EnPlayerState::enPlayerStateArrowAttack && !m_isMove)
 	{
 		m_arrowPosition =  *((CVector3*)GetPlayer().GetSkinmodel().FindBoneWorldMatrix(L"LeftHand").m[3]);
-		//プレイヤーの前方向を取得
+		//プレイヤーのボーンの前方向を取得
 		const CMatrix& playerWorldMat = GetPlayer().GetSkinmodel().GetSkelton()->GetBoneWorldMatrix(GetPlayer().GetSpineBoneID());
 		CVector3 weaponFlont;
 		weaponFlont.x = playerWorldMat.m[0][0];
 		weaponFlont.y = playerWorldMat.m[0][1];
 		weaponFlont.z = playerWorldMat.m[0][2];
 		weaponFlont.Normalize();
+		//矢の前方向を取得
 		const CMatrix& skinWorldMatrix = m_arrowskin.GetWorldMatrix();
 		m_moveSpeed.x = skinWorldMatrix.m[2][0];
 		m_moveSpeed.y = skinWorldMatrix.m[2][1];
@@ -46,6 +47,7 @@ void CPlayerArrow::Update()
 		CQuaternion rotY;
 		m_arrowRot.SetRotation(CVector3::AxisY, atan2f(weaponFlont.x, weaponFlont.z));		//Y軸周りの回転
 		rotY.SetRotation(CVector3::AxisX, atanf(-weaponFlont.y));		//X軸周りの回転
+		//回転の補正、ボーンの回転をそのまま使うと変な方向を向くため
 		CQuaternion multi;
 		multi.SetRotation(CVector3::AxisX, CMath::DegToRad(-10.0f));
 		m_arrowRot.Multiply(rotY);

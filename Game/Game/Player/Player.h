@@ -235,6 +235,7 @@ public:
 	*/
 	bool GetIsStateCondition(CPlayerState::EnPlayerState state);
 
+	//˜‚Ìƒ{[ƒ“‚Ì”Ô†‚ğæ“¾
 	int GetSpineBoneID() const
 	{
 		return m_spineBoneID;
