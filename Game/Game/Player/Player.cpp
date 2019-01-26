@@ -398,7 +398,7 @@ void CPlayer::Rotation(const CVector3& stickDir)
 		}
 		multi.SetRotation(CVector3::AxisX, rad);
 		multiX.Multiply(multi);
-		angle = Pad().GetLeftStickY() * ROTATION_SPEED;
+		angle = Pad().GetRightStickY() * ROTATION_SPEED;
 		angle = -CMath::DegToRad(angle);
 		multi.SetRotation(CVector3::AxisX, angle);
 		multiX.Multiply(multi);
@@ -413,7 +413,7 @@ void CPlayer::Rotation(const CVector3& stickDir)
 		CQuaternion multiY;
 		multi.SetRotation(CVector3::AxisY, rad);
 		multiY.Multiply(multi);
-		angle = Pad().GetLeftStickX() * ROTATION_SPEED;
+		angle = Pad().GetRightStickX() * ROTATION_SPEED;
 		angle = CMath::DegToRad(angle);
 		multi.SetRotation(CVector3::AxisY, angle);
 		multiY.Multiply(multi);

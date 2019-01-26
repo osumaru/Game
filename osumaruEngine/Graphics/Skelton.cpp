@@ -155,6 +155,7 @@ void CSkelton::Update(const CMatrix& mat)
 	}
 }
 
+
 void CSkelton::UpdateWorldMatrix(CBone* bone, const CMatrix& mat)
 {
 	//親のワールド行列を使って子のワールド行列を更新
