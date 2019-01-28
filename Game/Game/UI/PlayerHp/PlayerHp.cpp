@@ -26,6 +26,14 @@ void CPlayerHp::Init()
 	m_playerHpBackSize.x = (float)(m_playerMaxHpSizeX*(GetPlayer().GetStatus().Health / m_playerMaxHp));
 	m_playerHpBackSprite.SetSize({ m_playerHpBackSize.x,m_playerHpBackSize.y });
 
+	//プレイヤHPのフレームのロード
+	m_playerHpFrameTexture = TextureResource().LoadTexture(L"Assets/sprite/PlayerHPFrame.png");
+	m_playerHpFrameSprite.Init(m_playerHpFrameTexture);
+	m_playerHpFrameSprite.SetCenterPosition({ m_playerHpFrameCenterPos });
+	m_playerHpFrameSprite.SetPosition({ m_playerHpFramePos });
+	m_playerHpFrameSize.x = m_playerMaxHpSizeX + 8.0f;
+	m_playerHpFrameSprite.SetSize({ m_playerHpFrameSize.x,m_playerHpFrameSize.y });
+
 }
 
 void CPlayerHp::Update()
@@ -48,21 +56,31 @@ void CPlayerHp::Update()
 
 		m_playerHpSize.x = (float)(m_playerMaxHpSizeX*(GetPlayer().GetStatus().Health / m_playerMaxHp));
 		m_playerHpSprite.SetSize({ m_playerHpSize.x, m_playerHpSize.y });
-
+		m_hpSubtractSpeed = (float)(m_playerHp - GetPlayer().GetStatus().Health) / m_playerMaxHp * 10.0f;
 		//プレイヤーHp更新
 		m_playerHp = GetPlayer().GetStatus().Health;
+		m_delayTime = 0.0f;
 	}
 
 	//HPの背景を減らしていく処理
 	if ((float)(m_playerMaxHpSizeX*(GetPlayer().GetStatus().Health / m_playerMaxHp)) <= m_playerHpBackSize.x)
 	{
-		m_playerHpBackSize.x -= m_hpSubtractSpeed;
-		m_playerHpBackSprite.SetSize({ m_playerHpBackSize.x,m_playerHpBackSize.y });
+		const float DELAY_TIME = 0.3f;
+		if (m_delayTime < DELAY_TIME)
+		{
+			m_delayTime += GameTime().GetDeltaFrameTime();
+		}
+		else
+		{
+			m_playerHpBackSize.x -= m_hpSubtractSpeed;
+			m_playerHpBackSprite.SetSize({ m_playerHpBackSize.x,m_playerHpBackSize.y });
+		}
 	}
 }
 
 void CPlayerHp::PostAfterDraw()
 {
+	m_playerHpFrameSprite.Draw();
 	m_playerHpBackSprite.Draw();
 	m_playerHpSprite.Draw();
 }

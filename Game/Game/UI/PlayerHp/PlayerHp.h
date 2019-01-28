@@ -26,9 +26,15 @@ private:
 	CVector2		m_playerHpBackSize = { 300.0f,40.0f };		//プレイヤーのHPバックグラウンドサイズ
 	const CVector2	m_playerHpBackCenterPos = { 0.0f,1.0f };	//プレイヤーのHPバックグラウンド基点座標
 
+	CSprite			m_playerHpFrameSprite;						//プレイヤーのHPバックグラウンドスプライト
+	CTexture*		m_playerHpFrameTexture;						//プレイヤーのHPバックグラウンドテクスチャ
+	const CVector2	m_playerHpFramePos = { -624.0f,268.0f };		//プレイヤーのHPバックグラウンド座標
+	CVector2		m_playerHpFrameSize = { 300.0f,44.0f };		//プレイヤーのHPバックグラウンドサイズ
+	const CVector2	m_playerHpFrameCenterPos = { 0.0f,1.0f };	//プレイヤーのHPバックグラウンド基点座標
+
 	int				m_playerHp=100;								//プレイヤーのHPの値
-	int				m_playerHpSizeUp = 3;						//プレイヤーのHPの大きさを調整する用の変数
 	float			m_playerMaxHp = 100;						//プレイヤーの最大Hp
 	float			m_playerMaxHpSizeX = 400.0f;				//プレイヤーの最大X方向の大きさ
+	float			m_delayTime = 0.0f;							//バックのHPが減り始めるまでの遅延時間
 };
 
