@@ -22,8 +22,9 @@ public:
 
 
 private:
+	CSprite		m_weaponChoice;					//選択している武器のスプライト
 	CSprite		m_weapon[enWeaponNum];			//武器
-	CTexture*	m_weaponTexture[enWeaponNum];
+	CTexture*	m_weaponTexture[enWeaponNum];	
 	CSprite		m_crossKey;						//十字キー
 	CTexture*	m_crossKeyTexture;
 	CSprite		m_LBButton;						//LBボタン
@@ -32,7 +33,5 @@ private:
 	CTexture*	m_RBButtonTexture;
 	CVector2	crossKeyPos;					//十字キーの座標
 	CVector2	size;							//サイズ
-	int			weaponNumber = enWeaponSword;			//変更する武器の番号
-	int			weaponNumberOld = enWeaponSword;		//現在選択している武器の番号
-	bool		m_selectFlag[enWeaponNum];		//選択した武器フラグ
+	int			weaponNumber = enWeaponSword;	//変更する武器の番号
 };

@@ -106,6 +106,9 @@
     <Filter Include="ソース ファイル\UI\GetItem">
       <UniqueIdentifier>{1cade88a-003a-43a3-82aa-bf8deed517e4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\UI\ArrowRemin">
+      <UniqueIdentifier>{a6270084-10a5-471b-bada-eeec20adbdc4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -420,6 +423,9 @@
     </ClCompile>
     <ClCompile Include="UI\GetItem\GetItem.cpp">
       <Filter>ソース ファイル\UI\GetItem</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\AllowRemain\ArrowRemain.cpp">
+      <Filter>ソース ファイル\UI\ArrowRemin</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -746,6 +752,9 @@
     </ClInclude>
     <ClInclude Include="UI\GetItem\GetItem.h">
       <Filter>ソース ファイル\UI\GetItem</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\AllowRemain\ArrowRemain.h">
+      <Filter>ソース ファイル\UI\ArrowRemin</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

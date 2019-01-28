@@ -83,6 +83,10 @@ public:
 		return m_gameSound;
 	}
 
+	EnSceneState GetCurrentSceneState() const
+	{
+		return m_preSceneState;
+	}
 private:
 	EnSceneState	m_preSceneState= enSceneNum;//シーンのステート（現在のシーンを入れておく用）
 	EnSceneState	m_nextSceneState = enSceneNum;//シーンのステート（次のシーンを入れておく用）

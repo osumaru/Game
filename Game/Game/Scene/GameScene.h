@@ -12,6 +12,7 @@ class CMenu;
 class CResult;
 class CGameSound;
 class CGetItem;
+class CArrowRemain;
 
 class CGameScene : public IGameObject
 {
@@ -57,4 +58,5 @@ private:
 	CMenu*			m_menu = nullptr;			//メニュー
 	CResult*		m_result = nullptr;			//リザルト
 	CGetItem*		m_getItem = nullptr;		//アイテム拾うボタン
+	CArrowRemain*	m_arrowRemain = nullptr;	//矢の残弾数を表示
 };
