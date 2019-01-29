@@ -58,13 +58,13 @@ void CGameSound::Update()
 
 		break;
 	case enShopBgm:
-		if (!m_isShop)
+	/*	if (!m_isShop)
 		{
 			m_backSound[enShopBgm].Stop();
 			m_soundState = enWorldBgm;
 			m_backSound[enWorldBgm].Play(true, false);
 			m_backSound[enWorldBgm].SetVolume(MASTER_VOLUME);
-		}
+		}*/
 		break;
 
 	case enBossBgm:

@@ -14,7 +14,6 @@ struct VS_OUTPUT
 {
 	float4 pos : SV_POSITION;
 	float2 uv : TEXCOORD0;
-	float4 worldPos : TEXCOORD1;
 };
 
 Texture2D<float4> colorTexture : register(t0);
@@ -27,7 +26,6 @@ VS_OUTPUT VSMain(VS_INPUT In)
 	VS_OUTPUT Out;
 	Out.pos =  mul(mvp, In.pos);
 	Out.uv = In.uv;
-	Out.worldPos = Out.pos;
 	return Out;
 
 }

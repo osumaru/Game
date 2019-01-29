@@ -200,6 +200,7 @@
     <ClCompile Include="Player\PlayerSate\PlayerWireAttack.cpp" />
     <ClCompile Include="Player\WireDraw.cpp" />
     <ClCompile Include="Scene\BossScene.cpp" />
+    <ClCompile Include="UI\AllowRemain\ArrowRemain.cpp" />
     <ClCompile Include="UI\Fade\LoadScene.cpp" />
     <ClCompile Include="NPC\Shop\ItemShop.cpp" />
     <ClCompile Include="Item\IItem.cpp" />
@@ -313,6 +314,7 @@
     <ClInclude Include="Player\PlayerSate\PlayerWireAttack.h" />
     <ClInclude Include="Player\WireDraw.h" />
     <ClInclude Include="Scene\BossScene.h" />
+    <ClInclude Include="UI\AllowRemain\ArrowRemain.h" />
     <ClInclude Include="UI\Fade\LoadScene.h" />
     <ClInclude Include="NPC\Shop\ItemShop.h" />
     <ClInclude Include="Item\IItem.h" />
@@ -387,6 +389,7 @@
     <MeshContentTask Include="Assets\modelData\build\Build1.FBX" />
     <MeshContentTask Include="Assets\modelData\build\Castle_Wall1.FBX" />
     <MeshContentTask Include="Assets\modelData\build\Castle_Wall2.FBX" />
+    <MeshContentTask Include="Assets\modelData\build\Castle_Wall3.FBX" />
     <MeshContentTask Include="Assets\modelData\build\Gate.FBX" />
     <MeshContentTask Include="Assets\modelData\Castle1.FBX" />
     <MeshContentTask Include="Assets\modelData\Castle2.FBX" />
@@ -424,6 +427,8 @@
     <MeshContentTask Include="Assets\modelData\tree\Stone1.FBX" />
     <MeshContentTask Include="Assets\modelData\tree\Stone2.FBX" />
     <MeshContentTask Include="Assets\modelData\tree\Stone3.FBX" />
+    <MeshContentTask Include="Assets\modelData\tree\Stone4.FBX" />
+    <MeshContentTask Include="Assets\modelData\tree\Stone5.FBX" />
     <MeshContentTask Include="Assets\modelData\tree\tree1.FBX" />
     <MeshContentTask Include="Assets\modelData\tree\Tree2.FBX" />
     <MeshContentTask Include="Assets\modelData\tree\Tree3.FBX" />

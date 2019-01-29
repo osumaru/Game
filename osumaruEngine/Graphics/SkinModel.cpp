@@ -133,6 +133,11 @@ void CSkinModel::Draw(const CMatrix& view, const CMatrix& projection, bool isSha
 	
 }
 
+void CSkinModel::SetBoneMatrix(int boneID, const CMatrix & mat)
+{
+	m_skelton->SetBoneMatrix(boneID, mat);
+}
+
 const CMatrix& CSkinModel::FindBoneWorldMatrix(const wchar_t* boneName) const
 {
 	const CBone* bone = m_skelton->FindBone(boneName);

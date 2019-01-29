@@ -23,8 +23,8 @@ std::vector<std::vector<SMapChipInfo>> mapChipInfo =
 {
 	{
 		//本番用の世界のマップ
-		#include "WorldMap.h"
-		//#include "ShopTest.h"
+		//#include "WorldMap.h"
+#include "ShopTest.h"
 		//#include "mm.h"
 		//#include "BossStage.h"
 		//#include "Boss.h"
@@ -116,6 +116,10 @@ void Map::Init(int stageNum)
 		case enMapTagTerrain:
 			mapChip = New<StaticMapObject>(PRIORITY_GROUND);
 			g_pathFinding.GetNavigationMesh().SetSkinModel(&dynamic_cast<StaticMapObject*>(mapChip)->GetSkinModel());
+			m_collider = false;
+			break;
+		case enMapTagMesh:
+			mapChip = New<StaticMapObject>(PRIORITY_GROUND);
 			m_collider = false;
 			break;
 		case enMapTagObstacle:

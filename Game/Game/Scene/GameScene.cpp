@@ -12,6 +12,7 @@
 #include "../UI/LevelUp/LevelUp.h"
 #include "../UI/GetItem/GetItem.h"
 #include "../GameSound/GameSound.h"
+#include "../UI/AllowRemain/ArrowRemain.h"
 #include <thread>
 
 CGameScene::CGameScene()
@@ -34,6 +35,7 @@ void CGameScene::BeforeDead()
 	Engine().GetEffectEngine().SetCamera(nullptr);
 	Delete(m_miniMap);
 	Delete(m_map);
+	Delete(m_arrowRemain);
 
 }
 
@@ -94,6 +96,9 @@ bool CGameScene::Start()
 
 			m_getItem = New<CGetItem>(PRIORITY_UI);
 			m_getItem->Init();
+
+			m_arrowRemain = New<CArrowRemain>(PRIORITY_UI);
+			m_arrowRemain->Init();
 		}
 		//フェードインの開始
 		GetSceneManager().GetFade()->FadeIn();
