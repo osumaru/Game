@@ -19,6 +19,7 @@ enum EnMapChipTag
 	enMapTagMapChip,
 	enMapTagBreakBrock,
 	enMapTagTerrain,		//地形用のタグ
+	enMapTagMesh,			//剛体をメッシュにするためのタグ
 	enMapTagItemShop,		//アイテムショップ用のタグ
 	enMapTagWeaponShop,		//武器屋用のタグ
 	enMapTagSoundPoint,		//BGM用のタグ

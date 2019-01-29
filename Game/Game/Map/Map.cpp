@@ -118,6 +118,10 @@ void Map::Init(int stageNum)
 			g_pathFinding.GetNavigationMesh().SetSkinModel(&dynamic_cast<StaticMapObject*>(mapChip)->GetSkinModel());
 			m_collider = false;
 			break;
+		case enMapTagMesh:
+			mapChip = New<StaticMapObject>(PRIORITY_GROUND);
+			m_collider = false;
+			break;
 		case enMapTagObstacle:
 			mapChip = New<CObstacleMapObject>(PRIORITY_BILLDING);
 			break;
