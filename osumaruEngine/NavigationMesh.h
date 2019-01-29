@@ -5,7 +5,7 @@ class CSkinModel;
 class CNavigationMesh : Uncopyable
 {
 public:
-	static const int AREA_NUM = 64;
+	static const int AREA_NUM = 16;
 	//ƒƒbƒVƒ…î•ñ
 	struct SPoligonInfo
 	{
