@@ -156,7 +156,9 @@ void CWeaponManager::Init(CPlayer* player)
 
 void CWeaponManager::Update()
 {
-	if (!m_isAttack && GetPlayer().GetIsAction()) 
+	if (!m_isAttack && 
+		GetPlayer().GetStateMachine().GetState() != CPlayerState::enPlayerStateAvoidance && 
+		GetPlayer().GetIsAction())
 	{
 		if (Pad().IsTriggerButton(enButtonUp))
 		{
