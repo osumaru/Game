@@ -59,6 +59,13 @@ public:
 		return m_skelton.get();
 	}
 
+	/*
+	骨のローカル行列を更新
+	boneID	骨の番号
+	mat		ローカル行列
+	*/
+	void SetBoneMatrix(int boneID, const CMatrix& mat);
+
 	//ワールド行列の取得
 	const CMatrix& GetWorldMatrix() const
 	{

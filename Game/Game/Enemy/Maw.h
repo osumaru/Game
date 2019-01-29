@@ -177,6 +177,9 @@ public:
 	}
 
 private:
+	//スペシャルアタックの攻撃判定の終わりに呼ばれる関数
+	void SpecialAttackEnd();
+private:
 	//行動パターン
 	enum EnMawActionPattern
 	{
@@ -211,11 +214,10 @@ private:
 	bool					m_isDown = false;							//ダウン判定
 	bool					m_isDeath = false;							//死亡判定
 	bool					m_isBattle = false;							//発見判定
-	bool					m_isHoge = false;
-	bool					m_isSpecialAttackRot = true;
+	bool					m_isSpecialAttackRot = true;				//スペシャルアタックの攻撃判定取り始めるまでたっているフラグ
 	float					m_waitTime = 0.0f;
-	CBossHp*		m_bossHp = nullptr;			//ボスHP
-	CWeekPoint*		m_weekPoint = nullptr;		//ボスの弱点スプライト
+	CBossHp*				m_bossHp = nullptr;			//ボスHP
+	CWeekPoint*				m_weekPoint = nullptr;		//ボスの弱点スプライト
 };
 
 //ボスの取得

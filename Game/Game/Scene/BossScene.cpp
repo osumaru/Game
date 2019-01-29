@@ -2,7 +2,6 @@
 #include "SceneManager.h"
 #include "Map/Map.h"
 #include "../../Game/Camera/GameCamera.h"
-#include "../UI/MiniMap/MiniMap.h"
 #include "../UI/WeaponSelect/WeaponSelect.h"
 #include "../UI/PlayerHp/PlayerHp.h"
 #include "../UI/Menu/Menu.h"
@@ -11,6 +10,8 @@
 #include "../UI/Message/Message.h"
 #include "../UI/Message/Choices.h"
 #include "../GameSound/GameSound.h"
+#include "../UI/AllowRemain/ArrowRemain.h"
+
 
 void CBossScene::BeforeDead()
 {
@@ -25,6 +26,7 @@ void CBossScene::BeforeDead()
 	Delete(m_gameSound);
 	Delete(m_choices);
 	Delete(m_message);
+	Delete(m_arrowRemain);
 }
 
 bool CBossScene::Start()
@@ -63,6 +65,9 @@ bool CBossScene::Start()
 		m_choices = New<CChoices>(PRIORITY_UI);
 		m_choices->Init(L"はい", L"いいえ");
 		m_choices->SetIsActive(false);
+
+		m_arrowRemain = New<CArrowRemain>(PRIORITY_UI);
+		m_arrowRemain->Init();
 	}
 
 	//フェードインの開始
@@ -79,7 +84,8 @@ void CBossScene::Update()
 		return;
 	}
 
-	if (m_result->GetDraw()) {
+	if (m_result->GetDraw()) 
+	{
 		//コンティニュー表示をアクティブにする
 		m_choices->SetIsActive(true);
 		m_message->SetIsActive(true);

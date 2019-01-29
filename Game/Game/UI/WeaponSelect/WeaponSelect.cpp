@@ -5,41 +5,39 @@
 void CWeaponSelect::Init()
 {
 	crossKeyPos = { -520.0f, -240.0f };
-	size = { 50.0f,50.0f };
-
+	const float ICON_SIZE = 70.0f;
+	size = { ICON_SIZE, ICON_SIZE };
+	const float CROSS_KEY_SIZE = 50.0f;
+	CVector2 crossKeySize = { CROSS_KEY_SIZE, CROSS_KEY_SIZE };
+	const float KEY_WEAPON_SPACE = 63.0f;
 	m_weaponTexture[enWeaponSword] = TextureResource().LoadTexture(L"Assets/sprite/sword.png");
 	m_weapon[enWeaponSword].Init(m_weaponTexture[enWeaponSword]);
-	m_weapon[enWeaponSword].SetPosition({ crossKeyPos.x , crossKeyPos.y + size.y });
+	m_weapon[enWeaponSword].SetPosition({ crossKeyPos.x , crossKeyPos.y + KEY_WEAPON_SPACE });
 	m_weapon[enWeaponSword].SetSize(size);
 
 	m_weaponTexture[enWeaponLongSword] = TextureResource().LoadTexture(L"Assets/sprite/largeSword.png");
 	m_weapon[enWeaponLongSword].Init(m_weaponTexture[enWeaponLongSword]);
-	m_weapon[enWeaponLongSword].SetPosition({ crossKeyPos.x + size.x, crossKeyPos.y });
+	m_weapon[enWeaponLongSword].SetPosition({ crossKeyPos.x + KEY_WEAPON_SPACE, crossKeyPos.y });
 	m_weapon[enWeaponLongSword].SetSize(size);
 
 	m_weaponTexture[enWeaponTwinSword] = TextureResource().LoadTexture(L"Assets/sprite/twinSword.png");
 	m_weapon[enWeaponTwinSword].Init(m_weaponTexture[enWeaponTwinSword]);
-	m_weapon[enWeaponTwinSword].SetPosition({ crossKeyPos.x - size.x, crossKeyPos.y });
+	m_weapon[enWeaponTwinSword].SetPosition({ crossKeyPos.x - KEY_WEAPON_SPACE, crossKeyPos.y });
 	m_weapon[enWeaponTwinSword].SetSize(size);
 
 	m_weaponTexture[enWeaponArrow] = TextureResource().LoadTexture(L"Assets/sprite/bow.png");
 	m_weapon[enWeaponArrow].Init(m_weaponTexture[enWeaponArrow]);
-	m_weapon[enWeaponArrow].SetPosition({ crossKeyPos.x, crossKeyPos.y - size.y });
+	m_weapon[enWeaponArrow].SetPosition({ crossKeyPos.x, crossKeyPos.y - KEY_WEAPON_SPACE });
 	m_weapon[enWeaponArrow].SetSize(size);
-
-	for (int i = 0; i < enWeaponNum; i++) {
-		if (i == enWeaponSword) {
-			m_selectFlag[i] = true;
-		}
-		else {
-			m_selectFlag[i] = false;
-		}
-	}
+	
+	m_weaponChoice.Init(TextureResource().LoadTexture(L"Assets/sprite/weaponChoice.png"));
+	m_weaponChoice.SetSize(size);
+	ChangeWeapon();
 
 	m_crossKeyTexture = TextureResource().LoadTexture(L"Assets/sprite/crossKey.png");
 	m_crossKey.Init(m_crossKeyTexture);
 	m_crossKey.SetPosition(crossKeyPos);
-	m_crossKey.SetSize({ size.x - 10.0f, size.y - 10.0f });
+	m_crossKey.SetSize(crossKeySize);
 
 	m_LBButtonTexture = TextureResource().LoadTexture(L"Assets/sprite/LBButton.png");
 	m_LBButton.Init(m_LBButtonTexture);
@@ -59,21 +57,6 @@ void CWeaponSelect::Update()
 	//武器変更
 	ChangeWeapon();
 
-	//武器が変更されていたら選択している武器を更新
-	if (weaponNumber != weaponNumberOld) {
-		m_selectFlag[weaponNumberOld] = false;
-		weaponNumberOld = weaponNumber;
-	}
-
-	//選択した武器のUIの大きさを変える
-	for (int i = 0; i < enWeaponNum; i++) {
-		if (m_selectFlag[i] == true){
-			m_weapon[i].SetSize(size * 1.2f);
-		}
-		else {
-			m_weapon[i].SetSize(size);
-		}
-	}
 }
 
 void CWeaponSelect::PostAfterDraw()
@@ -82,6 +65,7 @@ void CWeaponSelect::PostAfterDraw()
 	m_weapon[enWeaponLongSword].Draw();
 	m_weapon[enWeaponTwinSword].Draw();
 	m_weapon[enWeaponArrow].Draw();
+	m_weaponChoice.Draw();
 	m_crossKey.Draw();
 	m_LBButton.Draw();
 	m_RBButton.Draw();
@@ -91,5 +75,6 @@ void CWeaponSelect::ChangeWeapon()
 {
 	//プレイヤーが装備している武器の種類を取得
 	weaponNumber = GetPlayer().GetWeaponManager().GetCurrentState();
-	m_selectFlag[weaponNumber] = true;
+	CVector2 pos = m_weapon[weaponNumber].GetPosition();
+	m_weaponChoice.SetPosition(pos);
 }

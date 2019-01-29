@@ -200,6 +200,7 @@
     <ClCompile Include="Player\PlayerSate\PlayerWireAttack.cpp" />
     <ClCompile Include="Player\WireDraw.cpp" />
     <ClCompile Include="Scene\BossScene.cpp" />
+    <ClCompile Include="UI\AllowRemain\ArrowRemain.cpp" />
     <ClCompile Include="UI\Fade\LoadScene.cpp" />
     <ClCompile Include="NPC\Shop\ItemShop.cpp" />
     <ClCompile Include="Item\IItem.cpp" />
@@ -252,6 +253,7 @@
     </ClCompile>
     <ClCompile Include="UI\DamageNumber\DamageNumber.cpp" />
     <ClCompile Include="UI\DamageNumber\Number.cpp" />
+    <ClCompile Include="UI\GetItem\GetItem.cpp" />
     <ClCompile Include="UI\LevelUp\LevelUp.cpp" />
     <ClCompile Include="UI\Menu\EquipInventory.cpp" />
     <ClCompile Include="UI\Menu\ItemInventory.cpp" />
@@ -312,6 +314,7 @@
     <ClInclude Include="Player\PlayerSate\PlayerWireAttack.h" />
     <ClInclude Include="Player\WireDraw.h" />
     <ClInclude Include="Scene\BossScene.h" />
+    <ClInclude Include="UI\AllowRemain\ArrowRemain.h" />
     <ClInclude Include="UI\Fade\LoadScene.h" />
     <ClInclude Include="NPC\Shop\ItemShop.h" />
     <ClInclude Include="Item\IItem.h" />
@@ -361,6 +364,7 @@
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="UI\DamageNumber\DamageNumber.h" />
     <ClInclude Include="UI\DamageNumber\Number.h" />
+    <ClInclude Include="UI\GetItem\GetItem.h" />
     <ClInclude Include="UI\LevelUp\LevelUp.h" />
     <ClInclude Include="UI\Menu\EquipInventory.h" />
     <ClInclude Include="UI\Menu\ItemInventory.h" />

@@ -2,7 +2,6 @@
 
 class Map;
 class CWeaponSelect;
-class CMiniMap;
 class CPlayerHp;
 class CLevelUp;
 class CMenu;
@@ -10,6 +9,7 @@ class CResult;
 class CGameSound;
 class CMessage;
 class CChoices;
+class CArrowRemain;
 
 class CBossScene : public IGameObject
 {
@@ -44,4 +44,5 @@ private:
 	CGameSound*		m_gameSound = nullptr;		//ゲームサウンド
 	CMessage*		m_message = nullptr;		//メッセージ表示
 	CChoices*		m_choices = nullptr;		//選択肢表示
+	CArrowRemain*	m_arrowRemain = nullptr;	//矢の残弾数
 };

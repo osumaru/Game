@@ -153,7 +153,7 @@ void CPlayerAttack::Update()
 				m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateStand);
 
 			}
-			m_pPlayer->GetWeaponManager().ParticleSetting();
+			m_pPlayer->GetWeaponManager().SetDrawingWeapon(true);
 		}
 	}
 }

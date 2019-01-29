@@ -78,6 +78,34 @@ void CTwinSword::Init()
 	m_stanAttack[0] = false;
 	m_stanAttack[1] = false;
 	m_stanAttack[2] = false;
+
+	DirectX::Model* model = m_skinModelTwin.GetBody();
+	//メッシュをなめる
+	for (auto& mesh : model->meshes)
+	{
+		for (auto& meshPart : mesh->meshParts)
+		{
+			ID3D11Buffer* vertexBuffer = meshPart->vertexBuffer.Get();
+			D3D11_BUFFER_DESC vertexDesc;
+			vertexBuffer->GetDesc(&vertexDesc);
+
+			//超点数を求める
+			int vertexCount = vertexDesc.ByteWidth / meshPart->vertexStride;
+
+			//頂点バッファを取得
+			D3D11_MAPPED_SUBRESOURCE subresource;
+			Engine().GetDeviceContext()->Map(vertexBuffer, 0, D3D11_MAP_WRITE_NO_OVERWRITE, 0, &subresource);
+			//頂点バッファから座標を取得して配列に積む
+			char* pData = (char*)subresource.pData;
+			for (int i = 0; i < vertexCount; i++)
+			{
+				CVector3 vertexPos = *((CVector3*)pData);
+				m_twinVertexBufferVector.push_back(vertexPos);
+				pData += meshPart->vertexStride;
+				m_twinVertexBufferCount++;
+			}
+		}
+	}
 }
 
 void CTwinSword::Update()
@@ -85,7 +113,7 @@ void CTwinSword::Update()
 	CVector3 position;
 	CQuaternion rotation;
 	const CMatrix* boneMat;
-	if (m_pPlayer->GetWeaponManager().GetIsAttack())
+	if (m_pPlayer->GetWeaponManager().GetIsAttack() || m_pPlayer->GetWeaponManager().GetDrawingWeapon())
 	{
 		boneMat = m_attackTwinBoneMat;
 		position = m_attackTwinPosition;

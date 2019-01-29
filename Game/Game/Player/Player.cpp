@@ -218,6 +218,7 @@ void CPlayer::Init(CVector3 position)
 	GetGameCamera().CameraSetPlayer();
 	m_wireDraw.Init(CVector3::Zero, CVector3::Zero, CVector3::Zero);
 	m_hipBoneMat = &m_skinmodel.FindBoneWorldMatrix(L"Hips");
+	m_spineBoneID = m_skinmodel.GetSkelton()->FindBoneID(L"Spine1");
 }
 
 void CPlayer::Update()
@@ -250,11 +251,11 @@ void CPlayer::Update()
 	Engine().GetShadowMap().SetViewMatrix(viewMat);
 	Engine().GetShadowMap().SetProjectionMatrix(projMat);
 	m_wireAction.Update();
-	Rotation(m_characterController.GetMoveSpeed());
 	m_animation.Update(GameTime().GetDeltaFrameTime());
 	m_skinmodel.Update(m_position, m_rotation, { 1.0f, 1.0f, 1.0f }, true);
 	m_PlayerStateMachine.Update();
 	m_animation.Update(0.0f);
+	Rotation(m_characterController.GetMoveSpeed());
 
 	//アニメーションの更新
 	//スキンモデルの更新
@@ -357,9 +358,9 @@ void CPlayer::Rotation(const CVector3& stickDir)
 		rad = -1.0f;
 	}
 	rad = acosf(rad);
-	CVector3 judgeAxis;
-	judgeAxis.Cross(moveSpeed, playerFront);
-	if (0.0f < judgeAxis.y)
+	CVector3 crossJudge;
+	crossJudge.Cross(moveSpeed, playerFront);
+	if (0.0f < crossJudge.y)
 	{
 		rad = -rad;
 	}
@@ -369,43 +370,33 @@ void CPlayer::Rotation(const CVector3& stickDir)
 
 	if (m_weaponManager.GetCurrentState() == enWeaponArrow && m_weaponManager.GetIsAttack())
 	{
+		CMatrix spineMat = m_skinmodel.GetSkelton()->GetBoneMatrix(m_spineBoneID);
 		m_rotation = CQuaternion::Identity;
 		const CMatrix& worldMat = m_skinmodel.GetWorldMatrix();
-		CVector3 playerFront;
-		playerFront.x = worldMat.m[2][0];
-		playerFront.y = worldMat.m[2][1];
-		playerFront.z = worldMat.m[2][2];
-		playerFront.Normalize();
-		CVector3 playerFrontXZ = playerFront;
-		playerFrontXZ.y = 0.0f;
-		playerFrontXZ.Normalize();
-
-		CVector3 crossJudge;
+		const CCamera& camera = GetGameCamera().GetCamera();
+		CVector3 cameraFront = camera.GetTarget() - camera.GetPosition();
+		cameraFront.Normalize();
+		CVector3 cameraFrontXZ = cameraFront;
+		cameraFrontXZ.y = 0.0f;
+		cameraFrontXZ.Normalize();
 		CQuaternion multi;
-		const float ROTATION_SPEED = 1.0f;
-		float rad;
-		float angle;
-		rad = playerFront.Dot(playerFrontXZ);
+
+		rad = cameraFront.Dot(cameraFrontXZ);
 		rad = max(-1.0f, min(1.0f, rad));
 		rad = acos(rad);
-
 		CQuaternion multiX = CQuaternion::Identity;
-		crossJudge.Cross(playerFront, playerFrontXZ);
-		crossJudge.Cross(crossJudge, playerFrontXZ);
+		crossJudge.Cross(cameraFrontXZ, cameraFront);
+		crossJudge.Cross(crossJudge, cameraFront);
 		if (crossJudge.y < 0.0f)
 		{
 			rad = -rad;
 		}
-		multi.SetRotation(CVector3::AxisX, rad);
+		multi.SetRotation(CVector3::AxisZ, rad);
 		multiX.Multiply(multi);
-		angle = Pad().GetRightStickY() * ROTATION_SPEED;
-		angle = -CMath::DegToRad(angle);
-		multi.SetRotation(CVector3::AxisX, angle);
-		multiX.Multiply(multi);
-		rad = playerFrontXZ.Dot(CVector3::Front);
+		rad = cameraFrontXZ.Dot(CVector3::Front);
 		rad = max(-1.0f, min(1.0f, rad));
 		rad = acos(rad);
-		crossJudge.Cross(CVector3::Front, playerFrontXZ);
+		crossJudge.Cross(CVector3::Front, cameraFrontXZ);
 		if (crossJudge.y < 0.0f)
 		{
 			rad = -rad;
@@ -413,12 +404,12 @@ void CPlayer::Rotation(const CVector3& stickDir)
 		CQuaternion multiY;
 		multi.SetRotation(CVector3::AxisY, rad);
 		multiY.Multiply(multi);
-		angle = Pad().GetRightStickX() * ROTATION_SPEED;
-		angle = CMath::DegToRad(angle);
-		multi.SetRotation(CVector3::AxisY, angle);
-		multiY.Multiply(multi);
 		m_rotation.Multiply(multiY);
-		m_rotation.Multiply(multiX);
+		CMatrix rotMat;
+		rotMat.MakeRotationFromQuaternion(multiX);
+		spineMat.Mul(spineMat, rotMat);
+		m_skinmodel.SetBoneMatrix(m_spineBoneID, spineMat);
+
 	}
 	else if (m_wireAction.IsWireMove())
 	{
