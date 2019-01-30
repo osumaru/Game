@@ -42,11 +42,24 @@ public:
 		return m_rareEquipItemList.size();
 	}
 
+	//レア3アイテムのIDの入ったリスト
+	const int GetLegendEquipItemList(const int num)
+	{
+		if (num > m_legendEquipItemList.size()) { return 0; }
+		return m_legendEquipItemList.at(num);
+	}
+	//レア3アイテムのIDの入ったリストの大きさ
+	const int GetLegendEquipItemListSize()
+	{
+		return m_legendEquipItemList.size();
+	}
+
 private:
-	static const int			MAX_ITEM_NUMBER = 30;
+	static const int			MAX_ITEM_NUMBER = 40;
 	std::list<SItemStatus>		m_equipItemStatusList;
 	SItemStatus					ItemStatus[MAX_ITEM_NUMBER];
-	std::vector<int>			m_normalEquipItemList;
-	std::vector<int>			m_rareEquipItemList;
+	std::vector<int>			m_normalEquipItemList;			//レア度１のリスト
+	std::vector<int>			m_rareEquipItemList;			//レア度２のリスト
+	std::vector<int>			m_legendEquipItemList;			//レア度３のリスト
 };
 
