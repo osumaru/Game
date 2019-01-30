@@ -60,7 +60,7 @@ void CEnemyChase::Move(float length)
 	CVector3 playerPos = GetPlayer().GetPosition();
 	CVector3 enemyPos = m_enemy->GetPosition();
 	CVector3 toPlayerDir = playerPos - enemyPos;
-	if (length > 3.0f) 
+	if (length > 10.0f) 
 	{
 		//åoòHíTçıÇ∑ÇÈ
 		m_interval++;
@@ -86,12 +86,9 @@ void CEnemyChase::Move(float length)
 					break;
 				}
 			}
-			CVector3 pos = enemyPos;
-			pos.y = 0.0f;
-			rootPos -= pos;
+			rootPos -= enemyPos;
 			rootPos.Normalize();
-			moveSpeed.x = rootPos.x * 5.0f;
-			moveSpeed.z = rootPos.z * 5.0f;
+			moveSpeed = rootPos * 5.0f;
 		}
 	}
 	else {
