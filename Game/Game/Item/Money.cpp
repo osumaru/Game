@@ -3,13 +3,25 @@
 #include "../Player/Player.h"
 #include"../../Game/Camera/GameCamera.h"
 
-void CMoney::Init(const int gold)
+void CMoney::Init(const CVector3& position, const int gold)
 {
+	//モデルの初期化
+	m_skinModel.Load(L"Assets/modelData/money.cmo");
+	m_position = position;
+	m_characterController.Init(0.2f, 0.2f, m_position);
+	m_characterController.SetUserIndex(EnCollisionAttr::enCollisionAttr_Item);
+	m_characterController.SetIgnoreRigidBody(&GetPlayer().GetCharacterController().GetBody());
+
 	m_gold = gold;
 }
 
 bool CMoney::Start()
 {
+	float distance = 3.0f;
+	float popUpSpeed = 6.0f;
+	//ランダム地点にポップさせる
+	RamdomPop(distance, popUpSpeed);
+
 	return true;
 }
 
@@ -78,18 +90,4 @@ void CMoney::Update()
 void CMoney::Draw()
 {
 	m_skinModel.Draw(GetGameCamera().GetViewMatrix(), GetGameCamera().GetProjectionMatrix());
-}
-
-void CMoney::Pop(CVector3 position)
-{
-	//モデルの初期化
-	m_skinModel.Load(L"Assets/modelData/money.cmo");
-	m_position = position;
-	m_characterController.Init(0.2f, 0.2f, m_position);
-	m_characterController.SetUserIndex(EnCollisionAttr::enCollisionAttr_Item);
-	m_characterController.SetIgnoreRigidBody(&GetPlayer().GetCharacterController().GetBody());
-	float distance = 3.0f;
-	float popUpSpeed = 6.0f;
-	//ランダム地点にポップさせる
-	RamdomPop(distance, popUpSpeed);
 }

@@ -32,8 +32,7 @@ void CEnemyDeath::Update()
 	if (!m_enemy->GetAnimation().IsPlay()) {
 		//お金
 		CMoney* money = New<CMoney>(PRIORITY_ITEM);
-		money->Init(m_enemy->GetStatus().gold);
-		money->Pop(m_enemy->GetPosition());
+		money->Init(m_enemy->GetPosition(), m_enemy->GetStatus().gold);
 		//ランダムで0～9の数値を取得
 		int randomNum = Random().GetRandSInt() % 10;
 		//５割の確率で出す
@@ -41,8 +40,7 @@ void CEnemyDeath::Update()
 		{
 			//回復アイテム
 			CRecoveryItem* recoveryItem = New<CRecoveryItem>(PRIORITY_ITEM);
-			recoveryItem->Init();
-			recoveryItem->Pop(m_enemy->GetPosition());
+			recoveryItem->Init(m_enemy->GetPosition());
 		}
 		//３割の確率で出す
 		if (randomNum < 3) 
@@ -51,6 +49,7 @@ void CEnemyDeath::Update()
 			CTreasureChest* treasureChest = New<CTreasureChest>(PRIORITY_ITEM);
 			treasureChest->Init(m_enemy->GetPosition());
 		}
+		m_isAnimationEnd = true;
 		m_enemy->EnemyListErase();
 		Delete(m_enemy);
 	}

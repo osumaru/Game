@@ -32,4 +32,5 @@ public:
 	void Rotation();
 private:
 	float m_timer = 0.0f;	//タイマー
+	bool  m_isNoneEnd = false; //何もしない状態が終わったか
 };

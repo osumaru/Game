@@ -5,12 +5,23 @@
 #include "../UI/Menu/ItemInventory.h"
 #include "InventoryItem/InventoryRecoveryItem.h"
 
-void CRecoveryItem::Init()
+void CRecoveryItem::Init(const CVector3& position)
 {
+	//モデルの初期化
+	m_skinModel.Load(L"Assets/modelData/heart.cmo");
+	m_position = position;
+	m_characterController.Init(0.2f, 0.2f, m_position);
+	m_characterController.SetUserIndex(EnCollisionAttr::enCollisionAttr_Item);
+	m_characterController.SetIgnoreRigidBody(&GetPlayer().GetCharacterController().GetBody());
 }
 
 bool CRecoveryItem::Start()
 {
+	float distance = 3.0f;
+	float popUpSpeed = 6.0f;
+	//ランダム地点にポップさせる
+	RamdomPop(distance, popUpSpeed);
+
 	return true;
 }
 
@@ -79,18 +90,4 @@ void CRecoveryItem::Update()
 void CRecoveryItem::Draw()
 {
 	m_skinModel.Draw(GetGameCamera().GetViewMatrix(), GetGameCamera().GetProjectionMatrix());
-}
-
-void CRecoveryItem::Pop(CVector3 position)
-{
-	//モデルの初期化
-	m_skinModel.Load(L"Assets/modelData/heart.cmo");
-	m_position = position;
-	m_characterController.Init(0.2f, 0.2f, m_position);
-	m_characterController.SetUserIndex(EnCollisionAttr::enCollisionAttr_Item);
-	m_characterController.SetIgnoreRigidBody(&GetPlayer().GetCharacterController().GetBody());
-	float distance = 3.0f;
-	float popUpSpeed = 6.0f;
-	//ランダム地点にポップさせる
-	RamdomPop(distance, popUpSpeed);
 }

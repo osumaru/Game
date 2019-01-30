@@ -4,7 +4,7 @@
 #include "../Player/PlayerSate/PlayerStateMachine.h"
 #include "../Enemy/IEnemy.h"
 #include "../Enemy/EnemyGroup.h"
-#include "../Enemy/Maw.h"
+#include "../Enemy/Boss/Maw.h"
 #include "../Scene/SceneManager.h"
 #include "../Map/Map.h"
 
@@ -278,8 +278,10 @@ void CGameCamera::SearchTarget()
 void CGameCamera::ChangeTarget()
 {
 	float rStick_x = Pad().GetRightStickX();
+	float rStickValue = fabsf(rStick_x) - m_preRStick;
+	m_preRStick = fabsf(rStick_x);
 	//右スティックを入力したか
-	if (rStick_x == 0.0f)
+	if (rStickValue <= 0.8f)
 	{
 		//右スティックを入力していない
 		return;

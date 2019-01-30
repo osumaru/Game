@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "BreakMapObject.h"
-#include "../../Enemy/Maw.h"
+#include "../../Enemy/Boss/Maw.h"
 
 CBreakMapObject::CBreakMapObject():
 	m_rigidBody(),

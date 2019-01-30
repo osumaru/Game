@@ -4,7 +4,7 @@
 #include "../../Map/Map.h"
 #include "../../Scene/SceneManager.h"
 #include "../../Enemy/IEnemy.h"
-#include "../../Enemy/Maw.h"
+#include "../../Enemy/Boss/Maw.h"
 #include "../../NPC/IShop.h"
 #include "../../NPC/ShopManager.h"
 #include "ItemInventory.h"

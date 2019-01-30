@@ -36,12 +36,6 @@ void CBow::Init()
 	m_attackPosition = { 10.0f, 0.0f, 0.0f };
 	m_skinModel.Load(L"Assets/modelData/LongBow.cmo", NULL);
 
-	m_texture = TextureResource().LoadTexture(L"Assets/sprite/arrowTag.png");
-	m_tag.Init(m_texture);
-	m_tag.SetPosition({ 0.0f,0.0f });
-	m_tag.SetSize({ 50.0f,50.0f });
-	m_tag.SetAlpha(0.7f);
-
 	m_hitEffectParam = std::make_unique<SHitEffectParam[]>(1);
 	m_hitEffectParam[0] = { 0.0f, 1.0f, 0.0f };
 }
@@ -74,34 +68,10 @@ void CBow::Update()
 			m_timer = 0.0f;
 		}
 	}
-
-	if (!m_pPlayer->GetWireAction().IsWireMove() && Pad().GetLeftTrigger())
-	{
-		//GetGameCamera().SetCmareaState(GetGameCamera().enArrow);
-		m_isZoom = true;
-	}
-	else
-	{
-		//GetGameCamera().SetCmareaState(GetGameCamera().enNormal);
-		m_isZoom = false;
-	}
-}
-
-void CBow::AfterDraw()
-{
-	//ƒJƒƒ‰‚ğØ‚è‘Ö‚¦‚Ä‚é‚Í•`‰æ‚·‚é
-	if (m_isZoom)
-	{
-		m_tag.Draw();
-	}
 }
 
 void CBow::ArrowCreate()
 {
-	if (m_remainNum <= 0) 
-	{
-		return;
-	}
 	CPlayerArrow* arrow = New<CPlayerArrow>(PRIORITY_ARROW);
 	m_arrowList.push_back(arrow);
 	m_remainNum--;

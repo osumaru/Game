@@ -5,7 +5,7 @@
 #include "../../Scene/SceneManager.h"
 #include "../../Scene/GameScene.h"
 #include "../../Map/Map.h"
-#include "../../Enemy/Maw.h"
+#include "../../Enemy/Boss/Maw.h"
 #include "../../Enemy/EnemyGroup.h"
 
 void CTwinSword::Init()

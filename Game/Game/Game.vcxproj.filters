@@ -109,6 +109,9 @@
     <Filter Include="ソース ファイル\UI\ArrowRemin">
       <UniqueIdentifier>{a6270084-10a5-471b-bada-eeec20adbdc4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Enemy\Boss">
+      <UniqueIdentifier>{da385530-fd8c-49a6-93c8-91c3083fed66}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -246,12 +249,6 @@
     <ClCompile Include="Enemy\PathFinding\PathFinding.cpp">
       <Filter>ソース ファイル\Enemy\PathFinding</Filter>
     </ClCompile>
-    <ClCompile Include="Camera\NormalGameCamera.cpp">
-      <Filter>ソース ファイル\Camera</Filter>
-    </ClCompile>
-    <ClCompile Include="Camera\ArrowGameCamera.cpp">
-      <Filter>ソース ファイル\Camera</Filter>
-    </ClCompile>
     <ClCompile Include="Player\PlayerSate\PlayerState.cpp">
       <Filter>ソース ファイル\Player\PlayerState</Filter>
     </ClCompile>
@@ -281,9 +278,6 @@
     </ClCompile>
     <ClCompile Include="Item\TreasureChest.cpp">
       <Filter>ソース ファイル\Item</Filter>
-    </ClCompile>
-    <ClCompile Include="Enemy\Maw.cpp">
-      <Filter>ソース ファイル\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="Player\WireAction.cpp">
       <Filter>ソース ファイル\Player</Filter>
@@ -426,6 +420,12 @@
     </ClCompile>
     <ClCompile Include="UI\AllowRemain\ArrowRemain.cpp">
       <Filter>ソース ファイル\UI\ArrowRemin</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy\Boss\AttackWave.cpp">
+      <Filter>ソース ファイル\Enemy\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy\Boss\Maw.cpp">
+      <Filter>ソース ファイル\Enemy\Boss</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -573,12 +573,6 @@
     <ClInclude Include="Enemy\PathFinding\MapData.h">
       <Filter>ソース ファイル\Enemy\PathFinding</Filter>
     </ClInclude>
-    <ClInclude Include="Camera\NormalGameCamera.h">
-      <Filter>ソース ファイル\Camera</Filter>
-    </ClInclude>
-    <ClInclude Include="Camera\ArrowGameCamera.h">
-      <Filter>ソース ファイル\Camera</Filter>
-    </ClInclude>
     <ClInclude Include="Player\PlayerSate\PlayerStateCommon.h">
       <Filter>ソース ファイル\Player\PlayerState</Filter>
     </ClInclude>
@@ -611,9 +605,6 @@
     </ClInclude>
     <ClInclude Include="Item\TreasureChest.h">
       <Filter>ソース ファイル\Item</Filter>
-    </ClInclude>
-    <ClInclude Include="Enemy\Maw.h">
-      <Filter>ソース ファイル\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="Player\WireAction.h">
       <Filter>ソース ファイル\Player</Filter>
@@ -755,6 +746,12 @@
     </ClInclude>
     <ClInclude Include="UI\AllowRemain\ArrowRemain.h">
       <Filter>ソース ファイル\UI\ArrowRemin</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy\Boss\AttackWave.h">
+      <Filter>ソース ファイル\Enemy\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy\Boss\Maw.h">
+      <Filter>ソース ファイル\Enemy\Boss</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

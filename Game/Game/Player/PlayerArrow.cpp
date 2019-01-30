@@ -5,7 +5,7 @@
 #include "../Enemy/IEnemy.h"
 #include "PlayerArrow.h"
 #include "Player.h"
-#include "../Enemy/Maw.h"
+#include "../Enemy/Boss/Maw.h"
 
 CPlayerArrow::CPlayerArrow()
 {

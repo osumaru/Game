@@ -1,9 +1,9 @@
-#include "../../Player/Weapon/WeaponManager.h"
 /*
 *	武器選択のUIクラス
 */
 #pragma once
 
+#include "../../Player/Weapon/WeaponManager.h"
 
 class CWeaponSelect : public IGameObject
 {
@@ -27,10 +27,6 @@ private:
 	CTexture*	m_weaponTexture[enWeaponNum];	
 	CSprite		m_crossKey;						//十字キー
 	CTexture*	m_crossKeyTexture;
-	CSprite		m_LBButton;						//LBボタン
-	CTexture*	m_LBButtonTexture;
-	CSprite		m_RBButton;						//RBボタン
-	CTexture*	m_RBButtonTexture;
 	CVector2	crossKeyPos;					//十字キーの座標
 	CVector2	size;							//サイズ
 	int			weaponNumber = enWeaponSword;	//変更する武器の番号

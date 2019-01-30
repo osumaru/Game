@@ -161,6 +161,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Camera\CameraCollisionSolver.cpp" />
+    <ClCompile Include="Enemy\Boss\AttackWave.cpp" />
+    <ClCompile Include="Enemy\Boss\Maw.cpp" />
     <ClCompile Include="Enemy\EnemyState\EnemyAttackWait.cpp" />
     <ClCompile Include="Enemy\EnemyState\EnemyStan.cpp" />
     <ClCompile Include="Enemy\TitleEnemy.cpp" />
@@ -168,7 +170,6 @@
     <ClCompile Include="Enemy\Warrok\Warrok.cpp" />
     <ClCompile Include="GameSound\GameSoundEffect.cpp" />
     <ClCompile Include="Item\GameItem\CEquipItem.cpp" />
-    <ClCompile Include="Camera\ArrowGameCamera.cpp" />
     <ClCompile Include="Camera\GameCamera.cpp" />
     <ClCompile Include="Enemy\EnemyGroup.cpp" />
     <ClCompile Include="Enemy\EnemySearch.cpp" />
@@ -181,7 +182,6 @@
     <ClCompile Include="Enemy\EnemyState\EnemyWalk.cpp" />
     <ClCompile Include="Enemy\EnemyTurn.cpp" />
     <ClCompile Include="Enemy\IEnemy.cpp" />
-    <ClCompile Include="Enemy\Maw.cpp" />
     <ClCompile Include="Enemy\Ninja.cpp" />
     <ClCompile Include="Enemy\PathFinding\PathFinding.cpp" />
     <ClCompile Include="Enemy\Samurai.cpp" />
@@ -227,7 +227,6 @@
     <ClCompile Include="Map\Map.cpp" />
     <ClCompile Include="Map\MapChip\MapChip.cpp" />
     <ClCompile Include="Map\MapChip\StaticMapObject.cpp" />
-    <ClCompile Include="Camera\NormalGameCamera.cpp" />
     <ClCompile Include="Player\PlayerSate\PlayerArrowShoot.cpp" />
     <ClCompile Include="Player\PlayerSate\PlayerArrowAttack.cpp" />
     <ClCompile Include="Player\PlayerArrow.cpp" />
@@ -269,6 +268,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera\CameraCollisionSolver.h" />
+    <ClInclude Include="Enemy\Boss\AttackWave.h" />
+    <ClInclude Include="Enemy\Boss\Maw.h" />
     <ClInclude Include="Enemy\EnemyState\EnemyAttackWait.h" />
     <ClInclude Include="Enemy\EnemyState\EnemyStan.h" />
     <ClInclude Include="Enemy\TitleEnemy.h" />
@@ -277,7 +278,6 @@
     <ClInclude Include="GameSound\GameSoundEffect.h" />
     <ClInclude Include="Item\GameItem\ItemStatus.h" />
     <ClInclude Include="Item\GameItem\CEquipItem.h" />
-    <ClInclude Include="Camera\ArrowGameCamera.h" />
     <ClInclude Include="Camera\GameCamera.h" />
     <ClInclude Include="Enemy\EnemyGroup.h" />
     <ClInclude Include="Enemy\EnemySearch.h" />
@@ -292,7 +292,6 @@
     <ClInclude Include="Enemy\EnemyState\IEnemyState.h" />
     <ClInclude Include="Enemy\EnemyTurn.h" />
     <ClInclude Include="Enemy\IEnemy.h" />
-    <ClInclude Include="Enemy\Maw.h" />
     <ClInclude Include="Enemy\Ninja.h" />
     <ClInclude Include="Enemy\PathFinding\MapData.h" />
     <ClInclude Include="Enemy\PathFinding\PathFinding.h" />
@@ -341,7 +340,6 @@
     <ClInclude Include="Map\Map.h" />
     <ClInclude Include="Map\MapChip\MapChip.h" />
     <ClInclude Include="Map\MapChip\StaticMapObject.h" />
-    <ClInclude Include="Camera\NormalGameCamera.h" />
     <ClInclude Include="Player\PlayerSate\PlayerArrowShoot.h" />
     <ClInclude Include="Player\PlayerSate\PlayerArrowAttack.h" />
     <ClInclude Include="Player\PlayerArrow.h" />
