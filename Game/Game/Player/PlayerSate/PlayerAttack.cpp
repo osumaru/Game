@@ -5,7 +5,7 @@
 #include "../../Map/Map.h"
 #include "../../Enemy/IEnemy.h"
 #include "../../Scene/SceneManager.h"
-#include "../../Enemy/Maw.h"
+#include "../../Enemy/Boss/Maw.h"
 #include "../../Camera/GameCamera.h"
 
 CPlayerAttack::CPlayerAttack()

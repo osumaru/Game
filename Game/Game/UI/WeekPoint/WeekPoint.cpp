@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "WeekPoint.h"
 #include "../../Camera/GameCamera.h"
-#include "../../Enemy/Maw.h"
+#include "../../Enemy/Boss/Maw.h"
 void CWeekPoint::Init()
 {
 	const CVector2 WeekPos = {0.0f,0.0f};

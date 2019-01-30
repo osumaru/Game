@@ -12,7 +12,7 @@
 #include "../Enemy/Ninja.h"
 #include "../Enemy/Samurai.h"
 #include "../Enemy/Warrok/Warrok.h"
-#include "../Enemy/Maw.h"
+#include "../Enemy/Boss/Maw.h"
 #include "../Enemy/EnemyGroup.h"
 #include "../Enemy/PathFinding/PathFinding.h"
 #include"../NPC/ShopManager.h"
@@ -23,8 +23,8 @@ std::vector<std::vector<SMapChipInfo>> mapChipInfo =
 {
 	{
 		//本番用の世界のマップ
-		//#include "WorldMap.h"
-#include "ShopTest.h"
+		#include "WorldMap.h"
+		//#include "ShopTest.h"
 		//#include "mm.h"
 		//#include "BossStage.h"
 		//#include "Boss.h"

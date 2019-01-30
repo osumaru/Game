@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "BossHp.h"
-#include "../../Enemy/Maw.h"
+#include "../../Enemy/Boss/Maw.h"
 
 
 void CBossHp::Init()

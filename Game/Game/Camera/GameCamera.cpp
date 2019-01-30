@@ -4,7 +4,7 @@
 #include "../Player/PlayerSate/PlayerStateMachine.h"
 #include "../Enemy/IEnemy.h"
 #include "../Enemy/EnemyGroup.h"
-#include "../Enemy/Maw.h"
+#include "../Enemy/Boss/Maw.h"
 #include "../Scene/SceneManager.h"
 #include "../Map/Map.h"
 

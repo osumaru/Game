@@ -161,6 +161,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Camera\CameraCollisionSolver.cpp" />
+    <ClCompile Include="Enemy\Boss\AttackWave.cpp" />
+    <ClCompile Include="Enemy\Boss\Maw.cpp" />
     <ClCompile Include="Enemy\EnemyState\EnemyAttackWait.cpp" />
     <ClCompile Include="Enemy\EnemyState\EnemyStan.cpp" />
     <ClCompile Include="Enemy\TitleEnemy.cpp" />
@@ -181,7 +183,6 @@
     <ClCompile Include="Enemy\EnemyState\EnemyWalk.cpp" />
     <ClCompile Include="Enemy\EnemyTurn.cpp" />
     <ClCompile Include="Enemy\IEnemy.cpp" />
-    <ClCompile Include="Enemy\Maw.cpp" />
     <ClCompile Include="Enemy\Ninja.cpp" />
     <ClCompile Include="Enemy\PathFinding\PathFinding.cpp" />
     <ClCompile Include="Enemy\Samurai.cpp" />
@@ -269,6 +270,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera\CameraCollisionSolver.h" />
+    <ClInclude Include="Enemy\Boss\AttackWave.h" />
+    <ClInclude Include="Enemy\Boss\Maw.h" />
     <ClInclude Include="Enemy\EnemyState\EnemyAttackWait.h" />
     <ClInclude Include="Enemy\EnemyState\EnemyStan.h" />
     <ClInclude Include="Enemy\TitleEnemy.h" />
@@ -292,7 +295,6 @@
     <ClInclude Include="Enemy\EnemyState\IEnemyState.h" />
     <ClInclude Include="Enemy\EnemyTurn.h" />
     <ClInclude Include="Enemy\IEnemy.h" />
-    <ClInclude Include="Enemy\Maw.h" />
     <ClInclude Include="Enemy\Ninja.h" />
     <ClInclude Include="Enemy\PathFinding\MapData.h" />
     <ClInclude Include="Enemy\PathFinding\PathFinding.h" />
