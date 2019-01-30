@@ -8,7 +8,7 @@
 void CDamageNumber::Init(IEnemy* enemy)
 {
 	CVector2 numPos = { 0.0f,0.0f };
-	CVector2 numSize = { 15.0f,25.0f };
+	CVector2 numSize = { 20.0f,30.0f };
 
 	//数字のスプライトを初期化
 	for (int i = 0; i < EnDigit::enDigit_Num; i++) {

@@ -43,6 +43,8 @@ void CSword::Init()
 	m_stanAttack[0] = false;
 	m_stanAttack[1] = false;
 	m_stanAttack[2] = true;
+	m_weaponHoldAnimationNum = enPlayerAnimationRunSword;
+	m_weaponHoldBoneName = L"RightShoulder";
 }
 
 void CSword::Update()

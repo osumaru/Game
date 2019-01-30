@@ -33,6 +33,14 @@ void CGameCamera::Init()
 	m_shakeCamera.Init(CVector3::Zero, CVector3::Zero, {1.0f, 1.0f, 0.0f}, 0.7f);
 	//カメラの当たり判定を初期化
 	m_cameraCollisionSolver.Init(0.2f);
+	m_lockOnSprite.Init(TextureResource().LoadTexture(L"Assets/sprite/target.png"));
+	m_lockOnSprite.SetIsDraw(false);
+	float spriteSize= 10.0f;
+	m_lockOnSprite.SetSize({ spriteSize, spriteSize });
+	spriteSize = 100.0f;
+	m_reticule.Init(TextureResource().LoadTexture(L"Assets/sprite/reticule.png"));
+	m_reticule.SetIsDraw(false);
+	m_reticule.SetSize({ spriteSize, spriteSize });
 }
 
 void CGameCamera::CameraSetPlayer()
@@ -71,6 +79,8 @@ void CGameCamera::Update()
 			//ロックオンを解除する
 			LockOnCancel();
 		}
+		m_lockOnSprite.SetIsDraw(m_isLockOn);
+		m_reticule.SetIsDraw(false);
 	}
 
 	//ロックオン中
@@ -131,6 +141,8 @@ void CGameCamera::Update()
 			target.y += TARGET_OFFSET_Y;
 			position = target + m_toCameraPos;
 		}
+
+		m_reticule.SetIsDraw(m_isArrowZoom);
 	}
 
 	////カメラの座標と注視点が近ければ座標と注視点を更新しない
@@ -162,6 +174,12 @@ void CGameCamera::Update()
 	m_camera.SetTarget(m_shakeCamera.GetShakeTarget());
 	m_camera.SetPosition(m_shakeCamera.GetShakePosition());
 	m_camera.Update();
+}
+
+void CGameCamera::PostAfterDraw()
+{
+	m_lockOnSprite.Draw();
+	m_reticule.Draw();
 }
 
 void CGameCamera::Rotation()
@@ -337,7 +355,7 @@ void CGameCamera::LockOn(CVector3& target)
 			return;
 		}
 		target = m_lockOnEnemy->GetPosition();
-		target.y += 0.5f;
+		target.y += 1.5f;
 	}
 
 	//ターゲートからカメラへのベクトルを求める

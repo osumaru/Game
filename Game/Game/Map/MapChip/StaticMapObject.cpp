@@ -31,6 +31,7 @@ void StaticMapObject::Init(const CVector3& position, const CQuaternion& rotation
 	//メッシュコライダーからAABBを作成
 	isCollider = collider;
 
+	//木のモデル
 	if (m_isTree)
 	{
 		CMatrix rotMat;
@@ -44,6 +45,16 @@ void StaticMapObject::Init(const CVector3& position, const CQuaternion& rotation
 		m_boxCollider.reset(new CBoxCollider);
 		m_boxCollider->Create({ 1.0f,boxsize.y,1.0f });
 		rInfo.collider = m_boxCollider.get();
+
+		//CNavigationMesh::SObstacleInfo naviInfo;
+		////ナビゲーションメッシュでルートを弾くためのコライダーのAABBを求める
+		//CVector3 aabbMax = mesh.GetAabbMax();
+		//CVector3 aabbMin = mesh.GetAabbMin();
+		//naviInfo.aabbMax = (aabbMax - aabbMin) * 0.5f;
+		//naviInfo.aabbMin = (aabbMin - aabbMax) * 0.5f;
+		//naviInfo.center = m_position;
+		//g_pathFinding.GetNavigationMesh().AddObstacleObject(naviInfo);
+
 	}
 	//メッシュコライダー
 	else if (!collider)
@@ -81,6 +92,16 @@ void StaticMapObject::Init(const CVector3& position, const CQuaternion& rotation
 		m_boxCollider.reset(new CBoxCollider);
 		m_boxCollider->Create({ boxsize.x,boxsize.y,boxsize.z });
 		rInfo.collider = m_boxCollider.get();
+
+		CNavigationMesh::SObstacleInfo naviInfo;
+		//ナビゲーションメッシュでルートを弾くためのコライダーのAABBを求める
+		CVector3 aabbMax = mesh.GetAabbMax();
+		CVector3 aabbMin = mesh.GetAabbMin();
+		naviInfo.aabbMax = (aabbMax - aabbMin) * 0.5f;
+		naviInfo.aabbMin = (aabbMin - aabbMax) * 0.5f;
+		naviInfo.center = m_position;
+		g_pathFinding.GetNavigationMesh().AddObstacleObject(naviInfo);
+
 	}
 
 

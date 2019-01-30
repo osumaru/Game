@@ -19,9 +19,10 @@
 	//アイテムのクオリティー
 	enum EnItemQuality
 	{
-		enNormal,
-		enRare,
-		enLegend,
+		enNormal,		//62%程度で手に入るアイテム
+		enRare,			//30%程度で手に入るアイテム
+		enLegend,		//8%程度で手に入るアイテム
+		enSpecial,		//特定の場所以外では手に入らないもの
 	};
 
 	struct SItemStatus

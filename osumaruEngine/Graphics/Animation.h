@@ -91,12 +91,25 @@ public:
 	*/
 	void AddBlendAnimation(const wchar_t* boneName, int animationNum);
 
-private:
+	/*
+	ブレンドしてるアニメーションの数を取得
+	*/
+	int GetBlendAnimationNum() const
+	{
+		return m_animationBlend.size();
+	}
+
+	//アニメーションブレンドをクリア
+	void BlendAnimationClear()
+	{
+		m_animationBlend.clear();
+		m_animationBlend.push_back({ m_currentAnimationNum, m_rootBoneID });
+	}
+
 	//ボーンの行列を更新
 	void UpdateBoneMatrix(int boneID, const std::vector<CMatrix>& localMat1, const std::vector<CMatrix>& localMat2);
 
-	//ブレンドアニメーションするための情報を追加
-	void AddBlendAnimationInfo(int boneID, int animationNum, int count);
+	
 
 
 	//アニメーションブレンドに使う情報

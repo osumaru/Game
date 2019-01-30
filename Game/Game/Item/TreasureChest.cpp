@@ -107,6 +107,7 @@ void CTreasureChest::DesideWeaponStatus()
 	CEquipItem* nItem = GetSceneManager().GetFade()->GetLoadScene()->GetEquipItemData();
 	//↓これはレア度がNormalの武器からランダムで武器を取得するコード
 	int num = nItem->GetNormalEquipItemList(Random().GetRandSInt() % nItem->GetNormalEquipItemListSize());
+	//int num = nItem->GetLegendEquipItemList(Random().GetRandSInt() % nItem->GetLegendEquipItemListSize());
 	//武器のタイプの取得
 	int weaponNumber = nItem->GetItemStatus_ItemId(num).WeaponType;
 	//武器の名前の取得

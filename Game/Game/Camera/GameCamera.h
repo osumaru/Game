@@ -17,6 +17,8 @@ public:
 	//更新
 	void Update();
 
+	void PostAfterDraw()override;
+
 	//カメラ必要なプレイヤーの情報の初期化`
 	void CameraSetPlayer();
 
@@ -110,7 +112,8 @@ private:
 		enLockOn_Enemy,	//エネミー
 		enLockOn_Boss	//ボス
 	};
-
+	CSprite					m_reticule;
+	CSprite					m_lockOnSprite;				//ロックオンスプライト				
 	static CGameCamera*		m_gameCamera;				//ゲームカメラ
 	CCamera					m_camera;					//カメラ
 	CSpringCamera			m_springCamera;				//バネカメラ
