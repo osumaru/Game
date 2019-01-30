@@ -7,6 +7,7 @@ bool CEnemyAttackWait::Start()
 	m_enemy->GetAnimation().Play(CEnemyState::enState_Idle, 0.3f);
 	//タイマーを初期化
 	m_timer = 0.0f;
+	m_isNoneEnd = false;
 
 	return true;
 }
@@ -25,6 +26,12 @@ void CEnemyAttackWait::Update()
 	{
 		//しばらく何もしない
 		return;
+	}
+
+	if (m_timer > 3.0f && !m_isNoneEnd)
+	{
+		m_isNoneEnd = true;
+		m_enemy->GetAnimation().Play(CEnemyState::enAnimation_Walk, 0.3f);
 	}
 
 	CVector3 playerPos = GetPlayer().GetPosition();

@@ -13,8 +13,6 @@ public:
 
 	void Update()override;
 
-	void AfterDraw()override;
-
 	//–î‚ğì‚éŠÖ”
 	void ArrowCreate();
 
