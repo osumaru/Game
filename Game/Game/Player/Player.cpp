@@ -144,6 +144,9 @@ void CPlayer::Init(CVector3 position)
 									{ L"Assets/modelData/PlayerTwinAttackSecandEnd.tka" },	//連撃アニメーション
 									{ L"Assets/modelData/PlayerTwinAttackThirdEnd.tka" },	//連撃アニメーション
 									{ L"Assets/modelData/PlayerJumpAttack.tka"},			//ジャンプ攻撃アニメーション
+									{ L"Assets/modelData/PlayerRunSword.tka"},				//納刀前の剣を持ってる状態のアニメーション
+									{ L"Assets/modelData/PlayerRunTwinSword.tka"},				//納刀前の双剣を持ってる状態のアニメーション
+									{ L"Assets/modelData/PlayerRunLeageSword.tka"},			//納刀前の大剣を持ってる状態のアニメーション
 									{ L"Assets/modelData/PlayerStun.tka" },					//スタンアニメーション
 									{ L"Assets/modelData/PlayerDamage.tka" },				//ダメージアニメーション
 									{ L"Assets/modelData/PlayerJumpDamage.tka"},			//ダメージ(空中)アニメーション

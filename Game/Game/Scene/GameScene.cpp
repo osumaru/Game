@@ -35,6 +35,7 @@ void CGameScene::BeforeDead()
 	Engine().GetEffectEngine().SetCamera(nullptr);
 	Delete(m_miniMap);
 	Delete(m_map);
+	Delete(m_getItem);
 	Delete(m_arrowRemain);
 
 }

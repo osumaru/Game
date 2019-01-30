@@ -36,8 +36,7 @@ void CAnimation::Play(int animationNum)
 	m_currentAnimationNum = animationNum;
 	m_animationClips[m_currentAnimationNum].Play();
 	m_animationClips[m_curCurrentAnimationNum].Reset();
-	m_animationBlend.clear();
-	m_animationBlend.push_back({m_currentAnimationNum, m_rootBoneID});
+	BlendAnimationClear();
 }
 
 void CAnimation::Play(int animationNum, float interpolationTime)
@@ -81,25 +80,12 @@ void CAnimation::UpdateBoneMatrix(int boneID, const std::vector<CMatrix>& localM
 	}
 }
 
-void CAnimation::AddBlendAnimationInfo(int boneID, int animationNum, int count)
-{
-}
-
 
 void CAnimation::Update(float deltaTime)
 {
-	//再生中のアニメーションを更新
-	m_animationClips[m_currentAnimationNum].Update(deltaTime);
-	m_animationClips[m_currentAnimationNum].AnimationInvoke(this);
-	//再生が終わり、ループフラグが立っていればもう一度再生する
-	if (!m_animationClips[m_currentAnimationNum].IsPlay() && m_animationClips[m_currentAnimationNum].IsLoop())
-	{
-		m_animationClips[m_currentAnimationNum].Reset();
-		m_animationClips[m_currentAnimationNum].Play();
-	}
+
 
 	
-	const std::vector<CMatrix>& localMatrix2 = m_animationClips[m_curCurrentAnimationNum].GetLocalMatrix();
 
 
 	float progressTime = deltaTime;
@@ -111,8 +97,25 @@ void CAnimation::Update(float deltaTime)
 	m_blendRate -=  progressTime;
 	for (int i = 0; i < m_animationBlend.size(); i++)
 	{
+		//再生中のアニメーションを更新
+		m_animationClips[m_animationBlend[i].animationNum].Update(deltaTime);
+		m_animationClips[m_animationBlend[i].animationNum].AnimationInvoke(this);
+		//再生が終わり、ループフラグが立っていればもう一度再生する
+		if (!m_animationClips[m_currentAnimationNum].IsPlay() && m_animationClips[m_currentAnimationNum].IsLoop())
+		{
+			m_animationClips[m_animationBlend[i].animationNum].Reset();
+			m_animationClips[m_animationBlend[i].animationNum].Play();
+		}
 		const std::vector<CMatrix>& localMatrix = m_animationClips[m_animationBlend[i].animationNum].GetLocalMatrix();
-		UpdateBoneMatrix(m_animationBlend[i].boneID, localMatrix, localMatrix2);
+		const std::vector<CMatrix>& localMatrix2 = m_animationClips[m_curCurrentAnimationNum].GetLocalMatrix();
+		if (i == 0)
+		{
+			UpdateBoneMatrix(m_animationBlend[i].boneID, localMatrix, localMatrix2);
+		}
+		else
+		{
+			UpdateBoneMatrix(m_animationBlend[i].boneID, localMatrix, localMatrix);
+		}
 	}
 }
 

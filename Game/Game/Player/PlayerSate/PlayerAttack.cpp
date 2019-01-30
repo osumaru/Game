@@ -139,6 +139,7 @@ void CPlayerAttack::Update()
 			m_pPlayerGetter->GetAnimation().Play(m_combineAnimation[m_attackCount]);
 			m_pPlayerGetter->GetAnimation().Update(0.0f);
 			m_pPlayerGetter->SkinModelUpdate();
+			m_pPlayer->GetWeaponManager().SetDrawingWeapon(true);
 			if (m_isPreDodge)
 			{
 				m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateAvoidance);
@@ -153,7 +154,6 @@ void CPlayerAttack::Update()
 				m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateStand);
 
 			}
-			m_pPlayer->GetWeaponManager().SetDrawingWeapon(true);
 		}
 	}
 }

@@ -106,6 +106,8 @@ void CTwinSword::Init()
 			}
 		}
 	}
+	m_weaponHoldAnimationNum = enPlayerAnimationRunTwinSword;
+	m_weaponHoldBoneName = L"Spine1";
 }
 
 void CTwinSword::Update()

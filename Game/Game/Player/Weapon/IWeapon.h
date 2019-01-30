@@ -115,6 +115,18 @@ public:
 	{
 		return m_vertexBufferCount;
 	}
+	
+	//納刀前の構えてるアニメーションの番号を取得
+	int GetWeaponHoldAnimationNum() const
+	{
+		return m_weaponHoldAnimationNum;
+	}
+
+	//納刀前の構えてる時のアニメーションを合成するボーンの名前
+	const wchar_t* GetWeaponHorldBoneName() const
+	{
+		return m_weaponHoldBoneName;
+	}
 
 protected:
 	struct SHitEffectParam
@@ -125,6 +137,9 @@ protected:
 		float slowDelayTime = 0.0f;	//スローにするまでの遅延時間
 		float shakeDelayTime = 0.0f;//揺れるまでの遅延時間
 	};
+
+	int										m_weaponHoldAnimationNum;	//構えてる時のアニメーションの番号
+	wchar_t*								m_weaponHoldBoneName;		//構えてる時のアニメーションをするときのボーンの名前
 
 	CPlayer*								m_pPlayer = nullptr;		//プレイヤーのインスタンス
 	const CMatrix*							m_normalBoneMat = nullptr;	//プレイヤーのボーン行列

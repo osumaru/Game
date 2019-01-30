@@ -6,6 +6,11 @@
 void CPlayerRun::Init()
 {
 	m_pPlayerGetter->GetAnimation().Play(enPlayerAnimationRun, 0.3f);
+	if (m_pPlayer->GetWeaponManager().GetDrawingWeapon())
+	{
+		const IWeapon* weapon = m_pPlayer->GetWeaponManager().GetWeapon();
+		m_pPlayerGetter->GetAnimation().AddBlendAnimation(weapon->GetWeaponHorldBoneName(), weapon->GetWeaponHoldAnimationNum());
+	}
 
 	//タイマー初期化
 	m_timer = 0.0f;
@@ -26,12 +31,20 @@ void CPlayerRun::Update()
 		m_isDash = true;
 		//一定時間走るとダッシュする
 		m_pPlayerGetter->GetAnimation().Play(enPlayerAnimationDash, 0.2f);
+		if (m_pPlayer->GetWeaponManager().GetDrawingWeapon())
+		{
+			const IWeapon* weapon = m_pPlayer->GetWeaponManager().GetWeapon();
+			m_pPlayerGetter->GetAnimation().AddBlendAnimation(weapon->GetWeaponHorldBoneName(), weapon->GetWeaponHoldAnimationNum());
+		}
 	}
 	if (m_isDash)
 	{
 		m_moveSpeed = 12.0f;
 	}
-
+	if (!m_pPlayer->GetWeaponManager().GetDrawingWeapon())
+	{
+		m_pPlayerGetter->GetAnimation().BlendAnimationClear();
+	}
 	const CCamera& gameCamera = GetGameCamera().GetCamera();
 	CVector3 frontVec = gameCamera.GetTarget() - gameCamera.GetPosition();
 	frontVec.y = 0.0f;

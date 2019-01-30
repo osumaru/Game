@@ -28,6 +28,9 @@ enum EnPlayerAnimation
 	enPlayerAnimationTwinAttackCombine2,		//連撃の後の合成用アニメーション
 	enPlayerAnimationTwinAttackCombine3,		//連撃の後の合成用アニメーション
 	enPlayerAnimationAttackAir,		//攻撃(空中)アニメーション
+	enPlayerAnimationRunSword,		//納刀前の剣を持ってる状態のアニメーション
+	enPlayerAnimationRunTwinSword,		//納刀前の双剣を持ってる状態のアニメーション
+	enPlayerAnimationRunLeageSword,	//納刀前の大剣を持ってる状態のアニメーション
 	enPlayerAnimationStun,			//スタン用のアニメーション
 	enPlayerAnimationDamage,		//ダメージアニメーション
 	enPlayerAnimationDamageAir,		//ダメージ(空中)アニメーション
