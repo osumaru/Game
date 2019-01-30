@@ -170,7 +170,6 @@
     <ClCompile Include="Enemy\Warrok\Warrok.cpp" />
     <ClCompile Include="GameSound\GameSoundEffect.cpp" />
     <ClCompile Include="Item\GameItem\CEquipItem.cpp" />
-    <ClCompile Include="Camera\ArrowGameCamera.cpp" />
     <ClCompile Include="Camera\GameCamera.cpp" />
     <ClCompile Include="Enemy\EnemyGroup.cpp" />
     <ClCompile Include="Enemy\EnemySearch.cpp" />
@@ -228,7 +227,6 @@
     <ClCompile Include="Map\Map.cpp" />
     <ClCompile Include="Map\MapChip\MapChip.cpp" />
     <ClCompile Include="Map\MapChip\StaticMapObject.cpp" />
-    <ClCompile Include="Camera\NormalGameCamera.cpp" />
     <ClCompile Include="Player\PlayerSate\PlayerArrowShoot.cpp" />
     <ClCompile Include="Player\PlayerSate\PlayerArrowAttack.cpp" />
     <ClCompile Include="Player\PlayerArrow.cpp" />
@@ -280,7 +278,6 @@
     <ClInclude Include="GameSound\GameSoundEffect.h" />
     <ClInclude Include="Item\GameItem\ItemStatus.h" />
     <ClInclude Include="Item\GameItem\CEquipItem.h" />
-    <ClInclude Include="Camera\ArrowGameCamera.h" />
     <ClInclude Include="Camera\GameCamera.h" />
     <ClInclude Include="Enemy\EnemyGroup.h" />
     <ClInclude Include="Enemy\EnemySearch.h" />
@@ -343,7 +340,6 @@
     <ClInclude Include="Map\Map.h" />
     <ClInclude Include="Map\MapChip\MapChip.h" />
     <ClInclude Include="Map\MapChip\StaticMapObject.h" />
-    <ClInclude Include="Camera\NormalGameCamera.h" />
     <ClInclude Include="Player\PlayerSate\PlayerArrowShoot.h" />
     <ClInclude Include="Player\PlayerSate\PlayerArrowAttack.h" />
     <ClInclude Include="Player\PlayerArrow.h" />

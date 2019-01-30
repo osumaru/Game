@@ -249,12 +249,6 @@
     <ClCompile Include="Enemy\PathFinding\PathFinding.cpp">
       <Filter>ソース ファイル\Enemy\PathFinding</Filter>
     </ClCompile>
-    <ClCompile Include="Camera\NormalGameCamera.cpp">
-      <Filter>ソース ファイル\Camera</Filter>
-    </ClCompile>
-    <ClCompile Include="Camera\ArrowGameCamera.cpp">
-      <Filter>ソース ファイル\Camera</Filter>
-    </ClCompile>
     <ClCompile Include="Player\PlayerSate\PlayerState.cpp">
       <Filter>ソース ファイル\Player\PlayerState</Filter>
     </ClCompile>
@@ -578,12 +572,6 @@
     </ClInclude>
     <ClInclude Include="Enemy\PathFinding\MapData.h">
       <Filter>ソース ファイル\Enemy\PathFinding</Filter>
-    </ClInclude>
-    <ClInclude Include="Camera\NormalGameCamera.h">
-      <Filter>ソース ファイル\Camera</Filter>
-    </ClInclude>
-    <ClInclude Include="Camera\ArrowGameCamera.h">
-      <Filter>ソース ファイル\Camera</Filter>
     </ClInclude>
     <ClInclude Include="Player\PlayerSate\PlayerStateCommon.h">
       <Filter>ソース ファイル\Player\PlayerState</Filter>

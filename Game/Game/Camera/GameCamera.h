@@ -120,6 +120,7 @@ private:
 	IEnemy*					m_lockOnEnemy = nullptr;	//ロックオンしているエネミー
 	CVector3				m_toCameraPos;				//カメラへのベクトル
 	float					m_cameraLength = 0.0f;		//注視点からカメラへの距離
+	float					m_preRStick = 0.0f;			//1フレーム前のパッド入力量
 	const float				LOCKON_OFFSET_Y = 2.5f;		//ロックオン時の高さ補正の限界値
 	const float				TARGET_OFFSET_Y = 1.4f;		//カメラ通常時の高さ補正
 	//float					m_height = 0.0f;			//カメラの座標と注視点の高さ
