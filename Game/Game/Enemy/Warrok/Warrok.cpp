@@ -72,6 +72,10 @@ void CWarrok::Init(const CVector3& position, int level)
 
 	this->SetIsActive(true);
 
+	//エフェクトを初期化
+	m_auraEffect.Init(L"Assets/Effect/auraEffect.efk");
+	m_auraEffect.SetPosition(position);
+	m_auraEffect.SetScale({ 1.0f, 1.0f, 1.0f });
 	//腰のワールド行列を取得
 	m_spineMatrix = &GetBoneWorldMatrix(L"Spine");
 	//攻撃できる距離を設定
@@ -98,6 +102,27 @@ void CWarrok::Update()
 	{
 		//剛体を削除する
 		m_characterController.RemovedRigidBody();
+	}
+
+	//プレイヤーとのレベル差を求める
+	int levelDifference = m_status.level - GetPlayer().GetStatus().Level;
+	//倒しやすい敵のレベル差を設定
+	const int LEVEL_DIFFERENCE_LIMIT = 5;
+	//レベル差が大きいか
+	if (levelDifference > LEVEL_DIFFERENCE_LIMIT)
+	{
+		m_effectInterval++;
+		const int EFFECT_INTERVAL = 30;
+		if (m_effectInterval % EFFECT_INTERVAL == 0)
+		{
+			m_effectInterval = 0;
+			//エフェクトを再生
+			m_auraEffect.Play();
+		}
+		//エフェクトの座標を設定
+		m_auraEffect.SetPosition(m_position);
+		//エフェクトの更新
+		m_auraEffect.Update();
 	}
 
 	if (m_isAttack) 

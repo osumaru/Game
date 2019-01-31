@@ -127,6 +127,12 @@ public:
 		return m_animation;
 	}
 
+	//スキンモデルを取得
+	CSkinModel& GetSkinModel()
+	{
+		return m_skinModel;
+	}
+
 	//ワールド行列を取得
 	const CMatrix& GetWorldMatrix() const
 	{
@@ -267,11 +273,13 @@ protected:
 	CVector3						m_position;						//座標
 	CQuaternion						m_rotation;						//回転
 	CCharacterController			m_characterController;			//キャラクターコントローラー
+	CEffect							m_auraEffect;					//オーラエフェクト
 	SEnemyStatus					m_status;						//ステータス
 	EnAttackType					m_attackType = enAttackType_Near; //攻撃タイプ
 	std::list<IEnemy*>::iterator	m_iterater;						//自身のイテレータ
 	const CMatrix*					m_spineMatrix;					//当たり判定用の腰のワールド行列
 	const int						m_maxPlayerHit = 2;				//最大攻撃ヒット数
+	int								m_effectInterval = 0;			//エフェクトを発生させるインターバル
 	float							m_attackLength = 1.2f;			//攻撃できる距離
 	bool							m_isFind = false;				//プレイヤーを発見したか
 	bool							m_isDamage = false;				//ダメージを受けたか
