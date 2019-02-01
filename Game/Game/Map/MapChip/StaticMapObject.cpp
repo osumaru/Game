@@ -127,6 +127,6 @@ void StaticMapObject::Draw()
 	MapChip::Draw();
 	if (isCollider || m_isTree)
 	{
-		m_rigidBody->Draw();
+		//m_rigidBody->Draw();
 	}
 }
