@@ -33,5 +33,7 @@ public:
 	}
 
 private:
+	//CLight m_light;
 	bool m_isAnimationEnd = false;	//アニメーションが終了したか
+	bool m_lightSetEnd = false;
 };

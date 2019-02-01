@@ -28,8 +28,26 @@ bool CEnemyDeath::Start()
 
 void CEnemyDeath::Update()
 {
+
 	//死亡アニメーションが終わったら回復アイテムとお金、宝箱を出す
-	if (!m_enemy->GetAnimation().IsPlay()) {
+	if (!m_enemy->GetAnimation().IsPlay()) 
+	{
+		if (!m_lightSetEnd)
+		{
+			CLight light = m_enemy->GetLight();
+			CVector4 ambientLight = light.GetAmbientLight();
+			ambientLight.w -= GameTime().GetDeltaFrameTime();
+			if (ambientLight.w <= 0.0f)
+			{
+				m_lightSetEnd = true;
+				ambientLight.w = 0.0f;
+			}
+			light.SetAmbientLight(ambientLight);
+			m_enemy->GetSkinModel().SetLight(light);
+		}
+	}
+	if (m_lightSetEnd)
+	{
 		//お金
 		CMoney* money = New<CMoney>(PRIORITY_ITEM);
 		money->Init(m_enemy->GetPosition(), m_enemy->GetStatus().gold);
@@ -43,7 +61,7 @@ void CEnemyDeath::Update()
 			recoveryItem->Init(m_enemy->GetPosition());
 		}
 		//３割の確率で出す
-		if (randomNum < 3) 
+		if (randomNum < 3)
 		{
 			//宝箱
 			CTreasureChest* treasureChest = New<CTreasureChest>(PRIORITY_ITEM);

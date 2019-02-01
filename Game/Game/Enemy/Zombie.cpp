@@ -48,6 +48,12 @@ void CZombie::Init(const CVector3& position, int level)
 	//Add(&m_enemyTurn, 0);
 	//Add(&m_enemySearch, 0);
 
+	//ライトの設定
+	CVector4 ambientLight = { 0.2f,0.2f,0.2f,0.4f };
+	m_light.SetAmbientLight(ambientLight);
+	m_skinModel.SetLight(m_light);
+	m_skinModel.SetIsDiffuse(false);
+
 	//ステータスを設定
 	m_status.level = level;
 	m_status.strength = 5 + level * 2;

@@ -121,6 +121,12 @@ public:
 		return m_characterController;
 	}
 
+	//ライトを取得
+	CLight& GetLight()
+	{
+		return m_light;
+	}
+
 	//アニメーションを取得
 	CAnimation& GetAnimation()
 	{
@@ -273,6 +279,7 @@ protected:
 	CVector3						m_position;						//座標
 	CQuaternion						m_rotation;						//回転
 	CCharacterController			m_characterController;			//キャラクターコントローラー
+	CLight							m_light;						//ライト
 	CEffect							m_auraEffect;					//オーラエフェクト
 	SEnemyStatus					m_status;						//ステータス
 	EnAttackType					m_attackType = enAttackType_Near; //攻撃タイプ
