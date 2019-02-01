@@ -151,6 +151,12 @@ void CWeaponManager::Init(CPlayer* player)
 		particle->SetAlpha(PARTICLE_ALPHA);
 		m_particleList.push_back(particle);
 	}
+	const CSkinModel* skinmodel[enWeaponNum];
+	for (int i = 0; i < enWeaponNum; i++)
+	{
+		skinmodel[i] = &m_weapons[i]->GetSkinModel();
+	}
+	m_weaponEraseEffect.Init(skinmodel);
 }
 
 
@@ -201,6 +207,8 @@ void CWeaponManager::Update()
 	if (m_particleDraw)
 	{
 		m_particleTimer += GameTime().GetDeltaFrameTime();
+
+		m_weaponEraseEffect.SetAlpha(m_particleTimer / PARTICLE_TIME);
 		if (m_particleTimer > PARTICLE_TIME)
 		{
 			for (auto& particle : m_particleList)
@@ -208,6 +216,7 @@ void CWeaponManager::Update()
 				particle->SetIsActive(false);
 			}
 			m_particleDraw = false;
+			m_weaponEraseEffect.SetIsDraw(false);
 		}
 		else
 		{
@@ -231,6 +240,7 @@ void CWeaponManager::Update()
 			ParticleSetting();
 			m_drawingWeapon = false;
 			m_drawingWeaponTimer = 0.0f;
+			m_weaponEraseEffect.SetIsDraw(true);
 		}
 	}
 
@@ -253,6 +263,7 @@ void CWeaponManager::AfterDraw()
 		}
 	}
 	m_weapons[m_weaponState]->AfterDrawer();
+	m_weaponEraseEffect.Draw();
 }
 
 void CWeaponManager::ParticleSetting()
@@ -277,10 +288,11 @@ void CWeaponManager::ParticleSetting()
 		position.Mul(worldMatrix);
 		particle->SetAlpha(PARTICLE_ALPHA);
 		particle->SetPosition(position);
-		particle->SetIsActive(true);
+		//particle->SetIsActive(true);
 		particle->UpdateWorldMatrix();
 		it++;
 	}
+	m_weaponEraseEffect.SetWorldMatrix(worldMatrix, m_weaponState);
 	//‘oŒ•‚Ìê‡‚Í‚Q‚Â–Ú‚Ìƒ‚ƒfƒ‹‚Ì•ª‚às‚¤
 	if (m_weaponState == enWeaponTwinSword)
 	{
@@ -313,6 +325,7 @@ void CWeaponManager::ParticleSetting()
 			it++;
 		}
 	}
+	m_weaponEraseEffect.SetIsDraw(true);
 }
 
 void CWeaponManager::ChangeEquipWeapon(std::unique_ptr<IInventoryEquip> equipWeapon, EnPlayerWeapon weaponNum)

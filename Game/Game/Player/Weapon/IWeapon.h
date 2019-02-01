@@ -8,6 +8,13 @@ class CPlayer;
 class IWeapon
 {
 public:
+	enum EnWeaponAnimationBlend
+	{
+		enAnimationBlendRun,
+		enAnimationBlendStand,
+		enAnimationBlendNum
+	};
+
 	//デストラクタ
 	virtual ~IWeapon(){}
 
@@ -117,15 +124,15 @@ public:
 	}
 	
 	//納刀前の構えてるアニメーションの番号を取得
-	int GetWeaponHoldAnimationNum() const
+	int GetWeaponHoldAnimationNum(EnWeaponAnimationBlend enAnimNum) const
 	{
-		return m_weaponHoldAnimationNum;
+		return m_weaponHold[enAnimNum].animationNum;
 	}
 
-	//納刀前の構えてる時のアニメーションを合成するボーンの名前
-	const wchar_t* GetWeaponHorldBoneName() const
+	//納刀前の構えてる時のアニメーションを合成するボーンの番号
+	int GetWeaponHorldBoneID(EnWeaponAnimationBlend enAnimNum) const
 	{
-		return m_weaponHoldBoneName;
+		return m_weaponHold[enAnimNum].boneID;
 	}
 
 protected:
@@ -138,8 +145,9 @@ protected:
 		float shakeDelayTime = 0.0f;//揺れるまでの遅延時間
 	};
 
-	int										m_weaponHoldAnimationNum;	//構えてる時のアニメーションの番号
-	wchar_t*								m_weaponHoldBoneName;		//構えてる時のアニメーションをするときのボーンの名前
+protected:
+
+	CAnimation::SAnimationBlendInfo			m_weaponHold[enAnimationBlendNum];//構えてる時のアニメーションブレンドの情報
 
 	CPlayer*								m_pPlayer = nullptr;		//プレイヤーのインスタンス
 	const CMatrix*							m_normalBoneMat = nullptr;	//プレイヤーのボーン行列

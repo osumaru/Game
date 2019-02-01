@@ -474,7 +474,7 @@ void CCharacterController::DynamicExecute()
 		end.setIdentity();
 		//レイの終点を現在を座標とし外側から現在の座標に向かってレイを飛ばす
 		CVector3 endPos = position;
-		end.setOrigin(btVector3(endPos.x, endPos.y + m_height * 0.5f + m_radius , endPos.z));
+		end.setOrigin(btVector3(endPos.x, endPos.y , endPos.z));
 		CVector3 startPos = endPos;
 		startPos += ray[i];
 		//高さが違うのでyの値だけ終点と同じものを使う
@@ -501,6 +501,28 @@ void CCharacterController::DynamicExecute()
 			hitNormal *= (projection + m_radius);
 			position += hitNormal;
 			m_wallHitObject = callback.hitObject;
+		}
+	}
+	{
+		btTransform start, end;
+		start.setIdentity();
+		end.setIdentity();
+		//レイの終点を現在を座標とし外側から現在の座標に向かってレイを飛ばす
+		CVector3 endPos = position;
+		end.setOrigin(btVector3(endPos.x, endPos.y + m_height * 0.5f + m_radius, endPos.z));
+		CVector3 startPos = endPos;
+		startPos.y += 4.0f;
+		//高さが違うのでyの値だけ終点と同じものを使う
+		start.setOrigin(btVector3(startPos.x, startPos.y, startPos.z));
+		SSweepResultGround callback;
+		callback.me = m_rigidBody.GetBody();
+		callback.startPos = startPos;
+
+		PhysicsWorld().ConvexSweepTest((const btConvexShape*)m_collider.GetBody(), start, end, callback);
+		//もしレイが当たっていて、さらに押し戻す方向とオブジェクトの移動方向が一致している場合(引っ付き防止)
+		if (callback.isHit)
+		{
+			position.y = callback.hitPos.y + m_radius + m_height;
 		}
 	}
 	m_rigidBody.SetPosition(position);

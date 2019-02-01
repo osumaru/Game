@@ -10,6 +10,11 @@ void CPlayerStand::Init()
 {
 	//待機アニメーションの再生
 	m_pPlayerGetter->GetAnimation().Play(enPlayerAnimationStand, 0.5f);
+	if (m_pPlayer->GetWeaponManager().GetDrawingWeapon())
+	{
+		const IWeapon* weapon = m_pPlayer->GetWeaponManager().GetWeapon();
+		m_pPlayerGetter->GetAnimation().AddBlendAnimation(weapon->GetWeaponHorldBoneID(IWeapon::enAnimationBlendStand), weapon->GetWeaponHoldAnimationNum(IWeapon::enAnimationBlendStand));
+	}
 	m_pPlayerGetter->SetMoveSpeed(CVector3::Zero);
 }
 
@@ -19,6 +24,10 @@ void CPlayerStand::Update()
 	//{
 	//	return;
 	//}
+	if (!m_pPlayer->GetWeaponManager().GetDrawingWeapon())
+	{
+		m_pPlayerGetter->GetAnimation().BlendAnimationClear();
+	}
 	//死亡した場合の処理
 	if (m_pPlayer->GetIsStateCondition(CPlayerState::enPlayerStateDied))
 	{

@@ -427,6 +427,9 @@
     <ClCompile Include="Enemy\Boss\Maw.cpp">
       <Filter>ソース ファイル\Enemy\Boss</Filter>
     </ClCompile>
+    <ClCompile Include="Player\Weapon\WeaponEraseEffect.cpp">
+      <Filter>ソース ファイル\Player\Weapon</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -753,6 +756,9 @@
     <ClInclude Include="Enemy\Boss\Maw.h">
       <Filter>ソース ファイル\Enemy\Boss</Filter>
     </ClInclude>
+    <ClInclude Include="Player\Weapon\WeaponEraseEffect.h">
+      <Filter>ソース ファイル\Player\Weapon</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Map\MapChip\ObstacleMapObject.h">
@@ -1011,6 +1017,9 @@
       <Filter>ソース ファイル\Assets</Filter>
     </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\Arrow.fbx">
+      <Filter>ソース ファイル\Assets</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\Map\Sea.FBX">
       <Filter>ソース ファイル\Assets</Filter>
     </MeshContentTask>
   </ItemGroup>

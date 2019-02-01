@@ -37,7 +37,11 @@ void CBow::Init()
 	m_skinModel.Load(L"Assets/modelData/LongBow.cmo", NULL);
 
 	m_hitEffectParam = std::make_unique<SHitEffectParam[]>(1);
-	m_hitEffectParam[0] = { 0.0f, 1.0f, 0.0f };
+	m_hitEffectParam[0] = { 0.0f, 1.0f, 0.0f };	
+	m_weaponHold[enAnimationBlendRun].animationNum = enPlayerAnimationRun;
+	m_weaponHold[enAnimationBlendRun].boneID = GetPlayer().GetSkinmodel().GetSkelton()->FindBoneID(L"Spine1");
+	m_weaponHold[enAnimationBlendStand].animationNum = enPlayerAnimationStand;
+	m_weaponHold[enAnimationBlendStand].boneID = GetPlayer().GetSkinmodel().GetSkelton()->FindBoneID(L"Spine1");
 }
 
 void CBow::Update()

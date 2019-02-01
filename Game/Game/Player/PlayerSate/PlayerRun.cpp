@@ -9,7 +9,7 @@ void CPlayerRun::Init()
 	if (m_pPlayer->GetWeaponManager().GetDrawingWeapon())
 	{
 		const IWeapon* weapon = m_pPlayer->GetWeaponManager().GetWeapon();
-		m_pPlayerGetter->GetAnimation().AddBlendAnimation(weapon->GetWeaponHorldBoneName(), weapon->GetWeaponHoldAnimationNum());
+		m_pPlayerGetter->GetAnimation().AddBlendAnimation(weapon->GetWeaponHorldBoneID(IWeapon::enAnimationBlendRun), weapon->GetWeaponHoldAnimationNum(IWeapon::enAnimationBlendRun));
 	}
 
 	//タイマー初期化
@@ -34,7 +34,7 @@ void CPlayerRun::Update()
 		if (m_pPlayer->GetWeaponManager().GetDrawingWeapon())
 		{
 			const IWeapon* weapon = m_pPlayer->GetWeaponManager().GetWeapon();
-			m_pPlayerGetter->GetAnimation().AddBlendAnimation(weapon->GetWeaponHorldBoneName(), weapon->GetWeaponHoldAnimationNum());
+			m_pPlayerGetter->GetAnimation().AddBlendAnimation(weapon->GetWeaponHorldBoneID(IWeapon::enAnimationBlendRun), weapon->GetWeaponHoldAnimationNum(IWeapon::enAnimationBlendRun));
 		}
 	}
 	if (m_isDash)

@@ -86,10 +86,11 @@ public:
 
 	/*
 	アニメーションブレンドをさせたいボーンを追加
-	boneName		アニメーションブレンドさせたい骨の名前
+	boneID		アニメーションブレンドさせたい骨の番号
 	animationNum	アニメーションの番号
 	*/
-	void AddBlendAnimation(const wchar_t* boneName, int animationNum);
+	void AddBlendAnimation(int boneID, int animationNum);
+
 
 	/*
 	ブレンドしてるアニメーションの数を取得

@@ -43,8 +43,10 @@ void CSword::Init()
 	m_stanAttack[0] = false;
 	m_stanAttack[1] = false;
 	m_stanAttack[2] = true;
-	m_weaponHoldAnimationNum = enPlayerAnimationRunSword;
-	m_weaponHoldBoneName = L"RightShoulder";
+	m_weaponHold[enAnimationBlendRun].animationNum = enPlayerAnimationRunSword;
+	m_weaponHold[enAnimationBlendRun].boneID = GetPlayer().GetSkinmodel().GetSkelton()->FindBoneID(L"RightShoulder");
+	m_weaponHold[enAnimationBlendStand].animationNum = enPlayerAnimationStand;
+	m_weaponHold[enAnimationBlendStand].boneID = GetPlayer().GetSkinmodel().GetSkelton()->FindBoneID(L"Spine1");
 }
 
 void CSword::Update()
