@@ -10,7 +10,7 @@ void CAttackWave::Init(const CCamera* camera, const CVector3& position)
 	//カメラを設定
 	m_camera = camera;
 	//テクスチャを設定
-	m_texture = TextureResource().LoadTexture(L"Assets/sprite/aButton.png");
+	m_texture = TextureResource().LoadTexture(L"Assets/sprite/Ripple.png");
 	//サイズ
 	m_size.x = 1.0f;
 	m_size.y = 1.0f;
