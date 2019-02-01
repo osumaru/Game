@@ -34,6 +34,7 @@ void CEnemyDeath::Update()
 	{
 		if (!m_lightSetEnd)
 		{
+			//ŠÂ‹«Œõ‚Ì’l‚ð¬‚³‚­‚µ‚Ä‚¢‚­
 			CLight light = m_enemy->GetLight();
 			CVector4 ambientLight = light.GetAmbientLight();
 			ambientLight.w -= GameTime().GetDeltaFrameTime();

@@ -371,7 +371,7 @@ void CPlayer::Rotation(const CVector3& stickDir)
 	addRot.SetRotation(CVector3::AxisY, rad);
 	m_rotation.Slerp(0.6f , m_rotation, addRot);
 
-	if (m_weaponManager.GetCurrentState() == enWeaponArrow && m_weaponManager.GetIsAttack())
+	if (GetGameCamera().GetIsArrowZoom())
 	{
 		CMatrix spineMat = m_skinmodel.GetSkelton()->GetBoneMatrix(m_spineBoneID);
 		m_rotation = CQuaternion::Identity;

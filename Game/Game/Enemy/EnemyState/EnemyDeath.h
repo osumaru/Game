@@ -33,7 +33,6 @@ public:
 	}
 
 private:
-	//CLight m_light;
 	bool m_isAnimationEnd = false;	//アニメーションが終了したか
-	bool m_lightSetEnd = false;
+	bool m_lightSetEnd = false;		//ライトの設定が終わったか
 };

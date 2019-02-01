@@ -26,6 +26,11 @@ void CPlayerArrowAttack::Update()
 		m_isCharge = false;
 	}
 
+	if (m_pPlayer->GetIsStateCondition(CPlayerState::enPlayerStateDamage))
+	{
+		m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateDamage);
+		GetGameCamera().SetIsArrowZoom(false);
+	}
 	if (!m_pPlayerGetter->GetAnimation().IsPlay())
 	{
 

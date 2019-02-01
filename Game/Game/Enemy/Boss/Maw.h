@@ -203,6 +203,7 @@ private:
 	SmawStatus				m_status;									//ステータス
 	EnMawActionPattern		m_actionPattern;							//行動パターン
 	CVector3				m_weekPosition;								//弱点座標
+	//CEffect					m_rippleEffect;
 
 	int						m_downCount = 0;							//何回攻撃を受けたか
 	float					m_downTime=0.0f;							//ダウンしている時間

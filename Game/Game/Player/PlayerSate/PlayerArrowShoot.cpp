@@ -26,6 +26,11 @@ void CPlayerArrowShoot::Init()
 
 void CPlayerArrowShoot::Update()
 {
+	if (m_pPlayer->GetIsStateCondition(CPlayerState::enPlayerStateDamage))
+	{
+		m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateDamage);
+		GetGameCamera().SetIsArrowZoom(false);
+	}
 	if (m_pPlayer->GetIsStateCondition(CPlayerState::enPlayerStateArrowAttack))
 	{
 		m_isShoot = true;

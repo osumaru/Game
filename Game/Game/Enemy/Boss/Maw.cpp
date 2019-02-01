@@ -97,6 +97,11 @@ void CMaw::Init(CVector3 position)
 		//最初に流すアニメーションを歩きに設定
 		m_animation.Play(EnMawState::enState_Walk);
 	}
+
+	////エフェクトの初期化
+	//m_rippleEffect.Init(L"Assets/Effect/rippleEffect.efk");
+	//m_rippleEffect.SetScale({ 1.0f,1.0f,1.0f });
+
 	//弱点の頭のボーンを取得
 	CMatrix WeekMat = m_skinModel.FindBoneWorldMatrix(L"Head");
 	m_weekPosition.x = WeekMat.m[3][0];
@@ -265,6 +270,16 @@ void CMaw::SpecialAttack()
 
 void CMaw::SpecialAttackEnd()
 {
+	//const CMatrix handMatrix = m_skinModel.FindBoneWorldMatrix(L"LeftHand");
+	//float offsetY = 0.01f;
+	//CVector3 handPosition;
+	//handPosition.x = handMatrix.m[3][0];
+	//handPosition.y = m_position.y + offsetY;
+	//handPosition.z = handMatrix.m[3][2];
+	//m_rippleEffect.SetPosition(handPosition);
+	//m_rippleEffect.Play();
+	//m_rippleEffect.Update();
+
 	CAttackWave* wave = New<CAttackWave>(PRIORITY_PARTICLE);
 	const CMatrix handMatrix = m_skinModel.FindBoneWorldMatrix(L"LeftHand");
 	float offsetY = 0.01f;
