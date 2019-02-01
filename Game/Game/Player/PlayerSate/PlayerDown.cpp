@@ -15,10 +15,10 @@ CPlayerDown::~CPlayerDown()
 void CPlayerDown::Init()
 {
 	const float RollVolume = 0.3f;
-	CSoundSource* RollSound = New<CSoundSource>(0);
+	/*CSoundSource* RollSound = New<CSoundSource>(0);
 	RollSound->Init("Assets/sound/Battle/Roll.wav");
 	RollSound->Play(false);
-	RollSound->SetVolume(RollVolume);
+	RollSound->SetVolume(RollVolume);*/
 	//アニメーションの再生
 	m_pPlayerGetter->GetAnimation().Play(enPlayerAnimationDown, 0.2f);
 }

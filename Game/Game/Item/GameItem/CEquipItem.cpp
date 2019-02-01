@@ -340,7 +340,17 @@ bool CEquipItem::Start()
 			m_equipItemStatusList.push_back(ItemStatus[num]);
 		}
 	}
-
+	//ƒf[ƒ^‚Ìæ“¾ˆ—
+	/*std::fstream file;
+	file.open("Assets/ItemList/Equip.dta", std::ios::binary | std::ios::out | std::ios::trunc);
+	file.write((char*)ItemStatus, sizeof(ItemStatus));
+	file.close();
+	file.open("Assets/ItemList/Equip.dta", std::ios::binary | std::ios::in);
+	for (auto& list : ItemStatus)
+	{
+		file.read((char*)&list, sizeof(SItemStatus));
+	}
+	file.close();*/
 	return true;
 }
 

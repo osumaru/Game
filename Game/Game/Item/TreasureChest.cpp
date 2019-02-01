@@ -106,7 +106,23 @@ void CTreasureChest::DesideWeaponStatus()
 	wchar_t* textureFileName;
 	CEquipItem* nItem = GetSceneManager().GetFade()->GetLoadScene()->GetEquipItemData();
 	//↓これはレア度がNormalの武器からランダムで武器を取得するコード
-	int num = nItem->GetNormalEquipItemList(Random().GetRandSInt() % nItem->GetNormalEquipItemListSize());
+	int probability = 0;
+	probability = Random().GetRandSInt() % 100;
+	int num = 0;
+	//if (probability <= 80 && probability >= 0)
+	//{
+		
+		num = nItem->GetNormalEquipItemList((Random().GetRandInt() % (nItem->GetNormalEquipItemListSize() - 1)));
+	//}
+	/*else if (probability <= 95 && probability > 80)
+	{
+		num = nItem->GetRareItemList(Random().GetRandSInt() % max(0,(nItem->GetRareEquipItemListSize() - 1)));
+	}
+	else
+	{
+		num = nItem->GetLegendEquipItemList(Random().GetRandSInt() % max(0,(nItem->GetLegendEquipItemListSize() - 1)));
+	}*/
+	//int num = nItem->GetNormalEquipItemList(Random().GetRandSInt() % nItem->GetNormalEquipItemListSize());
 	//int num = nItem->GetLegendEquipItemList(Random().GetRandSInt() % nItem->GetLegendEquipItemListSize());
 	//武器のタイプの取得
 	int weaponNumber = nItem->GetItemStatus_ItemId(num).WeaponType;
