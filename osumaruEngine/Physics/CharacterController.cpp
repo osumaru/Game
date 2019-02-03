@@ -509,9 +509,9 @@ void CCharacterController::DynamicExecute()
 		end.setIdentity();
 		//レイの終点を現在を座標とし外側から現在の座標に向かってレイを飛ばす
 		CVector3 endPos = position;
-		end.setOrigin(btVector3(endPos.x, endPos.y + m_height * 0.5f + m_radius, endPos.z));
+		end.setOrigin(btVector3(endPos.x, endPos.y, endPos.z));
 		CVector3 startPos = endPos;
-		startPos.y += 4.0f;
+		startPos.y += rayLength;
 		//高さが違うのでyの値だけ終点と同じものを使う
 		start.setOrigin(btVector3(startPos.x, startPos.y, startPos.z));
 		SSweepResultGround callback;
@@ -522,7 +522,7 @@ void CCharacterController::DynamicExecute()
 		//もしレイが当たっていて、さらに押し戻す方向とオブジェクトの移動方向が一致している場合(引っ付き防止)
 		if (callback.isHit)
 		{
-			position.y = callback.hitPos.y + m_radius + m_height;
+			position.y = callback.hitPos.y + m_radius + m_height * 0.5f;
 		}
 	}
 	m_rigidBody.SetPosition(position);

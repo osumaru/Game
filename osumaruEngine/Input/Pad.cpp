@@ -145,8 +145,8 @@ void CPad::Update()
 				difference = -difference;
 			}
 			difference = max(0.0f, difference);
-			const float FLIP_RANGE = 0.3f;
-			*flipFlg[i] = FLIP_RANGE < difference;
+			const float FLIP_RANGE = 0.2f;
+			*flipFlg[i] = FLIP_RANGE < difference && 0.7f < inputAmount;
 			*padOutput[i] = inputAmount;
 
 			//“ü—Í—Ê‚ª¬‚³‚¢ê‡Œë·‚Æ‚Ý‚È‚µ‚Ä’l‚ð0‚É‚·‚é

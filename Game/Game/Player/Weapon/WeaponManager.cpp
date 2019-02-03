@@ -156,7 +156,8 @@ void CWeaponManager::Init(CPlayer* player)
 	{
 		skinmodel[i] = &m_weapons[i]->GetSkinModel();
 	}
-	m_weaponEraseEffect.Init(skinmodel);
+	m_weaponEraseEffect[0].Init(skinmodel);
+	m_weaponEraseEffect[1].Init(skinmodel);
 }
 
 
@@ -208,7 +209,8 @@ void CWeaponManager::Update()
 	{
 		m_particleTimer += GameTime().GetDeltaFrameTime();
 
-		m_weaponEraseEffect.SetAlpha(m_particleTimer / PARTICLE_TIME);
+		m_weaponEraseEffect[0].SetDissolve(m_particleTimer / PARTICLE_TIME);
+		m_weaponEraseEffect[1].SetDissolve(m_particleTimer / PARTICLE_TIME);
 		if (m_particleTimer > PARTICLE_TIME)
 		{
 			for (auto& particle : m_particleList)
@@ -216,7 +218,8 @@ void CWeaponManager::Update()
 				particle->SetIsActive(false);
 			}
 			m_particleDraw = false;
-			m_weaponEraseEffect.SetIsDraw(false);
+			m_weaponEraseEffect[0].SetIsDraw(false);
+			m_weaponEraseEffect[1].SetIsDraw(false);
 		}
 		else
 		{
@@ -240,7 +243,8 @@ void CWeaponManager::Update()
 			ParticleSetting();
 			m_drawingWeapon = false;
 			m_drawingWeaponTimer = 0.0f;
-			m_weaponEraseEffect.SetIsDraw(true);
+			m_weaponEraseEffect[0].SetIsDraw(true);
+			m_weaponEraseEffect[1].SetIsDraw(true);
 		}
 	}
 
@@ -263,7 +267,8 @@ void CWeaponManager::AfterDraw()
 		}
 	}
 	m_weapons[m_weaponState]->AfterDrawer();
-	m_weaponEraseEffect.Draw();
+	m_weaponEraseEffect[0].Draw();
+	m_weaponEraseEffect[1].Draw();
 }
 
 void CWeaponManager::ParticleSetting()
@@ -292,7 +297,7 @@ void CWeaponManager::ParticleSetting()
 		particle->UpdateWorldMatrix();
 		it++;
 	}
-	m_weaponEraseEffect.SetWorldMatrix(worldMatrix, m_weaponState);
+	m_weaponEraseEffect[0].SetWorldMatrix(worldMatrix, m_weaponState);
 	//‘oŒ•‚Ìê‡‚Í‚Q‚Â–Ú‚Ìƒ‚ƒfƒ‹‚Ì•ª‚às‚¤
 	if (m_weaponState == enWeaponTwinSword)
 	{
@@ -320,12 +325,14 @@ void CWeaponManager::ParticleSetting()
 			position.Mul(worldMatrix);
 			particle->SetAlpha(PARTICLE_ALPHA);
 			particle->SetPosition(position);
-			particle->SetIsActive(true);
+			//particle->SetIsActive(true);
 			particle->UpdateWorldMatrix();
+			m_weaponEraseEffect[1].SetWorldMatrix(worldMatrix, enWeaponTwinSword);
+			m_weaponEraseEffect[1].SetIsDraw(true);
 			it++;
 		}
 	}
-	m_weaponEraseEffect.SetIsDraw(true);
+	m_weaponEraseEffect[0].SetIsDraw(true);
 }
 
 void CWeaponManager::ChangeEquipWeapon(std::unique_ptr<IInventoryEquip> equipWeapon, EnPlayerWeapon weaponNum)
