@@ -30,6 +30,13 @@ void CPlayerArrowAttack::Update()
 	{
 		m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateDamage);
 		GetGameCamera().SetIsArrowZoom(false);
+		m_pPlayer->GetWeaponManager().SetIsAttack(false);
+	}
+	else if (m_pPlayer->GetIsStateCondition(CPlayerState::enPlayerStateStun))
+	{
+		m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateStun);
+		GetGameCamera().SetIsArrowZoom(false);
+		m_pPlayer->GetWeaponManager().SetIsAttack(false);
 	}
 	if (!m_pPlayerGetter->GetAnimation().IsPlay())
 	{
