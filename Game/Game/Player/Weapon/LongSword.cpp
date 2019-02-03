@@ -42,8 +42,10 @@ void CLongSword::Init()
 	m_stanAttack[0] = false;
 	m_stanAttack[1] = false;
 	m_stanAttack[2] = true;
-	m_weaponHoldAnimationNum = enPlayerAnimationRunLeageSword;
-	m_weaponHoldBoneName = L"Spine1";
+	m_weaponHold[enAnimationBlendRun].animationNum = enPlayerAnimationRunLeageSword;
+	m_weaponHold[enAnimationBlendRun].boneID = GetPlayer().GetSkinmodel().GetSkelton()->FindBoneID(L"Spine1");
+	m_weaponHold[enAnimationBlendStand].animationNum = enPlayerAnimationRunLeageSword;
+	m_weaponHold[enAnimationBlendStand].boneID = GetPlayer().GetSkinmodel().GetSkelton()->FindBoneID(L"Spine1");
 }
 
 void CLongSword::Update()

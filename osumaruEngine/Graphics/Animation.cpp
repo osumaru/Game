@@ -47,9 +47,8 @@ void CAnimation::Play(int animationNum, float interpolationTime)
 	m_interpolationTime = 1.0f / interpolationTime;
 }
 
-void CAnimation::AddBlendAnimation(const wchar_t * boneName, int animationNum)
+void CAnimation::AddBlendAnimation(int boneID, int animationNum)
 {
-	int boneID = m_skelton->FindBoneID(boneName);
 	m_animationBlend.push_back({ animationNum, boneID });
 
 }
@@ -84,10 +83,6 @@ void CAnimation::UpdateBoneMatrix(int boneID, const std::vector<CMatrix>& localM
 void CAnimation::Update(float deltaTime)
 {
 
-
-	
-
-
 	float progressTime = deltaTime;
 	//補間時間を計算
 	if (m_isInterpolation)
@@ -95,11 +90,26 @@ void CAnimation::Update(float deltaTime)
 		progressTime *= m_interpolationTime;
 	}
 	m_blendRate -=  progressTime;
+	//同じアニメーションのアップデートを複数回呼ばないための配列
+	std::vector<int> animationUpdateVector;
 	for (int i = 0; i < m_animationBlend.size(); i++)
 	{
+		bool isAnimationUpdate = true;
+		for (int animUpdateNum : animationUpdateVector)
+		{
+			if (animUpdateNum == m_animationBlend[i].animationNum)
+			{
+				isAnimationUpdate = false;
+				break;
+			}
+		}
 		//再生中のアニメーションを更新
-		m_animationClips[m_animationBlend[i].animationNum].Update(deltaTime);
-		m_animationClips[m_animationBlend[i].animationNum].AnimationInvoke(this);
+		if (isAnimationUpdate)
+		{
+			m_animationClips[m_animationBlend[i].animationNum].Update(deltaTime);
+			m_animationClips[m_animationBlend[i].animationNum].AnimationInvoke(this);
+			animationUpdateVector.push_back(m_animationBlend[i].animationNum);
+		}
 		//再生が終わり、ループフラグが立っていればもう一度再生する
 		if (!m_animationClips[m_currentAnimationNum].IsPlay() && m_animationClips[m_currentAnimationNum].IsLoop())
 		{

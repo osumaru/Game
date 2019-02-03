@@ -120,6 +120,13 @@ void CPad::Update()
 			&m_rightStickX,
 			&m_rightStickY,
 		};
+		bool* flipFlg[stickNum] =
+		{
+			&m_isLeftStickXFlip,
+			&m_isLeftStickYFlip,
+			&m_isRightStickXFlip,
+			&m_isRightStickYFlip
+		};
 		for (int i = 0; i < stickNum; i++)
 		{
 			if (0 < padInput)
@@ -131,7 +138,17 @@ void CPad::Update()
 				inputNormalize = -SHRT_MIN;
 			}
 			//スティックの入力量を-1.0～1.0に正規化
-			*padOutput[i] = padInput[i] / inputNormalize;
+			float inputAmount = padInput[i] / inputNormalize;
+			float difference = inputAmount - *padOutput[i];
+			if (*padOutput[i] < 0.0f)
+			{
+				difference = -difference;
+			}
+			difference = max(0.0f, difference);
+			const float FLIP_RANGE = 0.3f;
+			*flipFlg[i] = FLIP_RANGE < difference;
+			*padOutput[i] = inputAmount;
+
 			//入力量が小さい場合誤差とみなして値を0にする
 			if (*padOutput[i] < inputDeadZone && -inputDeadZone < *padOutput[i])
 			{

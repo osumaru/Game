@@ -89,7 +89,35 @@ public:
 		return m_rightTrigger;
 	}
 
+	//左スティックをX軸方向に弾いたか
+	bool IsLeftStickXFlip() const
+	{
+		return m_isLeftStickXFlip;
+	}
+
+	//左スティックをY軸方向に弾いたか
+	bool IsLeftStickYFlip() const
+	{
+		return m_isLeftStickYFlip;
+	}
+
+	//右スティックをX軸方向に弾いたか
+	bool IsRightStickXFlip() const
+	{
+		return m_isRightStickXFlip;
+	}
+
+	//右スティックをY軸方向に弾いたか
+	bool IsRightStickYFlip() const
+	{
+		return m_isRightStickYFlip;
+	}
+
 private:
+	bool			m_isLeftStickXFlip;				//左スティックの弾きフラグ
+	bool			m_isLeftStickYFlip;				//左スティックの弾きフラグ
+	bool			m_isRightStickXFlip;			//右スティックの弾きフラグ
+	bool			m_isRightStickYFlip;			//右スティックの弾きフラグ
 	int				m_padNum;						//パッドの番号
 	float			m_rightStickX;					//右スティックのX軸の入力量
 	float			m_rightStickY;					//右スティックのY軸の入力量

@@ -2,7 +2,7 @@
 #include "IWeapon.h"
 #include "WeaponCommon.h"
 #include "../../Item/InventoryItem/IInventoryEquip.h"
-
+#include "WeaponEraseEffect.h"
 class CPlayer;
 //武器を管理するクラス
 
@@ -142,6 +142,7 @@ public:
 	}
 
 private:
+	CWeaponEraseEffect			m_weaponEraseEffect;
 	const float					PARTICLE_ALPHA = 0.2f;
 	EnPlayerWeapon				m_weaponState = enWeaponSword;				//現在使ってる武器
 	static std::unique_ptr<IInventoryEquip> m_equipWeapon[enWeaponNum];		//装備中の武器
@@ -153,7 +154,7 @@ private:
 	int							m_attackCount = 0;							//現在の武器攻撃の回数
 	std::list<CParticle*>		m_particleList;								//パーティクルのリスト
 	float						m_particleTimer = 0.0f;						//パーティクル用のタイマー
-	const float					PARTICLE_TIME = 1.0f;						//パーティクルを描画する時間
+	const float					PARTICLE_TIME = 0.6f;						//パーティクルを描画する時間
 	bool						m_particleDraw = false;						//パーティクルを描画するフラグ
 	bool						m_drawingWeapon = false;					//武器を出し続けるか
 	float						m_drawingWeaponTimer = 0.0f;				//武器を出している間のタイマー

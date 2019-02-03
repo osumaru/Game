@@ -196,6 +196,7 @@
     <ClCompile Include="Map\MapChip\ObstacleMapObject.cpp" />
     <ClCompile Include="Player\PlayerSate\PlayerDown.cpp" />
     <ClCompile Include="Player\PlayerSate\PlayerSky.cpp" />
+    <ClCompile Include="Player\Weapon\WeaponEraseEffect.cpp" />
     <ClCompile Include="Player\Weapon\WeaponTraceDraw.cpp" />
     <ClCompile Include="Player\PlayerSate\PlayerWireAttack.cpp" />
     <ClCompile Include="Player\WireDraw.cpp" />
@@ -309,6 +310,7 @@
     <ClInclude Include="Map\MapChip\ObstacleMapObject.h" />
     <ClInclude Include="Player\PlayerSate\PlayerDown.h" />
     <ClInclude Include="Player\PlayerSate\PlayerSky.h" />
+    <ClInclude Include="Player\Weapon\WeaponEraseEffect.h" />
     <ClInclude Include="Player\Weapon\WeaponTraceDraw.h" />
     <ClInclude Include="Player\PlayerSate\PlayerWireAttack.h" />
     <ClInclude Include="Player\WireDraw.h" />
@@ -410,6 +412,7 @@
     <MeshContentTask Include="Assets\modelData\map2.FBX" />
     <MeshContentTask Include="Assets\modelData\map3.FBX" />
     <MeshContentTask Include="Assets\modelData\Map4.FBX" />
+    <MeshContentTask Include="Assets\modelData\Map\Sea.FBX" />
     <MeshContentTask Include="Assets\modelData\Maw.fbx" />
     <MeshContentTask Include="Assets\modelData\Money.fbx" />
     <MeshContentTask Include="Assets\modelData\Ninja.FBX" />

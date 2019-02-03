@@ -14,8 +14,8 @@ void CWireDraw::Init(const CVector3& startPos, const CVector3& endPos, const CVe
 	vertexBuffer[1].color = color;
 	DWORD indexBuffer[VERTEX_NUM] = { 0, 1 };
 	m_primitive.Create(vertexBuffer, sizeof(SVSLayout), VERTEX_NUM, indexBuffer, VERTEX_NUM, CPrimitive::enIndex32, CPrimitive::enTypeLineList);
-	m_vs.Load("Assets/shader/rigidBodyDraw.fx", "VSMain", CShader::enVS);
-	m_ps.Load("Assets/shader/rigidBodyDraw.fx", "PSMain", CShader::enPS);
+	m_vs.Load("Assets/shader/line.fx", "VSMain", CShader::enVS);
+	m_ps.Load("Assets/shader/line.fx", "PSMain", CShader::enPS);
 	CMatrix mat = CMatrix::Identity;
 	m_cb.Create(sizeof(CMatrix), &mat);
 	m_color = color;

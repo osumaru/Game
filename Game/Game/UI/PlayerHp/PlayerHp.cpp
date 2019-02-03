@@ -56,7 +56,7 @@ void CPlayerHp::Update()
 
 		m_playerHpSize.x = (float)(m_playerMaxHpSizeX*(GetPlayer().GetStatus().Health / m_playerMaxHp));
 		m_playerHpSprite.SetSize({ m_playerHpSize.x, m_playerHpSize.y });
-		m_hpSubtractSpeed = (float)(m_playerHp - GetPlayer().GetStatus().Health) / m_playerMaxHp * 10.0f;
+		m_hpSubtractSpeed = max(0.0f, (float)(m_playerHp - GetPlayer().GetStatus().Health) / m_playerMaxHp * 10.0f);
 		//プレイヤーHp更新
 		m_playerHp = GetPlayer().GetStatus().Health;
 		m_delayTime = 0.0f;

@@ -31,12 +31,18 @@ void CPlayerArrow::Update()
 	{
 		m_arrowPosition =  *((CVector3*)GetPlayer().GetSkinmodel().FindBoneWorldMatrix(L"LeftHand").m[3]);
 		//ƒvƒŒƒCƒ„[‚Ìƒ{[ƒ“‚Ì‘O•ûŒü‚ðŽæ“¾
-		const CMatrix& playerWorldMat = GetPlayer().GetSkinmodel().GetSkelton()->GetBoneWorldMatrix(GetPlayer().GetSpineBoneID());
+		const CMatrix& playerBoneWorldMat = GetPlayer().GetSkinmodel().GetSkelton()->GetBoneWorldMatrix(GetPlayer().GetSpineBoneID());
 		CVector3 weaponFlont;
-		weaponFlont.x = playerWorldMat.m[0][0];
-		weaponFlont.y = playerWorldMat.m[0][1];
-		weaponFlont.z = playerWorldMat.m[0][2];
+		weaponFlont.x = playerBoneWorldMat.m[0][0];
+		weaponFlont.y = playerBoneWorldMat.m[0][1];
+		weaponFlont.z = playerBoneWorldMat.m[0][2];
 		weaponFlont.Normalize();
+		const CMatrix& playerWorldMat = GetPlayer().GetSkinmodel().GetWorldMatrix();
+		CVector3 playerFront;
+		playerFront.x = playerWorldMat.m[2][0];
+		playerFront.y = playerWorldMat.m[2][1];
+		playerFront.z = playerWorldMat.m[2][2];
+		playerFront.Normalize();
 		//–î‚Ì‘O•ûŒü‚ðŽæ“¾
 		const CMatrix& skinWorldMatrix = m_arrowskin.GetWorldMatrix();
 		m_moveSpeed.x = skinWorldMatrix.m[2][0];
@@ -45,7 +51,7 @@ void CPlayerArrow::Update()
 		m_moveSpeed.Normalize();
 		m_moveSpeed *= MOVE_POWRE;
 		CQuaternion rotY;
-		m_arrowRot.SetRotation(CVector3::AxisY, atan2f(weaponFlont.x, weaponFlont.z));		//YŽ²Žü‚è‚Ì‰ñ“]
+		m_arrowRot.SetRotation(CVector3::AxisY, atan2f(playerFront.x, playerFront.z));		//YŽ²Žü‚è‚Ì‰ñ“]
 		rotY.SetRotation(CVector3::AxisX, atanf(-weaponFlont.y));		//XŽ²Žü‚è‚Ì‰ñ“]
 		//‰ñ“]‚Ì•â³Aƒ{[ƒ“‚Ì‰ñ“]‚ð‚»‚Ì‚Ü‚ÜŽg‚¤‚Æ•Ï‚È•ûŒü‚ðŒü‚­‚½‚ß
 		CQuaternion multi;
@@ -78,7 +84,7 @@ void CPlayerArrow::Update()
 		m_lifeTime += GameTime().GetDeltaFrameTime();
 
 		//“G‚Æ‚Ì“–‚½‚è”»’è‚ÌŒvŽZ
-		for (const auto& enemys :GetSceneManager().GetGameScene().GetMap()->GetEnemyList())
+		for (const auto& enemys :GetSceneManager().GetMap()->GetEnemyList())
 		{
 			if (!enemys->GetIsDamage()) {
 

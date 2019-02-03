@@ -24,8 +24,8 @@ void CRigidBodyDraw::Init()
 	memset(m_vertexBuffer, 0, sizeof(m_vertexBuffer));
 	memset(m_indexBuffer, 0, sizeof(m_indexBuffer));
 	m_primitive.Create(m_vertexBuffer, sizeof(SRigidBodyVSLayout), VERTEX_NUM, m_indexBuffer, VERTEX_NUM,  CPrimitive::enIndex32, CPrimitive::enTypeLineList);
-	m_vs.Load("Assets/shader/rigidBodyDraw.fx", "VSMain", CShader::enVS);
-	m_ps.Load("Assets/shader/rigidBodyDraw.fx", "PSMain", CShader::enPS);
+	m_vs.Load("Assets/shader/line.fx", "VSMain", CShader::enVS);
+	m_ps.Load("Assets/shader/line.fx", "PSMain", CShader::enPS);
 	CMatrix mat = CMatrix::Identity;
 	m_cb.Create(sizeof(CMatrix), &mat);
 }

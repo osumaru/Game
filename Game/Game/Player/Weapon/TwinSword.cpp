@@ -106,8 +106,11 @@ void CTwinSword::Init()
 			}
 		}
 	}
-	m_weaponHoldAnimationNum = enPlayerAnimationRunTwinSword;
-	m_weaponHoldBoneName = L"Spine1";
+	m_weaponHold[enAnimationBlendRun].animationNum = enPlayerAnimationRun;
+	m_weaponHold[enAnimationBlendRun].boneID = GetPlayer().GetSkinmodel().GetSkelton()->FindBoneID(L"Spine1");
+	m_weaponHold[enAnimationBlendStand].animationNum = enPlayerAnimationStand;
+	m_weaponHold[enAnimationBlendStand].boneID = GetPlayer().GetSkinmodel().GetSkelton()->FindBoneID(L"Spine1");
+
 }
 
 void CTwinSword::Update()

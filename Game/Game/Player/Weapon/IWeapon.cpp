@@ -134,6 +134,7 @@ void IWeapon::EnemyAttack()
 		return;
 	}
 
+	const float EFFECT_SCALE = 0.1f;
 	//エネミーグループのリストを取得
 	std::list<CEnemyGroup*> enemyGroup = GetSceneManager().GetMap()->GetEnemyGroupList();
 	for (const auto& group : enemyGroup)
@@ -172,8 +173,7 @@ void IWeapon::EnemyAttack()
 							damagePossible[i] = false;
 							m_hitEffect.Play();
 							m_hitEffect.SetPosition(effectPos);
-							const float SCALE = 0.1f;
-							m_hitEffect.SetScale({ SCALE, SCALE, SCALE });
+							m_hitEffect.SetScale({ EFFECT_SCALE, EFFECT_SCALE, EFFECT_SCALE });
 							m_hitEffect.Update();
 						}
 					}
@@ -212,13 +212,17 @@ void IWeapon::EnemyAttack()
 					//ボスの座標取得
 					CVector3 EnemyVec = GetMaw().GetPosition();
 					EnemyVec.y += BossHeight;
+					CVector3 effectPos = (info.attackPos[i] + EnemyVec) * 0.5f;
 					EnemyVec -= info.attackPos[i];
 					float len = EnemyVec.Length();
-
 					if (fabs(len) < BossLenge && GetMaw().IsDamagePossible())
 					{
 						GetMaw().SetIsDamage(true);
 						GetMaw().SetIsDamagePossible(false);
+						m_hitEffect.Play();
+						m_hitEffect.SetPosition(effectPos);
+						m_hitEffect.SetScale({ EFFECT_SCALE, EFFECT_SCALE, EFFECT_SCALE });
+						m_hitEffect.Update();
 					}
 				}
 			}
