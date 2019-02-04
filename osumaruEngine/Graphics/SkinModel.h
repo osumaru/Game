@@ -84,6 +84,11 @@ public:
 	{
 		m_light = light;
 	}
+
+	const CLight& GetLight() const
+	{
+		return m_light;
+	}
 	/*
 	法線マップの読み込み
 

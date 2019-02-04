@@ -544,7 +544,7 @@ public:
 		Scale(scale);
 	}
 
-	void Mul(CMatrix& mat) const;
+	void Mul(const CMatrix& mat) const;
 };
 
 class CQuaternion : public CVector4 {

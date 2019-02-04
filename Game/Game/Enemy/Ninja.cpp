@@ -141,7 +141,7 @@ void CNinja::Update()
 	if (!m_isWireHit) 
 	{
 		//アニメーションの更新
-		m_animation.Update(GameTime().GetDeltaFrameTime() * 2.0f);
+		m_animation.Update(GameTime().GetDeltaFrameTime());
 	}
 
 	if (!m_isDead && !m_isWireHit) 
