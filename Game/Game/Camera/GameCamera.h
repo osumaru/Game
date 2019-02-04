@@ -105,6 +105,15 @@ private:
 	//ロックオンを解除する
 	void LockOnCancel();
 
+	/*
+	注視点に遊びを持たせる。
+	toRotateTargetDirection	回す視点から注視点へのベクトル
+	currentTargetDirection	現在の視点から注視点へのベクトル
+	lockOnTargetDirection	視点からロックオンしてる対象へのベクトル
+	range					遊びの範囲
+	*/
+	void TargetMargin(CVector3& toRotateTargetDirection, const CVector3& currentTargetDirection, const CVector3& lockOnTargetDirection, const float range);
+
 private:
 	enum EnLockOnState
 	{
@@ -112,8 +121,9 @@ private:
 		enLockOn_Enemy,	//エネミー
 		enLockOn_Boss	//ボス
 	};
+
 	CSprite					m_reticule;
-	CSprite					m_lockOnSprite;				//ロックオンスプライト				
+	CSprite					m_lockOnSprite;				//ロックオンスプライト			
 	static CGameCamera*		m_gameCamera;				//ゲームカメラ
 	CCamera					m_camera;					//カメラ
 	CSpringCamera			m_springCamera;				//バネカメラ
@@ -122,10 +132,11 @@ private:
 	EnLockOnState			m_lockOnState = enLockOn_None;	//何をロックオンしているか
 	IEnemy*					m_lockOnEnemy = nullptr;	//ロックオンしているエネミー
 	CVector3				m_toCameraPos;				//カメラへのベクトル
+	CVector3				m_toTargetDir;				//カメラの視点から注視点へのベクトル(敵をロックオン時に注視点に遊びを持たせるのに使う
 	float					m_cameraLength = 0.0f;		//注視点からカメラへの距離
 	float					m_preRStick = 0.0f;			//1フレーム前のパッド入力量
-	const float				LOCKON_OFFSET_Y = 2.5f;		//ロックオン時の高さ補正の限界値
-	const float				TARGET_OFFSET_Y = 1.4f;		//カメラ通常時の高さ補正
+	const float				LOCKON_OFFSET_Y = 2.0f;		//ロックオン時の高さ補正の限界値
+	const float				TARGET_OFFSET_Y = 2.0f;		//カメラ通常時の高さ補正
 	//float					m_height = 0.0f;			//カメラの座標と注視点の高さ
 	int						m_lockOnEnemyNumber = 0;	//ロックオンしているエネミー番号
 	bool					m_isLockOn = false;			//ロックオンしているか
