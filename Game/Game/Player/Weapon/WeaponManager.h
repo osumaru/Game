@@ -142,7 +142,7 @@ public:
 	}
 
 private:
-	CWeaponEraseEffect			m_weaponEraseEffect;
+	CWeaponEraseEffect			m_weaponEraseEffect[2];
 	const float					PARTICLE_ALPHA = 0.2f;
 	EnPlayerWeapon				m_weaponState = enWeaponSword;				//Œ»İg‚Á‚Ä‚é•Ší
 	static std::unique_ptr<IInventoryEquip> m_equipWeapon[enWeaponNum];		//‘•”õ’†‚Ì•Ší
