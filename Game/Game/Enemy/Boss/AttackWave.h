@@ -17,37 +17,10 @@ public:
 	//更新
 	void Update() override;
 
-	//描画
-	void AfterDraw() override;
 private:
-	CEffect	m_rippleEffect;
-
-	////頂点レイアウト
-	//struct SLayout
-	//{
-	//	CVector4 position;
-	//	CVector2 uv;
-	//};
-
-	//struct SConstantBuffer
-	//{
-	//	CMatrix worldViewProj;		//ワールドビュープロジェクション行列
-	//	float alpha;				//アルファ値
-	//};
-
-	//const CCamera*		m_camera = nullptr;	//カメラ
-	//CShader				m_vs;				//頂点シェーダー
-	//CShader				m_ps;				//ピクセルシェーダー
-	//CConstantBuffer		m_cb;				//コンスタントバッファ
-	//CPrimitive			m_primitive;		//プリミティブ
-	//CTexture*			m_texture;			//テクスチャ
-	//CVector2			m_size;				//サイズ
-	//CMatrix				m_worldMatrix;		//ワールド行列
-	CVector3	m_position;			//座標
-	//CQuaternion			m_rotation;			//回転
-	//float				m_alpha = 1.0f;		//アルファ値
-	//float				m_lifeTimer = 0.0f;	//寿命
-	const float	WAVE_WIDTH = 1.0f;	//波の幅
-	float		m_waveHitLength = WAVE_WIDTH; //波が当たる距離
-	float		m_timer = 0.0f;
+	CEffect		m_rippleEffect;					//エフェクト					
+	CVector3	m_position;						//座標
+	const float	WAVE_WIDTH = 1.0f;				//波の幅
+	float		m_waveHitLength = WAVE_WIDTH;	//波が当たる距離
+	float		m_timer = 0.0f;					//タイマー
 };
