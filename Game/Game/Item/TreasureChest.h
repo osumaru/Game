@@ -12,7 +12,8 @@ class CTreasureChest : public IItem
 public:
 	//初期化
 	//position		座標
-	void Init(CVector3 position);
+	//isMapItem		マップに配置するか
+	void Init(CVector3 position, bool isMapItem);
 
 	//更新する前に一度だけ呼ばれる
 	bool Start() override;
@@ -29,4 +30,5 @@ public:
 private:
 	std::unique_ptr<IInventoryEquip> m_inventoryEquip;	//インベントリに入れる装備
 	bool m_itemDrawCount = false;	//アイテムを拾うUIを出すカウントをすでにしているか
+	bool m_isMapItem = false;		//マップに配置するか
 };
