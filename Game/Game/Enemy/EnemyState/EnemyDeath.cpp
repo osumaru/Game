@@ -37,14 +37,26 @@ void CEnemyDeath::Update()
 			//ŠÂ‹«Œõ‚Ì’l‚ð¬‚³‚­‚µ‚Ä‚¢‚­
 			CLight light = m_enemy->GetSkinModel().GetLight();
 			CVector4 ambientLight = light.GetAmbientLight();
+			float diffuseLight = m_enemy->GetSkinModel().GetDiffuseLightPower();
 			ambientLight.w -= GameTime().GetDeltaFrameTime();
+			diffuseLight -= GameTime().GetDeltaFrameTime();
+
 			if (ambientLight.w <= 0.0f)
 			{
-				m_lightSetEnd = true;
 				ambientLight.w = 0.0f;
 			}
+			if (diffuseLight <= 0.0f)
+			{
+				diffuseLight = 0.0f;
+			}
+			if (ambientLight.w <= 0.0f && diffuseLight <= 0.0f)
+			{
+				m_lightSetEnd = true;
+			}
+
 			light.SetAmbientLight(ambientLight);
 			m_enemy->GetSkinModel().SetLight(light);
+			m_enemy->GetSkinModel().SetDiffuseLightPower(diffuseLight);
 		}
 	}
 	if (m_lightSetEnd)

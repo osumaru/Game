@@ -52,7 +52,6 @@ void CNinja::Init(const CVector3& position, int level)
 	CVector4 ambientLight = { 0.2f,0.2f,0.2f,0.6f };
 	m_light.SetAmbientLight(ambientLight);
 	m_skinModel.SetLight(m_light);
-	m_skinModel.SetIsDiffuse(false);
 
 	//ステータスを設定
 	m_status.level = level;

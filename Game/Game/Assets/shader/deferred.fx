@@ -103,15 +103,16 @@ float4 PSMain(VS_OUTPUT In) : SV_TARGET0
 		normalize(diffuseLightDir[2].xyz),
 		normalize(diffuseLightDir[3].xyz)
 	};
+	
+	float4 depthAndSpecular = depthTexture.Sample(Sampler, In.uv);
 	float4 lig = float4(0.0f, 0.0f, 0.0f, 1.0f);
 	for (int i = 0; i < 4; i++)
 	{
-		lig.xyz += diffuseLight[i].xyz * max(-dot(normal, normalLight[i]), 0.0f) * step(1, !(materialFlg.x & isNormalMapFlg)) * step(1, (materialFlg.x & isDiffuseFlg));
-		lig.xyz	+= diffuseLight[i].xyz * max(-dot(normalColor, normalLight[i]), 0.0f) * step(1, (materialFlg.x & isNormalMapFlg)) * step(1, (materialFlg.x & isDiffuseFlg));
+		lig.xyz += diffuseLight[i].xyz * max(-dot(normal, normalLight[i]), 0.0f) * step(1, !(materialFlg.x & isNormalMapFlg)) * step(1, (materialFlg.x & isDiffuseFlg)) * depthAndSpecular.w;
+		lig.xyz	+= diffuseLight[i].xyz * max(-dot(normalColor, normalLight[i]), 0.0f) * step(1, (materialFlg.x & isNormalMapFlg)) * step(1, (materialFlg.x & isDiffuseFlg)) * depthAndSpecular.w;
 	}
 	lig.xyz += color.w;
 	color.xyz *= lig;
-	float4 depthAndSpecular = depthTexture.Sample(Sampler, In.uv);
 	float4 shadowMapPos;
 	shadowMapPos.z = depthAndSpecular.x;
 	

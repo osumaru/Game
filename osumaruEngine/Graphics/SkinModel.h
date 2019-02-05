@@ -15,6 +15,7 @@ public:
 		CMatrix worldMat;				//ワールド行列
 		CMatrix viewProjMat;			//ビュープロジェクション行列
 		float specularPower;			//スペキュラライトの強さ
+		float diffuseLightPower;
 	};
 
 	//コンストラクタ
@@ -129,6 +130,18 @@ public:
 	{
 		m_materialFlg.isDiffuse = g_materialFlg.isDiffuse * isDiffuse;
 	}
+
+	//ディフューズライトの強さを設定
+	void SetDiffuseLightPower(float diffuseLightPower)
+	{
+		m_diffuseLightPower = diffuseLightPower;
+	}
+
+	//ディフューズライトの強さを取得
+	float GetDiffuseLightPower() const
+	{
+		return m_diffuseLightPower;
+	}
 	
 
 private:
@@ -145,5 +158,6 @@ private:
 	SMaterialFlg					m_materialFlg;
 	bool							m_isShadowCaster = false;
 	float							m_specularPower = 0.0f;					//スペキュラライトの強さ
+	float							m_diffuseLightPower = 1.0f;				//ディフューズライトの強さ
 
 };

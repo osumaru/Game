@@ -18,6 +18,8 @@ void CTitleEnemy::Init(const wchar_t* modelName, CVector3 position)
 	animationClip[0] = animFilePath;
 	m_animation.Init(animationClip, 1);
 	m_animation.SetLoopFlg(0, true);
+	m_animation.Play(0);
+
 }
 
 void CTitleEnemy::Update()
