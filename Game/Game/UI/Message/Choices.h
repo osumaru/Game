@@ -40,5 +40,7 @@ private:
 	CSprite			m_no;				//いいえ
 	CSprite			m_cursor;			//カーソル
 	CSprite			m_window;			//ウィンドウ
+	float			m_timer = 0.0f;		//タイマー
 	bool			m_isSelect = false;	//選択肢を選んだか
+	bool			m_isAlpha = true;	//透明になっているか
 };
