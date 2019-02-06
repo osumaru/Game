@@ -4,7 +4,7 @@
 void CGetItem::Init()
 {
 	//スプライトの初期化
-	CTexture* texture = TextureResource().LoadTexture(L"Assets/sprite/aButton.png");
+	CTexture* texture = TextureResource().LoadTexture(L"Assets/sprite/ButtonA.png");
 	m_aButton.Init(texture);
 	m_aButton.SetPosition({ -25.0f, -250.0f });
 	m_aButton.SetSize({ 30.0f, 30.0f });

@@ -63,7 +63,7 @@ bool CBossScene::Start()
 		m_message->SetIsActive(false);
 		//‘I‘ğˆ•\¦‚Ì‰Šú‰»
 		m_choices = New<CChoices>(PRIORITY_UI);
-		m_choices->Init(L"‚Í‚¢", L"‚¢‚¢‚¦");
+		m_choices->Init();
 		m_choices->SetIsActive(false);
 
 		m_arrowRemain = New<CArrowRemain>(PRIORITY_UI);

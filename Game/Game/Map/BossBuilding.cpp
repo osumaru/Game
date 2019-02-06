@@ -38,7 +38,7 @@ void CBossBuilding::Update()
 		m_message = New<CMessage>(PRIORITY_UI);
 		m_message->Init({ 500.0f,250.0f }, L"bossTry");
 		m_choices = New<CChoices>(PRIORITY_UI);
-		m_choices->Init(L"‚Í‚¢", L"‚¢‚¢‚¦");
+		m_choices->Init();
 		m_choices->SetIsActive(false);
 		m_isChoice = true;
 		m_timer = 0.0f;
