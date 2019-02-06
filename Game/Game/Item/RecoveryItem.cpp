@@ -47,6 +47,12 @@ void CRecoveryItem::Update()
 
 	if (m_isPopEnd && !m_isMove)
 	{
+		//‰ñ“]‚³‚¹‚é
+		const float angle = 3.0f;
+		CVector3 axisY = CVector3::AxisY;
+		CQuaternion addRot;
+		addRot.SetRotationDeg(axisY, angle);
+		m_rotation.Multiply(addRot);
 		//ƒvƒŒƒCƒ„[‚Æ‚Ì‹——£‚ğ‹‚ß‚é
 		CVector3 playerPos = GetPlayer().GetPosition();
 		CVector3 toPlayer = playerPos - m_position;
