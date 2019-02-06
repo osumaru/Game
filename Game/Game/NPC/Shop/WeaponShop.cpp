@@ -140,9 +140,9 @@ void CWeaponShop::Update()
 {
 	ShopUpdate();
 	if (!m_isTransaction) { return; };
-	if (GetPlayer().BuyMoney(m_items[m_lineupSelectNumber + 1].ItemStatus.Itemprice))
+	if (GetPlayer().BuyMoney(m_items[m_lineupSelectNumber].ItemStatus.Itemprice))
 	{
-		wchar_t* itemName = L"‚ ‚ ‚ ‚ ";
+		wchar_t* itemName = m_items[m_lineupSelectNumber].ItemStatus.ItemName;
 		wchar_t* textureFileName = L"Assets/sprite/item/Equip/Equip_2.png";
 		SWeaponStatus weapons;
 
@@ -215,9 +215,11 @@ void CWeaponShop::PostAfterDraw()
 		item.ItemSprite.Draw();
 		
 	}
+	m_moneyBack.Draw();
 	for (int num = 0; num < ITEM_ELEMENT;num++)
 	{
 		m_itemNameFont[num].Draw();
 		m_itemPriceFont[num].Draw();
 	}
+	m_money.Draw();
 }

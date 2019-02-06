@@ -171,6 +171,7 @@ void CPlayer::Init(CVector3 position)
 		m_animation.SetLoopFlg(enPlayerAnimationRun, true);
 		m_animation.SetLoopFlg(enPlayerAnimationDash, true);
 		m_animation.SetLoopFlg(enPlayerAnimationWireMove, true);
+		m_animation.SetIsLenearInterpolation(true);
 
 		//アニメーションイベントリスナーの登録　呼び出される関数の登録？
 		m_animation.AddAnimationEvent([&](auto animClipname, auto eventName)

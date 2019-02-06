@@ -13,7 +13,7 @@ void CAnimation::Init(wchar_t* animFilePath[], int animNum)
 	{
 		m_animationClips[i].Load(animFilePath[i]);
 	}
-
+	m_animationNum = animNum;
 }
 
 void CAnimation::SetSkelton(CSkelton* skelton)

@@ -10,7 +10,11 @@
 
 IShop::IShop()
 {
-	
+	m_money.Init(L"0");
+	m_money.SetPosition({400.0f, 300.0f});
+	m_moneyBack.Init(TextureResource().LoadTexture(L"Assets/sprite/ShopUI/Back_Menu.png"));
+	m_moneyBack.SetSize({200.0f, 60.0f});
+	m_moneyBack.SetPosition({ 450.0f, 270.0f });
 }
 
 
@@ -69,7 +73,6 @@ void IShop::ShopUpdate()
 			m_shopSelectPen.SetPosition(m_shopSelectPenPosition);
 
 		}
-
 		else if (Pad().IsTriggerButton(enButtonDown) && m_selectShop != enShopNone)
 		{
 			m_selectShop = enShopNone;
@@ -83,15 +86,24 @@ void IShop::ShopUpdate()
 			m_shopSelectPenPosition.y += 100.0f;
 			m_shopSelectPen.SetPosition(m_shopSelectPenPosition);
 		}
+		if (Pad().IsTriggerButton(enButtonB))
+		{
+			m_shopState = enShopNone;
+			m_isSelectDraw = false;
+			GetPlayer().SetIsActiveUpdate(true);
+			GetPlayer().SetIsAction(false);
+			//GetSceneGame().GetGameSound()->SetIsShop(false);
+			GetSceneManager().GetGameSound()->SetGameSound(CGameSound::enWorldBgm);
+
+		}
 
 		break;
 	case enShopBuy:
 		if (Pad().IsTriggerButton(enButtonB))
 		{
-			m_shopState = enShopNone;
+			m_shopState = enShopOpen;
 			m_isShoplineupDraw = false;
-			GetPlayer().SetIsActiveUpdate(true);
-			GetPlayer().SetIsAction(false);
+			m_isSelectDraw = true;
 			//GetSceneGame().GetGameSound()->SetIsShop(false);
 			GetSceneManager().GetGameSound()->SetGameSound(CGameSound::enWorldBgm);
 		}
@@ -115,6 +127,10 @@ void IShop::ShopUpdate()
 
 		break;
 	}
+	int gold = GetPlayer().GetStatus().Gold;
+	wchar_t str[64];
+	swprintf(str, L"%d", gold);
+	m_money.SetString(str);
 	m_animation.Update(GameTime().GetDeltaFrameTime());
 	m_skinModel.Update(m_position, m_rotation, m_scale, false);
 	m_skinmodelNpc.Update(m_position, m_rotation, m_scale, true);

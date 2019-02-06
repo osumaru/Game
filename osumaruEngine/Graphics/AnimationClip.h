@@ -96,6 +96,12 @@ public:
 		}
 	}
 
+	//アニメーションを線形補間させるかのフラグを設定
+	void SetIsLinearInterpolation(bool isLinearInterpolation)
+	{
+		m_isLinearInterpolation = isLinearInterpolation;
+	}
+
 private:
 	bool									m_isPlay = false;					//再生中か？
 	bool									m_isLoop = false;					//ループしてるか？
@@ -109,4 +115,5 @@ private:
 	std::unique_ptr<CAnimationEvent[]>		m_animationEvent = nullptr;			//アニメーションイベント。
 	int										m_animationEventNum = 0;			//アニメーションイベントの数
 	int										m_maxFrameNum = 0;					//最大キーフレーム数
+	bool									m_isLinearInterpolation = false;
 };
