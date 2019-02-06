@@ -18,13 +18,14 @@
 #include"../NPC/ShopManager.h"
 #include "../Map/BossBuilding.h"
 #include "../Enemy/TitleEnemy.h"
+#include "MapChip/CSea.h"
 
 std::vector<std::vector<SMapChipInfo>> mapChipInfo = 
 {
 	{
 		//本番用の世界のマップ
-		#include "WorldMap.h"
-		//#include "ShopTest.h"
+		//#include "WorldMap.h"
+		#include "ShopTest.h"
 		//#include "mm.h"
 		//#include "BossStage.h"
 		//#include "Boss.h"
@@ -60,6 +61,7 @@ void Map::Init(int stageNum)
 		IEnemy* enemy = nullptr;
 		std::list<IEnemy*>::iterator it;
 		CBossBuilding* bossBuilding = nullptr;
+		CSea* sea = nullptr;
 		CTitleEnemy* titleEnemy = nullptr;
 		switch (mInfo.m_tag)
 		{
@@ -105,9 +107,13 @@ void Map::Init(int stageNum)
 			titleEnemy = New<CTitleEnemy>(PRIORITY_ENEMY);
 			titleEnemy->Init(mInfo.m_modelName, mInfo.m_position);
 			break;
+		case enMapTagSea:
+			sea = New<CSea>(PRIORITY_BILLDING);
+			sea->Init(mInfo.m_position, mInfo.m_rotation);
+			break;
 		case enMapTagBossObj:
 			bossBuilding = New<CBossBuilding>(PRIORITY_BILLDING);
-			bossBuilding->Init(mInfo.m_position);
+			bossBuilding->Init(mInfo.m_position,mInfo.m_rotation);
 			break;
 		case enMapTagBreakBrock:
 			mapChip = New<CBreakMapObject>(PRIORITY_MAPCHIP);

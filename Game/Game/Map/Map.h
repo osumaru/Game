@@ -1,4 +1,5 @@
 #pragma once
+class CSea;
 class MapChip;
 class BreakMapObject;
 class IEnemy;
@@ -24,6 +25,8 @@ enum EnMapChipTag
 	enMapTagWeaponShop,		//武器屋用のタグ
 	enMapTagSoundPoint,		//BGM用のタグ
 	enMapTagTree,			//木のモデルに着けるタグ
+	enMapTagTreasureBox,	//宝箱用のタグ
+	enMapTagSea,			//水面
 	enMapTagObstacle,
 	enMapTagBossObj,
 	enMapTagTitleEnemy,

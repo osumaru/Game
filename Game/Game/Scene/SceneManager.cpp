@@ -5,7 +5,7 @@
 void CSceneManager::Init()
 {
 	m_fade = New<CFade>(PRIORITY_MAX - 1);
-	m_nextSceneState = enGameScene;//enGameScene;
+	m_nextSceneState = enTitleScene;//enGameScene;
 	m_gameSound = New<CGameSound>(0);
 	//SceneManagerƒNƒ‰ƒX‚ðAdd
 	Add(this, 0);

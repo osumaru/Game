@@ -9,10 +9,6 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
     </Filter>
-    <Filter Include="リソース ファイル">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
     <Filter Include="ソース ファイル\Map">
       <UniqueIdentifier>{d8b18880-62bb-43b5-8e95-45e0bb4bc02e}</UniqueIdentifier>
     </Filter>
@@ -111,6 +107,10 @@
     </Filter>
     <Filter Include="ソース ファイル\Enemy\Boss">
       <UniqueIdentifier>{da385530-fd8c-49a6-93c8-91c3083fed66}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\リソース ファイル">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -429,6 +429,9 @@
     </ClCompile>
     <ClCompile Include="Player\Weapon\WeaponEraseEffect.cpp">
       <Filter>ソース ファイル\Player\Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="Map\MapChip\CSea.cpp">
+      <Filter>ソース ファイル\Map\MapChip</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -759,6 +762,9 @@
     <ClInclude Include="Player\Weapon\WeaponEraseEffect.h">
       <Filter>ソース ファイル\Player\Weapon</Filter>
     </ClInclude>
+    <ClInclude Include="Map\MapChip\CSea.h">
+      <Filter>ソース ファイル\Map\MapChip</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Map\MapChip\ObstacleMapObject.h">
@@ -1020,6 +1026,18 @@
       <Filter>ソース ファイル\Assets</Filter>
     </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\Map\Sea.FBX">
+      <Filter>ソース ファイル\Assets</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\build\CastleDoor3.FBX">
+      <Filter>ソース ファイル\Assets</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\build\tile.FBX">
+      <Filter>ソース ファイル\Assets</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\build\Rock2.FBX">
+      <Filter>ソース ファイル\Assets</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\build\stl.FBX">
       <Filter>ソース ファイル\Assets</Filter>
     </MeshContentTask>
   </ItemGroup>
