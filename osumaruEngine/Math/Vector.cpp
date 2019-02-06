@@ -47,7 +47,7 @@ void CVector3::Mul(const CMatrix& mat) const
 /*
 *@brief		çsóÒÇÇ©ÇØÇÈ
 */
-void CVector4::Mul(CMatrix& mat) const
+void CVector4::Mul(const CMatrix& mat) const
 {
 	DirectX::XMStoreFloat4(
 		const_cast<DirectX::XMFLOAT4*>(&vec),

@@ -52,7 +52,6 @@ void CNinja::Init(const CVector3& position, int level)
 	CVector4 ambientLight = { 0.2f,0.2f,0.2f,0.6f };
 	m_light.SetAmbientLight(ambientLight);
 	m_skinModel.SetLight(m_light);
-	m_skinModel.SetIsDiffuse(false);
 
 	//ステータスを設定
 	m_status.level = level;
@@ -141,7 +140,7 @@ void CNinja::Update()
 	if (!m_isWireHit) 
 	{
 		//アニメーションの更新
-		m_animation.Update(GameTime().GetDeltaFrameTime() * 2.0f);
+		m_animation.Update(GameTime().GetDeltaFrameTime());
 	}
 
 	if (!m_isDead && !m_isWireHit) 

@@ -3,6 +3,7 @@ cbuffer cb : register(b0)
 	float4x4 mvp;	//ワールドビュープロジェクション行列
 	float4x4 viewProj;
 	float specularPower;
+	float diffuseLightPower;
 };
 
 cbuffer lightCB : register(b1)
@@ -146,6 +147,7 @@ PS_OUTPUT PSMain(VS_OUTPUT In)
 	Out.depthAndSpecular.x = worldPos.z / worldPos.w;
 	Out.depthAndSpecular.y = length(specularTexture.Sample(Sampler, In.uv).xyz);
 	Out.depthAndSpecular.z = specularPower;
+	Out.depthAndSpecular.w = diffuseLightPower;
 	Out.material.xyzw = 0;
 	Out.material.x |= isShadowReceiver;
 	Out.material.x |= isNormalMap;

@@ -90,12 +90,18 @@ void CGameCamera::Update()
 		ChangeTarget();
 		//ロックオンする
 		LockOn(target);
-
 		//プレイヤーの座標を取得
 		CVector3 playerPos = GetPlayer().GetCharacterController().GetPosition();
 		playerPos.y += LOCKON_OFFSET_Y;
 		//座標はプレイヤーの座標にカメラへのベクトルを足す
 		position = playerPos + m_toCameraPos;
+
+		//カメラのロックオン時に遊びを付ける処理
+		//視点から敵へのベクトル
+		CVector3 enemyDirection = target - position;
+		//視点から注視点までのベクトル
+		TargetMargin(m_toTargetDir, m_toTargetDir, enemyDirection, 10);
+		target = position + m_toTargetDir;
 	}
 	else
 	{
@@ -140,25 +146,19 @@ void CGameCamera::Update()
 			target = GetPlayer().GetCharacterController().GetPosition();
 			target.y += TARGET_OFFSET_Y;
 			position = target + m_toCameraPos;
+			
 		}
 
 		m_reticule.SetIsDraw(m_isArrowZoom);
 	}
 
-	////カメラの座標と注視点が近ければ座標と注視点を更新しない
-	//float currentHeight = m_camera.GetPosition().y - target.y;
-	//if (m_cameraVec.y > 0.0f && currentHeight > 0.0f && fabsf(currentHeight) < m_height)
-	//{
-	//	target.y = m_camera.GetTarget().y;
-	//	position.y = target.y + m_cameraVec.y;
-	//}
 
 	//カメラの当たり判定
-	CVector3 newPos;
-	if (m_cameraCollisionSolver.Execute(newPos, position, target))
-	{
-		position = newPos;
-	}
+	//CVector3 newPos;
+	//if (m_cameraCollisionSolver.Execute(newPos, position, target))
+	//{
+	//	position = newPos;
+	//}
 
 	//バネカメラを更新する
 	m_springCamera.SetTarTarget(target);
@@ -174,6 +174,8 @@ void CGameCamera::Update()
 	m_camera.SetTarget(m_shakeCamera.GetShakeTarget());
 	m_camera.SetPosition(m_shakeCamera.GetShakePosition());
 	m_camera.Update();
+
+
 }
 
 void CGameCamera::PostAfterDraw()
@@ -223,11 +225,45 @@ void CGameCamera::Rotation()
 	}
 }
 
+void CGameCamera::TargetMargin(CVector3 & toRotateTargetDirection,
+								const CVector3 & currentTargetDirection,
+								const CVector3 & lockOnTargetDirection,
+								const float range)
+{
+	CVector3 currentTargetDir = currentTargetDirection;
+	CVector3 lockOnTargetDir = lockOnTargetDirection;
+	currentTargetDir.Normalize();
+	lockOnTargetDir.Normalize();
+
+	//内積を取って角度を求める
+	float rad = lockOnTargetDir.Dot(currentTargetDir);
+	rad = acos(rad);
+	rad = CMath::RadToDeg(rad);
+	//範囲を超えていたら範囲内に収まるように注視点へのベクトルを回す
+	if (range < rad)
+	{
+		rad = CMath::DegToRad(rad - range);
+		CVector3 targetAxis;
+		targetAxis.Cross(currentTargetDir, lockOnTargetDir);
+		targetAxis.Normalize();
+		CMatrix multi;
+		multi.MakeRotationAxis(targetAxis, rad);
+		toRotateTargetDirection.Mul(multi);
+	}
+}
+
+
 void CGameCamera::SearchTarget()
 {
 	if (&GetMaw().GetInstance() != nullptr && m_lockOnState != enLockOn_Boss)
 	{
 		m_lockOnState = enLockOn_Boss;
+		CVector3 playerPos = GetPlayer().GetCharacterController().GetPosition();
+		playerPos.y += LOCKON_OFFSET_Y;
+		//座標はプレイヤーの座標にカメラへのベクトルを足す
+		playerPos += m_toCameraPos;
+		m_toTargetDir = GetMaw().GetPosition() - playerPos;
+		
 		m_isLockOn = true;
 		return;
 	}
@@ -238,6 +274,7 @@ void CGameCamera::SearchTarget()
 	{
 		return;
 	}
+	IEnemy* enemy = nullptr;
 	for (CEnemyGroup* enemyGroup : enemyGroupList)
 	{
 		CVector3 enemyGroupPos = enemyGroup->GetPosition();
@@ -260,6 +297,7 @@ void CGameCamera::SearchTarget()
 				CVector3 enemyPos = enemyData.enemy->GetPosition();
 				//エネミーとプレイヤーの距離を求める
 				distance = playerPos - enemyPos;
+
 				length = distance.Length();
 				if (length < minLength)
 				{
@@ -269,9 +307,18 @@ void CGameCamera::SearchTarget()
 					m_lockOnEnemy = enemyData.enemy;
 					m_lockOnEnemyNumber = enemyData.groupNumber;
 					m_lockOnState = enLockOn_Enemy;
+					enemy = enemyData.enemy;
 				}
 			}
 		}
+	}
+	if (enemy != nullptr)
+	{
+		CVector3 playerPos = GetPlayer().GetCharacterController().GetPosition();
+		playerPos.y += LOCKON_OFFSET_Y;
+		//座標はプレイヤーの座標にカメラへのベクトルを足す
+		playerPos += m_toCameraPos;
+		m_toTargetDir = enemy->GetPosition() - playerPos;
 	}
 }
 
@@ -310,6 +357,7 @@ void CGameCamera::ChangeTarget()
 			m_lockOnEnemyNumber = 1;
 		}
 	}
+
 	//左にスティックを倒すとマイナス
 	else if (rStick_x < 0.0f)
 	{
@@ -357,6 +405,16 @@ void CGameCamera::LockOn(CVector3& target)
 		target = m_lockOnEnemy->GetPosition();
 		target.y += 1.5f;
 	}
+	CVector4 screenPos = { target.x, target.y, target.z, 1.0f };
+	screenPos.Mul(m_camera.GetViewMatrix());
+	screenPos.Mul(m_camera.GetProjectionMatrix());
+	screenPos.x /= screenPos.w;
+	screenPos.y /= screenPos.w;
+	screenPos.z /= screenPos.w;
+	CVector2 spritePos;
+	spritePos.x = screenPos.x * FrameBufferWidth() / 2.0f;
+	spritePos.y = screenPos.y * FrameBufferHeight() / 2.0f;
+	m_lockOnSprite.SetPosition(spritePos);
 
 	//ターゲートからカメラへのベクトルを求める
 	CVector3 playerPos = GetPlayer().GetCharacterController().GetPosition();
@@ -364,15 +422,25 @@ void CGameCamera::LockOn(CVector3& target)
 	cameraVec.y = 0.0f;
 	//距離を求める
 	float length = cameraVec.Length();
-	//ターゲットと近いからカメラの高さに補正をかける
-	if (m_lockOnState == enLockOn_Enemy && length < LOCKON_OFFSET_Y)
-	{
-		//高さは距離が近いほど高い
-		cameraVec.y += LOCKON_OFFSET_Y - length;
-	}
+	const float LOCKON_OFFSET_RANGE_MAX = 6.0f;
+	const float LOCKON_OFFSET_RANGE_MIN = 1.0f;
 	//視点はプレイヤーから一定距離後ろにする
 	cameraVec.Normalize();
 	cameraVec *= m_cameraLength;
+	//ターゲットと近いからカメラの高さに補正をかける
+	if (m_lockOnState == enLockOn_Enemy && length < LOCKON_OFFSET_RANGE_MAX)
+	{
+		//高さは距離が近いほど高い
+		length = max(0.0f, length - LOCKON_OFFSET_RANGE_MIN);
+		float rangeLength = LOCKON_OFFSET_RANGE_MAX - LOCKON_OFFSET_RANGE_MIN;
+		cameraVec.y += LOCKON_OFFSET_Y - LOCKON_OFFSET_Y * length / rangeLength;
+	}
+	cameraVec.y += 0.3f;
+	//CVector3 targetAdd = cameraVec - m_toCameraPos;
+	//targetAdd.y = 0.0f;
+	//targetAdd.Normalize();
+	//target += targetAdd * 1.0f;
+
 	m_toCameraPos = cameraVec;
 }
 
@@ -382,3 +450,4 @@ void CGameCamera::LockOnCancel()
 	m_isLockOn = false;
 	m_lockOnState = enLockOn_None;
 }
+

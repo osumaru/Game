@@ -56,7 +56,7 @@ void CPlayerRun::Update()
 	moveSpeed += frontVec * Pad().GetLeftStickY();
 	moveSpeed += rightVec * Pad().GetLeftStickX();
 	moveSpeed.Normalize();
-	moveSpeed.Scale(speed);
+	moveSpeed.Scale(m_moveSpeed);
 
 	m_pPlayerGetter->SetMoveSpeed(moveSpeed);
 	m_pPlayerGetter->GetCharacterController().Execute(GameTime().GetDeltaFrameTime());
