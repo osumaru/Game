@@ -72,7 +72,6 @@ bool CBossScene::Start()
 
 	//フェードインの開始
 	GetSceneManager().GetFade()->FadeIn();
-
 	return true;
 }
 

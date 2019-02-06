@@ -40,16 +40,12 @@ void IShop::ShopUpdate()
 			angle = acos(angle);
 			if (Pad().IsTriggerButton(enButtonA) && fabsf(angle) < CMath::DegToRad(40.0f))
 			{
-				
 				m_shopState = enShopOpen;
 				m_selectShop = enShopBuy;
 				m_isSelectDraw = true;
 				GetPlayer().SetIsActiveUpdate(false);
 				//“X—p‚Ì‰¹Šy‚ð‚©‚¯‚é
-				//GetSceneGame().GetGameSound()->SetIsShop(true);
 				GetSceneManager().GetGameSound()->SetGameSound(CGameSound::enShopBgm);
-				
-				
 			}
 		}
 		break;

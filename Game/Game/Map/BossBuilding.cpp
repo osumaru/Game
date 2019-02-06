@@ -5,12 +5,13 @@
 #include "../UI/Message/Message.h"
 #include "../UI/Message/Choices.h"
 
-void CBossBuilding::Init(CVector3 position)
+void CBossBuilding::Init(CVector3 position,CQuaternion rotation)
 {
 	//ƒ‚ƒfƒ‹‚Ì‰Šú‰»
-	m_skinModel.Load(L"Assets/modelData/CastleDoor2.cmo");
+	m_skinModel.Load(L"Assets/modelData/CastleDoor3.cmo");
 	//À•W‚ğİ’è
 	m_position = position;
+	m_rotation = rotation;
 }
 
 void CBossBuilding::Update()
