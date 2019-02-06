@@ -8,9 +8,7 @@ class CChoices : public IGameObject
 {
 public:
 	//初期化
-	//select1	1つ目の選択肢
-	//select2	2つ目の選択肢
-	void Init(wchar_t* select1, wchar_t* select2);
+	void Init();
 
 	//更新
 	void Update() override;
@@ -37,10 +35,12 @@ public:
 	}
 
 private:
-	EnSelect		m_state = Yes;		//状態
-	CFont			m_yes;				//はい
-	CFont			m_no;				//いいえ
+	EnSelect		m_state = No;		//状態
+	CSprite			m_yes;				//はい
+	CSprite			m_no;				//いいえ
 	CSprite			m_cursor;			//カーソル
 	CSprite			m_window;			//ウィンドウ
+	float			m_timer = 0.0f;		//タイマー
 	bool			m_isSelect = false;	//選択肢を選んだか
+	bool			m_isAlpha = true;	//透明になっているか
 };

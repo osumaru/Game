@@ -12,7 +12,7 @@
 #include "../Item/InventoryItem/InventoryTwinSword.h"
 #include"GameItem/CEquipItem.h"
 
-void CTreasureChest::Init(CVector3 position)
+void CTreasureChest::Init(CVector3 position, bool isMapItem)
 {
 	//モデルの初期化
 	m_skinModel.Load(L"Assets/modelData/Chest.cmo");
@@ -21,28 +21,38 @@ void CTreasureChest::Init(CVector3 position)
 	//キャラクターコントローラーを初期化
 	m_characterController.Init(0.6f, 0.4f, m_position);
 	m_characterController.SetUserIndex(enCollisionAttr_Item);
+	//マップに配置するか
+	m_isMapItem = isMapItem;
 }
 
 bool CTreasureChest::Start()
 {
-	//ポップさせる距離と上方向のスピードを設定
-	float distance = 0.0f;
-	float popUpSpeed = 2.0f;
-	//ランダムにポップさせる
-	RamdomPop(distance, popUpSpeed);
+	if (!m_isMapItem) 
+	{
+		//ポップさせる距離と上方向のスピードを設定
+		float distance = 0.0f;
+		float popUpSpeed = 2.0f;
+		//ランダムにポップさせる
+		RamdomPop(distance, popUpSpeed);
+	}
 
 	return true;
 }
 
 void CTreasureChest::Update()
 {
-	if (GetPlayer().GetIsDied() || m_timer > m_deadTime)
+	if (GetSceneManager().GetSceneChange() || 
+		(!m_isMapItem && m_timer > m_deadTime))
 	{
 		//プレイヤーが死亡した又は一定時間で削除
 		Delete(this);
 		return;
 	}
-	m_timer += GameTime().GetDeltaFrameTime();
+
+	if (!m_isMapItem)
+	{
+		m_timer += GameTime().GetDeltaFrameTime();
+	}
 
 	//移動速度を取得
 	CVector3 moveSpeed = m_characterController.GetMoveSpeed();
