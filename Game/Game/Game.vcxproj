@@ -161,6 +161,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Camera\CameraCollisionSolver.cpp" />
+    <ClCompile Include="Map\MapChip\CSea.cpp" />
     <ClCompile Include="Enemy\Boss\AttackWave.cpp" />
     <ClCompile Include="Enemy\Boss\Maw.cpp" />
     <ClCompile Include="Enemy\EnemyState\EnemyAttackWait.cpp" />
@@ -269,6 +270,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera\CameraCollisionSolver.h" />
+    <ClInclude Include="Map\MapChip\CSea.h" />
     <ClInclude Include="Enemy\Boss\AttackWave.h" />
     <ClInclude Include="Enemy\Boss\Maw.h" />
     <ClInclude Include="Enemy\EnemyState\EnemyAttackWait.h" />
@@ -390,10 +392,14 @@
     <MeshContentTask Include="Assets\modelData\Building4.FBX" />
     <MeshContentTask Include="Assets\modelData\Building5.FBX" />
     <MeshContentTask Include="Assets\modelData\build\Build1.FBX" />
+    <MeshContentTask Include="Assets\modelData\build\CastleDoor3.FBX" />
     <MeshContentTask Include="Assets\modelData\build\Castle_Wall1.FBX" />
     <MeshContentTask Include="Assets\modelData\build\Castle_Wall2.FBX" />
     <MeshContentTask Include="Assets\modelData\build\Castle_Wall3.FBX" />
     <MeshContentTask Include="Assets\modelData\build\Gate.FBX" />
+    <MeshContentTask Include="Assets\modelData\build\Rock2.FBX" />
+    <MeshContentTask Include="Assets\modelData\build\stl.FBX" />
+    <MeshContentTask Include="Assets\modelData\build\tile.FBX" />
     <MeshContentTask Include="Assets\modelData\Castle.FBX" />
     <MeshContentTask Include="Assets\modelData\Castle1.FBX" />
     <MeshContentTask Include="Assets\modelData\Castle2.FBX" />

@@ -63,7 +63,7 @@ bool CBossScene::Start()
 		m_message->SetIsActive(false);
 		//選択肢表示の初期化
 		m_choices = New<CChoices>(PRIORITY_UI);
-		m_choices->Init(L"はい", L"いいえ");
+		m_choices->Init();
 		m_choices->SetIsActive(false);
 
 		m_arrowRemain = New<CArrowRemain>(PRIORITY_UI);
@@ -72,7 +72,6 @@ bool CBossScene::Start()
 
 	//フェードインの開始
 	GetSceneManager().GetFade()->FadeIn();
-
 	return true;
 }
 

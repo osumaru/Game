@@ -17,13 +17,25 @@ void CEquipInventory::Init(CMenu * menu)
 	m_menu = menu;
 	//インベントリの幅と高さを初期化
 	m_width = 5;
-	m_height = 3;
+	m_height = m_equipLimit / m_width;
 	//座標とサイズを初期化
-	m_basePos = { -560.0f, 180.0f };
+	m_basePos = { -550.0f, 200.0f };
 	m_baseSize = { 100.0f, 100.0f };
+	//項目を初期化
+	CTexture* texture = TextureResource().LoadTexture(L"Assets/sprite/Weapon.png");
+	m_headline.Init(texture);
+	m_headline.SetPosition({ -450.0f, 310.0f });
+	m_headline.SetSize({ 300.0f, 75.0f });
 	//インベントリの背景を初期化
-	CTexture* texture = TextureResource().LoadTexture(L"Assets/sprite/MenuUI/Back_Menu.png");
+	texture = TextureResource().LoadTexture(L"Assets/sprite/BackGround.png");
 	m_background.Init(texture);
+	m_background.SetPosition({ 0.0f, 30.0f });
+	m_background.SetSize({ 1250.0f, 650.0f });
+	//インベントリウィンドウを初期化
+	texture = TextureResource().LoadTexture(L"Assets/sprite/InventoryWindow.png");
+	m_inventoryWindow.Init(texture);
+	m_inventoryWindow.SetPosition({ -350.0f, -10.0f });
+	m_inventoryWindow.SetSize({530.0f, 560.0f});
 	//インベントリの枠を初期化
 	texture = TextureResource().LoadTexture(L"Assets/sprite/Frame.png");
 	for (int i = 0; i < m_equipLimit; i++)
@@ -35,49 +47,51 @@ void CEquipInventory::Init(CMenu * menu)
 		position.y -= m_baseSize.y * (i / m_width);
 		m_frame[i].SetPosition(position);
 	}
-	//AボタンとBボタン表示の初期化
-	texture = TextureResource().LoadTexture(L"Assets/sprite/statusWindow.png");
+	//ボタン表示の初期化
+	texture = TextureResource().LoadTexture(L"Assets/sprite/ButtonBackGround.png");
 	m_buttonBackground.Init(texture);
-	m_buttonBackground.SetSize({ 1280.0f, 60.0f });
-	m_buttonBackground.SetPosition({ 0.0f, -330.0f });
-	m_buttonBackground.SetAlpha(0.3f);
+	m_buttonBackground.SetSize({ 1200.0f, 40.0f });
+	m_buttonBackground.SetPosition({ 0.0f, -325.0f });
+	m_buttonBackground.SetAlpha(0.8f);
 	texture = TextureResource().LoadTexture(L"Assets/sprite/ButtonA.png");
 	m_buttonA.Init(texture);
-	m_buttonA.SetSize({ 35.0f,35.0f });
-	m_buttonA.SetPosition({ 200.0f, -330.0f });
+	m_buttonA.SetSize({ 30.0f,30.0f });
+	m_buttonA.SetPosition({ 200.0f, -325.0f });
 	texture = TextureResource().LoadTexture(L"Assets/sprite/ButtonB.png");
 	m_buttonB.Init(texture);
-	m_buttonB.SetSize({ 35.0f,35.0f });
-	m_buttonB.SetPosition({ 325.0f, -330.0f });
+	m_buttonB.SetSize({ 30.0f,30.0f });
+	m_buttonB.SetPosition({ 330.0f, -325.0f });
 	texture = TextureResource().LoadTexture(L"Assets/sprite/ButtonY.png");
 	m_buttonY.Init(texture);
-	m_buttonY.SetSize({ 35.0f,35.0f });
-	m_buttonY.SetPosition({ 450.0f, -330.0f });
-	//ボタンフォントの初期化
-	m_buttonAFont.Init(L"装備する");
-	m_buttonAFont.SetSize({ 0.5f, 0.5f });
-	m_buttonAFont.SetPosition({ 212.5f, -319.0f });
-	m_buttonBFont.Init(L"戻る");
-	m_buttonBFont.SetSize({ 0.5f, 0.5f });
-	m_buttonBFont.SetPosition({ 342.5f, -319.0f });
-	m_buttonYFont.Init(L"捨てる");
-	m_buttonYFont.SetSize({ 0.5f, 0.5f });
-	m_buttonYFont.SetPosition({ 472.5f, -319.0f });
+	m_buttonY.SetSize({ 30.0f,30.0f });
+	m_buttonY.SetPosition({ 460.0f, -325.0f });
+	//ボタン文字の初期化
+	texture = TextureResource().LoadTexture(L"Assets/sprite/Equip.png");
+	m_buttonAMoji.Init(texture);
+	m_buttonAMoji.SetPosition({ 240.0f, -325.0f });
+	m_buttonAMoji.SetSize({ 40.0f,20.0f });
+	texture = TextureResource().LoadTexture(L"Assets/sprite/return.png");
+	m_buttonBMoji.Init(texture);
+	m_buttonBMoji.SetPosition({ 370.0f, -325.0f });
+	m_buttonBMoji.SetSize({ 40.0f,20.0f });
+	texture = TextureResource().LoadTexture(L"Assets/sprite/erase.png");
+	m_buttonYMoji.Init(texture);
+	m_buttonYMoji.SetPosition({ 510.0f, -325.0f });
+	m_buttonYMoji.SetSize({ 60.0f,20.0f });
 	//ステータスウィンドウの背景を初期化
+	texture = TextureResource().LoadTexture(L"Assets/sprite/statusWindow.png");
 	for (int i = 0; i < enFont_StatusNum; i++) 
 	{
-		texture = TextureResource().LoadTexture(L"Assets/sprite/statusWindow.png");
 		m_statusWindow[i].Init(texture);
-		m_statusWindow[i].SetSize({ 320.0f, 450.0f });
-		m_statusWindow[i].SetAlpha(0.3f);
+		m_statusWindow[i].SetSize({ 340.0f, 450.0f });
 	}
-	m_statusWindow[enFont_CurrentStatus].SetPosition({ 70.0f, 80.0f });
-	m_statusWindow[enFont_ChangeStatus].SetPosition({ 470.0f, 80.0f });
+	m_statusWindow[enFont_CurrentStatus].SetPosition({ 100.0f, 30.0f });
+	m_statusWindow[enFont_ChangeStatus].SetPosition({ 440.0f, 30.0f });
 	//右矢印の初期化
 	texture = TextureResource().LoadTexture(L"Assets/sprite/right.png");
 	m_right.Init(texture);
 	m_right.SetSize({ 80.0f, 80.0f });
-	m_right.SetPosition({ 270.0f, 80.0f });
+	m_right.SetPosition({ 270.0f, 30.0f });
 	//カーソルを初期化
 	texture = TextureResource().LoadTexture(L"Assets/sprite/Pointer.png");
 	m_pointer.Init(texture);
@@ -87,19 +101,19 @@ void CEquipInventory::Init(CMenu * menu)
 	texture = TextureResource().LoadTexture(GetPlayer().GetWeaponManager().GetEquipWeapon(enWeaponSword)->GetTextureFilePath());
 	m_equipWeapon[enWeaponSword].Init(texture);
 	m_equipWeapon[enWeaponSword].SetSize({ 65.0f,65.0f });
-	m_equipWeapon[enWeaponSword].SetPosition({ -360.0f, -120.0f });
+	m_equipWeapon[enWeaponSword].SetPosition({ -350.0f, -100.0f });
 	texture = TextureResource().LoadTexture(GetPlayer().GetWeaponManager().GetEquipWeapon(enWeaponLongSword)->GetTextureFilePath());
 	m_equipWeapon[enWeaponLongSword].Init(texture);
 	m_equipWeapon[enWeaponLongSword].SetSize({ 65.0f,65.0f });
-	m_equipWeapon[enWeaponLongSword].SetPosition({ -290.0f, -190.0f });
+	m_equipWeapon[enWeaponLongSword].SetPosition({ -280.0f, -170.0f });
 	texture = TextureResource().LoadTexture(GetPlayer().GetWeaponManager().GetEquipWeapon(enWeaponArrow)->GetTextureFilePath());
 	m_equipWeapon[enWeaponArrow].Init(texture);
 	m_equipWeapon[enWeaponArrow].SetSize({ 65.0f,65.0f });
-	m_equipWeapon[enWeaponArrow].SetPosition({ -360.0f, -260.0f });
+	m_equipWeapon[enWeaponArrow].SetPosition({ -350.0f, -240.0f });
 	texture = TextureResource().LoadTexture(GetPlayer().GetWeaponManager().GetEquipWeapon(enWeaponTwinSword)->GetTextureFilePath());
 	m_equipWeapon[enWeaponTwinSword].Init(texture);
 	m_equipWeapon[enWeaponTwinSword].SetSize({ 65.0f,65.0f });
-	m_equipWeapon[enWeaponTwinSword].SetPosition({ -430.0f, -190.0f });
+	m_equipWeapon[enWeaponTwinSword].SetPosition({ -420.0f, -170.0f });
 	for (int i = 0; i < enWeaponNum; i++)
 	{
 		IInventoryEquip* weapon = GetPlayer().GetWeaponManager().GetEquipWeapon((EnPlayerWeapon)i);
@@ -118,7 +132,7 @@ void CEquipInventory::Init(CMenu * menu)
 	EquipListReset();
 	//ステータス表示を初期化
 	SplayerStatus playerStatus = GetPlayer().GetStatus();
-	CVector2 fontPos = { m_basePos.x + m_baseSize.x * m_width, m_basePos.y };
+	CVector2 fontPos = { m_basePos.x + m_baseSize.x * m_width, m_basePos.y - 70.0f};
 	wchar_t fontMoji[256];
 	wchar_t fontNum[256];
 	for (int j = 0; j < enFont_StatusNum; j++)
@@ -142,7 +156,7 @@ void CEquipInventory::Init(CMenu * menu)
 			}
 			m_statusFont[j][i].Init(fontMoji);
 			m_statusFont[j][i].SetPosition({
-				fontPos.x + (m_right.GetSize().x + m_statusWindow[enFont_CurrentStatus].GetSize().x) * j,
+				fontPos.x + 350.0f * j + 30.0f,
 				fontPos.y - m_baseSize.y * i
 			});
 			CVector2 fontSize = { 0.7f, 0.7f };
@@ -150,7 +164,7 @@ void CEquipInventory::Init(CMenu * menu)
 
 			m_statusFontNum[j][i].Init(fontNum);
 			m_statusFontNum[j][i].SetPosition({
-				fontPos.x + (m_right.GetSize().x + m_statusWindow[enFont_CurrentStatus].GetSize().x) * j + 130.0f,
+				fontPos.x + 350.0f * j + 160.0f,
 				fontPos.y - m_baseSize.y * i
 			});
 			m_statusFontNum[j][i].SetSize(fontSize);
@@ -160,13 +174,13 @@ void CEquipInventory::Init(CMenu * menu)
 	m_equipName[enFont_CurrentStatus].Init(L"");
 	m_equipName[enFont_CurrentStatus].SetSize({ 0.7f,0.7f });
 	m_equipName[enFont_CurrentStatus].SetPosition({ 
-		m_statusWindow[enFont_CurrentStatus].GetPosition().x - 60.0f,
+		m_statusWindow[enFont_CurrentStatus].GetPosition().x - 100.0f,
 		fontPos.y + m_baseSize.y - 30.0f
 	});
 	m_equipName[enFont_ChangeStatus].Init(L"");
 	m_equipName[enFont_ChangeStatus].SetSize({ 0.7f,0.7f });
 	m_equipName[enFont_ChangeStatus].SetPosition({
-		m_statusWindow[enFont_ChangeStatus].GetPosition().x - 60.0f,
+		m_statusWindow[enFont_ChangeStatus].GetPosition().x - 100.0f,
 		fontPos.y + m_baseSize.y - 30.0f
 	});
 
@@ -211,6 +225,8 @@ void CEquipInventory::Update()
 void CEquipInventory::PostAfterDraw()
 {
 	m_background.Draw();
+	m_headline.Draw();
+	m_inventoryWindow.Draw();
 	for (int i = 0; i < m_equipLimit; i++)
 	{
 		m_frame[i].Draw();
@@ -234,6 +250,9 @@ void CEquipInventory::PostAfterDraw()
 	m_buttonA.Draw();
 	m_buttonB.Draw();
 	m_buttonY.Draw();
+	m_buttonAMoji.Draw();
+	m_buttonBMoji.Draw();
+	m_buttonYMoji.Draw();
 	for (int j = 0; j < enFont_StatusNum; j++)
 	{
 		for (int i = 0; i < enStatus_Num; i++)
@@ -243,9 +262,6 @@ void CEquipInventory::PostAfterDraw()
 		}
 		m_equipName[j].Draw();
 	}
-	m_buttonAFont.Draw();
-	m_buttonBFont.Draw();
-	m_buttonYFont.Draw();
 }
 
 void CEquipInventory::EquipListReset()

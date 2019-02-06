@@ -20,6 +20,7 @@ public:
 		return ItemStatus[ItemID - 1];
 	}
 	//ノーマルアイテムのIDの入ったリスト
+	//引数　要素数
 	const int GetNormalEquipItemList(const int num)
 	{
 		if (num >= m_normalEquipItemList.size()) { return 0; }
@@ -31,6 +32,7 @@ public:
 		return m_normalEquipItemList.size();
 	}
 	//レアアイテムのIDの入ったリスト
+	//引数　要素数
 	const int GetRareItemList(const int num)
 	{
 		if (num >= m_rareEquipItemList.size()) { return 0; }
@@ -43,6 +45,7 @@ public:
 	}
 
 	//レア3アイテムのIDの入ったリスト
+	//引数　要素数
 	const int GetLegendEquipItemList(const int num)
 	{
 		if (num >= m_legendEquipItemList.size()) { return 0; }

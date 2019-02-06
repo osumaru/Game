@@ -17,7 +17,7 @@ StaticMapObject::~StaticMapObject()
 
 void StaticMapObject::Init(const CVector3& position, const CQuaternion& rotation, const wchar_t* modelName, const bool istree, const bool collider, CAnimation* anim)
 {
-	MapChip::Init(position, rotation, modelName,istree,collider);
+	MapChip::Init(position, rotation, modelName, istree, collider);
 
 	SRigidBodyInfo rInfo;
 	m_isTree = istree;

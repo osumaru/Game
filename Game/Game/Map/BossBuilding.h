@@ -12,7 +12,7 @@ class CBossBuilding : public IGameObject
 public:
 	//‰Šú‰»
 	//position	À•W
-	void Init(CVector3 position);
+	void Init(CVector3 position, CQuaternion rotation);
 
 	//XV
 	void Update() override;

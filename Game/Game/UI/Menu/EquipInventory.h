@@ -67,7 +67,9 @@ private:
 	static const int m_equipLimit = 15;								//装備所持上限
 	static std::list<std::unique_ptr<IInventoryEquip>>	m_equipList;//装備リスト
 	CMenu*			 m_menu = nullptr;								//メニュー
+	CSprite			 m_headline;									//項目
 	CSprite			 m_background;									//背景
+	CSprite			 m_inventoryWindow;								//インベントリウィンドウ
 	CSprite			 m_statusWindow[enFont_StatusNum];				//ステータスウィンドウ
 	CSprite			 m_right;										//右矢印
 	CSprite			 m_pointer;										//カーソル
@@ -78,12 +80,12 @@ private:
 	CSprite			 m_buttonA;										//Aボタン
 	CSprite			 m_buttonB;										//Bボタン
 	CSprite			 m_buttonY;										//Yボタン
+	CSprite			 m_buttonAMoji;									//Aボタン文字
+	CSprite			 m_buttonBMoji;									//Bボタン文字
+	CSprite			 m_buttonYMoji;									//Yボタン文字
 	CFont			 m_equipName[enFont_StatusNum];					//装備の名前
 	CFont			 m_statusFont[enFont_StatusNum][enStatus_Num];	//現在の装備と装備変更時のステータス文字
 	CFont			 m_statusFontNum[enFont_StatusNum][enStatus_Num];//現在の装備と装備変更時のステータス数値
-	CFont			 m_buttonAFont;									//Aボタンフォント
-	CFont			 m_buttonBFont;									//Bボタンフォント
-	CFont			 m_buttonYFont;									//Yボタンフォント
 	CVector2		 m_basePos = CVector2::Zero;					//初期座標
 	CVector2		 m_baseSize = CVector2::Zero;					//初期サイズ
 	int				 m_width = 0;									//インベントリの幅
