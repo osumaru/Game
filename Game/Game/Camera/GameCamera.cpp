@@ -48,10 +48,12 @@ void CGameCamera::CameraSetPlayer()
 	//注視点を設定する
 	CVector3 target = GetPlayer().GetCharacterController().GetPosition();
 	target.y += TARGET_OFFSET_Y;
+	m_springCamera.SetTarget(target);
 	m_springCamera.SetTarTarget(target);
 	//座標を設定する
 	m_toCameraPos = { 0.0f, 0.0f, -3.5f };
 	CVector3 position = target + m_toCameraPos;
+	m_springCamera.SetPosition(position);
 	m_springCamera.SetTarPosition(position);
 	m_springCamera.Update();
 	//注視点からカメラまでの距離を求める
