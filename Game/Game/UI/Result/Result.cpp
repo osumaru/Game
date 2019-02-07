@@ -32,16 +32,6 @@ void CResult::PostAfterDraw()
 	if (!GetPlayer().GetIsDied()) { return; }
 
 	m_alphaTime += GameTime().GetDeltaFrameTime() / 5.0f;
-	if (m_alphaTime >= 1.0f)
-	{
-		const float GameOverVolume = 0.3f;
-		CSoundSource* GameOverSound = New<CSoundSource>(0);
-		GameOverSound->Init("Assets/sound/SystemSound/GameOver.wav");
-		GameOverSound->Play(false);
-		GameOverSound->SetVolume(GameOverVolume);
-		m_alphaTime = 1.0f;
-		m_isDraw = true;
-	}
 	m_result.SetAlpha(m_alphaTime);
 	m_result.Draw();
 

@@ -98,19 +98,19 @@ void CEquipInventory::Init(CMenu * menu)
 	m_pointer.SetPosition(m_basePos);
 	m_pointer.SetSize(m_baseSize);
 	//‘•”õ•Ší‚ÌƒAƒCƒRƒ“‚ð‰Šú‰»
-	texture = TextureResource().LoadTexture(GetPlayer().GetWeaponManager().GetEquipWeapon(enWeaponSword)->GetTextureFilePath());
+	texture = TextureResource().LoadTexture(L"Assets/sprite/Item/Equip/Sword.png");
 	m_equipWeapon[enWeaponSword].Init(texture);
 	m_equipWeapon[enWeaponSword].SetSize({ 65.0f,65.0f });
 	m_equipWeapon[enWeaponSword].SetPosition({ -350.0f, -100.0f });
-	texture = TextureResource().LoadTexture(GetPlayer().GetWeaponManager().GetEquipWeapon(enWeaponLongSword)->GetTextureFilePath());
+	texture = TextureResource().LoadTexture(L"Assets/sprite/Item/Equip/LargeSword.png");
 	m_equipWeapon[enWeaponLongSword].Init(texture);
 	m_equipWeapon[enWeaponLongSword].SetSize({ 65.0f,65.0f });
 	m_equipWeapon[enWeaponLongSword].SetPosition({ -280.0f, -170.0f });
-	texture = TextureResource().LoadTexture(GetPlayer().GetWeaponManager().GetEquipWeapon(enWeaponArrow)->GetTextureFilePath());
+	texture = TextureResource().LoadTexture(L"Assets/sprite/Item/Equip/Bow.png");
 	m_equipWeapon[enWeaponArrow].Init(texture);
 	m_equipWeapon[enWeaponArrow].SetSize({ 65.0f,65.0f });
 	m_equipWeapon[enWeaponArrow].SetPosition({ -350.0f, -240.0f });
-	texture = TextureResource().LoadTexture(GetPlayer().GetWeaponManager().GetEquipWeapon(enWeaponTwinSword)->GetTextureFilePath());
+	texture = TextureResource().LoadTexture(L"Assets/sprite/Item/Equip/TwinSword.png");
 	m_equipWeapon[enWeaponTwinSword].Init(texture);
 	m_equipWeapon[enWeaponTwinSword].SetSize({ 65.0f,65.0f });
 	m_equipWeapon[enWeaponTwinSword].SetPosition({ -420.0f, -170.0f });

@@ -71,7 +71,7 @@ void CWeaponManager::Init(CPlayer* player)
 				weaponStatus.attack = 20;
 				weaponStatus.weaponNum = EnPlayerWeapon::enWeaponLongSword;
 				itemName = L"ŽK‚Ñ‚½‘åŒ•";
-				textureFileName = L"Assets/sprite/item/Equip/Equip_2.png";
+				textureFileName = L"Assets/sprite/item/Equip/LargeSword.png";
 				break;
 			case enWeaponTwinSword:
 				ptr = std::make_unique<CTwinSword>();
@@ -79,7 +79,7 @@ void CWeaponManager::Init(CPlayer* player)
 				weaponStatus.attack = 5;
 				weaponStatus.weaponNum = EnPlayerWeapon::enWeaponTwinSword;
 				itemName = L"ŽK‚Ñ‚½‘oŒ•";
-				textureFileName = L"Assets/sprite/item/Equip/Equip_2.png";
+				textureFileName = L"Assets/sprite/item/Equip/TwinSword.png";
 				break;
 			case enWeaponArrow:
 				ptr = std::make_unique<CBow>();
@@ -87,7 +87,7 @@ void CWeaponManager::Init(CPlayer* player)
 				weaponStatus.attack = 1;
 				weaponStatus.weaponNum = EnPlayerWeapon::enWeaponArrow;
 				itemName = L"ŽK‚Ñ‚½‹|";
-				textureFileName = L"Assets/sprite/item/Equip/Equip_2.png";
+				textureFileName = L"Assets/sprite/item/Equip/Bow.png";
 				break;
 			case enWeaponSword:
 				ptr = std::make_unique<CSword>();
@@ -95,7 +95,7 @@ void CWeaponManager::Init(CPlayer* player)
 				weaponStatus.attack = 10;
 				weaponStatus.weaponNum = EnPlayerWeapon::enWeaponSword;
 				itemName = L"ŽK‚Ñ‚½Œ•";
-				textureFileName = L"Assets/sprite/item/Equip/Equip_2.png";
+				textureFileName = L"Assets/sprite/item/Equip/Sword.png";
 				break;
 			}
 			m_weapons[i] = std::move(ptr);
