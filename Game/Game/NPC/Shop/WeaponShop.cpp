@@ -38,7 +38,7 @@ void CWeaponShop::Init(const CVector3 position, const CQuaternion rotation)
 	m_animation.SetLoopFlg(0, true);
 	m_skinmodelNpc.Load(L"Assets/modelData/Shopgirl.cmo", &m_animation);
 	m_animation.Play(0);
-	m_skinModel.Load(L"Assets/modelData/roten.cmo",NULL);
+	m_skinModel.Load(L"Assets/modelData/roten3.cmo",NULL);
 	m_skinModel.Update(m_position, m_rotation, m_scale, false);
 	//AABB�̍쐬
 	{
@@ -115,7 +115,28 @@ void CWeaponShop::Init(const CVector3 position, const CQuaternion rotation)
 	SetIsActive(true);
 }
 void CWeaponShop::LineupChange()
-{
+{/*
+	int count[3] = { 0,0,0 };
+	int rand = 0;
+	for (int n = 0;n < 10;n++)
+	{
+		rand = Random().GetRandInt() % 100;
+
+		if (rand > 0 &&rand <= 80)
+		{
+			count[0]++;
+		}
+		else if (rand > 80 && rand <=99)
+		{
+			count[1]++;
+		}
+		else
+		{
+			count[2]++;
+		}
+
+	}*/
+
 	wchar_t filePath[256];
 	CVector2 texturePos = m_shopLineupPosition;
 	CVector2 fontPos = m_fontPosition;
