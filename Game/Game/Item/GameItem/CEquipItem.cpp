@@ -75,7 +75,7 @@ bool CEquipItem::Start()
 			//武器の種類の設定
 			ItemStatus[num].WeaponType = EnPlayerWeapon::enWeaponSword;
 			//インベントリに表示するスプライトの情報
-			swprintf(ItemStatus[num].ItemSprite, L"Assets/sprite/sword.png");
+			swprintf(ItemStatus[num].ItemSprite, L"Assets/sprite/Item/Equip/sword.png");
 			//影響を及ぼすステータス
 			ItemStatus[num].ItemEffectPlayerStatus = EnIemEffectPlayerStatus::Strength;
 			//装備のタイプの設定
@@ -142,7 +142,7 @@ bool CEquipItem::Start()
 			ItemStatus[num].ItemID = num + 1;
 			ItemStatus[num].WeaponType = EnPlayerWeapon::enWeaponLongSword;
 			//インベントリに表示するスプライトの情報
-			swprintf(ItemStatus[num].ItemSprite, L"Assets/sprite/largeSword.png");
+			swprintf(ItemStatus[num].ItemSprite, L"Assets/sprite/Item/Equip/largeSword.png");
 			ItemStatus[num].ItemEffectPlayerStatus = EnIemEffectPlayerStatus::Strength;
 			ItemStatus[num].ItemType = EnInventoryItemType::Equip;
 			
@@ -206,7 +206,7 @@ bool CEquipItem::Start()
 			ItemStatus[num].ItemID = num + 1;
 			ItemStatus[num].WeaponType = EnPlayerWeapon::enWeaponArrow;
 			//インベントリに表示するスプライトの情報
-			swprintf(ItemStatus[num].ItemSprite, L"Assets/sprite/bow.png");
+			swprintf(ItemStatus[num].ItemSprite, L"Assets/sprite/Item/Equip/bow.png");
 			ItemStatus[num].ItemEffectPlayerStatus = EnIemEffectPlayerStatus::Strength;
 			ItemStatus[num].ItemType = EnInventoryItemType::Equip;
 			
@@ -278,7 +278,7 @@ bool CEquipItem::Start()
 			ItemStatus[num].ItemID = num + 1;
 			ItemStatus[num].WeaponType = EnPlayerWeapon::enWeaponTwinSword;
 			//インベントリに表示するスプライトの情報
-			swprintf(ItemStatus[num].ItemSprite, L"Assets/sprite/twinSword.png");
+			swprintf(ItemStatus[num].ItemSprite, L"Assets/sprite/Item/Equip/twinSword.png");
 			ItemStatus[num].ItemEffectPlayerStatus = EnIemEffectPlayerStatus::Strength;
 			ItemStatus[num].ItemType = EnInventoryItemType::Equip;
 			

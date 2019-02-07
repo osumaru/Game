@@ -30,7 +30,7 @@ void CTitleEnemy::Update()
 		return;
 	}
 	//アニメーションの更新
-	m_animation.Update(GameTime().GetDeltaFrameTime());
+	m_animation.Update(GameTime().GetDeltaFrameTime() * 0.6f);
 	//モデルの更新
 	m_skinModel.Update(m_position, m_rotation, { 1.0f,1.0f,1.0f }, true);
 }
