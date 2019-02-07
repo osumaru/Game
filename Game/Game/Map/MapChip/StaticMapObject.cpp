@@ -40,20 +40,14 @@ void StaticMapObject::Init(const CVector3& position, const CQuaternion& rotation
 		mesh.CreateCollider(&m_skinModel);
 		CVector3 boxsize = (mesh.GetAabbMax() - mesh.GetAabbMin()) / 2.0f;
 		CVector3 pos = (mesh.GetAabbMax() + mesh.GetAabbMin()) / 2.0f;
-		//pos.Mul(rotMat);
-		rInfo.pos.y = pos.y + m_position.y;
+		pos.Mul(rotMat);
+		boxsize.x *= 0.1;
+		boxsize.z *= 0.1;
+		rInfo.pos = pos + m_position;
 		m_boxCollider.reset(new CBoxCollider);
-		m_boxCollider->Create({ 1.0f,boxsize.y,1.0f });
+		m_boxCollider->Create({ boxsize.x,boxsize.y,boxsize.z });
 		rInfo.collider = m_boxCollider.get();
 
-		//CNavigationMesh::SObstacleInfo naviInfo;
-		////ナビゲーションメッシュでルートを弾くためのコライダーのAABBを求める
-		//CVector3 aabbMax = mesh.GetAabbMax();
-		//CVector3 aabbMin = mesh.GetAabbMin();
-		//naviInfo.aabbMax = (aabbMax - aabbMin) * 0.5f;
-		//naviInfo.aabbMin = (aabbMin - aabbMax) * 0.5f;
-		//naviInfo.center = m_position;
-		//g_pathFinding.GetNavigationMesh().AddObstacleObject(naviInfo);
 
 	}
 	//メッシュコライダー
@@ -103,10 +97,6 @@ void StaticMapObject::Init(const CVector3& position, const CQuaternion& rotation
 		g_pathFinding.GetNavigationMesh().AddObstacleObject(naviInfo);
 
 	}
-
-
-	
-
 	//剛体を作成
 	m_rigidBody.reset(new CRigidBody);
 	m_rigidBody->Create(rInfo);

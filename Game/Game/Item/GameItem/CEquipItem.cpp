@@ -80,21 +80,7 @@ bool CEquipItem::Start()
 			ItemStatus[num].ItemEffectPlayerStatus = EnIemEffectPlayerStatus::Strength;
 			//装備のタイプの設定
 			ItemStatus[num].ItemType = EnInventoryItemType::Equip;
-			//ノーマルアイテムのIDの入ったリスト作成
-			if (ItemStatus[num].ItemQuality == EnItemQuality::enNormal)
-			{
-				m_normalEquipItemList.push_back(ItemStatus[num].ItemID);
-			}
-			//レアアイテムのIDの入ったリスト作成
-			else if (ItemStatus[num].ItemQuality == EnItemQuality::enRare)
-			{
-				m_rareEquipItemList.push_back(ItemStatus[num].ItemID);
-			}
-			else if (ItemStatus[num].ItemQuality == EnItemQuality::enLegend)
-			{
-				m_legendEquipItemList.push_back(ItemStatus[num].ItemID);
-			}
-			m_equipItemStatusList.push_back(ItemStatus[num]);
+			
 		
 		}
 	}
@@ -159,21 +145,7 @@ bool CEquipItem::Start()
 			swprintf(ItemStatus[num].ItemSprite, L"Assets/sprite/largeSword.png");
 			ItemStatus[num].ItemEffectPlayerStatus = EnIemEffectPlayerStatus::Strength;
 			ItemStatus[num].ItemType = EnInventoryItemType::Equip;
-			//ノーマルアイテムのIDの入ったリスト作成
-			if (ItemStatus[num].ItemQuality == EnItemQuality::enNormal)
-			{
-				m_normalEquipItemList.push_back(ItemStatus[num].ItemID);
-			}
-			//レアアイテムのIDの入ったリスト作成
-			else if (ItemStatus[num].ItemQuality == EnItemQuality::enRare)
-			{
-				m_rareEquipItemList.push_back(ItemStatus[num].ItemID);
-			}
-			else if (ItemStatus[num].ItemQuality == EnItemQuality::enLegend)
-			{
-				m_legendEquipItemList.push_back(ItemStatus[num].ItemID);
-			}
-			m_equipItemStatusList.push_back(ItemStatus[num]);
+			
 		}
 	}
 
@@ -237,21 +209,7 @@ bool CEquipItem::Start()
 			swprintf(ItemStatus[num].ItemSprite, L"Assets/sprite/bow.png");
 			ItemStatus[num].ItemEffectPlayerStatus = EnIemEffectPlayerStatus::Strength;
 			ItemStatus[num].ItemType = EnInventoryItemType::Equip;
-			//ノーマルアイテムのIDの入ったリスト作成
-			if (ItemStatus[num].ItemQuality == EnItemQuality::enNormal)
-			{
-				m_normalEquipItemList.push_back(ItemStatus[num].ItemID);
-			}
-			//レアアイテムのIDの入ったリスト作成
-			else if (ItemStatus[num].ItemQuality == EnItemQuality::enRare)
-			{
-				m_rareEquipItemList.push_back(ItemStatus[num].ItemID);
-			}
-			else if (ItemStatus[num].ItemQuality == EnItemQuality::enLegend)
-			{
-				m_legendEquipItemList.push_back(ItemStatus[num].ItemID);
-			}
-			m_equipItemStatusList.push_back(ItemStatus[num]);
+			
 		}
 	}
 	//弓の初期化
@@ -323,22 +281,33 @@ bool CEquipItem::Start()
 			swprintf(ItemStatus[num].ItemSprite, L"Assets/sprite/twinSword.png");
 			ItemStatus[num].ItemEffectPlayerStatus = EnIemEffectPlayerStatus::Strength;
 			ItemStatus[num].ItemType = EnInventoryItemType::Equip;
-			//ノーマルアイテムのIDの入ったリスト作成
-			if (ItemStatus[num].ItemQuality == EnItemQuality::enNormal)
-			{
-				m_normalEquipItemList.push_back(ItemStatus[num].ItemID);
-			}
-			//レアアイテムのIDの入ったリスト作成
-			else if (ItemStatus[num].ItemQuality == EnItemQuality::enRare)
-			{
-				m_rareEquipItemList.push_back(ItemStatus[num].ItemID);
-			}
-			else if (ItemStatus[num].ItemQuality == EnItemQuality::enLegend)
-			{
-				m_legendEquipItemList.push_back(ItemStatus[num].ItemID);
-			}
-			m_equipItemStatusList.push_back(ItemStatus[num]);
+			
 		}
+	}
+
+	for (int element = 0;element < 40;element++)
+	{
+		//レア度1アイテムのIDの入ったリスト作成
+		if (ItemStatus[element].ItemQuality == EnItemQuality::enNormal)
+		{
+			m_normalEquipItemList.push_back(ItemStatus[element].ItemID);
+		}
+		//レア度2アイテムのIDの入ったリスト作成
+		else if (ItemStatus[element].ItemQuality == EnItemQuality::enRare)
+		{
+			m_rareEquipItemList.push_back(ItemStatus[element].ItemID);
+		}
+		//レア度3アイテムのIDの入ったリスト作成
+		else if (ItemStatus[element].ItemQuality == EnItemQuality::enLegend)
+		{
+			m_legendEquipItemList.push_back(ItemStatus[element].ItemID);
+		}
+		//レア度4アイテムのIDの入ったリスト作成
+		else
+		{
+			m_specialEquipItemList.push_back(ItemStatus[element].ItemID);
+		}
+		m_equipItemStatusList.push_back(ItemStatus[element]);
 	}
 	//データの取得処理
 	/*std::fstream file;

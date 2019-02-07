@@ -20,6 +20,7 @@
 #include "../Enemy/TitleEnemy.h"
 #include "MapChip/CSea.h"
 #include "../Scene/SceneManager.h"
+#include "../Item/TreasureChest.h"
 
 std::vector<std::vector<SMapChipInfo>> mapChipInfo = 
 {
@@ -59,6 +60,7 @@ void Map::Init(int stageNum)
 	{
 		MapChip* mapChip = nullptr;
 		CEnemyGroup* enemyGroup = nullptr;
+		CTreasureChest* treasureChest = nullptr;
 		IEnemy* enemy = nullptr;
 		std::list<IEnemy*>::iterator it;
 		CBossBuilding* bossBuilding = nullptr;
@@ -93,6 +95,11 @@ void Map::Init(int stageNum)
 			enemyGroup = New<CEnemyGroup>(PRIORITY_ENEMY);
 			enemyGroup->Init(mInfo.m_position);
 			m_enemyGroupList.push_back(enemyGroup);
+			break;
+		case enMapTagTreasureBox:
+			treasureChest = New<CTreasureChest>(PRIORITY_ENEMY);
+			treasureChest->Init(mInfo.m_position,mInfo.m_rotation, true,(CTreasureChest::EnDropType)mInfo.m_dropType);
+			m_treasureList.push_back(treasureChest);
 			break;
 		case enMapTagItemShop:
 			m_shopManager->InitShop(mInfo.m_position, mInfo.m_rotation, EShop::enItemShop);
@@ -217,6 +224,12 @@ void Map::BeforeDead()
 		Delete(mapchip);
 	}
 	m_mapChip.clear();
+
+	for (auto* tresureList : m_treasureList)
+	{
+		Delete(tresureList);
+	}
+	m_treasureList.clear();
 
 	//NPC‚ÌÁ‹Ž
 	m_shopManager->DeleteList();
