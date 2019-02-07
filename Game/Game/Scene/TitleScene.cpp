@@ -27,13 +27,13 @@ bool CTitleScene::Start()
 
 	Light().SetAmbientLight({ 0.0f, 0.0f, 0.0f, 0.1f });
 	Sky().SetLight(Light());
-	Light().SetAmbientLight({ 0.0f, 0.0f, 0.0f, 0.0f });
-	const float diffuseLight[DIFFUSE_LIGHT_NUM] = { 0.05f, 0.05f, 0.0f, 0.0f };
+	Light().SetAmbientLight({ 0.0f, 0.0f, 0.0f, 0.02f });
+	const float diffuseLight[DIFFUSE_LIGHT_NUM] = { 0.1f, 0.02f, 0.02f, 0.01f };
 	CVector4 diffuseDir[DIFFUSE_LIGHT_NUM] =
 	{
-		{1.0f, -1.0f, 0.0f, 0.0f},
-		{1.0f, 0.0f, 1.0f, 0.0f},
-		{0.0f, 0.0f, 1.0f, 0.0f},
+		{-1.0f, 0.0f, -1.0f, 0.0f},
+		{-1.0f, -0.0f, 0.0f, 0.0f},
+		{0.2f, 0.0f, -0.5f, 0.0f},
 		{0.0f, -1.0f, 0.0f, 0.0f}
 	};
 	

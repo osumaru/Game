@@ -18,8 +18,8 @@ void CGameCamera::Init()
 	m_camera.SetNear(1.0f);
 	m_camera.SetAspect((float)FrameBufferWidth() / (float)FrameBufferHeight());
 	m_camera.SetAngle(CMath::DegToRad(60.0f));
-	m_camera.SetPosition({ 0.0f, 1.0f, -3.5f });
-	m_camera.SetTarget({ 0.0f, 0.0f, 0.0f });
+	m_camera.SetPosition({ -1.0f, 2.0f, 5.5f });
+	m_camera.SetTarget({ -1.0f, 1.0f, 0.0f });
 	m_camera.SetUp({ 0.0f, 1.0f, 0.0f });
 	m_camera.Update();
 	//Add(this, 0);
