@@ -270,6 +270,7 @@ public:
 		m_isDead = isDead;
 	}
 
+	//エネミーの種類を取得
 	EnEnemyType GetEnemyType()
 	{
 		return m_type;

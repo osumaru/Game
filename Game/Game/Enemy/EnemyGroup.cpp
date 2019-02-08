@@ -38,6 +38,7 @@ void CEnemyGroup::Update()
 	}
 	m_groupNum = groupNum;
 
+	//グループ全員がいなくなったらリスポーン
 	if (m_enemyGroupList.empty() && !GetSceneManager().GetSceneChange())
 	{
 		m_timer += GameTime().GetDeltaFrameTime();

@@ -766,7 +766,7 @@
       <Filter>ソース ファイル\Map\MapChip</Filter>
     </ClInclude>
     <ClInclude Include="Enemy\RespawnData.h">
-      <Filter>ソース ファイル\Enemy\EnemyState</Filter>
+      <Filter>ソース ファイル\Enemy</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

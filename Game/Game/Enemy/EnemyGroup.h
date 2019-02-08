@@ -10,8 +10,8 @@ class IEnemy;
 
 struct SEnemyGroupData
 {
-	IEnemy* enemy;
-	int groupNumber;
+	IEnemy* enemy;		//エネミー
+	int groupNumber;	//グループ内の番号
 };
 
 class CEnemyGroup : public IGameObject
@@ -56,18 +56,10 @@ public:
 	}
 
 private:
-
-	struct SRespawnData
-	{
-		CVector3 initPosition;	//初期座標
-		EnEnemyType enemyType;	//エネミーの種類
-		int level;
-	};
-
 	std::list<SEnemyGroupData>	m_enemyGroupList ;	//グループのリスト
 	std::list<SRespawnData>		m_respawnDataList;	//初期座標のリスト(リスポーン時に使用する)
 	CVector3					m_position;			//座標
 	int							m_groupNum = 0;		//グループ内のエネミー数
-	float						m_timer = 0.0f;
-	const float					RESPAWN_TIME = 3.0f;
+	float						m_timer = 0.0f;		//タイマー
+	const float					RESPAWN_TIME = 3.0f;//リスポーンする時間
 };
