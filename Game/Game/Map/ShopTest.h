@@ -5,14 +5,16 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagTerrain, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Player
 {
 	L"Player",
-	CVector3(-522.83f, 228.00f, -56.18f),             //平行移動
-	CQuaternion(0.00f, 0.10f, 0.00f, 1.00f ),  //回転
+	CVector3(-519.86f, 210.58f, -75.65f),             //平行移動
+	CQuaternion(0.00f, 0.30f, 0.00f, 0.95f ),  //回転
 	enMapTagPlayer, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Gate
 {
@@ -21,6 +23,7 @@
 	CQuaternion(0.00f, 0.33f, 0.00f, 0.95f ),  //回転
 	enMapTagMesh, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Sea
 {
@@ -29,6 +32,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagSea, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Castle_Wall1
 {
@@ -37,6 +41,7 @@
 	CQuaternion(0.00f, 0.17f, 0.00f, 0.99f ),  //回転
 	enMapTagUntagged, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Castle_Wall1
 {
@@ -45,6 +50,7 @@
 	CQuaternion(0.00f, 0.40f, 0.00f, 0.92f ),  //回転
 	enMapTagUntagged, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Castle_Wall2
 {
@@ -53,6 +59,7 @@
 	CQuaternion(0.00f, 0.10f, 0.00f, 1.00f ),  //回転
 	enMapTagUntagged, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Castle_Wall2
 {
@@ -61,6 +68,7 @@
 	CQuaternion(0.00f, 0.44f, 0.00f, 0.90f ),  //回転
 	enMapTagUntagged, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Castle_Wall1
 {
@@ -69,6 +77,7 @@
 	CQuaternion(0.00f, 0.78f, 0.00f, 0.63f ),  //回転
 	enMapTagUntagged, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Castle_Wall1
 {
@@ -77,6 +86,7 @@
 	CQuaternion(0.00f, 0.78f, 0.00f, 0.63f ),  //回転
 	enMapTagUntagged, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Castle_Wall1
 {
@@ -85,6 +95,7 @@
 	CQuaternion(0.00f, 0.97f, 0.00f, 0.25f ),  //回転
 	enMapTagUntagged, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Castle_Wall1
 {
@@ -93,6 +104,7 @@
 	CQuaternion(0.00f, 0.97f, 0.00f, 0.25f ),  //回転
 	enMapTagUntagged, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Castle_Wall2
 {
@@ -101,6 +113,7 @@
 	CQuaternion(0.00f, 0.18f, 0.00f, 0.98f ),  //回転
 	enMapTagUntagged, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Castle_Wall2
 {
@@ -109,38 +122,34 @@
 	CQuaternion(0.00f, 0.25f, 0.00f, 0.97f ),  //回転
 	enMapTagUntagged, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
 	L"Tree3",
-	CVector3(-435.65f, 211.17f, 5.09f),             //平行移動
-	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
+	CVector3(-435.00f, 211.17f, 4.93f),             //平行移動
+	CQuaternion(0.00f, -0.60f, 0.00f, 0.80f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
 	L"Tree3",
-	CVector3(-450.60f, 214.80f, 24.20f),             //平行移動
-	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
+	CVector3(-450.61f, 214.80f, 24.89f),             //平行移動
+	CQuaternion(0.00f, 0.62f, 0.00f, 0.78f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
 	L"Tree3",
-	CVector3(-472.10f, 207.34f, 25.47f),             //平行移動
-	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
+	CVector3(-430.71f, 214.70f, 33.68f),             //平行移動
+	CQuaternion(0.00f, 0.45f, 0.00f, 0.90f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
-},
-//Tree3
-{
-	L"Tree3",
-	CVector3(-430.60f, 214.70f, 33.20f),             //平行移動
-	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
-	enMapTagTree, //タグ
-	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Stone2
 {
@@ -149,6 +158,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagUntagged, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Stone2
 {
@@ -157,6 +167,7 @@
 	CQuaternion(0.00f, -0.29f, 0.00f, 0.96f ),  //回転
 	enMapTagUntagged, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Stone2
 {
@@ -165,6 +176,7 @@
 	CQuaternion(0.00f, -0.29f, 0.00f, 0.96f ),  //回転
 	enMapTagUntagged, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Stone2
 {
@@ -173,6 +185,7 @@
 	CQuaternion(0.00f, -0.01f, 0.00f, 1.00f ),  //回転
 	enMapTagUntagged, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree2
 {
@@ -181,6 +194,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -189,6 +203,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -197,6 +212,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -205,14 +221,16 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree2
 {
 	L"Tree2",
-	CVector3(-445.90f, 253.00f, 139.40f),             //平行移動
-	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
+	CVector3(-445.33f, 253.00f, 139.06f),             //平行移動
+	CQuaternion(0.00f, -0.32f, 0.00f, 0.95f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree2
 {
@@ -221,6 +239,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree2
 {
@@ -229,6 +248,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -237,6 +257,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -245,6 +266,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -253,6 +275,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -261,6 +284,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree2
 {
@@ -269,6 +293,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree2
 {
@@ -277,6 +302,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -285,14 +311,16 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
 	L"Tree3",
-	CVector3(-495.40f, 250.10f, 144.70f),             //平行移動
-	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
+	CVector3(-495.47f, 250.10f, 145.30f),             //平行移動
+	CQuaternion(0.00f, 0.54f, 0.00f, 0.84f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -301,6 +329,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree2
 {
@@ -309,6 +338,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree2
 {
@@ -317,6 +347,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -325,6 +356,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -333,6 +365,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -341,6 +374,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree2
 {
@@ -349,6 +383,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree2
 {
@@ -357,6 +392,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree2
 {
@@ -365,6 +401,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree2
 {
@@ -373,6 +410,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree2
 {
@@ -381,6 +419,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -389,6 +428,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -397,6 +437,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree2
 {
@@ -405,6 +446,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -413,6 +455,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree2
 {
@@ -421,6 +464,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree2
 {
@@ -429,6 +473,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree2
 {
@@ -437,6 +482,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree2
 {
@@ -445,6 +491,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -453,6 +500,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -461,6 +509,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Toge
 {
@@ -469,6 +518,7 @@
 	CQuaternion(0.00f, -0.64f, 0.00f, 0.77f ),  //回転
 	enMapTagUntagged, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Toge
 {
@@ -477,6 +527,7 @@
 	CQuaternion(0.00f, -0.81f, 0.00f, -0.59f ),  //回転
 	enMapTagUntagged, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Toge
 {
@@ -485,6 +536,7 @@
 	CQuaternion(0.00f, -0.81f, 0.00f, -0.59f ),  //回転
 	enMapTagUntagged, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Toge
 {
@@ -493,6 +545,7 @@
 	CQuaternion(0.00f, -0.14f, 0.00f, 0.99f ),  //回転
 	enMapTagUntagged, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Toge
 {
@@ -501,6 +554,7 @@
 	CQuaternion(0.00f, -0.99f, 0.00f, -0.11f ),  //回転
 	enMapTagUntagged, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Toge
 {
@@ -509,6 +563,7 @@
 	CQuaternion(0.00f, -0.35f, 0.00f, 0.94f ),  //回転
 	enMapTagUntagged, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Toge
 {
@@ -517,6 +572,7 @@
 	CQuaternion(0.00f, -0.85f, 0.00f, -0.53f ),  //回転
 	enMapTagUntagged, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Toge
 {
@@ -525,6 +581,7 @@
 	CQuaternion(0.00f, -0.99f, 0.00f, -0.12f ),  //回転
 	enMapTagUntagged, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Toge
 {
@@ -533,6 +590,7 @@
 	CQuaternion(0.04f, -0.45f, -0.02f, -0.89f ),  //回転
 	enMapTagUntagged, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Toge
 {
@@ -541,30 +599,16 @@
 	CQuaternion(0.09f, -0.45f, -0.05f, -0.89f ),  //回転
 	enMapTagUntagged, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //roten
 {
 	L"roten",
-	CVector3(-475.61f, 210.17f, -45.87f),             //平行移動
-	CQuaternion(0.00f, -0.40f, 0.00f, 0.92f ),  //回転
+	CVector3(-509.77f, 210.16f, -85.34f),             //平行移動
+	CQuaternion(0.00f, 0.21f, 0.00f, 0.98f ),  //回転
 	enMapTagWeaponShop, //タグ
 	0, //エネミーのレベル
-},
-//roten
-{
-	L"roten",
-	CVector3(-479.78f, 210.17f, -50.34f),             //平行移動
-	CQuaternion(0.00f, -0.40f, 0.00f, 0.92f ),  //回転
-	enMapTagWeaponShop, //タグ
-	0, //エネミーのレベル
-},
-//roten
-{
-	L"roten",
-	CVector3(-483.97f, 210.17f, -54.82f),             //平行移動
-	CQuaternion(0.00f, -0.40f, 0.00f, 0.92f ),  //回転
-	enMapTagWeaponShop, //タグ
-	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -573,6 +617,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -581,6 +626,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree2
 {
@@ -589,6 +635,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree2
 {
@@ -597,6 +644,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree2
 {
@@ -605,6 +653,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree2
 {
@@ -613,6 +662,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -621,6 +671,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree2
 {
@@ -629,6 +680,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree2
 {
@@ -637,6 +689,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -645,6 +698,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -653,6 +707,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -661,6 +716,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -669,6 +725,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -677,6 +734,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -685,6 +743,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -693,6 +752,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Castle_Wall1
 {
@@ -701,6 +761,7 @@
 	CQuaternion(0.00f, 0.00f, 0.05f, 1.00f ),  //回転
 	enMapTagUntagged, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Castle_Wall1
 {
@@ -709,6 +770,7 @@
 	CQuaternion(0.00f, -0.06f, 0.00f, 1.00f ),  //回転
 	enMapTagUntagged, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Castle_Wall1
 {
@@ -717,6 +779,7 @@
 	CQuaternion(0.00f, -0.15f, 0.00f, 0.99f ),  //回転
 	enMapTagUntagged, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Castle_Wall1
 {
@@ -725,6 +788,7 @@
 	CQuaternion(0.00f, -0.25f, 0.00f, 0.97f ),  //回転
 	enMapTagUntagged, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Castle_Wall1
 {
@@ -733,6 +797,7 @@
 	CQuaternion(-0.01f, -0.25f, 0.03f, 0.97f ),  //回転
 	enMapTagUntagged, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Castle_Wall1
 {
@@ -741,6 +806,7 @@
 	CQuaternion(-0.04f, -0.34f, 0.14f, 0.93f ),  //回転
 	enMapTagUntagged, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Castle_Wall1
 {
@@ -749,6 +815,7 @@
 	CQuaternion(-0.02f, -0.34f, 0.07f, 0.94f ),  //回転
 	enMapTagUntagged, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Castle_Wall1
 {
@@ -757,6 +824,7 @@
 	CQuaternion(-0.02f, -0.26f, 0.07f, 0.96f ),  //回転
 	enMapTagUntagged, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Castle_Wall1
 {
@@ -765,6 +833,7 @@
 	CQuaternion(-0.02f, -0.26f, 0.04f, 0.97f ),  //回転
 	enMapTagUntagged, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Gate
 {
@@ -773,6 +842,7 @@
 	CQuaternion(0.00f, 1.00f, 0.00f, 0.00f ),  //回転
 	enMapTagMesh, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Castle_Wall1
 {
@@ -781,6 +851,7 @@
 	CQuaternion(0.00f, -0.05f, 0.14f, 0.99f ),  //回転
 	enMapTagUntagged, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Castle_Wall1
 {
@@ -789,6 +860,7 @@
 	CQuaternion(0.00f, -0.05f, 0.14f, 0.99f ),  //回転
 	enMapTagUntagged, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Castle_Wall2
 {
@@ -797,6 +869,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagUntagged, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Castle_Wall1
 {
@@ -805,6 +878,7 @@
 	CQuaternion(0.03f, 0.41f, 0.04f, 0.91f ),  //回転
 	enMapTagUntagged, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Castle_Wall1
 {
@@ -813,6 +887,7 @@
 	CQuaternion(0.08f, 0.41f, 0.15f, 0.90f ),  //回転
 	enMapTagUntagged, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Castle_Wall1
 {
@@ -821,6 +896,7 @@
 	CQuaternion(0.03f, 0.41f, 0.02f, 0.91f ),  //回転
 	enMapTagUntagged, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Castle_Wall1
 {
@@ -829,6 +905,7 @@
 	CQuaternion(-0.01f, 0.37f, -0.07f, 0.93f ),  //回転
 	enMapTagUntagged, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Castle_Wall1
 {
@@ -837,6 +914,7 @@
 	CQuaternion(-0.02f, 0.20f, -0.07f, 0.98f ),  //回転
 	enMapTagUntagged, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Castle_Wall1
 {
@@ -845,6 +923,7 @@
 	CQuaternion(-0.04f, 0.01f, -0.03f, 1.00f ),  //回転
 	enMapTagUntagged, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Castle_Wall2
 {
@@ -853,6 +932,7 @@
 	CQuaternion(0.00f, 0.64f, 0.00f, 0.77f ),  //回転
 	enMapTagUntagged, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Castle_Wall2
 {
@@ -861,6 +941,7 @@
 	CQuaternion(0.00f, 0.64f, 0.00f, 0.77f ),  //回転
 	enMapTagUntagged, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Castle_Wall3
 {
@@ -869,6 +950,7 @@
 	CQuaternion(0.00f, 0.16f, 0.00f, 0.99f ),  //回転
 	enMapTagUntagged, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Castle_Wall2
 {
@@ -877,6 +959,7 @@
 	CQuaternion(0.00f, -0.23f, 0.02f, 0.97f ),  //回転
 	enMapTagUntagged, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Castle_Wall2
 {
@@ -885,6 +968,7 @@
 	CQuaternion(0.39f, 0.50f, -0.45f, -0.63f ),  //回転
 	enMapTagUntagged, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Toge
 {
@@ -893,6 +977,7 @@
 	CQuaternion(0.11f, 0.00f, 0.00f, 0.99f ),  //回転
 	enMapTagUntagged, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Toge
 {
@@ -901,6 +986,7 @@
 	CQuaternion(0.11f, 0.00f, 0.00f, 0.99f ),  //回転
 	enMapTagUntagged, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Toge
 {
@@ -909,6 +995,7 @@
 	CQuaternion(0.11f, 0.07f, 0.01f, 0.99f ),  //回転
 	enMapTagUntagged, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Toge
 {
@@ -917,6 +1004,7 @@
 	CQuaternion(0.11f, 0.18f, 0.02f, 0.98f ),  //回転
 	enMapTagUntagged, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Toge
 {
@@ -925,6 +1013,7 @@
 	CQuaternion(0.04f, -0.42f, -0.09f, 0.90f ),  //回転
 	enMapTagUntagged, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Toge
 {
@@ -933,6 +1022,7 @@
 	CQuaternion(-0.05f, -0.60f, -0.11f, 0.79f ),  //回転
 	enMapTagUntagged, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Castle_Wall2
 {
@@ -941,6 +1031,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagUntagged, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Castle_Wall1
 {
@@ -949,6 +1040,7 @@
 	CQuaternion(0.04f, 0.71f, -0.01f, 0.70f ),  //回転
 	enMapTagUntagged, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Castle_Wall1
 {
@@ -957,6 +1049,7 @@
 	CQuaternion(0.04f, 0.71f, -0.01f, 0.70f ),  //回転
 	enMapTagUntagged, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Castle_Wall1
 {
@@ -965,6 +1058,7 @@
 	CQuaternion(0.04f, 0.48f, -0.02f, 0.87f ),  //回転
 	enMapTagUntagged, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Castle_Wall1
 {
@@ -973,6 +1067,7 @@
 	CQuaternion(0.04f, 0.48f, -0.02f, 0.87f ),  //回転
 	enMapTagUntagged, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Castle_Wall3
 {
@@ -981,6 +1076,7 @@
 	CQuaternion(0.00f, 0.62f, 0.00f, 0.78f ),  //回転
 	enMapTagUntagged, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Castle_Wall3
 {
@@ -989,6 +1085,7 @@
 	CQuaternion(0.00f, 0.69f, 0.00f, 0.72f ),  //回転
 	enMapTagUntagged, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Castle_Wall1
 {
@@ -997,6 +1094,7 @@
 	CQuaternion(0.00f, 0.71f, 0.00f, 0.71f ),  //回転
 	enMapTagUntagged, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Castle_Wall1
 {
@@ -1005,6 +1103,7 @@
 	CQuaternion(0.00f, 0.71f, 0.00f, 0.71f ),  //回転
 	enMapTagUntagged, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Stone4
 {
@@ -1013,6 +1112,7 @@
 	CQuaternion(0.00f, 0.28f, 0.00f, 0.96f ),  //回転
 	enMapTagMesh, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Stone5
 {
@@ -1021,6 +1121,7 @@
 	CQuaternion(-0.57f, -0.47f, -0.64f, -0.21f ),  //回転
 	enMapTagMesh, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Stone4
 {
@@ -1029,6 +1130,7 @@
 	CQuaternion(0.52f, -0.30f, 0.48f, 0.64f ),  //回転
 	enMapTagMesh, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Stone5
 {
@@ -1037,6 +1139,7 @@
 	CQuaternion(-0.85f, -0.22f, -0.11f, -0.47f ),  //回転
 	enMapTagMesh, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Stone1
 {
@@ -1045,6 +1148,7 @@
 	CQuaternion(0.15f, 0.58f, -0.20f, 0.78f ),  //回転
 	enMapTagMesh, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Stone3
 {
@@ -1053,6 +1157,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagMesh, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Stone1
 {
@@ -1061,6 +1166,7 @@
 	CQuaternion(0.24f, 0.00f, 0.00f, 0.97f ),  //回転
 	enMapTagMesh, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Stone4
 {
@@ -1069,6 +1175,7 @@
 	CQuaternion(-0.06f, 0.38f, -0.92f, 0.03f ),  //回転
 	enMapTagMesh, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Stone4
 {
@@ -1077,6 +1184,7 @@
 	CQuaternion(-0.40f, -0.53f, 0.75f, -0.08f ),  //回転
 	enMapTagMesh, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Stone5
 {
@@ -1085,6 +1193,7 @@
 	CQuaternion(0.81f, -0.31f, -0.46f, 0.21f ),  //回転
 	enMapTagMesh, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Stone4
 {
@@ -1093,6 +1202,7 @@
 	CQuaternion(0.13f, -0.29f, 0.48f, 0.82f ),  //回転
 	enMapTagMesh, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Stone5
 {
@@ -1101,6 +1211,7 @@
 	CQuaternion(0.31f, -0.37f, -0.87f, -0.04f ),  //回転
 	enMapTagMesh, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Stone1
 {
@@ -1109,6 +1220,7 @@
 	CQuaternion(-0.37f, -0.41f, 0.69f, 0.46f ),  //回転
 	enMapTagMesh, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Stone3
 {
@@ -1117,6 +1229,7 @@
 	CQuaternion(-0.04f, -0.61f, 0.78f, -0.07f ),  //回転
 	enMapTagMesh, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Stone1
 {
@@ -1125,6 +1238,7 @@
 	CQuaternion(-0.37f, -0.41f, 0.69f, 0.46f ),  //回転
 	enMapTagMesh, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Stone4
 {
@@ -1133,6 +1247,7 @@
 	CQuaternion(0.27f, -0.12f, 0.04f, 0.95f ),  //回転
 	enMapTagMesh, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Stone5
 {
@@ -1141,6 +1256,7 @@
 	CQuaternion(0.74f, 0.07f, 0.56f, 0.37f ),  //回転
 	enMapTagMesh, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Stone1
 {
@@ -1149,6 +1265,7 @@
 	CQuaternion(-0.55f, -0.01f, 0.81f, -0.19f ),  //回転
 	enMapTagMesh, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Castle_Wall1
 {
@@ -1157,6 +1274,7 @@
 	CQuaternion(0.00f, 0.71f, 0.00f, 0.71f ),  //回転
 	enMapTagUntagged, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Stone5
 {
@@ -1165,6 +1283,7 @@
 	CQuaternion(0.92f, 0.02f, 0.33f, 0.22f ),  //回転
 	enMapTagMesh, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Stone5
 {
@@ -1173,6 +1292,7 @@
 	CQuaternion(0.78f, -0.01f, -0.48f, 0.40f ),  //回転
 	enMapTagMesh, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Stone1
 {
@@ -1181,6 +1301,7 @@
 	CQuaternion(-0.46f, 0.31f, 0.56f, -0.62f ),  //回転
 	enMapTagMesh, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Stone4
 {
@@ -1189,6 +1310,7 @@
 	CQuaternion(0.06f, -0.58f, 0.55f, 0.59f ),  //回転
 	enMapTagMesh, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Stone4
 {
@@ -1197,6 +1319,7 @@
 	CQuaternion(0.13f, -0.29f, 0.48f, 0.82f ),  //回転
 	enMapTagMesh, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Stone4
 {
@@ -1205,6 +1328,7 @@
 	CQuaternion(-0.03f, -0.32f, 0.82f, 0.47f ),  //回転
 	enMapTagMesh, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Stone4
 {
@@ -1213,6 +1337,7 @@
 	CQuaternion(0.03f, -0.38f, 0.71f, 0.60f ),  //回転
 	enMapTagMesh, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Stone5
 {
@@ -1221,6 +1346,7 @@
 	CQuaternion(0.98f, -0.11f, 0.00f, 0.16f ),  //回転
 	enMapTagMesh, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Stone4
 {
@@ -1229,6 +1355,7 @@
 	CQuaternion(0.11f, 0.36f, -0.29f, 0.88f ),  //回転
 	enMapTagMesh, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Stone5
 {
@@ -1237,6 +1364,7 @@
 	CQuaternion(0.91f, -0.28f, -0.20f, 0.21f ),  //回転
 	enMapTagMesh, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Stone4
 {
@@ -1245,6 +1373,7 @@
 	CQuaternion(0.11f, 0.36f, -0.29f, 0.88f ),  //回転
 	enMapTagMesh, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Stone5
 {
@@ -1253,6 +1382,7 @@
 	CQuaternion(0.91f, -0.28f, -0.20f, 0.21f ),  //回転
 	enMapTagMesh, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Stone5
 {
@@ -1261,6 +1391,7 @@
 	CQuaternion(0.34f, -0.71f, -0.61f, -0.06f ),  //回転
 	enMapTagMesh, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Stone4
 {
@@ -1269,6 +1400,7 @@
 	CQuaternion(0.05f, 0.02f, -0.65f, 0.76f ),  //回転
 	enMapTagMesh, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Stone4
 {
@@ -1277,6 +1409,7 @@
 	CQuaternion(0.29f, 0.00f, -0.56f, 0.78f ),  //回転
 	enMapTagMesh, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Stone5
 {
@@ -1285,6 +1418,7 @@
 	CQuaternion(0.05f, -0.68f, -0.68f, -0.27f ),  //回転
 	enMapTagMesh, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Stone4
 {
@@ -1293,6 +1427,7 @@
 	CQuaternion(0.45f, 0.51f, -0.64f, -0.37f ),  //回転
 	enMapTagMesh, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Stone5
 {
@@ -1301,6 +1436,7 @@
 	CQuaternion(-0.17f, -0.55f, -0.75f, -0.31f ),  //回転
 	enMapTagMesh, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Stone5
 {
@@ -1309,6 +1445,7 @@
 	CQuaternion(-0.17f, -0.55f, -0.75f, -0.31f ),  //回転
 	enMapTagMesh, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Stone4
 {
@@ -1317,6 +1454,7 @@
 	CQuaternion(-0.25f, -0.13f, 0.75f, -0.60f ),  //回転
 	enMapTagMesh, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Stone5
 {
@@ -1325,6 +1463,7 @@
 	CQuaternion(0.24f, 0.65f, 0.66f, 0.29f ),  //回転
 	enMapTagMesh, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Stone4
 {
@@ -1333,6 +1472,7 @@
 	CQuaternion(-0.39f, -0.39f, 0.56f, 0.62f ),  //回転
 	enMapTagMesh, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Stone5
 {
@@ -1341,6 +1481,7 @@
 	CQuaternion(0.45f, 0.47f, 0.67f, 0.35f ),  //回転
 	enMapTagMesh, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Stone4
 {
@@ -1349,6 +1490,7 @@
 	CQuaternion(-0.39f, -0.39f, 0.56f, 0.62f ),  //回転
 	enMapTagMesh, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Stone5
 {
@@ -1357,6 +1499,7 @@
 	CQuaternion(0.45f, 0.47f, 0.67f, 0.35f ),  //回転
 	enMapTagMesh, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Stone5
 {
@@ -1365,6 +1508,7 @@
 	CQuaternion(0.97f, -0.18f, -0.11f, 0.13f ),  //回転
 	enMapTagMesh, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Stone4
 {
@@ -1373,6 +1517,7 @@
 	CQuaternion(0.15f, 0.44f, -0.36f, 0.81f ),  //回転
 	enMapTagMesh, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Stone5
 {
@@ -1381,6 +1526,7 @@
 	CQuaternion(0.87f, -0.33f, -0.31f, 0.18f ),  //回転
 	enMapTagMesh, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Stone5
 {
@@ -1389,6 +1535,7 @@
 	CQuaternion(0.87f, -0.33f, -0.31f, 0.18f ),  //回転
 	enMapTagMesh, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Stone5
 {
@@ -1397,6 +1544,7 @@
 	CQuaternion(-0.75f, 0.42f, 0.47f, -0.18f ),  //回転
 	enMapTagMesh, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //zombi
 {
@@ -1405,6 +1553,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagEnemyGroup, //タグ
 	5, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //zombi
 {
@@ -1413,6 +1562,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagZombie, //タグ
 	5, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //zombi
 {
@@ -1421,6 +1571,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagZombie, //タグ
 	5, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //zombi
 {
@@ -1429,6 +1580,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagZombie, //タグ
 	5, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //zombi
 {
@@ -1437,6 +1589,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagZombie, //タグ
 	5, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //zombi
 {
@@ -1445,6 +1598,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagZombie, //タグ
 	5, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Castle_Wall1
 {
@@ -1453,6 +1607,7 @@
 	CQuaternion(0.00f, 0.71f, 0.00f, 0.71f ),  //回転
 	enMapTagUntagged, //タグ
 	5, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //zombi
 {
@@ -1461,6 +1616,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagEnemyGroup, //タグ
 	5, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Castle_Wall1
 {
@@ -1469,6 +1625,7 @@
 	CQuaternion(0.00f, 0.71f, 0.00f, 0.71f ),  //回転
 	enMapTagUntagged, //タグ
 	5, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //zombi
 {
@@ -1477,6 +1634,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagZombie, //タグ
 	5, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //zombi
 {
@@ -1485,6 +1643,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagZombie, //タグ
 	5, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //zombi
 {
@@ -1493,6 +1652,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagZombie, //タグ
 	5, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //zombi
 {
@@ -1501,6 +1661,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagZombie, //タグ
 	5, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Gate
 {
@@ -1509,6 +1670,7 @@
 	CQuaternion(0.00f, 0.74f, 0.00f, 0.68f ),  //回転
 	enMapTagMesh, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Gate
 {
@@ -1517,6 +1679,7 @@
 	CQuaternion(0.00f, -0.71f, 0.00f, 0.71f ),  //回転
 	enMapTagMesh, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Castle_Wall1
 {
@@ -1525,6 +1688,7 @@
 	CQuaternion(0.00f, 0.79f, 0.00f, 0.62f ),  //回転
 	enMapTagUntagged, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Castle_Wall2
 {
@@ -1533,6 +1697,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagUntagged, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Castle_Wall2
 {
@@ -1541,6 +1706,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagUntagged, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Castle_Wall3
 {
@@ -1549,6 +1715,7 @@
 	CQuaternion(0.00f, 0.69f, 0.00f, 0.72f ),  //回転
 	enMapTagUntagged, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Castle_Wall3
 {
@@ -1557,6 +1724,7 @@
 	CQuaternion(0.00f, 0.69f, 0.00f, 0.72f ),  //回転
 	enMapTagUntagged, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Castle_Wall3
 {
@@ -1565,6 +1733,7 @@
 	CQuaternion(0.00f, 0.69f, 0.00f, 0.72f ),  //回転
 	enMapTagUntagged, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Castle_Wall3
 {
@@ -1573,6 +1742,7 @@
 	CQuaternion(0.00f, 0.99f, 0.00f, 0.17f ),  //回転
 	enMapTagUntagged, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Gate
 {
@@ -1581,6 +1751,7 @@
 	CQuaternion(0.00f, 0.09f, 0.00f, 1.00f ),  //回転
 	enMapTagMesh, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Castle_Wall2
 {
@@ -1589,6 +1760,7 @@
 	CQuaternion(0.00f, 0.81f, 0.00f, 0.59f ),  //回転
 	enMapTagUntagged, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Castle_Wall2
 {
@@ -1597,6 +1769,7 @@
 	CQuaternion(0.00f, 0.81f, 0.00f, 0.59f ),  //回転
 	enMapTagUntagged, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Castle_Wall1
 {
@@ -1605,6 +1778,7 @@
 	CQuaternion(0.00f, 0.10f, 0.00f, 0.99f ),  //回転
 	enMapTagUntagged, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Castle_Wall1
 {
@@ -1613,6 +1787,7 @@
 	CQuaternion(0.00f, 0.10f, 0.00f, 0.99f ),  //回転
 	enMapTagUntagged, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Castle_Wall1
 {
@@ -1621,6 +1796,7 @@
 	CQuaternion(0.00f, 0.10f, 0.00f, 0.99f ),  //回転
 	enMapTagUntagged, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Castle_Wall1
 {
@@ -1629,6 +1805,7 @@
 	CQuaternion(0.00f, 0.10f, 0.00f, 0.99f ),  //回転
 	enMapTagUntagged, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Castle_Wall1
 {
@@ -1637,6 +1814,7 @@
 	CQuaternion(0.00f, 0.77f, 0.00f, 0.63f ),  //回転
 	enMapTagUntagged, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Castle_Wall1
 {
@@ -1645,6 +1823,7 @@
 	CQuaternion(0.00f, 0.77f, 0.00f, 0.63f ),  //回転
 	enMapTagUntagged, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Castle_Wall1
 {
@@ -1653,6 +1832,7 @@
 	CQuaternion(0.00f, 0.77f, 0.00f, 0.63f ),  //回転
 	enMapTagUntagged, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Castle_Wall1
 {
@@ -1661,6 +1841,7 @@
 	CQuaternion(0.00f, 0.77f, 0.00f, 0.63f ),  //回転
 	enMapTagUntagged, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Castle_Wall1
 {
@@ -1669,6 +1850,7 @@
 	CQuaternion(0.00f, 0.77f, 0.00f, 0.63f ),  //回転
 	enMapTagUntagged, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Castle_Wall1
 {
@@ -1677,6 +1859,7 @@
 	CQuaternion(0.00f, 0.77f, 0.00f, 0.63f ),  //回転
 	enMapTagUntagged, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Castle_Wall1
 {
@@ -1685,6 +1868,7 @@
 	CQuaternion(0.00f, 0.77f, 0.00f, 0.63f ),  //回転
 	enMapTagUntagged, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Castle_Wall1
 {
@@ -1693,6 +1877,7 @@
 	CQuaternion(0.00f, 0.99f, 0.00f, -0.12f ),  //回転
 	enMapTagUntagged, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Castle_Wall1
 {
@@ -1701,6 +1886,7 @@
 	CQuaternion(0.00f, 0.77f, 0.00f, 0.63f ),  //回転
 	enMapTagUntagged, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Castle_Wall1
 {
@@ -1709,6 +1895,7 @@
 	CQuaternion(0.00f, 0.99f, 0.00f, -0.12f ),  //回転
 	enMapTagUntagged, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Castle_Wall1
 {
@@ -1717,6 +1904,7 @@
 	CQuaternion(0.00f, 0.99f, 0.00f, -0.12f ),  //回転
 	enMapTagUntagged, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Castle_Wall1
 {
@@ -1725,6 +1913,7 @@
 	CQuaternion(0.00f, 0.99f, 0.00f, -0.12f ),  //回転
 	enMapTagUntagged, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Castle_Wall1
 {
@@ -1733,6 +1922,7 @@
 	CQuaternion(-0.01f, 0.98f, 0.00f, -0.21f ),  //回転
 	enMapTagUntagged, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Castle_Wall1
 {
@@ -1741,6 +1931,7 @@
 	CQuaternion(0.00f, 0.99f, 0.00f, -0.12f ),  //回転
 	enMapTagUntagged, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //zombi
 {
@@ -1749,6 +1940,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagEnemyGroup, //タグ
 	2, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //zombi
 {
@@ -1757,6 +1949,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagZombie, //タグ
 	2, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //zombi
 {
@@ -1765,6 +1958,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagZombie, //タグ
 	2, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //zombi
 {
@@ -1773,6 +1967,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagZombie, //タグ
 	2, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //zombi
 {
@@ -1781,6 +1976,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagZombie, //タグ
 	2, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //zombi
 {
@@ -1789,6 +1985,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagZombie, //タグ
 	2, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //zombi
 {
@@ -1797,6 +1994,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagZombie, //タグ
 	3, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //zombi
 {
@@ -1805,6 +2003,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagZombie, //タグ
 	3, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //zombi
 {
@@ -1813,6 +2012,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagZombie, //タグ
 	3, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //zombi
 {
@@ -1821,6 +2021,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagEnemyGroup, //タグ
 	3, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //zombi
 {
@@ -1829,6 +2030,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagZombie, //タグ
 	3, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //zombi
 {
@@ -1837,6 +2039,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagZombie, //タグ
 	3, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //zombi
 {
@@ -1845,6 +2048,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagZombie, //タグ
 	5, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //zombi
 {
@@ -1853,6 +2057,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagZombie, //タグ
 	5, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //zombi
 {
@@ -1861,6 +2066,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagZombie, //タグ
 	5, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //zombi
 {
@@ -1869,6 +2075,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagZombie, //タグ
 	5, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //zombi
 {
@@ -1877,6 +2084,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagEnemyGroup, //タグ
 	5, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //zombi
 {
@@ -1885,6 +2093,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagZombie, //タグ
 	5, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //zombi
 {
@@ -1893,6 +2102,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagZombie, //タグ
 	5, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Warrok
 {
@@ -1901,6 +2111,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagWarrok, //タグ
 	25, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Warrok
 {
@@ -1909,6 +2120,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagEnemyGroup, //タグ
 	25, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Warrok
 {
@@ -1917,6 +2129,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagWarrok, //タグ
 	25, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Warrok
 {
@@ -1925,6 +2138,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagWarrok, //タグ
 	25, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Warrok
 {
@@ -1933,6 +2147,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagWarrok, //タグ
 	25, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Warrok
 {
@@ -1941,6 +2156,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagWarrok, //タグ
 	25, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Warrok
 {
@@ -1949,6 +2165,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagWarrok, //タグ
 	25, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Warrok
 {
@@ -1957,6 +2174,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagEnemyGroup, //タグ
 	25, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Warrok
 {
@@ -1965,6 +2183,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagWarrok, //タグ
 	25, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Warrok
 {
@@ -1973,6 +2192,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagWarrok, //タグ
 	25, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Warrok
 {
@@ -1981,6 +2201,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagWarrok, //タグ
 	25, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Warrok
 {
@@ -1989,6 +2210,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagWarrok, //タグ
 	25, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Warrok
 {
@@ -1997,6 +2219,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagEnemyGroup, //タグ
 	25, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Warrok
 {
@@ -2005,6 +2228,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagWarrok, //タグ
 	25, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Warrok
 {
@@ -2013,6 +2237,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagWarrok, //タグ
 	25, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Warrok
 {
@@ -2021,6 +2246,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagWarrok, //タグ
 	25, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Warrok
 {
@@ -2029,6 +2255,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagWarrok, //タグ
 	25, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Warrok
 {
@@ -2037,6 +2264,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagWarrok, //タグ
 	25, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Warrok
 {
@@ -2045,6 +2273,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagWarrok, //タグ
 	25, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Warrok
 {
@@ -2053,6 +2282,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagEnemyGroup, //タグ
 	25, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Warrok
 {
@@ -2061,6 +2291,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagWarrok, //タグ
 	25, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Warrok
 {
@@ -2069,6 +2300,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagWarrok, //タグ
 	25, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Warrok
 {
@@ -2077,6 +2309,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagWarrok, //タグ
 	25, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Warrok
 {
@@ -2085,6 +2318,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagWarrok, //タグ
 	25, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //ninja
 {
@@ -2093,6 +2327,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagEnemyGroup, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //ninja
 {
@@ -2101,6 +2336,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagNinja, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //ninja
 {
@@ -2109,6 +2345,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagNinja, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //ninja
 {
@@ -2117,6 +2354,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagNinja, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //ninja
 {
@@ -2125,6 +2363,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagNinja, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //ninja
 {
@@ -2133,6 +2372,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagNinja, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //ninja
 {
@@ -2141,6 +2381,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagNinja, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //ninja
 {
@@ -2149,6 +2390,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagNinja, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //ninja
 {
@@ -2157,6 +2399,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagNinja, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //ninja
 {
@@ -2165,6 +2408,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagNinja, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //ninja
 {
@@ -2173,6 +2417,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagEnemyGroup, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //ninja
 {
@@ -2181,6 +2426,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagNinja, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //ninja
 {
@@ -2189,6 +2435,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagNinja, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //ninja
 {
@@ -2197,6 +2444,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagNinja, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //ninja
 {
@@ -2205,6 +2453,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagNinja, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //ninja
 {
@@ -2213,6 +2462,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagNinja, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //ninja
 {
@@ -2221,6 +2471,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagNinja, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //ninja
 {
@@ -2229,6 +2480,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagNinja, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //ninja
 {
@@ -2237,6 +2489,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagNinja, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //ninja
 {
@@ -2245,6 +2498,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagEnemyGroup, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //ninja
 {
@@ -2253,6 +2507,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagNinja, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //samurai
 {
@@ -2261,6 +2516,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagEnemyGroup, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //samurai
 {
@@ -2269,6 +2525,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagSamurai, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //samurai
 {
@@ -2277,6 +2534,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagSamurai, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //samurai
 {
@@ -2285,6 +2543,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagSamurai, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //samurai
 {
@@ -2293,6 +2552,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagSamurai, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //samurai
 {
@@ -2301,6 +2561,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagSamurai, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //samurai
 {
@@ -2309,6 +2570,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagSamurai, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //samurai
 {
@@ -2317,6 +2579,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagSamurai, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //samurai
 {
@@ -2325,6 +2588,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagSamurai, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //samurai
 {
@@ -2333,6 +2597,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagSamurai, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //samurai
 {
@@ -2341,6 +2606,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagSamurai, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //samurai
 {
@@ -2349,6 +2615,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagSamurai, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //samurai
 {
@@ -2357,6 +2624,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagSamurai, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //samurai
 {
@@ -2365,6 +2633,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagEnemyGroup, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //samurai
 {
@@ -2373,6 +2642,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagSamurai, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //samurai
 {
@@ -2381,6 +2651,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagSamurai, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //samurai
 {
@@ -2389,6 +2660,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagEnemyGroup, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //samurai
 {
@@ -2397,6 +2669,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagSamurai, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //samurai
 {
@@ -2405,6 +2678,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagSamurai, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //samurai
 {
@@ -2413,6 +2687,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagSamurai, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //samurai
 {
@@ -2421,6 +2696,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagSamurai, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //samurai
 {
@@ -2429,6 +2705,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagSamurai, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //samurai
 {
@@ -2437,6 +2714,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagSamurai, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //samurai
 {
@@ -2445,6 +2723,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagSamurai, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //samurai
 {
@@ -2453,6 +2732,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagSamurai, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //samurai
 {
@@ -2461,6 +2741,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagSamurai, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //samurai
 {
@@ -2469,6 +2750,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagSamurai, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //samurai
 {
@@ -2477,6 +2759,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagEnemyGroup, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //zombi
 {
@@ -2485,6 +2768,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagZombie, //タグ
 	6, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //zombi
 {
@@ -2493,6 +2777,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagZombie, //タグ
 	6, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //zombi
 {
@@ -2501,6 +2786,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagZombie, //タグ
 	6, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //zombi
 {
@@ -2509,6 +2795,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagEnemyGroup, //タグ
 	6, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //zombi
 {
@@ -2517,6 +2804,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagZombie, //タグ
 	6, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //zombi
 {
@@ -2525,6 +2813,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagZombie, //タグ
 	6, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //zombi
 {
@@ -2533,6 +2822,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagZombie, //タグ
 	8, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //zombi
 {
@@ -2541,6 +2831,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagZombie, //タグ
 	8, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //zombi
 {
@@ -2549,6 +2840,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagZombie, //タグ
 	8, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //zombi
 {
@@ -2557,6 +2849,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagZombie, //タグ
 	8, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //zombi
 {
@@ -2565,6 +2858,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagEnemyGroup, //タグ
 	8, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //zombi
 {
@@ -2573,6 +2867,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagZombie, //タグ
 	8, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //zombi
 {
@@ -2581,6 +2876,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagZombie, //タグ
 	8, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //zombi
 {
@@ -2589,6 +2885,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagZombie, //タグ
 	8, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //zombi
 {
@@ -2597,6 +2894,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagZombie, //タグ
 	8, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //zombi
 {
@@ -2605,6 +2903,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagEnemyGroup, //タグ
 	8, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //zombi
 {
@@ -2613,6 +2912,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagZombie, //タグ
 	8, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //zombi
 {
@@ -2621,6 +2921,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagZombie, //タグ
 	8, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //zombi
 {
@@ -2629,6 +2930,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagEnemyGroup, //タグ
 	9, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //zombi
 {
@@ -2637,6 +2939,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagZombie, //タグ
 	9, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //zombi
 {
@@ -2645,6 +2948,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagZombie, //タグ
 	9, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //zombi
 {
@@ -2653,6 +2957,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagZombie, //タグ
 	9, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //zombi
 {
@@ -2661,6 +2966,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagZombie, //タグ
 	9, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //zombi
 {
@@ -2669,6 +2975,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagZombie, //タグ
 	9, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //zombi
 {
@@ -2677,6 +2984,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagZombie, //タグ
 	12, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //zombi
 {
@@ -2685,6 +2993,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagZombie, //タグ
 	12, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //zombi
 {
@@ -2693,6 +3002,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagZombie, //タグ
 	12, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //zombi
 {
@@ -2701,6 +3011,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagEnemyGroup, //タグ
 	12, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //zombi
 {
@@ -2709,6 +3020,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagZombie, //タグ
 	12, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //zombi
 {
@@ -2717,6 +3029,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagZombie, //タグ
 	12, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //zombi
 {
@@ -2725,6 +3038,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagZombie, //タグ
 	12, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //zombi
 {
@@ -2733,6 +3047,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagEnemyGroup, //タグ
 	12, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //zombi
 {
@@ -2741,6 +3056,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagZombie, //タグ
 	12, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //zombi
 {
@@ -2749,6 +3065,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagZombie, //タグ
 	12, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //zombi
 {
@@ -2757,6 +3074,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagZombie, //タグ
 	12, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //zombi
 {
@@ -2765,6 +3083,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagZombie, //タグ
 	12, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //zombi
 {
@@ -2773,6 +3092,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagZombie, //タグ
 	12, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //zombi
 {
@@ -2781,6 +3101,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagZombie, //タグ
 	12, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //zombi
 {
@@ -2789,6 +3110,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagZombie, //タグ
 	12, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //zombi
 {
@@ -2797,6 +3119,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagZombie, //タグ
 	12, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //zombi
 {
@@ -2805,6 +3128,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagZombie, //タグ
 	12, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //zombi
 {
@@ -2813,6 +3137,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagEnemyGroup, //タグ
 	12, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Castle_Wall2
 {
@@ -2821,6 +3146,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagUntagged, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Castle_Wall2
 {
@@ -2829,6 +3155,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagUntagged, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Castle_Wall2
 {
@@ -2837,6 +3164,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagUntagged, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Castle_Wall2
 {
@@ -2845,6 +3173,7 @@
 	CQuaternion(0.00f, 0.27f, 0.00f, 0.96f ),  //回転
 	enMapTagUntagged, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Stone4
 {
@@ -2853,6 +3182,7 @@
 	CQuaternion(0.75f, 0.30f, 0.47f, 0.37f ),  //回転
 	enMapTagMesh, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //samurai
 {
@@ -2861,6 +3191,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagEnemyGroup, //タグ
 	17, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //samurai
 {
@@ -2869,6 +3200,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagSamurai, //タグ
 	17, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //samurai
 {
@@ -2877,6 +3209,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagSamurai, //タグ
 	17, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //samurai
 {
@@ -2885,6 +3218,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagSamurai, //タグ
 	17, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //samurai
 {
@@ -2893,6 +3227,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagSamurai, //タグ
 	17, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //samurai
 {
@@ -2901,6 +3236,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagSamurai, //タグ
 	17, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //samurai
 {
@@ -2909,6 +3245,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagSamurai, //タグ
 	17, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -2917,6 +3254,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -2925,6 +3263,7 @@
 	CQuaternion(0.00f, -0.49f, 0.00f, 0.87f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree2
 {
@@ -2933,6 +3272,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -2941,6 +3281,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -2949,6 +3290,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree2
 {
@@ -2957,6 +3299,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -2965,6 +3308,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -2973,6 +3317,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -2981,6 +3326,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree2
 {
@@ -2989,6 +3335,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -2997,6 +3344,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -3005,6 +3353,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -3013,6 +3362,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree2
 {
@@ -3021,6 +3371,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree2
 {
@@ -3029,6 +3380,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -3037,6 +3389,7 @@
 	CQuaternion(0.00f, -0.64f, 0.00f, 0.77f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -3045,6 +3398,7 @@
 	CQuaternion(0.00f, -0.64f, 0.00f, 0.77f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -3053,6 +3407,7 @@
 	CQuaternion(0.13f, -0.59f, 0.07f, 0.80f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -3061,6 +3416,7 @@
 	CQuaternion(0.13f, -0.59f, 0.07f, 0.80f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -3069,6 +3425,7 @@
 	CQuaternion(0.13f, -0.59f, 0.07f, 0.80f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -3077,6 +3434,7 @@
 	CQuaternion(0.13f, -0.59f, 0.07f, 0.80f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -3085,6 +3443,7 @@
 	CQuaternion(0.13f, -0.59f, 0.07f, 0.80f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -3093,6 +3452,7 @@
 	CQuaternion(0.13f, -0.59f, 0.07f, 0.80f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree2
 {
@@ -3101,6 +3461,7 @@
 	CQuaternion(0.02f, 0.07f, 0.20f, 0.98f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree2
 {
@@ -3109,6 +3470,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree2
 {
@@ -3117,6 +3479,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree2
 {
@@ -3125,6 +3488,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -3133,6 +3497,7 @@
 	CQuaternion(0.00f, 0.51f, 0.00f, 0.86f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -3141,6 +3506,7 @@
 	CQuaternion(0.00f, 0.51f, 0.00f, 0.86f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -3149,6 +3515,7 @@
 	CQuaternion(0.00f, 0.75f, 0.00f, 0.66f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -3157,6 +3524,7 @@
 	CQuaternion(0.00f, 0.51f, 0.00f, 0.86f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -3165,6 +3533,7 @@
 	CQuaternion(0.00f, 0.51f, 0.00f, 0.86f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -3173,6 +3542,7 @@
 	CQuaternion(0.00f, 0.51f, 0.00f, 0.86f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -3181,6 +3551,7 @@
 	CQuaternion(0.00f, 0.78f, 0.00f, 0.62f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -3189,6 +3560,7 @@
 	CQuaternion(0.00f, 0.81f, 0.00f, 0.59f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -3197,6 +3569,7 @@
 	CQuaternion(0.00f, 0.30f, 0.00f, 0.95f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -3205,6 +3578,7 @@
 	CQuaternion(0.00f, 0.97f, 0.00f, -0.23f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -3213,6 +3587,7 @@
 	CQuaternion(0.00f, 0.51f, 0.00f, 0.86f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -3221,6 +3596,7 @@
 	CQuaternion(0.00f, 0.51f, 0.00f, 0.86f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -3229,6 +3605,7 @@
 	CQuaternion(0.00f, 0.75f, 0.00f, 0.66f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -3237,6 +3614,7 @@
 	CQuaternion(0.00f, 0.45f, 0.00f, 0.89f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -3245,6 +3623,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -3253,6 +3632,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -3261,6 +3641,7 @@
 	CQuaternion(0.00f, 0.67f, 0.00f, 0.75f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -3269,6 +3650,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -3277,6 +3659,7 @@
 	CQuaternion(0.00f, 0.00f, 0.13f, 0.99f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -3285,6 +3668,7 @@
 	CQuaternion(0.00f, 0.00f, 0.13f, 0.99f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -3293,6 +3677,7 @@
 	CQuaternion(0.00f, 0.00f, 0.13f, 0.99f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -3301,6 +3686,7 @@
 	CQuaternion(0.00f, 0.59f, 0.00f, 0.81f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -3309,6 +3695,7 @@
 	CQuaternion(-0.11f, 0.58f, 0.08f, 0.80f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -3317,6 +3704,7 @@
 	CQuaternion(-0.11f, 0.58f, 0.08f, 0.80f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -3325,6 +3713,7 @@
 	CQuaternion(-0.16f, 0.01f, 0.06f, 0.99f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -3333,6 +3722,7 @@
 	CQuaternion(0.00f, 0.45f, 0.00f, 0.89f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree2
 {
@@ -3341,6 +3731,7 @@
 	CQuaternion(0.00f, 0.00f, 0.06f, 1.00f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree2
 {
@@ -3349,6 +3740,7 @@
 	CQuaternion(0.00f, 0.00f, 0.06f, 1.00f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree2
 {
@@ -3357,6 +3749,7 @@
 	CQuaternion(0.00f, 0.00f, 0.06f, 1.00f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -3365,6 +3758,7 @@
 	CQuaternion(-0.14f, 0.00f, 0.00f, 0.99f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -3373,6 +3767,7 @@
 	CQuaternion(-0.14f, 0.00f, 0.00f, 0.99f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -3381,6 +3776,7 @@
 	CQuaternion(-0.14f, 0.00f, 0.00f, 0.99f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -3389,6 +3785,7 @@
 	CQuaternion(-0.17f, 0.74f, -0.17f, 0.63f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -3397,6 +3794,7 @@
 	CQuaternion(-0.16f, 0.01f, 0.06f, 0.99f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -3405,6 +3803,7 @@
 	CQuaternion(-0.16f, 0.01f, 0.06f, 0.99f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -3413,6 +3812,7 @@
 	CQuaternion(-0.14f, 0.00f, 0.00f, 0.99f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -3421,6 +3821,7 @@
 	CQuaternion(-0.14f, 0.00f, 0.00f, 0.99f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -3429,6 +3830,7 @@
 	CQuaternion(-0.10f, -0.68f, 0.09f, 0.72f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -3437,6 +3839,7 @@
 	CQuaternion(-0.10f, -0.68f, 0.09f, 0.72f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -3445,6 +3848,7 @@
 	CQuaternion(-0.01f, 0.45f, -0.01f, 0.89f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -3453,6 +3857,7 @@
 	CQuaternion(-0.01f, 0.45f, -0.01f, 0.89f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -3461,6 +3866,7 @@
 	CQuaternion(-0.01f, 0.45f, -0.01f, 0.89f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -3469,6 +3875,7 @@
 	CQuaternion(-0.01f, 0.45f, -0.01f, 0.89f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -3477,6 +3884,7 @@
 	CQuaternion(0.00f, 0.00f, -0.05f, 1.00f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -3485,6 +3893,7 @@
 	CQuaternion(0.03f, 0.54f, -0.04f, 0.84f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -3493,6 +3902,7 @@
 	CQuaternion(0.03f, 0.58f, -0.04f, 0.81f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -3501,6 +3911,7 @@
 	CQuaternion(0.00f, 0.59f, -0.02f, 0.81f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -3509,6 +3920,7 @@
 	CQuaternion(0.00f, 0.59f, -0.02f, 0.81f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -3517,6 +3929,7 @@
 	CQuaternion(-0.02f, -0.53f, 0.00f, 0.85f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -3525,6 +3938,7 @@
 	CQuaternion(-0.02f, -0.53f, 0.00f, 0.85f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -3533,6 +3947,7 @@
 	CQuaternion(-0.02f, -0.53f, 0.00f, 0.85f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -3541,6 +3956,7 @@
 	CQuaternion(-0.02f, -0.53f, 0.00f, 0.85f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -3549,6 +3965,7 @@
 	CQuaternion(-0.02f, -0.53f, 0.00f, 0.85f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -3557,6 +3974,7 @@
 	CQuaternion(-0.02f, -0.53f, 0.00f, 0.85f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -3565,6 +3983,7 @@
 	CQuaternion(-0.02f, -0.53f, 0.00f, 0.85f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree2
 {
@@ -3573,6 +3992,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree2
 {
@@ -3581,6 +4001,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -3589,6 +4010,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -3597,6 +4019,7 @@
 	CQuaternion(0.13f, -0.59f, 0.07f, 0.80f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree2
 {
@@ -3605,6 +4028,7 @@
 	CQuaternion(0.00f, 0.00f, 0.06f, 1.00f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //CastleDoor3
 {
@@ -3613,6 +4037,7 @@
 	CQuaternion(0.00f, 0.31f, 0.00f, 0.95f ),  //回転
 	enMapTagBossObj, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Brock
 {
@@ -3621,6 +4046,7 @@
 	CQuaternion(0.00f, 0.32f, 0.00f, 0.95f ),  //回転
 	enMapTagUntagged, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Brock
 {
@@ -3629,6 +4055,7 @@
 	CQuaternion(0.00f, 0.32f, 0.00f, 0.95f ),  //回転
 	enMapTagUntagged, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Brock
 {
@@ -3637,6 +4064,7 @@
 	CQuaternion(0.00f, 0.32f, 0.00f, 0.95f ),  //回転
 	enMapTagUntagged, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Brock
 {
@@ -3645,6 +4073,7 @@
 	CQuaternion(0.00f, 0.32f, 0.00f, 0.95f ),  //回転
 	enMapTagUntagged, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Brock
 {
@@ -3653,14 +4082,16 @@
 	CQuaternion(0.00f, 0.32f, 0.00f, 0.95f ),  //回転
 	enMapTagUntagged, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Gate
 {
 	L"Gate",
 	CVector3(-32.63f, 319.60f, 654.55f),             //平行移動
 	CQuaternion(0.00f, -0.94f, 0.00f, 0.33f ),  //回転
-	enMapTagTerrain, //タグ
+	enMapTagUntagged, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Castle_Wall1
 {
@@ -3669,6 +4100,7 @@
 	CQuaternion(0.00f, -0.94f, 0.00f, 0.33f ),  //回転
 	enMapTagUntagged, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Castle_Wall2
 {
@@ -3677,6 +4109,7 @@
 	CQuaternion(0.00f, -0.94f, 0.00f, 0.33f ),  //回転
 	enMapTagUntagged, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Castle_Wall1
 {
@@ -3685,6 +4118,7 @@
 	CQuaternion(0.00f, -0.94f, 0.00f, 0.33f ),  //回転
 	enMapTagUntagged, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Castle_Wall2
 {
@@ -3693,6 +4127,7 @@
 	CQuaternion(0.00f, -0.94f, 0.00f, 0.33f ),  //回転
 	enMapTagUntagged, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Castle_Wall1
 {
@@ -3701,6 +4136,7 @@
 	CQuaternion(0.00f, -0.43f, 0.00f, 0.90f ),  //回転
 	enMapTagUntagged, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Castle_Wall1
 {
@@ -3709,6 +4145,7 @@
 	CQuaternion(0.00f, -0.43f, 0.00f, 0.90f ),  //回転
 	enMapTagUntagged, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Castle_Wall1
 {
@@ -3717,6 +4154,7 @@
 	CQuaternion(0.00f, -0.43f, 0.00f, 0.90f ),  //回転
 	enMapTagUntagged, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Castle_Wall1
 {
@@ -3725,6 +4163,7 @@
 	CQuaternion(0.00f, -0.43f, 0.00f, 0.90f ),  //回転
 	enMapTagUntagged, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Castle_Wall2
 {
@@ -3733,6 +4172,7 @@
 	CQuaternion(0.00f, -0.94f, 0.00f, 0.33f ),  //回転
 	enMapTagUntagged, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Castle_Wall2
 {
@@ -3741,6 +4181,7 @@
 	CQuaternion(0.00f, -0.94f, 0.00f, 0.33f ),  //回転
 	enMapTagUntagged, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Castle_Wall1
 {
@@ -3749,6 +4190,7 @@
 	CQuaternion(0.00f, -0.94f, 0.00f, 0.33f ),  //回転
 	enMapTagUntagged, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Castle_Wall1
 {
@@ -3757,6 +4199,7 @@
 	CQuaternion(0.00f, -0.94f, 0.00f, 0.33f ),  //回転
 	enMapTagUntagged, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Castle_Wall1
 {
@@ -3765,6 +4208,7 @@
 	CQuaternion(0.00f, -0.94f, 0.00f, 0.33f ),  //回転
 	enMapTagUntagged, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -3773,6 +4217,7 @@
 	CQuaternion(-0.01f, -0.68f, -0.01f, 0.73f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -3781,6 +4226,7 @@
 	CQuaternion(-0.01f, -0.68f, -0.01f, 0.73f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -3789,6 +4235,7 @@
 	CQuaternion(-0.01f, -0.68f, -0.01f, 0.73f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -3797,6 +4244,7 @@
 	CQuaternion(-0.01f, -0.68f, -0.01f, 0.73f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -3805,6 +4253,7 @@
 	CQuaternion(-0.01f, -0.68f, -0.01f, 0.73f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -3813,6 +4262,7 @@
 	CQuaternion(-0.01f, -0.68f, -0.01f, 0.73f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -3821,6 +4271,7 @@
 	CQuaternion(-0.01f, -0.91f, 0.00f, 0.41f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -3829,6 +4280,7 @@
 	CQuaternion(-0.01f, -0.68f, -0.01f, 0.73f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -3837,6 +4289,7 @@
 	CQuaternion(-0.01f, -0.88f, 0.00f, 0.47f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -3845,6 +4298,7 @@
 	CQuaternion(-0.01f, -0.68f, -0.01f, 0.73f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -3853,6 +4307,7 @@
 	CQuaternion(-0.01f, -0.95f, 0.00f, 0.33f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -3861,6 +4316,7 @@
 	CQuaternion(-0.01f, -0.68f, -0.01f, 0.73f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -3869,6 +4325,7 @@
 	CQuaternion(0.00f, 0.24f, -0.01f, 0.97f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -3877,6 +4334,7 @@
 	CQuaternion(-0.01f, -0.68f, -0.01f, 0.73f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -3885,6 +4343,7 @@
 	CQuaternion(-0.01f, -0.68f, -0.01f, 0.73f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -3893,6 +4352,7 @@
 	CQuaternion(0.00f, -0.19f, -0.01f, 0.98f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -3901,6 +4361,7 @@
 	CQuaternion(0.00f, -0.19f, -0.01f, 0.98f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -3909,6 +4370,7 @@
 	CQuaternion(0.00f, -0.19f, -0.01f, 0.98f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -3917,6 +4379,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -3925,6 +4388,7 @@
 	CQuaternion(0.00f, 0.42f, 0.00f, 0.91f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -3933,6 +4397,7 @@
 	CQuaternion(0.00f, 0.42f, 0.00f, 0.91f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -3941,6 +4406,7 @@
 	CQuaternion(0.00f, 0.42f, 0.00f, 0.91f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -3949,6 +4415,7 @@
 	CQuaternion(-0.01f, -0.68f, -0.01f, 0.73f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -3957,6 +4424,7 @@
 	CQuaternion(-0.01f, -0.68f, -0.01f, 0.73f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -3965,6 +4433,7 @@
 	CQuaternion(-0.01f, -0.68f, -0.01f, 0.73f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -3973,6 +4442,7 @@
 	CQuaternion(-0.01f, -0.68f, -0.01f, 0.73f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -3981,6 +4451,7 @@
 	CQuaternion(0.00f, -0.19f, -0.01f, 0.98f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -3989,6 +4460,7 @@
 	CQuaternion(0.00f, 0.51f, 0.00f, 0.86f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -3997,6 +4469,7 @@
 	CQuaternion(0.00f, 0.75f, 0.00f, 0.66f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -4005,6 +4478,7 @@
 	CQuaternion(0.00f, 0.51f, 0.00f, 0.86f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -4013,6 +4487,7 @@
 	CQuaternion(0.00f, 0.51f, 0.00f, 0.86f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -4021,6 +4496,7 @@
 	CQuaternion(0.00f, 0.78f, 0.00f, 0.62f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -4029,6 +4505,7 @@
 	CQuaternion(0.00f, 0.81f, 0.00f, 0.59f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -4037,6 +4514,7 @@
 	CQuaternion(0.00f, 0.30f, 0.00f, 0.95f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -4045,6 +4523,7 @@
 	CQuaternion(0.00f, 0.97f, 0.00f, -0.23f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -4053,6 +4532,7 @@
 	CQuaternion(0.00f, 0.51f, 0.00f, 0.86f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -4061,6 +4541,7 @@
 	CQuaternion(0.00f, 0.51f, 0.00f, 0.86f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -4069,6 +4550,7 @@
 	CQuaternion(0.00f, 0.75f, 0.00f, 0.66f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -4077,6 +4559,7 @@
 	CQuaternion(0.00f, 0.51f, 0.00f, 0.86f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -4085,6 +4568,7 @@
 	CQuaternion(0.00f, 0.75f, 0.00f, 0.66f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -4093,6 +4577,7 @@
 	CQuaternion(0.00f, 0.51f, 0.00f, 0.86f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -4101,6 +4586,7 @@
 	CQuaternion(0.00f, 0.51f, 0.00f, 0.86f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -4109,6 +4595,7 @@
 	CQuaternion(0.00f, 0.78f, 0.00f, 0.62f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -4117,6 +4604,7 @@
 	CQuaternion(0.00f, 0.81f, 0.00f, 0.59f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -4125,6 +4613,7 @@
 	CQuaternion(0.00f, 0.30f, 0.00f, 0.95f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -4133,6 +4622,7 @@
 	CQuaternion(0.00f, 0.97f, 0.00f, -0.23f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -4141,6 +4631,7 @@
 	CQuaternion(0.00f, 0.51f, 0.00f, 0.86f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -4149,6 +4640,7 @@
 	CQuaternion(0.00f, 0.51f, 0.00f, 0.86f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -4157,6 +4649,7 @@
 	CQuaternion(0.00f, 0.75f, 0.00f, 0.66f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -4165,6 +4658,7 @@
 	CQuaternion(0.00f, 0.75f, 0.00f, 0.66f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -4173,6 +4667,7 @@
 	CQuaternion(0.00f, 0.75f, 0.00f, 0.66f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -4181,6 +4676,7 @@
 	CQuaternion(0.00f, 0.75f, 0.00f, 0.66f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -4189,6 +4685,7 @@
 	CQuaternion(0.00f, 0.81f, 0.00f, 0.59f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -4197,6 +4694,7 @@
 	CQuaternion(0.00f, 0.55f, 0.00f, 0.83f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -4205,6 +4703,7 @@
 	CQuaternion(0.00f, 0.82f, 0.00f, 0.58f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -4213,6 +4712,7 @@
 	CQuaternion(0.00f, 0.84f, 0.00f, 0.55f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -4221,6 +4721,7 @@
 	CQuaternion(0.00f, 0.55f, 0.00f, 0.83f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -4229,6 +4730,7 @@
 	CQuaternion(0.00f, 0.84f, 0.00f, 0.55f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -4237,6 +4739,7 @@
 	CQuaternion(0.00f, 0.75f, 0.00f, 0.66f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -4245,6 +4748,7 @@
 	CQuaternion(0.00f, 0.75f, 0.00f, 0.66f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -4253,6 +4757,7 @@
 	CQuaternion(0.00f, 0.75f, 0.00f, 0.66f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -4261,6 +4766,7 @@
 	CQuaternion(0.00f, 0.75f, 0.00f, 0.66f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -4269,6 +4775,7 @@
 	CQuaternion(0.00f, 0.75f, 0.00f, 0.66f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Warrok
 {
@@ -4277,6 +4784,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagWarrok, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Warrok
 {
@@ -4285,6 +4793,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagEnemyGroup, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Warrok
 {
@@ -4293,6 +4802,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagWarrok, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Warrok
 {
@@ -4301,6 +4811,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagWarrok, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Warrok
 {
@@ -4309,6 +4820,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagWarrok, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Warrok
 {
@@ -4317,6 +4829,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagWarrok, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //zombi
 {
@@ -4325,6 +4838,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagEnemyGroup, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //zombi
 {
@@ -4333,6 +4847,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagZombie, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //zombi
 {
@@ -4341,6 +4856,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagZombie, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //zombi
 {
@@ -4349,6 +4865,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagZombie, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //zombi
 {
@@ -4357,6 +4874,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagZombie, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //zombi
 {
@@ -4365,6 +4883,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagZombie, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //zombi
 {
@@ -4373,6 +4892,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagEnemyGroup, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //zombi
 {
@@ -4381,6 +4901,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagZombie, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //zombi
 {
@@ -4389,6 +4910,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagZombie, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //zombi
 {
@@ -4397,6 +4919,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagZombie, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //zombi
 {
@@ -4405,6 +4928,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagZombie, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //zombi
 {
@@ -4413,6 +4937,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagZombie, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Castle_Wall2
 {
@@ -4421,6 +4946,7 @@
 	CQuaternion(0.09f, 0.11f, 0.55f, 0.82f ),  //回転
 	enMapTagUntagged, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -4429,6 +4955,7 @@
 	CQuaternion(0.00f, -0.95f, 0.00f, 0.33f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -4437,6 +4964,7 @@
 	CQuaternion(0.00f, -0.95f, 0.00f, 0.33f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -4445,6 +4973,7 @@
 	CQuaternion(0.00f, -0.95f, 0.00f, 0.33f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -4453,6 +4982,7 @@
 	CQuaternion(0.00f, -0.95f, 0.00f, 0.33f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -4461,6 +4991,7 @@
 	CQuaternion(0.00f, -0.95f, 0.00f, 0.33f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -4469,6 +5000,7 @@
 	CQuaternion(0.00f, -0.95f, 0.00f, 0.33f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -4477,6 +5009,7 @@
 	CQuaternion(0.00f, -0.95f, 0.00f, 0.33f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -4485,6 +5018,7 @@
 	CQuaternion(0.00f, -0.95f, 0.00f, 0.33f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -4493,6 +5027,7 @@
 	CQuaternion(0.00f, -0.95f, 0.00f, 0.33f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -4501,6 +5036,7 @@
 	CQuaternion(0.00f, -0.95f, 0.00f, 0.33f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -4509,6 +5045,7 @@
 	CQuaternion(0.00f, -0.95f, 0.00f, 0.33f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -4517,6 +5054,7 @@
 	CQuaternion(0.00f, 0.51f, 0.00f, 0.86f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -4525,6 +5063,7 @@
 	CQuaternion(0.00f, 0.78f, 0.00f, 0.62f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -4533,6 +5072,7 @@
 	CQuaternion(0.00f, 0.81f, 0.00f, 0.59f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -4541,6 +5081,7 @@
 	CQuaternion(0.00f, 0.30f, 0.00f, 0.95f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -4549,6 +5090,7 @@
 	CQuaternion(0.00f, 0.97f, 0.00f, -0.23f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -4557,6 +5099,7 @@
 	CQuaternion(0.00f, 0.51f, 0.00f, 0.86f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //TownHouse
 {
@@ -4565,6 +5108,7 @@
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagUntagged, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //TownHouse
 {
@@ -4573,6 +5117,7 @@
 	CQuaternion(0.00f, 0.93f, 0.00f, 0.36f ),  //回転
 	enMapTagUntagged, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //Tree3
 {
@@ -4581,6 +5126,7 @@
 	CQuaternion(0.00f, 0.30f, 0.00f, 0.95f ),  //回転
 	enMapTagTree, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //TownHouse
 {
@@ -4589,6 +5135,7 @@
 	CQuaternion(0.00f, -0.97f, 0.00f, 0.26f ),  //回転
 	enMapTagUntagged, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //TownHouse
 {
@@ -4597,6 +5144,7 @@
 	CQuaternion(0.00f, 0.09f, 0.00f, 1.00f ),  //回転
 	enMapTagUntagged, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
 },
 //tile
 {
@@ -4605,4 +5153,149 @@
 	CQuaternion(0.00f, -0.45f, 0.00f, 0.89f ),  //回転
 	enMapTagMesh, //タグ
 	0, //エネミーのレベル
+	0, //ドロップタイプ
+},
+//Church
+{
+	L"Church",
+	CVector3(-522.04f, 210.20f, -79.51f),             //平行移動
+	CQuaternion(0.00f, 0.23f, 0.00f, 0.97f ),  //回転
+	enMapTagUntagged, //タグ
+	0, //エネミーのレベル
+	0, //ドロップタイプ
+},
+//roten3
+{
+	L"roten3",
+	CVector3(-490.63f, 210.10f, -49.90f),             //平行移動
+	CQuaternion(0.00f, -0.42f, 0.00f, 0.91f ),  //回転
+	enMapTagUntagged, //タグ
+	0, //エネミーのレベル
+	0, //ドロップタイプ
+},
+//roten3
+{
+	L"roten3",
+	CVector3(-494.29f, 210.10f, -54.63f),             //平行移動
+	CQuaternion(0.00f, -0.42f, 0.00f, 0.91f ),  //回転
+	enMapTagUntagged, //タグ
+	0, //エネミーのレベル
+	0, //ドロップタイプ
+},
+//roten3
+{
+	L"roten3",
+	CVector3(-498.21f, 210.10f, -58.86f),             //平行移動
+	CQuaternion(0.00f, -0.42f, 0.00f, 0.91f ),  //回転
+	enMapTagUntagged, //タグ
+	0, //エネミーのレベル
+	0, //ドロップタイプ
+},
+//roten3
+{
+	L"roten3",
+	CVector3(-501.77f, 210.10f, -63.98f),             //平行移動
+	CQuaternion(0.00f, -0.42f, 0.00f, 0.91f ),  //回転
+	enMapTagUntagged, //タグ
+	0, //エネミーのレベル
+	0, //ドロップタイプ
+},
+//roten3
+{
+	L"roten3",
+	CVector3(-506.06f, 210.10f, -68.14f),             //平行移動
+	CQuaternion(0.00f, -0.42f, 0.00f, 0.91f ),  //回転
+	enMapTagUntagged, //タグ
+	0, //エネミーのレベル
+	0, //ドロップタイプ
+},
+//Tree3
+{
+	L"Tree3",
+	CVector3(-463.40f, 207.19f, -61.00f),             //平行移動
+	CQuaternion(0.00f, 0.62f, 0.00f, 0.78f ),  //回転
+	enMapTagTree, //タグ
+	0, //エネミーのレベル
+	0, //ドロップタイプ
+},
+//Tree3
+{
+	L"Tree3",
+	CVector3(-512.50f, 207.90f, -92.70f),             //平行移動
+	CQuaternion(0.00f, 0.62f, 0.00f, 0.78f ),  //回転
+	enMapTagTree, //タグ
+	0, //エネミーのレベル
+	0, //ドロップタイプ
+},
+//Tree3
+{
+	L"Tree3",
+	CVector3(-482.30f, 207.90f, -80.20f),             //平行移動
+	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
+	enMapTagTree, //タグ
+	0, //エネミーのレベル
+	0, //ドロップタイプ
+},
+//Yasikib
+{
+	L"Yasikib",
+	CVector3(-531.97f, 210.11f, -22.96f),             //平行移動
+	CQuaternion(0.00f, -0.60f, 0.00f, 0.80f ),  //回転
+	enMapTagUntagged, //タグ
+	0, //エネミーのレベル
+	0, //ドロップタイプ
+},
+//Yasikib
+{
+	L"Yasikib",
+	CVector3(-538.33f, 210.11f, -33.35f),             //平行移動
+	CQuaternion(0.00f, -0.60f, 0.00f, 0.80f ),  //回転
+	enMapTagUntagged, //タグ
+	0, //エネミーのレベル
+	0, //ドロップタイプ
+},
+//Yasikib
+{
+	L"Yasikib",
+	CVector3(-537.20f, 210.11f, -46.30f),             //平行移動
+	CQuaternion(0.00f, -0.60f, 0.00f, 0.80f ),  //回転
+	enMapTagUntagged, //タグ
+	0, //エネミーのレベル
+	0, //ドロップタイプ
+},
+//Yasikib
+{
+	L"Yasikib",
+	CVector3(-542.60f, 210.11f, -54.80f),             //平行移動
+	CQuaternion(0.00f, -0.60f, 0.00f, 0.80f ),  //回転
+	enMapTagUntagged, //タグ
+	0, //エネミーのレベル
+	0, //ドロップタイプ
+},
+//TresureBox
+{
+	L"TresureBox",
+	CVector3(-513.68f, 210.23f, -88.95f),             //平行移動
+	CQuaternion(0.00f, 0.22f, 0.00f, 0.98f ),  //回転
+	enMapTagTreasureBox, //タグ
+	0, //エネミーのレベル
+	2, //ドロップタイプ
+},
+//TresureBox
+{
+	L"TresureBox",
+	CVector3(-678.03f, 194.80f, -13.72f),             //平行移動
+	CQuaternion(0.06f, 0.10f, 0.28f, 0.95f ),  //回転
+	enMapTagTreasureBox, //タグ
+	0, //エネミーのレベル
+	1, //ドロップタイプ
+},
+//TresureBox
+{
+	L"TresureBox",
+	CVector3(-864.60f, 227.63f, -13.37f),             //平行移動
+	CQuaternion(0.69f, 0.54f, 0.38f, 0.30f ),  //回転
+	enMapTagTreasureBox, //タグ
+	0, //エネミーのレベル
+	1, //ドロップタイプ
 },

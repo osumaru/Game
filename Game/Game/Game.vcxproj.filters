@@ -9,12 +9,6 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
     </Filter>
-    <Filter Include="ソース ファイル\Map">
-      <UniqueIdentifier>{d8b18880-62bb-43b5-8e95-45e0bb4bc02e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\Map\MapChip">
-      <UniqueIdentifier>{bff5da5e-9d3d-413e-b2c7-73ea96d43507}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソース ファイル\Assets">
       <UniqueIdentifier>{d2959fce-86b1-4097-a78a-08621cd7ae81}</UniqueIdentifier>
     </Filter>
@@ -111,6 +105,12 @@
     <Filter Include="ヘッダー ファイル\リソース ファイル">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="ソース ファイル\Map">
+      <UniqueIdentifier>{d8b18880-62bb-43b5-8e95-45e0bb4bc02e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Map\MapChip">
+      <UniqueIdentifier>{bff5da5e-9d3d-413e-b2c7-73ea96d43507}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -1040,7 +1040,16 @@
     <MeshContentTask Include="Assets\modelData\build\Rock2.FBX">
       <Filter>ソース ファイル\Assets</Filter>
     </MeshContentTask>
-    <MeshContentTask Include="Assets\modelData\build\stl.FBX">
+    <MeshContentTask Include="Assets\modelData\ShopModel\roten2.FBX">
+      <Filter>ソース ファイル\Assets</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\build\Church.FBX">
+      <Filter>ソース ファイル\Assets</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\ShopModel\roten3.FBX">
+      <Filter>ソース ファイル\Assets</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\Interior\TresureBox.FBX">
       <Filter>ソース ファイル\Assets</Filter>
     </MeshContentTask>
   </ItemGroup>

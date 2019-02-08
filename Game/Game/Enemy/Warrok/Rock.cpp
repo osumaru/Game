@@ -7,7 +7,7 @@
 void CRock::Init(CWarrok* warrok, const CVector3& enemyPos)
 {
 	//ƒ‚ƒfƒ‹‚ğ‰Šú‰»
-	m_skinModel.Load(L"Assets/modelData/Rock2.cmo");
+	m_skinModel.Load(L"Assets/modelData/Rock.cmo");
 	//UŒ‚‚µ‚½“G‚ÌÀ•W‚ğ•Û‘¶
 	m_enemyPos = enemyPos;
 	//À•W‚ğ‰Šú‰»

@@ -201,6 +201,7 @@ void CWarrok::RockAttackRotation()
 {
 	//攻撃する方向を求める
 	CVector3 attackDir = GetPlayer().GetPosition() - m_position;
+	attackDir.y = 0.0f;
 	attackDir.Normalize();
 	//エネミーの前方向を取得
 	CMatrix worldMatrix = GetWorldMatrix();

@@ -75,26 +75,12 @@ bool CEquipItem::Start()
 			//武器の種類の設定
 			ItemStatus[num].WeaponType = EnPlayerWeapon::enWeaponSword;
 			//インベントリに表示するスプライトの情報
-			swprintf(ItemStatus[num].ItemSprite, L"Assets/sprite/sword.png");
+			swprintf(ItemStatus[num].ItemSprite, L"Assets/sprite/Item/Equip/sword.png");
 			//影響を及ぼすステータス
 			ItemStatus[num].ItemEffectPlayerStatus = EnIemEffectPlayerStatus::Strength;
 			//装備のタイプの設定
 			ItemStatus[num].ItemType = EnInventoryItemType::Equip;
-			//ノーマルアイテムのIDの入ったリスト作成
-			if (ItemStatus[num].ItemQuality == EnItemQuality::enNormal)
-			{
-				m_normalEquipItemList.push_back(ItemStatus[num].ItemID);
-			}
-			//レアアイテムのIDの入ったリスト作成
-			else if (ItemStatus[num].ItemQuality == EnItemQuality::enRare)
-			{
-				m_rareEquipItemList.push_back(ItemStatus[num].ItemID);
-			}
-			else if (ItemStatus[num].ItemQuality == EnItemQuality::enLegend)
-			{
-				m_legendEquipItemList.push_back(ItemStatus[num].ItemID);
-			}
-			m_equipItemStatusList.push_back(ItemStatus[num]);
+			
 		
 		}
 	}
@@ -156,24 +142,10 @@ bool CEquipItem::Start()
 			ItemStatus[num].ItemID = num + 1;
 			ItemStatus[num].WeaponType = EnPlayerWeapon::enWeaponLongSword;
 			//インベントリに表示するスプライトの情報
-			swprintf(ItemStatus[num].ItemSprite, L"Assets/sprite/largeSword.png");
+			swprintf(ItemStatus[num].ItemSprite, L"Assets/sprite/Item/Equip/largeSword.png");
 			ItemStatus[num].ItemEffectPlayerStatus = EnIemEffectPlayerStatus::Strength;
 			ItemStatus[num].ItemType = EnInventoryItemType::Equip;
-			//ノーマルアイテムのIDの入ったリスト作成
-			if (ItemStatus[num].ItemQuality == EnItemQuality::enNormal)
-			{
-				m_normalEquipItemList.push_back(ItemStatus[num].ItemID);
-			}
-			//レアアイテムのIDの入ったリスト作成
-			else if (ItemStatus[num].ItemQuality == EnItemQuality::enRare)
-			{
-				m_rareEquipItemList.push_back(ItemStatus[num].ItemID);
-			}
-			else if (ItemStatus[num].ItemQuality == EnItemQuality::enLegend)
-			{
-				m_legendEquipItemList.push_back(ItemStatus[num].ItemID);
-			}
-			m_equipItemStatusList.push_back(ItemStatus[num]);
+			
 		}
 	}
 
@@ -234,24 +206,10 @@ bool CEquipItem::Start()
 			ItemStatus[num].ItemID = num + 1;
 			ItemStatus[num].WeaponType = EnPlayerWeapon::enWeaponArrow;
 			//インベントリに表示するスプライトの情報
-			swprintf(ItemStatus[num].ItemSprite, L"Assets/sprite/bow.png");
+			swprintf(ItemStatus[num].ItemSprite, L"Assets/sprite/Item/Equip/bow.png");
 			ItemStatus[num].ItemEffectPlayerStatus = EnIemEffectPlayerStatus::Strength;
 			ItemStatus[num].ItemType = EnInventoryItemType::Equip;
-			//ノーマルアイテムのIDの入ったリスト作成
-			if (ItemStatus[num].ItemQuality == EnItemQuality::enNormal)
-			{
-				m_normalEquipItemList.push_back(ItemStatus[num].ItemID);
-			}
-			//レアアイテムのIDの入ったリスト作成
-			else if (ItemStatus[num].ItemQuality == EnItemQuality::enRare)
-			{
-				m_rareEquipItemList.push_back(ItemStatus[num].ItemID);
-			}
-			else if (ItemStatus[num].ItemQuality == EnItemQuality::enLegend)
-			{
-				m_legendEquipItemList.push_back(ItemStatus[num].ItemID);
-			}
-			m_equipItemStatusList.push_back(ItemStatus[num]);
+			
 		}
 	}
 	//弓の初期化
@@ -320,25 +278,36 @@ bool CEquipItem::Start()
 			ItemStatus[num].ItemID = num + 1;
 			ItemStatus[num].WeaponType = EnPlayerWeapon::enWeaponTwinSword;
 			//インベントリに表示するスプライトの情報
-			swprintf(ItemStatus[num].ItemSprite, L"Assets/sprite/twinSword.png");
+			swprintf(ItemStatus[num].ItemSprite, L"Assets/sprite/Item/Equip/twinSword.png");
 			ItemStatus[num].ItemEffectPlayerStatus = EnIemEffectPlayerStatus::Strength;
 			ItemStatus[num].ItemType = EnInventoryItemType::Equip;
-			//ノーマルアイテムのIDの入ったリスト作成
-			if (ItemStatus[num].ItemQuality == EnItemQuality::enNormal)
-			{
-				m_normalEquipItemList.push_back(ItemStatus[num].ItemID);
-			}
-			//レアアイテムのIDの入ったリスト作成
-			else if (ItemStatus[num].ItemQuality == EnItemQuality::enRare)
-			{
-				m_rareEquipItemList.push_back(ItemStatus[num].ItemID);
-			}
-			else if (ItemStatus[num].ItemQuality == EnItemQuality::enLegend)
-			{
-				m_legendEquipItemList.push_back(ItemStatus[num].ItemID);
-			}
-			m_equipItemStatusList.push_back(ItemStatus[num]);
+			
 		}
+	}
+
+	for (int element = 0;element < 40;element++)
+	{
+		//レア度1アイテムのIDの入ったリスト作成
+		if (ItemStatus[element].ItemQuality == EnItemQuality::enNormal)
+		{
+			m_normalEquipItemList.push_back(ItemStatus[element].ItemID);
+		}
+		//レア度2アイテムのIDの入ったリスト作成
+		else if (ItemStatus[element].ItemQuality == EnItemQuality::enRare)
+		{
+			m_rareEquipItemList.push_back(ItemStatus[element].ItemID);
+		}
+		//レア度3アイテムのIDの入ったリスト作成
+		else if (ItemStatus[element].ItemQuality == EnItemQuality::enLegend)
+		{
+			m_legendEquipItemList.push_back(ItemStatus[element].ItemID);
+		}
+		//レア度4アイテムのIDの入ったリスト作成
+		else
+		{
+			m_specialEquipItemList.push_back(ItemStatus[element].ItemID);
+		}
+		m_equipItemStatusList.push_back(ItemStatus[element]);
 	}
 	//データの取得処理
 	/*std::fstream file;

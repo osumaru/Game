@@ -12,17 +12,25 @@
 #include "../Item/InventoryItem/InventoryTwinSword.h"
 #include"GameItem/CEquipItem.h"
 
-void CTreasureChest::Init(CVector3 position, bool isMapItem)
+void CTreasureChest::Init(CVector3 position, CQuaternion rotation, bool isMapItem, EnDropType dropType)
 {
 	//モデルの初期化
-	m_skinModel.Load(L"Assets/modelData/Chest.cmo");
+	m_skinModel.Load(L"Assets/modelData/TresureBox.cmo");
+	m_skinModel.LoadNormalmap(L"Assets/modelData/Interior/box_01_normal.tga");
+	m_skinModel.SetIsDiffuse(true);
+	m_skinModel.SetSpecularPower(0.3f);
+	m_light.SetAmbientLight({ 0.8f ,0.8f,0.8f,1.0f });
+	m_skinModel.SetLight(m_light);
 	//座標を設定
 	m_position = position;
+	m_rotation = rotation;
 	//キャラクターコントローラーを初期化
-	m_characterController.Init(0.6f, 0.4f, m_position);
+	m_characterController.Init(1.0f, 0.5f, m_position);
 	m_characterController.SetUserIndex(enCollisionAttr_Item);
 	//マップに配置するか
 	m_isMapItem = isMapItem;
+	m_dropType = dropType;
+	
 }
 
 bool CTreasureChest::Start()
@@ -99,7 +107,7 @@ void CTreasureChest::Update()
 	m_characterController.Execute(GameTime().GetDeltaFrameTime());
 	m_position = m_characterController.GetPosition();
 
-	m_skinModel.Update(m_position, m_rotation, { 1.0f,1.0f,1.0f }, true);
+	m_skinModel.Update(m_position, m_rotation, { 1.0f,1.0f,1.0f },false);
 }
 
 void CTreasureChest::Draw()
@@ -116,24 +124,44 @@ void CTreasureChest::DesideWeaponStatus()
 	wchar_t* textureFileName;
 	CEquipItem* nItem = GetSceneManager().GetFade()->GetLoadScene()->GetEquipItemData();
 	//↓これはレア度がNormalの武器からランダムで武器を取得するコード
-	int probability = 0;
-	probability = Random().GetRandSInt() % 100;
+
 	int num = 0;
-	//if (probability <= 80 && probability >= 0)
-	//{
-		
-		num = nItem->GetNormalEquipItemList((Random().GetRandInt() % (nItem->GetNormalEquipItemListSize() - 1)));
-	//}
-	/*else if (probability <= 95 && probability > 80)
+	switch (m_dropType)
 	{
-		num = nItem->GetRareItemList(Random().GetRandSInt() % max(0,(nItem->GetRareEquipItemListSize() - 1)));
+	case EnDropType::enRandom:
+	{
+		int probability = 0;
+		probability = Random().GetRandSInt() % 100;
+
+		if (probability <= 90 && probability >= 0)
+		{
+
+			num = nItem->GetNormalEquipItemList((Random().GetRandInt() % (nItem->GetNormalEquipItemListSize() - 1)));
+		}
+		else if (probability <= 98 && probability > 90)
+		{
+			num = nItem->GetRareItemList(Random().GetRandSInt() % max(0, (nItem->GetRareEquipItemListSize() - 1)));
+		}
+		else
+		{
+			num = nItem->GetLegendEquipItemList(Random().GetRandSInt() % max(0, (nItem->GetLegendEquipItemListSize() - 1)));
+		}
 	}
-	else
-	{
-		num = nItem->GetLegendEquipItemList(Random().GetRandSInt() % max(0,(nItem->GetLegendEquipItemListSize() - 1)));
-	}*/
-	//int num = nItem->GetNormalEquipItemList(Random().GetRandSInt() % nItem->GetNormalEquipItemListSize());
-	//int num = nItem->GetLegendEquipItemList(Random().GetRandSInt() % nItem->GetLegendEquipItemListSize());
+		break;
+	case EnDropType::enNormal:
+		num = nItem->GetNormalEquipItemList((Random().GetRandInt() % (nItem->GetNormalEquipItemListSize() - 1)));
+		break;
+	case EnDropType::enRare:
+		num = nItem->GetRareItemList(Random().GetRandSInt() % max(0, (nItem->GetRareEquipItemListSize() - 1)));
+		break;
+	case EnDropType::enLegend:
+		num = nItem->GetLegendEquipItemList(Random().GetRandSInt() % max(0, (nItem->GetLegendEquipItemListSize() - 1)));
+		break;
+	case EnDropType::enSpecial:
+
+		break;
+	}
+
 	//武器のタイプの取得
 	int weaponNumber = nItem->GetItemStatus_ItemId(num).WeaponType;
 	//武器の名前の取得
@@ -141,8 +169,7 @@ void CTreasureChest::DesideWeaponStatus()
 	//武器のUI情報の取得(文字列)
 	textureFileName = nItem->GetItemStatus(num).ItemSprite;
 	int weaponAttack = nItem->GetItemStatus_ItemId(num).ItemEffect;
-	
-	
+
 	if (weaponNumber == EnPlayerWeapon::enWeaponSword)
 	{
 		//剣

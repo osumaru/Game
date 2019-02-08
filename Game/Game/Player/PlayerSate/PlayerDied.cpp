@@ -6,6 +6,11 @@
 void CPlayerDied::Init()
 {
 	m_pPlayerGetter->GetAnimation().Play(enPlayerAnimationDete, 0.2f);
+	const float GameOverVolume = 0.3f;
+	CSoundSource* GameOverSound = New<CSoundSource>(0);
+	GameOverSound->Init("Assets/sound/SystemSound/GameOver.wav");
+	GameOverSound->Play(false);
+	GameOverSound->SetVolume(GameOverVolume);
 }
 
 void CPlayerDied::Update()

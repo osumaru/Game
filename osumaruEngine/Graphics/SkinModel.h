@@ -16,6 +16,7 @@ public:
 		CMatrix viewProjMat;			//ビュープロジェクション行列
 		float specularPower;			//スペキュラライトの強さ
 		float diffuseLightPower;
+		int alphaTestFlg;
 	};
 
 	//コンストラクタ
@@ -143,6 +144,11 @@ public:
 		return m_diffuseLightPower;
 	}
 	
+	//アルファテストするかどうかのフラグを設定
+	void SetIsAlphaTest(bool isAlphaTest)
+	{
+		m_isAlphaTest = isAlphaTest;
+	}
 
 private:
 	std::unique_ptr<CSkelton>		m_skelton = nullptr;				//スケルトン
@@ -159,5 +165,5 @@ private:
 	bool							m_isShadowCaster = false;
 	float							m_specularPower = 0.0f;					//スペキュラライトの強さ
 	float							m_diffuseLightPower = 1.0f;				//ディフューズライトの強さ
-
+	bool							m_isAlphaTest = false;					//アルファテストするかどうかのフラグ
 };

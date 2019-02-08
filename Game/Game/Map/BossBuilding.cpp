@@ -33,7 +33,7 @@ void CBossBuilding::Update()
 	//プレイヤーとの距離を求める
 	CVector3 distance = playerPos - m_position;
 	float length = distance.Length();
-	if (!m_isChoice && length < 2.0f && m_timer >= 3.0f)
+	if (!m_isChoice && length < 2.0f && m_timer >= 3.0f/* || Pad().IsTriggerButton(enButtonRB)*/)
 	{
 		//メッセージと選択肢を表示する
 		m_message = New<CMessage>(PRIORITY_UI);

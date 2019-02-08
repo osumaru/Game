@@ -50,12 +50,33 @@ void CAnimationClip::Update(float deltaTime)
 	if (m_isPlay)
 	{
 		int i = 0;
-
+		//今のキーフレームから次のキーフレームまでの時間
+		float keyTime = (*m_topBoneKeyFrameList)[m_currentFrameNo]->time;
+		//今のキーフレームから次のキーフレームまでの残り時間
+		float nowTime = (*m_topBoneKeyFrameList)[m_currentFrameNo]->time - m_frameTime;
+		if (0 < m_currentFrameNo)
+		{
+			keyTime -= (*m_topBoneKeyFrameList)[m_currentFrameNo - 1]->time;
+		}
+		nowTime = keyTime - nowTime;
+		//非数回避
+		if (keyTime == 0.0f)
+		{
+			keyTime = 1.0f;
+		}
+		int nextFrameNum = min(m_topBoneKeyFrameList->size() - 1, m_currentFrameNo + 1);
 		for (auto& keyframe : m_keyFramePtrListArray)
 		{
 			if (!keyframe.empty())
 			{
-				m_localMatrix[i] = keyframe[m_currentFrameNo]->transform;
+				if (m_isLinearInterpolation)
+				{
+					m_localMatrix[i].Lerp(max(0.0f, nowTime / keyTime), keyframe[m_currentFrameNo]->transform, keyframe[nextFrameNum]->transform);
+				}
+				else
+				{
+					m_localMatrix[i] = keyframe[m_currentFrameNo]->transform;
+				}
 			}
 			i++;
 		}

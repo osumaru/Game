@@ -78,7 +78,7 @@ void CEnemyDeath::Update()
 		{
 			//•ó” 
 			CTreasureChest* treasureChest = New<CTreasureChest>(PRIORITY_ITEM);
-			treasureChest->Init(m_enemy->GetPosition(), false);
+			treasureChest->Init(m_enemy->GetPosition(), { 0.00f, 0.00f, 0.00f, 1.00f }, false);
 		}
 		m_isAnimationEnd = true;
 		m_enemy->EnemyListErase();

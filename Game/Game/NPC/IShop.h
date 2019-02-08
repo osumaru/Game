@@ -97,6 +97,10 @@ protected:
 	CFont					m_itemPriceFont[ITEM_ELEMENT];
 	CVector2				m_fontPosition{ -420.0f,215.0f };
 	CVector2				FONT_POSITION_OFFSET = { 240.0f,85.0f };
+
+	CSprite					m_moneyBack;
+	CFont					m_money;											//金額表示用のフォント
+	
 	
 	
 };

@@ -1,4 +1,5 @@
 #pragma once
+class CTreasureChest;
 class CSea;
 class MapChip;
 class BreakMapObject;
@@ -40,6 +41,7 @@ struct SMapChipInfo
 	CQuaternion		m_rotation;
 	EnMapChipTag	m_tag;
 	int				m_level = 0;
+	int				m_dropType = 0;
 };
 
 //マップのオブジェクトを配置するクラス
@@ -91,6 +93,7 @@ private:
 	std::list<MapChip*>			m_mapChip;				//マップチップ
 	std::list<IEnemy*>			m_enemyList;			//エネミーリスト
 	std::list<CEnemyGroup*>		m_enemyGroupList;		//エネミーグループのリスト
+	std::list<CTreasureChest*>	m_treasureList;			//宝箱リスト`
 	bool						m_collider = false;		//AABBを作成するかどうか
 	bool						m_isTree = false;	//木用のコライダーの設定をするためのフラグ		
 	CShopManager*				m_shopManager;

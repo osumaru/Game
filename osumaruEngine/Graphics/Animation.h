@@ -110,9 +110,14 @@ public:
 	//ボーンの行列を更新
 	void UpdateBoneMatrix(int boneID, const std::vector<CMatrix>& localMat1, const std::vector<CMatrix>& localMat2);
 
+	void SetIsLenearInterpolation(bool isLenearInterpolation)
+	{
+		for(int i = 0;i < m_animationNum;i++)
+		{
+			m_animationClips[i].SetIsLinearInterpolation(isLenearInterpolation);
+		}
+	}
 	
-
-
 	//アニメーションブレンドに使う情報
 	struct SAnimationBlendInfo
 	{
@@ -131,5 +136,6 @@ private:
 	bool								m_isInterpolation = false;		//補間しているか？
 	float								m_interpolationTime = 1.0f;		//アニメーション補間時の経過させる時間
 	std::vector<AnimationEventListener>	m_animationEventListener;
+	int									m_animationNum;					//アニメーションの数
 
 };

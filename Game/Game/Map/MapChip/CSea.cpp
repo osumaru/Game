@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "CSea.h"
 #include "../../Camera/GameCamera.h"
+#include"../../Scene/SceneManager.h"
 
 
 CSea::CSea()
@@ -29,6 +30,11 @@ bool CSea::Init(const CVector3& position, const CQuaternion& rotation)
 void CSea::Update()
 {
 	m_skinModel.Update(m_position, m_rotation, CVector3::One);
+	if (GetSceneManager().GetSceneChange())
+	{
+		Delete(this);
+		return;
+	}
 }
 
 void CSea::Draw()

@@ -97,6 +97,14 @@ void CSkinModel::Draw(const CMatrix& view, const CMatrix& projection, bool isSha
 	cb.worldMat = m_worldMatrixZUp;
 	cb.specularPower = m_specularPower;
 	cb.diffuseLightPower = m_diffuseLightPower;
+	if (m_isAlphaTest)
+	{
+		cb.alphaTestFlg = 1;
+	}
+	else
+	{
+		cb.alphaTestFlg = 0;
+	}
 	m_cb.Update(&cb);
 	m_materialCB.Update(&m_materialFlg);
 	m_lightCB.Update(&m_light);
