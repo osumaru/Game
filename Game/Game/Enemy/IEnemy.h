@@ -7,7 +7,7 @@
 #include "EnemyState/EnemyStateMachine.h"
 #include "EnemyTurn.h"
 #include "EnemySearch.h"
-#include "../Player/Weapon/WeaponCommon.h"
+#include "RespawnData.h"
 
 class CEnemyGroup;
 
@@ -33,6 +33,7 @@ public:
 
 	//初期化
 	//position	座標
+	//level		レベル
 	virtual void Init(const CVector3& position, int level) {};
 
 	//更新
@@ -269,6 +270,11 @@ public:
 		m_isDead = isDead;
 	}
 
+	EnEnemyType GetEnemyType()
+	{
+		return m_type;
+	}
+
 protected:
 	CSkinModel						m_skinModel;					//スキンモデル
 	CAnimation						m_animation;					//アニメーション
@@ -282,6 +288,7 @@ protected:
 	CLight							m_light;						//ライト
 	CEffect							m_auraEffect;					//オーラエフェクト
 	SEnemyStatus					m_status;						//ステータス
+	EnEnemyType						m_type;							//エネミーの種類
 	EnAttackType					m_attackType = enAttackType_Near; //攻撃タイプ
 	std::list<IEnemy*>::iterator	m_iterater;						//自身のイテレータ
 	const CMatrix*					m_spineMatrix;					//当たり判定用の腰のワールド行列

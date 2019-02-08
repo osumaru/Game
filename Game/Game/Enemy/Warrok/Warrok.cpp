@@ -87,6 +87,8 @@ void CWarrok::Init(const CVector3& position, int level)
 	m_attackLength = 10.0f;
 	//攻撃タイプを設定
 	m_attackType = enAttackType_Far;
+	//エネミーの種類を設定
+	m_type = enEnemy_Warrok;
 
 	m_animation.AddAnimationEvent([&](auto animClipname, auto eventName)
 	{

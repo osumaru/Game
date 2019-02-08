@@ -765,6 +765,9 @@
     <ClInclude Include="Map\MapChip\CSea.h">
       <Filter>ソース ファイル\Map\MapChip</Filter>
     </ClInclude>
+    <ClInclude Include="Enemy\RespawnData.h">
+      <Filter>ソース ファイル\Enemy\EnemyState</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Map\MapChip\ObstacleMapObject.h">

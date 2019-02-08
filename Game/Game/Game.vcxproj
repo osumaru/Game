@@ -270,6 +270,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera\CameraCollisionSolver.h" />
+    <ClInclude Include="Enemy\RespawnData.h" />
     <ClInclude Include="Map\MapChip\CSea.h" />
     <ClInclude Include="Enemy\Boss\AttackWave.h" />
     <ClInclude Include="Enemy\Boss\Maw.h" />

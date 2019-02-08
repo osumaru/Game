@@ -2,6 +2,7 @@
 #include "Money.h"
 #include "../Player/Player.h"
 #include"../../Game/Camera/GameCamera.h"
+#include "../Scene/SceneManager.h"
 
 void CMoney::Init(const CVector3& position, const int gold)
 {
@@ -27,7 +28,7 @@ bool CMoney::Start()
 
 void CMoney::Update()
 {
-	if (GetPlayer().GetIsDied() || (m_timer > m_deadTime && !m_isMove))
+	if (GetSceneManager().GetSceneChange() || GetPlayer().GetIsDied() || (m_timer > m_deadTime && !m_isMove))
 	{
 		//ƒvƒŒƒCƒ„[‚ª€–S‚µ‚½–”‚Íˆê’èŠÔ‚Åíœ
 		Delete(this);

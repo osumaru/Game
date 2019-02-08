@@ -72,6 +72,8 @@ void CNinja::Init(const CVector3& position, int level)
 	m_spineMatrix = &GetBoneWorldMatrix(L"Spine");
 	//攻撃できる距離を設定
 	m_attackLength = 1.2f;
+	//エネミーの種類を設定
+	m_type = enEnemy_Ninja;
 
 	m_animation.AddAnimationEvent([&](auto animClipname, auto eventName)
 	{
