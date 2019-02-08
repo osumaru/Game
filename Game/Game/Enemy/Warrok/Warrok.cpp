@@ -119,7 +119,7 @@ void CWarrok::Update()
 	if (levelDifference > LEVEL_DIFFERENCE_LIMIT)
 	{
 		m_effectInterval++;
-		const int EFFECT_INTERVAL = 30;
+		const int EFFECT_INTERVAL = 40;
 		if (m_effectInterval % EFFECT_INTERVAL == 0)
 		{
 			m_effectInterval = 0;

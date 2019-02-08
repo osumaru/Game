@@ -66,6 +66,8 @@ void CEnemyStan::Update()
 	}
 	else if (m_enemy->GetStatus().hp <= 0)
 	{
+		//ˆÚ“®‚µ‚Ä‚¢‚é‚Ì‚ÅÀ•W‚ðXV
+		m_enemy->SetPosition(position);
 		//HP‚ª‚È‚¯‚ê‚ÎŽ€–S‚·‚é
 		m_esm->ChangeState(CEnemyState::enState_Death);
 	}

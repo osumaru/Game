@@ -47,6 +47,14 @@ void CEnemyGroup::Update()
 			m_timer = 0.0f;
 			for (auto& respawnData : m_respawnDataList)
 			{
+				//リスポーンエフェクトの初期化
+				CEffect respawnEffect;
+				respawnEffect.Init(L"Assets/Effect/respawnEffect.efk");
+				respawnEffect.SetScale({ 1.0f,1.0f,1.0f });
+				respawnEffect.SetPosition(respawnData.initPosition);
+				respawnEffect.Play();
+				respawnEffect.Update();
+				//エネミーの初期化
 				std::list<IEnemy*>::iterator it;
 				IEnemy* enemy = nullptr;
 				switch (respawnData.enemyType)
