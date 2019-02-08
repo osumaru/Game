@@ -1,5 +1,6 @@
 #pragma once
 #include "../Item/GameItem/ItemStatus.h"
+#include "../Camera/GameCamera.h"
 class IShop	:	public IGameObject
 {
 public:
@@ -97,9 +98,11 @@ protected:
 	CFont					m_itemPriceFont[ITEM_ELEMENT];
 	CVector2				m_fontPosition{ -420.0f,215.0f };
 	CVector2				FONT_POSITION_OFFSET = { 240.0f,85.0f };
-
 	CSprite					m_moneyBack;
 	CFont					m_money;											//金額表示用のフォント
+	std::unique_ptr<CRigidBody>			m_rigidBody;		//剛体
+	std::unique_ptr<CMeshCollider>		m_meshCollider;		//コライダー
+	std::unique_ptr<CBoxCollider>		m_boxCollider;		//コライダー
 	
 	
 	

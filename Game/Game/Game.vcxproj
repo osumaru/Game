@@ -195,6 +195,7 @@
     <ClCompile Include="Item\InventoryItem\InventoryTwinSword.cpp" />
     <ClCompile Include="Map\BossBuilding.cpp" />
     <ClCompile Include="Map\MapChip\ObstacleMapObject.cpp" />
+    <ClCompile Include="NPC\Shop\NormalShop.cpp" />
     <ClCompile Include="Player\PlayerSate\PlayerDown.cpp" />
     <ClCompile Include="Player\PlayerSate\PlayerSky.cpp" />
     <ClCompile Include="Player\Weapon\WeaponEraseEffect.cpp" />
@@ -310,6 +311,7 @@
     <ClInclude Include="Item\InventoryItem\InventoryTwinSword.h" />
     <ClInclude Include="Map\BossBuilding.h" />
     <ClInclude Include="Map\MapChip\ObstacleMapObject.h" />
+    <ClInclude Include="NPC\Shop\NormalShop.h" />
     <ClInclude Include="Player\PlayerSate\PlayerDown.h" />
     <ClInclude Include="Player\PlayerSate\PlayerSky.h" />
     <ClInclude Include="Player\Weapon\WeaponEraseEffect.h" />

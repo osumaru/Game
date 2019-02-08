@@ -47,6 +47,7 @@ void StaticMapObject::Init(const CVector3& position, const CQuaternion& rotation
 		m_boxCollider.reset(new CBoxCollider);
 		m_boxCollider->Create({ boxsize.x,boxsize.y,boxsize.z });
 		rInfo.collider = m_boxCollider.get();
+		m_skinModel.SetIsAlphaTest(true);
 
 
 	}

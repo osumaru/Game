@@ -5169,7 +5169,7 @@
 	L"roten3",
 	CVector3(-490.63f, 210.10f, -49.90f),             //平行移動
 	CQuaternion(0.00f, -0.42f, 0.00f, 0.91f ),  //回転
-	enMapTagUntagged, //タグ
+	enMapTagNormalShop, //タグ
 	0, //エネミーのレベル
 	0, //ドロップタイプ
 },
@@ -5178,7 +5178,7 @@
 	L"roten3",
 	CVector3(-494.29f, 210.10f, -54.63f),             //平行移動
 	CQuaternion(0.00f, -0.42f, 0.00f, 0.91f ),  //回転
-	enMapTagUntagged, //タグ
+	enMapTagNormalShop, //タグ
 	0, //エネミーのレベル
 	0, //ドロップタイプ
 },
@@ -5187,7 +5187,7 @@
 	L"roten3",
 	CVector3(-498.21f, 210.10f, -58.86f),             //平行移動
 	CQuaternion(0.00f, -0.42f, 0.00f, 0.91f ),  //回転
-	enMapTagUntagged, //タグ
+	enMapTagNormalShop, //タグ
 	0, //エネミーのレベル
 	0, //ドロップタイプ
 },
@@ -5196,7 +5196,7 @@
 	L"roten3",
 	CVector3(-501.77f, 210.10f, -63.98f),             //平行移動
 	CQuaternion(0.00f, -0.42f, 0.00f, 0.91f ),  //回転
-	enMapTagUntagged, //タグ
+	enMapTagNormalShop, //タグ
 	0, //エネミーのレベル
 	0, //ドロップタイプ
 },
@@ -5205,7 +5205,7 @@
 	L"roten3",
 	CVector3(-506.06f, 210.10f, -68.14f),             //平行移動
 	CQuaternion(0.00f, -0.42f, 0.00f, 0.91f ),  //回転
-	enMapTagUntagged, //タグ
+	enMapTagNormalShop, //タグ
 	0, //エネミーのレベル
 	0, //ドロップタイプ
 },

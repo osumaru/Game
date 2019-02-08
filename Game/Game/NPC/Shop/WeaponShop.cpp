@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "WeaponShop.h"
-#include "../../Camera/GameCamera.h"
 #include "../../Player/Player.h"
 #include "../../UI/Menu/EquipInventory.h"
 #include "../../UI/Fade/LoadScene.h"
@@ -38,7 +37,7 @@ void CWeaponShop::Init(const CVector3 position, const CQuaternion rotation)
 	m_animation.SetLoopFlg(0, true);
 	m_skinmodelNpc.Load(L"Assets/modelData/Shopgirl.cmo", &m_animation);
 	m_animation.Play(0);
-	m_skinModel.Load(L"Assets/modelData/roten3.cmo",NULL);
+	m_skinModel.Load(L"Assets/modelData/roten.cmo",NULL);
 	m_skinModel.Update(m_position, m_rotation, m_scale, false);
 	//AABB�̍쐬
 	{

@@ -25,12 +25,34 @@ void CTreasureChest::Init(CVector3 position, CQuaternion rotation, bool isMapIte
 	m_position = position;
 	m_rotation = rotation;
 	//キャラクターコントローラーを初期化
-	m_characterController.Init(1.0f, 0.5f, m_position);
-	m_characterController.SetUserIndex(enCollisionAttr_Item);
+	//m_characterController.Init(1.0f, 0.5f, m_position);
+	//m_characterController.SetUserIndex(enCollisionAttr_Item);
 	//マップに配置するか
 	m_isMapItem = isMapItem;
 	m_dropType = dropType;
-	
+
+	SRigidBodyInfo rInfo;
+	rInfo.mass = 0.0f;
+	rInfo.pos = m_position;
+	rInfo.rot = m_rotation;
+	CQuaternion multi = CQuaternion::Identity;
+	rInfo.rot.Multiply(multi);
+	//AABBの作成
+	{
+		CMatrix rotMat;
+		rotMat.MakeRotationFromQuaternion(multi);
+		CMeshCollider mesh;
+		mesh.CreateCollider(&m_skinModel);
+		CVector3 boxsize = (mesh.GetAabbMax() - mesh.GetAabbMin()) / 2.0f;
+		CVector3 pos = (mesh.GetAabbMax() + mesh.GetAabbMin()) / 2.0f;
+		pos.Mul(rotMat);
+		rInfo.pos = pos + m_position;
+		m_boxCollider.reset(new CBoxCollider);
+		m_boxCollider->Create({ boxsize.x,boxsize.y,boxsize.z });
+		rInfo.collider = m_boxCollider.get();
+		m_rigidBody.reset(new CRigidBody);
+		m_rigidBody->Create(rInfo);
+	}
 }
 
 bool CTreasureChest::Start()
@@ -65,7 +87,7 @@ void CTreasureChest::Update()
 	//移動速度を取得
 	CVector3 moveSpeed = m_characterController.GetMoveSpeed();
 	//地面に接地しているか判定
-	bool isPopEnd = m_characterController.IsOnGround();
+	bool isPopEnd = true;//m_characterController.IsOnGround();
 	//プレイヤーとの距離を計算
 	bool isPickUp = PickUp(isPopEnd, 2.0f);
 	//拾うことができるか
@@ -102,10 +124,10 @@ void CTreasureChest::Update()
 	}
 
 	//キャラクターコントローラーに移動速度を設定
-	m_characterController.SetMoveSpeed(moveSpeed);
+	/*m_characterController.SetMoveSpeed(moveSpeed);
 	m_characterController.SetPosition(m_position);
 	m_characterController.Execute(GameTime().GetDeltaFrameTime());
-	m_position = m_characterController.GetPosition();
+	m_position = m_characterController.GetPosition();*/
 
 	m_skinModel.Update(m_position, m_rotation, { 1.0f,1.0f,1.0f },false);
 }
@@ -113,6 +135,7 @@ void CTreasureChest::Update()
 void CTreasureChest::Draw()
 {
 	m_skinModel.Draw(GetGameCamera().GetViewMatrix(), GetGameCamera().GetProjectionMatrix());
+	m_rigidBody->Draw();
 }
 
 void CTreasureChest::DesideWeaponStatus()

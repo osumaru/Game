@@ -1,5 +1,8 @@
 #include "stdafx.h"
 #include "ShopManager.h"
+#include "Shop/ItemShop.h"
+#include "Shop/WeaponShop.h"
+#include "Shop/NormalShop.h"
 
 
 CShopManager::CShopManager()
@@ -39,6 +42,11 @@ void CShopManager::InitShop(const CVector3 position, const CQuaternion rotation,
 		m_shoplist.push_back(weaponshop);
 		break;
 	}
+	case enNormalNpc:
+		CNormalShop* normalshop = New<CNormalShop>(PRIORITY_SHOP);
+		normalshop->Init(position, rotation);
+		m_shoplist.push_back(normalshop);
+		break;
 	}
 }
 

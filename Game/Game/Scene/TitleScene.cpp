@@ -59,6 +59,7 @@ bool CTitleScene::Start()
 		m_start.SetPosition({0.0f, -180.0f});
 		m_start.SetSize({ 500.0f, 300.0f });
 
+		GetSceneManager().GetGameSound()->SetGameSound(CGameSound::enTitleBgm);
 		//フェードインの開始
 		GetSceneManager().GetFade()->FadeIn();
 		return true;

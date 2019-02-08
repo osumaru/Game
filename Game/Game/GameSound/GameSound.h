@@ -15,6 +15,12 @@ public:
 		enBgmNum			//BGMの数
 	};
 
+	enum EnSoundFadeState
+	{
+		enFadeOut,
+		enFadeIn,
+	};
+
 	CGameSound();
 	~CGameSound();
 	bool Start();
@@ -29,22 +35,39 @@ public:
 		m_backSound[enBossBgm].SetPosition(m_3dSoundPosition);
 	}
 	//音楽の切り替えを行う関数
-	void SetGameSound(EnSoundState BgmName)
+	void SetGameSound(EnSoundState BgmName,bool begin = true)
 	{
 		m_backSound[m_soundState].Stop();
 		m_soundState = BgmName;
-		m_backSound[m_soundState].Play(true, true);
+		m_backSound[m_soundState].Play(true, begin);
+	}
+	void GamesoundFadeIn()
+	{
+		m_isFade = true;
+		m_state = EnSoundFadeState::enFadeIn;
+	}
+	void GamesoundFadeOut()
+	{
+		m_isFade = true;
+		m_state = EnSoundFadeState::enFadeOut;
 	}
 
+	void FadeSound();
 private:
-	CSoundSource		m_backSound[5];
-    EnSoundState		m_soundState = enWorldBgm;
-	const float			MENU_SOUND_VOLUME = 0.5f;
-	const float			MASTER_VOLUME = 0.3f;			//BGMの音量
-	const float			SHOP_MASTER_VOLUME = 0.1f;		//ショップのBGMの音量
+	CSoundSource		m_backSound[6];
+    EnSoundState		m_soundState = enBossBgm;
+	EnSoundState		m_nextSoundState = enWorldBgm;
+	const float			MASTER_VOLUME = 1.0f;			//BGMの音量
+	float				m_bgmVolume = 0.0f;
 	CVector3			m_3dSoundPosition = CVector3::Zero;
 	bool				m_isMenu;					
 	bool				m_isShop = false;
 	bool				m_isTown;
+
+	float				m_fadeTime = 0.0f;
+	bool				m_isFade = false;
+	EnSoundFadeState	m_state = EnSoundFadeState::enFadeIn;
+	const float			FADE_IN_TIME = 2.0f;
+	const float			FADE_OUT_TIME = 2.0f;
 };
 
