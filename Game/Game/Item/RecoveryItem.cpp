@@ -8,7 +8,7 @@
 void CRecoveryItem::Init(const CVector3& position)
 {
 	//ƒ‚ƒfƒ‹‚Ì‰Šú‰»
-	m_skinModel.Load(L"Assets/modelData/heart.cmo");
+	m_skinModel.Load(L"Assets/modelData/Potion.cmo");
 	m_position = position;
 	m_characterController.Init(0.2f, 0.2f, m_position);
 	m_characterController.SetUserIndex(EnCollisionAttr::enCollisionAttr_Item);
