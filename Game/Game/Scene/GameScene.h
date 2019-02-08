@@ -37,6 +37,12 @@ public:
 		return m_map;
 	}
 
+	//ƒƒjƒ…[‚Ìæ“¾
+	CMenu* GetMenu()
+	{
+		return m_menu;
+	}
+
 	//•Ší‘I‘ğ‚Ìæ“¾
 	CWeaponSelect*	GetWeaponSelect()
 	{

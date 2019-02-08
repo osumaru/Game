@@ -143,3 +143,19 @@ Map* CSceneManager::GetMap()
 	}
 	return nullptr;
 }
+
+CMenu * CSceneManager::GetMenu()
+{
+	if (m_preSceneState == enGameScene)
+	{
+		//ゲームシーンのメニュー情報
+		return m_gameScene->GetMenu();
+	}
+	else if (m_preSceneState == enBossScene)
+	{
+		//ボスシーンのメニュー情報
+		return m_bossScene->GetMenu();
+	}
+
+	return nullptr;
+}

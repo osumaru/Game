@@ -25,6 +25,11 @@ public:
 	//プレイヤーのステータスが変化した場合に再度数値を書き換える処理
 	void StatusConversion();
 
+	//描画しているか
+	bool GetIsDraw()
+	{
+		return m_draw;
+	}
 private:
 	enum EnMenuState
 	{

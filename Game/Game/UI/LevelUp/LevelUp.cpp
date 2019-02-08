@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "LevelUp.h"
 #include "../../Player/Player.h"
+#include "../../Scene/SceneManager.h"
+#include "../Menu/Menu.h"
 
 //Result‚Ìyoudied‚Æ—‚½Š´‚¶‚Éo‚µ‚½‚Ù‚¤‚ª‚©‚Á‚±‚¢‚¢‚©‚à’m‚ê‚È‚¢
 
@@ -48,7 +50,7 @@ void CLevelUp::Update()
 
 void CLevelUp::PostAfterDraw()
 {
-	if (m_playerLevelUpAlpha <= 0.0f)
+	if (m_playerLevelUpAlpha <= 0.0f || GetSceneManager().GetMenu()->GetIsDraw())
 	{
 		return;
 	}

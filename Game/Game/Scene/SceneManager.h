@@ -55,6 +55,9 @@ public:
 	//マップの取得
 	Map* GetMap();
 
+	//メニューの取得
+	CMenu* GetMenu();
+
 	//フェードアウトが開始したか
 	bool GetFadeOut()
 	{
