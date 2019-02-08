@@ -433,6 +433,9 @@
     <ClCompile Include="Map\MapChip\CSea.cpp">
       <Filter>ソース ファイル\Map\MapChip</Filter>
     </ClCompile>
+    <ClCompile Include="NPC\Shop\NormalShop.cpp">
+      <Filter>ソース ファイル\NPC\Shop</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -764,6 +767,9 @@
     </ClInclude>
     <ClInclude Include="Map\MapChip\CSea.h">
       <Filter>ソース ファイル\Map\MapChip</Filter>
+    </ClInclude>
+    <ClInclude Include="NPC\Shop\NormalShop.h">
+      <Filter>ソース ファイル\NPC\Shop</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

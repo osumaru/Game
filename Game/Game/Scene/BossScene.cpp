@@ -23,7 +23,7 @@ void CBossScene::BeforeDead()
 	GetGameCamera().Destroy();
 	Engine().GetEffectEngine().SetCamera(nullptr);
 	Delete(m_map);
-	Delete(m_gameSound);
+	//Delete(m_gameSound);
 	Delete(m_choices);
 	Delete(m_message);
 	Delete(m_arrowRemain);
@@ -35,7 +35,7 @@ bool CBossScene::Start()
 	GetGameCamera().Create();
 	GetGameCamera().Init();
 
-	m_gameSound = New<CGameSound>(0);
+	//m_gameSound = New<CGameSound>(0);
 
 	if (!GetSceneManager().GetFade()->IsExecute())
 	{
@@ -68,10 +68,12 @@ bool CBossScene::Start()
 
 		m_arrowRemain = New<CArrowRemain>(PRIORITY_UI);
 		m_arrowRemain->Init();
-	}
 
-	//フェードインの開始
-	GetSceneManager().GetFade()->FadeIn();
+		GetSceneManager().GetGameSound()->SetGameSound(CGameSound::EnSoundState::enBossBgm);
+		//フェードインの開始
+		GetSceneManager().GetFade()->FadeIn();
+	}
+	
 	return true;
 }
 

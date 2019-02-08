@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "ItemShop.h"
 #include "../../Player/Player.h"
-#include "../../Camera/GameCamera.h"
 #include "../../Item/InventoryItem/IInventoryItem.h"
 #include "../../Item/InventoryItem/InventoryRecoveryItem.h"
 #include "../../UI/Fade/LoadScene.h"

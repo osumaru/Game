@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "Fade.h"
+#include "../../Scene/SceneManager.h"
 
 
 
@@ -76,6 +77,7 @@ void CFade::FadeOut()
 	m_fadeTime = 0.0f;
 	m_isExecute = true;
 	m_fadeState = enFadeOut;
+	GetSceneManager().GetGameSound()->GamesoundFadeIn();
 
 }
 void CFade::FadeIn()
@@ -84,6 +86,7 @@ void CFade::FadeIn()
 	m_isExecute = true;
 	m_fadeState = enFadeIn;
 	m_loadScene.IsDraw(false);
+	GetSceneManager().GetGameSound()->GamesoundFadeOut();
 }
 
 
