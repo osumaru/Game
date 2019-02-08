@@ -195,6 +195,7 @@
     <ClCompile Include="Item\InventoryItem\InventoryTwinSword.cpp" />
     <ClCompile Include="Map\BossBuilding.cpp" />
     <ClCompile Include="Map\MapChip\ObstacleMapObject.cpp" />
+    <ClCompile Include="NPC\Shop\NormalShop.cpp" />
     <ClCompile Include="Player\PlayerSate\PlayerDown.cpp" />
     <ClCompile Include="Player\PlayerSate\PlayerSky.cpp" />
     <ClCompile Include="Player\Weapon\WeaponEraseEffect.cpp" />
@@ -311,6 +312,7 @@
     <ClInclude Include="Item\InventoryItem\InventoryTwinSword.h" />
     <ClInclude Include="Map\BossBuilding.h" />
     <ClInclude Include="Map\MapChip\ObstacleMapObject.h" />
+    <ClInclude Include="NPC\Shop\NormalShop.h" />
     <ClInclude Include="Player\PlayerSate\PlayerDown.h" />
     <ClInclude Include="Player\PlayerSate\PlayerSky.h" />
     <ClInclude Include="Player\Weapon\WeaponEraseEffect.h" />
@@ -411,6 +413,7 @@
     <MeshContentTask Include="Assets\modelData\CastleDoor2.FBX" />
     <MeshContentTask Include="Assets\modelData\CastleFloor.FBX" />
     <MeshContentTask Include="Assets\modelData\Chest.FBX" />
+    <MeshContentTask Include="Assets\modelData\Coin.FBX" />
     <MeshContentTask Include="Assets\modelData\Grass.FBX" />
     <MeshContentTask Include="Assets\modelData\Heart.fbx" />
     <MeshContentTask Include="Assets\modelData\House.FBX" />
@@ -428,6 +431,7 @@
     <MeshContentTask Include="Assets\modelData\NYApartmentA.fbx" />
     <MeshContentTask Include="Assets\modelData\NYBuilding_A.fbx" />
     <MeshContentTask Include="Assets\modelData\Player.fbx" />
+    <MeshContentTask Include="Assets\modelData\Potion.FBX" />
     <MeshContentTask Include="Assets\modelData\Rock.FBX" />
     <MeshContentTask Include="Assets\modelData\Samurai.FBX" />
     <MeshContentTask Include="Assets\modelData\Shopgirl.fbx" />

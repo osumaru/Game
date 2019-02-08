@@ -24,6 +24,7 @@ enum EnMapChipTag
 	enMapTagMesh,			//剛体をメッシュにするためのタグ
 	enMapTagItemShop,		//アイテムショップ用のタグ
 	enMapTagWeaponShop,		//武器屋用のタグ
+	enMapTagNormalShop,		//取引しない店のモデルのためのタグ
 	enMapTagSoundPoint,		//BGM用のタグ
 	enMapTagTree,			//木のモデルに着けるタグ
 	enMapTagTreasureBox,	//宝箱用のタグ

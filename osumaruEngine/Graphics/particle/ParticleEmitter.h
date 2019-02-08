@@ -19,6 +19,8 @@ struct SParticleEmittInfo
 	int particleNum;			//同時に出るパーティクルの数
 	bool isFirstTimeRandom;		//一番最初にパーティクル出すときだけ時間をずらすか
 	EnAlphaBlendState alphaBlendState;//アルファブレンドのステート
+	float fadeOutTime;			//フェードアウトさせる時間
+
 };
 
 //パーティクルエミッター

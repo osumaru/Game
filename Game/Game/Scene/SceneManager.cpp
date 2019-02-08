@@ -124,7 +124,6 @@ void CSceneManager::ChangeScene(EnSceneState scene)
 		m_fade->FadeOut();
 		m_isFadeOut = true;
 	}
-	
 	//変更するシーンを現在のシーンにする
 	m_nextSceneState = scene;
 }

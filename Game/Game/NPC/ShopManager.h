@@ -1,12 +1,10 @@
 #pragma once
-#include "Shop/ItemShop.h"
-#include "Shop/WeaponShop.h"
-
+#include "IShop.h"
 enum EShop
 {
 	enItemShop,
 	enWeaponShop,
-	enWalkNpc,
+	enNormalNpc,
 };
 class CShopManager:public IGameObject
 {

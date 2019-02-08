@@ -8,8 +8,11 @@ void CMeshCollider::CreateCollider(CSkinModel* skinModel)
 	m_stridingMeshInterface.reset(new btTriangleIndexVertexArray);
 	m_aabbMax = { FLT_MIN, FLT_MIN, FLT_MIN };
 	m_aabbMin = { FLT_MAX, FLT_MAX, FLT_MAX };
+	int index = 0;
 	for (auto& mesh : model->meshes)
 	{
+		m_vertexBuffer.push_back(std::vector<CVector3>());
+		m_indexBuffer.push_back(std::vector<DWORD>());
 		for (auto& meshPart : mesh->meshParts)
 		{
 			ID3D11Buffer* vertexBuffer = meshPart->vertexBuffer.Get();
@@ -28,7 +31,7 @@ void CMeshCollider::CreateCollider(CSkinModel* skinModel)
 				CVector3 vertexPos = *((CVector3*)pData);
 				m_aabbMax.Max(vertexPos);
 				m_aabbMin.Min(vertexPos);
-				m_vertexBuffer.push_back(vertexPos);
+				m_vertexBuffer[index].push_back(vertexPos);
 				pData += meshPart->vertexStride;
 			}
 			Engine().GetDeviceContext()->Unmap(vertexBuffer, 0);
@@ -56,26 +59,27 @@ void CMeshCollider::CreateCollider(CSkinModel* skinModel)
 				if (indexStride == 2)
 				{
 					value = (unsigned int)*((unsigned short*)pData);
-					m_indexBuffer.push_back(value);
+					m_indexBuffer[index].push_back(value);
 				}
 				else if (indexStride == 4)
 				{
 					value = *((unsigned int*)pData);
-					m_indexBuffer.push_back(value);
+					m_indexBuffer[index].push_back(value);
 				}
 				pData += indexStride;
 			}
 
 		}
+		btIndexedMesh indexedMesh;
+		indexedMesh.m_numTriangles = m_indexBuffer[index].size() / 3;
+		indexedMesh.m_triangleIndexBase = (unsigned char*)&m_indexBuffer[index][0];
+		indexedMesh.m_triangleIndexStride = 12;
+		indexedMesh.m_numVertices = (unsigned int)m_vertexBuffer[index].size();
+		indexedMesh.m_vertexBase = (unsigned char*)&m_vertexBuffer[index][0];
+		indexedMesh.m_vertexStride = sizeof(CVector3);
+		m_stridingMeshInterface->addIndexedMesh(indexedMesh);
+		index++;
 	}
-	btIndexedMesh indexedMesh;
-	indexedMesh.m_numTriangles = m_indexBuffer.size() / 3;
-	indexedMesh.m_triangleIndexBase = (unsigned char*)&m_indexBuffer[0];
-	indexedMesh.m_triangleIndexStride = 12;
-	indexedMesh.m_numVertices = (unsigned int)m_vertexBuffer.size();
-	indexedMesh.m_vertexBase = (unsigned char*)&m_vertexBuffer[0];
-	indexedMesh.m_vertexStride = sizeof(CVector3);
-	m_stridingMeshInterface->addIndexedMesh(indexedMesh);
 	m_meshShape.reset(new btBvhTriangleMeshShape(m_stridingMeshInterface.get(), true));
 	
 }

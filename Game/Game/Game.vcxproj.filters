@@ -433,6 +433,9 @@
     <ClCompile Include="Map\MapChip\CSea.cpp">
       <Filter>ソース ファイル\Map\MapChip</Filter>
     </ClCompile>
+    <ClCompile Include="NPC\Shop\NormalShop.cpp">
+      <Filter>ソース ファイル\NPC\Shop</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -768,6 +771,9 @@
     <ClInclude Include="Enemy\RespawnData.h">
       <Filter>ソース ファイル\Enemy</Filter>
     </ClInclude>
+    <ClInclude Include="NPC\Shop\NormalShop.h">
+      <Filter>ソース ファイル\NPC\Shop</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Map\MapChip\ObstacleMapObject.h">
@@ -1050,6 +1056,12 @@
       <Filter>ソース ファイル\Assets</Filter>
     </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\Interior\TresureBox.FBX">
+      <Filter>ソース ファイル\Assets</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\Coin.FBX">
+      <Filter>ソース ファイル\Assets</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\Potion.FBX">
       <Filter>ソース ファイル\Assets</Filter>
     </MeshContentTask>
   </ItemGroup>

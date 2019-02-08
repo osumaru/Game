@@ -101,6 +101,7 @@ bool CGameScene::Start()
 			m_arrowRemain = New<CArrowRemain>(PRIORITY_UI);
 			m_arrowRemain->Init();
 		}
+		GetSceneManager().GetGameSound()->SetGameSound(CGameSound::EnSoundState::enTownBgm);
 		//フェードインの開始
 		GetSceneManager().GetFade()->FadeIn();
 
@@ -108,7 +109,6 @@ bool CGameScene::Start()
 		GetSceneManager().SetIsStart(true);
 		//});
 		//ThreadA.detach();
-		GetSceneManager().GetGameSound()->SetGameSound(CGameSound::enWorldBgm);
 		return true;
 
 	}

@@ -69,4 +69,6 @@ private:
 	CVector3			m_speed;		//速度
 	float				m_alpha = 1.0f;	//アルファ値
 	EnAlphaBlendState	m_alphaBlendState;	//アルファブレンドのステート
+	float				m_fadeOutTime = 0.0f;	//フェードアウトする時間
+	float				m_fadeOutTimer = 0.0f;	//フェードアウトする時間
 };
