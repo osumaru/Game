@@ -72,6 +72,9 @@ void CSamurai::Init(const CVector3& position, int level)
 	m_spineMatrix = &GetBoneWorldMatrix(L"Spine");
 	//攻撃できる距離を設定
 	m_attackLength = 1.2f;
+	//エネミーの種類を設定
+	m_type = enEnemy_Samurai;
+
 	m_animation.AddAnimationEvent([&](auto animClipname, auto eventName)
 	{
 		OnInvokeAnimationEvent(animClipname, eventName);
@@ -101,7 +104,7 @@ void CSamurai::Update()
 	if (levelDifference > LEVEL_DIFFERENCE_LIMIT)
 	{
 		m_effectInterval++;
-		const int EFFECT_INTERVAL = 30;
+		const int EFFECT_INTERVAL = 40;
 		if (m_effectInterval % EFFECT_INTERVAL == 0)
 		{
 			m_effectInterval = 0;
@@ -156,6 +159,7 @@ void CSamurai::Update()
 
 void CSamurai::Draw()
 {
+	//m_characterController.Draw();
 	m_skinModel.Draw(GetGameCamera().GetViewMatrix(), GetGameCamera().GetProjectionMatrix());
 }
 

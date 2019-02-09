@@ -4,6 +4,7 @@
 #include "../Player/Player.h"
 #include "../UI/Menu/ItemInventory.h"
 #include "InventoryItem/InventoryRecoveryItem.h"
+#include "../Scene/SceneManager.h"
 
 void CRecoveryItem::Init(const CVector3& position)
 {
@@ -27,7 +28,7 @@ bool CRecoveryItem::Start()
 
 void CRecoveryItem::Update()
 {
-	if (GetPlayer().GetIsDied() || (m_timer > m_deadTime && !m_isMove))
+	if (GetSceneManager().GetSceneChange() || GetPlayer().GetIsDied() || (m_timer > m_deadTime && !m_isMove))
 	{
 		//ƒvƒŒƒCƒ„[‚ª€–S‚µ‚½–”‚Íˆê’èŠÔ‚Åíœ
 		Delete(this);

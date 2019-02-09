@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "PlayerHp.h"
 #include "../../Player/Player.h"
+#include "../../Scene/SceneManager.h"
+#include "../Menu/Menu.h"
 
 void CPlayerHp::Init()
 {
@@ -80,6 +82,11 @@ void CPlayerHp::Update()
 
 void CPlayerHp::PostAfterDraw()
 {
+	if (GetSceneManager().GetMenu()->GetIsDraw())
+	{
+		return;
+	}
+
 	m_playerHpFrameSprite.Draw();
 	m_playerHpBackSprite.Draw();
 	m_playerHpSprite.Draw();

@@ -27,7 +27,7 @@ public:
 	void Update() override;
 
 	//アニメーションが終了したか
-	bool GetIsAnimationEnd()
+	bool GetIsAnimationEnd() const
 	{
 		return m_isAnimationEnd;
 	}
