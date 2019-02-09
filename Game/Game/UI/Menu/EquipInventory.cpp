@@ -5,6 +5,7 @@
 #include "../../Item/IItem.h"
 #include "../../Player/Weapon/WeaponManager.h"
 #include "../../Item/InventoryItem/IInventoryEquip.h"
+#include "../Message/Message.h"
 
 std::list<std::unique_ptr<IInventoryEquip>> CEquipInventory::m_equipList;
 
@@ -523,10 +524,18 @@ void CEquipInventory::Erase()
 
 void CEquipInventory::AddEquipList(std::unique_ptr<IInventoryEquip> inventoryEquip)
 {
+	m_equipList.push_back(std::move(inventoryEquip));
+}
+
+bool CEquipInventory::IsSpaceEquipList()
+{
 	if (m_equipList.size() < m_equipLimit)
 	{
-		//ŠŽãŒÀ‚ð’´‚¦‚Ä‚¢‚È‚¯‚ê‚Î‘•”õƒŠƒXƒg‚É’Ç‰Á
-		m_equipList.push_back(std::move(inventoryEquip));
+		return true;
 	}
-	
+
+	CMessage* message = New<CMessage>(PRIORITY_UI);
+	message->Init({ 400.0f,200.0f }, L"NoGet");
+	message->SetAlphaSpeed(3.0f);
+	return false;
 }

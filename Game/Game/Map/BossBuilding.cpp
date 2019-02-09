@@ -56,16 +56,14 @@ void CBossBuilding::Update()
 			{
 				//ボスシーンに切り替える
 				GetSceneManager().ChangeScene(CSceneManager::enBossScene);
-				m_isChoice = false;
 			}
 			//いいえを選んだ
 			else
 			{
 				//プレイヤーを動かせるようにする
 				GetPlayer().SetIsAction(true);
-				m_isChoice = false;
 			}
-			m_choices->SetDeleteFlag(true);
+			m_isChoice = false;
 		}
 	}
 

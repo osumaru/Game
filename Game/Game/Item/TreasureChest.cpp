@@ -100,18 +100,22 @@ void CTreasureChest::Update()
 		}
 		if (Pad().IsTriggerButton(enButtonA))
 		{
-			const float GetVolume = 0.3f;
-			CSoundSource* GetSound = New<CSoundSource>(0);
-			GetSound->Init("Assets/sound/Battle/TresureSE.wav");
-			GetSound->Play(false);
-			GetSound->SetVolume(GetVolume);
-			//武器のステータスを決める
-			DesideWeaponStatus();
-			CEquipInventory::AddEquipList(std::move(m_inventoryEquip));
-			GetSceneManager().GetGameScene().GetGetItem()->SubtractDrawCount();
-			m_itemDrawCount = false;
-			GetPlayer().SetIsAction(false);
-			Delete(this);
+			bool itemGet = CEquipInventory::IsSpaceEquipList();
+			if (itemGet)
+			{
+				const float GetVolume = 0.3f;
+				CSoundSource* GetSound = New<CSoundSource>(0);
+				GetSound->Init("Assets/sound/Battle/TresureSE.wav");
+				GetSound->Play(false);
+				GetSound->SetVolume(GetVolume);
+				//武器のステータスを決める
+				DesideWeaponStatus();
+				CEquipInventory::AddEquipList(std::move(m_inventoryEquip));
+				GetSceneManager().GetGameScene().GetGetItem()->SubtractDrawCount();
+				m_itemDrawCount = false;
+				GetPlayer().SetIsAction(false);
+				Delete(this);
+			}
 		}
 	}
 	else 

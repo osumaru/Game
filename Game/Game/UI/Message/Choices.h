@@ -34,13 +34,6 @@ public:
 		return m_isSelect;
 	}
 
-	//自身を削除するフラグを設定する
-	//deleteFlag	自身を削除するフラグ
-	void SetDeleteFlag(bool deleteFlag)
-	{
-		m_deleteFlag = deleteFlag;
-	}
-
 private:
 	EnSelect		m_state = No;		//状態
 	CSprite			m_yes;				//はい
@@ -50,5 +43,4 @@ private:
 	float			m_timer = 0.0f;		//タイマー
 	bool			m_isSelect = false;	//選択肢を選んだか
 	bool			m_isAlpha = true;	//透明になっているか
-	bool			m_deleteFlag = false;//自身を削除するフラグ
 };
