@@ -33,14 +33,13 @@ void CBossBuilding::Update()
 	//プレイヤーとの距離を求める
 	CVector3 distance = playerPos - m_position;
 	float length = distance.Length();
-	if (!m_isChoice && length < 2.0f && m_timer >= 3.0f/* || Pad().IsTriggerButton(enButtonRB)*/)
+	if (!m_isChoice && length < 2.0f && m_timer >= 3.0f)
 	{
 		//メッセージと選択肢を表示する
 		m_message = New<CMessage>(PRIORITY_UI);
 		m_message->Init({ 500.0f,250.0f }, L"bossTry");
 		m_choices = New<CChoices>(PRIORITY_UI);
 		m_choices->Init();
-		m_choices->SetIsActive(false);
 		m_isChoice = true;
 		m_timer = 0.0f;
 	}
@@ -49,12 +48,6 @@ void CBossBuilding::Update()
 	{
 		//選択中ならプレイヤーは動かない
 		GetPlayer().SetIsAction(false);
-		//メッセージを描画し終わった
-		if (m_message->GetIsDrawEnd())
-		{
-			//選択肢を表示する
-			m_choices->SetIsActive(true);
-		}
 		//選択肢を選んだ
 		if (m_choices->GetIsSelect())
 		{
@@ -63,6 +56,7 @@ void CBossBuilding::Update()
 			{
 				//ボスシーンに切り替える
 				GetSceneManager().ChangeScene(CSceneManager::enBossScene);
+				m_isChoice = false;
 			}
 			//いいえを選んだ
 			else
@@ -71,9 +65,7 @@ void CBossBuilding::Update()
 				GetPlayer().SetIsAction(true);
 				m_isChoice = false;
 			}
-			//メッセージと選択肢を消す
-			Delete(m_message);
-			Delete(m_choices);
+			m_choices->SetDeleteFlag(true);
 		}
 	}
 

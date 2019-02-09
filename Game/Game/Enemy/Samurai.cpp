@@ -159,7 +159,6 @@ void CSamurai::Update()
 
 void CSamurai::Draw()
 {
-	//m_characterController.Draw();
 	m_skinModel.Draw(GetGameCamera().GetViewMatrix(), GetGameCamera().GetProjectionMatrix());
 }
 
