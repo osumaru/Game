@@ -29,8 +29,8 @@ std::vector<std::vector<SMapChipInfo>> mapChipInfo =
 	{
 		//本番用の世界のマップ
 		//#include "WorldMap.h"
-		//#include "ShopTest.h"
-		#include "mm.h"
+		#include "ShopTest.h"
+		//#include "mm.h"
 		//#include "BossStage.h"
 		//#include "Boss.h"
 	},
@@ -107,10 +107,10 @@ void Map::Init(int stageNum)
 			m_shopManager->InitShop(mInfo.m_position, mInfo.m_rotation, EShop::enItemShop);
 			break;
 		case enMapTagWeaponShop:
-			m_shopManager->InitShop(mInfo.m_position, mInfo.m_rotation, EShop::enWeaponShop);
+			m_shopManager->InitShop(mInfo.m_position, mInfo.m_rotation, EShop::enItemShop);
 			break;
 		case enMapTagNormalShop:
-			m_shopManager->InitShop(mInfo.m_position, mInfo.m_rotation, EShop::enNormalNpc);
+			m_shopManager->InitShop(mInfo.m_position, mInfo.m_rotation, EShop::enItemShop);
 			break;
 		case enMapTagTree:
 			mapChip = New<CTree>(PRIORITY_MAPCHIP);
@@ -210,6 +210,54 @@ void Map::MapChipErase(std::list<MapChip*>::iterator iterator)
 {
 	Delete(*iterator);
 	iterator = m_mapChip.erase(iterator);
+}
+
+void Map::SetIsMapChipActive(bool isActive)
+{
+	//敵のアクティブ設定
+	for (auto& enemy : m_enemyList)
+	{
+		enemy->SetIsActive(isActive);
+
+	}
+	for (auto& shop : m_shopManager->Getlist())
+	{
+		shop->SetIsActive(isActive);
+	}
+	//ボスの動きの設定
+	if (&GetMaw())
+	{
+		GetMaw().SetIsActive(isActive);
+	}
+	//プレイヤーの動きの設定
+	if (&GetPlayer())
+	{
+		GetPlayer().SetIsActive(isActive);
+	}
+}
+
+void Map::SetIsMapChipActiveUpdate(bool isActive)
+{
+	//敵のアクティブ設定
+	for (auto& enemy : m_enemyList)
+	{
+		enemy->SetIsActiveUpdate(isActive);
+
+	}
+	for (auto& shop : m_shopManager->Getlist())
+	{
+		shop->SetIsActiveUpdate(isActive);
+	}
+	//ボスの動きの設定
+	if (&GetMaw())
+	{
+		GetMaw().SetIsActiveUpdate(isActive);
+	}
+	//プレイヤーの動きの設定
+	if (&GetPlayer())
+	{
+		GetPlayer().SetIsActiveUpdate(isActive);
+	}
 }
 
 void Map::BeforeDead()

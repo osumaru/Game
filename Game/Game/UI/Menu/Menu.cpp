@@ -163,28 +163,9 @@ void CMenu::KeyInputMenu()
 			m_menuState = enMiniMap;
 			m_stateNum = enMiniMap;
 			m_menuSoundEffect.Play(false,true);
-			
-
 		}
-		std::list<IEnemy*> enemyList = GetSceneManager().GetMap()->GetEnemyList();
 		
-		//敵のアクティブ設定
-		for (auto& enemy : enemyList)
-		{
-			enemy->SetIsActive(!m_draw);
-
-		}
-		for (auto& shop : GetSceneManager().GetMap()->GetShop()->Getlist())
-		{
-			shop->SetIsActive(!m_draw);
-		}
-		//ボスの動きの設定
-		if (&GetMaw())
-		{
-			GetMaw().SetIsActive(!m_draw);
-		}
-		//プレイヤーの動きの設定
-		GetPlayer().SetIsActive(!m_draw);
+		GetSceneManager().GetMap()->SetIsMapChipActiveUpdate(!m_draw);
 
 	}
 

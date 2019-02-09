@@ -91,6 +91,14 @@ public:
 		return m_shopManager;
 	}
 
+	
+
+	//マップのオブジェクトにアクティブフラグを設定
+	void SetIsMapChipActive(bool isActive);
+
+	//マップのオブジェクトのアップデートのアクティブフラグを設定
+	void SetIsMapChipActiveUpdate(bool isActive);
+
 private:
 	std::list<MapChip*>			m_mapChip;				//マップチップ
 	std::list<IEnemy*>			m_enemyList;			//エネミーリスト
