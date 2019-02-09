@@ -161,6 +161,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Camera\CameraCollisionSolver.cpp" />
+    <ClCompile Include="Map\MapChip\Castle.cpp" />
     <ClCompile Include="Map\MapChip\CSea.cpp" />
     <ClCompile Include="Enemy\Boss\AttackWave.cpp" />
     <ClCompile Include="Enemy\Boss\Maw.cpp" />
@@ -195,6 +196,7 @@
     <ClCompile Include="Item\InventoryItem\InventoryTwinSword.cpp" />
     <ClCompile Include="Map\BossBuilding.cpp" />
     <ClCompile Include="Map\MapChip\ObstacleMapObject.cpp" />
+    <ClCompile Include="Map\MapChip\Tree.cpp" />
     <ClCompile Include="NPC\Shop\NormalShop.cpp" />
     <ClCompile Include="Player\PlayerSate\PlayerDown.cpp" />
     <ClCompile Include="Player\PlayerSate\PlayerSky.cpp" />
@@ -271,6 +273,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera\CameraCollisionSolver.h" />
+    <ClInclude Include="Map\MapChip\Castle.h" />
     <ClInclude Include="Enemy\RespawnData.h" />
     <ClInclude Include="Map\MapChip\CSea.h" />
     <ClInclude Include="Enemy\Boss\AttackWave.h" />
@@ -312,6 +315,7 @@
     <ClInclude Include="Item\InventoryItem\InventoryTwinSword.h" />
     <ClInclude Include="Map\BossBuilding.h" />
     <ClInclude Include="Map\MapChip\ObstacleMapObject.h" />
+    <ClInclude Include="Map\MapChip\Tree.h" />
     <ClInclude Include="NPC\Shop\NormalShop.h" />
     <ClInclude Include="Player\PlayerSate\PlayerDown.h" />
     <ClInclude Include="Player\PlayerSate\PlayerSky.h" />

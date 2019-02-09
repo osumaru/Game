@@ -29,6 +29,7 @@ enum EnMapChipTag
 	enMapTagTree,			//木のモデルに着けるタグ
 	enMapTagTreasureBox,	//宝箱用のタグ
 	enMapTagSea,			//水面
+	enMapTagCastle,			//Castle系のモデルのタグ(Zアップでナビゲーションメッシュからパスを取り除く為ののモデル
 	enMapTagObstacle,
 	enMapTagBossObj,
 	enMapTagTitleEnemy,
@@ -95,7 +96,5 @@ private:
 	std::list<IEnemy*>			m_enemyList;			//エネミーリスト
 	std::list<CEnemyGroup*>		m_enemyGroupList;		//エネミーグループのリスト
 	std::list<CTreasureChest*>	m_treasureList;			//宝箱リスト`
-	bool						m_collider = false;		//AABBを作成するかどうか
-	bool						m_isTree = false;	//木用のコライダーの設定をするためのフラグ		
 	CShopManager*				m_shopManager;
 };
