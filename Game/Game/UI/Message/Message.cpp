@@ -22,7 +22,7 @@ void CMessage::Init(CVector2 windowSize, wchar_t* textureName)
 void CMessage::Update()
 {
 	//メッセージを段々不透明にしていく
-	m_timer += GameTime().GetDeltaFrameTime();
+	m_timer += GameTime().GetDeltaFrameTime() * m_alphaSpeed;
 	if (m_timer >= 1.0f)
 	{
 		m_timer = 1.0f;
@@ -31,6 +31,11 @@ void CMessage::Update()
 	//アルファ値を設定
 	m_window.SetAlpha(m_timer);
 	m_message.SetAlpha(m_timer);
+
+	if (m_isDrawEnd && Pad().IsTriggerButton(enButtonA))
+	{
+		Delete(this);
+	}
 }
 
 void CMessage::PostAfterDraw()
