@@ -436,6 +436,12 @@
     <ClCompile Include="NPC\Shop\NormalShop.cpp">
       <Filter>ソース ファイル\NPC\Shop</Filter>
     </ClCompile>
+    <ClCompile Include="Map\MapChip\Tree.cpp">
+      <Filter>ソース ファイル\Map\MapChip</Filter>
+    </ClCompile>
+    <ClCompile Include="Map\MapChip\Castle.cpp">
+      <Filter>ソース ファイル\Map\MapChip</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -768,8 +774,17 @@
     <ClInclude Include="Map\MapChip\CSea.h">
       <Filter>ソース ファイル\Map\MapChip</Filter>
     </ClInclude>
+    <ClInclude Include="Enemy\RespawnData.h">
+      <Filter>ソース ファイル\Enemy</Filter>
+    </ClInclude>
     <ClInclude Include="NPC\Shop\NormalShop.h">
       <Filter>ソース ファイル\NPC\Shop</Filter>
+    </ClInclude>
+    <ClInclude Include="Map\MapChip\Tree.h">
+      <Filter>ソース ファイル\Map\MapChip</Filter>
+    </ClInclude>
+    <ClInclude Include="Map\MapChip\Castle.h">
+      <Filter>ソース ファイル\Map\MapChip</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

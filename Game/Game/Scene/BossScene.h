@@ -34,6 +34,13 @@ public:
 	{
 		return m_map;
 	}
+
+	//メニューの取得
+	CMenu* GetMenu()
+	{
+		return m_menu;
+	}
+
 private:
 	Map*			m_map = nullptr;			//マップ
 	CWeaponSelect*	m_weaponSelect = nullptr;	//武器選択

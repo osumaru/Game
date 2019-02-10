@@ -68,20 +68,28 @@ void CParticle::Init(const SParticleEmittInfo& info, const CCamera* camera)
 	m_size.x = info.width;
 	m_size.y = info.height;
 	m_alphaBlendState = info.alphaBlendState;
-
+	m_fadeOutTime = info.fadeOutTime;
 }
 
 void CParticle::Update()
 {
 	m_speed += m_gravity * GameTime().GetDeltaFrameTime();
 	m_position += m_speed * GameTime().GetDeltaFrameTime();
-	if (0.0f < m_lifeTimer)
+	if (0.0f <= m_lifeTimer)
 	{
 		m_lifeTimer -= GameTime().GetDeltaFrameTime();
 	}
 	if (m_lifeTimer < 0.0f)
 	{
-		Delete(this);
+		if (m_fadeOutTimer < m_fadeOutTime)
+		{
+			m_alpha = (m_fadeOutTime - m_fadeOutTimer) / m_fadeOutTime;
+			m_fadeOutTimer += GameTime().GetDeltaFrameTime();
+		}
+		else
+		{
+			Delete(this);
+		}
 	}
 	CQuaternion multi;
 	multi.SetRotation(CVector3::AxisY, m_angle);

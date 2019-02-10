@@ -12,9 +12,9 @@ CBreakMapObject::~CBreakMapObject()
 {
 }
 
-void CBreakMapObject::Init(const CVector3& position, const CQuaternion& rotation, const wchar_t* modelName, const bool istree, const bool collider, CAnimation* anim)
+void CBreakMapObject::Init(const CVector3& position, const CQuaternion& rotation, const wchar_t* modelName, CAnimation* anim)
 {
-	MapChip::Init(position, rotation, modelName,istree,collider);
+	MapChip::Init(position, rotation, modelName);
 
 	SRigidBodyInfo rInfo;
 

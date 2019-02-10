@@ -17,6 +17,7 @@ public:
 
 	//初期化
 	//position	座標
+	//level		レベル
 	void Init(const CVector3& position, int level) override;
 
 	//更新される前に一度だけ呼ばれる

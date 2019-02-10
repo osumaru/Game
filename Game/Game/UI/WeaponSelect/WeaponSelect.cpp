@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "WeaponSelect.h"
 #include "../../Player/Player.h"
+#include "../../Scene/SceneManager.h"
+#include "../Menu/Menu.h"
 
 void CWeaponSelect::Init()
 {
@@ -51,6 +53,11 @@ void CWeaponSelect::Update()
 
 void CWeaponSelect::PostAfterDraw()
 {
+	if (GetSceneManager().GetMenu()->GetIsDraw())
+	{
+		return;
+	}
+
 	m_weapon[enWeaponSword].Draw();
 	m_weapon[enWeaponLongSword].Draw();
 	m_weapon[enWeaponTwinSword].Draw();

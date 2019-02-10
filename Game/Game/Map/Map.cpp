@@ -21,6 +21,8 @@
 #include "MapChip/CSea.h"
 #include "../Scene/SceneManager.h"
 #include "../Item/TreasureChest.h"
+#include "MapChip/Castle.h"
+#include "MapChip/Tree.h"
 
 std::vector<std::vector<SMapChipInfo>> mapChipInfo = 
 {
@@ -111,8 +113,7 @@ void Map::Init(int stageNum)
 			m_shopManager->InitShop(mInfo.m_position, mInfo.m_rotation, EShop::enNormalNpc);
 			break;
 		case enMapTagTree:
-			mapChip = New<StaticMapObject>(PRIORITY_MAPCHIP);
-			m_isTree = true;
+			mapChip = New<CTree>(PRIORITY_MAPCHIP);
 			break;
 		case enMapTagTitleEnemy:
 			titleEnemy = New<CTitleEnemy>(PRIORITY_ENEMY);
@@ -128,23 +129,22 @@ void Map::Init(int stageNum)
 			break;
 		case enMapTagBreakBrock:
 			mapChip = New<CBreakMapObject>(PRIORITY_MAPCHIP);
-			m_collider = true;
 			break;
 		case enMapTagTerrain:
 			mapChip = New<StaticMapObject>(PRIORITY_GROUND);
 			g_pathFinding.GetNavigationMesh().SetSkinModel(&dynamic_cast<StaticMapObject*>(mapChip)->GetSkinModel());
-			m_collider = false;
 			break;
 		case enMapTagMesh:
 			mapChip = New<StaticMapObject>(PRIORITY_GROUND);
-			m_collider = false;
+			break;
+		case enMapTagCastle:
+			mapChip = New<CCastle>(PRIORITY_BILLDING);
 			break;
 		case enMapTagObstacle:
 			mapChip = New<CObstacleMapObject>(PRIORITY_BILLDING);
 			break;
 		default:
 			mapChip = New<StaticMapObject>(PRIORITY_MAPCHIP);
-			m_collider = true;
 			break;
 		}
 		if (enemy != nullptr)
@@ -158,15 +158,13 @@ void Map::Init(int stageNum)
 		if (mapChip != nullptr)
 		{
 			//マップチップを生成
-			mapChip->Init(mInfo.m_position, mInfo.m_rotation, mInfo.m_modelName,m_isTree,m_collider);
+			mapChip->Init(mInfo.m_position, mInfo.m_rotation, mInfo.m_modelName);
 			m_mapChip.push_back(mapChip);
 
 			//マップチップに自身のイテレーターとマップのインスタンスを渡す(削除の時に使う)
 			std::list<MapChip*>::iterator iterator = m_mapChip.end();
 			iterator--;
 			mapChip->SetIterator(this, iterator);
-			m_isTree = false;
-			m_collider = false;
 		}
 	}
 

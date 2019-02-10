@@ -1,6 +1,8 @@
 #include "ArrowRemain.h"
 #include "../../Player/Player.h"
 #include "../../Player/Weapon/Bow.h"
+#include "../../Scene/SceneManager.h"
+#include "../Menu/Menu.h"
 
 void CArrowRemain::Init()
 {
@@ -61,6 +63,11 @@ void CArrowRemain::Update()
 
 void CArrowRemain::PostAfterDraw()
 {
+	if (GetSceneManager().GetMenu()->GetIsDraw())
+	{
+		return;
+	}
+
 	m_arrowSynbol.Draw();
 	for (int i = 0; i < DIGIT_NUM; i++)
 	{

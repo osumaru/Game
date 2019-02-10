@@ -37,8 +37,8 @@ private:
 
 	CVector3											m_aabbMax;					//AABBの最大値
 	CVector3											m_aabbMin;					//AABBの最小値
-	std::vector<DWORD>									m_indexBuffer;				//インデックスバッファ
-	std::vector<CVector3>								m_vertexBuffer;				//頂点バッファ
+	std::vector<std::vector<DWORD>>						m_indexBuffer;				//インデックスバッファ
+	std::vector<std::vector<CVector3>>								m_vertexBuffer;				//頂点バッファ
 	std::unique_ptr<btBvhTriangleMeshShape>				m_meshShape;				//メッシュコライダー
 	std::unique_ptr<btTriangleIndexVertexArray>			m_stridingMeshInterface;	//メッシュインターフェース
 };

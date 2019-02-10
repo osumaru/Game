@@ -7,13 +7,13 @@ public:
 	~CQuickItem();
 	bool Start();
 	void Update();
-	SItemStatus GetItemStatus(const int num)
+	SItemStatus& GetItemStatus(const int num)
 	{
 		return ItemStatus[num];
 	}
 	//アイテムのIDが一致するものを取り出す
 	//引数	アイテムのID
-	SItemStatus GetItemStatus_ItemId(const int ItemID)
+	SItemStatus& GetItemStatus_ItemId(const int ItemID)
 	{
 		for (auto quicklist : m_quickItemStatusList)
 		{

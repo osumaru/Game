@@ -5,6 +5,7 @@
 #include "../../Camera/GameCamera.h"
 #include "../../Scene/SceneManager.h"
 #include "../../Map/Map.h"
+#include "../Menu/Menu.h"
 
 CMiniMap::CMiniMap()
 {
@@ -124,6 +125,11 @@ void CMiniMap::Update()
 
 void CMiniMap::PostAfterDraw()
 {
+	if (GetSceneManager().GetMenu()->GetIsDraw())
+	{
+		return;
+	}
+
 	m_miniMap.Draw();
 	for (int i = 0; i < m_enemyList->size(); i++) {
 		m_enemyIcon[i]->Draw();

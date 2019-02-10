@@ -1,5 +1,7 @@
 #include "GetItem.h"
 #include "../../Player/Player.h"
+#include "../../Scene/SceneManager.h"
+#include "../Menu/Menu.h"
 
 void CGetItem::Init()
 {
@@ -29,6 +31,11 @@ void CGetItem::Update()
 
 void CGetItem::PostAfterDraw()
 {
+	if (GetSceneManager().GetMenu()->GetIsDraw())
+	{
+		return;
+	}
+
 	if (m_drawCount > 0)
 	{
 		m_back.Draw();

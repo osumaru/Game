@@ -87,6 +87,8 @@ void CWarrok::Init(const CVector3& position, int level)
 	m_attackLength = 10.0f;
 	//攻撃タイプを設定
 	m_attackType = enAttackType_Far;
+	//エネミーの種類を設定
+	m_type = enEnemy_Warrok;
 
 	m_animation.AddAnimationEvent([&](auto animClipname, auto eventName)
 	{
@@ -117,7 +119,7 @@ void CWarrok::Update()
 	if (levelDifference > LEVEL_DIFFERENCE_LIMIT)
 	{
 		m_effectInterval++;
-		const int EFFECT_INTERVAL = 30;
+		const int EFFECT_INTERVAL = 40;
 		if (m_effectInterval % EFFECT_INTERVAL == 0)
 		{
 			m_effectInterval = 0;
