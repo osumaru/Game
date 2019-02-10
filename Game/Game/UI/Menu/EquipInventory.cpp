@@ -523,10 +523,16 @@ void CEquipInventory::Erase()
 
 void CEquipInventory::AddEquipList(std::unique_ptr<IInventoryEquip> inventoryEquip)
 {
+	//装備リストに追加
+	m_equipList.push_back(std::move(inventoryEquip));
+}
+
+bool CEquipInventory::IsSpaceEquipList()
+{
 	if (m_equipList.size() < m_equipLimit)
 	{
-		//所持上限を超えていなければ装備リストに追加
-		m_equipList.push_back(std::move(inventoryEquip));
+		//リストに空きがある
+		return true;
 	}
-	
+	return false;
 }

@@ -14,12 +14,6 @@ public:
 	//描画
 	void PostAfterDraw() override;
 
-	////描画し終わったかを取得
-	//bool GetIsDrawEnd()
-	//{
-	//	return m_isDrawEnd;
-	//}
-
 	//透明から不透明にする速度を設定
 	//alphaSpeed	透明から不透明にする速度
 	void SetAlphaSpeed(float alphaSpeed)
@@ -30,8 +24,6 @@ public:
 private:
 	CSprite		m_window;				//ウィンドウ
 	CSprite		m_message;				//メッセージ
-	CVector2	m_windowSize;			//ウィンドウのサイズ
 	float		m_timer = 0.0f;			//タイマー
 	float		m_alphaSpeed = 1.0f;	//透明から不透明にする速度
-	bool		m_isDrawEnd = false;	//描画し終わったか
 };

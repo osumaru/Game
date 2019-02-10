@@ -50,6 +50,10 @@ public:
 	//所持装備リストに追加
 	//inventoryEquip		リストに追加する装備
 	static void AddEquipList(std::unique_ptr<IInventoryEquip> inventoryEquip);
+
+	//装備リストに追加する前に呼んで調べてね
+	//装備リストに空きがあるか
+	static bool IsSpaceEquipList();
 private:
 	//ステータスの数
 	enum EnStatusNum {

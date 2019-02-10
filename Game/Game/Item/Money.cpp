@@ -21,7 +21,8 @@ bool CMoney::Start()
 	float distance = 3.0f;
 	float popUpSpeed = 6.0f;
 	//ランダム地点にポップさせる
-	RamdomPop(distance, popUpSpeed);
+	CVector3 moveSpeed = RamdomPop(distance, popUpSpeed);
+	m_characterController.SetMoveSpeed(moveSpeed);
 
 	return true;
 }

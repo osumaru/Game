@@ -317,9 +317,16 @@ void CItemInventory::Erase()
 
 void CItemInventory::AddItemList(std::unique_ptr<IInventoryItem> item)
 {
+	//アイテムリストに追加
+	m_itemList.push_back(std::move(item));
+}
+
+bool CItemInventory::IsSpaceItemList()
+{
 	if (m_itemList.size() < m_itemLimit)
 	{
-		//所持上限を超えていなければアイテムリストに追加
-		m_itemList.push_back(std::move(item));
+		//リストに空きがある
+		return true;
 	}
+	return false;
 }
