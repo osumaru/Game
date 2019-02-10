@@ -53,6 +53,13 @@ void CTreasureChest::Init(CVector3 position, CQuaternion rotation, bool isMapIte
 		m_rigidBody.reset(new CRigidBody);
 		m_rigidBody->Create(rInfo);
 	}
+	CTexture * texture = TextureResource().LoadTexture(L"Assets/sprite/MessageWindow.png");
+	m_sprite.Init(texture);
+	m_sprite.SetSize({ 600.0f,100.0f });
+	m_sprite.SetPosition({ 0.0f,-250.0f });
+	m_font.Init(L"10000000");
+	m_font.SetPosition({ -180.0f,-230.0f });
+	m_font.SetColor(CVector4::White);
 }
 
 bool CTreasureChest::Start()
@@ -111,7 +118,8 @@ void CTreasureChest::Update()
 			GetSceneManager().GetGameScene().GetGetItem()->SubtractDrawCount();
 			m_itemDrawCount = false;
 			GetPlayer().SetIsAction(false);
-			Delete(this);
+			m_isItemeName = true;
+			//Delete(this);
 		}
 	}
 	else 
@@ -136,6 +144,13 @@ void CTreasureChest::Draw()
 {
 	m_skinModel.Draw(GetGameCamera().GetViewMatrix(), GetGameCamera().GetProjectionMatrix());
 	m_rigidBody->Draw();
+}
+
+void CTreasureChest::PostAfterDraw()
+{
+	if (!m_isItemeName) { return; }
+	m_sprite.Draw();
+	m_font.Draw();
 }
 
 void CTreasureChest::DesideWeaponStatus()
@@ -192,7 +207,7 @@ void CTreasureChest::DesideWeaponStatus()
 	//•Ší‚ÌUIî•ñ‚ÌŽæ“¾(•¶Žš—ñ)
 	textureFileName = nItem->GetItemStatus(num).ItemSprite;
 	int weaponAttack = nItem->GetItemStatus_ItemId(num).ItemEffect;
-
+	m_font.SetString(itemName);
 	if (weaponNumber == EnPlayerWeapon::enWeaponSword)
 	{
 		//Œ•

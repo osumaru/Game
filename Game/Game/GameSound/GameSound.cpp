@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "GameSound.h"
+#include "../Player/Player.h"
 
 
 CGameSound::CGameSound()
@@ -15,18 +16,28 @@ CGameSound::~CGameSound()
 bool CGameSound::Start()
 {
 	m_bgmVolume = MASTER_VOLUME;
-	m_backSound[enTitleBgm].Init("Assets/sound/BackSound/TitleBgm.wav");
-	m_backSound[enTitleBgm].SetVolume(m_bgmVolume);
-	m_backSound[enTownBgm].Init("Assets/sound/BackSound/TownBgm.wav");
-	m_backSound[enTownBgm].SetVolume(m_bgmVolume);
-	m_backSound[enShopBgm].Init("Assets/sound/BackSound/ShopBgm.wav");
-	m_backSound[enShopBgm].SetVolume(m_bgmVolume);
-	m_backSound[enWorldBgm].Init("Assets/sound/BackSound/FieldBgm.wav");
-	m_backSound[enWorldBgm].SetVolume(m_bgmVolume);
-	m_backSound[enBossBgm].Init("Assets/sound/BackSound/BossBgm.wav");
-	m_backSound[enBossBgm].SetVolume(m_bgmVolume);
+	m_backSound[enTitleBgm].m_backSound.Init("Assets/sound/BackSound/TitleBgm.wav");
+	m_backSound[enTitleBgm].m_backSound.SetVolume(m_backSound[enTitleBgm].m_volume);
 
-	m_backSound[m_soundState].Play(true,true);
+	m_backSound[enTownBgm].m_backSound.Init("Assets/sound/BackSound/TownBgm.wav");
+	m_backSound[enTownBgm].m_backSound.SetVolume(m_backSound[enTownBgm].m_volume);
+	m_backSound[enTownBgm].m_soundPosition = { -522.04f, 210.20f, -79.51f };
+	m_backSound[enTownBgm].m_lenght = 80.0f;
+	m_backSound[enTownBgm].m_isMapSound = true;
+	
+	m_backSound[enShopBgm].m_backSound.Init("Assets/sound/BackSound/ShopBgm.wav");
+	m_backSound[enShopBgm].m_backSound.SetVolume(m_backSound[enShopBgm].m_volume);
+
+	m_backSound[enWorldBgm].m_backSound.Init("Assets/sound/BackSound/FieldBgm.wav");
+	m_backSound[enWorldBgm].m_backSound.SetVolume(m_backSound[enWorldBgm].m_volume);
+
+	m_backSound[enBossBgm].m_backSound.Init("Assets/sound/BackSound/BossBgm.wav");
+	m_backSound[enBossBgm].m_backSound.SetVolume(m_backSound[enBossBgm].m_volume);
+
+	m_backSound[enDeathBgm].m_backSound.Init("Assets/sound/BackSound/GameOverBgm.wav");
+	m_backSound[enDeathBgm].m_backSound.SetVolume(m_backSound[enDeathBgm].m_volume);
+
+	m_backSound[m_soundState].m_backSound.Play(m_backSound[enDeathBgm].m_isLoop, m_backSound[enDeathBgm].m_isBegin);
 	return true;
 }
 
@@ -39,20 +50,10 @@ void CGameSound::Update()
 
 		break;
 	case enWorldBgm:
-		if (m_isShop)
-		{
-			m_backSound[enWorldBgm].Stop();;
-			m_soundState = enShopBgm;
-			m_backSound[enShopBgm].Play(true, true);
-		}
+		
 		break;
 	case enTownBgm:
-		if (m_isShop)
-		{
-			m_backSound[enTownBgm].Stop();;
-			m_soundState = enShopBgm;
-			m_backSound[enShopBgm].Play(true, true);
-		}
+		
 		break;
 	case enBattleBgm:
 
@@ -72,11 +73,14 @@ void CGameSound::Update()
 		break;
 	}
 	FadeSound();
+	m_backSound[m_soundState].m_backSound.Update();
+	m_backSound[m_soundState].m_backSound.SetVolume(m_bgmVolume);
+	SoundLenght();
 }
 
 void CGameSound::FadeSound()
 {
-	if (!m_isFade) { return; }
+	if (!m_isFade ) { return; }
 
 	switch (m_state)
 	{
@@ -84,13 +88,13 @@ void CGameSound::FadeSound()
 		m_fadeTime += GameTime().GetDeltaFrameTime();
 		if (m_fadeTime < FADE_OUT_TIME)
 		{
-			m_bgmVolume = (min((m_fadeTime / FADE_OUT_TIME), 1.0f));
+			m_bgmVolume = (min((m_fadeTime / FADE_OUT_TIME), m_backSound[m_soundState].m_volume));
 		}
 		else
 		{
 			m_isFade = false;
 			m_fadeTime = 0;
-			m_bgmVolume = 1.0f;
+			m_bgmVolume = m_backSound[m_soundState].m_volume;
 		}
 
 		break;
@@ -99,7 +103,7 @@ void CGameSound::FadeSound()
 		m_fadeTime += GameTime().GetDeltaFrameTime();
 		if (m_fadeTime < FADE_IN_TIME)
 		{
-			m_bgmVolume = max((1.0f - (m_fadeTime / FADE_IN_TIME)), 0.0f);
+			m_bgmVolume = max((m_backSound[m_soundState].m_volume - (m_fadeTime / FADE_IN_TIME)), 0.0f);
 		}
 		else
 		{
@@ -111,5 +115,30 @@ void CGameSound::FadeSound()
 		break;
 	}
 	
-	m_backSound[m_soundState].SetVolume(m_bgmVolume);
+	m_backSound[m_soundState].m_backSound.SetVolume(m_bgmVolume);
+	
+}
+
+void CGameSound::SoundLenght()
+{
+	if (&GetPlayer() == nullptr || !m_backSound[m_soundState].m_isMapSound) { return; }
+
+	CVector3 soundVec = m_backSound[m_soundState].m_soundPosition - GetPlayer().GetPosition();
+	float len = soundVec.Length();
+	if (m_backSound[m_soundState].m_lenght < len)
+	{
+		len -= m_backSound[m_soundState].m_lenght;
+		if (len < m_volumeDownLen)
+		{
+			m_bgmVolume = m_backSound[m_soundState].m_volume - (1.0f / m_volumeDownLen * len);
+		}
+		else
+		{
+			m_bgmVolume = 0.0f;
+		}
+	}
+	else
+	{
+		m_bgmVolume = m_backSound[m_soundState].m_volume;
+	}
 }
