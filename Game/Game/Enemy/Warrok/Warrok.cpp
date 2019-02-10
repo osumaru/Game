@@ -57,6 +57,7 @@ void CWarrok::Init(const CVector3& position, int level)
 	m_animation.SetLoopFlg(CEnemyState::enAnimationWarrok_Idle, true);
 	m_animation.SetLoopFlg(CEnemyState::enAnimationWarrok_Walk, true);
 	m_animation.SetLoopFlg(CEnemyState::enAnimationWarrok_Chase, true);
+	m_animation.Play(CEnemyState::enAnimation_Idle, 0.3f);
 	//Add(&m_enemyStateMachine, 0);
 	//Add(&m_enemyTurn, 0);
 	//Add(&m_enemySearch, 0);
