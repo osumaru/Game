@@ -85,7 +85,7 @@ void CItemShop::Update()
 {
 	ShopUpdate();
 	if (!m_isTransaction) { return; };
-	if (GetPlayer().BuyMoney(m_items[m_lineupSelectNumber + 101].ItemStatus.Itemprice))
+	if (GetPlayer().BuyMoney(m_items[m_lineupSelectNumber + 101].ItemStatus.Itemprice) && CItemInventory::IsSpaceItemList())
 	{
 		std::unique_ptr<IInventoryItem> inventoryItem = std::make_unique<CInventoryRecoveryItem>();
 		inventoryItem->Init();

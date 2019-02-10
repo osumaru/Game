@@ -25,7 +25,8 @@ public:
 	//ランダム地点にポップさせる
 	//distance	ランダム地点までの距離
 	//upSpeed	ポップさせる上方向の速度
-	virtual void RamdomPop(float distance, float upSpeed);
+	//戻り値　移動速度
+	virtual CVector3 RamdomPop(float distance, float upSpeed);
 
 	//アイテムを拾うことができるか
 	//isPopEnd	ポップし終わっているか
@@ -33,6 +34,7 @@ public:
 	virtual bool PickUp(bool isPopEnd, float length);
 
 	//移動
+	//戻り値　移動速度
 	virtual CVector3 Move();
 
 protected:

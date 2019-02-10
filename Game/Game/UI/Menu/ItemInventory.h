@@ -41,6 +41,9 @@ public:
 	//item		アイテムリストに追加するアイテム
 	static void AddItemList(std::unique_ptr<IInventoryItem> item);
 
+	//アイテムリストに追加する前に呼んで調べてね
+	//アイテムリストに空きがあるか
+	static bool IsSpaceItemList();
 private:
 	static const int	m_itemLimit = 25;			//アイテム所持上限
 	static std::list<std::unique_ptr<IInventoryItem>>	m_itemList;	//アイテムリスト

@@ -11,6 +11,7 @@
 #include "../Item/InventoryItem/InventoryBow.h"
 #include "../Item/InventoryItem/InventoryTwinSword.h"
 #include"GameItem/CEquipItem.h"
+#include "../UI/Message/Message.h"
 
 void CTreasureChest::Init(CVector3 position, CQuaternion rotation, bool isMapItem, EnDropType dropType)
 {
@@ -63,7 +64,8 @@ bool CTreasureChest::Start()
 		float distance = 0.0f;
 		float popUpSpeed = 2.0f;
 		//ランダムにポップさせる
-		RamdomPop(distance, popUpSpeed);
+		CVector3 moveSpeed = RamdomPop(distance, popUpSpeed);
+		m_characterController.SetMoveSpeed(moveSpeed);
 	}
 
 	return true;
@@ -115,6 +117,12 @@ void CTreasureChest::Update()
 				m_itemDrawCount = false;
 				GetPlayer().SetIsAction(false);
 				Delete(this);
+			}
+			else 
+			{
+				CMessage* message = New<CMessage>(PRIORITY_UI);
+				message->Init({ 320.0f,100.0f }, L"NoGet");
+				message->SetAlphaSpeed(3.0f);
 			}
 		}
 	}

@@ -37,7 +37,7 @@ void CBossBuilding::Update()
 	{
 		//メッセージと選択肢を表示する
 		m_message = New<CMessage>(PRIORITY_UI);
-		m_message->Init({ 500.0f,250.0f }, L"bossTry");
+		m_message->Init({ 480.0f,150.0f }, L"bossTry");
 		m_choices = New<CChoices>(PRIORITY_UI);
 		m_choices->Init();
 		m_isChoice = true;
