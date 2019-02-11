@@ -10,12 +10,11 @@ void CCastle::Init(const CVector3& position, const CQuaternion& rotation, const 
 	MapChip::Init(position, rotation, modelName);
 
 	SRigidBodyInfo rInfo;
-	//	m_isTree = istree;
 	rInfo.mass = 0.0f;
 	rInfo.pos = m_position;
 	rInfo.rot = m_rotation;
 	CQuaternion multi = CQuaternion::Identity;
-	multi.SetRotationDeg(CVector3::AxisX, -90.0f);
+	//multi.SetRotationDeg(CVector3::AxisX, -90.0f);
 	rInfo.rot.Multiply(multi);
 	CMatrix rotMat;
 	rotMat.MakeRotationFromQuaternion(m_rotation);
@@ -24,8 +23,6 @@ void CCastle::Init(const CVector3& position, const CQuaternion& rotation, const 
 	CVector3 boxsize = (m_meshCollider->GetAabbMax() - m_meshCollider->GetAabbMin()) / 2.0f;
 	CVector3 pos = (m_meshCollider->GetAabbMax() + m_meshCollider->GetAabbMin()) / 2.0f;
 	pos.Mul(rotMat);
-	boxsize.x *= 0.1;
-	boxsize.z *= 0.1;
 	rInfo.collider = m_meshCollider.get();
 	m_skinModel.SetIsAlphaTest(true);
 	//„‘Ì‚ðì¬
@@ -45,4 +42,6 @@ void CCastle::Update()
 void CCastle::Draw()
 {
 	MapChip::Draw();
+	m_rigidBody->Draw();
+
 }

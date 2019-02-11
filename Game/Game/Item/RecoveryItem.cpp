@@ -102,10 +102,11 @@ void CRecoveryItem::Update()
 		}
 		else 
 		{
-			float distance = 3.0f;
+			float distance = 6.5f;
 			float popUpSpeed = 6.0f;
 			//ランダム地点にポップさせる
 			moveSpeed = RamdomPop(distance, popUpSpeed);
+			AcceleReset();
 			m_isPopEnd = false;
 			m_isMove = false;
 			m_isRePop = true;
