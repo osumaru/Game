@@ -53,13 +53,7 @@ void CTreasureChest::Init(CVector3 position, CQuaternion rotation, bool isMapIte
 		m_rigidBody.reset(new CRigidBody);
 		m_rigidBody->Create(rInfo);
 	}
-	CTexture * texture = TextureResource().LoadTexture(L"Assets/sprite/MessageWindow.png");
-	m_sprite.Init(texture);
-	m_sprite.SetSize({ 600.0f,100.0f });
-	m_sprite.SetPosition({ 0.0f,-250.0f });
-	m_font.Init(L"10000000");
-	m_font.SetPosition({ -180.0f,-230.0f });
-	m_font.SetColor(CVector4::White);
+
 }
 
 bool CTreasureChest::Start()
@@ -78,7 +72,7 @@ bool CTreasureChest::Start()
 
 void CTreasureChest::Update()
 {
-	if (GetSceneManager().GetSceneChange() || 
+	if (GetSceneManager().GetSceneChange() ||
 		(!m_isMapItem && m_timer > m_deadTime))
 	{
 		//プレイヤーが死亡した又は一定時間で削除
@@ -90,6 +84,18 @@ void CTreasureChest::Update()
 	{
 		m_timer += GameTime().GetDeltaFrameTime();
 	}
+	if (m_isDrawItemName)
+	{
+		m_drawTime += GameTime().GetDeltaFrameTime();
+		if (m_drawTime > 1.5f)
+		{
+			GetSceneManager().GetGameScene().GetGetItem()->NoItemeNameDraw();
+			m_drawTime = 0.0f;
+			Delete(this);
+		}
+		return;
+	}
+	
 
 	//移動速度を取得
 	CVector3 moveSpeed = m_characterController.GetMoveSpeed();
@@ -119,7 +125,8 @@ void CTreasureChest::Update()
 			m_itemDrawCount = false;
 			GetPlayer().SetIsAction(false);
 			m_isItemeName = true;
-			//Delete(this);
+			m_isDrawItemName = true;
+			
 		}
 	}
 	else 
@@ -142,16 +149,11 @@ void CTreasureChest::Update()
 
 void CTreasureChest::Draw()
 {
+	if (m_isDrawItemName) { return; }
 	m_skinModel.Draw(GetGameCamera().GetViewMatrix(), GetGameCamera().GetProjectionMatrix());
 	m_rigidBody->Draw();
 }
 
-void CTreasureChest::PostAfterDraw()
-{
-	if (!m_isItemeName) { return; }
-	m_sprite.Draw();
-	m_font.Draw();
-}
 
 void CTreasureChest::DesideWeaponStatus()
 {
@@ -207,7 +209,9 @@ void CTreasureChest::DesideWeaponStatus()
 	//武器のUI情報の取得(文字列)
 	textureFileName = nItem->GetItemStatus(num).ItemSprite;
 	int weaponAttack = nItem->GetItemStatus_ItemId(num).ItemEffect;
-	m_font.SetString(itemName);
+	CTexture * texture = TextureResource().LoadTexture(textureFileName);
+	GetSceneManager().GetGameScene().GetGetItem()->ItemeNameDraw(texture, itemName);
+
 	if (weaponNumber == EnPlayerWeapon::enWeaponSword)
 	{
 		//剣

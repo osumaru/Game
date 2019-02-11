@@ -32,7 +32,6 @@ public:
 	//描画
 	void Draw() override;
 
-	void PostAfterDraw() override;
 
 	//武器のステータスを決める
 	void DesideWeaponStatus();
@@ -47,6 +46,7 @@ private:
 	std::unique_ptr<CMeshCollider>		m_meshCollider;		//コライダー
 	std::unique_ptr<CBoxCollider>		m_boxCollider;		//コライダー
 	bool								m_isItemeName = false;
-	CSprite								m_sprite;
-	CFont								m_font;
+	bool								m_isDrawItemName = false;
+	float								m_drawTime = 0.0f;
+
 };
