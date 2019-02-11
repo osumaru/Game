@@ -29,8 +29,8 @@ std::vector<std::vector<SMapChipInfo>> mapChipInfo =
 	{
 		//本番用の世界のマップ
 		//#include "WorldMap.h"
-		#include "ShopTest.h"
-		//#include "mm.h"
+		//#include "ShopTest.h"
+		#include "mm.h"
 		//#include "BossStage.h"
 		//#include "Boss.h"
 	},
@@ -214,6 +214,7 @@ void Map::MapChipErase(std::list<MapChip*>::iterator iterator)
 
 void Map::SetIsMapChipActive(bool isActive)
 {
+
 	//敵のアクティブ設定
 	for (auto& enemy : m_enemyList)
 	{

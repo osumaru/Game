@@ -1,10 +1,11 @@
 #include "stdafx.h"
 #include "ItemInventory.h"
 #include "Menu.h"
-#include "../../Player/Player.h"
 #include "../../Item/InventoryItem/IInventoryItem.h"
+#include "../../Player/ItemList.h"
+#include "../../Player/Player.h"
 
-std::list<std::unique_ptr<IInventoryItem>> CItemInventory::m_itemList;
+//std::list<std::unique_ptr<IInventoryItem>> CItemInventory::m_itemList;
 
 CItemInventory::CItemInventory(){}
 
@@ -15,7 +16,7 @@ void CItemInventory::Init(CMenu* menu)
 	m_menu = menu;
 	//インベントリの幅と高さを初期化
 	m_width = 5;
-	m_height = m_itemLimit / m_width;
+	m_height = CItemList::m_itemLimit / m_width;
 	//座標とサイズを初期化
 	m_basePos = { -450.0f, 190.0f };
 	m_size = { 100.0f, 100.0f };
@@ -41,7 +42,7 @@ void CItemInventory::Init(CMenu* menu)
 	m_pointer.SetSize(m_size);
 	//インベントリの枠を初期化
 	texture = TextureResource().LoadTexture(L"Assets/sprite/Frame.png");
-	for (int i = 0; i < m_itemLimit; i++)
+	for (int i = 0; i < CItemList::m_itemLimit; i++)
 	{
 		m_itemFrame[i].Init(texture);
 		m_itemFrame[i].SetSize(m_size);
@@ -81,18 +82,19 @@ void CItemInventory::Init(CMenu* menu)
 	m_buttonYMoji.Init(texture);
 	m_buttonYMoji.SetPosition({ 510.0f, -325.0f });
 	m_buttonYMoji.SetSize({ 60.0f,20.0f });
-	if (!m_itemList.empty()) 
+	const std::list<std::unique_ptr<IInventoryItem>>& itemList = GetItemList().GetBody();
+	if (!itemList.empty()) 
 	{
 		//リストにアイテムがある
 		int idx = 0;
-		for (auto& item : m_itemList)
+		for (auto& item : itemList)
 		{
 			//座標とサイズを決める
 			CVector2 position = m_basePos;
 			position.x += m_size.x * (idx % m_width);
 			position.y -= m_size.y * (idx / m_width);
-			item->GetSprite()->SetPosition(position);
-			item->GetSprite()->SetSize(m_size);
+			GetItemList().SetSpritePos(idx, position);
+			GetItemList().SetSpriteSize(idx, m_size);
 			idx++;
 		}
 	}
@@ -120,10 +122,11 @@ void CItemInventory::Update()
 	PointerMove();
 
 	//アイテムの名前を設定する
-	if (m_pointerNum < m_itemList.size() && !m_itemList.empty())
+	const std::list<std::unique_ptr<IInventoryItem>>& itemList = GetItemList().GetBody();
+	if (m_pointerNum < itemList.size() && !itemList.empty())
 	{
-		std::list<std::unique_ptr<IInventoryItem>>::iterator it;
-		it = m_itemList.begin();
+		std::list<std::unique_ptr<IInventoryItem>>::const_iterator it;
+		it = itemList.begin();
 		for (int i = 0; i < m_pointerNum; i++)
 		{
 			it++;
@@ -161,14 +164,11 @@ void CItemInventory::PostAfterDraw()
 	m_backGround.Draw();
 	m_headline.Draw();
 	m_inventoryWindow.Draw();
-	for (int i = 0; i < m_itemLimit; i++)
+	for (int i = 0; i < CItemList::m_itemLimit; i++)
 	{
 		m_itemFrame[i].Draw();
 	}
-	for (auto& item : m_itemList)
-	{
-		item->Draw();
-	}
+	GetItemList().Draw();
 	m_pointer.Draw();
 	m_buttonBackground.Draw();
 	m_buttonA.Draw();
@@ -256,26 +256,10 @@ void CItemInventory::PointerMove()
 void CItemInventory::UseItem()
 {
 	//アイテムの数を取得
-	size_t itemNum = m_itemList.size();
-	if (m_pointerNum >= itemNum || m_itemList.empty())
-	{
-		return;
-	}
-	//選んだアイテムを使う
-	std::list<std::unique_ptr<IInventoryItem>>::iterator it;
-	it = m_itemList.begin();
-	for (int i = 0; i < m_pointerNum; i++)
-	{
-		it++;
-	}
-	bool isUse = (*it)->Use();
-	if (isUse) 
-	{
-		//使ったアイテムをリストから削除する
-		m_itemList.erase(it);
-	}
+	std::list<std::unique_ptr<IInventoryItem>>& itemList = GetItemList().GetBody();
+	GetItemList().Use(m_pointerNum);
 	int idx = 0;
-	for (auto& item : m_itemList)
+	for (auto& item : itemList)
 	{
 		//座標とサイズを決める
 		CVector2 position = m_basePos;
@@ -289,22 +273,10 @@ void CItemInventory::UseItem()
 
 void CItemInventory::Erase()
 {
-	//アイテムの数を取得
-	size_t itemNum = m_itemList.size();
-	if (m_pointerNum >= itemNum || m_itemList.empty())
-	{
-		return;
-	}
-	std::list<std::unique_ptr<IInventoryItem>>::iterator it;
-	it = m_itemList.begin();
-	for (int i = 0; i < m_pointerNum; i++)
-	{
-		it++;
-	}
-	//リストから削除する
-	m_itemList.erase(it);
+	const std::list<std::unique_ptr<IInventoryItem>>& itemList = GetItemList().GetBody();
+	GetItemList().Erase(m_pointerNum);
 	int idx = 0;
-	for (auto& item : m_itemList)
+	for (auto& item : itemList)
 	{
 		//座標とサイズを決める
 		CVector2 position = m_basePos;
@@ -314,20 +286,4 @@ void CItemInventory::Erase()
 		item->GetSprite()->SetSize(m_size);
 		idx++;
 	}
-}
-
-void CItemInventory::AddItemList(std::unique_ptr<IInventoryItem> item)
-{
-	//アイテムリストに追加
-	m_itemList.push_back(std::move(item));
-}
-
-bool CItemInventory::IsSpaceItemList()
-{
-	if (m_itemList.size() < m_itemLimit)
-	{
-		//リストに空きがある
-		return true;
-	}
-	return false;
 }

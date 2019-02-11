@@ -112,6 +112,9 @@
     <Filter Include="ソース ファイル\Map\MapChip">
       <UniqueIdentifier>{bff5da5e-9d3d-413e-b2c7-73ea96d43507}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\UI\ShopSale">
+      <UniqueIdentifier>{33637ac1-59aa-4332-bc7b-fd1d55cf7d36}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -441,6 +444,12 @@
     </ClCompile>
     <ClCompile Include="Map\MapChip\Castle.cpp">
       <Filter>ソース ファイル\Map\MapChip</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\ShopSale\ItemShopSale.cpp">
+      <Filter>ソース ファイル\UI\ShopSale</Filter>
+    </ClCompile>
+    <ClCompile Include="Player\ItemList.cpp">
+      <Filter>ソース ファイル\Player</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -785,6 +794,12 @@
     </ClInclude>
     <ClInclude Include="Map\MapChip\Castle.h">
       <Filter>ソース ファイル\Map\MapChip</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\ShopSale\ItemShopSale.h">
+      <Filter>ソース ファイル\UI\ShopSale</Filter>
+    </ClInclude>
+    <ClInclude Include="Player\ItemList.h">
+      <Filter>ソース ファイル\Player</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

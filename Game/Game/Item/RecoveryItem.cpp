@@ -5,6 +5,7 @@
 #include "../UI/Menu/ItemInventory.h"
 #include "InventoryItem/InventoryRecoveryItem.h"
 #include "../Scene/SceneManager.h"
+#include "../Player/ItemList.h"
 
 void CRecoveryItem::Init(const CVector3& position)
 {
@@ -86,7 +87,7 @@ void CRecoveryItem::Update()
 	if (isPickUp) 
 	{
 		//ƒCƒ“ƒxƒ“ƒgƒŠ‚É‹ó‚«‚ª‚ ‚é‚©
-		if (CItemInventory::IsSpaceItemList())
+		if (GetItemList().IsSpaceItemList())
 		{
 			const float GetVolume = 0.3f;
 			CSoundSource* GetSound = New<CSoundSource>(0);
@@ -96,7 +97,7 @@ void CRecoveryItem::Update()
 			//E‚¤‚±‚Æ‚ª‚Å‚«‚é
 			std::unique_ptr<IInventoryItem> inventoryItem = std::make_unique<CInventoryRecoveryItem>();
 			inventoryItem->Init();
-			CItemInventory::AddItemList(std::move(inventoryItem));
+			GetItemList().AddItemList(std::move(inventoryItem));
 			Delete(this);
 		}
 		else 

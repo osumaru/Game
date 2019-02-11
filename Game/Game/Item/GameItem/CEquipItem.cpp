@@ -221,48 +221,48 @@ bool CEquipItem::Start()
 		ItemStatus[30].ItemQuality = EnItemQuality::enNormal;
 
 		swprintf(ItemStatus[31].ItemName, L"バタフライソード");
-		swprintf(ItemStatus[31].ItemText, L"旅人の弓。主に旅をする者た\nちが食料を確保するため\nに使用している。");
+		swprintf(ItemStatus[31].ItemText, L"a");
 		ItemStatus[31].Itemprice = 120;
 		ItemStatus[31].ItemEffect = 10;
 		ItemStatus[31].ItemQuality = EnItemQuality::enNormal;
 
 		swprintf(ItemStatus[32].ItemName, L"兵士の双刀");
-		swprintf(ItemStatus[32].ItemText, L"兵士の弓。主に兵士が戦争時に\n敵を屠るために使われて\nいる。");
+		swprintf(ItemStatus[32].ItemText, L"a");
 		ItemStatus[32].Itemprice = 340;
 		ItemStatus[32].ItemEffect = 14;
 		ItemStatus[32].ItemQuality = EnItemQuality::enNormal;
 
 		swprintf(ItemStatus[33].ItemName, L"グラディウス");
-		swprintf(ItemStatus[33].ItemText, L"森人の弓。森人が狩りに使う弓。\n特殊な力が込められてい\nる。");
+		swprintf(ItemStatus[33].ItemText, L"a");
 		ItemStatus[33].Itemprice = 3500;
 		ItemStatus[33].ItemEffect = 40;
 		ItemStatus[33].ItemQuality = EnItemQuality::enRare;
 
 		swprintf(ItemStatus[34].ItemName, L"盗賊のダガー");
-		swprintf(ItemStatus[34].ItemText, L"ボロイ弓。弓を飛ばすことができる\nが、さほど威力はない。");
+		swprintf(ItemStatus[34].ItemText, L"a");
 		ItemStatus[34].Itemprice = 500;
 		ItemStatus[34].ItemEffect = 20;
 		ItemStatus[34].ItemQuality = EnItemQuality::enNormal;
 
 		swprintf(ItemStatus[35].ItemName, L"ファルシオン");
-		swprintf(ItemStatus[35].ItemText, L"ロングボウ。通常の弓より大きく、そ\nの弓から放たれる一撃\nを重たい。");
+		swprintf(ItemStatus[35].ItemText, L"a");
 		ItemStatus[35].Itemprice = 2400;
 		ItemStatus[35].ItemEffect = 30;
 		ItemStatus[35].ItemQuality = EnItemQuality::enLegend;
 
 		swprintf(ItemStatus[36].ItemName, L"ショーテル");
-		swprintf(ItemStatus[36].ItemText, L"巨人の弓。古の時代にいた巨人族が使用\nしていた弓。");
+		swprintf(ItemStatus[36].ItemText, L"a");
 		ItemStatus[36].Itemprice = 1500;
 		ItemStatus[36].ItemEffect = 25;
 		ItemStatus[36].ItemQuality = EnItemQuality::enRare;
 
 		swprintf(ItemStatus[37].ItemName, L"ツインソード");
-		swprintf(ItemStatus[37].ItemText, L"古代の弓。古の時代の技術によって作られ\nた強力な弓。");
+		swprintf(ItemStatus[37].ItemText, L"a");
 		ItemStatus[37].Itemprice = 1200;
 		ItemStatus[37].ItemEffect = 23;
 		ItemStatus[37].ItemQuality = EnItemQuality::enRare;
 		swprintf(ItemStatus[38].ItemName, L"メフィストフェレス");
-		swprintf(ItemStatus[38].ItemText, L"賢者の弓。ある、賢者が使用していた弓。強\n力な魔力が込めら\nれている。。");
+		swprintf(ItemStatus[38].ItemText, L"a");
 		ItemStatus[38].Itemprice = 4500;
 		ItemStatus[38].ItemEffect = 46;
 		ItemStatus[38].ItemQuality = EnItemQuality::enLegend;

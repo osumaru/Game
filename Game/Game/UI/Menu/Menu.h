@@ -33,6 +33,19 @@ public:
 	{
 		return m_draw;
 	}
+
+	//アイテムインベントリを取得
+	CItemInventory* GetItemInventory()
+	{
+		return m_itemInventory;
+	}
+
+	//装備インベントリを取得
+	CEquipInventory* GetEquipInventory()
+	{
+		return m_equipInventory;
+	}
+
 private:
 	enum EnMenuState
 	{

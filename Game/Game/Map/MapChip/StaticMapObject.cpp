@@ -5,8 +5,7 @@
 #include "../../Enemy/PathFinding/PathFinding.h"
 
 StaticMapObject::StaticMapObject() :
-	m_rigidBody(),
-	m_boxCollider()
+	m_rigidBody()
 {
 	this->SetIsActive(false);
 }

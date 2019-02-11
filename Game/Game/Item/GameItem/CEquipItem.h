@@ -16,7 +16,7 @@ public:
 	//0を入れたら何も帰ってきません
 	SItemStatus& GetItemStatus_ItemId(const int ItemID)
 	{
-		if (ItemID == 0 || MAX_ITEM_NUMBER < ItemID){MessageBox(NULL, TEXT("存在しないIDが入力されました。"),TEXT("メッセージボックス"), MB_OK);}
+		//if (ItemID == 0 || MAX_ITEM_NUMBER < ItemID){MessageBox(NULL, TEXT("存在しないIDが入力されました。"),TEXT("メッセージボックス"), MB_OK);}
 		return ItemStatus[ItemID - 1];
 	}
 	//ノーマルアイテムのIDの入ったリスト
