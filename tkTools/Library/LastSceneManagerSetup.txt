@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/BossStage.unity
+- path: Assets/mm.unity
   isLoaded: 1
   isActive: 1

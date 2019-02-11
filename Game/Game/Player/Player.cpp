@@ -12,6 +12,8 @@
 #include "../Enemy/PathFinding/PathFinding.h"
 
 CPlayer *CPlayer::m_player = NULL;
+CItemList CPlayer::m_itemList;
+
 SplayerStatus CPlayer::m_status = {
 	m_status.Strength = 10,							//UŒ‚—Í
 	m_status.Defense = 3,							//–hŒä—Í

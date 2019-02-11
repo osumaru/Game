@@ -5,6 +5,8 @@
 #include "../UI/Menu/ItemInventory.h"
 #include "InventoryItem/InventoryRecoveryItem.h"
 #include "../Scene/SceneManager.h"
+#include "../Player/ItemList.h"
+#include "GameItem/QuickItem.h"
 
 void CRecoveryItem::Init(const CVector3& position)
 {
@@ -14,6 +16,10 @@ void CRecoveryItem::Init(const CVector3& position)
 	m_characterController.Init(0.2f, 0.2f, m_position);
 	m_characterController.SetUserIndex(EnCollisionAttr::enCollisionAttr_Item);
 	m_characterController.SetIgnoreRigidBody(&GetPlayer().GetCharacterController().GetBody());
+	//アイテムのステータスを初期化
+	CQuickItem quickItem;
+	quickItem.Start();
+	m_status = quickItem.GetItemStatus(0);
 }
 
 bool CRecoveryItem::Start()
@@ -86,7 +92,7 @@ void CRecoveryItem::Update()
 	if (isPickUp) 
 	{
 		//インベントリに空きがあるか
-		if (CItemInventory::IsSpaceItemList())
+		if (GetItemList().IsSpaceItemList())
 		{
 			const float GetVolume = 0.3f;
 			CSoundSource* GetSound = New<CSoundSource>(0);
@@ -96,7 +102,8 @@ void CRecoveryItem::Update()
 			//拾うことができる
 			std::unique_ptr<IInventoryItem> inventoryItem = std::make_unique<CInventoryRecoveryItem>();
 			inventoryItem->Init();
-			CItemInventory::AddItemList(std::move(inventoryItem));
+			inventoryItem->SetStatus(m_status);
+			GetItemList().AddItemList(std::move(inventoryItem));
 			Delete(this);
 		}
 		else 

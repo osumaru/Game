@@ -47,5 +47,4 @@ private:
 	bool								m_isItemeName = false;
 	bool								m_isDrawItemName = false;
 	float								m_drawTime = 0.0f;
-
 };
