@@ -199,10 +199,6 @@ void Map::Init(int stageNum)
 
 void Map::Update()
 {
-	if (Pad().IsTriggerButton(enButtonRB))
-	{
-		GetSceneManager().ChangeScene(CSceneManager::enBossScene);
-	}
 }
 
 
