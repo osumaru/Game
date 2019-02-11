@@ -115,7 +115,6 @@ void CTreasureChest::Update()
 				CEquipInventory::AddEquipList(std::move(m_inventoryEquip));
 				GetSceneManager().GetGameScene().GetGetItem()->SubtractDrawCount();
 				m_itemDrawCount = false;
-				GetPlayer().SetIsAction(false);
 				Delete(this);
 			}
 			else 
@@ -124,6 +123,7 @@ void CTreasureChest::Update()
 				message->Init({ 320.0f,100.0f }, L"NoGet");
 				message->SetAlphaSpeed(3.0f);
 			}
+			GetPlayer().SetIsAction(false);
 		}
 	}
 	else 

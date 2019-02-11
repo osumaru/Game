@@ -22,8 +22,9 @@ public:
 	}
 
 private:
-	CSprite		m_window;				//ウィンドウ
-	CSprite		m_message;				//メッセージ
-	float		m_timer = 0.0f;			//タイマー
-	float		m_alphaSpeed = 1.0f;	//透明から不透明にする速度
+	CSprite	m_window;				//ウィンドウ
+	CSprite	m_message;				//メッセージ
+	CSprite	m_background;			//背景
+	float	m_timer = 0.0f;			//タイマー
+	float	m_alphaSpeed = 1.0f;	//透明から不透明にする速度
 };

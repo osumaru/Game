@@ -220,6 +220,11 @@ void Map::SetIsMapChipActive(bool isActive)
 		enemy->SetIsActive(isActive);
 
 	}
+	//敵グループクラスのアクティブ設定
+	for (auto& enemyGroup : m_enemyGroupList)
+	{
+		enemyGroup->SetIsActive(isActive);
+	}
 	for (auto& shop : m_shopManager->Getlist())
 	{
 		shop->SetIsActive(isActive);
@@ -243,6 +248,11 @@ void Map::SetIsMapChipActiveUpdate(bool isActive)
 	{
 		enemy->SetIsActiveUpdate(isActive);
 
+	}
+	//敵グループクラスのアクティブ設定
+	for (auto& enemyGroup : m_enemyGroupList)
+	{
+		enemyGroup->SetIsActiveUpdate(isActive);
 	}
 	for (auto& shop : m_shopManager->Getlist())
 	{

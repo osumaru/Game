@@ -200,6 +200,18 @@ void CMenu::StatusConversion()
 	GetPlayer().SetIsStatusConversion(false);
 }
 
+void CMenu::ReleaseInventory()
+{
+	if (m_itemInventory == nullptr)
+	{
+		m_itemInventory = nullptr;
+	}
+	if (m_equipInventory == nullptr)
+	{
+		m_equipInventory = nullptr;
+	}
+}
+
 
 //メニュー画面に表示されるプレイヤーのステータスの数値を決める処理
 void CMenu::StatusMath()

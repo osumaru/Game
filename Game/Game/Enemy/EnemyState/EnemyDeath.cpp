@@ -49,7 +49,13 @@ void CEnemyDeath::Update()
 		{
 			//•ó” 
 			CTreasureChest* treasureChest = New<CTreasureChest>(PRIORITY_ITEM);
-			treasureChest->Init(m_enemy->GetPosition(), m_enemy->GetRotation(), false);
+			//˜‚ÌÀ•W‚ðŽæ“¾
+			const CMatrix* spineMatrix = m_enemy->GetWorldMatrixSpine();
+			CVector3 spinePosition;
+			spinePosition.x = spineMatrix->m[3][0];
+			spinePosition.y = spineMatrix->m[3][1];
+			spinePosition.z = spineMatrix->m[3][2];
+			treasureChest->Init(spinePosition, m_enemy->GetRotation(), false);
 		}
 		m_isAnimationEnd = true;
 		m_enemy->EnemyListErase();
@@ -99,6 +105,7 @@ void CEnemyDeath::Update()
 				particleEmitInfo.randomMoveSpeed = { 0.0f,0.0f,0.0f };
 				particleEmitInfo.randomPosition = { 0.6f, 0.6f, 0.6f };
 				particleEmitInfo.particleNum = 10;
+				particleEmitInfo.fadeOutTime = 2.0f;
 				particleEmitInfo.alphaBlendState = enAlphaBlendStateTranslucent;
 				particleEmitInfo.isFirstTimeRandom = false;
 				CParticleEmitter* particleEmitter = New<CParticleEmitter>(PRIORITY_PARTICLE);

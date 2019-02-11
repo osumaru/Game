@@ -151,6 +151,7 @@ void CItemInventory::Update()
 	{
 		//ƒƒjƒ…[‚É–ß‚é
 		m_menu->SetIsActive(true);
+		m_menu->ReleaseInventory();
 		Delete(this);
 	}
 }
