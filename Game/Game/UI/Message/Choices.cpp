@@ -27,11 +27,6 @@ void CChoices::Init()
 
 void CChoices::Update()
 {
-	if (m_deleteFlag)
-	{
-		Delete(this);
-	}
-
 	//“§–¾‚É‚È‚Á‚Ä‚¢‚é
 	if (m_isAlpha) 
 	{
@@ -70,10 +65,7 @@ void CChoices::Update()
 		{
 			//‘I‚ñ‚¾
 			m_isSelect = true;
-		}
-		else
-		{
-			m_isSelect = false;
+			Delete(this);
 		}
 	}
 }

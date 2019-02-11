@@ -25,16 +25,23 @@ public:
 	//ランダム地点にポップさせる
 	//distance	ランダム地点までの距離
 	//upSpeed	ポップさせる上方向の速度
-	virtual void RamdomPop(float distance, float upSpeed);
+	//戻り値　移動速度
+	CVector3 RamdomPop(float distance, float upSpeed);
 
 	//アイテムを拾うことができるか
 	//isPopEnd	ポップし終わっているか
 	//length	アイテムを拾える距離
-	virtual bool PickUp(bool isPopEnd, float length);
+	bool PickUp(bool isPopEnd, float length);
 
 	//移動
-	virtual CVector3 Move();
+	//戻り値　移動速度
+	CVector3 Move();
 
+	//加速度をリセットする
+	void AcceleReset()
+	{
+		m_accele = 0.0f;
+	}
 protected:
 	CSkinModel				m_skinModel;				//スキンモデル
 	CVector3				m_position;					//座標

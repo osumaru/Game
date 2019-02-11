@@ -21,7 +21,8 @@ bool CRecoveryItem::Start()
 	float distance = 3.0f;
 	float popUpSpeed = 6.0f;
 	//ランダム地点にポップさせる
-	RamdomPop(distance, popUpSpeed);
+	CVector3 moveSpeed = RamdomPop(distance, popUpSpeed);
+	m_characterController.SetMoveSpeed(moveSpeed);
 
 	return true;
 }
@@ -34,12 +35,20 @@ void CRecoveryItem::Update()
 		Delete(this);
 		return;
 	}
-	m_timer += GameTime().GetDeltaFrameTime();
 
 	//移動速度を取得
 	CVector3 moveSpeed = m_characterController.GetMoveSpeed();
+	//リポップしているか
+	if (m_isRePop)
+	{
+		if (m_characterController.IsOnGround())
+		{
+			m_isRePop = false;
+		}
+	}
+
 	//地面に接地しているか判定
-	if (!m_isPopEnd && m_characterController.IsOnGround())
+	if (!m_isRePop && !m_isPopEnd && m_characterController.IsOnGround())
 	{
 		m_isPopEnd = true;
 		moveSpeed.x = 0.0f;
@@ -48,6 +57,7 @@ void CRecoveryItem::Update()
 
 	if (m_isPopEnd && !m_isMove)
 	{
+		m_timer += GameTime().GetDeltaFrameTime();
 		//回転させる
 		const float angle = 3.0f;
 		CVector3 axisY = CVector3::AxisY;
@@ -73,17 +83,33 @@ void CRecoveryItem::Update()
 
 	//拾うことができるか判定
 	bool isPickUp = PickUp(m_isPopEnd, 0.8f);
-	if (isPickUp) {
-		const float GetVolume = 0.3f;
-		CSoundSource* GetSound = New<CSoundSource>(0);
-		GetSound->Init("Assets/sound/Battle/ItemGet.wav");
-		GetSound->Play(false);
-		GetSound->SetVolume(GetVolume);
-		//拾うことができる
-		std::unique_ptr<IInventoryItem> inventoryItem = std::make_unique<CInventoryRecoveryItem>();
-		inventoryItem->Init();
-		CItemInventory::AddItemList(std::move(inventoryItem));
-		Delete(this);
+	if (isPickUp) 
+	{
+		//インベントリに空きがあるか
+		if (CItemInventory::IsSpaceItemList())
+		{
+			const float GetVolume = 0.3f;
+			CSoundSource* GetSound = New<CSoundSource>(0);
+			GetSound->Init("Assets/sound/Battle/ItemGet.wav");
+			GetSound->Play(false);
+			GetSound->SetVolume(GetVolume);
+			//拾うことができる
+			std::unique_ptr<IInventoryItem> inventoryItem = std::make_unique<CInventoryRecoveryItem>();
+			inventoryItem->Init();
+			CItemInventory::AddItemList(std::move(inventoryItem));
+			Delete(this);
+		}
+		else 
+		{
+			float distance = 6.5f;
+			float popUpSpeed = 6.0f;
+			//ランダム地点にポップさせる
+			moveSpeed = RamdomPop(distance, popUpSpeed);
+			AcceleReset();
+			m_isPopEnd = false;
+			m_isMove = false;
+			m_isRePop = true;
+		}
 	}
 
 	m_characterController.SetMoveSpeed(moveSpeed);

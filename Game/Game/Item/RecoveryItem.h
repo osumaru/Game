@@ -20,4 +20,6 @@ public:
 
 	//•`‰æ
 	void Draw() override;
+private:
+	bool m_isRePop = false;	//ƒŠƒ|ƒbƒv‚µ‚Ä‚¢‚é‚©
 };

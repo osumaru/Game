@@ -10,14 +10,13 @@ IItem::~IItem()
 {
 }
 
-void IItem::RamdomPop(float distance, float upSpeed)
+CVector3 IItem::RamdomPop(float distance, float upSpeed)
 {
 	CVector3 moveSpeed = CVector3::Zero;
 	if (distance <= 0.0f) {
 		//その場にポップさせる
 		moveSpeed.y = upSpeed;
-		m_characterController.SetMoveSpeed(moveSpeed);
-		return;
+		return moveSpeed;
 	}
 	//ランダムに移動先を決定
 	float randomPositionX = (float)Random().GetRandDouble();
@@ -37,7 +36,7 @@ void IItem::RamdomPop(float distance, float upSpeed)
 	moveSpeed.Normalize();
 	moveSpeed *= speed;
 	moveSpeed.y = upSpeed;
-	m_characterController.SetMoveSpeed(moveSpeed);
+	return moveSpeed;
 }
 
 bool IItem::PickUp(bool isPopEnd, float length)

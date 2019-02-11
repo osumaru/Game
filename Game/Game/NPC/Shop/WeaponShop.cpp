@@ -176,7 +176,7 @@ void CWeaponShop::Update()
 {
 	ShopUpdate();
 	if (!m_isTransaction) { return; };
-	if (GetPlayer().BuyMoney(m_items[m_lineupSelectNumber].ItemStatus.Itemprice))
+	if (GetPlayer().BuyMoney(m_items[m_lineupSelectNumber].ItemStatus.Itemprice) && CEquipInventory::IsSpaceEquipList())
 	{
 		
 		wchar_t* itemName = m_items[m_lineupSelectNumber].ItemStatus.ItemName;

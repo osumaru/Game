@@ -11,6 +11,7 @@
 #include "../Item/InventoryItem/InventoryBow.h"
 #include "../Item/InventoryItem/InventoryTwinSword.h"
 #include"GameItem/CEquipItem.h"
+#include "../UI/Message/Message.h"
 
 void CTreasureChest::Init(CVector3 position, CQuaternion rotation, bool isMapItem, EnDropType dropType)
 {
@@ -64,7 +65,8 @@ bool CTreasureChest::Start()
 		float distance = 0.0f;
 		float popUpSpeed = 2.0f;
 		//ランダムにポップさせる
-		RamdomPop(distance, popUpSpeed);
+		CVector3 moveSpeed = RamdomPop(distance, popUpSpeed);
+		m_characterController.SetMoveSpeed(moveSpeed);
 	}
 
 	return true;
@@ -113,20 +115,29 @@ void CTreasureChest::Update()
 		}
 		if (Pad().IsTriggerButton(enButtonA))
 		{
-			const float GetVolume = 0.3f;
-			CSoundSource* GetSound = New<CSoundSource>(0);
-			GetSound->Init("Assets/sound/Battle/TresureSE.wav");
-			GetSound->Play(false);
-			GetSound->SetVolume(GetVolume);
-			//武器のステータスを決める
-			DesideWeaponStatus();
-			CEquipInventory::AddEquipList(std::move(m_inventoryEquip));
-			GetSceneManager().GetGameScene().GetGetItem()->SubtractDrawCount();
-			m_itemDrawCount = false;
-			GetPlayer().SetIsAction(false);
-			m_isItemeName = true;
-			m_isDrawItemName = true;
-			
+			bool itemGet = CEquipInventory::IsSpaceEquipList();
+			if (itemGet)
+			{
+				const float GetVolume = 0.3f;
+				CSoundSource* GetSound = New<CSoundSource>(0);
+				GetSound->Init("Assets/sound/Battle/TresureSE.wav");
+				GetSound->Play(false);
+				GetSound->SetVolume(GetVolume);
+				//武器のステータスを決める
+				DesideWeaponStatus();
+				CEquipInventory::AddEquipList(std::move(m_inventoryEquip));
+				GetSceneManager().GetGameScene().GetGetItem()->SubtractDrawCount();
+				m_itemDrawCount = false;
+				GetPlayer().SetIsAction(false);
+				m_isDrawItemName = true;
+				//Delete(this);
+			}
+			else 
+			{
+				CMessage* message = New<CMessage>(PRIORITY_UI);
+				message->Init({ 320.0f,100.0f }, L"NoGet");
+				message->SetAlphaSpeed(3.0f);
+			}
 		}
 	}
 	else 

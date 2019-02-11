@@ -32,16 +32,15 @@ public:
 	//描画
 	void Draw() override;
 
-
 	//武器のステータスを決める
 	void DesideWeaponStatus();
 
 private:
 	std::unique_ptr<IInventoryEquip> m_inventoryEquip;	//インベントリに入れる装備
 	EnDropType	m_dropType = EnDropType::enRandom;
+	CLight	m_light;				//ライト
 	bool m_itemDrawCount = false;	//アイテムを拾うUIを出すカウントをすでにしているか
 	bool m_isMapItem = false;		//マップに配置するか
-	CLight	m_light;
 	std::unique_ptr<CRigidBody>			m_rigidBody;		//剛体
 	std::unique_ptr<CMeshCollider>		m_meshCollider;		//コライダー
 	std::unique_ptr<CBoxCollider>		m_boxCollider;		//コライダー
