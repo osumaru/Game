@@ -2,6 +2,7 @@
 *	アイテムインベントリクラス
 */
 #pragma once
+#include "../../Player/ItemList.h"
 
 class CMenu;
 class IInventoryItem;
@@ -37,22 +38,13 @@ public:
 	//アイテムを捨てる
 	void Erase();
 
-	//所持アイテムリストに追加
-	//item		アイテムリストに追加するアイテム
-	static void AddItemList(std::unique_ptr<IInventoryItem> item);
-
-	//アイテムリストに追加する前に呼んで調べてね
-	//アイテムリストに空きがあるか
-	static bool IsSpaceItemList();
 private:
-	static const int	m_itemLimit = 25;			//アイテム所持上限
-	static std::list<std::unique_ptr<IInventoryItem>>	m_itemList;	//アイテムリスト
 	CMenu*				m_menu = nullptr;			//メニュー
 	CSprite				m_headline;					//項目
 	CSprite				m_backGround;				//背景
 	CSprite				m_inventoryWindow;			//インベントリウィンドウ
 	CSprite				m_pointer;					//カーソル
-	CSprite				m_itemFrame[m_itemLimit];	//インベントリの枠
+	CSprite				m_itemFrame[CItemList::m_itemLimit];	//インベントリの枠
 	CSprite				m_itemWindow;				//アイテムウィンドウ
 	CSprite				m_buttonBackground;			//ボタン背景
 	CSprite				m_buttonA;					//Aボタン

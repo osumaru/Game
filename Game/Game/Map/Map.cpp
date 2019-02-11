@@ -214,6 +214,7 @@ void Map::MapChipErase(std::list<MapChip*>::iterator iterator)
 
 void Map::SetIsMapChipActive(bool isActive)
 {
+
 	//敵のアクティブ設定
 	for (auto& enemy : m_enemyList)
 	{

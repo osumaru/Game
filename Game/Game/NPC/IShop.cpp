@@ -6,15 +6,16 @@
 #include "../Item/InventoryItem/IInventoryItem.h"
 #include "../Item/InventoryItem/InventoryRecoveryItem.h"
 #include "../UI/Menu/ItemInventory.h"
-
+#include "../UI/ShopSale/ItemShopSale.h"]
 
 IShop::IShop()
 {
 	m_money.Init(L"0");
 	m_money.SetPosition({400.0f, 300.0f});
 	m_moneyBack.Init(TextureResource().LoadTexture(L"Assets/sprite/ShopUI/Back_Menu.png"));
-	m_moneyBack.SetSize({200.0f, 60.0f});
-	m_moneyBack.SetPosition({ 450.0f, 270.0f });
+	m_moneyBack.SetSize({150.0f, 50.0f});
+	m_moneyBack.SetCenterPosition({ 0.0f, 0.0f });
+	m_moneyBack.SetPosition({ 400.0f, 300.0f });
 }
 
 
@@ -27,7 +28,6 @@ void IShop::ShopUpdate()
 	if (&GetPlayer() == nullptr) { return; }
 	CVector3 playervec = GetPlayer().GetPosition() - m_position;
 	float len = playervec.Length();
-
 	switch (m_shopState)
 	{
 	case enShopNone:
@@ -58,6 +58,11 @@ void IShop::ShopUpdate()
 		{
 			m_shopState = m_selectShop;
 			if (m_shopState == enShopBuy) { m_isShoplineupDraw = true; }
+			else if (m_shopState == enShopSale)
+			{
+				New<CItemShopSale>(PRIORITY_UI)->Init();
+				m_shopState = enShopSale;
+			}
 			else 
 			{ 
 				GetPlayer().SetIsActiveUpdate(true); 
@@ -69,17 +74,39 @@ void IShop::ShopUpdate()
 			m_shopSelectPen.SetPosition(m_shopSelectPenPosition);
 
 		}
-		else if (Pad().IsTriggerButton(enButtonDown) && m_selectShop != enShopNone)
+		else if (Pad().IsTriggerButton(enButtonDown))
 		{
-			m_selectShop = enShopNone;
-			m_shopSelectPenPosition.y -= 100.0f;
+			switch (m_selectShop)
+			{
+			case enShopBuy:
+				m_selectShop = enShopSale;
+				break;
+			case enShopSale:
+				m_selectShop = enShopNone;
+				break;
+			case enShopNone:
+				m_shopSelectPenPosition.y += 70.0f;
+				break;
+			}
+			m_shopSelectPenPosition.y -= 70.0f;
 			m_shopSelectPen.SetPosition(m_shopSelectPenPosition);
 			GetPlayer().SetIsAction(false);
 		}
-		else if (Pad().IsTriggerButton(enButtonUp) && m_selectShop != enShopBuy)
+		else if (Pad().IsTriggerButton(enButtonUp))
 		{
-			m_selectShop = enShopBuy;
-			m_shopSelectPenPosition.y += 100.0f;
+			switch (m_selectShop)
+			{
+			case enShopBuy:
+				m_shopSelectPenPosition.y -= 70.0f;
+				break;
+			case enShopSale:
+				m_selectShop = enShopBuy;
+				break;
+			case enShopNone:
+				m_selectShop = enShopSale;
+				break;
+			}
+			m_shopSelectPenPosition.y += 70.0f;
 			m_shopSelectPen.SetPosition(m_shopSelectPenPosition);
 		}
 		if (Pad().IsTriggerButton(enButtonB))
@@ -88,6 +115,8 @@ void IShop::ShopUpdate()
 			m_isSelectDraw = false;
 			GetPlayer().SetIsActiveUpdate(true);
 			GetPlayer().SetIsAction(false);
+			m_shopSelectPenPosition = SELECT_POSITON_START;
+			m_shopSelectPen.SetPosition(m_shopSelectPenPosition);
 			//GetSceneGame().GetGameSound()->SetIsShop(false);
 			GetSceneManager().GetGameSound()->SetGameSound(CGameSound::enWorldBgm);
 
@@ -122,6 +151,16 @@ void IShop::ShopUpdate()
 		m_selectItemSprite.SetPosition(m_slectItemTexPos); 
 
 		break;
+	case enShopSale:
+		if (Pad().IsTriggerButton(enButtonB))
+		{
+			m_selectShop = enShopBuy;
+			m_shopState = enShopOpen;
+			m_shopSelectPenPosition = SELECT_POSITON_START;
+			m_shopSelectPen.SetPosition(m_shopSelectPenPosition);
+			m_isSelectDraw = true;
+		}
+		break;
 	}
 	int gold = GetPlayer().GetStatus().Gold;
 	wchar_t str[64];
@@ -155,9 +194,9 @@ bool IShop::Transaction(const int gold)
 	{
 		std::unique_ptr<IInventoryItem> inventoryItem = std::make_unique<CInventoryRecoveryItem>();
 		inventoryItem->Init();
-		CItemInventory::AddItemList(std::move(inventoryItem));
+		GetItemList().AddItemList(std::move(inventoryItem));
 		CSoundSource* se = New<CSoundSource>(0);
-		se->Init("Assets/sound/Shop/BuySe.wav");
+		se->Init("Assets/sound/SystemSound/BuySe.wav");
 		se->SetVolume(1.0f);
 		se->Play(false);
 		return true;

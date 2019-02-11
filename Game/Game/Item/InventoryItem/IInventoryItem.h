@@ -1,7 +1,7 @@
 /*
 *	インベントリに入れるアイテムのインターフェースクラス
 */
-
+#include "../GameItem/ItemStatus.h"
 #pragma once
 
 class IInventoryItem
@@ -34,7 +34,18 @@ public:
 		return m_itemName;
 	}
 
+	void SetStatus(const SItemStatus& status)
+	{
+		m_status = status;
+	}
+
+	const SItemStatus& GetStatus() const
+	{
+		return m_status;
+	}
+
 protected:
+	SItemStatus				m_status;
 	CSprite					m_itemSprite;			//アイテムのスプライト
 	wchar_t*				m_itemName;				//アイテムの名前
 };
