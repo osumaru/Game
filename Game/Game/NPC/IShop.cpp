@@ -6,7 +6,8 @@
 #include "../Item/InventoryItem/IInventoryItem.h"
 #include "../Item/InventoryItem/InventoryRecoveryItem.h"
 #include "../UI/Menu/ItemInventory.h"
-#include "../UI/ShopSale/ItemShopSale.h"]
+#include "../UI/ShopSale/ItemShopSale.h"
+#include "../UI/ShopSale/EquipShopSale.h"
 
 IShop::IShop()
 {
@@ -60,14 +61,24 @@ void IShop::ShopUpdate()
 			if (m_shopState == enShopBuy) { m_isShoplineupDraw = true; }
 			else if (m_shopState == enShopSale)
 			{
-				New<CItemShopSale>(PRIORITY_UI)->Init();
+				//ìXÇÃéÌóﬁÇ…ÇÊÇ¡ÇƒèoÇ∑îÑãpópÇÃUIÇïœÇ¶ÇÈ
+				switch (m_shopType)
+				{
+				case enItemShop:
+					New<CItemShopSale>(PRIORITY_UI)->Init();
+					break;
+				case enWeaponShop:
+					New<CEquipShopSale>(PRIORITY_UI)->Init();
+					break;
+				case enNormalNpc:
+					break;
+				}
 				m_shopState = enShopSale;
 			}
 			else 
 			{ 
 				GetPlayer().SetIsActiveUpdate(true); 
-				//GetSceneGame().GetGameSound()->SetIsShop(false);
-				GetSceneManager().GetGameSound()->SetGameSound(CGameSound::enWorldBgm);
+				GetSceneManager().GetGameSound()->SetGameSound(CGameSound::enTownBgm);
 			}
 			m_isSelectDraw = false;
 			m_shopSelectPenPosition = SELECT_POSITON_START;
@@ -117,8 +128,7 @@ void IShop::ShopUpdate()
 			GetPlayer().SetIsAction(false);
 			m_shopSelectPenPosition = SELECT_POSITON_START;
 			m_shopSelectPen.SetPosition(m_shopSelectPenPosition);
-			//GetSceneGame().GetGameSound()->SetIsShop(false);
-			GetSceneManager().GetGameSound()->SetGameSound(CGameSound::enWorldBgm);
+			GetSceneManager().GetGameSound()->SetGameSound(CGameSound::enTownBgm);
 
 		}
 
@@ -129,8 +139,6 @@ void IShop::ShopUpdate()
 			m_shopState = enShopOpen;
 			m_isShoplineupDraw = false;
 			m_isSelectDraw = true;
-			//GetSceneGame().GetGameSound()->SetIsShop(false);
-			GetSceneManager().GetGameSound()->SetGameSound(CGameSound::enWorldBgm);
 		}
 		else if (Pad().IsTriggerButton(enButtonA))
 		{
@@ -143,7 +151,7 @@ void IShop::ShopUpdate()
 			m_lineupSelectNumber--;
 			m_slectItemTexPos.y += SHOPLINEUP_POSITION_OFFSET.y;
 		}
-		else if (Pad().IsTriggerButton(enButtonDown) && m_lineupSelectNumber != ITEM_ELEMENT - 1)
+		else if (Pad().IsTriggerButton(enButtonDown) && m_lineupSelectNumber != m_element - 1)
 		{
 			m_lineupSelectNumber++;
 			m_slectItemTexPos.y -= SHOPLINEUP_POSITION_OFFSET.y;

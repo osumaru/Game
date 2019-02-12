@@ -29,13 +29,14 @@ bool CGameSound::Start()
 	m_backSound[enShopBgm].m_backSound.SetVolume(m_backSound[enShopBgm].m_volume);
 
 	m_backSound[enWorldBgm].m_backSound.Init("Assets/sound/BackSound/FieldBgm.wav");
+	m_backSound[enWorldBgm].m_volume = 0.5f;
 	m_backSound[enWorldBgm].m_backSound.SetVolume(m_backSound[enWorldBgm].m_volume);
 	m_backSound[enWorldBgm].m_isMapSound = true;
 
 	m_backSound[enBossBgm].m_backSound.Init("Assets/sound/BackSound/BossBgm.wav");
 	m_backSound[enBossBgm].m_backSound.SetVolume(m_backSound[enBossBgm].m_volume);
 
-	m_backSound[enDeathBgm].m_backSound.Init("Assets/sound/BackSound/BossBgm.wav");
+	m_backSound[enDeathBgm].m_backSound.Init("Assets/sound/BackSound/GameOverBgm.wav");
 	m_backSound[enDeathBgm].m_backSound.SetVolume(m_backSound[enDeathBgm].m_volume);
 
 	m_backSound[m_soundState].m_backSound.Play(m_backSound[enDeathBgm].m_isLoop, m_backSound[enDeathBgm].m_isBegin);
@@ -124,12 +125,22 @@ void CGameSound::SoundLenght()
 {
 	if (&GetPlayer() == nullptr || !m_backSound[m_soundState].m_isMapSound) { return; }
 
-	CVector3 soundVec = m_backSound[enTownBgm].m_soundPosition - GetPlayer().GetPosition();
-	float len = soundVec.Length();
-	if (m_backSound[enTownBgm].m_lenght < len)
+	float oldlen = 99999;
+	for (auto vect : m_soundPointList)
 	{
-		len -= m_backSound[enTownBgm].m_lenght;
-		if (len < m_volumeDownLen)
+		CVector3 soundVec = vect - GetPlayer().GetPosition();
+		float len = soundVec.Length();
+		if (oldlen > len)
+		{
+			oldlen = len;
+
+		}
+	}
+
+	if (m_backSound[enTownBgm].m_lenght < oldlen)
+	{
+		oldlen -= m_backSound[enTownBgm].m_lenght;
+		if (oldlen < m_volumeDownLen)
 		{
 			if (m_soundState == enWorldBgm)
 			{
@@ -137,7 +148,7 @@ void CGameSound::SoundLenght()
 				m_soundState = enTownBgm;
 				m_backSound[m_soundState].m_backSound.Play(true, false);
 			}
-			m_bgmVolume = m_backSound[m_soundState].m_volume - (1.0f / m_volumeDownLen * len);
+			m_bgmVolume = m_backSound[m_soundState].m_volume - (1.0f / m_volumeDownLen * oldlen);
 			
 		}
 		else if(m_soundState != enWorldBgm)

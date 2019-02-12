@@ -12,8 +12,9 @@
 #include "../Item/InventoryItem/InventoryTwinSword.h"
 #include "../UI/Message/Message.h"
 #include "../UI/GetItem/GetItemName.h"
+#include "EquipList.h"
 
-void CTreasureChest::Init(CVector3 position, CQuaternion rotation, bool isMapItem/*, EnDropType dropType*/)
+void CTreasureChest::Init(CVector3 position, CQuaternion rotation, bool isMapItem)
 {
 	//モデルの初期化
 	m_skinModel.Load(L"Assets/modelData/TresureBox.cmo");
@@ -33,7 +34,6 @@ void CTreasureChest::Init(CVector3 position, CQuaternion rotation, bool isMapIte
 	}
 	//マップに配置するか
 	m_isMapItem = isMapItem;
-	//m_dropType = dropType;
 }
 
 bool CTreasureChest::Start()
@@ -82,17 +82,17 @@ void CTreasureChest::Update()
 		}
 		if (Pad().IsTriggerButton(enButtonA))
 		{
-			bool itemGet = CEquipInventory::IsSpaceEquipList();
+			bool itemGet = GetEquipList().IsSpaceEquipList();
 			if (itemGet)
 			{
-				const float GetVolume = 0.3f;
+				const float GetVolume = 0.8f;
 				CSoundSource* GetSound = New<CSoundSource>(0);
 				GetSound->Init("Assets/sound/Battle/TresureSE.wav");
 				GetSound->Play(false);
 				GetSound->SetVolume(GetVolume);
 				//武器のステータスを決める
 				DesideWeaponStatus();
-				CEquipInventory::AddEquipList(std::move(m_inventoryEquip));
+				GetEquipList().AddEquipList(std::move(m_inventoryEquip));
 				GetSceneManager().GetGameScene().GetGetItem()->SubtractDrawCount();
 				m_itemDrawCount = false;
 				Delete(this);
@@ -214,6 +214,7 @@ void CTreasureChest::DesideWeaponStatus()
 		weaponStatus.weaponNum = EnPlayerWeapon::enWeaponTwinSword;
 	}
 	weaponStatus.attack = weaponAttack;
-	m_inventoryEquip->SetEquipStatus(weaponStatus);
 	m_inventoryEquip->Init(itemName, textureFileName);
+	m_inventoryEquip->SetEquipStatus(weaponStatus);
+	m_inventoryEquip->SetItemStatus(nItem->GetItemStatus(num));
 }

@@ -7,7 +7,8 @@
 #include "WireAction.h"
 #include "PlayerGetter.h"
 #include "WireDraw.h"
-#include "ItemList.h"
+#include "../Item/ItemList.h"
+#include "../Item/EquipList.h"
 class IItem;
 
 struct SplayerStatus
@@ -246,6 +247,11 @@ public:
 		return m_itemList;
 	}
 
+	static CEquipList& GetEquipList()
+	{
+		return m_equipList;
+	}
+
 	friend class CPlayerGetter;
 private:
 
@@ -255,6 +261,7 @@ private:
 	//アニメーションイベントが起きた時に呼ばれる処理。
 	void OnInvokeAnimationEvent(const wchar_t* animClipName, const wchar_t* eventName);
 private:
+	static CEquipList					m_equipList;
 	static CItemList					m_itemList;								//アイテムリスト
 	static CPlayer*						m_player;								//プレイヤー
 	CPlayerGetter						m_playerGetter;							//プレイヤーのゲッター
@@ -291,4 +298,9 @@ static CPlayer& GetPlayer()
 static CItemList& GetItemList()
 {
 	return CPlayer::GetItemList();
+}
+
+static CEquipList& GetEquipList()
+{
+	return CPlayer::GetEquipList();
 }

@@ -9,6 +9,8 @@
 
 void CItemShopSale::Init()
 {
+	m_money.Init(L"0");
+	m_money.SetPosition({ 100.0f, 100.0f });
 	//インベントリの幅と高さを初期化
 	m_width = 5;
 	m_height = CItemList::m_itemLimit / m_width;
@@ -153,21 +155,24 @@ void CItemShopSale::Update()
 	if (Pad().IsTriggerButton(enButtonA))
 	{
 		IInventoryItem* item = GetItemList().GetItem(m_pointerNum);
-		const int PRICE_RATE = 5;
-		int price = item->GetStatus().Itemprice / PRICE_RATE;
-		GetPlayer().GainGold(price);
-		GetItemList().Erase(m_pointerNum);
-		const std::list<std::unique_ptr<IInventoryItem>>& itemList = GetItemList().GetBody();
-		int idx = 0;
-		for (auto& item : itemList)
+		if (item != nullptr)
 		{
-			//座標とサイズを決める
-			CVector2 position = m_basePos;
-			position.x += m_size.x * (idx % m_width);
-			position.y -= m_size.y * (idx / m_width);
-			item->GetSprite()->SetPosition(position);
-			item->GetSprite()->SetSize(m_size);
-			idx++;
+			const int PRICE_RATE = 5;
+			int price = item->GetStatus().Itemprice / PRICE_RATE;
+			GetPlayer().GainGold(price);
+			GetItemList().Erase(m_pointerNum);
+			const std::list<std::unique_ptr<IInventoryItem>>& itemList = GetItemList().GetBody();
+			int idx = 0;
+			for (auto& item : itemList)
+			{
+				//座標とサイズを決める
+				CVector2 position = m_basePos;
+				position.x += m_size.x * (idx % m_width);
+				position.y -= m_size.y * (idx / m_width);
+				item->GetSprite()->SetPosition(position);
+				item->GetSprite()->SetSize(m_size);
+				idx++;
+			}
 		}
 	}
 	if (Pad().IsTriggerButton(enButtonB))
@@ -175,11 +180,15 @@ void CItemShopSale::Update()
 		Delete(this);
 	}
 	IInventoryItem* item = GetItemList().GetItem(m_pointerNum);
+
 	if (item != nullptr)
 	{
 		m_choiceItemStatus = item->GetStatus();
 		m_itemName.SetString(m_choiceItemStatus.ItemName);
 	}
+	wchar_t str[64];
+	swprintf(str, L"%dG", GetPlayer().GetStatus().Gold);
+	m_money.SetString(str);
 }
 
 void CItemShopSale::PostAfterDraw()
@@ -201,4 +210,5 @@ void CItemShopSale::PostAfterDraw()
 	m_buttonBackground.Draw();
 	m_itemWindow.Draw();
 	m_itemName.Draw();
+	m_money.Draw();
 }

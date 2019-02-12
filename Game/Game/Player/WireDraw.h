@@ -40,6 +40,7 @@ public:
 		CVector4 pos;
 		CVector3 color;
 	};
+
 private:
 	static const int VERTEX_NUM = 2;
 	CVector3		m_startPos;		//énì_ÇÃç¿ïW

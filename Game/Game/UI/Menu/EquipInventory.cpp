@@ -6,8 +6,6 @@
 #include "../../Player/Weapon/WeaponManager.h"
 #include "../../Item/InventoryItem/IInventoryEquip.h"
 
-std::list<std::unique_ptr<IInventoryEquip>> CEquipInventory::m_equipList;
-
 CEquipInventory::CEquipInventory(){}
 
 CEquipInventory::~CEquipInventory(){}
@@ -17,7 +15,7 @@ void CEquipInventory::Init(CMenu * menu)
 	m_menu = menu;
 	//インベントリの幅と高さを初期化
 	m_width = 5;
-	m_height = m_equipLimit / m_width;
+	m_height = CEquipList::m_equipLimit / m_width;
 	//座標とサイズを初期化
 	m_basePos = { -550.0f, 200.0f };
 	m_baseSize = { 100.0f, 100.0f };
@@ -38,7 +36,7 @@ void CEquipInventory::Init(CMenu * menu)
 	m_inventoryWindow.SetSize({530.0f, 560.0f});
 	//インベントリの枠を初期化
 	texture = TextureResource().LoadTexture(L"Assets/sprite/Frame.png");
-	for (int i = 0; i < m_equipLimit; i++)
+	for (int i = 0; i < CEquipList::m_equipLimit; i++)
 	{
 		m_frame[i].Init(texture);
 		m_frame[i].SetSize(m_baseSize);
@@ -228,11 +226,12 @@ void CEquipInventory::PostAfterDraw()
 	m_background.Draw();
 	m_headline.Draw();
 	m_inventoryWindow.Draw();
-	for (int i = 0; i < m_equipLimit; i++)
+	for (int i = 0; i < CEquipList::m_equipLimit; i++)
 	{
 		m_frame[i].Draw();
 	}
-	for (auto& equip : m_equipList)
+	std::list<std::unique_ptr<IInventoryEquip>>& equipList = GetEquipList().GetBody();
+	for (auto& equip : equipList)
 	{
 		equip->Draw();
 	}
@@ -267,13 +266,14 @@ void CEquipInventory::PostAfterDraw()
 
 void CEquipInventory::EquipListReset()
 {
-	if (m_equipList.empty()) 
+	std::list<std::unique_ptr<IInventoryEquip>>& equipList = GetEquipList().GetBody();
+	if (equipList.empty()) 
 	{
 		//装備が何もない
 		return;
 	}
 	int idx = 0;
-	for (auto& equip : m_equipList)
+	for (auto& equip : equipList)
 	{
 		//座標を決める
 		CVector2 position = m_basePos;
@@ -359,16 +359,18 @@ void CEquipInventory::PointerMove()
 
 void CEquipInventory::Equip()
 {
+	std::list<std::unique_ptr<IInventoryEquip>>& equipList = GetEquipList().GetBody();
+
 	//装備の数を取得
-	size_t equipNum = m_equipList.size();
-	if (m_pointerNum >= equipNum || m_equipList.empty()) 
+	size_t equipNum = equipList.size();
+	if (m_pointerNum >= equipNum || equipList.empty()) 
 	{
 		//選んだ場所の装備がリストの中にない又はリストが空になっている
 		return;
 	}
 	//選んだ武器のアイコンを描画させる
 	std::list<std::unique_ptr<IInventoryEquip>>::iterator it;
-	it = m_equipList.begin();
+	it = equipList.begin();
 	for (int i = 0; i < m_pointerNum; i++)
 	{
 		it++;
@@ -381,14 +383,14 @@ void CEquipInventory::Equip()
 	{
 		//何も装備していない
 		GetPlayer().GetWeaponManager().SetEquipWeapon(std::move(*it), weaponNumber);
-		m_equipList.erase(it);
+		equipList.erase(it);
 	}
 	else
 	{
 		//装備を交換する
 		GetPlayer().GetWeaponManager().ChangeEquipWeapon(std::move(*it), weaponNumber);
 		//空きができたのでリストから外す
-		m_equipList.erase(it);
+		equipList.erase(it);
 	}
 	//装備リストを整理する
 	EquipListReset();
@@ -402,16 +404,18 @@ void CEquipInventory::Equip()
 
 void CEquipInventory::CalucStatus()
 {
+	std::list<std::unique_ptr<IInventoryEquip>>& equipList = GetEquipList().GetBody();
+
 	//プレイヤーのステータスを取得
 	SplayerStatus playerStatus = GetPlayer().GetStatus();
 	//装備の数を取得
-	size_t equipNum = m_equipList.size();
+	size_t equipNum = equipList.size();
 	SWeaponStatus equipStatus[enFont_StatusNum];
 	if (m_pointerNum < equipNum) 
 	{
 		//所持している装備を選んでいる場合はその装備のステータスを取得
 		std::list<std::unique_ptr<IInventoryEquip>>::iterator it;
-		it = m_equipList.begin();
+		it = equipList.begin();
 		for (int i = 0; i < m_pointerNum; i++)
 		{
 			it++;
@@ -497,21 +501,23 @@ void CEquipInventory::CalucStatus()
 
 void CEquipInventory::Erase()
 {
+	std::list<std::unique_ptr<IInventoryEquip>>& equipList = GetEquipList().GetBody();
+
 	//装備の数を取得
-	size_t equipNum = m_equipList.size();
-	if (m_pointerNum >= equipNum || m_equipList.empty()) 
+	size_t equipNum = equipList.size();
+	if (m_pointerNum >= equipNum || equipList.empty()) 
 	{
 		//選んだ場所の装備がリストの中にない又はリストが空になっている
 		return;
 	}
 	//選んだ装備を捨てる
 	std::list<std::unique_ptr<IInventoryEquip>>::iterator it;
-	it = m_equipList.begin();
+	it = equipList.begin();
 	for (int i = 0; i < m_pointerNum; i++)
 	{
 		it++;
 	}
-	m_equipList.erase(it);
+	equipList.erase(it);
 	//装備リストを整理する
 	EquipListReset();
 	//装備を捨てるときの音を鳴らす処理
@@ -520,20 +526,4 @@ void CEquipInventory::Erase()
 		m_equipSound[1].Stop();
 	}
 	m_equipSound[1].Play(false, true);
-}
-
-void CEquipInventory::AddEquipList(std::unique_ptr<IInventoryEquip> inventoryEquip)
-{
-	//装備リストに追加
-	m_equipList.push_back(std::move(inventoryEquip));
-}
-
-bool CEquipInventory::IsSpaceEquipList()
-{
-	if (m_equipList.size() < m_equipLimit)
-	{
-		//リストに空きがある
-		return true;
-	}
-	return false;
 }

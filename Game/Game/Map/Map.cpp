@@ -23,14 +23,15 @@
 #include "../Item/TreasureChest.h"
 #include "MapChip/Castle.h"
 #include "MapChip/Tree.h"
+#include "../NPC/IShop.h"
 
 std::vector<std::vector<SMapChipInfo>> mapChipInfo = 
 {
 	{
 		//本番用の世界のマップ
 		//#include "WorldMap.h"
-		#include "ShopTest.h"
-		//#include "mm.h"
+		//#include "ShopTest.h"
+		#include "mm.h"
 		//#include "BossStage.h"
 		//#include "Boss.h"
 	},
@@ -107,10 +108,10 @@ void Map::Init(int stageNum)
 			m_shopManager->InitShop(mInfo.m_position, mInfo.m_rotation, EShop::enItemShop);
 			break;
 		case enMapTagWeaponShop:
-			m_shopManager->InitShop(mInfo.m_position, mInfo.m_rotation, EShop::enItemShop);
+			m_shopManager->InitShop(mInfo.m_position, mInfo.m_rotation, EShop::enWeaponShop);
 			break;
 		case enMapTagNormalShop:
-			m_shopManager->InitShop(mInfo.m_position, mInfo.m_rotation, EShop::enItemShop);
+			m_shopManager->InitShop(mInfo.m_position, mInfo.m_rotation, EShop::enNormalNpc);
 			break;
 		case enMapTagTree:
 			mapChip = New<CTree>(PRIORITY_MAPCHIP);
@@ -129,6 +130,10 @@ void Map::Init(int stageNum)
 			break;
 		case enMapTagBreakBrock:
 			mapChip = New<CBreakMapObject>(PRIORITY_MAPCHIP);
+			break;
+		case enMapTagSoundPoint:
+			mapChip = New<CCastle>(PRIORITY_BILLDING);
+			GetSceneManager().GetGameSound()->SetTownPosition(mInfo.m_position);
 			break;
 		case enMapTagTerrain:
 			mapChip = New<StaticMapObject>(PRIORITY_GROUND);

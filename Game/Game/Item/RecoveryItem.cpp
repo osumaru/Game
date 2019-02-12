@@ -5,7 +5,7 @@
 #include "../UI/Menu/ItemInventory.h"
 #include "InventoryItem/InventoryRecoveryItem.h"
 #include "../Scene/SceneManager.h"
-#include "../Player/ItemList.h"
+#include "ItemList.h"
 #include "GameItem/QuickItem.h"
 
 void CRecoveryItem::Init(const CVector3& position)

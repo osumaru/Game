@@ -13,6 +13,7 @@
 
 CPlayer *CPlayer::m_player = NULL;
 CItemList CPlayer::m_itemList;
+CEquipList CPlayer::m_equipList;
 
 SplayerStatus CPlayer::m_status = {
 	m_status.Strength = 10,							//攻撃力
@@ -24,7 +25,7 @@ SplayerStatus CPlayer::m_status = {
 	m_status.NextExp = ((m_status.OldExp * 1.1f + 0.5) + (m_status.Level * 12)) / 2 + 0.5,	//次のレベルアップに必要な経験値
 	m_status.ExperiencePoint = 0,					//経験値
 	m_status.AccumulationExp += m_status.OldExp,	//累積経験値
-	m_status.Gold = 4000,							//所持金
+	m_status.Gold = 0,							//所持金
 };
 
 void CPlayer::OnInvokeAnimationEvent(//アニメーションイベントが呼ばれるごとに呼び出される？

@@ -47,6 +47,12 @@ public:
 		m_isFade = true;
 		m_state = EnSoundFadeState::enFadeOut;
 	}
+	void SetTownPosition(CVector3 pos)
+	{
+		CVector3* position;
+		position = &pos;
+		m_soundPointList.push_back(pos);
+	}
 	//‹——£‚Å‰¹—Ê’²®‚ğs‚¤ŠÖ”
 	//ˆø”@Å‘å‰¹—Ê‚Ì”ÍˆÍ
 	void SoundLenght();
@@ -81,5 +87,7 @@ private:
 	EnSoundFadeState	m_state = EnSoundFadeState::enFadeIn;
 	const float			FADE_IN_TIME = 2.0f;
 	const float			FADE_OUT_TIME = 2.0f;
+
+	std::list<CVector3>	m_soundPointList;
 };
 

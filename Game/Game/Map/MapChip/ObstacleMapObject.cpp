@@ -62,5 +62,5 @@ void CObstacleMapObject::Update()
 void CObstacleMapObject::Draw()
 {
 	MapChip::Draw();
-	m_rigidBody.Draw();
+	//m_rigidBody.Draw();
 }

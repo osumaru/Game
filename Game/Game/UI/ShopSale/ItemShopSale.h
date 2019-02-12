@@ -1,7 +1,7 @@
 #pragma once
 //アイテムショップで売却時の画面 
 class IShop;
-#include "../../Player/ItemList.h"
+#include "../../Item/ItemList.h"
 
 class CItemShopSale : public IGameObject
 {
@@ -27,4 +27,5 @@ private:
 	int					m_width = 0;				//インベントリの幅
 	int					m_height = 0;				//インベントリの高さ
 	int					m_pointerNum = 0;			//カーソルで選んでいるアイテムの番号
+	CFont				m_money;
 };

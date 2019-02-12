@@ -42,6 +42,6 @@ void CCastle::Update()
 void CCastle::Draw()
 {
 	MapChip::Draw();
-	m_rigidBody->Draw();
+	//m_rigidBody->Draw();
 
 }

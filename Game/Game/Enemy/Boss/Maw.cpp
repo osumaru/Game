@@ -52,13 +52,15 @@ void CMaw::Init(CVector3 position)
 
 	m_weekPoint = New<CWeekPoint>(PRIORITY_UI);
 	m_weekPoint->Init();
+	int level = 50;
 	//ステータスを設定
-	m_status.Strength = 10;
-	m_status.Defense = 0;
-	m_status.Hp = 100;
+	m_status.Strength = 15 + level * 2;
+	m_status.Defense = 10 + level * 2;
+	m_status.Hp = 200 + level * 20;
 	m_status.MaxHp = m_status.Hp;
-	m_status.Gold = 100;
+	m_status.Gold = 80 + level * 20;
 
+	
 	//キャラコンの設定
 	const float Height = 3.0f;
 	const float radius = 2.0f;
