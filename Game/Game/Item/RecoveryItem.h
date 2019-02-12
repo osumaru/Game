@@ -5,6 +5,7 @@
 #pragma once
 
 #include "IItem.h"
+#include "GameItem/ItemStatus.h"
 
 class CRecoveryItem : public IItem
 {
@@ -21,5 +22,6 @@ public:
 	//描画
 	void Draw() override;
 private:
+	SItemStatus m_status;	//アイテムのステータス
 	bool m_isRePop = false;	//リポップしているか
 };

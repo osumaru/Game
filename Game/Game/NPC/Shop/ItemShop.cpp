@@ -112,6 +112,7 @@ void CItemShop::Update()
 	{
 		std::unique_ptr<IInventoryItem> inventoryItem = std::make_unique<CInventoryRecoveryItem>();
 		inventoryItem->Init();
+		inventoryItem->SetStatus(m_items[m_lineupSelectNumber].ItemStatus);
 		GetItemList().AddItemList(std::move(inventoryItem));
 		CSoundSource* se = New<CSoundSource>(0);
 		se->Init("Assets/sound/SystemSound/BuySe.wav");

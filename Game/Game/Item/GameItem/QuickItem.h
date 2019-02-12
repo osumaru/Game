@@ -23,8 +23,13 @@ public:
 			}
 		}
 	}
+	//ƒAƒCƒeƒ€‚ÌŽí—Þ‚ðŽæ“¾
+	int GetMaxItemNum()
+	{
+		return MAX_QUICK_ITEM_LIST;
+	}
 private:
-	static const int			MAX_QUICK_ITEM_LIST = 6;
+	static const int			MAX_QUICK_ITEM_LIST = 5;
 	std::list<SItemStatus>		m_quickItemStatusList;
 	SItemStatus					ItemStatus[MAX_QUICK_ITEM_LIST];
 };

@@ -14,7 +14,7 @@ void CCastle::Init(const CVector3& position, const CQuaternion& rotation, const 
 	rInfo.pos = m_position;
 	rInfo.rot = m_rotation;
 	CQuaternion multi = CQuaternion::Identity;
-	//multi.SetRotationDeg(CVector3::AxisX, -90.0f);
+	multi.SetRotationDeg(CVector3::AxisX, -90.0f);
 	rInfo.rot.Multiply(multi);
 	CMatrix rotMat;
 	rotMat.MakeRotationFromQuaternion(m_rotation);

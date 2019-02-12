@@ -21,13 +21,21 @@ public:
 		return m_itemList;
 	}
 
+	//スプライトの座標を設定
 	void SetSpritePos(int idx, const CVector2& pos);
 
+	//スプライトのサイズを取得
 	void SetSpriteSize(int idx, const CVector2& size);
 
+	//描画
 	void Draw();
 
+	//アイテムリストにスペースが空いてるかのフラグを取得
 	bool IsSpaceItemList();
+
+	//アイテムを取得
+	//pointerNum 
+	IInventoryItem* GetItem(int pointerNum);
 
 	static const int	m_itemLimit = 25;			//アイテム所持上限
 private:

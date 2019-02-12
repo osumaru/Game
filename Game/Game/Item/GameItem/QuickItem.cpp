@@ -38,7 +38,7 @@ bool CQuickItem::Start()
 	ItemStatus[4].ItemEffect = 15;
 	ItemStatus[4].ItemEffectPlayerStatus = EnIemEffectPlayerStatus::Defense;
 	ItemStatus[4].ItemType = EnInventoryItemType::Buff;
-	for (int num = 0;num < 5;num++)
+	for (int num = 0;num < MAX_QUICK_ITEM_LIST;num++)
 	{
 		ItemStatus[num].ItemID = 100 + 1;
 		m_quickItemStatusList.push_back(ItemStatus[num]);

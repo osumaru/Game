@@ -42,6 +42,7 @@ void CItemList::Use(int pointerNum)
 
 void CItemList::AddItemList(std::unique_ptr<IInventoryItem> item)
 {
+
 	if (m_itemList.size() < m_itemLimit)
 	{
 		//所持上限を超えていなければアイテムリストに追加
@@ -51,6 +52,11 @@ void CItemList::AddItemList(std::unique_ptr<IInventoryItem> item)
 
 void CItemList::SetSpritePos(int idx, const CVector2 & pos)
 {
+	size_t itemNum = m_itemList.size();
+	if (idx >= itemNum || m_itemList.empty())
+	{
+		return;
+	}
 	std::list<std::unique_ptr<IInventoryItem>>::iterator it;
 	it = m_itemList.begin();
 	for (int i = 0; i < idx; i++)
@@ -63,6 +69,11 @@ void CItemList::SetSpritePos(int idx, const CVector2 & pos)
 
 void CItemList::SetSpriteSize(int idx, const CVector2 & size)
 {
+	size_t itemNum = m_itemList.size();
+	if (idx >= itemNum || m_itemList.empty())
+	{
+		return;
+	}
 	std::list<std::unique_ptr<IInventoryItem>>::iterator it;
 	it = m_itemList.begin();
 	for (int i = 0; i < idx; i++)
@@ -89,4 +100,20 @@ bool CItemList::IsSpaceItemList()
 		return true;
 	}
 	return false;
+}
+
+IInventoryItem * CItemList::GetItem(int pointerNum)
+{
+	size_t itemNum = m_itemList.size();
+	if (pointerNum >= itemNum || m_itemList.empty())
+	{
+		return nullptr;
+	}
+	std::list<std::unique_ptr<IInventoryItem>>::iterator it;
+	it = m_itemList.begin();
+	for (int i = 0; i < pointerNum; i++)
+	{
+		it++;
+	}
+	return (*it).get();
 }
