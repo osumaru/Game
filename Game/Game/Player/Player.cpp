@@ -13,6 +13,7 @@
 
 CPlayer *CPlayer::m_player = NULL;
 CItemList CPlayer::m_itemList;
+CEquipList CPlayer::m_equipList;
 
 SplayerStatus CPlayer::m_status = {
 	m_status.Strength = 10,							//UŒ‚—Í

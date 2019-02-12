@@ -23,6 +23,7 @@
 #include "../Item/TreasureChest.h"
 #include "MapChip/Castle.h"
 #include "MapChip/Tree.h"
+#include "../NPC/IShop.h"
 
 std::vector<std::vector<SMapChipInfo>> mapChipInfo = 
 {

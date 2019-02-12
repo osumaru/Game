@@ -1,5 +1,6 @@
 #pragma once
-#include "../Item/InventoryItem/IInventoryItem.h"
+#pragma once
+#include "InventoryItem/IInventoryItem.h"
 //プレイヤーの所持しているアイテムのリスト
 
 class CItemList

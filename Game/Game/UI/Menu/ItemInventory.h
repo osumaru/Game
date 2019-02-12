@@ -2,7 +2,7 @@
 *	アイテムインベントリクラス
 */
 #pragma once
-#include "../../Player/ItemList.h"
+#include "../../Item/ItemList.h"
 
 class CMenu;
 class IInventoryItem;

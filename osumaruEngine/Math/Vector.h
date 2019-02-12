@@ -692,10 +692,16 @@ static inline TCVector operator/(const TCVector& v, float s)
 /*!
 *@brief	ベクトル同士の減算。
 */
-template<class TCVector>
-static inline TCVector operator-(const TCVector& v0, const TCVector& v1)
+static inline CVector4 operator-(const CVector4& v0, const CVector4& v1)
 {
-	TCVector result;
+	CVector4 result;
+	result.Subtract(v0, v1);
+	return result;
+}
+
+static inline CVector3 operator-(const CVector3& v0, const CVector3& v1)
+{
+	CVector3 result;
 	result.Subtract(v0, v1);
 	return result;
 }

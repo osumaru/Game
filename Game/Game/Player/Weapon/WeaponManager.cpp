@@ -342,5 +342,5 @@ void CWeaponManager::ChangeEquipWeapon(std::unique_ptr<IInventoryEquip> equipWea
 	//変更したい武器を装備中の武器に設定する
 	m_equipWeapon[weaponNum] = std::move(equipWeapon);
 	//保存していた武器をインベントリに追加する
-	CEquipInventory::AddEquipList(std::move(changeEquip));
+	GetEquipList().AddEquipList(std::move(changeEquip));
 }

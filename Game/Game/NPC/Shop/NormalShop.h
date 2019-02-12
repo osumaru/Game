@@ -5,7 +5,8 @@ class CNormalShop : public IShop
 public:
 	CNormalShop();
 	~CNormalShop();
-	void Init(const CVector3 position, const CQuaternion rotation, const int element);
+	void Init(const CVector3 position, const CQuaternion rotation, EShop shopeType, const int element);
+
 	void Update();
 	void Draw();
 };

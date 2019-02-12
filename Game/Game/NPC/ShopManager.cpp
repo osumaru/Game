@@ -3,7 +3,7 @@
 #include "Shop/ItemShop.h"
 #include "Shop/WeaponShop.h"
 #include "Shop/NormalShop.h"
-
+#include "IShop.h"
 
 CShopManager::CShopManager()
 {
@@ -31,20 +31,21 @@ void CShopManager::InitShop(const CVector3 position, const CQuaternion rotation,
 	case enItemShop:
 	{
 		CItemShop* itemshop = New<CItemShop>(PRIORITY_SHOP);
-		itemshop->Init(position, rotation,3);
+		itemshop->Init(position, rotation, shopnum, 3);
 		m_shoplist.push_back(itemshop);
 		break;
 	}
 	case enWeaponShop:
 	{
 		CWeaponShop* weaponshop = New<CWeaponShop>(PRIORITY_SHOP);
-		weaponshop->Init(position, rotation,5);
+		weaponshop->Init(position, rotation, shopnum, 5);
 		m_shoplist.push_back(weaponshop);
 		break;
 	}
 	case enNormalNpc:
 		CNormalShop* normalshop = New<CNormalShop>(PRIORITY_SHOP);
-		normalshop->Init(position, rotation,0);
+		normalshop->Init(position, rotation, shopnum, 0);
+
 		m_shoplist.push_back(normalshop);
 		break;
 	}

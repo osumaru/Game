@@ -18,9 +18,12 @@ CWeaponShop::CWeaponShop()
 CWeaponShop::~CWeaponShop()
 {
 }
-void CWeaponShop::Init(const CVector3 position, const CQuaternion rotation,const int element)
-{
 
+void CWeaponShop::Init(const CVector3 position, const CQuaternion rotation, EShop shopType, const int element)
+{
+	m_shopType = shopType;
+	//AddFile(L"Assets/sprite/shopData");
+	//LoadFile(L"Assets/sprite/shopData");
 	m_position = position;
 	m_rotation = rotation;
 	m_element = element;
@@ -162,7 +165,7 @@ void CWeaponShop::Update()
 {
 	ShopUpdate();
 	if (!m_isTransaction) { return; };
-	if (GetPlayer().BuyMoney(m_equipItems[m_lineupSelectNumber].ItemStatus.Itemprice) && CEquipInventory::IsSpaceEquipList())
+	if (GetPlayer().BuyMoney(m_items[m_lineupSelectNumber].ItemStatus.Itemprice) && GetEquipList().IsSpaceEquipList())
 	{
 		
 		wchar_t* itemName = m_equipItems[m_lineupSelectNumber].ItemStatus.ItemName;
@@ -202,7 +205,8 @@ void CWeaponShop::Update()
 		}
 		inventoryEquip->Init(itemName, textureFileName);
 		inventoryEquip->SetEquipStatus(weapons);
-		CEquipInventory::AddEquipList(std::move(inventoryEquip));
+		inventoryEquip->SetItemStatus(m_items[m_lineupSelectNumber].ItemStatus);
+		GetEquipList().AddEquipList(std::move(inventoryEquip));
 
 		CSoundSource* se = New<CSoundSource>(0);
 		se->Init("Assets/sound/SystemSound/BuySe.wav");

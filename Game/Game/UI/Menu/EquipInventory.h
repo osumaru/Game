@@ -7,8 +7,8 @@
 class CMenu;
 class IItem;
 class IInventoryEquip;
-
 #include "../../Player/Weapon/WeaponCommon.h"
+#include "../../Item/EquipList.h"
 
 class CEquipInventory : public IGameObject
 {
@@ -47,29 +47,23 @@ public:
 	//アイテムを捨てる
 	void Erase();
 
-	//所持装備リストに追加
-	//inventoryEquip		リストに追加する装備
-	static void AddEquipList(std::unique_ptr<IInventoryEquip> inventoryEquip);
-
-	//装備リストに追加する前に呼んで調べてね
-	//装備リストに空きがあるか
-	static bool IsSpaceEquipList();
-private:
 	//ステータスの数
-	enum EnStatusNum {
+	enum EnStatusNum
+	{
 		enStatus_Hp,		//HP
 		enStatus_Attack,	//攻撃力
 		enStatus_Defense,	//防御力
 		enStatus_Num		//ステータスの数
 	};
+
+private:
+
 	//ステータス比較用のフォントの数
 	enum EnFontNum {
 		enFont_CurrentStatus,	//現在のステータス
 		enFont_ChangeStatus,	//変更したステータス
 		enFont_StatusNum		//ステータスの数
 	};
-	static const int m_equipLimit = 15;								//装備所持上限
-	static std::list<std::unique_ptr<IInventoryEquip>>	m_equipList;//装備リスト
 	CMenu*			 m_menu = nullptr;								//メニュー
 	CSprite			 m_headline;									//項目
 	CSprite			 m_background;									//背景
@@ -77,7 +71,7 @@ private:
 	CSprite			 m_statusWindow[enFont_StatusNum];				//ステータスウィンドウ
 	CSprite			 m_right;										//右矢印
 	CSprite			 m_pointer;										//カーソル
-	CSprite			 m_frame[m_equipLimit];							//インベントリの枠
+	CSprite			 m_frame[CEquipList::m_equipLimit];							//インベントリの枠
 	CSprite			 m_equipWeapon[enWeaponNum];					//装備武器アイコン
 	CSprite			 m_equipFrame[enWeaponNum];						//装備武器アイコンの枠
 	CSprite			 m_buttonBackground;							//ボタン背景

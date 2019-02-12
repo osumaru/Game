@@ -6,7 +6,8 @@ class CItemShop :public IShop
 public:
 	CItemShop();
 	~CItemShop();
-	void Init(const CVector3 position, const CQuaternion rotation,const int element);
+	void Init(const CVector3 position, const CQuaternion rotation, EShop shopType, const int element);
+
 	void Update();
 	void Draw();
 	void PostAfterDraw();
