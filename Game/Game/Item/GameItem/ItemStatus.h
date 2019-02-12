@@ -19,6 +19,7 @@
 	//アイテムのクオリティー
 	enum EnItemQuality
 	{
+		enUnknown,
 		enNormal,		//62%程度で手に入るアイテム
 		enRare,			//30%程度で手に入るアイテム
 		enLegend,		//8%程度で手に入るアイテム

@@ -103,6 +103,6 @@ private:
 	std::list<MapChip*>			m_mapChip;				//マップチップ
 	std::list<IEnemy*>			m_enemyList;			//エネミーリスト
 	std::list<CEnemyGroup*>		m_enemyGroupList;		//エネミーグループのリスト
-	std::list<CTreasureChest*>	m_treasureList;			//宝箱リスト`
+	//std::list<CTreasureChest*>	m_treasureList;			//宝箱リスト`
 	CShopManager*				m_shopManager;
 };

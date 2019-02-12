@@ -59,7 +59,7 @@ bool CBossScene::Start()
 		m_result->Init();
 		//メッセージ表示の初期化
 		m_message = New<CMessage>(PRIORITY_UI);
-		m_message->Init({ 500.0f,250.0f }, L"Continue");
+		m_message->Init({ 480.0f,150.0f }, L"Continue");
 		m_message->SetIsActive(false);
 		//選択肢表示の初期化
 		m_choices = New<CChoices>(PRIORITY_UI);

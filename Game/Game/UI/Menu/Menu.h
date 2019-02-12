@@ -25,6 +25,9 @@ public:
 	//プレイヤーのステータスが変化した場合に再度数値を書き換える処理
 	void StatusConversion();
 
+	//インベントリを解放
+	void ReleaseInventory();
+
 	//描画しているか
 	bool GetIsDraw()
 	{

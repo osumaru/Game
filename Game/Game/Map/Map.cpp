@@ -100,9 +100,9 @@ void Map::Init(int stageNum)
 			m_enemyGroupList.push_back(enemyGroup);
 			break;
 		case enMapTagTreasureBox:
-			treasureChest = New<CTreasureChest>(PRIORITY_ENEMY);
-			treasureChest->Init(mInfo.m_position,mInfo.m_rotation, true,(CTreasureChest::EnDropType)mInfo.m_dropType);
-			m_treasureList.push_back(treasureChest);
+			treasureChest = New<CTreasureChest>(PRIORITY_ITEM);
+			treasureChest->Init(mInfo.m_position,mInfo.m_rotation, true);
+			treasureChest->SetWeaponQuality((EnItemQuality)mInfo.m_dropType);
 			break;
 		case enMapTagItemShop:
 			m_shopManager->InitShop(mInfo.m_position, mInfo.m_rotation, EShop::enItemShop);
@@ -222,6 +222,11 @@ void Map::SetIsMapChipActive(bool isActive)
 		enemy->SetIsActive(isActive);
 
 	}
+	//敵グループクラスのアクティブ設定
+	for (auto& enemyGroup : m_enemyGroupList)
+	{
+		enemyGroup->SetIsActive(isActive);
+	}
 	for (auto& shop : m_shopManager->Getlist())
 	{
 		shop->SetIsActive(isActive);
@@ -245,6 +250,11 @@ void Map::SetIsMapChipActiveUpdate(bool isActive)
 	{
 		enemy->SetIsActiveUpdate(isActive);
 
+	}
+	//敵グループクラスのアクティブ設定
+	for (auto& enemyGroup : m_enemyGroupList)
+	{
+		enemyGroup->SetIsActiveUpdate(isActive);
 	}
 	for (auto& shop : m_shopManager->Getlist())
 	{
@@ -275,12 +285,6 @@ void Map::BeforeDead()
 		Delete(mapchip);
 	}
 	m_mapChip.clear();
-
-	for (auto* tresureList : m_treasureList)
-	{
-		Delete(tresureList);
-	}
-	m_treasureList.clear();
 
 	//NPCの消去
 	m_shopManager->DeleteList();
