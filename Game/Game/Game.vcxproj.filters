@@ -813,6 +813,9 @@
     <ClInclude Include="UI\ShopSale\EquipShopSale.h">
       <Filter>ソース ファイル\UI\ShopSale</Filter>
     </ClInclude>
+    <ClInclude Include="Item\ItemList.h">
+      <Filter>ソース ファイル\Item</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Map\MapChip\ObstacleMapObject.h">

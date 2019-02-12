@@ -8,7 +8,8 @@ class IShop	:	public IGameObject
 public:
 	IShop();
 	virtual ~IShop();
-	virtual void Init(const CVector3 position, const CQuaternion rotation, EShop shopType) = 0;
+	virtual void Init(const CVector3 position, const CQuaternion rotation, EShop shopType, const int element) = 0;
+
 	virtual void Update() = 0;
 	virtual void Draw() = 0;
 	//バイナリーデータの読み込み
@@ -68,9 +69,14 @@ protected:
 	EShopState				m_shopState = enShopNone;			//店の状態
 	EShopState				m_selectShop = enShopNone;			//選択中の状態
 
-	static const int		ITEM_ELEMENT = 5;										//行の要素数
-	int						m_lineupSelectNumber = 0;							//選んでるアイテムの要素
+	static const int		ITEM_ELEMENT = 3;	
+	static const int		EQUIP_ELEMENT = 5;										//行の要素数
+
+	int						m_element = 0;
+	int						m_lineupSelectNumber = 0;								//選んでるアイテムの要素
 	ShopItem				m_items[ITEM_ELEMENT];									//商品の情報
+
+	ShopItem				m_equipItems[EQUIP_ELEMENT];									//商品の情報
 	CVector2				m_shopLineupPosition = { -300.0f,200.0f };
 	CVector2				m_shopLineupTexSize = { 80.0f,80.0f };
 	const CVector2			SHOPLINEUP_POSITION_OFFSET = { 80.0f,85.0f };
@@ -80,10 +86,11 @@ protected:
 	CVector2				m_slectItemTexPos = { -300.0f,200.0f };
 	CVector2				m_selectItemTexSize = { 80.0f,80.0f };
 
-	static const int		SELECT_TEX_ELEMENT = 3;									//セレクト用のスプライトの要素数
+	static const int		SELECT_ITEM_ELEMENT = 3;									//セレクト用のスプライトの要素数
 	const	CVector2		SELECT_POSITON_START = { 350.0f,-195.0f };				//セレクトテクスチャの初期座標
-	CSprite					m_shopSelect[SELECT_TEX_ELEMENT];						//セレクト用のスプライト
-	CTexture*				m_shopSelectTexture[SELECT_TEX_ELEMENT];				//セレクト用のテクスチャ
+	CSprite					m_shopSelect[SELECT_ITEM_ELEMENT];						//セレクト用のスプライト
+	CTexture*				m_shopSelectTexture[SELECT_ITEM_ELEMENT];				//セレクト用のテクスチャ
+	
 
 	CSprite					m_shopSelectPen;										//ペン用のスプライト
 	CTexture*				m_shopSelectPenTexture;									//ペン用のテクスチャ
@@ -99,6 +106,8 @@ protected:
 	bool					m_isTransaction = false;							//取引を行うかの判定
 	CFont					m_itemNameFont[ITEM_ELEMENT];
 	CFont					m_itemPriceFont[ITEM_ELEMENT];
+	CFont					m_equipNameFont[EQUIP_ELEMENT];
+	CFont					m_equipPriceFont[EQUIP_ELEMENT];
 	CVector2				m_fontPosition{ -420.0f,215.0f };
 	CVector2				FONT_POSITION_OFFSET = { 240.0f,85.0f };
 	CSprite					m_moneyBack;

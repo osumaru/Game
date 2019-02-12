@@ -278,6 +278,7 @@
   <ItemGroup>
     <ClInclude Include="Camera\CameraCollisionSolver.h" />
     <ClInclude Include="Item\EquipList.h" />
+    <ClInclude Include="Item\ItemList.h" />
     <ClInclude Include="Map\MapChip\Castle.h" />
     <ClInclude Include="Enemy\RespawnData.h" />
     <ClInclude Include="Map\MapChip\CSea.h" />

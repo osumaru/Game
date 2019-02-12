@@ -111,7 +111,7 @@ void Map::Init(int stageNum)
 			m_shopManager->InitShop(mInfo.m_position, mInfo.m_rotation, EShop::enWeaponShop);
 			break;
 		case enMapTagNormalShop:
-			m_shopManager->InitShop(mInfo.m_position, mInfo.m_rotation, EShop::enItemShop);
+			m_shopManager->InitShop(mInfo.m_position, mInfo.m_rotation, EShop::enNormalNpc);
 			break;
 		case enMapTagTree:
 			mapChip = New<CTree>(PRIORITY_MAPCHIP);
@@ -130,6 +130,10 @@ void Map::Init(int stageNum)
 			break;
 		case enMapTagBreakBrock:
 			mapChip = New<CBreakMapObject>(PRIORITY_MAPCHIP);
+			break;
+		case enMapTagSoundPoint:
+			mapChip = New<CCastle>(PRIORITY_BILLDING);
+			GetSceneManager().GetGameSound()->SetTownPosition(mInfo.m_position);
 			break;
 		case enMapTagTerrain:
 			mapChip = New<StaticMapObject>(PRIORITY_GROUND);
