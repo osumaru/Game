@@ -29,13 +29,14 @@ bool CGameSound::Start()
 	m_backSound[enShopBgm].m_backSound.SetVolume(m_backSound[enShopBgm].m_volume);
 
 	m_backSound[enWorldBgm].m_backSound.Init("Assets/sound/BackSound/FieldBgm.wav");
+	m_backSound[enWorldBgm].m_volume = 0.5f;
 	m_backSound[enWorldBgm].m_backSound.SetVolume(m_backSound[enWorldBgm].m_volume);
 	m_backSound[enWorldBgm].m_isMapSound = true;
 
 	m_backSound[enBossBgm].m_backSound.Init("Assets/sound/BackSound/BossBgm.wav");
 	m_backSound[enBossBgm].m_backSound.SetVolume(m_backSound[enBossBgm].m_volume);
 
-	m_backSound[enDeathBgm].m_backSound.Init("Assets/sound/BackSound/BossBgm.wav");
+	m_backSound[enDeathBgm].m_backSound.Init("Assets/sound/BackSound/GameOverBgm.wav");
 	m_backSound[enDeathBgm].m_backSound.SetVolume(m_backSound[enDeathBgm].m_volume);
 
 	m_backSound[m_soundState].m_backSound.Play(m_backSound[enDeathBgm].m_isLoop, m_backSound[enDeathBgm].m_isBegin);

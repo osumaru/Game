@@ -118,7 +118,7 @@ void CTreasureChest::Update()
 			bool itemGet = CEquipInventory::IsSpaceEquipList();
 			if (itemGet)
 			{
-				const float GetVolume = 0.3f;
+				const float GetVolume = 0.8f;
 				CSoundSource* GetSound = New<CSoundSource>(0);
 				GetSound->Init("Assets/sound/Battle/TresureSE.wav");
 				GetSound->Play(false);

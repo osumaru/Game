@@ -13,7 +13,8 @@ public:
 	void LineupChange();
 private:
 	CEquipItem*			m_equipItem;
-	float				m_changeUpTime = 0.0f;
+	float				m_changeTime = 0.0f;
+	float				TIME = 10;
 	const int			DEFAULT_WEAPON[5] = { 0,1,2,10,11 };
 	const int			PICUP_WEAPON[5] = { 5,6,12,13,14 };
 };

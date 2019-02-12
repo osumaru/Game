@@ -43,5 +43,4 @@ void CTree::Update()
 void CTree::Draw()
 {
 	MapChip::Draw();
-	m_rigidBody->Draw();
 }
