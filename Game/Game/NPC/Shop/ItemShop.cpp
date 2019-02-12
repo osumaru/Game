@@ -18,7 +18,7 @@ CItemShop::~CItemShop()
 
 void CItemShop::Init(const CVector3 position, const CQuaternion rotation, EShop shopType, const int element)
 {
-	m_shopType - shopType;
+	m_shopType = shopType;
 	m_position = position;
 	m_rotation = rotation;
 	m_element = element;

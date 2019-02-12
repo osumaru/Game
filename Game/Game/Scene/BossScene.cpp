@@ -24,8 +24,6 @@ void CBossScene::BeforeDead()
 	Engine().GetEffectEngine().SetCamera(nullptr);
 	Delete(m_map);
 	//Delete(m_gameSound);
-	Delete(m_choices);
-	Delete(m_message);
 	Delete(m_arrowRemain);
 }
 
@@ -57,14 +55,8 @@ bool CBossScene::Start()
 		//ゲームオーバーのUIの初期化
 		m_result = New<CResult>(PRIORITY_UI);
 		m_result->Init();
-		//メッセージ表示の初期化
-		m_message = New<CMessage>(PRIORITY_UI);
-		m_message->Init({ 480.0f,150.0f }, L"Continue");
-		m_message->SetIsActive(false);
-		//選択肢表示の初期化
-		m_choices = New<CChoices>(PRIORITY_UI);
-		m_choices->Init();
-		m_choices->SetIsActive(false);
+		m_message = nullptr;
+		m_choices = nullptr;
 
 		m_arrowRemain = New<CArrowRemain>(PRIORITY_UI);
 		m_arrowRemain->Init();
@@ -87,9 +79,19 @@ void CBossScene::Update()
 
 	if (m_result->GetDraw()) 
 	{
-		//コンティニュー表示をアクティブにする
-		m_choices->SetIsActive(true);
-		m_message->SetIsActive(true);
+		if (m_message == nullptr)
+		{
+			//メッセージ表示の初期化
+			m_message = New<CMessage>(PRIORITY_UI);
+			m_message->Init({ 480.0f,150.0f }, L"Continue");
+		}
+		if (m_choices == nullptr)
+		{
+			//選択肢表示の初期化
+			m_choices = New<CChoices>(PRIORITY_UI);
+			m_choices->Init();
+		}
+
 		//選択肢を選んだらシーン切り替え
 		if (m_choices->GetIsSelect())
 		{
@@ -105,6 +107,7 @@ void CBossScene::Update()
 				//ゲームシーンに遷移
 				GetSceneManager().ChangeScene(CSceneManager::enGameScene);
 			}
+			m_isChoice = false;
 		}
 	}
 }
