@@ -47,11 +47,6 @@ void CMaw::OnInvokeAnimationEvent(
 //初期化
 void CMaw::Init(CVector3 position)
 {
-	m_bossHp = New<CBossHp>(PRIORITY_UI);
-	m_bossHp->Init();
-
-	m_weekPoint = New<CWeekPoint>(PRIORITY_UI);
-	m_weekPoint->Init();
 	int level = 50;
 	//ステータスを設定
 	m_status.Strength = 15 + level * 2;
@@ -59,6 +54,11 @@ void CMaw::Init(CVector3 position)
 	m_status.Hp = 200 + level * 20;
 	m_status.MaxHp = m_status.Hp;
 	m_status.Gold = 80 + level * 20;
+	m_bossHp = New<CBossHp>(PRIORITY_UI);
+	m_bossHp->Init();
+
+	m_weekPoint = New<CWeekPoint>(PRIORITY_UI);
+	m_weekPoint->Init();
 
 	
 	//キャラコンの設定
