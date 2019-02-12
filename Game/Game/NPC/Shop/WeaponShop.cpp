@@ -165,7 +165,7 @@ void CWeaponShop::Update()
 {
 	ShopUpdate();
 	if (!m_isTransaction) { return; };
-	if (GetPlayer().BuyMoney(m_items[m_lineupSelectNumber].ItemStatus.Itemprice) && GetEquipList().IsSpaceEquipList())
+	if (GetPlayer().BuyMoney(m_equipItems[m_lineupSelectNumber].ItemStatus.Itemprice) && GetEquipList().IsSpaceEquipList())
 	{
 		
 		wchar_t* itemName = m_equipItems[m_lineupSelectNumber].ItemStatus.ItemName;
@@ -205,7 +205,7 @@ void CWeaponShop::Update()
 		}
 		inventoryEquip->Init(itemName, textureFileName);
 		inventoryEquip->SetEquipStatus(weapons);
-		inventoryEquip->SetItemStatus(m_items[m_lineupSelectNumber].ItemStatus);
+		inventoryEquip->SetItemStatus(m_equipItems[m_lineupSelectNumber].ItemStatus);
 		GetEquipList().AddEquipList(std::move(inventoryEquip));
 
 		CSoundSource* se = New<CSoundSource>(0);
