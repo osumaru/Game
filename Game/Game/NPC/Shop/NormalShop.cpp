@@ -11,8 +11,9 @@ CNormalShop::~CNormalShop()
 {
 }
 
-void CNormalShop::Init(const CVector3 position, const CQuaternion rotation)
+void CNormalShop::Init(const CVector3 position, const CQuaternion rotation, EShop shopType)
 {
+	m_shopType = shopType;
 	m_position = position;
 	m_rotation = rotation;
 	wchar_t* animClip[] = { L"Assets/modelData/ShopgirlStand.tka" };
@@ -52,7 +53,6 @@ void CNormalShop::Update()
 	m_animation.Update(GameTime().GetDeltaFrameTime());
 	m_skinModel.Update(m_position, m_rotation, m_scale, false);
 	m_skinmodelNpc.Update(m_position, m_rotation, m_scale, true);
-
 }
 
 void CNormalShop::Draw()

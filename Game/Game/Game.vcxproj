@@ -161,6 +161,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Camera\CameraCollisionSolver.cpp" />
+    <ClCompile Include="Item\EquipList.cpp" />
     <ClCompile Include="Map\MapChip\Castle.cpp" />
     <ClCompile Include="Map\MapChip\CSea.cpp" />
     <ClCompile Include="Enemy\Boss\AttackWave.cpp" />
@@ -268,6 +269,7 @@
     <ClCompile Include="UI\MiniMap\MiniMap.cpp" />
     <ClCompile Include="UI\PlayerHp\PlayerHp.cpp" />
     <ClCompile Include="UI\Result\Result.cpp" />
+    <ClCompile Include="UI\ShopSale\EquipShopSale.cpp" />
     <ClCompile Include="UI\ShopSale\ItemShopSale.cpp" />
     <ClCompile Include="UI\WeaponSelect\WeaponSelect.cpp" />
     <ClCompile Include="NPC\Shop\WeaponShop.cpp" />
@@ -275,6 +277,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera\CameraCollisionSolver.h" />
+    <ClInclude Include="Item\EquipList.h" />
     <ClInclude Include="Map\MapChip\Castle.h" />
     <ClInclude Include="Enemy\RespawnData.h" />
     <ClInclude Include="Map\MapChip\CSea.h" />
@@ -386,6 +389,7 @@
     <ClInclude Include="UI\MiniMap\MiniMap.h" />
     <ClInclude Include="UI\PlayerHp\PlayerHp.h" />
     <ClInclude Include="UI\Result\Result.h" />
+    <ClInclude Include="UI\ShopSale\EquipShopSale.h" />
     <ClInclude Include="UI\ShopSale\ItemShopSale.h" />
     <ClInclude Include="UI\WeaponSelect\WeaponSelect.h" />
     <ClInclude Include="NPC\Shop\WeaponShop.h" />

@@ -1,5 +1,5 @@
 #pragma once
-#include "IShop.h"
+class IShop;
 enum EShop
 {
 	enItemShop,

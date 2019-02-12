@@ -6,7 +6,7 @@ class CWeaponShop : public IShop
 public:
 	CWeaponShop();
 	~CWeaponShop();
-	void Init(const CVector3 position, const CQuaternion rotation);
+	void Init(const CVector3 position, const CQuaternion rotation, EShop shopType);
 	void Update();
 	void Draw();
 	void PostAfterDraw();

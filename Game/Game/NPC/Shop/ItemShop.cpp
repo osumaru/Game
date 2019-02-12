@@ -16,9 +16,9 @@ CItemShop::~CItemShop()
 {
 }
 
-void CItemShop::Init(const CVector3 position, const CQuaternion rotation)
+void CItemShop::Init(const CVector3 position, const CQuaternion rotation, EShop shopType)
 {
-	
+	m_shopType - shopType;
 	m_position = position;
 	m_rotation = rotation;
 	wchar_t* animClip[] = { L"Assets/modelData/ShopgirlStand.tka" };

@@ -12,6 +12,7 @@
 #include "../Item/InventoryItem/InventoryTwinSword.h"
 #include"GameItem/CEquipItem.h"
 #include "../UI/Message/Message.h"
+#include "EquipList.h"
 
 void CTreasureChest::Init(CVector3 position, CQuaternion rotation, bool isMapItem, EnDropType dropType)
 {
@@ -115,7 +116,7 @@ void CTreasureChest::Update()
 		}
 		if (Pad().IsTriggerButton(enButtonA))
 		{
-			bool itemGet = CEquipInventory::IsSpaceEquipList();
+			bool itemGet = GetEquipList().IsSpaceEquipList();
 			if (itemGet)
 			{
 				const float GetVolume = 0.3f;
@@ -125,7 +126,7 @@ void CTreasureChest::Update()
 				GetSound->SetVolume(GetVolume);
 				//武器のステータスを決める
 				DesideWeaponStatus();
-				CEquipInventory::AddEquipList(std::move(m_inventoryEquip));
+				GetEquipList().AddEquipList(std::move(m_inventoryEquip));
 				GetSceneManager().GetGameScene().GetGetItem()->SubtractDrawCount();
 				m_itemDrawCount = false;
 				GetPlayer().SetIsAction(false);
@@ -248,6 +249,7 @@ void CTreasureChest::DesideWeaponStatus()
 		weaponStatus.weaponNum = EnPlayerWeapon::enWeaponTwinSword;
 	}
 	weaponStatus.attack = weaponAttack;
-	m_inventoryEquip->SetEquipStatus(weaponStatus);
 	m_inventoryEquip->Init(itemName, textureFileName);
+	m_inventoryEquip->SetEquipStatus(weaponStatus);
+	m_inventoryEquip->SetItemStatus(nItem->GetItemStatus(num));
 }

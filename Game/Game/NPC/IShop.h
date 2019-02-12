@@ -1,12 +1,14 @@
 #pragma once
 #include "../Item/GameItem/ItemStatus.h"
 #include "../Camera/GameCamera.h"
+#include "ShopManager.h"
+
 class IShop	:	public IGameObject
 {
 public:
 	IShop();
 	virtual ~IShop();
-	virtual void Init(const CVector3 position, const CQuaternion rotation) = 0;
+	virtual void Init(const CVector3 position, const CQuaternion rotation, EShop shopType) = 0;
 	virtual void Update() = 0;
 	virtual void Draw() = 0;
 	//バイナリーデータの読み込み
@@ -54,7 +56,7 @@ protected:
 		CSprite			ItemSprite;				//アイテムのスプライト
 		CTexture*		ItemTexture;			//アイテムのテクスチャ
 	};
-
+	EShop					m_shopType;
 	CSkinModel				m_skinModel;						//スキンモデル
 	CSkinModel				m_skinmodelNpc;						//人のモデル
 	CAnimation				m_animation;

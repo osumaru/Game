@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../../Player/Weapon/WeaponCommon.h"
+#include "../GameItem/ItemStatus.h"
 
 class IInventoryEquip 
 {
@@ -50,7 +51,20 @@ public:
 		return m_equipStatus;
 	}
 
+	//アイテムのステータスを設定
+	void SetItemStatus(const SItemStatus& status)
+	{
+		m_status = status;
+	}
+
+	//アイテムのステータスを取得
+	SItemStatus& GetItemStatus()
+	{
+		return m_status;
+	}
+
 protected:
+	SItemStatus				m_status;
 	CSprite					m_itemSprite;			//アイテムのスプライト
 	const wchar_t*			m_itemName;				//アイテムの名前
 	const wchar_t*			m_textureFilePath;		//テクスチャのファイルパス

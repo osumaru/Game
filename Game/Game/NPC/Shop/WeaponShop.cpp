@@ -18,8 +18,9 @@ CWeaponShop::CWeaponShop()
 CWeaponShop::~CWeaponShop()
 {
 }
-void CWeaponShop::Init(const CVector3 position, const CQuaternion rotation)
+void CWeaponShop::Init(const CVector3 position, const CQuaternion rotation, EShop shopType)
 {
+	m_shopType = shopType;
 	//AddFile(L"Assets/sprite/shopData");
 	//LoadFile(L"Assets/sprite/shopData");
 	m_position = position;
@@ -69,11 +70,13 @@ void CWeaponShop::Init(const CVector3 position, const CQuaternion rotation)
 		m_shopSelect[0].Init(m_shopSelectTexture[0]);
 		m_shopSelectTexture[1] = TextureResource().LoadTexture(L"Assets/sprite/ShopUI/Execute.png");
 		m_shopSelect[1].Init(m_shopSelectTexture[1]);
+		m_shopSelectTexture[2] = TextureResource().LoadTexture(L"Assets/sprite/ShopUI/Execute.png");
+		m_shopSelect[2].Init(m_shopSelectTexture[2]);
 		for (int num = 0;num < SELECT_TEX_ELEMENT;num++)
 		{
 			m_shopSelect[num].SetPosition(m_shopSelectPosition);
 			m_shopSelect[num].SetSize(m_shopSelectSize);
-			m_shopSelectPosition.y -= 100.0f;
+			m_shopSelectPosition.y -= 70.0f;
 		}
 
 		m_shopSelectPenTexture = TextureResource().LoadTexture(L"Assets/sprite/MenuUI/Select2.png");
@@ -176,7 +179,7 @@ void CWeaponShop::Update()
 {
 	ShopUpdate();
 	if (!m_isTransaction) { return; };
-	if (GetPlayer().BuyMoney(m_items[m_lineupSelectNumber].ItemStatus.Itemprice) && CEquipInventory::IsSpaceEquipList())
+	if (GetPlayer().BuyMoney(m_items[m_lineupSelectNumber].ItemStatus.Itemprice) && GetEquipList().IsSpaceEquipList())
 	{
 		
 		wchar_t* itemName = m_items[m_lineupSelectNumber].ItemStatus.ItemName;
@@ -216,7 +219,8 @@ void CWeaponShop::Update()
 		}
 		inventoryEquip->Init(itemName, textureFileName);
 		inventoryEquip->SetEquipStatus(weapons);
-		CEquipInventory::AddEquipList(std::move(inventoryEquip));
+		inventoryEquip->SetItemStatus(m_items[m_lineupSelectNumber].ItemStatus);
+		GetEquipList().AddEquipList(std::move(inventoryEquip));
 
 		CSoundSource* se = New<CSoundSource>(0);
 		se->Init("Assets/sound/SystemSound/BuySe.wav");

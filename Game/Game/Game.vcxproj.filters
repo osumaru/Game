@@ -451,6 +451,12 @@
     <ClCompile Include="Player\ItemList.cpp">
       <Filter>ソース ファイル\Player</Filter>
     </ClCompile>
+    <ClCompile Include="Item\EquipList.cpp">
+      <Filter>ソース ファイル\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\ShopSale\EquipShopSale.cpp">
+      <Filter>ソース ファイル\UI\ShopSale</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -800,6 +806,12 @@
     </ClInclude>
     <ClInclude Include="Player\ItemList.h">
       <Filter>ソース ファイル\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Item\EquipList.h">
+      <Filter>ソース ファイル\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\ShopSale\EquipShopSale.h">
+      <Filter>ソース ファイル\UI\ShopSale</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -23,6 +23,7 @@
 #include "../Item/TreasureChest.h"
 #include "MapChip/Castle.h"
 #include "MapChip/Tree.h"
+#include "../NPC/IShop.h"
 
 std::vector<std::vector<SMapChipInfo>> mapChipInfo = 
 {
@@ -107,7 +108,7 @@ void Map::Init(int stageNum)
 			m_shopManager->InitShop(mInfo.m_position, mInfo.m_rotation, EShop::enItemShop);
 			break;
 		case enMapTagWeaponShop:
-			m_shopManager->InitShop(mInfo.m_position, mInfo.m_rotation, EShop::enItemShop);
+			m_shopManager->InitShop(mInfo.m_position, mInfo.m_rotation, EShop::enWeaponShop);
 			break;
 		case enMapTagNormalShop:
 			m_shopManager->InitShop(mInfo.m_position, mInfo.m_rotation, EShop::enItemShop);

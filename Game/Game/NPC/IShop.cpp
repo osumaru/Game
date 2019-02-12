@@ -6,7 +6,8 @@
 #include "../Item/InventoryItem/IInventoryItem.h"
 #include "../Item/InventoryItem/InventoryRecoveryItem.h"
 #include "../UI/Menu/ItemInventory.h"
-#include "../UI/ShopSale/ItemShopSale.h"]
+#include "../UI/ShopSale/ItemShopSale.h"
+#include "../UI/ShopSale/EquipShopSale.h"
 
 IShop::IShop()
 {
@@ -60,7 +61,18 @@ void IShop::ShopUpdate()
 			if (m_shopState == enShopBuy) { m_isShoplineupDraw = true; }
 			else if (m_shopState == enShopSale)
 			{
-				New<CItemShopSale>(PRIORITY_UI)->Init();
+				//ìXÇÃéÌóﬁÇ…ÇÊÇ¡ÇƒèoÇ∑îÑãpópÇÃUIÇïœÇ¶ÇÈ
+				switch (m_shopType)
+				{
+				case enItemShop:
+					New<CItemShopSale>(PRIORITY_UI)->Init();
+					break;
+				case enWeaponShop:
+					New<CEquipShopSale>(PRIORITY_UI)->Init();
+					break;
+				case enNormalNpc:
+					break;
+				}
 				m_shopState = enShopSale;
 			}
 			else 
