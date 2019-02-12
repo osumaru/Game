@@ -47,14 +47,16 @@ public:
 	//アイテムを捨てる
 	void Erase();
 
-private:
 	//ステータスの数
-	enum EnStatusNum {
+	enum EnStatusNum
+	{
 		enStatus_Hp,		//HP
 		enStatus_Attack,	//攻撃力
 		enStatus_Defense,	//防御力
 		enStatus_Num		//ステータスの数
 	};
+
+private:
 
 	//ステータス比較用のフォントの数
 	enum EnFontNum {

@@ -7,7 +7,7 @@
 #include "WireAction.h"
 #include "PlayerGetter.h"
 #include "WireDraw.h"
-#include "ItemList.h"
+#include "../Item/ItemList.h"
 #include "../Item/EquipList.h"
 class IItem;
 

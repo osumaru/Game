@@ -448,14 +448,14 @@
     <ClCompile Include="UI\ShopSale\ItemShopSale.cpp">
       <Filter>ソース ファイル\UI\ShopSale</Filter>
     </ClCompile>
-    <ClCompile Include="Player\ItemList.cpp">
-      <Filter>ソース ファイル\Player</Filter>
-    </ClCompile>
     <ClCompile Include="Item\EquipList.cpp">
       <Filter>ソース ファイル\Item</Filter>
     </ClCompile>
     <ClCompile Include="UI\ShopSale\EquipShopSale.cpp">
       <Filter>ソース ファイル\UI\ShopSale</Filter>
+    </ClCompile>
+    <ClCompile Include="Item\ItemList.cpp">
+      <Filter>ソース ファイル\Item</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -803,9 +803,6 @@
     </ClInclude>
     <ClInclude Include="UI\ShopSale\ItemShopSale.h">
       <Filter>ソース ファイル\UI\ShopSale</Filter>
-    </ClInclude>
-    <ClInclude Include="Player\ItemList.h">
-      <Filter>ソース ファイル\Player</Filter>
     </ClInclude>
     <ClInclude Include="Item\EquipList.h">
       <Filter>ソース ファイル\Item</Filter>

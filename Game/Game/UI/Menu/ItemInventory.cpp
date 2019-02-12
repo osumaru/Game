@@ -2,7 +2,7 @@
 #include "ItemInventory.h"
 #include "Menu.h"
 #include "../../Item/InventoryItem/IInventoryItem.h"
-#include "../../Player/ItemList.h"
+#include "../../Item/ItemList.h"
 #include "../../Player/Player.h"
 
 //std::list<std::unique_ptr<IInventoryItem>> CItemInventory::m_itemList;

@@ -70,19 +70,19 @@ void CEquipShopSale::Init()
 	CVector2 fontPos = { m_basePos.x + m_baseSize.x * m_width, m_basePos.y - 70.0f };
 	wchar_t fontMoji[256];
 	wchar_t fontNum[256];
-	for (int i = 0; i < enStatus_Num; i++)
+	for (int i = 0; i < CEquipInventory::enStatus_Num; i++)
 	{
 		switch (i)
 		{
-		case enStatus_Hp:
+		case CEquipInventory::enStatus_Hp:
 			swprintf(fontMoji, L"Å‘åHP : ");
 			swprintf(fontNum, L"%d", playerStatus.MaxHealth);
 			break;
-		case enStatus_Attack:
+		case CEquipInventory::enStatus_Attack:
 			swprintf(fontMoji, L"UŒ‚—Í : ");
 			swprintf(fontNum, L"%d", playerStatus.Strength);
 			break;
-		case enStatus_Defense:
+		case CEquipInventory::enStatus_Defense:
 			swprintf(fontMoji, L"–hŒä—Í : ");
 			swprintf(fontNum, L"%d", playerStatus.Defense);
 			break;
@@ -140,7 +140,7 @@ void CEquipShopSale::Update()
 		m_equipName.SetString(equip->GetItemStatus().ItemName);
 		wchar_t attackStr[16];
 		swprintf(attackStr, L"%d", equip->GetEquipStatus().attack);
-		m_statusFontNum[enStatus_Attack].SetString(attackStr);
+		m_statusFontNum[CEquipInventory::enStatus_Attack].SetString(attackStr);
 	}
 	else
 	{
@@ -167,7 +167,7 @@ void CEquipShopSale::PostAfterDraw()
 
 	m_statusWindow.Draw();
 
-	for (int i = 0; i < enStatus_Num; i++)
+	for (int i = 0; i < CEquipInventory::enStatus_Num; i++)
 	{
 		m_statusFont[i].Draw();
 		m_statusFontNum[i].Draw();
