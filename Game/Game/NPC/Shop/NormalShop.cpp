@@ -11,10 +11,11 @@ CNormalShop::~CNormalShop()
 {
 }
 
-void CNormalShop::Init(const CVector3 position, const CQuaternion rotation)
+void CNormalShop::Init(const CVector3 position, const CQuaternion rotation, const int element)
 {
 	m_position = position;
 	m_rotation = rotation;
+	m_element = element;
 	wchar_t* animClip[] = { L"Assets/modelData/ShopgirlStand.tka" };
 	m_animation.Init(animClip, 1);
 	m_animation.SetLoopFlg(0, true);

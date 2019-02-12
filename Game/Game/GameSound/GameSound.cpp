@@ -124,12 +124,22 @@ void CGameSound::SoundLenght()
 {
 	if (&GetPlayer() == nullptr || !m_backSound[m_soundState].m_isMapSound) { return; }
 
-	CVector3 soundVec = m_backSound[enTownBgm].m_soundPosition - GetPlayer().GetPosition();
-	float len = soundVec.Length();
-	if (m_backSound[enTownBgm].m_lenght < len)
+	float oldlen = 99999;
+	for (auto vect : m_soundPointList)
 	{
-		len -= m_backSound[enTownBgm].m_lenght;
-		if (len < m_volumeDownLen)
+		CVector3 soundVec = vect - GetPlayer().GetPosition();
+		float len = soundVec.Length();
+		if (oldlen > len)
+		{
+			oldlen = len;
+
+		}
+	}
+
+	if (m_backSound[enTownBgm].m_lenght < oldlen)
+	{
+		oldlen -= m_backSound[enTownBgm].m_lenght;
+		if (oldlen < m_volumeDownLen)
 		{
 			if (m_soundState == enWorldBgm)
 			{
@@ -137,7 +147,7 @@ void CGameSound::SoundLenght()
 				m_soundState = enTownBgm;
 				m_backSound[m_soundState].m_backSound.Play(true, false);
 			}
-			m_bgmVolume = m_backSound[m_soundState].m_volume - (1.0f / m_volumeDownLen * len);
+			m_bgmVolume = m_backSound[m_soundState].m_volume - (1.0f / m_volumeDownLen * oldlen);
 			
 		}
 		else if(m_soundState != enWorldBgm)

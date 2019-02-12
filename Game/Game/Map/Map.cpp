@@ -130,6 +130,10 @@ void Map::Init(int stageNum)
 		case enMapTagBreakBrock:
 			mapChip = New<CBreakMapObject>(PRIORITY_MAPCHIP);
 			break;
+		case enMapTagSoundPoint:
+			mapChip = New<CCastle>(PRIORITY_BILLDING);
+			GetSceneManager().GetGameSound()->SetTownPosition(mInfo.m_position);
+			break;
 		case enMapTagTerrain:
 			mapChip = New<StaticMapObject>(PRIORITY_GROUND);
 			g_pathFinding.GetNavigationMesh().SetSkinModel(&dynamic_cast<StaticMapObject*>(mapChip)->GetSkinModel());

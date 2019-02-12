@@ -16,17 +16,18 @@ CItemShop::~CItemShop()
 {
 }
 
-void CItemShop::Init(const CVector3 position, const CQuaternion rotation)
+void CItemShop::Init(const CVector3 position, const CQuaternion rotation,const int element)
 {
 	
 	m_position = position;
 	m_rotation = rotation;
+	m_element = element;
 	wchar_t* animClip[] = { L"Assets/modelData/ShopgirlStand.tka" };
 	m_animation.Init(animClip, 1);
 	m_animation.SetLoopFlg(0, true);
 	m_skinmodelNpc.Load(L"Assets/modelData/Shopgirl.cmo", &m_animation);
 	m_animation.Play(0);
-	m_skinModel.Load(L"Assets/modelData/roten.cmo", NULL);
+	m_skinModel.Load(L"Assets/modelData/roten2.cmo", NULL);
 	m_skinModel.Update(m_position, m_rotation, m_scale, false);
 	SRigidBodyInfo rInfo;
 
@@ -58,15 +59,15 @@ void CItemShop::Init(const CVector3 position, const CQuaternion rotation)
 
 		m_shopSelectTexture[0] = TextureResource().LoadTexture(L"Assets/sprite/ShopUI/Buy.png");
 		m_shopSelect[0].Init(m_shopSelectTexture[0]);
-		m_shopSelectTexture[1] = TextureResource().LoadTexture(L"Assets/sprite/ShopUI/Execute.png");
+		m_shopSelectTexture[1] = TextureResource().LoadTexture(L"Assets/sprite/ShopUI/sell.png");
 		m_shopSelect[1].Init(m_shopSelectTexture[1]);
 		m_shopSelectTexture[2] = TextureResource().LoadTexture(L"Assets/sprite/ShopUI/Execute.png");
 		m_shopSelect[2].Init(m_shopSelectTexture[2]);
-		for (int num = 0;num < SELECT_TEX_ELEMENT;num++)
+		for (int num = 0;num < SELECT_ITEM_ELEMENT;num++)
 		{
 			m_shopSelect[num].SetPosition(m_shopSelectPosition);
 			m_shopSelect[num].SetSize(m_shopSelectSize);
-			m_shopSelectPosition.y -= 70.0f;
+			m_shopSelectPosition.y -= 65.0f;
 		}
 
 		m_shopSelectPenTexture = TextureResource().LoadTexture(L"Assets/sprite/MenuUI/Select2.png");
@@ -85,10 +86,9 @@ void CItemShop::Init(const CVector3 position, const CQuaternion rotation)
 		wchar_t filePath[256];
 		for (int num = 0; num < ITEM_ELEMENT;num++)
 		{
-			int RandomID = num;// Random().GetRandInt() % 5;// 9 + 1;
+			int RandomID = num;
 			m_items[num].ItemStatus = m_quickItem.GetItemStatus(RandomID);
-			swprintf(filePath, L"Assets/sprite/%d.png", num/*m_items[num].ItemStatus.ItemID*/);
-			m_items[num].ItemTexture = TextureResource().LoadTexture(filePath);
+			m_items[num].ItemTexture = TextureResource().LoadTexture(m_items[num].ItemStatus.ItemSprite);
 			m_items[num].ItemSprite.Init(m_items[num].ItemTexture);
 			m_items[num].ItemSprite.SetSize(m_shopLineupTexSize);
 			m_items[num].ItemSprite.SetPosition(m_shopLineupPosition);
@@ -133,19 +133,20 @@ void CItemShop::PostAfterDraw()
 {
 	if(!m_isSelectDraw && !m_isShoplineupDraw) { return; }
 
-	for (int num = 0;num < SELECT_TEX_ELEMENT;num++)
+	for (auto &SelectTex : m_shopSelect)
 	{
-		m_shopSelect[num].Draw();
+		SelectTex.Draw();
+
 	}
 	m_shopSelectPen.Draw();
 
 	if (!m_isShoplineupDraw) { return; }
 	m_backSprite.Draw();
 	m_selectItemSprite.Draw();
-	for (int num = 0; num < ITEM_ELEMENT;num++)
+	for (auto &item : m_items)
 	{
-		m_items[num].ItemSprite.Draw();
-		
+		item.ItemSprite.Draw();
+
 	}
 	m_moneyBack.Draw();
 	for (int num = 0; num < ITEM_ELEMENT; num++)

@@ -18,12 +18,12 @@ CWeaponShop::CWeaponShop()
 CWeaponShop::~CWeaponShop()
 {
 }
-void CWeaponShop::Init(const CVector3 position, const CQuaternion rotation)
+void CWeaponShop::Init(const CVector3 position, const CQuaternion rotation,const int element)
 {
-	//AddFile(L"Assets/sprite/shopData");
-	//LoadFile(L"Assets/sprite/shopData");
+
 	m_position = position;
 	m_rotation = rotation;
+	m_element = element;
 	SRigidBodyInfo rInfo;
 
 	rInfo.mass = 0.0f;
@@ -67,13 +67,15 @@ void CWeaponShop::Init(const CVector3 position, const CQuaternion rotation)
 
 		m_shopSelectTexture[0] = TextureResource().LoadTexture(L"Assets/sprite/ShopUI/Buy.png");
 		m_shopSelect[0].Init(m_shopSelectTexture[0]);
-		m_shopSelectTexture[1] = TextureResource().LoadTexture(L"Assets/sprite/ShopUI/Execute.png");
+		m_shopSelectTexture[1] = TextureResource().LoadTexture(L"Assets/sprite/ShopUI/sell.png");
 		m_shopSelect[1].Init(m_shopSelectTexture[1]);
-		for (int num = 0;num < SELECT_TEX_ELEMENT;num++)
+		m_shopSelectTexture[2] = TextureResource().LoadTexture(L"Assets/sprite/ShopUI/Execute.png");
+		m_shopSelect[2].Init(m_shopSelectTexture[2]);
+		for (int num = 0;num < SELECT_ITEM_ELEMENT;num++)
 		{
 			m_shopSelect[num].SetPosition(m_shopSelectPosition);
 			m_shopSelect[num].SetSize(m_shopSelectSize);
-			m_shopSelectPosition.y -= 100.0f;
+			m_shopSelectPosition.y -= 65.0f;
 		}
 
 		m_shopSelectPenTexture = TextureResource().LoadTexture(L"Assets/sprite/MenuUI/Select2.png");
@@ -91,26 +93,9 @@ void CWeaponShop::Init(const CVector3 position, const CQuaternion rotation)
 
 		wchar_t filePath[256];
 		//商品情報の初期化
-		//for (int num = 0; num < ITEM_ELEMENT;num++)
-		//{
-		//	int RandomID = DEFAULT_WEAPON[num];//Random().GetRandInt() % 10;
-		//	m_items[num].ItemStatus = m_equipItem->GetItemStatus(RandomID);
-		//	swprintf(filePath, L"Assets/sprite/Item/Equip/Equip_%d.png", (int)m_items[num].ItemStatus.WeaponType);
-		//	m_items[num].ItemTexture = TextureResource().LoadTexture(filePath);
-		//	m_items[num].ItemSprite.Init(m_items[num].ItemTexture);
-		//	m_items[num].ItemSprite.SetSize(m_shopLineupTexSize);
-		//	m_items[num].ItemSprite.SetPosition(m_shopLineupPosition);
-		//	m_shopLineupPosition.y -= SHOPLINEUP_POSITION_OFFSET.y;
-		//	swprintf(m_filePath, m_items[num].ItemStatus.ItemName);
-		//	m_itemNameFont[num].Init(m_filePath);
-		//	m_itemNameFont[num].SetPosition({ m_fontPosition.x + FONT_POSITION_OFFSET.x, m_fontPosition.y});
-		//	swprintf(m_filePath,L"      %dG", m_items[num].ItemStatus.Itemprice);
-		//	m_itemPriceFont[num].Init(m_filePath);
-		//	m_itemPriceFont[num].SetPosition({ m_fontPosition.x + FONT_POSITION_OFFSET.x * 2, m_fontPosition.y });
-		//	m_fontPosition.y -= FONT_POSITION_OFFSET.y;
-		//}
+		LineupChange();
 	}
-	LineupChange();
+	
 	SetIsActive(true);
 }
 void CWeaponShop::LineupChange()
@@ -141,7 +126,8 @@ void CWeaponShop::LineupChange()
 	CVector2 fontPos = m_fontPosition;
 	int RandomID = 0;
 	int randomElement = 0;
-	for (int num = 0; num < ITEM_ELEMENT;num++)
+	bool loop = false;
+	for (int num = 0; num < EQUIP_ELEMENT;num++)
 	{
 		if (GetPlayer().GetStatus().Level >= 10)
 		{
@@ -150,24 +136,24 @@ void CWeaponShop::LineupChange()
 		}
 		else
 		{
-			randomElement = (Random().GetRandInt() % (m_equipItem->GetNormalEquipItemListSize() - 1));
-			RandomID = m_equipItem->GetNormalEquipItemList(randomElement);
+				randomElement = (Random().GetRandInt() % (m_equipItem->GetNormalEquipItemListSize() - 1));
+				RandomID = m_equipItem->GetNormalEquipItemList(randomElement);
 		}
 		//アイテムのIDを取得
-		m_items[num].ItemStatus = m_equipItem->GetItemStatus_ItemId(RandomID);
+		m_equipItems[num].ItemStatus = m_equipItem->GetItemStatus_ItemId(RandomID);
 		//m_items[num].ItemStatus.ItemEffect += Random().GetRandSInt() % 5;
 		//スプライトの設定
-		m_items[num].ItemTexture = TextureResource().LoadTexture(m_items[num].ItemStatus.ItemSprite);
-		m_items[num].ItemSprite.Init(m_items[num].ItemTexture);
-		m_items[num].ItemSprite.SetSize(m_shopLineupTexSize);
-		m_items[num].ItemSprite.SetPosition(texturePos);
+		m_equipItems[num].ItemTexture = TextureResource().LoadTexture(m_equipItems[num].ItemStatus.ItemSprite);
+		m_equipItems[num].ItemSprite.Init(m_equipItems[num].ItemTexture);
+		m_equipItems[num].ItemSprite.SetSize(m_shopLineupTexSize);
+		m_equipItems[num].ItemSprite.SetPosition(texturePos);
 		texturePos.y -= SHOPLINEUP_POSITION_OFFSET.y;
-		swprintf(m_filePath, m_items[num].ItemStatus.ItemName);
-		m_itemNameFont[num].Init(m_filePath);
-		m_itemNameFont[num].SetPosition({ fontPos.x + FONT_POSITION_OFFSET.x, fontPos.y });
-		swprintf(m_filePath, L"     %dG", m_items[num].ItemStatus.Itemprice);
-		m_itemPriceFont[num].Init(m_filePath);
-		m_itemPriceFont[num].SetPosition({ fontPos.x + FONT_POSITION_OFFSET.x * 2, fontPos.y });
+		swprintf(m_filePath, m_equipItems[num].ItemStatus.ItemName);
+		m_equipNameFont[num].Init(m_filePath);
+		m_equipNameFont[num].SetPosition({ fontPos.x + FONT_POSITION_OFFSET.x, fontPos.y });
+		swprintf(m_filePath, L"     %dG", m_equipItems[num].ItemStatus.Itemprice);
+		m_equipPriceFont[num].Init(m_filePath);
+		m_equipPriceFont[num].SetPosition({ fontPos.x + FONT_POSITION_OFFSET.x * 2, fontPos.y });
 		fontPos.y -= FONT_POSITION_OFFSET.y;
 	}
 }
@@ -176,22 +162,22 @@ void CWeaponShop::Update()
 {
 	ShopUpdate();
 	if (!m_isTransaction) { return; };
-	if (GetPlayer().BuyMoney(m_items[m_lineupSelectNumber].ItemStatus.Itemprice) && CEquipInventory::IsSpaceEquipList())
+	if (GetPlayer().BuyMoney(m_equipItems[m_lineupSelectNumber].ItemStatus.Itemprice) && CEquipInventory::IsSpaceEquipList())
 	{
 		
-		wchar_t* itemName = m_items[m_lineupSelectNumber].ItemStatus.ItemName;
-		wchar_t* textureFileName = m_items[m_lineupSelectNumber].ItemStatus.ItemSprite;
+		wchar_t* itemName = m_equipItems[m_lineupSelectNumber].ItemStatus.ItemName;
+		wchar_t* textureFileName = m_equipItems[m_lineupSelectNumber].ItemStatus.ItemSprite;
 		SWeaponStatus weapons;
 
-		weapons.weaponNum = (EnPlayerWeapon)m_items[m_lineupSelectNumber].ItemStatus.WeaponType;
-		switch (m_items[m_lineupSelectNumber].ItemStatus.ItemEffectPlayerStatus)
+		weapons.weaponNum = (EnPlayerWeapon)m_equipItems[m_lineupSelectNumber].ItemStatus.WeaponType;
+		switch (m_equipItems[m_lineupSelectNumber].ItemStatus.ItemEffectPlayerStatus)
 		{
 			
 		case EnIemEffectPlayerStatus::Strength:
-			weapons.attack = m_items[m_lineupSelectNumber].ItemStatus.ItemEffect;
+			weapons.attack = m_equipItems[m_lineupSelectNumber].ItemStatus.ItemEffect;
 			break;
 		case EnIemEffectPlayerStatus::Defense:
-			weapons.diffence = m_items[m_lineupSelectNumber].ItemStatus.ItemEffect;
+			weapons.diffence = m_equipItems[m_lineupSelectNumber].ItemStatus.ItemEffect;
 			break;
 		case EnIemEffectPlayerStatus::Health:
 
@@ -247,16 +233,16 @@ void CWeaponShop::PostAfterDraw()
 	if (!m_isShoplineupDraw) { return; }
 	m_backSprite.Draw();
 	m_selectItemSprite.Draw();
-	for (auto &item:m_items)
+	for (auto &item: m_equipItems)
 	{
 		item.ItemSprite.Draw();
 		
 	}
 	m_moneyBack.Draw();
-	for (int num = 0; num < ITEM_ELEMENT;num++)
+	for (int num = 0; num < EQUIP_ELEMENT;num++)
 	{
-		m_itemNameFont[num].Draw();
-		m_itemPriceFont[num].Draw();
+		m_equipNameFont[num].Draw();
+		m_equipPriceFont[num].Draw();
 	}
 	m_money.Draw();
 }
