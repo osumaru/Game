@@ -186,6 +186,10 @@ void CItemShopSale::Update()
 		m_choiceItemStatus = item->GetStatus();
 		m_itemName.SetString(m_choiceItemStatus.ItemName);
 	}
+	else
+	{
+		m_itemName.SetString(L"");
+	}
 	wchar_t str[64];
 	swprintf(str, L"%dG", GetPlayer().GetStatus().Gold);
 	m_money.SetString(str);

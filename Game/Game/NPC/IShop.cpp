@@ -172,7 +172,7 @@ void IShop::ShopUpdate()
 	}
 	int gold = GetPlayer().GetStatus().Gold;
 	wchar_t str[64];
-	swprintf(str, L"%d", gold);
+	swprintf(str, L"%dG", gold);
 	m_money.SetString(str);
 	m_animation.Update(GameTime().GetDeltaFrameTime());
 	m_skinModel.Update(m_position, m_rotation, m_scale, false);
