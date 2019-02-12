@@ -451,6 +451,9 @@
     <ClCompile Include="Player\ItemList.cpp">
       <Filter>ソース ファイル\Player</Filter>
     </ClCompile>
+    <ClCompile Include="UI\GetItem\GetItemName.cpp">
+      <Filter>ソース ファイル\UI\GetItem</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -800,6 +803,9 @@
     </ClInclude>
     <ClInclude Include="Player\ItemList.h">
       <Filter>ソース ファイル\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\GetItem\GetItemName.h">
+      <Filter>ソース ファイル\UI\GetItem</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

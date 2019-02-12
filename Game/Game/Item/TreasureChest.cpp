@@ -10,10 +10,10 @@
 #include "../Item/InventoryItem/InventoryLargeSword.h"
 #include "../Item/InventoryItem/InventoryBow.h"
 #include "../Item/InventoryItem/InventoryTwinSword.h"
-#include"GameItem/CEquipItem.h"
 #include "../UI/Message/Message.h"
+#include "../UI/GetItem/GetItemName.h"
 
-void CTreasureChest::Init(CVector3 position, CQuaternion rotation, bool isMapItem, EnDropType dropType)
+void CTreasureChest::Init(CVector3 position, CQuaternion rotation, bool isMapItem/*, EnDropType dropType*/)
 {
 	//モデルの初期化
 	m_skinModel.Load(L"Assets/modelData/TresureBox.cmo");
@@ -26,35 +26,14 @@ void CTreasureChest::Init(CVector3 position, CQuaternion rotation, bool isMapIte
 	m_position = position;
 	m_rotation = rotation;
 	//キャラクターコントローラーを初期化
-	//m_characterController.Init(1.0f, 0.5f, m_position);
-	//m_characterController.SetUserIndex(enCollisionAttr_Item);
+	m_characterController.Init(1.0f, 0.5f, m_position);
+	if (!isMapItem) 
+	{
+		m_characterController.SetUserIndex(enCollisionAttr_Item);
+	}
 	//マップに配置するか
 	m_isMapItem = isMapItem;
-	m_dropType = dropType;
-
-	SRigidBodyInfo rInfo;
-	rInfo.mass = 0.0f;
-	rInfo.pos = m_position;
-	rInfo.rot = m_rotation;
-	CQuaternion multi = CQuaternion::Identity;
-	rInfo.rot.Multiply(multi);
-	//AABBの作成
-	{
-		CMatrix rotMat;
-		rotMat.MakeRotationFromQuaternion(multi);
-		CMeshCollider mesh;
-		mesh.CreateCollider(&m_skinModel);
-		CVector3 boxsize = (mesh.GetAabbMax() - mesh.GetAabbMin()) / 2.0f;
-		CVector3 pos = (mesh.GetAabbMax() + mesh.GetAabbMin()) / 2.0f;
-		pos.Mul(rotMat);
-		rInfo.pos = pos + m_position;
-		m_boxCollider.reset(new CBoxCollider);
-		m_boxCollider->Create({ boxsize.x,boxsize.y,boxsize.z });
-		rInfo.collider = m_boxCollider.get();
-		m_rigidBody.reset(new CRigidBody);
-		m_rigidBody->Create(rInfo);
-	}
-
+	//m_dropType = dropType;
 }
 
 bool CTreasureChest::Start()
@@ -85,24 +64,12 @@ void CTreasureChest::Update()
 	if (!m_isMapItem)
 	{
 		m_timer += GameTime().GetDeltaFrameTime();
-	}
-	if (m_isDrawItemName)
-	{
-		m_drawTime += GameTime().GetDeltaFrameTime();
-		if (m_drawTime > 1.5f)
-		{
-			GetSceneManager().GetGameScene().GetGetItem()->NoItemeNameDraw();
-			m_drawTime = 0.0f;
-			Delete(this);
-		}
-		return;
-	}
-	
+	}	
 
 	//移動速度を取得
 	CVector3 moveSpeed = m_characterController.GetMoveSpeed();
 	//地面に接地しているか判定
-	bool isPopEnd = true;//m_characterController.IsOnGround();
+	bool isPopEnd = m_characterController.IsOnGround();
 	//プレイヤーとの距離を計算
 	bool isPickUp = PickUp(isPopEnd, 2.0f);
 	//拾うことができるか
@@ -128,8 +95,7 @@ void CTreasureChest::Update()
 				CEquipInventory::AddEquipList(std::move(m_inventoryEquip));
 				GetSceneManager().GetGameScene().GetGetItem()->SubtractDrawCount();
 				m_itemDrawCount = false;
-				m_isDrawItemName = true;
-				//Delete(this);
+				Delete(this);
 			}
 			else 
 			{
@@ -150,19 +116,17 @@ void CTreasureChest::Update()
 	}
 
 	//キャラクターコントローラーに移動速度を設定
-	/*m_characterController.SetMoveSpeed(moveSpeed);
+	m_characterController.SetMoveSpeed(moveSpeed);
 	m_characterController.SetPosition(m_position);
 	m_characterController.Execute(GameTime().GetDeltaFrameTime());
-	m_position = m_characterController.GetPosition();*/
+	m_position = m_characterController.GetPosition();
 
-	m_skinModel.Update(m_position, m_rotation, { 1.0f,1.0f,1.0f },false);
+	m_skinModel.Update(m_position, m_rotation, { 1.0f,1.0f,1.0f });
 }
 
 void CTreasureChest::Draw()
 {
-	if (m_isDrawItemName) { return; }
 	m_skinModel.Draw(GetGameCamera().GetViewMatrix(), GetGameCamera().GetProjectionMatrix());
-	m_rigidBody->Draw();
 }
 
 
@@ -177,9 +141,9 @@ void CTreasureChest::DesideWeaponStatus()
 	//↓これはレア度がNormalの武器からランダムで武器を取得するコード
 
 	int num = 0;
-	switch (m_dropType)
+	switch (m_weaponQuality)
 	{
-	case EnDropType::enRandom:
+	case EnItemQuality::enUnknown:
 	{
 		int probability = 0;
 		probability = Random().GetRandSInt() % 100;
@@ -199,16 +163,16 @@ void CTreasureChest::DesideWeaponStatus()
 		}
 	}
 		break;
-	case EnDropType::enNormal:
+	case EnItemQuality::enNormal:
 		num = nItem->GetNormalEquipItemList((Random().GetRandInt() % (nItem->GetNormalEquipItemListSize() - 1)));
 		break;
-	case EnDropType::enRare:
+	case EnItemQuality::enRare:
 		num = nItem->GetRareItemList(Random().GetRandSInt() % max(0, (nItem->GetRareEquipItemListSize() - 1)));
 		break;
-	case EnDropType::enLegend:
+	case EnItemQuality::enLegend:
 		num = nItem->GetLegendEquipItemList(Random().GetRandSInt() % max(0, (nItem->GetLegendEquipItemListSize() - 1)));
 		break;
-	case EnDropType::enSpecial:
+	case EnItemQuality::enSpecial:
 
 		break;
 	}
@@ -220,8 +184,10 @@ void CTreasureChest::DesideWeaponStatus()
 	//武器のUI情報の取得(文字列)
 	textureFileName = nItem->GetItemStatus(num).ItemSprite;
 	int weaponAttack = nItem->GetItemStatus_ItemId(num).ItemEffect;
+	//獲得したアイテムを表示する
+	CGetItemName* getItemName = New<CGetItemName>(PRIORITY_UI);
 	CTexture * texture = TextureResource().LoadTexture(textureFileName);
-	GetSceneManager().GetGameScene().GetGetItem()->ItemeNameDraw(texture, itemName);
+	getItemName->Init(texture, itemName);
 
 	if (weaponNumber == EnPlayerWeapon::enWeaponSword)
 	{

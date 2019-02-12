@@ -14,6 +14,24 @@
 	enMapTagPlayer, //タグ
 	0, //エネミーのレベル
 },
+//TresureBox
+{
+	L"TresureBox",
+	CVector3(0.00f, 0.80f, 15.80f),             //平行移動
+	CQuaternion(0.00f, 0.22f, 0.00f, 0.98f),  //回転
+	enMapTagTreasureBox, //タグ
+	0, //エネミーのレベル
+	2, //ドロップタイプ
+},
+//TresureBox
+{
+	L"TresureBox",
+	CVector3(0.00f, 0.80f, 20.80f),             //平行移動
+	CQuaternion(0.06f, 0.10f, 0.28f, 0.95f),  //回転
+	enMapTagTreasureBox, //タグ
+	0, //エネミーのレベル
+	1, //ドロップタイプ
+},
 //CastleDoor2
 {
 	L"CastleDoor2",

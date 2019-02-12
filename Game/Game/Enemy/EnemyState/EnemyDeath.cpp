@@ -32,9 +32,15 @@ void CEnemyDeath::Update()
 	//ライトが黒くなったか
 	if (m_lightSetEnd)
 	{
+		//腰の座標を取得
+		const CMatrix* spineMatrix = m_enemy->GetWorldMatrixSpine();
+		CVector3 spinePosition;
+		spinePosition.x = spineMatrix->m[3][0];
+		spinePosition.y = spineMatrix->m[3][1];
+		spinePosition.z = spineMatrix->m[3][2];
 		//お金
 		CMoney* money = New<CMoney>(PRIORITY_ITEM);
-		money->Init(m_enemy->GetPosition(), m_enemy->GetStatus().gold);
+		money->Init(spinePosition, m_enemy->GetStatus().gold);
 		//ランダムで0～9の数値を取得
 		int randomNum = Random().GetRandSInt() % 10;
 		//５割の確率で出す
@@ -42,19 +48,13 @@ void CEnemyDeath::Update()
 		{
 			//回復アイテム
 			CRecoveryItem* recoveryItem = New<CRecoveryItem>(PRIORITY_ITEM);
-			recoveryItem->Init(m_enemy->GetPosition());
+			recoveryItem->Init(spinePosition);
 		}
 		//３割の確率で出す
 		if (randomNum < 3)
 		{
 			//宝箱
 			CTreasureChest* treasureChest = New<CTreasureChest>(PRIORITY_ITEM);
-			//腰の座標を取得
-			const CMatrix* spineMatrix = m_enemy->GetWorldMatrixSpine();
-			CVector3 spinePosition;
-			spinePosition.x = spineMatrix->m[3][0];
-			spinePosition.y = spineMatrix->m[3][1];
-			spinePosition.z = spineMatrix->m[3][2];
 			treasureChest->Init(spinePosition, m_enemy->GetRotation(), false);
 		}
 		m_isAnimationEnd = true;

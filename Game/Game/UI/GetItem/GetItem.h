@@ -27,25 +27,10 @@ public:
 	{
 		m_drawCount--;
 	}
-	void ItemeNameDraw(CTexture* texture,wchar_t* ItemName )
-	{
-		m_isDrawItemName = true;
-		m_sprite[1].Init(texture);
-		m_sprite[1].SetSize({ 80,80.0f });
-		m_sprite[1].SetPosition({ -200.0f,-250.0f });
-		m_font.SetString(ItemName);
-	}
-	void NoItemeNameDraw()
-	{
-		m_isDrawItemName = false;
-	}
 
 private:
 	CSprite m_aButton;			//Aƒ{ƒ^ƒ“
 	CSprite m_pickUp;			//E‚¤
 	CSprite	m_back;				//”wŒi
 	int		m_drawCount = 0;	//•`‰æ‚·‚é‚©‚ğŒˆ‚ß‚éƒJƒEƒ“ƒgB0‚È‚ç•`‰æ‚µ‚È‚¢
-	CSprite								m_sprite[2];
-	CFont								m_font;
-	bool								m_isDrawItemName = false;
 };
