@@ -28,7 +28,7 @@ public:
 	{
 		m_drawCount--;
 	}
-	CGetItemName* GetCGetItemName()
+	CGetItemName* GetGetItemName()
 	{
 		return &m_itemName;
 	}
