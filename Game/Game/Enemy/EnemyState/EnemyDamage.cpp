@@ -31,9 +31,11 @@ void CEnemyDamage::Init()
 	{
 		m_isNockBack = true;
 	}
-	//どの武器でダメージを食らったか
-	//m_enemy->SetAttackWeapon(*GetPlayer().GetWeaponManager().GetWeapon()->GetAttackWeapon());
 
+	if (m_enemy->GetIsAttack())
+	{
+		m_enemy->SetIsAttack(false);
+	}
 
 	//ダメージ音
 	const float DamageVolume = 0.3f;

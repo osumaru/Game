@@ -65,6 +65,9 @@ void CGameCamera::Update()
 	if (&GetPlayer() == nullptr) { return; }
 	if(GetPlayer().IsActive() == false) { return; }
 
+	SoundEngine().SetListenerPosition(m_camera.GetPosition());
+	SoundEngine().SetListenerFront(m_toCameraPos * -1.0f);
+
 	CVector3 target = m_springCamera.GetTarTarget();
 	CVector3 position = m_springCamera.GetTarPosition();
 

@@ -44,6 +44,7 @@ void CChoices::Update()
 	}
 	else 
 	{
+		EnSelect currentState = m_state;
 		//スティックを右に倒した、又は十字キーの右を押した
 		if (Pad().GetLeftStickX() > 0.0f || Pad().IsTriggerButton(enButtonRight))
 		{
@@ -59,6 +60,14 @@ void CChoices::Update()
 			m_state = Yes;
 			//カーソルの座標を変更
 			m_cursor.SetPosition(m_yes.GetPosition());
+		}
+
+		if (currentState != m_state)
+		{
+			//選択音を鳴らす
+			CSoundSource* selectSound = New<CSoundSource>(0);
+			selectSound->Init("Assets/sound/SystemSound/EquipOn.wav");
+			selectSound->Play(false);
 		}
 
 		if (Pad().IsTriggerButton(enButtonA))

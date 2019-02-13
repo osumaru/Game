@@ -16,6 +16,10 @@ void CItemList::Erase(int pointerNum)
 	}
 	//リストから削除する
 	m_itemList.erase(it);
+	//アイテムを捨てる音を鳴らす
+	CSoundSource* eraseItemSound = New<CSoundSource>(0);
+	eraseItemSound->Init("Assets/sound/SystemSound/EquipOn.wav");
+	eraseItemSound->Play(false);
 }
 
 void CItemList::Use(int pointerNum)
@@ -37,6 +41,10 @@ void CItemList::Use(int pointerNum)
 	{
 		//使ったアイテムをリストから削除する
 		m_itemList.erase(it);
+		//アイテム使用音を鳴らす
+		CSoundSource* useItemSound = New<CSoundSource>(0);
+		useItemSound->Init("Assets/sound/Battle/heal.wav");
+		useItemSound->Play(false);
 	}
 }
 

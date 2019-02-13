@@ -86,6 +86,11 @@ void CRock::Update()
 		CParticleEmitter* particleEmitter = New<CParticleEmitter>(PRIORITY_UI);
 		particleEmitter->Init(m_particleInfo, &GetGameCamera().GetCamera());
 		particleEmitter->SetPosition(m_position);
+		//Šâ‚ª‚Ô‚Â‚©‚Á‚½‰¹‚ð–Â‚ç‚·
+		CSoundSource* rockHitSound = New<CSoundSource>(0);
+		rockHitSound->Init("Assets/sound/SystemSound/EquipOn.wav", true);
+		rockHitSound->Play(false);
+		rockHitSound->SetPosition(m_position);
 		m_isHit = false;
 	}
 

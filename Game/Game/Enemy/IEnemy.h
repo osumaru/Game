@@ -276,6 +276,19 @@ public:
 		return m_type;
 	}
 
+	//攻撃しているかを取得
+	bool GetIsAttack()
+	{
+		return m_isAttack;
+	}
+
+	//攻撃しているかを設定
+	//isAttack	攻撃しているか
+	void SetIsAttack(bool isAttack)
+	{
+		m_isAttack = isAttack;
+	}
+
 protected:
 	CSkinModel						m_skinModel;					//スキンモデル
 	CAnimation						m_animation;					//アニメーション

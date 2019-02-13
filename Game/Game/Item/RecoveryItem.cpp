@@ -117,6 +117,11 @@ void CRecoveryItem::Update()
 			m_isPopEnd = false;
 			m_isMove = false;
 			m_isRePop = true;
+			//アイテムがリポップする音を鳴らす
+			CSoundSource* itemRepopSound = New<CSoundSource>(0);
+			itemRepopSound->Init("Assets/sound/SystemSound/EquipOn.wav", true);
+			itemRepopSound->Play(false);
+			itemRepopSound->SetPosition(m_position);
 		}
 	}
 

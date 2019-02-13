@@ -183,10 +183,9 @@ void CTreasureChest::DesideWeaponStatus()
 	//武器のUI情報の取得(文字列)
 	textureFileName = nItem->GetItemStatus(num).ItemSprite;
 	int weaponAttack = nItem->GetItemStatus_ItemId(num).ItemEffect;
-	//獲得したアイテムを表示する
+	////獲得したアイテムを表示する
 	//CGetItemName* getItemName = New<CGetItemName>(PRIORITY_UI);
-	CTexture * texture = TextureResource().LoadTexture(textureFileName);
-	GetSceneManager().GetGameScene().GetGetItem()->GetCGetItemName()->SetIteName(texture, itemName);
+	//CTexture * texture = TextureResource().LoadTexture(textureFileName);
 	//getItemName->Init(texture, itemName);
 
 	if (weaponNumber == EnPlayerWeapon::enWeaponSword)

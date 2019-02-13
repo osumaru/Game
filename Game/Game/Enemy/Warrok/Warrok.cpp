@@ -19,6 +19,15 @@ void CWarrok::OnInvokeAnimationEvent(//ƒAƒjƒ[ƒVƒ‡ƒ“ƒCƒxƒ“ƒg‚ªŒÄ‚Î‚ê‚é‚²‚Æ‚ÉŒÄ‚
 {
 	if (wcscmp(animClipName, L"Assets/modelData/WarrokAttack.tka") == 0) 
 	{
+		if (!m_isAttack)
+		{
+			//UŒ‚‰¹
+			const float AttackVolume = 0.3f;
+			CSoundSource* AttackSound = New<CSoundSource>(0);
+			AttackSound->Init("Assets/sound/Battle/WarrokEnemyAttackSE.wav");
+			AttackSound->Play(false);
+			AttackSound->SetVolume(AttackVolume);
+		}
 		//UŒ‚ƒtƒ‰ƒO‚ğØ‚è‘Ö‚¦‚é
 		m_isAttack = !m_isAttack;
 	}
@@ -29,6 +38,11 @@ void CWarrok::OnInvokeAnimationEvent(//ƒAƒjƒ[ƒVƒ‡ƒ“ƒCƒxƒ“ƒg‚ªŒÄ‚Î‚ê‚é‚²‚Æ‚ÉŒÄ‚
 		m_rock->SetMoveSpeed();
 		//“Š‚°‚éƒtƒ‰ƒO‚ğ—§‚Ä‚é
 		m_rock->SetIsThrow(true);
+		//Šâ‚ğ“Š‚°‚é‚Æ‚«‚Ì‰¹‚ğ–Â‚ç‚·
+		CSoundSource* rockThrowSound = New<CSoundSource>(0);
+		rockThrowSound->Init("Assets/sound/SystemSound/EquipOn.wav", true);
+		rockThrowSound->Play(false);
+		rockThrowSound->SetPosition(m_position);
 	}
 }
 
