@@ -138,7 +138,6 @@ void CTreasureChest::DesideWeaponStatus()
 	wchar_t* itemName;
 	wchar_t* textureFileName;
 	CEquipItem* nItem = GetSceneManager().GetFade()->GetLoadScene()->GetEquipItemData();
-	//↓これはレア度がNormalの武器からランダムで武器を取得するコード
 
 	int num = 0;
 	switch (m_weaponQuality)

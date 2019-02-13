@@ -208,6 +208,7 @@
     <ClCompile Include="Player\WireDraw.cpp" />
     <ClCompile Include="Scene\BossScene.cpp" />
     <ClCompile Include="UI\AllowRemain\ArrowRemain.cpp" />
+    <ClCompile Include="UI\Clear.cpp" />
     <ClCompile Include="UI\Fade\LoadScene.cpp" />
     <ClCompile Include="NPC\Shop\ItemShop.cpp" />
     <ClCompile Include="Item\IItem.cpp" />
@@ -332,6 +333,7 @@
     <ClInclude Include="Player\WireDraw.h" />
     <ClInclude Include="Scene\BossScene.h" />
     <ClInclude Include="UI\AllowRemain\ArrowRemain.h" />
+    <ClInclude Include="UI\Clear.h" />
     <ClInclude Include="UI\Fade\LoadScene.h" />
     <ClInclude Include="NPC\Shop\ItemShop.h" />
     <ClInclude Include="Item\IItem.h" />

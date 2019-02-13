@@ -87,7 +87,7 @@ void CItemShop::Init(const CVector3 position, const CQuaternion rotation, EShop 
 		for (int num = 0; num < ITEM_ELEMENT;num++)
 		{
 			int RandomID = num;
-			m_items[num].ItemStatus = m_quickItem.GetItemStatus(RandomID);
+			m_items[num].ItemStatus = m_quickItem.GetItemStatus(RandomID + 1);
 			m_items[num].ItemTexture = TextureResource().LoadTexture(m_items[num].ItemStatus.ItemSprite);
 			m_items[num].ItemSprite.Init(m_items[num].ItemTexture);
 			m_items[num].ItemSprite.SetSize(m_shopLineupTexSize);
@@ -113,6 +113,7 @@ void CItemShop::Update()
 		std::unique_ptr<IInventoryItem> inventoryItem = std::make_unique<CInventoryRecoveryItem>();
 		inventoryItem->Init();
 		inventoryItem->SetStatus(m_items[m_lineupSelectNumber].ItemStatus);
+		inventoryItem->TexUpdate();
 		GetItemList().AddItemList(std::move(inventoryItem));
 		CSoundSource* se = New<CSoundSource>(0);
 		se->Init("Assets/sound/SystemSound/BuySe.wav");

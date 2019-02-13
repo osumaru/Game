@@ -13,9 +13,12 @@ public:
 	void Draw();
 	void PostAfterDraw();
 	void LineupChange();
+	void InitLineUp();
 private:
 	CEquipItem*			m_equipItem;
+	int					m_minuteCount = 0.0f;
 	float				m_changeTime = 0.0f;
+	const int			LINEUP_CHANGE_TIME = 6;
 	float				TIME = 10;
 	const int			DEFAULT_WEAPON[5] = { 0,1,2,10,11 };
 	const int			PICUP_WEAPON[5] = { 5,6,12,13,14 };

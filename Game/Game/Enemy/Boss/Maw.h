@@ -218,6 +218,11 @@ private:
 	float					m_waitTime = 0.0f;
 	CBossHp*				m_bossHp = nullptr;			//ボスHP
 	CWeekPoint*				m_weekPoint = nullptr;		//ボスの弱点スプライト
+	float					m_deathTimer = 0.0f;
+	const float				DEATH_TIME = 3.0f;
+	CLight					m_light;
+	float					m_diffuseLightPower;
+	bool					m_isParticle = true;;
 };
 
 //ボスの取得

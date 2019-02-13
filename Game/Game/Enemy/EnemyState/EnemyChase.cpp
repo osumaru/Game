@@ -60,43 +60,43 @@ void CEnemyChase::Move(float length)
 	CVector3 playerPos = GetPlayer().GetPosition();
 	CVector3 enemyPos = m_enemy->GetPosition();
 	CVector3 toPlayerDir = playerPos - enemyPos;
-	if (length > 10.0f) 
-	{
-		//Œo˜H’Tõ‚·‚é
-		m_interval++;
-		if (m_interval % 5 == 0) {
-			CVector3 startPos = enemyPos;
-			CVector3 targetPos = playerPos;
-			g_pathFinding.FindRoot(m_root, startPos, targetPos);
+	//if (length > 10.0f) 
+	//{
+	//	//Œo˜H’Tõ‚·‚é
+	//	m_interval++;
+	//	if (m_interval % 5 == 0) {
+	//		CVector3 startPos = enemyPos;
+	//		CVector3 targetPos = playerPos;
+	//		g_pathFinding.FindRoot(m_root, startPos, targetPos);
 
-			if (m_root.empty()) {
-				return;
-			}
-			CVector3 rootPos;
-			m_iterater = m_root.begin();
-			while(m_iterater != m_root.end()) {
-				m_iterater->CopyTo(rootPos);
-				CVector3 rootDir = rootPos - m_root[0];
-				if (rootDir.LengthSq() < FLT_EPSILON)
-				{
-					m_iterater++;
-				}
-				else 
-				{
-					break;
-				}
-			}
-			rootPos -= enemyPos;
-			rootPos.Normalize();
-			moveSpeed = rootPos * 5.0f;
-		}
-	}
-	else {
+	//		if (m_root.empty()) {
+	//			return;
+	//		}
+	//		CVector3 rootPos;
+	//		m_iterater = m_root.begin();
+	//		while(m_iterater != m_root.end()) {
+	//			m_iterater->CopyTo(rootPos);
+	//			CVector3 rootDir = rootPos - m_root[0];
+	//			if (rootDir.LengthSq() < FLT_EPSILON)
+	//			{
+	//				m_iterater++;
+	//			}
+	//			else 
+	//			{
+	//				break;
+	//			}
+	//		}
+	//		rootPos -= enemyPos;
+	//		rootPos.Normalize();
+	//		moveSpeed = rootPos * 5.0f;
+	//	}
+	//}
+	//else {
 		//ƒvƒŒƒCƒ„[‚ð’Ç‚¢‚©‚¯‚é
 		toPlayerDir.Normalize();
 		toPlayerDir *= speed;
 		moveSpeed.x = toPlayerDir.x;
 		moveSpeed.z = toPlayerDir.z;
-	}
+	//}
 	m_enemy->SetMoveSpeed(moveSpeed);
 }

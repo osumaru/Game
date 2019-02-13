@@ -22,6 +22,8 @@ public:
 	//アイテムを使う
 	virtual bool Use() { return false; }
 
+	virtual void TexUpdate() {};
+
 	//アイテムのスプライトを取得
 	CSprite* GetSprite()
 	{

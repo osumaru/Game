@@ -67,6 +67,14 @@ void CPlayerRun::Update()
 	{
 		m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateDamage);
 	}
+	else if (m_pPlayer->GetIsStateCondition(CPlayerState::enPlayerStateStun))
+	{
+		m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateStun);
+	}
+	else if (m_pPlayer->GetIsStateCondition(CPlayerState::enPlayerStateDied))
+	{
+		m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateDied);
+	}
 	//‘–‚Á‚Ä‚¢‚é‚Æ‚«‚ÉUŒ‚‚µ‚½Žž‚Ìˆ—
 	else if (m_pPlayer->GetIsStateCondition(CPlayerState::enPlayerStateArrowAttack))
 	{
