@@ -48,7 +48,7 @@ void CMaw::OnInvokeAnimationEvent(
 //初期化
 void CMaw::Init(CVector3 position)
 {
-	int level = 1;
+	int level = 45;
 	//ステータスを設定
 	m_status.Strength = 15 + level * 2;
 	m_status.Defense = 10 + level * 2;
