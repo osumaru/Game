@@ -460,6 +460,9 @@
     <ClCompile Include="UI\GetItem\GetItemName.cpp">
       <Filter>ソース ファイル\UI\GetItem</Filter>
     </ClCompile>
+    <ClCompile Include="UI\Clear.cpp">
+      <Filter>ソース ファイル\UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -818,6 +821,9 @@
     </ClInclude>
     <ClInclude Include="UI\GetItem\GetItemName.h">
       <Filter>ソース ファイル\UI\GetItem</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Clear.h">
+      <Filter>ソース ファイル\UI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
