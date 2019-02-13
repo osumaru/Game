@@ -30,6 +30,14 @@ void CMaw::OnInvokeAnimationEvent(
 	//攻撃判定を切り替える
 	if (wcscmp(animClipName, L"Assets/modelData/MawAttack.tka") == 0) 
 	{
+		if (m_isAttack)
+		{
+			//通常攻撃の音を鳴らす
+			CSoundSource* normalAttackSound = New<CSoundSource>(0);
+			normalAttackSound->Init("Assets/sound/SystemSound/EquipOn.wav", true);
+			normalAttackSound->Play(false);
+			normalAttackSound->SetPosition(m_position);
+		}
 		m_isAttack = !m_isAttack;
 	}
 
@@ -48,7 +56,7 @@ void CMaw::OnInvokeAnimationEvent(
 //初期化
 void CMaw::Init(CVector3 position)
 {
-	int level = 1;
+	int level = 45;
 	//ステータスを設定
 	m_status.Strength = 15 + level * 2;
 	m_status.Defense = 10 + level * 2;
@@ -285,6 +293,12 @@ void CMaw::SpecialAttackEnd()
 	CShakeCamera& shakeCamera = GetGameCamera().GetShakeCamera();
 	shakeCamera.SetDamping(0.7f);
 	shakeCamera.ShakeStart(0.7f);
+
+	//特殊攻撃の音を鳴らす
+	CSoundSource* specialAttackSound = New<CSoundSource>(0);
+	specialAttackSound->Init("Assets/sound/SystemSound/EquipOn.wav", true);
+	specialAttackSound->Play(false);
+	specialAttackSound->SetPosition(m_position);
 }
 //ダウン状態
 void CMaw::Down()

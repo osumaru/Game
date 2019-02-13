@@ -59,6 +59,11 @@ void CEnemyDeath::Update()
 		}
 		m_isAnimationEnd = true;
 		m_enemy->EnemyListErase();
+		//エネミーの死亡時の音を鳴らす
+		CSoundSource* enemyDeathSound = New<CSoundSource>(0);
+		enemyDeathSound->Init("Assets/sound/SystemSound/EquipOn.wav", true);
+		enemyDeathSound->Play(false);
+		enemyDeathSound->SetPosition(m_enemy->GetPosition());
 		Delete(m_enemy);
 	}
 	//死亡アニメーションが終わったか

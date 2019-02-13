@@ -28,7 +28,7 @@ bool CGameSound::Start()
 	m_backSound[enShopBgm].m_backSound.Init("Assets/sound/BackSound/ShopBgm.wav");
 	m_backSound[enShopBgm].m_backSound.SetVolume(m_backSound[enShopBgm].m_volume);
 
-	m_backSound[enWorldBgm].m_backSound.Init("Assets/sound/BackSound/FieldBgm.wav");
+	m_backSound[enWorldBgm].m_backSound.Init("Assets/sound/BackSound/FieldBgm3.wav");
 	m_backSound[enWorldBgm].m_volume = 0.5f;
 	m_backSound[enWorldBgm].m_backSound.SetVolume(m_backSound[enWorldBgm].m_volume);
 	m_backSound[enWorldBgm].m_isMapSound = true;
@@ -38,7 +38,7 @@ bool CGameSound::Start()
 
 	m_backSound[enDeathBgm].m_backSound.Init("Assets/sound/BackSound/GameOverBgm.wav");
 	m_backSound[enDeathBgm].m_backSound.SetVolume(m_backSound[enDeathBgm].m_volume);
-
+	m_backSound[enDeathBgm].m_isLoop = false;
 	m_backSound[m_soundState].m_backSound.Play(m_backSound[enDeathBgm].m_isLoop, m_backSound[enDeathBgm].m_isBegin);
 	return true;
 }
@@ -61,13 +61,7 @@ void CGameSound::Update()
 
 		break;
 	case enShopBgm:
-	/*	if (!m_isShop)
-		{
-			m_backSound[enShopBgm].Stop();
-			m_soundState = enWorldBgm;
-			m_backSound[enWorldBgm].Play(true, false);
-			m_backSound[enWorldBgm].SetVolume(MASTER_VOLUME);
-		}*/
+
 		break;
 
 	case enBossBgm:
@@ -125,22 +119,23 @@ void CGameSound::SoundLenght()
 {
 	if (&GetPlayer() == nullptr || !m_backSound[m_soundState].m_isMapSound) { return; }
 
-	float oldlen = 99999;
+	float plVec = 99999;
 	for (auto vect : m_soundPointList)
 	{
 		CVector3 soundVec = vect - GetPlayer().GetPosition();
 		float len = soundVec.Length();
-		if (oldlen > len)
+		if (plVec > len)
 		{
-			oldlen = len;
+			plVec = len;
 
 		}
 	}
 
-	if (m_backSound[enTownBgm].m_lenght < oldlen)
+	if (m_backSound[enTownBgm].m_lenght < plVec)
 	{
-		oldlen -= m_backSound[enTownBgm].m_lenght;
-		if (oldlen < m_volumeDownLen)
+
+		plVec -= m_backSound[enTownBgm].m_lenght;
+		if (plVec < m_volumeDownLen)
 		{
 			if (m_soundState == enWorldBgm)
 			{
@@ -148,16 +143,23 @@ void CGameSound::SoundLenght()
 				m_soundState = enTownBgm;
 				m_backSound[m_soundState].m_backSound.Play(true, false);
 			}
-			m_bgmVolume = m_backSound[m_soundState].m_volume - (1.0f / m_volumeDownLen * oldlen);
-			
+			m_bgmVolume = m_backSound[m_soundState].m_volume - (m_backSound[m_soundState].m_volume / m_volumeDownLen * plVec);
+
 		}
-		else if(m_soundState != enWorldBgm)
+		else if (m_soundState != enWorldBgm)
 		{
 			m_bgmVolume = 0.0f;
 			m_backSound[m_soundState].m_backSound.Stop();
 			m_soundState = enWorldBgm;
-			m_backSound[m_soundState].m_backSound.Play(true,true);
+			m_backSound[m_soundState].m_backSound.Play(true, true);
 			m_bgmVolume = m_backSound[m_soundState].m_volume;
+		}
+		plVec -= m_volumeDownLen;
+		if (plVec < m_volumeDownLen && m_soundState == enWorldBgm)
+		{
+			float downLength = m_volumeDownLen - plVec;
+			m_bgmVolume = m_backSound[m_soundState].m_volume - (m_backSound[m_soundState].m_volume / m_volumeDownLen * downLength);
+
 		}
 	}
 	else

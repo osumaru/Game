@@ -18,6 +18,10 @@ bool CEnemyStan::Start()
 	//ダメージを受けたフラグを戻す
 	m_enemy->SetIsDamage(false);
 
+	if (m_enemy->GetIsAttack())
+	{
+		m_enemy->SetIsAttack(false);
+	}
 	return true;
 }
 
@@ -39,6 +43,12 @@ void CEnemyStan::Update()
 		m_damageNumber->Init(m_enemy);
 		//ダメージを受けたフラグを戻す
 		m_enemy->SetIsDamage(false);
+		//ダメージ音
+		const float DamageVolume = 0.3f;
+		CSoundSource* DamageSound = New<CSoundSource>(0);
+		DamageSound->Init("Assets/sound/Battle/EnemyDamage.wav");
+		DamageSound->Play(false);
+		DamageSound->SetVolume(DamageVolume);
 	}
 
 	if (!m_enemy->GetAnimation().IsPlay()

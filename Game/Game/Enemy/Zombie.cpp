@@ -16,6 +16,15 @@ void CZombie::OnInvokeAnimationEvent(const wchar_t* animClipName, const wchar_t*
 {
 	if (wcscmp(animClipName, L"Assets/modelData/ZombiAttack.tka") == 0)
 	{
+		if (!m_isAttack)
+		{
+			//çUåÇâπ
+			const float AttackVolume = 0.3f;
+			CSoundSource* AttackSound = New<CSoundSource>(0);
+			AttackSound->Init("Assets/sound/Battle/WarrokEnemyAttackSE.wav");
+			AttackSound->Play(false);
+			AttackSound->SetVolume(AttackVolume);
+		}
 		m_isAttack = !m_isAttack;
 	}
 }

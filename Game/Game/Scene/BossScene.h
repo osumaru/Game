@@ -48,7 +48,6 @@ private:
 	CLevelUp*		m_levelUp = nullptr;		//レベルアップ表示
 	CMenu*			m_menu = nullptr;			//メニュー
 	CResult*		m_result = nullptr;			//リザルト
-	CGameSound*		m_gameSound = nullptr;		//ゲームサウンド
 	CMessage*		m_message = nullptr;		//メッセージ表示
 	CChoices*		m_choices = nullptr;		//選択肢表示
 	CArrowRemain*	m_arrowRemain = nullptr;	//矢の残弾数
