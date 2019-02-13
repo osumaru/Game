@@ -38,7 +38,7 @@ bool CGameSound::Start()
 
 	m_backSound[enDeathBgm].m_backSound.Init("Assets/sound/BackSound/GameOverBgm.wav");
 	m_backSound[enDeathBgm].m_backSound.SetVolume(m_backSound[enDeathBgm].m_volume);
-
+	m_backSound[enDeathBgm].m_isLoop = false;
 	m_backSound[m_soundState].m_backSound.Play(m_backSound[enDeathBgm].m_isLoop, m_backSound[enDeathBgm].m_isBegin);
 	return true;
 }

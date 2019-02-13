@@ -181,9 +181,6 @@ void CEquipInventory::Init(CMenu * menu)
 		m_statusWindow[enFont_ChangeStatus].GetPosition().x - 100.0f,
 		fontPos.y + m_baseSize.y - 30.0f
 	});
-
-	m_equipSound[0].Init("Assets/sound/SystemSound/EquipOn.wav");
-	m_equipSound[1].Init("Assets/sound/SystemSound/EquipOff.wav");
 }
 
 bool CEquipInventory::Start()
@@ -217,6 +214,10 @@ void CEquipInventory::Update()
 		//メニューに戻る
 		m_menu->SetIsActive(true);
 		m_menu->ReleaseInventory();
+		//戻るボタンの音を鳴らす
+		CSoundSource* returnSound = New<CSoundSource>(0);
+		returnSound->Init("Assets/sound/SystemSound/MenuOpen.wav");
+		returnSound->Play(false);
 		Delete(this);
 	}
 }
@@ -289,6 +290,7 @@ void CEquipInventory::PointerMove()
 {
 	CVector2 position = m_pointer.GetPosition();
 	int number = m_pointerNum;
+	bool isCursorMove = false;
 	if (Pad().IsTriggerButton(enButtonRight))
 	{
 		//右にカーソルを動かす
@@ -303,6 +305,7 @@ void CEquipInventory::PointerMove()
 		{
 			//動いたらカーソルで選んでいる番号を更新
 			m_pointerNum = number;
+			isCursorMove = true;
 		}
 	}
 	else if (Pad().IsTriggerButton(enButtonLeft))
@@ -319,6 +322,7 @@ void CEquipInventory::PointerMove()
 		{
 			//動いたらカーソルで選んでいる番号を更新
 			m_pointerNum = number;
+			isCursorMove = true;
 		}
 	}
 	else if (Pad().IsTriggerButton(enButtonUp))
@@ -335,6 +339,7 @@ void CEquipInventory::PointerMove()
 		{
 			//動いたらカーソルで選んでいる番号を更新
 			m_pointerNum = number;
+			isCursorMove = true;
 		}
 	}
 	else if (Pad().IsTriggerButton(enButtonDown))
@@ -351,10 +356,18 @@ void CEquipInventory::PointerMove()
 		{
 			//動いたらカーソルで選んでいる番号を更新
 			m_pointerNum = number;
+			isCursorMove = true;
 		}
 	}
 	//座標を更新
 	m_pointer.SetPosition(position);
+	if (isCursorMove)
+	{
+		//選択音を鳴らす
+		CSoundSource* selectSound = New<CSoundSource>(0);
+		selectSound->Init("Assets/sound/SystemSound/EquipOn.wav");
+		selectSound->Play(false);
+	}
 }
 
 void CEquipInventory::Equip()
@@ -394,12 +407,10 @@ void CEquipInventory::Equip()
 	}
 	//装備リストを整理する
 	EquipListReset();
-	//装備時の音を鳴らす処理
-	if (m_equipSound[0].IsPlay())
-	{
-		m_equipSound[0].Stop();
-	}
-	m_equipSound[0].Play(false, true);
+	//装備を交換したときの音を鳴らす
+	CSoundSource* equipOnSound = New<CSoundSource>(0);
+	equipOnSound->Init("Assets/sound/SystemSound/EquipOn.wav");
+	equipOnSound->Play(false);
 }
 
 void CEquipInventory::CalucStatus()
@@ -520,10 +531,8 @@ void CEquipInventory::Erase()
 	equipList.erase(it);
 	//装備リストを整理する
 	EquipListReset();
-	//装備を捨てるときの音を鳴らす処理
-	if (m_equipSound[1].IsPlay())
-	{
-		m_equipSound[1].Stop();
-	}
-	m_equipSound[1].Play(false, true);
+	//装備を捨てるときの音を鳴らす
+	CSoundSource* equipOnSound = New<CSoundSource>(0);
+	equipOnSound->Init("Assets/sound/SystemSound/EquipOff.wav");
+	equipOnSound->Play(false);
 }

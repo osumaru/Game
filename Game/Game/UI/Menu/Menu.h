@@ -57,7 +57,6 @@ private:
 		enNoneMenu,
 		num,
 	};
-	CSoundSource		m_menuSoundEffect;		//メニューを開いた時の音`
 	CSprite				m_menu;					//メニュー画面のスプライト
 	CTexture*			m_Texture;				//メニュー画面のテクスチャ
 

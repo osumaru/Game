@@ -155,6 +155,10 @@ void CItemInventory::Update()
 		//メニューに戻る
 		m_menu->SetIsActive(true);
 		m_menu->ReleaseInventory();
+		//戻るボタンの音を鳴らす
+		CSoundSource* returnSound = New<CSoundSource>(0);
+		returnSound->Init("Assets/sound/SystemSound/MenuOpen.wav");
+		returnSound->Play(false);
 		Delete(this);
 	}
 }
@@ -185,6 +189,7 @@ void CItemInventory::PointerMove()
 {
 	int number = m_pointerNum;
 	CVector2 position = m_pointer.GetPosition();
+	bool isCursorMove = false;
 	if (Pad().IsTriggerButton(enButtonRight))
 	{
 		//右にカーソルを動かす
@@ -199,6 +204,7 @@ void CItemInventory::PointerMove()
 		{
 			//動いたらカーソルで選んでいる番号を更新
 			m_pointerNum = number;
+			isCursorMove = true;
 		}
 	}
 	else if (Pad().IsTriggerButton(enButtonLeft))
@@ -215,6 +221,7 @@ void CItemInventory::PointerMove()
 		{
 			//動いたらカーソルで選んでいる番号を更新
 			m_pointerNum = number;
+			isCursorMove = true;
 		}
 	}
 	else if (Pad().IsTriggerButton(enButtonUp))
@@ -231,6 +238,7 @@ void CItemInventory::PointerMove()
 		{
 			//動いたらカーソルで選んでいる番号を更新
 			m_pointerNum = number;
+			isCursorMove = true;
 		}
 	}
 	else if (Pad().IsTriggerButton(enButtonDown))
@@ -247,10 +255,18 @@ void CItemInventory::PointerMove()
 		{
 			//動いたらカーソルで選んでいる番号を更新
 			m_pointerNum = number;
+			isCursorMove = true;
 		}
 	}
 	//座標を更新
 	m_pointer.SetPosition(position);
+	if (isCursorMove)
+	{
+		//選択音を鳴らす
+		CSoundSource* selectSound = New<CSoundSource>(0);
+		selectSound->Init("Assets/sound/SystemSound/EquipOn.wav");
+		selectSound->Play(false);
+	}
 }
 
 void CItemInventory::UseItem()

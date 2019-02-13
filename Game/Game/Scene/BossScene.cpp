@@ -23,7 +23,6 @@ void CBossScene::BeforeDead()
 	GetGameCamera().Destroy();
 	Engine().GetEffectEngine().SetCamera(nullptr);
 	Delete(m_map);
-	//Delete(m_gameSound);
 	Delete(m_arrowRemain);
 }
 
@@ -32,8 +31,6 @@ bool CBossScene::Start()
 	//ƒJƒƒ‰‚ğ¶¬
 	GetGameCamera().Create();
 	GetGameCamera().Init();
-
-	//m_gameSound = New<CGameSound>(0);
 
 	if (!GetSceneManager().GetFade()->IsExecute())
 	{

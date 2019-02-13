@@ -34,7 +34,6 @@ void CMenu::BeforeDead()
 
 void CMenu::Init()
 {
-	m_menuSoundEffect.Init("Assets/sound/SystemSound/MenuOpen.wav", false);
 	m_Texture = TextureResource().LoadTexture(L"Assets/sprite/MenuUI/Menu.png");
 	m_menu.Init(m_Texture);
 	m_menu.SetPosition({ -1.0f, -1.0f });
@@ -76,6 +75,8 @@ void CMenu::Update()
 	}
 
 	KeyInputMenu();
+
+	bool isDeside = false;
 	switch (m_menuState)
 	{
 	case enMiniMap:			//ミニマップの確認
@@ -87,6 +88,7 @@ void CMenu::Update()
 		{
 			m_itemInventory = New<CItemInventory>(PRIORITY_UI);
 			m_itemInventory->Init(this);
+			isDeside = true;
 		}
 		StatusConversion();
 		break;
@@ -96,6 +98,7 @@ void CMenu::Update()
 		{
 			m_equipInventory = New<CEquipInventory>(PRIORITY_UI);
 			m_equipInventory->Init(this);
+			isDeside = true;
 		}
 		break;
 
@@ -112,6 +115,13 @@ void CMenu::Update()
 
 	}
 
+	if (isDeside)
+	{
+		//決定音を鳴らす
+		CSoundSource* desideSound = New<CSoundSource>(0);
+		desideSound->Init("Assets/sound/SystemSound/MenuOpen.wav");
+		desideSound->Play(false);
+	}
 	
 	
 }
@@ -121,12 +131,14 @@ void CMenu::KeyInputMenu()
 	//メニュー画面が開いてる時だけ行う処理
 	if (m_draw)
 	{
+		bool isCursorMove = false;
 		if (Pad().IsTriggerButton(enButtonDown) && m_selectPosition.y > UI_POSITION_Y_DOWN_LIMIT)
 		{
 			m_selectPosition.y -= UI_OFFSET_Y;
 			m_selectSprite.SetPosition(m_selectPosition);
 			m_stateNum++;
 			m_menuState = (EnMenuState)m_stateNum;
+			isCursorMove = true;
 		}
 
 		else if (Pad().IsTriggerButton(enButtonUp) && m_selectPosition.y < UI_POSITION_Y_UP_LIMIT)
@@ -135,6 +147,14 @@ void CMenu::KeyInputMenu()
 			m_selectSprite.SetPosition(m_selectPosition);
 			m_stateNum--;
 			m_menuState = (EnMenuState)m_stateNum;
+			isCursorMove = true;
+		}
+		if (isCursorMove)
+		{
+			//選択音を鳴らす
+			CSoundSource* selectSound = New<CSoundSource>(0);
+			selectSound->Init("Assets/sound/SystemSound/BuySe.wav");
+			selectSound->Play(false);
 		}
 	}
 
@@ -151,20 +171,18 @@ void CMenu::KeyInputMenu()
 			m_stateNum = enNoneMenu;
 			m_selectPosition = SELECT_TEX_POS;
 			m_selectSprite.SetPosition(m_selectPosition);
-			//音を消す処理
-			if (m_menuSoundEffect.IsPlay())
-			{
-				m_menuSoundEffect.Stop();
-			}
 		}
 		else
 		{
 			m_draw = true;
 			m_menuState = enMiniMap;
 			m_stateNum = enMiniMap;
-			m_menuSoundEffect.Play(false,true);
 		}
-		
+		//メニューを開く音を鳴らす
+		CSoundSource* menuOpenSound = New<CSoundSource>(0);
+		menuOpenSound->Init("Assets/sound/SystemSound/MenuOpen.wav");
+		menuOpenSound->Play(false);
+
 		GetSceneManager().GetMap()->SetIsMapChipActiveUpdate(!m_draw);
 
 	}

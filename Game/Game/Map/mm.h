@@ -232,6 +232,42 @@
 	enMapTagZombie, //タグ
 	0, //エネミーのレベル
 },
+////Warrok
+//{
+//	L"Warrok",
+//	CVector3(4.43f, 0.79f, 166.29f),             //平行移動
+//	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f),  //回転
+//	enMapTagWarrok, //タグ
+//	0, //エネミーのレベル
+//	0, //ドロップタイプ
+//},
+////Warrok
+//{
+//	L"Warrok",
+//	CVector3(4.43f, 0.79f, 171.29f),             //平行移動
+//	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f),  //回転
+//	enMapTagWarrok, //タグ
+//	0, //エネミーのレベル
+//	0, //ドロップタイプ
+//},
+//ninja
+{
+	L"ninja",
+	CVector3(4.43f, 0.79f, 176.29f),             //平行移動
+	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f),  //回転
+	enMapTagNinja, //タグ
+	0, //エネミーのレベル
+	0, //ドロップタイプ
+},
+//ninja
+{
+	L"ninja",
+	CVector3(4.43f, 0.79f, 181.29f),             //平行移動
+	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f),  //回転
+	enMapTagNinja, //タグ
+	0, //エネミーのレベル
+	0, //ドロップタイプ
+},
 //Sphere
 {
 	L"Sphere",

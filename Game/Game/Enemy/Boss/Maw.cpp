@@ -29,6 +29,14 @@ void CMaw::OnInvokeAnimationEvent(
 	//UŒ‚”»’è‚ğØ‚è‘Ö‚¦‚é
 	if (wcscmp(animClipName, L"Assets/modelData/MawAttack.tka") == 0) 
 	{
+		if (m_isAttack)
+		{
+			//’ÊíUŒ‚‚Ì‰¹‚ğ–Â‚ç‚·
+			CSoundSource* normalAttackSound = New<CSoundSource>(0);
+			normalAttackSound->Init("Assets/sound/SystemSound/EquipOn.wav", true);
+			normalAttackSound->Play(false);
+			normalAttackSound->SetPosition(m_position);
+		}
 		m_isAttack = !m_isAttack;
 	}
 
@@ -281,6 +289,12 @@ void CMaw::SpecialAttackEnd()
 	CShakeCamera& shakeCamera = GetGameCamera().GetShakeCamera();
 	shakeCamera.SetDamping(0.7f);
 	shakeCamera.ShakeStart(0.7f);
+
+	//“ÁêUŒ‚‚Ì‰¹‚ğ–Â‚ç‚·
+	CSoundSource* specialAttackSound = New<CSoundSource>(0);
+	specialAttackSound->Init("Assets/sound/SystemSound/EquipOn.wav", true);
+	specialAttackSound->Play(false);
+	specialAttackSound->SetPosition(m_position);
 }
 //ƒ_ƒEƒ“ó‘Ô
 void CMaw::Down()
