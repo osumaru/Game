@@ -18,6 +18,8 @@ public:
 	//アイテムを使う
 	bool Use() override;
 
+	void TexUpdate() override;
+
 private:
-	int m_recoveryValue = 30;	//回復値
+	float m_recoveryValue = 30.0f;	//回復値
 };

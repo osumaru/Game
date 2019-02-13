@@ -18,6 +18,7 @@ void CGetItem::Init()
 	m_pickUp.Init(texture);
 	m_pickUp.SetPosition({ 25.0f, -250.0f });
 	m_pickUp.SetSize({ 60.0f, 60.0f });
+	m_itemName.Init();
 }
 
 void CGetItem::Update()
@@ -26,6 +27,7 @@ void CGetItem::Update()
 	{
 		m_drawCount = 0;
 	}
+	m_itemName.Update();
 }
 
 void CGetItem::PostAfterDraw()
@@ -36,4 +38,5 @@ void CGetItem::PostAfterDraw()
 		m_aButton.Draw();
 		m_pickUp.Draw();
 	}
+	m_itemName.PostAfterDraw();
 }

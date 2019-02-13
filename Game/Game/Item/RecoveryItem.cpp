@@ -103,6 +103,7 @@ void CRecoveryItem::Update()
 			std::unique_ptr<IInventoryItem> inventoryItem = std::make_unique<CInventoryRecoveryItem>();
 			inventoryItem->Init();
 			inventoryItem->SetStatus(m_status);
+			inventoryItem->TexUpdate();
 			GetItemList().AddItemList(std::move(inventoryItem));
 			Delete(this);
 		}

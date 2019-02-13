@@ -3,6 +3,7 @@
 */
 
 #pragma once
+#include "GetItemName.h"
 
 class CGetItem : public IGameObject
 {
@@ -27,10 +28,16 @@ public:
 	{
 		m_drawCount--;
 	}
+	CGetItemName* GetCGetItemName()
+	{
+		return &m_itemName;
+	}
+
 
 private:
 	CSprite m_aButton;			//Aƒ{ƒ^ƒ“
 	CSprite m_pickUp;			//E‚¤
 	CSprite	m_back;				//”wŒi
 	int		m_drawCount = 0;	//•`‰æ‚·‚é‚©‚ğŒˆ‚ß‚éƒJƒEƒ“ƒgB0‚È‚ç•`‰æ‚µ‚È‚¢
+	CGetItemName	m_itemName;
 };
