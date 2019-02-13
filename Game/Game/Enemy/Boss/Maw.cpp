@@ -7,6 +7,7 @@
 #include "../../Scene/SceneManager.h"
 #include "../../GameSound/GameSound.h"
 #include "AttackWave.h"
+#include "../../UI/Clear.h"
 
 CMaw *CMaw::m_maw = NULL;
 
@@ -47,18 +48,18 @@ void CMaw::OnInvokeAnimationEvent(
 //初期化
 void CMaw::Init(CVector3 position)
 {
-	m_bossHp = New<CBossHp>(PRIORITY_UI);
-	m_bossHp->Init();
-
-	m_weekPoint = New<CWeekPoint>(PRIORITY_UI);
-	m_weekPoint->Init();
-	int level = 50;
+	int level = 1;
 	//ステータスを設定
 	m_status.Strength = 15 + level * 2;
 	m_status.Defense = 10 + level * 2;
 	m_status.Hp = 200 + level * 20;
 	m_status.MaxHp = m_status.Hp;
 	m_status.Gold = 80 + level * 20;
+	m_bossHp = New<CBossHp>(PRIORITY_UI);
+	m_bossHp->Init();
+
+	m_weekPoint = New<CWeekPoint>(PRIORITY_UI);
+	m_weekPoint->Init();
 
 	
 	//キャラコンの設定
@@ -120,6 +121,7 @@ void CMaw::Init(CVector3 position)
 //更新
 void CMaw::Update()
 {
+	m_characterController.SetMoveSpeed(CVector3::Zero);
 	//行動パターンの選択
 	switch (m_actionPattern)
 	{
@@ -172,6 +174,8 @@ void CMaw::Update()
 	m_animation.Update(GameTime().GetDeltaFrameTime());
 	//スキンモデルの更新
 	m_skinModel.Update(m_position, m_rotation,m_scale, true);
+	m_light = m_skinModel.GetLight();
+	m_diffuseLightPower = m_skinModel.GetDiffuseLightPower();
 }
 
 //弱点描画の更新
@@ -307,6 +311,7 @@ void CMaw::Down()
 		//ダメージ計算
 		int playerStrength = GetPlayer().GetStatus().Strength;
 		int damage = playerStrength - m_status.Defense;
+		damage = max(0, damage);
 		damage *= 3;
 		m_status.Hp -= damage;
 		m_isDamage = false;
@@ -457,11 +462,64 @@ void CMaw::Death()
 {
 	//死亡アニメーション
 	bool IsAnimPlay = Anim(EnMawState::enState_Death);
+
 	//終わっていたら
-	if (!IsAnimPlay)
+	if (!IsAnimPlay )
 	{
-		//クリアシーンへ遷移
-		GetSceneManager().ChangeScene(GetSceneManager().enClearScene);
+		m_skinModel.GetLight();
+		if (m_deathTimer < DEATH_TIME)
+		{
+			CLight light = m_light;
+			CVector4 ambient = light.GetAmbientLight();
+			ambient.w *= (DEATH_TIME - m_deathTimer) / DEATH_TIME;
+			light.SetAmbientLight(ambient);
+			float diffusePower = m_diffuseLightPower;
+			diffusePower *= (DEATH_TIME - m_deathTimer) / DEATH_TIME;
+			m_skinModel.SetLight(light);
+			m_skinModel.SetDiffuseLightPower(diffusePower);
+			m_deathTimer += GameTime().GetDeltaFrameTime();
+			if (m_isParticle)
+			{
+				New<CClear>(PRIORITY_UI)->Init();
+				SParticleEmittInfo particleInfo;
+				particleInfo.alphaBlendState = enAlphaBlendStateTranslucent;
+				particleInfo.emitterLifeTime = DEATH_TIME;
+				CVector3 emitPos;
+				emitPos = *((CVector3*)m_skinModel.FindBoneWorldMatrix(L"Spine").m[3]);
+				particleInfo.emitterPosition = emitPos;
+				particleInfo.emittIntervalTime = 0.2f;
+				particleInfo.fadeOutTime = 1.0f;
+				particleInfo.filePath = L"Assets/particle/smork2.png";
+				CVector3 up = CVector3::Up;
+				CVector3 right;
+				CVector3 cameraFront = GetGameCamera().GetCamera().GetTarget() - GetGameCamera().GetCamera().GetPosition();
+				right.Cross(up, cameraFront);
+				right.Normalize();
+				right.Scale(0.9f);
+				right += up;
+				right.Normalize();
+				particleInfo.gravity = CVector3::Zero;
+				particleInfo.height = 1.0f;
+				particleInfo.width = 1.0f;
+				particleInfo.isFirstTimeRandom = false;
+				particleInfo.lifeTime = 1.0f;
+				particleInfo.moveSpeed = right * 3.0f;
+				particleInfo.randomMoveSpeed = { 0.0f, 0.0f, 0.0f };
+				particleInfo.particleNum = 3;
+				particleInfo.uv = { 0.0f, 0.0f, 1.0f, 1.0f };
+				particleInfo.randomPosition = { 3.0f, 0.0f, 3.0f };
+				CParticleEmitter* emitter = New<CParticleEmitter>(0);
+				emitter->Init(particleInfo, &GetGameCamera().GetCamera());
+				m_isParticle = false;
+			}
+
+		}
+		else
+		{
+			Destroy();
+
+
+		}
 	}
 }
 
@@ -513,7 +571,6 @@ void CMaw::SetIsDamage(bool isDamage)
 {
 	m_isDamage = isDamage;
 	m_characterController.SetMoveSpeed(CVector3::Zero);
-
 }
 
 //描画
