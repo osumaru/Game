@@ -61,5 +61,5 @@ private:
 	CVector3					m_position;			//座標
 	int							m_groupNum = 0;		//グループ内のエネミー数
 	float						m_timer = 0.0f;		//タイマー
-	const float					RESPAWN_TIME = 3.0f;//リスポーンする時間
+	const float					RESPAWN_TIME = 30.0f;//リスポーンする時間
 };
