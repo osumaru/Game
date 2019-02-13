@@ -21,7 +21,7 @@ void CZombie::OnInvokeAnimationEvent(const wchar_t* animClipName, const wchar_t*
 			//çUåÇâπ
 			const float AttackVolume = 0.3f;
 			CSoundSource* AttackSound = New<CSoundSource>(0);
-			AttackSound->Init("Assets/sound/Battle/WarrokEnemyAttackSE.wav");/*  EnemyAttackSE2.wav*/
+			AttackSound->Init("Assets/sound/Battle/WarrokEnemyAttackSE.wav");
 			AttackSound->Play(false);
 			AttackSound->SetVolume(AttackVolume);
 		}

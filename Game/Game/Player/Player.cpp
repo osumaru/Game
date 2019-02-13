@@ -241,6 +241,16 @@ void CPlayer::Update()
 	CVector3 stickDir = { stickX, 0.0f, stickZ };
 	m_playerGetter.SetStickDir(stickDir);
 
+	if (Pad().IsTriggerButton(enButtonRB) && 
+		m_weaponManager.GetCurrentState() == enWeaponArrow && 
+		dynamic_cast<CBow*>(m_weaponManager.GetWeapon(enWeaponArrow))->GetRemainNum() == 0 &&
+		!m_weaponManager.GetIsAttack())
+	{
+		//‹|‚Ìc’e”‚ª‚È‚¢‚Æ‚«‚Ì‰¹‚ğ–Â‚ç‚·
+		CSoundSource* arrowAttackCancelSound = New<CSoundSource>(0);
+		arrowAttackCancelSound->Init("Assets/sound/SystemSound/EquipOn.wav");
+		arrowAttackCancelSound->Play(false);
+	}
 
 	CMatrix viewMat;
 	CVector3 shadowCameraUp = GetGameCamera().GetSpringCamera().GetTarget() - GetGameCamera().GetSpringCamera().GetPosition();

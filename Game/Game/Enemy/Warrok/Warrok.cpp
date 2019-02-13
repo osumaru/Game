@@ -24,7 +24,7 @@ void CWarrok::OnInvokeAnimationEvent(//ƒAƒjƒ[ƒVƒ‡ƒ“ƒCƒxƒ“ƒg‚ªŒÄ‚Î‚ê‚é‚²‚Æ‚ÉŒÄ‚
 			//UŒ‚‰¹
 			const float AttackVolume = 0.3f;
 			CSoundSource* AttackSound = New<CSoundSource>(0);
-			AttackSound->Init("Assets/sound/Battle/WarrokEnemyAttackSE.wav");/*  EnemyAttackSE2.wav*/
+			AttackSound->Init("Assets/sound/Battle/WarrokEnemyAttackSE.wav");
 			AttackSound->Play(false);
 			AttackSound->SetVolume(AttackVolume);
 		}
