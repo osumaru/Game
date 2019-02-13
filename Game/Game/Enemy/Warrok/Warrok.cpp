@@ -40,7 +40,7 @@ void CWarrok::OnInvokeAnimationEvent(//ƒAƒjƒ[ƒVƒ‡ƒ“ƒCƒxƒ“ƒg‚ªŒÄ‚Î‚ê‚é‚²‚Æ‚ÉŒÄ‚
 		m_rock->SetIsThrow(true);
 		//Šâ‚ð“Š‚°‚é‚Æ‚«‚Ì‰¹‚ð–Â‚ç‚·
 		CSoundSource* rockThrowSound = New<CSoundSource>(0);
-		rockThrowSound->Init("Assets/sound/SystemSound/EquipOn.wav", true);
+		rockThrowSound->Init("Assets/sound/SystemSound/StoneThrow.wav", true);
 		rockThrowSound->Play(false);
 		rockThrowSound->SetPosition(m_position);
 	}

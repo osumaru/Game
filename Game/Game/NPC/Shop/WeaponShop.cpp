@@ -115,17 +115,23 @@ void CWeaponShop::LineupChange()
 	int RandomID = 0;
 	int randomElement = 0;
 	bool loop = false;
+	int Bcount = 0;
 	for (int num = 0; num < EQUIP_ELEMENT;num++)
 	{
-		if (GetPlayer().GetStatus().Level >= 10)
+		if (GetPlayer().GetStatus().Level >= 20)
 		{
-			randomElement = (Random().GetRandInt() % (m_equipItem->GetRareEquipItemListSize() - 1));
+			randomElement = (Random().GetRandInt() % m_equipItem->GetLegendEquipItemListSize());
+			RandomID = m_equipItem->GetLegendEquipItemList(randomElement);
+		}
+		else if (GetPlayer().GetStatus().Level >= 10)
+		{
+			randomElement = (Random().GetRandInt() % m_equipItem->GetRareEquipItemListSize());
 			RandomID = m_equipItem->GetRareItemList(randomElement);
 		}
 		else
 		{
-				randomElement = (Random().GetRandInt() % (m_equipItem->GetNormalEquipItemListSize() - 1));
-				RandomID = m_equipItem->GetNormalEquipItemList(randomElement);
+			randomElement = (Random().GetRandInt() % m_equipItem->GetNormalEquipItemListSize());
+			RandomID = m_equipItem->GetNormalEquipItemList(randomElement);
 		}
 		//ƒAƒCƒeƒ€‚ÌID‚ðŽæ“¾
 		m_equipItems[num].ItemStatus = m_equipItem->GetItemStatus_ItemId(RandomID);

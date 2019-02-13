@@ -147,18 +147,18 @@ void CTreasureChest::DesideWeaponStatus()
 		int probability = 0;
 		probability = Random().GetRandSInt() % 100;
 
-		if (probability <= 90 && probability >= 0)
+		if (probability <= 95 && probability >= 0)
 		{
 
-			num = nItem->GetNormalEquipItemList((Random().GetRandInt() % (nItem->GetNormalEquipItemListSize() - 1)));
+			num = nItem->GetNormalEquipItemList(Random().GetRandInt() % nItem->GetNormalEquipItemListSize());
 		}
-		else if (probability <= 98 && probability > 90)
+		else if (probability <= 98 && probability > 95)
 		{
-			num = nItem->GetRareItemList(Random().GetRandSInt() % max(0, (nItem->GetRareEquipItemListSize() - 1)));
+			num = nItem->GetRareItemList(Random().GetRandSInt() % max(0,nItem->GetRareEquipItemListSize()));
 		}
 		else
 		{
-			num = nItem->GetLegendEquipItemList(Random().GetRandSInt() % max(0, (nItem->GetLegendEquipItemListSize() - 1)));
+			num = nItem->GetLegendEquipItemList(Random().GetRandSInt() % max(0, nItem->GetLegendEquipItemListSize()));
 		}
 	}
 		break;
