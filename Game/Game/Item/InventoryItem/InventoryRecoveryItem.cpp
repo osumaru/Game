@@ -12,6 +12,12 @@ void CInventoryRecoveryItem::Draw()
 {
 	m_itemSprite.Draw();
 }
+void CInventoryRecoveryItem::TexUpdate()
+{
+	m_itemName = m_status.ItemName;
+	CTexture* texture = TextureResource().LoadTexture(m_status.ItemSprite);
+	m_itemSprite.SetTexture(texture);
+}
 
 bool CInventoryRecoveryItem::Use()
 {
@@ -22,7 +28,8 @@ bool CInventoryRecoveryItem::Use()
 	if (playerHP < playerHPMax)
 	{
 		//ƒvƒŒƒCƒ„[‚ÌHP‚ð‰ñ•œ‚³‚¹‚é
-		GetPlayer().RecoveryHP(m_recoveryValue);
+		m_recoveryValue = ((float)m_status.ItemEffect / 100.0f ) * (float)playerHPMax;
+		GetPlayer().RecoveryHP((int)m_recoveryValue);
 		return true;
 	}
 	return false;

@@ -138,7 +138,6 @@ void CTreasureChest::DesideWeaponStatus()
 	wchar_t* itemName;
 	wchar_t* textureFileName;
 	CEquipItem* nItem = GetSceneManager().GetFade()->GetLoadScene()->GetEquipItemData();
-	//↓これはレア度がNormalの武器からランダムで武器を取得するコード
 
 	int num = 0;
 	switch (m_weaponQuality)
@@ -185,9 +184,10 @@ void CTreasureChest::DesideWeaponStatus()
 	textureFileName = nItem->GetItemStatus(num).ItemSprite;
 	int weaponAttack = nItem->GetItemStatus_ItemId(num).ItemEffect;
 	//獲得したアイテムを表示する
-	CGetItemName* getItemName = New<CGetItemName>(PRIORITY_UI);
+	//CGetItemName* getItemName = New<CGetItemName>(PRIORITY_UI);
 	CTexture * texture = TextureResource().LoadTexture(textureFileName);
-	getItemName->Init(texture, itemName);
+	GetSceneManager().GetGameScene().GetGetItem()->GetCGetItemName()->SetIteName(texture, itemName);
+	//getItemName->Init(texture, itemName);
 
 	if (weaponNumber == EnPlayerWeapon::enWeaponSword)
 	{

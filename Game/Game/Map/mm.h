@@ -37,7 +37,7 @@
 	L"CastleDoor2",
 	CVector3(10.00f, 0.80f, 183.80f),             //平行移動
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f),  //回転
-	enMapTagWeaponShop, //タグ
+	enMapTagItemShop, //タグ
 	0, //エネミーのレベル
 },
 //Castle1
