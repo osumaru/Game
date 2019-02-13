@@ -23,7 +23,7 @@ void CPlayerRun::Update()
 {
 	float speed = 8.0f;
 	m_timer += GameTime().GetDeltaFrameTime();
-	m_accel += 0.1f;
+	m_accel += 0.3f;
 	m_moveSpeed += m_accel;
 	m_moveSpeed = min(speed, m_moveSpeed);
 	if (!m_isDash && m_timer >= 2.0f)

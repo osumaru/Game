@@ -142,8 +142,23 @@ void IShop::ShopUpdate()
 		}
 		else if (Pad().IsTriggerButton(enButtonA))
 		{
-			//取引を行う
-			m_isTransaction = true;
+			//インベントリに空きがあれば取引をする
+			switch (m_shopType)
+			{
+			case enWeaponShop:
+				if (GetEquipList().IsSpaceEquipList())
+				{
+					//取引を行う
+					m_isTransaction = true;
+				}
+				break;
+			case enItemShop:
+				if (GetItemList().IsSpaceItemList())
+				{
+					m_isTransaction = true;
+				}
+				break;
+			}
 		}
 
 		else if (Pad().IsTriggerButton(enButtonUp) && m_lineupSelectNumber != 0)

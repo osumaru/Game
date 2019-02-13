@@ -12,8 +12,12 @@ CPlayerWireMove::CPlayerWireMove()
 void CPlayerWireMove::Init()
 {
 	m_pPlayerGetter->GetAnimation().Play(enPlayerAnimationWireThrow, 0.25f);
-	m_movePosition = m_pPlayer->GetWireAction().GetWirePosition();
-	m_accel = 0.8f;
+	m_movePosition = m_pPlayer->GetWireAction().GetWirePosition();	
+	CVector3 playerPos = GetPlayer().GetPosition();
+	playerPos.y += m_pPlayer->GetWireAction().GetOffsetY();
+	m_moveDirection = m_movePosition - playerPos;
+	m_moveDirection.Normalize();
+	m_accel = 0.0f;
 	m_moveSpeed = 0.0f;
 	m_wireSpeed = 1.0f;
 	m_isWireThrow = true;
@@ -80,20 +84,15 @@ void CPlayerWireMove::Update()
 	CVector3 playerPos = GetPlayer().GetPosition();
 	playerPos.y += m_pPlayer->GetWireAction().GetOffsetY();
 	CVector3 toMovePos = m_movePosition - playerPos;
-	CVector3 moveVec = toMovePos;
+	float angle = m_moveDirection.Dot(toMovePos);
 	float length = toMovePos.Length();
+	toMovePos = m_moveDirection;
 	toMovePos.Normalize();
-	m_accel += 0.0f;
+	m_accel += 0.1f;
 	m_moveSpeed += m_accel;
-	if (m_speed < m_moveSpeed)
-	{
-		m_moveSpeed = m_speed;
-	}
+	m_moveSpeed = min(m_moveSpeed, m_speed);
 	toMovePos *= m_moveSpeed;
-	m_previousMoveSpeed = toMovePos;
 	float range = 2.0f;
-
-	float angle = 0.0f;
 	switch (m_pPlayer->GetWireAction().GetState())
 	{
 	case CWireAction::enStateEnemy:
@@ -101,22 +100,22 @@ void CPlayerWireMove::Update()
 		break;
 	case CWireAction::enStateMap:
 		range = 1.0f;
-		angle = moveVec.Dot(m_previousMoveSpeed);
 		break;
 	}
+
 	if (length < range || angle < 0.0f) {
 		isMoveEnd = true;
-		if (angle)
-		{
-			m_pPlayerGetter->SetPosition(m_movePosition);
-		}
+		m_pPlayerGetter->SetPosition(m_movePosition);
 
 	}
 	else {
 		//–Ú•W‚Æ‚Ì‹——£‚ª—£‚ê‚Ä‚¢‚ê‚ÎˆÚ“®æ‚Éi‚Þ
+		float gravityBackup = m_pPlayerGetter->GetCharacterController().GetGravity();
+		m_pPlayerGetter->GetCharacterController().SetGravity(0.0f);
 		m_pPlayerGetter->SetMoveSpeed(toMovePos);
 		m_pPlayerGetter->GetCharacterController().Execute(GameTime().GetDeltaFrameTime());
 		m_pPlayerGetter->SetPosition(m_pPlayerGetter->GetCharacterController().GetPosition());
+		m_pPlayerGetter->GetCharacterController().SetGravity(gravityBackup);
 	}
 
 	if (isMoveEnd) {
@@ -141,24 +140,33 @@ void CPlayerWireMove::Update()
 			enemy->SetIsWireHit(false);
 			break;
 		case CWireAction::enStateMap:
-			if (Pad().IsPressButton(enButtonRightTrigger))
+			if (0.0f < m_moveDirection.y)
 			{
-
-				m_previousMoveSpeed.y = 10.0f;
-				m_pPlayerGetter->SetMoveSpeed(m_previousMoveSpeed);
+				//toMovePos.y = 10.0f;
+				m_pPlayerGetter->SetMoveSpeed(toMovePos);
 				m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateJump);
 			}
 			else
 			{
-				m_pPlayerGetter->SetPosition(m_movePosition);
-				m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateSky);
-				m_pPlayerGetter->SetMoveSpeed(CVector3::Zero);
+				if (m_pPlayer->GetIsStateCondition(CPlayerState::enPlayerStateRun))
+				{
+					m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateRun);
+				}
+				else
+				{
+					m_pPlayerGetter->SetPosition(m_movePosition);
+					m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateSky);
+					m_pPlayerGetter->SetMoveSpeed(CVector3::Zero);
+				}
 			}
 			break;
 		}
 	}
-
-	m_previousMoveSpeed = toMovePos;
+	if (m_pPlayer->GetWireAction().GetState() == CWireAction::enStateMap && !Pad().IsPressButton(enButtonRightTrigger))
+	{
+		m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateSky);
+		GetPlayer().GetWireAction().SetIsWireMove(false);
+	}
 }
 
 void CPlayerWireMove::UpdateWireDraw()
