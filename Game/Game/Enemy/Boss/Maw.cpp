@@ -34,7 +34,7 @@ void CMaw::OnInvokeAnimationEvent(
 		{
 			//’ÊíUŒ‚‚Ì‰¹‚ğ–Â‚ç‚·
 			CSoundSource* normalAttackSound = New<CSoundSource>(0);
-			normalAttackSound->Init("Assets/sound/SystemSound/EquipOn.wav", true);
+			normalAttackSound->Init("Assets/sound/SystemSound/BossAtack.wav", true);
 			normalAttackSound->Play(false);
 			normalAttackSound->SetPosition(m_position);
 		}
@@ -296,7 +296,7 @@ void CMaw::SpecialAttackEnd()
 
 	//“ÁêUŒ‚‚Ì‰¹‚ğ–Â‚ç‚·
 	CSoundSource* specialAttackSound = New<CSoundSource>(0);
-	specialAttackSound->Init("Assets/sound/SystemSound/EquipOn.wav", true);
+	specialAttackSound->Init("Assets/sound/SystemSound/BossWave.wav", true);
 	specialAttackSound->Play(false);
 	specialAttackSound->SetPosition(m_position);
 }

@@ -61,7 +61,8 @@ void CEnemyDeath::Update()
 		m_enemy->EnemyListErase();
 		//エネミーの死亡時の音を鳴らす
 		CSoundSource* enemyDeathSound = New<CSoundSource>(0);
-		enemyDeathSound->Init("Assets/sound/SystemSound/EquipOn.wav", true);
+		enemyDeathSound->Init("Assets/sound/SystemSound/Spown.wav", true);
+		enemyDeathSound->SetVolume(0.5f);
 		enemyDeathSound->Play(false);
 		enemyDeathSound->SetPosition(m_enemy->GetPosition());
 		Delete(m_enemy);

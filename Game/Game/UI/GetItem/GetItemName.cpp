@@ -44,10 +44,10 @@ void CGetItemName::PostAfterDraw()
 }
 void CGetItemName::SetIteName(CTexture* texture, wchar_t* itemName)
 {
-	m_sprite[1].Init(texture);
+	m_sprite[1].SetTexture(texture);
 	m_sprite[1].SetSize({ 80,80.0f });
 	m_sprite[1].SetPosition({ -200.0f,-250.0f });
-	m_font.Init(itemName);
+	m_font.SetString(itemName);
 	m_isDraw = true;
 	m_drawTime = 0.0f;
 }

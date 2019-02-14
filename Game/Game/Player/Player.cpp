@@ -248,7 +248,7 @@ void CPlayer::Update()
 	{
 		//‹|‚Ìc’e”‚ª‚È‚¢‚Æ‚«‚Ì‰¹‚ğ–Â‚ç‚·
 		CSoundSource* arrowAttackCancelSound = New<CSoundSource>(0);
-		arrowAttackCancelSound->Init("Assets/sound/SystemSound/EquipOn.wav");
+		arrowAttackCancelSound->Init("Assets/sound/SystemSound/NoArrow.wav");
 		arrowAttackCancelSound->Play(false);
 	}
 
