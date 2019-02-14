@@ -263,9 +263,9 @@ void CItemInventory::PointerMove()
 	if (isCursorMove)
 	{
 		//‘I‘ð‰¹‚ð–Â‚ç‚·
-		CSoundSource* selectSound = New<CSoundSource>(0);
+		/*CSoundSource* selectSound = New<CSoundSource>(0);
 		selectSound->Init("Assets/sound/SystemSound/EquipOn.wav");
-		selectSound->Play(false);
+		selectSound->Play(false);*/
 	}
 }
 

@@ -164,6 +164,8 @@ void CPlayerWireMove::Update()
 	}
 	if (m_pPlayer->GetWireAction().GetState() == CWireAction::enStateMap && !Pad().IsPressButton(enButtonRightTrigger))
 	{
+		//Ä¶’âŽ~
+		m_windSound->Stop();
 		m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateSky);
 		GetPlayer().GetWireAction().SetIsWireMove(false);
 	}

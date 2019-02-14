@@ -49,7 +49,7 @@ void CMessage::Update()
 	{
 		//決定音を鳴らす
 		CSoundSource* desideSound = New<CSoundSource>(0);
-		desideSound->Init("Assets/sound/SystemSound/EquipOn.wav");
+		desideSound->Init("Assets/sound/SystemSound/BuySe.wav");
 		desideSound->Play(false);
 		//他のオブジェクトの更新を戻す
 		GetSceneManager().GetMap()->SetIsMapChipActiveUpdate(true);

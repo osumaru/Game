@@ -36,7 +36,7 @@ std::vector<std::vector<SMapChipInfo>> mapChipInfo =
 		//#include "Boss.h"
 	},
 	{
-		#include "bossTest.h"
+		#include "Boss.h"
 	},
 	{
 		#include "TitleMap.h"

@@ -66,7 +66,7 @@ void CChoices::Update()
 		{
 			//‘I‘ð‰¹‚ð–Â‚ç‚·
 			CSoundSource* selectSound = New<CSoundSource>(0);
-			selectSound->Init("Assets/sound/SystemSound/EquipOn.wav");
+			selectSound->Init("Assets/sound/SystemSound/BuySe.wav");
 			selectSound->Play(false);
 		}
 

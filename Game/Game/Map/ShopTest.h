@@ -6364,7 +6364,7 @@
 //zombi
 {
 	L"zombi",
-	CVector3(-843.80f, 223.10f, -22.80f),             //平行移動
+	CVector3(-843.80f, 225.29f, -22.80f),             //平行移動
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagZombie, //タグ
 	10, //エネミーのレベル
@@ -6382,7 +6382,7 @@
 //zombi
 {
 	L"zombi",
-	CVector3(-832.40f, 218.57f, -8.91f),             //平行移動
+	CVector3(-835.84f, 219.73f, -8.91f),             //平行移動
 	CQuaternion(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 	enMapTagZombie, //タグ
 	10, //エネミーのレベル
