@@ -3,6 +3,7 @@
 #include "../Scene/SceneManager.h"
 #include "../Scene/GameScene.h"
 #include "../Map/Map.h"
+#include "EnemyGroup.h"
 
 IEnemy::IEnemy() :
 	m_enemyStateMachine(this),
@@ -18,8 +19,34 @@ IEnemy::~IEnemy()
 
 void IEnemy::Init(const SMapChipInfo & info, CAnimation * anim)
 {
-	MapChip::Init(info, anim);
+	MapChip::Init(info, &m_animation);
 	Init(info.m_level);
+	AddObject();
+}
+
+bool IEnemy::Start()
+{
+	//Š‘®‚·‚éƒOƒ‹[ƒv‚ğŒˆ‚ß‚é
+	CEnemyGroup* group = nullptr;
+	std::list<CEnemyGroup*>& enemyGroupList = GetSceneManager().GetMap()->GetEnemyGroupList();
+	for (CEnemyGroup* enemyGroup : enemyGroupList)
+	{
+		if (group == nullptr)
+		{
+			group = enemyGroup;
+			continue;
+		}
+		CVector3 distance = group->GetPosition();
+		distance -= m_position;
+		CVector3 distance2 = enemyGroup->GetPosition();
+		distance2 -= m_position;
+		if (distance2.Length() <= distance.Length())
+		{
+			group = enemyGroup;
+		}
+	}
+	SetEnemyGroup(group);
+	return true;
 }
 
 void IEnemy::BeforeDead()
@@ -57,4 +84,11 @@ bool IEnemy::CalucFanShape(float degree, const CVector3& position)
 void IEnemy::EnemyListErase()
 {
 	MapChipDelete();
+	m_enemyGroup->EnemyNumReduce();
+}
+
+void IEnemy::SetEnemyGroup(CEnemyGroup * enemyGroup)
+{
+	m_enemyGroup = enemyGroup;
+	m_enemyGroup->Add(m_initializeInfo);
 }

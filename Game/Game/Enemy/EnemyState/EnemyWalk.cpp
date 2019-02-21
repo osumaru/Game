@@ -6,6 +6,11 @@
 
 bool CEnemyWalk::Start()
 {
+	CEnemyGroup* enemyGroup = m_enemy->GetEnemyGroup();
+	if (enemyGroup == nullptr)
+	{
+		return false;
+	}
 	//歩きアニメーションを再生
 	m_enemy->GetAnimation().Play(CEnemyState::enAnimation_Walk, 0.3f);
 
@@ -25,7 +30,7 @@ bool CEnemyWalk::Start()
 	toRandomPosition.z = randomPositionZ;
 
 	//移動先の座標を保存
-	m_destination = m_enemy->GetEnemyGroup()->GetPosition() + toRandomPosition;
+	m_destination = enemyGroup->GetPosition() + toRandomPosition;
 
 	m_isMoveEnd = false;
 	return true;

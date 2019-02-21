@@ -32,7 +32,6 @@ void CSamurai::OnInvokeAnimationEvent(const wchar_t * animClipName, const wchar_
 void CSamurai::Init(int level)
 {
 	//モデルを読み込む
-	m_skinModel.Load(L"Assets/modelData/Samurai.cmo", &m_animation);
 	m_skinModel.LoadNormalmap(L"Assets/modelData/Samurai_normal.png");
 	//キャラクターコントローラーを初期化
 	m_characterController.Init(0.5f, 0.9f, m_position);
@@ -89,6 +88,8 @@ void CSamurai::Init(int level)
 
 bool CSamurai::Start()
 {
+
+	IEnemy::Start();
 	m_enemyStateMachine.SetEnemyGroup(m_enemyGroup);
 
 	return true;

@@ -32,7 +32,6 @@ void CZombie::OnInvokeAnimationEvent(const wchar_t* animClipName, const wchar_t*
 void CZombie::Init(int level)
 {
 	//モデルを読み込む
-	m_skinModel.Load(L"Assets/modelData/Zombi.cmo", &m_animation);
 	m_skinModel.LoadNormalmap(L"Assets/modelData/Zombi_normal.png");
 	//キャラクターコントローラーを初期化
 	m_characterController.Init(0.5f, 0.9f, m_position);
@@ -89,6 +88,7 @@ void CZombie::Init(int level)
 
 bool CZombie::Start()
 {
+	IEnemy::Start();
 	m_enemyStateMachine.SetEnemyGroup(m_enemyGroup);
 
 	return true;

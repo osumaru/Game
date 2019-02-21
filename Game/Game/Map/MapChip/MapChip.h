@@ -41,7 +41,7 @@ public:
 	//タグを取得
 	EnMapChipTag GetMapTag()
 	{
-		return m_mapTag;
+		return m_initializeInfo.m_tag;
 	}
 
 protected:
@@ -49,7 +49,7 @@ protected:
 	void MapChipDelete();
 
 protected:
-	EnMapChipTag	m_mapTag;
+	SMapChipInfo	m_initializeInfo;
 	int				m_areaX;					//X軸のエリア番号
 	int				m_areaY;					//Y軸のエリア番号
 	CSkinModel		m_skinModel;				//スキンモデル

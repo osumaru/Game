@@ -5,90 +5,39 @@
 #include "Zombie.h"
 #include "Samurai.h"
 #include "Warrok/Warrok.h"
-#include "../Map/Map.h"
 #include "../Scene/SceneManager.h"
 
 void CEnemyGroup::Update()
 {
-	std::list<SEnemyGroupData>::iterator it;
-	it = m_enemyGroupList.begin();
 
-	while (it != m_enemyGroupList.end()) 
+
+	//グループ全員がいなくなったらリスポーン
+	if (m_groupNum <= 0 && !m_respawnDataList.empty() && !GetSceneManager().GetSceneChange())
 	{
-		//エネミーが死亡していたらグループリストから外す
-		const CEnemyDeath* enemyDeath = dynamic_cast<const CEnemyDeath*>((*it).enemy->GetStateMachine().GetState(CEnemyState::enState_Death));
-		if (enemyDeath != nullptr && enemyDeath->GetIsAnimationEnd())
+		m_timer += GameTime().GetDeltaFrameTime();
+		if (m_timer > RESPAWN_TIME)
 		{
-			it = m_enemyGroupList.erase(it);
-		}
-		else
-		{
-			it++;
+			m_timer = 0.0f;
+
+			for (auto& respawnData : m_respawnDataList)
+			{
+				//リスポーンエフェクトの初期化
+				CEffect respawnEffect;
+				respawnEffect.Init(L"Assets/Effect/respawnEffect.efk");
+				respawnEffect.SetScale({ 1.0f,1.0f,1.0f });
+				respawnEffect.SetPosition(respawnData.m_position);
+				respawnEffect.Play();
+				respawnEffect.Update();
+				//エネミーの初期化
+				GetSceneManager().GetMap()->CreateMapChip(respawnData);
+			}
+			m_respawnDataList.clear();
 		}
 	}
-
-	it = m_enemyGroupList.begin();
-	int groupNum = 0;
-	//グループ内のエネミー番号を更新する
-	while (it != m_enemyGroupList.end()) 
-	{
-		groupNum++;
-		(*it).groupNumber = groupNum;
-		it++;
-	}
-	m_groupNum = groupNum;
-
-	////グループ全員がいなくなったらリスポーン
-	//if (m_enemyGroupList.empty() && !GetSceneManager().GetSceneChange())
-	//{
-	//	m_timer += GameTime().GetDeltaFrameTime();
-	//	if (m_timer > RESPAWN_TIME)
-	//	{
-	//		m_timer = 0.0f;
-	//		for (auto& respawnData : m_respawnDataList)
-	//		{
-	//			//リスポーンエフェクトの初期化
-	//			CEffect respawnEffect;
-	//			respawnEffect.Init(L"Assets/Effect/respawnEffect.efk");
-	//			respawnEffect.SetScale({ 1.0f,1.0f,1.0f });
-	//			respawnEffect.SetPosition(respawnData.initPosition);
-	//			respawnEffect.Play();
-	//			respawnEffect.Update();
-	//			//エネミーの初期化
-	//			std::list<IEnemy*>::iterator it;
-	//			IEnemy* enemy = nullptr;
-	//			switch (respawnData.enemyType)
-	//			{
-	//			case enEnemy_Ninja:
-	//				enemy = New<CNinja>(PRIORITY_ENEMY);
-	//				break;
-	//			case enEnemy_Samurai:
-	//				enemy = New<CSamurai>(PRIORITY_ENEMY);
-	//				break;
-	//			case enEnemy_Warrok:
-	//				enemy = New<CWarrok>(PRIORITY_ENEMY);
-	//				break;
-	//			case enEnemy_Zombi:
-	//				enemy = New<CZombie>(PRIORITY_ENEMY);
-	//				break;
-	//			}
-	//			enemy->Init(respawnData.initPosition, respawnData.level);
-	//			GetSceneManager().GetMap()->GetEnemyList().push_back(enemy);
-	//			it = GetSceneManager().GetMap()->GetEnemyList().end();
-	//			it--;
-	//			enemy->SetIterater(it);
-	//			enemy->SetEnemyGroup(this);
-	//			m_groupNum++;
-	//			m_enemyGroupList.push_back({ enemy, m_groupNum });
-	//			enemy->AddObject();
-	//		}
-	//	}
-	//}
 }
 
-void CEnemyGroup::Add(IEnemy * enemy)
+void CEnemyGroup::Add(const SMapChipInfo& info)
 {
 	m_groupNum++;
-	m_enemyGroupList.push_back({ enemy, m_groupNum });
-	m_respawnDataList.push_back({ enemy->GetPosition(),  enemy->GetEnemyType(), enemy->GetStatus().level});
+	m_respawnDataList.push_back(info);
 }

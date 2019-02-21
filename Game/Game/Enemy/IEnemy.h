@@ -38,6 +38,8 @@ public:
 	//level		レベル
 	virtual void Init(int level) {};
 
+	virtual bool Start()override;
+
 	//更新
 	virtual void Update() = 0;
 
@@ -67,12 +69,6 @@ public:
 
 	//敵の攻撃(敵の種類によって変わる)
 	virtual void Attack() {};
-
-	//自身のイテレータを設定
-	void SetIterater(std::list<IEnemy*>::iterator iterater)
-	{
-		m_iterater = iterater;
-	}
 
 	//敵の座標を取得
 	const CVector3& GetPosition() const
@@ -176,10 +172,7 @@ public:
 
 	//所属するグループを設定
 	//enemyGroup	エネミーの所属するグループのポインタ
-	void SetEnemyGroup(CEnemyGroup* enemyGroup)
-	{
-		m_enemyGroup = enemyGroup;
-	}
+	void SetEnemyGroup(CEnemyGroup* enemyGroup);
 
 	//所属しているグループを取得
 	CEnemyGroup* GetEnemyGroup()
@@ -296,7 +289,7 @@ protected:
 	CEnemyStateMachine				m_enemyStateMachine;			//ステートマシン
 	CEnemyTurn						m_enemyTurn;					//向きを回転
 	CEnemySearch					m_enemySearch;					//プレイヤーを探索
-	CEnemyGroup*					m_enemyGroup;					//エネミーグループ
+	CEnemyGroup*					m_enemyGroup = nullptr;					//エネミーグループ
 	CCharacterController			m_characterController;			//キャラクターコントローラー
 	CLight							m_light;						//ライト
 	CEffect							m_auraEffect;					//オーラエフェクト

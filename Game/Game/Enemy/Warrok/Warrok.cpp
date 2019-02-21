@@ -49,7 +49,6 @@ void CWarrok::OnInvokeAnimationEvent(//ƒAƒjƒ[ƒVƒ‡ƒ“ƒCƒxƒ“ƒg‚ªŒÄ‚Î‚ê‚é‚²‚Æ‚ÉŒÄ‚
 void CWarrok::Init(int level)
 {
 	//ƒ‚ƒfƒ‹‚ğ“Ç‚İ‚Ş
-	m_skinModel.Load(L"Assets/modelData/Warrok.cmo", &m_animation);
 	m_skinModel.LoadNormalmap(L"Assets/modelData/Warrok_normal.png");
 	//ƒLƒƒƒ‰ƒNƒ^[ƒRƒ“ƒgƒ[ƒ‰[‚ğ‰Šú‰»
 	m_characterController.Init(0.5f, 0.9f, m_position);
@@ -109,6 +108,7 @@ void CWarrok::Init(int level)
 
 bool CWarrok::Start()
 {
+	IEnemy::Start();
 	m_enemyStateMachine.SetEnemyGroup(m_enemyGroup);
 
 	return true;

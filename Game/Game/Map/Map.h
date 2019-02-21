@@ -87,22 +87,22 @@ public:
 		return m_shopManager;
 	}
 
-	
-
 	//マップのオブジェクトにアクティブフラグを設定
 	void SetIsMapChipActive(bool isActive);
 
 	//マップのオブジェクトのアップデートのアクティブフラグを設定
 	void SetIsMapChipActiveUpdate(bool isActive);
 
-	
+	//空間分割の一辺あたりの分割数
 	static const int AREA_PARTITION_NUM = 10;
 
+	//分割したエリアの範囲
 	float GetPartitionRange() const
 	{
 		return m_partitionRange;
 	}
-
+	
+	//X軸のエリア位置を求める
 	int GetAreaPosX(const CVector3& position)
 	{
 		int areaPosX = position.x;
@@ -111,6 +111,7 @@ public:
 		return areaPosX;
 	}
 
+	//Y軸のエリア位置を求める
 	int GetAreaPosY(const CVector3& position)
 	{
 		int areaPosY = position.z;
@@ -119,11 +120,14 @@ public:
 		return areaPosY;
 	}
 
+	//指定したエリア内にあるマップチップを取得
 	std::list<MapChip*>& GetMapChips(int areaPosX, int areaPosY)
 	{
 		return m_mapChips[areaPosX][areaPosY];
 	}
 
+
+	void CreateMapChip(const SMapChipInfo& info);
 
 
 private:

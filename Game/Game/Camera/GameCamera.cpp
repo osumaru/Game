@@ -274,56 +274,42 @@ void CGameCamera::SearchTarget()
 	}
 	float minLength = FLT_MAX;
 	//エネミーグループのリストを取得
-	std::list<CEnemyGroup*> enemyGroupList = GetSceneManager().GetMap()->GetEnemyGroupList();
-	if (enemyGroupList.empty())
+	CVector3 playerPos = GetPlayer().GetPosition();
+	Map* map = GetSceneManager().GetMap();
+	int areaPosX = map->GetAreaPosX(playerPos);
+	int areaPosY = map->GetAreaPosY(playerPos);
+	std::list<MapChip*>& mapChips = map->GetMapChips(areaPosX, areaPosY);
+	IEnemy* targetEnemy = nullptr;
+	for (auto& mapChip : mapChips)
 	{
-		return;
-	}
-	IEnemy* enemy = nullptr;
-	for (CEnemyGroup* enemyGroup : enemyGroupList)
-	{
-		CVector3 enemyGroupPos = enemyGroup->GetPosition();
-		CVector3 playerPos = GetPlayer().GetPosition();
+
+		IEnemy* enemy = dynamic_cast<IEnemy*>(mapChip);
+		CVector3 enemyPos = enemy->GetPosition();
 		//エネミーグループとプレイヤーの距離を求める
-		CVector3 distance = playerPos - enemyGroupPos;
+		CVector3 distance = playerPos - enemyPos;
 		float length = distance.Length();
 		//ロックオンできる距離を設定
 		const float	LOCKON_LENGTH = 30.0f;	
 		if (length < LOCKON_LENGTH)
 		{
-			//エネミーグループの中のエネミーリストを取得
-			std::list<SEnemyGroupData> enemyList = enemyGroup->GetGroupList();
-			for (SEnemyGroupData& enemyData : enemyList)
+			if (length < minLength)
 			{
-				if (enemyData.enemy->GetIsDead())
-				{
-					continue;
-				}
-				CVector3 enemyPos = enemyData.enemy->GetPosition();
-				//エネミーとプレイヤーの距離を求める
-				distance = playerPos - enemyPos;
-
-				length = distance.Length();
-				if (length < minLength)
-				{
-					//一番近いエネミーをロックオンする
-					m_isLockOn = true;
-					minLength = length;
-					m_lockOnEnemy = enemyData.enemy;
-					m_lockOnEnemyNumber = enemyData.groupNumber;
-					m_lockOnState = enLockOn_Enemy;
-					enemy = enemyData.enemy;
-				}
+				//一番近いエネミーをロックオンする
+				m_isLockOn = true;
+				minLength = length;
+				m_lockOnEnemy = enemy;
+				m_lockOnState = enLockOn_Enemy;
+				targetEnemy = enemy;
 			}
 		}
 	}
-	if (enemy != nullptr)
+	if (targetEnemy != nullptr)
 	{
 		CVector3 playerPos = GetPlayer().GetCharacterController().GetPosition();
 		playerPos.y += LOCKON_OFFSET_Y;
 		//座標はプレイヤーの座標にカメラへのベクトルを足す
 		playerPos += m_toCameraPos;
-		m_toTargetDir = enemy->GetPosition() - playerPos;
+		m_toTargetDir = targetEnemy->GetPosition() - playerPos;
 	}
 }
 
@@ -347,8 +333,7 @@ void CGameCamera::ChangeTarget()
 	}
 
 	//ロックオン対象のエネミーグループのリストを取得
-	std::list<SEnemyGroupData> enemyGroup = m_lockOnEnemy->GetEnemyGroup()->GetGroupList();
-	if (m_lockOnState != enLockOn_Enemy && enemyGroup.empty())
+	if (m_lockOnState != enLockOn_Enemy)
 	{
 		return;
 	}
@@ -374,15 +359,15 @@ void CGameCamera::ChangeTarget()
 		}
 	}
 
-	for (auto& enemyData : enemyGroup)
-	{
-		//同じ番号の敵をロックオン対象とする
-		if (enemyData.groupNumber == m_lockOnEnemyNumber)
-		{
-			m_lockOnEnemy = enemyData.enemy;
-			break;
-		}
-	}
+	//for (auto& enemyData : enemyGroup)
+	//{
+	//	//同じ番号の敵をロックオン対象とする
+	//	if (enemyData.groupNumber == m_lockOnEnemyNumber)
+	//	{
+	//		m_lockOnEnemy = enemyData.enemy;
+	//		break;
+	//	}
+	//}
 }
 
 void CGameCamera::LockOn(CVector3& target)

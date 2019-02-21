@@ -18,6 +18,7 @@ MapChip::~MapChip()
 
 void MapChip::Init(const SMapChipInfo& info, CAnimation* anim)
 {
+	m_initializeInfo = info;
 	//ƒ‚ƒfƒ‹‚Ì“Ç‚Ýž‚Ý
 	wchar_t filePath[64];
 	swprintf(filePath, L"Assets/modelData/%s.cmo", info.m_modelName);
@@ -29,7 +30,6 @@ void MapChip::Init(const SMapChipInfo& info, CAnimation* anim)
 
 	m_skinModel.SetIsShadowReceiver(true);
 	this->SetIsActive(true);
-	m_mapTag = info.m_tag;
 }
 
 void MapChip::SetIterator(Map* map, std::list<MapChip*>::iterator iterator, int areaX, int areaY)

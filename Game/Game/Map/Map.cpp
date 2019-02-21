@@ -54,7 +54,6 @@ Map::~Map()
 
 void Map::Init(int stageNum)
 {
-	std::list<IEnemy*> enemyList;
 	std::map<int, std::vector<SMapChipInfo>> instancingData;
 	std::list<IGameObject*> mapChips;
 	CVector3 aabbMax = { FLT_MIN, FLT_MIN, FLT_MIN };
@@ -79,7 +78,6 @@ void Map::Init(int stageNum)
 		MapChip* mapChip = nullptr;
 		CEnemyGroup* enemyGroup = nullptr;
 		CTreasureChest* treasureChest = nullptr;
-		IEnemy* enemy = nullptr;
 		std::list<IEnemy*>::iterator it;
 		CBossBuilding* bossBuilding = nullptr;
 		CSea* sea = nullptr;
@@ -98,16 +96,16 @@ void Map::Init(int stageNum)
 			GetMaw().Init(mInfo.m_position);
 			break;
 		case enMapTagZombie:
-			enemy = New<CZombie>(PRIORITY_ENEMY);
+			mapChip = New<CZombie>(PRIORITY_ENEMY);
 			break;
 		case enMapTagNinja:
-			enemy = New<CNinja>(PRIORITY_ENEMY);
+			mapChip = New<CNinja>(PRIORITY_ENEMY);
 			break;
 		case enMapTagSamurai:
-			enemy = New<CSamurai>(PRIORITY_ENEMY);
+			mapChip = New<CSamurai>(PRIORITY_ENEMY);
 			break;
 		case enMapTagWarrok:
-			enemy = New<CWarrok>(PRIORITY_ENEMY);
+			mapChip = New<CWarrok>(PRIORITY_ENEMY);
 			break;
 		case enMapTagEnemyGroup:
 			enemyGroup = New<CEnemyGroup>(PRIORITY_ENEMY);
@@ -168,11 +166,6 @@ void Map::Init(int stageNum)
 			mapChip = New<StaticMapObject>(PRIORITY_MAPCHIP);
 			break;
 		}
-		if (enemy != nullptr)
-		{
-			mapChip = enemy;
-			enemyList.push_back(enemy);
-		}
 		if (mapChip != nullptr)
 		{
 			//マップチップを生成
@@ -192,29 +185,6 @@ void Map::Init(int stageNum)
 			iterator--;
 			mapChip->SetIterator(this, iterator, areaX, areaY);
 		}
-	}
-
-	for (IEnemy* enemy : enemyList) 
-	{
-		//所属するグループを決める
-		CEnemyGroup* group = nullptr;
-		for (CEnemyGroup* enemyGroup : m_enemyGroupList) {
-			if (group == nullptr) 
-			{
-				group = enemyGroup;
-				continue;
-			}
-			CVector3 distance = group->GetPosition();
-			distance -= enemy->GetPosition();
-			CVector3 distance2 = enemyGroup->GetPosition();
-			distance2 -= enemy->GetPosition();
-			if (distance2.Length() <= distance.Length())
-			{
-				group = enemyGroup;
-			}
-		}
-		enemy->SetEnemyGroup(group);
-		enemy->AddObject();
 	}
 
 	Add(&Sky(), PRIORITY_SKY);
@@ -336,6 +306,120 @@ void Map::SetIsMapChipActiveUpdate(bool isActive)
 	if (&GetPlayer())
 	{
 		GetPlayer().SetIsActiveUpdate(isActive);
+	}
+}
+
+void Map::CreateMapChip(const SMapChipInfo& info)
+{
+	MapChip* mapChip = nullptr;
+	CEnemyGroup* enemyGroup = nullptr;
+	CTreasureChest* treasureChest = nullptr;
+	IEnemy* enemy = nullptr;
+	CBossBuilding* bossBuilding = nullptr;
+	CSea* sea = nullptr;
+	CTitleEnemy* titleEnemy = nullptr;
+	switch (info.m_tag)
+	{
+	case enMapTagMapChip:
+		mapChip = New<MapChip>(PRIORITY_MAPCHIP);
+		break;
+	case enMapTagPlayer:
+		GetPlayer().Create();
+		GetPlayer().Init(info.m_position);
+		break;
+	case enMapTagMaw:
+		GetMaw().Create();
+		GetMaw().Init(info.m_position);
+		break;
+	case enMapTagZombie:
+		mapChip = New<CZombie>(PRIORITY_ENEMY);
+		break;
+	case enMapTagNinja:
+		mapChip = New<CNinja>(PRIORITY_ENEMY);
+		break;
+	case enMapTagSamurai:
+		mapChip = New<CSamurai>(PRIORITY_ENEMY);
+		break;
+	case enMapTagWarrok:
+		mapChip = New<CWarrok>(PRIORITY_ENEMY);
+		break;
+	case enMapTagEnemyGroup:
+		enemyGroup = New<CEnemyGroup>(PRIORITY_ENEMY);
+		enemyGroup->Init(info.m_position);
+		m_enemyGroupList.push_back(enemyGroup);
+		break;
+	case enMapTagTreasureBox:
+		treasureChest = New<CTreasureChest>(PRIORITY_ITEM);
+		treasureChest->Init(info.m_position, info.m_rotation, true);
+		treasureChest->SetWeaponQuality((EnItemQuality)info.m_dropType);
+		break;
+	case enMapTagItemShop:
+		m_shopManager->InitShop(info.m_position, info.m_rotation, EShop::enItemShop);
+		break;
+	case enMapTagWeaponShop:
+		m_shopManager->InitShop(info.m_position, info.m_rotation, EShop::enWeaponShop);
+		break;
+	case enMapTagNormalShop:
+		m_shopManager->InitShop(info.m_position, info.m_rotation, EShop::enNormalNpc);
+		break;
+	case enMapTagTree:
+		mapChip = New<CTree>(PRIORITY_MAPCHIP);
+		break;
+	case enMapTagTitleEnemy:
+		titleEnemy = New<CTitleEnemy>(PRIORITY_ENEMY);
+		titleEnemy->Init(info.m_modelName, info.m_position);
+		break;
+	case enMapTagSea:
+		sea = New<CSea>(PRIORITY_BILLDING);
+		sea->Init(info.m_position, info.m_rotation);
+		break;
+	case enMapTagBossObj:
+		bossBuilding = New<CBossBuilding>(PRIORITY_BILLDING);
+		bossBuilding->Init(info.m_position, info.m_rotation);
+		break;
+	case enMapTagBreakBrock:
+		mapChip = New<CBreakMapObject>(PRIORITY_MAPCHIP);
+		break;
+	case enMapTagSoundPoint:
+		mapChip = New<CCastle>(PRIORITY_BILLDING);
+		GetSceneManager().GetGameSound()->SetTownPosition(info.m_position);
+		break;
+	case enMapTagTerrain:
+		m_ground = New<StaticMapObject>(PRIORITY_GROUND);
+		m_ground->Init(info);
+		g_pathFinding.GetNavigationMesh().SetSkinModel(&dynamic_cast<StaticMapObject*>(m_ground)->GetSkinModel());
+		break;
+	case enMapTagMesh:
+		mapChip = New<StaticMapObject>(PRIORITY_GROUND);
+		break;
+	case enMapTagCastle:
+		mapChip = New<CCastle>(PRIORITY_BILLDING);
+		break;
+	case enMapTagObstacle:
+		mapChip = New<CObstacleMapObject>(PRIORITY_BILLDING);
+		break;
+	default:
+		mapChip = New<StaticMapObject>(PRIORITY_MAPCHIP);
+		break;
+	}
+	if (mapChip != nullptr)
+	{
+		//マップチップを生成
+		mapChip->Init(info);
+		CVector3 areaPos = info.m_position;
+		areaPos.x += m_partitionRange * (AREA_PARTITION_NUM / 2);
+		areaPos.z += m_partitionRange * (AREA_PARTITION_NUM / 2);
+		areaPos.x /= m_partitionRange;
+		areaPos.z /= m_partitionRange;
+		int areaX = min(max((int)areaPos.x, 0), AREA_PARTITION_NUM - 1);
+		int areaY = min(max((int)areaPos.z, 0), AREA_PARTITION_NUM - 1);
+
+		m_mapChips[areaX][areaY].push_back(mapChip);
+
+		//マップチップに自身のイテレーターとマップのインスタンスを渡す(削除の時に使う)
+		std::list<MapChip*>::iterator iterator = m_mapChips[areaX][areaY].end();
+		iterator--;
+		mapChip->SetIterator(this, iterator, areaX, areaY);
 	}
 }
 
