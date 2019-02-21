@@ -364,9 +364,9 @@ void CEquipInventory::PointerMove()
 	if (isCursorMove)
 	{
 		//‘I‘ğ‰¹‚ğ–Â‚ç‚·
-		/*CSoundSource* selectSound = New<CSoundSource>(0);
-		selectSound->Init("Assets/sound/SystemSound/EquipOn.wav");
-		selectSound->Play(false);*/
+		CSoundSource* selectSound = New<CSoundSource>(0);
+		selectSound->Init("Assets/sound/SystemSound/water-drop1.wav");
+		selectSound->Play(false);
 	}
 }
 
@@ -408,9 +408,10 @@ void CEquipInventory::Equip()
 	//‘•”õƒŠƒXƒg‚ğ®—‚·‚é
 	EquipListReset();
 	//‘•”õ‚ğŒğŠ·‚µ‚½‚Æ‚«‚Ì‰¹‚ğ–Â‚ç‚·
-	CSoundSource* equipOnSound = New<CSoundSource>(0);
+	/*CSoundSource* equipOnSound = New<CSoundSource>(0);
 	equipOnSound->Init("Assets/sound/SystemSound/EquipOn.wav");
-	equipOnSound->Play(false);
+	equipOnSound->Play(false);*/
+
 }
 
 void CEquipInventory::CalucStatus()

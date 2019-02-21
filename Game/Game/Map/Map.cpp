@@ -43,8 +43,7 @@ std::vector<std::vector<SMapChipInfo>> mapChipInfo =
 	}
 };
 	
-Map::Map() :
-	m_mapChip()
+Map::Map()
 {
 }
 
@@ -55,9 +54,25 @@ Map::~Map()
 
 void Map::Init(int stageNum)
 {
+	std::list<IEnemy*> enemyList;
 	std::map<int, std::vector<SMapChipInfo>> instancingData;
-
+	std::list<IGameObject*> mapChips;
+	CVector3 aabbMax = { FLT_MIN, FLT_MIN, FLT_MIN };
+	CVector3 aabbMin = { FLT_MAX, FLT_MAX, FLT_MAX };
 	m_shopManager = New<CShopManager>(PRIORITY_SHOP);
+
+	for (SMapChipInfo& mInfo : mapChipInfo[stageNum])
+	{
+		aabbMax.Max(mInfo.m_position);
+		aabbMin.Min(mInfo.m_position);
+	}
+	m_partitionRange = 0.0f;
+	const int ELEMENT_NUM = 2;
+	float length[ELEMENT_NUM] = { aabbMax.x - aabbMin.x, aabbMax.z - aabbMin.z};
+	for (int i = 0; i < ELEMENT_NUM; i++)
+	{
+		m_partitionRange = max(m_partitionRange, length[i] / AREA_PARTITION_NUM);
+	}
 
 	for (SMapChipInfo& mInfo : mapChipInfo[stageNum])
 	{
@@ -136,8 +151,9 @@ void Map::Init(int stageNum)
 			GetSceneManager().GetGameSound()->SetTownPosition(mInfo.m_position);
 			break;
 		case enMapTagTerrain:
-			mapChip = New<StaticMapObject>(PRIORITY_GROUND);
-			g_pathFinding.GetNavigationMesh().SetSkinModel(&dynamic_cast<StaticMapObject*>(mapChip)->GetSkinModel());
+			m_ground = New<StaticMapObject>(PRIORITY_GROUND);
+			m_ground->Init(mInfo);
+			g_pathFinding.GetNavigationMesh().SetSkinModel(&dynamic_cast<StaticMapObject*>(m_ground)->GetSkinModel());
 			break;
 		case enMapTagMesh:
 			mapChip = New<StaticMapObject>(PRIORITY_GROUND);
@@ -154,26 +170,31 @@ void Map::Init(int stageNum)
 		}
 		if (enemy != nullptr)
 		{
-			enemy->Init(mInfo.m_position, mInfo.m_level);
-			m_enemyList.push_back(enemy);
-			it = m_enemyList.end();
-			it--;
-			enemy->SetIterater(it);
+			mapChip = enemy;
+			enemyList.push_back(enemy);
 		}
 		if (mapChip != nullptr)
 		{
 			//マップチップを生成
-			mapChip->Init(mInfo.m_position, mInfo.m_rotation, mInfo.m_modelName);
-			m_mapChip.push_back(mapChip);
+			mapChip->Init(mInfo);
+			CVector3 areaPos = mInfo.m_position;
+			areaPos.x += m_partitionRange * (AREA_PARTITION_NUM / 2);
+			areaPos.z += m_partitionRange * (AREA_PARTITION_NUM / 2);
+			areaPos.x /= m_partitionRange;
+			areaPos.z /= m_partitionRange;
+			int areaX = min(max((int)areaPos.x, 0), AREA_PARTITION_NUM - 1);
+			int areaY = min(max((int)areaPos.z, 0), AREA_PARTITION_NUM - 1);
+
+			m_mapChips[areaX][areaY].push_back(mapChip);
 
 			//マップチップに自身のイテレーターとマップのインスタンスを渡す(削除の時に使う)
-			std::list<MapChip*>::iterator iterator = m_mapChip.end();
+			std::list<MapChip*>::iterator iterator = m_mapChips[areaX][areaY].end();
 			iterator--;
-			mapChip->SetIterator(this, iterator);
+			mapChip->SetIterator(this, iterator, areaX, areaY);
 		}
 	}
 
-	for (IEnemy* enemy : m_enemyList) 
+	for (IEnemy* enemy : enemyList) 
 	{
 		//所属するグループを決める
 		CEnemyGroup* group = nullptr;
@@ -193,34 +214,76 @@ void Map::Init(int stageNum)
 			}
 		}
 		enemy->SetEnemyGroup(group);
-		group->Add(enemy);
 		enemy->AddObject();
 	}
 
 	Add(&Sky(), PRIORITY_SKY);
 	g_pathFinding.BuildNodes();
+	
 }
 
 
 void Map::Update()
 {
+	if (&GetPlayer() == nullptr)
+	{
+		return;
+	}
+	CVector3 playerPos = GetPlayer().GetPosition();
+	int playerAreaPosX = GetAreaPosX(playerPos);
+	int playerAreaPosY = GetAreaPosY(playerPos);
+	if (m_playerAreaPosX != playerAreaPosX ||
+		m_playerAreaPosY != playerAreaPosY)
+	{
+		m_playerAreaPosX = playerAreaPosX;
+		m_playerAreaPosY = playerAreaPosY;
+		for (int i = 0; i < AREA_PARTITION_NUM; i++)
+		{
+			for (int j = 0; j < AREA_PARTITION_NUM; j++)
+			{
+				for (auto& mapChip : m_mapChips[i][j])
+				{
+					mapChip->SetIsActiveUpdate(false);
+				}
+			}
+		}
+		const int AREA_NUM = 9;
+		int areaPosX[AREA_NUM] = { m_playerAreaPosX,m_playerAreaPosX, m_playerAreaPosX,
+							m_playerAreaPosX + 1, m_playerAreaPosX + 1, m_playerAreaPosX + 1,
+							m_playerAreaPosX - 1, m_playerAreaPosX - 1, m_playerAreaPosX - 1, };
+		int areaPosY[AREA_NUM] = { m_playerAreaPosY,m_playerAreaPosY + 1, m_playerAreaPosY - 1,
+							m_playerAreaPosY, m_playerAreaPosY + 1, m_playerAreaPosY - 1,
+							m_playerAreaPosY, m_playerAreaPosY + 1, m_playerAreaPosY - 1, };
+		for (int i = 0; i < AREA_NUM; i++)
+		{
+			areaPosX[i] = max(0, min(AREA_PARTITION_NUM - 1, areaPosX[i]));
+			areaPosY[i] = max(0, min(AREA_PARTITION_NUM - 1, areaPosY[i]));
+			for (auto& mapChip : m_mapChips[areaPosX[i]][areaPosY[i]])
+			{
+				mapChip->SetIsActiveUpdate(true);
+			}
+		}
+	}
 }
 
 
-void Map::MapChipErase(std::list<MapChip*>::iterator iterator)
+void Map::MapChipErase(std::list<MapChip*>::iterator iterator, int areaPosX, int areaPosY)
 {
 	Delete(*iterator);
-	iterator = m_mapChip.erase(iterator);
+	m_mapChips[areaPosX][areaPosY].erase(iterator);
 }
 
 void Map::SetIsMapChipActive(bool isActive)
 {
-
-	//敵のアクティブ設定
-	for (auto& enemy : m_enemyList)
+	for (int i = 0; i < AREA_PARTITION_NUM; i++)
 	{
-		enemy->SetIsActive(isActive);
-
+		for (int j = 0; j < AREA_PARTITION_NUM; j++)
+		{
+			for (auto& mapChip : m_mapChips[i][j])
+			{
+				mapChip->SetIsActive(isActive);
+			}
+		}
 	}
 	//敵グループクラスのアクティブ設定
 	for (auto& enemyGroup : m_enemyGroupList)
@@ -245,11 +308,15 @@ void Map::SetIsMapChipActive(bool isActive)
 
 void Map::SetIsMapChipActiveUpdate(bool isActive)
 {
-	//敵のアクティブ設定
-	for (auto& enemy : m_enemyList)
+	for (int i = 0; i < AREA_PARTITION_NUM; i++)
 	{
-		enemy->SetIsActiveUpdate(isActive);
-
+		for (int j = 0; j < AREA_PARTITION_NUM; j++)
+		{
+			for (auto& mapChip : m_mapChips[i][j])
+			{
+				mapChip->SetIsActiveUpdate(isActive);
+			}
+		}
 	}
 	//敵グループクラスのアクティブ設定
 	for (auto& enemyGroup : m_enemyGroupList)
@@ -279,13 +346,21 @@ void Map::BeforeDead()
 	{
 		GetMaw().Destroy();
 	}
-	//マップチップの消去
-	for (MapChip* mapchip : m_mapChip)
+	for (int i = 0; i < AREA_PARTITION_NUM; i++)
 	{
-		Delete(mapchip);
+		for (int j = 0; j < AREA_PARTITION_NUM; j++)
+		{
+			for (IGameObject* obj : m_mapChips[i][j])
+			{
+				Delete(obj);
+			}
+			m_mapChips[i][j].clear();
+		}
 	}
-	m_mapChip.clear();
-
+	if (m_ground != nullptr)
+	{
+		Delete(m_ground);
+	}
 	//NPCの消去
 	m_shopManager->DeleteList();
 	Delete(m_shopManager);
@@ -297,12 +372,6 @@ void Map::BeforeDead()
 	}
 	m_enemyGroupList.clear();
 
-	//エネミーの消去
-	for (IEnemy* enemy : m_enemyList)
-	{
-		Delete(enemy);
-	}
-	m_enemyList.clear();
 
 	if (&GetPlayer() != nullptr) 
 	{

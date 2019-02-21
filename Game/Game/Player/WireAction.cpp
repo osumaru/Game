@@ -52,15 +52,20 @@ void CWireAction::Update()
 	if (isWireAction)
 	{
 		float minLength = FLT_MAX;
-		std::list<IEnemy*> enemyList;
+		CVector3 areaPos = m_pPlayer->GetPosition();
+		Map* map = GetSceneManager().GetMap();
+		int areaPosX = map->GetAreaPosX(areaPos);
+		int areaPosY = map->GetAreaPosY(areaPos);
+		std::list<MapChip*>& mapChips = map->GetMapChips(areaPosX, areaPosY);
+
 		//ƒƒCƒ„[‚ð”ò‚Î‚·æ‚ðŒˆ‚ß‚é
 		switch (m_state)
 		{
 		case enStateEnemy:
-			enemyList = GetSceneManager().GetMap()->GetEnemyList();
-			for (auto& enemy : enemyList)
+			for (auto& mapChip : mapChips)
 			{
-				if (enemy->GetIsDead())
+				IEnemy* enemy = dynamic_cast<IEnemy*>(mapChip);
+				if (enemy == nullptr || enemy->GetIsDead())
 				{
 					continue;
 				}
@@ -99,7 +104,11 @@ void CWireAction::Update()
 				float len = distance.Length();
 				distance.Normalize();
 				float localScore = (100.0f - len) / 100.0f * 0.3f;
-				float dt = max(distance.Dot(playerDir), 0.0f);
+				float dt = distance.Dot(playerDir);
+				if (dt < 0.0f)
+				{
+					continue;
+				}
 				localScore += dt * 0.7f;
 				if (score < localScore)
 				{
@@ -131,10 +140,13 @@ void CWireAction::Update()
 				switch (m_state)
 				{
 				case enStateEnemy:
-					WIRE_OFFSET_Y = 1.0f;
-					m_wirePosition.y += WIRE_OFFSET_Y;
-					for (auto& enemy : enemyList)
+					for (auto& mapChip : mapChips)
 					{
+						IEnemy* enemy = dynamic_cast<IEnemy*>(mapChip);
+						if (enemy == nullptr)
+						{
+							continue;
+						}
 						CVector3 enemyPos = enemy->GetPosition();
 						CVector3 toMovePos = m_wirePosition - enemyPos;
 						float length = toMovePos.Length();

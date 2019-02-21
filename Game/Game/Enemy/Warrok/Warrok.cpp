@@ -46,12 +46,11 @@ void CWarrok::OnInvokeAnimationEvent(//ƒAƒjƒ[ƒVƒ‡ƒ“ƒCƒxƒ“ƒg‚ªŒÄ‚Î‚ê‚é‚²‚Æ‚ÉŒÄ‚
 	}
 }
 
-void CWarrok::Init(const CVector3& position, int level)
+void CWarrok::Init(int level)
 {
 	//ƒ‚ƒfƒ‹‚ğ“Ç‚İ‚Ş
 	m_skinModel.Load(L"Assets/modelData/Warrok.cmo", &m_animation);
 	m_skinModel.LoadNormalmap(L"Assets/modelData/Warrok_normal.png");
-	m_position = position;
 	//ƒLƒƒƒ‰ƒNƒ^[ƒRƒ“ƒgƒ[ƒ‰[‚ğ‰Šú‰»
 	m_characterController.Init(0.5f, 0.9f, m_position);
 	m_characterController.SetGravity(-9.8f);
@@ -72,9 +71,6 @@ void CWarrok::Init(const CVector3& position, int level)
 	m_animation.SetLoopFlg(CEnemyState::enAnimationWarrok_Walk, true);
 	m_animation.SetLoopFlg(CEnemyState::enAnimationWarrok_Chase, true);
 	m_animation.Play(CEnemyState::enAnimation_Idle, 0.3f);
-	//Add(&m_enemyStateMachine, 0);
-	//Add(&m_enemyTurn, 0);
-	//Add(&m_enemySearch, 0);
 
 	//ƒ‰ƒCƒg‚Ìİ’è
 	CVector4 ambientLight = { 0.2f,0.2f,0.2f,0.4f };
@@ -94,7 +90,7 @@ void CWarrok::Init(const CVector3& position, int level)
 
 	//ƒGƒtƒFƒNƒg‚ğ‰Šú‰»
 	m_auraEffect.Init(L"Assets/Effect/auraEffect.efk");
-	m_auraEffect.SetPosition(position);
+	m_auraEffect.SetPosition(m_position);
 	m_auraEffect.SetScale({ 1.0f, 1.0f, 1.0f });
 	//˜‚Ìƒ[ƒ‹ƒhs—ñ‚ğæ“¾
 	m_spineMatrix = &GetBoneWorldMatrix(L"Spine");

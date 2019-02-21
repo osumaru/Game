@@ -20,17 +20,28 @@ void CPlayerAttack::Init()
 	m_stanAttack = GetPlayer().GetWeaponManager().GetWeapon()->GetStanAttack();
 	m_maxAttackNum = GetPlayer().GetWeaponManager().GetWeapon()->GetMaxAttackNum();
 	m_maxWeaponHitNum = GetPlayer().GetWeaponManager().GetWeapon()->GetMaxWeaponHitNum();
-	//エネミーのリストを取得
-	for (const auto& enemys : GetSceneManager().GetMap()->GetEnemyList())
+	for (int i = 0; i < Map::AREA_PARTITION_NUM; i++)
 	{
-		bool* damagePossible = enemys->IsDamagePossible();
-		for (int i = 0; i < m_maxWeaponHitNum; i++)
+		for (int j = 0; j < Map::AREA_PARTITION_NUM; j++)
 		{
-			damagePossible[0] = true;
-			damagePossible[1] = true;
+			std::list<MapChip*>& mapChips = GetSceneManager().GetMap()->GetMapChips(i, j);
+			//エネミーのリストを取得
+			for (auto& mapChip : mapChips)
+			{
+				IEnemy* enemy = dynamic_cast<IEnemy*>(mapChip);
+				if (enemy != nullptr)
+				{
+					bool* damagePossible = enemy->IsDamagePossible();
+					for (int i = 0; i < m_maxWeaponHitNum; i++)
+					{
+						damagePossible[0] = true;
+						damagePossible[1] = true;
+					}
+				}
+			}
 		}
-		
 	}
+
 	if (&GetMaw())
 	{
 		GetMaw().SetIsDamagePossible(true);
@@ -121,14 +132,23 @@ void CPlayerAttack::Update()
 	//攻撃アニメーションが終わった時の処理
 	if (!m_pPlayerGetter->GetAnimation().IsPlay())
 	{
+		CVector3 areaPos = m_pPlayer->GetPosition();
+		Map* map = GetSceneManager().GetMap();
+		int areaPosX = map->GetAreaPosX(areaPos);
+		int areaPosY = map->GetAreaPosY(areaPos);
+		std::list<MapChip*>& mapChips = map->GetMapChips(areaPosX, areaPosY);
 		//エネミーのリストを取得
-		for (const auto& enemys : GetSceneManager().GetMap()->GetEnemyList())
+		for (auto& mapChip : mapChips)
 		{
-			bool* damagePossible = enemys->IsDamagePossible();
-			for (int i = 0; i < m_maxWeaponHitNum;i++)
+			IEnemy* enemy = dynamic_cast<IEnemy*>(mapChip);
+			if (enemy != nullptr)
 			{
-				damagePossible[0] = true;
-				damagePossible[1] = true;
+				bool* damagePossible = enemy->IsDamagePossible();
+				for (int i = 0; i < m_maxWeaponHitNum; i++)
+				{
+					damagePossible[0] = true;
+					damagePossible[1] = true;
+				}
 			}
 		}
 		if (&GetMaw())

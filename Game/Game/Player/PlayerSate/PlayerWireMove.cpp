@@ -144,7 +144,7 @@ void CPlayerWireMove::Update()
 			{
 				//toMovePos.y = 10.0f;
 				m_pPlayerGetter->SetMoveSpeed(toMovePos);
-				m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateJump);
+				m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateSky);
 			}
 			else
 			{

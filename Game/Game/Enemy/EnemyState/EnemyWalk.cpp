@@ -2,6 +2,7 @@
 #include "EnemyWalk.h"
 #include "../IEnemy.h"
 #include "../EnemyGroup.h"
+#include "../../Player/Player.h"
 
 bool CEnemyWalk::Start()
 {
@@ -34,7 +35,11 @@ void CEnemyWalk::Update()
 {
 	//ˆÚ“®
 	Move();
-
+	CVector3 distance = m_enemy->GetPosition() - GetPlayer().GetPosition();
+	if (distance.Length() < 10.0f)
+	{
+		m_enemy->SetIsFind(true);
+	}
 	if (m_enemy->GetIsDamage()) {
 		//ƒ_ƒ[ƒW‚ðŽó‚¯‚½
 		m_esm->ChangeState(CEnemyState::enState_Damage);

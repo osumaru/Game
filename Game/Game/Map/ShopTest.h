@@ -4089,7 +4089,7 @@
 	L"Gate",
 	CVector3(-32.63f, 319.60f, 654.55f),             //平行移動
 	CQuaternion(0.00f, -0.94f, 0.00f, 0.33f ),  //回転
-	enMapTagTerrain, //タグ
+	enMapTagUntagged, //タグ
 	0, //エネミーのレベル
 	0, //ドロップタイプ
 },

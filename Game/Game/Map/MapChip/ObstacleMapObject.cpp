@@ -15,9 +15,9 @@ CObstacleMapObject::~CObstacleMapObject()
 {
 }
 
-void CObstacleMapObject::Init(const CVector3& position, const CQuaternion& rotation, const wchar_t* modelName, CAnimation* anim)
+void CObstacleMapObject::Init(const SMapChipInfo& info, CAnimation* anim)
 {
-	MapChip::Init(position, rotation, modelName);
+	MapChip::Init(info);
 
 	SRigidBodyInfo rInfo;
 

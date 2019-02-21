@@ -20,7 +20,7 @@ public:
 	modelName	読み込むモデルの名前
 	anim		アニメーション付きのモデルの場合アニメーションを入れる入れ物
 	*/
-	virtual void Init(const CVector3& position, const CQuaternion& rotation, const wchar_t* modelName, CAnimation* anim = nullptr);
+	virtual void Init(const SMapChipInfo& info, CAnimation* anim = nullptr);
 
 	//初期化関数
 	virtual bool Start()override;
@@ -36,25 +36,26 @@ public:
 	map			自身をデリートするためのインスタンス
 	iterator	自身のイテレーター
 	*/
-	void SetIterator(Map* map, std::list<MapChip*>::iterator iterator);
+	void SetIterator(Map* map, std::list<MapChip*>::iterator iterator, int areaX, int areaY);
 
-	//アクティブかのフラグを設定する
-	/*void SetIsActive(bool isActive)
+	//タグを取得
+	EnMapChipTag GetMapTag()
 	{
-		m_isActive = isActive;
-	}*/
+		return m_mapTag;
+	}
 
 protected:
 	//デリートする関数
 	void MapChipDelete();
 
 protected:
+	EnMapChipTag	m_mapTag;
+	int				m_areaX;					//X軸のエリア番号
+	int				m_areaY;					//Y軸のエリア番号
 	CSkinModel		m_skinModel;				//スキンモデル
 	CVector3		m_position;					//座標
 	CQuaternion		m_rotation;					//回転
 	CVector3		m_scale;					//拡大
 	Map*			m_pMap;						//デリートする時のためのポインタ
 	std::list<MapChip*>::iterator m_iterator;	//自身のイテレーター
-	bool			m_isActive;					//アクティブか？
-	CMatrix			m_worldMatrix;
 };

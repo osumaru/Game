@@ -9,15 +9,17 @@ public:
 	bool Start();
 	void Update();
 	void Draw();
-	const CVector3 getArrowPosition()
+
+	const CVector3& GetArrowPosition() const
 	{
-		return m_arrowPosition;
+		return m_position;
 	}
+
 private:
 	CEffect			m_effect;
-	CSkinModel		m_arrowskin;
-	CVector3		m_arrowPosition;
-	CQuaternion		m_arrowRot;
+	CSkinModel		m_skinmodel;
+	CVector3		m_position;
+	CQuaternion		m_rotation;
 	CVector3		m_scale = CVector3::Zero;
 	CVector3		m_moveSpeed = CVector3::Zero;
 	float			m_lifeTime = 0.0f;

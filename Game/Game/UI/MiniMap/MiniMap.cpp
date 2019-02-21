@@ -31,13 +31,28 @@ void CMiniMap::Init()
 	m_playerIcon.SetSize({ 15.0f,15.0f });
 	//エネミーアイコンを初期化
 	m_enemyIconTexture = TextureResource().LoadTexture(L"Assets/sprite/enemy_Icon.png");
-	m_enemyList = &GetSceneManager().GetGameScene().GetMap()->GetEnemyList();
-	for (int i = 0; i < m_enemyList->size(); i++) {
-		m_enemyIcon.emplace_back(std::make_unique<CSprite>());
-		m_enemyIcon[i]->Init(m_enemyIconTexture);
-		m_enemyIcon[i]->SetPosition(m_mapCenterPos);
-		m_enemyIcon[i]->SetSize({ 10.0f,10.0f });
-		m_enemyIcon[i]->SetAlpha(0.8f);
+	int count = 0;
+
+	for (int i = 0; i < Map::AREA_PARTITION_NUM; i++)
+	{
+		for (int j = 0; j < Map::AREA_PARTITION_NUM; j++)
+		{
+			std::list<MapChip*>& mapChips = GetSceneManager().GetMap()->GetMapChips(i, j);
+			for (auto& mapChip : mapChips)
+			{
+				IEnemy* enemy = dynamic_cast<IEnemy*>(mapChip);
+				if (enemy == nullptr)
+				{
+					continue;
+				}
+				m_enemyIcon.emplace_back(std::make_unique<CSprite>());
+				m_enemyIcon[count]->Init(m_enemyIconTexture);
+				m_enemyIcon[count]->SetPosition(m_mapCenterPos);
+				m_enemyIcon[count]->SetSize({ 10.0f,10.0f });
+				m_enemyIcon[count]->SetAlpha(0.8f);
+				count++;
+			}
+		}
 	}
 }
 
@@ -60,10 +75,19 @@ void CMiniMap::Update()
 
 	//敵アイコンの処理
 	{
-		m_enemyList = &GetSceneManager().GetGameScene().GetMap()->GetEnemyList();
+		CVector3 areaPos = GetPlayer().GetPosition();
+		Map* map = GetSceneManager().GetMap();
+		int areaPosX = map->GetAreaPosX(areaPos);
+		int areaPosY = map->GetAreaPosY(areaPos);
+		std::list<MapChip*>& mapChips = map->GetMapChips(areaPosX, areaPosY);
 		int idx = 0;
-		for (auto& enemy : *m_enemyList)
+		for (auto& mapChip : mapChips)
 		{
+			IEnemy* enemy = dynamic_cast<IEnemy*>(mapChip);
+			if (enemy == nullptr)
+			{
+				continue;
+			}
 			CVector3 toCameraXZ = cameraPos - enemy->GetPosition();
 			toCameraXZ.y = 0.0f;
 			float length = toCameraXZ.Length();
@@ -131,7 +155,22 @@ void CMiniMap::PostAfterDraw()
 	}
 
 	m_miniMap.Draw();
-	for (int i = 0; i < m_enemyList->size(); i++) {
+	CVector3 areaPos = GetPlayer().GetPosition();
+	Map* map = GetSceneManager().GetMap();
+	int areaPosX = map->GetAreaPosX(areaPos);
+	int areaPosY = map->GetAreaPosY(areaPos);
+	std::list<MapChip*>& mapChips = map->GetMapChips(areaPosX, areaPosY);
+	int count = 0;
+	for (auto& mapChip : mapChips)
+	{
+		IEnemy* enemy = dynamic_cast<IEnemy*>(mapChip);
+		if (enemy != nullptr)
+		{
+			count++;
+		}
+	}
+
+	for (int i = 0; i < count; i++) {
 		m_enemyIcon[i]->Draw();
 	}
 	m_playerIcon.Draw();

@@ -16,6 +16,12 @@ IEnemy::~IEnemy()
 {
 }
 
+void IEnemy::Init(const SMapChipInfo & info, CAnimation * anim)
+{
+	MapChip::Init(info, anim);
+	Init(info.m_level);
+}
+
 void IEnemy::BeforeDead()
 {
 	Delete(&m_enemyTurn);
@@ -50,7 +56,5 @@ bool IEnemy::CalucFanShape(float degree, const CVector3& position)
 
 void IEnemy::EnemyListErase()
 {
-	//エネミーが死亡していたらリストから削除
-	std::list<IEnemy*>& enemyList = GetSceneManager().GetMap()->GetEnemyList();
-	enemyList.erase(m_iterater);
+	MapChipDelete();
 }

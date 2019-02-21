@@ -8,10 +8,11 @@
 #include "EnemyTurn.h"
 #include "EnemySearch.h"
 #include "RespawnData.h"
+#include "../Map/MapChip/MapChip.h"
 
 class CEnemyGroup;
 
-class IEnemy : public IGameObject
+class IEnemy : public MapChip
 {
 public:
 	struct SEnemyStatus
@@ -31,10 +32,11 @@ public:
 	//デストラクタ
 	virtual ~IEnemy();
 
+	void Init(const SMapChipInfo& info, CAnimation* anim = nullptr)override;
+
 	//初期化
-	//position	座標
 	//level		レベル
-	virtual void Init(const CVector3& position, int level) {};
+	virtual void Init(int level) {};
 
 	//更新
 	virtual void Update() = 0;
@@ -290,14 +292,11 @@ public:
 	}
 
 protected:
-	CSkinModel						m_skinModel;					//スキンモデル
 	CAnimation						m_animation;					//アニメーション
 	CEnemyStateMachine				m_enemyStateMachine;			//ステートマシン
 	CEnemyTurn						m_enemyTurn;					//向きを回転
 	CEnemySearch					m_enemySearch;					//プレイヤーを探索
 	CEnemyGroup*					m_enemyGroup;					//エネミーグループ
-	CVector3						m_position;						//座標
-	CQuaternion						m_rotation;						//回転
 	CCharacterController			m_characterController;			//キャラクターコントローラー
 	CLight							m_light;						//ライト
 	CEffect							m_auraEffect;					//オーラエフェクト

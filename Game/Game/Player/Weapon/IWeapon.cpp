@@ -136,47 +136,42 @@ void IWeapon::EnemyAttack()
 
 	const float EFFECT_SCALE = 0.1f;
 	//エネミーグループのリストを取得
-	std::list<CEnemyGroup*> enemyGroup = GetSceneManager().GetMap()->GetEnemyGroupList();
-	for (const auto& group : enemyGroup)
+	for (int i = 0; i < m_maxWeaponHitNum; i++)
 	{
-		for (int i = 0; i < m_maxWeaponHitNum; i++)
+		int areaPosX = GetSceneManager().GetMap()->GetAreaPosX(info.attackPos[i]);
+		int areaPosY = GetSceneManager().GetMap()->GetAreaPosY(info.attackPos[i]);
+		std::list<MapChip*>& mapChips = GetSceneManager().GetMap()->GetMapChips(areaPosX, areaPosY);
+		for (auto& mapChip : mapChips)
 		{
-			CVector3 enemyGroupPos = group->GetPosition();
-			CVector3 distance = enemyGroupPos - info.attackPos[i];
-			float length = distance.Length();
-			if (length < 50.0f)
+			IEnemy* enemy = dynamic_cast<IEnemy*>(mapChip);
+
+			if (enemy == nullptr || enemy->GetIsDead())
 			{
-				for (const auto& enemyData : group->GetGroupList())
+				continue;
+			}
+			bool* damagePossible = enemy->IsDamagePossible();
+			if(damagePossible[i])
+			{
+				const CMatrix* enemySpineMatrix = enemy->GetWorldMatrixSpine();
+				CVector3 EnemyVec;
+				EnemyVec.x = enemySpineMatrix->m[3][0];
+				EnemyVec.y = enemySpineMatrix->m[3][1];
+				EnemyVec.z = enemySpineMatrix->m[3][2];
+				CVector3 effectPos = (info.attackPos[i] + EnemyVec) * 0.5f;
+				EnemyVec.Subtract(info.attackPos[i]);
+				float len = EnemyVec.Length();
+				if (fabs(len) < 2.0f)
 				{
-					if (enemyData.enemy->GetIsDead())
-					{
-						continue;
-					}
-					bool* damagePossible = enemyData.enemy->IsDamagePossible();
-					if(damagePossible[i])
-					{
-						const CMatrix* enemySpineMatrix = enemyData.enemy->GetWorldMatrixSpine();
-						CVector3 EnemyVec;
-						EnemyVec.x = enemySpineMatrix->m[3][0];
-						EnemyVec.y = enemySpineMatrix->m[3][1];
-						EnemyVec.z = enemySpineMatrix->m[3][2];
-						CVector3 effectPos = (info.attackPos[i] + EnemyVec) * 0.5f;
-						EnemyVec.Subtract(info.attackPos[i]);
-						float len = EnemyVec.Length();
-						if (fabs(len) < 2.0f)
-						{
-							int attackNum = m_pPlayer->GetWeaponManager().GetAttackCount();
-							GameTime().SetSlowDelayTime(m_hitEffectParam[attackNum].slowTime, m_hitEffectParam[attackNum].slowScale, m_hitEffectParam[attackNum].slowDelayTime);
-							GetGameCamera().GetShakeCamera().ShakeStart(m_hitEffectParam[attackNum].shakePower);
-							GetGameCamera().GetShakeCamera().SetDelayTime(m_hitEffectParam[attackNum].shakeDelayTime);
-							enemyData.enemy->SetIsDamage(true);
-							damagePossible[i] = false;
-							m_hitEffect.Play();
-							m_hitEffect.SetPosition(effectPos);
-							m_hitEffect.SetScale({ EFFECT_SCALE, EFFECT_SCALE, EFFECT_SCALE });
-							m_hitEffect.Update();
-						}
-					}
+					int attackNum = m_pPlayer->GetWeaponManager().GetAttackCount();
+					GameTime().SetSlowDelayTime(m_hitEffectParam[attackNum].slowTime, m_hitEffectParam[attackNum].slowScale, m_hitEffectParam[attackNum].slowDelayTime);
+					GetGameCamera().GetShakeCamera().ShakeStart(m_hitEffectParam[attackNum].shakePower);
+					GetGameCamera().GetShakeCamera().SetDelayTime(m_hitEffectParam[attackNum].shakeDelayTime);
+					enemy->SetIsDamage(true);
+					damagePossible[i] = false;
+					m_hitEffect.Play();
+					m_hitEffect.SetPosition(effectPos);
+					m_hitEffect.SetScale({ EFFECT_SCALE, EFFECT_SCALE, EFFECT_SCALE });
+					m_hitEffect.Update();
 				}
 			}
 		}

@@ -13,7 +13,7 @@ public:
 	collider	コライダーの設定　falseならメッシュ	trueならボックス
 	anim		アニメーション付きのモデルの場合アニメーションを入れる入れ物
 	*/
-	void Init(const CVector3& position, const CQuaternion& rotation, const wchar_t* modelName, CAnimation* anim = nullptr)override;
+	void Init(const SMapChipInfo& info, CAnimation* anim = nullptr)override;
 
 	//更新関数
 	void Update()override;

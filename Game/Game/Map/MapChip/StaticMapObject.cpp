@@ -14,9 +14,9 @@ StaticMapObject::~StaticMapObject()
 {
 }
 
-void StaticMapObject::Init(const CVector3& position, const CQuaternion& rotation, const wchar_t* modelName, CAnimation* anim)
+void StaticMapObject::Init(const SMapChipInfo& info, CAnimation* anim)
 {
-	MapChip::Init(position, rotation, modelName);
+	MapChip::Init(info);
 
 	SRigidBodyInfo rInfo;
 	rInfo.mass = 0.0f;

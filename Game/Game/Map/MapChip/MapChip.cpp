@@ -7,9 +7,7 @@ MapChip::MapChip():
 	m_rotation(0.0f, 0.0f, 0.0f, 1.0f),
 	m_scale(1.0f, 1.0f, 1.0f),
 	m_pMap(nullptr),
-	m_iterator(),
-	m_isActive(true),
-	m_worldMatrix(CMatrix::Identity)
+	m_iterator()
 {
 	this->SetIsActive(false);
 }
@@ -18,30 +16,33 @@ MapChip::~MapChip()
 {
 }
 
-void MapChip::Init(const CVector3& position, const CQuaternion& rotation, const wchar_t* modelName, CAnimation* anim)
+void MapChip::Init(const SMapChipInfo& info, CAnimation* anim)
 {
 	//ƒ‚ƒfƒ‹‚Ì“Ç‚Ýž‚Ý
 	wchar_t filePath[64];
-	swprintf(filePath, L"Assets/modelData/%s.cmo", modelName);
-	m_skinModel.Load(filePath);
+	swprintf(filePath, L"Assets/modelData/%s.cmo", info.m_modelName);
+	m_skinModel.Load(filePath, anim);
 
-	m_position = position;
-	m_rotation = rotation;
+	m_position = info.m_position;
+	m_rotation = info.m_rotation;
 	m_scale = { 1.0f, 1.0f, 1.0f };
 
 	m_skinModel.SetIsShadowReceiver(true);
 	this->SetIsActive(true);
+	m_mapTag = info.m_tag;
 }
 
-void MapChip::SetIterator(Map* map, std::list<MapChip*>::iterator iterator)
+void MapChip::SetIterator(Map* map, std::list<MapChip*>::iterator iterator, int areaX, int areaY)
 {
 	m_pMap = map;
 	m_iterator = iterator;
+	m_areaX = areaX;
+	m_areaY = areaY;
 }
 
 void MapChip::MapChipDelete()
 {
-	m_pMap->MapChipErase(m_iterator);
+	m_pMap->MapChipErase(m_iterator, m_areaX, m_areaY);
 }
 
 bool MapChip::Start()

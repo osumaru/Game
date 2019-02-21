@@ -105,8 +105,8 @@ void CGameCamera::Update()
 		//視点から敵へのベクトル
 		CVector3 enemyDirection = target - position;
 		//視点から注視点までのベクトル
-		TargetMargin(m_toTargetDir, m_toTargetDir, enemyDirection, 10);
-		target = position + m_toTargetDir;
+		//TargetMargin(m_toTargetDir, m_toTargetDir, enemyDirection, 10);
+		//target = position + m_toTargetDir;
 	}
 	else
 	{
@@ -159,11 +159,11 @@ void CGameCamera::Update()
 
 
 	//カメラの当たり判定
-	//CVector3 newPos;
-	//if (m_cameraCollisionSolver.Execute(newPos, position, target))
-	//{
-	//	position = newPos;
-	//}
+	CVector3 newPos;
+	if (m_cameraCollisionSolver.Execute(newPos, position, target))
+	{
+		position = newPos;
+	}
 
 	//バネカメラを更新する
 	m_springCamera.SetTarTarget(target);
@@ -454,5 +454,6 @@ void CGameCamera::LockOnCancel()
 	//ロックオンをやめる
 	m_isLockOn = false;
 	m_lockOnState = enLockOn_None;
+	m_lockOnSprite.SetIsDraw(m_isLockOn);
 }
 

@@ -29,12 +29,11 @@ void CNinja::OnInvokeAnimationEvent(const wchar_t* animClipName, const wchar_t* 
 	}
 }
 
-void CNinja::Init(const CVector3& position, int level)
+void CNinja::Init(int level)
 {
 	//モデルを読み込む
 	m_skinModel.Load(L"Assets/modelData/Ninja.cmo", &m_animation);
 	m_skinModel.LoadNormalmap(L"Assets/modelData/Ninja_normal.png");
-	m_position = position;
 	//キャラクターコントローラーを初期化
 	m_characterController.Init(0.5f, 0.9f, m_position);
 	m_characterController.SetGravity(-9.8f);
@@ -54,9 +53,6 @@ void CNinja::Init(const CVector3& position, int level)
 	m_animation.SetLoopFlg(CEnemyState::enAnimation_Walk, true);
 	m_animation.SetLoopFlg(CEnemyState::enAnimation_Chase, true);
 	m_animation.Play(CEnemyState::enAnimation_Idle, 0.3f);
-	//Add(&m_enemyStateMachine, 0);
-	//Add(&m_enemyTurn, 0);
-	//Add(&m_enemySearch, 0);
 
 	//ライトの設定
 	CVector4 ambientLight = { 0.2f,0.2f,0.2f,0.6f };
@@ -76,7 +72,7 @@ void CNinja::Init(const CVector3& position, int level)
 
 	//エフェクトを初期化
 	m_auraEffect.Init(L"Assets/Effect/auraEffect.efk");
-	m_auraEffect.SetPosition(position);
+	m_auraEffect.SetPosition(m_position);
 	m_auraEffect.SetScale({ 1.0f, 1.0f, 1.0f });
 	//腰のワールド行列を取得
 	m_spineMatrix = &GetBoneWorldMatrix(L"Spine");

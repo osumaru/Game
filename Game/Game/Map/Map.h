@@ -72,13 +72,9 @@ public:
 	マップチップをデリート
 	iterator	デリートするマップチップのイテレーター
 	*/
-	void MapChipErase(std::list<MapChip*>::iterator iterator);
+	void MapChipErase(std::list<MapChip*>::iterator iterator, int areaPosX, int areaPosY);
 
-	//エネミーのリストを取得
-	std::list<IEnemy*>& GetEnemyList()
-	{
-		return m_enemyList;
-	}
+
 
 	//エネミーグループのリストを取得
 	std::list<CEnemyGroup*>& GetEnemyGroupList()
@@ -99,10 +95,44 @@ public:
 	//マップのオブジェクトのアップデートのアクティブフラグを設定
 	void SetIsMapChipActiveUpdate(bool isActive);
 
+	
+	static const int AREA_PARTITION_NUM = 10;
+
+	float GetPartitionRange() const
+	{
+		return m_partitionRange;
+	}
+
+	int GetAreaPosX(const CVector3& position)
+	{
+		int areaPosX = position.x;
+		areaPosX += m_partitionRange * AREA_PARTITION_NUM * 0.5f;
+		areaPosX /= m_partitionRange;
+		return areaPosX;
+	}
+
+	int GetAreaPosY(const CVector3& position)
+	{
+		int areaPosY = position.z;
+		areaPosY += m_partitionRange * AREA_PARTITION_NUM * 0.5f;
+		areaPosY /= m_partitionRange;
+		return areaPosY;
+	}
+
+	std::list<MapChip*>& GetMapChips(int areaPosX, int areaPosY)
+	{
+		return m_mapChips[areaPosX][areaPosY];
+	}
+
+
+
 private:
-	std::list<MapChip*>			m_mapChip;				//マップチップ
-	std::list<IEnemy*>			m_enemyList;			//エネミーリスト
+	int						m_playerAreaPosX = 0;
+	int						m_playerAreaPosY = 0;
+	std::list<MapChip*>		m_mapChips[AREA_PARTITION_NUM][AREA_PARTITION_NUM];
+	MapChip*				m_ground = nullptr;
 	std::list<CEnemyGroup*>		m_enemyGroupList;		//エネミーグループのリスト
 	//std::list<CTreasureChest*>	m_treasureList;			//宝箱リスト`
 	CShopManager*				m_shopManager;
+	float						m_partitionRange;
 };
