@@ -243,48 +243,35 @@ void Map::MapChipErase(std::list<MapChip*>::iterator iterator, int areaPosX, int
 	m_mapChips[areaPosX][areaPosY].erase(iterator);
 }
 
-void Map::SetIsMapChipActive(bool isActive)
+void Map::SetIsMapChipActiveUpdate(bool isActive)
 {
+
 	for (int i = 0; i < AREA_PARTITION_NUM; i++)
 	{
 		for (int j = 0; j < AREA_PARTITION_NUM; j++)
 		{
 			for (auto& mapChip : m_mapChips[i][j])
 			{
-				mapChip->SetIsActive(isActive);
+				mapChip->SetIsActiveUpdate(false);
 			}
 		}
 	}
-	//敵グループクラスのアクティブ設定
-	for (auto& enemyGroup : m_enemyGroupList)
+	if (isActive)
 	{
-		enemyGroup->SetIsActive(isActive);
-	}
-	for (auto& shop : m_shopManager->Getlist())
-	{
-		shop->SetIsActive(isActive);
-	}
-	//ボスの動きの設定
-	if (&GetMaw())
-	{
-		GetMaw().SetIsActive(isActive);
-	}
-	//プレイヤーの動きの設定
-	if (&GetPlayer())
-	{
-		GetPlayer().SetIsActive(isActive);
-	}
-}
-
-void Map::SetIsMapChipActiveUpdate(bool isActive)
-{
-	for (int i = 0; i < AREA_PARTITION_NUM; i++)
-	{
-		for (int j = 0; j < AREA_PARTITION_NUM; j++)
+		const int AREA_NUM = 9;
+		int areaPosX[AREA_NUM] = { m_playerAreaPosX,m_playerAreaPosX, m_playerAreaPosX,
+							m_playerAreaPosX + 1, m_playerAreaPosX + 1, m_playerAreaPosX + 1,
+							m_playerAreaPosX - 1, m_playerAreaPosX - 1, m_playerAreaPosX - 1, };
+		int areaPosY[AREA_NUM] = { m_playerAreaPosY,m_playerAreaPosY + 1, m_playerAreaPosY - 1,
+							m_playerAreaPosY, m_playerAreaPosY + 1, m_playerAreaPosY - 1,
+							m_playerAreaPosY, m_playerAreaPosY + 1, m_playerAreaPosY - 1, };
+		for (int i = 0; i < AREA_NUM; i++)
 		{
-			for (auto& mapChip : m_mapChips[i][j])
+			areaPosX[i] = max(0, min(AREA_PARTITION_NUM - 1, areaPosX[i]));
+			areaPosY[i] = max(0, min(AREA_PARTITION_NUM - 1, areaPosY[i]));
+			for (auto& mapChip : m_mapChips[areaPosX[i]][areaPosY[i]])
 			{
-				mapChip->SetIsActiveUpdate(isActive);
+				mapChip->SetIsActiveUpdate(true);
 			}
 		}
 	}

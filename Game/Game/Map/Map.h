@@ -88,7 +88,7 @@ public:
 	}
 
 	//マップのオブジェクトにアクティブフラグを設定
-	void SetIsMapChipActive(bool isActive);
+	//void SetIsMapChipActive(bool isActive);
 
 	//マップのオブジェクトのアップデートのアクティブフラグを設定
 	void SetIsMapChipActiveUpdate(bool isActive);
@@ -127,9 +127,13 @@ public:
 	}
 
 
+	//マップチップを制作
 	void CreateMapChip(const SMapChipInfo& info);
 
 
+private:
+	//プレイヤーの周りの空間のみアクティブにする
+	//void PlayerAroundAreaActive();
 private:
 	int						m_playerAreaPosX = 0;
 	int						m_playerAreaPosY = 0;
