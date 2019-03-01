@@ -1,5 +1,6 @@
 #pragma once
 #include "Bloom.h"
+#include "MotionBlur.h"
 
 class CPostEffect
 {
@@ -34,6 +35,7 @@ public:
 
 private:
 	CBloom											m_bloom;
+	CMotionBlur										m_motionBlur;
 	CPrimitive										m_primitive;			//プリミティブ
 	CShader											m_vertexShader;			//頂点シェーダー
 	CShader											m_pixelShader;			//ピクセルシェーダー

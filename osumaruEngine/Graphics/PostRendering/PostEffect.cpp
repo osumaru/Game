@@ -25,11 +25,13 @@ void CPostEffect::Init(Microsoft::WRL::ComPtr<IDXGISwapChain> swapChain)
 	m_pBackRenderTargetView = m_backBuffer.GetRenderTarget();
 	m_pBackDepthStencilView = m_backBuffer.GetDepthStencil();
 	m_bloom.Init();
+	m_motionBlur.Init();
 }
 
 void CPostEffect::Draw()
 {
-	m_bloom.Draw();
+	//m_bloom.Draw();
+	m_motionBlur.Draw();
 	float color[4] = { 0.0f, 0.0f, 1.0f, 1.0f };
 	GetDeviceContext()->OMSetRenderTargets(1, m_pBackRenderTargetView.GetAddressOf(), m_pBackDepthStencilView.Get());
 	GetDeviceContext()->ClearRenderTargetView(m_pBackRenderTargetView.Get(), color);

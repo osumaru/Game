@@ -211,5 +211,8 @@ private:
 	std::vector<std::unique_ptr<CBone>>		m_bones;				//骨達
 	ID3D11Buffer*							m_structuredBuffer;		//ストラクチャードバッファ
 	ID3D11ShaderResourceView*				m_shaderResourceView;	//SRV
+	ID3D11Buffer*							m_beforeSB;				//ストラクチャードバッファ
+	ID3D11ShaderResourceView*				m_beforeSRV;	//SRV
 	std::unique_ptr<CMatrix[]>				m_boneMat;				//骨の行列
+	std::unique_ptr<CMatrix[]>				m_beforeBoneMat;				//骨の行列
 };

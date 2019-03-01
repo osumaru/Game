@@ -94,7 +94,11 @@ void CSkinModel::Draw(const CMatrix& view, const CMatrix& projection, bool isSha
 	CMatrix viewProjMat;
 	viewProjMat.Mul(view, projection);
 	cb.viewProjMat = viewProjMat;
+	cb.beforeViewProjMat = m_beforeViewProj;
+	m_beforeViewProj = viewProjMat;
 	cb.worldMat = m_worldMatrixZUp;
+	cb.beforeWorldMat = m_beforeWorldMatrix;
+	m_beforeWorldMatrix = m_worldMatrixZUp;
 	cb.specularPower = m_specularPower;
 	cb.diffuseLightPower = m_diffuseLightPower;
 	if (m_isAlphaTest)
@@ -131,6 +135,7 @@ void CSkinModel::Draw(const CMatrix& view, const CMatrix& projection, bool isSha
 	{
 		m_skelton->Render();
 	}
+
 	for (auto& modelMesh : m_skinModel->meshes)
 	{
 		for (auto& meshPart : modelMesh->meshParts)
@@ -139,7 +144,6 @@ void CSkinModel::Draw(const CMatrix& view, const CMatrix& projection, bool isSha
 		}
 	}
 	m_skinModel->Draw(GetDeviceContext(), common, world, view, projection);
-	
 }
 
 void CSkinModel::SetBoneMatrix(int boneID, const CMatrix & mat)

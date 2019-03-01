@@ -60,9 +60,11 @@ Texture2D<float4> normalTexture : register(t2);
 Texture2D<float4> tangentTexture : register(t3);
 Texture2D<float4> depthTexture : register(t4);
 Texture2D<int4> materialTexture : register(t5);
-Texture2D<float4> shadowTexture : register(t6);
+Texture2D<float4> velocityTexture : register(t6);
+Texture2D<float4> shadowTexture : register(t7);
 sampler Sampler : register(s0);
 sampler shadowSampler : register(s1);
+
 VS_OUTPUT VSMain(VS_INPUT In)
 {
 	VS_OUTPUT Out;
@@ -113,6 +115,7 @@ float4 PSMain(VS_OUTPUT In) : SV_TARGET0
 	}
 	lig.xyz += color.w;
 	color.xyz *= lig;
+
 	float4 shadowMapPos;
 	shadowMapPos.z = depthAndSpecular.x;
 	

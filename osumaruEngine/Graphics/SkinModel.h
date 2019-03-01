@@ -13,7 +13,9 @@ public:
 	struct SSkinModelCB
 	{
 		CMatrix worldMat;				//ワールド行列
+		CMatrix beforeWorldMat;				//ワールド行列
 		CMatrix viewProjMat;			//ビュープロジェクション行列
+		CMatrix beforeViewProjMat;
 		float specularPower;			//スペキュラライトの強さ
 		float diffuseLightPower;
 		int alphaTestFlg;
@@ -159,6 +161,8 @@ private:
 	DirectX::Model*					m_skinModel = nullptr;				//スキンモデル
 	CMatrix							m_worldMatrixZUp = CMatrix::Identity;	//ZUpのワールド行列
 	CMatrix							m_worldMatrix = CMatrix::Identity;	//ワールド行列
+	CMatrix							m_beforeWorldMatrix;
+	CMatrix							m_beforeViewProj = CMatrix::Identity;	//1フレーム前のビュープロジェクション行列
 	CTexture*						m_pNormalTexture = nullptr;
 	CTexture*						m_pSpecularTexture = nullptr;
 	SMaterialFlg					m_materialFlg;

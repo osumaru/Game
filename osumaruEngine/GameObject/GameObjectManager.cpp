@@ -54,46 +54,48 @@ void CGameObjectManager::Execute(CDeferred& deferred, CPostEffect& postEffect)
 				object.gameObject->Updater();
 			}
 		}
+		Engine().GetShadowMap().Draw();
+		//
+
+		Engine().SetAlphaBlendState(enAlphaBlendStateNone);
+		Engine().SetDepthStencilState(enDepthStencilState3D);
+		deferred.Start();
+
+		for (GameObjectList& objList : m_objectVector)
+		{
+			for (SGameObjectData& object : objList)
+			{
+				object.gameObject->Drawer();
+			}
+		}
+		//PhysicsWorld().Draw();
+		deferred.Draw();
+		for (GameObjectList& objList : m_objectVector)
+		{
+			for (SGameObjectData& object : objList)
+			{
+				object.gameObject->AfterDrawer();
+			}
+		}
+		//Engine().GetTBDR().Draw();
+		postEffect.Draw();
+		//Engine().GetEffectEngine().Draw();
+		for (GameObjectList& objList : m_objectVector)
+		{
+			for (SGameObjectData& object : objList)
+			{
+				object.gameObject->PostAfterDrawer();
+			}
+		}
+		GameTime().Draw();
+
+		//最後にオブジェクトを消去
+		DeleteExecute();
 	}
+
+
+
 	isFlg = false;
-	Engine().GetShadowMap().Draw();
-	//
-
-	Engine().SetAlphaBlendState(enAlphaBlendStateNone);
-	Engine().SetDepthStencilState(enDepthStencilState3D);
-	deferred.Start();
-
-	for (GameObjectList& objList : m_objectVector)
-	{
-		for (SGameObjectData& object : objList)
-		{
-			object.gameObject->Drawer();
-		}
-	}
-	PhysicsWorld().Draw();
-	deferred.Draw();
-	for (GameObjectList& objList : m_objectVector)
-	{
-		for (SGameObjectData& object : objList)
-		{
-			object.gameObject->AfterDrawer();
-		}
-	}
-	Engine().GetTBDR().Draw();
-
-	postEffect.Draw();
-	Engine().GetEffectEngine().Draw();
-	for (GameObjectList& objList : m_objectVector)
-	{
-		for (SGameObjectData& object : objList)
-		{
-			object.gameObject->PostAfterDrawer();
-		}
-	}
-	GameTime().Draw();
-
-	//最後にオブジェクトを消去
-	DeleteExecute();
 }
 
 void CGameObjectManager::Delete(IGameObject* deleteObject)

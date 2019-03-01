@@ -212,7 +212,7 @@ void CPlayer::Init(CVector3 position)
 
 	m_PlayerStateMachine.SetPlayer(this, &m_playerGetter);
 	m_PlayerStateMachine.Init();
-	m_skinmodel.SetIsShadowCaster(true);
+	//m_skinmodel.SetIsShadowCaster(true);
 	//m_skinmodel.SetIsShadowReceiver(true);
 	m_skinmodel.SetSpecularPower(0.1f);
 	m_weaponManager.Init(this);

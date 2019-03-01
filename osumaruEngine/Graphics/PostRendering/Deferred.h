@@ -15,6 +15,7 @@ enum EnRenderTarget
 	enRenderTargetTangent,		//接ベクトル
 	enRenderTargetDepth,		//深度値(今はワールド座標
 	enRenderTargetMaterial,		//マテリアル情報
+	enRenderTargetVelocity,		//速度マップ
 	enRenderTargetNum
 };
 

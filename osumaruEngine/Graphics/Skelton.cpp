@@ -113,9 +113,11 @@ bool CSkelton::Load(const wchar_t* filePath)
 	}
 	//ボーン用の行列を初期化
 	m_boneMat = std::make_unique<CMatrix[]>(m_bones.size());
+	m_beforeBoneMat = std::make_unique<CMatrix[]>(m_bones.size());
 	for (int i = 0;i < m_bones.size();i++)
 	{
 		m_boneMat[i] = m_bones[i]->GetLocalMatrix();
+		m_beforeBoneMat[i] = m_bones[i]->GetLocalMatrix();
 	}
 	//ストラクチャーバッファを作成
 	D3D11_BUFFER_DESC desc;
@@ -128,6 +130,7 @@ bool CSkelton::Load(const wchar_t* filePath)
 	D3D11_SUBRESOURCE_DATA resource;
 	resource.pSysMem = m_boneMat.get();
 	GetDevice()->CreateBuffer(&desc, &resource, &m_structuredBuffer);
+	GetDevice()->CreateBuffer(&desc, &resource, &m_beforeSB);
 
 	//シェーダーリソースビューをさくせい
 	D3D11_SHADER_RESOURCE_VIEW_DESC viewDesc;
@@ -137,6 +140,7 @@ bool CSkelton::Load(const wchar_t* filePath)
 	viewDesc.BufferEx.FirstElement = 0;
 	viewDesc.BufferEx.NumElements = m_bones.size();
 	GetDevice()->CreateShaderResourceView(m_structuredBuffer, &viewDesc, &m_shaderResourceView);
+	GetDevice()->CreateShaderResourceView(m_beforeSB, &viewDesc, &m_beforeSRV);
 
 	Update(CMatrix::Identity);
 	return true;
@@ -163,7 +167,8 @@ void CSkelton::UpdateWorldMatrix(CBone* bone, const CMatrix& mat)
 	CMatrix localMatrix = bone->GetLocalMatrix();
 	mBoneWorld.Mul(localMatrix, mat);
 	bone->SetWorldMatrix(mBoneWorld);
-	for (auto& childBone : bone->GetChildren()) {
+	for (auto& childBone : bone->GetChildren()) 
+	{
 		UpdateWorldMatrix(childBone, mBoneWorld);
 	}
 
@@ -175,8 +180,11 @@ void CSkelton::Render()
 	//ボーンの行列をシェーダーに送る
 	for (int i = 0;i < m_bones.size();i++)
 	{
+		m_beforeBoneMat[i] = m_boneMat[i];
 		m_boneMat[i].Mul(m_bones[i]->GetInvMatrix(), m_bones[i]->GetWorldMatrix());
 	}
 	GetDeviceContext()->UpdateSubresource(m_structuredBuffer, 0, NULL, m_boneMat.get(), 0, 0);
 	GetDeviceContext()->VSSetShaderResources(100, 1, &m_shaderResourceView);
+	GetDeviceContext()->UpdateSubresource(m_beforeSB, 0, NULL, m_beforeBoneMat.get(), 0, 0);
+	GetDeviceContext()->VSSetShaderResources(101, 1, &m_beforeSRV);
 }

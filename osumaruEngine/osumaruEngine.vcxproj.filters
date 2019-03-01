@@ -264,6 +264,9 @@
     <ClCompile Include="Graphics\PostRendering\Bloom.cpp">
       <Filter>ソース ファイル\Graphics\PostRendering</Filter>
     </ClCompile>
+    <ClCompile Include="Graphics\PostRendering\MotionBlur.cpp">
+      <Filter>ソース ファイル\Graphics\PostRendering</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject\GameObject.h">
@@ -471,6 +474,9 @@
       <Filter>ソース ファイル\Graphics\PostRendering</Filter>
     </ClInclude>
     <ClInclude Include="Graphics\PostRendering\Bloom.h">
+      <Filter>ソース ファイル\Graphics\PostRendering</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\PostRendering\MotionBlur.h">
       <Filter>ソース ファイル\Graphics\PostRendering</Filter>
     </ClInclude>
   </ItemGroup>
