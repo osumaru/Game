@@ -164,7 +164,7 @@ public:
 
 
 	//•`‰æ
-	void Render();
+	void Render(bool isUpdateBeforeWorldMatrix);
 
 	//œ‚Ì”‚ğæ“¾
 	int GetBoneNum() const

@@ -98,7 +98,10 @@ void CSkinModel::Draw(const CMatrix& view, const CMatrix& projection, bool isSha
 	m_beforeViewProj = viewProjMat;
 	cb.worldMat = m_worldMatrixZUp;
 	cb.beforeWorldMat = m_beforeWorldMatrix;
-	m_beforeWorldMatrix = m_worldMatrixZUp;
+	if (!isShadow)
+	{
+		m_beforeWorldMatrix = m_worldMatrixZUp;
+	}
 	cb.specularPower = m_specularPower;
 	cb.diffuseLightPower = m_diffuseLightPower;
 	if (m_isAlphaTest)
@@ -133,7 +136,7 @@ void CSkinModel::Draw(const CMatrix& view, const CMatrix& projection, bool isSha
 
 	if (m_skelton != nullptr)
 	{
-		m_skelton->Render();
+		m_skelton->Render(!isShadow);
 	}
 
 	for (auto& modelMesh : m_skinModel->meshes)

@@ -138,7 +138,7 @@ PS_OUTPUT PSMain(VS_OUTPUT In)
 {
 	PS_OUTPUT Out;
 	float4 albedoColor = colorTexture.Sample(Sampler, In.uv);
-	//clip((albedoColor.w - 0.001f) * alphaTestFlg);
+	clip((albedoColor.w - 0.001f) * alphaTestFlg);
 	Out.color = float4(albedoColor.xyz, ambientLight.w);
 	Out.normal = float4(In.normal, 1.0f);
 	Out.tangent = float4(In.tangent, 1.0f);

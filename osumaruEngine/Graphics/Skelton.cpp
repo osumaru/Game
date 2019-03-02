@@ -175,14 +175,18 @@ void CSkelton::UpdateWorldMatrix(CBone* bone, const CMatrix& mat)
 }
 
 
-void CSkelton::Render()
+void CSkelton::Render(bool isUpdateBeforeWorldMatrix)
 {
-	//ボーンの行列をシェーダーに送る
-	for (int i = 0;i < m_bones.size();i++)
+	//影の描画などでは行列を更新しない
+	if (isUpdateBeforeWorldMatrix)
 	{
-		m_beforeBoneMat[i] = m_boneMat[i];
-		m_boneMat[i].Mul(m_bones[i]->GetInvMatrix(), m_bones[i]->GetWorldMatrix());
+		for (int i = 0; i < m_bones.size(); i++)
+		{
+			m_beforeBoneMat[i] = m_boneMat[i];
+			m_boneMat[i].Mul(m_bones[i]->GetInvMatrix(), m_bones[i]->GetWorldMatrix());
+		}
 	}
+	//ボーンの行列をシェーダーに送る
 	GetDeviceContext()->UpdateSubresource(m_structuredBuffer, 0, NULL, m_boneMat.get(), 0, 0);
 	GetDeviceContext()->VSSetShaderResources(100, 1, &m_shaderResourceView);
 	GetDeviceContext()->UpdateSubresource(m_beforeSB, 0, NULL, m_beforeBoneMat.get(), 0, 0);
