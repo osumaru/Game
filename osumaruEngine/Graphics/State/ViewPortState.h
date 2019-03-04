@@ -1,7 +1,9 @@
 #pragma once
 enum EnViewPortState
 {
-	enViewPortShadow,	//シャドウマップ用のビューポート設定
+	enViewPortShadow1,	//シャドウマップ用のビューポート設定
+	enViewPortShadow2,	//シャドウマップ用のビューポート設定
+	enViewPortShadow3,	//シャドウマップ用のビューポート設定
 	enViewPortGame,		//ゲームシーン用のビューポート設定
 	enViewPortBloom00,
 	enViewPortBloom01,

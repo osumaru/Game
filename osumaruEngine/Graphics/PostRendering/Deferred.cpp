@@ -48,19 +48,7 @@ void CDeferred::Init()
 	};
 	DWORD indexBufferLayout[4] = { 0, 2, 1, 3 };
 	m_primitive.Create(vertexBufferLayout, sizeof(SVSLayout), 4, indexBufferLayout, 4, CPrimitive::enIndex32, CPrimitive::enTypeTriangleStrip);
-
-	D3D11_SAMPLER_DESC desc;
-	ZeroMemory(&desc, sizeof(D3D11_SAMPLER_DESC));
-	desc.AddressU = D3D11_TEXTURE_ADDRESS_CLAMP;
-	desc.AddressV = D3D11_TEXTURE_ADDRESS_CLAMP;
-	desc.AddressW = D3D11_TEXTURE_ADDRESS_CLAMP;
-	desc.MaxLOD = D3D11_FLOAT32_MAX;
-	desc.ComparisonFunc = D3D11_COMPARISON_ALWAYS;
-	desc.MaxAnisotropy = 1;
-	desc.Filter = D3D11_FILTER_ANISOTROPIC;
-	GetDevice()->CreateSamplerState(&desc, &m_pAnisotropicSampler);
-	desc.Filter = D3D11_FILTER_MIN_MAG_MIP_LINEAR;
-	GetDevice()->CreateSamplerState(&desc, &m_pLinearSampler);
+	m_shadowMapSampler.Init(enAddressingModeClamp, enFilterLinear);
 	m_gameCameraCB.Create(sizeof(SGameCameraCB), nullptr);
 }
 
@@ -109,12 +97,14 @@ void CDeferred::Draw()
 
 	GetDeviceContext()->ClearRenderTargetView(backBuffer[0], color);
 	GetDeviceContext()->ClearDepthStencilView(m_renderTarget[0].GetDepthStencil().Get(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
-	ID3D11ShaderResourceView* srviews[enRenderTargetNum + 1];
+	ID3D11ShaderResourceView* srviews[enRenderTargetNum + 3];
 	for (int i = 0; i < enRenderTargetNum; i++)
 	{
 		srviews[i] = m_renderTarget[i].GetRenderTargetTexture().GetShaderResource().Get();
 	};
-	srviews[enRenderTargetNum] = Engine().GetShadowMap().GetRenderTarget().GetRenderTargetTexture().GetShaderResource().Get();
+	srviews[enRenderTargetNum] = Engine().GetShadowMap().GetRenderTarget(0).GetRenderTargetTexture().GetShaderResource().Get();
+	srviews[enRenderTargetNum + 1] = Engine().GetShadowMap().GetRenderTarget(1).GetRenderTargetTexture().GetShaderResource().Get();
+	srviews[enRenderTargetNum + 2] = Engine().GetShadowMap().GetRenderTarget(2).GetRenderTargetTexture().GetShaderResource().Get();
 	CLight light = Light();
 	m_lightCB.Update(&Light());
 	Engine().GetShadowMap().SetConstantBuffer();
@@ -144,9 +134,9 @@ void CDeferred::Draw()
 	GetDeviceContext()->PSSetConstantBuffers(0, 1, m_lightCB.GetBody().GetAddressOf());
 	GetDeviceContext()->PSSetConstantBuffers(3, 1, m_materialCB.GetBody().GetAddressOf());
 	GetDeviceContext()->PSSetConstantBuffers(4, 1, m_defferedCB.GetBody().GetAddressOf());
-	GetDeviceContext()->PSSetShaderResources(0, enRenderTargetNum + 1, srviews);
+	GetDeviceContext()->PSSetShaderResources(0, enRenderTargetNum + 3, srviews);
 
-	ID3D11SamplerState* samplers[] = { m_pAnisotropicSampler };
+	ID3D11SamplerState* samplers[] = { m_shadowMapSampler.GetBody() };
 	GetDeviceContext()->PSSetSamplers(1, 1, samplers);
 
 	GetDeviceContext()->VSSetShader((ID3D11VertexShader*)m_vertexShader.GetBody().Get(), nullptr, 0);

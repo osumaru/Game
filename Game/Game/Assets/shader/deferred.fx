@@ -14,7 +14,9 @@ cbuffer shadowConB : register(b1)
 
 cbuffer shadowCB : register(b2)
 {
-	float4x4 lightViewProj;
+	float4x4 lightViewProj1;
+	float4x4 lightViewProj2;
+	float4x4 lightViewProj3;
 };
 
 cbuffer materialCB : register(b3)
@@ -61,7 +63,9 @@ Texture2D<float4> tangentTexture : register(t3);
 Texture2D<float4> depthTexture : register(t4);
 Texture2D<int4> materialTexture : register(t5);
 Texture2D<float4> velocityTexture : register(t6);
-Texture2D<float4> shadowTexture : register(t7);
+Texture2D<float4> shadowTexture1 : register(t7);
+Texture2D<float4> shadowTexture2 : register(t8);
+Texture2D<float4> shadowTexture3 : register(t9);
 sampler Sampler : register(s0);
 sampler shadowSampler : register(s1);
 
@@ -72,6 +76,38 @@ VS_OUTPUT VSMain(VS_INPUT In)
 	Out.uv = In.uv;
 	Out.screenPos = In.pos;
 	return Out;
+}
+
+
+float4 ShadowMapCalc(VS_OUTPUT In, Texture2D<float4> shadowTexture, float4x4 lightViewProj,  float maindepth)
+{
+	float4 shadowMapPos;
+	shadowMapPos.z = maindepth;
+	shadowMapPos.xy = In.uv;
+	shadowMapPos.y = 1.0f - shadowMapPos.y;
+	shadowMapPos.xy -= 0.5f;
+	shadowMapPos.xy *= 2.0f;
+	shadowMapPos.w = 1.0f;
+	shadowMapPos = mul(gameProj, shadowMapPos);
+	shadowMapPos = mul(gameView, shadowMapPos);
+	shadowMapPos /= shadowMapPos.w;
+	float3 worldPos = shadowMapPos.xyz;
+	shadowMapPos = mul(lightViewProj, shadowMapPos);
+	shadowMapPos /= shadowMapPos.w;
+	shadowMapPos.xy += 1.0f;
+	shadowMapPos.xy /= 2.0f;
+	shadowMapPos.y = 1.0f - shadowMapPos.y;
+	float depth = shadowMapPos.z;
+	float shadowDepth;
+	shadowDepth = shadowTexture.Sample(shadowSampler, shadowMapPos.xy).x;
+	int shadowValue = 1;
+	if (shadowMapPos.x <= 1.0f && 0.0f <= shadowMapPos.x
+		&&	shadowMapPos.y <= 1.0f && 0.0f <= shadowMapPos.y)
+	{
+		float d = depth - 0.01 - shadowDepth;
+		shadowValue *= step(depth, shadowDepth + 0.0001f);
+	}
+	return shadowValue;
 }
 
 float4 PSMain(VS_OUTPUT In) : SV_TARGET0
@@ -115,10 +151,8 @@ float4 PSMain(VS_OUTPUT In) : SV_TARGET0
 	}
 	lig.xyz += color.w;
 	color.xyz *= lig;
-
 	float4 shadowMapPos;
 	shadowMapPos.z = depthAndSpecular.x;
-	
 	shadowMapPos.xy = In.uv;
 	shadowMapPos.y = 1.0f - shadowMapPos.y;
 	shadowMapPos.xy -= 0.5f;
@@ -128,29 +162,11 @@ float4 PSMain(VS_OUTPUT In) : SV_TARGET0
 	shadowMapPos = mul(gameView, shadowMapPos);
 	shadowMapPos /= shadowMapPos.w;
 	float3 worldPos = shadowMapPos.xyz;
-	shadowMapPos = mul(lightViewProj, shadowMapPos);
+	shadowMapPos = mul(lightViewProj1, shadowMapPos);
 	shadowMapPos /= shadowMapPos.w;
 	shadowMapPos.xy += 1.0f;
 	shadowMapPos.xy /= 2.0f;
 	shadowMapPos.y = 1.0f - shadowMapPos.y;
-	int3 uv;
-	uv.xy = (int2)(shadowMapPos.xy * 1024);
-	uv.z = 0;
-	float depth = shadowMapPos.z;
-	float shadowDepth;
-	//shadowDepth = shadowTexture.Sample(shadowSampler, shadowMapPos.xy).z;
-	shadowDepth = shadowTexture.Load(uv, int2(0, 0)).x;
-	int shadowValue = 1;
-	if (shadowMapPos.x <= 1.0f && 0.0f <= shadowMapPos.x
-		&&	shadowMapPos.y <= 1.0f && 0.0f <= shadowMapPos.y)
-	{
-		int3 uv;
-		uv.z = 0;
-		uv.x = (int)(In.uv.x * 1280.0f);
-		uv.y = (int)(In.uv.y * 720.0f);
-		float d = depth - 0.01 - shadowDepth;
-		shadowValue *= step(depth, shadowDepth + 0.0001f);
-	}
 	for(int i = 0;i < 4;i++)
 	{
 		float3 lineSight = worldPos - gameCameraPos.xyz;
@@ -162,7 +178,13 @@ float4 PSMain(VS_OUTPUT In) : SV_TARGET0
 		speculaLight = pow(speculaLight, 10.0f);
 		color.xyz += speculaLight * (depthAndSpecular.y * step(1, (materialFlg.x & isSpecularMap)) + step(1, !(materialFlg.x & isSpecularMap))) * depthAndSpecular.z;
 	}
+	float shadowValue = ShadowMapCalc(In, shadowTexture1, lightViewProj1, depthAndSpecular.x);
 	color.xyz *= min(1, step(1, !(materialFlg.x & isShadowReceiver)) + shadowValue);
+	shadowValue = ShadowMapCalc(In, shadowTexture2, lightViewProj2, depthAndSpecular.x);
+	color.xyz *= min(1, step(1, !(materialFlg.x & isShadowReceiver)) + shadowValue);
+	shadowValue = ShadowMapCalc(In, shadowTexture3, lightViewProj3, depthAndSpecular.x);
+	color.xyz *= min(1, step(1, !(materialFlg.x & isShadowReceiver)) + shadowValue);
+	//color.xyz = shadowTexture2.Sample(shadowSampler, In.uv);
 	return color;
 }
 

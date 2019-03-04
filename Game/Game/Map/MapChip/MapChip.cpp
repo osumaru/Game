@@ -28,8 +28,9 @@ void MapChip::Init(const SMapChipInfo& info, CAnimation* anim)
 	m_rotation = info.m_rotation;
 	m_scale = { 1.0f, 1.0f, 1.0f };
 
-	m_skinModel.SetIsShadowReceiver(true);
+	m_skinModel.SetIsShadowCaster(true);
 	this->SetIsActive(true);
+
 }
 
 void MapChip::SetIterator(Map* map, std::list<MapChip*>::iterator iterator, int areaX, int areaY)

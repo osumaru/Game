@@ -15,7 +15,7 @@ void CMotionBlur::Init()
 	DWORD indexBufferLayout[4] = { 0, 2, 1, 3 };
 	m_primitive.Create(vertexBufferLayout, sizeof(SVSLayout), 4, indexBufferLayout, 4, CPrimitive::enIndex32, CPrimitive::enTypeTriangleStrip);
 	
-	m_sampler.Init(EnSamplerAddressingMode::enAddressingModeClamp, EnSamplerFilter::enFilterLinear);
+	m_sampler.Init(EnSamplerAddressingMode::enAddressingModeClamp, EnSamplerFilter::enFilterTest);
 }
 
 void CMotionBlur::Update()

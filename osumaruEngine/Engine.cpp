@@ -153,7 +153,7 @@ void CEngine::InitD3D(HINSTANCE& hInst)
 	m_depthState.SetDepthStencilState(m_pDeviceContext, enDepthStencilState3D);
 	m_deferred.Init();
 	m_postEffect.Init(m_pSwapChain);
-	m_shadowMap.Init();
+	m_shadowMap.Init(100.0f);
 	m_pointLightManager.Init();
 	m_spriteBatch = std::make_unique<DirectX::SpriteBatch>(m_pDeviceContext.Get());
 	m_effectEngine.Init();
@@ -169,6 +169,7 @@ void CEngine::SetCamera(const CCamera* camera)
 	m_physicsWorld->SetCamera(camera);
 	m_effectEngine.SetCamera(camera);
 	Sky().SetCamera(camera);
+	m_shadowMap.SetGameCamera(camera);
 }
 void CEngine::GameLoop()
 {

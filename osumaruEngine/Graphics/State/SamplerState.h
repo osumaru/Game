@@ -9,6 +9,7 @@ enum EnSamplerAddressingMode
 enum EnSamplerFilter
 {
 	enFilterLinear,
+	enFilterTest,
 };
 class CSamplerState
 {

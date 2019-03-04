@@ -64,6 +64,7 @@ struct VS_OUTPUT
 struct VS_SHADOW_OUTPUT
 {
 	float4 pos : SV_POSITION;
+	float2 uv : TEXCOORD0;
 	float4 worldPos : TEXCOORD1;
 };
 
@@ -168,12 +169,15 @@ VS_SHADOW_OUTPUT VSShadowMain(VS_INPUT In)
 	Out.pos = mul(worldMat, In.pos);
 	Out.pos = mul(lightViewProj, float4(Out.pos.xyz, 1.0f));
 	Out.worldPos = Out.pos;
+	Out.uv = In.uv;
 	return Out;
 }
 
 VS_SHADOW_OUTPUT VSShadowSkinMain(VS_SKIN_INPUT In)
 {
+	
 	VS_SHADOW_OUTPUT Out;
+	
 	float4x4 pos = 0;
 	float4 blendWeight;
 	float weight = 0.0f;
@@ -186,12 +190,15 @@ VS_SHADOW_OUTPUT VSShadowSkinMain(VS_SKIN_INPUT In)
 	Out.pos = mul(pos, In.pos);
 	Out.pos = mul(lightViewProj, float4(Out.pos.xyz, 1.0f));
 	Out.worldPos = Out.pos;
+	Out.uv = In.uv;
 	return Out;
 }
 
 float4 PSShadowMain(VS_SHADOW_OUTPUT In) : SV_TARGET0
 {
 	float4 Out;
+	float4 albedoColor = colorTexture.Sample(Sampler, In.uv);
+	clip((albedoColor.w - 0.001f) * alphaTestFlg);
 	Out.xyz = In.worldPos.z / In.worldPos.w;
 	Out.w = 1.0f;
 	return Out;

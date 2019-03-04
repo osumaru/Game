@@ -31,6 +31,11 @@ public:
 	//描画関数
 	virtual void Draw()override;
 
+
+	void Hoge()
+	{
+		m_skinModel.SetIsShadowReceiver(true);
+	}
 	/*
 	イテレーターをセット
 	map			自身をデリートするためのインスタンス

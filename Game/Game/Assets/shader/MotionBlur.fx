@@ -33,11 +33,12 @@ float4 PSMain(VS_OUTPUT In) : SV_Target0
 	{
 		float2 fuv = In.uv;
 		fuv += -velocity.xy * i * 0.06f;
-		int3 uv;
-		uv.z = 0;
-		uv.x = fuv.x * 1280;
-		uv.y = fuv.y * 720;
-		color.xyz += mainTexture.Load(uv, int2(0, 0)).xyz;
+		//int3 uv;
+		//uv.z = 0;
+		//uv.x = fuv.x * 1280;
+		//uv.y = fuv.y * 720;
+		//color.xyz += mainTexture.Load(uv, int2(0, 0)).xyz;
+		color.xyz += mainTexture.Sample(clampSampler, fuv).xyz;
 	}
 	color.xyz /= 5.0f;
 	color.w = 1.0f;

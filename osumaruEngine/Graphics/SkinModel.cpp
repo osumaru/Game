@@ -115,7 +115,6 @@ void CSkinModel::Draw(const CMatrix& view, const CMatrix& projection, bool isSha
 	m_cb.Update(&cb);
 	m_materialCB.Update(&m_materialFlg);
 	m_lightCB.Update(&m_light);
-	Engine().GetShadowMap().SetConstantBuffer();
 	Microsoft::WRL::ComPtr<ID3D11Buffer> cbBuffer = m_cb.GetBody();
 	GetDeviceContext()->VSSetConstantBuffers(0, 1, cbBuffer.GetAddressOf());
 	GetDeviceContext()->PSSetConstantBuffers(0, 1, cbBuffer.GetAddressOf());

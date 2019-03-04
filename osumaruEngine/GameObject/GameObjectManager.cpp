@@ -54,6 +54,7 @@ void CGameObjectManager::Execute(CDeferred& deferred, CPostEffect& postEffect)
 				object.gameObject->Updater();
 			}
 		}
+		Engine().GetShadowMap().Update();
 		Engine().GetShadowMap().Draw();
 		//
 

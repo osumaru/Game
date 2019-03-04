@@ -151,6 +151,7 @@ void Map::Init(int stageNum)
 		case enMapTagTerrain:
 			m_ground = New<StaticMapObject>(PRIORITY_GROUND);
 			m_ground->Init(mInfo);
+			m_ground->Hoge();
 			g_pathFinding.GetNavigationMesh().SetSkinModel(&dynamic_cast<StaticMapObject*>(m_ground)->GetSkinModel());
 			break;
 		case enMapTagMesh:
