@@ -4,6 +4,7 @@
 #include "RigidBodyDraw.h"
 #include "../Camera/Camera.h"
 #include "../Timer/GameTime.h"
+#include "NullRigidBodyDraw.h"
 
 CPhysicsWorld::CPhysicsWorld() :
 	m_pCollisionConfig(nullptr),
@@ -36,7 +37,7 @@ void CPhysicsWorld::Init()
 		m_pCollisionConfig.get()
 	));
 	m_pDynamicWorld->setGravity(btVector3(0, -10, 0));
-	m_pRigidBodyDraw.reset(new CRigidBodyDraw);
+	m_pRigidBodyDraw.reset(new NullRigidBodyDraw);
 	m_pRigidBodyDraw->Init();
 	m_pDynamicWorld->setDebugDrawer(m_pRigidBodyDraw.get());
 }
@@ -48,13 +49,11 @@ void CPhysicsWorld::Update()
 
 void CPhysicsWorld::Draw()
 {
-//#ifdef _DEBUG
 	if (m_pCamera != nullptr)
 	{
 		m_pRigidBodyDraw->Draw(m_pCamera->GetViewMatrix(), m_pCamera->GetProjectionMatrix());
 		m_pRigidBodyDraw->Reset();
 	}
-//#endif
 }
 
 void CPhysicsWorld::AddRigidBody(btRigidBody* rb)

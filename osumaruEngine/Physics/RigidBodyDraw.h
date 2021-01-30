@@ -2,6 +2,7 @@
 #pragma once
 #include "../Graphics/Primitive.h"
 #include "../Graphics/Shader.h"
+#include "IRigidBodyDraw.h"
 
 struct SRigidBodyVSLayout
 {
@@ -10,14 +11,14 @@ struct SRigidBodyVSLayout
 };
 //剛体を表示するクラス
 
-class CRigidBodyDraw : public btIDebugDraw
+class CRigidBodyDraw : public IRigidBodyDraw
 {
 public:
 	//コンストラクタ
 	CRigidBodyDraw();
 
 	//デストラクタ
-	~CRigidBodyDraw();
+	~CRigidBodyDraw() override;
 
 	//初期化関数
 	void Init();
@@ -35,33 +36,16 @@ public:
 	viewMatrix			カメラのビュー行列
 	projectionMatrix	カメラの射影行列
 	*/
-	void Draw(CMatrix viewMatrix, CMatrix projectionMatrix);
+	void Draw(CMatrix viewMatrix, CMatrix projectionMatrix)override;
 
-	//よくわかってない
-	void drawContactPoint(const btVector3& PointOnB, const btVector3& normalOnB, btScalar distance, int lifeTime, const btVector3& color) {}
-
-	//よくわかってない
-	void reportErrorWarning(const char* warningString) {}
-
-	//よくわかってない
-	void draw3dText(const btVector3& location, const char* textString) {}
-
-	//よくわかってない
-	void setDebugMode(int debugMode) {}
 
 	//カウントをリセット
-	void Reset()
+	void Reset() override
 	{
 		ZeroMemory(m_vertexBuffer, sizeof(m_vertexBuffer));
 		ZeroMemory(m_indexBuffer, sizeof(m_indexBuffer));
 		//毎フレームインデックスバッファと頂点バッファをリセット
 		m_count = 0;
-	}
-
-	//よくわかってない
-	int getDebugMode() const
-	{
-		return 0;
 	}
 
 private:

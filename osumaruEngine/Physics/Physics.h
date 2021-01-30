@@ -2,6 +2,7 @@
 #pragma once
 class CRigidBody;
 class CRigidBodyDraw;
+class IRigidBodyDraw;
 class CCamera;
 
 /*
@@ -14,7 +15,7 @@ class CPhysicsWorld : Uncopyable
 	std::unique_ptr<btBroadphaseInterface>					m_pOverlappingPairCache;		//ブロードフェーズ。
 	std::unique_ptr<btSequentialImpulseConstraintSolver>	m_pConstraintSolver;			//コンストレイントソルバー。拘束条件の解決処理
 	std::unique_ptr<btDiscreteDynamicsWorld>				m_pDynamicWorld;				//ワールド
-	std::unique_ptr<CRigidBodyDraw>							m_pRigidBodyDraw;
+	std::unique_ptr<IRigidBodyDraw>							m_pRigidBodyDraw;
 	const CCamera*												m_pCamera;
 public:
 	//コンストラクタ
@@ -86,12 +87,10 @@ public:
 		const btTransform& worldTrans,
 		const btCollisionShape* colShape)
 	{
-#ifdef _DEBUG
 		m_pDynamicWorld->debugDrawObject(worldTrans, colShape, { 0.0f, 0.0f, 0.0f });
-#endif
 	}
 
-	CRigidBodyDraw& GetRigidBodyDraw()
+	IRigidBodyDraw& GetRigidBodyDraw()
 	{
 		return *m_pRigidBodyDraw;
 	}

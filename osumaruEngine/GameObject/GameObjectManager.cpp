@@ -69,7 +69,7 @@ void CGameObjectManager::Execute(CDeferred& deferred, CPostEffect& postEffect)
 				object.gameObject->Drawer();
 			}
 		}
-		//PhysicsWorld().Draw();
+		PhysicsWorld().Draw();
 		deferred.Draw();
 		for (GameObjectList& objList : m_objectVector)
 		{
