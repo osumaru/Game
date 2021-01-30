@@ -28,13 +28,13 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
@@ -161,6 +161,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Camera\CameraCollisionSolver.cpp" />
+    <ClCompile Include="Command\Command.cpp" />
     <ClCompile Include="Item\EquipList.cpp" />
     <ClCompile Include="Item\ItemList.cpp" />
     <ClCompile Include="Map\MapChip\Castle.cpp" />
@@ -279,6 +280,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera\CameraCollisionSolver.h" />
+    <ClInclude Include="Command\Command.h" />
     <ClInclude Include="Item\EquipList.h" />
     <ClInclude Include="Item\ItemList.h" />
     <ClInclude Include="Map\MapChip\Castle.h" />
@@ -400,99 +402,9 @@
     <ClInclude Include="UI\WeekPoint\WeekPoint.h" />
   </ItemGroup>
   <ItemGroup>
-    <MeshContentTask Include="Assets\modelData\Arrow.fbx" />
-    <MeshContentTask Include="Assets\modelData\Barrel.FBX" />
-    <MeshContentTask Include="Assets\modelData\Biulding.FBX" />
-    <MeshContentTask Include="Assets\modelData\BOX.FBX" />
-    <MeshContentTask Include="Assets\modelData\Brock.FBX" />
-    <MeshContentTask Include="Assets\modelData\Building1.FBX" />
-    <MeshContentTask Include="Assets\modelData\Building2.fbx" />
-    <MeshContentTask Include="Assets\modelData\Building3.fbx" />
-    <MeshContentTask Include="Assets\modelData\Building4.FBX" />
-    <MeshContentTask Include="Assets\modelData\Building5.FBX" />
-    <MeshContentTask Include="Assets\modelData\build\Build1.FBX" />
-    <MeshContentTask Include="Assets\modelData\build\CastleDoor3.FBX" />
-    <MeshContentTask Include="Assets\modelData\build\Castle_Wall1.FBX" />
-    <MeshContentTask Include="Assets\modelData\build\Castle_Wall2.FBX" />
-    <MeshContentTask Include="Assets\modelData\build\Castle_Wall3.FBX" />
-    <MeshContentTask Include="Assets\modelData\build\Church.FBX" />
-    <MeshContentTask Include="Assets\modelData\build\Gate.FBX" />
-    <MeshContentTask Include="Assets\modelData\build\Rock2.FBX" />
-    <MeshContentTask Include="Assets\modelData\build\tile.FBX" />
-    <MeshContentTask Include="Assets\modelData\Castle.FBX" />
-    <MeshContentTask Include="Assets\modelData\Castle1.FBX" />
-    <MeshContentTask Include="Assets\modelData\Castle2.FBX" />
-    <MeshContentTask Include="Assets\modelData\Castle3.FBX" />
-    <MeshContentTask Include="Assets\modelData\Castle4.FBX" />
-    <MeshContentTask Include="Assets\modelData\Castle5.FBX" />
-    <MeshContentTask Include="Assets\modelData\CastleDoor.FBX" />
-    <MeshContentTask Include="Assets\modelData\CastleDoor2.FBX" />
-    <MeshContentTask Include="Assets\modelData\CastleFloor.FBX" />
-    <MeshContentTask Include="Assets\modelData\Chest.FBX" />
-    <MeshContentTask Include="Assets\modelData\Coin.FBX" />
-    <MeshContentTask Include="Assets\modelData\Grass.FBX" />
-    <MeshContentTask Include="Assets\modelData\Heart.fbx" />
-    <MeshContentTask Include="Assets\modelData\House.FBX" />
-    <MeshContentTask Include="Assets\modelData\Interior\TresureBox.FBX" />
-    <MeshContentTask Include="Assets\modelData\LargeSword.fbx" />
-    <MeshContentTask Include="Assets\modelData\LongBow.FBX" />
-    <MeshContentTask Include="Assets\modelData\map2.FBX" />
-    <MeshContentTask Include="Assets\modelData\map3.FBX" />
-    <MeshContentTask Include="Assets\modelData\Map4.FBX" />
-    <MeshContentTask Include="Assets\modelData\Map\Sea.FBX" />
-    <MeshContentTask Include="Assets\modelData\Maw.fbx" />
-    <MeshContentTask Include="Assets\modelData\Money.fbx" />
-    <MeshContentTask Include="Assets\modelData\Ninja.FBX" />
-    <MeshContentTask Include="Assets\modelData\Npc.fbx" />
-    <MeshContentTask Include="Assets\modelData\NYApartmentA.fbx" />
-    <MeshContentTask Include="Assets\modelData\NYBuilding_A.fbx" />
-    <MeshContentTask Include="Assets\modelData\Player.fbx" />
-    <MeshContentTask Include="Assets\modelData\Potion.FBX" />
-    <MeshContentTask Include="Assets\modelData\Rock.FBX" />
-    <MeshContentTask Include="Assets\modelData\Samurai.FBX" />
-    <MeshContentTask Include="Assets\modelData\Shopgirl.fbx" />
-    <MeshContentTask Include="Assets\modelData\ShopModel\House1.FBX" />
-    <MeshContentTask Include="Assets\modelData\ShopModel\roten.FBX" />
-    <MeshContentTask Include="Assets\modelData\ShopModel\roten2.FBX" />
-    <MeshContentTask Include="Assets\modelData\ShopModel\roten3.FBX" />
-    <MeshContentTask Include="Assets\modelData\Skyball_WithCap.FBX" />
-    <MeshContentTask Include="Assets\modelData\Skyball_WithoutCap.FBX" />
-    <MeshContentTask Include="Assets\modelData\Sword.fbx" />
-    <MeshContentTask Include="Assets\modelData\TestBox1.FBX" />
-    <MeshContentTask Include="Assets\modelData\TestBox2.FBX" />
-    <MeshContentTask Include="Assets\modelData\TestBox3.FBX" />
-    <MeshContentTask Include="Assets\modelData\TestBox4.FBX" />
-    <MeshContentTask Include="Assets\modelData\TestBox5.FBX" />
-    <MeshContentTask Include="Assets\modelData\testChamferBox.FBX" />
-    <MeshContentTask Include="Assets\modelData\testGround.FBX" />
-    <MeshContentTask Include="Assets\modelData\testRectangle.FBX" />
-    <MeshContentTask Include="Assets\modelData\Toge.FBX" />
-    <MeshContentTask Include="Assets\modelData\TownGround.FBX" />
-    <MeshContentTask Include="Assets\modelData\TownHouse.fbx" />
-    <MeshContentTask Include="Assets\modelData\TownHouse1.fbx" />
-    <MeshContentTask Include="Assets\modelData\tree\Stone1.FBX" />
-    <MeshContentTask Include="Assets\modelData\tree\Stone2.FBX" />
-    <MeshContentTask Include="Assets\modelData\tree\Stone3.FBX" />
-    <MeshContentTask Include="Assets\modelData\tree\Stone4.FBX" />
-    <MeshContentTask Include="Assets\modelData\tree\Stone5.FBX" />
-    <MeshContentTask Include="Assets\modelData\tree\tree1.FBX" />
-    <MeshContentTask Include="Assets\modelData\tree\Tree2.FBX" />
-    <MeshContentTask Include="Assets\modelData\tree\Tree3.FBX" />
-    <MeshContentTask Include="Assets\modelData\tree\WorldMap1.FBX" />
-    <MeshContentTask Include="Assets\modelData\tree\WorldMap2.FBX" />
-    <MeshContentTask Include="Assets\modelData\TwinSword.fbx" />
-    <MeshContentTask Include="Assets\modelData\U2.FBX" />
-    <MeshContentTask Include="Assets\modelData\umi.FBX" />
-    <MeshContentTask Include="Assets\modelData\Unitychan.FBX" />
-    <MeshContentTask Include="Assets\modelData\Unitychan2.fbx" />
-    <MeshContentTask Include="Assets\modelData\Unitychan3.FBX" />
-    <MeshContentTask Include="Assets\modelData\Warrok.fbx" />
-    <MeshContentTask Include="Assets\modelData\Wave.FBX" />
-    <MeshContentTask Include="Assets\modelData\WireTest.FBX" />
-    <MeshContentTask Include="Assets\modelData\Yasikia.FBX" />
-    <MeshContentTask Include="Assets\modelData\Yasikib.FBX" />
-    <MeshContentTask Include="Assets\modelData\Yasikic.FBX" />
-    <MeshContentTask Include="Assets\modelData\Zombi.FBX" />
+    <MeshContentTask Include="Assets\modelData\Building_a.FBX" />
+    <MeshContentTask Include="Assets\modelData\Building_b.FBX" />
+    <MeshContentTask Include="Assets\modelData\Building_e.FBX" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

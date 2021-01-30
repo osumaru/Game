@@ -29,11 +29,7 @@ std::vector<std::vector<SMapChipInfo>> mapChipInfo =
 {
 	{
 		//本番用の世界のマップ
-		//#include "WorldMap.h"
-		#include "ShopTest.h"
-		//#include "mm.h"
-		//#include "BossStage.h"
-		//#include "Boss.h"
+		#include "test2.h"
 	},
 	{
 		#include "Boss.h"
@@ -82,6 +78,9 @@ void Map::Init(int stageNum)
 		CBossBuilding* bossBuilding = nullptr;
 		CSea* sea = nullptr;
 		CTitleEnemy* titleEnemy = nullptr;
+		CVector3 test(0.0f, -1.0f, 0.0f);
+		lightDir = CVector3(0.0f, -1.0f, 0.0f);
+		lightDir.Normalize();
 		switch (mInfo.m_tag)
 		{
 		case enMapTagMapChip:
@@ -151,7 +150,6 @@ void Map::Init(int stageNum)
 		case enMapTagTerrain:
 			m_ground = New<StaticMapObject>(PRIORITY_GROUND);
 			m_ground->Init(mInfo);
-			m_ground->Hoge();
 			g_pathFinding.GetNavigationMesh().SetSkinModel(&dynamic_cast<StaticMapObject*>(m_ground)->GetSkinModel());
 			break;
 		case enMapTagMesh:
@@ -162,6 +160,15 @@ void Map::Init(int stageNum)
 			break;
 		case enMapTagObstacle:
 			mapChip = New<CObstacleMapObject>(PRIORITY_BILLDING);
+			break;
+		case enMapTagDirectionalLight:
+			lightDir = CVector3::Front;
+			mInfo.m_rotation.Multiply(lightDir);
+			lightDir.Normalize();
+			Light().SetDiffuseLightDir(0, lightDir);
+			lightDir = CVector3(0.5f, -1.0f, 0.8f);
+			lightDir.Normalize();
+			Engine().GetShadowMap().SetLightCameraTarget(lightDir);
 			break;
 		default:
 			mapChip = New<StaticMapObject>(PRIORITY_MAPCHIP);
@@ -180,17 +187,22 @@ void Map::Init(int stageNum)
 			int areaY = min(max((int)areaPos.z, 0), AREA_PARTITION_NUM - 1);
 
 			m_mapChips[areaX][areaY].push_back(mapChip);
-
+			
 			//マップチップに自身のイテレーターとマップのインスタンスを渡す(削除の時に使う)
 			std::list<MapChip*>::iterator iterator = m_mapChips[areaX][areaY].end();
 			iterator--;
 			mapChip->SetIterator(this, iterator, areaX, areaY);
+			mapChip->SetShadowCaster(mInfo.m_isShadowCaster);
+			mapChip->SetShadowReceiver(mInfo.m_isShadowReceiver);
+			
 		}
 	}
 
 	Add(&Sky(), PRIORITY_SKY);
 	g_pathFinding.BuildNodes();
-	
+
+	lightDir = CVector3(0.0f, -1.0f, 1.0f);
+	lightDir.Normalize();
 }
 
 
@@ -214,7 +226,7 @@ void Map::Update()
 			{
 				for (auto& mapChip : m_mapChips[i][j])
 				{
-					mapChip->SetIsActiveUpdate(false);
+					//mapChip->SetIsActiveUpdate(true);
 				}
 			}
 		}

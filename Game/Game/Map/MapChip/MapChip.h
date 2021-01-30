@@ -31,10 +31,14 @@ public:
 	//描画関数
 	virtual void Draw()override;
 
-
-	void Hoge()
+	void SetShadowCaster(bool isShadowCaster)
 	{
-		m_skinModel.SetIsShadowReceiver(true);
+		m_skinModel.SetIsShadowCaster(isShadowCaster);
+	}
+
+	void SetShadowReceiver(bool isShadowReceiver)
+	{
+		m_skinModel.SetIsShadowReceiver(isShadowReceiver);
 	}
 	/*
 	イテレーターをセット

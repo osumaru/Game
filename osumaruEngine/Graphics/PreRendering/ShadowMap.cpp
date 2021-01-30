@@ -52,6 +52,8 @@ void CShadowMap::Update()
 	CVector3 lightCameraRight;
 	lightCameraRight.Cross(lightCameraUp, lightCameraForward);
 	lightCameraRight.Normalize();
+	lightCameraUp.Cross(lightCameraForward, lightCameraRight);
+	lightCameraUp.Normalize();
 	CMatrix lightCameraRot;
 	lightCameraRot.m[0][0] = lightCameraRight.x;
 	lightCameraRot.m[0][1] = lightCameraRight.y;
@@ -72,7 +74,7 @@ void CShadowMap::Update()
 	{
 		10.0f,
 		40.0f,
-		150.0f
+		300.0f
 	};
 	//メインカメラの前方向と上方向と右方向を求める
 	CVector3 cameraForward = m_pCamera->GetTarget() - m_pCamera->GetPosition();
@@ -112,7 +114,10 @@ void CShadowMap::Update()
 		aabbVertex[6] = cameraCenter - cameraUpFar + cameraRightFar;
 		aabbVertex[7] = cameraCenter - cameraUpFar - cameraRightFar;
 		CMatrix lightView = lightCameraRot;
-		lightPos.y += m_lightHeight;
+		CVector3 lightPosDir = m_target;
+		lightPosDir.Normalize();
+		lightPos -= lightPosDir * m_lightHeight;
+		//lightPos.y += m_lightHeight;
 		lightView.m[3][0] = lightPos.x;
 		lightView.m[3][1] = lightPos.y;
 		lightView.m[3][2] = lightPos.z;
@@ -128,7 +133,7 @@ void CShadowMap::Update()
 			aabbMin.Min(aabbVertex[i]);
 		}
 		CVector3 lightTarget = lightPos + lightCameraForward;
-		float w = aabbMax.x - aabbMin.x + 50;//ちょっと太らせる
+		float w = aabbMax.x - aabbMin.x;//ちょっと太らせる
 		float h = aabbMax.y - aabbMin.y;
 		m_viewMatrix[i].MakeLookAt(lightPos, lightTarget, lightCameraUp);
 		m_projectionMatrix[i].MakeOrthoProjectionMatrix(w, h, 10.0f, 1000.0f);

@@ -33,6 +33,7 @@ enum EnMapChipTag
 	enMapTagObstacle,
 	enMapTagBossObj,
 	enMapTagTitleEnemy,
+	enMapTagDirectionalLight,
 	enMapTagNum,
 };
 
@@ -42,6 +43,8 @@ struct SMapChipInfo
 	CVector3		m_position;
 	CQuaternion		m_rotation;
 	EnMapChipTag	m_tag;
+	bool			m_isShadowCaster;
+	bool			m_isShadowReceiver;
 	int				m_level = 0;
 	int				m_dropType = 0;
 };
@@ -143,4 +146,6 @@ private:
 	//std::list<CTreasureChest*>	m_treasureList;			//•ó” ƒŠƒXƒg`
 	CShopManager*				m_shopManager;
 	float						m_partitionRange;
+	CVector3				lightDir = CVector3::Zero;
+	float time = 0.0f;
 };

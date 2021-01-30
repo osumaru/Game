@@ -79,7 +79,7 @@ VS_OUTPUT VSMain(VS_INPUT In)
 }
 
 
-float4 ShadowMapCalc(VS_OUTPUT In, Texture2D<float4> shadowTexture, float4x4 lightViewProj,  float maindepth)
+int ShadowMapCalc(VS_OUTPUT In, Texture2D<float4> shadowTexture, float4x4 lightViewProj,  float maindepth)
 {
 	float4 shadowMapPos;
 	shadowMapPos.z = maindepth;
@@ -105,7 +105,7 @@ float4 ShadowMapCalc(VS_OUTPUT In, Texture2D<float4> shadowTexture, float4x4 lig
 		&&	shadowMapPos.y <= 1.0f && 0.0f <= shadowMapPos.y)
 	{
 		float d = depth - 0.01 - shadowDepth;
-		shadowValue *= step(depth, shadowDepth + 0.0001f);
+		shadowValue *= step(depth, shadowDepth + 0.00001f);
 	}
 	return shadowValue;
 }
@@ -162,11 +162,6 @@ float4 PSMain(VS_OUTPUT In) : SV_TARGET0
 	shadowMapPos = mul(gameView, shadowMapPos);
 	shadowMapPos /= shadowMapPos.w;
 	float3 worldPos = shadowMapPos.xyz;
-	shadowMapPos = mul(lightViewProj1, shadowMapPos);
-	shadowMapPos /= shadowMapPos.w;
-	shadowMapPos.xy += 1.0f;
-	shadowMapPos.xy /= 2.0f;
-	shadowMapPos.y = 1.0f - shadowMapPos.y;
 	for(int i = 0;i < 4;i++)
 	{
 		float3 lineSight = worldPos - gameCameraPos.xyz;
@@ -184,7 +179,9 @@ float4 PSMain(VS_OUTPUT In) : SV_TARGET0
 	color.xyz *= min(1, step(1, !(materialFlg.x & isShadowReceiver)) + shadowValue);
 	shadowValue = ShadowMapCalc(In, shadowTexture3, lightViewProj3, depthAndSpecular.x);
 	color.xyz *= min(1, step(1, !(materialFlg.x & isShadowReceiver)) + shadowValue);
-	//color.xyz = shadowTexture2.Sample(shadowSampler, In.uv);
+	//color.xyz  = ShadowMapCalcTest(In, shadowTexture1, lightViewProj1, depthAndSpecular.x).xyz;
+	
+	//color.xyz = shadowTexture2.Sample(shadowSampler, In.uv).x;
 	return color;
 }
 
