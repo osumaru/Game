@@ -2,9 +2,12 @@
 #include "PlayerJump.h"
 #include "../Player.h"
 #include "../../Camera/GameCamera.h"
+#include "../../Command/Command.h"
 
 void CPlayerJump::Init()
 {
+	IPlayerState::Init();
+	m_isStateTransition = true;
 	const float JumpVolume = 0.3f;
 	CSoundSource* JumpSound = New<CSoundSource>(0);
 	JumpSound->Init("Assets/sound/Battle/landing.wav");
@@ -13,7 +16,7 @@ void CPlayerJump::Init()
 	CVector3 moveSpeed = m_pPlayerGetter->GetMoveSpeed();
 	moveSpeed.y += 20.0f;
 	m_pPlayerGetter->SetMoveSpeed(moveSpeed);
-	if (m_pPlayer->GetStateMachine().GetState() == CPlayerState::EnPlayerState::enPlayerStateRunJump)
+	if (m_pPlayer->GetStateMachine().GetPreState() == CPlayerState::EnPlayerState::enPlayerStateRun)
 	{
 		m_pPlayerGetter->GetAnimation().Play(enPlayerAnimationRunJump, 0.0f);
 	}
@@ -70,21 +73,21 @@ void CPlayerJump::Update()
 			//着地時移動していればランステートに、動いていなければスタンドステートに
 			if (m_pPlayer->GetIsStateCondition(CPlayerState::enPlayerStateRun))
 			{
-				m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateRun);
+				m_pPlayer->SetCommand(new RunCommand(m_pPlayer));
 			}
 			else
 			{
-				m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateStand);
+				m_pPlayer->SetCommand(new StandCommand(m_pPlayer));
 			}
 		}
 	}
 	else if (m_pPlayer->GetIsStateCondition(CPlayerState::enPlayerStateDamage))
 	{
-		m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateDamage);
+		m_pPlayer->SetCommand(new DamageCommand(m_pPlayer));
 	}
 	else if (m_pPlayer->GetIsStateCondition(CPlayerState::enPlayerStateWireMove))
 	{
 		//ワイヤー移動できるなら遷移
-		m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateWireMove);
+		m_pPlayer->SetCommand(new WireMoveCommand(m_pPlayer));
 	}
 }

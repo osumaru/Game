@@ -7,9 +7,9 @@
 #include "../Item/IItem.h"
 #include "../UI/Menu/ItemInventory.h"
 #include "../UI/Menu/EquipInventory.h"
-//#include "../Enemy/Maw.h"
 #include "Weapon/Bow.h"
 #include "../Enemy/PathFinding/PathFinding.h"
+#include "../Command/Command.h"
 
 CPlayer *CPlayer::m_player = NULL;
 CItemList CPlayer::m_itemList;
@@ -213,7 +213,7 @@ void CPlayer::Init(CVector3 position)
 	m_PlayerStateMachine.SetPlayer(this, &m_playerGetter);
 	m_PlayerStateMachine.Init();
 	m_skinmodel.SetIsShadowCaster(true);
-	//m_skinmodel.SetIsShadowReceiver(true);
+	m_skinmodel.SetIsShadowReceiver(false);
 	m_skinmodel.SetSpecularPower(0.1f);
 	m_weaponManager.Init(this);
 	m_wireAction.Init(this);
@@ -260,7 +260,6 @@ void CPlayer::Update()
 	shadowPos.x = m_hipBoneMat->m[3][0];
 	shadowPos.y = m_position.y;
 	shadowPos.z = m_hipBoneMat->m[3][2];
-	Engine().GetShadowMap().SetLightCameraTarget(CVector3::Down);
 	const CCamera& camera = GetGameCamera().GetCamera();
 	CVector3 lightCameraUp = camera.GetTarget() - camera.GetPosition();
 	lightCameraUp.y = 0.0f;
@@ -269,7 +268,7 @@ void CPlayer::Update()
 	m_wireAction.Update();
 	m_animation.Update(GameTime().GetDeltaFrameTime());
 	m_skinmodel.Update(m_position, m_rotation, { 1.0f, 1.0f, 1.0f }, true);
-	m_PlayerStateMachine.Update();
+	bool isStateTransition = m_PlayerStateMachine.Update();
 	m_animation.Update(0.0f);
 	Rotation(m_characterController.GetMoveSpeed());
 
@@ -287,6 +286,21 @@ void CPlayer::Update()
 	m_characterController.SetPosition(oldRigidPos);
 	m_isAction = true;
 	Sky().SetPosition(m_position);
+	if (isStateTransition && m_defferdCommand)
+	{
+		m_defferdCommand->Execute();
+		delete m_defferdCommand;
+		m_defferdCommand = nullptr;
+	}
+	else if (m_command != nullptr)
+	{
+
+		m_command->Execute();
+		delete m_command;
+		m_command = nullptr;
+	}
+
+
 }
 
 //描画処理
@@ -489,9 +503,6 @@ bool CPlayer::GetIsStateCondition(CPlayerState::EnPlayerState state)
 		return m_isAction && m_status.Health <= 0;
 
 	case CPlayerState::enPlayerStateJump:		//Aボタンを押しているか
-		return m_isAction && Pad().IsTriggerButton(enButtonA);
-
-	case CPlayerState::enPlayerStateRunJump:	//Aボタンを押しているか
 		return m_isAction && Pad().IsTriggerButton(enButtonA);
 
 	case CPlayerState::enPlayerStateWireMove:	//ワイヤーで移動するフラグが立っているか

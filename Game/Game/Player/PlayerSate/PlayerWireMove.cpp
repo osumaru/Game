@@ -11,6 +11,8 @@ CPlayerWireMove::CPlayerWireMove()
 
 void CPlayerWireMove::Init()
 {
+	IPlayerState::Init();
+	m_isStateTransition = true;
 	m_pPlayerGetter->GetAnimation().Play(enPlayerAnimationWireThrow, 0.25f);
 	m_movePosition = m_pPlayer->GetWireAction().GetWirePosition();	
 	CVector3 playerPos = GetPlayer().GetPosition();

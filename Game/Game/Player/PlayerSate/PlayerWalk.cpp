@@ -2,10 +2,12 @@
 #include "PlayerWalk.h"
 #include "../Player.h"
 #include "../../Camera/GameCamera.h"
-
+#include "../../Command/Command.h"
 
 void CPlayerWalk::Init()
 {
+	IPlayerState::Init();
+	m_isStateTransition = true;
 	//歩きアニメーションの再生
 	m_pPlayerGetter->GetAnimation().Play(enPlayerAnimationWalk, 0.2f);
 }
@@ -32,18 +34,18 @@ void CPlayerWalk::Update()
 	//移動の入力がなければ待機アニメーションに遷移
 	if (Pad().GetLeftStickX() == 0 && Pad().GetLeftStickY() == 0)
 	{
-		m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateStand);
+		m_pPlayer->SetCommand(new StandCommand(m_pPlayer));
 	}
 
 	else if (m_pPlayer->GetIsStateCondition(CPlayerState::enPlayerStateJump))
 	{
-		m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateJump);
+		m_pPlayer->SetCommand(new JumpCommand(m_pPlayer));
 	}
 
 	//一定以上の速さならあ知りアニメーションに遷移
 	else if (fabs(m_pPlayerGetter->GetMoveSpeed().Length()) >= 1.3f)
 	{
-		m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateRun);
+		m_pPlayer->SetCommand(new RunCommand(m_pPlayer));
 	}
 
 }

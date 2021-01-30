@@ -7,6 +7,7 @@
 #include "../../Scene/SceneManager.h"
 #include "../../Enemy/Boss/Maw.h"
 #include "../../Camera/GameCamera.h"
+#include "../../Command/Command.h"
 
 CPlayerAttack::CPlayerAttack()
 {
@@ -15,6 +16,7 @@ CPlayerAttack::CPlayerAttack()
 
 void CPlayerAttack::Init()
 {
+	IPlayerState::Init();
 	m_attackAnimation = GetPlayer().GetWeaponManager().GetWeapon()->GetAttackAnimation();
 	m_combineAnimation = GetPlayer().GetWeaponManager().GetWeapon()->GetCombineAnimation();
 	m_stanAttack = GetPlayer().GetWeaponManager().GetWeapon()->GetStanAttack();
@@ -55,7 +57,6 @@ void CPlayerAttack::Init()
 	CVector3 bonePos = { m_pBoneMat->m[3][0], m_pBoneMat->m[3][1], m_pBoneMat->m[3][2] };
 	m_pPlayer->GetWeaponManager().SetIsAttack(true);
 	m_pPlayer->GetWeaponManager().GetWeapon()->WeaponTraceDrawStart();
-	m_isPreDodge = false;
 	m_rotationDirectionVector = CVector3::Zero;
 }
 
@@ -72,12 +73,12 @@ void CPlayerAttack::Update()
 	m_pPlayer->GetWeaponManager().GetWeapon(m_pPlayer->GetWeaponManager().GetCurrentState())->EnemyAttack();
 
 	if (m_pPlayer->GetIsStateCondition(CPlayerState::enPlayerStateAvoidance)) {
-		m_isPreDodge = true;
+		m_pPlayer->SetDefferdCommand(new AvoidanceCommand(&GetPlayer()));
 	}
 	else if(m_pPlayer->GetIsStateCondition(CPlayerState::enPlayerStateSky))
 	{
-		m_pPlayer->GetWeaponManager().SetIsAttack(false);
-		GetPlayer().GetStateMachine().SetState(CPlayerState::enPlayerStateSky);
+		m_pPlayer->GetWeaponManager().SetIsAttack(false); 
+		m_pPlayer->SetCommand(new SkyCommand(&GetPlayer()));
 		return;
 	}
 	m_pPlayer->SetStanAttack(m_stanAttack[m_attackCount]);
@@ -97,7 +98,7 @@ void CPlayerAttack::Update()
 		m_pPlayerGetter->SetPosition(position);
 		m_pPlayer->GetWeaponManager().SetIsAttackCheck(false);
 		m_pPlayer->GetWeaponManager().SetIsAttack(false);
-		m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateDamage);
+		m_pPlayer->SetCommand(new DamageCommand(&GetPlayer()));
 		return;
 	}
 	else if(m_pPlayer->GetIsStateCondition(CPlayerState::enPlayerStateStun))
@@ -111,7 +112,7 @@ void CPlayerAttack::Update()
 		m_pPlayerGetter->SetPosition(position);
 		m_pPlayer->GetWeaponManager().SetIsAttackCheck(false);
 		m_pPlayer->GetWeaponManager().SetIsAttack(false);
-		m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateStun);
+		m_pPlayer->SetCommand(new StunCommand(&GetPlayer()));
 		return;
 	}
 	else if (m_pPlayer->GetIsStateCondition(CPlayerState::enPlayerStateDied))
@@ -125,13 +126,14 @@ void CPlayerAttack::Update()
 		m_pPlayerGetter->SetPosition(position);
 		m_pPlayer->GetWeaponManager().SetIsAttackCheck(false);
 		m_pPlayer->GetWeaponManager().SetIsAttack(false);
-		m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateDied);
+		m_pPlayer->SetCommand(new DiedCommand(m_pPlayer));
 		return;
 	}
 
 	//攻撃アニメーションが終わった時の処理
-	if (!m_pPlayerGetter->GetAnimation().IsPlay())
+	if (!m_isStateTransition && !m_pPlayerGetter->GetAnimation().IsPlay())
 	{
+		m_isStateTransition = true;
 		CVector3 areaPos = m_pPlayer->GetPosition();
 		Map* map = GetSceneManager().GetMap();
 		int areaPosX = map->GetAreaPosX(areaPos);
@@ -174,6 +176,7 @@ void CPlayerAttack::Update()
 			m_pPlayerGetter->GetAnimation().Update(0.0f);
 			m_pPlayer->GetWeaponManager().GetWeapon()->WeaponTraceDrawStart();
 
+			m_isStateTransition = false;
 			Rotation();
 		}
 		else
@@ -188,18 +191,14 @@ void CPlayerAttack::Update()
 			m_pPlayerGetter->GetAnimation().Update(0.0f);
 			m_pPlayerGetter->SkinModelUpdate();
 			m_pPlayer->GetWeaponManager().SetDrawingWeapon(true);
-			if (m_isPreDodge)
-			{
-				m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateAvoidance);
-			}
-			else if (m_pPlayer->GetIsStateCondition(CPlayerState::enPlayerStateRun))
+			if (m_pPlayer->GetIsStateCondition(CPlayerState::enPlayerStateRun))
 			{
 				//走りアニメーション
-				m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateRun);
+				m_pPlayer->SetCommand(new RunCommand(&GetPlayer()));
 			}
 			else
 			{
-				m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateStand);
+				m_pPlayer->SetCommand(new StandCommand(&GetPlayer()));
 
 			}
 		}

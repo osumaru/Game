@@ -1,8 +1,12 @@
 #include "PlayerStun.h"
 #include "../Player.h"
+#include "../../Command/Command.h"
+
 
 void CPlayerStun::Init()
 {
+	IPlayerState::Init();
+	m_isStateTransition = true;
 	m_timer = 0.0f;
 	m_pPlayerGetter->SetIsInvincible(true);
 	//m_pPlayerGetter->GetAnimation().Play(enPlayerAnimationStun);
@@ -31,7 +35,7 @@ void CPlayerStun::Update()
 		{
 			m_pPlayerGetter->StanDamageStateReset();
 			m_pPlayerGetter->SetIsInvincible(false);
-			m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateStand);
+			m_pPlayer->SetCommand(new StandCommand(m_pPlayer));
 		}
 	}
 

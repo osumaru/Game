@@ -5,9 +5,12 @@
 #include "../../UI/WeaponSelect/WeaponSelect.h"
 #include "../../Scene/SceneManager.h"
 #include "../Weapon/WeaponManager.h"
+#include "../../Command/Command.h"
 
 void CPlayerStand::Init()
 {
+	IPlayerState::Init();
+	m_isStateTransition = true;
 	//待機アニメーションの再生
 	m_pPlayerGetter->GetAnimation().Play(enPlayerAnimationStand, 0.5f);
 	if (m_pPlayer->GetWeaponManager().GetDrawingWeapon())
@@ -31,49 +34,50 @@ void CPlayerStand::Update()
 	//死亡した場合の処理
 	if (m_pPlayer->GetIsStateCondition(CPlayerState::enPlayerStateDied))
 	{
-		m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateDied);
+		m_pPlayer->SetCommand(new DiedCommand(m_pPlayer));
+
 	}
 	//ダメージを受けた場合の処理
 	else if (m_pPlayer->GetIsStateCondition(CPlayerState::enPlayerStateDamage))
 	{
-		m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateDamage);
+		m_pPlayer->SetCommand(new DamageCommand(m_pPlayer));
 	}
 	else if (m_pPlayer->GetIsStateCondition(CPlayerState::enPlayerStateStun))
 	{
-		m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateStun);
+		m_pPlayer->SetCommand(new StunCommand(m_pPlayer));
 	}
 	//攻撃をした時の処理
 	else if (m_pPlayer->GetIsStateCondition(CPlayerState::enPlayerStateArrowAttack))
 	{
-		m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateArrowAttack);
+		m_pPlayer->SetCommand(new ArrowAttackCommand(m_pPlayer));
 	}
 	//攻撃をした時の処理
 	else if (m_pPlayer->GetIsStateCondition(CPlayerState::enPlayerStateAttack))
 	{
-		m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateAttack);
+		m_pPlayer->SetCommand(new AttackCommand(m_pPlayer));
 	}
 	else if (m_pPlayer->GetIsStateCondition(CPlayerState::enPlayerStateJump))
 	{
-		GetPlayer().GetStateMachine().SetState(CPlayerState::enPlayerStateJump);
+		m_pPlayer->SetCommand(new JumpCommand(m_pPlayer));
 	}
 	else if (m_pPlayer->GetIsStateCondition(CPlayerState::enPlayerStateAvoidance))
 	{
-		GetPlayer().GetStateMachine().SetState(CPlayerState::enPlayerStateAvoidance);
+		m_pPlayer->SetCommand(new AvoidanceCommand(m_pPlayer));
 	}
 	else if (m_pPlayer->GetIsStateCondition(CPlayerState::enPlayerStateWireMove)) 
 	{
 		//ワイヤー移動できるなら遷移
-		GetPlayer().GetStateMachine().SetState(CPlayerState::enPlayerStateWireMove);
+		m_pPlayer->SetCommand(new WireMoveCommand(m_pPlayer));
 	}
 	//移動の入力があるなら歩きアニメーションに遷移
 	else if (m_pPlayer->GetIsStateCondition(CPlayerState::enPlayerStateRun))
 	{
 		//GetPlayer().GetStateMachine().SetState(CPlayerState::enPlayerStateWalk);
-		GetPlayer().GetStateMachine().SetState(CPlayerState::enPlayerStateRun);
+		m_pPlayer->SetCommand(new RunCommand(m_pPlayer));
 	}
 	else if (m_pPlayer->GetIsStateCondition(CPlayerState::enPlayerStateSky))
 	{
-		GetPlayer().GetStateMachine().SetState(CPlayerState::enPlayerStateSky);
+		m_pPlayer->SetCommand(new SkyCommand(m_pPlayer));
 	}
 }
 void CPlayerStand::ChangeWepon()

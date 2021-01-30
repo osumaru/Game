@@ -26,7 +26,7 @@ public:
 	void Init();
 
 	// 更新
-	void Update();
+	bool Update();
 			
 	//ステートの切り替え
 	void SetState(CPlayerState::EnPlayerState nextState);
@@ -35,6 +35,11 @@ public:
 	CPlayerState::EnPlayerState GetState() const
 	{
 		return m_state;
+	}
+
+	CPlayerState::EnPlayerState GetPreState() const
+	{
+		return m_preState;
 	}
 
 	void SetPlayer(CPlayer* player, CPlayerGetter* playerGetter)
@@ -71,7 +76,7 @@ public:
 
 private:
 	CPlayerState::EnPlayerState		m_state = (CPlayerState::EnPlayerState)-1;				//プレイヤーのアニメーションの状態
-	
+	CPlayerState::EnPlayerState		m_preState = (CPlayerState::EnPlayerState) - 1;
 	IPlayerState*					m_currentState = nullptr;
 	IPlayerState*					m_pStates[CPlayerState::enPlayerStateNum];
 	CPlayerStand					m_playerStand;			//待機モーション

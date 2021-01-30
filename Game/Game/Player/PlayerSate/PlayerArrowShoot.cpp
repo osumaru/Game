@@ -2,6 +2,7 @@
 #include "PlayerArrowShoot.h"
 #include "../Player.h"
 #include "../../Camera/GameCamera.h"
+#include "../../Command/Command.h"
 
 CPlayerArrowShoot::CPlayerArrowShoot()
 {
@@ -14,6 +15,8 @@ CPlayerArrowShoot::~CPlayerArrowShoot()
 
 void CPlayerArrowShoot::Init()
 {
+	IPlayerState::Init();
+	m_isStateTransition = true;
 	const float ArrowVolume = 0.3f;
 	CSoundSource* ArrowSound = New<CSoundSource>(0);
 	ArrowSound->Init("Assets/sound/Battle/ArrowSound.wav");
@@ -28,13 +31,13 @@ void CPlayerArrowShoot::Update()
 {
 	if (m_pPlayer->GetIsStateCondition(CPlayerState::enPlayerStateDamage))
 	{
-		m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateDamage);
+		m_pPlayer->SetCommand(new DamageCommand(m_pPlayer));
 		GetGameCamera().SetIsArrowZoom(false);
 		m_pPlayer->GetWeaponManager().SetIsAttack(false);
 	}
 	else if (m_pPlayer->GetIsStateCondition(CPlayerState::enPlayerStateStun))
 	{
-		m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateStun);
+		m_pPlayer->SetCommand(new StunCommand(m_pPlayer));
 		GetGameCamera().SetIsArrowZoom(false);
 		m_pPlayer->GetWeaponManager().SetIsAttack(false);
 	}
@@ -50,11 +53,12 @@ void CPlayerArrowShoot::Update()
 		//˜AŽËŽž‚Ìˆ—
 		if (m_isShoot)
 		{
-			GetPlayer().GetStateMachine().SetState(CPlayerState::enPlayerStateArrowAttack);
+			m_pPlayer->SetCommand(new ArrowAttackCommand(m_pPlayer));
 		}
 		else
 		{
-			m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateStand);
+
+			m_pPlayer->SetCommand(new StandCommand(m_pPlayer));
 			m_pPlayer->GetWeaponManager().SetIsAttack(false);
 			GetGameCamera().SetIsArrowZoom(false);
 		}

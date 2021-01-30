@@ -60,7 +60,6 @@ public:
 		enPlayerStateStand,				//待機ステート
 		enPlayerStateWalk,				//歩行ステート
 		enPlayerStateRun,				//走りステート
-		enPlayerStateRunJump,			//走りジャンプ
 		enPlayerStateJump,				//ジャンプステート
 		enPlayerStateAttack,			//攻撃ステート
 		enPlayerStateDamage,			//ダメージステート

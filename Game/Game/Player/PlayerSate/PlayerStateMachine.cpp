@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "PlayerStateMachine.h"
+#include "../Player.h"
 
 
 void CPlayerStateMachine::Init()
@@ -10,7 +11,6 @@ void CPlayerStateMachine::Init()
 	m_pStates[CPlayerState::enPlayerStateRun] = &m_playerRun;
 	m_pStates[CPlayerState::enPlayerStateAvoidance] = &m_playerAvoidance;
 	m_pStates[CPlayerState::enPlayerStateJump] = &m_playerJump;
-	m_pStates[CPlayerState::enPlayerStateRunJump] = &m_playerJump;
 	m_pStates[CPlayerState::enPlayerStateAttack] = &m_playerAttack;
 	m_pStates[CPlayerState::enPlayerStateArrowAttack] = &m_playerArrowAttack;
 	m_pStates[CPlayerState::enPlayerStateArrowShoot] = &m_playerArrowShoot;
@@ -28,9 +28,9 @@ void CPlayerStateMachine::SetState(CPlayerState::EnPlayerState nextState)
 		//同じステートなら返す
 		return;
 	}
-
+	m_preState = m_state;
 	m_state = nextState;
-
+	GetPlayer().ResetCommand();
 	switch (m_state) {
 	case CPlayerState::enPlayerStateStand:
 		m_currentState = &m_playerStand;			//待機ステートに遷移
@@ -46,9 +46,6 @@ void CPlayerStateMachine::SetState(CPlayerState::EnPlayerState nextState)
 		break;
 	case CPlayerState::enPlayerStateJump:
 		m_currentState = &m_playerJump;				//ジャンプステートに遷移	
-		break;
-	case CPlayerState::enPlayerStateRunJump:
-		m_currentState = &m_playerJump;				//走りジャンプステートに遷移	
 		break;
 	case CPlayerState::enPlayerStateAttack:
 		m_currentState = &m_playerAttack;			//攻撃ステートに遷移
@@ -83,9 +80,15 @@ void CPlayerStateMachine::SetState(CPlayerState::EnPlayerState nextState)
 	}
 
 	m_currentState->Init();
+	
 }
 
-void CPlayerStateMachine::Update()
+bool CPlayerStateMachine::Update()
 {
 	m_currentState->Update();
+	if (m_currentState->GetIsStateTransition())
+	{
+		return true;
+	}
+	return false;
 }

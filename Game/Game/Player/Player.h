@@ -9,6 +9,7 @@
 #include "WireDraw.h"
 #include "../Item/ItemList.h"
 #include "../Item/EquipList.h"
+class Command;
 class IItem;
 
 struct SplayerStatus
@@ -252,6 +253,40 @@ public:
 		return m_equipList;
 	}
 
+	//即時コマンドの設定
+	void SetCommand(Command* command)
+	{
+		if (m_command != nullptr)
+		{
+			delete m_command;
+		}
+		m_command = command;
+	}
+
+	//遅延コマンドの設定
+	void SetDefferdCommand(Command* command)
+	{
+
+		if (m_defferdCommand != nullptr)
+		{
+			delete m_defferdCommand;
+		}
+		m_defferdCommand = command;
+	}
+
+	void ResetCommand()
+	{
+		if (m_command != nullptr)
+		{
+			delete m_command;
+			m_command = nullptr;
+		}
+		if (m_defferdCommand != nullptr)
+		{
+			delete m_defferdCommand;
+			m_defferdCommand = nullptr;
+		}
+	}
 	friend class CPlayerGetter;
 private:
 
@@ -261,6 +296,8 @@ private:
 	//アニメーションイベントが起きた時に呼ばれる処理。
 	void OnInvokeAnimationEvent(const wchar_t* animClipName, const wchar_t* eventName);
 private:
+	Command*							m_command = nullptr;					//即時コマンド
+	Command*							m_defferdCommand = nullptr;				//遅延コマンド
 	static CEquipList					m_equipList;
 	static CItemList					m_itemList;								//アイテムリスト
 	static CPlayer*						m_player;								//プレイヤー

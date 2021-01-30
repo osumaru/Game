@@ -3,9 +3,11 @@
 #include "../Player.h"
 
 #include "../../Camera/GameCamera.h"
+#include "../../Command/Command.h"
 
 void CPlayerAvoidance::Init()
 {
+	IPlayerState::Init();
 	const float RollVolume = 0.3f;
 	CSoundSource* RollSound = New<CSoundSource>(0);
 	RollSound->Init("Assets/sound/Battle/RollSE.wav");
@@ -26,6 +28,7 @@ void CPlayerAvoidance::Update()
 	Move();
 	if (!m_pPlayerGetter->GetAnimation().IsPlay())
 	{
+		m_isStateTransition = true;
 		CVector3 bonePos;
 		bonePos.x = m_pBoneMat->m[3][0];
 		bonePos.y = m_pBoneMat->m[3][1];
@@ -50,11 +53,11 @@ void CPlayerAvoidance::Update()
 		}
 		else if (m_pPlayer->GetIsStateCondition(CPlayerState::enPlayerStateRun))
 		{
-			GetPlayer().GetStateMachine().SetState(CPlayerState::enPlayerStateRun);
+			m_pPlayer->SetCommand(new RunCommand(&GetPlayer()));
 		}
 		else if (m_pPlayer->GetIsStateCondition(CPlayerState::enPlayerStateStand))
 		{
-			GetPlayer().GetStateMachine().SetState(CPlayerState::enPlayerStateStand);
+			m_pPlayer->SetCommand(new StandCommand(&GetPlayer()));
 		}
 	}
 

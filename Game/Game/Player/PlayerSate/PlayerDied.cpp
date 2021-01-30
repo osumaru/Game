@@ -6,6 +6,8 @@
 
 void CPlayerDied::Init()
 {
+	IPlayerState::Init();
+	m_isStateTransition = true;
 	m_pPlayerGetter->GetAnimation().Play(enPlayerAnimationDete, 0.2f);
 	/*CSoundSource* GameOverSound = New<CSoundSource>(0);
 	GameOverSound->Init("Assets/sound/SystemSound/GameOver.wav");

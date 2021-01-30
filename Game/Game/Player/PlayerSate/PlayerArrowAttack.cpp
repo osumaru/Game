@@ -3,9 +3,12 @@
 #include "../Player.h"
 #include "../../Camera/GameCamera.h"
 #include "../Weapon/Bow.h"
+#include "../../Command/Command.h"
 
 void CPlayerArrowAttack::Init()
 {
+	IPlayerState::Init();
+	m_isStateTransition = true;
 	//ã|ÇÃê∂ê¨
 	dynamic_cast<CBow*>(m_pPlayer->GetWeaponManager().GetWeapon(enWeaponArrow))->ArrowCreate();
 	m_pPlayerGetter->GetAnimation().Play(enPlayerAnimationArrowAttack, 0.5f);
@@ -28,13 +31,13 @@ void CPlayerArrowAttack::Update()
 
 	if (m_pPlayer->GetIsStateCondition(CPlayerState::enPlayerStateDamage))
 	{
-		m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateDamage);
+		m_pPlayer->SetCommand(new DamageCommand(m_pPlayer));
 		GetGameCamera().SetIsArrowZoom(false);
 		m_pPlayer->GetWeaponManager().SetIsAttack(false);
 	}
 	else if (m_pPlayer->GetIsStateCondition(CPlayerState::enPlayerStateStun))
 	{
-		m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateStun);
+		m_pPlayer->SetCommand(new StunCommand(m_pPlayer));
 		GetGameCamera().SetIsArrowZoom(false);
 		m_pPlayer->GetWeaponManager().SetIsAttack(false);
 	}
@@ -44,7 +47,7 @@ void CPlayerArrowAttack::Update()
 		if (m_pPlayer->GetIsStateCondition(CPlayerState::enPlayerStateArrowShoot))
 		{
 
-			m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateArrowShoot);
+			m_pPlayer->SetCommand(new ArrowShootCommand(m_pPlayer));
 		}
 		
 	}

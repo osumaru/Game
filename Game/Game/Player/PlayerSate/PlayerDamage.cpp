@@ -1,11 +1,13 @@
 #include "stdafx.h"
 #include "PlayerDamage.h"
 #include "../Player.h"
-
+#include "../../Command/Command.h"
 
 
 void CPlayerDamage::Init()
 {
+	IPlayerState::Init();
+	m_isStateTransition = true;
 	const float DamageVolume = 0.3f;
 	CSoundSource* DamageSound = New<CSoundSource>(0);
 	DamageSound->Init("Assets/sound/Battle/Damage.wav");
@@ -46,14 +48,14 @@ void CPlayerDamage::Update()
 		if (m_pPlayer->GetIsStateCondition(CPlayerState::enPlayerStateDown))
 		{
 			m_pPlayerGetter->DamageStateReset();
-			m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateDown);
+			m_pPlayer->SetCommand(new DownCommand(m_pPlayer));
 		}
 	}
 	
 	if (!m_pPlayerGetter->GetAnimation().IsPlay()&&!m_isSky)
 	{
 		m_pPlayerGetter->DamageStateReset();
-		m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateStand);
+		m_pPlayer->SetCommand(new StandCommand(m_pPlayer));
 	}
 }
 

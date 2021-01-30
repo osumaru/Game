@@ -4,6 +4,7 @@
 #include "../../UI/WeaponSelect/WeaponSelect.h"
 #include "../../Scene/SceneManager.h"
 #include "../Weapon/WeaponManager.h"
+#include "../../Command/Command.h"
 
 
 CPlayerSky::CPlayerSky()
@@ -12,6 +13,8 @@ CPlayerSky::CPlayerSky()
 
 void CPlayerSky::Init()
 {
+	IPlayerState::Init();
+	m_isStateTransition = true;
 	//アニメーションの再生
 	m_pPlayerGetter->GetAnimation().Play(enPlayerAnimationJump, 0.2f);
 }
@@ -45,22 +48,22 @@ void CPlayerSky::Update()
 			//着地時移動していればランステートに、動いていなければスタンドステートに
 			if (m_pPlayer->GetIsStateCondition(CPlayerState::enPlayerStateRun))
 			{
-				m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateRun);
+				m_pPlayer->SetCommand(new RunCommand(m_pPlayer));
 			}
 			else
 			{
-				m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateStand);
+				m_pPlayer->SetCommand(new StandCommand(m_pPlayer));
 			}
 		}
 	}
 	else if (m_pPlayer->GetIsStateCondition(CPlayerState::enPlayerStateDamage))
 	{
-		m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateDamage);
+		m_pPlayer->SetCommand(new DamageCommand(m_pPlayer));
 	}
 	else if (m_pPlayer->GetIsStateCondition(CPlayerState::enPlayerStateWireMove))
 	{
 		//ワイヤー移動できるなら遷移
-		m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateWireMove);
+		m_pPlayer->SetCommand(new WireMoveCommand(m_pPlayer));
 	}
 
 

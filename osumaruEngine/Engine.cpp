@@ -188,7 +188,7 @@ void CEngine::GameLoop()
 		{
 			CStopWatch sw;
 			sw.Start();
-			if (GetAsyncKeyState(VK_RSHIFT))
+			if (GetAsyncKeyState(VK_SPACE))
 			{
 				m_shaderResource.ReLoad();
 			}

@@ -2,9 +2,12 @@
 #include "PlayerRun.h"
 #include "../Player.h"
 #include "../../Camera/GameCamera.h"
+#include "../../Command/Command.h"
 
 void CPlayerRun::Init()
 {
+	IPlayerState::Init();
+	m_isStateTransition = true;
 	m_pPlayerGetter->GetAnimation().Play(enPlayerAnimationRun, 0.3f);
 	if (m_pPlayer->GetWeaponManager().GetDrawingWeapon())
 	{
@@ -65,47 +68,47 @@ void CPlayerRun::Update()
 	//走り中にダメージを受けた場合
 	if (m_pPlayer->GetIsStateCondition(CPlayerState::enPlayerStateDamage))
 	{
-		m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateDamage);
+		m_pPlayer->SetCommand(new DamageCommand(m_pPlayer));
 	}
 	else if (m_pPlayer->GetIsStateCondition(CPlayerState::enPlayerStateStun))
 	{
-		m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateStun);
+		m_pPlayer->SetCommand(new StunCommand(m_pPlayer));
 	}
 	else if (m_pPlayer->GetIsStateCondition(CPlayerState::enPlayerStateDied))
 	{
-		m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateDied);
+		m_pPlayer->SetCommand(new DiedCommand(m_pPlayer));
 	}
 	//走っているときに攻撃した時の処理
 	else if (m_pPlayer->GetIsStateCondition(CPlayerState::enPlayerStateArrowAttack))
 	{
-		m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateArrowAttack);
+		m_pPlayer->SetCommand(new ArrowAttackCommand(m_pPlayer));
 	}
 	//走っているときに攻撃した時の処理
 	else if (m_pPlayer->GetIsStateCondition(CPlayerState::enPlayerStateAttack))
 	{
-		m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateAttack);
+		m_pPlayer->SetCommand(new AttackCommand(m_pPlayer));
 	}
 	//走り中に回避した時の処理
 	else if (m_pPlayer->GetIsStateCondition(CPlayerState::enPlayerStateAvoidance))
 	{
-		m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateAvoidance);
+		m_pPlayer->SetCommand(new AvoidanceCommand(m_pPlayer));
 	}
 	//走っている時にジャンプが押されたとき処理
-	else if (m_pPlayer->GetIsStateCondition(CPlayerState::enPlayerStateRunJump))
+	else if (m_pPlayer->GetIsStateCondition(CPlayerState::enPlayerStateJump))
 	{
-		m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateRunJump);
+		m_pPlayer->SetCommand(new JumpCommand(m_pPlayer));
 	}
 	else if (m_pPlayer->GetIsStateCondition(CPlayerState::enPlayerStateStand))
 	{
-		m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateStand);
+		m_pPlayer->SetCommand(new StandCommand(m_pPlayer));
 	}
 	else if (m_pPlayer->GetIsStateCondition(CPlayerState::enPlayerStateWireMove))
 	{
 		//ワイヤー移動できるなら遷移
-		m_pPlayer->GetStateMachine().SetState(CPlayerState::enPlayerStateWireMove);
+		m_pPlayer->SetCommand(new WireMoveCommand(m_pPlayer));
 	}
 	else if (m_pPlayer->GetIsStateCondition(CPlayerState::enPlayerStateSky))
 	{
-		GetPlayer().GetStateMachine().SetState(CPlayerState::enPlayerStateSky);
+		m_pPlayer->SetCommand(new SkyCommand(m_pPlayer));
 	}
 }
