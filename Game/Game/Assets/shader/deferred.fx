@@ -174,14 +174,13 @@ float4 PSMain(VS_OUTPUT In) : SV_TARGET0
 		color.xyz += speculaLight * (depthAndSpecular.y * step(1, (materialFlg.x & isSpecularMap)) + step(1, !(materialFlg.x & isSpecularMap))) * depthAndSpecular.z;
 	}
 	float shadowValue = ShadowMapCalc(In, shadowTexture1, lightViewProj1, depthAndSpecular.x);
-	color.xyz *= min(1, step(1, !(materialFlg.x & isShadowReceiver)) + shadowValue);
-	shadowValue = ShadowMapCalc(In, shadowTexture2, lightViewProj2, depthAndSpecular.x);
-	color.xyz *= min(1, step(1, !(materialFlg.x & isShadowReceiver)) + shadowValue);
-	shadowValue = ShadowMapCalc(In, shadowTexture3, lightViewProj3, depthAndSpecular.x);
-	color.xyz *= min(1, step(1, !(materialFlg.x & isShadowReceiver)) + shadowValue);
+	shadowValue *= ShadowMapCalc(In, shadowTexture2, lightViewProj2, depthAndSpecular.x);
+	shadowValue *= ShadowMapCalc(In, shadowTexture3, lightViewProj3, depthAndSpecular.x);
+	shadowValue = min(1, step(1, !(materialFlg.x & isShadowReceiver)) + shadowValue);
+	color.xyz = lerp(color.xyz * 0.5f, color.xyz, shadowValue);
 	//color.xyz  = ShadowMapCalcTest(In, shadowTexture1, lightViewProj1, depthAndSpecular.x).xyz;
 	
-	//color.xyz = shadowTexture2.Sample(shadowSampler, In.uv).x;
+
 	return color;
 }
 

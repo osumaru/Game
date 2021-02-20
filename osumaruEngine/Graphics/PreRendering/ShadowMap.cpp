@@ -88,6 +88,12 @@ void CShadowMap::Update()
 	cameraRight.Normalize();
 	float halfAngle = m_pCamera->GetAngle() * 0.5f;
 	float _aspect = m_pCamera->GetAspect();
+
+	float yCamera = 0.0f;
+
+	const int VERTEX_NUM = 8;
+	CVector3 preAabbVertex[VERTEX_NUM] = {};
+	float sumDis = 0.0f;
 	//メインカメラの近平面と遠平面の8個の頂点の座標を求める
 	for (int i = 0; i < SHADOWMAP_NUM; i++)
 	{
@@ -100,7 +106,6 @@ void CShadowMap::Update()
 		t *= _aspect;
 		CVector3 cameraRightNear = cameraRight * t * _near;
 		CVector3 cameraRightFar = cameraRight * t * _far;
-		const int VERTEX_NUM = 8;
 		CVector3 aabbVertex[VERTEX_NUM];
 		aabbVertex[0] = cameraCenter + cameraUpNear + cameraRightNear;
 		aabbVertex[1] = cameraCenter + cameraUpNear - cameraRightNear;
@@ -125,18 +130,46 @@ void CShadowMap::Update()
 		lightView.Inverse();
 		CVector3 aabbMin = { FLT_MAX, FLT_MAX, FLT_MAX };
 		CVector3 aabbMax = { -FLT_MAX, -FLT_MAX, -FLT_MAX };
+		CVector3 preAabbMin = { FLT_MAX, FLT_MAX, FLT_MAX };
+		CVector3 preAabbMax = { -FLT_MAX, -FLT_MAX, -FLT_MAX };
 		//8個の頂点をライト用のカメラのビュー行列をかけてAABBをもとめライトカメラの写す範囲を決定
 		for (int i = 0; i < VERTEX_NUM; i++)
 		{
-			aabbVertex[i].Mul(lightView);
-			aabbMax.Max(aabbVertex[i]);
-			aabbMin.Min(aabbVertex[i]);
+			CVector3 lightViewAabb = aabbVertex[i];
+			lightViewAabb.Mul(lightView);
+			aabbMax.Max(lightViewAabb);
+			aabbMin.Min(lightViewAabb);
+			CVector3 preLightViewAabb = preAabbVertex[i];
+			preLightViewAabb.Mul(lightView);
+			preAabbMax.Max(preLightViewAabb);
+			preAabbMin.Min(preLightViewAabb);
+			preAabbVertex[i] = aabbVertex[i];
 		}
-		CVector3 lightTarget = lightPos + lightCameraForward;
+		
+
+
+
 		float w = aabbMax.x - aabbMin.x;//ちょっと太らせる
 		float h = aabbMax.y - aabbMin.y;
+
+		CVector3 lightCameraUpNormalize = lightCameraUp;
+		lightCameraUpNormalize = lightCameraUp;
+		lightCameraUpNormalize.Normalize();
+		CVector3 cameraForwardNormalize = cameraForward;
+		float angle = lightCameraUpNormalize.Dot(cameraForwardNormalize);
+		cameraForwardNormalize /= angle;
+		cameraForwardNormalize *= h * 0.5f;
+		float dis = cameraForwardNormalize.Length() - (shadowAreaTable[i] * 0.5f);
+		if (dis < 0.0f)
+		{
+			dis = 0.0f;
+		}
+		sumDis += dis;
+		lightPos += cameraForward * sumDis;
+		sumDis += dis;
+		CVector3 lightTarget = lightPos + lightCameraForward;
 		m_viewMatrix[i].MakeLookAt(lightPos, lightTarget, lightCameraUp);
-		m_projectionMatrix[i].MakeOrthoProjectionMatrix(w, h, 10.0f, 1000.0f);
+		m_projectionMatrix[i].MakeOrthoProjectionMatrix(w + 50.0f, h, 10.0f, 1000.0f);
 		_near = _far;
 	}
 }
